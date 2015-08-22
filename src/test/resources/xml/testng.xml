@@ -1,0 +1,10 @@
+<suite name="My suite">
+<listeners>
+    <listener class-name="listener.TestsListenerAdapter" />
+</listeners>
+  <suite-files>
+   <suite-file path="./Suite_A.xml" />
+   <suite-file path="./Suite_B.xml" />
+   
+  </suite-files>
+</suite>
