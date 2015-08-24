@@ -7,7 +7,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -27,7 +29,7 @@ public class ProfileFollowTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
-	static String followBefore=null;
+	static String followBefore="trafasfue";
 	static String followAfter=null;
 	
 	@BeforeTest
@@ -65,16 +67,23 @@ public class ProfileFollowTest extends TestBase {
 		}
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
-				openBrowser();
-				clearCookies();
-				maximizeWindow();
-				
-				ob.get(CONFIG.getProperty("devSnapshot_url"));
-				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				LoginTR.waitForTRHomePage();
-				LoginTR.enterTRCredentials(username, password);
-				LoginTR.clickLogin();
+				try {
+					openBrowser();
+					clearCookies();
+					maximizeWindow();
+					
+					ob.get(CONFIG.getProperty("devStable_url"));
+					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					waitForTRHomePage();
+					enterTRCredentials(username, password);
+					clickLogin();
+				} catch (Throwable e) {
+					test.log(LogStatus.FAIL,"Error: Login not happended"+e);
+					ErrorUtil.addVerificationFailure(e);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_login_not_done")));//screenshot
+				}
 	}
 	
 	/**
@@ -93,7 +102,7 @@ public class ProfileFollowTest extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 				status=2;//excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
-				closeBrowser();
+				//closeBrowser();
 			}
 	}
 	/**
@@ -109,15 +118,16 @@ public class ProfileFollowTest extends TestBase {
 			ErrorUtil.addVerificationFailure(e);
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
-			closeBrowser();
+			//closeBrowser();
 		}
 	}
 	
 	public void followOtherProfile(String profileName) throws Exception {
 		List<WebElement> profiles=ob.findElements(By.cssSelector("div[class='webui-media-header h2']"));
-		//System.out.println("list of find profiles -->"+profiles.size());
+		System.out.println("list of find profiles -->"+profiles.size());
 		for(WebElement profile:profiles){
-			if(profile.findElements(By.tagName("span")).get(0).getText().trim().equalsIgnoreCase(profileName)){
+			if(profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)){
+				System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
 				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(1).findElements(By.tagName("a"));
 				for(WebElement followProfile:followProfiles){
 					if(followProfile.isDisplayed()){
@@ -134,10 +144,22 @@ public class ProfileFollowTest extends TestBase {
 					}
 				}
 				
-				if(followBefore.equalsIgnoreCase(followAfter)){
+				/*if(followBefore.equalsIgnoreCase(followAfter)){
 					status=2;
-					throw new Exception("User is unable to follow another user");
-				}
+					//throw new Exception("User is unable to follow another user");
+				}*/
+				
+				try{
+					Assert.assertEquals(followBefore, followAfter);
+					test.log(LogStatus.PASS, "MainString doesn't contain ToBeCheckedString");
+					}catch(Throwable t){
+						test.log(LogStatus.INFO, "Error--->"+t);
+						ErrorUtil.addVerificationFailure(t);	
+						status=2;
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_Follow and Unfollow not giving expected result")));// screenshot
+						
+					}
 			  }
 			}
 	}
@@ -150,7 +172,49 @@ public class ProfileFollowTest extends TestBase {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(4000);
+	}
+	
+	@AfterTest
+	public void reportTestResult() {
 		
+		extent.endTest(test);
+		
+		if(status==1)
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "PASS");
+		else if(status==2)
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
+		else
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
+		closeBrowser();
+	}
+	
+	/**
+	 * Method for wait TR Home Screen
+	 * @throws InterruptedException 
+	 */
+	public  void waitForTRHomePage() throws InterruptedException {
+		Thread.sleep(4000);
+		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+	}
+	
+	/**
+	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
+	 */
+	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		Thread.sleep(10000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+	}
+	
+	public  void clickLogin() throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
+		Thread.sleep(6000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
+		//waitUntilElementClickable("Home");
 	}
 	
 	

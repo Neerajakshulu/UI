@@ -1,5 +1,6 @@
 package suiteD;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -63,16 +64,24 @@ public class FindProfileTest extends TestBase {
 		}
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
-				openBrowser();
-				clearCookies();
-				maximizeWindow();
+				try {
+					openBrowser();
+					clearCookies();
+					maximizeWindow();
+					
+					ob.get(CONFIG.getProperty("devSnapshot_url"));
+					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					waitForTRHomePage();
+					enterTRCredentials(username, password);
+					clickLogin();
+				} catch (Throwable e) {
+					test.log(LogStatus.FAIL,"Error:"+e);
+					ErrorUtil.addVerificationFailure(e);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
+				}
 				
-				ob.get(CONFIG.getProperty("devSnapshot_url"));
-				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				LoginTR.waitForTRHomePage();
-				LoginTR.enterTRCredentials(username, password);
-				LoginTR.clickLogin();
 	}
 	/**
 	 * Method for Find others Profile
@@ -86,7 +95,7 @@ public class FindProfileTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void findOthersProfile() throws Exception  {
 				try {
-					LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
+					searchArticle(CONFIG.getProperty("find_profile_name"));
 					clickPeople();
 					chooseOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
 					clickOtherProfileEdit();
@@ -97,7 +106,7 @@ public class FindProfileTest extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
-					closeBrowser();
+					//closeBrowser();
 				}
 	}
 	
@@ -108,13 +117,14 @@ public class FindProfileTest extends TestBase {
 	public void clickPeople() throws Exception {
 		try {
 			ob.findElement(By.xpath("//a[contains(text(), 'People')]")).click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 		} catch (Exception e) {
+			System.out.println("closing browser--->");
 			test.log(LogStatus.FAIL,"Error:"+e);
 			ErrorUtil.addVerificationFailure(e);
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
-			closeBrowser();
+			//closeBrowser();
 		}
 	}
 	
@@ -199,6 +209,37 @@ public class FindProfileTest extends TestBase {
 		Thread.sleep(4000);
 	}
 	
+	public  void searchArticle(String article) throws InterruptedException, IOException {
+		//waitUntilElementClickable("Watchlist");
+		try {
+			System.out.println("article name-->"+article);
+			ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_search_box_css"))).sendKeys(article);
+			Thread.sleep(4000);
+			List<WebElement> searchElements=ob.findElement(By.cssSelector("ul[class='dropdown-menu ng-isolate-scope']")).findElements(By.tagName("li"));
+			System.out.println("list of articles-->"+searchElements.size());
+			for(WebElement searchElement:searchElements){
+				String articleName=searchElement.findElement(By.tagName("a")).getText();
+				System.out.println("article name-->"+articleName);
+				if(searchElement.findElement(By.tagName("a")).getText().equalsIgnoreCase(articleName)){
+					System.out.println("name changes done");
+					WebElement element = searchElement.findElement(By.tagName("a"));
+					JavascriptExecutor executor = (JavascriptExecutor)ob;
+					executor.executeScript("arguments[0].click();", element);
+					
+					//searchElement.findElement(By.tagName("a")).click();
+					Thread.sleep(4000);
+					break;
+				}//if
+			}//for
+			Thread.sleep(4000);
+		} catch (Throwable e) {
+			test.log(LogStatus.FAIL,"Error:"+e);
+			ErrorUtil.addVerificationFailure(e);
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
+		}
+	}
+	
 	@AfterTest
 	public void reportTestResult() {
 		
@@ -210,6 +251,36 @@ public class FindProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		
+		closeBrowser();
+	}
+	
+	
+	/**
+	 * Method for wait TR Home Screen
+	 * @throws InterruptedException 
+	 */
+	public  void waitForTRHomePage() throws InterruptedException {
+		Thread.sleep(4000);
+		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+	}
+	
+	/**
+	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
+	 */
+	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		Thread.sleep(10000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+	}
+	
+	public  void clickLogin() throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
+		Thread.sleep(6000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
+		//waitUntilElementClickable("Home");
 	}
 }

@@ -15,7 +15,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -66,16 +65,22 @@ public class ViewProfileTest extends TestBase {
 		}
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
-				openBrowser();
-				clearCookies();
-				maximizeWindow();
-				
-				ob.get(CONFIG.getProperty("devSnapshot_url"));
-				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				LoginTR.waitForTRHomePage();
-				LoginTR.enterTRCredentials(username, password);
-				LoginTR.clickLogin();
+				try {
+					openBrowser();
+					clearCookies();
+					maximizeWindow();
+					
+					ob.get(CONFIG.getProperty("devSnapshot_url"));
+					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					waitForTRHomePage();
+					enterTRCredentials(username, password);
+					clickLogin();
+				} catch (Throwable e) {
+					test.log(LogStatus.FAIL,"Error:"+e);//extent reports
+					ErrorUtil.addVerificationFailure(e);//testng
+					status=2;//excel
+				}
 	}
 	
 	/**
@@ -91,7 +96,7 @@ public class ViewProfileTest extends TestBase {
 				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
 				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
-				closeBrowser();
+				//closeBrowser();
 			}
 	}
 	
@@ -150,8 +155,36 @@ public class ViewProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		
 		closeBrowser();
+	}
+	
+	/**
+	 * Method for wait TR Home Screen
+	 * @throws InterruptedException 
+	 */
+	public  void waitForTRHomePage() throws InterruptedException {
+		Thread.sleep(4000);
+		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+	}
+	
+	/**
+	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
+	 */
+	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		Thread.sleep(10000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+	}
+	
+	public  void clickLogin() throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
+		Thread.sleep(6000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
+		//waitUntilElementClickable("Home");
 	}
 
 }

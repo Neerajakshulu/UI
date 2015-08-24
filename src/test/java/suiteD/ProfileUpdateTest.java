@@ -15,7 +15,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -74,9 +73,10 @@ public class ProfileUpdateTest extends TestBase {
 				ob.get(CONFIG.getProperty("devStable_url"));
 				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				LoginTR.waitForTRHomePage();
-				LoginTR.enterTRCredentials(username, password);
-				LoginTR.clickLogin();
+				waitForTRHomePage();
+				Thread.sleep(6000);
+				enterTRCredentials(username, password);
+				clickLogin();
 	}
 	
 	
@@ -91,7 +91,7 @@ public class ProfileUpdateTest extends TestBase {
 				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
-				closeBrowser();
+				//closeBrowser();
 			}
 	}
 	
@@ -187,8 +187,37 @@ public class ProfileUpdateTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		
 		closeBrowser();
+	}
+	
+	
+	/**
+	 * Method for wait TR Home Screen
+	 * @throws InterruptedException 
+	 */
+	public  void waitForTRHomePage() throws InterruptedException {
+		Thread.sleep(4000);
+		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+	}
+	
+	/**
+	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
+	 */
+	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		Thread.sleep(10000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+	}
+	
+	public  void clickLogin() throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
+		Thread.sleep(6000);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
+		//waitUntilElementClickable("Home");
 	}
 	
 }
