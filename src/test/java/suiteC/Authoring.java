@@ -76,12 +76,13 @@ public class Authoring  {
 		}
 	}
 	
-	public static void validateUpdatedComment(String updatedComments) throws Exception  {
+	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
 		String commentText=driver.findElements(By.cssSelector("div[class='col-xs-7 comment-content'")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
+			AuthoringTest.status=2;
 			throw new Exception("Updated "+updatedComments+" not present");
 		}
 	}

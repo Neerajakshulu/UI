@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -29,10 +30,10 @@ public class AuthoringAppreciateTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest("AuthoringTest", "Validate Authoring Appreciation Functionality").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Appreciation Functionality").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");
 		//load the runmodes of the tests			
-		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, "AuthoringTest");
+		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->"+runmodes.length);
 	}
 	
@@ -41,16 +42,16 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * @throws Exception, When TR Login Home screen not displaying
 	 */
 	@Test
-	public void testLoginTRAccount() throws Exception  {
+	public void testAuthoringTestAccount() throws Exception  {
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "C Suite");
-		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,"AuthoringTest");
+		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,this.getClass().getSimpleName());
 		boolean master_condition=suiteRunmode && testRunmode;
 		
 		if(!master_condition) {
 			status=3;
-			test.log(LogStatus.SKIP, "Skipping test case "+"AuthoringTest"+" as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case"+"AuthoringTest"+" as runmode set to NO");//reports
+			test.log(LogStatus.SKIP, "Skipping test case "+this.getClass().getSimpleName()+" as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
 		}
 		
 		
@@ -61,7 +62,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			skip=true;
 			throw new SkipException("Runmode for test set data set to no "+count);
 		}
-		test.log(LogStatus.INFO,"AuthoringTest"+" execution starts for data set #"+ count+"--->");
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
 				openBrowser();
 				clearCookies();
@@ -70,41 +71,24 @@ public class AuthoringAppreciateTest extends TestBase {
 				ob.get(CONFIG.getProperty("devStable_url"));
 				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				LoginTR.waitForTRHomePage();
+				AuthoringTest.waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	
-	@Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
-	public void authoringAppreciation(String username,
-			String password,
-			String article,
-			String completeArticle, String addComments) throws Exception  {
+	@Test(dependsOnMethods="testAuthoringTestAccount")
+	@Parameters({"username","password","article","completeArticle"})
+	public void authoringAppreciation(String username,String password,
+			String article,String completeArticle) throws Exception  {
 
-		LoginTR.enterTRCredentials(username, password);
-		LoginTR.clickLogin();
-		LoginTR.searchArticle(article);
-		LoginTR.chooseArticle(completeArticle);
+		AuthoringTest.enterTRCredentials(username, password);
+		AuthoringTest.clickLogin();
+		AuthoringTest.searchArticle(article);
+		AuthoringTest.chooseArticle(completeArticle);
 		validateAppreciationComment();
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 	}
 	
-	@AfterMethod
-	public void reportDataSetResult() {
-		if(skip)
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "SKIP");
-		
-		else if(fail) {
-			
-			status=2;
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "FAIL");
-		}
-		else
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "PASS");
-		
-		
-		skip=false;
-		fail=false;
-	}
+	
 	
 	@AfterTest
 	public void reportTestResult() {
@@ -112,20 +96,14 @@ public class AuthoringAppreciateTest extends TestBase {
 		extent.endTest(test);
 		
 		if(status==1)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,"AuthoringTest"), "PASS");
+			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,"AuthoringTest"), "FAIL");
+			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,"AuthoringTest"), "SKIP");
+			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
 		closeBrowser();
 		
-	}
-	
-
-	@DataProvider
-	public Object[][] getTestData() {
-		return TestUtil.getData(suiteCxls, "AuthoringTest") ;
 	}
 	
 	/**

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -767,5 +768,12 @@ public class TestBase {
 				
 				public static void setOR(Properties oR) {
 					OR = oR;
+				}
+				
+	//Added by Chinna
+				public static void scrollingToElementofAPage() throws InterruptedException  {
+					JavascriptExecutor jse = (JavascriptExecutor)ob;
+					jse.executeScript("scroll(0, 250);");
+					Thread.sleep(4000);
 				}
 }

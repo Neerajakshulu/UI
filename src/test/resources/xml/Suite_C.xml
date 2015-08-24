@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite C">
 
+<parameter name="username" value="chinna.putha@thomsonreuters.com"></parameter>
+<parameter name="password" value="Welcome01"></parameter>
+<parameter name="article" value="drug delivery system"></parameter>
+<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
+
 <test name="Test Authoring">
     <classes>
-        <!-- <class name="suiteC.AuthoringTest" ></class>   -->
+        <class name="suiteC.AuthoringTest" ></class>  
     </classes>
 </test>
 
@@ -13,15 +18,15 @@
     </classes>
 </test>
 
-<test name="Authoring_Deletion_Test">
+ <test name="Authoring_Deletion_Test">
     <classes>
-    <!-- <class name="suiteC.AuthoringDeleteTest" ></class> -->
+    <class name="suiteC.AuthoringDeleteTest" ></class>
     </classes>
 </test>
 
 <test name="Authoring_Profile_Comments">
     <classes>
-      <!-- <class name="suiteC.AuthoringProfileCommentsTest" ></class> -->
+      <class name="suiteC.AuthoringProfileCommentsTest" ></class>
     </classes>
 </test>
 
