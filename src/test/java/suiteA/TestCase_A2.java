@@ -63,22 +63,14 @@ public class TestCase_A2 extends TestBase{
 		
 		
 		
-		String email="1q6nt5+83hxvkofjc2w0@sharklasers.com";
-		String password="Transaction@2";
 		
-		
-		//Navigate to TR login page
+		//Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		Thread.sleep(8000);
-		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
-		
-		
-		//Verify that existing user credentials are working fine
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("login_button"))).click();
+		login();
 		Thread.sleep(15000);
+		
+		//Verify that login is successful
 		if(!checkElementPresence("help_link")){
 			
 			test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");//extent reports

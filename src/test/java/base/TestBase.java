@@ -87,6 +87,7 @@ public class TestBase {
 		suiteBxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\B suite.xlsx");
 		suiteCxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\C suite.xlsx");
 		suiteDxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\D suite.xlsx");
+		tr_authoring_commentCount_css=span[class='comment-count ng-binding']
 
 		suiteExls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\E suite.xlsx");
 		suiteFxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\F suite.xlsx");

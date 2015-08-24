@@ -57,8 +57,8 @@ public class TestCase_A4 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		
-		String email="amneetsinghasr@gmail.com";
-		String password="Iliveinasr123";
+		String email="amneetsingh500@gmail.com";
+		String password="Transaction@2";
 		
 		openBrowser();
 		maximizeWindow();
