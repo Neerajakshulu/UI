@@ -44,7 +44,7 @@ public class TestCase_B2 extends TestBase{
 	}
 	
 	@Test
-	public void testcaseB1() throws Exception{
+	public void testcaseB2() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());

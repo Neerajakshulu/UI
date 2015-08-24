@@ -109,7 +109,7 @@ public class TestCase_A1 extends TestBase{
 		email_list.get(0).click();
 		Thread.sleep(2000);
 		String email_subject=ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
-		if(!StringContains(email_subject,"Thank you for Registering with Thomson Reuters Project Neon")){
+		if(!StringContains(email_subject,"Please confirm your email address for your new Project Neon User ID")){
 			
 			test.log(LogStatus.FAIL, "Account activation email not received");//extent reports
 			status=2;//excel
