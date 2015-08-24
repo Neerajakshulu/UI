@@ -3,6 +3,7 @@ package suiteC;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,7 +59,12 @@ public class LoginTR extends TestBase{
 			String articleName=searchElement.findElement(By.tagName("a")).getText();
 			System.out.println("article name-->"+articleName);
 			if(searchElement.findElement(By.tagName("a")).getText().equalsIgnoreCase(articleName)){
-				searchElement.findElement(By.tagName("a")).click();
+				WebElement element = searchElement.findElement(By.tagName("a"));
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].click();", element);
+				
+				//searchElement.findElement(By.tagName("a")).click();
+				Thread.sleep(4000);
 				break;
 			}//if
 		}//for

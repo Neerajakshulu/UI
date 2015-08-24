@@ -7,6 +7,8 @@
    <suite-file path="./Suite_B.xml" />
    <suite-file path="./Suite_C.xml" />
    <suite-file path="./Suite_D.xml" />
-   
+   <suite-file path="./Suite_E.xml" />
+   <suite-file path="./Suite_F.xml" />
+  
   </suite-files>
 </suite>

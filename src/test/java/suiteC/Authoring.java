@@ -17,9 +17,11 @@ public class Authoring  {
 	static int commentSizeAfterAdd;
 	
 	public static int getCommentCount()  {
-		String commentSizeBeforeAdd=driver.findElement(By.cssSelector(TestBase.OR.getProperty("tr_authoring_commentCount_css"))).getText();
-		System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
-		return Integer.parseInt(commentSizeBeforeAdd);
+		String commentSizeBeforeAdd=driver.findElement(By.cssSelector(TestBase.OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
+		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
+		String num[]=commentSizeBeforeAdd.split(" ");
+		//System.out.println("num length-->"+num[num.length-1]);
+		return Integer.parseInt(num[num.length-1]);
 	}
 	
 	public static void enterArticleComment(String addComments) throws InterruptedException  {

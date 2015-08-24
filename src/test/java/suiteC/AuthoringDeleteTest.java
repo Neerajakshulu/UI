@@ -4,8 +4,10 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -37,10 +39,7 @@ public class AuthoringDeleteTest extends TestBase {
 		@BeforeTest
 		public void beforeTest() {
 			test = extent.startTest("AuthoringTest", "Validate Authoring Delete Comments").assignCategory("Suite C");
-//			test.log(LogStatus.INFO, "****************************");
-			//load the runmodes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, "AuthoringTest");
-			System.out.println("Run modes-->"+runmodes.length);
 		}
 	
 			
@@ -57,7 +56,6 @@ public class AuthoringDeleteTest extends TestBase {
 			
 			if(!master_condition) {
 				status=3;
-//			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,"AuthoringTest"), "SKIP");
 				test.log(LogStatus.SKIP, "Skipping test case "+"AuthoringTest"+" as the run mode is set to NO");
 				throw new SkipException("Skipping Test Case"+"AuthoringTest"+" as runmode set to NO");//reports
 			}
@@ -68,11 +66,9 @@ public class AuthoringDeleteTest extends TestBase {
 			if(!runmodes[count].equalsIgnoreCase("Y")) {
 				test.log(LogStatus.INFO, "Runmode for test set data set to no "+count);
 				skip=true;
-//			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "SKIP");
 				throw new SkipException("Runmode for test set data set to no "+count);
 			}
 			test.log(LogStatus.INFO,"AuthoringTest"+" execution starts for data set #"+ count+"--->");
-			//test.log(LogStatus.INFO,searchKey);
 			
 					//selenium code
 					openBrowser();
@@ -94,16 +90,22 @@ public class AuthoringDeleteTest extends TestBase {
 	}
 	
 	//@Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
-	public void performAuthoringCommentOperations(String username,
-			String password,
-			String article,
-			String completeArticle, String addComments) throws Exception  {
-		LoginTR.waitForTRHomePage();
-		LoginTR.enterTRCredentials(username, password);
-		LoginTR.clickLogin();
-		LoginTR.searchArticle(article);
-		LoginTR.chooseArticle(completeArticle);
-		deleteComments(); 
+	public void performAuthoringCommentOperations(String username,String password,
+			String article,String completeArticle, String addComments) throws Exception  {
+		try {
+			LoginTR.waitForTRHomePage();
+			LoginTR.enterTRCredentials(username, password);
+			LoginTR.clickLogin();
+			LoginTR.searchArticle(article);
+			LoginTR.chooseArticle(completeArticle);
+			deleteComments();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,"Error: Delete Comments not done"+t);//extent reports
+			ErrorUtil.addVerificationFailure(t);//testng
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
+			closeBrowser();
+		} 
 	}
 	
 	
@@ -151,25 +153,37 @@ public class AuthoringDeleteTest extends TestBase {
 	}
 	
 	public void deleteComments() throws Exception {
-		AuthoringAppreciateTest.scrollingToElementofAPage();
-		totalCommentsBeforeDeletion=getTotalComments();
-		System.out.println("Before Deletion count --->"+totalCommentsBeforeDeletion);
-		ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-trash edit-comment-icon'][ng-click='deleteThis(comment.id)']")).click();
-		waitUntilText("Confirmation to Delete Comment");
-		IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
-		ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))).click();
-		totalCommentsAfterDeletion=getTotalComments();
-		System.out.println("TOTAL COMMENTS AFTER DELETION --->"+totalCommentsAfterDeletion);
-		
-		if(!(totalCommentsBeforeDeletion>totalCommentsAfterDeletion)){
-			status=2;
-			throw new Exception("Comment Deletion not happended");
+		try {
+			AuthoringAppreciateTest.scrollingToElementofAPage();
+			totalCommentsBeforeDeletion=Authoring.getCommentCount();
+			System.out.println("Before Deletion count --->"+totalCommentsBeforeDeletion);
+			WebElement deleteCommentButton=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-trash edit-comment-icon'][ng-click='deleteThis(comment.id)']"));
+			//System.out.println("is Delete displayed-->"+deleteCommentButton.isDisplayed());
+			
+			JavascriptExecutor executor = (JavascriptExecutor)ob;
+			executor.executeScript("arguments[0].click();", deleteCommentButton);
+			
+			waitUntilText("Confirmation to Delete Comment");
+			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
+			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))).click();
+			Thread.sleep(6000);
+			totalCommentsAfterDeletion=Authoring.getCommentCount();
+			System.out.println("TOTAL COMMENTS AFTER DELETION --->"+totalCommentsAfterDeletion);
+			
+			if(!(totalCommentsBeforeDeletion>totalCommentsAfterDeletion)){
+				status=2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
+			}
+		} catch (Throwable e) {
+			test.log(LogStatus.FAIL,"Error: Delete Comments not done"+e);//extent reports
+			ErrorUtil.addVerificationFailure(e);//testng
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
+			closeBrowser();
 		}
 		
-	}
-	
-	public int getTotalComments()  {
-		return Integer.parseInt(ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_authoring_commentCount_css"))).getText());
 	}
 	
 	/**
