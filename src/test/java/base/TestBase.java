@@ -2,7 +2,6 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +38,8 @@ public class TestBase {
 	public static Xls_Reader suiteXls=null;
 	public static Xls_Reader suiteAxls=null;
 	public static Xls_Reader suiteBxls=null;
+	public static Xls_Reader suiteCxls=null;
+	public static Xls_Reader suiteDxls=null;
 	
 	public static boolean isInitalized=false;
 	public static WebDriver ob=null;
@@ -79,6 +80,8 @@ public class TestBase {
 		// xls file
 		suiteAxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\A suite.xlsx");
 		suiteBxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\B suite.xlsx");
+		suiteCxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\C suite.xlsx");
+		suiteDxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\D suite.xlsx");
 		suiteXls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\Suite.xlsx");
 		isInitalized=true;
 		}
@@ -119,7 +122,7 @@ public class TestBase {
 			 System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer.exe");
 			 ob = new InternetExplorerDriver();
 		}
-		else if (CONFIG.getProperty("browserType").equals("Chrome")){
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
 //			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
 			 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
 			 ob = new ChromeDriver();
@@ -716,9 +719,22 @@ public class TestBase {
 						e.printStackTrace();
 					}
 					return true;
-					
-					
 				}
+				
+	//Added by Chinna
 
-
+				public static WebDriver getOb() {
+					return ob;
+				}
+				
+				public static void setOb(WebDriver ob) {
+					TestBase.ob = ob;
+				}
+				public static Properties getOR() {
+					return OR;
+				}
+				
+				public static void setOR(Properties oR) {
+					OR = oR;
+				}
 }
