@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite D">
+
+
+<parameter name="username" value="chinna.putha@thomsonreuters.com"></parameter>
+<parameter name="password" value="Welcome01"></parameter>
+	
+<test name="Follow_Other_Profile">
+    <classes>
+       <class name="suiteD.ProfileFollowTest" ></class> 
+    </classes>
+</test>
+
+<test name="Find_Other_Profile_and_Follow_Others">
+    <classes>
+      <class name="suiteD.FindProfileTest" ></class>
+    </classes>
+</test>
+
+<test name="Validate_View_Profile">
+    <classes>
+        <class name="suiteD.ViewProfileTest" ></class> 
+    </classes>
+</test>
+
+<test name="Update_User_Own_Profile">
+	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"></parameter>
+    <classes>
+        <class name="suiteD.ProfileUpdateTest" ></class> 
+    </classes>
+</test>
+
+</suite>
+

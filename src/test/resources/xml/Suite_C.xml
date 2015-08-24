@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite C">
+
+<test name="Test Authoring">
+    <classes>
+        <!-- <class name="suiteC.AuthoringTest" ></class>   -->
+    </classes>
+</test>
+
+<test name="Authoring Appreciation Test">
+    <classes>
+         <!-- <class name="suiteC.AuthoringAppreciateTest" ></class> --> 
+    </classes>
+</test>
+
+<test name="Authoring_Deletion_Test">
+    <classes>
+   <!--  <class name="suiteC.AuthoringDeleteTest" ></class> -->
+    </classes>
+</test>
+
+<test name="Authoring_Profile_Comments">
+    <classes>
+      <class name="suiteC.AuthoringProfileCommentsTest" ></class>
+    </classes>
+</test>
+
+</suite>
+

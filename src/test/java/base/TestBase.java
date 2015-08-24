@@ -2,7 +2,6 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,8 +39,11 @@ public class TestBase {
 	public static Xls_Reader suiteXls=null;
 	public static Xls_Reader suiteAxls=null;
 	public static Xls_Reader suiteBxls=null;
+<<<<<<< HEAD
 	public static Xls_Reader suiteExls=null;
 	public static Xls_Reader suiteFxls=null;
+=======
+>>>>>>> branch 'master' of https://github.com/ThomsonReuters-IPS/1p-ui-automation.git
 	public static Xls_Reader suiteCxls=null;
 	public static Xls_Reader suiteDxls=null;
 	
@@ -86,8 +88,11 @@ public class TestBase {
 		suiteBxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\B suite.xlsx");
 		suiteCxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\C suite.xlsx");
 		suiteDxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\D suite.xlsx");
+<<<<<<< HEAD
 		suiteExls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\E suite.xlsx");
 		suiteFxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\F suite.xlsx");
+=======
+>>>>>>> branch 'master' of https://github.com/ThomsonReuters-IPS/1p-ui-automation.git
 		suiteXls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\Suite.xlsx");
 		isInitalized=true;
 		}
