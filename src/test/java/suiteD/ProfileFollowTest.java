@@ -125,6 +125,7 @@ public class ProfileFollowTest extends TestBase {
 	public void followOtherProfile(String profileName) throws Exception {
 		List<WebElement> profiles=ob.findElements(By.cssSelector("div[class='webui-media-header h2']"));
 		System.out.println("list of find profiles -->"+profiles.size());
+		Assert.assertTrue(profiles.size()>0);
 		for(WebElement profile:profiles){
 			if(profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)){
 				System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
