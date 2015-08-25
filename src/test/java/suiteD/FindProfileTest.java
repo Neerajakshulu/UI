@@ -16,10 +16,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
+/**
+ * Class for find and follow others profile
+ * @author UC202376
+ *
+ */
 public class FindProfileTest extends TestBase {
 	
 	String runmodes[]=null;
@@ -69,7 +73,7 @@ public class FindProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					ob.get(CONFIG.getProperty("devSnapshot_url"));
+					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -83,14 +87,10 @@ public class FindProfileTest extends TestBase {
 				}
 				
 	}
+	
 	/**
-	 * Method for Find others Profile
-	 * @param username
-	 * @param password
-	 * @param article
-	 * @param completeArticle
-	 * @param addComments
-	 * @throws Exception, When not able to find others profiles
+	 * Method for find and follow others profile
+	 * @throws Exception
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void findOthersProfile() throws Exception  {
