@@ -21,6 +21,11 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
+/**
+ * Class for follow profile in search page itself
+ * @author UC202376
+ *
+ */
 public class ProfileFollowTest extends TestBase {
 	
 	String runmodes[]=null;
@@ -93,9 +98,9 @@ public class ProfileFollowTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void followOthersProfile() throws IOException  {
 			try {
-				LoginTR.searchArticle(CONFIG.getProperty("profile_name"));
+				LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
 				clickPeople();
-				followOtherProfile(CONFIG.getProperty("profile_complete_name"));
+				followOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Error:"+t);
@@ -126,6 +131,9 @@ public class ProfileFollowTest extends TestBase {
 		List<WebElement> profiles=ob.findElements(By.cssSelector("div[class='webui-media-header h2']"));
 		System.out.println("list of find profiles -->"+profiles.size());
 		Assert.assertTrue(profiles.size()>0);
+		
+		
+		
 		for(WebElement profile:profiles){
 			if(profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)){
 				System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
@@ -144,21 +152,17 @@ public class ProfileFollowTest extends TestBase {
 						followAfter=followProfile.getText();
 					}
 				}
-				
-				/*if(followBefore.equalsIgnoreCase(followAfter)){
-					status=2;
-					//throw new Exception("User is unable to follow another user");
-				}*/
-				
+				//System.out.println("Before Follow Status-->"+followBefore);
+				//System.out.println("After Follow Status-->"+followAfter);
 				try{
-					Assert.assertEquals(followBefore, followAfter);
-					test.log(LogStatus.PASS, "MainString doesn't contain ToBeCheckedString");
+					Assert.assertNotEquals(followBefore, followAfter);
+					test.log(LogStatus.PASS, "Follow profile from Search Screen is working fine");
 					}catch(Throwable t){
 						test.log(LogStatus.INFO, "Error--->"+t);
 						ErrorUtil.addVerificationFailure(t);	
 						status=2;
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "_Follow and Unfollow not giving expected result")));// screenshot
+							captureScreenshot(this.getClass().getSimpleName() + "Unable to follow the profile from search screen")));// screenshot
 						
 					}
 			  }
