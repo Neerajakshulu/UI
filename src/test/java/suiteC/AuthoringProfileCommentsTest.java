@@ -9,10 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -35,26 +34,27 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	    // Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() {
-			test = extent.startTest("AuthoringTest", "Validate Authoring Profile Comments").assignCategory("Suite C");
+			test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Profile Comments").assignCategory("Suite C");
 			test.log(LogStatus.INFO, "Test Execution is Started");
 			//load the run modes of the tests			
-			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, "AuthoringTest");
+			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 			System.out.println("Run modes-->"+runmodes.length);
 		}
 	
 			
-	@Test(dataProvider="getTestData")
+	@Test
+	@Parameters({"username","password","article","completeArticle","addComments"})
 	public void testLoginTRAccount(String username,String password,
 			String article,String completeArticle, String addComments) throws Exception  {
 		
 			boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "C Suite");
-			boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,"AuthoringTest");
+			boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,this.getClass().getSimpleName());
 			boolean master_condition=suiteRunmode && testRunmode;
 			
 			if(!master_condition) {
 				status=3;
-				test.log(LogStatus.SKIP, "Skipping test case "+"AuthoringTest"+" as the run mode is set to NO");
-				throw new SkipException("Skipping Test Case"+"AuthoringTest"+" as runmode set to NO");//reports
+				test.log(LogStatus.SKIP, "Skipping test case "+this.getClass().getSimpleName()+" as the run mode is set to NO");
+				throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
 			}
 			
 			
@@ -65,7 +65,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 				skip=true;
 				throw new SkipException("Runmode for test set data set to no "+count);
 			}
-			test.log(LogStatus.INFO,"AuthoringTest"+" execution starts for data set #"+ count+"--->");
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 					//selenium code
 					openBrowser();
 					clearCookies();
@@ -73,7 +73,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-					LoginTR.waitForTRHomePage();
+					AuthoringTest.waitForTRHomePage();
 					performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
 	}
@@ -81,9 +81,8 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle, String addComments) throws Exception  {
 		
-		LoginTR.waitForTRHomePage();
-		LoginTR.enterTRCredentials(username, password);
-		LoginTR.clickLogin();
+		AuthoringTest.enterTRCredentials(username, password);
+		AuthoringTest.clickLogin();
 		//Get Total No.of comments
 		totalProfileCommentsBeforeAdd=getProfleComments();
 		System.out.println("comments Before-->"+totalProfileCommentsBeforeAdd);
@@ -105,26 +104,6 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		}
 	}
 	
-	@AfterMethod
-	public void reportDataSetResult() {
-		if(skip)
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "SKIP");
-		
-		else if(fail) {
-			
-			status=2;
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "FAIL");
-		}
-		else
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "PASS");
-		
-		
-		skip=false;
-		fail=false;
-		
-
-	}
-	
 	@AfterTest
 	public void reportTestResult() {
 		
@@ -140,18 +119,13 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		closeBrowser();
 	}
 	
-
-	@DataProvider
-	public Object[][] getTestData() {
-		return TestUtil.getData(suiteCxls, "AuthoringTest") ;
-	}
 	
 	public int getProfleComments() throws InterruptedException  {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))).click();
 		waitUntilText("Profile");
 		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
 		waitUntilText("Comments"); 
-		Authoring.scrollingToElementofAPage();
+		scrollingToElementofAPage();
 		return Integer.parseInt(ob.findElement(By.cssSelector("span[class='profile-doc-count ng-binding']")).getText());
 	}
 	

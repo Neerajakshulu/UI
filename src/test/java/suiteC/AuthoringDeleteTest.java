@@ -11,10 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -38,26 +37,27 @@ public class AuthoringDeleteTest extends TestBase {
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() {
-			test = extent.startTest("AuthoringTest", "Validate Authoring Delete Comments").assignCategory("Suite C");
-			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, "AuthoringTest");
+			test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Delete Comments").assignCategory("Suite C");
+			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		}
 	
 			
-	@Test(dataProvider="getTestData")
+	@Test()
+	@Parameters({"username","password","article","completeArticle"})
 	public void testLoginTRAccount(String username,
 			String password,
 			String article,
-			String completeArticle, String addComments) throws Exception  {
+			String completeArticle) throws Exception  {
 		
 		try {
 			boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "C Suite");
-			boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,"AuthoringTest");
+			boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,this.getClass().getSimpleName());
 			boolean master_condition=suiteRunmode && testRunmode;
 			
 			if(!master_condition) {
 				status=3;
-				test.log(LogStatus.SKIP, "Skipping test case "+"AuthoringTest"+" as the run mode is set to NO");
-				throw new SkipException("Skipping Test Case"+"AuthoringTest"+" as runmode set to NO");//reports
+				test.log(LogStatus.SKIP, "Skipping test case "+this.getClass().getSimpleName()+" as the run mode is set to NO");
+				throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
 			}
 			
 			
@@ -68,7 +68,7 @@ public class AuthoringDeleteTest extends TestBase {
 				skip=true;
 				throw new SkipException("Runmode for test set data set to no "+count);
 			}
-			test.log(LogStatus.INFO,"AuthoringTest"+" execution starts for data set #"+ count+"--->");
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 			
 					//selenium code
 					openBrowser();
@@ -78,7 +78,7 @@ public class AuthoringDeleteTest extends TestBase {
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					LoginTR.waitForTRHomePage();
-					performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
+					performAuthoringCommentOperations(username, password, article, completeArticle);
 					
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Error:"+t);//extent reports
@@ -91,13 +91,13 @@ public class AuthoringDeleteTest extends TestBase {
 	
 	//@Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
 	public void performAuthoringCommentOperations(String username,String password,
-			String article,String completeArticle, String addComments) throws Exception  {
+			String article,String completeArticle) throws Exception  {
 		try {
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
-			LoginTR.searchArticle(article);
-			LoginTR.chooseArticle(completeArticle);
+			AuthoringTest.waitForTRHomePage();
+			AuthoringTest.enterTRCredentials(username, password);
+			AuthoringTest.clickLogin();
+			AuthoringTest.searchArticle(article);
+			AuthoringTest.chooseArticle(completeArticle);
 			deleteComments();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Error: Delete Comments not done"+t);//extent reports
@@ -109,27 +109,6 @@ public class AuthoringDeleteTest extends TestBase {
 	}
 	
 	
-	
-	//@Test(dependsOnMethods="performOperations")
-	@AfterMethod
-	public void reportDataSetResult() {
-		if(skip)
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "SKIP");
-		
-		else if(fail) {
-			
-			status=2;
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "FAIL");
-		}
-		else
-			TestUtil.reportDataSetResult(suiteCxls, "AuthoringTest", count+2, "PASS");
-		
-		
-		skip=false;
-		fail=false;
-		
-
-	}
 	
 	@AfterTest
 	public void reportTestResult() {
@@ -147,11 +126,10 @@ public class AuthoringDeleteTest extends TestBase {
 	}
 	
 
-	@DataProvider
-	public Object[][] getTestData() {
-		return TestUtil.getData(suiteCxls, "AuthoringTest") ;
-	}
-	
+	/**
+	 * Method for Delete Article comments and Validate comments deleted or not
+	 * @throws Exception
+	 */
 	public void deleteComments() throws Exception {
 		try {
 			AuthoringAppreciateTest.scrollingToElementofAPage();
