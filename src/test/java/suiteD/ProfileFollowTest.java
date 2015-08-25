@@ -29,7 +29,7 @@ public class ProfileFollowTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
-	static String followBefore="trafasfue";
+	static String followBefore=null;
 	static String followAfter=null;
 	
 	@BeforeTest
