@@ -73,6 +73,9 @@ public class FindProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
+
+					ob.navigate().to(System.getProperty("host"));
+
 					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -84,6 +87,7 @@ public class FindProfileTest extends TestBase {
 					ErrorUtil.addVerificationFailure(e);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
+					closeBrowser();
 				}
 				
 	}
@@ -101,12 +105,14 @@ public class FindProfileTest extends TestBase {
 					clickOtherProfileEdit();
 					checkFollowOtherProfile();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+					closeBrowser();
+
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Error:"+t);
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
-					//closeBrowser();
+					closeBrowser();
 				}
 	}
 	
@@ -251,7 +257,7 @@ public class FindProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		closeBrowser();
+		//closeBrowser();
 	}
 	
 	

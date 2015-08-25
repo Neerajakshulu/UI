@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
 import util.TestUtil;
 
 public class AuthoringProfileCommentsTest extends TestBase {
@@ -67,15 +68,24 @@ public class AuthoringProfileCommentsTest extends TestBase {
 			}
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 					//selenium code
-					openBrowser();
-					clearCookies();
-					maximizeWindow();
-					ob.get(CONFIG.getProperty("devStable_url"));
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-					AuthoringTest.waitForTRHomePage();
-					performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
-					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
+					try {
+						openBrowser();
+						clearCookies();
+						maximizeWindow();
+						ob.navigate().to(System.getProperty("host"));
+						ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+						ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+						AuthoringTest.waitForTRHomePage();
+						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
+						test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
+						closeBrowser();
+					} catch (Throwable t) {
+						test.log(LogStatus.FAIL,"Error:"+t);//extent reports
+						ErrorUtil.addVerificationFailure(t);//testng
+						status=2;//excel
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
+						closeBrowser();
+					}
 	}
 	
 	public void performAuthoringCommentOperations(String username,String password,

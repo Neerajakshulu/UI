@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
 import util.TestUtil;
 
 public class AuthoringAppreciateTest extends TestBase {
@@ -66,7 +67,7 @@ public class AuthoringAppreciateTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				
-				ob.get(CONFIG.getProperty("devStable_url"));
+				ob.navigate().to(System.getProperty("host"));
 				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				AuthoringTest.waitForTRHomePage();
@@ -78,12 +79,21 @@ public class AuthoringAppreciateTest extends TestBase {
 	public void authoringAppreciation(String username,String password,
 			String article,String completeArticle) throws Exception  {
 
-		AuthoringTest.enterTRCredentials(username, password);
-		AuthoringTest.clickLogin();
-		AuthoringTest.searchArticle(article);
-		AuthoringTest.chooseArticle(completeArticle);
-		validateAppreciationComment();
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+		try {
+			AuthoringTest.enterTRCredentials(username, password);
+			AuthoringTest.clickLogin();
+			AuthoringTest.searchArticle(article);
+			AuthoringTest.chooseArticle(completeArticle);
+			validateAppreciationComment();
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+			closeBrowser();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,"Error:"+t);//extent reports
+			ErrorUtil.addVerificationFailure(t);//testng
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
+			closeBrowser();
+		}
 	}
 	
 	
@@ -100,7 +110,7 @@ public class AuthoringAppreciateTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
-		closeBrowser();
+		//closeBrowser();
 		
 	}
 	

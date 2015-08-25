@@ -71,7 +71,7 @@ public class AuthoringTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				
-				ob.get(CONFIG.getProperty("devStable_url"));
+				ob.navigate().to(System.getProperty("host"));
 				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				//waitForTRHomePage();
@@ -93,11 +93,13 @@ public class AuthoringTest extends TestBase {
 			Authoring.validateViewComment(addComments);
 			Authoring.updateComment();
 			validateUpdatedComment("comment updated");
+			closeBrowser();
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"Error: Login not happended"+e);
 			ErrorUtil.addVerificationFailure(e);
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_login_not_done")));//screenshot
+			closeBrowser();
 		}
 	}
 	
@@ -135,7 +137,7 @@ public class AuthoringTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
-		closeBrowser();
+		//closeBrowser();
 	}
 	
 

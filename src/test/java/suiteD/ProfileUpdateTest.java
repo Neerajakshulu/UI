@@ -66,17 +66,25 @@ public class ProfileUpdateTest extends TestBase {
 		}
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
-				openBrowser();
-				clearCookies();
-				maximizeWindow();
-				
-				ob.get(CONFIG.getProperty("devStable_url"));
-				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				waitForTRHomePage();
-				Thread.sleep(6000);
-				enterTRCredentials(username, password);
-				clickLogin();
+				try {
+					openBrowser();
+					clearCookies();
+					maximizeWindow();
+					
+					ob.navigate().to(System.getProperty("host"));
+					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					waitForTRHomePage();
+					Thread.sleep(6000);
+					enterTRCredentials(username, password);
+					clickLogin();
+				} catch (Throwable e) {
+					test.log(LogStatus.FAIL,"Error:"+e);//extent reports
+					ErrorUtil.addVerificationFailure(e);//testng
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
+					closeBrowser();
+				}
 	}
 	
 	
@@ -86,12 +94,13 @@ public class ProfileUpdateTest extends TestBase {
 			try {
 				editUserOwnProfile(profileInfo);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
 				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
-				//closeBrowser();
+				closeBrowser();
 			}
 	}
 	
@@ -187,7 +196,7 @@ public class ProfileUpdateTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		closeBrowser();
+		//closeBrowser();
 	}
 	
 	

@@ -49,7 +49,7 @@ public class AuthoringDeleteTest extends TestBase {
 			String article,
 			String completeArticle) throws Exception  {
 		
-		try {
+		
 			boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 			boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,this.getClass().getSimpleName());
 			boolean master_condition=suiteRunmode && testRunmode;
@@ -69,22 +69,23 @@ public class AuthoringDeleteTest extends TestBase {
 				throw new SkipException("Runmode for test set data set to no "+count);
 			}
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
-			
+			try {
 					//selenium code
 					openBrowser();
 					clearCookies();
 					maximizeWindow();
-					ob.get(CONFIG.getProperty("devStable_url"));
+					ob.navigate().to(System.getProperty("host"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					LoginTR.waitForTRHomePage();
 					performAuthoringCommentOperations(username, password, article, completeArticle);
+					closeBrowser();
 					
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Error:"+t);//extent reports
 			ErrorUtil.addVerificationFailure(t);//testng
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
 			closeBrowser();
 		}
 	}
@@ -99,6 +100,7 @@ public class AuthoringDeleteTest extends TestBase {
 			AuthoringTest.searchArticle(article);
 			AuthoringTest.chooseArticle(completeArticle);
 			deleteComments();
+			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Error: Delete Comments not done"+t);//extent reports
 			ErrorUtil.addVerificationFailure(t);//testng
@@ -122,7 +124,6 @@ public class AuthoringDeleteTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
-		closeBrowser();
 	}
 	
 
@@ -159,7 +160,6 @@ public class AuthoringDeleteTest extends TestBase {
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
-			closeBrowser();
 		}
 		
 	}

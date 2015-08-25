@@ -70,7 +70,7 @@ public class ViewProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					ob.get(CONFIG.getProperty("devSnapshot_url"));
+					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -80,6 +80,9 @@ public class ViewProfileTest extends TestBase {
 					test.log(LogStatus.FAIL,"Error:"+e);//extent reports
 					ErrorUtil.addVerificationFailure(e);//testng
 					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
+					closeBrowser();
 				}
 	}
 	
@@ -92,11 +95,14 @@ public class ViewProfileTest extends TestBase {
 			try {
 				validateViewProfile();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
 				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
-				//closeBrowser();
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
+				closeBrowser();
 			}
 	}
 	
@@ -155,7 +161,7 @@ public class ViewProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		closeBrowser();
+		//closeBrowser();
 	}
 	
 	/**
