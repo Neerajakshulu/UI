@@ -95,10 +95,10 @@ public class ProfileFollowTest extends TestBase {
 	
 	/**
 	 * Method for find and follow others profile
-	 * @throws IOException, When unable to follow others profile
+	 * @throws Exception 
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	public void followOthersProfile() throws IOException  {
+	public void followOthersProfile() throws Exception  {
 			try {
 				LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
 				clickPeople();

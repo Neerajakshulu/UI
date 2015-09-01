@@ -70,7 +70,7 @@ public class ViewProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					ob.get(CONFIG.getProperty("devStable_url"));
+					ob.navigate().to(System.getProperty("host"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -88,10 +88,10 @@ public class ViewProfileTest extends TestBase {
 	
 	/**
 	 * Method for Validate View user own profile info
-	 * @throws IOException,When Validation not done
+	 * @throws Exception 
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	public void validateOwnProfileData() throws IOException  {
+	public void validateOwnProfileData() throws Exception  {
 			try {
 				validateViewProfile();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");

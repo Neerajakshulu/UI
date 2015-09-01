@@ -90,7 +90,7 @@ public class ProfileUpdateTest extends TestBase {
 	
 	@Test(dependsOnMethods="testLoginTRAccount")
 	@Parameters("profileInfo")
-	public void profileDataUpdate(String profileInfo) throws IOException  {
+	public void profileDataUpdate(String profileInfo) throws Exception  {
 			try {
 				editUserOwnProfile(profileInfo);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
