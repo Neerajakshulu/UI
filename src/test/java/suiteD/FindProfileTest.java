@@ -72,11 +72,8 @@ public class FindProfileTest extends TestBase {
 					openBrowser();
 					clearCookies();
 					maximizeWindow();
-					
-
 					ob.navigate().to(System.getProperty("host"));
-
-					ob.get(CONFIG.getProperty("devStable_url"));
+//					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -215,7 +212,7 @@ public class FindProfileTest extends TestBase {
 		Thread.sleep(4000);
 	}
 	
-	public  void searchArticle(String article) throws InterruptedException, IOException {
+	public  void searchArticle(String article) throws Exception {
 		//waitUntilElementClickable("Watchlist");
 		try {
 			System.out.println("article name-->"+article);
