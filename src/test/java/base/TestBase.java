@@ -3,14 +3,18 @@ package base;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +25,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -40,19 +47,17 @@ public class TestBase {
 	public static Xls_Reader suiteXls=null;
 	public static Xls_Reader suiteAxls=null;
 	public static Xls_Reader suiteBxls=null;
-
-	public static Xls_Reader suiteExls=null;
-	public static Xls_Reader suiteFxls=null;
-
 	public static Xls_Reader suiteCxls=null;
 	public static Xls_Reader suiteDxls=null;
+	public static Xls_Reader suiteExls=null;
+	public static Xls_Reader suiteFxls=null;
 	
 	public static boolean isInitalized=false;
 	public static WebDriver ob=null;
 	public static ExtentReports extent=null;
 	public static ExtentTest test=null;
 	
-	
+	public static String host=null;
 	
 	@BeforeSuite
 	public void beforeSuite() throws Exception{
@@ -76,23 +81,26 @@ public class TestBase {
 		extent = getInstance();
 		// config
 		CONFIG = new Properties();
-		FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\properties\\config.properties");
+		//FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\properties\\config.properties");
+		FileInputStream ip = new FileInputStream("src/test/resources/properties/config.properties");
 		CONFIG.load(ip);
 			
 		OR = new Properties();
-		ip = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\properties\\OR.properties");
+		ip = new FileInputStream("src/test/resources/properties/OR.properties");
 		OR.load(ip);
+		
+		//Getting url
+		host=System.getProperty("host");
 
+//		System.out.println(host);
 		// xls file
-		suiteAxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\A suite.xlsx");
-		suiteBxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\B suite.xlsx");
-		suiteCxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\C suite.xlsx");
-		suiteDxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\D suite.xlsx");
-
-		suiteExls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\E suite.xlsx");
-		suiteFxls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\F suite.xlsx");
-
-		suiteXls = new Xls_Reader(System.getProperty("user.dir")+"\\src\\test\\resources\\xls\\Suite.xlsx");
+		suiteAxls = new Xls_Reader("src/test/resources/xls/A suite.xlsx");
+		suiteBxls = new Xls_Reader("src/test/resources/xls/B suite.xlsx");
+		suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
+		suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
+		suiteExls = new Xls_Reader("src/test/resources/xls/E suite.xlsx");
+		suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
+		suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 		isInitalized=true;
 		}
 		
@@ -102,7 +110,7 @@ public class TestBase {
 	
 	public static ExtentReports getInstance() {
         if (extent == null) {
-            extent = new ExtentReports(System.getProperty("user.dir")+"\\testReports\\test_report.html", true);
+            extent = new ExtentReports("testReports/test_report.html", true);
             
             // optional
             extent.config()
@@ -119,31 +127,52 @@ public class TestBase {
     }
 
 	
-	// selenium RC/ Webdriver
 	
-	//Opening the desired browser
-	public void openBrowser(){
+	//Opening via Sauce Labs
+	public void openBrowser() throws Exception{
 		
-		if(CONFIG.getProperty("browserType").equals("FF")){
-		     ob = new FirefoxDriver();
-		}
-		else if (CONFIG.getProperty("browserType").equals("IE")){
-//			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\IEDriverServer.exe");
-			 System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer.exe");
-			 ob = new InternetExplorerDriver();
-		}
-		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-//			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-			 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
-			 ob = new ChromeDriver();
-		}
 		
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+                desiredCapabilities);
 		String waitTime=CONFIG.getProperty("defaultImplicitWait");
 		String pageWait=CONFIG.getProperty("defaultpageWait");
 		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
 		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(waitTime), TimeUnit.SECONDS);
 		
 	}
+	
+	
+	 
+	
+	// selenium RC/ Webdriver
+	
+	//Opening the desired browser
+//	public void openBrowser(){
+//		
+//		if(CONFIG.getProperty("browserType").equals("FF")){
+//		     ob = new FirefoxDriver();
+//		}
+//		else if (CONFIG.getProperty("browserType").equals("IE")){
+////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\IEDriverServer.exe");
+//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+//			 ob = new InternetExplorerDriver();
+//		}
+//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+//			 ob = new ChromeDriver();
+//		}
+//		
+//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//		String pageWait=CONFIG.getProperty("defaultpageWait");
+//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(waitTime), TimeUnit.SECONDS);
+//		
+//	}
 	
 	//Closing the browser
 	public void closeBrowser(){
@@ -307,10 +336,12 @@ public class TestBase {
 			}	 
 			
 			//capturing screenshot
-			public String captureScreenshot(String filename) throws IOException{
+			public String captureScreenshot(String filename) throws Exception{
 				File myImg = ((TakesScreenshot)ob).getScreenshotAs(OutputType.FILE);
-				String myP=System.getProperty("user.dir")+"\\screenshots\\"+filename+".jpg";
+//				Thread.sleep(5000);
+				String myP=System.getProperty("user.dir")+"/screenshots/"+filename+".jpg";
 			    FileUtils.copyFile(myImg, new File(myP));
+//			    Thread.sleep(5000);
 			    return myP;
 
 			}
@@ -324,9 +355,9 @@ public class TestBase {
 				List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
 				for(int i=0;i<mylist.size();i++){
 					
-					ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-trash watch-icon-active cursor-pointer']")).click();
+					ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch watch-icon-active cursor-pointer']")).click();
 					Thread.sleep(2000);
-					ob.findElement(By.xpath("//button[@class='btn btn-danger']")).click();
+					ob.findElement(By.xpath("//button[contains(text(),'Remove')]")).click();
 					Thread.sleep(2000);
 					
 				}
@@ -766,11 +797,12 @@ public class TestBase {
 					return OR;
 				}
 				
+				
+				
+				
 				public static void setOR(Properties oR) {
 					OR = oR;
 				}
-				
-	//Added by Chinna
 				public static void scrollingToElementofAPage() throws InterruptedException  {
 					JavascriptExecutor jse = (JavascriptExecutor)ob;
 					jse.executeScript("scroll(0, 250);");
