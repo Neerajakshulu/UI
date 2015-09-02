@@ -2,15 +2,19 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,9 +22,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -150,7 +158,7 @@ public class TestBase {
 //		     ob = new FirefoxDriver();
 //		}
 //		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\IEDriverServer.exe");
+////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
 //			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
 //			 ob = new InternetExplorerDriver();
 //		}
@@ -159,6 +167,11 @@ public class TestBase {
 //			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 //			 ob = new ChromeDriver();
 //		}
+//		
+//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+//			 ob = new SafariDriver();
+//		}
+//		
 //		
 //		String waitTime=CONFIG.getProperty("defaultImplicitWait");
 //		String pageWait=CONFIG.getProperty("defaultpageWait");
