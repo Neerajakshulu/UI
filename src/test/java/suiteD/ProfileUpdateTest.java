@@ -71,26 +71,6 @@ public class ProfileUpdateTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					//ob.navigate().to(System.getProperty("host"));
-					ob.get("http://dev-stable.1p.thomsonreuters.com/#/home");	
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-					waitForTRHomePage();
-					Thread.sleep(6000);
-					enterTRCredentials(username, password);
-					clickLogin();
-				} catch (Throwable e) {
-					test.log(LogStatus.FAIL,"Error:"+e);//extent reports
-					ErrorUtil.addVerificationFailure(e);//testng
-					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
-					closeBrowser();
-				}
-				try {
-					openBrowser();
-					clearCookies();
-					maximizeWindow();
-					
 					ob.navigate().to(System.getProperty("host"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -150,11 +130,11 @@ public class ProfileUpdateTest extends TestBase {
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
-		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).isDisplayed();
+		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(1).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
 		
 		if(isEditEnable){
-			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).click();
+			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(1).click();
 			//clear and enter title or role
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).clear();
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).sendKeys(profileDetailsUpdate[0]);
