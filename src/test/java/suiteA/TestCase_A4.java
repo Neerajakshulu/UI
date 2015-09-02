@@ -65,7 +65,7 @@ public class TestCase_A4 extends TestBase{
 		clearCookies();
 		
 		//Navigate to FB login page
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(System.getProperty("host"));
 		Thread.sleep(8000);
 		ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
 		Thread.sleep(4000);

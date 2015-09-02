@@ -70,7 +70,8 @@ public class TestCase_F2 extends TestBase{
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(System.getProperty("host"));
 		Thread.sleep(8000);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();

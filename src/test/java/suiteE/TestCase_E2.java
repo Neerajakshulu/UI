@@ -68,7 +68,7 @@ public class TestCase_E2 extends TestBase{
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(System.getProperty("host"));
 		Thread.sleep(8000);
 		
 		//login using TR credentials
@@ -88,9 +88,16 @@ public class TestCase_E2 extends TestBase{
 		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
 		Thread.sleep(4000);
 		
-		
+		try{
 		ob.findElement(By.xpath("//span[@class='webui-icon webui-icon-watch watch']")).click();
 		Thread.sleep(2000);
+		}
+		catch(Throwable t){
+		
+			ob.findElement(By.xpath("//span[@class='webui-icon webui-icon-watch watch']")).click();
+			Thread.sleep(2000);
+			
+		}
 		
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();

@@ -71,11 +71,14 @@ public class TestCase_A1 extends TestBase{
 		//Open Guerilla Mail and get email id
 		ob.get("https://www.guerrillamail.com");
 		String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+		System.out.println(email);
 		
 		//Navigate to TR login page
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
+		System.out.println("Before clicking login");
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+		System.out.println("After clicking login");
 		Thread.sleep(4000);
 		
 		//Create new TR account

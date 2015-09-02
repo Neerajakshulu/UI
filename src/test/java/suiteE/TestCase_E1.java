@@ -66,7 +66,9 @@ public class TestCase_E1 extends TestBase{
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		
 		//login using TR credentials
@@ -85,7 +87,7 @@ public class TestCase_E1 extends TestBase{
 //		System.out.println(document_name);
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
-		Thread.sleep(4000);
+		Thread.sleep(8000);
 		
 		List<WebElement> watchlist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
 //		System.out.println(watchlist.size());

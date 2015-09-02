@@ -22,7 +22,7 @@ public static void main(String args[]) throws Exception
     String from = "amneetsingh72@gmail.com";//sender id
     String[] to = {"amneetsinghasr@gmail.com","amneetsingh100@gmail.com"};//reciever id
     String pass = "Iliveinasr123";//sender's password 
-    String fileAttachment = System.getProperty("user.dir")+"\\testReports\\test_report.html";//file name for attachment 
+    String fileAttachment = "testReports/test_report.html";//file name for attachment 
     //system properties
     Properties prop = System.getProperties();
     // Setup mail server properties

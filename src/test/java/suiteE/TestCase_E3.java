@@ -60,15 +60,13 @@ public class TestCase_E3 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
-			
-		String search_query="kernel";
-			
+						
 			
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(System.getProperty("host"));
 		Thread.sleep(8000);
 		
 		//login using TR credentials
@@ -76,6 +74,8 @@ public class TestCase_E3 extends TestBase{
 		Thread.sleep(15000);
 		
 		cleanWatchlist();
+		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+		Thread.sleep(4000);
 		
 		List<WebElement> total_documents=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
 		
@@ -87,6 +87,8 @@ public class TestCase_E3 extends TestBase{
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_unable_to_delete_document_from_watchlist")));//screenshot
 			
 		}
+		
+		closeBrowser();
 		
 		}
 		catch(Throwable t){

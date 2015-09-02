@@ -70,7 +70,8 @@ public class TestCase_F1 extends TestBase{
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		
 		//login using TR credentials
@@ -87,7 +88,7 @@ public class TestCase_F1 extends TestBase{
 		
 		try{
 			
-			ob.findElement(By.xpath("//a[contains(text(),'Unfollow')]")).click();
+			ob.findElement(By.xpath("//button[contains(text(),'Unfollow')]")).click();
 			Thread.sleep(2000);
 		}
 		catch(Throwable t){
@@ -95,7 +96,7 @@ public class TestCase_F1 extends TestBase{
 			System.out.println(t);
 		}
 		
-		ob.findElement(By.xpath("//a[contains(text(),'Follow')]")).click();
+		ob.findElement(By.xpath("//button[contains(text(),'Follow')]")).click();
 		Thread.sleep(2000);
 		
 		ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-caret-down']")).click();

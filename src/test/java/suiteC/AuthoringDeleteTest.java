@@ -69,7 +69,8 @@ public class AuthoringDeleteTest extends TestBase {
 				throw new SkipException("Runmode for test set data set to no "+count);
 			}
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
-			try {
+			try{
+				
 					//selenium code
 					openBrowser();
 					clearCookies();
@@ -124,6 +125,7 @@ public class AuthoringDeleteTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
+		//closeBrowser();
 	}
 	
 
@@ -160,6 +162,7 @@ public class AuthoringDeleteTest extends TestBase {
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
+			closeBrowser();
 		}
 		
 	}

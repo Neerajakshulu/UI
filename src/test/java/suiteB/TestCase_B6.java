@@ -69,7 +69,12 @@ public class TestCase_B6 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			System.out.println(System.getProperty("host"));
+			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			
+			
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -85,7 +90,7 @@ public class TestCase_B6 extends TestBase{
 				
 				test.log(LogStatus.FAIL, "Search drop down not getting displayed");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot	
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
 			}
 			
 			
