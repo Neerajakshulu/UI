@@ -130,11 +130,11 @@ public class ProfileUpdateTest extends TestBase {
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
-		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(1).isDisplayed();
+		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
 		
 		if(isEditEnable){
-			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(1).click();
+			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).click();
 			//clear and enter title or role
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).clear();
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).sendKeys(profileDetailsUpdate[0]);
