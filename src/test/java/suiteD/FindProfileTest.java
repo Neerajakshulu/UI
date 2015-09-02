@@ -1,6 +1,5 @@
 package suiteD;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -72,8 +71,7 @@ public class FindProfileTest extends TestBase {
 					openBrowser();
 					clearCookies();
 					maximizeWindow();
-					ob.navigate().to(System.getProperty("host"));
-//					ob.get(CONFIG.getProperty("devStable_url"));
+					ob.get(CONFIG.getProperty("devStable_url"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -147,10 +145,10 @@ public class FindProfileTest extends TestBase {
 				break;
 				}
 			}
-		if(!ob.findElement(By.cssSelector("div[class^='col-xs-11 col-md-8']")).getText().trim().equalsIgnoreCase(profileName)){
+		if(!ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText().trim().contains(profileName)){
 			test.log(LogStatus.FAIL,"Error:");
 			status=2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_Profile details are not accurate")));//screenshot
 			throw new Exception("Other Profiles details not accurate");
 		}
 	}
@@ -165,7 +163,7 @@ public class FindProfileTest extends TestBase {
 		if(editOtherProfileEnable.contains("before") && isEditEnable){
 			test.log(LogStatus.FAIL,"Error:");//extent reports
 			status=2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_other profiles should not have edit option")));//screenshot
 			throw new Exception("Other Profiles Edit should not be visible");
 		}
 	}
