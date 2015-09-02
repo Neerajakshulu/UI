@@ -76,8 +76,7 @@ public class ProfileFollowTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					//ob.navigate().to(System.getProperty("host"));
-					ob.get("http://dev-stable.1p.thomsonreuters.com/#/home");
+					ob.navigate().to(System.getProperty("host"));
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
