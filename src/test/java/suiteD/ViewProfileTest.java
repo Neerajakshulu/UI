@@ -134,7 +134,7 @@ public class ViewProfileTest extends TestBase {
 		profileHeadingName=ob.findElement(By.cssSelector("span[class^='projectne-navbar-link-text'")).getText();
 		//System.out.println("Profile Heading Name-->"+profileHeadingName);
 		
-		profileDetailsName=ob.findElement(By.cssSelector("div[class^='col-xs-11 col-md-8']")).getText();
+		profileDetailsName=ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText();
 		//System.out.println("profile Details Name-->"+profileDetailsName);
 		
 		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit'")).isDisplayed();
