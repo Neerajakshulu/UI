@@ -1,6 +1,5 @@
 package suiteD;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -77,7 +76,8 @@ public class ProfileFollowTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					
-					ob.navigate().to(System.getProperty("host"));
+					//ob.navigate().to(System.getProperty("host"));
+					ob.get("http://dev-stable.1p.thomsonreuters.com/#/home");
 					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
@@ -137,11 +137,11 @@ public class ProfileFollowTest extends TestBase {
 		Assert.assertTrue(profiles.size()>0);
 		
 		
-		
 		for(WebElement profile:profiles){
+			
 			if(profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)){
-				System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
-				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(1).findElements(By.tagName("a"));
+				//System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
+				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(1).findElements(By.tagName("button"));
 				for(WebElement followProfile:followProfiles){
 					if(followProfile.isDisplayed()){
 						followBefore=followProfile.getText();
@@ -154,23 +154,23 @@ public class ProfileFollowTest extends TestBase {
 				for(WebElement followProfile:followProfiles){
 					if(followProfile.isDisplayed()){
 						followAfter=followProfile.getText();
+						break;
 					}
 				}
-				//System.out.println("Before Follow Status-->"+followBefore);
-				//System.out.println("After Follow Status-->"+followAfter);
-				try{
-					Assert.assertNotEquals(followBefore, followAfter);
-					test.log(LogStatus.PASS, "Follow profile from Search Screen is working fine");
-					}catch(Throwable t){
-						test.log(LogStatus.INFO, "Error--->"+t);
-						ErrorUtil.addVerificationFailure(t);	
-						status=2;
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "Unable to follow the profile from search screen")));// screenshot
-						
-					}
-			  }
 			}
+		}
+			try{
+				Assert.assertNotEquals(followBefore, followAfter);
+				test.log(LogStatus.PASS, "Follow profile from Search Screen is working fine");
+				}catch(Throwable t){
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);	
+					status=2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Unable to follow the profile from search screen")));// screenshot
+					
+				}
+			
 	}
 	
 	/**
