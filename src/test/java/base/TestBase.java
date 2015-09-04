@@ -151,7 +151,7 @@ public class TestBase {
 	
 	// selenium RC/ Webdriver
 	
-	//Opening the desired browser
+//	Opening the desired browser
 //	public void openBrowser(){
 //		
 //		if(CONFIG.getProperty("browserType").equals("FF")){
@@ -171,6 +171,7 @@ public class TestBase {
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
 //			 ob = new SafariDriver();
 //		}
+//	
 //		
 //		
 //		String waitTime=CONFIG.getProperty("defaultImplicitWait");

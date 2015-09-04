@@ -136,7 +136,10 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
 		waitUntilText("Comments"); 
 		scrollingToElementofAPage();
-		return Integer.parseInt(ob.findElement(By.cssSelector("span[class='profile-doc-count ng-binding']")).getText());
+		String commentsCount=ob.findElement(By.cssSelector("li[class='search-heading tabs ng-isolate-scope active']")).getText();
+		String[]count=commentsCount.split(" ");
+		int totalComments=Integer.parseInt(count[1]);
+		return totalComments;
 	}
 	
 	/**

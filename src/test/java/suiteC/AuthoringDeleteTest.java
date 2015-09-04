@@ -144,7 +144,9 @@ public class AuthoringDeleteTest extends TestBase {
 			JavascriptExecutor executor = (JavascriptExecutor)ob;
 			executor.executeScript("arguments[0].click();", deleteCommentButton);
 			
-			waitUntilText("Confirmation to Delete Comment");
+			waitUntilText("Delete Comment");
+			waitUntilText("Are you sure you wish to delete this comment?");
+			
 			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
 			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))).click();
 			Thread.sleep(6000);
