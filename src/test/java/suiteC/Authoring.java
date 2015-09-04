@@ -120,7 +120,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public static void validateViewComment(String addComments) throws Exception  {
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-7 comment-content'")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!commentText.contains(addComments))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
