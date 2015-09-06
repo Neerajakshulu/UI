@@ -137,6 +137,7 @@ public class TestBase {
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
 		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
 		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
 		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
                 desiredCapabilities);
 		String waitTime=CONFIG.getProperty("defaultImplicitWait");
