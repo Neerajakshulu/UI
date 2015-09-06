@@ -89,7 +89,7 @@ public class TestCase_E2 extends TestBase{
 		Thread.sleep(4000);
 		
 		try{
-		ob.findElement(By.xpath("//span[@class='webui-icon webui-icon-watch watch']")).click();
+		ob.findElement(By.xpath("//button[@class='btn btn-default activity-block-btn']")).click();
 		Thread.sleep(2000);
 		}
 		catch(Throwable t){
