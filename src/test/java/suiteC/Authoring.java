@@ -63,7 +63,7 @@ public class Authoring  extends TestBase {
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(" comment updated ");
 		Thread.sleep(4000);
-		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary comment-add-button']"));
+		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){
 			System.out.println("Button Text-->"+subButton.getText());
@@ -76,7 +76,7 @@ public class Authoring  extends TestBase {
 	
 	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-7 comment-content'")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
@@ -86,7 +86,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public static void validateAppreciationComment() throws Exception  {
-		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-7 comment-content']"));
+		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']"));
 		List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.size());
 		scrollingToElementofAPage();

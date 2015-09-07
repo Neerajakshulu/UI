@@ -119,21 +119,25 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * @throws Exception, When Validation not done
 	 */
 	public  void validateAppreciationComment() throws Exception  {
-		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-7 comment-content']"));
-		List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-		System.out.println("app sub divs-->"+apprSubDivs.size());
+		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']"));
+		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='webui-media-header']"))
+				.findElement(By.cssSelector("div[class='user-notification']"));
+		
+		
+		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
+		//System.out.println("app sub divs-->"+apprSubDivs.size());
 		scrollingToElementofAPage();
-		int apprEarCount=Integer.parseInt(apprSubDivs.get(1).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 		System.out.println("Before count-->"+apprEarCount);
 		
-		String attrStatus=apprSubDivs.get(0).findElement(By.tagName("button")).getAttribute("ng-click");
+		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
 		System.out.println("Attribute Status-->"+attrStatus);
 		
 		if(attrStatus.contains("NONE")) {
 			scrollingToElementofAPage();
-			apprSubDivs.get(0).findElement(By.tagName("button")).click();
+			apprSubDivs.findElement(By.tagName("button")).click();
 			Thread.sleep(4000);
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   //status=2;
@@ -143,9 +147,9 @@ public class AuthoringAppreciateTest extends TestBase {
 		} 
 		else if (attrStatus.contains("UP")) {
 			scrollingToElementofAPage();
-			apprSubDivs.get(0).findElement(By.tagName("button")).click();
+			apprSubDivs.findElement(By.tagName("button")).click();
 			Thread.sleep(4000);
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   status=2;
