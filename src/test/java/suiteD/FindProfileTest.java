@@ -72,8 +72,6 @@ public class FindProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
 					enterTRCredentials(username, password);
 					clickLogin();

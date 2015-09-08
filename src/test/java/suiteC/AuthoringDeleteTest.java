@@ -76,8 +76,6 @@ public class AuthoringDeleteTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					LoginTR.waitForTRHomePage();
 					performAuthoringCommentOperations(username, password, article, completeArticle);
 					closeBrowser();

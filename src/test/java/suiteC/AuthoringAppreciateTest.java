@@ -68,8 +68,6 @@ public class AuthoringAppreciateTest extends TestBase {
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
-				ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-				ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				AuthoringTest.waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}

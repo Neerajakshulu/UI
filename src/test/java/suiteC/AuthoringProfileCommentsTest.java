@@ -39,7 +39,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 			test.log(LogStatus.INFO, "Test Execution is Started");
 			//load the run modes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
-			System.out.println("Run modes-->"+runmodes.length);
+			//System.out.println("Run modes-->"+runmodes.length);
 		}
 	
 			
@@ -73,8 +73,6 @@ public class AuthoringProfileCommentsTest extends TestBase {
 						clearCookies();
 						maximizeWindow();
 						ob.navigate().to(System.getProperty("host"));
-						ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-						ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 						AuthoringTest.waitForTRHomePage();
 						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 						test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");

@@ -72,8 +72,6 @@ public class ProfileUpdateTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
 					Thread.sleep(6000);
 					enterTRCredentials(username, password);
