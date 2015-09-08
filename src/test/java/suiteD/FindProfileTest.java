@@ -1,11 +1,11 @@
 package suiteD;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -143,7 +143,9 @@ public class FindProfileTest extends TestBase {
 				break;
 				}
 			}
-		if(!ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText().trim().contains(profileName)){
+		
+		System.out.println("profile text-->"+ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText());
+		if(!ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText().trim().equalsIgnoreCase(profileName)){
 			test.log(LogStatus.FAIL,"Error:");
 			status=2;
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_Profile details are not accurate")));//screenshot
@@ -170,31 +172,23 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception
 	 */
 	public void checkFollowOtherProfile() throws Exception {
-		String editOtherProfileEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow']")).getText();
-		isFollowEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow']")).isDisplayed();
-		
-		System.out.println("follow Text before-->"+editOtherProfileEnable);
-		System.out.println("IS editable before-->"+isFollowEnable);
-		
-		//if user is unfollow
-		if(!isFollowEnable){
-			ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow unfollow'")).click();
-			Thread.sleep(4000);
-		}
-		
-		ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow'")).click();
-		
-		String editOtherProfileDisable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow']")).getText();
-		System.out.println("follow Text after-->"+editOtherProfileDisable);
-		isFollowDisable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-follow']")).isDisplayed();
-		System.out.println("is editable after-->"+isFollowDisable);
-		
-		if(isFollowEnable && isFollowDisable) {
-			test.log(LogStatus.FAIL,"Error:");//extent reports
+		try {
+			String beforeclickFollowStaus=ob.findElement(By.cssSelector("button[class='btn btn-link profile-follow-button-wrapper']")).getAttribute("ng-click");
+			List<WebElement> followUnfollowElements=ob.findElements(By.cssSelector("span[class^='webui-icon webui-icon-checkmark']"));
+			for(WebElement followUnfollowElement:followUnfollowElements){
+				if(followUnfollowElement.isDisplayed()){
+					followUnfollowElement.click();
+					break;
+				}
+			}
+			String afterclickFollowStaus=ob.findElement(By.cssSelector("button[class='btn btn-link profile-follow-button-wrapper']")).getAttribute("ng-click");
+			Thread.sleep(2000);
+			Assert.assertNotEquals(beforeclickFollowStaus, afterclickFollowStaus);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,"Error:");
+			ErrorUtil.addVerificationFailure(e);
 			status=2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			throw new Exception("Unable to Follow Other User");
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_Other Profiles Follow and Unfollow Operations not giving expected result")));//screenshot
 		}
 	}
 	
@@ -220,7 +214,7 @@ public class FindProfileTest extends TestBase {
 				String articleName=searchElement.findElement(By.tagName("a")).getText();
 				System.out.println("article name-->"+articleName);
 				if(searchElement.findElement(By.tagName("a")).getText().equalsIgnoreCase(articleName)){
-					System.out.println("name changes done");
+					//System.out.println("name changes done");
 					WebElement element = searchElement.findElement(By.tagName("a"));
 					JavascriptExecutor executor = (JavascriptExecutor)ob;
 					executor.executeScript("arguments[0].click();", element);
