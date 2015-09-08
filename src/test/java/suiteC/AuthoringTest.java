@@ -1,7 +1,8 @@
 package suiteC;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -92,7 +93,11 @@ public class AuthoringTest extends TestBase {
 			validateUpdatedComment("comment updated");
 			closeBrowser();
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL,"Error: Login not happended"+e);
+			test.log(LogStatus.FAIL,"Error: Login not happended");
+			//print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO,errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_login_not_done")));//screenshot

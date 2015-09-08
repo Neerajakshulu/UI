@@ -1,7 +1,8 @@
 package suiteC;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -81,10 +82,14 @@ public class AuthoringDeleteTest extends TestBase {
 					closeBrowser();
 					
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,"Error:"+t);//extent reports
-			ErrorUtil.addVerificationFailure(t);//testng
-			status=2;//excel
-//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+			test.log(LogStatus.FAIL,"UnExpected Behaviour");
+			//print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO,errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status=2;
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
 			closeBrowser();
 		}
 	}

@@ -1,5 +1,7 @@
 package suiteD;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -101,7 +103,11 @@ public class FindProfileTest extends TestBase {
 					closeBrowser();
 
 				} catch (Throwable t) {
-					test.log(LogStatus.FAIL,"Error:"+t);
+					test.log(LogStatus.FAIL,"Something Unexpected");
+					//print full stack trace
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					test.log(LogStatus.INFO,errors.toString());
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));

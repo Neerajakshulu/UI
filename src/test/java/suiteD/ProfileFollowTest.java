@@ -1,7 +1,8 @@
 package suiteD;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -80,9 +81,13 @@ public class ProfileFollowTest extends TestBase {
 					waitForTRHomePage();
 					enterTRCredentials(username, password);
 					clickLogin();
-				} catch (Throwable e) {
-					test.log(LogStatus.FAIL,"Error: Login not happended"+e);
-					ErrorUtil.addVerificationFailure(e);
+				} catch (Throwable t) {
+					test.log(LogStatus.FAIL,"Error: Login not happended");
+					//print full stack trace
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					test.log(LogStatus.INFO,errors.toString());
+					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_login_not_done")));//screenshot
 					closeBrowser();
