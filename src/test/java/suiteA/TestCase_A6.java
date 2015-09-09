@@ -89,7 +89,13 @@ public class TestCase_A6 extends TestBase{
 		// selenium code
 		openBrowser();
 		Thread.sleep(25000);
-//		maximizeWindow();
+		try{
+		maximizeWindow();
+		}
+		catch(Throwable t){
+			
+			System.out.println("maximizeWindow() command not supported in Selendroid");
+		}
 		clearCookies();
 		
 		
