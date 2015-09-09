@@ -94,7 +94,7 @@ public class TestCase_A6 extends TestBase{
 		}
 		catch(Throwable t){
 			
-			System.out.println("maximizeWindow() command not supported in Selendroid");
+			System.out.println("maximize() command not supported in Selendroid");
 		}
 		clearCookies();
 		

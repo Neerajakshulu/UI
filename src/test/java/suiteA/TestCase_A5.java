@@ -88,9 +88,15 @@ public class TestCase_A5 extends TestBase{
 		
 		// selenium code
 		openBrowser();
-		Thread.sleep(25000);
-//		maximizeWindow();
-//		clearCookies();
+//		Thread.sleep(25000);
+		try{
+		maximizeWindow();
+		}
+		catch(Throwable t){
+			
+			System.out.println("maximize() command not supported in Selendroid");
+		}
+		clearCookies();
 		
 		
 		//Navigate to TR login page
