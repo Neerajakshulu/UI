@@ -142,7 +142,7 @@ public class TestBase {
 		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
                 desiredCapabilities);
 		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-		String pageWait=CONFIG.getProperty("defaultpageWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
 		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
 		try{
 			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
