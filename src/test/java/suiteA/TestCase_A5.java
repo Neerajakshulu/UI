@@ -89,9 +89,8 @@ public class TestCase_A5 extends TestBase{
 		// selenium code
 		openBrowser();
 		Thread.sleep(10000);
-		maximizeWindow();
-		clearCookies();
-		Thread.sleep(10000);
+//		maximizeWindow();
+//		clearCookies();
 		
 		
 		//Navigate to TR login page
