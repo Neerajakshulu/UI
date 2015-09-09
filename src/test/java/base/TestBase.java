@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -130,28 +131,30 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-	public void openBrowser() throws Exception{
-		
-		
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-//		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
-		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-                desiredCapabilities);
-		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-		String pageWait=CONFIG.getProperty("defaultpageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try{
-			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(waitTime), TimeUnit.SECONDS);
-			}
-		catch(Throwable t){
-				
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
-		
-	}
+//	public void openBrowser() throws Exception{
+//		
+//		
+//		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+//		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+//		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+//		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+////		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
+//		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+//                desiredCapabilities);
+//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//		String pageWait=CONFIG.getProperty("defaultpageWait");
+//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+//		try{
+//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+//			}
+//		catch(Throwable t){
+//				
+//			System.out.println("Page Load Timeout not supported in safari driver");
+//		}
+//		
+//	}
+	
+
 	
 	
 	 
@@ -159,40 +162,40 @@ public class TestBase {
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-//	public void openBrowser(){
-//		
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//		     ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob = new ChromeDriver();
-//		}
-//		
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			 ob = new SafariDriver();
-//		}
-//	
-//		
-//		
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultpageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//			
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//		
-//	}
+	public void openBrowser(){
+		
+		if(CONFIG.getProperty("browserType").equals("FF")){
+		     ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+//			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			 ob = new InternetExplorerDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+//			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+			 ob = new ChromeDriver();
+		}
+		
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+			 ob = new SafariDriver();
+		}
+	
+		
+		
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+			
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+		
+	}
 	
 	//Closing the browser
 	public void closeBrowser(){
@@ -802,6 +805,30 @@ public class TestBase {
 						e.printStackTrace();
 					}
 					return true;
+				}
+				
+				//This method returns a name with specified character length
+				public String generateRandomName(int numberOfCharacters){
+					
+					Random rand =new Random(System.currentTimeMillis());
+					
+					int min=97;
+					int max=122;
+					char ch;
+					int num;
+					
+					String random_name="";
+					
+					for(int i=1;i<=numberOfCharacters;i++){
+						
+						num=min+rand.nextInt(max-min+1);
+						ch=(char)num;
+						random_name=random_name+ch;
+						
+					}
+					
+					return random_name;
+					
 				}
 				
 	//Added by Chinna

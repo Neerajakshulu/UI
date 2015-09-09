@@ -3,6 +3,8 @@ package suiteA;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -95,7 +97,11 @@ public class TestCase_A2 extends TestBase{
 		
 		catch(Throwable t){
 			
-			test.log(LogStatus.FAIL,"Error:"+t);//extent reports
+			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
+			//next 3 lines to print whole testng error in report
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO,errors.toString());//extent reports
 			ErrorUtil.addVerificationFailure(t);//testng
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot

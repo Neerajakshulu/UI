@@ -1,7 +1,7 @@
 package suiteD;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -72,15 +72,17 @@ public class ProfileUpdateTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					ob.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-					ob.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 					waitForTRHomePage();
 					Thread.sleep(6000);
 					enterTRCredentials(username, password);
 					clickLogin();
-				} catch (Throwable e) {
-					test.log(LogStatus.FAIL,"Error:"+e);//extent reports
-					ErrorUtil.addVerificationFailure(e);//testng
+				} catch (Throwable t) {
+					test.log(LogStatus.FAIL,"Something Unexpected");
+					//print full stack trace
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					test.log(LogStatus.INFO,errors.toString());
+					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
 					closeBrowser();
@@ -96,8 +98,12 @@ public class ProfileUpdateTest extends TestBase {
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				closeBrowser();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
-				ErrorUtil.addVerificationFailure(t);//testng
+				test.log(LogStatus.FAIL,"Something Unexpected");
+				//print full stack trace
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO,errors.toString());
+				ErrorUtil.addVerificationFailure(t);
 				status=2;//excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_data_updation_not_done")));//screenshot
 				closeBrowser();
