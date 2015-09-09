@@ -60,7 +60,13 @@ public class TestCase_A3 extends TestBase{
 		try{
 		
 		openBrowser();
-		maximizeWindow();
+		try{
+			maximizeWindow();
+			}
+			catch(Throwable t){
+				
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 		clearCookies();
 		
 		

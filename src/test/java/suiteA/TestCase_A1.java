@@ -63,7 +63,13 @@ public class TestCase_A1 extends TestBase{
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
 		openBrowser();
-		maximizeWindow();
+		try{
+			maximizeWindow();
+			}
+			catch(Throwable t){
+				
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 		clearCookies();
 		
 		String password="Transaction@2";

@@ -64,7 +64,13 @@ public class TestCase_A4 extends TestBase{
 		
 		try{
 		openBrowser();
-		maximizeWindow();
+		try{
+			maximizeWindow();
+			}
+			catch(Throwable t){
+				
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 		clearCookies();
 		
 		//Navigate to FB login page
