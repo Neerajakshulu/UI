@@ -88,7 +88,7 @@ public class TestCase_A5 extends TestBase{
 		
 		// selenium code
 		openBrowser();
-		Thread.sleep(10000);
+		Thread.sleep(25000);
 //		maximizeWindow();
 //		clearCookies();
 		
