@@ -146,7 +146,7 @@ public class TestBase {
 		String pageWait=CONFIG.getProperty("defaultPageWait");
 		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
 		try{
-			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
 			}
 		catch(Throwable t){
 				

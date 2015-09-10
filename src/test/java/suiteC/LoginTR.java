@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.TestBase;
+import util.BrowserWaits;
+import util.OnePObjectMap;
 
 /**
  * class for Project Neon Login with TR Credentials
@@ -17,7 +19,6 @@ import base.TestBase;
 public class LoginTR extends TestBase{
 
 	
-	//static WebDriver driver=TestBase.getOb();
 	static int time=15;
 	
 	/**
@@ -36,6 +37,7 @@ public class LoginTR extends TestBase{
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
 		waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}
@@ -43,8 +45,6 @@ public class LoginTR extends TestBase{
 	public static void clickLogin() throws InterruptedException {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
 		Thread.sleep(6000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		//waitUntilElementClickable("Home");
 	}
 	
 	public static void searchArticle(String article) throws InterruptedException {
@@ -61,7 +61,6 @@ public class LoginTR extends TestBase{
 				WebElement element = searchElement.findElement(By.tagName("a"));
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", element);
-				
 				//searchElement.findElement(By.tagName("a")).click();
 				Thread.sleep(4000);
 				break;
@@ -92,6 +91,14 @@ public class LoginTR extends TestBase{
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(linkName)));
 	}
 	
+	
+	public static void logOutApp() {
+		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
+		AuthoringProfileCommentsTest.waitUntilText("Sign out");
+		ob.findElement(By.linkText("Sign out")).click();
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_LOGIN_BUTTON_CSS);
+		
+	}
 	
 
 

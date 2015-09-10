@@ -15,7 +15,7 @@ public class Authoring  extends TestBase {
 	static int commentSizeAfterAdd;
 	
 	public static int getCommentCount()  {
-		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
+		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 		String num[]=commentSizeBeforeAdd.split(" ");
 		//System.out.println("num length-->"+num[num.length-1]);
@@ -34,12 +34,12 @@ public class Authoring  extends TestBase {
 	
 	
 	public static void clickAddCommentButton() throws InterruptedException  {
-		//LoginTR.waitUntilTextPresent(TestBase.OR.getProperty("tr_authoring_addcomment_css"), "Add Comment");
 		scrollingToElementofAPage();
-		ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
-		//driver.findElement(By.cssSelector(TestBase.OR.getProperty("tr_authoring_addcomment_css"))).click();
+		WebElement addCommentElement=ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));
+		//ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
+		JavascriptExecutor executor = (JavascriptExecutor)ob;
+		executor.executeScript("arguments[0].click();", addCommentElement);
 		Thread.sleep(6000);
-		
 		
 	}
 	
@@ -48,7 +48,6 @@ public class Authoring  extends TestBase {
 		System.out.println("before-->"+commentSizeBeforeAdd);
 		System.out.println("After-->"+commentSizeAfterAdd);
 		if(!(commentSizeAfterAdd>commentSizeBeforeAdd))  {
-			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
 			throw new Exception("Entered Comment not updated");
 		}
 	}
@@ -57,18 +56,25 @@ public class Authoring  extends TestBase {
 	
 	public static void updateComment() throws Exception {
 		scrollingToElementofAPage();
-		ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']")).click();
+		
+		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
+		JavascriptExecutor exe= (JavascriptExecutor)ob;
+		exe.executeScript("arguments[0].click();", editCommentElement);
+		
+		
 		List<WebElement> commentArea=ob.findElements(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
-		commentArea.get(1).sendKeys(" comment updated ");
+		commentArea.get(1).sendKeys("comment updated");
 		Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){
 			System.out.println("Button Text-->"+subButton.getText());
 			if(subButton.getText().trim().equalsIgnoreCase("submit")){
-				subButton.click();
+				JavascriptExecutor executor = (JavascriptExecutor)ob;
+				executor.executeScript("arguments[0].click();", subButton);
+				//subButton.click();
 				break;
 			}
 		}
@@ -76,7 +82,7 @@ public class Authoring  extends TestBase {
 	
 	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
@@ -120,7 +126,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public static void validateViewComment(String addComments) throws Exception  {
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!commentText.contains(addComments))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
@@ -132,9 +138,6 @@ public class Authoring  extends TestBase {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(4000);
-		/*
-		((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView();", element);*/
 	}
 	
 	public static void scrollingToElement(WebElement element) throws InterruptedException  {

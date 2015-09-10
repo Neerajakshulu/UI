@@ -130,27 +130,31 @@ public class TestCase_A1 extends TestBase{
 		}
 		
 		//Activate the account
+		System.out.println("Before capturing email body links");
 		WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 		List<WebElement> links=email_body.findElements(By.tagName("a"));
-		links.get(0).click();
+		System.out.println(links.size());
+		System.out.println("After capturing email body links");
+//		links.get(0).click();
+		ob.get(links.get(0).getAttribute("href"));
 		Thread.sleep(4000);
 		
-		//Switch to 2nd window
-		Set<String> myset=ob.getWindowHandles();
-		Iterator<String> myIT=myset.iterator();
-		ArrayList<String> al=new ArrayList<String>();
-		for(int i=0;i<myset.size();i++){
-			
-			al.add(myIT.next());
-		}
-		ob.switchTo().window(al.get(1));
+//		//Switch to 2nd window
+//		Set<String> myset=ob.getWindowHandles();
+//		Iterator<String> myIT=myset.iterator();
+//		ArrayList<String> al=new ArrayList<String>();
+//		for(int i=0;i<myset.size();i++){
+//			
+//			al.add(myIT.next());
+//		}
+//		ob.switchTo().window(al.get(1));
 		
 		
 		//Verify that newly registered user credentials are working fine
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-		Thread.sleep(15000);
+		Thread.sleep(25000);
 		if(!checkElementPresence("help_link")){
 			
 			test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");//extent reports
