@@ -135,18 +135,19 @@ public class TestCase_A1 extends TestBase{
 		List<WebElement> links=email_body.findElements(By.tagName("a"));
 		System.out.println(links.size());
 		System.out.println("After capturing email body links");
-		links.get(0).click();
+//		links.get(0).click();
+		ob.get(links.get(0).getAttribute("href"));
 		Thread.sleep(4000);
 		
-		//Switch to 2nd window
-		Set<String> myset=ob.getWindowHandles();
-		Iterator<String> myIT=myset.iterator();
-		ArrayList<String> al=new ArrayList<String>();
-		for(int i=0;i<myset.size();i++){
-			
-			al.add(myIT.next());
-		}
-		ob.switchTo().window(al.get(1));
+//		//Switch to 2nd window
+//		Set<String> myset=ob.getWindowHandles();
+//		Iterator<String> myIT=myset.iterator();
+//		ArrayList<String> al=new ArrayList<String>();
+//		for(int i=0;i<myset.size();i++){
+//			
+//			al.add(myIT.next());
+//		}
+//		ob.switchTo().window(al.get(1));
 		
 		
 		//Verify that newly registered user credentials are working fine
