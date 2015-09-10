@@ -130,8 +130,11 @@ public class TestCase_A1 extends TestBase{
 		}
 		
 		//Activate the account
+		System.out.println("Before capturing email body links");
 		WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 		List<WebElement> links=email_body.findElements(By.tagName("a"));
+		System.out.println(links.size());
+		System.out.println("After capturing email body links");
 		links.get(0).click();
 		Thread.sleep(4000);
 		
