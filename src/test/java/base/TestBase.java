@@ -145,13 +145,13 @@ public class TestBase {
 		String waitTime=CONFIG.getProperty("defaultImplicitWait");
 		String pageWait=CONFIG.getProperty("defaultPageWait");
 		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try{
-			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-			}
-		catch(Throwable t){
-				
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
+//		try{
+//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+//			}
+//		catch(Throwable t){
+//				
+//			System.out.println("Page Load Timeout not supported in safari driver");
+//		}
 		
 	}
 	
