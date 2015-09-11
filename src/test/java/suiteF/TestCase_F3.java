@@ -111,7 +111,7 @@ public class TestCase_F3 extends TestBase{
 		
 		ob.get(link);
 		Thread.sleep(4000);
-		ob.findElement(By.xpath("//*[@class='ng-pristine ng-valid ta-bind ng-touched placeholder-text']")).sendKeys("what a comment!");
+		ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("what a comment!");
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
 		Thread.sleep(2000);
 		

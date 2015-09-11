@@ -92,7 +92,7 @@ public class TestCase_F2 extends TestBase{
 		System.out.println(document_title);
 		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
 		Thread.sleep(4000);
-		ob.findElement(By.xpath("//*[@class='ng-pristine ng-valid ta-bind ng-touched placeholder-text']")).sendKeys("what a comment!");
+		ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("what a comment!");
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
 		Thread.sleep(2000);
 		
