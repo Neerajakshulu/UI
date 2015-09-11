@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -94,6 +95,8 @@ public class TestCase_F2 extends TestBase{
 		Thread.sleep(4000);
 		ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("what a comment!");
 		Thread.sleep(5000);
+		((JavascriptExecutor)ob).executeScript("scroll(0,-200)");
+
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
 		Thread.sleep(2000);
 		
