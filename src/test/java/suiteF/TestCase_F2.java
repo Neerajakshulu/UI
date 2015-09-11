@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -92,7 +93,23 @@ public class TestCase_F2 extends TestBase{
 		System.out.println(document_title);
 		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
 		Thread.sleep(4000);
-		ob.findElement(By.xpath("//*[contains(@id,'taTextElement')]")).sendKeys("what a comment!");
+//		ob.findElement(By.cssSelector("div[id^='taTextElement']")).click();
+//		Thread.sleep(2000);
+//		ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("what a comment!");
+//		Thread.sleep(5000);
+//		((JavascriptExecutor)ob).executeScript("scroll(0,-200)");
+		
+		
+		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+        System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
+        commentArea.click();
+        Thread.sleep(4000);
+		JavascriptExecutor js = (JavascriptExecutor)ob;
+        js.executeScript("arguments[0].setAttribute('value','Green');", commentArea);
+        ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("purple");
+		Thread.sleep(5000);
+
+
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
 		Thread.sleep(2000);
 		
