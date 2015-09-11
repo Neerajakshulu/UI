@@ -106,6 +106,8 @@ public class TestCase_F2 extends TestBase{
         Thread.sleep(4000);
 		JavascriptExecutor js = (JavascriptExecutor)ob;
         js.executeScript("arguments[0].setAttribute('value','Green');", commentArea);
+        ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("purple");
+		Thread.sleep(5000);
 
 
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
