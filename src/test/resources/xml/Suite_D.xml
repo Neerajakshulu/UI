@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite D">
 
+<listeners>
+    <listener class-name="listener.TestsListenerAdapter" />
+</listeners>
 
 <parameter name="username" value="chinna.putha@thomsonreuters.com"></parameter>
 <parameter name="password" value="Welcome01"></parameter>
@@ -27,6 +30,22 @@
 	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"></parameter>
     <classes>
         <class name="suiteD.ProfileUpdateTest" ></class> 
+    </classes>
+</test>
+
+
+<test name="Validate_Application_Links">
+	<parameter name="appLinks"
+	value="Web of Science|EndNote|InCites|ScholarOne Abstracts|ScholarOne Manuscripts" />
+    <classes>
+        <class name="suiteD.ApplicationLinksValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_Application_Header_and_Footer_Links">
+	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use|Help"/>
+    <classes>
+        <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
     </classes>
 </test>
 

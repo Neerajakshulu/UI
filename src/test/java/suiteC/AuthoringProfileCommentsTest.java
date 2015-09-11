@@ -27,7 +27,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	static int count=-1;
 	static int totalProfileCommentsBeforeAdd=0;
 	static int totalProfileCommentsAfterAdd=0;
-	static int time=15;
+	static int time=30;
 	
 	static boolean fail=false;
 	static boolean skip=false;
@@ -37,10 +37,8 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		@BeforeTest
 		public void beforeTest() {
 			test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Profile Comments").assignCategory("Suite C");
-			test.log(LogStatus.INFO, "Test Execution is Started");
 			//load the run modes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
-			//System.out.println("Run modes-->"+runmodes.length);
 		}
 	
 			
@@ -69,14 +67,14 @@ public class AuthoringProfileCommentsTest extends TestBase {
 			}
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 					//selenium code
-					try {
+					
 						openBrowser();
 						clearCookies();
 						maximizeWindow();
 						ob.navigate().to(System.getProperty("host"));
+						try {
 						AuthoringTest.waitForTRHomePage();
 						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
-						test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
 						closeBrowser();
 					} catch (Throwable t) {
 						test.log(LogStatus.FAIL,"Something UnExpected");
@@ -129,7 +127,6 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
 		
-		closeBrowser();
 	}
 	
 	
