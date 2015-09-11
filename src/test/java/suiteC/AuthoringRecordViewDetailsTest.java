@@ -104,7 +104,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	 */
 	public void recordViewDetailsLinkValidation() throws Exception {
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
-			Thread.sleep(8000);
+			Thread.sleep(15000);
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
