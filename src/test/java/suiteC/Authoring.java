@@ -27,6 +27,11 @@ public class Authoring  extends TestBase {
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
+		
+		// Instantiating JavascriptExecutor
+	    JavascriptExecutor js = (JavascriptExecutor)ob;
+        js.executeScript("arguments[0].setAttribute('value','"+addComments+"');", commentArea);
+        
 		scrollingToElementofAPage();
 		commentArea.sendKeys(addComments+RandomStringUtils.randomNumeric(3));
 		Thread.sleep(4000);
@@ -82,7 +87,7 @@ public class Authoring  extends TestBase {
 	
 	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));

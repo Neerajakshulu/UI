@@ -106,6 +106,7 @@ public class ProfileFollowTest extends TestBase {
 				clickPeople();
 				followOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				LoginTR.logOutApp();
 				closeBrowser();
 
 			} catch (Throwable t) {
@@ -217,6 +218,7 @@ public class ProfileFollowTest extends TestBase {
 		Thread.sleep(10000);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}

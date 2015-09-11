@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -99,6 +100,7 @@ public class ViewProfileTest extends TestBase {
 			try {
 				validateViewProfile();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				LoginTR.logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
@@ -135,13 +137,13 @@ public class ViewProfileTest extends TestBase {
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
-		profileHeadingName=ob.findElement(By.cssSelector("span[class^='projectne-navbar-link-text'")).getText();
+		profileHeadingName=ob.findElement(By.cssSelector("span[class^='projectne-navbar-link-text']")).getText();
 		//System.out.println("Profile Heading Name-->"+profileHeadingName);
 		
 		profileDetailsName=ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText();
 		//System.out.println("profile Details Name-->"+profileDetailsName);
 		
-		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit'")).isDisplayed();
+		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
 		
 		if(!profileHeadingName.equalsIgnoreCase(profileDetailsName)){
@@ -186,6 +188,7 @@ public class ViewProfileTest extends TestBase {
 		Thread.sleep(10000);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}

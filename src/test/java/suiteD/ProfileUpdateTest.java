@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -96,6 +97,7 @@ public class ProfileUpdateTest extends TestBase {
 			try {
 				editUserOwnProfile(profileInfo);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				LoginTR.logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");
@@ -136,11 +138,11 @@ public class ProfileUpdateTest extends TestBase {
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
-		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).isDisplayed();
+		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit']")).get(0).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
 		
 		if(isEditEnable){
-			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit'")).get(0).click();
+			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit']")).get(0).click();
 			//clear and enter title or role
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).clear();
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).sendKeys(profileDetailsUpdate[0]);
@@ -224,6 +226,7 @@ public class ProfileUpdateTest extends TestBase {
 		Thread.sleep(10000);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}

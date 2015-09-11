@@ -77,8 +77,8 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
-			//AuthoringTest.enterTRCredentials(username, password);
-			//AuthoringTest.clickLogin();
+			AuthoringTest.enterTRCredentials(username, password);
+			AuthoringTest.clickLogin();
 			AuthoringTest.searchArticle(article);
 			AuthoringTest.chooseArticle(completeArticle);
 			recordViewDetailsLinkValidation();
@@ -104,6 +104,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	 */
 	public void recordViewDetailsLinkValidation() throws Exception {
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
+			Thread.sleep(8000);
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);

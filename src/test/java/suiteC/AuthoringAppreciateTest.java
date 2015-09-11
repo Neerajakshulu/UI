@@ -138,7 +138,9 @@ public class AuthoringAppreciateTest extends TestBase {
 		
 		if(attrStatus.contains("NONE")) {
 			scrollingToElementofAPage();
-			apprSubDivs.findElement(By.tagName("button")).click();
+			//apprSubDivs.findElement(By.tagName("button")).click();
+			JavascriptExecutor exe= (JavascriptExecutor)ob;
+			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
@@ -150,7 +152,10 @@ public class AuthoringAppreciateTest extends TestBase {
 		} 
 		else if (attrStatus.contains("UP")) {
 			scrollingToElementofAPage();
-			apprSubDivs.findElement(By.tagName("button")).click();
+			//apprSubDivs.findElement(By.tagName("button")).click();
+			JavascriptExecutor exe= (JavascriptExecutor)ob;
+			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+			
 			Thread.sleep(4000);
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);

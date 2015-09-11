@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -100,6 +101,7 @@ public class FindProfileTest extends TestBase {
 					clickOtherProfileEdit();
 					checkFollowOtherProfile();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+					LoginTR.logOutApp();
 					closeBrowser();
 
 				} catch (Throwable t) {
@@ -144,7 +146,10 @@ public class FindProfileTest extends TestBase {
 		System.out.println("list of find profiles -->"+profiles.size());
 		for(WebElement profile:profiles){
 			if(profile.findElements(By.tagName("span")).get(0).getText().equalsIgnoreCase(profileName)){
-				profile.findElements(By.tagName("span")).get(0).click();
+				System.out.println("getting text-->"+profile.findElements(By.tagName("span")).get(0).getText());
+				//profile.findElements(By.tagName("span")).get(0).click();
+				JavascriptExecutor exe= (JavascriptExecutor)ob;
+				exe.executeScript("arguments[0].click();", profile.findElements(By.tagName("span")).get(0).findElement(By.tagName("a")));
 				Thread.sleep(4000);
 				break;
 				}
@@ -164,8 +169,8 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception, When Edit button is Enabled
 	 */
 	public void clickOtherProfileEdit() throws Exception {
-		String editOtherProfileEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit'")).getText();
-		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit'")).isDisplayed();
+		String editOtherProfileEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).getText();
+		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).isDisplayed();
 		if(editOtherProfileEnable.contains("before") && isEditEnable){
 			test.log(LogStatus.FAIL,"Error:");//extent reports
 			status=2;
@@ -272,6 +277,7 @@ public class FindProfileTest extends TestBase {
 		Thread.sleep(10000);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}
