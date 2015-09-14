@@ -136,10 +136,10 @@ public class TestBase {
 		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-//		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
+		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
 		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-//		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
-//		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
+		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
+		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
 //		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
