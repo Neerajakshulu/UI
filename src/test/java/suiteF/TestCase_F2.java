@@ -68,7 +68,7 @@ public class TestCase_F2 extends TestBase{
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
 			
-		String search_query="biology";
+		String search_query="india";
 		String email="motadon100@gmail.com";
 		String password="Transaction@2";
 			
