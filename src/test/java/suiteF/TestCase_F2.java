@@ -102,16 +102,27 @@ public class TestCase_F2 extends TestBase{
 		
 		 Robot robot = new Robot();
 		 robot.keyPress(KeyEvent.VK_SHIFT);
-		    robot.keyPress(KeyEvent.VK_H);
+		 Thread.sleep(1000);
+		  robot.keyPress(KeyEvent.VK_H);
+		  Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_H);
+		    Thread.sleep(1000);
 		    robot.keyPress(KeyEvent.VK_E);
+		    Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_E);
+		    Thread.sleep(1000);
 		    robot.keyPress(KeyEvent.VK_L);
+		    Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_L);
+		    Thread.sleep(1000);
 		    robot.keyPress(KeyEvent.VK_L);
+		    Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_L);
+		    Thread.sleep(1000);
 		    robot.keyPress(KeyEvent.VK_O);
+		    Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_O);
+		    Thread.sleep(1000);
 		    robot.keyRelease(KeyEvent.VK_SHIFT);
 		
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
