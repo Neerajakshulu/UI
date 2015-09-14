@@ -2,6 +2,8 @@ package suiteF;
 
 
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -16,6 +18,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.internal.Locatable;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -93,23 +97,23 @@ public class TestCase_F2 extends TestBase{
 		System.out.println(document_title);
 		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
 		Thread.sleep(4000);
-//		ob.findElement(By.cssSelector("div[id^='taTextElement']")).click();
-//		Thread.sleep(2000);
-//		ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("what a comment!");
-//		Thread.sleep(5000);
-//		((JavascriptExecutor)ob).executeScript("scroll(0,-200)");
+		ob.findElement(By.cssSelector("div[id^='taTextElement']")).click();
+		Thread.sleep(2000);
 		
+		 Robot robot = new Robot();
+		 robot.keyPress(KeyEvent.VK_SHIFT);
+		    robot.keyPress(KeyEvent.VK_H);
+		    robot.keyRelease(KeyEvent.VK_H);
+		    robot.keyPress(KeyEvent.VK_E);
+		    robot.keyRelease(KeyEvent.VK_E);
+		    robot.keyPress(KeyEvent.VK_L);
+		    robot.keyRelease(KeyEvent.VK_L);
+		    robot.keyPress(KeyEvent.VK_L);
+		    robot.keyRelease(KeyEvent.VK_L);
+		    robot.keyPress(KeyEvent.VK_O);
+		    robot.keyRelease(KeyEvent.VK_O);
+		    robot.keyRelease(KeyEvent.VK_SHIFT);
 		
-		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
-        System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
-        commentArea.click();
-        Thread.sleep(4000);
-		JavascriptExecutor js = (JavascriptExecutor)ob;
-        js.executeScript("arguments[0].setAttribute('value','Green');", commentArea);
-        ob.findElement(By.cssSelector("div[id^='taTextElement']")).sendKeys("purple");
-		Thread.sleep(5000);
-
-
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
 		Thread.sleep(2000);
 		
