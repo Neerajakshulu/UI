@@ -30,6 +30,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -183,7 +184,12 @@ public class TestBase {
 //		}
 //		
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			 ob = new SafariDriver();
+//			
+//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+//			SafariOptions safariOptions = new SafariOptions();
+//			safariOptions.setUseCleanSession(true);
+//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+//			ob = new SafariDriver(desiredCapabilities);
 //		}
 //	
 //		
@@ -310,6 +316,22 @@ public class TestBase {
 				return true;
 			}
 	       
+	     //Check whether a particular element is present or not(detecting element via name)
+	       public boolean checkElementPresence_name(String name_key){
+				int count =ob.findElements(By.name(OR.getProperty(name_key))).size();
+				System.out.println("Count is "+count);
+				try{
+				Assert.assertEquals(count, 1);
+				test.log(LogStatus.PASS, "Particular element is present");
+				}catch(Throwable t){
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					System.out.println("Error:"+t);
+					return false;
+			    }
+				return true;
+			}
+	       
 	       
 	     //Check whether a particular element has disappeared or not(via xpath)
 	       public boolean checkElementDisappearance(String xpathKey){
@@ -347,8 +369,8 @@ public class TestBase {
 				
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
-				ob.findElement(By.id("userid")).sendKeys(CONFIG.getProperty("defaultUsername"));
-				ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
+				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
 	    	 
 			}

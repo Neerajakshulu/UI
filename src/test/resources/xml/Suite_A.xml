@@ -42,6 +42,27 @@
 </test>
 
 
+<test name="Test A7">
+    <classes>
+        <class name="suiteA.TestCase_A7" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test A8">
+    <classes>
+        <class name="suiteA.TestCase_A8" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test A9">
+    <classes>
+        <class name="suiteA.TestCase_A9" ></class>  
+    </classes>
+</test>
+
+
 
 
 
