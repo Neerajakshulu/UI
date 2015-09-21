@@ -5,8 +5,8 @@
     <listener class-name="listener.TestsListenerAdapter" />
 </listeners>
 
-<parameter name="username" value="chinna.putha@thomsonreuters.com"></parameter>
-<parameter name="password" value="Welcome01"></parameter>
+<parameter name="username" value="chinna.putha@thomsonreuters.com"/>
+<parameter name="password" value="Welcome01"/>
 	
 <test name="Follow_Other_Profile">
     <classes>
@@ -27,7 +27,7 @@
 </test>
 
 <test name="Update_User_Own_Profile">
-	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"></parameter>
+	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"/>
     <classes>
         <class name="suiteD.ProfileUpdateTest" ></class> 
     </classes>
@@ -46,6 +46,20 @@
 	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use|Help"/>
     <classes>
         <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_User_Own_Profile_Comments_Like">
+    <classes>
+        <class name="suiteD.OwnProfileCommentsLikeTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_Other_User_Profile_Comments_Like">
+	<parameter name="profileName" value="Chaturvedi"/>
+	<parameter name="profileCompleteName" value="Deepak Chaturvedi"/>
+    <classes>
+        <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
     </classes>
 </test>
 

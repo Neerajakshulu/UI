@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.LoginTR;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -142,14 +143,13 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception
 	 */
 	public void chooseOtherProfile(String profileName) throws Exception {
-		List<WebElement> profiles=ob.findElements(By.cssSelector("div[class='webui-media-header h2']"));
+		List<WebElement> profiles=ob.findElements(By.cssSelector("h2[class='webui-media-header ng-scope ng-isolate-scope']"));
 		System.out.println("list of find profiles -->"+profiles.size());
-		for(WebElement profile:profiles){
-			if(profile.findElements(By.tagName("span")).get(0).getText().equalsIgnoreCase(profileName)){
-				System.out.println("getting text-->"+profile.findElements(By.tagName("span")).get(0).getText());
-				//profile.findElements(By.tagName("span")).get(0).click();
-				JavascriptExecutor exe= (JavascriptExecutor)ob;
-				exe.executeScript("arguments[0].click();", profile.findElements(By.tagName("span")).get(0).findElement(By.tagName("a")));
+		for(WebElement profile:profiles) {
+			System.out.println("profile Name-->"+profile.findElement(By.xpath("span[1]/span/a")).getText());
+			if(profile.findElement(By.xpath("span[1]/span/a")).getText().equalsIgnoreCase(profileName)) {
+				profile.findElement(By.xpath("span[1]/span/a")).click();
+				BrowserWaits.waitUntilText(profileName);
 				Thread.sleep(4000);
 				break;
 				}
