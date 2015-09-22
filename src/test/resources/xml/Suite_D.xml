@@ -63,5 +63,13 @@
     </classes>
 </test>
 
+<test name="Validate_User_Own_Profile_Interests_and_Skills_Update">
+	<parameter name="maxInterstSkilChar" value="52"/>
+	<parameter name="finalInterstSkilChar" value="50"/>
+    <classes>
+        <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
+    </classes>
+</test>
+
 </suite>
 
