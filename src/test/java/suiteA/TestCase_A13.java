@@ -5,13 +5,16 @@ package suiteA;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -27,7 +30,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_A4 extends TestBase{
+public class TestCase_A13 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -38,12 +41,12 @@ public class TestCase_A4 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that existing FB user is able to login and logout successfully").assignCategory("Suite A");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly").assignCategory("Suite A");
 		
 	}
 	
 	@Test
-	public void testcaseA4() throws Exception{
+	public void testcaseA13() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
@@ -59,10 +62,8 @@ public class TestCase_A4 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		
-		String email="amneetsingh500@gmail.com";
-		String password="Transaction@2";
-		
 		try{
+		
 		openBrowser();
 		try{
 			maximizeWindow();
@@ -73,52 +74,85 @@ public class TestCase_A4 extends TestBase{
 			}
 		clearCookies();
 		
-		//Navigate to FB login page
+		
+		
+		
+		//Navigate to TR login page and login with valid TR credentials
+//		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
 		Thread.sleep(8000);
-		ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
+		
+		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		Thread.sleep(4000);
 		
-		
-		//Verify that existing FB credentials are working fine
-		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
-		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-		ob.findElement(By.xpath(OR.getProperty("FB_page_login_button"))).click();
-		Thread.sleep(15000);
-		if(!checkElementPresence("help_link")){
-			
-			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_existing_FB_User_credentials_not_working_fine")));//screenshot	
-			
-			
-		}
-		
-		//Verify that profile name gets displayed correctly
-		if(!checkElementPresence("FB_profile_name_xpath")){
-			
-			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_profile_name_getting_displayed")));//screenshot	
-			
-			
-		}
-		
-		logout();
+		//Create new TR account
+		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+		Thread.sleep(2000);
+
+		ob.findElement(By.linkText(OR.getProperty("reg_TermsOfUse_link"))).click();
 		Thread.sleep(5000);
 		
-		if(!checkElementPresence("login_banner")){
-			
-			test.log(LogStatus.FAIL, "User not able to logout successfully");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_unable_to_logout_successfully")));//screenshot	
-			
-			
-		}
-				
-		closeBrowser();
+		Set<String> myset1=ob.getWindowHandles();
+		Iterator<String> myIT1=myset1.iterator();
+		ArrayList<String> al1=new ArrayList<String>();
 		
+		for(int i=0;i<myset1.size();i++){
+			
+			al1.add(myIT1.next());
+			
 		}
+		
+		ob.switchTo().window(al1.get(1));
+		String pageHeading=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
+//		System.out.println(pageHeading);
+		
+		if(!compareStrings("TERMS OF USE",pageHeading)){
+			
+			test.log(LogStatus.FAIL, "Either TERMS OF USE link is not working or the page is not getting displayed correctly");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_termsOfUse_link")));//screenshot	
+			
+		}
+		
+		ob.switchTo().window(al1.get(0));
+		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
+		if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("internet explorer")){
+			
+			JavascriptExecutor executor = (JavascriptExecutor)ob;
+			executor.executeScript("arguments[0].click();", myE);
+		}
+		else{
+			
+			myE.click();
+		}
+		Thread.sleep(5000);
+		
+		al1.clear();
+		myset1=ob.getWindowHandles();
+		myIT1=myset1.iterator();
+//		System.out.println(myset1.size());
+		for(int i=0;i<myset1.size();i++){
+			
+			al1.add(myIT1.next());
+		}
+		
+		ob.switchTo().window(al1.get(2));
+		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
+//		System.out.println(pageHeading2);
+		
+//		System.out.println(al1.size());
+		if(!compareStrings("PRIVACY STATEMENT",pageHeading2)){
+			
+			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_privacyStatement_link")));//screenshot	
+			
+		}
+		
+		
+		closeBrowser();
+		}
+		
 		catch(Throwable t){
 			
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
@@ -130,9 +164,7 @@ public class TestCase_A4 extends TestBase{
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
 			closeBrowser();
-			
 		}
-		
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
 	}
