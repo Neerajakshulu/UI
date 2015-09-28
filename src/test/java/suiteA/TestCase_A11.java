@@ -25,7 +25,7 @@ import util.TestUtil;
 
 
 
-public class TestCase_A5 extends TestBase{
+public class TestCase_A11 extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -37,7 +37,7 @@ public class TestCase_A5 extends TestBase{
 		@BeforeTest
 		public void beforeTest(){
 			
-			test = extent.startTest(this.getClass().getSimpleName(), "To verify FIRST NAME field in new TR user registration page").assignCategory("Suite A");
+			test = extent.startTest(this.getClass().getSimpleName(), "To verify CONFIRM PASSWORD field in new TR user registration page").assignCategory("Suite A");
 //			test.log(LogStatus.INFO, "****************************");
 			//load the runmodes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());	
@@ -45,8 +45,8 @@ public class TestCase_A5 extends TestBase{
 	
 			
 	@Test(dataProvider="getTestData")
-	public void testcaseA5(
-								String charLength,
+	public void testcaseA11(
+								String password,
 								String validity
 						  ) throws Exception{
 		
@@ -78,14 +78,7 @@ public class TestCase_A5 extends TestBase{
 		
 		try{
 		
-			String characterLength=charLength.substring(0, 2);
-			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ (count+1)+"--->");
-			test.log(LogStatus.INFO,characterLength +" -- "+validity);
-			
-			System.out.println(characterLength);
-			System.out.println(Integer.parseInt(characterLength));
-			String first_name=generateRandomName(Integer.parseInt(characterLength));
-			System.out.println(first_name);
+			test.log(LogStatus.INFO,password +" -- "+validity);	
 		
 		// selenium code
 		openBrowser();
@@ -111,10 +104,11 @@ public class TestCase_A5 extends TestBase{
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 		Thread.sleep(2000);
-		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
+		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys("Transaction@2");
+		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
 		
-		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_firstNameError_label")));		
+		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_confirmPasswordError_label")));		
 				
 				if(validity.equalsIgnoreCase("YES")){
 					
@@ -144,8 +138,8 @@ public class TestCase_A5 extends TestBase{
 						return;
 					}
 					
-					String errorText=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).getText();
-					if(!compareStrings("Please enter no more than 70 characters.",errorText)){
+					String errorText=ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).getText();
+					if(!compareStrings("Passwords do not match.",errorText)){
 						
 						fail=true;//excel
 						test.log(LogStatus.FAIL,"Error text is incorrect");//extent report

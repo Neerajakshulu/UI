@@ -104,7 +104,7 @@ public class TestCase_A1 extends TestBase{
 		
 		
 		//Verify that confirmation email is sent
-		String text=ob.findElement(By.id(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
+		String text=ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
 		if(!StringContains(text,email)){
 			
 			test.log(LogStatus.FAIL, "Account activation email not sent");//extent reports

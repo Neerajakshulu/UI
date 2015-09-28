@@ -36,7 +36,7 @@ public class TestCase_A3 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that existing LI user credentials are working fine").assignCategory("Suite A");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that existing LI user is able to login and logout successfully").assignCategory("Suite A");
 		
 	}
 	
@@ -76,7 +76,7 @@ public class TestCase_A3 extends TestBase{
 		
 		
 		//Navigate to LI login page
-		ob.navigate().to(System.getProperty("host"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
 		Thread.sleep(4000);
@@ -102,6 +102,18 @@ public class TestCase_A3 extends TestBase{
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_profile_name_getting_displayed")));//screenshot	
+			
+			
+		}
+		
+		logout();
+		Thread.sleep(5000);
+		
+		if(!checkElementPresence("login_banner")){
+			
+			test.log(LogStatus.FAIL, "User not able to logout successfully");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_unable_to_logout_successfully")));//screenshot	
 			
 			
 		}

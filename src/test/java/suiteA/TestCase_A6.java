@@ -74,17 +74,18 @@ public class TestCase_A6 extends TestBase{
 //			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no "+(count+1));
 		}
-		String characterLength=charLength.substring(0, 2);
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ (count+1)+"--->");
-		test.log(LogStatus.INFO,characterLength +" -- "+validity);
 		
-		System.out.println(characterLength);
-		System.out.println(Integer.parseInt(characterLength));
-		String last_name=generateRandomName(Integer.parseInt(characterLength));
-		System.out.println(last_name);
 		
 		try{
 		
+			String characterLength=charLength.substring(0, 2);
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ (count+1)+"--->");
+			test.log(LogStatus.INFO,characterLength +" -- "+validity);
+			
+			System.out.println(characterLength);
+			System.out.println(Integer.parseInt(characterLength));
+			String last_name=generateRandomName(Integer.parseInt(characterLength));
+			System.out.println(last_name);
 		
 		// selenium code
 		openBrowser();

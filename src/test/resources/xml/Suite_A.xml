@@ -62,6 +62,32 @@
     </classes>
 </test>
 
+<test name="Test A10">
+    <classes>
+        <class name="suiteA.TestCase_A10" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test A11">
+    <classes>
+        <class name="suiteA.TestCase_A11" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test A12">
+    <classes>
+        <class name="suiteA.TestCase_A12" ></class>  
+    </classes>
+</test>
+
+<test name="Test A13">
+    <classes>
+        <class name="suiteA.TestCase_A13" ></class>  
+    </classes>
+</test>
+
 
 
 

@@ -73,7 +73,7 @@ public class TestCase_A2 extends TestBase{
 		
 		
 		//Navigate to TR login page and login with valid TR credentials
-		ob.navigate().to(System.getProperty("host"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		login();
 		Thread.sleep(15000);
@@ -93,6 +93,18 @@ public class TestCase_A2 extends TestBase{
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_profile_name_getting_displayed")));//screenshot	
+			
+		}
+		
+		logout();
+		Thread.sleep(5000);
+		
+		if(!checkElementPresence("login_banner")){
+			
+			test.log(LogStatus.FAIL, "User not able to logout successfully");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_unable_to_logout_successfully")));//screenshot	
+			
 			
 		}
 		

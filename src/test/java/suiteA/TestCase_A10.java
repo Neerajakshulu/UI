@@ -25,7 +25,7 @@ import util.TestUtil;
 
 
 
-public class TestCase_A5 extends TestBase{
+public class TestCase_A10 extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -37,7 +37,7 @@ public class TestCase_A5 extends TestBase{
 		@BeforeTest
 		public void beforeTest(){
 			
-			test = extent.startTest(this.getClass().getSimpleName(), "To verify FIRST NAME field in new TR user registration page").assignCategory("Suite A");
+			test = extent.startTest(this.getClass().getSimpleName(), "To verify EMAIL ADDRESS field in new TR user registration page").assignCategory("Suite A");
 //			test.log(LogStatus.INFO, "****************************");
 			//load the runmodes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());	
@@ -45,8 +45,10 @@ public class TestCase_A5 extends TestBase{
 	
 			
 	@Test(dataProvider="getTestData")
-	public void testcaseA5(
+	public void testcaseA10(
 								String charLength,
+								String suffix,
+								String error,
 								String validity
 						  ) throws Exception{
 		
@@ -74,7 +76,7 @@ public class TestCase_A5 extends TestBase{
 //			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no "+(count+1));
 		}
-
+		
 		
 		try{
 		
@@ -84,8 +86,8 @@ public class TestCase_A5 extends TestBase{
 			
 			System.out.println(characterLength);
 			System.out.println(Integer.parseInt(characterLength));
-			String first_name=generateRandomName(Integer.parseInt(characterLength));
-			System.out.println(first_name);
+			String email=generateRandomName(Integer.parseInt(characterLength)) + suffix;
+			System.out.println(email);
 		
 		// selenium code
 		openBrowser();
@@ -100,6 +102,7 @@ public class TestCase_A5 extends TestBase{
 		clearCookies();
 		
 		
+		
 		//Navigate to TR login page
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
@@ -111,10 +114,10 @@ public class TestCase_A5 extends TestBase{
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 		Thread.sleep(2000);
-		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
-		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
+		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
+		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
 		
-		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_firstNameError_label")));		
+		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_emailError_label")));		
 				
 				if(validity.equalsIgnoreCase("YES")){
 					
@@ -144,8 +147,8 @@ public class TestCase_A5 extends TestBase{
 						return;
 					}
 					
-					String errorText=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).getText();
-					if(!compareStrings("Please enter no more than 70 characters.",errorText)){
+					String errorText=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
+					if(!compareStrings(error,errorText)){
 						
 						fail=true;//excel
 						test.log(LogStatus.FAIL,"Error text is incorrect");//extent report

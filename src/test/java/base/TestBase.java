@@ -174,8 +174,10 @@ public class TestBase {
 //		}
 //		else if (CONFIG.getProperty("browserType").equals("IE")){
 ////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+//			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+//			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 //			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver();
+//			 ob = new InternetExplorerDriver(capabilities);
 //		}
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
 ////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
@@ -378,10 +380,9 @@ public class TestBase {
 	       //logging out
 			public void logout() throws Exception{
 				
-				ob.findElement(By.xpath(OR.getProperty("logout_button"))).click();
-				Thread.sleep(1000);
-				Alert myalert=ob.switchTo().alert();
-				myalert.accept();
+				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+				Thread.sleep(2000);
+				ob.findElement(By.xpath(OR.getProperty("signOut_link"))).click();
 			}	 
 			
 			//capturing screenshot

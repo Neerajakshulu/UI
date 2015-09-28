@@ -6,8 +6,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import base.TestBase;
+import util.BrowserAction;
+import util.BrowserWaits;
+import util.OnePObjectMap;
 
 public class Authoring  extends TestBase {
 
@@ -29,14 +33,13 @@ public class Authoring  extends TestBase {
 		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
 		
 		// Instantiating JavascriptExecutor
-	    JavascriptExecutor js = (JavascriptExecutor)ob;
-        js.executeScript("arguments[0].setAttribute('value','"+addComments+"');", commentArea);
-        
-		scrollingToElementofAPage();
+	   // JavascriptExecutor js = (JavascriptExecutor)ob;
+        //js.executeScript("arguments[0].setAttribute('value','"+addComments+"');", commentArea);
+		commentArea.click();
+		//scrollingToElementofAPage();
 		commentArea.sendKeys(addComments+RandomStringUtils.randomNumeric(3));
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 	}
-	
 	
 	public static void clickAddCommentButton() throws InterruptedException  {
 		scrollingToElementofAPage();
@@ -44,8 +47,7 @@ public class Authoring  extends TestBase {
 		//ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
 		JavascriptExecutor executor = (JavascriptExecutor)ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
-		Thread.sleep(6000);
-		
+		Thread.sleep(5000);
 	}
 	
 	public static void validateCommentAdd() throws Exception {
@@ -131,7 +133,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public static void validateViewComment(String addComments) throws Exception  {
-		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class^='col-xs-12 ng-scope col-sm-7']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!commentText.contains(addComments))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
@@ -148,5 +150,16 @@ public class Authoring  extends TestBase {
 	public static void scrollingToElement(WebElement element) throws InterruptedException  {
 		((JavascriptExecutor) ob).executeScript(
                 "arguments[0].scrollIntoView(true);", element);
+	}
+	
+	/**
+	 * Method for Validate Prevent Bot Comment
+	 * @throws Exception
+	 */
+	public static void validatePreventBotComment() throws Exception  {
+		String preventBotText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+		//System.out.println("Prevent Bot--->"+preventBotText);
+		BrowserWaits.waitUntilText(preventBotText);
+		Assert.assertEquals("We are still processing your previous comment. Please try again.", preventBotText);
 	}
 }
