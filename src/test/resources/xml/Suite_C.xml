@@ -41,5 +41,17 @@
     </classes>
 </test>
 
+<test name="Authoring_Prevent_bots_comments_for_Same_Article">
+    <classes>
+      <class name="suiteC.AuthoringPreventBotsCommentsTest" ></class>
+    </classes>
+</test>
+
+<test name="Authoring_Prevent_bots_comments_for_Different_Article">
+    <classes>
+      <class name="suiteC.AuthoringDiffArticlePreventBotsCommentsTest" ></class>
+    </classes>
+</test>
+
 </suite>
 

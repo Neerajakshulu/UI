@@ -122,13 +122,13 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * @throws Exception, When Validation not done
 	 */
 	public  void validateAppreciationComment() throws Exception  {
-		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']"));
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='webui-media-header']"))
-				.findElement(By.cssSelector("div[class='user-notification']"));
-		
+		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class^='col-xs-12 ng-scope col-sm-7']"));
+		System.out.println("size of total elemntes-->"+apprDivs.size());
+		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class^='webui-media-header']"))
+				.findElement(By.cssSelector("div[class^='user-notification']"));
 		
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-		//System.out.println("app sub divs-->"+apprSubDivs.size());
+		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.tagName("span")).getText());
 		scrollingToElementofAPage();
 		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
 		System.out.println("Before count-->"+apprEarCount);

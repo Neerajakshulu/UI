@@ -89,6 +89,19 @@
 </test>
 
 
+<test name="Test A14">
+    <classes>
+        <class name="suiteA.TestCase_A14" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test A15">
+    <classes>
+        <class name="suiteA.TestCase_A15" ></class>  
+    </classes>
+</test>
+
 
 
 
