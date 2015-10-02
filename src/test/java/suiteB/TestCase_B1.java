@@ -99,9 +99,10 @@ public class TestCase_B1 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
-				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
-				JavascriptExecutor executor = (JavascriptExecutor)ob;
-				executor.executeScript("arguments[0].click();", myE);
+				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
+//				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
+//				JavascriptExecutor executor = (JavascriptExecutor)ob;
+//				executor.executeScript("arguments[0].click();", myE);
 				Thread.sleep(15000);
 				
 				Set<String> myset=ob.getWindowHandles();
