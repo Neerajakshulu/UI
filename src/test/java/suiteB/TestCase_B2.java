@@ -71,7 +71,7 @@ public class TestCase_B2 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(System.getProperty("host"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -99,7 +99,21 @@ public class TestCase_B2 extends TestBase{
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
 				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
-				Thread.sleep(15000);
+				Thread.sleep(10000);
+				
+				Set<String> myset=ob.getWindowHandles();
+				Iterator<String> myIT=myset.iterator();
+				ArrayList<String> mylist55=new ArrayList<String>();
+				
+				
+				for(int k=0;k<myset.size();k++){
+					
+					mylist55.add(myIT.next());
+					
+				}
+				
+				ob.switchTo().window(mylist55.get(1));
+				
 				pageText=ob.getPageSource().toLowerCase();
 				condition1=pageText.contains("cat");
 				System.out.println(condition1);
@@ -113,7 +127,8 @@ public class TestCase_B2 extends TestBase{
 					error_list.add(i+1);
 				}
 				
-				
+				ob.close();
+				ob.switchTo().window(mylist55.get(0));
 				
 			}
 			String message="";
