@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -98,7 +99,9 @@ public class TestCase_B4 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
-				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
+				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
+				JavascriptExecutor executor = (JavascriptExecutor)ob;
+				executor.executeScript("arguments[0].click();", myE);
 				Thread.sleep(15000);
 				
 				Set<String> myset=ob.getWindowHandles();
@@ -112,7 +115,7 @@ public class TestCase_B4 extends TestBase{
 					
 				}
 				
-				ob.switchTo().window(mylist55.get(mylist55.size()-1));
+				ob.switchTo().window(mylist55.get(1));
 				
 				pageText=ob.getPageSource().toLowerCase();
 				condition1=pageText.contains("cat") && pageText.contains("dog");
@@ -127,7 +130,7 @@ public class TestCase_B4 extends TestBase{
 					error_list.add(i+1);
 				}
 				
-				
+				ob.close();
 				ob.switchTo().window(mylist55.get(0));
 				
 			}
