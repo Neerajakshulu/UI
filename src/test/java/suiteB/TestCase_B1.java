@@ -99,7 +99,7 @@ public class TestCase_B1 extends TestBase{
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
 				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
-				Thread.sleep(10000);
+				Thread.sleep(15000);
 				
 				Set<String> myset=ob.getWindowHandles();
 				Iterator<String> myIT=myset.iterator();
