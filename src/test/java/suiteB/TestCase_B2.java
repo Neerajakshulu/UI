@@ -112,7 +112,7 @@ public class TestCase_B2 extends TestBase{
 					
 				}
 				
-				ob.switchTo().window(mylist55.get(1));
+				ob.switchTo().window(mylist55.get(mylist55.size()-1));
 				
 				pageText=ob.getPageSource().toLowerCase();
 				condition1=pageText.contains("cat");
@@ -127,7 +127,6 @@ public class TestCase_B2 extends TestBase{
 					error_list.add(i+1);
 				}
 				
-				ob.close();
 				ob.switchTo().window(mylist55.get(0));
 				
 			}
