@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -98,7 +99,9 @@ public class TestCase_B1 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
-				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
+				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
+				JavascriptExecutor executor = (JavascriptExecutor)ob;
+				executor.executeScript("arguments[0].click();", myE);
 				Thread.sleep(15000);
 				
 				Set<String> myset=ob.getWindowHandles();
