@@ -99,24 +99,25 @@ public class TestCase_B1 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
-				ob.findElement(By.xpath(OR.getProperty("details_link"))).click();
+				String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
+				ob.get(link55);
 //				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
 //				JavascriptExecutor executor = (JavascriptExecutor)ob;
 //				executor.executeScript("arguments[0].click();", myE);
 				Thread.sleep(15000);
 				
-				Set<String> myset=ob.getWindowHandles();
-				Iterator<String> myIT=myset.iterator();
-				ArrayList<String> mylist55=new ArrayList<String>();
-				
-				
-				for(int k=0;k<myset.size();k++){
-					
-					mylist55.add(myIT.next());
-					
-				}
-				
-				ob.switchTo().window(mylist55.get(1));
+//				Set<String> myset=ob.getWindowHandles();
+//				Iterator<String> myIT=myset.iterator();
+//				ArrayList<String> mylist55=new ArrayList<String>();
+//				
+//				
+//				for(int k=0;k<myset.size();k++){
+//					
+//					mylist55.add(myIT.next());
+//					
+//				}
+//				
+//				ob.switchTo().window(mylist55.get(1));
 				
 				
 				pageText=ob.getPageSource().toLowerCase();
