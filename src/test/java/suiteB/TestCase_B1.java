@@ -134,8 +134,8 @@ public class TestCase_B1 extends TestBase{
 					
 					error_list.add(i+1);
 				}
-				ob.close();
-				ob.switchTo().window(mylist55.get(0));
+//				ob.close();
+//				ob.switchTo().window(mylist55.get(0));
 				
 			}
 			String message="";
