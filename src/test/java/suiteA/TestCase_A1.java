@@ -137,7 +137,7 @@ public class TestCase_A1 extends TestBase{
 		System.out.println("After capturing email body links");
 //		links.get(0).click();
 		ob.get(links.get(0).getAttribute("href"));
-		Thread.sleep(4000);
+		Thread.sleep(8000);
 		
 //		//Switch to 2nd window
 //		Set<String> myset=ob.getWindowHandles();
