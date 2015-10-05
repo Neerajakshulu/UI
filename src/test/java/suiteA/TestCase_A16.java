@@ -180,7 +180,8 @@ public class TestCase_A16 extends TestBase{
 		email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 		links=email_body.findElements(By.tagName("a"));
 //		ob.get(links.get(0).getAttribute("href"));
-		links.get(0).click();
+		myE=links.get(0);
+		executor.executeScript("arguments[0].click();", myE);
 		Thread.sleep(8000);
 		
 		myset=ob.getWindowHandles();
@@ -228,7 +229,7 @@ public class TestCase_A16 extends TestBase{
 		}
 
 		
-//		closeBrowser();
+		closeBrowser();
 		}
 		
 		catch(Throwable t){
