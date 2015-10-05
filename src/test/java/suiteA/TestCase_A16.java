@@ -126,6 +126,7 @@ public class TestCase_A16 extends TestBase{
 				al.add(myIT.next());
 			}
 			ob.switchTo().window(al.get(1));
+			Thread.sleep(2000);
 			
 			
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
@@ -161,6 +162,7 @@ public class TestCase_A16 extends TestBase{
 		}
 		Thread.sleep(15000);
 		ob.switchTo().window(al.get(0));
+		Thread.sleep(2000);
 //		ob.get("https://www.guerrillamail.com");
 		email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
 		myE=email_list.get(0);
@@ -192,6 +194,7 @@ public class TestCase_A16 extends TestBase{
 			al.add(myIT.next());
 		}
 		ob.switchTo().window(al.get(2));
+		Thread.sleep(2000);
 		
 		ob.findElement(By.id(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
 		ob.findElement(By.id(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
