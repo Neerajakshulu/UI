@@ -104,6 +104,14 @@
 
 
 
+<test name="Test A16">
+    <classes>
+        <class name="suiteA.TestCase_A16" ></class>  
+    </classes>
+</test>
+
+
+
 
 
 

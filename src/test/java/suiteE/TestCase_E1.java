@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -62,37 +63,78 @@ public class TestCase_E1 extends TestBase{
 		try{
 			
 		String search_query="kernel";
+		String password="Transaction@2";
+		String first_name="mask";
+		String last_name="man";
 			
-			
+		
+		//1--->Making a new user
 		openBrowser();
-		maximizeWindow();
+		try{
+			maximizeWindow();
+			}
+			catch(Throwable t){
+				
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 		clearCookies();
 		
-		
+		ob.get("https://www.guerrillamail.com");
+		String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 //		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
 		Thread.sleep(8000);
+		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+		Thread.sleep(4000);
 		
-		//login using TR credentials
-		login();
-		Thread.sleep(15000);
 		
-		cleanWatchlist();
+		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+		Thread.sleep(2000);
+		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
+		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
+		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
+		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
+		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
+		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
+		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
+		Thread.sleep(10000);
 		
-		//Type into the search box and get search results
+		
+		ob.get("https://www.guerrillamail.com");
+		List<WebElement> email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
+		WebElement myE=email_list.get(0);
+		JavascriptExecutor executor = (JavascriptExecutor)ob;
+		executor.executeScript("arguments[0].click();", myE);
+//		email_list.get(0).click();
+		Thread.sleep(2000);
+		
+		
+		WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
+		List<WebElement> links=email_body.findElements(By.tagName("a"));
+		ob.get(links.get(0).getAttribute("href"));
+		Thread.sleep(8000);
+		
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+		ob.findElement(By.id(OR.getProperty("login_button"))).click();
+		Thread.sleep(25000);
+		
+		
+		
+		//2--->Adding an article to watchlist
 		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
 		ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']")).click();
 		String document_name=ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
-//		System.out.println(document_name);
 		
+		
+		//3--->verifying that particular article has been added to watchlist
 		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
 		Thread.sleep(8000);
 		
 		List<WebElement> watchlist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
-//		System.out.println(watchlist.size());
 		
 		int count = 0;
 		for(int i=0;i<watchlist.size();i++){
@@ -100,7 +142,6 @@ public class TestCase_E1 extends TestBase{
 			if(watchlist.get(i).getText().equals(document_name))
 				count++;
 			
-//			System.out.println(watchlist.get(i).getText());
 		}
 		
 		if(!compareNumbers(1,count)){
@@ -111,8 +152,8 @@ public class TestCase_E1 extends TestBase{
 			
 		}
 		
-		
 		closeBrowser();
+		
 		
 		}
 		catch(Throwable t){
