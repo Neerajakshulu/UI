@@ -84,8 +84,8 @@ public class TestCase_A16 extends TestBase{
 			
 			ob.get("https://www.guerrillamail.com");
 			String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			Thread.sleep(8000);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
@@ -114,8 +114,19 @@ public class TestCase_A16 extends TestBase{
 			
 			WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links=email_body.findElements(By.tagName("a"));
-			ob.get(links.get(0).getAttribute("href"));
+			links.get(0).click();
+//			ob.get(links.get(0).getAttribute("href"));
 			Thread.sleep(8000);
+			
+			Set<String> myset=ob.getWindowHandles();
+			Iterator<String> myIT=myset.iterator();
+			ArrayList<String> al=new ArrayList<String>();
+			for(int i=0;i<myset.size();i++){
+				
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
+			
 			
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
@@ -167,8 +178,18 @@ public class TestCase_A16 extends TestBase{
 		
 		email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 		links=email_body.findElements(By.tagName("a"));
-		ob.get(links.get(0).getAttribute("href"));
+//		ob.get(links.get(0).getAttribute("href"));
+		links.get(0).click();
 		Thread.sleep(8000);
+		
+		myset=ob.getWindowHandles();
+		myIT=myset.iterator();
+		al.clear();
+		for(int i=0;i<myset.size();i++){
+			
+			al.add(myIT.next());
+		}
+		ob.switchTo().window(al.get(2));
 		
 		ob.findElement(By.id(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
 		ob.findElement(By.id(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
