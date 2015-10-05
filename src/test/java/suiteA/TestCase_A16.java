@@ -84,8 +84,8 @@ public class TestCase_A16 extends TestBase{
 			
 			ob.get("https://www.guerrillamail.com");
 			String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
@@ -159,8 +159,9 @@ public class TestCase_A16 extends TestBase{
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_password_change_email_not_sent")));//screenshot	
 			
 		}
-		
-		ob.get("https://www.guerrillamail.com");
+		Thread.sleep(15000);
+		ob.switchTo().window(al.get(0));
+//		ob.get("https://www.guerrillamail.com");
 		email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
 		myE=email_list.get(0);
 		executor.executeScript("arguments[0].click();", myE);
@@ -227,7 +228,7 @@ public class TestCase_A16 extends TestBase{
 		}
 
 		
-		closeBrowser();
+//		closeBrowser();
 		}
 		
 		catch(Throwable t){
