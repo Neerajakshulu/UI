@@ -3,7 +3,7 @@ package suiteE;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -116,7 +116,7 @@ public class WatchlistArticleDocInfoTest extends TestBase{
 		
 		
 		List<String> docInfoInput=Arrays.asList(docsInfo);
-		Set<String> watchLabels=new HashSet<String>();
+		Set<String> watchLabels=new LinkedHashSet<String>();
 		//verify watchlist doc info
 		List<WebElement> watchlistDocInfo=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_DOCINFO_CSS);
 		for(WebElement watchlistDoc:watchlistDocInfo){
