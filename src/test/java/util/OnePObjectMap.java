@@ -17,7 +17,10 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_OWN_PROFILE_INTEREST_SKILLS_CSS("a[class='remove-button ng-binding ng-scope']"),
 	HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS("div[class='comment-error-msg ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS("a[class='ng-binding']"),
-	HOME_PROJECT_NEON_PROFILE_NAME_CSS("h4[class='webui-media-heading']");
+	HOME_PROJECT_NEON_PROFILE_NAME_CSS("h4[class='webui-media-heading']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_TITLE_CSS("h3[class='ng-binding']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_ARTICLE_WATCH_CSS("button[class='btn btn-default activity-block-btn']"),
+	HOME_PROJECT_NEON_WATCHLIST_DOCINFO_CSS("span[class^='docInfo ultra-light']");
 	
 	
 	private String locator;
