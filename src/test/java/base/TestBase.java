@@ -2,16 +2,21 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -398,16 +403,19 @@ public class TestBase {
 				Thread.sleep(4000);
 				
 				List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
-				if(mylist.size()>0) {
-					for(int i=0;i<mylist.size();i++){
-						ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch watch-icon-active cursor-pointer']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//button[contains(text(),'Remove')]")).click();
-						Thread.sleep(2000);
-					}
+				for(int i=0;i<mylist.size();i++){
+					
+					ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch watch-icon-active cursor-pointer']")).click();
+					Thread.sleep(2000);
+					ob.findElement(By.xpath("//button[contains(text(),'Remove')]")).click();
+					Thread.sleep(2000);
+					
 				}
 				
 			}
+
+			
+			
 			
 			// verifies whether a particular string contains another string or not
 			 public boolean StringContains(String MainString, String ToBeCheckedString){
