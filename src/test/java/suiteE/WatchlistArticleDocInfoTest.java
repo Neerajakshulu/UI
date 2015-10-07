@@ -2,9 +2,10 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.LoginTR;
 import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
@@ -116,7 +116,7 @@ public class WatchlistArticleDocInfoTest extends TestBase{
 		
 		
 		List<String> docInfoInput=Arrays.asList(docsInfo);
-		List<String> watchLabels=new ArrayList<String>();
+		Set<String> watchLabels=new HashSet<String>();
 		//verify watchlist doc info
 		List<WebElement> watchlistDocInfo=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_DOCINFO_CSS);
 		for(WebElement watchlistDoc:watchlistDocInfo){
