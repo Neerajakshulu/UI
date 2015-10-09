@@ -43,8 +43,29 @@
     </classes>
 </test>
 
+<test name="Watchlist artiles delete">
+    <classes>
+        <class name="suiteE.WatchlistDeleteArticleTest" ></class>  
+    </classes>
+</test>
 
+<test name="Watchlist More button validation when article count lessthan 10">
+    <classes>
+        <class name="suiteE.WatchlistMoreButtonBelowTenArticlesTest" ></class>  
+    </classes>
+</test>
 
+<test name="Watchlist More button validation when article count greaterthan 10">
+    <classes>
+        <class name="suiteE.WatchlistMoreButtonAboveTenArticlesTest" ></class>  
+    </classes>
+</test>
+
+<test name="Valiadte App is navigating to Watchlist from RecordView Page">
+    <classes>
+        <class name="suiteE.NavigateToWatchlistFromRVTest" ></class>  
+    </classes>
+</test>
 
 </suite>
 
