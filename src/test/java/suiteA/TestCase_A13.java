@@ -114,40 +114,40 @@ public class TestCase_A13 extends TestBase{
 			
 		}
 		
-		ob.switchTo().window(al1.get(0));
-		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
-		if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("internet explorer")){
-			
-			JavascriptExecutor executor = (JavascriptExecutor)ob;
-			executor.executeScript("arguments[0].click();", myE);
-		}
-		else{
-			
-			myE.click();
-		}
-		Thread.sleep(5000);
-		
-		al1.clear();
-		myset1=ob.getWindowHandles();
-		myIT1=myset1.iterator();
-//		System.out.println(myset1.size());
-		for(int i=0;i<myset1.size();i++){
-			
-			al1.add(myIT1.next());
-		}
-		
-		ob.switchTo().window(al1.get(2));
-		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
-//		System.out.println(pageHeading2);
-		
-//		System.out.println(al1.size());
-		if(!compareStrings("PRIVACY STATEMENT",pageHeading2)){
-			
-			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_privacyStatement_link")));//screenshot	
-			
-		}
+//		ob.switchTo().window(al1.get(0));
+//		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
+//		if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("internet explorer")){
+//			
+//			JavascriptExecutor executor = (JavascriptExecutor)ob;
+//			executor.executeScript("arguments[0].click();", myE);
+//		}
+//		else{
+//			
+//			myE.click();
+//		}
+//		Thread.sleep(5000);
+//		
+//		al1.clear();
+//		myset1=ob.getWindowHandles();
+//		myIT1=myset1.iterator();
+////		System.out.println(myset1.size());
+//		for(int i=0;i<myset1.size();i++){
+//			
+//			al1.add(myIT1.next());
+//		}
+//		
+//		ob.switchTo().window(al1.get(2));
+//		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
+////		System.out.println(pageHeading2);
+//		
+////		System.out.println(al1.size());
+//		if(!compareStrings("PRIVACY STATEMENT",pageHeading2)){
+//			
+//			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
+//			status=2;//excel
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_privacyStatement_link")));//screenshot	
+//			
+//		}
 		
 		
 		closeBrowser();
