@@ -31,7 +31,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B5 extends TestBase{
+public class TestCase_B7 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -42,12 +42,12 @@ public class TestCase_B5 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that PHRASING WITH QUOTES rule is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that MINIMUM SHOULD MATCH rule is working correctly").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB5() throws Exception{
+	public void testcaseB7() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -66,13 +66,14 @@ public class TestCase_B5 extends TestBase{
 		
 		
 			
-			String search_query="\"cat and dog\"";
+			String search_query="ghdscjgwedkjdgcdjkdw";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(System.getProperty("host"));
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -86,68 +87,15 @@ public class TestCase_B5 extends TestBase{
 			
 			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			ArrayList<String> urls=new ArrayList<String>();
-			for(int i=0;i<searchResults.size();i++){
-				
-				urls.add(searchResults.get(i).getAttribute("href"));
-			}
-			boolean condition1;
-			String pageText;
-			ArrayList<Integer> error_list=new ArrayList<Integer>();
-			int count=0;
-			for(int i=0;i<urls.size();i++){
-				
-				ob.navigate().to(urls.get(i));
-				Thread.sleep(5000);
-				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
-				JavascriptExecutor executor = (JavascriptExecutor)ob;
-				executor.executeScript("arguments[0].click();", myE);
-				
-				
-				Set<String> myset=ob.getWindowHandles();
-				Iterator<String> myIT=myset.iterator();
-				ArrayList<String> mylist55=new ArrayList<String>();
-				
-				
-				for(int k=0;k<myset.size();k++){
-					
-					mylist55.add(myIT.next());
-					
-				}
-				
-				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(15000);
-				
-				pageText=ob.getPageSource().toLowerCase();
-				condition1=pageText.contains("cat and dog") || pageText.contains("cats and dogs");
-				System.out.println(condition1);
-				if(condition1){
-					
-					count++;
-				}
-				else
-				{
-					
-					error_list.add(i+1);
-				}
+			System.out.println(searchResults.size());
 			
-//				ob.close();
-//				ob.switchTo().window(mylist55.get(0));
+			if(!compareNumbers(0,searchResults.size())){
 				
-			}
-			String message="";
-			for(int i=0;i<error_list.size();i++){
-				
-				message=message+error_list.get(i)+",";
-				
-			}
-			
-			
-			if(!compareNumbers(urls.size(),count)){
-				
-				test.log(LogStatus.FAIL, "PHRASING WITH QUOTES rule not working correctly");//extent reports
+				test.log(LogStatus.FAIL, "Search resuls getting displayed even when user searches for an absurd keyword");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO,"Issues are in the following documents:"+message);//extent reports
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_results_getting_displayed_even_when_user_searches_absurd_keyword")));//screenshot	
+				
+				
 			}
 			
 			
@@ -187,4 +135,3 @@ public class TestCase_B5 extends TestBase{
 	
 
 }
-

@@ -2,16 +2,14 @@
 <suite name="Suite E">
 
 
-
+<parameter name="userName" value="chinnareddy.putha@gmail.com"/>
+<parameter name="password" value="Reddys@123"/>
 
 <test name="Test E1">
     <classes>
         <class name="suiteE.TestCase_E1" ></class>  
     </classes>
 </test>
-
-
-
 
 
 <test name="Test E2">
@@ -27,8 +25,47 @@
 </test>
 
 
+<test name="Unwatch Article From Search Page">
+    <classes>
+        <class name="suiteE.UnwatchArticleFromSearch" ></class>  
+    </classes>
+</test>
 
+<test name="Unwatch Article From Record View Page">
+    <classes>
+        <class name="suiteE.UnwatchArticleFromRecordViewTest" ></class>  
+    </classes>
+</test>
 
+<test name="Watchlist artiles docs info">
+    <classes>
+        <class name="suiteE.WatchlistArticleDocInfoTest" ></class>  
+    </classes>
+</test>
+
+<test name="Watchlist artiles delete">
+    <classes>
+        <class name="suiteE.WatchlistDeleteArticleTest" ></class>  
+    </classes>
+</test>
+
+<test name="Watchlist More button validation when article count lessthan 10">
+    <classes>
+        <class name="suiteE.WatchlistMoreButtonBelowTenArticlesTest" ></class>  
+    </classes>
+</test>
+
+<test name="Watchlist More button validation when article count greaterthan 10">
+    <classes>
+        <class name="suiteE.WatchlistMoreButtonAboveTenArticlesTest" ></class>  
+    </classes>
+</test>
+
+<test name="Valiadte App is navigating to Watchlist from RecordView Page">
+    <classes>
+        <class name="suiteE.NavigateToWatchlistFromRVTest" ></class>  
+    </classes>
+</test>
 
 </suite>
 

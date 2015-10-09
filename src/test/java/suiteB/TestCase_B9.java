@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -31,7 +32,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B5 extends TestBase{
+public class TestCase_B9 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -42,12 +43,12 @@ public class TestCase_B5 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that PHRASING WITH QUOTES rule is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that sorting is retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB5() throws Exception{
+	public void testcaseB9() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -66,13 +67,14 @@ public class TestCase_B5 extends TestBase{
 		
 		
 			
-			String search_query="\"cat and dog\"";
+			String search_query="cat dog";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(System.getProperty("host"));
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -84,72 +86,59 @@ public class TestCase_B5 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
-			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			
+			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
+			Thread.sleep(1000);
+			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
+			Thread.sleep(2000);
+			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			ArrayList<String> urls=new ArrayList<String>();
+			ArrayList<String> al1=new ArrayList<String>();
 			for(int i=0;i<searchResults.size();i++){
 				
-				urls.add(searchResults.get(i).getAttribute("href"));
-			}
-			boolean condition1;
-			String pageText;
-			ArrayList<Integer> error_list=new ArrayList<Integer>();
-			int count=0;
-			for(int i=0;i<urls.size();i++){
-				
-				ob.navigate().to(urls.get(i));
-				Thread.sleep(5000);
-				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
-				JavascriptExecutor executor = (JavascriptExecutor)ob;
-				executor.executeScript("arguments[0].click();", myE);
-				
-				
-				Set<String> myset=ob.getWindowHandles();
-				Iterator<String> myIT=myset.iterator();
-				ArrayList<String> mylist55=new ArrayList<String>();
-				
-				
-				for(int k=0;k<myset.size();k++){
-					
-					mylist55.add(myIT.next());
-					
-				}
-				
-				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(15000);
-				
-				pageText=ob.getPageSource().toLowerCase();
-				condition1=pageText.contains("cat and dog") || pageText.contains("cats and dogs");
-				System.out.println(condition1);
-				if(condition1){
-					
-					count++;
-				}
-				else
-				{
-					
-					error_list.add(i+1);
-				}
-			
-//				ob.close();
-//				ob.switchTo().window(mylist55.get(0));
-				
-			}
-			String message="";
-			for(int i=0;i<error_list.size();i++){
-				
-				message=message+error_list.get(i)+",";
+				al1.add(searchResults.get(i).getText());
 				
 			}
 			
 			
-			if(!compareNumbers(urls.size(),count)){
+			searchResults.get(8).click();
+			Thread.sleep(5000);
+			
+			
+//			ob.navigate().back();
+			JavascriptExecutor js = (JavascriptExecutor)ob;
+			js.executeScript("window.history.back();");
+			Thread.sleep(5000);
+			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ArrayList<String> al2=new ArrayList<String>();
+			for(int i=0;i<searchResults2.size();i++){
 				
-				test.log(LogStatus.FAIL, "PHRASING WITH QUOTES rule not working correctly");//extent reports
+				al2.add(searchResults2.get(i).getText());
+				
+			}
+			
+			try{
+				Assert.assertTrue(al1.equals(al2));
+				test.log(LogStatus.PASS, "Correct sorted documents getting displayed");
+				}
+				catch(Throwable t){
+					
+					test.log(LogStatus.FAIL, "Incorrect documents getting displayed");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
+					
+				}
+			
+			String option=ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			if(!compareStrings("Times Cited",option)){
+				
+				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO,"Issues are in the following documents:"+message);//extent reports
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
+				
 			}
-			
 			
 			closeBrowser();
 		}
@@ -187,4 +176,3 @@ public class TestCase_B5 extends TestBase{
 	
 
 }
-
