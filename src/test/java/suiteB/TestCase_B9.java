@@ -73,8 +73,8 @@ public class TestCase_B9 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials

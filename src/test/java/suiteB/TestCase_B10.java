@@ -43,7 +43,7 @@ public class TestCase_B10 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that sorting is retained when user navigates back to search results page from record view page").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that filtering is retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
@@ -73,8 +73,8 @@ public class TestCase_B10 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -87,18 +87,18 @@ public class TestCase_B10 extends TestBase{
 			Thread.sleep(4000);
 			
 			
-			List<WebElement> checkboxes=ob.findElements(By.xpath("//input[@class='refine-checkbox']"));
-			System.out.println(checkboxes.size());
+			List<WebElement> checkboxes=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+//			System.out.println(checkboxes.size());
 			
 			
 			checkboxes.get(0).click();
 			Thread.sleep(3000);
-			checkboxes.get(10).click();
+			checkboxes.get(1).click();
 			Thread.sleep(3000);
-			checkboxes.get(20).click();
-			Thread.sleep(3000);
-			checkboxes.get(30).click();
-			Thread.sleep(3000);
+//			checkboxes.get(20).click();
+//			Thread.sleep(3000);
+//			checkboxes.get(30).click();
+//			Thread.sleep(10000);
 			
 			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -125,12 +125,33 @@ public class TestCase_B10 extends TestBase{
 			}
 			
 
-			System.out.println(al1.size());
-			System.out.println(al2.size());
-			System.out.println(al1.equals(al2));
+//			System.out.println(al1.size());
+//			System.out.println(al2.size());
+//			System.out.println(al1.equals(al2));
+			
 			
 			try{
 				Assert.assertTrue(al1.equals(al2));
+				test.log(LogStatus.PASS, "Correct filtered search results getting displayed when user navigates back to search results page from record view page");
+				}
+				catch(Throwable t){
+					
+					test.log(LogStatus.FAIL, "Incorrect filtered search results getting displayed when user navigates back to search results page from record view page");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_filtered_search_results_getting_displayed")));//screenshot	
+					
+				}
+			
+			List<WebElement> checkboxes2=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+//			System.out.println("------------>"+checkboxes2.size());
+			
+			boolean filtering_condition=checkboxes2.get(0).isSelected() && checkboxes2.get(1).isSelected();
+//			System.out.println(filtering_condition);
+			
+			try{
+				Assert.assertTrue(filtering_condition);
 				test.log(LogStatus.PASS, "Filters are retained when user navigates back to search results page from record view page");
 				}
 				catch(Throwable t){

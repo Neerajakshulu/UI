@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -62,24 +63,39 @@ public class TestCase_E3 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
-						
+		
+			
+			String search_query="kernel";
+			
 			
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(System.getProperty("host"));
-		Thread.sleep(8000);
 		
-		//login using TR credentials
-		login();
-		Thread.sleep(15000);
+//		1)Create a new user
+		createNewUser("mask","man");
 		
-		cleanWatchlist();
-		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+		
+//		2)Add some documents to watchlist
+		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
-		List<WebElement> total_documents=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+		
+		List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+		for(int i=0;i<5;i++){
+			
+			mylist.get(i).click();
+			Thread.sleep(1000);
+		}
+		
+//		3)Go to watchlist page,delete all the articles and verify that all the articles have been deleted
+		cleanWatchlist();
+		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		Thread.sleep(4000);
+		
+		List<WebElement> total_documents=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 		
 		if(!compareNumbers(0,total_documents.size())){
 			
@@ -91,6 +107,8 @@ public class TestCase_E3 extends TestBase{
 		}
 		
 		closeBrowser();
+		
+	
 		
 		}
 		catch(Throwable t){

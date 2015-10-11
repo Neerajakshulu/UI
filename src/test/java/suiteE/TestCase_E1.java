@@ -63,9 +63,6 @@ public class TestCase_E1 extends TestBase{
 		try{
 			
 		String search_query="kernel";
-		String password="Transaction@2";
-		String first_name="mask";
-		String last_name="man";
 			
 		
 		//1--->Making a new user
@@ -79,45 +76,7 @@ public class TestCase_E1 extends TestBase{
 			}
 		clearCookies();
 		
-		ob.get("https://www.guerrillamail.com");
-		String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		ob.navigate().to(host);
-		Thread.sleep(8000);
-		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
-		
-		
-		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		Thread.sleep(2000);
-		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
-		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
-		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
-		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
-		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		Thread.sleep(10000);
-		
-		
-		ob.get("https://www.guerrillamail.com");
-		List<WebElement> email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
-		WebElement myE=email_list.get(0);
-		JavascriptExecutor executor = (JavascriptExecutor)ob;
-		executor.executeScript("arguments[0].click();", myE);
-//		email_list.get(0).click();
-		Thread.sleep(2000);
-		
-		
-		WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
-		List<WebElement> links=email_body.findElements(By.tagName("a"));
-		ob.get(links.get(0).getAttribute("href"));
-		Thread.sleep(8000);
-		
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-		Thread.sleep(25000);
+		createNewUser("mask","man");
 		
 		
 		
@@ -126,15 +85,15 @@ public class TestCase_E1 extends TestBase{
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
-		ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']")).click();
-		String document_name=ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
+		ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+		String document_name=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 		
 		
 		//3--->verifying that particular article has been added to watchlist
-		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		Thread.sleep(8000);
 		
-		List<WebElement> watchlist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+		List<WebElement> watchlist=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 		
 		int count = 0;
 		for(int i=0;i<watchlist.size();i++){

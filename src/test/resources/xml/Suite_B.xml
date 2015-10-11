@@ -65,6 +65,20 @@
 </test>
 
 
+<test name="Test B11">
+    <classes>
+        <class name="suiteB.TestCase_B11" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test B12">
+    <classes>
+        <class name="suiteB.TestCase_B12" ></class>  
+    </classes>
+</test>
+
+
 
 
 </suite>

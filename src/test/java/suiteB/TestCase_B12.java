@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,7 +31,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B6 extends TestBase{
+public class TestCase_B12 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -41,12 +42,12 @@ public class TestCase_B6 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that type ahead functionality is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that the addition of total articles count and total profiles count is equal to total search results count").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB6() throws Exception{
+	public void testcaseB8() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -65,18 +66,14 @@ public class TestCase_B6 extends TestBase{
 		
 		
 			
-			String search_query="b";
+			String search_query="mota";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-//			System.out.println(System.getProperty("host"));
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-			
-			
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -85,32 +82,40 @@ public class TestCase_B6 extends TestBase{
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
 			
-			//Verify that the search drop down gets displayed
-			if(!checkElementPresence("typeAhead_dropDown")){
+			String text1=ob.findElement(By.xpath(OR.getProperty("articlesTabHeading_link"))).getText().substring(9);
+			String text2=ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).getText().substring(7);
+			String text3=ob.findElement(By.xpath(OR.getProperty("totalCountHeading_label"))).getText().substring(16);
+			
+			String temp1=getPurifiedString(text1);
+			String temp2=getPurifiedString(text2);
+			String temp3=getPurifiedString(text3);
+			
+			
+			int article_count=Integer.parseInt(temp1);
+			int profile_count=Integer.parseInt(temp2);
+			int total_count=Integer.parseInt(temp3);
+			
+			
+//			System.out.println(article_count);
+//			System.out.println(profile_count);
+//			System.out.println(total_count);
+			
+			
+			if(!compareNumbers(total_count,article_count+profile_count)){
 				
-				test.log(LogStatus.FAIL, "Search drop down not getting displayed");//extent reports
+				test.log(LogStatus.FAIL, "Sum of total article count and total profile count is not equal to total search results count");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
-			}
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_total_search_results_count_not_equal_to_sum_of_article_count_and_profile_count")));//screenshot
 			
-			
-			
-			//Verify that 10 options are contained in search drop down
-			List<WebElement> options=ob.findElements(By.xpath(OR.getProperty("search_dropDown_options_link")));
-			if(!compareNumbers(10,options.size())){
-				
-
-				test.log(LogStatus.FAIL, "10 options not getting displayed in search drop down");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_ten_options_not_getting_displayed_in_search_drop_down")));//screenshot	
 				
 			}
-			
 			
 			closeBrowser();
-		
+			
+			
 			
 		}
 		catch(Throwable t){
@@ -142,9 +147,23 @@ public class TestCase_B6 extends TestBase{
 	
 	}
 	
+	
+	public String getPurifiedString(String text){
+		
+		String[] arr=text.split(",");
+		String purifiedString="";
+		
+		for(int i=0;i<arr.length;i++){
+			
+			
+			purifiedString=purifiedString + arr[i];
+		}
+		
+		return purifiedString;
+	}
+	
 
 	
 	
 
 }
-

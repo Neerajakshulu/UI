@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -31,7 +32,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B8 extends TestBase{
+public class TestCase_B11 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -42,12 +43,12 @@ public class TestCase_B8 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that search maintains state when user navigates back to serach results page from record view page").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that search,sorting and filtering are retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB8() throws Exception{
+	public void testcaseB11() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -66,7 +67,7 @@ public class TestCase_B8 extends TestBase{
 		
 		
 			
-			String search_query="cat dog";
+			String search_query="biology";
 			
 			openBrowser();
 			clearCookies();
@@ -85,13 +86,30 @@ public class TestCase_B8 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
+			
+			List<WebElement> checkboxes=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			
+//			System.out.println(checkboxes.size());
+			
+			
+			checkboxes.get(0).click();
+			Thread.sleep(3000);
+			checkboxes.get(1).click();
+			Thread.sleep(3000);
+			
+			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
+			Thread.sleep(1000);
+			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
+			Thread.sleep(2000);
+			
+			
 			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
 			Thread.sleep(5000);
 			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
 			Thread.sleep(5000);
 			
 			
-			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al1=new ArrayList<String>();
 			for(int i=0;i<searchResults.size();i++){
@@ -115,27 +133,55 @@ public class TestCase_B8 extends TestBase{
 				
 			}
 			
+
 //			System.out.println(al1.size());
 //			System.out.println(al2.size());
 //			System.out.println(al1.equals(al2));
 			
+			
 			try{
-			Assert.assertTrue(al1.equals(al2));
-			test.log(LogStatus.PASS, "Search maintains state when user navigates back to search results page from record view page");
-			}
-			catch(Throwable t){
-				
-				test.log(LogStatus.FAIL, "Search does not maintain state when user navigates back from record view page to search results page");//extent reports
-				test.log(LogStatus.INFO, "Error--->"+t);
-				ErrorUtil.addVerificationFailure(t);
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_not_maintaining_state_when_user_navigates_to_search_results_page_from_record_view_page")));//screenshot	
-				
-			}
+				Assert.assertTrue(al1.equals(al2));
+				test.log(LogStatus.PASS, "Search maintains state when user navigates back to search results page from record view page");
+				}
+				catch(Throwable t){
 					
+					test.log(LogStatus.FAIL, "Search does not maintain state when user navigates back to search results page from record view page");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_not_maintaining_state")));//screenshot	
+					
+				}
 			
 			
+			String option=ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			if(!compareStrings("Times Cited",option)){
+				
+				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
+				
+			}
 			
+			List<WebElement> checkboxes2=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+//			System.out.println("------------>"+checkboxes2.size());
+			
+			boolean filtering_condition=checkboxes2.get(0).isSelected() && checkboxes2.get(1).isSelected();
+//			System.out.println(filtering_condition);
+			
+			try{
+				Assert.assertTrue(filtering_condition);
+				test.log(LogStatus.PASS, "Filters are retained when user navigates back to search results page from record view page");
+				}
+				catch(Throwable t){
+					
+					test.log(LogStatus.FAIL, "Filters are not retained when user navigates back to search results page from record view page");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_filters_not_retained_when_user_navigates_back_to_search_results_page_from_record_view_page")));//screenshot	
+					
+				}
 			
 			closeBrowser();
 			

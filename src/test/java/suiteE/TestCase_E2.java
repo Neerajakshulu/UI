@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -63,49 +64,36 @@ public class TestCase_E2 extends TestBase{
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
 			
-		String search_query="kernel";
+			String search_query="kernel";
 			
 			
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
 		
-		ob.navigate().to(System.getProperty("host"));
-		Thread.sleep(8000);
+//		1)Create a new user
+		createNewUser("mask","man");;
 		
-		//login using TR credentials
-		login();
-		Thread.sleep(15000);
 		
-		cleanWatchlist();
 		
-		//Type into the search box and get search results
+		
+		
+//		2)Add an article to watchlist from record view page
 		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
-		
-		String document_name=ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
-//		System.out.println(document_name);
-		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
+		String document_name=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+		ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 		Thread.sleep(4000);
 		
-		try{
-		ob.findElement(By.xpath("//button[@class='btn btn-default activity-block-btn']")).click();
+		ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
 		Thread.sleep(2000);
-		}
-		catch(Throwable t){
-		
-			ob.findElement(By.xpath("//span[@class='webui-icon webui-icon-watch watch']")).click();
-			Thread.sleep(2000);
-			
-		}
-		
-		
-		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		Thread.sleep(4000);
 		
-		List<WebElement> watchlist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+//		3)Verify that particular article has been added to watchlist
+		List<WebElement> watchlist=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 //		System.out.println(watchlist.size());
 		
 		int count = 0;
@@ -126,6 +114,8 @@ public class TestCase_E2 extends TestBase{
 		
 		
 		closeBrowser();
+		
+		
 		
 		}
 		catch(Throwable t){
