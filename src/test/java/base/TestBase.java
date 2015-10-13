@@ -2,36 +2,28 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -371,6 +363,7 @@ public class TestBase {
 				
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
@@ -925,9 +918,6 @@ public class TestBase {
 					return OR;
 				}
 				
-				
-				
-				
 				public static void setOR(Properties oR) {
 					OR = oR;
 				}
@@ -936,4 +926,63 @@ public class TestBase {
 					jse.executeScript("scroll(0, 250);");
 					Thread.sleep(4000);
 				}
+	
+      //Added by Kavya		
+				
+				/**
+				 * Method to wait till the element is visible on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to wait till the element is present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to click on the specified element using java script executor.
+				 * @param driver
+				 * @param element
+				 */
+				public void jsClick(WebDriver driver, WebElement element) {
+
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+				}
+
+				/**
+				 * Method to scroll the specified element to view.
+				 * @param driver
+				 * @param element
+				 */
+				public static void scrollElementIntoView(WebDriver driver, WebElement element) {
+					JavascriptExecutor jse = (JavascriptExecutor) ob;
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
+				}
+
+				/**
+				 * Method to wait till all the elements are present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+				}
+
 }
