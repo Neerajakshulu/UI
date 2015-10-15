@@ -66,12 +66,13 @@ public class TestCase_B4 extends TestBase{
 		
 		
 			
-			String search_query="+(cat dog) goat sheep animal";
+			String search_query="+(cat dog bull) goat sheep animal";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(System.getProperty("host"));
 			Thread.sleep(8000);
 			
@@ -119,7 +120,7 @@ public class TestCase_B4 extends TestBase{
 				Thread.sleep(15000);
 				
 				pageText=ob.getPageSource().toLowerCase();
-				condition1=pageText.contains("cat") && pageText.contains("dog");
+				condition1=pageText.contains("cat") || pageText.contains("dog") || pageText.contains(" bull");
 				System.out.println(condition1);
 				if(condition1){
 					

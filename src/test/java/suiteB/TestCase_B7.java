@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,7 +31,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B6 extends TestBase{
+public class TestCase_B7 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -41,12 +42,12 @@ public class TestCase_B6 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that type ahead functionality is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that MINIMUM SHOULD MATCH rule is working correctly").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB6() throws Exception{
+	public void testcaseB7() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -65,18 +66,14 @@ public class TestCase_B6 extends TestBase{
 		
 		
 			
-			String search_query="b";
+			String search_query="ghdscjgwedkjdgcdjkdw";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-//			System.out.println(System.getProperty("host"));
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-			
-			
 			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -85,33 +82,24 @@ public class TestCase_B6 extends TestBase{
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
 			
-			//Verify that the search drop down gets displayed
-			if(!checkElementPresence("typeAhead_dropDown")){
+			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			System.out.println(searchResults.size());
+			
+			if(!compareNumbers(0,searchResults.size())){
 				
-				test.log(LogStatus.FAIL, "Search drop down not getting displayed");//extent reports
+				test.log(LogStatus.FAIL, "Search resuls getting displayed even when user searches for an absurd keyword");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
-			}
-			
-			
-			
-			//Verify that 10 options are contained in search drop down
-			List<WebElement> options=ob.findElements(By.xpath(OR.getProperty("search_dropDown_options_link")));
-			if(!compareNumbers(10,options.size())){
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_results_getting_displayed_even_when_user_searches_absurd_keyword")));//screenshot	
 				
-
-				test.log(LogStatus.FAIL, "10 options not getting displayed in search drop down");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_ten_options_not_getting_displayed_in_search_drop_down")));//screenshot	
 				
 			}
 			
 			
 			closeBrowser();
-		
-			
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
@@ -147,4 +135,3 @@ public class TestCase_B6 extends TestBase{
 	
 
 }
-

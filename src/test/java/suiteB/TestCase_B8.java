@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,7 +31,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B6 extends TestBase{
+public class TestCase_B8 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -41,12 +42,12 @@ public class TestCase_B6 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that type ahead functionality is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that search maintains state when user navigates back to serach results page from record view page").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB6() throws Exception{
+	public void testcaseB8() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -65,17 +66,13 @@ public class TestCase_B6 extends TestBase{
 		
 		
 			
-			String search_query="b";
+			String search_query="cat dog";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-//			System.out.println(System.getProperty("host"));
-//			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-			
-			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
@@ -85,32 +82,64 @@ public class TestCase_B6 extends TestBase{
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			
+			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
+			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
 			Thread.sleep(5000);
 			
-			//Verify that the search drop down gets displayed
-			if(!checkElementPresence("typeAhead_dropDown")){
+			
+			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ArrayList<String> al1=new ArrayList<String>();
+			for(int i=0;i<searchResults.size();i++){
 				
-				test.log(LogStatus.FAIL, "Search drop down not getting displayed");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
-			}
-			
-			
-			
-			//Verify that 10 options are contained in search drop down
-			List<WebElement> options=ob.findElements(By.xpath(OR.getProperty("search_dropDown_options_link")));
-			if(!compareNumbers(10,options.size())){
-				
-
-				test.log(LogStatus.FAIL, "10 options not getting displayed in search drop down");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_ten_options_not_getting_displayed_in_search_drop_down")));//screenshot	
+				al1.add(searchResults.get(i).getText());
 				
 			}
+			searchResults.get(28).click();
+			Thread.sleep(5000);
+			
+			
+//			ob.navigate().back();
+			JavascriptExecutor js = (JavascriptExecutor)ob;
+			js.executeScript("window.history.back();");
+			Thread.sleep(5000);
+			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ArrayList<String> al2=new ArrayList<String>();
+			for(int i=0;i<searchResults2.size();i++){
+				
+				al2.add(searchResults2.get(i).getText());
+				
+			}
+			
+//			System.out.println(al1.size());
+//			System.out.println(al2.size());
+//			System.out.println(al1.equals(al2));
+			
+			try{
+			Assert.assertTrue(al1.equals(al2));
+			test.log(LogStatus.PASS, "Search maintains state when user navigates back to search results page from record view page");
+			}
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Search does not maintain state when user navigates back from record view page to search results page");//extent reports
+				test.log(LogStatus.INFO, "Error--->"+t);
+				ErrorUtil.addVerificationFailure(t);
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_not_maintaining_state_when_user_navigates_to_search_results_page_from_record_view_page")));//screenshot	
+				
+			}
+					
+			
+			
 			
 			
 			closeBrowser();
-		
+			
+			
 			
 		}
 		catch(Throwable t){
@@ -147,4 +176,3 @@ public class TestCase_B6 extends TestBase{
 	
 
 }
-

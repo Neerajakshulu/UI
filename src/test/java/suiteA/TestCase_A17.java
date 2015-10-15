@@ -84,8 +84,8 @@ public class TestCase_A17 extends TestBase{
 			
 			ob.get("https://www.guerrillamail.com");
 			String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);

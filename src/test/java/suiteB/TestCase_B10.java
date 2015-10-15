@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -31,7 +32,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B5 extends TestBase{
+public class TestCase_B10 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -42,12 +43,12 @@ public class TestCase_B5 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that PHRASING WITH QUOTES rule is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that filtering is retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB5() throws Exception{
+	public void testcaseB10() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -66,13 +67,14 @@ public class TestCase_B5 extends TestBase{
 		
 		
 			
-			String search_query="\"cat and dog\"";
+			String search_query="biology";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(System.getProperty("host"));
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -84,74 +86,88 @@ public class TestCase_B5 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
-			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			
+			List<WebElement> checkboxes=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+//			System.out.println(checkboxes.size());
+			
+			
+			checkboxes.get(0).click();
+			Thread.sleep(3000);
+			checkboxes.get(1).click();
+			Thread.sleep(3000);
+//			checkboxes.get(20).click();
+//			Thread.sleep(3000);
+//			checkboxes.get(30).click();
+//			Thread.sleep(10000);
+			
+			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			ArrayList<String> urls=new ArrayList<String>();
+			ArrayList<String> al1=new ArrayList<String>();
 			for(int i=0;i<searchResults.size();i++){
 				
-				urls.add(searchResults.get(i).getAttribute("href"));
+				al1.add(searchResults.get(i).getText());
+				
 			}
-			boolean condition1;
-			String pageText;
-			ArrayList<Integer> error_list=new ArrayList<Integer>();
-			int count=0;
-			for(int i=0;i<urls.size();i++){
+			searchResults.get(8).click();
+			Thread.sleep(5000);
+			
+			
+//			ob.navigate().back();
+			JavascriptExecutor js = (JavascriptExecutor)ob;
+			js.executeScript("window.history.back();");
+			Thread.sleep(5000);
+			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ArrayList<String> al2=new ArrayList<String>();
+			for(int i=0;i<searchResults2.size();i++){
 				
-				ob.navigate().to(urls.get(i));
-				Thread.sleep(5000);
-				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
-				JavascriptExecutor executor = (JavascriptExecutor)ob;
-				executor.executeScript("arguments[0].click();", myE);
+				al2.add(searchResults2.get(i).getText());
 				
-				
-				Set<String> myset=ob.getWindowHandles();
-				Iterator<String> myIT=myset.iterator();
-				ArrayList<String> mylist55=new ArrayList<String>();
-				
-				
-				for(int k=0;k<myset.size();k++){
+			}
+			
+
+//			System.out.println(al1.size());
+//			System.out.println(al2.size());
+//			System.out.println(al1.equals(al2));
+			
+			
+			try{
+				Assert.assertTrue(al1.equals(al2));
+				test.log(LogStatus.PASS, "Correct filtered search results getting displayed when user navigates back to search results page from record view page");
+				}
+				catch(Throwable t){
 					
-					mylist55.add(myIT.next());
+					test.log(LogStatus.FAIL, "Incorrect filtered search results getting displayed when user navigates back to search results page from record view page");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_filtered_search_results_getting_displayed")));//screenshot	
 					
 				}
-				
-				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(15000);
-				
-				pageText=ob.getPageSource().toLowerCase();
-				condition1=pageText.contains("cat and dog") || pageText.contains("cats and dogs");
-				System.out.println(condition1);
-				if(condition1){
-					
-					count++;
+			
+			List<WebElement> checkboxes2=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+//			System.out.println("------------>"+checkboxes2.size());
+			
+			boolean filtering_condition=checkboxes2.get(0).isSelected() && checkboxes2.get(1).isSelected();
+//			System.out.println(filtering_condition);
+			
+			try{
+				Assert.assertTrue(filtering_condition);
+				test.log(LogStatus.PASS, "Filters are retained when user navigates back to search results page from record view page");
 				}
-				else
-				{
+				catch(Throwable t){
 					
-					error_list.add(i+1);
+					test.log(LogStatus.FAIL, "Filters are not retained when user navigates back to search results page from record view page");//extent reports
+					test.log(LogStatus.INFO, "Error--->"+t);
+					ErrorUtil.addVerificationFailure(t);
+					status=2;//excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_filters_not_retained_when_user_navigates_back_to_search_results_page_from_record_view_page")));//screenshot	
+					
 				}
-			
-//				ob.close();
-//				ob.switchTo().window(mylist55.get(0));
-				
-			}
-			String message="";
-			for(int i=0;i<error_list.size();i++){
-				
-				message=message+error_list.get(i)+",";
-				
-			}
-			
-			
-			if(!compareNumbers(urls.size(),count)){
-				
-				test.log(LogStatus.FAIL, "PHRASING WITH QUOTES rule not working correctly");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO,"Issues are in the following documents:"+message);//extent reports
-			}
-			
 			
 			closeBrowser();
+			
+			
+			
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
@@ -187,4 +203,3 @@ public class TestCase_B5 extends TestBase{
 	
 
 }
-
