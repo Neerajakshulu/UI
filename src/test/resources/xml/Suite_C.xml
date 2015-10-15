@@ -53,5 +53,51 @@
     </classes>
 </test>
 
+
+<test name="Authoring_Comments_Min_and_Max_length_Validation">
+    <classes>
+      <class name="suiteC.CommentsMinMaxValidationTest" ></class>
+    </classes>
+</test>
+
+
+<test name="Comments_Profanity_Words_Check">
+    <classes>
+      <class name="suiteC.CommentsProfanityWordsCheckTest" ></class>
+    </classes>
+</test>
+
+<test name="Comments_Validation_with_Unsupported_HTML_Tag">
+    <classes>
+      <class name="suiteC.UnsupportedTagsCommentsTest" ></class>
+    </classes>
+</test>
+
+
+<test name="Article_Sharing_Using_Twitter">
+	<parameter name="tusername" value="pcreddy08.11@gmail.com"/>
+	<parameter name="tpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareArticleOnTwitterTest" ></class>
+    </classes>
+</test>
+
+
+<test name="Article_Sharing_Using_LinkedIn">
+	<parameter name="liusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="lipassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareArticleOnLITest" ></class>
+    </classes>
+</test>
+
+<test name="Article_Sharing_Using_Facebook">
+    <parameter name="fbusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="fbpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareArticleOnFBTest" ></class>
+    </classes>
+</test>
+
 </suite>
 

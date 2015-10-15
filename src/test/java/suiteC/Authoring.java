@@ -41,6 +41,21 @@ public class Authoring  extends TestBase {
 		Thread.sleep(3000);
 	}
 	
+	
+	
+	public static void enterArticleComments(String addComments) throws InterruptedException  {
+		commentSizeBeforeAdd=getCommentCount();
+		System.out.println("Before-->"+commentSizeBeforeAdd);
+		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
+		commentArea.click();
+		commentArea.clear();
+		//scrollingToElementofAPage();
+		commentArea.sendKeys(addComments);
+		Thread.sleep(3000);
+	}
+	
+	
 	public static void clickAddCommentButton() throws InterruptedException  {
 		scrollingToElementofAPage();
 		WebElement addCommentElement=ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));

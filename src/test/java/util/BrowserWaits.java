@@ -23,7 +23,7 @@ public class BrowserWaits extends TestBase{
 	 * @param ElementPath
 	 * @return boolean
 	 */
-	static int time=10;
+	static int time=60;
 	static String locatorType;
 	static String locatorText;
 	public static void IsElementPresent(Object elementName) throws Exception {

@@ -2,36 +2,28 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -137,10 +129,10 @@ public class TestBase {
 		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		System.out.println("Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
+		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
 		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		System.out.println("Browser Version-->"+System.getenv("SELENIUM_VERSION"));
-		System.out.println("OS Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
+		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
+		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
 //		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
@@ -371,6 +363,7 @@ public class TestBase {
 				
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
@@ -399,18 +392,70 @@ public class TestBase {
 			//Cleaning up watchlist
 			public void cleanWatchlist() throws Exception{
 				
-				ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+				ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 				Thread.sleep(4000);
 				
-				List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+				List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 				for(int i=0;i<mylist.size();i++){
 					
-					ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch watch-icon-active cursor-pointer']")).click();
+					ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
 					Thread.sleep(2000);
-					ob.findElement(By.xpath("//button[contains(text(),'Remove')]")).click();
+					ob.findElement(By.xpath(OR.getProperty("watchlist_remove_button"))).click();
 					Thread.sleep(2000);
 					
 				}
+				
+			}
+			
+			
+			//Creates a new TR user
+			public String createNewUser(String first_name,String last_name) throws Exception{
+				
+				String password="Transaction@2";
+				
+				
+				ob.get("https://www.guerrillamail.com");
+				String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+//				ob.navigate().to(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(host);
+				Thread.sleep(8000);
+				ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+				Thread.sleep(4000);
+				
+				
+				ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+				Thread.sleep(2000);
+				ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
+				ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
+				ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
+				ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
+				ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
+				ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
+				ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
+				Thread.sleep(10000);
+				
+				
+				ob.get("https://www.guerrillamail.com");
+				List<WebElement> email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
+				WebElement myE=email_list.get(0);
+				JavascriptExecutor executor = (JavascriptExecutor)ob;
+				executor.executeScript("arguments[0].click();", myE);
+//				email_list.get(0).click();
+				Thread.sleep(2000);
+				
+				
+				WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
+				List<WebElement> links=email_body.findElements(By.tagName("a"));
+				ob.get(links.get(0).getAttribute("href"));
+				Thread.sleep(8000);
+				
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+				ob.findElement(By.id(OR.getProperty("login_button"))).click();
+				Thread.sleep(25000);
+				
+				
+				return email;
 				
 			}
 
@@ -858,6 +903,8 @@ public class TestBase {
 					
 				}
 				
+				
+				
 	//Added by Chinna
 
 				public static WebDriver getOb() {
@@ -871,9 +918,6 @@ public class TestBase {
 					return OR;
 				}
 				
-				
-				
-				
 				public static void setOR(Properties oR) {
 					OR = oR;
 				}
@@ -882,4 +926,63 @@ public class TestBase {
 					jse.executeScript("scroll(0, 250);");
 					Thread.sleep(4000);
 				}
+	
+      //Added by Kavya		
+				
+				/**
+				 * Method to wait till the element is visible on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to wait till the element is present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to click on the specified element using java script executor.
+				 * @param driver
+				 * @param element
+				 */
+				public void jsClick(WebDriver driver, WebElement element) {
+
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+				}
+
+				/**
+				 * Method to scroll the specified element to view.
+				 * @param driver
+				 * @param element
+				 */
+				public static void scrollElementIntoView(WebDriver driver, WebElement element) {
+					JavascriptExecutor jse = (JavascriptExecutor) ob;
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
+				}
+
+				/**
+				 * Method to wait till all the elements are present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+				}
+
 }
