@@ -129,17 +129,21 @@ public class ShareArticleOnLITest extends TestBase {
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
 					 Thread.sleep(6000);
 					 
-					 Set<String> child_sub_window_handles= ob.getWindowHandles();
-					// System.out.println("child sub window--->"+child_sub_window_handles.size());
-					 for(String sub_window:child_sub_window_handles) {
-						 if(!sub_window.equals(child_window_handle)) {
-							 System.out.println("sub window--->"+ob.getTitle());
-							 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
-							 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
-							 Thread.sleep(3000);
-							 BrowserWaits.waitUntilText("Great! You have successfully shared this update.");
+					 try {
+						Set<String> child_sub_window_handles= ob.getWindowHandles();
+						// System.out.println("child sub window--->"+child_sub_window_handles.size());
+						 for(String sub_window:child_sub_window_handles) {
+							 if(!sub_window.equals(child_window_handle)) {
+								 System.out.println("sub window--->"+ob.getTitle());
+								 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
+								 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
+								 Thread.sleep(3000);
+								 BrowserWaits.waitUntilText("Great! You have successfully shared this update.");
+							 }
 						 }
-					 }
+					} catch (Exception e) {
+						test.log(LogStatus.INFO, "Unable to login into LI account from Remote Machines");
+					}
 					 ob.close();
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
