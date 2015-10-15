@@ -984,5 +984,53 @@ public class TestBase {
 				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
 					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				}
+				
+				/**
+				 * This method is to wait for all ajax calls to complete.
+				 * @param driver
+				 */
+				public void waitForAjax(WebDriver driver) {
+					try {
+						for (int i = 0; i < 60; i++) {
+
+							JavascriptExecutor js = (JavascriptExecutor) driver;
+							//check for the pending request count and break if count is zero.
+							if ((Long) js
+									.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+								break;
+							}
+							Thread.sleep(1000);
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				/**
+				 * Method to wait till the element is clickable on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
+				}
+				
+				 public boolean checkElementIsDisplayed(WebDriver driver,By locator){
+				    	boolean result=false;
+				    	   try{
+				    	 
+				    		   result=ob.findElement(locator).isDisplayed();
+				    		  
+				    	   }catch(Exception e){
+				    		   return false;
+				    	   }
+				    	   return result; 
+				       }
+
+
 
 }
