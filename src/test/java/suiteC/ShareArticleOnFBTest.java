@@ -201,6 +201,7 @@ public class ShareArticleOnFBTest extends TestBase {
 	
 	public static void chooseArticle(String linkName) throws InterruptedException {
 		ob.findElement(By.linkText(linkName)).click();
+		Thread.sleep(8000);//providing more while script is getting failed in saucelabs
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}
 	
