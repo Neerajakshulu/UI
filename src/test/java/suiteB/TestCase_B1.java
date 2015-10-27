@@ -72,6 +72,7 @@ public class TestCase_B1 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
@@ -104,7 +105,7 @@ public class TestCase_B1 extends TestBase{
 				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", myE);
-				
+				Thread.sleep(5000);
 				
 				Set<String> myset=ob.getWindowHandles();
 				Iterator<String> myIT=myset.iterator();
@@ -154,7 +155,7 @@ public class TestCase_B1 extends TestBase{
 			}
 			
 			
-			closeBrowser();
+//			closeBrowser();
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
@@ -165,7 +166,7 @@ public class TestCase_B1 extends TestBase{
 			ErrorUtil.addVerificationFailure(t);//testng
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
-			closeBrowser();
+//			closeBrowser();
 		}
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
