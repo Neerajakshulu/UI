@@ -67,98 +67,84 @@ public class TestCase_F2 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
-			
-		String search_query="india";
-		String email="motadon100@gmail.com";
-		String password="Transaction@2";
-			
+		
 			
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
 		
-//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		ob.navigate().to(System.getProperty("host"));
+		
+//		1)Make user1 comment on some article and logout
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		Thread.sleep(4000);
-		ob.findElement(By.id("userid")).clear();
-		ob.findElement(By.id("userid")).sendKeys(email);
-		ob.findElement(By.id("password")).sendKeys(password);
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
+		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
 		Thread.sleep(15000);
 		
-		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
-		String document_title=ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
+		String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 		System.out.println(document_title);
-		ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).click();
+		ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 		Thread.sleep(4000);
-		ob.findElement(By.cssSelector("div[id^='taTextElement']")).click();
+		ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
+		ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
 		Thread.sleep(2000);
+		logout();
+		Thread.sleep(5000);
 		
-		 Robot robot = new Robot();
-		 robot.keyPress(KeyEvent.VK_SHIFT);
-		 Thread.sleep(1000);
-		  robot.keyPress(KeyEvent.VK_H);
-		  Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_H);
-		    Thread.sleep(1000);
-		    robot.keyPress(KeyEvent.VK_E);
-		    Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_E);
-		    Thread.sleep(1000);
-		    robot.keyPress(KeyEvent.VK_L);
-		    Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_L);
-		    Thread.sleep(1000);
-		    robot.keyPress(KeyEvent.VK_L);
-		    Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_L);
-		    Thread.sleep(1000);
-		    robot.keyPress(KeyEvent.VK_O);
-		    Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_O);
-		    Thread.sleep(1000);
-		    robot.keyRelease(KeyEvent.VK_SHIFT);
-		
-		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']")).click();
-		Thread.sleep(2000);
-		
-		ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-caret-down']")).click();
-		Thread.sleep(2000);
-		ob.findElement(By.xpath("//a[contains(text(),'Sign out')]")).click();
-		Thread.sleep(8000);
-		
+	
+//		2)Login with user2 and verify that he receives a correct notification
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		Thread.sleep(4000);
 		ob.findElement(By.id("userid")).clear();
-		ob.findElement(By.id("userid")).sendKeys(CONFIG.getProperty("defaultUsername"));
+		ob.findElement(By.id("userid")).sendKeys(user2);
 		ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
 		Thread.sleep(15000);
 		
-		String text=ob.findElement(By.xpath("//*[@class='clearfix webui-media-wrapper']")).getText();
+		
+		
+		if(!checkElementPresence("notification")){
+			
+
+			test.log(LogStatus.FAIL, "User not receiving notification");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_not_receiving_notification")));//screenshot	
+			closeBrowser();
+			return;
+		}
+		
+		String text=ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 		System.out.println(text);
 		
+		String expected_text=fn1+" "+ln1+" commented on an article";
+
+		
 		try{
-		Assert.assertTrue(text.contains("mota don") && text.contains("TODAY") && text.contains(document_title));
+		Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY") && text.contains(document_title));
+		test.log(LogStatus.PASS, "User receiving notification with correct content");
 		}
 		catch(Throwable t){
 			
-			
-			test.log(LogStatus.FAIL,"User not receiving notification when he is following comments on an article.....Error:"+t);//extent reports
-			ErrorUtil.addVerificationFailure(t);//testng
+			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");//extent reports
+			test.log(LogStatus.INFO, "Error--->"+t);
+			ErrorUtil.addVerificationFailure(t);
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_not_receiving_notification_when_someone_he_is_following_comments_on_article")));//screenshot
-			
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_receiving_notification_with_incorrect_content")));//screenshot	
 			
 		}
 		
 		closeBrowser();
+		
+		
+	
 		
 		}
 		catch(Throwable t){

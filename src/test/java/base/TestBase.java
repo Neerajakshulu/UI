@@ -29,6 +29,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.Select;
@@ -61,6 +63,8 @@ public class TestBase {
 	public static ExtentTest test=null;
 	
 	public static String host=null;
+	public static String user1,user2;
+	public static String fn1,fn2,ln1,ln2;
 	
 	@BeforeSuite
 	public void beforeSuite() throws Exception{
@@ -132,32 +136,32 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-	public void openBrowser() throws Exception{
-		
-		
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
-		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
-//		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
-		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-                desiredCapabilities);
-		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-		String pageWait=CONFIG.getProperty("defaultPageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try{
-			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
-			}
-		catch(Throwable t){
-				
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
-		
-	}
+//	public void openBrowser() throws Exception{
+//		
+//		
+//		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+//		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+//		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
+//		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+//		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
+//		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
+//		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+//		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
+////		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
+//		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+//                desiredCapabilities);
+//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//		String pageWait=CONFIG.getProperty("defaultPageWait");
+//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+//		try{
+//			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
+//			}
+//		catch(Throwable t){
+//				
+//			System.out.println("Page Load Timeout not supported in safari driver");
+//		}
+//		
+//	}
 	
 
 	
@@ -167,47 +171,47 @@ public class TestBase {
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-//	public void openBrowser(){
-//		
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//		     ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver(capabilities);
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob = new ChromeDriver();
-//		}
-//		
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			
-//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-//			SafariOptions safariOptions = new SafariOptions();
-//			safariOptions.setUseCleanSession(true);
-//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
-//			ob = new SafariDriver(desiredCapabilities);
-//		}
-//	
-//		
-//		
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//			
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//		
-//	}
+	public void openBrowser(){
+		
+		if(CONFIG.getProperty("browserType").equals("FF")){
+		     ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+//			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			 ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+//			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+			 ob = new ChromeDriver();
+		}
+		
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+			
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+	
+		
+		
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+			
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+		
+	}
 	
 	//Closing the browser
 	public void closeBrowser(){
@@ -371,6 +375,7 @@ public class TestBase {
 				
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
@@ -448,14 +453,17 @@ public class TestBase {
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", myE);
 //				email_list.get(0).click();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				
 				
 				WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 				List<WebElement> links=email_body.findElements(By.tagName("a"));
+				
+				
 				ob.get(links.get(0).getAttribute("href"));
 				Thread.sleep(8000);
 				
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
@@ -936,4 +944,109 @@ public class TestBase {
 					jse.executeScript("scroll(0, 250);");
 					Thread.sleep(4000);
 				}
+				
+				
+ //Added by Kavya		
+				
+				/**
+				 * Method to wait till the element is visible on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to wait till the element is present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
+				}
+
+				/**
+				 * Method to click on the specified element using java script executor.
+				 * @param driver
+				 * @param element
+				 */
+				public void jsClick(WebDriver driver, WebElement element) {
+
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+				}
+
+				/**
+				 * Method to scroll the specified element to view.
+				 * @param driver
+				 * @param element
+				 */
+				public static void scrollElementIntoView(WebDriver driver, WebElement element) {
+					JavascriptExecutor jse = (JavascriptExecutor) ob;
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
+				}
+
+				/**
+				 * Method to wait till all the elements are present on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+				}
+				
+				/**
+				 * This method is to wait for all ajax calls to complete.
+				 * @param driver
+				 */
+				public void waitForAjax(WebDriver driver) {
+					try {
+						for (int i = 0; i < 60; i++) {
+
+							JavascriptExecutor js = (JavascriptExecutor) driver;
+							//check for the pending request count and break if count is zero.
+							if ((Long) js
+									.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+								break;
+							}
+							Thread.sleep(1000);
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				/**
+				 * Method to wait till the element is clickable on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
+				}
+				
+				 public boolean checkElementIsDisplayed(WebDriver driver,By locator){
+				    	boolean result=false;
+				    	   try{
+				    	 
+				    		   result=ob.findElement(locator).isDisplayed();
+				    		  
+				    	   }catch(Exception e){
+				    		   return false;
+				    	   }
+				    	   return result; 
+				       }
 }

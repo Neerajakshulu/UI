@@ -79,6 +79,55 @@
 </test>
 
 
+<test name="Test B15">
+    <classes>
+        <class name="suiteB.TestCase_B15" ></class>  
+    </classes>
+</test>
+<test name="Test B16">
+    <classes>
+        <class name="suiteB.TestCase_B16" ></class>  
+    </classes>
+</test>
+<test name="Test B17">
+    <classes>
+        <class name="suiteB.TestCase_B17" ></class>  
+    </classes>
+</test>
+
+<test name="Test B18">
+    <classes>
+        <class name="suiteB.TestCase_B18" ></class>  
+    </classes>
+</test>
+
+<test name="Test B19">
+    <classes>
+        <class name="suiteB.TestCase_B19" ></class>  
+    </classes>
+</test>
+
+<test name="Test B20">
+    <classes>
+        <class name="suiteB.TestCase_B20" ></class>  
+    </classes>
+</test>
+<test name="Test B21">
+    <classes>
+        <class name="suiteB.TestCase_B21" ></class>  
+    </classes>
+</test>
+<test name="Test B22">
+    <classes>
+        <class name="suiteB.TestCase_B22" ></class>  
+    </classes>
+</test>
+
+<test name="Test B23">
+    <classes>
+        <class name="suiteB.TestCase_B23" ></class>  
+    </classes>
+</test>
 
 
 </suite>

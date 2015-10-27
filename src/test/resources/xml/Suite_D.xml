@@ -71,7 +71,17 @@
     </classes>
 </test>
 
+<test name="ProfileSummaryTest">
+    <classes>
+        <class name="suiteD.ProfileSummaryTest" ></class> 
+    </classes>
+</test>
 
+<test name="ProfileFollowerTest">
+    <classes>
+        <class name="suiteD.ProfileFollowerTest" ></class> 
+    </classes>
+</test>
 
 
 </suite>
