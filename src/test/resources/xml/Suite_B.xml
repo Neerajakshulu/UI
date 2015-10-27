@@ -79,6 +79,20 @@
 </test>
 
 
+<test name="Test B13">
+    <classes>
+        <class name="suiteB.TestCase_B13" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test B14">
+    <classes>
+        <class name="suiteB.TestCase_B14" ></class>  
+    </classes>
+</test>
+
+
 <test name="Test B15">
     <classes>
         <class name="suiteB.TestCase_B15" ></class>  
@@ -129,6 +143,30 @@
     </classes>
 </test>
 
+
+<test name="Test B24">
+    <classes>
+        <class name="suiteB.TestCase_B24" ></class>  
+    </classes>
+</test>
+
+<test name="Test B25">
+    <classes>
+        <class name="suiteB.TestCase_B25" ></class>  
+    </classes>
+</test>
+
+<test name="Test B26">
+    <classes>
+        <class name="suiteB.TestCase_B26" ></class>  
+    </classes>
+</test>
+
+<test name="Test B27">
+    <classes>
+        <class name="suiteB.TestCase_B27" ></class>  
+    </classes>
+</test>
 
 </suite>
 
