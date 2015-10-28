@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -91,6 +92,10 @@ public class TestCase_F1 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
+			JavascriptExecutor jse=(JavascriptExecutor)ob;
+			jse.executeScript("scroll(0,-500)");
+			Thread.sleep(2000);
+		
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
