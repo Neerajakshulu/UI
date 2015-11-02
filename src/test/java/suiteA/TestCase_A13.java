@@ -78,8 +78,8 @@ public class TestCase_A13 extends TestBase{
 		
 		
 		//Navigate to TR login page and login with valid TR credentials
-		ob.get(CONFIG.getProperty("testSiteName"));
-//		ob.navigate().to(host);
+//		ob.get(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
 		Thread.sleep(8000);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
