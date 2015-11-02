@@ -137,7 +137,7 @@ public class TestCase_A17 extends TestBase{
 			
 			String actual_name=ob.findElement(By.xpath(OR.getProperty("header_label"))).getText();
 //			System.out.println(actual_name);
-			String expected_name="firstfirstfirstfirstfirstfi �";
+			String expected_name="firstfirstfirstfirstfirstfi …";
 			if(!compareStrings(expected_name,actual_name)){
 				
 				test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");//extent reports
