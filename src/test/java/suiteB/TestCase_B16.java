@@ -71,7 +71,7 @@ public class TestCase_B16 extends TestBase {
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("cat dog purse", Keys.ENTER);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			List<WebElement> resultList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_item_xpath")));

@@ -75,6 +75,7 @@ public class TestCase_B15 extends TestBase {
 			List<WebElement> resultList;
 		
 			for (int i = 1; i <= 3; i++) {
+				waitForAjax(ob);
 				resultList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_item_xpath")));
 				try {
 
@@ -91,8 +92,7 @@ public class TestCase_B15 extends TestBase {
 
 				}
 				ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_more_button_css"))).click();
-				waitForAjax(ob);
-
+		
 			}
 			
 			logout();

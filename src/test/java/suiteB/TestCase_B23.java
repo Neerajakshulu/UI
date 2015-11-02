@@ -67,8 +67,7 @@ static int status=1;
 	
 		
 		//Navigate to TR login page and login with valid TR credentials
-		//ob.navigate().to(host);
-		ob.get(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
 		Thread.sleep(10000);
 		login();
 		Thread.sleep(15000);
