@@ -31,7 +31,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B1 extends TestBase{
+public class TestCase_B13 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -42,12 +42,12 @@ public class TestCase_B1 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that MINIMUM SHOULD MATCH rule is working correctly").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that NOT is not treated as a boolean").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB1() throws Exception{
+	public void testcaseB13() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
@@ -66,7 +66,7 @@ public class TestCase_B1 extends TestBase{
 		
 		
 			
-			String search_query="cat dog";
+			String search_query="cat not dog";
 			
 			openBrowser();
 			clearCookies();
@@ -92,7 +92,7 @@ public class TestCase_B1 extends TestBase{
 				
 				urls.add(searchResults.get(i).getAttribute("href"));
 			}
-			boolean condition1,condition2,masterSearchCondition;
+			boolean condition1,condition2,condition3,masterSearchCondition;
 			String pageText;
 			ArrayList<Integer> error_list=new ArrayList<Integer>();
 			int count=0;
@@ -105,7 +105,7 @@ public class TestCase_B1 extends TestBase{
 				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", myE);
-				Thread.sleep(5000);
+				
 				
 				Set<String> myset=ob.getWindowHandles();
 				Iterator<String> myIT=myset.iterator();
@@ -124,7 +124,8 @@ public class TestCase_B1 extends TestBase{
 				pageText=ob.getPageSource().toLowerCase();
 				condition1=pageText.contains("cat");
 				condition2=pageText.contains("dog");
-				masterSearchCondition=condition1 && condition2;
+				condition3=pageText.contains("not");
+				masterSearchCondition=condition1 && condition2 && condition3;
 				System.out.println(masterSearchCondition);
 				if(masterSearchCondition){
 					
@@ -149,7 +150,7 @@ public class TestCase_B1 extends TestBase{
 			
 			if(!compareNumbers(urls.size(),count)){
 				
-				test.log(LogStatus.FAIL, "MINIMUM SHOULD MATCH rule not working correctly");//extent reports
+				test.log(LogStatus.FAIL, "NOT is treated as a boolean");//extent reports
 				status=2;//excel
 				test.log(LogStatus.INFO,"Issues are in the following documents:\n"+message);//extent reports
 			}

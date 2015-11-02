@@ -27,7 +27,7 @@ public class LoginTR extends TestBase{
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
 		Thread.sleep(4000);
-		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	/**

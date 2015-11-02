@@ -79,7 +79,94 @@
 </test>
 
 
+<test name="Test B13">
+    <classes>
+        <class name="suiteB.TestCase_B13" ></class>  
+    </classes>
+</test>
 
+
+<test name="Test B14">
+    <classes>
+        <class name="suiteB.TestCase_B14" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test B15">
+    <classes>
+        <class name="suiteB.TestCase_B15" ></class>  
+    </classes>
+</test>
+<test name="Test B16">
+    <classes>
+        <class name="suiteB.TestCase_B16" ></class>  
+    </classes>
+</test>
+<test name="Test B17">
+    <classes>
+        <class name="suiteB.TestCase_B17" ></class>  
+    </classes>
+</test>
+
+<test name="Test B18">
+    <classes>
+        <class name="suiteB.TestCase_B18" ></class>  
+    </classes>
+</test>
+
+<test name="Test B19">
+    <classes>
+        <class name="suiteB.TestCase_B19" ></class>  
+    </classes>
+</test>
+
+<test name="Test B20">
+    <classes>
+        <class name="suiteB.TestCase_B20" ></class>  
+    </classes>
+</test>
+<test name="Test B21">
+    <classes>
+        <class name="suiteB.TestCase_B21" ></class>  
+    </classes>
+</test>
+<test name="Test B22">
+    <classes>
+        <class name="suiteB.TestCase_B22" ></class>  
+    </classes>
+</test>
+
+<test name="Test B23">
+    <classes>
+        <class name="suiteB.TestCase_B23" ></class>  
+    </classes>
+</test>
+
+
+<test name="Test B24">
+    <classes>
+        <class name="suiteB.TestCase_B24" ></class>  
+    </classes>
+</test>
+
+<test name="Test B25">
+    <classes>
+        <class name="suiteB.TestCase_B25" ></class>  
+    </classes>
+</test>
+
+<test name="Test B26">
+    <classes>
+        <class name="suiteB.TestCase_B26" ></class>  
+    </classes>
+</test>
+
+<test name="Test B27">
+    <classes>
+        <class name="suiteB.TestCase_B27" ></class>  
+    </classes>
+</test>
 
 </suite>
 

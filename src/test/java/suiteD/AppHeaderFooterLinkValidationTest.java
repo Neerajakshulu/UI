@@ -120,17 +120,17 @@ public class AppHeaderFooterLinkValidationTest extends TestBase {
 					}
 					
 					if(headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")){
-						String cookieText=ob.findElement(By.cssSelector("h3[class='uppercase spacing-top']")).getText();
+						String cookieText=ob.findElement(By.cssSelector("h3[class^='uppercase']")).getText();
 						Assert.assertEquals(headerFooterLinks[i].toUpperCase(), cookieText);
 					}
 					
 					else if (headerFooterLinks[i].equalsIgnoreCase("Privacy Statement")){
-						String psText=ob.findElement(By.cssSelector("h3[class='uppercase']")).getText();
+						String psText=ob.findElement(By.cssSelector("h3[class^='uppercase']")).getText();
 						Assert.assertEquals(headerFooterLinks[i].toUpperCase(), psText);
 					}
 					
 					else if (headerFooterLinks[i].equalsIgnoreCase("Terms of Use")){
-						String tcText=ob.findElement(By.cssSelector("h3[class='uppercase']")).getText();
+						String tcText=ob.findElement(By.cssSelector("h3[class^='uppercase']")).getText();
 						Assert.assertEquals(headerFooterLinks[i].toUpperCase(), tcText);
 					}
 					

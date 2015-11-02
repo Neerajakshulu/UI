@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.xmlbeans.impl.xb.xmlconfig.ConfigDocument.Config;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -57,12 +56,7 @@ public class ProfileSummaryTest extends TestBase {
 		try {
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
@@ -81,6 +75,8 @@ public class ProfileSummaryTest extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_edit_button_css"))).click();
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))).click();
+				
+				Thread.sleep(4000);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 
 			}
@@ -98,8 +94,8 @@ public class ProfileSummaryTest extends TestBase {
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Maximum length for add summary field validation Failed");
 				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
 				status = 2;
+				ErrorUtil.addVerificationFailure(t);
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "maximum length validation failed for summary field")));// screenshot
 
@@ -113,14 +109,14 @@ public class ProfileSummaryTest extends TestBase {
 		}
 
 		catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
+			status = 2;// excel
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
-			status = 2;// excel
+			
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
@@ -134,14 +130,14 @@ public class ProfileSummaryTest extends TestBase {
 		extent.endTest(test);
 
 		if (status == 1)
-			TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-					TestUtil.getRowNum(suiteAxls, this.getClass().getSimpleName()), "PASS");
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
+					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-					TestUtil.getRowNum(suiteAxls, this.getClass().getSimpleName()), "FAIL");
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
+					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-					TestUtil.getRowNum(suiteAxls, this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
+					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

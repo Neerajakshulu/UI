@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -63,77 +64,89 @@ public class TestCase_F1 extends TestBase{
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
 			
-		String search_query="mota";
-		String email="motadon100@gmail.com";
-		String password="Transaction@2";
 			
 			
-		openBrowser();
-		maximizeWindow();
-		clearCookies();
-		
-//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		ob.navigate().to(host);
-		Thread.sleep(8000);
-		
-		//login using TR credentials
-		login();
-		Thread.sleep(15000);
-		
-		
-		ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		Thread.sleep(4000);
-		
-		ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
-		Thread.sleep(2000);
-		
-		try{
 			
-			ob.findElement(By.xpath("//button[contains(text(),'Unfollow')]")).click();
+			
+//		1)Create User1 and logout
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			fn1=generateRandomName(8);
+			ln1=generateRandomName(10);
+			user1=createNewUser(fn1,ln1);
+			logout();
+			Thread.sleep(5000);
+			
+			closeBrowser();
+			
+//		2)Create User2 and follow User1
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			fn2=generateRandomName(8);
+			ln2=generateRandomName(10);
+			user2=createNewUser(fn2,ln2);
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1+ " " +ln1);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			
+			JavascriptExecutor jse=(JavascriptExecutor)ob;
+			jse.executeScript("scroll(0,-500)");
 			Thread.sleep(2000);
-		}
-		catch(Throwable t){
+		
+			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+			Thread.sleep(2000);
+			logout();
+			Thread.sleep(5000);
 			
-			System.out.println(t);
-		}
-		
-		ob.findElement(By.xpath("//button[contains(text(),'Follow')]")).click();
-		Thread.sleep(2000);
-		
-		ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-caret-down']")).click();
-		Thread.sleep(2000);
-		ob.findElement(By.xpath("//a[contains(text(),'Sign out')]")).click();
-		Thread.sleep(8000);
-		
-		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
-		ob.findElement(By.id("userid")).clear();
-		ob.findElement(By.id("userid")).sendKeys(email);
-		ob.findElement(By.id("password")).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-		Thread.sleep(15000);
-		
-		String text=ob.findElement(By.xpath("//*[@class='clearfix webui-media-wrapper']")).getText();
-//		System.out.println(text);
+			
+//		3)Verify that User1 receives a notification with correct data	
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			Thread.sleep(4000);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			Thread.sleep(15000);
+			
+			
+			
+			if(!checkElementPresence("notification")){
+				
+
+				test.log(LogStatus.FAIL, "User not receiving notification");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_not_receiving_notification")));//screenshot	
+				closeBrowser();
+				return;
+			}
+			
+			String text=ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			System.out.println(text);
+			String expected_text=fn2+" "+ln2+" is now following you";
 		
 		try{
-		Assert.assertTrue(text.contains("amneet singh is now following you") && text.contains("TODAY"));
+		Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY"));
+		test.log(LogStatus.PASS, "User receiving notification with correct content");
 		}
 		catch(Throwable t){
 			
-			
-			test.log(LogStatus.FAIL,"User not receiving notification when someone follows him.....Error:"+t);//extent reports
-			ErrorUtil.addVerificationFailure(t);//testng
+			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");//extent reports
+			test.log(LogStatus.INFO, "Error--->"+t);
+			ErrorUtil.addVerificationFailure(t);
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_not_receiving_notification_when_someone_follows_him")));//screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_receiving_notification_with_incorrect_content")));//screenshot	
 			
 			
 		}
-		
-		closeBrowser();
-		
-		
+			
+		closeBrowser();	
+			
+	
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports

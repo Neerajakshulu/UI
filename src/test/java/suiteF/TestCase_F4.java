@@ -30,7 +30,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_F3 extends TestBase{
+public class TestCase_F4 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -41,12 +41,12 @@ public class TestCase_F3 extends TestBase{
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that user receives a notificatication when someone comments on an article contained in his watchlist").assignCategory("Suite F");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that user receives a notificatication when someone likes his comment").assignCategory("Suite F");
 		
 	}
 	
 	@Test
-	public void testcaseF3() throws Exception{
+	public void testcaseF4() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteFxls,this.getClass().getSimpleName());
@@ -62,10 +62,8 @@ public class TestCase_F3 extends TestBase{
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
 		try{
-			
-			
-//		1)Login with user1,add an article to watchlist and logout
-			
+		
+//		1)Login with user2,comment on some article and logout
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -75,24 +73,51 @@ public class TestCase_F3 extends TestBase{
 			
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
-			String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+//			String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+//			System.out.println(document_title);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(4000);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
+			ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
+			Thread.sleep(2000);
+			logout();
+			Thread.sleep(5000);
+			
+			
+			
+//		2)Login with user1,like the comment and logout
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			Thread.sleep(4000);
+			ob.findElement(By.id("userid")).clear();
+			ob.findElement(By.id("userid")).sendKeys(user1);
+			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			Thread.sleep(15000);
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(4000);
+			
+			ob.findElement(By.xpath(OR.getProperty("document_commentLike_button"))).click();
 			Thread.sleep(1000);
 			
 			logout();
 			Thread.sleep(5000);
 			
+//		3)Login with user2 again and verify that he receives a correct notification
 			
-//		2)Login with user2,comment on article contained in user1's watchlist and logout
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.id("userid")).clear();
@@ -100,37 +125,17 @@ public class TestCase_F3 extends TestBase{
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-			
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
-			ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
-			Thread.sleep(2000);
-			logout();
-			Thread.sleep(5000);
-			
-//		3)Login with user1 again and verify that he receives a correct notification
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(25000);
 			
 			
-			String text=ob.findElement(By.xpath(OR.getProperty("notification2"))).getText();
+			
+			String text=ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 			
-			String expected_text=fn2+" "+ln2;
+			String expected_text=fn1+" "+ln1+" liked your comment";
 
 			
 			try{
-			Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY") && text.contains(document_title) && text.contains("green tea"));
+			Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY") && text.contains("beach"));
 			test.log(LogStatus.PASS, "User receiving notification with correct content");
 			}
 			catch(Throwable t){
@@ -144,8 +149,6 @@ public class TestCase_F3 extends TestBase{
 			}
 			
 			closeBrowser();
-			
-	
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports

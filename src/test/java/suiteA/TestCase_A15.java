@@ -106,7 +106,7 @@ public class TestCase_A15 extends TestBase{
 		String error_message=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
 //		System.out.println(error_message);
 
-		if(!compareStrings("Your id has already been created, please login.",error_message)){
+		if(!compareStrings("Your id has already been created, please sign in.",error_message)){
 			
 			test.log(LogStatus.FAIL, "Error text is incorrect");//extent reports
 			status=2;//excel

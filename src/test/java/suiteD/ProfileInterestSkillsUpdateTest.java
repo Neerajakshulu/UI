@@ -135,16 +135,16 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 				Thread.sleep(2000);
 			}
 		}
-		String statusBeforeSkill=ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).getAttribute("class");
+		String statusBeforeSkill=ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).getAttribute("class");
 		//System.out.println("Attr stauts-->"+statusBeforeSkill);
-		ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).sendKeys(RandomStringUtils.randomAlphabetic(maxInterstSkilChar));
-		ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).sendKeys(Keys.ENTER);
-		String statusAfterSkill=ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).getAttribute("class");
+		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(RandomStringUtils.randomAlphabetic(maxInterstSkilChar));
+		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(Keys.ENTER);
+		String statusAfterSkill=ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).getAttribute("class");
 		Thread.sleep(4000);
 		//System.out.println("Attr stauts-->"+statusAfterSkill);
 		Assert.assertNotEquals(statusBeforeSkill, statusAfterSkill);
-		ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).clear();
-		ob.findElement(By.cssSelector("div[class='row interests-and-skills']")).findElement(By.xpath("tags-input/div/div/input")).sendKeys(RandomStringUtils.randomAlphabetic(finalInterstSkilChar));
+		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).clear();
+		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(RandomStringUtils.randomAlphabetic(finalInterstSkilChar));
 		Thread.sleep(4000);
 		
 	}

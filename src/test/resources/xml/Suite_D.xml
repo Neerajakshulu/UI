@@ -57,7 +57,8 @@
 
 <test name="Validate_Other_User_Profile_Comments_Like">
 	<parameter name="profileName" value="Chaturvedi"/>
-	<parameter name="profileCompleteName" value="Deepak Chaturvedi"/>
+	<parameter name="profileCompleteName" value="Deepak Chaturvedi"/> 
+
     <classes>
         <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
     </classes>
@@ -68,6 +69,14 @@
 	<parameter name="finalInterstSkilChar" value="50"/>
     <classes>
         <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_User_Own_Profile_Following_Others_Profiles">
+	<parameter name="profileName" value="deepak"/>
+	<parameter name="profileFullName" value="Deepak Chaturvedi"/>
+    <classes>
+        <class name="suiteD.ProfileFollowingOthersTest" ></class> 
     </classes>
 </test>
 

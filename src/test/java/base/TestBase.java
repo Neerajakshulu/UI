@@ -18,10 +18,16 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -53,6 +59,8 @@ public class TestBase {
 	public static ExtentTest test=null;
 	
 	public static String host=null;
+	public static String user1,user2;
+	public static String fn1,fn2,ln1,ln2;
 	
 	@BeforeSuite
 	public void beforeSuite() throws Exception{
@@ -360,7 +368,7 @@ public class TestBase {
 	       
 	       //logging in
 	       public void login() throws Exception{
-				
+	    	   waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
@@ -441,14 +449,17 @@ public class TestBase {
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", myE);
 //				email_list.get(0).click();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				
 				
 				WebElement email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
 				List<WebElement> links=email_body.findElements(By.tagName("a"));
+				
+				
 				ob.get(links.get(0).getAttribute("href"));
 				Thread.sleep(8000);
 				
+				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
@@ -926,8 +937,9 @@ public class TestBase {
 					jse.executeScript("scroll(0, 250);");
 					Thread.sleep(4000);
 				}
-	
-      //Added by Kavya		
+				
+				
+ //Added by Kavya		
 				
 				/**
 				 * Method to wait till the element is visible on the web page
@@ -984,5 +996,53 @@ public class TestBase {
 				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
 					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				}
+				
+				/**
+				 * This method is to wait for all ajax calls to complete.
+				 * @param driver
+				 */
+				public void waitForAjax(WebDriver driver) {
+					try {
+						for (int i = 0; i < 60; i++) {
+
+							JavascriptExecutor js = (JavascriptExecutor) driver;
+							//check for the pending request count and break if count is zero.
+							if ((Long) js
+									.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+								break;
+							}
+							Thread.sleep(1000);
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				/**
+				 * Method to wait till the element is clickable on the web page
+				 * @param driver
+				 * @param locator
+				 * @param time
+				 * @return
+				 */
+				public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+
+					return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
+				}
+				
+				 public boolean checkElementIsDisplayed(WebDriver driver,By locator){
+				    	boolean result=false;
+				    	   try{
+				    	 
+				    		   result=ob.findElement(locator).isDisplayed();
+				    		  
+				    	   }catch(Exception e){
+				    		   return false;
+				    	   }
+				    	   return result; 
+				       }
+	
+
 
 }
