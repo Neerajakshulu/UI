@@ -368,7 +368,7 @@ public class TestBase {
 	       
 	       //logging in
 	       public void login() throws Exception{
-				
+	    	   waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 	    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				Thread.sleep(4000);
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
