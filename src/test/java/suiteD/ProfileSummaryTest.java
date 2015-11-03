@@ -86,6 +86,7 @@ public class ProfileSummaryTest extends TestBase {
 			scrollElementIntoView(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))));
 			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))));
 			ob.navigate().refresh();
+			Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr-profile_summary_css")), 30);
 			String str3 = ob.findElement(By.cssSelector(OR.getProperty("tr-profile_summary_css"))).getText();
 			try {
