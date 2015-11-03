@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.TestBase;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
@@ -63,6 +64,7 @@ public class LoginTR extends TestBase{
 				executor.executeScript("arguments[0].click();", element);
 				//searchElement.findElement(By.tagName("a")).click();
 				Thread.sleep(4000);
+				BrowserAction.scrollingPageUp();
 				break;
 			}//if
 		}//for

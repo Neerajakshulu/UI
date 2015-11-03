@@ -73,12 +73,11 @@ public class ProfileSummaryTest extends TestBase {
 
 			} catch (Exception e1) {
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_edit_button_css"))).click();
+				Thread.sleep(2000);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))).click();
-				
 				Thread.sleep(4000);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
-
 			}
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 30);

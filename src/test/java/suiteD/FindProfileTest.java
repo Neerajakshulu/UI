@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.LoginTR;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -230,9 +231,9 @@ public class FindProfileTest extends TestBase {
 					WebElement element = searchElement.findElement(By.tagName("a"));
 					JavascriptExecutor executor = (JavascriptExecutor)ob;
 					executor.executeScript("arguments[0].click();", element);
-					
 					//searchElement.findElement(By.tagName("a")).click();
 					Thread.sleep(4000);
+					BrowserAction.scrollingPageUp();
 					break;
 				}//if
 			}//for
