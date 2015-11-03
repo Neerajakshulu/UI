@@ -67,8 +67,9 @@ public class ProfileSummaryTest extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
 			BrowserWaits.waitUntilText("Profile");
 			ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
+			Thread.sleep(4000);
 			try {
-				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_add_summary_css")), 10);
+				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_add_summary_css")), 30);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 
 			} catch (Exception e1) {
