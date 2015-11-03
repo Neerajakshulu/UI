@@ -92,6 +92,9 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 			Thread.sleep(2000);
 		}
 		
+		BrowserAction.scrollingPageUp();
+		Thread.sleep(2000);
+		
 		List<WebElement> watchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
 		System.out.println("total article search count-->"+watchLists.size());
 		//Add 14 articles into my watchlist

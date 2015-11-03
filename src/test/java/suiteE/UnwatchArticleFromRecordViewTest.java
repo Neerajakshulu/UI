@@ -126,6 +126,7 @@ public class UnwatchArticleFromRecordViewTest extends TestBase {
 		String articleWatchLabel=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ARTICLE_WATCH_CSS).getText();
 		System.out.println("watch label--->"+articleWatchLabel);
 		
+		BrowserAction.scrollingPageUp();
 		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ARTICLE_WATCH_CSS).click();
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
