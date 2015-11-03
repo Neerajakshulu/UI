@@ -96,7 +96,7 @@ public class TestCase_B26 extends TestBase{
 			String pageText;
 			ArrayList<Integer> error_list=new ArrayList<Integer>();
 			int count=0;
-			for(int i=0;i<urls.size();i++){
+			for(int i=0;i<urls.size()-8;i++){
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
@@ -147,7 +147,7 @@ public class TestCase_B26 extends TestBase{
 			}
 			
 			
-			if(!compareNumbers(urls.size(),count)){
+			if(!compareNumbers(urls.size()-8,count)){
 				
 				test.log(LogStatus.FAIL, "? is not supported for a single character");//extent reports
 				status=2;//excel
