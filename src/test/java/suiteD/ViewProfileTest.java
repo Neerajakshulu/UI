@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
 import suiteC.LoginTR;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -74,9 +75,9 @@ public class ViewProfileTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					waitForTRHomePage();
-					enterTRCredentials(username, password);
-					clickLogin();
+					LoginTR.waitForTRHomePage();
+					LoginTR.enterTRCredentials(username, password);
+					LoginTR.clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -131,17 +132,17 @@ public class ViewProfileTest extends TestBase {
 	public void validateViewProfile() throws Exception  {
 		
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))).click();
-		AuthoringProfileCommentsTest.waitUntilText("Profile");
+		BrowserWaits.waitUntilText("Profile");
 		
 		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
-		AuthoringProfileCommentsTest.waitUntilText("Comments");
+		BrowserWaits.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
 		profileHeadingName=ob.findElement(By.cssSelector("span[class^='projectne-navbar-link-text']")).getText();
-		//System.out.println("Profile Heading Name-->"+profileHeadingName);
+		System.out.println("Profile Heading Name-->"+profileHeadingName);
 		
-		profileDetailsName=ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText();
-		//System.out.println("profile Details Name-->"+profileDetailsName);
+		profileDetailsName=ob.findElement(By.cssSelector("span[class$='headline ng-binding']")).getText();
+		System.out.println("profile Details Name-->"+profileDetailsName);
 		
 		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
@@ -151,7 +152,7 @@ public class ViewProfileTest extends TestBase {
 			status=2;
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 					this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
-			throw new Exception("My profile details are not displayed ");
+			throw new Exception("My profile details are not displayed Accurately");
 		}
 	}
 	
@@ -167,37 +168,8 @@ public class ViewProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		//closeBrowser();
 	}
 	
-	/**
-	 * Method for wait TR Home Screen
-	 * @throws InterruptedException 
-	 */
-	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
-		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
-	}
 	
-	/**
-	 * Method for enter Application Url and enter Credentials
-	 * @throws InterruptedException 
-	 */
-	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		Thread.sleep(10000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-	
-	public  void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		//waitUntilElementClickable("Home");
-	}
 
 }

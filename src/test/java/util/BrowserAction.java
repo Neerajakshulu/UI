@@ -217,6 +217,11 @@ public class BrowserAction extends TestBase{
 		jse.executeScript("scroll(0, 250);");
 	}
 	
+	public static void scrollingPageUp() throws InterruptedException  {
+		JavascriptExecutor jse = (JavascriptExecutor)ob;
+		jse.executeScript("scroll(0, -250);");
+	}
+	
 	/**
 	 * Method for get web element
 	 * @param locator

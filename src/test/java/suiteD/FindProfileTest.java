@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.LoginTR;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -76,9 +77,9 @@ public class FindProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					waitForTRHomePage();
-					enterTRCredentials(username, password);
-					clickLogin();
+					LoginTR.waitForTRHomePage();
+					LoginTR.enterTRCredentials(username, password);
+					LoginTR.clickLogin();
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -143,20 +144,19 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception
 	 */
 	public void chooseOtherProfile(String profileName) throws Exception {
-		List<WebElement> profiles=ob.findElements(By.cssSelector("h2[class='webui-media-header ng-scope ng-isolate-scope']"));
+		List<WebElement> profiles=ob.findElements(By.cssSelector("h4[class='webui-media-heading']"));
 		System.out.println("list of find profiles -->"+profiles.size());
 		for(WebElement profile:profiles) {
-			System.out.println("profile Name-->"+profile.findElement(By.xpath("span[1]/span/a")).getText());
-			if(profile.findElement(By.xpath("span[1]/span/a")).getText().equalsIgnoreCase(profileName)) {
-				profile.findElement(By.xpath("span[1]/span/a")).click();
-				BrowserWaits.waitUntilText(profileName);
-				Thread.sleep(4000);
+			if(profile.findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)) {
+				profile.findElement(By.tagName("a")).click();
+				//BrowserWaits.waitUntilText(profileName);
+				Thread.sleep(6000);
 				break;
 				}
 			}
 		
-		System.out.println("profile text-->"+ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText());
-		if(!ob.findElement(By.cssSelector("div[class$='headline ng-binding']")).getText().trim().equalsIgnoreCase(profileName)){
+		System.out.println("profile text-->"+ob.findElement(By.cssSelector("span[class='headline ng-binding']")).getText());
+		if(!ob.findElement(By.cssSelector("span[class='headline ng-binding']")).getText().trim().equalsIgnoreCase(profileName)){
 			test.log(LogStatus.FAIL,"Error:");
 			status=2;
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_Profile details are not accurate")));//screenshot
@@ -184,17 +184,19 @@ public class FindProfileTest extends TestBase {
 	 */
 	public void checkFollowOtherProfile() throws Exception {
 		try {
-			String beforeclickFollowStaus=ob.findElement(By.cssSelector("button[class='btn btn-link profile-follow-button-wrapper']")).getAttribute("ng-click");
-			List<WebElement> followUnfollowElements=ob.findElements(By.cssSelector("span[class^='webui-icon webui-icon-checkmark']"));
-			for(WebElement followUnfollowElement:followUnfollowElements){
-				if(followUnfollowElement.isDisplayed()){
-					followUnfollowElement.click();
-					break;
-				}
-			}
-			String afterclickFollowStaus=ob.findElement(By.cssSelector("button[class='btn btn-link profile-follow-button-wrapper']")).getAttribute("ng-click");
+			
+			followBefore=ob.findElement(By.xpath("//button[@event-action='unfollow']")).getAttribute("tooltip");
+			
+			
+			ob.findElement(By.xpath("//button[@event-action='unfollow']/descendant::span")).click();
 			Thread.sleep(2000);
-			Assert.assertNotEquals(beforeclickFollowStaus, afterclickFollowStaus);
+			
+			followAfter=ob.findElement(By.xpath("//button[@event-action='unfollow']")).getAttribute("tooltip");
+			
+			System.out.println("Follow Status before and After-->"+followBefore+"--AFTER-->"+followAfter);
+		
+			Assert.assertNotEquals(followBefore, followAfter);
+			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"Error:");
 			ErrorUtil.addVerificationFailure(e);
@@ -229,9 +231,9 @@ public class FindProfileTest extends TestBase {
 					WebElement element = searchElement.findElement(By.tagName("a"));
 					JavascriptExecutor executor = (JavascriptExecutor)ob;
 					executor.executeScript("arguments[0].click();", element);
-					
 					//searchElement.findElement(By.tagName("a")).click();
 					Thread.sleep(4000);
+					BrowserAction.scrollingPageUp();
 					break;
 				}//if
 			}//for
@@ -258,34 +260,4 @@ public class FindProfileTest extends TestBase {
 		//closeBrowser();
 	}
 	
-	
-	/**
-	 * Method for wait TR Home Screen
-	 * @throws InterruptedException 
-	 */
-	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
-		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
-	}
-	
-	/**
-	 * Method for enter Application Url and enter Credentials
-	 * @throws InterruptedException 
-	 */
-	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		Thread.sleep(10000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-	
-	public  void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		//waitUntilElementClickable("Home");
-	}
 }

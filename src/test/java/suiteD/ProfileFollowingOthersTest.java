@@ -131,7 +131,8 @@ public class ProfileFollowingOthersTest extends TestBase {
 		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
 		Thread.sleep(4000);
 		
-		String following=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS).get(2).getText();
+		String following=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS).get(2).findElement(By.tagName("tab-heading")).getText();
+		System.out.println("Following-->"+following);
 		String followArr[]=following.split(" ");
 		int totalBeforeFollowing=Integer.parseInt(followArr[followArr.length-1]);
 		//System.out.println("Following Total-->"+totalBeforeFollowing);
@@ -140,10 +141,10 @@ public class ProfileFollowingOthersTest extends TestBase {
 		new ProfileFollowTest().clickPeople();
 		
 		List<WebElement> profiles=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
-		//System.out.println("list of find profiles -->"+profiles.size());
+		System.out.println("list of find profiles -->"+profiles.size());
 		Assert.assertTrue(profiles.size()>0);
 		
-		for(WebElement profile:profiles){
+		for(WebElement profile:profiles) {
 			if(profile.findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileFullName)){
 				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(0).findElements(By.tagName("button"));
 				for(WebElement followProfile:followProfiles){

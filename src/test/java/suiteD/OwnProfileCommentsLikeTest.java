@@ -78,7 +78,6 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 					
 					ob.navigate().to(System.getProperty("host"));
 					LoginTR.waitForTRHomePage();
-					Thread.sleep(6000);
 					LoginTR.enterTRCredentials(username, password);
 					LoginTR.clickLogin();
 				} catch (Throwable t) {
@@ -130,24 +129,24 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 		Thread.sleep(6000);
 		
 		String totalProfileComments=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_APP_PROFILE_COMMENTS_CSS).getText();
-		//System.out.println("Total Profile Comments-->"+totalProfileComments);
+		System.out.println("Total Profile Comments-->"+totalProfileComments);
 		String totComments[]=totalProfileComments.split(" ");
-		//System.out.println("tc-->"+totComments[totComments.length-1]);
+		System.out.println("tc-->"+totComments[totComments.length-1]);
 		if(Integer.parseInt(totComments[totComments.length-1]) > 0) {
 			//click user own profile comments like button
 			int beforeCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
 			//System.out.println("Before Comment like size-->"+beforeCommentLike);
 			int afterCommentLike=0;
-			String commnentLikeStatus=getUserProfileComments().get(0).getAttribute("ng-click");
+			String commnentLikeStatus=ob.findElements(By.cssSelector("span[class$='-liked ng-scope']")).get(0).getAttribute("ng-click");
 		
 			//comment is liked, if like the comment, size should Decrease  
 			if(commnentLikeStatus.contains("NONE")) {
 				Thread.sleep(2000);
 				//System.out.println("Attribute-->"+getUserProfileComments().get(0).getAttribute("ng-click"));
-				getUserProfileComments().get(0).click();
+				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(2000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-				//System.out.println("After Comment like size-2222->"+afterCommentLike);
+			   // System.out.println("After Comment like size-2222->"+afterCommentLike);
 				if(!(beforeCommentLike>afterCommentLike)) {
 					throw new Exception("Comments Like size not Decreased");
 				}
@@ -155,7 +154,7 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 			
 			//comment is not liked, if like the comment, size should increase 
 			if(commnentLikeStatus.contains("UP")) {
-				getUserProfileComments().get(0).click();
+				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(4000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
 				//System.out.println("After Comment like size-->"+afterCommentLike);
@@ -172,7 +171,7 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 	 * @throws Exception, Element not found
 	 */
 	public List<WebElement> getUserProfileComments() throws Exception {
-		List<WebElement> commentsLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_CSS);
+		List<WebElement> commentsLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH);
 		return commentsLike;
 	}
 	

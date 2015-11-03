@@ -78,9 +78,9 @@ public class ProfileFollowTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					waitForTRHomePage();
-					enterTRCredentials(username, password);
-					clickLogin();
+					LoginTR.waitForTRHomePage();
+					LoginTR.enterTRCredentials(username, password);
+					LoginTR.clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Error: Login not happended");
 					//print full stack trace
@@ -135,44 +135,34 @@ public class ProfileFollowTest extends TestBase {
 	}
 	
 	public void followOtherProfile(String profileName) throws Exception {
-		List<WebElement> profiles=ob.findElements(By.cssSelector("div[class='webui-media-header h2']"));
+		List<WebElement> profiles=ob.findElements(By.cssSelector("h4[class='webui-media-heading']"));
 		System.out.println("list of find profiles -->"+profiles.size());
 		Assert.assertTrue(profiles.size()>0);
 		
-		
 		for(WebElement profile:profiles){
+			System.out.println("Header Name-->"+profile.findElement(By.tagName("a")).getText());
 			
-			if(profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)){
-				//System.out.println("available text-->"+profile.findElement(By.cssSelector("span[class='webui-media-heading']")).findElement(By.tagName("a")).getText());
-				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(1).findElements(By.tagName("button"));
-				for(WebElement followProfile:followProfiles){
-					if(followProfile.isDisplayed()){
-						followBefore=followProfile.getText();
-						followProfile.click();
-						Thread.sleep(2000);
-						break;
-					}
-				}
+			if(profile.findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileName)) {
 				
-				for(WebElement followProfile:followProfiles){
-					if(followProfile.isDisplayed()){
-						followAfter=followProfile.getText();
-						break;
-					}
-				}
+				WebElement followUnFollow=profile.findElement(By.cssSelector("span button[class='btn btn-link']"));
+				followBefore=followUnFollow.getText();
+				System.out.println("FOLLOW BEFORE-->"+followBefore);
+				followUnFollow.click();
+				Thread.sleep(3000);
+				followAfter=profile.findElement(By.cssSelector("span button[class='btn btn-link']")).getText();
+				System.out.println("FOLLOW AFTER-->"+followAfter);
+				break;
+				
+			   }
 			}
-		}
-			try{
-				Assert.assertNotEquals(followBefore, followAfter);
-				test.log(LogStatus.PASS, "Follow profile from Search Screen is working fine");
-				}catch(Throwable t){
-					test.log(LogStatus.INFO, "Error--->"+t);
-					ErrorUtil.addVerificationFailure(t);	
-					status=2;
+			
+			if(followBefore.equals(followAfter)){
+				test.log(LogStatus.FAIL, "Follow and UnFollow behaviour not giving expected result");
+				status=2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "Unable to follow the profile from search screen")));// screenshot
-					
-				}
+				throw new Exception("Follow and UnFollow behaviour not giving expected result");
+			}
 			
 	}
 	
@@ -199,36 +189,5 @@ public class ProfileFollowTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
 		//closeBrowser();
 	}
-	
-	/**
-	 * Method for wait TR Home Screen
-	 * @throws InterruptedException 
-	 */
-	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
-		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
-	}
-	
-	/**
-	 * Method for enter Application Url and enter Credentials
-	 * @throws InterruptedException 
-	 */
-	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		Thread.sleep(10000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-	
-	public  void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		//waitUntilElementClickable("Home");
-	}
-	
 	
 }

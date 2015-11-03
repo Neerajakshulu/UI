@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -72,6 +73,7 @@ public class ProfileFollowerTest extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(PROFILE_NAME, Keys.ENTER);
+			BrowserAction.scrollingPageUp();
 			waitForElementTobePresent(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 			try {
@@ -107,6 +109,7 @@ public class ProfileFollowerTest extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(PROFILE_NAME, Keys.ENTER);
+			BrowserAction.scrollingPageUp();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);

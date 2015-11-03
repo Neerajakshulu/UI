@@ -147,13 +147,13 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 			int beforeCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
 			//System.out.println("Before Comment like size-->"+beforeCommentLike);
 			int afterCommentLike=0;
-			String commnentLikeStatus=getUserProfileComments().get(0).getAttribute("ng-click");
+			String commnentLikeStatus=ob.findElements(By.cssSelector("span[class$='-liked ng-scope']")).get(0).getAttribute("ng-click");
 		
 			//comment is liked, if like the comment, size should Decrease  
 			if(commnentLikeStatus.contains("NONE")) {
 				Thread.sleep(2000);
 				//System.out.println("Attribute-->"+getUserProfileComments().get(0).getAttribute("ng-click"));
-				getUserProfileComments().get(0).click();
+				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(2000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
 				//System.out.println("After Comment like size-2222->"+afterCommentLike);
@@ -164,7 +164,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 			
 			//comment is not liked, if like the comment, size should increase 
 			if(commnentLikeStatus.contains("UP")) {
-				getUserProfileComments().get(0).click();
+				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(4000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
 				//System.out.println("After Comment like size-->"+afterCommentLike);
@@ -181,7 +181,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	 * @throws Exception, Element not found
 	 */
 	public List<WebElement> getUserProfileComments() throws Exception {
-		List<WebElement> commentsLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_CSS);
+		List<WebElement> commentsLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH);
 		return commentsLike;
 	}
 	

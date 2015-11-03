@@ -153,14 +153,14 @@ public class ProfileUpdateTest extends TestBase {
 			ob.findElement(By.cssSelector("input[placeholder='Add your country']")).clear();
 			ob.findElement(By.cssSelector("input[placeholder='Add your country']")).sendKeys(profileDetailsUpdate[2]);
 			
-			boolean isUpdateEnable=ob.findElement(By.cssSelector("button[class='btn webui-btn-primary pull-right']")).isDisplayed();
+			boolean isUpdateEnable=ob.findElement(By.cssSelector("button[ng-click='saveUserData()']")).isDisplayed();
 			if(isUpdateEnable){
-				ob.findElement(By.cssSelector("button[class='btn webui-btn-primary pull-right']")).click();
+				ob.findElement(By.cssSelector("button[ng-click='saveUserData()']")).click();
 				Thread.sleep(6000);
 			}
 			else{
 				status=2;
-				test.log(LogStatus.FAIL,"Update button shoulb Enable:");
+				test.log(LogStatus.FAIL,"Update button should be Enable:");
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_update_button_should_be_enalbe")));
 				throw new Exception("update button should  be enable");
@@ -169,10 +169,10 @@ public class ProfileUpdateTest extends TestBase {
 			//Validate Profile details updated or not
 			ob.navigate().refresh();
 			Thread.sleep(6000);
-			String title=ob.findElement(By.cssSelector("div[class='meta ng-binding'][ng-show='role']")).getText();
-			String primaryInstitution=ob.findElement(By.cssSelector("div[class='meta ng-binding'][ng-show='primaryInstitution']")).getText();
-			String country=ob.findElement(By.cssSelector("div[class='meta ng-binding'][ng-show='location']")).getText();
-			//System.out.println("Profile Entered Values-->"+title+"-->"+primaryInstitution+"-->"+country);
+			String title=ob.findElement(By.cssSelector("div[ng-show='role']")).getText();
+			String primaryInstitution=ob.findElement(By.cssSelector("div[ng-show='primaryInstitution']")).getText();
+			String country=ob.findElement(By.cssSelector("div[ng-show='location']")).getText();
+		    //System.out.println("Profile Entered Values-->"+title+"-->"+primaryInstitution+"-->"+country);
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "taking screenshot")));
 			
