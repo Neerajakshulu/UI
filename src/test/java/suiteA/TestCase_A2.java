@@ -74,6 +74,7 @@ public class TestCase_A2 extends TestBase{
 		
 		//Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		Thread.sleep(8000);
 		login();
 		Thread.sleep(15000);

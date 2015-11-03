@@ -73,36 +73,32 @@ public class TestCase_B18 extends TestBase {
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			waitForAjax(ob);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 60);
 			List<WebElement> resultList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_item_xpath")));
 			List<WebElement> timeCiteList;
 			List<WebElement> viewsList;
 			List<WebElement> commentsList;
 			int timeCiteCount = 0, viewsCount = 0, commentsCount = 0;
-
+			waitForAjax(ob);
 			timeCiteList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_search_results_xpath")));
-			for (WebElement timeCite : timeCiteList) {
-				if (!timeCite.isDisplayed())
-					timeCiteCount++;
-			}
-
-			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
-			for (WebElement views : viewsList) {
-				if (!views.isDisplayed())
-					viewsCount++;
-			}
-
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
-			for (WebElement comments : commentsList) {
-				if (!comments.isDisplayed())
-					commentsCount++;
+			if (timeCiteList.size() != 0) {
+				for (WebElement timeCite : timeCiteList) {
+					if (!timeCite.isDisplayed())
+						timeCiteCount++;
+				}
+			} else {
+				viewsCount = -1;
 			}
 
 			try {
 				Assert.assertTrue(resultList.size() == timeCiteList.size() && timeCiteCount == 0);
-				test.log(LogStatus.PASS, "Time cite field is displayed for all documents");
+				test.log(LogStatus.PASS, "Time cite field is displayed for all articles");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, String.format("Time cite field is not displayed %d documents", timeCiteCount));
+				if (timeCiteCount == -1)
+					test.log(LogStatus.FAIL, "Time cite field is not displayed for any articles");
+				test.log(LogStatus.FAIL,
+						String.format("Time cite field is not displayed for %d articles", timeCiteCount));
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -110,12 +106,24 @@ public class TestCase_B18 extends TestBase {
 						this.getClass().getSimpleName() + "TimeCite for search results validation failed")));// screenshot
 
 			}
+			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
+			if (viewsList.size() != 0) {
+				for (WebElement views : viewsList) {
+					if (!views.isDisplayed())
+						viewsCount++;
+				}
+			} else {
+				viewsCount = -1;
+			}
 
 			try {
 				Assert.assertTrue(resultList.size() == viewsList.size() && viewsCount == 0);
-				test.log(LogStatus.PASS, "views field is displayed for all documents");
+				test.log(LogStatus.PASS, "views field is displayed for all articles");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", timeCiteCount));
+				if (viewsCount == -1)
+					test.log(LogStatus.FAIL, "views field is not displayed for any articles");
+				else
+					test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -123,11 +131,25 @@ public class TestCase_B18 extends TestBase {
 						this.getClass().getSimpleName() + "Viewsfor search results validation failed")));// screenshot
 
 			}
+			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
+			if (commentsList.size() != 0) {
+				for (WebElement comments : commentsList) {
+					if (!comments.isDisplayed())
+						commentsCount++;
+				}
+			} else {
+				commentsCount = -1;
+			}
+
 			try {
 				Assert.assertTrue(resultList.size() == commentsList.size() && commentsCount == 0);
 				test.log(LogStatus.PASS, "Comments field is displayed for all documents");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, String.format("Comments field is not displayed %d documents", timeCiteCount));
+				if (commentsCount == -1)
+					test.log(LogStatus.FAIL, "Comments field is not displayed for any articles");
+				else
+					test.log(LogStatus.FAIL,
+							String.format("Comments field is not displayed for %d articles", commentsCount));
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

@@ -93,13 +93,16 @@ public class WatchlistMoreButtonAboveTenArticlesTest extends TestBase{
 			Thread.sleep(2000);
 		}
 		
+		BrowserAction.scrollingPageUp();
+		Thread.sleep(4000);
+		
 		List<WebElement> watchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
 		System.out.println("total article search count-->"+watchLists.size());
 		//Add 14 articles into my watchlist
 		test.log(LogStatus.INFO," Add 14 articles into my watchlist");
 		for(int i=0;i<14;i++) {
 			watchLists.get(i).click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 		}
 		
 		//goto watchlist page
@@ -136,6 +139,7 @@ public class WatchlistMoreButtonAboveTenArticlesTest extends TestBase{
 		Assert.assertEquals(totArticle.size(), totalwatchListHeaderCount);
 		
 		//again clearing the watchlist due to firest cleanwatchlist method not clearing all watchlist articles due to app issue,
+		BrowserAction.scrollingPageUp();
 		cleanWatchlist();
 		
 		LoginTR.logOutApp();

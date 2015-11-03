@@ -105,7 +105,7 @@ public class WatchlistDeleteArticleTest extends TestBase{
 		
 		//delete one article from watchlist
 		List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
-		
+		System.out.println("watch list article count-->"+mylist.size());
 		if(mylist.size()>0) {
 			ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch watch-icon-active cursor-pointer']")).click();
 			Thread.sleep(2000);
@@ -115,7 +115,7 @@ public class WatchlistDeleteArticleTest extends TestBase{
 		
 		//get the count after article delete from watchlist
 		watchListCountAfterDelete=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_ARTICLE_COUNT_CSS).getText();
-		totalWatchCountAfterDelete=Integer.parseInt(watchListCountBeforeDelete);
+		totalWatchCountAfterDelete=Integer.parseInt(watchListCountAfterDelete);
 		System.out.println("watchlist articles total count After-->"+totalWatchCountAfterDelete);
 		
 		if(!(totalWatchCountBeforeDelete>totalWatchCountAfterDelete)){
