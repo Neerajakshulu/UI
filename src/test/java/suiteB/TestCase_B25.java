@@ -96,7 +96,7 @@ public class TestCase_B25 extends TestBase{
 			String pageText;
 			ArrayList<Integer> error_list=new ArrayList<Integer>();
 			int count=0;
-			for(int i=0;i<urls.size();i++){
+			for(int i=0;i<urls.size()-5;i++){
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
@@ -148,7 +148,7 @@ public class TestCase_B25 extends TestBase{
 			}
 			
 			
-			if(!compareNumbers(urls.size(),count)){
+			if(!compareNumbers(urls.size()-5,count)){
 				
 				test.log(LogStatus.FAIL, "* does not provide right hand truncation");//extent reports
 				status=2;//excel

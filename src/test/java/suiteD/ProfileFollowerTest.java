@@ -73,6 +73,7 @@ public class ProfileFollowerTest extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(PROFILE_NAME, Keys.ENTER);
+			Thread.sleep(3000);
 			BrowserAction.scrollingPageUp();
 			waitForElementTobePresent(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
@@ -109,6 +110,7 @@ public class ProfileFollowerTest extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(PROFILE_NAME, Keys.ENTER);
+			Thread.sleep(3000);
 			BrowserAction.scrollingPageUp();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
