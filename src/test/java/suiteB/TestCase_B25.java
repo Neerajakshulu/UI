@@ -72,8 +72,8 @@ public class TestCase_B25 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -148,7 +148,7 @@ public class TestCase_B25 extends TestBase{
 			}
 			
 			
-			if(!compareNumbers(urls.size(),count)){
+			if(!compareNumbers(urls.size()-5,count)){
 				
 				test.log(LogStatus.FAIL, "* does not provide right hand truncation");//extent reports
 				status=2;//excel
