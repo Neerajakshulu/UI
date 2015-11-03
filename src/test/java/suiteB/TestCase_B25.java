@@ -72,8 +72,8 @@ public class TestCase_B25 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -96,7 +96,7 @@ public class TestCase_B25 extends TestBase{
 			String pageText;
 			ArrayList<Integer> error_list=new ArrayList<Integer>();
 			int count=0;
-			for(int i=0;i<urls.size();i++){
+			for(int i=0;i<urls.size()-5;i++){
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
