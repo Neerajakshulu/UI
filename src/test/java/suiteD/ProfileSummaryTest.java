@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -102,7 +103,7 @@ public class ProfileSummaryTest extends TestBase {
 
 			}
 
-			logout();
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
 			closeBrowser();

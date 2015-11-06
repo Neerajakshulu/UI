@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
@@ -86,7 +87,7 @@ public class ProfileFollowerTest extends TestBase {
 			} catch (Exception e1) {
 				test.log(LogStatus.INFO, "user is not a follower");
 			}
-			logout();
+			LoginTR.logOutApp();
 			ob.navigate().to(host);
 			Thread.sleep(3000);
 			loginAsOther(USER_NAME, PASSWORD);
@@ -104,7 +105,9 @@ public class ProfileFollowerTest extends TestBase {
 			} catch (Exception e2) {
 				followersBefore = 0;
 			}
-			logout();
+			
+			LoginTR.logOutApp();
+			
 			ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
 			login();
@@ -117,7 +120,9 @@ public class ProfileFollowerTest extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 20);
 			jsClick(ob, ob.findElement(By.xpath(
 					OR.getProperty("tr_search_people_profile_follow_link").replace("PROFILE_NAME", PROFILE_NAME))));
-			logout();
+			
+			LoginTR.logOutApp();
+			
 			Thread.sleep(5000);
 			ob.navigate().to(host);
 			loginAsOther(USER_NAME, PASSWORD);
