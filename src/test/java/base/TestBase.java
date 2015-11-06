@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -18,16 +19,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -1044,5 +1040,58 @@ public class TestBase {
 				       }
 	
 
+					/**
+					 * This is wait condition for multiple windows.
+					 * @param driver
+					 * @param numberOfWindows
+					 * @return
+					 */
+					public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver,
+							final int numberOfWindows) {
+						return new ExpectedCondition<Boolean>() {
+							@Override
+							public Boolean apply(WebDriver driver) {
+								driver.getWindowHandles();
+								return driver.getWindowHandles().size() == numberOfWindows;
+							}
+						};
+					}
+
+					/**
+					 * This method is to wait till specified number of windows are open.
+					 * 
+					 * @param driver
+					 * @param numberOfWindows
+					 */
+					public void waitForNumberOfWindowsToEqual(WebDriver driver,
+							final int numberOfWindows) {
+						new WebDriverWait(driver, 60).until(numberOfWindowsToBe(driver,
+								numberOfWindows));
+					}
+					
+					/**
+					 * Method to switch to new window.
+					 * @param driver
+					 * @return
+					 */
+					public String switchToNewWindow(WebDriver driver) {
+						String mainWindow = driver.getWindowHandle();
+						Set<String> windows = driver.getWindowHandles();
+						windows.remove(mainWindow);
+						driver.switchTo().window(windows.iterator().next());
+						return mainWindow;
+
+					}
+
+					/**
+					 * Method to switch to main window
+					 * @param driver
+					 * @param mainWindowHandle
+					 */
+					public void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
+
+						driver.switchTo().window(mainWindowHandle);
+
+					}
 
 }
