@@ -110,7 +110,7 @@ public class AppHeaderFooterLinkValidationTest extends TestBase {
 						ob.findElement(By.xpath("//span[contains(text(),'" +headerFooterLinks[i]+"')]")).click();
 						BrowserWaits.waitUntilText(headerFooterLinks[i]);
 						Thread.sleep(6000);
-						String helpText=ob.findElement(By.cssSelector("h2[class='spacing-top uppercase']")).getText();
+						String helpText=ob.findElement(By.cssSelector("h2[class='uppercase']")).getText();
 						Assert.assertEquals(headerFooterLinks[i].toUpperCase(), helpText);
 					}
 					else{

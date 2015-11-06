@@ -138,7 +138,7 @@ public class ViewProfileTest extends TestBase {
 		BrowserWaits.waitUntilText("Comments");
 		Thread.sleep(6000);
 		
-		profileHeadingName=ob.findElement(By.cssSelector("span[class^='projectne-navbar-link-text']")).getText();
+		profileHeadingName=ob.findElement(By.cssSelector("span[class^='ne-navbar-link-text']")).getText();
 		System.out.println("Profile Heading Name-->"+profileHeadingName);
 		
 		profileDetailsName=ob.findElement(By.cssSelector("span[class$='headline ng-binding']")).getText();
