@@ -73,10 +73,10 @@ public class ProfileUpdateTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					waitForTRHomePage();
+					LoginTR.waitForTRHomePage();
 					Thread.sleep(6000);
-					enterTRCredentials(username, password);
-					clickLogin();
+					LoginTR.enterTRCredentials(username, password);
+					LoginTR.clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -131,12 +131,12 @@ public class ProfileUpdateTest extends TestBase {
 	public void editUserOwnProfile(String profleInfo) throws Exception  {
 		
 		String profileDetailsUpdate[]=profleInfo.split("\\|");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))).click();
+		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
 		AuthoringProfileCommentsTest.waitUntilText("Profile");
 		
-		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
+		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit']")).get(0).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
@@ -205,37 +205,6 @@ public class ProfileUpdateTest extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
 		//closeBrowser();
-	}
-	
-	
-	/**
-	 * Method for wait TR Home Screen
-	 * @throws InterruptedException 
-	 */
-	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
-		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
-	}
-	
-	/**
-	 * Method for enter Application Url and enter Credentials
-	 * @throws InterruptedException 
-	 */
-	public  void enterTRCredentials(String userName, String password) throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		Thread.sleep(10000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-	
-	public  void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		//waitUntilElementClickable("Home");
 	}
 	
 }
