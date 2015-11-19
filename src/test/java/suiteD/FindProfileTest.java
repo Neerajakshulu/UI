@@ -97,7 +97,8 @@ public class FindProfileTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void findOthersProfile() throws Exception  {
 				try {
-					searchArticle(CONFIG.getProperty("find_profile_name"));
+					//searchArticle(CONFIG.getProperty("find_profile_name"));
+					LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
 					clickPeople();
 					chooseOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
 					clickOtherProfileEdit();
