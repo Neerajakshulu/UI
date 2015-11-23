@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.AuthoringProfileCommentsTest;
 import suiteC.LoginTR;
+import util.BrowserAction;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -137,11 +138,12 @@ public class ProfileUpdateTest extends TestBase {
 		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
 		AuthoringProfileCommentsTest.waitUntilText("Comments");
 		Thread.sleep(8000);
-		
+		BrowserAction.scrollingPageUp();
 		boolean isEditEnable=ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit']")).get(0).isDisplayed();
 		System.out.println("profile edit Enabled-->"+isEditEnable);
 		
 		if(isEditEnable){
+			
 			ob.findElements(By.cssSelector("span[class='webui-icon webui-icon-edit']")).get(0).click();
 			//clear and enter title or role
 			ob.findElement(By.cssSelector("input[placeholder='Add your title or role']")).clear();
