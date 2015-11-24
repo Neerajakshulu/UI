@@ -22,7 +22,7 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 
-public class WatchlistDeleteArticleTest extends TestBase{
+public class WatchlistDeleteArticleTest extends TestBase {
 	static int status=1;
 	static String watchListCountBeforeDelete;
 	static int totalWatchCountBeforeDelete;
@@ -86,11 +86,17 @@ public class WatchlistDeleteArticleTest extends TestBase{
 		Thread.sleep(4000);
 		
 		
-		List<WebElement> watchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
+		//List<WebElement> watchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
+		List<WebElement> watchLists=ob.findElements(By.xpath("//i[@tooltip='Watch article']"));
+		
+		System.out.println("watchlists size-->"+watchLists.size());
 		
 		//Add 4 articles into my watchlist
 		for(int i=0;i<4;i++) {
-			watchLists.get(i).click();
+			scrollElementIntoView(ob, watchLists.get(i));
+			Thread.sleep(2000);
+			jsClick(ob, watchLists.get(i));
+			//watchLists.get(i).click();
 			Thread.sleep(2000);
 		}
 		

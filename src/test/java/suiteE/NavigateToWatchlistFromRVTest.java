@@ -111,6 +111,7 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 		boolean moreButtonStatus=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH).isDisplayed();
 		System.out.println("more buttton should be in hidden mode-->"+moreButtonStatus);
 		
+		
 		if(!moreButtonStatus) {
 			status=2;
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
