@@ -162,7 +162,7 @@ public class AuthoringTest extends TestBase {
 	 */
 	public static void enterTRCredentials(String userName, String password) {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		new TestBase().waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);

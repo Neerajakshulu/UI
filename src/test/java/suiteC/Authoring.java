@@ -172,6 +172,7 @@ public class Authoring  extends TestBase {
 	 * @throws Exception
 	 */
 	public static void validatePreventBotComment() throws Exception  {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
 		String preventBotText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 		//System.out.println("Prevent Bot--->"+preventBotText);
 		BrowserWaits.waitUntilText(preventBotText);
