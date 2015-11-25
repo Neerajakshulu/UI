@@ -179,23 +179,10 @@ public class ShareArticleOnFBTest extends TestBase {
 	
 	
 	public static void searchArticle(String article) throws InterruptedException {
-		System.out.println("article name-->"+article);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
-		List<WebElement> searchElements=ob.findElement(By.cssSelector("ul[class='dropdown-menu ng-isolate-scope']")).findElements(By.tagName("li"));
-		System.out.println("list of articles-->"+searchElements.size());
-		for(WebElement searchElement:searchElements){
-			String articleName=searchElement.findElement(By.tagName("a")).getText();
-			System.out.println("article name-->"+articleName);
-			if(searchElement.findElement(By.tagName("a")).getText().equalsIgnoreCase(articleName)){
-				WebElement element = searchElement.findElement(By.tagName("a"));
-				JavascriptExecutor executor = (JavascriptExecutor)ob;
-				executor.executeScript("arguments[0].click();", element);
-				//searchElement.findElement(By.tagName("a")).click();
-				Thread.sleep(4000);
-				break;
-			}//if
-		}//for
+		
+		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		Thread.sleep(4000);
 	}
 	

@@ -97,7 +97,8 @@ public class FindProfileTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void findOthersProfile() throws Exception  {
 				try {
-					searchArticle(CONFIG.getProperty("find_profile_name"));
+					//searchArticle(CONFIG.getProperty("find_profile_name"));
+					LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
 					clickPeople();
 					chooseOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
 					clickOtherProfileEdit();
@@ -185,13 +186,14 @@ public class FindProfileTest extends TestBase {
 	public void checkFollowOtherProfile() throws Exception {
 		try {
 			
-			followBefore=ob.findElement(By.xpath("//button[@event-action='unfollow']")).getAttribute("tooltip");
+			followBefore=ob.findElement(By.xpath("//button[@class='btn btn-link fadeinout ng-scope follow']")).getAttribute("tooltip");
 			
+			System.out.println("profile tooltip-->"+followBefore);
 			
-			ob.findElement(By.xpath("//button[@event-action='unfollow']/descendant::span")).click();
+			ob.findElement(By.xpath("//button[@class='btn btn-link fadeinout ng-scope follow']/descendant::span")).click();
 			Thread.sleep(2000);
 			
-			followAfter=ob.findElement(By.xpath("//button[@event-action='unfollow']")).getAttribute("tooltip");
+			followAfter=ob.findElement(By.xpath("//button[@class='btn btn-link fadeinout ng-scope follow']")).getAttribute("tooltip");
 			
 			System.out.println("Follow Status before and After-->"+followBefore+"--AFTER-->"+followAfter);
 		

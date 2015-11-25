@@ -92,7 +92,7 @@ public class WatchlistMoreButtonBelowTenArticlesTest extends TestBase{
 		//Add 4 articles into my watchlist
 		test.log(LogStatus.INFO," Add 4 articles into my watchlist");
 		for(int i=0;i<4;i++) {
-			watchLists.get(i).click();
+			jsClick(ob, watchLists.get(i));
 			Thread.sleep(2000);
 		}
 		

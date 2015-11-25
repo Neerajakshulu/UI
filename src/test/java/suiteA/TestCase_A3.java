@@ -72,11 +72,12 @@ public class TestCase_A3 extends TestBase{
 		
 		
 		String email="amneetsingh100@gmail.com";
-		String password="transaction@2";
+		String password="Transaction@2";
 		
 		
 		//Navigate to LI login page
 		ob.navigate().to(host);
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		Thread.sleep(8000);
 		ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
 		Thread.sleep(4000);

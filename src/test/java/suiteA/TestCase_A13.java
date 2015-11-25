@@ -116,15 +116,11 @@ public class TestCase_A13 extends TestBase{
 		
 		ob.switchTo().window(al1.get(0));
 		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
-		if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("internet explorer")){
-			
+		
 			JavascriptExecutor executor = (JavascriptExecutor)ob;
 			executor.executeScript("arguments[0].click();", myE);
-		}
-		else{
+		
 			
-			myE.click();
-		}
 		Thread.sleep(5000);
 		
 		al1.clear();

@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite E">
 
+<listeners>
+    <listener class-name="listener.TestsListenerAdapter" />
+</listeners>
 
 <parameter name="userName" value="chinnareddy.putha@gmail.com"/>
 <parameter name="password" value="Reddys@123"/>

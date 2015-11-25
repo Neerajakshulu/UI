@@ -129,7 +129,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 		
 		FindProfileTest profileFind=new FindProfileTest();
 		
-		profileFind.searchArticle(profileName);
+		LoginTR.searchArticle(profileName);
 		profileFind.clickPeople();
 		profileFind.chooseOtherProfile(profileCompleteName);
 		
@@ -145,7 +145,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 		if(Integer.parseInt(totComments[totComments.length-1]) > 0) {
 			//click user own profile comments like button
 			int beforeCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-			//System.out.println("Before Comment like size-->"+beforeCommentLike);
+			System.out.println("Before Comment like size-->"+beforeCommentLike);
 			int afterCommentLike=0;
 			String commnentLikeStatus=ob.findElements(By.cssSelector("span[class$='-liked ng-scope']")).get(0).getAttribute("ng-click");
 		
@@ -156,7 +156,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(2000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-				//System.out.println("After Comment like size-2222->"+afterCommentLike);
+				System.out.println("After Comment like size-2222->"+afterCommentLike);
 				if(!(beforeCommentLike>afterCommentLike)) {
 					throw new Exception("Comments Like size not Decreased");
 				}
@@ -167,7 +167,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
 				Thread.sleep(4000);
 				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-				//System.out.println("After Comment like size-->"+afterCommentLike);
+				System.out.println("After Comment like size-->"+afterCommentLike);
 				if(!(beforeCommentLike<afterCommentLike)) {
 					throw new Exception("Comments Like size not increased");
 				}

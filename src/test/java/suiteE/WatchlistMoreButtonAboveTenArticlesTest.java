@@ -86,22 +86,32 @@ public class WatchlistMoreButtonAboveTenArticlesTest extends TestBase{
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		Thread.sleep(4000);
 		
-		boolean searchMoreButton=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS).isDisplayed();
-		System.out.println("10 More button status-->"+searchMoreButton);
-		if(searchMoreButton){
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS);
-			Thread.sleep(2000);
-		}
-		
-		BrowserAction.scrollingPageUp();
-		Thread.sleep(4000);
-		
+//		boolean searchMoreButton=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS).isDisplayed();
+//		System.out.println("10 More button status-->"+searchMoreButton);
+//		if(searchMoreButton){
+//			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS);
+//			Thread.sleep(2000);
+//		}
+//		
+//		BrowserAction.scrollingPageUp();
+//		Thread.sleep(4000);
+		//BrowserAction.scrollingPageDown();
 		List<WebElement> watchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
 		System.out.println("total article search count-->"+watchLists.size());
+		
+		scrollElementIntoView(ob, watchLists.get(watchLists.size()-1));
+		Thread.sleep(6000);
+		
+		List<WebElement> afterScrollwatchLists=ob.findElements(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
+		System.out.println("After scroll total article search count-->"+afterScrollwatchLists.size());
+		
+		Thread.sleep(4000);
+		//BrowserAction.scrollingPageUp();
+		
 		//Add 14 articles into my watchlist
 		test.log(LogStatus.INFO," Add 14 articles into my watchlist");
 		for(int i=0;i<14;i++) {
-			watchLists.get(i).click();
+			jsClick(ob, afterScrollwatchLists.get(i));
 			Thread.sleep(4000);
 		}
 		

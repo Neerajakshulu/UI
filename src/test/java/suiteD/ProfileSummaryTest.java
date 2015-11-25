@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.LoginTR;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -69,6 +70,8 @@ public class ProfileSummaryTest extends TestBase {
 			BrowserWaits.waitUntilText("Profile");
 			ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
 			Thread.sleep(4000);
+			BrowserAction.scrollingPageUp();
+			
 			try {
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_add_summary_css")), 30);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
