@@ -128,7 +128,7 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 		List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
 		scrollElementIntoView(ob, mylist.get(11));
 		String articleName=mylist.get(11).getText();
-		mylist.get(11).click();
+		jsClick(ob, mylist.get(11));
 		Thread.sleep(6000);
 		BrowserWaits.waitUntilText(articleName);
 		
