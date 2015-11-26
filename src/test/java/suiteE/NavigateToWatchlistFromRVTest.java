@@ -153,10 +153,10 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 //			
 //		}
 		
-		String articleNamebackFromRV=afterNavToWatList.get(11).getText();
+		//String articleNamebackFromRV=afterNavToWatList.get(11).getText();
 		
 		
-		System.out.println("watchlist atricle name after navigate from Record view--->"+articleNamebackFromRV);
+		//System.out.println("watchlist atricle name after navigate from Record view--->"+articleNamebackFromRV);
 		
 		//Assert.assertEquals(articleName, articleNamebackFromRV);
 		
