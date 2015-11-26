@@ -46,8 +46,8 @@ static int status=1;
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
 		boolean master_condition=suiteRunmode && testRunmode;
 		Map<String,String> filters= new HashMap<String,String>();
-		filters.put("Categories", "category");
-		filters.put("Document Type", "doctype");
+		filters.put("Category", "category");
+		filters.put("Documents", "doctype");
 		filters.put("Institutions", "institution");
 		filters.put("Authors", "author");
 		
@@ -80,13 +80,19 @@ static int status=1;
 		login();
 		Thread.sleep(15000);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+		Thread.sleep(4000);
+		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		Thread.sleep(4000);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 		
 		List<WebElement> ckBoxList;
 			for(Map.Entry<String, String> entry: filters.entrySet()){
 			int checkBoxDisplayed=	0;
-			ckBoxList=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_refine_checkboxes_css").replaceAll("FILTER_TYPE", entry.getValue())));
+			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
+			Thread.sleep(4000);
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 						
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
@@ -104,9 +110,10 @@ static int status=1;
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
 				}
+			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			Thread.sleep(8000);
-			ckBoxList=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_refine_checkboxes_css").replaceAll("FILTER_TYPE", entry.getValue())));
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
@@ -123,10 +130,12 @@ static int status=1;
 					status = 2;
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
-				}
+			
+			}
+			scrollElementIntoView(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			Thread.sleep(8000);
-			ckBoxList=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_refine_checkboxes_css").replaceAll("FILTER_TYPE", entry.getValue())));
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
