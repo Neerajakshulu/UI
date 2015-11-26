@@ -118,7 +118,7 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 		}
 		
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
-		Thread.sleep(4000);
+		Thread.sleep(8000);
 		
 		
 		
@@ -128,7 +128,7 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 		List<WebElement> mylist=ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
 		scrollElementIntoView(ob, mylist.get(11));
 		String articleName=mylist.get(11).getText();
-		mylist.get(11).click();
+		jsClick(ob, mylist.get(11));
 		Thread.sleep(6000);
 		BrowserWaits.waitUntilText(articleName);
 		
@@ -153,10 +153,10 @@ public class NavigateToWatchlistFromRVTest extends TestBase{
 //			
 //		}
 		
-		String articleNamebackFromRV=afterNavToWatList.get(11).getText();
+		//String articleNamebackFromRV=afterNavToWatList.get(11).getText();
 		
 		
-		System.out.println("watchlist atricle name after navigate from Record view--->"+articleNamebackFromRV);
+		//System.out.println("watchlist atricle name after navigate from Record view--->"+articleNamebackFromRV);
 		
 		//Assert.assertEquals(articleName, articleNamebackFromRV);
 		

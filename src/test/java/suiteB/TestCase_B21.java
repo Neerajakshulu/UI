@@ -73,32 +73,37 @@ public class TestCase_B21 extends TestBase {
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			Thread.sleep(4000);
+			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+			Thread.sleep(4000);
 			waitForAllElementsToBePresent(ob,
-					By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
-			int checkedBoxestoBeSelected = 0, checkboxesSelected = 0;
-			List<WebElement> checkboxList = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
-			for (WebElement element : checkboxList) {
-				if (checkedBoxestoBeSelected > 2)
-					break;
-				if (element.isDisplayed() && !element.isSelected())
-					element.click();
-				checkedBoxestoBeSelected++;
+					By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
+					
+			int checkboxesSelected = 0;
+			List<WebElement> checkboxList; 
+			for (int i= 0;i<2 ; i++) {
+				checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
+					jsClick(ob,checkboxList.get(i));
+				waitForAjax(ob);
+				Thread.sleep(4000);
 
 			}
-
+			
+			checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
 			for (WebElement element : checkboxList) {
 				if (element.isSelected())
 					checkboxesSelected++;
 
 			}
-
 			Assert.assertTrue(checkboxesSelected != 0, "No filters is selected");
 			WebElement resetButton = ob
 					.findElement(By.cssSelector(OR.getProperty("tr_search_results_reset_button_css")));
 			jsClick(ob, resetButton);
 			waitForAjax(ob);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
 			checkboxList = ob
 					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
 

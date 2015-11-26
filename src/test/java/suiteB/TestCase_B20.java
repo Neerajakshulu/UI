@@ -77,9 +77,10 @@ public class TestCase_B20 extends TestBase {
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 20);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_css"))).click();
