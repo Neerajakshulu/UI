@@ -112,7 +112,7 @@ public class WatchlistMoreButtonAboveTenArticlesTest extends TestBase{
 		test.log(LogStatus.INFO," Add 14 articles into my watchlist");
 		for(int i=0;i<14;i++) {
 			jsClick(ob, afterScrollwatchLists.get(i));
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 		}
 		
 		//goto watchlist page
@@ -124,8 +124,9 @@ public class WatchlistMoreButtonAboveTenArticlesTest extends TestBase{
 		List<WebElement> watchListMore=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
 		System.out.println("More buttons size-->"+watchListMore.size());
 		
+		BrowserAction.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
 		boolean moreButtonStatus=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH).isDisplayed();
-		System.out.println("more buttton should be in hidden mode-->"+moreButtonStatus);
+		System.out.println("more buttton should not be in hidden mode-->"+moreButtonStatus);
 		
 		if(!moreButtonStatus) {
 			status=2;

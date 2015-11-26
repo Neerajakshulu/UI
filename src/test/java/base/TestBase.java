@@ -19,6 +19,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -180,9 +183,11 @@ public class TestBase {
 //			 ob = new InternetExplorerDriver(capabilities);
 //		}
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+//			DesiredCapabilities capability = DesiredCapabilities.chrome();
+//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 ////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
 //			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob = new ChromeDriver();
+//			 ob= new ChromeDriver(capability);
 //		}
 //		
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
