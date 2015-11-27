@@ -3,6 +3,7 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -103,7 +104,9 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	 * @throws Exception, When Details link Not Working
 	 */
 	public void recordViewDetailsLinkValidation() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH.toString()), 40);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH.toString())));
+		//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
 		waitForNumberOfWindowsToEqual(ob, 2);
 		switchToNewWindow(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);

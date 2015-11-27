@@ -18,7 +18,8 @@ public class Authoring  extends TestBase {
 	static int commentSizeBeforeAdd;
 	static int commentSizeAfterAdd;
 	
-	public static int getCommentCount()  {
+	public static int getCommentCount() throws InterruptedException  {
+		Thread.sleep(10000);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 		String num[]=commentSizeBeforeAdd.split(" ");
