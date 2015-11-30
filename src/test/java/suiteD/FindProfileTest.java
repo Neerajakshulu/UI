@@ -19,7 +19,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.LoginTR;
 import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
