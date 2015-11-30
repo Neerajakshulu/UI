@@ -2,9 +2,11 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -102,7 +104,7 @@ public class ProfileFollowingOthersTest extends TestBase {
 	@Parameters({"profileName","profileFullName"})
 	public void followOthersProfile(String profileName,String profileFullName) throws Exception  {
 			try {
-				
+		
 				follwingOthersProfile(profileName,profileFullName);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();

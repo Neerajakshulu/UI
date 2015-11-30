@@ -2,27 +2,18 @@ package suiteB;
 
 
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -32,7 +23,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 
-public class TestCase_B11 extends TestBase{
+public class TestCase_B11 extends TestBase {
 	static int status=1;
 	
 //	Following is the list of status:
@@ -86,38 +77,34 @@ public class TestCase_B11 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
+			ob.findElement(By.cssSelector("i[class='webui-icon pull-right dropchevron ng-scope webui-icon-caret-down']")).click();
+			Thread.sleep(3000);
 			
 			List<WebElement> checkboxes=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-			
 //			System.out.println(checkboxes.size());
 			
-			
 			checkboxes.get(0).click();
-			Thread.sleep(3000);
-			checkboxes.get(1).click();
-			Thread.sleep(3000);
+			Thread.sleep(8000);
+			List<WebElement> checkbox=ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			checkbox.get(1).click();
+			Thread.sleep(8000);
+			
 			
 			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
 			Thread.sleep(1000);
 			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
-			Thread.sleep(2000);
-			
-			
-			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
-			Thread.sleep(5000);
-			ob.findElement(By.xpath(OR.getProperty("more_button"))).click();
-			Thread.sleep(5000);
-			
-			
+			Thread.sleep(6000);
 			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			//System.out.println("search Results-->"+searchResults.size());
 			ArrayList<String> al1=new ArrayList<String>();
 			for(int i=0;i<searchResults.size();i++){
 				
 				al1.add(searchResults.get(i).getText());
 				
 			}
-			searchResults.get(28).click();
+			jsClick(ob, searchResults.get(7));
+			//searchResults.get(7).click();
 			Thread.sleep(5000);
 			
 			
@@ -126,6 +113,7 @@ public class TestCase_B11 extends TestBase{
 			js.executeScript("window.history.back();");
 			Thread.sleep(5000);
 			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			//System.out.println("search Results-->"+searchResults);
 			ArrayList<String> al2=new ArrayList<String>();
 			for(int i=0;i<searchResults2.size();i++){
 				
@@ -140,6 +128,7 @@ public class TestCase_B11 extends TestBase{
 			
 			
 			try{
+				//System.out.println("al1-->"+al1+"al2-->"+al2);
 				Assert.assertTrue(al1.equals(al2));
 				test.log(LogStatus.PASS, "Search maintains state when user navigates back to search results page from record view page");
 				}

@@ -92,6 +92,34 @@
     </classes>
 </test>
 
+<test name="Profile_Search_with_Lastname">
+	<parameter name="lastName" value="reddy"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithLastNameTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_Role">
+	<parameter name="role" value="QA"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithRoleTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_PrimaryInstitution">
+	<parameter name="primaryInstitution" value="thomson reuters"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithPrimaryInstitutionTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_Country">
+	<parameter name="country" value="USA"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithCountryTest" ></class> 
+    </classes>
+</test>
+
 
 </suite>
 
