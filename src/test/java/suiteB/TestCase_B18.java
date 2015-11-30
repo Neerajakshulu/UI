@@ -32,7 +32,7 @@ public class TestCase_B18 extends TestBase {
 
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"To verify that Times cited,Views,Comments fields are getting displayed for each document in search results page")
+						"To verify that Times cited and Comments fields are getting displayed for each document in search results page")
 				.assignCategory("Suite B");
 
 	}

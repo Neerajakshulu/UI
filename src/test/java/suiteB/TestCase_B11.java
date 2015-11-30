@@ -34,7 +34,7 @@ public class TestCase_B11 extends TestBase {
 	@BeforeTest
 	public void beforeTest(){
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that search,sorting and filtering are retained when user navigates back to search results page from record view page").assignCategory("Suite B");
+		test = extent.startTest(this.getClass().getSimpleName(), "To verify that sorting and filtering are retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
