@@ -93,21 +93,7 @@
 </test>
 
 
-<test name="Test B15">
-    <classes>
-        <class name="suiteB.TestCase_B15" ></class>  
-    </classes>
-</test>
-<test name="Test B16">
-    <classes>
-        <class name="suiteB.TestCase_B16" ></class>  
-    </classes>
-</test>
-<test name="Test B17">
-    <classes>
-        <class name="suiteB.TestCase_B17" ></class>  
-    </classes>
-</test>
+
 
 <test name="Test B18">
     <classes>
