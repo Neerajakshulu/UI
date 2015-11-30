@@ -75,7 +75,7 @@ public class TestCase_B19 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
 
 			try {
