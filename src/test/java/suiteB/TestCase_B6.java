@@ -24,6 +24,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import base.TestBase;
 import util.ErrorUtil;
@@ -65,7 +66,7 @@ public class TestCase_B6 extends TestBase{
 		
 		
 			
-			String search_query="b";
+			String search_query="bio";
 			
 			openBrowser();
 			clearCookies();
@@ -88,6 +89,8 @@ public class TestCase_B6 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			Thread.sleep(5000);
 			
+//			System.out.println(ob.findElement(By.xpath(OR.getProperty("typeAhead_dropDown"))).getText());
+			
 			//Verify that the search drop down gets displayed
 			if(!checkElementPresence("typeAhead_dropDown")){
 				
@@ -99,15 +102,15 @@ public class TestCase_B6 extends TestBase{
 			
 			
 			//Verify that 10 options are contained in search drop down
-			List<WebElement> options=ob.findElements(By.xpath(OR.getProperty("search_dropDown_options_link")));
-			if(!compareNumbers(10,options.size())){
-				
-
-				test.log(LogStatus.FAIL, "10 options not getting displayed in search drop down");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_ten_options_not_getting_displayed_in_search_drop_down")));//screenshot	
-				
-			}
+//			List<WebElement> options=ob.findElements(By.xpath(OR.getProperty("search_dropDown_options_link")));
+//			if(!compareNumbers(10,options.size())){
+//				
+//
+//				test.log(LogStatus.FAIL, "10 options not getting displayed in search drop down");//extent reports
+//				status=2;//excel
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_ten_options_not_getting_displayed_in_search_drop_down")));//screenshot	
+//				
+//			}
 			
 			
 			closeBrowser();
