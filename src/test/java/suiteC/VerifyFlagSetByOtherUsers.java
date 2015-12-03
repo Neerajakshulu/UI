@@ -70,7 +70,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
@@ -105,7 +105,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			for (WebElement we : commentsList) {
 				commentText = we.getText();
 				if (commentText.contains(PROFILE_NAME) && commentText.contains(comment)) {
-					we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))).click();
+					jsClick(ob,we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
 					waitForElementTobeVisible(ob,
 							By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
 					ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css")))
@@ -120,12 +120,12 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			ob.navigate().to(host);
 			loginAsOther(USER_NAME1, PASSWORD1);
 
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 60);
 
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			boolean flag=false;
