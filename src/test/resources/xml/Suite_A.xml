@@ -118,6 +118,13 @@
 </test>
 
 
+<test name="Test A18">
+    <classes>
+        <class name="suiteA.TestCase_A18" ></class>  
+    </classes>
+</test>
+
+
 
 
 
