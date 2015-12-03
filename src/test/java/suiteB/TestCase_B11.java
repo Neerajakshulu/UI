@@ -111,7 +111,7 @@ public class TestCase_B11 extends TestBase {
 //			ob.navigate().back();
 			JavascriptExecutor js = (JavascriptExecutor)ob;
 			js.executeScript("window.history.back();");
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			//System.out.println("search Results-->"+searchResults);
 			ArrayList<String> al2=new ArrayList<String>();
