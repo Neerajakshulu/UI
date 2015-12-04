@@ -109,7 +109,9 @@ public class ShareArticleOnFBTest extends TestBase {
 	public void shareOnFacebook(String fbusername,String fbpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO,"Sharing Article on Facebook");
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 60);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();

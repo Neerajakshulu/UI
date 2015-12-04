@@ -35,9 +35,12 @@ public class ProfileUpdateTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "User Own Profile Update Validation").assignCategory("Suite D");
+		test = extent
+				.startTest(this.getClass().getSimpleName(),
+						"Verity that user is able to edit  info like title/role,Primary Institution and country from his own profile")
+				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
-		System.out.println("Run modes-->"+runmodes.length);
+		//System.out.println("Run modes-->"+runmodes.length);
 	}
 	
 	/**

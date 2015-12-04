@@ -103,7 +103,7 @@ public class TestCase_B11 extends TestBase {
 				al1.add(searchResults.get(i).getText());
 				
 			}
-			jsClick(ob, searchResults.get(7));
+			jsClick(ob, searchResults.get(5));
 			//searchResults.get(7).click();
 			Thread.sleep(5000);
 			
@@ -111,7 +111,7 @@ public class TestCase_B11 extends TestBase {
 //			ob.navigate().back();
 			JavascriptExecutor js = (JavascriptExecutor)ob;
 			js.executeScript("window.history.back();");
-			Thread.sleep(10000);
+			Thread.sleep(20000);
 			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			//System.out.println("search Results-->"+searchResults);
 			ArrayList<String> al2=new ArrayList<String>();
@@ -121,26 +121,30 @@ public class TestCase_B11 extends TestBase {
 				
 			}
 			
+			
+			int temp=0;
+			for(int i=0;i<5;i++){
+				
+				if(al1.get(i).equals(al2.get(i))){
+					
+					temp++;
+				}
+			}
+			
 
 //			System.out.println(al1.size());
 //			System.out.println(al2.size());
 //			System.out.println(al1.equals(al2));
 			
+			if(!compareNumbers(5,temp)){
+				
+				test.log(LogStatus.FAIL, "Search does not maintain state when user navigates back to search results page from record view page");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_not_maintaining_state")));//screenshot	
+				
+			}
 			
-			try{
-				//System.out.println("al1-->"+al1+"al2-->"+al2);
-				Assert.assertTrue(al1.equals(al2));
-				test.log(LogStatus.PASS, "Search maintains state when user navigates back to search results page from record view page");
-				}
-				catch(Throwable t){
-					
-					test.log(LogStatus.FAIL, "Search does not maintain state when user navigates back to search results page from record view page");//extent reports
-					test.log(LogStatus.INFO, "Error--->"+t);
-					ErrorUtil.addVerificationFailure(t);
-					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_not_maintaining_state")));//screenshot	
-					
-				}
+			
 			
 			
 			String option=ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();

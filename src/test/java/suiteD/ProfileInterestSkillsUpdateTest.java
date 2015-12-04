@@ -37,7 +37,7 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 		test = extent.startTest(this.getClass().getSimpleName(),
-				"Validate User Own Profile Interests and Skills Update Test").assignCategory("Suite D");
+				"Verity that user is able to edit  info like Interests and Skills from his own profile").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	

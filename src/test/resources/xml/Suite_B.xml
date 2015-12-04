@@ -94,7 +94,6 @@
 
 
 
-
 <test name="Test B18">
     <classes>
         <class name="suiteB.TestCase_B18" ></class>  

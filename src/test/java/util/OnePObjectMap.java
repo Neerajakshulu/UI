@@ -45,7 +45,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS("input[value='Log In']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS("input[name='publish'][type='submit']"),
 	
-	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_CSS("ul[class='list-unstyled meta ng-scope']");
+	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_CSS("ul[class='list-unstyled meta ng-scope']"),
+	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("span[class='interest-or-skill ng-binding ng-scope']");
 	
 	
 	

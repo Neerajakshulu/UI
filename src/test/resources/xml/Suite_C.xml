@@ -99,5 +99,55 @@
     </classes>
 </test>
 
+<test name="VerifyCancelFlagAction">
+    <classes>
+      <class name="suiteC.VerifyCancelFlagAction" ></class>
+    </classes>
+</test>
+
+<test name="VerifyCancelUnflagAction">
+    <classes>
+      <class name="suiteC.VerifyCancelUnflagAction" ></class>
+    </classes>
+</test>
+
+<test name="VerifyFlagActionWithoutReason">
+    <classes>
+      <class name="suiteC.VerifyFlagActionWithoutReason" ></class>
+    </classes>
+</test>
+
+<test name="VerifyFlagForCommentUserAuthoredThemselves">
+    <classes>
+      <class name="suiteC.VerifyFlagForCommentUserAuthoredThemselves" ></class>
+    </classes>
+</test>
+
+<test name="VerifyFlagInUserComments">
+    <classes>
+      <class name="suiteC.VerifyFlagInUserComments" ></class>
+    </classes>
+</test>
+
+<test name="VerifyFlagSetByOtherUsers">
+    <classes>
+      <class name="suiteC.VerifyFlagSetByOtherUsers" ></class>
+    </classes>
+</test>
+
+<test name="VerifyFlagUserComment">
+    <classes>
+      <class name="suiteC.VerifyFlagUserComment" ></class>
+    </classes>
+</test>
+
+<test name="VerifyUnflagActionWithoutReason">
+    <classes>
+      <class name="suiteC.VerifyUnflagActionWithoutReason" ></class>
+    </classes>
+</test>
+
+
+
 </suite>
 
