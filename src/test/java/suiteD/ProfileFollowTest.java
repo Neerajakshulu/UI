@@ -39,7 +39,10 @@ public class ProfileFollowTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Profile Follow Validation Test").assignCategory("Suite D");
+		test = extent
+				.startTest(this.getClass().getSimpleName(),
+						"Verify that user is able to Start/Stop following a user from profile search results page")
+				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	

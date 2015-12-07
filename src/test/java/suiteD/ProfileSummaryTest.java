@@ -30,10 +30,10 @@ public class ProfileSummaryTest extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Add summary field maximum lenghth validation")
+		test = extent
+				.startTest(this.getClass().getSimpleName(),
+						"Verity that user is able to edit Summary field from his own profile and validate max length condition")
 				.assignCategory("Suite D");
-
 	}
 
 	@Test

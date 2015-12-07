@@ -1,5 +1,6 @@
 package suiteD;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import base.TestBase;
 import util.BrowserAction;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class ProfilePage  extends TestBase {
@@ -60,6 +62,39 @@ public class ProfilePage  extends TestBase {
 	public static void clickPeople() throws Exception {
 			ob.findElement(By.xpath("//a[contains(text(), 'People')]")).click();
 			Thread.sleep(4000);
+	}
+	
+	
+	/**
+	 * Method for Validate Profile Search with Interests and Skills
+	 * @param lastName
+	 * @throws Exception
+	 */
+	public static void validateProfileInterest(String interestAndSkill) throws Exception {
+		List<WebElement> profilesname=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
+		if(profilesname.size()>0){
+			for(WebElement profilename:profilesname) {
+				profilename.findElement(By.tagName("a")).click();
+				BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
+				Thread.sleep(6000);
+				break;
+			}
+			
+			List<WebElement> interestsSkills=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
+			List<String> interests=new ArrayList<String>();
+			for(WebElement intSkill:interestsSkills) {
+				interests.add(intSkill.getText());
+			}
+			
+			//System.out.println("interests and skills-->"+interests);
+			
+			if(!interests.contains(interestAndSkill)) {
+				throw new Exception("Profile Search not happening with Interests and Skill "+interestAndSkill);
+			}
+		}
+		else
+			System.out.println("Profile Search Results are not available with \t"+interestAndSkill+ "\t Interests and Skills");
+		
 	}
 
 }

@@ -39,7 +39,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Validate Other User Profile Comments Like Test").assignCategory("Suite D");
+		test = extent.startTest(this.getClass().getSimpleName(), "Verity that user is able to Like others comments from their profile page").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	

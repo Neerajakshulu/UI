@@ -43,7 +43,10 @@ public class FindProfileTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Find Profile Validation Test").assignCategory("Suite D");
+		test = extent
+				.startTest(this.getClass().getSimpleName(),
+						"Verify that user is able to Start/Stop following a user from profile page \n Verify that user should not able to  Edit others profile")
+				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			

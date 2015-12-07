@@ -121,5 +121,13 @@
 </test>
 
 
+<test name="Profile_Search_with_Interests">
+	<parameter name="interest" value="computers"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithInterestTest" ></class> 
+    </classes>
+</test>
+
+
 </suite>
 

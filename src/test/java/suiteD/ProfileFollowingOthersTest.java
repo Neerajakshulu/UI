@@ -2,11 +2,9 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -40,7 +38,7 @@ public class ProfileFollowingOthersTest extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 		test = extent.startTest(this.getClass().getSimpleName(),
-				"Validate User Own Profile following other profile").assignCategory("Suite D");
+				"Verify that user is able to follow other profile and test for count of users following me").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	
