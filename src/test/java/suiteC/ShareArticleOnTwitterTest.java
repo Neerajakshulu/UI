@@ -2,13 +2,10 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -45,7 +42,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),"Article Sharing on Twitter").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(),"Verify that user is able to add an article on twitter").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
 	
@@ -75,6 +72,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
+				
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -127,8 +125,9 @@ public class ShareArticleOnTwitterTest extends TestBase {
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
+					 Thread.sleep(20000);
 					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
-					 
+					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
 					 String articleDesc=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
 					 System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
 					 if(!articleDesc.contains(rvPageurl)){
@@ -184,11 +183,11 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	}
 	
 	
-	public static void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
 		
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		Thread.sleep(4000);
 	}
 	

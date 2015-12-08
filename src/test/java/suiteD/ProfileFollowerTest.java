@@ -33,10 +33,8 @@ public class ProfileFollowerTest extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify count of users following me")
-				.assignCategory("Suite D");
-
+		test = extent.startTest(this.getClass().getSimpleName(),
+				"Verify that user is able to test for count of users following me").assignCategory("Suite D");
 	}
 
 	@Test

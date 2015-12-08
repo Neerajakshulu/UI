@@ -83,7 +83,7 @@ public class TestCase_A4 extends TestBase{
 		//Verify that existing FB credentials are working fine
 		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-		ob.findElement(By.xpath(OR.getProperty("FB_page_login_button"))).click();
+		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 		Thread.sleep(15000);
 		if(!checkElementPresence("help_link")){
 			

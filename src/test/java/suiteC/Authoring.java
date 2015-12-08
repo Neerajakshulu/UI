@@ -18,7 +18,8 @@ public class Authoring  extends TestBase {
 	static int commentSizeBeforeAdd;
 	static int commentSizeAfterAdd;
 	
-	public static int getCommentCount()  {
+	public static int getCommentCount() throws InterruptedException  {
+		Thread.sleep(10000);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 		String num[]=commentSizeBeforeAdd.split(" ");
@@ -76,7 +77,7 @@ public class Authoring  extends TestBase {
 	
 	
 	
-	public static void updateComment() throws Exception {
+	public static void updateComment(String steComment) throws Exception {
 		scrollingToElementofAPage();
 		
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
@@ -87,7 +88,7 @@ public class Authoring  extends TestBase {
 		List<WebElement> commentArea=ob.findElements(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
-		commentArea.get(1).sendKeys("comment updated");
+		commentArea.get(1).sendKeys(steComment);
 		Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
@@ -172,6 +173,7 @@ public class Authoring  extends TestBase {
 	 * @throws Exception
 	 */
 	public static void validatePreventBotComment() throws Exception  {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
 		String preventBotText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 		//System.out.println("Prevent Bot--->"+preventBotText);
 		BrowserWaits.waitUntilText(preventBotText);

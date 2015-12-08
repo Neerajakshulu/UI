@@ -38,7 +38,7 @@ public class ProfileFollowingOthersTest extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 		test = extent.startTest(this.getClass().getSimpleName(),
-				"Validate User Own Profile following other profile").assignCategory("Suite D");
+				"Verify that user is able to follow other profile and test for count of users following me").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	
@@ -102,7 +102,7 @@ public class ProfileFollowingOthersTest extends TestBase {
 	@Parameters({"profileName","profileFullName"})
 	public void followOthersProfile(String profileName,String profileFullName) throws Exception  {
 			try {
-				
+		
 				follwingOthersProfile(profileName,profileFullName);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();

@@ -36,7 +36,10 @@ public class AppHeaderFooterLinkValidationTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Validate Application Header and Footer Links").assignCategory("Suite D");
+		test = extent
+				.startTest(this.getClass().getSimpleName(),
+						"Verify that below Project Neon Header and Footer links working as expected \n 1.Help \n 2.Cookie Policy \n 3.Privacy Statement \n 4.Terms of Use")
+				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	

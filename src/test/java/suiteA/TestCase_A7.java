@@ -106,11 +106,11 @@ public class TestCase_A7 extends TestBase{
 		
 		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-		ob.findElement(By.xpath(OR.getProperty("FB_page_login_button"))).click();
+		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 		Thread.sleep(15000);
 		
 		
-		if(!checkElementPresence("FB_page_login_button")){
+		if(!checkElementPresence_name("FB_page_login_button")){
 			
 			
 			fail=true;//excel

@@ -44,7 +44,7 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	public void beforeTest() {
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"Validate Authoring prevent comment flooding by bots with different article")
+						"Verify that prevention of comment flooding by bots with different articles works as expected")
 				.assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
@@ -140,12 +140,12 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	}
 	
 	
-	public static void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
 		
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		Thread.sleep(4000);
 	}
 	

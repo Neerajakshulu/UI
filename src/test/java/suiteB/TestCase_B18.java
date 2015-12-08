@@ -32,7 +32,7 @@ public class TestCase_B18 extends TestBase {
 
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"To verify that Times cited,Views,Comments fields are getting displayed for each document in search results page")
+						"To verify that Times cited and Comments fields are getting displayed for each document in search results page")
 				.assignCategory("Suite B");
 
 	}
@@ -106,31 +106,31 @@ public class TestCase_B18 extends TestBase {
 						this.getClass().getSimpleName() + "TimeCite for search results validation failed")));// screenshot
 
 			}
-			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
-			if (viewsList.size() != 0) {
-				for (WebElement views : viewsList) {
-					if (!views.isDisplayed())
-						viewsCount++;
-				}
-			} else {
-				viewsCount = -1;
-			}
-
-			try {
-				Assert.assertTrue(resultList.size() == viewsList.size() && viewsCount == 0);
-				test.log(LogStatus.PASS, "views field is displayed for all articles");
-			} catch (Throwable t) {
-				if (viewsCount == -1)
-					test.log(LogStatus.FAIL, "views field is not displayed for any articles");
-				else
-					test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Viewsfor search results validation failed")));// screenshot
-
-			}
+//			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
+//			if (viewsList.size() != 0) {
+//				for (WebElement views : viewsList) {
+//					if (!views.isDisplayed())
+//						viewsCount++;
+//				}
+//			} else {
+//				viewsCount = -1;
+//			}
+//
+//			try {
+//				Assert.assertTrue(resultList.size() == viewsList.size() && viewsCount == 0);
+//				test.log(LogStatus.PASS, "views field is displayed for all articles");
+//			} catch (Throwable t) {
+//				if (viewsCount == -1)
+//					test.log(LogStatus.FAIL, "views field is not displayed for any articles");
+//				else
+//					test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
+//				test.log(LogStatus.INFO, "Error--->" + t);
+//				ErrorUtil.addVerificationFailure(t);
+//				status = 2;
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+//						this.getClass().getSimpleName() + "Viewsfor search results validation failed")));// screenshot
+//
+//			}
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
 			if (commentsList.size() != 0) {
 				for (WebElement comments : commentsList) {

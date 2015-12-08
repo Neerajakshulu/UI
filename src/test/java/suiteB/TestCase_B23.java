@@ -72,7 +72,10 @@ static int status=1;
 		login();
 		Thread.sleep(15000);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+		Thread.sleep(4000);
+		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		Thread.sleep(4000);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 		
 		List<WebElement> refineBlocks=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_blocks_xpath")));
@@ -80,14 +83,11 @@ static int status=1;
 			for (WebElement refineBlock : refineBlocks) {
 				filterType=refineBlock
 						.findElement(By.xpath(OR.getProperty("tr_search_results_refine_filter_type"))).getText();
-				Assert.assertTrue(refineBlock
-						.findElement(By.xpath(OR.getProperty("tr_search_results_refine_filter_block"))).isDisplayed());
-
-				jsClick(ob,refineBlock.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_or_collapse_path"))));
+					jsClick(ob,refineBlock.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_or_collapse_path"))));
 						
 				Thread.sleep(4000);
 				try{
-				Assert.assertFalse(refineBlock
+				Assert.assertTrue(refineBlock
 						.findElement(By.xpath(OR.getProperty("tr_search_results_refine_filter_block"))).isDisplayed());
 				test.log(LogStatus.PASS, String.format("Refine block expands properly for %s type ", filterType));	
 				}catch(Throwable t){
@@ -102,7 +102,7 @@ static int status=1;
 						
 				Thread.sleep(4000);
 				try {
-					Assert.assertTrue(
+					Assert.assertFalse(
 							refineBlock.findElement(By.xpath(OR.getProperty("tr_search_results_refine_filter_block")))
 									.isDisplayed());
 					test.log(LogStatus.PASS, String.format("Refine block collapse properly for %s type ", filterType));

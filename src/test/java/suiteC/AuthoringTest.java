@@ -38,7 +38,7 @@ public class AuthoringTest extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Creating Comments").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user Is able to comment on any article and validate the comment count increment").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->"+runmodes.length);
 	}
@@ -89,7 +89,7 @@ public class AuthoringTest extends TestBase {
 			Authoring.clickAddCommentButton();
 			Authoring.validateCommentAdd();
 			Authoring.validateViewComment(addComments);
-			Authoring.updateComment();
+			Authoring.updateComment("comment updated");
 			validateUpdatedComment("comment updated");
 			closeBrowser();
 		} catch (Exception e) {
@@ -162,7 +162,7 @@ public class AuthoringTest extends TestBase {
 	 */
 	public static void enterTRCredentials(String userName, String password) {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		new TestBase().waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
