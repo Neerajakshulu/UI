@@ -35,7 +35,7 @@ public class VerifyFlagUserComment extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify flag action for comments")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to flag and unflag the comments")
 				.assignCategory("Suite C");
 
 	}
@@ -85,8 +85,8 @@ public class VerifyFlagUserComment extends TestBase {
 							.getText();
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount != 0) {
-						itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
-								.click();
+						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+
 						isFound = true;
 						break;
 					}
@@ -110,7 +110,7 @@ public class VerifyFlagUserComment extends TestBase {
 					int y = point.getY() + 100;
 					String script = "scroll(0," + y + ");";
 					((JavascriptExecutor) ob).executeScript(script);
-					more.click();
+					jsClick(ob,more);
 					waitForAjax(ob);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -139,9 +139,8 @@ public class VerifyFlagUserComment extends TestBase {
 			}
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
 					40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))).click();
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();
-			// waitForAllElementsToBePresent(ob,
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
 			// 40);
 			Thread.sleep(5000);
@@ -171,9 +170,9 @@ public class VerifyFlagUserComment extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
 					40);
 
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 			try {
 				Thread.sleep(6000);

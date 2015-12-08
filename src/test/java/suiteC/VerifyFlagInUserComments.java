@@ -34,7 +34,7 @@ public class VerifyFlagInUserComments extends TestBase{
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify Flag In User Comments")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that flag button is displayed for comments")
 				.assignCategory("Suite C");
 
 	}
@@ -82,7 +82,7 @@ public class VerifyFlagInUserComments extends TestBase{
 				strCmntCt=itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).getText();
 				commentsCount=	Integer.parseInt(strCmntCt);
 				if(commentsCount!=0 && commentsCount<50){
-					itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
 					isFound=true;
 					break;
 				}
@@ -106,7 +106,7 @@ public class VerifyFlagInUserComments extends TestBase{
 			int y=point.getY()+100;
 			String script="scroll(0,"+y+");";
 			((JavascriptExecutor)ob).executeScript(script);
-			more.click();
+			jsClick(ob,more);
 			waitForAjax(ob);
 			}catch(Exception e){
 				e.printStackTrace();

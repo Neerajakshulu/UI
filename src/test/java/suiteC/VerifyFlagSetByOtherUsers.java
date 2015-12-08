@@ -37,7 +37,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verification of flag for comment set by other users")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that only the user who set the flag can see the comment has flagged")
 				.assignCategory("Suite C");
 
 	}
@@ -106,12 +106,22 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 				commentText = we.getText();
 				if (commentText.contains(PROFILE_NAME) && commentText.contains(comment)) {
 					jsClick(ob,we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+					try{
+						Thread.sleep(10000);
+						waitForElementTobeVisible(ob,
+								By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 80);
+								
+						}catch(Exception e){
+							
+							jsClick(ob,we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+						}
+					
 					waitForElementTobeVisible(ob,
 							By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-					ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css")))
-							.click();
-					ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css")))
-							.click();
+					jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
+							
+					jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+							
 					break;
 				}
 			}
@@ -200,13 +210,13 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 	}
 
 	private void loginAsOther(String username, String pwd) throws Exception {
-		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
 		Thread.sleep(4000);
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(username);
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(pwd);
-		ob.findElement(By.id(OR.getProperty("login_button"))).click();
+		jsClick(ob,ob.findElement(By.id(OR.getProperty("login_button"))));
 
 	}
 
