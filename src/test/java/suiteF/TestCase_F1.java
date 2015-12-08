@@ -25,6 +25,11 @@ public class TestCase_F1 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
+	
+	/**
+	 * class for Notification
+	 * @author UC196983
+	 */
 	@BeforeTest
 	public void beforeTest() {
 
