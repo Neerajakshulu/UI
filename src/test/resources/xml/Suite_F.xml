@@ -28,11 +28,7 @@
 		</classes>
 	</test>
 
-	<test name="FollowFriendOfFriendNotification">
-		<classes>
-			<class name="suiteF.FollowFriendOfFriendNotification"></class>
-		</classes>
-	</test>
+	
 
 </suite>
 
