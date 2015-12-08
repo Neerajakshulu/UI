@@ -19,8 +19,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class AuthoringAppreciateTest extends TestBase {
-	
+public class AuthoringAppreciateOwnCommentTest extends TestBase{
+
+
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -30,7 +31,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verfiy that user can appreciate comments made by other neon users and validate appreciation count").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(), "Verfiy that user can appreciate their own comment validate appreciation count").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");
 		//load the runmodes of the tests			
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
@@ -84,6 +85,9 @@ public class AuthoringAppreciateTest extends TestBase {
 			AuthoringTest.clickLogin();
 			AuthoringTest.searchArticle(article);
 			AuthoringTest.chooseArticle(completeArticle);
+			Authoring.enterArticleComment("Test Appreciation");
+			Authoring.clickAddCommentButton();
+			Thread.sleep(6000);
 			validateAppreciationComment();
 			validateAppreciationComment();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");

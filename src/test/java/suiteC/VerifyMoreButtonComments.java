@@ -3,6 +3,7 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,9 +20,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class VerifyCancelFlagAction extends TestBase {
-
-	private static final String PROFILE_NAME = "amneet singh";
+public class VerifyMoreButtonComments extends TestBase{
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,13 +31,13 @@ public class VerifyCancelFlagAction extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the flag action")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that more button is not displayed for comments less than 10 ")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testFlagInUserComments() throws Exception {
+	public void testMoreButtonForLessThanTenComments() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -61,88 +60,50 @@ public class VerifyCancelFlagAction extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
-			List<WebElement> itemList;
-			while (true) {
-				itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
-				int commentsCount, itr = 1;
-				String strCmntCt;
-				boolean isFound = false;
-				for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
-					strCmntCt = itemList.get(i)
-							.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-							.getText();
-					commentsCount = Integer.parseInt(strCmntCt);
-					if (commentsCount !=0) {
-						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
-						isFound = true;
-						break;
-					}
-
-				}
-
-				if (isFound)
-					break;
-				itr++;
-				((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
-				waitForAjax(ob);
-			}
-			Thread.sleep(5000);
-
+			selectAnArticle();
+			String comment = "testFlag";
+			Authoring.enterArticleComment(comment);
+			Authoring.clickAddCommentButton();
+					
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			System.out.println(commentsList.size());
-			String commentText;
-			int commentsCount = 0;
-			for (int i = 0; i < commentsList.size(); i++) {
-				commentText = commentsList.get(i).getText();
-				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					jsClick(ob,commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					commentsCount = i;
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-								80);
-						}catch(Exception e){
-							
-							jsClick(ob,commentsList.get(i)
-									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-						}
-					break;
-				}
-
-			}
-			
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
-					40);
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			Thread.sleep(5000);
-
 			try {
-				boolean isFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-inactive");
-				Assert.assertTrue(isFlagged);
-				test.log(LogStatus.PASS, "Cancel flag action is working fine for comments");
+				
+				Assert.assertTrue(commentsList.size()<10);
+				test.log(LogStatus.PASS, "More functionality working fine for comments less than 10 ");
+				
+				
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Cancel flag action failed");
+				
+				test.log(LogStatus.FAIL, "More functionality is not working fine for comments lss than 10 ");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
-
 			}
+			
+			
+			try {
+				ob.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+				WebElement more=ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+				Assert.assertTrue(more.isDisplayed());
+				test.log(LogStatus.FAIL, "More button is displayed for comments less than 10");
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
+				
+				
+			} catch (Throwable t) {
+				test.log(LogStatus.PASS, "More button is not displayed for comments less than 10");
+				
+			}
+			
 			LoginTR.logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -161,6 +122,44 @@ public class VerifyCancelFlagAction extends TestBase {
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	}
+
+	private void selectAnArticle() throws Exception {
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+		Thread.sleep(4000);
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
+		List<WebElement> itemList;
+		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+		
+		boolean isFound = false;
+		while (true) {
+			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			int commentsCount, itr = 1;
+			String strCmntCt;
+			isFound = false;
+			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+				strCmntCt = itemList.get(i)
+						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
+						.getText();
+				commentsCount = Integer.parseInt(strCmntCt);
+				if (commentsCount ==0) {
+					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+					isFound = true;
+					break;
+				}
+
+			}
+
+			if (isFound)
+				break;
+			itr++;
+			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+		}
+		if(!isFound) throw new Exception("Article with less than 10 comments not found");
+		Thread.sleep(5000);
 	}
 
 	@AfterTest

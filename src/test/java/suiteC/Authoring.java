@@ -77,7 +77,7 @@ public class Authoring  extends TestBase {
 	
 	
 	
-	public static void updateComment() throws Exception {
+	public static void updateComment(String steComment) throws Exception {
 		scrollingToElementofAPage();
 		
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
@@ -88,7 +88,7 @@ public class Authoring  extends TestBase {
 		List<WebElement> commentArea=ob.findElements(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
-		commentArea.get(1).sendKeys("comment updated");
+		commentArea.get(1).sendKeys(steComment);
 		Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);

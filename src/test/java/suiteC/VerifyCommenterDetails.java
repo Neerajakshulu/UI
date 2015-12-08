@@ -2,6 +2,7 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -19,9 +20,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class VerifyCancelFlagAction extends TestBase {
-
-	private static final String PROFILE_NAME = "amneet singh";
+public class VerifyCommenterDetails extends TestBase{
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,13 +31,13 @@ public class VerifyCancelFlagAction extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the flag action")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testFlagInUserComments() throws Exception {
+	public void testCommenterDetails() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -61,7 +60,8 @@ public class VerifyCancelFlagAction extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
@@ -83,6 +83,7 @@ public class VerifyCancelFlagAction extends TestBase {
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount !=0) {
 						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+						
 						isFound = true;
 						break;
 					}
@@ -99,48 +100,43 @@ public class VerifyCancelFlagAction extends TestBase {
 
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			System.out.println(commentsList.size());
-			String commentText;
-			int commentsCount = 0;
+			String commentText, profileName=null;
+			List<String> profileDetailsInComment=new ArrayList<String>();
+			List<WebElement> details;
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
-				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					jsClick(ob,commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					commentsCount = i;
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-								80);
-						}catch(Exception e){
-							
-							jsClick(ob,commentsList.get(i)
-									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-						}
+				if (!commentText.contains("Comment deleted")) {
+					
+					profileName	=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))).getText();
+					details=commentsList.get(i).findElements(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath")));
+					for(WebElement we:details){
+						profileDetailsInComment.add(we.getText());
+					}
+				jsClick(ob,commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
 					break;
 				}
 
 			}
-			
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
-					40);
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			Thread.sleep(5000);
-
+			Thread.sleep(8000);
+			String actProfileName=ob.findElement(By.cssSelector(OR.getProperty("tr_profile_name_css"))).getText();
+			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_profile_details_css")), 80);
+			details=ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
+			List<String> profileDetailsInProfile=new ArrayList<String>();
+			for(WebElement we:details){
+				profileDetailsInProfile.add(we.getText());
+			}
 			try {
-				boolean isFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-inactive");
-				Assert.assertTrue(isFlagged);
-				test.log(LogStatus.PASS, "Cancel flag action is working fine for comments");
+				
+				Assert.assertEquals(profileDetailsInProfile,profileDetailsInComment);
+				Assert.assertEquals(profileName, actProfileName);
+				test.log(LogStatus.PASS, "Commenter details are displayed correctly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Cancel flag action failed");
+				test.log(LogStatus.FAIL, "Commenter's details verification failed");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
+						this.getClass().getSimpleName() + "Commenter_details_validation_failed")));// screenshot
 
 			}
 			LoginTR.logOutApp();

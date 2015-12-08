@@ -3,6 +3,7 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,7 +20,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class VerifyCancelFlagAction extends TestBase {
+public class VerifyEditOtherUsersComments extends TestBase{
 
 	private static final String PROFILE_NAME = "amneet singh";
 	static int status = 1;
@@ -32,13 +33,13 @@ public class VerifyCancelFlagAction extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the flag action")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is not able to edit and delete the comment added by other users")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testFlagInUserComments() throws Exception {
+	public void testEditOtherUserComments() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -61,7 +62,8 @@ public class VerifyCancelFlagAction extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
@@ -83,6 +85,7 @@ public class VerifyCancelFlagAction extends TestBase {
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount !=0) {
 						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+						
 						isFound = true;
 						break;
 					}
@@ -101,48 +104,54 @@ public class VerifyCancelFlagAction extends TestBase {
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
 			String commentText;
-			int commentsCount = 0;
+			
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					jsClick(ob,commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					commentsCount = i;
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-								80);
-						}catch(Exception e){
-							
-							jsClick(ob,commentsList.get(i)
-									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-						}
+					try {
+						ob.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+						boolean isPresent = commentsList.get(i)
+								.findElement(By.xpath(OR.getProperty("tr_authoring_comments_Edit_css")))
+								.isDisplayed();
+						Assert.assertTrue(isPresent);
+						
+						test.log(LogStatus.FAIL, "Uesr is able to edit the comments added by others");
+						status = 2;
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Edit_comment_validation_failed")));// screenshot
+						
+					} catch (Throwable t) {
+						
+						test.log(LogStatus.PASS, "Uesr is not able to edit the comments added by others");
+					}
 					break;
 				}
 
 			}
-			
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
-					40);
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			Thread.sleep(5000);
-
-			try {
-				boolean isFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-inactive");
-				Assert.assertTrue(isFlagged);
-				test.log(LogStatus.PASS, "Cancel flag action is working fine for comments");
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Cancel flag action failed");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
+			for (int i = 0; i < commentsList.size(); i++) {
+				commentText = commentsList.get(i).getText();
+				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					try {
+						ob.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+						boolean isPresent = commentsList.get(i)
+								.findElement(By.xpath(OR.getProperty("tr_authoring_comments_delete_css")))
+								.isDisplayed();
+						Assert.assertTrue(isPresent);
+						
+						test.log(LogStatus.FAIL, "Uesr is able to delete the comments added by others");
+						status = 2;
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Delete_comment_validation_failed")));// screenshot
+						
+					} catch (Throwable t) {
+						
+						test.log(LogStatus.PASS, "Uesr is not able to delete the comments added by others");
+					}
+					break;
+				}
 
 			}
+
 			LoginTR.logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

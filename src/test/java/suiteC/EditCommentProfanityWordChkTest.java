@@ -10,32 +10,31 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.TestUtil;
 
-/**
- * Class for Performing Authoring prevent comment flooding by bots with same article
- * @author UC202376
- *
- */
-public class AuthoringPreventBotsCommentsTest extends TestBase {
-	
+public class EditCommentProfanityWordChkTest extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	static boolean master_condition;
 	
 	static int time=30;
 	
@@ -44,8 +43,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	public void beforeTest() {
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"Validate Authoring prevent comment flooding by bots with same article")
-				.assignCategory("Suite C");
+						"Verify that profanity words are not allowed while editing the comments.").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
 	
@@ -54,7 +52,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	public void testOpenApplication() throws Exception  {
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteCxls,this.getClass().getSimpleName());
-		boolean master_condition=suiteRunmode && testRunmode;
+		master_condition=suiteRunmode && testRunmode;
 		
 		if(!master_condition) {
 			status=3;
@@ -69,35 +67,29 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 			skip=true;
 			throw new SkipException("Runmode for test set data set to no "+count);
 		}
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
+		
 				//selenium code
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
-				ob.navigate().to(System.getProperty("host"));
+				//ob.navigate().to(System.getProperty("host"));
+				ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
-	@Parameters({"username","password","article","completeArticle","addComments"})
-	public void validatePreventBotsComments(String username,String password,
-			String article,String completeArticle, String addComments) throws Exception  {
+	@Parameters({"username","password","article","completeArticle"})
+	public void chooseArtilce(String username,String password,
+			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
 			LoginTR.enterTRCredentials(username, password);
 			LoginTR.clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
-			
-			Authoring.enterArticleComment(addComments);
+			Authoring.enterArticleComments("test");
 			Authoring.clickAddCommentButton();
-			ob.navigate().refresh();
-			Thread.sleep(8000);
-			Authoring.enterArticleComment(addComments);
-			Authoring.clickAddCommentButton();
-			Authoring.validatePreventBotComment();
+			Thread.sleep(5000);
 			
-			LoginTR.logOutApp();
-			closeBrowser();
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
 			//print full stack trace
@@ -107,11 +99,67 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 			ErrorUtil.addVerificationFailure(e);
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
-			closeBrowser();
+					this.getClass().getSimpleName() + "_Article_Search_not_happening")));
+			//closeBrowser();
 		}
 	}
 	
+	
+
+	@Test(dependsOnMethods="chooseArtilce",dataProvider="getTestData")
+	public void commentProfanityWordsCheck(String profanityWord, String errorMessage) throws Exception {
+		try {
+			
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  Profanity Words execution starts for data set #"+ (count+1)+"--->");
+						
+			Authoring.updateComment(profanityWord);
+			Thread.sleep(4000);
+			String profanityErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
+			BrowserWaits.waitUntilText(profanityErrorMessage);
+			
+			Assert.assertEquals(profanityErrorMessage, errorMessage);
+			
+			if(!profanityErrorMessage.equalsIgnoreCase(errorMessage)){
+				throw new Exception("Profanity_Words_doesnot_allow_comments_validation");
+			}
+			
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,"UnExpected Error");
+			status=2;
+			fail=true;
+			//print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO,errors.toString());
+			ErrorUtil.addVerificationFailure(e);
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Profanity_Words_doesnot_allow_comments_validation")));
+			//closeBrowser();
+		} finally {
+			reportDataSetResult();
+			++count;
+		}
+		
+	}
+	
+	public void reportDataSetResult() {
+		if(skip)
+			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
+		
+		else if(fail) {
+			
+			status=2;
+			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "FAIL");
+		}
+		else
+			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");
+		
+		
+		skip=false;
+		fail=false;
+
+	}
 	
 	@AfterTest
 	public void reportTestResult() {
@@ -124,6 +172,9 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
+		
+		if(master_condition)
+		    closeBrowser();
 	}
 	
 	/**
@@ -136,7 +187,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	}
 	
 	
-	public void searchArticle(String article) throws InterruptedException {
+	public  void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
 		
@@ -144,8 +195,8 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 		Thread.sleep(4000);
 	}
 	
-	public void chooseArticle(String linkName) throws InterruptedException {
-		jsClick(ob,ob.findElement(By.linkText(linkName)));
+	public static void chooseArticle(String linkName) throws InterruptedException {
+		ob.findElement(By.linkText(linkName)).click();
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}
 	
@@ -159,4 +210,9 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 		}
 	}
 	
+	
+	@DataProvider
+	public Object[][] getTestData() {
+		return TestUtil.getData(suiteCxls, this.getClass().getSimpleName()) ;
+	}
 }
