@@ -109,7 +109,9 @@ public class ShareArticleOnLITest extends TestBase {
 	public void shareOnTwitter(String liusername, String lipassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();
@@ -199,8 +201,9 @@ public class ShareArticleOnLITest extends TestBase {
 		Thread.sleep(4000);
 	}
 	
-	public static void chooseArticle(String linkName) throws InterruptedException {
-		ob.findElement(By.linkText(linkName)).click();
+	public void chooseArticle(String linkName) throws InterruptedException {
+		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
+		jsClick(ob,ob.findElement(By.linkText(linkName)));
 		Thread.sleep(8000);//providing more while script is getting failed in saucelabs
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}

@@ -25,17 +25,20 @@ public class TestCase_F1 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
-	
+
 	/**
 	 * class for Notification
+	 * 
 	 * @author UC196983
+	 * @throws Exception
+	 * @throws NumberFormatException
 	 */
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
 
-		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"To verify that user receives a notification when he is followed by someone")
+		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
+				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
+		test = extent.startTest(var, "Verify that user receives a notification when he is followed by someone")
 				.assignCategory("Suite F");
 
 	}

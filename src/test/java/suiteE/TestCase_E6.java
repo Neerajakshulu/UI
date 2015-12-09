@@ -2,22 +2,30 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
+import util.BrowserAction;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.TestUtil;
 
-public class TestCase_E1 extends TestBase {
+public class TestCase_E6 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,13 +37,15 @@ public class TestCase_E1 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to add document to watchlist from search results page")
+		test = extent
+				.startTest(var,
+						"Verify that the following fields are getting displayed for each document in watchlist page: a)Times cited b)Comments c)Views ")
 				.assignCategory("Suite E");
-
 	}
 
 	@Test
-	public void testcaseE1() throws Exception {
+	@Parameters({ "userName", "password" })
+	public void unWatchArticleSearchScreen(String userName, String password) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -53,34 +63,40 @@ public class TestCase_E1 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "kernel";
+			String search_query = "finger prints";
+			String docsInfo[] = { "Times Cited", "Comments", "Views" };
 
-			// 1--->Making a new user
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
-			createNewUser("mask", "man");
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			Thread.sleep(8000);
 
-			// 2--->Adding an article to watchlist
+			// login using TR credentials
+			LoginTR.enterTRCredentials(userName, password);
+			LoginTR.clickLogin();
+
+			Thread.sleep(15000);
+
+			cleanWatchlist();
+
+			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"))
+					.click();
+			String document_name = ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
+			// System.out.println(document_name);
 
-			// 3--->verifying that particular article has been added to
-			// watchlist
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
 			Thread.sleep(8000);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> watchlist = ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+			// System.out.println(watchlist.size());
 
 			int count = 0;
 			for (int i = 0; i < watchlist.size(); i++) {
@@ -88,6 +104,7 @@ public class TestCase_E1 extends TestBase {
 				if (watchlist.get(i).getText().equals(document_name))
 					count++;
 
+				// System.out.println(watchlist.get(i).getText());
 			}
 
 			if (!compareNumbers(1, count)) {
@@ -101,6 +118,21 @@ public class TestCase_E1 extends TestBase {
 
 			}
 
+			List<String> docInfoInput = Arrays.asList(docsInfo);
+			Set<String> watchLabels = new LinkedHashSet<String>();
+			// verify watchlist doc info
+			List<WebElement> watchlistDocInfo = BrowserAction
+					.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_DOCINFO_CSS);
+			for (WebElement watchlistDoc : watchlistDocInfo) {
+				watchLabels.add(watchlistDoc.findElement(By.tagName("e")).getText());
+			}
+
+			System.out.println("docInfoInput labels-->" + docInfoInput);
+			System.out.println("watch list labels-->" + watchLabels);
+
+			Assert.assertEquals(docInfoInput, watchLabels);
+
+			LoginTR.logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -112,8 +144,8 @@ public class TestCase_E1 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "watchlist docinfo...Timescited,comments,views not present")));// screenshot
 			closeBrowser();
 		}
 
