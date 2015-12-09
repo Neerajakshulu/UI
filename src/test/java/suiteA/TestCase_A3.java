@@ -46,8 +46,7 @@ public class TestCase_A3 extends TestBase{
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 //		System.out.println(xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),this.getClass().getSimpleName().charAt(10),1));
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		test = extent.startTest(var, "To verify that existing LI user is able to login and logout successfully").assignCategory("Suite A");
-		
+		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully").assignCategory("Suite A");
 	}
 	
 	@Test

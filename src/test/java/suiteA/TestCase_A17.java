@@ -40,9 +40,9 @@ public class TestCase_A17 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
-		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that name of a user is truncated using ellipse if the name is very long").assignCategory("Suite A");
+	public void beforeTest() throws Exception{
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that name of a user is truncated using ellipse if the name is very long").assignCategory("Suite A");
 		
 	}
 	
