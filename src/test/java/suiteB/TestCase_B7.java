@@ -40,9 +40,10 @@ public class TestCase_B7 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
+	public void beforeTest() throws Exception{
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that MINIMUM SHOULD MATCH rule is working correctly").assignCategory("Suite B");
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that no search results get displayed if search engine doesn't interpret the query and that a proper message gets displayed regarding that").assignCategory("Suite B");
 		
 	}
 	

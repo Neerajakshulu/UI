@@ -40,9 +40,10 @@ public class TestCase_B12 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
+	public void beforeTest() throws Exception{
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that the addition of total articles count and total profiles count is equal to total search results count").assignCategory("Suite B");
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that the addition of total articles count and total profiles count is equal to total search results count").assignCategory("Suite B");
 		
 	}
 	

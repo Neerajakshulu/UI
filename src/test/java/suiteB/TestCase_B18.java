@@ -28,11 +28,12 @@ public class TestCase_B18 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception{
 
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"To verify that Times cited and Comments fields are getting displayed for each document in search results page")
+				.startTest(var,
+						"Verify that Times cited and Comments fields are getting displayed for each document in search results page")
 				.assignCategory("Suite B");
 
 	}

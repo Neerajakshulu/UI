@@ -32,11 +32,12 @@ public class TestCase_B20 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception{
 
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"To verify that user is able to sort the documents by TIMES CITED field")
+				.startTest(var,
+						"Verify that user is able to sort the documents by TIMES CITED field")
 				.assignCategory("Suite B");
 
 	}
