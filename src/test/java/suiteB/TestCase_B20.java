@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -77,9 +78,11 @@ public class TestCase_B20 extends TestBase {
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("cat dog mammal");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
@@ -91,10 +94,11 @@ public class TestCase_B20 extends TestBase {
 				timeCitedCountListBeforeSort.add(Long.parseLong(element.getText().trim()));
 			}
 
-			timeCitedCountListAfterSort = timeCitedCountListBeforeSort;
+			timeCitedCountListAfterSort.addAll(timeCitedCountListBeforeSort);
 			Collections.sort(timeCitedCountListAfterSort);
 
 			try {
+				Assert.assertTrue(timeCitedCountListBeforeSort.size()>0);
 				Assert.assertEquals(timeCitedCountListBeforeSort, timeCitedCountListAfterSort);
 				test.log(LogStatus.PASS, "User is able to sort the search results");
 			} catch (Throwable t) {
