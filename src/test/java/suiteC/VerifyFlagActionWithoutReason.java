@@ -102,6 +102,7 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					Thread.sleep(10000);
 					jsClick(ob,commentsList.get(i)
 							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
 					
