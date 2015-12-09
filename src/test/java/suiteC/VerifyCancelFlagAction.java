@@ -116,6 +116,7 @@ public class VerifyCancelFlagAction extends TestBase {
 							
 							jsClick(ob,commentsList.get(i)
 									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+							Thread.sleep(10000);
 						}
 					break;
 				}

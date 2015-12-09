@@ -145,6 +145,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
+		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
 		jsClick(ob,ob.findElement(By.linkText(linkName)));
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}
