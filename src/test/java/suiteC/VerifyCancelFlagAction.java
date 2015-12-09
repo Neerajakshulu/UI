@@ -105,6 +105,7 @@ public class VerifyCancelFlagAction extends TestBase {
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					Thread.sleep(10000);
 					jsClick(ob,commentsList.get(i)
 							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
 					commentsCount = i;
@@ -122,7 +123,8 @@ public class VerifyCancelFlagAction extends TestBase {
 				}
 
 			}
-			
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
+					80);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
 					40);
