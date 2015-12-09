@@ -110,7 +110,7 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
 								80);
 						}catch(Exception e){
-							
+							Thread.sleep(10000);
 							jsClick(ob,commentsList.get(i)
 									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
 						}

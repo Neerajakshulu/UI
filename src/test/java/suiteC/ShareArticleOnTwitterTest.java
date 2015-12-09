@@ -106,7 +106,9 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	public void shareOnTwitter(String tusername,String tpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO,"Sharing Article on Twitter");
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();
