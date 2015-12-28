@@ -100,7 +100,7 @@
 </test>
 
 <test name="Profile_Search_with_Role">
-	<parameter name="role" value="QA"></parameter>
+	<parameter name="role" value="engineer"></parameter>
     <classes>
         <class name="suiteD.FindProfileWithRoleTest" ></class> 
     </classes>
