@@ -141,7 +141,7 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-	public void openBrowser() throws Exception{
+	/*public void openBrowser() throws Exception{
 		
 		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -166,7 +166,7 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 		
-	}
+	}*/
 	
 
 	
@@ -176,49 +176,49 @@ public class TestBase {
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-//	public void openBrowser(){
-//		
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//		     ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver(capabilities);
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-//			DesiredCapabilities capability = DesiredCapabilities.chrome();
-//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob= new ChromeDriver(capability);
-//		}
-//		
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			
-//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-//			SafariOptions safariOptions = new SafariOptions();
-//			safariOptions.setUseCleanSession(true);
-//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
-//			ob = new SafariDriver(desiredCapabilities);
-//		}
-//	
-//		
-//		
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//			
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//		
-//	}
+	public void openBrowser(){
+
+		if(CONFIG.getProperty("browserType").equals("FF")){
+			ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+			DesiredCapabilities capability = DesiredCapabilities.chrome();
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+			ob= new ChromeDriver(capability);
+		}
+
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+
+
+
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+
+	}
 	
 	//Closing the browser
 	public void closeBrowser(){

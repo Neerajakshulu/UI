@@ -1,18 +1,27 @@
 package suiteB;
 
+
+
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,12 +30,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
+
 public class TestCase_B22 extends TestBase{
-
-	
-
-
-static int status=1;
+	static int status=1;
 	
 //	Following is the list of status:
 //		1--->PASS
@@ -37,20 +43,16 @@ static int status=1;
 	public void beforeTest() throws Exception{
 		
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that MORE and LESS links in the left navigation pane are working correctly").assignCategory("Suite B");
+		test = extent.startTest(var, "Verify that * provides right hand truncation").assignCategory("Suite B");
 		
 	}
 	
 	@Test
 	public void testcaseB22() throws Exception{
+		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
 		boolean master_condition=suiteRunmode && testRunmode;
-		Map<String,String> filters= new HashMap<String,String>();
-		filters.put("Category", "category");
-		filters.put("Documents", "doctype");
-		filters.put("Institutions", "institution");
-		filters.put("Authors", "author");
 		
 		if(!master_condition){
 			
@@ -61,109 +63,104 @@ static int status=1;
 		}
 		
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
-		
 		try{
 		
-		openBrowser();
-		try{
+		
+			
+			String search_query="educat*";
+			
+			openBrowser();
+			clearCookies();
 			maximizeWindow();
-			}
-			catch(Throwable t){
-				
-				System.out.println("maximize() command not supported in Selendroid");
-			}
-		clearCookies();
-	
-		
-		//Navigate to TR login page and login with valid TR credentials
-		ob.navigate().to(host);
-		Thread.sleep(10000);
-		login();
-		Thread.sleep(15000);
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-		Thread.sleep(4000);
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-		Thread.sleep(4000);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
-		
-		List<WebElement> ckBoxList;
-			for(Map.Entry<String, String> entry: filters.entrySet()){
-			int checkBoxDisplayed=	0;
-			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
+			
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			Thread.sleep(8000);
+			
+			//login using TR credentials
+			login();
+			Thread.sleep(15000);
+			
+			//Type into the search box and get search results
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
-						
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
 			
-			try{
-				Assert.assertTrue(checkBoxDisplayed==5);
-				test.log(LogStatus.PASS,String.format("default filters displayed for %s is 5", entry.getKey()) );	
-			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("default filters displayed for %s is not equal to 5", entry.getKey()));
-					test.log(LogStatus.INFO, "Error--->" + t);
-					ErrorUtil.addVerificationFailure(t);
-					status = 2;
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
+			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
+			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ArrayList<String> urls=new ArrayList<String>();
+			for(int i=0;i<searchResults.size();i++){
+				
+				urls.add(searchResults.get(i).getAttribute("href"));
+			}
+			boolean condition1,condition2,condition3,masterSearchCondition;
+			String pageText;
+			ArrayList<Integer> error_list=new ArrayList<Integer>();
+			int count=0;
+			for(int i=0;i<urls.size()-5;i++){
+				
+				ob.navigate().to(urls.get(i));
+				Thread.sleep(5000);
+//				String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
+//				ob.get(link55);
+				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
+				JavascriptExecutor executor = (JavascriptExecutor)ob;
+				executor.executeScript("arguments[0].click();", myE);
+				
+				
+				Set<String> myset=ob.getWindowHandles();
+				Iterator<String> myIT=myset.iterator();
+				ArrayList<String> mylist55=new ArrayList<String>();
+				
+				
+				for(int k=0;k<myset.size();k++){
+					
+					mylist55.add(myIT.next());
+					
 				}
-			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			Thread.sleep(8000);
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
-			checkBoxDisplayed=0;
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
-			
-			try{
-				Assert.assertTrue(checkBoxDisplayed==10);
-				test.log(LogStatus.PASS,String.format("More link should load 10 filters for %s", entry.getKey()) );	
-			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("More link not loding with 10 filters for", entry.getKey()));
-					test.log(LogStatus.INFO, "Error--->" + t);
-					ErrorUtil.addVerificationFailure(t);
-					status = 2;
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
-			
-			}
-			scrollElementIntoView(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			Thread.sleep(8000);
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
-			checkBoxDisplayed=0;
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
-		
-			try{
-				Assert.assertTrue(checkBoxDisplayed==5);
-				test.log(LogStatus.PASS,String.format("Less link should load 5 filters for %s", entry.getKey()) );	
-			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("Less link not loding with 5 filters for", entry.getKey()));
-					test.log(LogStatus.INFO, "Error--->" + t);
-					ErrorUtil.addVerificationFailure(t);
-					status = 2;
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "left_pane_is_not_ working_ for_ search_ results")));// screenshot
+				
+				ob.switchTo().window(mylist55.get(1));
+				Thread.sleep(15000);
+				
+				pageText=ob.getPageSource().toLowerCase();
+				condition1=pageText.contains("educate");
+				condition2=pageText.contains("educated");
+				condition3=pageText.contains("education");
+				masterSearchCondition=condition1 || condition2 || condition3;
+				System.out.println(masterSearchCondition);
+				if(masterSearchCondition){
+					
+					count++;
 				}
+				else
+				{
+					
+					error_list.add(i+1);
+				}
+				ob.close();
+				ob.switchTo().window(mylist55.get(0));
+				
 			}
-		logout();
-		closeBrowser();
-
-		
-		
-		}	
+			String message="";
+			for(int i=0;i<error_list.size();i++){
+				
+				message=message+error_list.get(i)+",";
+				
+			}
+			
+			
+			if(!compareNumbers(urls.size()-5,count)){
+				
+				test.log(LogStatus.FAIL, "* does not provide right hand truncation");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO,"Issues are in the following documents:\n"+message);//extent reports
+			}
+			
+			
+			closeBrowser();
+		}
 		catch(Throwable t){
-			t.printStackTrace();
-			test.log(LogStatus.FAIL,"Something went wrong");//extent reports
+			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
 			//next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -189,6 +186,10 @@ static int status=1;
 		else
 			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "SKIP");
 	
-	}	
+	}
 	
+
+	
+	
+
 }
