@@ -31,13 +31,13 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify flag action without selecting a reason")
+		test = extent.startTest(this.getClass().getSimpleName(), "Veirfy that user cannot flag a comment without selecting a reason")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testFlagInUserComments() throws Exception {
+	public void testFlagActionWithoutReason() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -81,8 +81,8 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 							.getText();
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount != 0) {
-						itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
-								.click();
+						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+								
 						isFound = true;
 						break;
 					}
@@ -102,8 +102,19 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					Thread.sleep(10000);
 					jsClick(ob,commentsList.get(i)
 							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+					
+					try{
+						Thread.sleep(10000);
+						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
+								80);
+						}catch(Exception e){
+							Thread.sleep(10000);
+							jsClick(ob,commentsList.get(i)
+									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+						}
 					break;
 				}
 
@@ -128,7 +139,7 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
 			LoginTR.logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

@@ -32,7 +32,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	public void beforeTest() {
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"To verify Record View Details link Navigate to WOS page and Navigate to Project Neon Page")
+						"Verify that details link in article record view is redirected to full record view of WOS")
 				.assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}

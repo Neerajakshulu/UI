@@ -42,9 +42,10 @@ public class FindProfileTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verify that user is able to Start/Stop following a user from profile page \n Verify that user should not able to  Edit others profile")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());

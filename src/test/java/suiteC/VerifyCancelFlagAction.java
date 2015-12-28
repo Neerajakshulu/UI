@@ -32,7 +32,7 @@ public class VerifyCancelFlagAction extends TestBase {
 	@BeforeTest
 	public void beforeTest() {
 
-		test = extent.startTest(this.getClass().getSimpleName(), "Cancel flag action verification")
+		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the flag action")
 				.assignCategory("Suite C");
 
 	}
@@ -82,8 +82,7 @@ public class VerifyCancelFlagAction extends TestBase {
 							.getText();
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount !=0) {
-						itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
-								.click();
+						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
 						isFound = true;
 						break;
 					}
@@ -106,18 +105,27 @@ public class VerifyCancelFlagAction extends TestBase {
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					Thread.sleep(10000);
 					jsClick(ob,commentsList.get(i)
 							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
 					commentsCount = i;
+					try{
+						Thread.sleep(10000);
+						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
+								80);
+						}catch(Exception e){
+							
+							jsClick(ob,commentsList.get(i)
+									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+							Thread.sleep(10000);
+						}
 					break;
 				}
 
 			}
-
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
 					80);
-
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));

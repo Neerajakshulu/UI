@@ -36,7 +36,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	    // Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() {
-			test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Profile Comments").assignCategory("Suite C");
+			test = extent.startTest(this.getClass().getSimpleName(), "Verify that comments added by the neon user are listed in profile page of the user").assignCategory("Suite C");
 			//load the run modes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		}
@@ -132,9 +132,9 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	
 	
 	public int getProfleComments() throws InterruptedException  {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))).click();
+		jsClick(ob,ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))));
 		waitUntilText("Profile");
-		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
+		jsClick(ob,ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))));
 		waitUntilText("Comments"); 
 		scrollingToElementofAPage();
 		String commentsCount=ob.findElement(By.cssSelector("li[class='search-heading tabs ng-isolate-scope active']")).getText();

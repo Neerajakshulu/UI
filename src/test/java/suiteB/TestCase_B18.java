@@ -2,6 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,6 +22,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 public class TestCase_B18 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -28,18 +31,18 @@ public class TestCase_B18 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception{
 
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"To verify that Times cited and Comments fields are getting displayed for each document in search results page")
+				.startTest(var,
+						"Verify that RESET button in the left navigation pane in search results page is working correctly")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
 	public void testcaseB18() throws Exception {
-
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -65,103 +68,68 @@ public class TestCase_B18 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			Thread.sleep(10000);
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			Thread.sleep(4000);
+			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+			Thread.sleep(4000);
+			waitForAllElementsToBePresent(ob,
+					By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
+					
+			int checkboxesSelected = 0;
+			List<WebElement> checkboxList; 
+			for (int i= 0;i<2 ; i++) {
+				checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
+					jsClick(ob,checkboxList.get(i));
+				waitForAjax(ob);
+				Thread.sleep(4000);
+
+			}
+			
+			checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+			for (WebElement element : checkboxList) {
+				if (element.isSelected())
+					checkboxesSelected++;
+
+			}
+			Assert.assertTrue(checkboxesSelected != 0, "No filters is selected");
+			WebElement resetButton = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_reset_button_css")));
+			jsClick(ob, resetButton);
 			waitForAjax(ob);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 60);
-			List<WebElement> resultList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_item_xpath")));
-			List<WebElement> timeCiteList;
-			List<WebElement> viewsList;
-			List<WebElement> commentsList;
-			int timeCiteCount = 0, viewsCount = 0, commentsCount = 0;
-			waitForAjax(ob);
-			timeCiteList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_search_results_xpath")));
-			if (timeCiteList.size() != 0) {
-				for (WebElement timeCite : timeCiteList) {
-					if (!timeCite.isDisplayed())
-						timeCiteCount++;
-				}
-			} else {
-				viewsCount = -1;
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
+			checkboxList = ob
+					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+
+			checkboxesSelected = 0;
+			for (WebElement element : checkboxList) {
+				if (element.isSelected())
+					checkboxesSelected++;
+
 			}
 
 			try {
-				Assert.assertTrue(resultList.size() == timeCiteList.size() && timeCiteCount == 0);
-				test.log(LogStatus.PASS, "Time cite field is displayed for all articles");
+				Assert.assertTrue(checkboxesSelected == 0);
+				test.log(LogStatus.PASS, "Reset button for search results should work fine");
 			} catch (Throwable t) {
-				if (timeCiteCount == -1)
-					test.log(LogStatus.FAIL, "Time cite field is not displayed for any articles");
-				test.log(LogStatus.FAIL,
-						String.format("Time cite field is not displayed for %d articles", timeCiteCount));
+				test.log(LogStatus.FAIL, "Reset button for search results not working as expected");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "TimeCite for search results validation failed")));// screenshot
-
-			}
-//			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
-//			if (viewsList.size() != 0) {
-//				for (WebElement views : viewsList) {
-//					if (!views.isDisplayed())
-//						viewsCount++;
-//				}
-//			} else {
-//				viewsCount = -1;
-//			}
-//
-//			try {
-//				Assert.assertTrue(resultList.size() == viewsList.size() && viewsCount == 0);
-//				test.log(LogStatus.PASS, "views field is displayed for all articles");
-//			} catch (Throwable t) {
-//				if (viewsCount == -1)
-//					test.log(LogStatus.FAIL, "views field is not displayed for any articles");
-//				else
-//					test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
-//				test.log(LogStatus.INFO, "Error--->" + t);
-//				ErrorUtil.addVerificationFailure(t);
-//				status = 2;
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//						this.getClass().getSimpleName() + "Viewsfor search results validation failed")));// screenshot
-//
-//			}
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
-			if (commentsList.size() != 0) {
-				for (WebElement comments : commentsList) {
-					if (!comments.isDisplayed())
-						commentsCount++;
-				}
-			} else {
-				commentsCount = -1;
-			}
-
-			try {
-				Assert.assertTrue(resultList.size() == commentsList.size() && commentsCount == 0);
-				test.log(LogStatus.PASS, "Comments field is displayed for all documents");
-			} catch (Throwable t) {
-				if (commentsCount == -1)
-					test.log(LogStatus.FAIL, "Comments field is not displayed for any articles");
-				else
-					test.log(LogStatus.FAIL,
-							String.format("Comments field is not displayed for %d articles", commentsCount));
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Comments for search results validation failed")));// screenshot
-
+						this.getClass().getSimpleName() + "reset_ is_not_ working_ for_ search_ results")));// screenshot
 			}
 			logout();
 			closeBrowser();
-		}
-
-		catch (Throwable t) {
+			
+		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something went wrong");// extent reports
 			// next 3 lines to print whole testng error in report
@@ -193,4 +161,5 @@ public class TestCase_B18 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
+
 }

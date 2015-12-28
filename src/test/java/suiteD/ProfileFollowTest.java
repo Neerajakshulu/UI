@@ -38,9 +38,12 @@ public class ProfileFollowTest extends TestBase {
 	static String followAfter=null;
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws  Exception {
+		
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		//System.out.println("column name-->"+var);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verify that user is able to Start/Stop following a user from profile search results page")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());

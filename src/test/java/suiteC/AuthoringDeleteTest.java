@@ -38,7 +38,7 @@ public class AuthoringDeleteTest extends TestBase {
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() {
-			test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Delete Comments").assignCategory("Suite C");
+			test = extent.startTest(this.getClass().getSimpleName(), "Verify that user can delete the comments user authored themselves and validate the comment count").assignCategory("Suite C");
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		}
 	
@@ -151,7 +151,7 @@ public class AuthoringDeleteTest extends TestBase {
 			waitUntilText("Are you sure you wish to delete this comment?");
 			
 			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))));
 			Thread.sleep(6000);
 			totalCommentsAfterDeletion=Authoring.getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->"+totalCommentsAfterDeletion);

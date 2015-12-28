@@ -35,9 +35,9 @@ public class TestCase_A12 extends TestBase{
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest(){
-			
-			test = extent.startTest(this.getClass().getSimpleName(), "To verify PASSWORD field in new TR user registration page").assignCategory("Suite A");
+		public void beforeTest() throws Exception{
+			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+			test = extent.startTest(var, "Verify that PASSWORD field in new TR user registration page").assignCategory("Suite A");
 //			test.log(LogStatus.INFO, "****************************");
 			
 			//load the runmodes of the tests			

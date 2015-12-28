@@ -1,36 +1,34 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite F">
 
+	<test name="Test F1">
+		<classes>
+			<class name="suiteF.TestCase_F1"></class>
+		</classes>
+	</test>
 
 
-
-<test name="Test F1">
-    <classes>
-        <class name="suiteF.TestCase_F1" ></class>  
-    </classes>
-</test>
-
-
-<test name="Test F2">
-    <classes>
-        <class name="suiteF.TestCase_F2" ></class>  
-    </classes>
-</test>
+	<test name="Test F2">
+		<classes>
+			<class name="suiteF.TestCase_F2"></class>
+		</classes>
+	</test>
 
 
-<test name="Test F3">
-    <classes>
-        <class name="suiteF.TestCase_F3" ></class>  
-    </classes>
-</test>
+	<test name="Test F3">
+		<classes>
+			<class name="suiteF.TestCase_F3"></class>
+		</classes>
+	</test>
 
 
-<test name="Test F4">
-    <classes>
-        <class name="suiteF.TestCase_F4" ></class>  
-    </classes>
-</test>
+	<test name="Test F4">
+		<classes>
+			<class name="suiteF.TestCase_F4"></class>
+		</classes>
+	</test>
 
+	
 
 </suite>
 

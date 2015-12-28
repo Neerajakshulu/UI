@@ -45,7 +45,7 @@ public class ShareArticleOnFBTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),"Article Sharing using Facebook").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(),"Verify that user is able to add an article on facebook").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
 	
@@ -109,7 +109,7 @@ public class ShareArticleOnFBTest extends TestBase {
 	public void shareOnFacebook(String fbusername,String fbpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO,"Sharing Article on Facebook");
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 60);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			Thread.sleep(3000);
@@ -180,16 +180,17 @@ public class ShareArticleOnFBTest extends TestBase {
 	}
 	
 	
-	public static void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
 		
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		Thread.sleep(4000);
 	}
 	
-	public static void chooseArticle(String linkName) throws InterruptedException {
-		ob.findElement(By.linkText(linkName)).click();
+	public void chooseArticle(String linkName) throws InterruptedException {
+		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
+		jsClick(ob,ob.findElement(By.linkText(linkName)));
 		Thread.sleep(8000);//providing more while script is getting failed in saucelabs
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}

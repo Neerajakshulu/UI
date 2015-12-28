@@ -35,7 +35,7 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 	public void beforeTest() {
 
 		test = extent
-				.startTest(this.getClass().getSimpleName(), "Verification of flag for comment user authored themselves")
+				.startTest(this.getClass().getSimpleName(), "Verify that flag button is not displyed for comments a user authored themselves")
 				.assignCategory("Suite C");
 
 	}

@@ -17,7 +17,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_OWN_PROFILE_INTEREST_SKILLS_CSS("a[class='remove-button ng-binding ng-scope']"),
 	HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS("div[class='comment-error-msg ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS("a[class='ng-binding']"),
-	HOME_PROJECT_NEON_PROFILE_NAME_CSS("h4[class='webui-media-heading']"),
+	HOME_PROJECT_NEON_PROFILE_NAME_CSS("span[class='ne-profile-object-title ng-scope']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_TITLE_CSS("h3[class='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_ARTICLE_WATCH_CSS("button[class^='btn btn-default pub-action-btn']"),
 	HOME_PROJECT_NEON_WATCHLIST_DOCINFO_CSS("span[class^='doc-info']"),
@@ -45,9 +45,14 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS("input[value='Log In']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS("input[name='publish'][type='submit']"),
 	
-	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_CSS("ul[class='list-unstyled meta ng-scope']"),
-	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("span[class='interest-or-skill ng-binding ng-scope']");
+	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG("h6"),
+	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("li[class='interest-or-skill ng-binding ng-scope']"),
+	HOME_PROJECT_NEON_SEARCH_BOX_CSS("input[placeholder='Search']"),
+	HOME_PROJECT_NEON_SEARCH_CLICK_CSS("i[class='webui-icon webui-icon-search']"),
 	
+	HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS("li[class='content-type-selector ng-scope']"),
+	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("span[class='ne-profile-image-wrapper']"),
+	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out");
 	
 	
 	private String locator;

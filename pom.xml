@@ -110,7 +110,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile>
-						<!--  <suiteXmlFile>src/test/resources/xml/testng.xml</suiteXmlFile> -->
+						 <!-- <suiteXmlFile>src/test/resources/xml/testng.xml</suiteXmlFile> -->
 					</suiteXmlFiles>
 
 					<systemProperties>

@@ -33,8 +33,9 @@ public class FindProfileWithInterestTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var,
 				"Verify that user is able to search for profiles with intrests").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
@@ -89,10 +90,12 @@ public class FindProfileWithInterestTest extends TestBase {
 	@Parameters("interest")
 	public void findOthersProfileWithIntersts(String interest) throws Exception  {
 				try {
-					LoginTR.searchArticle(interest);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results are having provided Interest");
-					ProfilePage.validateProfileInterest(interest);
+					ProfilePage.enterSearchKeyAndClick(interest);
+					if(ProfilePage.getPeopleCount()>0) {
+						ProfilePage.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results are having provided Interest");
+						ProfilePage.validateProfileInterest(interest);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {

@@ -14,6 +14,17 @@ import util.OnePObjectMap;
 
 public class ProfilePage  extends TestBase {
 	
+	/**
+	 * Search results people count
+	 */
+	static int peopleCount=0;
+			
+	public static void enterSearchKeyAndClick(String searchKey) throws Exception {
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
+		Thread.sleep(2000);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
+		Thread.sleep(4000);
+	}
 	
 	/**
 	 * Method for Validate Profile Search with last name
@@ -42,12 +53,12 @@ public class ProfilePage  extends TestBase {
 	public static void validateProfileMetaData(String metaData) throws Exception {
 		List<WebElement> profilesLastname=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
 		if(profilesLastname.size()>0){
-			List<WebElement> profilesMetaData=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_CSS);
+			List<WebElement> profilesMetaData=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG);
 			System.out.println("Profile metadata--->"+profilesMetaData.size());
 			for(WebElement profileMetaData:profilesMetaData) {
 				System.out.println("Meta Data-->"+profileMetaData.getText());
 				if(!StringUtils.containsIgnoreCase(profileMetaData.getText(), metaData)) {
-					throw new Exception("Profile serach not verifying with Role/Primary Institution/Country	");
+					throw new Exception("Profile search not verifying with Role/Primary Institution/Country	");
 				}
 			}
 		}
@@ -55,13 +66,25 @@ public class ProfilePage  extends TestBase {
 			System.out.println("No Profile Search Results are not available with \t"+metaData+ "\t role/Primary Institution/Country");
 	}
 	
+	
+	/**
+	 * Method for Click People after searching an profile
+	 * @throws Exception, When People are not present/Disabled
+	 */
+	public static int getPeopleCount() throws Exception {
+			String listPeople=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).findElement(By.tagName("span")).getText();
+			peopleCount=Integer.parseInt(listPeople);
+			System.out.println("Total People search results-->"+peopleCount);
+			return peopleCount;
+	}
+	
 	/**
 	 * Method for Click People after searching an profile
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public static void clickPeople() throws Exception {
-			ob.findElement(By.xpath("//a[contains(text(), 'People')]")).click();
-			Thread.sleep(4000);
+			BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+			Thread.sleep(8000);
 	}
 	
 	
@@ -86,7 +109,7 @@ public class ProfilePage  extends TestBase {
 				interests.add(intSkill.getText());
 			}
 			
-			//System.out.println("interests and skills-->"+interests);
+			System.out.println("interests and skills-->"+interests);
 			
 			if(!interests.contains(interestAndSkill)) {
 				throw new Exception("Profile Search not happening with Interests and Skill "+interestAndSkill);

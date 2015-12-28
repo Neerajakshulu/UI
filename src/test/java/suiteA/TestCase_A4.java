@@ -36,9 +36,9 @@ public class TestCase_A4 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
-		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that existing FB user is able to login and logout successfully").assignCategory("Suite A");
+	public void beforeTest() throws Exception{
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that existing FB user is able to login and logout successfully").assignCategory("Suite A");
 		
 	}
 	
@@ -85,7 +85,7 @@ public class TestCase_A4 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 		Thread.sleep(15000);
-		if(!checkElementPresence("help_link")){
+		if(!checkElementPresence_link_text("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
 			status=2;//excel
@@ -95,7 +95,7 @@ public class TestCase_A4 extends TestBase{
 		}
 		
 		//Verify that profile name gets displayed correctly
-		if(!checkElementPresence("FB_profile_name_xpath")){
+		if(!checkElementPresence("header_label")){
 			
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel

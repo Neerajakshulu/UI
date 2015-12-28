@@ -33,8 +33,9 @@ public class FindProfileWithRoleTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify Profile Search with Title/Role").assignCategory("Suite D");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify Profile Search with Title/Role").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			
@@ -88,10 +89,12 @@ public class FindProfileWithRoleTest extends TestBase {
 	@Parameters("role")
 	public void findOthersProfileWithRole(String role) throws Exception  {
 				try {
-					LoginTR.searchArticle(role);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results having provided role");
-					ProfilePage.validateProfileMetaData(role);
+					ProfilePage.enterSearchKeyAndClick(role);
+					if(ProfilePage.getPeopleCount()>0) {
+						ProfilePage.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results having provided role");
+						ProfilePage.validateProfileMetaData(role);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {

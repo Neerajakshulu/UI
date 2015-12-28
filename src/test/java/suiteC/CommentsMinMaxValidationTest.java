@@ -49,7 +49,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	public void beforeTest() {
 		test = extent
 				.startTest(this.getClass().getSimpleName(),
-						"Authoring comment min length and max length validation").assignCategory("Suite C");
+						"Verify that  proper error messages are diplayed for min and max length validation for creating the comments").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
 	
@@ -137,7 +137,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			//System.out.println("Min Validation Error Message--->"+minValidErrMsg);
 			BrowserWaits.waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
-			
+
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
 			Thread.sleep(2000);
@@ -145,7 +145,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			BrowserWaits.waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
-			
+
 			Thread.sleep(4000);
 			LoginTR.logOutApp();
 			closeBrowser();
@@ -208,16 +208,17 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	}
 	
 	
-	public static void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
 		
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		Thread.sleep(4000);
 	}
 	
-	public static void chooseArticle(String linkName) throws InterruptedException {
-		ob.findElement(By.linkText(linkName)).click();
+	public void chooseArticle(String linkName) throws InterruptedException {
+		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
+		jsClick(ob,ob.findElement(By.linkText(linkName)));
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}
 	

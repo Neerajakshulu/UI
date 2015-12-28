@@ -36,9 +36,10 @@ public class ApplicationLinksValidationTest extends TestBase {
 	static String PARENT_WINDOW_HANDLE=null;
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verify that  below Application links working as expected \n 1. Web of Science \n 2.End Note \n 3.InCities \n 4.ScholarOne Abstracts \n 5.ScholarOne Manuscripts")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());

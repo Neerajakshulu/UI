@@ -34,7 +34,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 	public void beforeTest() {
 
 		test = extent.startTest(this.getClass().getSimpleName(),
-				"Verify Unflag Action for comments without selecting a Reason").assignCategory("Suite C");
+				"Verify that user is not able to unflag the comment without selecting a Reason").assignCategory("Suite C");
 
 	}
 
@@ -83,8 +83,8 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 							.getText();
 					commentsCount = Integer.parseInt(strCmntCt);
 					if (commentsCount != 0) {
-						itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
-								.click();
+						jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+								
 						isFound = true;
 						break;
 					}
@@ -108,7 +108,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 					int y = point.getY() + 100;
 					String script = "scroll(0," + y + ");";
 					((JavascriptExecutor) ob).executeScript(script);
-					more.click();
+					jsClick(ob,more);
 					waitForAjax(ob);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -137,8 +137,8 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
 					40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))).click();
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 			Thread.sleep(5000);
 
 			try {
@@ -180,9 +180,9 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 		} catch (Throwable t) {
 			t.printStackTrace();

@@ -30,7 +30,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Validate Authoring Appreciation Functionality").assignCategory("Suite C");
+		test = extent.startTest(this.getClass().getSimpleName(), "Verfiy that user can appreciate comments made by other neon users and validate appreciation count").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");
 		//load the runmodes of the tests			
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
@@ -68,7 +68,8 @@ public class AuthoringAppreciateTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				
-				ob.navigate().to(System.getProperty("host"));
+				//ob.navigate().to(System.getProperty("host"));
+				ob.get(CONFIG.getProperty("testSiteName"));
 				AuthoringTest.waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
@@ -83,6 +84,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			AuthoringTest.clickLogin();
 			AuthoringTest.searchArticle(article);
 			AuthoringTest.chooseArticle(completeArticle);
+			validateAppreciationComment();
 			validateAppreciationComment();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 			closeBrowser();
@@ -148,6 +150,8 @@ public class AuthoringAppreciateTest extends TestBase {
 				   //status=2;
 				   test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Comment Appreciation not happended")));
 				   throw new Exception("Comment Appreciation not happended");
+			   }else{
+				   test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
 			   }
 		} 
 		else if (attrStatus.contains("UP")) {
@@ -163,6 +167,8 @@ public class AuthoringAppreciateTest extends TestBase {
 				   status=2;
 				   test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Comment Appreciation not happended")));
 				   throw new Exception("Comment Appreciation not happended");
+			   }else{
+				   test.log(LogStatus.PASS, "Up- apreciate functionality working fine for comments");
 			   }
 			}
 	}

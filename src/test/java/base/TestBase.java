@@ -13,6 +13,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -64,6 +68,8 @@ public class TestBase {
 	public static String host=null;
 	public static String user1,user2;
 	public static String fn1,fn2,ln1,ln2;
+	public static int xRows,xCols;
+	public static String[][] xData;
 	
 	@BeforeSuite
 	public void beforeSuite() throws Exception{
@@ -135,7 +141,7 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-	public void openBrowser() throws Exception{
+	/*public void openBrowser() throws Exception{
 		
 		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -160,7 +166,7 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 		
-	}
+	}*/
 	
 
 	
@@ -170,49 +176,49 @@ public class TestBase {
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-//	public void openBrowser(){
-//		
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//		     ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver(capabilities);
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-//			DesiredCapabilities capability = DesiredCapabilities.chrome();
-//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob= new ChromeDriver(capability);
-//		}
-//		
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			
-//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-//			SafariOptions safariOptions = new SafariOptions();
-//			safariOptions.setUseCleanSession(true);
-//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
-//			ob = new SafariDriver(desiredCapabilities);
-//		}
-//	
-//		
-//		
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//			
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//		
-//	}
+	public void openBrowser(){
+
+		if(CONFIG.getProperty("browserType").equals("FF")){
+			ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+			DesiredCapabilities capability = DesiredCapabilities.chrome();
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+			ob= new ChromeDriver(capability);
+		}
+
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+
+
+
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+
+	}
 	
 	//Closing the browser
 	public void closeBrowser(){
@@ -491,387 +497,8 @@ public class TestBase {
 					return true;
 				}	
 			 
-			 //This method has been specially designed for REPORTS module to reach upto dropdown irrespective of the instance
-			 public void ReportSteps(String URL) throws Exception{
-					
-					
-					switch(URL){
-					
-					//ACTIMIZE
-					case "https://actimize-stage.pramata.com":
-						System.out.println("We have arrived directly to the drop down...So,nothing to do....");
-						break;
-						
-					//CALLAWAYGOLF
-					case "https://callawaygolf-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-					
-					//CENTURYLINK
-					case "https://centurylink-stage.pramata.com":
-						ob.findElement(By.xpath("//input[@value='document']")).click();
-						Thread.sleep(1000);
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CISCO
-					case "https://cisco-stage.pramata.com":
-						ob.findElement(By.xpath("//input[@value='document']")).click();
-						Thread.sleep(1000);
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-					
-					//CTL
-					case "https://ctl-stage.pramata.com":
-//						ob.findElement(By.linkText("Select All")).click();
-//						Thread.sleep(2000);
-//						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-//						Thread.sleep(3000);
-						break;
-						
-					//EDIFECS
-					case "https://edifecs-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//EXPRESSSCRIPTS
-					case "https://expressscripts-stage.pramata.com":
-						String xp1="//html/body/div[3]/div/div/div/div[2]/div/div/div/form/input[";
-						String xp2="]";
-						String xp3;
-						
-						for(int i=1;i<=3;i++){
-							
-							xp3=xp1+i+xp2;
-							
-							if(!ob.findElement(By.xpath(xp3)).isSelected())
-								ob.findElement(By.xpath(xp3)).click();
-							
-						}
-						
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//FICO
-					case "https://fico-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//INTELLIGRATED
-					case "https://intelligrated-stage.pramata.com":
-						System.out.println("We have arrived directly to the drop down...So,nothing to do....");
-						break;
-						
-					//LOCKTON
-					case "https://lockton-stage.pramata.com":
-						String xp4="//html/body/div[3]/div/div/div/div[2]/div/div/div/form/input[";
-						String xp5="]";
-						String xp6;
-						
-						for(int i=1;i<=2;i++){
-							
-							xp6=xp4+i+xp5;
-							
-							if(!ob.findElement(By.xpath(xp6)).isSelected())
-								ob.findElement(By.xpath(xp6)).click();
-							
-						}
-						
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//NOVELIS
-					case "https://novelis-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//NYBC
-					case "https://nybc-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//PTC
-					case "https://ptc-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//SEPRACOR
-					case "https://sepracor-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//TRUVENHEALTH
-					case "https://truvenhealth-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//VALSPAR-STAGE
-					case "https://valspar-stage.pramata.com":
-						String xp7="//html/body/div[3]/div/div/div/div[2]/div/div/div/form/input[";
-						String xp8="]";
-						String xp9;
-						
-						for(int i=1;i<=2;i++){
-							
-							xp9=xp7+i+xp8;
-							
-							if(!ob.findElement(By.xpath(xp9)).isSelected())
-								ob.findElement(By.xpath(xp9)).click();
-							
-						}
-						
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//WPAHS
-					case "https://wpahs-stage.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//SANDBOX
-					case "https://sfdc-sandbox.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//VALSPAR-TEST
-					case "https://valspar-test.pramata.com":
-						String xp77="//html/body/div[3]/div/div/div/div[2]/div/div/div/form/input[";
-						String xp88="]";
-						String xp99;
-						
-						for(int i=1;i<=2;i++){
-							
-							xp99=xp77+i+xp88;
-							
-							if(!ob.findElement(By.xpath(xp99)).isSelected())
-								ob.findElement(By.xpath(xp99)).click();
-							
-						}
-						
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//LOAD-TEST
-					case "https://load-test.pramata.com":
-						ob.findElement(By.xpath("//input[@value='document']")).click();
-						Thread.sleep(1000);
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//LINODE-TEST
-					case "https://linode-test.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//DIGITALOCEAN-TEST
-					case "https://digitalocean-test.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CISCO-PRODUCTION
-					case "https://cisco.pramata.com":
-						ob.findElement(By.xpath("//input[@value='document']")).click();
-						Thread.sleep(1000);
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CTL-PRODUCTION
-					case "https://ctl.pramata.com":
-						break;
-						
-					//MEDTRONIC-PRODUCTION
-					case "https://medtronic.pramata.com":
-						break;
-						
-					//LOCKTON
-					case "https://lockton-test.pramata.com":
-						String xp101="//html/body/div[3]/div/div/div/div[2]/div/div/div/form/input[";
-						String xp102="]";
-						String xp103;
-						
-						for(int i=1;i<=2;i++){
-							
-							xp103=xp101+i+xp102;
-							
-							if(!ob.findElement(By.xpath(xp103)).isSelected())
-								ob.findElement(By.xpath(xp103)).click();
-							
-						}
-						
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CALLAWAYGOLF-PRODUCTION
-					case "https://callawaygolf.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//NYBC-PRODUCTIONS
-					case "https://nybc.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-						
-					//PTC-PRODUCTION
-					case "https://ptc.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//NYBC-TEST
-					case "https://nybc-test.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CISCO-PRODUCTION
-					case "https://qa-cisco.pramata.com":
-						ob.findElement(By.xpath("//input[@value='document']")).click();
-						Thread.sleep(1000);
-						ob.findElement(By.xpath("//input[@type='submit' and @value='Continue']")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//INTELLIGRATED-PRODUCTION
-					case "https://intelligrated.pramata.com":
-						System.out.println("We have arrived directly to the drop down...So,nothing to do....");
-						break;
-					
-						
-					//ACTIMIZE
-					case "https://actimize.pramata.com":
-						System.out.println("We have arrived directly to the drop down...So,nothing to do....");
-						break;
-					
-					//EDIFECS-PRODUCTION
-					case "https://edifecs.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					//CTL-OLD
-					case "https://ctl-old.pramata.com":
-						break;
-						
-					//MEDTRONIC-TEST
-					case "https://medtronic-test.pramata.com":
-						break;
-						
-					//INTELLIGRATED-TEST
-					case "https://intelligrated-test.pramata.com":
-						ob.findElement(By.linkText("Select All")).click();
-						Thread.sleep(2000);
-						ob.findElement(By.xpath("//*[@id='model_continue']")).click();
-						Thread.sleep(3000);
-						break;
-						
-					}
-			}
-			 	//select an option from REPORTS dropdown
-				public void report_dropdown_select_option(String option){
-				
-					WebElement myE=ob.findElement(By.xpath("//*[@id='criteria[1][type_id]']"));
-					Select mylist=new Select(myE);
-					mylist.selectByVisibleText(option);
-				
-			}
+			
+			 	
 				//To verify that a date falls between 2 particular dates
 				public boolean checkDate(String date,String minDate,String maxDate){
 					
@@ -1102,5 +729,115 @@ public class TestBase {
 						driver.switchTo().window(mainWindowHandle);
 
 					}
+
+					
+					
+					
+//Method to 
+
+//Method to return excel workbook path
+public String returnExcelPath(char ch){
+	
+	if(ch=='A')
+		return "src/test/resources/xls/A suite.xlsx";
+	else if(ch=='B')
+		return "src/test/resources/xls/B suite.xlsx";
+	else if(ch=='C')
+		return "src/test/resources/xls/C suite.xlsx";
+	else if(ch=='D')
+		return "src/test/resources/xls/D suite.xlsx";
+	else if(ch=='E')
+		return "src/test/resources/xls/E suite.xlsx";
+	else if(ch=='F')
+		return "src/test/resources/xls/F suite.xlsx";
+	else
+		return "No such excel file present";
+	
+	
+	
+}
+
+
+
+//Method to read excel worksheet
+public String xlRead(String sPath,int r,int c) throws Exception{
+	File myxl = new File(sPath);
+	FileInputStream myStream = new FileInputStream(myxl);
+	
+	XSSFWorkbook myWB = new XSSFWorkbook(myStream);
+	XSSFSheet mySheet = myWB.getSheetAt(0);	// Referring to 1st sheet
+	xRows = mySheet.getLastRowNum()+1;
+	xCols = mySheet.getRow(0).getLastCellNum();
+	System.out.println("Rows are " + xRows);
+	System.out.println("Cols are " + xCols);
+	xData = new String[xRows][xCols];
+    for (int i = 0; i < xRows; i++) {
+           XSSFRow row = mySheet.getRow(i);
+            for (int j = 0; j < xCols; j++) {
+               XSSFCell cell = row.getCell(j); // To read value from each col in each row
+               String value = cellToString(cell);
+               xData[i][j] = value;
+               }
+        }	
+	return xData[r][c];
+}
+
+
+public String xlRead2(String sPath,String cellValue,int c) throws Exception{
+	int r=0;
+	File myxl = new File(sPath);
+	FileInputStream myStream = new FileInputStream(myxl);
+	
+	XSSFWorkbook myWB = new XSSFWorkbook(myStream);
+	XSSFSheet mySheet = myWB.getSheetAt(0);	// Referring to 1st sheet
+	xRows = mySheet.getLastRowNum()+1;
+	xCols = mySheet.getRow(0).getLastCellNum();
+	System.out.println("Rows are " + xRows);
+	System.out.println("Cols are " + xCols);
+	xData = new String[xRows][xCols];
+    for (int i = 0; i < xRows; i++) {
+           XSSFRow row = mySheet.getRow(i);
+            for (int j = 0; j < xCols; j++) {
+               XSSFCell cell = row.getCell(j); // To read value from each col in each row
+               String value = cellToString(cell);
+               xData[i][j] = value;
+               if( xData[i][j].equalsIgnoreCase(cellValue)){
+            	   r=i;
+               }
+               }
+        }	
+	return xData[r][c];
+}
+
+
+
+
+
+public String cellToString(XSSFCell cell) {
+	// This function will convert an object of type excel cell to a string value
+        int type = cell.getCellType();
+        Object result;
+        switch (type) {
+            case XSSFCell.CELL_TYPE_NUMERIC: //0
+                result = cell.getNumericCellValue();
+                break;
+            case XSSFCell.CELL_TYPE_STRING: //1
+                result = cell.getStringCellValue();
+                break;
+            case XSSFCell.CELL_TYPE_FORMULA: //2
+                throw new RuntimeException("We can't evaluate formulas in Java");
+            case XSSFCell.CELL_TYPE_BLANK: //3
+                result = "-";
+                break;
+            case XSSFCell.CELL_TYPE_BOOLEAN: //4
+                result = cell.getBooleanCellValue();
+                break;
+            case XSSFCell.CELL_TYPE_ERROR: //5
+                throw new RuntimeException ("This cell has an error");
+            default:
+                throw new RuntimeException("We don't support this cell type: " + type);
+        }
+        return result.toString();
+    }
 
 }

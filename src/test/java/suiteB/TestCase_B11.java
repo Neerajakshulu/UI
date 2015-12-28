@@ -32,9 +32,10 @@ public class TestCase_B11 extends TestBase {
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
+	public void beforeTest() throws Exception{
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that sorting and filtering are retained when user navigates back to search results page from record view page").assignCategory("Suite B");
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that sorting and filtering are retained when user navigates back to search results page from record view page").assignCategory("Suite B");
 		
 	}
 	
