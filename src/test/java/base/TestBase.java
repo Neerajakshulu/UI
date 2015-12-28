@@ -782,37 +782,6 @@ public String xlRead(String sPath,int r,int c) throws Exception{
 	return xData[r][c];
 }
 
-
-public String xlRead2(String sPath,String cellValue,int c) throws Exception{
-	int r=0;
-	File myxl = new File(sPath);
-	FileInputStream myStream = new FileInputStream(myxl);
-	
-	XSSFWorkbook myWB = new XSSFWorkbook(myStream);
-	XSSFSheet mySheet = myWB.getSheetAt(0);	// Referring to 1st sheet
-	xRows = mySheet.getLastRowNum()+1;
-	xCols = mySheet.getRow(0).getLastCellNum();
-	System.out.println("Rows are " + xRows);
-	System.out.println("Cols are " + xCols);
-	xData = new String[xRows][xCols];
-    for (int i = 0; i < xRows; i++) {
-           XSSFRow row = mySheet.getRow(i);
-            for (int j = 0; j < xCols; j++) {
-               XSSFCell cell = row.getCell(j); // To read value from each col in each row
-               String value = cellToString(cell);
-               xData[i][j] = value;
-               if( xData[i][j].equalsIgnoreCase(cellValue)){
-            	   r=i;
-               }
-               }
-        }	
-	return xData[r][c];
-}
-
-
-
-
-
 public String cellToString(XSSFCell cell) {
 	// This function will convert an object of type excel cell to a string value
         int type = cell.getCellType();
