@@ -787,8 +787,6 @@ public String xlRead2(String sPath,String cellValue,int c) throws Exception{
 	XSSFSheet mySheet = myWB.getSheetAt(0);	// Referring to 1st sheet
 	xRows = mySheet.getLastRowNum()+1;
 	xCols = mySheet.getRow(0).getLastCellNum();
-	System.out.println("Rows are " + xRows);
-	System.out.println("Cols are " + xCols);
 	xData = new String[xRows][xCols];
     for (int i = 0; i < xRows; i++) {
            XSSFRow row = mySheet.getRow(i);

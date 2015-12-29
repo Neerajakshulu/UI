@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -88,9 +90,9 @@ public class FindProfileWithPrimaryInstitutionTest extends TestBase {
 	@Parameters("primaryInstitution")
 	public void findOthersProfileWithPrimaryInstitution(String primaryInstitution) throws Exception  {
 				try {
-					ProfilePage.enterSearchKeyAndClick(primaryInstitution);
-					if((ProfilePage.getPeopleCount())>0) {
-						ProfilePage.clickPeople();
+					SearchProfile.enterSearchKeyAndClick(primaryInstitution);
+					if((SearchProfile.getPeopleCount())>0) {
+						SearchProfile.clickPeople();
 						test.log(LogStatus.INFO, "validate populated search profile results having provided Primary Institution");
 						ProfilePage.validateProfileMetaData(primaryInstitution);
 					}

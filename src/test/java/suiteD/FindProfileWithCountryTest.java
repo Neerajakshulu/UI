@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -89,9 +91,9 @@ public class FindProfileWithCountryTest extends TestBase {
 	@Parameters("country")
 	public void findOthersProfileWithCountry(String country) throws Exception  {
 				try {
-					ProfilePage.enterSearchKeyAndClick(country);
-					if(ProfilePage.getPeopleCount()>0) {
-						ProfilePage.clickPeople();
+					SearchProfile.enterSearchKeyAndClick(country);
+					if(SearchProfile.getPeopleCount()>0) {
+						SearchProfile.clickPeople();
 						test.log(LogStatus.INFO, "validate populated search profile results having provided Country");
 						ProfilePage.validateProfileMetaData(country);
 					}

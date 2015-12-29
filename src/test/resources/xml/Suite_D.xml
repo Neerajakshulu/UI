@@ -9,6 +9,7 @@
 <parameter name="password" value="Welcome01"/>
 	
 <test name="Follow_Other_Profile">
+	<parameter name="profileName" value="reddy"/>
     <classes>
        	<class name="suiteD.ProfileFollowTest" ></class> 
     </classes>
