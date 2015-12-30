@@ -72,7 +72,6 @@ public class ShareArticleOnTwitterTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
-				
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")

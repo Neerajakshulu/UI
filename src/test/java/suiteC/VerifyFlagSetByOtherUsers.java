@@ -163,7 +163,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 					}
 					if(!flag){
-						test.log(LogStatus.FAIL, "Cooment is available");
+						test.log(LogStatus.FAIL, "Commment is available");
 						test.log(LogStatus.INFO, "Error--->");
 						status = 2;
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
@@ -185,7 +185,6 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			closeBrowser();
 		}
 
 		LoginTR.logOutApp();

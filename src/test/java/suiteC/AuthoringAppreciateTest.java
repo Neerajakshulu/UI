@@ -68,8 +68,7 @@ public class AuthoringAppreciateTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				
-				//ob.navigate().to(System.getProperty("host"));
-				ob.get(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(System.getProperty("host"));
 				AuthoringTest.waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
@@ -124,15 +123,15 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * @throws Exception, When Validation not done
 	 */
 	public  void validateAppreciationComment() throws Exception  {
-		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class^='col-xs-12 ng-scope col-sm-7']"));
+		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
 		System.out.println("size of total elemntes-->"+apprDivs.size());
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class^='webui-media-header']"))
-				.findElement(By.cssSelector("div[class^='user-notification']"));
+		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
+				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper"));
 		
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.tagName("span")).getText());
+		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		scrollingToElementofAPage();
-		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
@@ -144,7 +143,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   //status=2;
@@ -161,14 +160,14 @@ public class AuthoringAppreciateTest extends TestBase {
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			
 			Thread.sleep(4000);
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.tagName("span")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   status=2;
 				   test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Comment Appreciation not happended")));
 				   throw new Exception("Comment Appreciation not happended");
 			   }else{
-				   test.log(LogStatus.PASS, "Up- apreciate functionality working fine for comments");
+				   test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
 			   }
 			}
 	}

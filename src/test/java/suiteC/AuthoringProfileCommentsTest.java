@@ -132,14 +132,14 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	
 	
 	public int getProfleComments() throws InterruptedException  {
+		waitForAjax(ob);
 		jsClick(ob,ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))));
 		waitUntilText("Profile");
 		jsClick(ob,ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))));
 		waitUntilText("Comments"); 
 		scrollingToElementofAPage();
-		String commentsCount=ob.findElement(By.cssSelector("li[class='search-heading tabs ng-isolate-scope active']")).getText();
-		String[]count=commentsCount.split(" ");
-		int totalComments=Integer.parseInt(count[1]);
+		String commentsCount=ob.findElement(By.cssSelector("a[data-event-category='profilecomments'] span[ng-bind='vm.count']")).getText();
+		int totalComments=Integer.parseInt(commentsCount);
 		return totalComments;
 	}
 	

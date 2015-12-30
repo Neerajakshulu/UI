@@ -117,12 +117,14 @@ public class ShareArticleOnLITest extends TestBase {
 			String PARENT_WINDOW=ob.getWindowHandle();
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			Thread.sleep(6000);
-			
+			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
+			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']")).click();
 			Set<String> child_window_handles= ob.getWindowHandles();
 			System.out.println("window hanles-->"+child_window_handles.size());
 			 for(String child_window_handle:child_window_handles) {
 				 if(!child_window_handle.equals(PARENT_WINDOW)) {
 					 ob.switchTo().window(child_window_handle);
+					 Thread.sleep(6000);
 					 maximizeWindow();
 					 System.out.println("child window--->"+ob.getTitle());
 					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS);
@@ -131,27 +133,29 @@ public class ShareArticleOnLITest extends TestBase {
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
 					 Thread.sleep(6000);
 					 
-					 try {
-						Set<String> child_sub_window_handles= ob.getWindowHandles();
-						// System.out.println("child sub window--->"+child_sub_window_handles.size());
-						 for(String sub_window:child_sub_window_handles) {
-							 if(!sub_window.equals(child_window_handle)) {
-								 System.out.println("sub window--->"+ob.getTitle());
-								 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
-								 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
-								 Thread.sleep(3000);
-								 BrowserWaits.waitUntilText("Great! You have successfully shared this update.");
-							 }
-						 }
-					} catch (Exception e) {
-						test.log(LogStatus.INFO, "Unable to login into LI account from Remote Machines");
-					}
-					 ob.close();
+//					 try {
+//						Set<String> child_sub_window_handles= ob.getWindowHandles();
+//						// System.out.println("child sub window--->"+child_sub_window_handles.size());
+//						 for(String sub_window:child_sub_window_handles) {
+//							 if(!sub_window.equals(child_window_handle)) {
+//								 System.out.println("sub window--->"+ob.getTitle());
+//								 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
+//								 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS);
+//								 Thread.sleep(3000);
+//								 BrowserWaits.waitUntilText("Great! You have successfully shared this update.");
+//							 }
+//						 }
+//					} catch (Exception e) {
+//						test.log(LogStatus.INFO, "Unable to login into LI account from Remote Machines");
+//					}
+//					 ob.close();
 					 ob.switchTo().window(PARENT_WINDOW);
+					Thread.sleep(5000);
+					 ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")).click();
 				 }
 			 }
-			
-			LoginTR.logOutApp();
+			 Thread.sleep(5000);
+			logout();
 			closeBrowser();
 			
 		} catch (Exception e) {
