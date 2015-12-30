@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -33,8 +35,9 @@ public class FindProfileWithPrimaryInstitutionTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify Profile Search with Primary Institution").assignCategory("Suite D");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify Profile Search with Primary Institution").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			
@@ -77,7 +80,6 @@ public class FindProfileWithPrimaryInstitutionTest extends TestBase {
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
 					closeBrowser();
 				}
-				
 	}
 	
 	/**
@@ -88,10 +90,12 @@ public class FindProfileWithPrimaryInstitutionTest extends TestBase {
 	@Parameters("primaryInstitution")
 	public void findOthersProfileWithPrimaryInstitution(String primaryInstitution) throws Exception  {
 				try {
-					LoginTR.searchArticle(primaryInstitution);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results having provided Primary Institution");
-					ProfilePage.validateProfileMetaData(primaryInstitution);
+					SearchProfile.enterSearchKeyAndClick(primaryInstitution);
+					if((SearchProfile.getPeopleCount())>0) {
+						SearchProfile.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results having provided Primary Institution");
+						ProfilePage.validateProfileMetaData(primaryInstitution);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {

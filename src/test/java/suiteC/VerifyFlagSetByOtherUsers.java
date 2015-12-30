@@ -35,9 +35,9 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that only the user who set the flag can see the comment has flagged")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that only the user who set the flag can see the comment has flagged")
 				.assignCategory("Suite C");
 
 	}
@@ -163,7 +163,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 					}
 					if(!flag){
-						test.log(LogStatus.FAIL, "Cooment is available");
+						test.log(LogStatus.FAIL, "Commment is available");
 						test.log(LogStatus.INFO, "Error--->");
 						status = 2;
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
@@ -185,7 +185,6 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			closeBrowser();
 		}
 
 		LoginTR.logOutApp();

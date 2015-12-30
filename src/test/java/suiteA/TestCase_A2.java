@@ -92,16 +92,21 @@ public class TestCase_A2 extends TestBase{
 				Thread.sleep(15000);
 
 				//Verify that login is successful
-				if(!checkElementPresence("help_link")){
+				if(!checkElementPresence_link_text("apps")){
 
 					test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");//extent reports
 					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_existing_TR_credentials_not_working_fine")));//screenshot	
 
 				}
-
+				
+				//String name=ob.findElement(By.xpath("//div[@class='pull-right ng-isolate-scope']//a[@class='dropdown-toggle']//ne-profile-image[@class='data-alt']"));
+			//System.out.println(name);
+				Thread.sleep(3000);
+				
+				
 				//Verify that profile name gets displayed correctly
-				if(!checkElementPresence("TR_profile_name_xpath")){
+				if(!checkElementPresence("header_label")){
 
 					test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 					status=2;//excel

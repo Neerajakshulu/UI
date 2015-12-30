@@ -101,10 +101,10 @@ public class LoginTR extends TestBase{
 	}
 	
 	
-	public static void logOutApp() {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-		AuthoringProfileCommentsTest.waitUntilText("Sign out");
-		ob.findElement(By.linkText("Sign out")).click();
+	public static void logOutApp() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+		BrowserWaits.waitUntilText("Sign out");
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_LOGIN_BUTTON_CSS);
 		
 	}

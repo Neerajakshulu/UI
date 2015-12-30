@@ -29,9 +29,9 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Veirfy that user cannot flag a comment without selecting a reason")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Veirfy that user cannot flag a comment without selecting a reason")
 				.assignCategory("Suite C");
 
 	}

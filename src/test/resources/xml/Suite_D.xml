@@ -9,6 +9,7 @@
 <parameter name="password" value="Welcome01"/>
 	
 <test name="Follow_Other_Profile">
+	<parameter name="profileName" value="reddy"/>
     <classes>
        	<class name="suiteD.ProfileFollowTest" ></class> 
     </classes>
@@ -100,7 +101,7 @@
 </test>
 
 <test name="Profile_Search_with_Role">
-	<parameter name="role" value="QA"></parameter>
+	<parameter name="role" value="engineer"></parameter>
     <classes>
         <class name="suiteD.FindProfileWithRoleTest" ></class> 
     </classes>

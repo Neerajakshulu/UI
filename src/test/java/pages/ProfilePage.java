@@ -1,11 +1,13 @@
-package suiteD;
+package pages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import base.TestBase;
 import util.BrowserAction;
@@ -18,6 +20,7 @@ public class ProfilePage  extends TestBase {
 	 * Search results people count
 	 */
 	static int peopleCount=0;
+	static String PARENT_WINDOW_HANDLE=null;
 			
 	public static void enterSearchKeyAndClick(String searchKey) throws Exception {
 		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
@@ -119,5 +122,30 @@ public class ProfilePage  extends TestBase {
 			System.out.println("Profile Search Results are not available with \t"+interestAndSkill+ "\t Interests and Skills");
 		
 	}
-
+	
+	/**
+	 * Method for Validate Apps links for redirecting different pages
+	 * @param appLinks
+	 * @throws Exception, When App links not present
+	 */
+	public static void validateAppsLinks(String appLinks) throws Exception  {
+			String []totalAppLinks=appLinks.split("\\|");
+			for(int i=0;i<totalAppLinks.length;i++) {
+				BrowserAction.click(OnePObjectMap.HOME_ONEP_APPS_LINK);
+				PARENT_WINDOW_HANDLE = ob.getWindowHandle();
+				ob.findElement(By.linkText(totalAppLinks[i])).click();
+				Thread.sleep(6000);
+				ob.manage().window().maximize();
+				Set<String> child_window_handles= ob.getWindowHandles();
+				 for(String child_window_handle:child_window_handles) {
+					 if(!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
+						 ob.switchTo().window(child_window_handle);
+						 String appLinkText=BrowserAction.getElement(OnePObjectMap.HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS).getText();
+						 Assert.assertEquals(totalAppLinks[i], appLinkText);
+						 ob.close();
+						 ob.switchTo().window(PARENT_WINDOW_HANDLE);
+				} //if
+			 } //for
+			} //for
+		}
 }

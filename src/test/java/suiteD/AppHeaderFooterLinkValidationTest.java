@@ -35,9 +35,10 @@ public class AppHeaderFooterLinkValidationTest extends TestBase {
 	static String profileDetailsName;
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verify that below Project Neon Header and Footer links working as expected \n 1.Help \n 2.Cookie Policy \n 3.Privacy Statement \n 4.Terms of Use")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());

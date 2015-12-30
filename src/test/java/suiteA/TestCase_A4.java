@@ -85,7 +85,7 @@ public class TestCase_A4 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 		Thread.sleep(15000);
-		if(!checkElementPresence("help_link")){
+		if(!checkElementPresence_link_text("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
 			status=2;//excel
@@ -95,7 +95,7 @@ public class TestCase_A4 extends TestBase{
 		}
 		
 		//Verify that profile name gets displayed correctly
-		if(!checkElementPresence("FB_profile_name_xpath")){
+		if(!checkElementPresence("header_label")){
 			
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel
