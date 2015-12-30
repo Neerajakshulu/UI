@@ -35,8 +35,9 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	
 	    // Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() {
-			test = extent.startTest(this.getClass().getSimpleName(), "Verify that comments added by the neon user are listed in profile page of the user").assignCategory("Suite C");
+		public void beforeTest() throws Exception {
+			String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+			test = extent.startTest(var, "Verify that comments added by the neon user are listed in profile page of the user").assignCategory("Suite C");
 			//load the run modes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		}

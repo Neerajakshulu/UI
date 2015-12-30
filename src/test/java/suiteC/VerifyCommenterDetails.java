@@ -29,9 +29,9 @@ public class VerifyCommenterDetails extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
 				.assignCategory("Suite C");
 
 	}

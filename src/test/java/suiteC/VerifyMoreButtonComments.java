@@ -29,9 +29,9 @@ public class VerifyMoreButtonComments extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that more button is not displayed for comments less than 10 ")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that more button is not displayed for comments less than 10 ")
 				.assignCategory("Suite C");
 
 	}

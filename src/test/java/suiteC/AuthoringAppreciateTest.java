@@ -29,8 +29,9 @@ public class AuthoringAppreciateTest extends TestBase {
 	static int status=1;
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verfiy that user can appreciate comments made by other neon users and validate appreciation count").assignCategory("Suite C");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verfiy that user can appreciate comments made by other neon users and validate appreciation count").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");
 		//load the runmodes of the tests			
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
