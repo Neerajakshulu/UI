@@ -108,9 +108,10 @@ public class VerifyCommenterDetails extends TestBase{
 				if (!commentText.contains("Comment deleted")) {
 					
 					profileName	=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))).getText();
-					details=commentsList.get(i).findElements(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath")));
-					for(WebElement we:details){
-						profileDetailsInComment.add(we.getText());
+					String str=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath"))).getText();
+					
+					for(String str1:str.split(",")){
+						profileDetailsInComment.add(str1.trim());
 					}
 				jsClick(ob,commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
 					break;
@@ -123,7 +124,7 @@ public class VerifyCommenterDetails extends TestBase{
 			details=ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
 			List<String> profileDetailsInProfile=new ArrayList<String>();
 			for(WebElement we:details){
-				profileDetailsInProfile.add(we.getText());
+				profileDetailsInProfile.add(we.getText().trim());
 			}
 			try {
 				
