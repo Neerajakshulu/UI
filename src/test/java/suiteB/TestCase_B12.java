@@ -43,7 +43,7 @@ public class TestCase_B12 extends TestBase{
 	public void beforeTest() throws Exception{
 		
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that the addition of total articles count and total profiles count is equal to total search results count").assignCategory("Suite B");
+		test = extent.startTest(var, "Verify that ALL content type count is equal to the sum of the counts of other content types").assignCategory("Suite B");
 		
 	}
 	
@@ -67,14 +67,14 @@ public class TestCase_B12 extends TestBase{
 		
 		
 			
-			String search_query="mota";
+			String search_query="biology";
 			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			Thread.sleep(8000);
 			
 			//login using TR credentials
@@ -86,30 +86,33 @@ public class TestCase_B12 extends TestBase{
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
-			String text1=ob.findElement(By.xpath(OR.getProperty("articlesTabHeading_link"))).getText().substring(9);
-			String text2=ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).getText().substring(7);
-			String text3=ob.findElement(By.xpath(OR.getProperty("totalCountHeading_label"))).getText().substring(16);
+			List<WebElement> content_types=ob.findElements(By.xpath(OR.getProperty("contentType_span")));
+			String text1=content_types.get(0).getText();
+			String text2=content_types.get(1).getText();
+			String text3=content_types.get(2).getText();
+			String text4=content_types.get(3).getText();
+			String text5=content_types.get(4).getText();
 			
 			String temp1=getPurifiedString(text1);
 			String temp2=getPurifiedString(text2);
 			String temp3=getPurifiedString(text3);
+			String temp4=getPurifiedString(text4);
+			String temp5=getPurifiedString(text5);
 			
 			
-			int article_count=Integer.parseInt(temp1);
-			int profile_count=Integer.parseInt(temp2);
-			int total_count=Integer.parseInt(temp3);
+			int all_count=Integer.parseInt(temp1);
+			int article_count=Integer.parseInt(temp2);
+			int patent_count=Integer.parseInt(temp3);
+			int people_count=Integer.parseInt(temp4);
+			int post_count=Integer.parseInt(temp5);
 			
 			
-//			System.out.println(article_count);
-//			System.out.println(profile_count);
-//			System.out.println(total_count);
 			
-			
-			if(!compareNumbers(total_count,article_count+profile_count)){
+			if(!compareNumbers(all_count,article_count+patent_count+people_count+post_count)){
 				
-				test.log(LogStatus.FAIL, "Sum of total article count and total profile count is not equal to total search results count");//extent reports
+				test.log(LogStatus.FAIL, "Count of ALL content type is not equal to the sum of counts of other content types");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_total_search_results_count_not_equal_to_sum_of_article_count_and_profile_count")));//screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"count_of_ALL_content_type_not_equal_to_sum_of_counts_of_other_content_types")));//screenshot
 			
 				
 			}
