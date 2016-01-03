@@ -77,7 +77,8 @@ static int status=1;
 		Thread.sleep(4000);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		Thread.sleep(4000);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
+		ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]")).click();
+		//waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 		
 		List<WebElement> refineBlocks=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_blocks_xpath")));
 		String filterType=null;
