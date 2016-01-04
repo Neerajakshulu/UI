@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,11 @@ public class ProfilePage  extends TestBase {
 	 */
 	static int peopleCount=0;
 	static String PARENT_WINDOW_HANDLE=null;
+	static String profileTitle;
+	static String profileMetadata;
+	static String followUnfollowLableBefore;
+	static String followUnfollowLableAfter;
+	static String metadata[];
 			
 	public static void enterSearchKeyAndClick(String searchKey) throws Exception {
 		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
@@ -87,7 +93,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickPeople() throws Exception {
 			BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
-			Thread.sleep(8000);
+			BrowserWaits.waitTime(8);
 	}
 	
 	
@@ -148,4 +154,194 @@ public class ProfilePage  extends TestBase {
 			 } //for
 			} //for
 		}
+	
+	/**
+	 * Method for click profile image
+	 * @throws Exception, When Profile image not available
+	 */
+	public static void clickProfileImage() throws Exception {
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
+			
+	}
+	
+	/**
+	 * Method for click on profile
+	 * @throws Exception, When profile link not present
+	 */
+	public static void clickProfileLink() throws Exception {
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK);
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+			BrowserWaits.waitUntilText("Interests and Skills","Posts","Comments","Followers","Following");
+			BrowserWaits.waitTime(6);
+	}
+	
+	/**
+	 * Method for get profile title
+	 * @throws Exception
+	 */
+	public static void getProfileTitle() throws Exception {
+		profileTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
+		//System.out.println("profile title-->"+profileTitle);
+	}
+	
+	/**
+	 * Method for get Profile Meta Data
+	 * @throws Exception
+	 */
+	public static void getProfileMetadata() throws Exception {
+		profileMetadata=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
+		//System.out.println("profile metadata-->"+profileMetadata);
+	}
+	
+	/**
+	 * Method for click on first profile of search people page
+	 * @throws Exception
+	 */
+	public static void clickProfile() throws Exception {
+		getProfileTitle();
+		getProfileMetadata();
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
+		BrowserWaits.waitTime(4);
+	}
+	
+	
+	/**
+	 * Method for Validate Profile Title and Profile Metadata
+	 * @throws Exception, When Profile title or metadata mismatches
+	 */
+	public static void validateProfileTitleAndMetadata() throws Exception {
+		String title=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		Assert.assertEquals(profileTitle, title);
+		String role=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText();
+		String priInstitution=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
+		String location=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
+		
+		if(!(profileMetadata.contains(role)&&profileMetadata.contains(priInstitution)&&profileMetadata.contains(location))){
+			throw new Exception("Profile Metadata not matching");
+		}
+		
+	}
+	
+	
+	/**
+	 * Method for Validate user should not edit other profiles
+	 * @throws Exception, When Other profiles having edit option
+	 */
+	public static void validateOtherProfileEdit() throws Exception {
+		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+		System.out.println("profile edit-->"+otherProfileEdit);
+		if(otherProfileEdit) {
+			throw new Exception("Edit option should not available for others profile");
+		}
+				
+	}
+	
+	/**
+	 * Method for follow/unfollow other profile from their profile page
+	 * @throws Exception, When user not able to follow
+	 */
+	public static void followOtherProfileFromProfilePage() throws Exception {
+		WebElement followUnFollowCheck=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
+		followUnfollowLableBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
+		System.out.println("Follow/Unfollow Label Before-->"+followUnfollowLableBefore);
+		followUnFollowCheck.click();
+		Thread.sleep(4000);
+		followUnfollowLableAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
+		System.out.println("Follow/Unfollow Label After-->"+followUnfollowLableAfter);
+		
+		if(followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)){
+			throw new Exception("unable to follow other profile from search screen");
+		}
+	}
+	
+	
+	/**
+	 * Method for Validate user should have edit option to edit profile
+	 * and profile name should match with profile image title
+	 * @throws Exception, When Other profiles having edit option
+	 */
+	public static void validateOwnrProfile() throws Exception {
+		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+		//System.out.println("profile edit-->"+otherProfileEdit);
+		if(!otherProfileEdit) {
+			throw new Exception("Edit option should be available for own profile");
+		}
+		
+		String profileName=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		//System.out.println("profile name-->"+profileName);
+		
+		String profileImageText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img")).getAttribute("title");
+		//System.out.println("profile image neame-->"+profileImageText);
+		Assert.assertEquals(profileName, profileImageText);
+		
+	}
+	
+	/**
+	 * Method for Validate Edit Cancel Button
+	 * @throws Exception, When user not able to click cancel
+	 */
+	public static void clickEditCancel() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+	}
+	
+	
+	
+	/**
+	 * Method for Validate user should have edit option to edit profile
+	 * and profile name should match with profile image title
+	 * @throws Exception, When Other profiles having edit option
+	 */
+	public static void editUserOwnProfileMetadata(String profileMetadata) throws Exception {
+		
+		metadata=profileMetadata.split("\\|");
+		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+		//System.out.println("profile edit-->"+otherProfileEdit);
+		if(!otherProfileEdit) {
+			throw new Exception("Edit option should be available for own profile");
+		}
+		
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS, metadata[0]);
+		
+		
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS, metadata[1]);
+		
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS, metadata[2]);
+		
+		
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS, metadata[3]+RandomStringUtils.randomAlphabetic(3));
+	}
+	
+	
+	/**
+	 * Method for Validate Edit update Button
+	 * @throws Exception, When user not able to click update button
+	 */
+	public static void clickEditUpdate() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserWaits.waitTime(6);
+	}
+	
+	
+	
+	/**
+	 * Method for Validate profile metadata
+	 * @throws Exception, When data not matching
+	 */
+	public static void validateProfileMetadata() throws Exception {
+		String country=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
+		if(!country.contains(metadata[3])){
+			throw new Exception("profile meta data not updated");
+		}
+	}
+	
 }

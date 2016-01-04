@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -29,9 +30,9 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Veirfy that user cannot flag a comment without selecting a reason")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Veirfy that user cannot flag a comment without selecting a reason")
 				.assignCategory("Suite C");
 
 	}
@@ -96,32 +97,45 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 				waitForAjax(ob);
 			}
 			Thread.sleep(5000);
+			boolean isPresent = true;
+			WebElement more;
+			while (isPresent) {
+				try {
+					waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
+
+					more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+					Point point = more.getLocation();
+					int y = point.getY() + 100;
+					String script = "scroll(0," + y + ");";
+					((JavascriptExecutor) ob).executeScript(script);
+					jsClick(ob,more);
+					waitForAjax(ob);
+				} catch (Exception e) {
+					e.printStackTrace();
+					isPresent = false;
+				}
+			}
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			String commentText;
+			WebElement flagWe;
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					Thread.sleep(10000);
-					jsClick(ob,commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-								80);
-						}catch(Exception e){
-							Thread.sleep(10000);
-							jsClick(ob,commentsList.get(i)
-									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-						}
-					break;
+					flagWe = commentsList.get(i)
+							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
+					if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						jsClick(ob, commentsList.get(i)
+								.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+						break;
+					}
+
 				}
-
 			}
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
 
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-					80);
+			
 
 			try {
 				WebElement flagButton = ob

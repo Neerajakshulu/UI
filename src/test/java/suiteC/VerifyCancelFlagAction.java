@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -30,15 +31,15 @@ public class VerifyCancelFlagAction extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the flag action")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that user is able to cancel the flag action")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testFlagInUserComments() throws Exception {
+	public void testCancelFlagAction() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -95,6 +96,24 @@ public class VerifyCancelFlagAction extends TestBase {
 				((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 				waitForAjax(ob);
 			}
+			boolean isPresent = true;
+			WebElement more;
+			while (isPresent) {
+				try {
+					waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
+
+					more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+					Point point = more.getLocation();
+					int y = point.getY() + 100;
+					String script = "scroll(0," + y + ");";
+					((JavascriptExecutor) ob).executeScript(script);
+					jsClick(ob,more);
+					waitForAjax(ob);
+				} catch (Exception e) {
+					e.printStackTrace();
+					isPresent = false;
+				}
+			}
 			Thread.sleep(5000);
 
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
@@ -102,35 +121,28 @@ public class VerifyCancelFlagAction extends TestBase {
 			System.out.println(commentsList.size());
 			String commentText;
 			int commentsCount = 0;
+			WebElement flagWe;
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					Thread.sleep(10000);
-					jsClick(ob,commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					commentsCount = i;
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-								80);
-						}catch(Exception e){
-							
-							jsClick(ob,commentsList.get(i)
-									.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-							Thread.sleep(10000);
-						}
-					break;
-				}
+					flagWe = commentsList.get(i)
+							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
+					if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						jsClick(ob, commentsList.get(i)
+								.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+						commentsCount = i;
+						break;
+					}
 
+				}
 			}
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-					80);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
 			Thread.sleep(5000);
-
 			try {
 				boolean isFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))

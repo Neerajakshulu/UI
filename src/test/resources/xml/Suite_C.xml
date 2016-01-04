@@ -147,6 +147,47 @@
     </classes>
 </test>
 
+<test name="AuthoringAppreciateOwnCommentTest">
+    <classes>
+      <class name="suiteC.AuthoringAppreciateOwnCommentTest" ></class>
+    </classes>
+</test>
+
+<test name="EditCommentProfanityWordChkTest">
+    <classes>
+      <class name="suiteC.EditCommentProfanityWordChkTest" ></class>
+    </classes>
+</test>
+
+<test name="VerifyEditOtherUsersComments">
+    <classes>
+      <class name="suiteC.VerifyEditOtherUsersComments" ></class>
+    </classes>
+</test>
+
+<test name="UnsupportedTagsEditCommentsTest">
+    <classes>
+      <class name="suiteC.UnsupportedTagsEditCommentsTest" ></class>
+    </classes>
+</test>
+
+<test name="VerifyMoreButtonComments">
+    <classes>
+      <class name="suiteC.VerifyMoreButtonComments" ></class>
+    </classes>
+</test>
+
+<test name="VerifyMoreFunctionalityForComments">
+    <classes>
+      <class name="suiteC.VerifyMoreFunctionalityForComments" ></class>
+    </classes>
+</test>
+
+<test name="VerifyCommenterDetails">
+    <classes>
+      <class name="suiteC.VerifyCommenterDetails" ></class>
+    </classes>
+</test>
 
 
 </suite>

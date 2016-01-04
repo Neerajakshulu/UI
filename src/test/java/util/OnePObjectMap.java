@@ -11,7 +11,7 @@ public enum OnePObjectMap {
 	HOME_ONEP_APPS_LINK("Apps"),
 	HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS("h1[class='heading-1']"),
 	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='webui-btn-primary unauth-login-btn unauth-ne-btn']"),
-	HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS("ul[class='list-unstyled footer-link-list']"),
+	HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS("ul[class='list-unstyled footer-link-list'] li"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'Details')]"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS("a[title='Back to Project Neon']"),
 	HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH("//span[@class='webui-icon webui-icon-like']/following-sibling::span"),
@@ -54,9 +54,27 @@ public enum OnePObjectMap {
 	
 	HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS("li[class='content-type-selector ng-scope']"),
 	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("span[class='ne-profile-image-wrapper']"),
+	HOME_PROJECT_NEON_PROFILE_LINK("Profile"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
+	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
+	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("ne-profile-follow-unfollow button span"), 
-	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-profile-follow-unfollow button");
+	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-profile-follow-unfollow button"),
+	HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS("span[class='ne-profile-object-title ng-scope']"),
+	HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS("h6[class='ne-profile-object-metadata-wrapper ng-binding']"),
+	HOME_PROJECT_NEON_PROFILE_TITLE_CSS("h2[class='profile-name']"),
+	HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS("h6[ng-show='role']"),
+	HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS("h6[ng-show='primaryInstitution']"),
+	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("h6[ng-show='location']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_CSS("span[class='webui-icon webui-icon-edit']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS("input[ng-model='title']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model='role']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model='primaryInstitution']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[ng-model='location']"),
+
+	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click='cancelEditing()']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click='saveUserData()']");
+	
 	
 	
 	private String locator;

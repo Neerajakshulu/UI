@@ -3,8 +3,6 @@ package suiteD;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -14,8 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
 import suiteC.LoginTR;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -27,10 +25,6 @@ public class ViewProfileTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
-	static String followBefore=null;
-	static String followAfter=null;
-	static String profileHeadingName;
-	static String profileDetailsName;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -68,27 +62,27 @@ public class ViewProfileTest extends TestBase {
 			skip=true;
 			throw new SkipException("Runmode for test set data set to no "+count);
 		}
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts ");
 		
 				try {
 					openBrowser();
 					clearCookies();
 					maximizeWindow();
-					
+					test.log(LogStatus.INFO,"login into project neon application with valid credentials");
 					ob.navigate().to(System.getProperty("host"));
 					LoginTR.waitForTRHomePage();
 					LoginTR.enterTRCredentials(username, password);
 					LoginTR.clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
+					status=2;//excel
 					//print full stack trace
 					StringWriter errors = new StringWriter();
 					t.printStackTrace(new PrintWriter(errors));
 					test.log(LogStatus.INFO,errors.toString());
 					ErrorUtil.addVerificationFailure(t);
-					status=2;//excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
+							this.getClass().getSimpleName() + "_login_not_done")));
 					closeBrowser();
 				}
 	}
@@ -100,63 +94,25 @@ public class ViewProfileTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void validateOwnProfileData() throws Exception  {
 			try {
-				validateViewProfile();
+				test.log(LogStatus.INFO,"own profile validation-edit option enabled, profile name should match with profile title");
+				ProfilePage.clickProfileImage();
+				ProfilePage.clickProfileLink();
+				ProfilePage.validateOwnrProfile();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,"Error:"+t);//extent reports
-				ErrorUtil.addVerificationFailure(t);//testng
+				test.log(LogStatus.FAIL,"Validation for own profile providing incorrect details"+t);//extent reports
 				status=2;//excel
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO,errors.toString());
+				ErrorUtil.addVerificationFailure(t);//testng
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
+						this.getClass().getSimpleName() + "_Validation_own_profile_incorrect")));
 				closeBrowser();
 			}
 	}
-	
-	
-	/**
-	 * Method for Scrolling down to the page
-	 * @throws InterruptedException, When scroll not done
-	 */
-	public static void scrollingToElementofAPage() throws InterruptedException  {
-		JavascriptExecutor jse = (JavascriptExecutor)ob;
-		jse.executeScript("scroll(0, 250);");
-		Thread.sleep(4000);
-		
-	}
-	
-	/**
-	 * Method for Validate Profile, whether Profile is displayed my own details or not
-	 * @throws Exception, when details are not matching
-	 */
-	public void validateViewProfile() throws Exception  {
-		
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))).click();
-		BrowserWaits.waitUntilText("Profile");
-		
-		ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))).click();
-		BrowserWaits.waitUntilText("Comments");
-		Thread.sleep(6000);
-		
-		profileHeadingName=ob.findElement(By.cssSelector("span[class^='ne-navbar-link-text']")).getText();
-		System.out.println("Profile Heading Name-->"+profileHeadingName);
-		
-		profileDetailsName=ob.findElement(By.cssSelector("span[class$='headline ng-binding']")).getText();
-		System.out.println("profile Details Name-->"+profileDetailsName);
-		
-		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).isDisplayed();
-		System.out.println("profile edit Enabled-->"+isEditEnable);
-		
-		if(!profileHeadingName.equalsIgnoreCase(profileDetailsName)){
-			test.log(LogStatus.FAIL,"Validation not done,View profile giving incorrect details");
-			status=2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_Validation not done,View profile giving incorrect details")));
-			throw new Exception("My profile details are not displayed Accurately");
-		}
-	}
-	
 	
 	@AfterTest
 	public void reportTestResult() {

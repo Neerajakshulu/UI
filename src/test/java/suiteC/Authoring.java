@@ -22,9 +22,8 @@ public class Authoring  extends TestBase {
 		Thread.sleep(10000);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
-		String num[]=commentSizeBeforeAdd.split(" ");
-		//System.out.println("num length-->"+num[num.length-1]);
-		return Integer.parseInt(num[num.length-1]);
+			//System.out.println("num length-->"+num[num.length-1]);
+		return Integer.parseInt(commentSizeBeforeAdd);
 	}
 	
 	public static void enterArticleComment(String addComments) throws InterruptedException  {
@@ -149,7 +148,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public static void validateViewComment(String addComments) throws Exception  {
-		String commentText=ob.findElements(By.cssSelector("div[class^='col-xs-12 ng-scope col-sm-7']")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!commentText.contains(addComments))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));

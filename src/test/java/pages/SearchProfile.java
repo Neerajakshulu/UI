@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import base.TestBase;
 import util.BrowserAction;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class SearchProfile  extends TestBase {
@@ -35,13 +36,27 @@ public class SearchProfile  extends TestBase {
 			return peopleCount;
 	}
 	
+	
+	/**
+	 * Method for Click People after searching an profile
+	 * @throws Exception, When People are not present/Disabled
+	 */
+	public static int validatePeopleSearchResults() throws Exception {
+			String listPeople=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).findElement(By.tagName("span")).getText();
+			peopleCount=Integer.parseInt(listPeople);
+			System.out.println("Total People search results-->"+peopleCount);
+			return peopleCount;
+	}
+	
+	
+	
 	/**
 	 * Method for Click People after searching an profile
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public static void clickPeople() throws Exception {
 			BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
-			Thread.sleep(8000);
+			BrowserWaits.waitTime(6);
 	}
 	
 	/**
