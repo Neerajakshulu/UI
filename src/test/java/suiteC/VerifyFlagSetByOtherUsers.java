@@ -102,29 +102,22 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
 			String commentText;
-			for (WebElement we : commentsList) {
-				commentText = we.getText();
-				if (commentText.contains(PROFILE_NAME) && commentText.contains(comment)) {
-					jsClick(ob,we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-					try{
-						Thread.sleep(10000);
-						waitForElementTobeVisible(ob,
-								By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 80);
-								
-						}catch(Exception e){
-							
-							jsClick(ob,we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-						}
-					
-					waitForElementTobeVisible(ob,
-							By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-					jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-							
-					jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
-							
-					break;
+			WebElement flagWe;
+			for (int i = 0; i < commentsList.size(); i++) {
+				commentText = commentsList.get(i).getText();
+				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+					flagWe = commentsList.get(i)
+							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
+					if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						jsClick(ob,flagWe);
+						break;
+					}
 				}
+
 			}
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),180);
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
+			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 			LoginTR.logOutApp();
 			ob.navigate().to(host);

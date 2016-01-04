@@ -138,7 +138,7 @@ public class VerifyCancelUnflagAction extends TestBase {
 				}
 			}
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-					40);
+					180);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 			// waitForAllElementsToBePresent(ob,
