@@ -111,7 +111,6 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 					jsClick(ob,more);
 					waitForAjax(ob);
 				} catch (Exception e) {
-					e.printStackTrace();
 					isPresent = false;
 				}
 			}

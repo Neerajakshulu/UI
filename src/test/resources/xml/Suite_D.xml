@@ -21,6 +21,20 @@
     </classes>
 </test>
 
+<test name="Others_Profile_Edit">
+    <classes>
+     	 <class name="suiteD.OtherProfileEditTest" ></class>
+    </classes>
+</test>
+
+<test name="Others_Profile_Follow_Unfollow_ProfilePage">
+	<parameter name="otherProfileName" value="hao"></parameter>
+    <classes>
+     	 <class name="suiteD.OtherProfilePageFollowTest" ></class>
+    </classes>
+</test>
+
+
 <test name="Validate_View_Profile">
     <classes>
         <class name="suiteD.ViewProfileTest" ></class> 
@@ -28,7 +42,7 @@
 </test>
 
 <test name="Update_User_Own_Profile">
-	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"/>
+	<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india"/>
     <classes>
         <class name="suiteD.ProfileUpdateTest" ></class> 
     </classes>
@@ -44,7 +58,7 @@
 </test>
 
 <test name="Validate_Application_Header_and_Footer_Links">
-	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use|Help"/>
+	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use"/>
     <classes>
         <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
     </classes>

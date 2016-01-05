@@ -116,6 +116,26 @@ public class BrowserWaits extends TestBase{
 					+ locatorText + "}], after waiting for " + time
 					+ "ms");
 		}
+	} else if(locatorType.endsWith("_LINK")){
+		try {
+			(new WebDriverWait(ob, time))
+					.until(new ExpectedCondition<Boolean>() {
+						public Boolean apply(WebDriver d) {
+							try {
+								final WebElement element = d
+										.findElement(By.linkText((locatorText)));
+								return Boolean.valueOf(element != null
+										&& element.isDisplayed());
+							} catch (Exception e) {
+								return Boolean.valueOf(false);
+							}
+						}
+					});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find element [Locator = {"
+					+ locatorText + "}], after waiting for " + time
+					+ "ms");
+		}
 	}
 		
 	}
@@ -144,6 +164,13 @@ public class BrowserWaits extends TestBase{
 		}
 	}
 	
+	
+	public static void waitUntilText(final String... text) {
+		for (String each : text) {
+			waitUntilText(each);
+		}
+	}
+	
 	/**
 	 * wait for until expected text present
 	 * @param text
@@ -165,6 +192,14 @@ public class BrowserWaits extends TestBase{
 			throw new TimeoutException("Failed to find text: " + text
 					+ ", after waiting for " + time + "ms");
 		}
+	}
+	
+	/**
+	 * wait for provided time
+	 * @param secs
+	 */
+	public static void waitTime(final int secs) throws InterruptedException {
+		Thread.sleep(secs*1000);
 	}
 
 }

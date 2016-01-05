@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
@@ -131,7 +132,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 		FindProfileTest profileFind=new FindProfileTest();
 		
 		LoginTR.searchArticle(profileName);
-		profileFind.clickPeople();
+		SearchProfile.clickPeople();
 		profileFind.chooseOtherProfile(profileCompleteName);
 		
 		Thread.sleep(4000);
