@@ -378,12 +378,12 @@ public class ProfilePage  extends TestBase {
 	 * Method to enter the specified text to post content box in post creation modal
 	 * @param tilte
 	 */
-	public static void enterPostContent(String tilte) {
+	public static void enterPostContent(String content) {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.sendKeys(tilte);
+				.sendKeys(content);
 
 	}
 
@@ -410,7 +410,7 @@ public class ProfilePage  extends TestBase {
 	 * @return
 	 */
 	public static int getPostsCount() {
-
+		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString()))
@@ -423,6 +423,7 @@ public class ProfilePage  extends TestBase {
 	 * @return
 	 */
 	public static String getFirstPostTitle() {
+		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		String postTitle = ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)

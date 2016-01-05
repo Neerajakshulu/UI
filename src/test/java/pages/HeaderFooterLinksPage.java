@@ -79,7 +79,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * @throws Exception, When Profile image not available
 	 */
 	public static void clickProfileImage() throws Exception {
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);	
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
 			
 	}
@@ -120,7 +121,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickProfileImage();
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())).click();
+		jsClick(ob,ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
 	}
 
 	/**
@@ -130,7 +131,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickProfileImage();
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString())).click();
+		ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString())).click();
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickProfileImage();
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())).click();
+		ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())).click();
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickProfileImage();
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString())).click();
+		ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString())).click();
 	}
 
 	
@@ -160,7 +161,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public static void enterSearchText(String searchText) {
 		waitForElementTobeVisible(ob,
-				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 180);
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 180);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(searchText);
 	}
@@ -172,7 +173,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	public static void clickOnSearchIcon() {
 		
 		waitForElementTobeVisible(ob,
-				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 180);
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 180);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 	}
 	

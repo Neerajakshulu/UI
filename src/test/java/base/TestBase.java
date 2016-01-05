@@ -23,9 +23,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,6 +49,7 @@ import util.Xls_Reader;
 public class TestBase {
 	public static Properties CONFIG=null;
 	public static Properties OR=null;
+	public static Properties LOGIN=null;
 	public static Xls_Reader suiteXls=null;
 	public static Xls_Reader suiteAxls=null;
 	public static Xls_Reader suiteBxls=null;
@@ -93,6 +99,10 @@ public class TestBase {
 		ip = new FileInputStream("src/test/resources/properties/OR.properties");
 		OR.load(ip);
 		
+		LOGIN = new Properties();
+		ip = new FileInputStream("src/test/resources/properties/login.properties");
+		LOGIN.load(ip);
+		 
 		//Getting url
 		host=System.getProperty("host");
 
@@ -133,80 +143,80 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-	public void openBrowser() throws Exception{
-		
-		
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
-		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
-//		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
-		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-                desiredCapabilities);
-		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-		String pageWait=CONFIG.getProperty("defaultPageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try{
-			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
-			}
-		catch(Throwable t){
-				
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
-		
-	}
+//	public void openBrowser() throws Exception{
+//		
+//		
+//		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+//		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+//		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
+//		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+//		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
+//		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
+//		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+//		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
+////		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
+//		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+//                desiredCapabilities);
+//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//		String pageWait=CONFIG.getProperty("defaultPageWait");
+//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+//		try{
+//			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
+//			}
+//		catch(Throwable t){
+//				
+//			System.out.println("Page Load Timeout not supported in safari driver");
+//		}
+//		
+//	}
 	 
 	
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-//	public void openBrowser(){
-//
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//			ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-//			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-//			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			ob = new InternetExplorerDriver(capabilities);
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-//			DesiredCapabilities capability = DesiredCapabilities.chrome();
-//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-//			System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			ob= new ChromeDriver(capability);
-//		}
-//
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//
-//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-//			SafariOptions safariOptions = new SafariOptions();
-//			safariOptions.setUseCleanSession(true);
-//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
-//			ob = new SafariDriver(desiredCapabilities);
-//		}
-//
-//
-//
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//
-//	}
+	public void openBrowser(){
+
+		if(CONFIG.getProperty("browserType").equals("FF")){
+			ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+			DesiredCapabilities capability = DesiredCapabilities.chrome();
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+			ob= new ChromeDriver(capability);
+		}
+
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+
+
+
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+
+	}
 	
 	//Closing the browser
 	public void closeBrowser(){
@@ -820,5 +830,22 @@ public String cellToString(XSSFCell cell) {
         }
         return result.toString();
     }
+
+/**
+ * 
+ * @param username -USERNAME Field from the login.properties file
+ * @param pwd - PASSWORD Field from the login.properties file
+ * @throws Exception
+ */
+	public void loginAs(String usernameKey, String pwdKey) throws Exception {
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty(usernameKey));
+		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(LOGIN.getProperty(pwdKey));
+		jsClick(ob, ob.findElement(By.id(OR.getProperty("login_button"))));
+
+	}
 
 }
