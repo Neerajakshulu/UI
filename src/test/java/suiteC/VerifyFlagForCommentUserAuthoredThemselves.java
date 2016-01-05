@@ -32,10 +32,10 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(), "Verify that flag button is not displyed for comments a user authored themselves")
+				.startTest(var, "Verify that flag button is not displyed for comments a user authored themselves")
 				.assignCategory("Suite C");
 
 	}

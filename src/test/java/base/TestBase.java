@@ -167,57 +167,53 @@ public class TestBase {
 		}
 		
 	}
-	
-
-	
-	
 	 
 	
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
 //	public void openBrowser(){
-//		
+//
 //		if(CONFIG.getProperty("browserType").equals("FF")){
-//		     ob = new FirefoxDriver();
+//			ob = new FirefoxDriver();
 //		}
 //		else if (CONFIG.getProperty("browserType").equals("IE")){
-////			 System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			 DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//			 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-//			 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			 ob = new InternetExplorerDriver(capabilities);
+//			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+//			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+//			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+//			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+//			ob = new InternetExplorerDriver(capabilities);
 //		}
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
 //			DesiredCapabilities capability = DesiredCapabilities.chrome();
 //			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-////			 System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-//			 ob= new ChromeDriver(capability);
+//			System.setProperty("webdriver.chrome.driver", "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+//			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+//			ob= new ChromeDriver(capability);
 //		}
-//		
+//
 //		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//			
+//
 //			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
 //			SafariOptions safariOptions = new SafariOptions();
 //			safariOptions.setUseCleanSession(true);
 //			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
 //			ob = new SafariDriver(desiredCapabilities);
 //		}
-//	
-//		
-//		
+//
+//
+//
 //		String waitTime=CONFIG.getProperty("defaultImplicitWait");
 //		String pageWait=CONFIG.getProperty("defaultPageWait");
 //		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
 //		try{
-//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
 //		}
 //		catch(Throwable t){
-//			
+//
 //			System.out.println("Page Load Timeout not supported in safari driver");
 //		}
-//		
+//
 //	}
 	
 	//Closing the browser
@@ -777,6 +773,30 @@ public String xlRead(String sPath,int r,int c) throws Exception{
                XSSFCell cell = row.getCell(j); // To read value from each col in each row
                String value = cellToString(cell);
                xData[i][j] = value;
+               }
+        }	
+	return xData[r][c];
+}
+
+public String xlRead2(String sPath,String cellValue,int c) throws Exception{
+	int r=0;
+	File myxl = new File(sPath);
+	FileInputStream myStream = new FileInputStream(myxl);
+	
+	XSSFWorkbook myWB = new XSSFWorkbook(myStream);
+	XSSFSheet mySheet = myWB.getSheetAt(0);	// Referring to 1st sheet
+	xRows = mySheet.getLastRowNum()+1;
+	xCols = mySheet.getRow(0).getLastCellNum();
+	xData = new String[xRows][xCols];
+    for (int i = 0; i < xRows; i++) {
+           XSSFRow row = mySheet.getRow(i);
+            for (int j = 0; j < xCols; j++) {
+               XSSFCell cell = row.getCell(j); // To read value from each col in each row
+               String value = cellToString(cell);
+               xData[i][j] = value;
+               if( xData[i][j].equalsIgnoreCase(cellValue)){
+            	   r=i;
+               }
                }
         }	
 	return xData[r][c];

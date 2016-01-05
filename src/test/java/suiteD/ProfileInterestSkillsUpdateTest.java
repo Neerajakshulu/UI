@@ -35,8 +35,9 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 	static int status=1;
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var,
 				"Verity that user is able to edit  info like Interests and Skills from his own profile").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}

@@ -17,12 +17,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
 /**
- * Class for follow profile in search page itself
+ * Class for follow/unfollow  profile from search page itself
  * @author UC202376
  *
  */
@@ -38,14 +40,16 @@ public class ProfileFollowTest extends TestBase {
 	static String followAfter=null;
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"Verify that user is able to Start/Stop following a user from profile search results page")
+	public void beforeTest() throws  Exception {
+		
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		//System.out.println("column name-->"+var);
+		test = extent.startTest(var,
+						"1.Verify that user is able to Start/Stop following a user from profile search results page \n"
+					   +"2.Verify that user is able to search for profiles")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
-	
 			
 	/**
 	 * Method for wait TR Login Screen		
@@ -73,13 +77,13 @@ public class ProfileFollowTest extends TestBase {
 			skip=true;
 			throw new SkipException("Runmode for test set data set to no "+count);
 		}
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts ");
 		
 				try {
 					openBrowser();
 					clearCookies();
 					maximizeWindow();
-					
+					test.log(LogStatus.INFO,"Login to Applicaton with TR valid Credentials");
 					ob.navigate().to(System.getProperty("host"));
 					LoginTR.waitForTRHomePage();
 					LoginTR.enterTRCredentials(username, password);
@@ -103,20 +107,27 @@ public class ProfileFollowTest extends TestBase {
 	 * @throws Exception 
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	public void followOthersProfile() throws Exception  {
+	@Parameters("profileName")
+	public void followOthersProfile(String profileName) throws Exception  {
 			try {
-				LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
-				clickPeople();
-				followOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
+				test.log(LogStatus.INFO,"Search for Profile and follow/unfollow that profile from Search Page itself");
+				SearchProfile.enterSearchKeyAndClick(profileName);
+				if(ProfilePage.getPeopleCount()>0) {
+					SearchProfile.clickPeople();
+					SearchProfile.followProfileFromSeach();
+				}
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();
 				closeBrowser();
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Error:"+t);
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO,errors.toString());
 				ErrorUtil.addVerificationFailure(t);
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_follow")));//screenshot
 				closeBrowser();
 			}
 	}
@@ -190,7 +201,6 @@ public class ProfileFollowTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		//closeBrowser();
 	}
 	
 }

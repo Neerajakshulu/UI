@@ -39,9 +39,9 @@ public class TestCase_A14 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
-		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that user is not able to submit new TR user registration form without filling in the required fields").assignCategory("Suite A");
+	public void beforeTest() throws Exception{
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that user is not able to submit new TR user registration form without filling in the required fields").assignCategory("Suite A");
 		
 	}
 	

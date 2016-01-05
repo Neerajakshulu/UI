@@ -30,9 +30,9 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that default comments displayed for an article is 10 and valildate more functionality")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that default comments displayed for an article is 10 and valildate more functionality")
 				.assignCategory("Suite C");
 
 	}

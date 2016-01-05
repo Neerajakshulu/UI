@@ -39,9 +39,9 @@ public class TestCase_A13 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
-		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly").assignCategory("Suite A");
+	public void beforeTest() throws Exception{
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly").assignCategory("Suite A");
 		
 	}
 	
@@ -113,12 +113,12 @@ public class TestCase_A13 extends TestBase{
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_termsOfUse_link")));//screenshot	
 			
 		}
-		
+		ob.close();
 		ob.switchTo().window(al1.get(0));
 		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
-		
-			JavascriptExecutor executor = (JavascriptExecutor)ob;
-			executor.executeScript("arguments[0].click();", myE);
+		myE.click();
+			/*JavascriptExecutor executor = (JavascriptExecutor)ob;
+			executor.executeScript("arguments[0].click();", myE);*/
 		
 			
 		Thread.sleep(5000);
@@ -132,7 +132,7 @@ public class TestCase_A13 extends TestBase{
 			al1.add(myIT1.next());
 		}
 		
-		ob.switchTo().window(al1.get(2));
+		ob.switchTo().window(al1.get(1));
 		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
 //		System.out.println(pageHeading2);
 		

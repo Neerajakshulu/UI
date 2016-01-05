@@ -29,9 +29,9 @@ public class VerifyCommenterDetails extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
 				.assignCategory("Suite C");
 
 	}
@@ -108,9 +108,10 @@ public class VerifyCommenterDetails extends TestBase{
 				if (!commentText.contains("Comment deleted")) {
 					
 					profileName	=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))).getText();
-					details=commentsList.get(i).findElements(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath")));
-					for(WebElement we:details){
-						profileDetailsInComment.add(we.getText());
+					String str=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath"))).getText();
+					
+					for(String str1:str.split(",")){
+						profileDetailsInComment.add(str1.trim());
 					}
 				jsClick(ob,commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
 					break;
@@ -123,7 +124,7 @@ public class VerifyCommenterDetails extends TestBase{
 			details=ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
 			List<String> profileDetailsInProfile=new ArrayList<String>();
 			for(WebElement we:details){
-				profileDetailsInProfile.add(we.getText());
+				profileDetailsInProfile.add(we.getText().trim());
 			}
 			try {
 				

@@ -46,8 +46,7 @@ public class TestCase_A3 extends TestBase{
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 //		System.out.println(xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),this.getClass().getSimpleName().charAt(10),1));
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		test = extent.startTest(var, "To verify that existing LI user is able to login and logout successfully").assignCategory("Suite A");
-		
+		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully").assignCategory("Suite A");
 	}
 	
 	@Test
@@ -97,7 +96,7 @@ public class TestCase_A3 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 		Thread.sleep(15000);
-		if(!checkElementPresence("help_link")){
+		if(!checkElementPresence_link_text("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");//extent reports
 			status=2;//excel
@@ -108,7 +107,7 @@ public class TestCase_A3 extends TestBase{
 		
 		//Verify that profile name gets displayed correctly
 		
-		if(!checkElementPresence("LI_profile_name_xpath")){
+		if(!checkElementPresence("header_label")){
 			
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel

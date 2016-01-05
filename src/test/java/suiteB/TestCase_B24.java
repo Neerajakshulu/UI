@@ -40,9 +40,10 @@ public class TestCase_B24 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest(){
+	public void beforeTest() throws Exception{
 		
-		test = extent.startTest(this.getClass().getSimpleName(), "To verify that OR is not treated as a boolean").assignCategory("Suite B");
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that * is treated as a space if user does not provide 3 characters before it").assignCategory("Suite B");
 		
 	}
 	
@@ -66,7 +67,7 @@ public class TestCase_B24 extends TestBase{
 		
 		
 			
-			String search_query="cat or dog";
+			String search_query="ed*cat";
 			
 			openBrowser();
 			clearCookies();
@@ -122,12 +123,9 @@ public class TestCase_B24 extends TestBase{
 				Thread.sleep(15000);
 				
 				pageText=ob.getPageSource().toLowerCase();
-				condition1=pageText.contains("cat");
-				condition2=pageText.contains("dog");
-				condition3=pageText.contains("or");
-				masterSearchCondition=condition1 && condition2 && condition3;
-				System.out.println(masterSearchCondition);
-				if(masterSearchCondition){
+				condition1=pageText.contains("ed") && pageText.contains("cat");
+				System.out.println(condition1);
+				if(condition1){
 					
 					count++;
 				}
@@ -150,7 +148,7 @@ public class TestCase_B24 extends TestBase{
 			
 			if(!compareNumbers(urls.size(),count)){
 				
-				test.log(LogStatus.FAIL, "OR is treated as a boolean");//extent reports
+				test.log(LogStatus.FAIL, "* is not treated as a space if user does not provide 3 characters before it");//extent reports
 				status=2;//excel
 				test.log(LogStatus.INFO,"Issues are in the following documents:\n"+message);//extent reports
 			}

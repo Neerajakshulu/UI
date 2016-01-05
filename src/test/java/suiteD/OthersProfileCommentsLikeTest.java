@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
@@ -38,8 +39,9 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verity that user is able to Like others comments from their profile page").assignCategory("Suite D");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verity that user is able to Like others comments from their profile page").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	
@@ -130,7 +132,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 		FindProfileTest profileFind=new FindProfileTest();
 		
 		LoginTR.searchArticle(profileName);
-		profileFind.clickPeople();
+		SearchProfile.clickPeople();
 		profileFind.chooseOtherProfile(profileCompleteName);
 		
 		Thread.sleep(4000);

@@ -25,11 +25,11 @@ import util.ErrorUtil;
 import util.TestUtil;
 
 /**
- * Class for find and follow others profile
+ * Class for follow and unfollow from their profile page
  * @author UC202376
  *
  */
-public class FindProfileTest extends TestBase {
+public class OtherProfilePageFollowTest extends TestBase {
 	
 	String runmodes[]=null;
 	static int count=-1;
@@ -48,8 +48,7 @@ public class FindProfileTest extends TestBase {
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
 				.startTest(var,
-						"1.Verify that user is able to Start/Stop following a user from profile page 2. Verify that user is able to search for profiles with first name")
-				.assignCategory("Suite D");
+						"Verify that user is able to Start/Stop following a user from profile page").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			
@@ -100,13 +99,14 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	public void getOtherProfileDetails() throws Exception  {
+	@Parameters("otherProfileName")
+	public void OtherProfileEditDetails(String otherProfileName) throws Exception  {
 				try {
-					test.log(LogStatus.INFO,"get other profile details and validate");
-					SearchProfile.enterSearchKeyAndClick("hao");
+					test.log(LogStatus.INFO,"validate user should follow/unfollow other profile from their profile page");
+					SearchProfile.enterSearchKeyAndClick(otherProfileName);
 					SearchProfile.clickPeople();
 					ProfilePage.clickProfile();
-					ProfilePage.validateProfileTitleAndMetadata();
+					ProfilePage.followOtherProfileFromProfilePage();
 					LoginTR.logOutApp();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
@@ -152,20 +152,7 @@ public class FindProfileTest extends TestBase {
 		}
 	}
 	
-	/**
-	 * Method for Validate Other Profiles Edit button is Enabled
-	 * @throws Exception, When Edit button is Enabled
-	 */
-	public void clickOtherProfileEdit() throws Exception {
-		String editOtherProfileEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).getText();
-		boolean isEditEnable=ob.findElement(By.cssSelector("span[class='webui-icon webui-icon-edit']")).isDisplayed();
-		if(editOtherProfileEnable.contains("before") && isEditEnable){
-			test.log(LogStatus.FAIL,"Error:");//extent reports
-			status=2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_other profiles should not have edit option")));//screenshot
-			throw new Exception("Other Profiles Edit should not be visible");
-		}
-	}
+	
 	/**
 	 * Method for Follow Other Profile users
 	 * @throws Exception
@@ -246,7 +233,6 @@ public class FindProfileTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
-		//closeBrowser();
 	}
 	
 }

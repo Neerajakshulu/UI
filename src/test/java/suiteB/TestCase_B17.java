@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -21,7 +22,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B18 extends TestBase {
+public class TestCase_B17 extends TestBase {
 
 	static int status = 1;
 
@@ -36,13 +37,16 @@ public class TestCase_B18 extends TestBase {
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent
 				.startTest(var,
-						"Verify that RESET button in the left navigation pane in search results page is working correctly")
+						"Verify that user is able to sort the documents by TIMES CITED field")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB18() throws Exception {
+	public void testcaseB17() throws Exception {
+		List<Long> timeCitedCountListBeforeSort = new ArrayList<Long>();
+		List<WebElement> timeCitedWEList;
+		List<Long> timeCitedCountListAfterSort = new ArrayList<Long>();
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -68,69 +72,51 @@ public class TestCase_B18 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
+
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			Thread.sleep(10000);
+			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			Thread.sleep(4000);
-			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-			Thread.sleep(4000);
-			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]")).click();
-			waitForAllElementsToBePresent(ob,
-					By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
-					
-			int checkboxesSelected = 0;
-			List<WebElement> checkboxList; 
-			for (int i= 0;i<2 ; i++) {
-				checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
-				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
-					jsClick(ob,checkboxList.get(i));
-				waitForAjax(ob);
-				Thread.sleep(4000);
-
-			}
-			
-			checkboxList	= ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
-			for (WebElement element : checkboxList) {
-				if (element.isSelected())
-					checkboxesSelected++;
-
-			}
-			Assert.assertTrue(checkboxesSelected != 0, "No filters is selected");
-			WebElement resetButton = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_search_results_reset_button_css")));
-			jsClick(ob, resetButton);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("cat dog mammal");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
-			checkboxList = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_Link"))).click();
+			waitForAjax(ob);
+			timeCitedWEList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_count_search_results_xpath")));
 
-			checkboxesSelected = 0;
-			for (WebElement element : checkboxList) {
-				if (element.isSelected())
-					checkboxesSelected++;
-
+			for (WebElement element : timeCitedWEList) {
+				timeCitedCountListBeforeSort.add(Long.parseLong(element.getText().trim()));
 			}
+
+			timeCitedCountListAfterSort.addAll(timeCitedCountListBeforeSort);
+			Collections.sort(timeCitedCountListAfterSort);
 
 			try {
-				Assert.assertTrue(checkboxesSelected == 0);
-				test.log(LogStatus.PASS, "Reset button for search results should work fine");
+				Assert.assertTrue(timeCitedCountListBeforeSort.size()>0);
+				Assert.assertEquals(timeCitedCountListBeforeSort, timeCitedCountListAfterSort);
+				test.log(LogStatus.PASS, "User is able to sort the search results");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Reset button for search results not working as expected");
+				test.log(LogStatus.FAIL, "Sort by functionality is not working as expected");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "reset_ is_not_ working_ for_ search_ results")));// screenshot
+						this.getClass().getSimpleName() + "sortby_ is_not_ working_ for_ search_ results")));// screenshot
 			}
+
 			logout();
 			closeBrowser();
-			
-		} catch (Throwable t) {
+
+		}
+
+		catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something went wrong");// extent reports
 			// next 3 lines to print whole testng error in report

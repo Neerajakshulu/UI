@@ -29,9 +29,10 @@ public class ProfileSummaryTest extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verity that user is able to edit Summary field from his own profile and validate max length condition")
 				.assignCategory("Suite D");
 	}

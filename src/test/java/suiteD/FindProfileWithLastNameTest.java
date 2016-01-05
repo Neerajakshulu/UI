@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -33,8 +35,9 @@ public class FindProfileWithLastNameTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify Profile Search with last name").assignCategory("Suite D");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify Profile Search with last name").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			
@@ -88,10 +91,12 @@ public class FindProfileWithLastNameTest extends TestBase {
 	@Parameters("lastName")
 	public void findOthersProfileWithLastName(String lastName) throws Exception  {
 				try {
-					LoginTR.searchArticle(lastName);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results having provided last name");
-					ProfilePage.validateProfileLastName(lastName);
+					SearchProfile.enterSearchKeyAndClick(lastName);
+					if(SearchProfile.getPeopleCount()>0) {
+						SearchProfile.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results having provided last name");
+						ProfilePage.validateProfileLastName(lastName);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {
