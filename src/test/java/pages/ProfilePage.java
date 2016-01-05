@@ -27,13 +27,8 @@ public class ProfilePage  extends TestBase {
 	static String followUnfollowLableBefore;
 	static String followUnfollowLableAfter;
 	static String metadata[];
-			
-	public static void enterSearchKeyAndClick(String searchKey) throws Exception {
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
-		Thread.sleep(2000);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
-		Thread.sleep(4000);
-	}
+	static int followingBefore;
+	
 	
 	/**
 	 * Method for Validate Profile Search with last name
@@ -75,17 +70,6 @@ public class ProfilePage  extends TestBase {
 			System.out.println("No Profile Search Results are not available with \t"+metaData+ "\t role/Primary Institution/Country");
 	}
 	
-	
-	/**
-	 * Method for Click People after searching an profile
-	 * @throws Exception, When People are not present/Disabled
-	 */
-	public static int getPeopleCount() throws Exception {
-			String listPeople=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).findElement(By.tagName("span")).getText();
-			peopleCount=Integer.parseInt(listPeople);
-			System.out.println("Total People search results-->"+peopleCount);
-			return peopleCount;
-	}
 	
 	/**
 	 * Method for Click People after searching an profile
@@ -155,15 +139,6 @@ public class ProfilePage  extends TestBase {
 			} //for
 		}
 	
-	/**
-	 * Method for click profile image
-	 * @throws Exception, When Profile image not available
-	 */
-	public static void clickProfileImage() throws Exception {
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
-			
-	}
 	
 	/**
 	 * Method for click on profile
@@ -344,4 +319,180 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
+	/**
+	 * Method for Click profile comment tab
+	 * @throws Exception, comment tab is not click able
+	 */
+	public static void clickCommentsTab() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
+		BrowserWaits.waitTime(8);
+	}
+	
+	/**
+	 * Method for Click profile Following tab
+	 * @throws Exception, Following tab is not click able
+	 */
+	public static void clickFollowingTab() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
+		BrowserWaits.waitTime(8);
+	}
+	
+	/**
+	 * Method for Click profile Followers tab
+	 * @throws Exception, Followers tab is not click able
+	 */
+	public static void clickFollowersTab() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
+		BrowserWaits.waitTime(8);
+	}
+	
+	/**
+	 * Method for Click Posts Following tab
+	 * @throws Exception, Posts tab is not click able
+	 */
+	public static void clickPostsTab() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+		BrowserWaits.waitTime(8);
+	}
+	
+	
+	/**
+	 * Method for validate Like own profile comment
+	 * @throws Exception, comment like not done
+	 */
+	public static void commentAppreciation() throws Exception {
+		String tooltipBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+		String countBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
+		//System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
+		//System.out.println("Appreciate count-->"+countBeforeAppreciate);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
+		BrowserWaits.waitTime(4);
+		String tooltipAfterAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+		String countAfterAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
+		//System.out.println("Appreciate tooltip after-->"+tooltipAfterAppreciate);
+		//System.out.println("Appreciate count after-->"+countAfterAppreciate);
+		if(tooltipBeforeAppreciate.equalsIgnoreCase(tooltipAfterAppreciate) && countBeforeAppreciate.equalsIgnoreCase(countAfterAppreciate)){
+			throw new Exception("comment appreciation not happend");
+		}
+	}
+	
+	/**
+	 * Method for Click profile Following tab
+	 * @throws Exception, Following tab is not click able
+	 */
+	public static int getFollowingCount() throws Exception {
+		String followingCountBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS).getText();
+		String followingCount[]=followingCountBefore.split(" ");
+		followingBefore=Integer.parseInt(followingCount[1]);
+		return followingBefore;
+	}
+	
+	/**
+	 * Method for Validate Following count
+	 * @throws Exception, validation fails
+	 */
+	public static void validateFollowingCount() throws Exception {
+		int followingAfter=getFollowingCount();
+		if((followingBefore>followingAfter)||(followingBefore<followingAfter)) {
+			throw new Exception("Following count should increase or decrease");
+		}
+	}
+	
+	
+	/**
+	 * Method to click on Publish A Post button in the profile page
+	 */
+	public static void clickOnPublishPostButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
+				.click();
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+	}
+
+	/**
+	 * Method to validate various error messages while creating the post
+	 * @param expErrorMsg
+	 * @return
+	 */
+	public static boolean validatePostErrorMessage(String expErrorMsg) {
+		boolean result = false;
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+		String actErrorMessage = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString()))
+				.getText();
+		if (expErrorMsg.equalsIgnoreCase(actErrorMessage)) {
+			result = true;
+		}
+		return result;
+	}
+
+	/**
+	 * Method to enter the specified text to post title box in post creation modal
+	 * @param tilte
+	 */
+	public static void enterPostTitle(String tilte) {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.sendKeys(tilte);
+	}
+
+	/**
+	 * Method to enter the specified text to post content box in post creation modal
+	 * @param tilte
+	 */
+	public static void enterPostContent(String content) {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+				.clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+				.sendKeys(content);
+
+	}
+
+	/**
+	 * Method to click on publish button in post creation modal
+	 */
+	public static void clickOnPostPublishButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
+				.click();
+	}
+
+	/**
+	 * Method to click on cancel button in post creation modal
+	 */
+	public static void clickOnPostCancelButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
+				.click();
+	}
+
+	/**
+	 * Method to get the count of posts in a profile
+	 * @return
+	 */
+	public static int getPostsCount() {
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		int count = Integer.parseInt(
+				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString()))
+						.getText());
+		return count;
+	}
+
+	/**
+	 * Method to get the title of the most recent post in the profile.
+	 * @return
+	 */
+	public static String getFirstPostTitle() {
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		String postTitle = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
+				.getText();
+		return postTitle;
+
+	}
 }
