@@ -155,15 +155,6 @@ public class ProfilePage  extends TestBase {
 			} //for
 		}
 	
-	/**
-	 * Method for click profile image
-	 * @throws Exception, When Profile image not available
-	 */
-	public static void clickProfileImage() throws Exception {
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
-			
-	}
 	
 	/**
 	 * Method for click on profile
@@ -343,5 +334,104 @@ public class ProfilePage  extends TestBase {
 			throw new Exception("profile meta data not updated");
 		}
 	}
+	
+	/**
+	 * Method to click on Publish A Post button in the profile page
+	 */
+	public static void clickOnPublishPostButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
+				.click();
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+	}
+
+	/**
+	 * Method to validate various error messages while creating the post
+	 * @param expErrorMsg
+	 * @return
+	 */
+	public static boolean validatePostErrorMessage(String expErrorMsg) {
+		boolean result = false;
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+		String actErrorMessage = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString()))
+				.getText();
+		if (expErrorMsg.equalsIgnoreCase(actErrorMessage)) {
+			result = true;
+		}
+		return result;
+	}
+
+	/**
+	 * Method to enter the specified text to post title box in post creation modal
+	 * @param tilte
+	 */
+	public static void enterPostTitle(String tilte) {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.sendKeys(tilte);
+	}
+
+	/**
+	 * Method to enter the specified text to post content box in post creation modal
+	 * @param tilte
+	 */
+	public static void enterPostContent(String tilte) {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+				.clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+				.sendKeys(tilte);
+
+	}
+
+	/**
+	 * Method to click on publish button in post creation modal
+	 */
+	public static void clickOnPostPublishButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
+				.click();
+	}
+
+	/**
+	 * Method to click on cancel button in post creation modal
+	 */
+	public static void clickOnPostCancelButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
+				.click();
+	}
+
+	/**
+	 * Method to get the count of posts in a profile
+	 * @return
+	 */
+	public static int getPostsCount() {
+
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		int count = Integer.parseInt(
+				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString()))
+						.getText());
+		return count;
+	}
+
+	/**
+	 * Method to get the title of the most recent post in the profile.
+	 * @return
+	 */
+	public static String getFirstPostTitle() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		String postTitle = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
+				.getText();
+		return postTitle;
+
+	}
+
+	
+	
 	
 }
