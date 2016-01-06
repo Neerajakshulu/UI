@@ -540,7 +540,8 @@ public class ProfilePage  extends TestBase {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		List<WebElement> topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		BrowserWaits.waitTime(2);
-		topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
+		BrowserAction.jsClick(topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))));
+		//topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
 		BrowserWaits.waitTime(2);
 		}
 		
