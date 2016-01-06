@@ -2,10 +2,7 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,12 +12,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
 import pages.SearchProfile;
 import suiteC.LoginTR;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class OthersProfileCommentsLikeTest extends TestBase {
@@ -98,10 +93,15 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	
 	
 	@Test(dependsOnMethods="testLoginTRAccount")
-	@Parameters({"profileName","profileCompleteName"})
-	public void validateOthersProfileCommentsLike(String profileName,String profileCompleteName) throws Exception  {
+	@Parameters("otherProfileName")
+	public void validateOthersProfileCommentsLike(String otherProfileName) throws Exception  {
 			try {
-				othersProfileCommentsLike(profileName, profileCompleteName);
+				test.log(LogStatus.INFO,"validating other user profile comments appreciation");
+				SearchProfile.enterSearchKeyAndClick(otherProfileName);
+				SearchProfile.clickPeople();
+				ProfilePage.clickProfile();
+				ProfilePage.clickCommentsTab();
+				ProfilePage.commentAppreciation();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();
 				closeBrowser();
@@ -118,74 +118,6 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 			}
 	}
 	
-	
-	/**
-	 * Method for user Profile comments like
-	 * @throws Exception, when comments like is not working as expected
-	 */
-	
-	public void othersProfileCommentsLike(String profileName,String profileCompleteName) throws Exception  {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-		BrowserWaits.waitUntilText("Profile");
-		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
-		
-		FindProfileTest profileFind=new FindProfileTest();
-		
-		LoginTR.searchArticle(profileName);
-		SearchProfile.clickPeople();
-		profileFind.chooseOtherProfile(profileCompleteName);
-		
-		Thread.sleep(4000);
-		BrowserAction.scrollingPageDown();
-		BrowserWaits.waitUntilText("Comments");
-		Thread.sleep(6000);
-		
-		String totalProfileComments=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_APP_PROFILE_COMMENTS_CSS).getText();
-		//System.out.println("Total Profile Comments-->"+totalProfileComments);
-		String totComments[]=totalProfileComments.split(" ");
-		//System.out.println("tc-->"+totComments[totComments.length-1]);
-		if(Integer.parseInt(totComments[totComments.length-1]) > 0) {
-			//click user own profile comments like button
-			int beforeCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-			System.out.println("Before Comment like size-->"+beforeCommentLike);
-			int afterCommentLike=0;
-			String commnentLikeStatus=ob.findElements(By.cssSelector("span[class$='-liked ng-scope']")).get(0).getAttribute("ng-click");
-		
-			//comment is liked, if like the comment, size should Decrease  
-			if(commnentLikeStatus.contains("NONE")) {
-				Thread.sleep(2000);
-				//System.out.println("Attribute-->"+getUserProfileComments().get(0).getAttribute("ng-click"));
-				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
-				Thread.sleep(2000);
-				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-				System.out.println("After Comment like size-2222->"+afterCommentLike);
-				if(!(beforeCommentLike>afterCommentLike)) {
-					throw new Exception("Comments Like size not Decreased");
-				}
-			}
-			
-			//comment is not liked, if like the comment, size should increase 
-			if(commnentLikeStatus.contains("UP")) {
-				ob.findElements(By.cssSelector("span[class$='-liked ng-scope'] span")).get(0).click();
-				Thread.sleep(4000);
-				afterCommentLike=Integer.parseInt(getUserProfileComments().get(0).getText());
-				System.out.println("After Comment like size-->"+afterCommentLike);
-				if(!(beforeCommentLike<afterCommentLike)) {
-					throw new Exception("Comments Like size not increased");
-				}
-			 }
-		}
-	}
-	
-	/**
-	 * Method for Get list of WebElements of user profile comments
-	 * @return
-	 * @throws Exception, Element not found
-	 */
-	public List<WebElement> getUserProfileComments() throws Exception {
-		List<WebElement> commentsLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH);
-		return commentsLike;
-	}
 	
 	@AfterTest
 	public void reportTestResult() {

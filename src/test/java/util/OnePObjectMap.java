@@ -71,10 +71,37 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model='primaryInstitution']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[ng-model='location']"),
-
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click='cancelEditing()']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click='saveUserData()']");
+	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click='saveUserData()']"),
+
+	HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS("a[data-event-category='profileposts']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS("a[data-event-category='profilefollowers']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS("a[data-event-category='profilefollowing']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click^='appreciateThis']"),
+	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("div[class='post-button-wrapper'] button[id='posting']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("input[class^='post-title-input']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS("div[name='createdPostContent'] div[id^='taTextElement']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg ng-binding'] p"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("button[event-action='cancel']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[event-action='publish']"),
+	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.postsDisplay'] div[class='ng-scope'] h2 a"),
+	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[ng-bind='vm.count']"),
+	HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS("div[modal-controller='PostDialogController'] button[id='editing']"),
+	HOME_PROJECT_NEON_VIEW_POST_SHARE_CSS("i[class^='webui-icon webui-icon-share']"),
+	HOME_PROJECT_NEON_VIEW_POST_WATCH_CSS("i[class^='webui-icon webui-icon-watch']"),
+	HOME_PROJECT_NEON_VIEW_POST_STOP_WATCH_CSS("i[class^='webui-icon webui-icon-watch'][class$='watching']"),
+	HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS("a[label='Share on Facebook']"),
+	HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS("a[label='Share on LinkedIn']"),
+	HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS("a[event-category='share-twitter-posts']"),
+	HOME_PROJECT_NEON_HEADER_WATCHLIST_LINK("Watchlist"),
+	HOME_PROJECT_NEON_HEADER_HOME_LINK("Home"),
+	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post"),
 	
+	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
+	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS("input[placeholder='Add a Topic']"),
+	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li");
 	
 	
 	private String locator;

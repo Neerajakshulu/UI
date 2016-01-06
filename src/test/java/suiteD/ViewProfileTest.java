@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.HeaderFooterLinksPage;
 import pages.ProfilePage;
 import suiteC.LoginTR;
 import util.ErrorUtil;
@@ -95,7 +96,7 @@ public class ViewProfileTest extends TestBase {
 	public void validateOwnProfileData() throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"own profile validation-edit option enabled, profile name should match with profile title");
-				ProfilePage.clickProfileImage();
+				HeaderFooterLinksPage.clickProfileImage();
 				ProfilePage.clickProfileLink();
 				ProfilePage.validateOwnrProfile();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");

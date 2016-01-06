@@ -29,13 +29,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -52,6 +49,7 @@ import util.Xls_Reader;
 public class TestBase {
 	public static Properties CONFIG=null;
 	public static Properties OR=null;
+	public static Properties LOGIN=null;
 	public static Xls_Reader suiteXls=null;
 	public static Xls_Reader suiteAxls=null;
 	public static Xls_Reader suiteBxls=null;
@@ -101,6 +99,10 @@ public class TestBase {
 		ip = new FileInputStream("src/test/resources/properties/OR.properties");
 		OR.load(ip);
 		
+		LOGIN = new Properties();
+		ip = new FileInputStream("src/test/resources/properties/login.properties");
+		LOGIN.load(ip);
+		 
 		//Getting url
 		host=System.getProperty("host");
 
@@ -576,7 +578,7 @@ public class TestBase {
 				 * @param time
 				 * @return
 				 */
-				public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+				public static WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
 
 					return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
 				}
@@ -588,7 +590,7 @@ public class TestBase {
 				 * @param time
 				 * @return
 				 */
-				public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+				public static WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
 
 					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
 				}
@@ -598,7 +600,7 @@ public class TestBase {
 				 * @param driver
 				 * @param element
 				 */
-				public void jsClick(WebDriver driver, WebElement element) {
+				public static void jsClick(WebDriver driver, WebElement element) {
 
 					((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 				}
@@ -621,7 +623,7 @@ public class TestBase {
 				 * @param time
 				 * @return
 				 */
-				public List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+				public static List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
 					return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 				}
 				
@@ -629,7 +631,7 @@ public class TestBase {
 				 * This method is to wait for all ajax calls to complete.
 				 * @param driver
 				 */
-				public void waitForAjax(WebDriver driver) {
+				public static void waitForAjax(WebDriver driver) {
 					try {
 						for (int i = 0; i < 60; i++) {
 
@@ -654,7 +656,7 @@ public class TestBase {
 				 * @param time
 				 * @return
 				 */
-				public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+				public static WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
 
 					return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
 				}
@@ -678,7 +680,7 @@ public class TestBase {
 					 * @param numberOfWindows
 					 * @return
 					 */
-					public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver,
+					public static ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver,
 							final int numberOfWindows) {
 						return new ExpectedCondition<Boolean>() {
 							@Override
@@ -695,7 +697,7 @@ public class TestBase {
 					 * @param driver
 					 * @param numberOfWindows
 					 */
-					public void waitForNumberOfWindowsToEqual(WebDriver driver,
+					public static void  waitForNumberOfWindowsToEqual(WebDriver driver,
 							final int numberOfWindows) {
 						new WebDriverWait(driver, 60).until(numberOfWindowsToBe(driver,
 								numberOfWindows));
@@ -706,7 +708,7 @@ public class TestBase {
 					 * @param driver
 					 * @return
 					 */
-					public String switchToNewWindow(WebDriver driver) {
+					public static String switchToNewWindow(WebDriver driver) {
 						String mainWindow = driver.getWindowHandle();
 						Set<String> windows = driver.getWindowHandles();
 						windows.remove(mainWindow);
@@ -720,7 +722,7 @@ public class TestBase {
 					 * @param driver
 					 * @param mainWindowHandle
 					 */
-					public void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
+					public static void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
 
 						driver.switchTo().window(mainWindowHandle);
 
@@ -828,5 +830,22 @@ public String cellToString(XSSFCell cell) {
         }
         return result.toString();
     }
+
+/**
+ * 
+ * @param username -USERNAME Field from the login.properties file
+ * @param pwd - PASSWORD Field from the login.properties file
+ * @throws Exception
+ */
+	public void loginAs(String usernameKey, String pwdKey) throws Exception {
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty(usernameKey));
+		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(LOGIN.getProperty(pwdKey));
+		jsClick(ob, ob.findElement(By.id(OR.getProperty("login_button"))));
+
+	}
 
 }
