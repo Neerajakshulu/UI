@@ -28,6 +28,7 @@ public class ProfilePage  extends TestBase {
 	static String followUnfollowLableAfter;
 	static String metadata[];
 	static int followingBefore;
+	static int followersBefore;
 	
 	
 	/**
@@ -387,6 +388,7 @@ public class ProfilePage  extends TestBase {
 		return followingBefore;
 	}
 	
+	
 	/**
 	 * Method for Validate Following count
 	 * @throws Exception, validation fails
@@ -494,9 +496,58 @@ public class ProfilePage  extends TestBase {
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
 				.getText();
 		return postTitle;
-
 	}
 
+	
+	/**
+	 * Method for Click profile Followers tab
+	 * @throws Exception, Following tab is not click able
+	 */
+	public static int getFollowersCount() throws Exception {
+		String followerCountBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS).getText();
+		String followerCount[]=followerCountBefore.split(" ");
+		followersBefore=Integer.parseInt(followerCount[1]);
+		System.out.println("FOLLOWERSBEFORE-->"+followersBefore);
+		return followersBefore;
+	}
+	
+	/**
+	 * Method for Validate Followers count
+	 * @throws Exception, validation fails
+	 */
+	public static void validateFollowersCount() throws Exception {
+		int followerAfter=getFollowersCount();
+		if((followingBefore>followerAfter)||(followingBefore<followerAfter)) {
+			throw new Exception("Followers count should increase or decrease");
+		}
+	}
+	
+	/**
+	 * Method for Add Topics into Interest and Skills
+	 * @throws Exception, unable to add topic
+	 */
+	public static void addTopicForInterestAndSkills(String topics) throws Exception {
+		List<WebElement> addedTopics=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+		if(addedTopics.size()>0) {
+			for(WebElement addedTopic:addedTopics) {
+				addedTopic.click();
+				BrowserWaits.waitTime(2);
+			}
+		}
+		String topicLists[]=topics.split("\\|");
+		for(String topicList:topicLists) {
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, topicList);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		List<WebElement> topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
+		BrowserWaits.waitTime(2);
+		}
+		
+		List<WebElement> newlyAddedTopics=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+		if(!(newlyAddedTopics.size() == topicLists.length)) {
+			throw new Exception("Topics not added for Interests and Skills");
+		}
+	}
 	
 	
 	

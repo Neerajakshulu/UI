@@ -79,8 +79,6 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS("a[data-event-category='profilefollowers']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS("a[data-event-category='profilefollowing']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click^='appreciateThis']"),
-	//HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click='cancelEditing()']"),
-	//HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click='saveUserData()']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("div[class='post-button-wrapper'] button[id='posting']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("input[class^='post-title-input']"),
@@ -99,7 +97,12 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS("a[event-category='share-twitter-posts']"),
 	HOME_PROJECT_NEON_HEADER_WATCHLIST_LINK("Watchlist"),
 	HOME_PROJECT_NEON_HEADER_HOME_LINK("Home"),
-	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post");
+	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post"),
+	
+	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
+	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS("input[placeholder='Add a Topic']"),
+	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li");
+	
 	
 	private String locator;
 

@@ -77,9 +77,8 @@
     </classes>
 </test>
 
-<test name="Validate_User_Own_Profile_Interests_and_Skills_Update">
-	<parameter name="maxInterstSkilChar" value="52"/>
-	<parameter name="finalInterstSkilChar" value="50"/>
+<test name="Validate_Add_Topic_InterestsAndSkillsUpdate">
+	<parameter name="topics" value="tes|aut|dru"/>
     <classes>
         <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
     </classes>
