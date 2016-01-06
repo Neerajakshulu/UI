@@ -517,7 +517,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void validateFollowersCount() throws Exception {
 		int followerAfter=getFollowersCount();
-		if((followingBefore>followerAfter)||(followingBefore<followerAfter)) {
+		if(!(followingBefore>followerAfter)||(followingBefore<followerAfter)) {
 			throw new Exception("Followers count should increase or decrease");
 		}
 	}
