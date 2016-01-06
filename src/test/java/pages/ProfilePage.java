@@ -539,6 +539,7 @@ public class ProfilePage  extends TestBase {
 		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, topicList);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		List<WebElement> topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		BrowserWaits.waitTime(2);
 		topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
 		BrowserWaits.waitTime(2);
 		}
