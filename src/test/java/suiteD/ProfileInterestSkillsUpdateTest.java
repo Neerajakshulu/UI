@@ -2,13 +2,7 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,11 +12,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.HeaderFooterLinksPage;
+import pages.ProfilePage;
 import suiteC.LoginTR;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ProfileInterestSkillsUpdateTest extends TestBase {
@@ -35,8 +28,9 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 	static int status=1;
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var,
 				"Verity that user is able to edit  info like Interests and Skills from his own profile").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
@@ -59,15 +53,7 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 			throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
 		}
 		
-		
-		// test the runmode of current dataset
-		count++;
-		if(!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no "+count);
-			skip=true;
-			throw new SkipException("Runmode for test set data set to no "+count);
-		}
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts ");
 		
 				try {
 					openBrowser();
@@ -76,7 +62,6 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 					
 					ob.navigate().to(System.getProperty("host"));
 					LoginTR.waitForTRHomePage();
-					Thread.sleep(6000);
 					LoginTR.enterTRCredentials(username, password);
 					LoginTR.clickLogin();
 				} catch (Throwable t) {
@@ -94,10 +79,14 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 	
 	
 	@Test(dependsOnMethods="testLoginTRAccount")
-	@Parameters({"maxInterstSkilChar","finalInterstSkilChar"})
-	public void updateProfileInterestsAndSkills(int maxInterstSkilChar,int finalInterstSkilChar) throws Exception  {
+	@Parameters("topics")
+	public void updateProfileInterestsAndSkills(String topics) throws Exception  {
 			try {
-				profileSkillsUpdation(maxInterstSkilChar,finalInterstSkilChar);
+				test.log(LogStatus.INFO,"go to user profile page");
+				HeaderFooterLinksPage.clickProfileImage();
+				ProfilePage.clickProfileLink();
+				test.log(LogStatus.INFO,"Remove old topics and Add new Topics");
+				ProfilePage.addTopicForInterestAndSkills(topics);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 				LoginTR.logOutApp();
 				closeBrowser();
@@ -109,44 +98,9 @@ public class ProfileInterestSkillsUpdateTest extends TestBase {
 				test.log(LogStatus.INFO,errors.toString());
 				ErrorUtil.addVerificationFailure(t);
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_Interests and Skills not Updated")));
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_add_topic_not_done")));
 				closeBrowser();
 			}
-	}
-	
-	
-	/**
-	 * Method for user Profile comments like
-	 * @throws Exception, when comments like is not working as expected
-	 */
-	
-	public void profileSkillsUpdation(int maxInterstSkilChar,int finalInterstSkilChar) throws Exception  {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-		BrowserWaits.waitUntilText("Profile");
-		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
-		Thread.sleep(4000);
-		
-		List<WebElement> skills=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_OWN_PROFILE_INTEREST_SKILLS_CSS);
-		//System.out.println("skills size-->"+skills.size());
-		if(skills.size()>0) {
-			//existing interests and skills are available
-			for(WebElement skill:skills){
-				skill.click();
-				Thread.sleep(2000);
-			}
-		}
-		String statusBeforeSkill=ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).getAttribute("class");
-		//System.out.println("Attr stauts-->"+statusBeforeSkill);
-		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(RandomStringUtils.randomAlphabetic(maxInterstSkilChar));
-		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(Keys.ENTER);
-		String statusAfterSkill=ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).getAttribute("class");
-		Thread.sleep(4000);
-		//System.out.println("Attr stauts-->"+statusAfterSkill);
-		Assert.assertNotEquals(statusBeforeSkill, statusAfterSkill);
-		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).clear();
-		ob.findElement(By.cssSelector("input[placeholder='Add an interest or skill']")).sendKeys(RandomStringUtils.randomAlphabetic(finalInterstSkilChar));
-		Thread.sleep(4000);
-		
 	}
 	
 	@AfterTest

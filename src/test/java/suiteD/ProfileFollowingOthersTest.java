@@ -2,11 +2,7 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -16,11 +12,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.HeaderFooterLinksPage;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ProfileFollowingOthersTest extends TestBase {
@@ -36,8 +32,9 @@ public class ProfileFollowingOthersTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var,
 				"Verify that user is able to follow other profile and test for count of users following me").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
@@ -99,12 +96,68 @@ public class ProfileFollowingOthersTest extends TestBase {
 	 * @throws Exception, user not able to follow other users profile
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	@Parameters({"profileName","profileFullName"})
-	public void followOthersProfile(String profileName,String profileFullName) throws Exception  {
+	public void getFollowingUsers() throws Exception  {
 			try {
-		
-				follwingOthersProfile(profileName,profileFullName);
-				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+				test.log(LogStatus.INFO,"get users who iam following ");
+				HeaderFooterLinksPage.clickProfileImage();
+				ProfilePage.clickProfileLink();
+				ProfilePage.getFollowingCount();
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,"Something Unexpected");
+				//print full stack trace
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO,errors.toString());
+				ErrorUtil.addVerificationFailure(t);
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_following_count")));
+				closeBrowser();
+			}
+	}
+	
+	/**
+	 * Method for find and follow others profile
+	 * @throws Exception 
+	 */
+	@Test(dependsOnMethods="getFollowingUsers")
+	@Parameters("profileName")
+	public void followOthersProfile(String profileName) throws Exception  {
+			try {
+				test.log(LogStatus.INFO,"Search for Profile and follow/unfollow that profile from Search Page itself");
+				SearchProfile.enterSearchKeyAndClick(profileName);
+				if(SearchProfile.getPeopleCount()>0) {
+					SearchProfile.clickPeople();
+					SearchProfile.followProfileFromSeach();
+				}
+				else{
+					throw new SkipException("No Profiles to follow from SEARCH PEOPLE page");
+				}
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,"Error:"+t);
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO,errors.toString());
+				ErrorUtil.addVerificationFailure(t);
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_follow")));//screenshot
+				closeBrowser();
+			}
+	}
+	
+	/**
+	 * Method for User Own profile following other user's profile
+	 * @param profileName
+	 * @param profileFullName
+	 * @throws Exception, user not able to follow other users profile
+	 */
+	@Test(dependsOnMethods="followOthersProfile")
+	public void validateFollowingUsersCount() throws Exception  {
+			try {
+				test.log(LogStatus.INFO,"Following count should be increased/decreased");
+				HeaderFooterLinksPage.clickProfileImage();
+				ProfilePage.clickProfileLink();
+				ProfilePage.validateFollowingCount();
 				LoginTR.logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
@@ -115,67 +168,9 @@ public class ProfileFollowingOthersTest extends TestBase {
 				test.log(LogStatus.INFO,errors.toString());
 				ErrorUtil.addVerificationFailure(t);
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_profile_Interests and Skills not Updated")));
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_following_count")));
 				closeBrowser();
 			}
-	}
-	
-	
-	/**
-	 * Method for follow others users profile
-	 * @throws Exception, user not able to follow other users profile
-	 */
-	public void follwingOthersProfile(String profileName,String profileFullName) throws Exception  {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-		BrowserWaits.waitUntilText("Profile");
-		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
-		Thread.sleep(4000);
-		
-		String following=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS).get(2).findElement(By.tagName("tab-heading")).getText();
-		System.out.println("Following-->"+following);
-		String followArr[]=following.split(" ");
-		int totalBeforeFollowing=Integer.parseInt(followArr[followArr.length-1]);
-		//System.out.println("Following Total-->"+totalBeforeFollowing);
-		
-		LoginTR.searchArticle(profileName);
-		new ProfileFollowTest().clickPeople();
-		
-		List<WebElement> profiles=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
-		System.out.println("list of find profiles -->"+profiles.size());
-		Assert.assertTrue(profiles.size()>0);
-		
-		for(WebElement profile:profiles) {
-			if(profile.findElement(By.tagName("a")).getText().trim().equalsIgnoreCase(profileFullName)){
-				List<WebElement> followProfiles = profile.findElements(By.tagName("span")).get(0).findElements(By.tagName("button"));
-				for(WebElement followProfile:followProfiles){
-					if(followProfile.isDisplayed()){
-						followBefore=followProfile.getText();
-						followProfile.click();
-						Thread.sleep(2000);
-						break;
-					}
-				}
-				
-				for(WebElement followProfile:followProfiles){
-					if(followProfile.isDisplayed()){
-						followAfter=followProfile.getText();
-						break;
-					}
-				}
-			}
-		}
-		
-		ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-		BrowserWaits.waitUntilText("Profile");
-		ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
-		Thread.sleep(4000);
-		
-		String followingAfter=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_FOLLOWING_CSS).get(2).getText();
-		String followArrAfter[]=followingAfter.split(" ");
-		int totalAfterFollowing=Integer.parseInt(followArrAfter[followArrAfter.length-1]);
-		System.out.println("Following AfterTotal-->"+totalAfterFollowing);
-		
-		Assert.assertNotEquals(totalBeforeFollowing, followingAfter);
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -223,6 +224,19 @@ public class BrowserAction extends TestBase{
 	}
 	
 	/**
+	 * Method to click on the specified element using java script executor.
+	 * @param driver
+	 * @param element
+	 * @throws Exception 
+	 */
+	public static void jsClick(Object elementName) throws Exception {
+		WebElement element=getElement(elementName);
+		((JavascriptExecutor) ob).executeScript("arguments[0].click();", element);
+	}
+	
+	
+
+	/**
 	 * Method for get web element
 	 * @param locator
 	 */
@@ -247,7 +261,15 @@ public class BrowserAction extends TestBase{
 		else{
 			throw new Exception("All Locators Should be Declared as a Constants in Enum ");
 		}
-		
-		
+	}
+	
+	/**
+	 * Method to click on the specified element using java script executor.
+	 * @param driver
+	 * @param element
+	 * @throws Exception 
+	 */
+	public static void jsClick(WebElement elementName) throws Exception {
+		((JavascriptExecutor) ob).executeScript("arguments[0].click();", elementName);
 	}
 }

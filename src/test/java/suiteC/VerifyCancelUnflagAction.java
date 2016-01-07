@@ -31,9 +31,9 @@ public class VerifyCancelUnflagAction extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is able to cancel the remove flag action")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that user is able to cancel the remove flag action")
 				.assignCategory("Suite C");
 
 	}
@@ -138,7 +138,7 @@ public class VerifyCancelUnflagAction extends TestBase {
 				}
 			}
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
-					40);
+					180);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 			// waitForAllElementsToBePresent(ob,

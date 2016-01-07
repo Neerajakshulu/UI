@@ -13,9 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -161,6 +163,7 @@ public class TestCase_A16 extends TestBase{
 			
 		}
 		Thread.sleep(15000);
+		ob.close();
 		ob.switchTo().window(al.get(0));
 		Thread.sleep(5000);
 //		ob.get("https://www.guerrillamail.com");
@@ -179,11 +182,11 @@ public class TestCase_A16 extends TestBase{
 			
 		}
 		
-		email_body=ob.findElement(By.xpath(OR.getProperty("email_body")));
-		links=email_body.findElements(By.tagName("a"));
-//		ob.get(links.get(0).getAttribute("href"));
-		myE=links.get(0);
-		executor.executeScript("arguments[0].click();", myE);
+		WebElement reset_link_element=ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
+		String reset_link_url=reset_link_element.getAttribute("href");
+	
+		String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,"t");
+		ob.findElement(By.linkText(reset_link_url)).sendKeys(selectLinkOpeninNewTab);
 		Thread.sleep(8000);
 		
 		myset=ob.getWindowHandles();
@@ -193,11 +196,12 @@ public class TestCase_A16 extends TestBase{
 			
 			al.add(myIT.next());
 		}
-		ob.switchTo().window(al.get(2));
+		ob.switchTo().window(al.get(1));
+		ob.get(reset_link_url);
 		Thread.sleep(5000);
 		
-		ob.findElement(By.id(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
-		ob.findElement(By.id(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
+		ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
+		ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
 		ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
 		Thread.sleep(5000);
 		

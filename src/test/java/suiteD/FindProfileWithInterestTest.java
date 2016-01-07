@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -33,8 +35,9 @@ public class FindProfileWithInterestTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(),
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var,
 				"Verify that user is able to search for profiles with intrests").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
@@ -89,10 +92,12 @@ public class FindProfileWithInterestTest extends TestBase {
 	@Parameters("interest")
 	public void findOthersProfileWithIntersts(String interest) throws Exception  {
 				try {
-					LoginTR.searchArticle(interest);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results are having provided Interest");
-					ProfilePage.validateProfileInterest(interest);
+					SearchProfile.enterSearchKeyAndClick(interest);
+					if(SearchProfile.getPeopleCount()>0) {
+						SearchProfile.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results are having provided Interest");
+						ProfilePage.validateProfileInterest(interest);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {

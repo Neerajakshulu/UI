@@ -37,8 +37,9 @@ public class AuthoringTest extends TestBase {
 	
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user Is able to comment on any article and validate the comment count increment").assignCategory("Suite C");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that user Is able to comment on any article and validate the comment count increment").assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->"+runmodes.length);
 	}
@@ -200,7 +201,7 @@ public class AuthoringTest extends TestBase {
 	
 	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
-		String commentText=ob.findElements(By.cssSelector("div[class^='col-xs-12 ng-scope col-sm-7']")).get(0).getText();
+		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("EDITED")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));

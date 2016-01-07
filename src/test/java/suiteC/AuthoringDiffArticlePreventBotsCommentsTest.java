@@ -41,9 +41,10 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
+				.startTest(var,
 						"Verify that prevention of comment flooding by bots with different articles works as expected")
 				.assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());

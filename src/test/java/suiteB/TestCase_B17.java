@@ -87,7 +87,7 @@ public class TestCase_B17 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_css"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_Link"))).click();
 			waitForAjax(ob);
 			timeCitedWEList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_count_search_results_xpath")));
 

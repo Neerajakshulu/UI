@@ -17,6 +17,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.BrowserAction;
 import util.ErrorUtil;
@@ -42,10 +44,11 @@ public class FindProfileTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
-				.startTest(this.getClass().getSimpleName(),
-						"Verify that user is able to Start/Stop following a user from profile page \n Verify that user should not able to  Edit others profile")
+				.startTest(var,
+						"1.Verify that user is able to Start/Stop following a user from profile page 2. Verify that user is able to search for profiles with first name")
 				.assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
@@ -72,7 +75,7 @@ public class FindProfileTest extends TestBase {
 			skip=true;
 			throw new SkipException("Runmode for test set data set to no "+count);
 		}
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts ");
 		
 				try {
 					openBrowser();
@@ -97,16 +100,15 @@ public class FindProfileTest extends TestBase {
 	 * @throws Exception
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
-	public void findOthersProfile() throws Exception  {
+	public void getOtherProfileDetails() throws Exception  {
 				try {
-					//searchArticle(CONFIG.getProperty("find_profile_name"));
-					LoginTR.searchArticle(CONFIG.getProperty("find_profile_name"));
-					clickPeople();
-					chooseOtherProfile(CONFIG.getProperty("find_profile_complete_name"));
-					clickOtherProfileEdit();
-					checkFollowOtherProfile();
-					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
+					test.log(LogStatus.INFO,"get other profile details and validate");
+					SearchProfile.enterSearchKeyAndClick("hao");
+					SearchProfile.clickPeople();
+					ProfilePage.clickProfile();
+					ProfilePage.validateProfileTitleAndMetadata();
 					LoginTR.logOutApp();
+					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
 
 				} catch (Throwable t) {
@@ -117,28 +119,11 @@ public class FindProfileTest extends TestBase {
 					test.log(LogStatus.INFO,errors.toString());
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_to_find_others_profile")));
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unable_get_others_profile_details")));
 					closeBrowser();
 				}
 	}
 	
-	/**
-	 * Method for Click People after searching an profile
-	 * @throws Exception, When People are not present/Disabled
-	 */
-	public void clickPeople() throws Exception {
-		try {
-			ob.findElement(By.xpath("//a[contains(text(), 'People')]")).click();
-			Thread.sleep(4000);
-		} catch (Exception e) {
-			System.out.println("closing browser--->");
-			test.log(LogStatus.FAIL,"Error:"+e);
-			ErrorUtil.addVerificationFailure(e);
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
-			//closeBrowser();
-		}
-	}
 	
 	
 	/**

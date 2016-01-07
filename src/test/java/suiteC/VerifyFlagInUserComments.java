@@ -32,9 +32,9 @@ public class VerifyFlagInUserComments extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that flag button is displayed for comments")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that flag button is displayed for comments")
 				.assignCategory("Suite C");
 
 	}
@@ -81,7 +81,7 @@ public class VerifyFlagInUserComments extends TestBase{
 			for(int i=(itr-1)*10; i<itemList.size();i++)	{
 				strCmntCt=itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).getText();
 				commentsCount=	Integer.parseInt(strCmntCt);
-				if(commentsCount!=0 && commentsCount<50){
+				if(commentsCount!=0){
 					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
 					isFound=true;
 					break;

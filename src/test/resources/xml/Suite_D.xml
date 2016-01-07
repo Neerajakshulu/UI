@@ -9,6 +9,7 @@
 <parameter name="password" value="Welcome01"/>
 	
 <test name="Follow_Other_Profile">
+	<parameter name="profileName" value="reddy"/>
     <classes>
        	<class name="suiteD.ProfileFollowTest" ></class> 
     </classes>
@@ -20,6 +21,20 @@
     </classes>
 </test>
 
+<test name="Others_Profile_Edit">
+    <classes>
+     	 <class name="suiteD.OtherProfileEditTest" ></class>
+    </classes>
+</test>
+
+<test name="Others_Profile_Follow_Unfollow_ProfilePage">
+	<parameter name="otherProfileName" value="hao"></parameter>
+    <classes>
+     	 <class name="suiteD.OtherProfilePageFollowTest" ></class>
+    </classes>
+</test>
+
+
 <test name="Validate_View_Profile">
     <classes>
         <class name="suiteD.ViewProfileTest" ></class> 
@@ -27,7 +42,7 @@
 </test>
 
 <test name="Update_User_Own_Profile">
-	<parameter name="profileInfo" value="QA|THOMSONREUTERS|BANGLORE"/>
+	<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india"/>
     <classes>
         <class name="suiteD.ProfileUpdateTest" ></class> 
     </classes>
@@ -43,7 +58,7 @@
 </test>
 
 <test name="Validate_Application_Header_and_Footer_Links">
-	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use|Help"/>
+	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use"/>
     <classes>
         <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
     </classes>
@@ -56,25 +71,21 @@
 </test>
 
 <test name="Validate_Other_User_Profile_Comments_Like">
-	<parameter name="profileName" value="Chaturvedi"/>
-	<parameter name="profileCompleteName" value="Deepak Chaturvedi"/> 
-
+	<parameter name="otherProfileName" value="deepak"/>
     <classes>
         <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
     </classes>
 </test>
 
-<test name="Validate_User_Own_Profile_Interests_and_Skills_Update">
-	<parameter name="maxInterstSkilChar" value="52"/>
-	<parameter name="finalInterstSkilChar" value="50"/>
+<test name="Validate_Add_Topic_InterestsAndSkillsUpdate">
+	<parameter name="topics" value="tes|aut|dru"/>
     <classes>
         <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
     </classes>
 </test>
 
 <test name="Validate_User_Own_Profile_Following_Others_Profiles">
-	<parameter name="profileName" value="deepak"/>
-	<parameter name="profileFullName" value="Deepak Chaturvedi"/>
+	<parameter name="profileName" value="reddy"/>
     <classes>
         <class name="suiteD.ProfileFollowingOthersTest" ></class> 
     </classes>
@@ -100,7 +111,7 @@
 </test>
 
 <test name="Profile_Search_with_Role">
-	<parameter name="role" value="QA"></parameter>
+	<parameter name="role" value="engineer"></parameter>
     <classes>
         <class name="suiteD.FindProfileWithRoleTest" ></class> 
     </classes>

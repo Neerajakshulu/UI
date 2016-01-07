@@ -31,9 +31,9 @@ public class VerifyEditOtherUsersComments extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() {
-
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify that user is not able to edit and delete the comment added by other users")
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify that user is not able to edit and delete the comment added by other users")
 				.assignCategory("Suite C");
 
 	}

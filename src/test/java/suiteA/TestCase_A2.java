@@ -92,7 +92,7 @@ public class TestCase_A2 extends TestBase{
 				Thread.sleep(15000);
 
 				//Verify that login is successful
-				if(!checkElementPresence_link_text("apps")){
+				if(!checkElementPresence("apps")){
 
 					test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");//extent reports
 					status=2;//excel

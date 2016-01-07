@@ -37,8 +37,9 @@ public class AuthoringDeleteTest extends TestBase {
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() {
-			test = extent.startTest(this.getClass().getSimpleName(), "Verify that user can delete the comments user authored themselves and validate the comment count").assignCategory("Suite C");
+		public void beforeTest() throws Exception {
+			String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
+			test = extent.startTest(var, "Verify that user can delete the comments user authored themselves and validate the comment count").assignCategory("Suite C");
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 		}
 	

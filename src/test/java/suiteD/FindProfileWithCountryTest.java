@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchProfile;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -33,8 +35,9 @@ public class FindProfileWithCountryTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() {
-		test = extent.startTest(this.getClass().getSimpleName(), "Verify Profile Search with Country").assignCategory("Suite D");
+	public void beforeTest() throws Exception {
+		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
+		test = extent.startTest(var, "Verify Profile Search with Country").assignCategory("Suite D");
 		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 			
@@ -88,10 +91,12 @@ public class FindProfileWithCountryTest extends TestBase {
 	@Parameters("country")
 	public void findOthersProfileWithCountry(String country) throws Exception  {
 				try {
-					LoginTR.searchArticle(country);
-					ProfilePage.clickPeople();
-					test.log(LogStatus.INFO, "validate populated search profile results having provided Country");
-					ProfilePage.validateProfileMetaData(country);
+					SearchProfile.enterSearchKeyAndClick(country);
+					if(SearchProfile.getPeopleCount()>0) {
+						SearchProfile.clickPeople();
+						test.log(LogStatus.INFO, "validate populated search profile results having provided Country");
+						ProfilePage.validateProfileMetaData(country);
+					}
 					LoginTR.logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {
