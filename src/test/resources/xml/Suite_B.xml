@@ -190,6 +190,29 @@
     </classes>
 </test>
 
+<test name="Test B31">
+    <classes>
+        <class name="suiteB.TestCase_B31" ></class>  
+    </classes>
+</test>
+
+<test name="Test B32">
+    <classes>
+        <class name="suiteB.TestCase_B32" ></class>  
+    </classes>
+</test>
+
+<test name="Test B33">
+    <classes>
+        <class name="suiteB.TestCase_B33" ></class>  
+    </classes>
+</test>
+
+<test name="Test B34">
+    <classes>
+        <class name="suiteB.TestCase_B34" ></class>  
+    </classes>
+</test>
 
 
 </suite>
