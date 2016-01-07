@@ -88,12 +88,17 @@ public class TestCase_B26 extends TestBase{
 			Thread.sleep(2000);
 			
 			List<WebElement> headings=ob.findElements(By.xpath(OR.getProperty("sectionHeading_label")));
-			if(!compareNumbers(4,headings.size())){
-				
-				test.log(LogStatus.FAIL, "More than 4 sections getting displayed in the typeahead");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_than_four_sections_getting_displayed_in_the_typeahead")));//screenshot
-			}
+//			if(!compareNumbers(4,headings.size())){
+//				
+//				test.log(LogStatus.FAIL, "More than 4 sections getting displayed in the typeahead");//extent reports
+//				status=2;//excel
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_than_four_sections_getting_displayed_in_the_typeahead")));//screenshot
+//			}
+//			
+//			for(int i=0;i<headings.size();i++){
+//				
+//				System.out.println(headings.get(i).getText());
+//			}
 			
 			
 			
@@ -103,6 +108,7 @@ public class TestCase_B26 extends TestBase{
 			boolean condition4=headings.get(3).getText().equals("People");
 			
 			boolean final_condition=condition1 && condition2 && condition3 && condition4;
+//			System.out.println(final_condition);
 			
 			try{
 				

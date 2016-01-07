@@ -67,20 +67,20 @@ public class TestCase_F1 extends TestBase {
 			clearCookies();
 			fn1 = generateRandomName(8);
 			ln1 = generateRandomName(10);
+			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			logout();
 			Thread.sleep(5000);
-
+			logout();
 			closeBrowser();
-
 			// 2)Create User2 and follow User1
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			fn2 = generateRandomName(8);
 			ln2 = generateRandomName(10);
+			System.out.println(fn2 +" "+ ln2);
 			user2 = createNewUser(fn2, ln2);
-
+			Thread.sleep(5000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
@@ -90,9 +90,9 @@ public class TestCase_F1 extends TestBase {
 			Thread.sleep(2000);
 
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			logout();
 			Thread.sleep(5000);
 
@@ -119,10 +119,9 @@ public class TestCase_F1 extends TestBase {
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
-			String expected_text = fn2 + " " + ln2 + " is now following you";
-
+			
 			try {
-				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY"));
+				Assert.assertTrue(text.contains("TODAY") && text.contains(fn2 + " " + ln2) && text.contains("is now following you"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

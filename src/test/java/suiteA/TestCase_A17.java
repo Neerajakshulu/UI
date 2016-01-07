@@ -67,7 +67,7 @@ public class TestCase_A17 extends TestBase{
 		
 			String search_query="kernel";
 			String password="Transaction@2";
-			String first_name="firstfirstfirstfirstfirstfirst";
+			String first_name="firstfirstfirstfirstfiirstfiirstfirstfirst";
 			String last_name="lastlastlastlastlast";
 		
 //		1)Create a new user
@@ -89,7 +89,7 @@ public class TestCase_A17 extends TestBase{
 			Thread.sleep(8000);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
-			
+			System.out.println(email);
 			
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			Thread.sleep(2000);
@@ -135,7 +135,7 @@ public class TestCase_A17 extends TestBase{
 			Thread.sleep(25000);
 			
 			
-			String actual_name=ob.findElement(By.xpath(OR.getProperty("header_label"))).getText();
+			String actual_name=ob.findElement(By.xpath(OR.getProperty("header_label"))).getAttribute("title");
 //			System.out.println(actual_name);
 			String expected_name="firstfirstfirstfirstfirstfi …";
 			if(!compareStrings(expected_name,actual_name)){

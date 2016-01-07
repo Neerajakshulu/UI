@@ -95,7 +95,9 @@ public class TestCase_F2 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
-			ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
+			Thread.sleep(5000);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+			//ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
 			Thread.sleep(2000);
 			logout();
 			Thread.sleep(5000);
@@ -120,15 +122,11 @@ public class TestCase_F2 extends TestBase {
 				closeBrowser();
 				return;
 			}
-
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
-
-			String expected_text = fn1 + " " + ln1 + " commented on an article";
-
 			try {
 				Assert.assertTrue(
-						text.contains(expected_text) && text.contains("TODAY") && text.contains(document_title));
+						text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(document_title));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
