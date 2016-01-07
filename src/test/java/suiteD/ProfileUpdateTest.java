@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.HeaderFooterLinksPage;
 import pages.ProfilePage;
 import suiteC.LoginTR;
 import util.ErrorUtil;
@@ -93,7 +94,7 @@ public class ProfileUpdateTest extends TestBase {
 	public void profileDataUpdate(String profileInfo) throws Exception  {
 			try {
 				test.log(LogStatus.INFO," Edit user profile own meta data ");
-				ProfilePage.clickProfileImage();
+				HeaderFooterLinksPage.clickProfileImage();
 				ProfilePage.clickProfileLink();
 				ProfilePage.clickEditCancel();
 				ProfilePage.editUserOwnProfileMetadata(profileInfo);

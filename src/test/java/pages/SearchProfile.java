@@ -19,9 +19,9 @@ public class SearchProfile  extends TestBase {
 			
 	public static void enterSearchKeyAndClick(String searchKey) throws Exception {
 		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
-		Thread.sleep(2000);
+		BrowserWaits.waitTime(2);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
-		Thread.sleep(4000);
+		BrowserWaits.waitTime(4);
 	}
 	
 	
