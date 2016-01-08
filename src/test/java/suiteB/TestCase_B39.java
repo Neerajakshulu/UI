@@ -2,13 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +15,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B34 extends TestBase {
+public class TestCase_B39 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,7 +29,7 @@ public class TestCase_B34 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to sort the items by TIMES CITED field in ALL content type")
+				.startTest(var, "Verify that all articles are sorted by RELEVANCE by default in ARTICLES content type")
 				.assignCategory("Suite B");
 
 	}
@@ -77,41 +72,25 @@ public class TestCase_B34 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 			Thread.sleep(4000);
 
-			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			Thread.sleep(4000);
-
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-			Thread.sleep(4000);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
-
-			// Finding out the time cited values for the displayed items in all
-			// result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
-
-			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
-			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
-
-			Collections.sort(sortedTimeCitedCountList);
-			Collections.reverse(sortedTimeCitedCountList);
+			// Finding out the default sort by value for Article content set
+			String defaultSortBy = ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"))
+					.getText();
 
 			// Comparing the the label of default sort by value
-			if (!sortedTimeCitedCountList.equals(sortedTimeCitedCountList)) {
+			if (!defaultSortBy.equalsIgnoreCase("Relevance")) {
 
-				test.log(LogStatus.FAIL, "Results are not sorted by Times Cited");// extent
+				test.log(LogStatus.FAIL, "Article results are not sorted by Relevance by default");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
+						this.getClass().getSimpleName() + "Article_results_are_not_sorted_by _Relevance_by_default")));// screenshot
 
 			} else {
-				test.log(LogStatus.PASS, "Results are sorted correctly by Times Cited");
+				test.log(LogStatus.PASS, "Article results are sorted by Relevance by default");
 			}
 
 			closeBrowser();
@@ -131,24 +110,6 @@ public class TestCase_B34 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
-
-	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		String purifiedString;
-		String[] arr;
-		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
-			purifiedString = "";
-
-			for (int i = 0; i < arr.length; i++) {
-
-				purifiedString = purifiedString + arr[i];
-			}
-
-			list.add(Integer.parseInt(purifiedString));
-		}
-		return list;
 	}
 
 	@AfterTest

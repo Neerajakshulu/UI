@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -20,7 +17,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B34 extends TestBase {
+public class TestCase_B40 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,7 +31,8 @@ public class TestCase_B34 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to sort the items by TIMES CITED field in ALL content type")
+				.startTest(var,
+						"Verify that following filters are present for ARTICLES content type: a)Document Type b)Authors c)Categories d)Institutions")
 				.assignCategory("Suite B");
 
 	}
@@ -77,41 +75,30 @@ public class TestCase_B34 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
-			Thread.sleep(4000);
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 
-			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			Thread.sleep(4000);
+			// Finding out the types filer in refine panel
+			List<WebElement> content_types = ob
+					.findElements(By.cssSelector("span[class='h6 agg-category-title ng-binding']"));
+			String filter1 = content_types.get(0).getText();
+			String filter2 = content_types.get(1).getText();
+			String filter3 = content_types.get(2).getText();
+			String filter4 = content_types.get(3).getText();
 
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-			Thread.sleep(4000);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
+			// Comparing the the label of the type of sort item
+			if (!filter1.equalsIgnoreCase("Document Type") || !filter2.equalsIgnoreCase("Authors")
+					|| !filter3.equalsIgnoreCase("Categories") || !filter4.equalsIgnoreCase("Institutions")) {
 
-			// Finding out the time cited values for the displayed items in all
-			// result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
-
-			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
-			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
-
-			Collections.sort(sortedTimeCitedCountList);
-			Collections.reverse(sortedTimeCitedCountList);
-
-			// Comparing the the label of default sort by value
-			if (!sortedTimeCitedCountList.equals(sortedTimeCitedCountList)) {
-
-				test.log(LogStatus.FAIL, "Results are not sorted by Times Cited");// extent
+				test.log(LogStatus.FAIL, "All filters are not displayed in the refine panel for article content set");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "All_filters_are_not_displayed_in_the_refine_panel_for_article_content_set")));// screenshot
 
 			} else {
-				test.log(LogStatus.PASS, "Results are sorted correctly by Times Cited");
+				test.log(LogStatus.PASS, "Filters are properly displayed in refine panel for article content set");
 			}
 
 			closeBrowser();
@@ -131,24 +118,6 @@ public class TestCase_B34 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
-
-	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		String purifiedString;
-		String[] arr;
-		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
-			purifiedString = "";
-
-			for (int i = 0; i < arr.length; i++) {
-
-				purifiedString = purifiedString + arr[i];
-			}
-
-			list.add(Integer.parseInt(purifiedString));
-		}
-		return list;
 	}
 
 	@AfterTest

@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -20,7 +17,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B34 extends TestBase {
+public class TestCase_B36 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,7 +31,8 @@ public class TestCase_B34 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to sort the items by TIMES CITED field in ALL content type")
+				.startTest(var,
+						"Verify that the following fields get displayed in the SORT BY drop down when ARTICLES is selected as content type in the left navigation pane: a)Relevance b)Times cited c)Publication Date(Newest) d)Publication Date(Oldest)")
 				.assignCategory("Suite B");
 
 	}
@@ -77,41 +75,35 @@ public class TestCase_B34 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
-			Thread.sleep(4000);
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 
 			// Clicking on the sort by drop down
 			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			Thread.sleep(4000);
 
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-			Thread.sleep(4000);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
+			// Finding out the types by which we can sort the Article content
+			// results
+			List<WebElement> content_types = ob
+					.findElements(By.cssSelector("a[event-category='searchresult-ck-sort']"));
+			String text1 = content_types.get(0).getText();
+			String text2 = content_types.get(1).getText();
+			String text3 = content_types.get(2).getText();
+			String text4 = content_types.get(3).getText();
 
-			// Finding out the time cited values for the displayed items in all
-			// result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
+			// Comparing the the label of the type of sort item
+			if (!text1.equalsIgnoreCase("Relevance") || !text2.equalsIgnoreCase("Times Cited")
+					|| !text3.equalsIgnoreCase("Publication Date (Newest)")
+					|| !text4.equalsIgnoreCase("Publication Date (Oldest)")) {
 
-			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
-			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
-
-			Collections.sort(sortedTimeCitedCountList);
-			Collections.reverse(sortedTimeCitedCountList);
-
-			// Comparing the the label of default sort by value
-			if (!sortedTimeCitedCountList.equals(sortedTimeCitedCountList)) {
-
-				test.log(LogStatus.FAIL, "Results are not sorted by Times Cited");// extent
+				test.log(LogStatus.FAIL, "Fields mismatch in the Sort by drop down for Article cotent set");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "Fields_mismatch_in_the_Sort_by_drop_down_for_article_cotent_set")));// screenshot
 
 			} else {
-				test.log(LogStatus.PASS, "Results are sorted correctly by Times Cited");
+				test.log(LogStatus.PASS, "All fileds are displayed in the sort by drop down");
 			}
 
 			closeBrowser();
@@ -131,24 +123,6 @@ public class TestCase_B34 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
-
-	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		String purifiedString;
-		String[] arr;
-		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
-			purifiedString = "";
-
-			for (int i = 0; i < arr.length; i++) {
-
-				purifiedString = purifiedString + arr[i];
-			}
-
-			list.add(Integer.parseInt(purifiedString));
-		}
-		return list;
 	}
 
 	@AfterTest
