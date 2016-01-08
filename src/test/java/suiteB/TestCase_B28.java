@@ -93,8 +93,18 @@ public class TestCase_B28 extends TestBase{
 			String text=myE.getText();
 			
 			String[] arr=text.split("\n");
+//			for(int i=0;i<arr.length;i++){
+//				
+//				System.out.println(arr[i]);
+//			}
 			
-			if(!compareNumbers(4,arr.length)){
+			ArrayList<String> al=new ArrayList<String>();
+			for(int i=1;i<arr.length;i++){
+				
+				al.add(arr[i]);
+			}
+			
+			if(!compareNumbers(4,al.size())){
 				
 				test.log(LogStatus.FAIL, "More or less than 4 article suggestions are getting displayed");//extent reports
 				status=2;//excel
@@ -102,9 +112,9 @@ public class TestCase_B28 extends TestBase{
 			}
 			
 			int count=0;
-			for(int i=0;i<arr.length;i++){
+			for(int i=0;i<al.size();i++){
 				
-				if(!arr[i].toLowerCase().contains(search_query))
+				if(!al.get(i).toLowerCase().contains(search_query))
 					count++;
 			}
 			

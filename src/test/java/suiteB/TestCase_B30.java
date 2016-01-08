@@ -37,7 +37,7 @@ public class TestCase_B30 extends TestBase{
 //	Following is the list of status:
 //		1--->PASS
 //		2--->FAIL
-//      3--->SKIP
+//      3--->SKIP;
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{

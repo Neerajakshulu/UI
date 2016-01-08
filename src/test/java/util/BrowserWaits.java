@@ -23,7 +23,7 @@ public class BrowserWaits extends TestBase{
 	 * @param ElementPath
 	 * @return boolean
 	 */
-	static int time=60;
+	static int time=90;
 	static String locatorType;
 	static String locatorText;
 	public static void IsElementPresent(Object elementName) throws Exception {
@@ -191,6 +191,34 @@ public class BrowserWaits extends TestBase{
 		} catch (TimeoutException te) {
 			throw new TimeoutException("Failed to find text: " + text
 					+ ", after waiting for " + time + "ms");
+		}
+	}
+	
+	/*********************** Wait until specified text is not present **********************/
+
+	public static void waitUntilNotText(final String... text) throws Exception {
+		for (String each : text) {
+			waitUntilNotText(each, time);
+		}
+	}
+
+	public static void waitUntilNotText(final String text, final int time) {
+		try {
+			(new WebDriverWait(ob, time))
+					.until(new ExpectedCondition<Boolean>() {
+						public Boolean apply(WebDriver d) {
+							try {
+								return Boolean.valueOf(!d.getPageSource()
+										.contains(text));
+							} catch (Exception e) {
+								return Boolean.valueOf(false);
+							}
+						}
+					});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Text: " + text
+					+ " is present which is not expected, after waiting for "
+					+ time + "ms");
 		}
 	}
 	

@@ -39,7 +39,7 @@ public class TestCase_F4 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user receives a notificatication when someone likes his comment")
+		test = extent.startTest(var, "Verify that user receives a notification when someone likes his comment")
 				.assignCategory("Suite F");
 
 	}
@@ -89,7 +89,8 @@ public class TestCase_F4 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
-			ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
+			Thread.sleep(5000);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			logout();
 			Thread.sleep(5000);
@@ -109,8 +110,8 @@ public class TestCase_F4 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
-
-			ob.findElement(By.xpath(OR.getProperty("document_commentLike_button"))).click();
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
+			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
 			Thread.sleep(1000);
 
 			logout();
@@ -127,13 +128,13 @@ public class TestCase_F4 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 
-			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
 			System.out.println(text);
 
 			String expected_text = fn1 + " " + ln1 + " liked your comment";
 
 			try {
-				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY") && text.contains("beach"));
+				Assert.assertTrue(text.contains("TODAY") && text.contains("Liked your comment") && text.contains("beach") && text.contains(fn1 + " " + ln1));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

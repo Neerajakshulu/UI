@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -47,7 +48,7 @@ public class TestCase_A1 extends TestBase{
 	
 	@Test
 	public void testcaseA1() throws Exception{
-		
+		WebElement element=null;
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
 		boolean master_condition=suiteRunmode && testRunmode;
@@ -162,13 +163,10 @@ public class TestCase_A1 extends TestBase{
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_newly_registered_user_credentials_are_not_working_fine")));//screenshot	
 			
 		}
-		
-		//Verify that profile name gets displayed correctly
-		String profile_name_xpath="//span[contains(text(),'"+first_name+" "+last_name+"')]";
-		String profile_name=ob.findElement(By.xpath(profile_name_xpath)).getText();
-		String expected_profile_name=first_name+" "+last_name;
-		
-		if(!compareStringsIgnoringCase(expected_profile_name,profile_name)){
+		//Verify that profile image using below xpath is present or not
+		String profile_name_xpath="//img[@title='"+first_name+" "+last_name+"']";
+		element=ob.findElement(By.xpath(profile_name_xpath));
+		if(element==null){
 			
 			test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");//extent reports
 			status=2;//excel
