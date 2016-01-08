@@ -475,8 +475,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the count of posts in a profile
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public static int getPostsCount() {
+	public static int getPostsCount() throws InterruptedException {
+		Thread.sleep(5000);
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
@@ -551,6 +553,34 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
+public static int getLengthOfTitleFromPostCreationModal() {
+		
+		int count=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value").length();
+		return count;
+	}
+
+	public static void clickOnFirstPost(){
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0).click();
+	}
+
+	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) {
+		
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value");
+		
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
+	
+public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) {
+		
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString())).getText();
+		
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
 	
 	
 }
+
+	
+
