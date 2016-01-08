@@ -85,7 +85,7 @@ public class TestCase_A4 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 		Thread.sleep(15000);
-		if(!checkElementPresence_link_text("apps")){
+		if(!checkElementPresence("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
 			status=2;//excel

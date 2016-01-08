@@ -137,6 +137,22 @@
     </classes>
 </test>
 
+<test name="Test A21">
+    <classes>
+        <class name="suiteA.TestCase_A21" ></class>  
+    </classes>
+</test>
 
+<test name="Test A22">
+    <classes>
+        <class name="suiteA.TestCase_A22" ></class>  
+    </classes>
+</test>
+
+<test name="Test A23">
+    <classes>
+        <class name="suiteA.TestCase_A23" ></class>  
+    </classes>
+</test>
 </suite>
 

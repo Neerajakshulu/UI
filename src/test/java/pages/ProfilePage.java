@@ -475,8 +475,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the count of posts in a profile
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public static int getPostsCount() {
+	public static int getPostsCount() throws InterruptedException {
+		Thread.sleep(5000);
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
@@ -551,6 +553,109 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
+	public static int getLengthOfTitleFromPostCreationModal() {
+		int count = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.getAttribute("value").length();
+		return count;
+	}
+
+	public static void clickOnFirstPost() {
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
+				.click();
+	}
+
+	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) {
+		String title = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
+				.getAttribute("value");
+
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
+
+	public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) {
+		String title = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+				.getText();
+
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
 	
+	// added by chinna
+		/**
+		 * Method to click on publish button in post creation modal
+		 * @throws Exception 
+		 */
+		public static void clickPublishAPost() throws Exception {
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+			BrowserWaits.waitUntilText("Publish A Post","Give an update, pose a question, share an interesting find.");
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		}
+		
+		
+		/**
+		 * Method to click on publish button cancel button
+		 * @throws Exception 
+		 */
+		public static void clickPublishAPostCancel() throws Exception {
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+			BrowserWaits.waitUntilNotText("Publish A Post","Give an update, pose a question, share an interesting find.");
+		}
+		
+		
+
+		/**
+		 * Method to validate Post Title
+		 * @throws Exception, When Validation not done 
+		 */
+		public static void validatePostTitle(String postTitle) throws Exception {
+			String enteredPost=getFirstPostTitle();
+			Assert.assertEquals(enteredPost, enteredPost);
+		}
+		
+		
+		/**
+		 * Method to validate Published post counts
+		 * @throws Exception, When Validation not done 
+		 */
+		public static void validatePostCount(int postCount) throws Exception {
+			int totPosts=getPostsCount();
+			Assert.assertEquals(totPosts, postCount+1);
+		}
+		
+		
+		/**
+		 * Method for get Profile information
+		 * @throws Exception, When unable to get info
+		 */
+		public static List<String> getProfileTitleAndMetadata() throws Exception {
+			List<String> profileInfo= new ArrayList<String>();
+			profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText());
+			profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
+			profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
+			profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
+			return profileInfo;
+		}
+		
+		
+		/**
+		 * Method to get the title of the most recent post in the profile.
+		 * @return
+		 */
+		public static void  clickFirstPostTitle() throws Exception {
+			waitForAjax(ob);
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+			
+		}
+		//--------------
 	
 }
+
+	
+

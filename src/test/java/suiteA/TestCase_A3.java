@@ -96,7 +96,7 @@ public class TestCase_A3 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 		Thread.sleep(15000);
-		if(!checkElementPresence_link_text("apps")){
+		if(!checkElementPresence("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");//extent reports
 			status=2;//excel

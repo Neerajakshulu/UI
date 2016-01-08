@@ -110,7 +110,8 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
-			ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
+			Thread.sleep(5000);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			logout();
 			Thread.sleep(5000);
@@ -126,7 +127,7 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(25000);
 
-			String text = ob.findElement(By.xpath(OR.getProperty("notification2"))).getText();
+			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 
 			String expected_text = fn2 + " " + ln2;
