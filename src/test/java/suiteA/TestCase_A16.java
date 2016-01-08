@@ -196,7 +196,9 @@ public class TestCase_A16 extends TestBase{
 			
 			al.add(myIT.next());
 		}
+		Thread.sleep(8000);
 		ob.switchTo().window(al.get(1));
+		Thread.sleep(2000);
 		ob.get(reset_link_url);
 		Thread.sleep(5000);
 		

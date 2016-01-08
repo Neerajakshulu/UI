@@ -103,6 +103,7 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_PageHeading_label")), 30);
 		String pageHeading=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
 //		System.out.println(pageHeading);
 		
@@ -133,6 +134,7 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_PageHeading_label")), 30);
 		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
 //		System.out.println(pageHeading2);
 		
