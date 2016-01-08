@@ -102,7 +102,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS("input[placeholder='Add a Topic']"),
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li"), 
-	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class='autocomplete ng-scope'] ul li"),
+	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class*='post-stat'] button"),
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] div[class='doc-info']:nth-child(2) span[class*='stat-count']");
 	
 	
