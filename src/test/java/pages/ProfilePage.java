@@ -619,7 +619,10 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostCount(int postCount) throws Exception {
 		int totPosts=getPostsCount();
-		Assert.assertEquals(totPosts, postCount+1);
+		if(totPosts == postCount+1){
+			throw new Exception("Post got published but count not increased");
+		}
+		
 	}
 	
 	
@@ -646,10 +649,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
-		
 	}
-	
-	
 	
 }
 
