@@ -20,8 +20,8 @@ import pages.ProfilePage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class EditPostContentProfanityWordCheckTest extends TestBase{
-	
+public class EidtPostContentMinMaxLenValidation extends TestBase{
+
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -39,7 +39,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "EDIT POST:Verfiy that profanity words are not allowed in post content")
+		test = extent.startTest(var, "EDIT POST:Verfiy that proper error messages are displyed for min max length validation of POST CONTENT")
 				.assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
@@ -86,7 +86,6 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 			}
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnEditButton();
-			test.log(LogStatus.INFO, "Initiated post edit action");
 			} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -102,51 +101,46 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-	
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 	
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
-	public void testMinMaxLengthValidation(String profanityWord,String errorMessage) throws Exception {
-	ProfilePage.enterPostTitle("Test");
-	test.log(LogStatus.INFO, "Entered Post title");
-	ProfilePage.enterPostContent(profanityWord);
-	test.log(LogStatus.INFO, "Entered profanity word in Post Content : "+profanityWord);
-	ProfilePage.clickOnPostPublishButton();
-	try {
-		Assert.assertTrue(ProfilePage.validatePostErrorMessage(errorMessage));
-		test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post content");
-	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post content");
-		test.log(LogStatus.INFO, "Error--->" + t);
-		ErrorUtil.addVerificationFailure(t);
-		status = 2;
-		test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
-
-	}
-		
-	try {
-		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostContent(profanityWord));
-		test.log(LogStatus.PASS, "Profanity words are masked for post content");
-	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Profanity words are masked for post content");
-		test.log(LogStatus.INFO, "Error--->" + t);
-		ErrorUtil.addVerificationFailure(t);
-		status = 2;
-		test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
-
-	}
-	}
+	public void testMinMaxLengthValidation(String contentMinError,String contentMaxError,String minCharCount,String maxCharCount) throws Exception {
 	
-	@Test(dependsOnMethods="testMinMaxLengthValidation")
-	public void logOut() throws Exception{
-		ProfilePage.clickOnPostCancelButton();
-		logout();
-		closeBrowser();
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	ProfilePage.enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
+	test.log(LogStatus.INFO, "Entered Post Title of length:"+minCharCount);
+	
+	try {
+		Assert.assertTrue(ProfilePage.validatePostErrorMessage(contentMinError));
+		test.log(LogStatus.PASS, "Proper error message is displayed for min char count of post content");
+	} catch (Throwable t) {
+		test.log(LogStatus.FAIL, "Proper error message is not displayed for min char count of post content");
+		test.log(LogStatus.INFO, "Error--->" + t);
+		ErrorUtil.addVerificationFailure(t);
+		status = 2;
+		test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
+
 	}
-	@Test(dependsOnMethods="logOut")
+	ProfilePage.enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,5))));
+	test.log(LogStatus.INFO, "Entered Post Title of length:"+maxCharCount);
+	try {
+		Assert.assertTrue(ProfilePage.validatePostErrorMessage(contentMaxError));
+		test.log(LogStatus.PASS, "Proper error message is displayed for max char count of post content");
+	} catch (Throwable t) {
+		test.log(LogStatus.FAIL, "Proper error message is displayed for max char count of post content");
+		test.log(LogStatus.INFO, "Error--->" + t);
+		ErrorUtil.addVerificationFailure(t);
+		status = 2;
+		test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
+
+	}
+	ProfilePage.clickOnPostCancelButton();
+	logout();
+	closeBrowser();
+	}
+	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void reportDataSetResult() {
 		if(skip)
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
@@ -183,6 +177,6 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return TestUtil.getData(suiteCxls, "PostProfanityWordCheckTest") ;
+		return TestUtil.getData(suiteCxls, "MinMaxLenValidationPostContent") ;
 	}
 }

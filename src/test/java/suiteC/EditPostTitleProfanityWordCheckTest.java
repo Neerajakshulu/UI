@@ -20,7 +20,7 @@ import pages.ProfilePage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class EditPostContentProfanityWordCheckTest extends TestBase{
+public class EditPostTitleProfanityWordCheckTest extends TestBase{
 	
 	String runmodes[]=null;
 	static int count=-1;
@@ -39,7 +39,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "EDIT POST:Verfiy that profanity words are not allowed in post content")
+		test = extent.startTest(var, "EDIT POST:Verfiy that profanity words are not allowed in post title")
 				.assignCategory("Suite C");
 		runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
 	}
@@ -86,7 +86,6 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 			}
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnEditButton();
-			test.log(LogStatus.INFO, "Initiated post edit action");
 			} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -102,21 +101,21 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-	
+		
 	}
 	
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
 	public void testMinMaxLengthValidation(String profanityWord,String errorMessage) throws Exception {
-	ProfilePage.enterPostTitle("Test");
-	test.log(LogStatus.INFO, "Entered Post title");
-	ProfilePage.enterPostContent(profanityWord);
-	test.log(LogStatus.INFO, "Entered profanity word in Post Content : "+profanityWord);
+	ProfilePage.enterPostContent("Test");
+	test.log(LogStatus.INFO, "Entered Post content");
+	ProfilePage.enterPostTitle(profanityWord);
+	test.log(LogStatus.INFO, "Entered profanity word in Post Title : "+profanityWord);
 	ProfilePage.clickOnPostPublishButton();
 	try {
 		Assert.assertTrue(ProfilePage.validatePostErrorMessage(errorMessage));
-		test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post content");
+		test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post title");
 	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post content");
+		test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post title");
 		test.log(LogStatus.INFO, "Error--->" + t);
 		ErrorUtil.addVerificationFailure(t);
 		status = 2;
@@ -124,12 +123,11 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 	}
-		
 	try {
-		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostContent(profanityWord));
-		test.log(LogStatus.PASS, "Profanity words are masked for post content");
+		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostTitle(profanityWord));
+		test.log(LogStatus.PASS, "Profanity words are masked for post title");
 	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Profanity words are masked for post content");
+		test.log(LogStatus.FAIL, "Profanity words are masked for post title");
 		test.log(LogStatus.INFO, "Error--->" + t);
 		ErrorUtil.addVerificationFailure(t);
 		status = 2;
@@ -138,6 +136,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 
 	}
 	}
+	
 	
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void logOut() throws Exception{
