@@ -39,7 +39,7 @@ public class TestCase_F4 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user receives a notificatication when someone likes his comment")
+		test = extent.startTest(var, "Verify that user receives a notification when someone likes his comment")
 				.assignCategory("Suite F");
 
 	}
