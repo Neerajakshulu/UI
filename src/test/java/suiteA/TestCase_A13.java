@@ -103,9 +103,8 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_PageHeading_label_for_termsOfUse")), 30);
+		Thread.sleep(5000);
 		
-//		System.out.println(pageHeading);
 		
 		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
 			
@@ -134,10 +133,8 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_PageHeading_label_for_privacyStatement")), 30);
-//		System.out.println(pageHeading2);
+		Thread.sleep(5000);
 		
-//		System.out.println(al1.size());
 		if(!checkElementPresence("reg_PageHeading_label_for_privacyStatement")){
 			
 			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports

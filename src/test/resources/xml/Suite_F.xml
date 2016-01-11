@@ -27,6 +27,12 @@
 			<class name="suiteF.TestCase_F4"></class>
 		</classes>
 	</test>
+	
+	<test name="Test F5">
+		<classes>
+			<class name="suiteF.TestCase_F5"></class>
+		</classes>
+	</test>
 
 	
 
