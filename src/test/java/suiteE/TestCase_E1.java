@@ -29,7 +29,9 @@ public class TestCase_E1 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to add document to watchlist from search results page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to add document to watchlist from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
