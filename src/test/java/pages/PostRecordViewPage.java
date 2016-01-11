@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -7,6 +9,8 @@ import org.testng.Assert;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserAction;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class PostRecordViewPage extends TestBase{
@@ -136,5 +140,27 @@ public class PostRecordViewPage extends TestBase{
 		return result;
 
 	}
+	
+	/**
+	 * Method to Validate Post title and Profile meta data in record view page
+	 * @throws Exception, When Validation not done
+	 */
+	public static void validatePostTitleAndProfileMetadata(String post,List<String> profileInfo) throws Exception {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS);
+		String postTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
+		BrowserWaits.waitTime(6);
+		Assert.assertEquals(post, postTitle);
+		String postRVProfileTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
+		String profileData=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
+		
+		if(!(profileInfo.toString().contains(profileData) && profileInfo.toString().contains(postRVProfileTitle))){
+			throw new Exception("Profile info mismatching in Record view page of a Post");
+		}
+		
+	}
+	
 
 }

@@ -214,6 +214,40 @@
     </classes>
 </test>
 
+<test name="Test B35">
+    <classes>
+        <class name="suiteB.TestCase_B35" ></class>  
+    </classes>
+</test>
 
+<test name="Test B36">
+    <classes>
+        <class name="suiteB.TestCase_B36" ></class>  
+    </classes>
+</test>
+
+<test name="Test B37">
+    <classes>
+        <class name="suiteB.TestCase_B37" ></class>  
+    </classes>
+</test>
+
+<test name="Test B38">
+    <classes>
+        <class name="suiteB.TestCase_B38" ></class>  
+    </classes>
+</test>
+
+<test name="Test B39">
+    <classes>
+        <class name="suiteB.TestCase_B39" ></class>  
+    </classes>
+</test>
+
+<test name="Test B40">
+    <classes>
+        <class name="suiteB.TestCase_B40" ></class>  
+    </classes>
+</test>
 </suite>
 

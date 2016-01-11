@@ -184,21 +184,6 @@ public class TestCase_A16 extends TestBase{
 		
 		WebElement reset_link_element=ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
 		String reset_link_url=reset_link_element.getAttribute("href");
-	
-		String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,"n");
-		ob.findElement(By.linkText(reset_link_url)).sendKeys(selectLinkOpeninNewTab);
-		Thread.sleep(8000);
-		
-		myset=ob.getWindowHandles();
-		myIT=myset.iterator();
-		al.clear();
-		for(int i=0;i<myset.size();i++){
-			
-			al.add(myIT.next());
-		}
-		Thread.sleep(8000);
-		ob.switchTo().window(al.get(1));
-		Thread.sleep(2000);
 		ob.get(reset_link_url);
 		Thread.sleep(5000);
 		

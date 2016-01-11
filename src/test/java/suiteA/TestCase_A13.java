@@ -103,9 +103,8 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_PageHeading_label_for_termsOfUse")), 30);
+		Thread.sleep(5000);
 		
-//		System.out.println(pageHeading);
 		
 		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
 			
