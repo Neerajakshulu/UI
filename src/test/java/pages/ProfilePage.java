@@ -432,8 +432,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to enter the specified text to post title box in post creation modal
 	 * @param tilte
+	 * @throws InterruptedException 
 	 */
-	public static void enterPostTitle(String tilte) {
+	public static void enterPostTitle(String tilte) throws InterruptedException {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
 				.clear();
@@ -444,8 +446,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to enter the specified text to post content box in post creation modal
 	 * @param tilte
+	 * @throws Exception 
 	 */
-	public static void enterPostContent(String content) {
+	public static void enterPostContent(String content) throws Exception {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
@@ -456,8 +460,10 @@ public class ProfilePage  extends TestBase {
 
 	/**
 	 * Method to click on publish button in post creation modal
+	 * @throws Exception 
 	 */
-	public static void clickOnPostPublishButton() {
+	public static void clickOnPostPublishButton() throws Exception {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
 				.click();
