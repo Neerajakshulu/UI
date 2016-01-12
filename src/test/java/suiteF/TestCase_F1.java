@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -70,7 +71,7 @@ public class TestCase_F1 extends TestBase {
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
 			Thread.sleep(5000);
-			logout();
+			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
 			openBrowser();
@@ -93,7 +94,7 @@ public class TestCase_F1 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			Thread.sleep(5000);
-			logout();
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
 			// 3)Verify that User1 receives a notification with correct data

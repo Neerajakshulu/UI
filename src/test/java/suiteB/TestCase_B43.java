@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -20,7 +17,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B34 extends TestBase {
+public class TestCase_B43 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,7 +31,8 @@ public class TestCase_B34 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to sort the items by TIMES CITED field in ALL content type")
+				.startTest(var,
+						"Verify that user is able to expand and collapse the Categories filter in ARTICLES content type")
 				.assignCategory("Suite B");
 
 	}
@@ -64,7 +62,7 @@ public class TestCase_B34 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
@@ -77,42 +75,20 @@ public class TestCase_B34 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
-			Thread.sleep(4000);
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 
-			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			Thread.sleep(4000);
+			// Check the filter is collapsed by default
+			collapseFilter();
+			Thread.sleep(2000);
 
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-			Thread.sleep(4000);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
+			// Check if the filter expanded
+			expandFilter();
+			Thread.sleep(2000);
 
-			// Finding out the time cited values for the displayed items in all
-			// result page
-			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
-
-			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
-			List<Integer> sortedTimeCitedCountList = new LinkedList<Integer>(purifiedTimeCitedCountList);
-
-			Collections.sort(sortedTimeCitedCountList);
-			Collections.reverse(sortedTimeCitedCountList);
-
-			// Comparing the the label of default sort by value
-			if (!sortedTimeCitedCountList.equals(sortedTimeCitedCountList)) {
-
-				test.log(LogStatus.FAIL, "Results are not sorted by Times Cited");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
-
-			} else {
-				test.log(LogStatus.PASS, "Results are sorted correctly by Times Cited");
-			}
+			// Check if filter is collapsible
+			collapseFilter();
+			test.log(LogStatus.PASS, "Categories filter is collapsible");
 
 			closeBrowser();
 
@@ -133,22 +109,51 @@ public class TestCase_B34 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		String purifiedString;
-		String[] arr;
-		for (WebElement e : timeCitedCountList) {
-			arr = e.getText().split(",");
-			purifiedString = "";
+	private void expandFilter() {
+		List<WebElement> filterPanelHeadingList;
+		List<WebElement> filterPanelBodyList;
+		WebElement documentTypePanelBody;
+		WebElement documentTypePanelHeading;
+		// Capturing panel heading after expanding document type filter
+		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+		documentTypePanelHeading = filterPanelHeadingList.get(2);
+		WebElement upArrow = documentTypePanelHeading
+				.findElement(By.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-up']"));
 
-			for (int i = 0; i < arr.length; i++) {
-
-				purifiedString = purifiedString + arr[i];
-			}
-
-			list.add(Integer.parseInt(purifiedString));
+		if (upArrow != null) {
+			test.log(LogStatus.PASS, "Up arrow is visible for Categories filter");
 		}
-		return list;
+
+		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
+		documentTypePanelBody = filterPanelBodyList.get(0);
+
+		if (documentTypePanelBody.isDisplayed()) {
+			test.log(LogStatus.PASS, "Categories filter values are displayed");
+		}
+
+		// Collapse the document type filter by clicking it again
+		documentTypePanelHeading.click();
+
+	}
+
+	private void collapseFilter() {
+		// Finding out the types filer in refine panel
+		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+		WebElement documentTypePanelHeading = filterPanelHeadingList.get(2);
+		WebElement downArrow = documentTypePanelHeading
+				.findElement(By.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-down']"));
+
+		if (downArrow != null) {
+			test.log(LogStatus.PASS, "Down arrow is visible for Categories filter");
+		}
+		List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));
+		WebElement documentTypePanelBody = filterPanelBodyList.get(2);
+
+		if (!documentTypePanelBody.isDisplayed()) {
+			test.log(LogStatus.PASS, "Categories filter values are not displayed");
+		}
+		// Expanding the document type filter by clicking it
+		documentTypePanelHeading.click();
 	}
 
 	@AfterTest

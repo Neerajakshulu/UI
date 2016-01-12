@@ -20,7 +20,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B34 extends TestBase {
+public class TestCase_B37 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,7 +34,8 @@ public class TestCase_B34 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to sort the items by TIMES CITED field in ALL content type")
+				.startTest(var,
+						"Verify that user is able to sort the articles by TIMES CITED field in ARTICLES content type")
 				.assignCategory("Suite B");
 
 	}
@@ -77,8 +78,8 @@ public class TestCase_B34 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 			Thread.sleep(4000);
 
 			// Clicking on the sort by drop down
@@ -91,8 +92,8 @@ public class TestCase_B34 extends TestBase {
 			jse.executeScript("scroll(0, 250);");
 			Thread.sleep(4000);
 
-			// Finding out the time cited values for the displayed items in all
-			// result page
+			// Finding out time cited values for the displayed articles in
+			// article result page
 			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
 
 			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
@@ -104,14 +105,14 @@ public class TestCase_B34 extends TestBase {
 			// Comparing the the label of default sort by value
 			if (!sortedTimeCitedCountList.equals(sortedTimeCitedCountList)) {
 
-				test.log(LogStatus.FAIL, "Results are not sorted by Times Cited");// extent
+				test.log(LogStatus.FAIL, "Article results are not sorted by Times Cited");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
+						this.getClass().getSimpleName() + "article_results_are_not_sorted_by _Relevance_by_default")));// screenshot
 
 			} else {
-				test.log(LogStatus.PASS, "Results are sorted correctly by Times Cited");
+				test.log(LogStatus.PASS, "Article results are sorted correctly by Times Cited");
 			}
 
 			closeBrowser();
@@ -133,6 +134,22 @@ public class TestCase_B34 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
+	@AfterTest
+	public void reportTestResult() {
+		extent.endTest(test);
+
+		if (status == 1)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		else if (status == 2)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		else
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+
+	}
+
 	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		String purifiedString;
@@ -149,22 +166,6 @@ public class TestCase_B34 extends TestBase {
 			list.add(Integer.parseInt(purifiedString));
 		}
 		return list;
-	}
-
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
-
 	}
 
 }

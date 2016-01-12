@@ -29,7 +29,9 @@ public class TestCase_E2 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to add document to watchlist from document page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to add document to watchlist from document page once it is opened from ALL content set results")
 				.assignCategory("Suite E");
 
 	}
@@ -61,7 +63,6 @@ public class TestCase_E2 extends TestBase {
 
 			// 1)Create a new user
 			createNewUser("mask", "man");
-			;
 
 			// 2)Add an article to watchlist from record view page
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);

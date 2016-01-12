@@ -1,22 +1,21 @@
 package suiteF;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class TestCase_F3 extends TestBase {
+public class TestCase_F6 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -28,16 +27,13 @@ public class TestCase_F3 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user receives a notificatication when his follower comments on an article contained in his watchlist")
+		test = extent.startTest(var, "Verify that user is able to receive notification when my friend is following some other user.")
 				.assignCategory("Suite F");
 
 	}
 
 	@Test
-	public void testcaseF3() throws Exception {
-
+	public void testcaseF6() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -52,61 +48,19 @@ public class TestCase_F3 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try {
 
-			// 1)Login with user1,add an article to watchlist and logout
-
+		try{
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
-			ob.navigate().to(host);
-			Thread.sleep(8000);
-
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			Thread.sleep(1000);
-
-			logout();
+			//Create User 3
+			fn3 = generateRandomName(8);
+			ln3 = generateRandomName(10);
+			System.out.println(fn3 + " " + ln3);
+			user3 = createNewUser(fn3, ln3);
 			Thread.sleep(5000);
-
-			// 2)Login with user2,comment on article contained in user1's
-			// watchlist and logout
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id("userid")).clear();
-			ob.findElement(By.id("userid")).sendKeys(user2);
-			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			Thread.sleep(2000);
-			logout();
-			Thread.sleep(5000);
-
-			// 3)Login with user1 again and verify that he receives a correct
-			// notification
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
@@ -114,48 +68,72 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(25000);
+			Thread.sleep(15000);
+			//User1 searches User3
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn3 + " " + ln3);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("scroll(0,-500)");
+			Thread.sleep(2000);
 
-			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+			//User1 follows User3
+			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+			Thread.sleep(5000);
+			LoginTR.logOutApp();
+			Thread.sleep(5000);
+			//User2 Logging in
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			Thread.sleep(4000);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
+			String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
 			System.out.println(text);
-
-			String expected_text = fn2 + " " + ln2;
-
 			try {
-				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains("green tea"));
+				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
+						&& text.contains("is now following") && text.contains(fn3 + " " + ln3));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
+				LoginTR.logOutApp();
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-																								// reports
+				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
-
+				closeBrowser();
 			}
 
 			closeBrowser();
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
-			// next 3 lines to print whole testng error in report
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
+			
+			
+			
+			
+		}catch(Throwable t){
+			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
+			// reports
+			test.log(LogStatus.INFO, "Error--->" + t);
+			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 			closeBrowser();
 		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
+		
 	}
-
+	
+	
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
@@ -172,4 +150,5 @@ public class TestCase_F3 extends TestBase {
 
 	}
 
+	
 }

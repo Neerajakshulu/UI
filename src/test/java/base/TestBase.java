@@ -64,8 +64,8 @@ public class TestBase {
 	public static ExtentTest test=null;
 	
 	public static String host=null;
-	public static String user1,user2;
-	public static String fn1,fn2,ln1,ln2;
+	public static String user1,user2,user3;
+	public static String fn1,fn2,ln1,ln2,fn3,ln3;
 	public static int xRows,xCols;
 	public static String[][] xData;
 	
@@ -390,7 +390,7 @@ public class TestBase {
 			public void logout() throws Exception{
 				
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				ob.findElement(By.xpath(OR.getProperty("signOut_link"))).click();
 			}	 
 			
