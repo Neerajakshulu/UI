@@ -15,6 +15,7 @@ import pages.ProfilePage;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
@@ -81,7 +82,7 @@ public class TestCase_F5 extends TestBase {
 			ProfilePage.clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			Thread.sleep(6000);
-			logout();
+			LoginTR.logOutApp();
 
 			//Login using user2 and check for the notification
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
