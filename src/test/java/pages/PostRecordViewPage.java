@@ -161,6 +161,53 @@ public class PostRecordViewPage extends TestBase{
 		}
 		
 	}
+
+	public static boolean verifyPostCreationDate() throws Exception {
+		boolean isDisplayed=false;
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
+		BrowserWaits.waitTime(6);
+		List<WebElement> timestamp=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS);
+		String time;
+		for(WebElement we: timestamp){
+			time=we.getText();
+			if(time.contains("POSTED") && time.contains("|") && (time.contains("AM")||time.contains("PM"))){
+				isDisplayed=true;
+				break;
+			}
+			
+		}
+		
+		return isDisplayed;
+	}
 	
+	public static boolean verifyPostEditedDate() throws Exception {
+		boolean isDisplayed=false;
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
+		BrowserWaits.waitTime(6);
+		List<WebElement> timestamp=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS);
+		String time;
+		for(WebElement we: timestamp){
+			time=we.getText();
+			if(time.contains("EDITED") && time.contains("|") && (time.contains("AM")||time.contains("PM"))){
+				isDisplayed=true;
+				break;
+			}
+			
+		}
+		
+		return isDisplayed;
+	}
+	
+	public static String  getPostTitle() throws Exception{
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		return BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
+	}
+
+	public static String getPostContent() throws Exception {
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		return BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS).getText();
+	}
 
 }
