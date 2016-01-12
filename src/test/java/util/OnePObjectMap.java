@@ -1,12 +1,13 @@
 package util;
 
 /**
- * Enum for Project Neon Object Repository
+ * Enum for OneP Object Repository
  * @author UC202376
  *
  */
 public enum OnePObjectMap {
 
+	//HOME_ONEP_APPS_CSS("i[class='webui-icon webui-icon-app']"),
 	HOME_ONEP_APPS_LINK("Apps"),
 	HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS("h1[class='heading-1']"),
 	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='webui-btn-primary unauth-login-btn unauth-ne-btn']"),
@@ -111,6 +112,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("h6[class='ne-profile-object-metadata-wrapper ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='full-record'] div[class*='timestamp-wrapper'] div"),
+
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[1]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[2]"),
@@ -118,6 +120,12 @@ public enum OnePObjectMap {
 	
 	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
 	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']");
+	
+	
+	
+
+
+	
 	
 	private String locator;
 
