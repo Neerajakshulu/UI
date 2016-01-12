@@ -5,8 +5,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="userName" value="chinnareddy.putha@gmail.com" />
-	<parameter name="password" value="Reddys@123" />
+	<parameter name="userName" value="prasenjit.patra@thomsonreuters.com" />
+	<parameter name="password" value="Techm@2015" />
 
 	<test name="Test E1">
 		<classes>

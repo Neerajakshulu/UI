@@ -5,15 +5,18 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -35,7 +38,8 @@ public class TestCase_E3 extends TestBase {
 	}
 
 	@Test
-	public void testcaseE3() throws Exception {
+	@Parameters({ "userName", "password" })
+	public void testcaseE3(String userName, String password) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -59,8 +63,14 @@ public class TestCase_E3 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			// 1)Create a new user
-			createNewUser("mask", "man");
+			ob.navigate().to(host);
+			Thread.sleep(8000);
+
+			// login using TR credentials
+			LoginTR.enterTRCredentials(userName, password);
+			LoginTR.clickLogin();
+
+			Thread.sleep(15000);
 
 			// 2)Add some documents to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
@@ -68,9 +78,13 @@ public class TestCase_E3 extends TestBase {
 			Thread.sleep(4000);
 
 			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-			for (int i = 0; i < 5; i++) {
 
-				mylist.get(i).click();
+			WebElement ele;
+			// Watching the documents from All content results page
+			for (int i = 0; i < 10; i++) {
+				ele = mylist.get(i);
+				ele.click();
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
 				Thread.sleep(1000);
 			}
 
