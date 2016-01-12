@@ -71,7 +71,8 @@ public class TestCase_E3 extends TestBase {
 			LoginTR.clickLogin();
 
 			Thread.sleep(15000);
-
+			// Clean watchlist
+			cleanWatchlist();
 			// 2)Add some documents to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -81,7 +82,7 @@ public class TestCase_E3 extends TestBase {
 
 			WebElement ele;
 			// Watching the documents from All content results page
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 5; i++) {
 				ele = mylist.get(i);
 				ele.click();
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
