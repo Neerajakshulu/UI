@@ -163,5 +163,23 @@
     </classes>
 </test>
 
+<test name="Profile_Post_Tab_Validation">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.ProfilePostsValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Post_Watchlist">
+	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
+	<parameter name="password" value="Reddys@123"/>
+    <classes>
+        <class name="suiteD.AddPostToWatchlistTest" ></class> 
+    </classes>
+</test>
+
+
+
 </suite>
 

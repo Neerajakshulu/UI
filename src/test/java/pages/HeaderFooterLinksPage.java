@@ -88,10 +88,11 @@ public class HeaderFooterLinksPage extends TestBase {
 	/**
 	 * Method to click on WatchList link in header
 	 */
-	public static void clickOnWatchLink() {
+	public static void clickOnWatchLink() throws Exception {
 		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_LINK.toString())).click();
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS.toString()), 180);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS);
+		BrowserWaits.waitTime(4);
 
 	}
 
