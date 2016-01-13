@@ -69,6 +69,7 @@ public class TestCase_E2 extends TestBase {
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(4000);
 			WebElement ele = ob.findElement(By.xpath(OR.getProperty("searchResults_links")));
 			String document_name = ele.getText();
 			// Opening the record view page

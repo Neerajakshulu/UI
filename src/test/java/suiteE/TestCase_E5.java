@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,10 +14,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E3 extends TestBase {
+public class TestCase_E5 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,13 +30,13 @@ public class TestCase_E3 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch an Article from watchlist page")
+		test = extent.startTest(var, "Verify that user is able to watch an Patent from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE3() throws Exception {
+	public void testcaseE5() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -54,51 +54,59 @@ public class TestCase_E3 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "kernel";
+			String search_query = "\"Educational biology assembly\"";
 
+			// 1--->Making a new user
 			openBrowser();
-			maximizeWindow();
+			try {
+				maximizeWindow();
+			} catch (Throwable t) {
+
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 			clearCookies();
 
+			// createNewUser("mask", "man");
+
+			// login using TR credentials
 			ob.navigate().to(host);
 			Thread.sleep(8000);
+			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();
 
-			// 1)Create a new user
-			createNewUser("mask", "man");
+			Thread.sleep(15000);
 
-			// 2)Search some documents
+			// 2--->Adding an patent to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(4000);
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// 3--->verifying that particular patent has been added to
+			// watchlist
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			Thread.sleep(8000);
 
-			WebElement ele;
-			// Watching the documents from Article content results page
-			for (int i = 0; i < 5; i++) {
-				ele = mylist.get(i);
-				ele.click();
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
-				Thread.sleep(1000);
+			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+
+			int count = 0;
+			for (int i = 0; i < watchlist.size(); i++) {
+
+				if (watchlist.get(i).getText().equals(document_name))
+					count++;
+
 			}
 
-			// 3)Go to watchlist page,delete all the articles and verify that
-			// all the articles have been deleted
-			cleanWatchlist();
+			if (!compareNumbers(1, count)) {
 
-			List<WebElement> total_documents = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
-			if (!compareNumbers(0, total_documents.size())) {
-
-				test.log(LogStatus.FAIL, "User not able to delete a document from watchlist");// extent
-																								// reports
+				test.log(LogStatus.FAIL, "User not able to add an patent into watchlist from search results page");// extent
+																													// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_unwatch_article_from_watchlist")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_unable_to_add_patent_into_watchlist_from_searchResults_page")));// screenshot
 
 			}
 

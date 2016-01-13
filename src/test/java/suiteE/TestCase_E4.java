@@ -36,7 +36,7 @@ public class TestCase_E4 extends TestBase {
 	}
 
 	@Test
-	public void unWatchArticleSearchScreen() throws Exception {
+	public void testCase4() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
