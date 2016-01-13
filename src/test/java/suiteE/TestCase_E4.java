@@ -10,13 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -33,13 +31,12 @@ public class TestCase_E4 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that user is able to unwatch a document from All content search results page")
+				.startTest(var, "Verify that user is able to unwatch an Article from ALL content search results page")
 				.assignCategory("Suite E");
 	}
 
 	@Test
-	@Parameters({ "userName", "password" })
-	public void unWatchArticleSearchScreen(String userName, String password) throws Exception {
+	public void unWatchArticleSearchScreen() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -67,13 +64,8 @@ public class TestCase_E4 extends TestBase {
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
-			// login using TR credentials
-			LoginTR.enterTRCredentials(userName, password);
-			LoginTR.clickLogin();
-
-			Thread.sleep(15000);
-
-			cleanWatchlist();
+			// Create a new user
+			createNewUser("mask", "man");
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
@@ -117,16 +109,16 @@ public class TestCase_E4 extends TestBase {
 			}
 
 			if (compareNumbers(0, count)) {
-				test.log(LogStatus.INFO, "User is able to unwatch document from All content search results page");// extent
+				test.log(LogStatus.INFO, "User is able to unwatch Article from All content search results page");// extent
 				// reports
 
 			} else {
-				test.log(LogStatus.FAIL, "User not able to unwatch document from All content search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to unwatch Article from All content search results page");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_unwatch_document__from_All_content_searchResults_page")));// screenshot
+								+ "_user_unable_to_unwatch_article__from_All_content_searchResults_page")));// screenshot
 
 			}
 

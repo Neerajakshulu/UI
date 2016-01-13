@@ -34,41 +34,5 @@
 		</classes>
 	</test>
 
-	<test name="Test E5">
-		<classes>
-			<class name="suiteE.TestCase_E5"></class>
-		</classes>
-	</test>
-
-	<test name="Test E6">
-		<classes>
-			<class name="suiteE.TestCase_E6"></class>
-		</classes>
-	</test>
-
-	<test name="Test E7">
-		<classes>
-			<class name="suiteE.TestCase_E7"></class>
-		</classes>
-	</test>
-
-	<test name="Test E8">
-		<classes>
-			<class name="suiteE.TestCase_E8"></class>
-		</classes>
-	</test>
-
-	<test name="Test E9">
-		<classes>
-			<class name="suiteE.TestCase_E9"></class>
-		</classes>
-	</test>
-
-	<test name="Test E10">
-		<classes>
-			<class name="suiteE.TestCase_E10"></class>
-		</classes>
-	</test>
-
 </suite>
 
