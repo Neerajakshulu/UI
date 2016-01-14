@@ -29,9 +29,7 @@ public class TestCase_E2 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add document to watchlist from document page once it is opened from ALL content set results")
+		test = extent.startTest(var, "Verify that user is able to watch an Article from Record View page")
 				.assignCategory("Suite E");
 
 	}
@@ -69,8 +67,13 @@ public class TestCase_E2 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(4000);
+			WebElement ele = ob.findElement(By.xpath(OR.getProperty("searchResults_links")));
+			String document_name = ele.getText();
+			// Opening the record view page
+			ele.click();
 			Thread.sleep(4000);
 
 			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
@@ -93,12 +96,11 @@ public class TestCase_E2 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from document page");// extent
-																											// reports
+				test.log(LogStatus.FAIL, "User not able to watch article from document page");// extent
+																								// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_document_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_watch_article_from_document_page")));// screenshot
 			}
 
 			closeBrowser();

@@ -95,7 +95,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS("a[label='Share on Facebook']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS("a[label='Share on LinkedIn']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS("a[event-category='share-twitter-posts']"),
-	HOME_PROJECT_NEON_HEADER_WATCHLIST_LINK("Watchlist"),
+	HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS("a[href='#/watch-list']"),
 	HOME_PROJECT_NEON_HEADER_HOME_LINK("Home"),
 	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post"),
 	
@@ -111,8 +111,16 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("h3[class$='ne-profile-object-title-wrapper']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("h6[class='ne-profile-object-metadata-wrapper ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='full-record'] div[class*='timestamp-wrapper'] div")
-	;
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='full-record'] div[class*='timestamp-wrapper'] div"),
+
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] p"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[1]"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[2]"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] ne-watch-icon"),
+	
+	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
+	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']");
+	
 	
 	
 

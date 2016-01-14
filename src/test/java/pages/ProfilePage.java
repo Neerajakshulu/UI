@@ -652,9 +652,34 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+	}
+	
+	/**
+	 * Method for validate profile posts, posts are more than 10, by default 10 posts should display
+	 * @throws Exception, When Validation not done
+	 */
+	public static void  validateProfilePostTab() throws Exception {
+		int totPosts=getPostsCount();
+		if(totPosts>=10){
+			List<WebElement> postsTimeStamp=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS);
+			List<WebElement> postLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
+			List<WebElement> postComments=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
+			List<WebElement> postWatch=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+			
+			if(!(postsTimeStamp.size()==10 && postLike.size() ==10 && postComments.size() == 10 && postWatch.size()==10)){
+				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
+			}
+			
+		}
 		
 	}
 	
+	
+	public static void addPostToWatchlist() throws Exception {
+		String postTitle=getFirstPostTitle();
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		BrowserWaits.waitTime(2);
+	}
 	
 	
 }

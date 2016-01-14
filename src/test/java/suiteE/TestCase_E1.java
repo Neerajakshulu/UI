@@ -31,7 +31,7 @@ public class TestCase_E1 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add document to watchlist from ALL content search results page")
+						"Verify that user is able to watch an Article from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
@@ -94,12 +94,12 @@ public class TestCase_E1 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an article into watchlist from search results page");// extent
 																													// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_searchResults_page")));// screenshot
+								+ "_user_unable_to_add_article_into_watchlist_from_searchResults_page")));// screenshot
 
 			}
 

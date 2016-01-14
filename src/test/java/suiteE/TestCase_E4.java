@@ -5,18 +5,16 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -32,13 +30,13 @@ public class TestCase_E4 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch a document from search results page")
+		test = extent
+				.startTest(var, "Verify that user is able to unwatch an Article from ALL content search results page")
 				.assignCategory("Suite E");
 	}
 
 	@Test
-	@Parameters({ "userName", "password" })
-	public void unWatchArticleSearchScreen(String userName, String password) throws Exception {
+	public void testCase4() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -66,28 +64,39 @@ public class TestCase_E4 extends TestBase {
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
-			// login using TR credentials
-			LoginTR.enterTRCredentials(userName, password);
-			LoginTR.clickLogin();
-
-			Thread.sleep(15000);
-
-			cleanWatchlist();
+			// Create a new user
+			createNewUser("mask", "man");
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"))
-					.click();
-			String document_name = ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
+			// ob.findElement(By.xpath("//button[@class='btn webui-icon-btn']"))
+			// .click();
+
+			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// watching the document
+			mylist.get(0).click();
+			Thread.sleep(1000);
+			// unwatching the document
+			mylist.get(0).click();
+			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+
+			WebElement ele;
+			// Watching the documents from All content results page
+			for (int i = 1; i < 10; i++) {
+				ele = mylist.get(i);
+				ele.click();
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
+				Thread.sleep(1000);
+			}
 			// System.out.println(document_name);
 
-			ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
+			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			// System.out.println(watchlist.size());
 
 			int count = 0;
@@ -99,31 +108,20 @@ public class TestCase_E4 extends TestBase {
 				// System.out.println(watchlist.get(i).getText());
 			}
 
-			if (!compareNumbers(1, count)) {
+			if (compareNumbers(0, count)) {
+				test.log(LogStatus.INFO, "User is able to unwatch Article from All content search results page");// extent
+				// reports
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from search results page");// extent
-																													// reports
+			} else {
+				test.log(LogStatus.FAIL, "User not able to unwatch Article from All content search results page");// extent
+				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_searchResults_page")));// screenshot
+								+ "_user_unable_to_unwatch_article__from_All_content_searchResults_page")));// screenshot
 
 			}
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			ob.findElement(By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-active']"))
-					.click();
-			String document_name2 = ob.findElement(By.xpath("//a[@class='searchTitle ng-binding']")).getText();
-			System.out.println("unwatch artilcle name-->" + document_name2);
-
-			ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
-			Thread.sleep(8000);
-			BrowserWaits.waitUntilText(
-					"Add articles to your Watchlist to receive notifications when comments are added to an article");
 			closeBrowser();
 
 		} catch (Throwable t) {
