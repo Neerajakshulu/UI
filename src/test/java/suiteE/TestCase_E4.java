@@ -60,7 +60,6 @@ public class TestCase_E4 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
@@ -72,32 +71,27 @@ public class TestCase_E4 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			// ob.findElement(By.xpath("//button[@class='btn webui-icon-btn']"))
-			// .click();
-
 			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			// watching the document
 			mylist.get(0).click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			// unwatching the document
 			mylist.get(0).click();
 			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			WebElement ele;
 			// Watching the documents from All content results page
-			for (int i = 1; i < 10; i++) {
+			for (int i = 1; i < 5; i++) {
 				ele = mylist.get(i);
 				ele.click();
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			}
-			// System.out.println(document_name);
 
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
 			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			// System.out.println(watchlist.size());
 
 			int count = 0;
 			for (int i = 0; i < watchlist.size(); i++) {
@@ -105,7 +99,6 @@ public class TestCase_E4 extends TestBase {
 				if (watchlist.get(i).getText().equals(document_name))
 					count++;
 
-				// System.out.println(watchlist.get(i).getText());
 			}
 
 			if (compareNumbers(0, count)) {

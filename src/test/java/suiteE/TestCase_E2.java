@@ -91,7 +91,6 @@ public class TestCase_E2 extends TestBase {
 				if (watchlist.get(i).getText().equals(document_name))
 					count++;
 
-				// System.out.println(watchlist.get(i).getText());
 			}
 
 			if (!compareNumbers(1, count)) {

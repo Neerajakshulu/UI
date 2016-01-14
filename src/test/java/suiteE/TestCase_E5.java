@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -66,15 +65,7 @@ public class TestCase_E5 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
-
-			// login using TR credentials
-			/*ob.navigate().to(host);
-			Thread.sleep(8000);
-			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-
-			Thread.sleep(15000);*/
+			createNewUser("mask", "man");
 
 			// 2--->Adding an patent to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);

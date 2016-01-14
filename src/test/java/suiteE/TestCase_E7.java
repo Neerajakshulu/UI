@@ -2,7 +2,6 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,7 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E6 extends TestBase {
+public class TestCase_E7 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,13 +28,14 @@ public class TestCase_E6 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to watch an Post from ALL content search results page")
+		test = extent
+				.startTest(var, "Verify that user is able to unwatch a Patent from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE6() throws Exception {
+	public void testcaseE7() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -53,7 +53,7 @@ public class TestCase_E6 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "\"Post ABC\"";
+			String search_query = "\"Educational biology assembly\"";
 
 			// 1--->Making a new user
 			openBrowser();
@@ -65,39 +65,41 @@ public class TestCase_E6 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			 createNewUser("mask", "man");
 
-			// 2--->Adding an post to watchlist
+			// login using TR credentials
+			// ob.navigate().to(host);
+			// Thread.sleep(8000);
+			// LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
+
+			// Search a query
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-
+			// watching the patent
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			Thread.sleep(4000);
+			// unwatching the patent
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
-			// 3--->verifying that particular post has been added to
+			// verifying that particular patent is present in watchlist or not
 			// watchlist
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			WebElement noResultPanel = ob.findElement(By.xpath("//div[@ng-show='noResults']"));
 
-			int count = 0;
-			for (int i = 0; i < watchlist.size(); i++) {
+			if (!noResultPanel.isDisplayed()) {
 
-				if (watchlist.get(i).getText().equals(document_name))
-					count++;
-
-			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to unwatch a patent in ALL content search results page");// extent
 																													// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_post_into_watchlist_from_searchResults_page")));// screenshot
+								+ "_user_unable_unwatch_patent_in_ALL_content_search_Results_page")));// screenshot
 
 			}
 
