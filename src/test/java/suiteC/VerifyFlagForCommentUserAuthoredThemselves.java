@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -79,6 +80,7 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))));
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("test");
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+			BrowserWaits.waitTime(10);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
