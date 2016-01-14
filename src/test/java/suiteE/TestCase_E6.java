@@ -66,12 +66,13 @@ public class TestCase_E6 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
+			createNewUser("mask", "man");
 			// login using TR credentials
-			ob.navigate().to(host);
-			Thread.sleep(8000);
-			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
+			/*
+			 * ob.navigate().to(host); Thread.sleep(8000);
+			 * LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com",
+			 * "Techm@2015"); LoginTR.clickLogin();
+			 */
 
 			// 2--->Adding an post to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);

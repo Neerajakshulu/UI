@@ -66,15 +66,15 @@ public class TestCase_E5 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
+			 createNewUser("mask", "man");
 
 			// login using TR credentials
-			ob.navigate().to(host);
+			/*ob.navigate().to(host);
 			Thread.sleep(8000);
 			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
 			LoginTR.clickLogin();
 
-			Thread.sleep(15000);
+			Thread.sleep(15000);*/
 
 			// 2--->Adding an patent to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
