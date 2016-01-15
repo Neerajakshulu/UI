@@ -64,13 +64,13 @@ public class TestCase_E5 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			// Create new user and login
 			createNewUser("mask", "man");
 
 			// 2--->Adding an patent to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

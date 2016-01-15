@@ -63,21 +63,13 @@ public class TestCase_E8 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			// Create new user and login
 			createNewUser("mask", "man");
-
-			// login using TR credentials
-			// ob.navigate().to(host);
-			// Thread.sleep(8000);
-			// LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
 
 			// 2--->Adding an post to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			// watching the patent
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();

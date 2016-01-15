@@ -59,27 +59,27 @@ public class TestCase_E2 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			// 1)Create a new user
+			// 1)Create new user and login
 			createNewUser("mask", "man");
 
 			// 2)Add an article to watchlist from record view page
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			WebElement ele = ob.findElement(By.xpath(OR.getProperty("searchResults_links")));
 			String document_name = ele.getText();
 			// Opening the record view page
 			ele.click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			// 3)Verify that particular article has been added to watchlist
 			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));

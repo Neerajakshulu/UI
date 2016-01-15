@@ -69,11 +69,11 @@ public class TestCase_E3 extends TestBase {
 			// 2)Search some documents
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
@@ -83,7 +83,7 @@ public class TestCase_E3 extends TestBase {
 				ele = mylist.get(i);
 				ele.click();
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			}
 
 			// 3)Go to watchlist page,delete all the articles and verify that
