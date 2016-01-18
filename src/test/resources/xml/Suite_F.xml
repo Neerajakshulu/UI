@@ -46,6 +46,11 @@
 		</classes>
 	</test>
 
+	<test name="Test F8">
+		<classes>
+			<class name="suiteF.TestCase_F8"></class>
+		</classes>
+	</test>
 	
 
 </suite>

@@ -72,7 +72,7 @@ public class TestCase_E1 extends TestBase {
 			// 2--->Adding an article to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

@@ -46,5 +46,17 @@
 		</classes>
 	</test>
 
+	<test name="Test E7">
+		<classes>
+			<class name="suiteE.TestCase_E7"></class>
+		</classes>
+	</test>
+
+	<test name="Test E8">
+		<classes>
+			<class name="suiteE.TestCase_E8"></class>
+		</classes>
+	</test>
+
 </suite>
 
