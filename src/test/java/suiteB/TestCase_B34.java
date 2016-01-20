@@ -91,7 +91,8 @@ public class TestCase_B34 extends TestBase {
 			jse.executeScript("scroll(0, 250);");
 			Thread.sleep(4000);
 
-			// Finding out the default sort by value for All content set
+			// Finding out the time cited values for the displayed items in all
+			// result page
 			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
 
 			List<Integer> purifiedTimeCitedCountList = getPurifiedTimeCitedCountList(timeCitedCountList);
@@ -132,22 +133,6 @@ public class TestCase_B34 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
-
-	}
-
 	private List<Integer> getPurifiedTimeCitedCountList(List<WebElement> timeCitedCountList) {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		String purifiedString;
@@ -164,6 +149,22 @@ public class TestCase_B34 extends TestBase {
 			list.add(Integer.parseInt(purifiedString));
 		}
 		return list;
+	}
+
+	@AfterTest
+	public void reportTestResult() {
+		extent.endTest(test);
+
+		if (status == 1)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		else if (status == 2)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		else
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+
 	}
 
 }
