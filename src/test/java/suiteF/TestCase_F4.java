@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -71,14 +72,9 @@ public class TestCase_F4 extends TestBase {
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
-
+			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			Thread.sleep(8000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);

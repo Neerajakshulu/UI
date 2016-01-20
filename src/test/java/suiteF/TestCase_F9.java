@@ -33,7 +33,7 @@ public class TestCase_F9 extends TestBase {
 	}
 	
 	@Test
-	public void testCaseF8() throws Exception{
+	public void testCaseF9() throws Exception{
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -58,7 +58,7 @@ public class TestCase_F9 extends TestBase {
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			//searching for posts
-			LoginTR.searchArticle("POST");
+			LoginTR.searchArticle("POST for");
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
