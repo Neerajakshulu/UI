@@ -10,17 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import suiteC.LoginTR;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E10 extends TestBase {
@@ -36,14 +32,12 @@ public class TestCase_E10 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var,
-						"Verify that app navigates to correct page when user navigates back from document/RecordView page")
+				.startTest(var, "Verify that user is able to unwatch an Article from Article content results page")
 				.assignCategory("Suite E");
 	}
 
 	@Test
-	@Parameters({ "userName", "password" })
-	public void unWatchArticleSearchScreen(String userName, String password) throws Exception {
+	public void testCase4() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -61,7 +55,7 @@ public class TestCase_E10 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "finger prints";
+			String search_query = "cancer";
 
 			openBrowser();
 			maximizeWindow();
@@ -70,108 +64,68 @@ public class TestCase_E10 extends TestBase {
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 
+			// Create a new user
+			createNewUser("mask", "man");
+			/*// Navigate to home page
+			ob.navigate().to(host);
+			Thread.sleep(8000);
 			// login using TR credentials
-			LoginTR.enterTRCredentials(userName, password);
-			LoginTR.clickLogin();
+			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();*/
 
-			Thread.sleep(15000);
-
-			cleanWatchlist();
-
-			test.log(LogStatus.INFO, " Search for an article with " + search_query);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(8000);
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(8000);
+			
+			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// watching the document
+			mylist.get(0).click();
 			Thread.sleep(4000);
+			// unwatching the document
+			mylist.get(0).click();
+			Thread.sleep(4000);
+			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-			List<WebElement> watchLists = ob.findElements(
-					By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
-			System.out.println("total article search count-->" + watchLists.size());
-
-			scrollElementIntoView(ob, watchLists.get(watchLists.size() - 1));
-			Thread.sleep(6000);
-
-			List<WebElement> afterScrollwatchLists = ob.findElements(
-					By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
-			System.out.println("After scroll total article search count-->" + afterScrollwatchLists.size());
-
-			// Add 14 articles into my watchlist
-			test.log(LogStatus.INFO, " Add 14 articles into my watchlist");
-			for (int i = 0; i < 14; i++) {
-				jsClick(ob, afterScrollwatchLists.get(i));
+			WebElement ele;
+			// Watching the documents from All content results page
+			for (int i = 1; i < 5; i++) {
+				ele = mylist.get(i);
+				ele.click();
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
 				Thread.sleep(2000);
 			}
 
-			// goto watchlist page
-			ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
-			BrowserAction.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
-			boolean moreButtonStatus = BrowserAction
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH).isDisplayed();
-			System.out.println("more buttton should be in hidden mode-->" + moreButtonStatus);
+			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
-			if (!moreButtonStatus) {
-				status = 2;
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "MORE button should display if watchlist article count >10")));
-				throw new Exception("MORE button should  display if watchlist article count >10");
+			int count = 0;
+			for (int i = 0; i < watchlist.size(); i++) {
+
+				if (watchlist.get(i).getText().equals(document_name))
+					count++;
+
 			}
 
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
-			Thread.sleep(8000);
+			if (compareNumbers(0, count)) {
+				test.log(LogStatus.PASS, "User is able to unwatch Article from Article content search results page");// extent
+				// reports
 
-			// click 12th article in watchlist screen and it should navigate to
-			// Record view page
-			test.log(LogStatus.INFO,
-					"Click 12th article in watchlist screen and it should navigate to Record view page");
-			List<WebElement> mylist = ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
-			scrollElementIntoView(ob, mylist.get(11));
-			String articleName = mylist.get(11).getText();
-			jsClick(ob, mylist.get(11));
-			Thread.sleep(6000);
-			BrowserWaits.waitUntilText(articleName);
+			} else {
+				test.log(LogStatus.FAIL, "User not able to unwatch Article from Article content search results page");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_unable_to_unwatch_article__from_Article_content_searchResults_page")));// screenshot
 
-			// ob.navigate().back();
-			System.out.println("watchlist atricle name prior navigate to Record view--->" + articleName);
+			}
 
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("window.history.back();");
-
-			Thread.sleep(2000);
-
-			List<WebElement> afterNavToWatList = ob.findElements(By.xpath("//a[@class='searchTitle ng-binding']"));
-			System.out.println("watchlist count-->" + mylist.size() + "current count--->" + afterNavToWatList.size());
-			test.log(LogStatus.INFO,
-					" Validate App Navigate to Watchlist page from Record view page and displays the accurate count aswell");
-					// if(!(afterNavToWatList.size() == mylist.size())){
-					// status=2;
-					// test.log(LogStatus.INFO, "Snapshot below: " +
-					// test.addScreenCapture(captureScreenshot(
-					// this.getClass().getSimpleName() + "Application Should
-					// Navigate to Watchlist page from Record View page "
-					// + "and it should displays previous watchlist count
-					// articles")));// screenshot
-					// //raised defect for this, as per sam comments, this is
-					// enhancement, still they dint implement
-					// //throw new Exception("App Navigate from Record View page
-					// to Watchlist page and display expected article count");
-					//
-					// }
-
-			// String articleNamebackFromRV=afterNavToWatList.get(11).getText();
-
-			// System.out.println("watchlist atricle name after navigate from
-			// Record view--->"+articleNamebackFromRV);
-
-			// Assert.assertEquals(articleName, articleNamebackFromRV);
-
-			// again clearing the watchlist due to firest cleanwatchlist method
-			// not clearing all watchlist articles due to app issue,
-			cleanWatchlist();
-
-			LoginTR.logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -183,8 +137,8 @@ public class TestCase_E10 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "unwatch article from search screen not happended")));// screenshot
 			closeBrowser();
 		}
 

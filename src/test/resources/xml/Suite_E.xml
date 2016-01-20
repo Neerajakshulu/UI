@@ -5,8 +5,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="userName" value="chinnareddy.putha@gmail.com" />
-	<parameter name="password" value="Reddys@123" />
+	<parameter name="userName" value="prasenjit.patra@thomsonreuters.com" />
+	<parameter name="password" value="Techm@2015" />
 
 	<test name="Test E1">
 		<classes>
@@ -57,16 +57,22 @@
 			<class name="suiteE.TestCase_E8"></class>
 		</classes>
 	</test>
-
+	
 	<test name="Test E9">
 		<classes>
 			<class name="suiteE.TestCase_E9"></class>
 		</classes>
 	</test>
-
+	
 	<test name="Test E10">
 		<classes>
 			<class name="suiteE.TestCase_E10"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E11">
+		<classes>
+			<class name="suiteE.TestCase_E11"></class>
 		</classes>
 	</test>
 

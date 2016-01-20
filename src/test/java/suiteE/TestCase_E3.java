@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -29,7 +30,7 @@ public class TestCase_E3 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to delete a document from watchlist")
+		test = extent.startTest(var, "Verify that user is able to unwatch an Article from watchlist page")
 				.assignCategory("Suite E");
 
 	}
@@ -59,26 +60,35 @@ public class TestCase_E3 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
+			ob.navigate().to(host);
+			Thread.sleep(8000);
+
 			// 1)Create a new user
 			createNewUser("mask", "man");
 
-			// 2)Add some documents to watchlist
+			// 2)Search some documents
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
+
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(8000);
 
 			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-			for (int i = 0; i < 5; i++) {
 
-				mylist.get(i).click();
-				Thread.sleep(1000);
+			WebElement ele;
+			// Watching the documents from Article content results page
+			for (int i = 0; i < 5; i++) {
+				ele = mylist.get(i);
+				ele.click();
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
+				Thread.sleep(2000);
 			}
 
 			// 3)Go to watchlist page,delete all the articles and verify that
 			// all the articles have been deleted
 			cleanWatchlist();
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(4000);
 
 			List<WebElement> total_documents = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -88,7 +98,7 @@ public class TestCase_E3 extends TestBase {
 																								// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_delete_document_from_watchlist")));// screenshot
+						this.getClass().getSimpleName() + "_user_unable_to_unwatch_article_from_watchlist")));// screenshot
 
 			}
 

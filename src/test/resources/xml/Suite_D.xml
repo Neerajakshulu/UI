@@ -139,6 +139,47 @@
     </classes>
 </test>
 
+<test name="Profile_Publish_A_Post">
+	<parameter name="myPost" value="Post for Testing "></parameter>
+	<parameter name="postContent" value="my post content "></parameter>
+    <classes>
+        <class name="suiteD.PublishAPostTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Publish_A_Post_Count_Validation">
+	<parameter name="myPost" value="Post for Testing Post count"></parameter>
+	<parameter name="postContent" value="my post content for post count "></parameter>
+    <classes>
+        <class name="suiteD.PublishAPostCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Publish_A_Post_Record_View_Page">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostNavigateToRVTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Post_Tab_Validation">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.ProfilePostsValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Post_Watchlist">
+	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
+	<parameter name="password" value="Reddys@123"/>
+    <classes>
+        <class name="suiteD.AddPostToWatchlistTest" ></class> 
+    </classes>
+</test>
+
+
 
 </suite>
 

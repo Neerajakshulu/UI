@@ -2,31 +2,22 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
-import util.BrowserAction;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E8 extends TestBase {
 	static int status = 1;
-	static String watchListCountBeforeDelete;
-	static int totalWatchCountBeforeDelete;
-	static String watchListCountAfterDelete;
-	static int totalWatchCountAfterDelete;
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -37,15 +28,13 @@ public class TestCase_E8 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that document count gets decreased in the watchlist page when a document is deleted from watchlist")
+		test = extent.startTest(var, "Verify that user is able to unwatch a Post from ALL content search results page")
 				.assignCategory("Suite E");
+
 	}
 
 	@Test
-	@Parameters({ "userName", "password" })
-	public void unWatchArticleSearchScreen(String userName, String password) throws Exception {
+	public void testcaseE8() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -63,62 +52,50 @@ public class TestCase_E8 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "finger prints";
+			String search_query = "\"Post ABC\"";
 
+			// 1--->Making a new user
 			openBrowser();
-			maximizeWindow();
+			try {
+				maximizeWindow();
+			} catch (Throwable t) {
+
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 			clearCookies();
+			// Create new user and login
+			createNewUser("mask", "man");
 
-			ob.navigate().to(host);
-			Thread.sleep(8000);
-
-			// login using TR credentials
-			LoginTR.enterTRCredentials(userName, password);
-			LoginTR.clickLogin();
-
-			Thread.sleep(15000);
-
-			cleanWatchlist();
-
-			test.log(LogStatus.INFO, " Search for an article with " + search_query);
-			// Type into the search box and get search results
+			// 2--->Adding an post to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			List<WebElement> watchLists = ob.findElements(
-					By.xpath("//i[@class='webui-icon webui-icon-watch cursor-pointer watch-icon-inactive']"));
-
-			// Add 4 articles into my watchlist
-			test.log(LogStatus.INFO, " Add 4 articles into my watchlist");
-			for (int i = 0; i < 4; i++) {
-				jsClick(ob, watchLists.get(i));
-				Thread.sleep(2000);
-			}
-
-			// goto watchlist page
-			ob.findElement(By.xpath("//span[contains(text(),'Watchlist')]")).click();
 			Thread.sleep(8000);
 
-			// validate MORE button getting displayed if watchlist article count
-			// below 10
-			test.log(LogStatus.INFO, " validate MORE button getting displayed if watchlist article count below 10");
-			// List<WebElement>
-			// watchListMore=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH);
-			// System.out.println("More buttons size-->"+watchListMore.size());
+			// watching the patent
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			Thread.sleep(4000);
+			// unwatching the patent
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			Thread.sleep(4000);
 
-			boolean moreButtonStatus = BrowserAction
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH).isDisplayed();
-			System.out.println("more buttton should be in hidden mode-->" + moreButtonStatus);
+			// verifying that particular post is present in watch list or not
+			// watchlist
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			Thread.sleep(8000);
 
-			if (moreButtonStatus) {
-				status = 2;
+			WebElement noResultPanel = ob.findElement(By.xpath("//div[@ng-show='noResults']"));
+
+			if (!noResultPanel.isDisplayed()) {
+
+				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from search results page");// extent
+																													// reports
+				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "MORE button should not display if watchlist article count <10")));
-				throw new Exception("MORE button should not display if watchlist article count <10");
+								+ "_user_unable_to_add_post_into_watchlist_from_searchResults_page")));// screenshot
+
 			}
-			LoginTR.logOutApp();
+
 			closeBrowser();
 
 		} catch (Throwable t) {

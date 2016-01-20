@@ -27,8 +27,48 @@
 			<class name="suiteF.TestCase_F4"></class>
 		</classes>
 	</test>
-
 	
+	<test name="Test F5">
+		<classes>
+			<class name="suiteF.TestCase_F5"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F6">
+		<classes>
+			<class name="suiteF.TestCase_F6"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F7">
+		<classes>
+			<class name="suiteF.TestCase_F7"></class>
+		</classes>
+	</test>
+
+	<test name="Test F8">
+		<classes>
+			<class name="suiteF.TestCase_F8"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F9">
+		<classes>
+			<class name="suiteF.TestCase_F9"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F10">
+		<classes>
+			<class name="suiteF.TestCase_F10"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F11">
+		<classes>
+			<class name="suiteF.TestCase_F11"></class>
+		</classes>
+	</test>
 
 </suite>
 

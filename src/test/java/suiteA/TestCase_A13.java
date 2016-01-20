@@ -103,10 +103,10 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		String pageHeading=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
-//		System.out.println(pageHeading);
+		Thread.sleep(5000);
 		
-		if(!compareStrings("Terms of Use",pageHeading)){
+		
+		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
 			
 			test.log(LogStatus.FAIL, "Either TERMS OF USE link is not working or the page is not getting displayed correctly");//extent reports
 			status=2;//excel
@@ -133,11 +133,9 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		String pageHeading2=ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
-//		System.out.println(pageHeading2);
+		Thread.sleep(5000);
 		
-//		System.out.println(al1.size());
-		if(!compareStrings("Privacy Statement",pageHeading2)){
+		if(!checkElementPresence("reg_PageHeading_label_for_privacyStatement")){
 			
 			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
 			status=2;//excel

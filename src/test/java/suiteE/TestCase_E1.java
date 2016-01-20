@@ -29,7 +29,9 @@ public class TestCase_E1 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to add document to watchlist from search results page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to watch an Article from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
@@ -70,7 +72,7 @@ public class TestCase_E1 extends TestBase {
 			// 2--->Adding an article to watchlist
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -92,12 +94,12 @@ public class TestCase_E1 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an article into watchlist from search results page");// extent
 																													// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_searchResults_page")));// screenshot
+								+ "_user_unable_to_add_article_into_watchlist_from_searchResults_page")));// screenshot
 
 			}
 

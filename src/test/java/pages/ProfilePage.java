@@ -432,8 +432,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to enter the specified text to post title box in post creation modal
 	 * @param tilte
+	 * @throws InterruptedException 
 	 */
-	public static void enterPostTitle(String tilte) {
+	public static void enterPostTitle(String tilte) throws InterruptedException {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
 				.clear();
@@ -444,8 +446,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to enter the specified text to post content box in post creation modal
 	 * @param tilte
+	 * @throws Exception 
 	 */
-	public static void enterPostContent(String content) {
+	public static void enterPostContent(String content) throws Exception {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
@@ -456,8 +460,10 @@ public class ProfilePage  extends TestBase {
 
 	/**
 	 * Method to click on publish button in post creation modal
+	 * @throws Exception 
 	 */
-	public static void clickOnPostPublishButton() {
+	public static void clickOnPostPublishButton() throws Exception {
+		BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
 				.click();
@@ -475,8 +481,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the count of posts in a profile
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public static int getPostsCount() {
+	public static int getPostsCount() throws InterruptedException {
+		Thread.sleep(5000);
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
@@ -551,6 +559,130 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
+public static int getLengthOfTitleFromPostCreationModal() {
+		
+		int count=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value").length();
+		return count;
+	}
+
+	public static void clickOnFirstPost(){
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0).click();
+	}
+
+	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) {
+		
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value");
+		
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
+	
+public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) {
+		
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString())).getText();
+		
+		return (!title.contains(profanityWord) && title.contains("**"));
+	}
+
+	/**
+	 * Method to click on publish button in post creation modal
+	 * @throws Exception 
+	 */
+	public static void clickPublishAPost() throws Exception {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+		BrowserWaits.waitUntilText("Publish A Post","Give an update, pose a question, share an interesting find.");
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+	}
+	
+	
+	/**
+	 * Method to click on publish button cancel button
+	 * @throws Exception 
+	 */
+	public static void clickPublishAPostCancel() throws Exception {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		BrowserWaits.waitUntilNotText("Publish A Post","Give an update, pose a question, share an interesting find.");
+	}
+	
+	
+
+	/**
+	 * Method to validate Post Title
+	 * @throws Exception, When Validation not done 
+	 */
+	public static void validatePostTitle(String postTitle) throws Exception {
+		String enteredPost=getFirstPostTitle();
+		Assert.assertEquals(enteredPost, enteredPost);
+	}
+	
+	
+	/**
+	 * Method to validate Published post counts
+	 * @throws Exception, When Validation not done 
+	 */
+	public static void validatePostCount(int postCount) throws Exception {
+		int totPosts=getPostsCount();
+		Assert.assertEquals(totPosts, postCount+1);
+	}
+	
+	
+	/**
+	 * Method for get Profile information
+	 * @throws Exception, When unable to get info
+	 */
+	public static List<String> getProfileTitleAndMetadata() throws Exception {
+		List<String> profileInfo= new ArrayList<String>();
+		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText());
+		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
+		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
+		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
+		return profileInfo;
+	}
+	
+	
+	/**
+	 * Method to get the title of the most recent post in the profile.
+	 * @return
+	 */
+	public static void  clickFirstPostTitle() throws Exception {
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+	}
+	
+	/**
+	 * Method for validate profile posts, posts are more than 10, by default 10 posts should display
+	 * @throws Exception, When Validation not done
+	 */
+	public static void  validateProfilePostTab() throws Exception {
+		int totPosts=getPostsCount();
+		if(totPosts>=10){
+			List<WebElement> postsTimeStamp=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS);
+			List<WebElement> postLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
+			List<WebElement> postComments=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
+			List<WebElement> postWatch=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+			
+			if(!(postsTimeStamp.size()==10 && postLike.size() ==10 && postComments.size() == 10 && postWatch.size()==10)){
+				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
+			}
+			
+		}
+		
+	}
+	
+	
+	public static void addPostToWatchlist() throws Exception {
+		String postTitle=getFirstPostTitle();
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		BrowserWaits.waitTime(2);
+	}
 	
 	
 }
+
+	
+
