@@ -92,13 +92,31 @@ public class TestCase_B6 extends TestBase{
 			
 //			System.out.println(ob.findElement(By.xpath(OR.getProperty("typeAhead_dropDown"))).getText());
 			
-			//Verify that the search drop down gets displayed
-			if(!checkElementPresence("typeAhead_dropDown")){
+			
+			List<WebElement> myList=ob.findElements(By.xpath(OR.getProperty("typeAhead_dropDown")));
+//			System.out.println("Size="+myList.size());
+//			for(int i=0;i<myList.size();i++){
+//				
+//				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+//				System.out.println(myList.get(i).getText());
+//				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+//			}
+			
+			
+			try{
 				
-				test.log(LogStatus.FAIL, "Search drop down not getting displayed");//extent reports
+				Assert.assertTrue(myList.get(0).isDisplayed());
+			}
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL,"Search drop down not getting displayed");//extent reports
+				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
+				
 			}
+			
 			
 			
 			
