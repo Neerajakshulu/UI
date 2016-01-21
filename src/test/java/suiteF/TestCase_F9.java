@@ -79,6 +79,7 @@ public class TestCase_F9 extends TestBase {
 			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			test.log(LogStatus.INFO,"Checking if Notification is received");
+			Thread.sleep(15000);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 		
