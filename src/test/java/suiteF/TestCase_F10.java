@@ -15,7 +15,7 @@ import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
 
-public class TestCase_F9 extends TestBase {
+public class TestCase_F10 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -27,13 +27,13 @@ public class TestCase_F9 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user receives a notification when someone he is following user comments on a post")
+		test = extent.startTest(var, "Verify that user receives a notification when someone comments on an post contained in his watchlist")
 				.assignCategory("Suite F");
 
 	}
 	
 	@Test
-	public void testCaseF9() throws Exception{
+	public void testcaseF10() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -54,7 +54,6 @@ public class TestCase_F9 extends TestBase {
 			clearCookies();
 			
 			ob.navigate().to(host);
-			//Logging in with User1
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			//searching for posts
@@ -63,27 +62,50 @@ public class TestCase_F9 extends TestBase {
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
 			Thread.sleep(2000);
+			test.log(LogStatus.INFO,"Watching a post");
+			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
+			Thread.sleep(5000);
+			String postWatched=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
+			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			test.log(LogStatus.INFO,"Post added to user's watchList");
+			LoginTR.logOutApp();
+			//create a new user and comment on the same post in user1's watchlist
+			
+			fn3 = generateRandomName(8);
+			ln3 = generateRandomName(10);
+			System.out.println(fn3 + " " + ln3);
+			user3 = createNewUser(fn3, ln3);
+			Thread.sleep(5000);
+			//searching the post and commenting on it
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postWatched);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			
+			jse.executeScript("scroll(0,-500)");
+			Thread.sleep(2000);
 			test.log(LogStatus.INFO,"Commenting on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
 			Thread.sleep(5000);
-			String postLinkClicked=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F9:Nice Post");
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F10:Post in other user's watchlist");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
 			
-			//Login with User2 who is following user1 and check if he's notified
-			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			//Login with user1 and check for notification
+			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
+			
 			test.log(LogStatus.INFO,"Checking if Notification is received");
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 		
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
+				Assert.assertTrue(text.contains("New comments") && text.contains(postWatched)
+						&& text.contains(fn3 + " " + ln3) && text.contains("TestCase_F10:Post in other user's watchlist")
+						&& text.contains("TODAY"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
@@ -99,6 +121,8 @@ public class TestCase_F9 extends TestBase {
 			}
 			closeBrowser();
 			
+			
+			
 		}catch(Throwable t){
 			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
 			// reports
@@ -109,8 +133,8 @@ public class TestCase_F9 extends TestBase {
 			closeBrowser();
 		}
 		
+		
 	}
-	
 	
 	
 	@AfterTest
@@ -128,4 +152,5 @@ public class TestCase_F9 extends TestBase {
 					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
+	
 }
