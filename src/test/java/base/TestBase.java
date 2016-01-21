@@ -216,8 +216,8 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}
-	*/
+	}*/
+	
 	//Closing the browser
 	public void closeBrowser(){
 		
@@ -467,7 +467,7 @@ public class TestBase {
 				
 				
 				ob.get(links.get(0).getAttribute("href"));
-				Thread.sleep(8000);
+				Thread.sleep(12000);
 				
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);

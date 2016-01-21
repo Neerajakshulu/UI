@@ -83,8 +83,7 @@ public class TestCase_F9 extends TestBase {
 			System.out.println(text);
 		
 			try {
-				Assert.assertTrue(text.contains("TODAY")
-						&& text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
+				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
