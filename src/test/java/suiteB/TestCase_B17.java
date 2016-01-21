@@ -84,10 +84,11 @@ public class TestCase_B17 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
+			Thread.sleep(5000);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),180);
+			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_Link"))).click();
+			jsClick(ob, ob.findElement(By.linkText(OR.getProperty("tr_search_results_sortby_timescited_Link"))));
 			waitForAjax(ob);
 			timeCitedWEList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_count_search_results_xpath")));
 
@@ -96,7 +97,7 @@ public class TestCase_B17 extends TestBase {
 			}
 
 			timeCitedCountListAfterSort.addAll(timeCitedCountListBeforeSort);
-			Collections.sort(timeCitedCountListAfterSort);
+			Collections.sort(timeCitedCountListAfterSort,Collections.reverseOrder());
 
 			try {
 				Assert.assertTrue(timeCitedCountListBeforeSort.size()>0);
