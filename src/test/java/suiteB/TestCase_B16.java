@@ -91,7 +91,7 @@ public class TestCase_B16 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "sortby_ is_not_ working_ for_ search_ results")));// screenshot
 			}
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_css"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).click();
 
 			try {
 				Assert.assertFalse(checkElementIsDisplayed(ob,
