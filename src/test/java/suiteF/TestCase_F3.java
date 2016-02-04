@@ -77,6 +77,10 @@ public class TestCase_F3 extends TestBase {
 
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			Thread.sleep(3000);
+			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
+			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
 
 			logout();
@@ -98,7 +102,7 @@ public class TestCase_F3 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
@@ -123,7 +127,7 @@ public class TestCase_F3 extends TestBase {
 
 			try {
 				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains("green tea"));
+						&& text.contains(document_title) && text.contains("TestCase_F3:green tea"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
