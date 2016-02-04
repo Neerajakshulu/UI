@@ -107,17 +107,6 @@ public class TestCase_F1 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 
-			if (!checkElementPresence("notification")) {
-
-				test.log(LogStatus.FAIL, "User not receiving notification");// extent
-																			// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_not_receiving_notification")));// screenshot
-				closeBrowser();
-				return;
-			}
-
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 			
