@@ -118,6 +118,7 @@ public class TestCase_A1 extends TestBase{
 		
 		//Verify that account activation email has been received
 		ob.get("https://www.guerrillamail.com");
+		Thread.sleep(10000);
 		List<WebElement> email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
 		email_list.get(0).click();
 		Thread.sleep(2000);

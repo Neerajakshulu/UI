@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -63,7 +64,8 @@ public class TestCase_B44 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 
 			// login using TR credentials
@@ -80,11 +82,13 @@ public class TestCase_B44 extends TestBase {
 
 			// Check the filter is collapsed by default
 			collapseFilter();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 
 			// Check if the filter expanded
 			expandFilter();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
+			
+			
 
 			// Check if filter is collapsible
 			collapseFilter();

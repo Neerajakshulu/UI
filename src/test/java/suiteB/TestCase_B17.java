@@ -37,7 +37,7 @@ public class TestCase_B17 extends TestBase {
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to sort the documents by TIMES CITED field")
+						"Verify that user is able to sort the articles by TIMES CITED field in ARTICLES content type")
 				.assignCategory("Suite B");
 
 	}
@@ -64,56 +64,70 @@ public class TestCase_B17 extends TestBase {
 
 		try {
 
+			String search_query="cat dog";
+			
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
 			clearCookies();
-
-			// Navigate to TR login page and login with valid TR credentials
+			maximizeWindow();
+			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			Thread.sleep(8000);
+			
+			//login using TR credentials
 			login();
 			Thread.sleep(15000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("cat dog mammal");
+			
+			//Type into the search box and get search results
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
-			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
-			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")),20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_timescited_Link"))).click();
-			waitForAjax(ob);
-			timeCitedWEList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_count_search_results_xpath")));
+			Thread.sleep(4000);
+			
 
-			for (WebElement element : timeCitedWEList) {
-				timeCitedCountListBeforeSort.add(Long.parseLong(element.getText().trim()));
+			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			content_type_tiles.get(1).click();
+			Thread.sleep(5000);
+			
+			ob.findElement(By.id("single-button")).click();
+			Thread.sleep(2000);
+			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
+			Thread.sleep(5000);
+			
+			List<WebElement> times_cited_labels=ob.findElements(By.xpath("//*[@class='h6 doc-info']"));
+			ArrayList<Integer> counts=new ArrayList<Integer>();
+			String temp;
+			for(int i=0;i<times_cited_labels.size();i++){
+				
+				temp=times_cited_labels.get(i).getText().substring(0,times_cited_labels.get(0).getText().indexOf(" "));
+				counts.add(Integer.parseInt(temp));
+//				System.out.println(counts.get(i));
 			}
-
-			timeCitedCountListAfterSort.addAll(timeCitedCountListBeforeSort);
-			Collections.sort(timeCitedCountListAfterSort);
-
-			try {
-				Assert.assertTrue(timeCitedCountListBeforeSort.size()>0);
-				Assert.assertEquals(timeCitedCountListBeforeSort, timeCitedCountListAfterSort);
-				test.log(LogStatus.PASS, "User is able to sort the search results");
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Sort by functionality is not working as expected");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "sortby_ is_not_ working_ for_ search_ results")));// screenshot
+			
+			ArrayList<Integer> mylist=new ArrayList<Integer>();
+			mylist.addAll(counts);
+//			System.out.println(mylist);
+			
+			Collections.sort(mylist);
+			Collections.reverse(mylist);
+			
+			try{
+				
+				Assert.assertTrue(counts.equals(mylist));
 			}
-
-			logout();
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Articles are not sorted correctly as per TIMES CITED field in ARTICLES content type");// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_incorrect_TIMES_CITED_sorting_in_ARTICLES_content_type")));// screenshot
+				
+				
+			}
+			
 			closeBrowser();
-
+			
 		}
 
 		catch (Throwable t) {

@@ -66,6 +66,10 @@ public class TestCase_F7 extends TestBase {
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			test.log(LogStatus.INFO, " user watching an article");
+			Thread.sleep(3000);
+			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
+			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
 			LoginTR.logOutApp();
 			
@@ -81,7 +85,7 @@ public class TestCase_F7 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("My Favourite Game");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			test.log(LogStatus.INFO, " user watching an article");
+			test.log(LogStatus.INFO, " user adding the comment for an article");
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
 			

@@ -46,7 +46,29 @@
 		</classes>
 	</test>
 
+	<test name="Test F8">
+		<classes>
+			<class name="suiteF.TestCase_F8"></class>
+		</classes>
+	</test>
 	
+	<test name="Test F9">
+		<classes>
+			<class name="suiteF.TestCase_F9"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F10">
+		<classes>
+			<class name="suiteF.TestCase_F10"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F11">
+		<classes>
+			<class name="suiteF.TestCase_F11"></class>
+		</classes>
+	</test>
 
 </suite>
 

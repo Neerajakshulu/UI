@@ -29,9 +29,7 @@ public class TestCase_E2 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add document to watchlist from document page once it is opened from ALL content set results")
+		test = extent.startTest(var, "Verify that user is able to watch an Article from Record View page")
 				.assignCategory("Suite E");
 
 	}
@@ -61,22 +59,27 @@ public class TestCase_E2 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			// 1)Create a new user
+			// 1)Create new user and login
 			createNewUser("mask", "man");
 
 			// 2)Add an article to watchlist from record view page
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(8000);
+			WebElement ele = ob.findElement(By.xpath(OR.getProperty("searchResults_links")));
+			String document_name = ele.getText();
+			// Opening the record view page
+			ele.click();
+			Thread.sleep(8000);
 
 			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 
 			// 3)Verify that particular article has been added to watchlist
 			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -88,17 +91,15 @@ public class TestCase_E2 extends TestBase {
 				if (watchlist.get(i).getText().equals(document_name))
 					count++;
 
-				// System.out.println(watchlist.get(i).getText());
 			}
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from document page");// extent
-																											// reports
+				test.log(LogStatus.FAIL, "User not able to watch article from document page");// extent
+																								// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_document_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_watch_article_from_document_page")));// screenshot
 			}
 
 			closeBrowser();

@@ -151,7 +151,7 @@ public class PostRecordViewPage extends TestBase{
 		String postTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
-		BrowserWaits.waitTime(6);
+		BrowserWaits.waitTime(10);
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
 		String profileData=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();

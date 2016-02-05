@@ -13,10 +13,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E8 extends TestBase {
+public class TestCase_E11 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -28,13 +29,13 @@ public class TestCase_E8 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch a Post from ALL content search results page")
+		test = extent.startTest(var, "Verify that user is able to unwatch an Article from Record View page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE8() throws Exception {
+	public void testcaseE2() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -52,48 +53,56 @@ public class TestCase_E8 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "\"Post ABC\"";
+			String search_query = "biology";
 
-			// 1--->Making a new user
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-			// Create new user and login
-			createNewUser("mask", "man");
 
-			// 2--->Adding an post to watchlist
+			// 1)Create new user and login
+			createNewUser("mask", "man");
+			// Navigate to home page
+			/*ob.navigate().to(host);
+			Thread.sleep(8000);
+			// login using TR credentials
+			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();*/
+
+			// 2)Add an article to watchlist from record view page
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// watching the patent
+			// Clicking on Articles content result set
+			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(8000);
+			// Watching the first article
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			Thread.sleep(4000);
-			// unwatching the patent
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			Thread.sleep(4000);
+			// 3)Opening the record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 
-			// verifying that particular post is present in watch list or not
-			// watchlist
+			Thread.sleep(8000);
+			// 4)Unwatching the article from record view page
+			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
+			Thread.sleep(2000);
+			// Opening the watchlist page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
+			// 5)Verify that particular article has been removed from watchlist
 			WebElement noResultPanel = ob.findElement(By.xpath("//div[@ng-show='noResults']"));
 
 			if (!noResultPanel.isDisplayed()) {
 
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from search results page");// extent
-																													// reports
+				test.log(LogStatus.FAIL, "User not able to unwatch an article from record view page");// extent
+																										// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_post_into_watchlist_from_searchResults_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_unwatch_article_from_record_view_page")));// screenshot
 
+			} else {
+				test.log(LogStatus.PASS, "User is able to unwatch an article from record view page");// extent
 			}
 
 			closeBrowser();
