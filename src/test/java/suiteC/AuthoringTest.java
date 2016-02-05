@@ -186,7 +186,7 @@ public class AuthoringTest extends TestBase {
 	}
 	
 	public static void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForElementTobeVisible(ob, By.linkText(linkName), 80);
+		BrowserWaits.waitForElementTobeVisible(ob, By.linkText(linkName), 90);
 		ob.findElement(By.linkText(linkName)).click();
 		waitUntilTextPresent(TestBase.OR.getProperty("tr_authoring_header_css"), linkName);
 	}

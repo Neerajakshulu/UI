@@ -124,10 +124,11 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * @throws Exception, When Validation not done
 	 */
 	public  void validateAppreciationComment() throws Exception  {
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
 		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
 		System.out.println("size of total elemntes-->"+apprDivs.size());
 		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
-				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper"));
+				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper]"));
 		
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());

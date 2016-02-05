@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.ProfilePage;
+import pages.SearchResultsPage;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -93,7 +95,10 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 			Authoring.clickAddCommentButton();
 			
 			searchArticle("biology");
-			chooseArticle("Fostering synergy between cell biology and systems biology");
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
+			Thread.sleep(5000);
+			SearchResultsPage.clickOnArticleTab();
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			
 			//ob.navigate().refresh();
 			//Thread.sleep(8000);
@@ -151,7 +156,7 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
+		waitForElementTobeVisible(ob, By.linkText(linkName), 90);
 		jsClick(ob,ob.findElement(By.linkText(linkName)));
 		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
 	}
