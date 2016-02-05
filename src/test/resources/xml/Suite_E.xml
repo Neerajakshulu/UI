@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite E">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+	<parameter name="userName" value="Prasenjit.Patra@thomsonreuters.com" />
+	<parameter name="password" value="Techm@2015" />
+	<parameter name="articleName" value="biology" />
+	<parameter name="patentName" value="Percutaneous placement valve stent" />
+	<parameter name="postName" value="Unique Post for Automation" />
+
+
+	<test name="Test E1">
+		<classes>
+			<class name="suiteE.TestCase_E1"></class>
+		</classes>
+	</test>
+
+	<test name="Test E2">
+		<classes>
+			<class name="suiteE.TestCase_E2"></class>
+		</classes>
+	</test>
+
+	<test name="Test E3">
+		<classes>
+			<class name="suiteE.TestCase_E3"></class>
+		</classes>
+	</test>
+</suite>
+
