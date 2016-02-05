@@ -94,7 +94,7 @@ public class TestCase_F5 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(7000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
-			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationForNewPost"))).getText();
 			System.out.println(text);
 			String expected_text = fn1 + " " + ln1;
 			try {
