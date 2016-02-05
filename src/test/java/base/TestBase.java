@@ -19,7 +19,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -144,38 +143,38 @@ public class TestBase {
 	
 	
 	//Opening via Sauce Labs
-//	public void openBrowser() throws Exception{
-//		
-//		
-//		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-//		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-//		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
-//		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-//		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
-//		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
-//		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-//		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
-////		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
-//		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-//                desiredCapabilities);
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try{
-//			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//			}
-//		catch(Throwable t){
-//				
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//		
-//	}
+	public void openBrowser() throws Exception{
+		
+		
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+		System.out.println("Selenium Browser Name-->"+System.getenv("SELENIUM_BROWSER"));
+		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+		System.out.println("Selenium Version-->"+System.getenv("SELENIUM_VERSION"));
+		System.out.println("Selenium Plaform-->"+System.getenv("SELENIUM_PLATFORM"));
+		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
+//		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS,true);
+		ob = new RemoteWebDriver(new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+                desiredCapabilities);
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
+			}
+		catch(Throwable t){
+				
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+		
+	}
 	 
 	
 	// selenium RC/ Webdriver
 	
 //	Opening the desired browser
-	public void openBrowser(){
+	/*public void openBrowser(){
 
 		if(CONFIG.getProperty("browserType").equals("FF")){
 			ob = new FirefoxDriver();
@@ -217,7 +216,7 @@ public class TestBase {
 		}
 
 	}
-	
+	*/
 	//Closing the browser
 	public void closeBrowser(){
 		
@@ -406,23 +405,22 @@ public class TestBase {
 
 			}
 			
-			// Cleaning up watchlist
-			public void cleanWatchlist() throws Exception {
-
+			//Cleaning up watchlist
+			public void cleanWatchlist() throws Exception{
+				
 				ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 				Thread.sleep(4000);
-				try {
-					List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-					for (int i = 0; i < mylist.size(); i++) {
-
-						ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
-						Thread.sleep(2000);
-					}
-				} catch (NoSuchElementException e) {
-					//if no documents are there in watchlist
-					e.printStackTrace();
+				
+				List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for(int i=0;i<mylist.size();i++){
+					
+					ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+					Thread.sleep(2000);
+					ob.findElement(By.xpath(OR.getProperty("watchlist_remove_button"))).click();
+					Thread.sleep(2000);
+					
 				}
-
+				
 			}
 			
 			
@@ -467,7 +465,7 @@ public class TestBase {
 				
 				
 				ob.get(links.get(0).getAttribute("href"));
-				Thread.sleep(12000);
+				Thread.sleep(8000);
 				
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
