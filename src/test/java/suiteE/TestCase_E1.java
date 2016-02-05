@@ -9,11 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -31,13 +33,14 @@ public class TestCase_E1 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add document to watchlist from ALL content search results page")
+						"Verify that user is able to add an Article from ALL content search results page to a particular watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE1() throws Exception {
+	@Parameters({ "articleName" })
+	public void testWatchArticleFromAllContentSearchResult(String articleName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -55,9 +58,9 @@ public class TestCase_E1 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "kernel";
+			// String search_query = "biology";
 
-			// 1--->Making a new user
+			// Making a new user
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -67,39 +70,71 @@ public class TestCase_E1 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			 createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
-			// 2--->Adding an article to watchlist
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			// Searching for article
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-
-			// 3--->verifying that particular article has been added to
-			// watchlist
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(8000);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			// Select the first watch list from the model
+			waitForElementTobeClickable(ob,
+					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+			// Adding the item into watch list
+			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			// Selecting the watch list name
+			String selectedWatchlistName = ob.findElement(By.xpath("//h4[@class='select-watchlist-title ng-binding']"))
+					.getText();
+			// Closing the select a model
+			ob.findElement(By.xpath("//button[@class='close']")).click();
+			Thread.sleep(8000);
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			// ob.findElement(By.xpath("//a[@href='#/watchlist']")).click();
+			Thread.sleep(8000);
+
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			// Finding the particular watch list and navigating to it
+			for (int i = 0; i < watchLists.size(); i++) {
+				if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
+					watchLists.get(i).click();
+					Thread.sleep(4000);
+					break;
+				}
+			}
+
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			int count = 0;
-			for (int i = 0; i < watchlist.size(); i++) {
+			for (int i = 0; i < watchedItems.size(); i++) {
 
-				if (watchlist.get(i).getText().equals(document_name))
+				if (watchedItems.get(i).getText().equals(documentName))
 					count++;
 
 			}
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL, "User not able to add document into watchlist from search results page");// extent
-																													// reports
+				test.log(LogStatus.FAIL,
+						"User not able to add an article into watchlist from ALL content search results page");// extent
+				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_document_into_watchlist_from_searchResults_page")));// screenshot
+								+ "_user_unable_to_add_article_into_watchlist_from_all_content_searchResults_page")));// screenshot
 
 			}
 
