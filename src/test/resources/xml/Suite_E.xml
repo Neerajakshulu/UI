@@ -5,74 +5,12 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="userName" value="prasenjit.patra@thomsonreuters.com" />
+	<parameter name="userName" value="Prasenjit.Patra@thomsonreuters.com" />
 	<parameter name="password" value="Techm@2015" />
 
 	<test name="Test E1">
 		<classes>
 			<class name="suiteE.TestCase_E1"></class>
-		</classes>
-	</test>
-
-
-	<test name="Test E2">
-		<classes>
-			<class name="suiteE.TestCase_E2"></class>
-		</classes>
-	</test>
-
-	<test name="Test E3">
-		<classes>
-			<class name="suiteE.TestCase_E3"></class>
-		</classes>
-	</test>
-
-
-	<test name="Test E4">
-		<classes>
-			<class name="suiteE.TestCase_E4"></class>
-		</classes>
-	</test>
-
-	<test name="Test E5">
-		<classes>
-			<class name="suiteE.TestCase_E5"></class>
-		</classes>
-	</test>
-
-	<test name="Test E6">
-		<classes>
-			<class name="suiteE.TestCase_E6"></class>
-		</classes>
-	</test>
-
-	<test name="Test E7">
-		<classes>
-			<class name="suiteE.TestCase_E7"></class>
-		</classes>
-	</test>
-
-	<test name="Test E8">
-		<classes>
-			<class name="suiteE.TestCase_E8"></class>
-		</classes>
-	</test>
-	
-	<test name="Test E9">
-		<classes>
-			<class name="suiteE.TestCase_E9"></class>
-		</classes>
-	</test>
-	
-	<test name="Test E10">
-		<classes>
-			<class name="suiteE.TestCase_E10"></class>
-		</classes>
-	</test>
-	
-	<test name="Test E11">
-		<classes>
-			<class name="suiteE.TestCase_E11"></class>
 		</classes>
 	</test>
 
