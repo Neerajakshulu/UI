@@ -61,6 +61,7 @@ public class VerifyCommenterDetails extends TestBase{
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);

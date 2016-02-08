@@ -78,6 +78,7 @@ public class AuthoringDeleteTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
+					//ob.get(CONFIG.getProperty("testSiteName"));
 					LoginTR.waitForTRHomePage();
 					performAuthoringCommentOperations(username, password, article, completeArticle);
 					closeBrowser();
@@ -103,7 +104,9 @@ public class AuthoringDeleteTest extends TestBase {
 			AuthoringTest.enterTRCredentials(username, password);
 			AuthoringTest.clickLogin();
 			AuthoringTest.searchArticle(article);
-			AuthoringTest.chooseArticle(completeArticle);
+			Authoring.selectArtcleWithComments();
+			Authoring.enterArticleComment("Test comments");
+			Authoring.clickAddCommentButton();
 			deleteComments();
 			closeBrowser();
 		} catch (Throwable t) {

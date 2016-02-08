@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.SearchResultsPage;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
@@ -74,6 +75,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -85,6 +87,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 			LoginTR.enterTRCredentials(username, password);
 			LoginTR.clickLogin();
 			searchArticle(article);
+			SearchResultsPage.clickOnArticleTab();
 			chooseArticle(completeArticle);
 			Authoring.enterArticleComments("test");
 			Authoring.clickAddCommentButton();
@@ -117,7 +120,8 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 			String profanityErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			BrowserWaits.waitUntilText(profanityErrorMessage);
-			
+			ob.findElement(By.cssSelector("button[ng-click*='cancelEdit']")).click();
+			Thread.sleep(5000);
 			Assert.assertEquals(profanityErrorMessage, errorMessage);
 			
 			if(!profanityErrorMessage.equalsIgnoreCase(errorMessage)){
