@@ -75,7 +75,7 @@
 
 
 <test name="Article_Sharing_Using_Twitter">
-	<parameter name="tusername" value="pcreddy08.11@gmail.com"/>
+	<parameter name="tusername" value="testing.prasadreddy@gmail.com"/>
 	<parameter name="tpassword" value="likhithreddy@123"/>
     <classes>
       <class name="suiteC.ShareArticleOnTwitterTest" ></class>

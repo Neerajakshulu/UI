@@ -131,7 +131,9 @@ public class TestCase_F2 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-																								// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());												// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
