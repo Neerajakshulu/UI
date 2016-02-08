@@ -179,7 +179,7 @@ public class ProfilePage  extends TestBase {
 		getProfileTitle();
 		getProfileMetadata();
 		BrowserAction.jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
-		BrowserWaits.waitTime(4);
+		BrowserWaits.waitTime(8);
 	}
 	
 	
