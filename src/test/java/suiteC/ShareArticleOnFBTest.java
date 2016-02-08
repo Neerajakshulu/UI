@@ -190,10 +190,8 @@ public class ShareArticleOnFBTest extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
-		jsClick(ob,ob.findElement(By.linkText(linkName)));
-		Thread.sleep(8000);//providing more while script is getting failed in saucelabs
-		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){

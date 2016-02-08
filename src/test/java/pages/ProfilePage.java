@@ -159,7 +159,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void getProfileTitle() throws Exception {
 		profileTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
-		//System.out.println("profile title-->"+profileTitle);
+		System.out.println("profile title-->"+profileTitle);
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void getProfileMetadata() throws Exception {
 		profileMetadata=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
-		//System.out.println("profile metadata-->"+profileMetadata);
+		System.out.println("profile metadata-->"+profileMetadata);
 	}
 	
 	/**
@@ -178,8 +178,8 @@ public class ProfilePage  extends TestBase {
 	public static void clickProfile() throws Exception {
 		getProfileTitle();
 		getProfileMetadata();
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
-		BrowserWaits.waitTime(4);
+		BrowserAction.jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
+		BrowserWaits.waitTime(8);
 	}
 	
 	
@@ -314,8 +314,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, When data not matching
 	 */
 	public static void validateProfileMetadata() throws Exception {
-		String country=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
-		if(!country.contains(metadata[3])){
+		String country=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(2).getText();
+		if(country.contains(metadata[3])){
 			throw new Exception("profile meta data not updated");
 		}
 	}

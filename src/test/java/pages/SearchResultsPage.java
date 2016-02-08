@@ -20,6 +20,13 @@ public class SearchResultsPage extends TestBase{
 		BrowserWaits.waitTime(6);
 	}
 
+	public static void clickOnArticleTab() throws Exception {
+		waitForAjax(ob);
+		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
+		waitForAjax(ob);
+		BrowserWaits.waitTime(6);
+	}
+
 	public static void viewOtherUsersPost(String currentUserName) {
 
 		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);

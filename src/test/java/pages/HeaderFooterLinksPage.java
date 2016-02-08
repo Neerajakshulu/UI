@@ -19,11 +19,13 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public static void validateLinks(String appHeadFooterLinks) throws Exception {
 		String headerFooterLinks[]=appHeadFooterLinks.split("\\|");
+		
 		for(int i=0;i<headerFooterLinks.length;i++) {
-			BrowserAction.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS);
+			
+			clickProfileImage();
 		
 			if (headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")) {
-				BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS).get(0).click();
+				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK);
 				BrowserWaits.waitTime(4);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String cookieText=ob.findElement(By.tagName("h3")).getText();
@@ -32,7 +34,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			}
 			
 			else if (headerFooterLinks[i].equalsIgnoreCase("Privacy Statement")) {
-				BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS).get(1).click();
+				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
 				BrowserWaits.waitTime(4);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String psText=ob.findElement(By.tagName("h3")).getText();
@@ -41,7 +43,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			}
 			
 			else {
-				BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS).get(2).click();
+				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
 				BrowserWaits.waitTime(4);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String tcText=ob.findElement(By.tagName("h3")).getText();
@@ -81,7 +83,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	public static void clickProfileImage() throws Exception {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);	
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
+		BrowserWaits.waitUntilText("Profile","Account","Help","Sign out");
 			
 	}
 	

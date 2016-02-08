@@ -139,7 +139,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		jsClick(ob,ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))));
 		waitUntilText("Comments"); 
 		scrollingToElementofAPage();
-		String commentsCount=ob.findElement(By.cssSelector("a[data-event-category='profilecomments'] span[ng-bind='vm.count']")).getText();
+		String commentsCount=ob.findElement(By.cssSelector("a[data-event-category='profilecomments'] span[class='ng-binding']:nth-child(2)")).getText();
 		int totalComments=Integer.parseInt(commentsCount);
 		return totalComments;
 	}

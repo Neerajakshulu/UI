@@ -66,7 +66,12 @@ public class TestCase_F10 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
 			Thread.sleep(5000);
 			String postWatched=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			Thread.sleep(3000);
+			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
+			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
+			Thread.sleep(1000);
 			test.log(LogStatus.INFO,"Post added to user's watchList");
 			LoginTR.logOutApp();
 			//create a new user and comment on the same post in user1's watchlist

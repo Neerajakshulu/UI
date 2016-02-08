@@ -60,8 +60,8 @@ public class VerifyCommenterDetails extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
@@ -103,6 +103,7 @@ public class VerifyCommenterDetails extends TestBase{
 			String commentText, profileName=null;
 			List<String> profileDetailsInComment=new ArrayList<String>();
 			List<WebElement> details;
+			Thread.sleep(8000);
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains("Comment deleted")) {

@@ -19,7 +19,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -216,8 +215,8 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}*/
-	
+	}
+	*/
 	//Closing the browser
 	public void closeBrowser(){
 		
@@ -406,23 +405,22 @@ public class TestBase {
 
 			}
 			
-			// Cleaning up watchlist
-			public void cleanWatchlist() throws Exception {
-
+			//Cleaning up watchlist
+			public void cleanWatchlist() throws Exception{
+				
 				ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 				Thread.sleep(4000);
-				try {
-					List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-					for (int i = 0; i < mylist.size(); i++) {
-
-						ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
-						Thread.sleep(2000);
-					}
-				} catch (NoSuchElementException e) {
-					//if no documents are there in watchlist
-					e.printStackTrace();
+				
+				List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for(int i=0;i<mylist.size();i++){
+					
+					ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+					Thread.sleep(2000);
+					ob.findElement(By.xpath(OR.getProperty("watchlist_remove_button"))).click();
+					Thread.sleep(2000);
+					
 				}
-
+				
 			}
 			
 			
@@ -467,7 +465,7 @@ public class TestBase {
 				
 				
 				ob.get(links.get(0).getAttribute("href"));
-				Thread.sleep(12000);
+				Thread.sleep(8000);
 				
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);

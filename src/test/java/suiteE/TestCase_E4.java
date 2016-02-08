@@ -5,16 +5,19 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -33,10 +36,12 @@ public class TestCase_E4 extends TestBase {
 		test = extent
 				.startTest(var, "Verify that user is able to unwatch an Article from ALL content search results page")
 				.assignCategory("Suite E");
+
 	}
 
 	@Test
-	public void testCase4() throws Exception {
+	@Parameters({ "articleName" })
+	public void testUnwatchArticleFromAllContentSearchResult(String articleName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -54,67 +59,112 @@ public class TestCase_E4 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "finger prints";
+			// String search_query = "biology";
 
+			// Making a new user
 			openBrowser();
-			maximizeWindow();
+			try {
+				maximizeWindow();
+			} catch (Throwable t) {
+
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 			clearCookies();
 
-			ob.navigate().to(host);
-			Thread.sleep(8000);
+			 createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
-			// Create a new user
-			createNewUser("mask", "man");
-
-			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			// Searching for article
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-			// watching the document
-			mylist.get(0).click();
-			Thread.sleep(2000);
-			// unwatching the document
-			mylist.get(0).click();
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			// Watching the article
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
-			WebElement ele;
-			// Watching the documents from All content results page
-			for (int i = 1; i < 5; i++) {
-				ele = mylist.get(i);
-				ele.click();
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", ele);
-				Thread.sleep(2000);
-			}
-
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			// Select the first watch list from the model
+			waitForElementTobeClickable(ob,
+					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+			// Adding the item into watch list
+			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			Thread.sleep(4000);
+			// Selecting the watch list name
+			String selectedWatchlistName = ob.findElement(By.xpath("//h4[@class='select-watchlist-title ng-binding']"))
+					.getText();
+			// Closing the select a model
+			ob.findElement(By.xpath("//button[@class='close']")).click();
 			Thread.sleep(8000);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			// Unwatching the article
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
-			int count = 0;
-			for (int i = 0; i < watchlist.size(); i++) {
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			// Select the first watch list from the model
+			waitForElementTobeClickable(ob,
+					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+			Thread.sleep(4000);
+			// removing the item into watch list
+			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			// Closing the select a model
+			ob.findElement(By.xpath("//button[@class='close']")).click();
+			Thread.sleep(8000);
 
-				if (watchlist.get(i).getText().equals(document_name))
-					count++;
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			// ob.findElement(By.xpath("//a[@href='#/watchlist']")).click();
+			Thread.sleep(8000);
+
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			// Finding the particular watch list and navigating to it
+			for (int i = 0; i < watchLists.size(); i++) {
+				if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
+					watchLists.get(i).click();
+					Thread.sleep(4000);
+					break;
+				}
 			}
 
-			if (compareNumbers(0, count)) {
-				test.log(LogStatus.INFO, "User is able to unwatch Article from All content search results page");// extent
-				// reports
+			try {
 
-			} else {
-				test.log(LogStatus.FAIL, "User not able to unwatch Article from All content search results page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_unwatch_article__from_All_content_searchResults_page")));// screenshot
+				WebElement defaultMessage = ob
+						.findElement(By.xpath("//div[@class='row'][@ng-show='vm.supportingCopyIsVisible']"));
 
+				if (defaultMessage.isDisplayed()) {
+
+					test.log(LogStatus.PASS,
+							"User is able to remove an article from watchlist in ALL content search results page");// extent
+				} else {
+					test.log(LogStatus.FAIL,
+							"User not able to remove an article from watchlist in ALL content search results page");// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
+							+ "_user_unable_to_remove_article_from_watchlist_in_all_content_searchResults_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
+
+				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				int count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
 			}
-
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -126,8 +176,8 @@ public class TestCase_E4 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "unwatch article from search screen not happended")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

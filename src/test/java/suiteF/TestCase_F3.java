@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
@@ -77,6 +78,10 @@ public class TestCase_F3 extends TestBase {
 
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			Thread.sleep(3000);
+			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
+			Thread.sleep(5000);
+			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
 
 			logout();
@@ -98,11 +103,11 @@ public class TestCase_F3 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
-			logout();
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
 			// 3)Login with user1 again and verify that he receives a correct
@@ -123,12 +128,14 @@ public class TestCase_F3 extends TestBase {
 
 			try {
 				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains("green tea"));
+						&& text.contains(document_title) && text.contains("TestCase_F3:green tea"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-																								// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());																		// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel

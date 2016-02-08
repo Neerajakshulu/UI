@@ -70,8 +70,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
-				//ob.navigate().to(System.getProperty("host"));
-				ob.get(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -195,9 +195,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		waitForElementTobeVisible(ob, By.linkText(linkName), 40);
-		jsClick(ob,ob.findElement(By.linkText(linkName)));
-		waitUntilTextPresent(OR.getProperty("tr_authoring_header_css"), linkName);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){
