@@ -70,8 +70,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 				clearCookies();
 				maximizeWindow();
 				
-				//ob.navigate().to(System.getProperty("host"));
-				ob.get(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(System.getProperty("host"));
 				AuthoringTest.waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
