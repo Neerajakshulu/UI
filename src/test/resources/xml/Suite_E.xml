@@ -29,5 +29,12 @@
 			<class name="suiteE.TestCase_E3"></class>
 		</classes>
 	</test>
+	
+	<test name="Test E4">
+		<classes>
+			<class name="suiteE.TestCase_E4"></class>
+		</classes>
+	</test>
+	
 </suite>
 

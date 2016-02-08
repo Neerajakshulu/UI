@@ -91,6 +91,7 @@ public class TestCase_E3 extends TestBase {
 					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
 			// Adding the item into watch list
 			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			Thread.sleep(4000);
 			// Selecting the watch list name
 			String selectedWatchlistName = ob.findElement(By.xpath("//h4[@class='select-watchlist-title ng-binding']"))
 					.getText();

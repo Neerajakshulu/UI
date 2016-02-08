@@ -7,11 +7,12 @@ package util;
  */
 public enum OnePObjectMap {
 
-	//HOME_ONEP_APPS_CSS("i[class='webui-icon webui-icon-app']"),
 	HOME_ONEP_APPS_LINK("Apps"),
 	HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS("h1[class='heading-1']"),
 	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='webui-btn-primary unauth-login-btn unauth-ne-btn']"),
-	HOME_PROJECT_NEON_APP_FOOTER_LINKS_CSS("ul[class='list-unstyled footer-link-list'] li"),
+	HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK("Cookie Policy"),
+	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy Statement"),
+	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'Details')]"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS("a[title='Back to Project Neon']"),
 	HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH("//span[@class='webui-icon webui-icon-like']/following-sibling::span"),
@@ -45,7 +46,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),	
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS("input#pass"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS("input[value='Log In']"),
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS("input[name='publish'][type='submit']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS("button[name*='CONFIRM'][type='submit']"),
 	
 	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG("h6"),
 	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("li[class='interest-or-skill ng-binding ng-scope']"),
@@ -65,12 +66,12 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TITLE_CSS("h2[class^='profile-name']"),
 	HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS("h6[ng-show='role']"),
 	HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS("h6[ng-show='primaryInstitution']"),
-	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("h6[ng-show='location']"),
+	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("button[ng-click^='startEditing']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CSS("span[class='webui-icon webui-icon-edit']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS("input[ng-model='title']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model='role']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model='primaryInstitution']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[ng-model='location']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model='vm.field']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='Add your country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click='cancelEditing()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click='saveUserData()']"),
 
@@ -78,7 +79,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS("a[data-event-category='profilefollowers']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS("a[data-event-category='profilefollowing']"),
-	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click^='appreciateThis']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click*='appreciateThis']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("div[class='post-button-wrapper'] button[id='posting']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("input[class^='post-title-input']"),

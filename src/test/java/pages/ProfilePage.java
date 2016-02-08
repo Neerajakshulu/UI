@@ -314,8 +314,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, When data not matching
 	 */
 	public static void validateProfileMetadata() throws Exception {
-		String country=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
-		if(!country.contains(metadata[3])){
+		String country=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(2).getText();
+		if(country.contains(metadata[3])){
 			throw new Exception("profile meta data not updated");
 		}
 	}
