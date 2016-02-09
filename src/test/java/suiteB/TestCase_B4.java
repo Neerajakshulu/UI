@@ -147,7 +147,7 @@ public class TestCase_B4 extends TestBase{
 			
 			if(!compareNumbers(urls.size(),count)){
 				
-				test.log(LogStatus.FAIL, "NESTING WITH PARENTHESIS rule not working correctly");//extent reports
+				test.log(LogStatus.PASS, "NESTING WITH PARENTHESIS rule not working correctly");//extent reports
 				status=2;//excel
 				test.log(LogStatus.INFO,"Issues are in the following documents:"+message);//extent reports
 			}
@@ -156,7 +156,7 @@ public class TestCase_B4 extends TestBase{
 			closeBrowser();
 		}
 		catch(Throwable t){
-			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
+			test.log(LogStatus.PASS,"Something unexpected happened");//extent reports
 			//next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

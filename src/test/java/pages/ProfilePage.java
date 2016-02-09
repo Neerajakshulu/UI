@@ -604,10 +604,9 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	public static void clickPublishAPostCancel() throws Exception {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		BrowserAction.click((OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS));
 		BrowserWaits.waitUntilNotText("Publish A Post","Give an update, pose a question, share an interesting find.");
 	}
-	
-	
 
 	/**
 	 * Method to validate Post Title

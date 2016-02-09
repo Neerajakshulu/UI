@@ -1,5 +1,8 @@
 package suiteF;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -89,7 +92,9 @@ public class TestCase_F9 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-				// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel

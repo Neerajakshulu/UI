@@ -87,7 +87,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg ng-binding'] p"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("button[event-action='cancel']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[event-action='publish']"),
-	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
+	//HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
+	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading']"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[ng-bind='vm.count']"),
 	HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS("div[modal-controller='PostDialogController'] button[id='editing']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_CSS("i[class^='webui-icon webui-icon-share']"),
@@ -120,11 +121,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] ne-watch-icon"),
 	
 	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
-	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']");
-	
-	
-	
-
+	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']"),
+	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']");
 
 	
 	

@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
@@ -106,7 +107,7 @@ public class TestCase_F3 extends TestBase {
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
-			logout();
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
 			// 3)Login with user1 again and verify that he receives a correct
@@ -132,7 +133,9 @@ public class TestCase_F3 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-																								// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());																		// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel

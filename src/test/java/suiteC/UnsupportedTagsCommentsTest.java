@@ -202,7 +202,7 @@ public class UnsupportedTagsCommentsTest extends TestBase {
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
-		ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){

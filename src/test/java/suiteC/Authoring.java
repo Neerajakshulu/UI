@@ -178,4 +178,33 @@ public class Authoring  extends TestBase {
 		BrowserWaits.waitUntilText(preventBotText);
 		Assert.assertEquals("We are still processing your previous comment. Please try again.", preventBotText);
 	}
+	
+	public static void selectArtcleWithComments(){
+	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
+	List<WebElement> itemList;
+	while (true) {
+		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+		int commentsCount, itr = 1;
+		String strCmntCt;
+		boolean isFound = false;
+		for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+			strCmntCt = itemList.get(i)
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
+					.getText();
+			commentsCount = Integer.parseInt(strCmntCt);
+			if (commentsCount !=0) {
+				jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+				isFound = true;
+				break;
+			}
+
+		}
+
+		if (isFound)
+			break;
+		itr++;
+		((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+		waitForAjax(ob);
+	}
+	}
 }
