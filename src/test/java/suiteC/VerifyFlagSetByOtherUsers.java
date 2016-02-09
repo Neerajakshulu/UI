@@ -128,7 +128,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 60);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 180);
 
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			boolean flag=false;

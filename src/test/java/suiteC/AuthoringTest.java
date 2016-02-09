@@ -75,6 +75,7 @@ public class AuthoringTest extends TestBase {
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
@@ -164,7 +165,7 @@ public class AuthoringTest extends TestBase {
 	 */
 	public static void enterTRCredentials(String userName, String password) {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		new TestBase().waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
+	    waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
@@ -186,9 +187,8 @@ public class AuthoringTest extends TestBase {
 	}
 	
 	public static void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForElementTobeVisible(ob, By.linkText(linkName), 80);
-		ob.findElement(By.linkText(linkName)).click();
-		waitUntilTextPresent(TestBase.OR.getProperty("tr_authoring_header_css"), linkName);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){

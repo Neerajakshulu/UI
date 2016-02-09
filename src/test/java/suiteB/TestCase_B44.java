@@ -7,6 +7,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -79,25 +80,40 @@ public class TestCase_B44 extends TestBase {
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-
-			// Check the filter is collapsed by default
-			collapseFilter();
-			Thread.sleep(5000);
-
-			// Check if the filter expanded
-			expandFilter();
-			Thread.sleep(5000);
+			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+			((JavascriptExecutor) ob).executeScript("window.scrollBy(0,250)", "");
+            Thread.sleep(3000);
+            
 			
-			
+            
+            try{
+            	
+            	Assert.assertTrue(ob.findElement(By.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope")).isDisplayed());
+            }
+            
+            catch(Throwable t){
+            	
+            	test.log(LogStatus.PASS, "User unable to expand INSTITUTIONS filter");// extent report
 
-			// Check if filter is collapsible
-			collapseFilter();
-			test.log(LogStatus.PASS, "Institutions filter is collapsible");
+            	ErrorUtil.addVerificationFailure(t);// testng
+            	status = 2;// excel
+            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+            			captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 
-			closeBrowser();
+            }
+            
+            
+            
+            ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+            
+            List<WebElement> mylist=ob.findElements(By.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope"));
+            System.out.println("Count="+mylist.size());
+            
+//            closeBrowser();
+            
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+			test.log(LogStatus.PASS, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
