@@ -122,7 +122,10 @@ public enum OnePObjectMap {
 	
 	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
 	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']"),
-	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']");
+	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS("div[class*='modal-dialog'] button[name='insertLink']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("span[class^='ne-profile-object-title'] a")
+;
 
 	
 	
