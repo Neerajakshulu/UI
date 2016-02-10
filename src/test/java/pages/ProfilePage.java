@@ -650,7 +650,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	public static void  clickFirstPostTitle() throws Exception {
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).findElement(By.tagName("a")).click();
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 	}
 	
@@ -665,7 +665,6 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 			List<WebElement> postLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
 			List<WebElement> postComments=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
 			List<WebElement> postWatch=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
-			
 			if(!(postsTimeStamp.size()==10 && postLike.size() ==10 && postComments.size() == 10 && postWatch.size()==10)){
 				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
 			}
