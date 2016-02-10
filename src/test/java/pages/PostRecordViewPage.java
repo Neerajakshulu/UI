@@ -210,4 +210,35 @@ public class PostRecordViewPage extends TestBase{
 		return BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS).getText();
 	}
 
+public static boolean validatePostContentForExternalLink(String string) throws Exception {
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		WebElement content=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		if(content.findElements(By.linkText(string)).size()!=0)
+			return true;
+		else return false;
+	
+	}
+	
+	public static void clickExternalLinkInPostContent(String url) throws Exception {
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		WebElement content=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		content.findElement(By.linkText(url)).click();
+		BrowserWaits.waitTime(6);
+	}
+	
+	
+	public static boolean validateURL(String url){
+		
+		if(ob.getCurrentUrl().toLowerCase().contains(url.toLowerCase()))return true;
+		else return false;
+	}
+
+	
+public static void clickOnAuthorName() throws Exception{
+	BrowserWaits.waitTime(6);
+	BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
+	BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
+	}
 }
