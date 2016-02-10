@@ -108,9 +108,9 @@ public class TestCase_E6 extends TestBase {
 			// Select the first watch list from the model
 			waitForElementTobeClickable(ob,
 					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
-			Thread.sleep(4000);
 			// removing the item into watch list
 			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			Thread.sleep(4000);
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
 			Thread.sleep(8000);

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -649,7 +650,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	public static void  clickFirstPostTitle() throws Exception {
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).findElement(By.tagName("a")).click();
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 	}
 	
@@ -664,7 +665,6 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 			List<WebElement> postLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
 			List<WebElement> postComments=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
 			List<WebElement> postWatch=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
-			
 			if(!(postsTimeStamp.size()==10 && postLike.size() ==10 && postComments.size() == 10 && postWatch.size()==10)){
 				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
 			}
@@ -680,6 +680,24 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 		BrowserWaits.waitTime(2);
 	}
 	
+public static void addExternalLinkToPostContent(String url) throws Exception{
+		
+		BrowserWaits.waitTime(5);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
+		BrowserWaits.waitTime(5);
+		Alert alert=ob.switchTo().alert();
+		alert.sendKeys(url);
+		alert.accept();
+		BrowserWaits.waitTime(5);
+	}
+
+	public static boolean validateProfileDetails(List<String> details) throws Exception {
+		BrowserWaits.waitTime(6);
+		List<String> expected=getProfileTitleAndMetadata();
+		
+		return (expected.toString().equals(details.toString()));
+	}
 	
 }
 

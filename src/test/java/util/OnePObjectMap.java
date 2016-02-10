@@ -89,7 +89,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[event-action='publish']"),
 	//HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
 	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading']"),
-	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[ng-bind='vm.count']"),
+	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS("div[modal-controller='PostDialogController'] button[id='editing']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_CSS("i[class^='webui-icon webui-icon-share']"),
 	HOME_PROJECT_NEON_VIEW_POST_WATCH_CSS("i[class^='webui-icon webui-icon-watch']"),
@@ -109,20 +109,23 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] button"),
 	
 	HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS("button[id='posting']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("div[class='full-record'] h2[class='ng-binding']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("div[class='full-record'] h2[class$='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("h3[class$='ne-profile-object-title-wrapper']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("h6[class='ne-profile-object-metadata-wrapper ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='full-record'] div[class*='timestamp-wrapper'] div"),
 
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] p"),
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[1]"),
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@ng-show='vm.hasPosts']/div[@class='ng-scope']/div[2]"),
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] ne-watch-icon"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[2]"),
+	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[data-ng-show='vm.hasPosts'] button"),
 	
 	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
 	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']"),
-	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']");
+	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS("div[class*='modal-dialog'] button[name='insertLink']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("span[class^='ne-profile-object-title'] a")
+;
 
 	
 	
