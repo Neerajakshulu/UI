@@ -95,6 +95,30 @@
 			<class name="suiteE.TestCase_E14"></class>
 		</classes>
 	</test>
+	
+	<test name="Test E15">
+		<classes>
+			<class name="suiteE.TestCase_E15"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E16">
+		<classes>
+			<class name="suiteE.TestCase_E16"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E17">
+		<classes>
+			<class name="suiteE.TestCase_E17"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E18">
+		<classes>
+			<class name="suiteE.TestCase_E18"></class>
+		</classes>
+	</test>
 
 </suite>
 
