@@ -106,7 +106,7 @@ public class TestCase_E10 extends TestBase {
 					.getText();
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 
 			// Unwatching the article
 			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
@@ -121,7 +121,7 @@ public class TestCase_E10 extends TestBase {
 			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();

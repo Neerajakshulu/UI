@@ -72,5 +72,29 @@
 		</classes>
 	</test>
 
+	<test name="Test E11">
+		<classes>
+			<class name="suiteE.TestCase_E11"></class>
+		</classes>
+	</test>
+
+	<test name="Test E12">
+		<classes>
+			<class name="suiteE.TestCase_E12"></class>
+		</classes>
+	</test>
+
+	<test name="Test E13">
+		<classes>
+			<class name="suiteE.TestCase_E13"></class>
+		</classes>
+	</test>
+
+	<test name="Test E14">
+		<classes>
+			<class name="suiteE.TestCase_E14"></class>
+		</classes>
+	</test>
+
 </suite>
 

@@ -105,7 +105,7 @@ public class TestCase_E9 extends TestBase {
 					.getText();
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 

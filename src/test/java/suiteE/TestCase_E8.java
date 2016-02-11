@@ -72,11 +72,12 @@ public class TestCase_E8 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			Thread.sleep(15000);
+			 createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
 			// Searching for article
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
@@ -114,9 +115,9 @@ public class TestCase_E8 extends TestBase {
 			// Select the first watch list from the model
 			waitForElementTobeClickable(ob,
 					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
-			Thread.sleep(4000);
 			// removing the item into watch list
 			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+			Thread.sleep(4000);
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
 			Thread.sleep(8000);
