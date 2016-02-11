@@ -19,7 +19,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E7 extends TestBase {
+public class TestCase_E17 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,14 +33,14 @@ public class TestCase_E7 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add an Article from Articles content search results page to a particular watchlist")
+						"Verify that user is able to add an Post from Record View page to a particular watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "articleName" })
-	public void testWatchArticleFromArticleContentSearchResult(String articleName) throws Exception {
+	@Parameters({ "postName" })
+	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -70,25 +70,28 @@ public class TestCase_E7 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
+			createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for article
+			// Searching for post
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 5);
-			ob.findElement(By.linkText("Articles")).click();
+			ob.findElement(By.linkText("Posts")).click();
 			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(8000);
+			// Watching the record
+			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
 			// Wait until select a watch list model loads
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
 			// Select the first watch list from the model
@@ -102,9 +105,9 @@ public class TestCase_E7 extends TestBase {
 					.getText();
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 			// Selecting the document name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
@@ -134,13 +137,12 @@ public class TestCase_E7 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL,
-						"User not able to add an article into watchlist from Article content search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_user_unable_to_add_article_into_watchlist_from_Article_content_searchResults_page")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
 
 			}
 
