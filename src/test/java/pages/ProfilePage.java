@@ -626,7 +626,9 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostCount(int postCount) throws Exception {
 		int totPosts=getPostsCount();
-		Assert.assertEquals(totPosts, postCount+1);
+		if(totPosts == postCount){
+			throw new Exception("Post count not getting updated");
+		}
 	}
 	
 	
