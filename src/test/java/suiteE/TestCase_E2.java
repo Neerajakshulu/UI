@@ -70,7 +70,7 @@ public class TestCase_E2 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
+			createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");

@@ -75,8 +75,9 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-
-			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
+			System.out.println(document_url);
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
@@ -97,11 +98,13 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.navigate().to(document_url);
+			
+			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(document_title);
+			//ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
 			Thread.sleep(5000);
@@ -127,7 +130,7 @@ public class TestCase_F3 extends TestBase {
 			String expected_text = fn2 + " " + ln2;
 
 			try {
-				Assert.assertTrue(text.contains(expected_text) && text.contains("TODAY")
+				Assert.assertTrue(text.contains("New comments") && text.contains(expected_text) && text.contains("TODAY")
 						&& text.contains(document_title) && text.contains("TestCase_F3:green tea"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {

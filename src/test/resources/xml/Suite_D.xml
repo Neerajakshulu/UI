@@ -125,7 +125,7 @@
 </test>
 
 <test name="Profile_Search_with_Country">
-	<parameter name="country" value="USA"></parameter>
+	<parameter name="country" value="United States of America"></parameter>
     <classes>
         <class name="suiteD.FindProfileWithCountryTest" ></class> 
     </classes>

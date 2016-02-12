@@ -125,6 +125,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString()), 180);
 		jsClick(ob,ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
+BrowserWaits.waitTime(6);
 	}
 
 	/**
