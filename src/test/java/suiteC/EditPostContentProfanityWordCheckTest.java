@@ -72,7 +72,8 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
@@ -129,7 +130,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostContent(profanityWord));
 		test.log(LogStatus.PASS, "Profanity words are masked for post content");
 	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Profanity words are masked for post content");
+		test.log(LogStatus.FAIL, "Profanity words are not masked for post content");
 		test.log(LogStatus.INFO, "Error--->" + t);
 		ErrorUtil.addVerificationFailure(t);
 		status = 2;
@@ -142,6 +143,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void logOut() throws Exception{
 		ProfilePage.clickOnPostCancelButton();
+		ProfilePage.clickOnPostCancelDiscardButton();
 		logout();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

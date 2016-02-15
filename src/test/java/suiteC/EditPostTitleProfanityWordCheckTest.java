@@ -72,7 +72,8 @@ public class EditPostTitleProfanityWordCheckTest extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
@@ -141,6 +142,7 @@ public class EditPostTitleProfanityWordCheckTest extends TestBase{
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void logOut() throws Exception{
 		ProfilePage.clickOnPostCancelButton();
+		ProfilePage.clickOnPostCancelDiscardButton();
 		logout();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

@@ -189,6 +189,41 @@
     </classes>
 </test>
 
+<test name="CreateAndPublishPost">
+    <classes>
+      <class name="suiteC.CreateAndPublishPost" ></class>
+    </classes>
+</test>
+
+<test name="AppreciateUnAppreciateOwnPost">
+    <classes>
+      <class name="suiteC.AppreciateUnAppreciateOwnPost" ></class>
+    </classes>
+</test>
+
+<test name="EditPostContentProfanityWordCheckTest">
+    <classes>
+      <class name="suiteC.EditPostContentProfanityWordCheckTest" ></class>
+    </classes>
+</test>
+
+<test name="EditPostTitleProfanityWordCheckTest">
+    <classes>
+      <class name="suiteC.EditPostTitleProfanityWordCheckTest" ></class>
+    </classes>
+</test>
+
+<test name="EditPostTitleMinMaxLengthValidation">
+    <classes>
+      <class name="suiteC.EditPostTitleMinMaxLengthValidation" ></class>
+    </classes>
+</test>
+
+<test name="AppreciateUnAppreciateOthersPost">
+    <classes>
+      <class name="suiteC.AppreciateUnAppreciateOthersPost" ></class>
+    </classes>
+</test>
 
 </suite>
 

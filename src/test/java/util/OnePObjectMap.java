@@ -84,11 +84,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("input[class^='post-title-input']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS("div[name='createdPostContent'] div[id^='taTextElement']"),
-	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg ng-binding'] p"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg'] p[class='ng-binding'] p"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("button[event-action='cancel']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[event-action='publish']"),
 	//HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
-	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading']"),
+	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading'] a"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS("div[modal-controller='PostDialogController'] button[id='editing']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_CSS("i[class^='webui-icon webui-icon-share']"),
@@ -104,7 +104,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS("input[placeholder='Add a Topic']"),
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li"), 
-	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class*='post-stat'] div[class='doc-info']:nth-child(2) span[class*='stat-count']"),
+	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class*='post-stat'] div[class='doc-info']:nth-child(3) span[class*='stat-count']"),
 	
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] button"),
 	
