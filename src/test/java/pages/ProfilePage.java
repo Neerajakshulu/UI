@@ -735,6 +735,58 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 	
+	/**
+	 * Method for Validate profile Primary Institution typeahead options should display while enter min 2 characters
+	 * @throws Exception, When Typeahead options not occured
+	 */
+	public static void primaryInstitutionTypeaheadOptions(String oneChar,String twoChar) throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		//enter single character check typeahead options should not display
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,oneChar);
+		BrowserWaits.waitTime(2);
+		BrowserWaits.waitUntilElementIsNotDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+		
+		//enter two characters check typeahead options should  display
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,twoChar);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+		BrowserWaits.waitTime(4);
+		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
+		if(!(piTypeaheads.size()>0))
+			throw new Exception("Primary Instituion Type ahead options are not displayed while enter two characters");
+			
+	}
+	/**
+	 * Method for Validate profile Primary Institution
+	 * @throws Exception, When Typeahead options not occured
+	 */
+	public static void selectProfilePITypeAhead(String typeAheadOption) throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,typeAheadOption);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+		BrowserWaits.waitTime(4);
+		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
+		for(WebElement typeAhead:piTypeaheads) {
+			if(StringUtils.containsIgnoreCase(typeAhead.getText(),typeAheadOption.trim()))
+			{
+				typeAhead.click();
+				BrowserWaits.waitTime(2);
+				break;
+			}
+		}
+		clickEditUpdate();
+	}
+	
+	public static boolean validateProfilePI(String typeAheadOption) throws Exception {
+		BrowserWaits.waitTime(6);
+		String actualPI=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
+		return (StringUtils.containsIgnoreCase(actualPI,typeAheadOption));
+	}
 	
 	
 }
