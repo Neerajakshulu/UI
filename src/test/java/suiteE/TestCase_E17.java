@@ -78,11 +78,7 @@ public class TestCase_E17 extends TestBase {
 			// Thread.sleep(15000);
 
 			// Searching for post
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 5);
-			ob.findElement(By.linkText("Posts")).click();
-			Thread.sleep(2000);
+			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
@@ -90,40 +86,15 @@ public class TestCase_E17 extends TestBase {
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(8000);
-			// Watching the record
-			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
-			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
-			// Select the first watch list from the model
-			waitForElementTobeClickable(ob,
-					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
-			// Adding the item into watch list
-			ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
-			Thread.sleep(4000);
-			// Selecting the watch list name
-			String selectedWatchlistName = ob.findElement(By.xpath("//h4[@class='select-watchlist-title ng-binding']"))
-					.getText();
-			// Closing the select a model
-			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(4000);
-			// Selecting the document name
+			
+			// Watching the post to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+
+			// Selecting the post name
 			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			// ob.findElement(By.xpath("//a[@href='#/watchlist']")).click();
-			Thread.sleep(8000);
-
-			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
-			// Finding the particular watch list and navigating to it
-			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
-					watchLists.get(i).click();
-					Thread.sleep(4000);
-					break;
-				}
-			}
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(selectedWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -140,9 +111,8 @@ public class TestCase_E17 extends TestBase {
 				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
 
 			}
 

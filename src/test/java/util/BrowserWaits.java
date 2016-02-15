@@ -140,6 +140,82 @@ public class BrowserWaits extends TestBase{
 		
 	}
 	
+	
+	
+	/**
+	 * wait until desired element is not displayed
+	 * @param locator
+	 */
+	public static void waitUntilElementIsNotDisplayed(Object elementName) {
+		if ((elementName instanceof Enum)) {
+			 locatorType=((Enum<?>)elementName).name();
+			 locatorText= elementName.toString();
+			}
+		
+		if(locatorType.endsWith("_CSS")){
+		try {
+			(new WebDriverWait(ob, time))
+					.until(new ExpectedCondition<Boolean>() {
+						public Boolean apply(WebDriver d) {
+							try {
+								final WebElement element = d
+										.findElement(By.cssSelector(locatorText));
+								return Boolean.valueOf(element != null
+										&& !element.isDisplayed());
+							} catch (Exception e) {
+								return Boolean.valueOf(false);
+							}
+						}
+					});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find element [Locator = {"
+					+ locatorText + "}], after waiting for " + time
+					+ "ms");
+		}
+	}else if(locatorType.endsWith("_XPATH")){
+		try {
+			(new WebDriverWait(ob, time))
+					.until(new ExpectedCondition<Boolean>() {
+						public Boolean apply(WebDriver d) {
+							try {
+								final WebElement element = d
+										.findElement(By.xpath(locatorText));
+								return Boolean.valueOf(element != null
+										&& !element.isDisplayed());
+							} catch (Exception e) {
+								return Boolean.valueOf(false);
+							}
+						}
+					});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find element [Locator = {"
+					+ locatorText + "}], after waiting for " + time
+					+ "ms");
+		}
+	} else if(locatorType.endsWith("_LINK")){
+		try {
+			(new WebDriverWait(ob, time))
+					.until(new ExpectedCondition<Boolean>() {
+						public Boolean apply(WebDriver d) {
+							try {
+								final WebElement element = d
+										.findElement(By.linkText((locatorText)));
+								return Boolean.valueOf(element != null
+										&& !element.isDisplayed());
+							} catch (Exception e) {
+								return Boolean.valueOf(false);
+							}
+						}
+					});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find element [Locator = {"
+					+ locatorText + "}], after waiting for " + time
+					+ "ms");
+		}
+	}
+		
+	}
+	
 	/**
 	 * Wait for Expected PageTitle
 	 * @param title
