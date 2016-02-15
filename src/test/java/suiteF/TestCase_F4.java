@@ -82,6 +82,7 @@ public class TestCase_F4 extends TestBase {
 			// String
 			// document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// System.out.println(document_title);
+			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
@@ -100,11 +101,12 @@ public class TestCase_F4 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.navigate().to(document_url);
+			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
+			//ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			
+			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
@@ -135,7 +137,9 @@ public class TestCase_F4 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-																								// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports													// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel

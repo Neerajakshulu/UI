@@ -30,6 +30,7 @@ public class ProfilePage  extends TestBase {
 	static String metadata[];
 	static int followingBefore;
 	static int followersBefore;
+	static String watchTextBefore;
 	
 	
 	/**
@@ -625,7 +626,9 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostCount(int postCount) throws Exception {
 		int totPosts=getPostsCount();
-		Assert.assertEquals(totPosts, postCount+1);
+		if(totPosts == postCount){
+			throw new Exception("Post count not getting updated");
+		}
 	}
 	
 	
@@ -675,9 +678,26 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	
 	
 	public static void addPostToWatchlist() throws Exception {
-		String postTitle=getFirstPostTitle();
+		watchTextBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
 		BrowserWaits.waitTime(2);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+		
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
+		BrowserWaits.waitTime(2);
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+		BrowserWaits.waitTime(2);
+	}
+	
+	
+	public static void postWatchLabelValidation() throws Exception {
+		String watchTextAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
+		System.out.println("watch text before-->"+watchTextBefore);
+		System.out.println("watch text after-->"+watchTextAfter);
+		if(watchTextBefore.equalsIgnoreCase(watchTextAfter)){
+			throw new Exception("post watch label not getting changed");
+		}
 	}
 	
 public static void addExternalLinkToPostContent(String url) throws Exception{

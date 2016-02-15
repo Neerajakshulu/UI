@@ -64,6 +64,7 @@ public class TestCase_F7 extends TestBase {
 			Thread.sleep(4000);
 
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			test.log(LogStatus.INFO, " user watching an article");
 			Thread.sleep(3000);
@@ -76,11 +77,12 @@ public class TestCase_F7 extends TestBase {
 			//Login with someother user and comment on the article in watchlist of the above user
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(3000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("cricket");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(10000);
+			ob.navigate().to(document_url);
+			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("cricket");
+			//ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("My Favourite Game");
 			Thread.sleep(5000);

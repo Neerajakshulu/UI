@@ -97,7 +97,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS("a[label='Share on Facebook']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS("a[label='Share on LinkedIn']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS("a[event-category='share-twitter-posts']"),
-	HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS("a[href='#/watch-list']"),
+	HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS("a[href='#/watchlist']"),
 	HOME_PROJECT_NEON_HEADER_HOME_LINK("Home"),
 	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post"),
 	
@@ -124,8 +124,9 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS("div[class*='modal-dialog'] button[name='insertLink']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("span[class^='ne-profile-object-title'] a")
-;
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("span[class^='ne-profile-object-title'] a"),
+	HOME_PROJECT_NEON_POST_WATCH_CSS("button[class='pull-left btn webui-icon-btn watchlist-toggle-button']"),
+	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']");
 
 	
 	
