@@ -561,33 +561,29 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
-	public static int getLengthOfTitleFromPostCreationModal() {
-		int count = ob
-				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
-				.getAttribute("value").length();
+public static int getLengthOfTitleFromPostCreationModal() {
+		
+		int count=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value").length();
 		return count;
 	}
 
-	public static void clickOnFirstPost() {
+	public static void clickOnFirstPost(){
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
-				.click();
+		jsClick(ob,ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0));
 	}
 
-	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) {
-		String title = ob
-				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
-				.getAttribute("value");
+	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) throws InterruptedException   {
+		BrowserWaits.waitTime(4);
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value");
+		
 		return (!title.contains(profanityWord) && title.contains("**"));
 	}
-
-	public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) {
-
-		String title = ob
-				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.getText();
-
+	
+public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) throws InterruptedException {
+		BrowserWaits.waitTime(4);
+		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString())).getText();
+		
 		return (!title.contains(profanityWord) && title.contains("**"));
 	}
 
@@ -704,14 +700,13 @@ public class ProfilePage  extends TestBase {
 		}
 	}
 	
-	public static void addExternalLinkToPostContent(String url) throws Exception {
-
+public static void addExternalLinkToPostContent(String url) throws Exception{
+		
 		BrowserWaits.waitTime(5);
-		BrowserWaits.waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
 		BrowserWaits.waitTime(5);
-		Alert alert = ob.switchTo().alert();
+		Alert alert=ob.switchTo().alert();
 		alert.sendKeys(url);
 		alert.accept();
 		BrowserWaits.waitTime(5);
@@ -719,66 +714,29 @@ public class ProfilePage  extends TestBase {
 
 	public static boolean validateProfileDetails(List<String> details) throws Exception {
 		BrowserWaits.waitTime(6);
-		List<String> expected = getProfileTitleAndMetadata();
+		List<String> expected=getProfileTitleAndMetadata();
+		
 		return (expected.toString().equals(details.toString()));
 	}
 	
-	
-	/**
-	 * Method for Validate profile Primary Institution
-	 * @throws Exception, When Typeahead options not occured
+	/*
+	* Method to click on cancel button in post creation modal
 	 */
-	public static void selectProfilePITypeAhead(String typeAheadOption) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,typeAheadOption);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
-		BrowserWaits.waitTime(4);
-		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
-		for(WebElement typeAhead:piTypeaheads) {
-			if(StringUtils.containsIgnoreCase(typeAhead.getText(),typeAheadOption.trim()))
-			{
-				typeAhead.click();
-				BrowserWaits.waitTime(2);
-				break;
-			}
-		}
-		clickEditUpdate();
+	public static void clickOnPostCancelDiscardButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH);
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH.toString()))
+				.click();
 	}
-	
-	
-	public static boolean validateProfilePI(String typeAheadOption) throws Exception {
-		BrowserWaits.waitTime(6);
-		String actualPI=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
-		return (StringUtils.containsIgnoreCase(actualPI,typeAheadOption));
-	}
-	
-	
-	/**
-	 * Method for Validate profile Primary Institution typeahead options should display while enter min 2 characters
-	 * @throws Exception, When Typeahead options not occured
-	 */
-	public static void primaryInstitutionTypeaheadOptions(String oneChar,String twoChar) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
-		//enter single character check typeahead options should not display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,oneChar);
-		BrowserWaits.waitTime(2);
-		BrowserWaits.waitUntilElementIsNotDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+
+	public static boolean validatePublishButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		
-		//enter two characters check typeahead options should  display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,twoChar);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
-		BrowserWaits.waitTime(4);
-		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
-		if(!(piTypeaheads.size()>0))
-			throw new Exception("Primary Instituion Type ahead options are not displayed while enter two characters");
-			
+		return 	ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString())).isEnabled();
+		
 	}
+	
+	
+	
 }
 
 	
