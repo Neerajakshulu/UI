@@ -120,5 +120,23 @@
 		</classes>
 	</test>
 
+	<test name="Test E19">
+		<classes>
+			<class name="suiteE.TestCase_E19"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E20">
+		<classes>
+			<class name="suiteE.TestCase_E20"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E21">
+		<classes>
+			<class name="suiteE.TestCase_E21"></class>
+		</classes>
+	</test>
+	
 </suite>
 

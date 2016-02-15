@@ -264,5 +264,19 @@
 		</classes>
 	</test>
 	
+	
+	<test name="Test B45">
+		<classes>
+			<class name="suiteB.TestCase_B45"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B46">
+		<classes>
+			<class name="suiteB.TestCase_B46"></class>
+		</classes>
+	</test>
+	
+	
 </suite>
 

@@ -179,7 +179,20 @@
     </classes>
 </test>
 
+<test name="Profile_PI_Typeahead">
+	<parameter name="piTypeahead" value="india"/>
+    <classes>
+        <class name="suiteD.ProfilePrimaryInstitutionTypeAheadTest" ></class> 
+    </classes>
+</test>
 
+<test name="Profile_PI_Typeahead_Options_Validation">
+	<parameter name="oneChar" value="I"/>
+	<parameter name="twoChar" value="N"/>
+    <classes>
+        <class name="suiteD.ProfilePrimaryInstitutionTypeAheadMinCharTest" ></class> 
+    </classes>
+</test>
 
 </suite>
 
