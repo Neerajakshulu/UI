@@ -72,11 +72,12 @@ public class TestCase_E19 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			Thread.sleep(15000);
+			createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
 			// Searching for article
 			selectSearchTypeFromDropDown("Articles");
@@ -84,7 +85,7 @@ public class TestCase_E19 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Getting watch button list for articles 
+			// Getting watch button list for articles
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			String selectedWatchlistName = null;

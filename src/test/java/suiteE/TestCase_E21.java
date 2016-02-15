@@ -72,11 +72,12 @@ public class TestCase_E21 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			Thread.sleep(15000);
+			createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
