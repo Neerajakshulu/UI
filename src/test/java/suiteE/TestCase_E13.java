@@ -19,7 +19,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E2 extends TestBase {
+public class TestCase_E13 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,14 +33,14 @@ public class TestCase_E2 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add a Patent from ALL content search results page to a particular watchlist")
+						"Verify that user is able to add an Patent from Record View page to a particular watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
 	@Parameters({ "patentName" })
-	public void testWatchPatentFromAllContentSearchResult(String patentName) throws Exception {
+	public void testWatchPatentFromPatentsRecordViewPage(String patentName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -77,18 +77,22 @@ public class TestCase_E2 extends TestBase {
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for article
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Watching a patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(8000);
+			
+			// Watching the patent to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			// Selecting the document name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-
+			// Selecting the patent name
+			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
 
@@ -104,13 +108,12 @@ public class TestCase_E2 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL,
-						"User not able to add an patent into watchlist from ALL content search results page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an patent into watchlist from Record view page");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_patent_into_watchlist_from_all_content_searchResults_page")));// screenshot
+								+ "_user_unable_to_add_patent_into_watchlist_Record_view_page")));// screenshot
 
 			}
 

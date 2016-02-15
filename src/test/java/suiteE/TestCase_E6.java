@@ -5,15 +5,19 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -29,13 +33,14 @@ public class TestCase_E6 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to watch an Post from ALL content search results page")
+		test = extent.startTest(var, "Verify that user is able to unwatch an Post from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE6() throws Exception {
+	@Parameters({ "postName" })
+	public void testUnwatchPostFromAllContentSearchResult(String postName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -53,9 +58,9 @@ public class TestCase_E6 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "\"Post ABC\"";
+			// String search_query = "biology";
 
-			// 1--->Making a new user
+			// Making a new user
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -64,43 +69,63 @@ public class TestCase_E6 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			// Create new user and login
-			createNewUser("mask", "man");
 
-			// 2--->Adding an post to watchlist
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
+
+			// Searching for post
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			String document_name = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			// Watching a post to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			// 3--->verifying that particular post has been added to
-			// watchlist
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(8000);
+			// Unwatching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			List<WebElement> watchlist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-			int count = 0;
-			for (int i = 0; i < watchlist.size(); i++) {
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(selectedWatchlistName);
 
-				if (watchlist.get(i).getText().equals(document_name))
-					count++;
+			try {
 
+				WebElement defaultMessage = ob
+						.findElement(By.xpath("//div[@class='row'][@ng-show='vm.supportingCopyIsVisible']"));
+
+				if (defaultMessage.isDisplayed()) {
+
+					test.log(LogStatus.PASS,
+							"User is able to remove an post from watchlist in ALL content search results page");// extent
+				} else {
+					test.log(LogStatus.FAIL,
+							"User not able to remove an post from watchlist in ALL content search results page");// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO,
+							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_unable_to_remove_post_from_watchlist_in_all_content_searchResults_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
+
+				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				int count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
 			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from search results page");// extent
-																													// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_post_into_watchlist_from_searchResults_page")));// screenshot
-
-			}
-
 			closeBrowser();
 
 		} catch (Throwable t) {

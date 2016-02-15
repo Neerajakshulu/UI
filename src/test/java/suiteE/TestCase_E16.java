@@ -5,7 +5,9 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +21,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E2 extends TestBase {
+public class TestCase_E16 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,15 +34,14 @@ public class TestCase_E2 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var,
-						"Verify that user is able to add a Patent from ALL content search results page to a particular watchlist")
+				.startTest(var, "Verify that user is able to unwatch an Post from Posts content search results page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "patentName" })
-	public void testWatchPatentFromAllContentSearchResult(String patentName) throws Exception {
+	@Parameters({ "postName" })
+	public void testUnwatchPostFromPostsContentSearchResult(String postName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -77,43 +78,55 @@ public class TestCase_E2 extends TestBase {
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for article
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			// Searching for post
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Watching a patent to a particular watch list
+			// Watching a post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			// Selecting the document name
+			// Unwatching a post to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+
+			// Selecting the post name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
+			try {
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				WebElement defaultMessage = ob
+						.findElement(By.xpath("//div[@class='row'][@ng-show='vm.supportingCopyIsVisible']"));
 
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
+				if (defaultMessage.isDisplayed()) {
 
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
+					test.log(LogStatus.PASS,
+							"User is able to remove an post from watchlist in Posts content search results page");// extent
+				} else {
+					test.log(LogStatus.FAIL,
+							"User not able to remove an post from watchlist in Posts content search results page");// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
+							+ "_user_unable_to_remove_post_from_watchlist_in_Posts_content_searchResults_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
 
+				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				int count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
 			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL,
-						"User not able to add an patent into watchlist from ALL content search results page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_patent_into_watchlist_from_all_content_searchResults_page")));// screenshot
-
-			}
-
 			closeBrowser();
 
 		} catch (Throwable t) {

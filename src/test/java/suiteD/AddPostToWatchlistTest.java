@@ -83,10 +83,10 @@ public class AddPostToWatchlistTest extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void profilePostTabWatchlistValidation() throws Exception  {
 			try {
-				test.log(LogStatus.INFO," Click Watchlist link on top of page");
-				HeaderFooterLinksPage.clickOnWatchLink();
-				test.log(LogStatus.INFO,"Clear all watchlists");
-				Watchlist.clearWatchlist();
+//				test.log(LogStatus.INFO," Click Watchlist link on top of page");
+//				HeaderFooterLinksPage.clickOnWatchLink();
+//				test.log(LogStatus.INFO,"Clear all watchlists");
+//				Watchlist.clearWatchlist();
 				test.log(LogStatus.INFO,"click on Profile image and go to my profile page");
 				HeaderFooterLinksPage.clickProfileImage();
 				ProfilePage.clickProfileLink();
@@ -95,9 +95,9 @@ public class AddPostToWatchlistTest extends TestBase {
 				String firstPost=ProfilePage.getFirstPostTitle();
 				test.log(LogStatus.INFO,"Add Post to your watchlist");
 				ProfilePage.addPostToWatchlist();
-				HeaderFooterLinksPage.clickOnWatchLink();
+				//HeaderFooterLinksPage.clickOnWatchLink();
 				test.log(LogStatus.INFO,"Validate Post is added to your watchlist");
-				Watchlist.validateWatchlist(firstPost);
+				ProfilePage.postWatchLabelValidation();
 				
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends");
 				LoginTR.logOutApp();

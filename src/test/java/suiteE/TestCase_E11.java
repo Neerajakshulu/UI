@@ -2,12 +2,14 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -29,13 +31,16 @@ public class TestCase_E11 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch an Article from Record View page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to add an Patent from Patents content search results page to a particular watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testcaseE2() throws Exception {
+	@Parameters({ "patentName" })
+	public void testWatchPatentFromPatentContentSearchResult(String patentName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -53,56 +58,61 @@ public class TestCase_E11 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "biology";
+			// String search_query = "biology";
 
+			// Making a new user
 			openBrowser();
-			maximizeWindow();
+			try {
+				maximizeWindow();
+			} catch (Throwable t) {
+
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 			clearCookies();
 
-			// 1)Create new user and login
 			createNewUser("mask", "man");
-			// Navigate to home page
-			/*ob.navigate().to(host);
-			Thread.sleep(8000);
-			// login using TR credentials
-			LoginTR.enterTRCredentials("prasenjit.patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();*/
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
-			// 2)Add an article to watchlist from record view page
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(8000);
-			// Watching the first article
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			Thread.sleep(4000);
-			// 3)Opening the record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			// Watching a patent to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			Thread.sleep(8000);
-			// 4)Unwatching the article from record view page
-			ob.findElement(By.xpath(OR.getProperty("document_watchlist_button"))).click();
-			Thread.sleep(2000);
-			// Opening the watchlist page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(8000);
+			// Selecting the patent name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-			// 5)Verify that particular article has been removed from watchlist
-			WebElement noResultPanel = ob.findElement(By.xpath("//div[@ng-show='noResults']"));
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(selectedWatchlistName);
 
-			if (!noResultPanel.isDisplayed()) {
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
-				test.log(LogStatus.FAIL, "User not able to unwatch an article from record view page");// extent
-																										// reports
+			int count = 0;
+			for (int i = 0; i < watchedItems.size(); i++) {
+
+				if (watchedItems.get(i).getText().equals(documentName))
+					count++;
+
+			}
+
+			if (!compareNumbers(1, count)) {
+
+				test.log(LogStatus.FAIL,
+						"User not able to add an patent into watchlist from Patents content search results page");// extent
+				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_unwatch_article_from_record_view_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_add_patent_into_watchlist_from_Patents_content_searchResults_page")));// screenshot
 
-			} else {
-				test.log(LogStatus.PASS, "User is able to unwatch an article from record view page");// extent
 			}
 
 			closeBrowser();
