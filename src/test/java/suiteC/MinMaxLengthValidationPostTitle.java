@@ -72,6 +72,7 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
@@ -102,10 +103,10 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+minCharCount);
 	
 	try {
-		Assert.assertTrue(ProfilePage.validatePostErrorMessage(titleMinError));
-		test.log(LogStatus.PASS, "Proper error message is displayed for min char count of post title");
+		Assert.assertFalse(ProfilePage.validatePublishButton());
+		test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "Proper error message is not displayed for min char count of post title");
+		test.log(LogStatus.PASS, "Publish button is not disabled for the post content less than min character count");
 		test.log(LogStatus.INFO, "Error--->" + t);
 		ErrorUtil.addVerificationFailure(t);
 		status = 2;
@@ -128,6 +129,7 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 
 	}
 	ProfilePage.clickOnPostCancelButton();
+	ProfilePage.clickOnPostCancelDiscardButton();
 	logout();
 	closeBrowser();
 	}
