@@ -823,6 +823,33 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		return (actualCountry.trim().equalsIgnoreCase(country));
 	} 
 	
+	
+	/**
+	 * Method for Validate profile Country typeahead options should display while enter min 2 characters
+	 * @throws Exception, When Typeahead options not occurred
+	 */
+	public static void countryTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+		//enter single character check typeahead options should not display
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,oneChar);
+		BrowserWaits.waitTime(2);
+		List<WebElement> countryTyeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
+		if(countryTyeahead.size()>0){
+			throw new Exception("Country typeahead options should display while enter min 2 chars");
+		}
+
+		//enter two characters check typeahead options should  display
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,twoChar);
+		BrowserWaits.waitTime(4);
+		List<WebElement> piTypeaheads=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
+		if(!(piTypeaheads.size()>0))
+			throw new Exception("Country Type ahead options are not displayed while enter two characters");
+			
+	}
+	
 }
 
 	
