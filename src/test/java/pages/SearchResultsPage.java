@@ -73,7 +73,7 @@ public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
 				title = records.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
 						.getText();
-				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by User")) {
+				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member")) {
 					profileName=records.get(i)
 							.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_profile_name_css")))
 							.getText().trim();
