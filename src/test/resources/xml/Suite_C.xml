@@ -225,5 +225,41 @@
     </classes>
 </test>
 
+<test name="CreateAndEditPost">
+    <classes>
+      <class name="suiteC.CreateAndEditPost" ></class>
+    </classes>
+</test>
+
+<test name="VerifyPostRecordDetails">
+    <classes>
+      <class name="suiteC.VerifyPostRecordDetails" ></class>
+    </classes>
+</test>
+
+<test name="SeacrhAndViewOwnPost">
+    <classes>
+      <class name="suiteC.SeacrhAndViewOwnPost" ></class>
+    </classes>
+</test>
+
+<test name="SeacrhAndViewOthersPost">
+    <classes>
+      <class name="suiteC.SeacrhAndViewOthersPost" ></class>
+    </classes>
+</test>
+
+<test name="CancelPostCreation">
+    <classes>
+      <class name="suiteC.CancelPostCreation" ></class>
+    </classes>
+</test>
+
+<test name="CreatePostWithExternalLink">
+    <classes>
+      <class name="suiteC.CreatePostWithExternalLink" ></class>
+    </classes>
+</test>
+
 </suite>
 

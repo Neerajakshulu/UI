@@ -73,6 +73,7 @@ public class CancelPostCreation extends TestBase{
 			ProfilePage.enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
 			ProfilePage.clickOnPostCancelButton();
+			ProfilePage.clickOnPostCancelDiscardButton();
 			test.log(LogStatus.INFO, "Cancelled the post");
 			int postCountAfter=ProfilePage.getPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);

@@ -653,7 +653,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	public static void  clickFirstPostTitle() throws Exception {
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).findElement(By.tagName("a")).click();
+		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).click();
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 	}
 	

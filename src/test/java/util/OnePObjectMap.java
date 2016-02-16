@@ -66,7 +66,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TITLE_CSS("h2[class^='profile-name']"),
 	HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS("h6[ng-show='role']"),
 	HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS("h6[ng-show='primaryInstitution']"),
-	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("button[ng-click^='startEditing']"),
+	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("h6[ng-show='location']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CSS("span[class='webui-icon webui-icon-edit']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS("input[ng-model='title']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model='role']"),
