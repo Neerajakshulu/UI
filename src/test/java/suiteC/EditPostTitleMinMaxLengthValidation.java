@@ -73,6 +73,7 @@ public class EditPostTitleMinMaxLengthValidation extends TestBase{
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
@@ -111,7 +112,7 @@ public class EditPostTitleMinMaxLengthValidation extends TestBase{
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+minCharCount);
 	
 	try {
-		Assert.assertTrue(ProfilePage.validatePostErrorMessage(titleMinError));
+		Assert.assertFalse(ProfilePage.validatePublishButton());
 		test.log(LogStatus.PASS, "Proper error message is displayed for min char count of post title");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Proper error message is not displayed for min char count of post title");
@@ -137,6 +138,7 @@ public class EditPostTitleMinMaxLengthValidation extends TestBase{
 
 	}
 	ProfilePage.clickOnPostCancelButton();
+	ProfilePage.clickOnPostCancelDiscardButton();
 	logout();
 	closeBrowser();
 	}

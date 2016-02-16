@@ -19,6 +19,7 @@ public class PostRecordViewPage extends TestBase{
 	 * Method to click on SHARE button in post record view
 	 */
 	public static void clickOnShareButton() {
+		
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()), 180);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))

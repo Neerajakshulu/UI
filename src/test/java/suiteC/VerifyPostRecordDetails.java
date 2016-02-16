@@ -63,11 +63,11 @@ public class VerifyPostRecordDetails extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("posts");
+			HeaderFooterLinksPage.searchForText("test");
 			SearchResultsPage.clickOnPostTab();
 			List<String> details=SearchResultsPage.getAuthorDetailsOfPost();
 			String postTitle=details.get(0);

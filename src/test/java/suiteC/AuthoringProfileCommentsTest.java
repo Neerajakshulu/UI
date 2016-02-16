@@ -140,7 +140,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 		waitUntilText("Comments"); 
 		scrollingToElementofAPage();
 		String commentsCount=ob.findElement(By.cssSelector("a[data-event-category='profilecomments'] span[class='ng-binding']:nth-child(2)")).getText();
-		int totalComments=Integer.parseInt(commentsCount);
+		int totalComments=Integer.parseInt(commentsCount.replace(",", "").trim());
 		return totalComments;
 	}
 	

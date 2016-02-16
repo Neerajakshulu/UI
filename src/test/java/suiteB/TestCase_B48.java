@@ -19,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B46 extends TestBase {
+public class TestCase_B48 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +34,13 @@ public class TestCase_B46 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that ALL content type is selected in the search drop down by default")
+						"Verify that ALL option is selected in the left navigation pane by default when user searches using ALL option in the search drop down")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB46() throws Exception {
+	public void testcaseB48() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -73,22 +73,28 @@ public class TestCase_B46 extends TestBase {
 			login();
 			Thread.sleep(15000);
 			
-			String text=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
-//			System.out.println(text);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
 			
-			if(!compareStrings("All",text)){
+			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			System.out.println(text);
+			
+			if(!StringContains(text,"All")){
 				
-				test.log(LogStatus.FAIL, "ALL is not selected as the default content type in search drop down");// extent report
+				test.log(LogStatus.FAIL, "ALL option not selected in the left navigation pane by default when user searches using ALL option in the search drop down");// extent report
             	status = 2;// excel
             	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_ALL_option_not_selected_as_default_content_type_in_search_drop_down")));// screenshot
+            			captureScreenshot(this.getClass().getSimpleName() + "_ALL_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_ALL_option_in_the_search_drop_down")));// screenshot
 
+				
 			}
-			
 			
 			closeBrowser();
 
-		} catch (Throwable t) {
+		} 
+		
+		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
