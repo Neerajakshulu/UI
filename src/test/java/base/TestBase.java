@@ -157,7 +157,7 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/* public void openBrowser(){
+	 /*public void openBrowser(){
 	
 	 if(CONFIG.getProperty("browserType").equals("FF")){
 	 ob = new FirefoxDriver();
@@ -206,8 +206,8 @@ public class TestBase {
 	 System.out.println("Page Load Timeout not supported in safari driver");
 	 }
 	
-	 }
-*/
+	 }*/
+
 	// Closing the browser
 	public void closeBrowser() {
 
@@ -879,7 +879,7 @@ public class TestBase {
 				.getText();
 		// Closing the select a model
 		ob.findElement(By.xpath("//button[@class='close']")).click();
-		Thread.sleep(8000);
+		Thread.sleep(4000);
 		return selectedWatchlistName;
 	}
 

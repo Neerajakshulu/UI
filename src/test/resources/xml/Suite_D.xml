@@ -194,5 +194,13 @@
     </classes>
 </test>
 
+<test name="Profile_Country_Typeahead">
+	<parameter name="countryTypeahead" value="In"/>
+	<parameter name="fullCountry" value="India"/>
+    <classes>
+        <class name="suiteD.ProfileTypeaheadCountySelectTest" ></class> 
+    </classes>
+</test>
+
 </suite>
 

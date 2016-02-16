@@ -59,8 +59,8 @@ public class CancelPostCreation extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
@@ -73,6 +73,7 @@ public class CancelPostCreation extends TestBase{
 			ProfilePage.enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
 			ProfilePage.clickOnPostCancelButton();
+			ProfilePage.clickOnPostCancelDiscardButton();
 			test.log(LogStatus.INFO, "Cancelled the post");
 			int postCountAfter=ProfilePage.getPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);
