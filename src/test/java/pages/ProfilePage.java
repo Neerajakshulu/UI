@@ -823,7 +823,6 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		return (actualCountry.trim().equalsIgnoreCase(country));
 	} 
 	
-	
 }
 
 	
