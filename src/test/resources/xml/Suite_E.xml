@@ -138,5 +138,23 @@
 		</classes>
 	</test>
 	
+	<test name="Test E22">
+		<classes>
+			<class name="suiteE.TestCase_E22"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E23">
+		<classes>
+			<class name="suiteE.TestCase_E23"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E24">
+		<classes>
+			<class name="suiteE.TestCase_E24"></class>
+		</classes>
+	</test>
+	
 </suite>
 
