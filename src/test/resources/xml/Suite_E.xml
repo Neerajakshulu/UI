@@ -156,5 +156,17 @@
 		</classes>
 	</test>
 	
+	<test name="Test E25">
+		<classes>
+			<class name="suiteE.TestCase_E25"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E26">
+		<classes>
+			<class name="suiteE.TestCase_E26"></class>
+		</classes>
+	</test>
+	
 </suite>
 
