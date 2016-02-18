@@ -2,16 +2,12 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,7 +17,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E22 extends TestBase {
+public class TestCase_E27 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,14 +29,15 @@ public class TestCase_E22 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch an Article from watchlist page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "articleName" })
-	public void testUnwathArticlesFromWatchlist(String articleName) throws Exception {
+	public void testEditWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -70,55 +67,58 @@ public class TestCase_E22 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			 createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
-
-			// Getting watch button list for articles
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 10 articles to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
-			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-			// Getting the first result title
-			String firstDocumentTitle = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
-
-			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(4000);
-			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
-			int count = 0;
-			String documentTitle;
-			for (WebElement document : documentList) {
-				documentTitle = document.getText();
-				if (documentTitle.equals(firstDocumentTitle))
-					count++;
-			}
+			// Creating a new watch list
+			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+			Thread.sleep(2000);
+			String newWatchlistName = "New Watchlist";
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+					.sendKeys("This is my newly created watch list");
+			// Clicking on Create button
+			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+			Thread.sleep(4000);
 
+			// Editing the first watch list
+			String watchlistName = "Updated Watchlist";
+			String watchlistDescription = "This is my watchlist";
+			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
+			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
+			Thread.sleep(4000);
+			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
+			String updatedWatchlistDescription = ob
+					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
+
+			// Compare watch list name
 			try {
-				Assert.assertEquals(0, count);
-				test.log(LogStatus.PASS, "User is able to unwatch an Article from watchlist page");
+				Assert.assertEquals(watchlistName, updatedWatchlistName);
+				test.log(LogStatus.PASS, "User is able to update watch list name");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to unwatch an Article from watchlist page");
+				test.log(LogStatus.FAIL, "User is not able to update watch list name");
+			}
+
+			// Compare watch list description
+			try {
+				Assert.assertEquals(watchlistDescription, updatedWatchlistDescription);
+				test.log(LogStatus.PASS, "User is able to update watch list description");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is not able to update watch list description");
 			}
 
 			closeBrowser();

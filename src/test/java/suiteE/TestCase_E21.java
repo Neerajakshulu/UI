@@ -123,7 +123,7 @@ public class TestCase_E21 extends TestBase {
 				}
 				test.log(LogStatus.PASS,
 						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-			} catch (Exception e) {
+			} catch (Error e) {
 
 				ErrorUtil.addVerificationFailure(e);
 				test.log(LogStatus.FAIL,

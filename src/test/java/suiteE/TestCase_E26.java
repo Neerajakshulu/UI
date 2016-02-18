@@ -32,7 +32,7 @@ public class TestCase_E26 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to create a new watchlist||Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist")
+						"Verify that user is able to create a new watchlist")
 				.assignCategory("Suite E");
 
 	}
@@ -84,7 +84,7 @@ public class TestCase_E26 extends TestBase {
 			String newWatchlistName = "New Watchlist";
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-					.sendKeys("This is my newly creted watch list");
+					.sendKeys("This is my newly created watch list");
 			// Clicking on Create button
 			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 			Thread.sleep(4000);
@@ -102,9 +102,9 @@ public class TestCase_E26 extends TestBase {
 			try {
 				Assert.assertEquals(1, count);
 				test.log(LogStatus.PASS, "User is able to create new watch list with name and description");
-			} catch (Exception e) {
+			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is able to create new watch list");
+				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
 			}
 
 			closeBrowser();

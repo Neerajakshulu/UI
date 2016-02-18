@@ -116,7 +116,7 @@ public class TestCase_E23 extends TestBase {
 			try {
 				Assert.assertEquals(0, count);
 				test.log(LogStatus.PASS, "User is able to unwatch a Patent from watchlist page");
-			} catch (Exception e) {
+			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is unable to unwatch a Patent from watchlist page");
 			}

@@ -123,7 +123,7 @@ public class TestCase_E25 extends TestBase {
 			try {
 				Assert.assertEquals(itemCount, 5);
 				test.log(LogStatus.PASS, "Items counts is decreased by 5 after unwatching 5 item");
-			} catch (Exception e) {
+			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "Items counts is not decreased by 5 after unwatching 5 item");
 			}

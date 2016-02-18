@@ -168,5 +168,11 @@
 		</classes>
 	</test>
 	
+	<test name="Test E27">
+		<classes>
+			<class name="suiteE.TestCase_E27"></class>
+		</classes>
+	</test>
+	
 </suite>
 
