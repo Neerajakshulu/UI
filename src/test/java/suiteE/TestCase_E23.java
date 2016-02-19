@@ -21,7 +21,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E21 extends TestBase {
+public class TestCase_E23 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,16 +33,14 @@ public class TestCase_E21 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+		test = extent.startTest(var, "Verify that user is able to unwatch a Patent from watchlist page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
+	@Parameters({ "patentName" })
+	public void testUnwathPatentsFromWatchlist(String patentName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -79,17 +77,17 @@ public class TestCase_E21 extends TestBase {
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			// Searching for patent
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Getting watch button list for posts
+			// Getting watch button list for patents
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
+			// Watching 10 patents to a particular watch list
 			for (WebElement watchButton : watchButtonList) {
 
 				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
@@ -99,40 +97,28 @@ public class TestCase_E21 extends TestBase {
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
+			// Getting the first result title
+			String firstDocumentTitle = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
 
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelLikes = "Likes";
-			String expectedLabelComments = "Comments";
+			// Unwatching the first document from results
+			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			Thread.sleep(4000);
+			// Checking if first document still exists in the watch list
+			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
+			int count = 0;
+			String documentTitle;
+			for (WebElement document : documentList) {
+				documentTitle = document.getText();
+				if (documentTitle.equals(firstDocumentTitle))
+					count++;
+			}
 
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelLikes);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+				Assert.assertEquals(0, count);
+				test.log(LogStatus.PASS, "User is able to unwatch a Patent from watchlist page");
 			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+				status = 2;
+				test.log(LogStatus.FAIL, "User is unable to unwatch a Patent from watchlist page");
 			}
 
 			closeBrowser();

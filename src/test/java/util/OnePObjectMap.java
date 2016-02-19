@@ -128,9 +128,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_POST_WATCH_CSS("button[class='pull-left btn webui-icon-btn watchlist-toggle-button']"),
 	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
-	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]");
-	
-	
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
+	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"); 
 
 	
 	

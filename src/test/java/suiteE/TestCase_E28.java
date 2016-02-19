@@ -5,23 +5,20 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E21 extends TestBase {
+public class TestCase_E28 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,16 +30,12 @@ public class TestCase_E21 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
-				.assignCategory("Suite E");
+		test = extent.startTest(var, "Verify that user is able to create multiple watchlist").assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
+	public void testCreateMultipleWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -79,60 +72,32 @@ public class TestCase_E21 extends TestBase {
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+			// Creating a new watch list
+			String newWatchlistName = "New Watchlist";
+			for (int i = 1; i <= 5; i++) {
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				Thread.sleep(2000);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list");
+				// Clicking on Create button
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				Thread.sleep(4000);
 			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelLikes = "Likes";
-			String expectedLabelComments = "Comments";
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			// Finding the newly created watch list
+			int noOfWatchList = watchLists.size();
 
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelLikes);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+				Assert.assertEquals(noOfWatchList, 5);
+				test.log(LogStatus.PASS, "User is able to create multiple watch list");
 			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+				status = 2;
+				test.log(LogStatus.FAIL, "User is unable to create multiple watch list");
 			}
 
 			closeBrowser();

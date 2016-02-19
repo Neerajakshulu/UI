@@ -261,5 +261,36 @@
     </classes>
 </test>
 
+
+<test name="MinMaxLengthValidationPostTitle">
+    <classes>
+      <class name="suiteC.MinMaxLengthValidationPostTitle" ></class>
+    </classes>
+</test>
+
+<test name="MinMaxLenValidationPostContent">
+    <classes>
+      <class name="suiteC.MinMaxLenValidationPostContent" ></class>
+    </classes>
+</test>
+
+<test name="EditCommentsMinMaxValidationTest">
+    <classes>
+      <class name="suiteC.EditCommentsMinMaxValidationTest" ></class>
+    </classes>
+</test>
+
+<test name="PostContentProfanityWordCheckTest">
+    <classes>
+      <class name="suiteC.PostContentProfanityWordCheckTest" ></class>
+    </classes>
+</test>
+
+
+<test name="PostTitleProfanityWordCheckTest">
+    <classes>
+      <class name="suiteC.PostTitleProfanityWordCheckTest" ></class>
+    </classes>
+</test>
 </suite>
 
