@@ -18,7 +18,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E26 extends TestBase {
+public class TestCase_E28 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,15 +30,12 @@ public class TestCase_E26 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to create a new watchlist||Verify that user is able to see his private watchlists on his own profile page")
-				.assignCategory("Suite E");
+		test = extent.startTest(var, "Verify that user is able to create multiple watchlist").assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testCreateWatchList() throws Exception {
+	public void testCreateMultipleWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -79,51 +76,28 @@ public class TestCase_E26 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 
 			// Creating a new watch list
-			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-			Thread.sleep(2000);
 			String newWatchlistName = "New Watchlist";
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-					.sendKeys("This is my newly created watch list");
-			// Clicking on Create button
-			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-			Thread.sleep(4000);
+			for (int i = 1; i <= 5; i++) {
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				Thread.sleep(2000);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list");
+				// Clicking on Create button
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				Thread.sleep(4000);
+			}
 			// Getting all the watch lists
 			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
 			// Finding the newly created watch list
-			int count = 0;
-			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
-					count++;
-					break;
-				}
-			}
+			int noOfWatchList = watchLists.size();
 
 			try {
-				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to create new watch list with name and description");
+				Assert.assertEquals(noOfWatchList, 5);
+				test.log(LogStatus.PASS, "User is able to create multiple watch list");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
-			}
-
-			// Navigating to the private watch list tab
-			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
-			watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
-			count = 0;
-			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
-					count++;
-					break;
-				}
-			}
-
-			try {
-				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to see private watch list in own profile page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to see private watch list in own profile page");
+				test.log(LogStatus.FAIL, "User is unable to create multiple watch list");
 			}
 
 			closeBrowser();

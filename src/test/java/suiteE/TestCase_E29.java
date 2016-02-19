@@ -18,7 +18,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E26 extends TestBase {
+public class TestCase_E29 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,15 +30,13 @@ public class TestCase_E26 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to create a new watchlist||Verify that user is able to see his private watchlists on his own profile page")
+		test = extent.startTest(var, "Verify that user is able to share watchlist publically")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testCreateWatchList() throws Exception {
+	public void testSharedWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -85,6 +83,9 @@ public class TestCase_E26 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 					.sendKeys("This is my newly created watch list");
+
+			// Sharing the watch list
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 			// Clicking on Create button
 			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 			Thread.sleep(4000);
@@ -101,16 +102,15 @@ public class TestCase_E26 extends TestBase {
 
 			try {
 				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to create new watch list with name and description");
+				test.log(LogStatus.PASS, "User is able to create public watch list with name and description");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
+				test.log(LogStatus.FAIL, "User is unable to create public watch list with name and description");
 			}
-
-			// Navigating to the private watch list tab
-			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
+			// Navigating to the public watch list tab
+			ob.findElement(By.xpath(OR.getProperty("watchListPublicTabLink"))).click();
 			watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
-			count = 0;
+			count=0;
 			for (int i = 0; i < watchLists.size(); i++) {
 				if (watchLists.get(i).getText().equals(newWatchlistName)) {
 					count++;
@@ -120,10 +120,10 @@ public class TestCase_E26 extends TestBase {
 
 			try {
 				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to see private watch list in own profile page");
+				test.log(LogStatus.PASS, "User is able to see public watch list in own profile page");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to see private watch list in own profile page");
+				test.log(LogStatus.FAIL, "User is unable to see public watch list in own profile page");
 			}
 
 			closeBrowser();

@@ -95,25 +95,25 @@
 			<class name="suiteE.TestCase_E14"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E15">
 		<classes>
 			<class name="suiteE.TestCase_E15"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E16">
 		<classes>
 			<class name="suiteE.TestCase_E16"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E17">
 		<classes>
 			<class name="suiteE.TestCase_E17"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E18">
 		<classes>
 			<class name="suiteE.TestCase_E18"></class>
@@ -125,54 +125,66 @@
 			<class name="suiteE.TestCase_E19"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E20">
 		<classes>
 			<class name="suiteE.TestCase_E20"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E21">
 		<classes>
 			<class name="suiteE.TestCase_E21"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E22">
 		<classes>
 			<class name="suiteE.TestCase_E22"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E23">
 		<classes>
 			<class name="suiteE.TestCase_E23"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E24">
 		<classes>
 			<class name="suiteE.TestCase_E24"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E25">
 		<classes>
 			<class name="suiteE.TestCase_E25"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E26">
 		<classes>
 			<class name="suiteE.TestCase_E26"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E27">
 		<classes>
 			<class name="suiteE.TestCase_E27"></class>
 		</classes>
 	</test>
+
+	<test name="Test E28">
+		<classes>
+			<class name="suiteE.TestCase_E28"></class>
+		</classes>
+	</test>
 	
+	<test name="Test E29">
+		<classes>
+			<class name="suiteE.TestCase_E29"></class>
+		</classes>
+	</test>
+
 </suite>
 
