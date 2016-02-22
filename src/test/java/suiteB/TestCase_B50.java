@@ -19,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B45 extends TestBase {
+public class TestCase_B50 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +34,13 @@ public class TestCase_B45 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following  content type options are present in the search drop down: a)All b)Articles c)Patents d)People e)Posts")
+						"Verify that ARTICLES option is selected in the left navigation pane by default when user searches using ARTICLES option in the search drop down")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB45() throws Exception {
+	public void testcaseB50() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -75,40 +75,31 @@ public class TestCase_B45 extends TestBase {
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
 			Thread.sleep(2000);
-			
-			WebElement dd=ob.findElement(By.xpath("//ul[@class='dropdown-menu']"));
+			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
 			Thread.sleep(2000);
-			List<WebElement> dd_options=dd.findElements(By.tagName("a"));
 			
-			boolean cond1=dd_options.get(0).getText().equals("All");
-			boolean cond2=dd_options.get(1).getText().equals("Articles");
-			boolean cond3=dd_options.get(2).getText().equals("Patents");
-			boolean cond4=dd_options.get(3).getText().equals("People");
-			boolean cond5=dd_options.get(4).getText().equals("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
 			
-			boolean masterCond=cond1 && cond2 && cond3 && cond4 && cond5;
-			System.out.println(masterCond);
+			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			System.out.println(text);
 			
-			try{
-            	
-            	Assert.assertTrue(masterCond);
-            	test.log(LogStatus.PASS, "All content type options getting displayed in the search drop down");// extent report
-            }
-            
-            catch(Throwable t){
-            	
-            	test.log(LogStatus.FAIL, "Some content type options not getting displayed in the serach drop down");// extent report
-
-            	ErrorUtil.addVerificationFailure(t);// testng
+			if(!StringContains(text,"Articles")){
+				
+				test.log(LogStatus.FAIL, "ARTICLES option not selected in the left navigation pane by default when user searches using ARTICLES option in the search drop down");// extent report
             	status = 2;// excel
             	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_some_content_type_options_not_present_in_search_drop_down")));// screenshot
+            			captureScreenshot(this.getClass().getSimpleName() + "_ARTICLES_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_ARTICLES_option_in_the_search_drop_down")));// screenshot
 
-            }
+				
+			}
 			
 			closeBrowser();
 
-		} catch (Throwable t) {
+		} 
+		
+		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report

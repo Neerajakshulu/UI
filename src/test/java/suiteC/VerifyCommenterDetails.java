@@ -126,6 +126,14 @@ public class VerifyCommenterDetails extends TestBase{
 			List<String> profileDetailsInProfile=new ArrayList<String>();
 			for(WebElement we:details){
 				profileDetailsInProfile.add(we.getText().trim());
+				
+			}
+			
+			while(true){
+				
+				if(profileDetailsInProfile.contains(""))
+					profileDetailsInProfile.remove("");
+				else break;
 			}
 			try {
 				

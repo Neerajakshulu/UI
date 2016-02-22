@@ -289,6 +289,37 @@
 		</classes>
 	</test>
 	
+	<test name="Test B49">
+		<classes>
+			<class name="suiteB.TestCase_B49"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B50">
+		<classes>
+			<class name="suiteB.TestCase_B50"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B51">
+		<classes>
+			<class name="suiteB.TestCase_B51"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B52">
+		<classes>
+			<class name="suiteB.TestCase_B52"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B53">
+		<classes>
+			<class name="suiteB.TestCase_B53"></class>
+		</classes>
+	</test>
+	
+	
 	
 </suite>
 

@@ -2,8 +2,10 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -17,7 +19,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E27 extends TestBase {
+public class TestCase_E32 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,15 +31,13 @@ public class TestCase_E27 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist||Verify that watchlist name is customizable")
+		test = extent.startTest(var, "Verify that every user watchlist is private by default")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testEditWatchList() throws Exception {
+	public void testDefaultWatchlistStatus() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -67,16 +67,15 @@ public class TestCase_E27 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
+			// createNewUser("mask", "man");
+			ob.navigate().to(host);
+			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();
+			Thread.sleep(15000);
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(4000);
+
 			// Creating a new watch list
 			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 			Thread.sleep(2000);
@@ -87,38 +86,32 @@ public class TestCase_E27 extends TestBase {
 			// Clicking on Create button
 			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 			Thread.sleep(4000);
-
-			// Editing the first watch list
-			String watchlistName = "Updated Watchlist";
-			String watchlistDescription = "This is my watchlist";
-			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
-			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-			Thread.sleep(4000);
-			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
-			String updatedWatchlistDescription = ob
-					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
-
-			// Compare watch list name
-			try {
-				Assert.assertEquals(watchlistName, updatedWatchlistName);
-				test.log(LogStatus.PASS, "User is able to update watch list name");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is not able to update watch list name");
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			// Finding the newly created watch list
+			int count = 0;
+			for (int i = 0; i < watchLists.size(); i++) {
+				if (watchLists.get(i).getText().equals(newWatchlistName)) {
+					count++;
+					break;
+				}
 			}
 
-			// Compare watch list description
+			// Check if user is able to create new watch list
 			try {
-				Assert.assertEquals(watchlistDescription, updatedWatchlistDescription);
-				test.log(LogStatus.PASS, "User is able to update watch list description");
+				Assert.assertEquals(1, count);
+				test.log(LogStatus.INFO, "User is able to create new watch list with name and description");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is not able to update watch list description");
+				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
+			}
+
+			// Check if watch list is private by default
+			boolean watchListStatus = ob.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected();
+			if (!watchListStatus) {
+				test.log(LogStatus.PASS, "User watchlist is private by default");
+			} else {
+				test.log(LogStatus.FAIL, "User watchlist is not private by default");
 			}
 
 			closeBrowser();

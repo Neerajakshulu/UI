@@ -19,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B45 extends TestBase {
+public class TestCase_B49 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +34,13 @@ public class TestCase_B45 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following  content type options are present in the search drop down: a)All b)Articles c)Patents d)People e)Posts")
+						"Verify that search results related to all content types get displayed in the summary page when user searches using ALL option in search drop down")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB45() throws Exception {
+	public void testcaseB49() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -73,42 +73,70 @@ public class TestCase_B45 extends TestBase {
 			login();
 			Thread.sleep(15000);
 			
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			Thread.sleep(2000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
 			
-			WebElement dd=ob.findElement(By.xpath("//ul[@class='dropdown-menu']"));
-			Thread.sleep(2000);
-			List<WebElement> dd_options=dd.findElements(By.tagName("a"));
+			String all_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]")).getText();
+			int all_num=Integer.parseInt(all_text.substring(3,4));
+			System.out.println(all_num);
+			boolean cond1=all_num!=0;
+			System.out.println(cond1);
 			
-			boolean cond1=dd_options.get(0).getText().equals("All");
-			boolean cond2=dd_options.get(1).getText().equals("Articles");
-			boolean cond3=dd_options.get(2).getText().equals("Patents");
-			boolean cond4=dd_options.get(3).getText().equals("People");
-			boolean cond5=dd_options.get(4).getText().equals("Posts");
+			String articles_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]")).getText();
+			int articles_num=Integer.parseInt(articles_text.substring(8,9));
+			System.out.println(articles_num);
+			boolean cond2=articles_num!=0;
+			System.out.println(cond2);
 			
-			boolean masterCond=cond1 && cond2 && cond3 && cond4 && cond5;
-			System.out.println(masterCond);
+			String patents_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]")).getText();
+			int patents_num=Integer.parseInt(patents_text.substring(7,8));
+			System.out.println(patents_num);
+			boolean cond3=patents_num!=0;
+			System.out.println(cond3);
+			
+			String people_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]")).getText();
+			int people_num=Integer.parseInt(people_text.substring(6,7));
+			System.out.println(people_num);
+			boolean cond4=people_num!=0;
+			System.out.println(cond4);
+			
+			
+			String posts_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]")).getText();
+			int posts_num=Integer.parseInt(posts_text.substring(5,6));
+			System.out.println(posts_num);
+			boolean cond5=posts_num!=0;
+			System.out.println(cond5);
+			
+			boolean master_cond=cond1 && cond2 && cond3 && cond4 && cond5;
+			System.out.println("Master condition="+master_cond);
 			
 			try{
-            	
-            	Assert.assertTrue(masterCond);
-            	test.log(LogStatus.PASS, "All content type options getting displayed in the search drop down");// extent report
-            }
-            
-            catch(Throwable t){
-            	
-            	test.log(LogStatus.FAIL, "Some content type options not getting displayed in the serach drop down");// extent report
+				
+				Assert.assertTrue(master_cond);
+				test.log(LogStatus.PASS, "Search results related to all content types getting displayed in the summary page when user searches using ALL option in search drop down");// extent report
+			}
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Search results related to all content types not getting displayed in the summary page when user searches using ALL option in search drop down");// extent report
 
             	ErrorUtil.addVerificationFailure(t);// testng
             	status = 2;// excel
             	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_some_content_type_options_not_present_in_search_drop_down")));// screenshot
+            			captureScreenshot(this.getClass().getSimpleName() + "_search_results_related_to_all_content_types_not_getting_displayed_in_the_summary_page_when_user_searches_using_ALL_option_in_search_drop_down")));// screenshot
 
-            }
+				
+			}
+			
+			
+			
 			
 			closeBrowser();
 
-		} catch (Throwable t) {
+		} 
+		
+		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report

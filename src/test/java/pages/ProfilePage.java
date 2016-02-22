@@ -316,7 +316,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, When data not matching
 	 */
 	public static void validateProfileMetadata() throws Exception {
-		String country=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(2).getText();
+		String country=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(0).getText();
+		System.out.println("country-->"+country);
 		if(country.contains(metadata[3])){
 			throw new Exception("profile meta data not updated");
 		}
@@ -355,7 +356,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickPostsTab() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
-		BrowserWaits.waitTime(8);
+		BrowserWaits.waitTime(12);
 	}
 	
 	
@@ -469,6 +470,7 @@ public class ProfilePage  extends TestBase {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
 				.click();
+		
 	}
 
 	/**
@@ -486,7 +488,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static int getPostsCount() throws InterruptedException {
-		Thread.sleep(5000);
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
