@@ -67,11 +67,12 @@ public class TestCase_E32 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			Thread.sleep(15000);
+			createNewUser("mask", "man");
+			// ob.navigate().to(host);
+			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
+			// "Techm@2015");
+			// LoginTR.clickLogin();
+			// Thread.sleep(15000);
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
