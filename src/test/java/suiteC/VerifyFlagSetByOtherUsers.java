@@ -3,6 +3,7 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -66,12 +68,13 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			Thread.sleep(8000);
 			login();
 			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Synergistic");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
@@ -91,24 +94,28 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			Thread.sleep(6000);
 			LoginTR.logOutApp();
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME, PASSWORD);
+			BrowserWaits.waitTime(15);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.linkText(articleTitle)).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
 			String commentText;
 			WebElement flagWe;
+			Thread.sleep(10000);
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
-				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+				if (!commentText.contains("Kavya Revanna") && !commentText.contains("Comment deleted")) {
 					flagWe = commentsList.get(i)
 							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
 					if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						scrollElementIntoView(ob, flagWe);
 						jsClick(ob,flagWe);
 						break;
 					}
@@ -121,15 +128,34 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 			LoginTR.logOutApp();
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME1, PASSWORD1);
-
+			BrowserWaits.waitTime(15);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			int count=0;
+			boolean found=false;
+			while(count<10){
+			
+				try{
+					ob.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					ob.findElement(By.linkText(articleTitle)).click();
+					found=true;
+					break;
+					
+				}catch(Exception e){
+					
+					count++;
+				}
+			
+			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+			}
+			if(!found)throw new Exception("Could not fiind the specified article:"+articleTitle);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 180);
-
+			
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			boolean flag=false;
 			for (WebElement we : commentsList) {
@@ -138,7 +164,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 					try {
 
-						if (we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
+						if (!we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
 								.isDisplayed()) {
 							test.log(LogStatus.PASS, "Flag set by other user is not visible to the current user");
 							flag=true;

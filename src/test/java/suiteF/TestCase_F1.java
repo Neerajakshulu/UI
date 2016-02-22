@@ -106,7 +106,8 @@ public class TestCase_F1 extends TestBase {
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
-
+			ob.navigate().refresh();
+			Thread.sleep(15000);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 			
