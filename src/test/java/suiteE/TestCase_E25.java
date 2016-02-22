@@ -21,7 +21,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E21 extends TestBase {
+public class TestCase_E25 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,14 +35,13 @@ public class TestCase_E21 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
+	public void testItemsCountInWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -72,7 +71,7 @@ public class TestCase_E21 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			 createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");
@@ -80,8 +79,8 @@ public class TestCase_E21 extends TestBase {
 			// Thread.sleep(15000);
 
 			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			selectSearchTypeFromDropDown("All");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
@@ -99,40 +98,34 @@ public class TestCase_E21 extends TestBase {
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
-
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelLikes = "Likes";
-			String expectedLabelComments = "Comments";
+			// Getting the items count
+			int itemCount = Integer.parseInt(
+					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
+				Assert.assertEquals(itemCount, 10);
+				test.log(LogStatus.PASS, "User is able to watch 10 items into watchlist");
+			} catch (Exception e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is not able to watch 10 items into watchlist");
+			}
 
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelLikes);
-					} else {
+			// Unwatching the first 5 document from results
+			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
+			for (int i = 0; i < 5; i++) {
+				watchButtonList.get(i).click();
+				Thread.sleep(2000);
+			}
 
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+			itemCount = Integer.parseInt(
+					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+
+			try {
+				Assert.assertEquals(itemCount, 5);
+				test.log(LogStatus.PASS, "Items counts is decreased by 5 after unwatching 5 item");
 			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+				status = 2;
+				test.log(LogStatus.FAIL, "Items counts is not decreased by 5 after unwatching 5 item");
 			}
 
 			closeBrowser();

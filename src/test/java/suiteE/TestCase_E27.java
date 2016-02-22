@@ -2,16 +2,12 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,7 +17,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E21 extends TestBase {
+public class TestCase_E27 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,14 +31,13 @@ public class TestCase_E21 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
+	public void testEditWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -72,67 +67,58 @@ public class TestCase_E21 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			 createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");
 			// LoginTR.clickLogin();
 			// Thread.sleep(15000);
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			Thread.sleep(4000);
+			// Creating a new watch list
+			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+			Thread.sleep(2000);
+			String newWatchlistName = "New Watchlist";
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+					.sendKeys("This is my newly created watch list");
+			// Clicking on Create button
+			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+			Thread.sleep(4000);
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// Editing the first watch list
+			String watchlistName = "Updated Watchlist";
+			String watchlistDescription = "This is my watchlist";
+			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
+			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
+			Thread.sleep(4000);
+			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
+			String updatedWatchlistDescription = ob
+					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
 
-			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
+			// Compare watch list name
+			try {
+				Assert.assertEquals(watchlistName, updatedWatchlistName);
+				test.log(LogStatus.PASS, "User is able to update watch list name");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is not able to update watch list name");
 			}
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelLikes = "Likes";
-			String expectedLabelComments = "Comments";
-
+			// Compare watch list description
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelLikes);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+				Assert.assertEquals(watchlistDescription, updatedWatchlistDescription);
+				test.log(LogStatus.PASS, "User is able to update watch list description");
 			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+				status = 2;
+				test.log(LogStatus.FAIL, "User is not able to update watch list description");
 			}
 
 			closeBrowser();
