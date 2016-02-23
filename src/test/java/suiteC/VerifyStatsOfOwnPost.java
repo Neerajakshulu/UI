@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -21,7 +22,7 @@ import pages.SearchResultsPage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class VerifyStatsOfOthersPost extends TestBase{
+public class VerifyStatsOfOwnPost extends TestBase{
 
 	
 	
@@ -35,7 +36,7 @@ public class VerifyStatsOfOthersPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that user is able to view the comment and like counts on posts created by others")
+		test = extent.startTest(var, "Verify that user is able to view the comment and like counts on own posts")
 				.assignCategory("Suite C");
 
 	}
@@ -67,9 +68,17 @@ public class VerifyStatsOfOthersPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
+			HeaderFooterLinksPage.clickOnProfileLink();
+			test.log(LogStatus.INFO, "Navigated to Profile Page");
+			if(ProfilePage.getPostsCount()==0){
+				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
+				ProfilePage.clickOnPublishPostButton();
+				ProfilePage.enterPostTitle(tilte);
+				ProfilePage.enterPostContent(tilte);
+				ProfilePage.clickOnPostPublishButton();
+			}
+			
+			ProfilePage.clickOnFirstPost();
 			List<String> list=new ArrayList<String>();
 			
 			if(!PostRecordViewPage.isCommentCountDisplayed())list.add("Comment count");
@@ -78,9 +87,9 @@ public class VerifyStatsOfOthersPost extends TestBase{
 			
 			try {
 				Assert.assertTrue(list.size()==0);
-				test.log(LogStatus.PASS, "Comment count, likes count and Like button are displayed for other user post");
+				test.log(LogStatus.PASS, "Comment count, likes count and Like button are displayed for own post");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, list.toString()+"are not displayed for other user post");
+				test.log(LogStatus.FAIL, list.toString()+"are not displayed for own post");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
