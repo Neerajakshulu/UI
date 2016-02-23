@@ -106,7 +106,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li"), 
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class*='post-stat'] div[class='doc-info']:nth-child(3) span[class*='stat-count']"),
 	
-	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] button"),
+	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] button[class*='webui-icon-like']"),
 	
 	HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS("button[id='posting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("div[class='full-record'] h2[class$='ng-binding']"),
@@ -129,8 +129,12 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
-	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"); 
+	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[@class='doc-info' and contains(.,'Comments')]/span[contains(@class,'stat-count')]"),
 
+	; 
+	
+	
 	
 	
 	private String locator;
