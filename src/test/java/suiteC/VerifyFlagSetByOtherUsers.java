@@ -132,28 +132,14 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			loginAsOther(USER_NAME1, PASSWORD1);
 			BrowserWaits.waitTime(15);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-			int count=0;
-			boolean found=false;
-			while(count<10){
+			searchAnArticle(articleTitle);
+			BrowserWaits.waitTime(10);
+			waitForElementTobeVisible(ob, By.cssSelector("h2 span[class='stat-count ng-binding']"), 90);
+			String commentCount=ob.findElement(By.cssSelector("h2 span[class='stat-count ng-binding']")).getText();
 			
-				try{
-					ob.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					ob.findElement(By.linkText(articleTitle)).click();
-					found=true;
-					break;
-					
-				}catch(Exception e){
-					
-					count++;
-				}
-			
-			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
-			waitForAjax(ob);
+			if(commentCount.equals("0")){
+				searchAnArticle(articleTitle);
 			}
-			if(!found)throw new Exception("Could not fiind the specified article:"+articleTitle);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 180);
 			
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
@@ -164,8 +150,8 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 
 					try {
 
-						if (!we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-								.isDisplayed()) {
+						if (we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
+								.getAttribute("class").contains("flag-inactive")) {
 							test.log(LogStatus.PASS, "Flag set by other user is not visible to the current user");
 							flag=true;
 						} else {
@@ -209,6 +195,31 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 		LoginTR.logOutApp();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	}
+
+	private void searchAnArticle(String articleTitle) throws InterruptedException, Exception {
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
+		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+		Thread.sleep(4000);
+		int count=0;
+		boolean found=false;
+		while(count<10){
+		
+			try{
+				ob.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				ob.findElement(By.linkText(articleTitle)).click();
+				found=true;
+				break;
+				
+			}catch(Exception e){
+				
+				count++;
+			}
+		
+		((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+		waitForAjax(ob);
+		}
+		if(!found)throw new Exception("Could not fiind the specified article:"+articleTitle);
 	}
 
 	@AfterTest

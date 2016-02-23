@@ -204,5 +204,17 @@
 		</classes>
 	</test>
 	
+	<test name="Test E33">
+		<classes>
+			<class name="suiteE.TestCase_E33"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E34">
+		<classes>
+			<class name="suiteE.TestCase_E34"></class>
+		</classes>
+	</test>
+	
 </suite>
 

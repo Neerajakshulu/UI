@@ -5,13 +5,11 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,7 +19,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E25 extends TestBase {
+public class TestCase_E34 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,15 +31,12 @@ public class TestCase_E25 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
-				.assignCategory("Suite E");
+		test = extent.startTest(var, "Verify that no one can see the private watchlists of a user on user's profile page").assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testItemsCountInWatchlist() throws Exception {
+	public void testPrivateWatchlistNotVisibleFromOthersProfile() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -61,73 +56,71 @@ public class TestCase_E25 extends TestBase {
 
 			// String search_query = "biology";
 
-			// Making a new user
+			// 1)Create User1 and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
+			fn1 = generateRandomName(8);
+			ln1 = generateRandomName(10);
+			System.out.println(fn1 + " " + ln1);
+			user1 = createNewUser(fn1, ln1);
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 
-			 createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
-
-			// Searching for post
-			selectSearchTypeFromDropDown("All");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			// Creating 4 private and 1 public watch list
+			String newWatchlistName = "New Watchlist";
+			for (int i = 1; i <= 5; i++) {
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				Thread.sleep(2000);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list");
+				if (i == 5)
+					ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+				// Clicking on Create button
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				Thread.sleep(4000);
+			}
+			LoginTR.logOutApp();
+			closeBrowser();
+			// 2)Login as User2 and navigate to the user1 profile page
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			ob.navigate().to(host);
+			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();
+			Thread.sleep(15000);
+			// Searching for article
+			selectSearchTypeFromDropDown("People");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			// Navigating to the first user profile page
+			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
+			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
+			Thread.sleep(5000);
+			// Navigating to the watch list tab
+			ob.findElement(By.xpath("//a/span[contains(text(),'Watchlists')]")).click();
 			Thread.sleep(8000);
-
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
+			List<WebElement> watchlists = ob.findElements(By.xpath("//a[contains(@ui-sref,'watchlist-detail')]"));
+			int count = 0;
+			for (int i = 0; i <= 4; i++) {
+				for (WebElement watchlist : watchlists) {
+					if (watchlist.getText().equals(newWatchlistName + i)) {
+						count++;
+						break;
+					}
+				}
 			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-			// Getting the items count
-			int itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 10);
-				test.log(LogStatus.INFO, "User is able to watch 10 items into watchlist");
-			} catch (Exception e) {
-				status = 2;
-				test.log(LogStatus.INFO, "User is not able to watch 10 items into watchlist");
-			}
-
-			// Unwatching the first 5 document from results
-			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
-			for (int i = 0; i < 5; i++) {
-				watchButtonList.get(i).click();
-				Thread.sleep(2000);
-			}
-
-			itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
-
-			try {
-				Assert.assertEquals(itemCount, 5);
-				test.log(LogStatus.PASS, "Items counts is decreased by 5 after unwatching 5 item");
+				Assert.assertEquals(0, count);
+				test.log(LogStatus.PASS, "Others can not see the private watchlists of a user on user's profile page");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 5 after unwatching 5 item");
+				test.log(LogStatus.FAIL, "Others able to see the private watchlists of a user on user's profile page");
 			}
-
 			closeBrowser();
 
 		} catch (Throwable t) {

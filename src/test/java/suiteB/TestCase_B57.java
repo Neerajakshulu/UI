@@ -19,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B53 extends TestBase {
+public class TestCase_B57 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +34,13 @@ public class TestCase_B53 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that PEOPLE option is selected in the left navigation pane by default when user searches using PEOPLE option in the search drop down")
+						"Verify that only people get displayed in the summary page when user searches using PEOPLE content type in search drop down")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB53() throws Exception {
+	public void testcaseB57() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -78,21 +78,37 @@ public class TestCase_B53 extends TestBase {
 			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
 			Thread.sleep(2000);
 			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
-			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
-			System.out.println(text);
+			JavascriptExecutor jse=(JavascriptExecutor)ob;
 			
-			if(!StringContains(text,"People")){
+			for(int i=1;i<=5;i++){
+			
+			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
+			Thread.sleep(3000);
+			
+			}
+			
+			
+			List<WebElement> tileTags=ob.findElements(By.tagName("h5"));
+			int count=0;
+			for(int i=0;i<tileTags.size();i++){
 				
-				test.log(LogStatus.FAIL, "PEOPLE option not selected in the left navigation pane by default when user searches using PEOPLE option in the search drop down");// extent report
+				
+				if(tileTags.get(i).getText().equals("People"))
+					count++;
+			}
+			
+			if(!compareNumbers(tileTags.size(),count)){
+				
+				
+				test.log(LogStatus.FAIL, "Items other than people also getting displayed in the summary page when user searches using PEOPLE content type in search drop down");// extent report
             	status = 2;// excel
             	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_PEOPLE_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_PEOPLE_option_in_the_search_drop_down")));// screenshot
+            			captureScreenshot(this.getClass().getSimpleName() + "_items_other_than_people_also_getting_displayed_in_the_summary_page_when_user_searches_using_PEOPLE_content_type_in_search_drop_down")));// screenshot
 
-				
 			}
 			
 			closeBrowser();
