@@ -106,7 +106,7 @@ public class PostRecordViewPage extends TestBase{
 
 		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
 			appreciationButton.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
@@ -122,7 +122,7 @@ public class PostRecordViewPage extends TestBase{
 
 		} else {
 			appreciationButton.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
@@ -242,4 +242,47 @@ public static void clickOnAuthorName() throws Exception{
 	BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
 	BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
 	}
+
+public static boolean isCommentCountDisplayed(){
+	boolean result=false;
+	try{
+		
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString()), 60);
+		if(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).isDisplayed())
+			result=true;	
+	}catch(Exception e){
+		return false;
+	}
+	
+	return result;
+}
+
+public static boolean isLikeCountDisplayed(){
+	boolean result=false;
+	try{
+		
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()), 60);
+		if(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString())).isDisplayed())
+			result=true;	
+	}catch(Exception e){
+		return false;
+	}
+	
+	return result;
+}
+
+public static boolean isLikeButtonDisplayed(){
+	boolean result=false;
+	try{
+		
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS.toString()), 60);
+		if(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS.toString())).isDisplayed())
+			result=true;	
+	}catch(Exception e){
+		return false;
+	}
+	
+	return result;
+}
+
 }
