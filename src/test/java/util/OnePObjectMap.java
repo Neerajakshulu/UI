@@ -131,7 +131,14 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
 	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[@class='doc-info' and contains(.,'Comments')]/span[contains(@class,'stat-count')]"),
-
+	HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS("div[class='full-record'] button[class*='profile-follow-unfollow']"),
+	HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS("div[class='col-xs-12 watching-article-comments']"),
+	HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS("a[data-event-category='profilecomments'] span[class='ng-binding']:nth-child(2)"),
+	HOME_PROJECT_NEON_PROFILE_FOLLOWERS_COUNT_CSS("a[data-event-category='profilefollowers'] span[class='ng-binding']:nth-child(2)"),
+	HOME_PROJECT_NEON_PROFILE_FOLLOWING_COUNT_CSS("a[data-event-category='profilefollowing'] span[class='ng-binding']:nth-child(2)"),
+	HOME_PROJECT_NEON_PROFILE_TABS_CSS("li[ng-repeat='tab in vm.detailTabs']"),
+	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("h2[class='profile-tab-heading']"),
+	
 	; 
 	
 	

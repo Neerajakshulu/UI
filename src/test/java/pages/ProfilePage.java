@@ -15,6 +15,7 @@ import base.TestBase;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class ProfilePage  extends TestBase {
 	
@@ -31,7 +32,8 @@ public class ProfilePage  extends TestBase {
 	static int followingBefore;
 	static int followersBefore;
 	static String watchTextBefore;
-	
+	static List<WebElement> topicTypeahead;
+	static List<WebElement> profileTabsRecords;
 	
 	/**
 	 * Method for Validate Profile Search with last name
@@ -496,7 +498,29 @@ public class ProfilePage  extends TestBase {
 						.getText());
 		return count;
 	}
-
+	
+	
+	/**
+	 * Method to get the count of Comments count in a profile
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	public static int getCommentsCount() throws Exception {
+		BrowserWaits.waitTime(10);
+		waitForAjax(ob);
+		int count = 0;
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS);
+		String commentsCount=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS).getText();
+		if(commentsCount.contains(",")) {
+			count=Integer.parseInt(commentsCount.replace(",", ""));
+		}
+		else{
+			count=Integer.parseInt(commentsCount);
+		}
+		return count;
+	}
+	
+	
 	/**
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
@@ -851,6 +875,105 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 			throw new Exception("Country Type ahead options are not displayed while enter two characters");
 			
 	}
+	
+	/**
+	 * Method for Validate topic typeahead options should display while enter min 2 characters
+	 * @throws Exception, When Typeahead options not displayed
+	 */
+	public static void topicTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, oneChar);
+		//System.out.println("topic typeahed options-->"+topicTypeahead.size());
+		topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		if(topicTypeahead.size()>0){
+			throw new Exception("topic typeahead options should display only while enter min 2 characters");
+		}
+		
+		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
+		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, twoChar);
+		topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		//System.out.println("topic typeahed options-->"+topicTypeahead.size());
+		if(!(topicTypeahead.size()>0)){
+			throw new Exception("topic typeahead options should display while enter min 2 characters");
+		}
+	}
+	
+	/**
+	 * Method for validate profile tab focus, tab focus should be POST tab only
+	 * @throws Exception, When tab focus on other than POST tab
+	 */
+	public static void profileTabFocus() throws Exception {
+		List<WebElement> profileTabs=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_CSS);
+		String tabFocus=profileTabs.get(0).getAttribute("class");
+		if(!tabFocus.contains("active")) {
+			throw new Exception("Tab focus should be on POST Tab");
+		}
+	}
+	
+	
+	public static void postTabScroll() throws Exception {
+		int totalPosts=getPostsCount();
+		if(totalPosts>10){
+			profileTabInfiniteScroll("Post");
+		}
+	}
+	
+	public static void commentsTabScroll() throws Exception {
+		clickCommentsTab();
+		int totalComments=getCommentsCount();
+		if(totalComments>10){
+			profileTabInfiniteScroll("Comments");
+		}
+	}
+	
+	public static void followersTabScroll() throws Exception {
+		clickFollowersTab();
+		int totalFollowers=getFollowersCount();
+		if(totalFollowers>10){
+			profileTabInfiniteScroll("Followers");
+		}
+	}
+	
+	public static void followingTabScroll() throws Exception {
+		clickFollowingTab();
+		int totalFollowing=getFollowingCount();
+		if(totalFollowing>10){
+			profileTabInfiniteScroll("Following");
+		}
+	}
+	
+	/**
+	 * Method for validate profile tab focus, tab focus should be POST tab only
+	 * @throws Exception, When tab focus on other than POST tab
+	 */
+	public static void profileTabInfiniteScroll(String tabName) throws Exception {
+		if(tabName.contains("Followers")||tabName.contains("Following")){
+			profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+		}
+		else {
+			profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
+		}
+		int beforeScroll=profileTabsRecords.size();
+		((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+		 waitForAjax(ob);
+		 BrowserWaits.waitTime(4);
+		 
+		 if(tabName.contains("Followers")||tabName.contains("Following")){
+				profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+			}
+			else {
+				profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
+			}
+		 
+		 //System.out.println("before scroll-->"+beforeScroll);
+		 int firstScroll=profileTabsRecords.size();
+		 //System.out.println(" first scroll-->"+firstScroll);
+		 if(!(firstScroll>beforeScroll)){
+			 throw new Exception("Records/Records Count should be increase while do page scrolldown");
+		 }
+	}
+	
+	
 	
 }
 
