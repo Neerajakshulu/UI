@@ -292,5 +292,20 @@
       <class name="suiteC.PostTitleProfanityWordCheckTest" ></class>
     </classes>
 </test>
+
+
+<test name="VerifyStatsOfOthersPost">
+    <classes>
+      <class name="suiteC.VerifyStatsOfOthersPost" ></class>
+    </classes>
+</test>
+
+<test name="VerifyStatsOfOwnPost">
+    <classes>
+      <class name="suiteC.VerifyStatsOfOwnPost" ></class>
+    </classes>
+</test>
+
+
 </suite>
 

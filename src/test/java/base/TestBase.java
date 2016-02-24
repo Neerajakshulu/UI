@@ -162,56 +162,56 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	 /*public void openBrowser(){
-	
-	 if(CONFIG.getProperty("browserType").equals("FF")){
-	 ob = new FirefoxDriver();
-	 }
-	 else if (CONFIG.getProperty("browserType").equals("IE")){
-	 System.setProperty("webdriver.ie.driver",
-	 "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-	 DesiredCapabilities capabilities =
-	 DesiredCapabilities.internetExplorer();
-	 capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
-	 true);
-	 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-	 ob = new InternetExplorerDriver(capabilities);
-	 }
-	 else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-	 DesiredCapabilities capability = DesiredCapabilities.chrome();
-	 capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	 System.setProperty("webdriver.chrome.driver",
-	 "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-	 System.setProperty("webdriver.chrome.driver",
-	 "drivers/chromedriver.exe");
-	 ob= new ChromeDriver(capability);
-	 }
-	
-	 else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-	
-	 DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-	 SafariOptions safariOptions = new SafariOptions();
-	 safariOptions.setUseCleanSession(true);
-	 desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
-	 safariOptions);
-	 ob = new SafariDriver(desiredCapabilities);
-	 }
-	
-	
-	 String waitTime=CONFIG.getProperty("defaultImplicitWait");
-	 String pageWait=CONFIG.getProperty("defaultPageWait");
-	 ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
-	 TimeUnit.SECONDS);
-	 try{
-	 ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
-	 TimeUnit.SECONDS);
-	 }
-	 catch(Throwable t){
-	
-	 System.out.println("Page Load Timeout not supported in safari driver");
-	 }
-	
-	 }*/
+	/*public void openBrowser(){
+
+		if(CONFIG.getProperty("browserType").equals("FF")){
+			ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+			System.setProperty("webdriver.ie.driver",
+					"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			DesiredCapabilities capabilities =
+					DesiredCapabilities.internetExplorer();
+			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
+					true);
+			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+			DesiredCapabilities capability = DesiredCapabilities.chrome();
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",
+					"drivers/chromedriver.exe");
+			ob= new ChromeDriver(capability);
+		}
+
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+					safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+
+
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
+				TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
+					TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+
+	}*/
 
 	// Closing the browser
 	public void closeBrowser() {
@@ -899,6 +899,21 @@ public class TestBase {
 		waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 5);
 		ob.findElement(By.linkText(type)).click();
 		Thread.sleep(2000);
+	}
+
+	public  void createWatchList(String typeOfWatchList,String watchListName,String watchListDescription) throws Exception {
+
+		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		Thread.sleep(5000);
+		ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
+		Thread.sleep(2000);
+		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
+		Thread.sleep(3000);
+		if(typeOfWatchList.equals("public"))
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+		Thread.sleep(6000);
 	}
 
 }

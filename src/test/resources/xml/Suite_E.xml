@@ -179,12 +179,42 @@
 			<class name="suiteE.TestCase_E28"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E29">
 		<classes>
 			<class name="suiteE.TestCase_E29"></class>
 		</classes>
 	</test>
 
+	<test name="Test E30">
+		<classes>
+			<class name="suiteE.TestCase_E30"></class>
+		</classes>
+	</test>
+
+	<test name="Test E31">
+		<classes>
+			<class name="suiteE.TestCase_E31"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E32">
+		<classes>
+			<class name="suiteE.TestCase_E32"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E33">
+		<classes>
+			<class name="suiteE.TestCase_E33"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E34">
+		<classes>
+			<class name="suiteE.TestCase_E34"></class>
+		</classes>
+	</test>
+	
 </suite>
 

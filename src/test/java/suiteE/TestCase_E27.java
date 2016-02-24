@@ -31,7 +31,7 @@ public class TestCase_E27 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist")
+						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist||Verify that watchlist name is customizable")
 				.assignCategory("Suite E");
 
 	}
@@ -67,7 +67,7 @@ public class TestCase_E27 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
+			createNewUser("mask", "man");
 			// ob.navigate().to(host);
 			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
 			// "Techm@2015");

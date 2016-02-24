@@ -2,26 +2,21 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E25 extends TestBase {
+public class TestCase_E31 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,15 +28,13 @@ public class TestCase_E25 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
+		test = extent.startTest(var, "Verify that user is able to have a watchlist with 0 item under it")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testItemsCountInWatchlist() throws Exception {
+	public void testZeroItemsCountInWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -59,7 +52,7 @@ public class TestCase_E25 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
+			String search_query = "biology";
 
 			// Making a new user
 			openBrowser();
@@ -71,61 +64,43 @@ public class TestCase_E25 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
+			createNewUser("mask", "man");
 
 			// Searching for post
 			selectSearchTypeFromDropDown("All");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// Clicking on first watch button from the results
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
-			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			// Select the first watch list from the model
+			waitForElementTobeClickable(ob,
+					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+			
+			// Closing the select a model
+			ob.findElement(By.xpath("//button[@class='close']")).click();
+			
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			Thread.sleep(8000);
 
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
-			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			// Navigating to the default watch list details page
+			ob.findElement(By.xpath("// a[@class='ng-binding']")).click();;
+			
 			// Getting the items count
-			int itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 10);
-				test.log(LogStatus.INFO, "User is able to watch 10 items into watchlist");
+				Assert.assertEquals(itemCount, 0);
+				test.log(LogStatus.PASS, "User can have a watchlist with 0 item under it");
 			} catch (Exception e) {
 				status = 2;
-				test.log(LogStatus.INFO, "User is not able to watch 10 items into watchlist");
-			}
-
-			// Unwatching the first 5 document from results
-			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
-			for (int i = 0; i < 5; i++) {
-				watchButtonList.get(i).click();
-				Thread.sleep(2000);
-			}
-
-			itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
-
-			try {
-				Assert.assertEquals(itemCount, 5);
-				test.log(LogStatus.PASS, "Items counts is decreased by 5 after unwatching 5 item");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 5 after unwatching 5 item");
+				test.log(LogStatus.FAIL, "User can not have a watchlist with 0 item under it");
 			}
 
 			closeBrowser();

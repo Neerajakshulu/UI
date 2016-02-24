@@ -2,6 +2,7 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -19,7 +20,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B53 extends TestBase {
+public class TestCase_B59 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +35,13 @@ public class TestCase_B53 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that PEOPLE option is selected in the left navigation pane by default when user searches using PEOPLE option in the search drop down")
+						"Verify that 10 article suggestions get displayed in the search type ahead when user searches using ARTICLES option in the search drop down and that the searched keyword is present in all the suggestions")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB53() throws Exception {
+	public void testcaseB59() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -75,26 +76,55 @@ public class TestCase_B53 extends TestBase {
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
 			Thread.sleep(2000);
-			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
+			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
 			Thread.sleep(2000);
 			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
+			Thread.sleep(1000);
 			
-			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
-			System.out.println(text);
 			
-			if(!StringContains(text,"People")){
+			WebElement myE=ob.findElement(By.xpath(OR.getProperty("articlesTile")));
+			String text=myE.getText();
+			
+			String[] arr=text.split("\n");
+			
+			ArrayList<String> al=new ArrayList<String>();
+			for(int i=1;i<arr.length;i++){
 				
-				test.log(LogStatus.FAIL, "PEOPLE option not selected in the left navigation pane by default when user searches using PEOPLE option in the search drop down");// extent report
-            	status = 2;// excel
-            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_PEOPLE_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_PEOPLE_option_in_the_search_drop_down")));// screenshot
-
-				
+				al.add(arr[i]);
 			}
 			
+			for(int i=0;i<al.size();i++){
+				
+				System.out.println(al.get(i));
+			}
+			
+			if(!compareNumbers(10,al.size())){
+				
+				test.log(LogStatus.FAIL, "More or less than 10 article suggestions are getting displayed");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_or_less_than_ten_article_suggestions_getting_displayed")));//screenshot
+			}
+			
+			int count=0;
+			for(int i=0;i<al.size();i++){
+				
+				if(!al.get(i).toLowerCase().contains("john"))
+					count++;
+			}
+			
+			if(!compareNumbers(0,count)){
+				
+				test.log(LogStatus.FAIL, "Article suggestion does not contain the typed keyword");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_article_suggestion_does_not_contain_typed_keyword")));//screenshot
+			}
 			closeBrowser();
 
 		} 
