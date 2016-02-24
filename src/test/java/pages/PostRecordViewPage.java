@@ -106,7 +106,7 @@ public class PostRecordViewPage extends TestBase{
 
 		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
 			appreciationButton.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
@@ -122,7 +122,7 @@ public class PostRecordViewPage extends TestBase{
 
 		} else {
 			appreciationButton.click();
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
