@@ -349,4 +349,28 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	public static int getCommentCount() throws Exception {
+		//BrowserWaits.waitTime(10);
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob,
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString()), 90);
+		String count=ob.findElement(
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).getText();	
+		
+		return Integer.parseInt(count);
+	}
+
+	
+	public static void validateCommentNewlyAdded(String comment){
+		
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 180);
+		
+		String actComment=ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0).getText();
+		
+		Assert.assertTrue(actComment.contains(comment) );
+		test.log(LogStatus.PASS, "Newly added comment on user's own post is available");
+		
+		
+	}
 }

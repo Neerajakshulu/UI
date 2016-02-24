@@ -132,7 +132,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[@class='doc-info' and contains(.,'Comments')]/span[contains(@class,'stat-count')]"),
 	HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS("div[class='full-record'] button[class*='profile-follow-unfollow']"),
-
+	HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS("div[class='col-xs-12 watching-article-comments']"),
+	
 	; 
 	
 	
