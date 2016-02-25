@@ -127,14 +127,14 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 			LoginTR.logOutApp();
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME1, PASSWORD1);
 			BrowserWaits.waitTime(15);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			searchAnArticle(articleTitle);
 			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob, By.cssSelector("h2 span[class='stat-count ng-binding']"), 90);
+			waitForElementTobeVisible(ob, By.cssSelector("h2 span[class='stat-count ng-binding']"), 180);
 			String commentCount=ob.findElement(By.cssSelector("h2 span[class='stat-count ng-binding']")).getText();
 			
 			if(commentCount.equals("0")){

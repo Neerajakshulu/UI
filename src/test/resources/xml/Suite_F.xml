@@ -89,5 +89,10 @@
 	</test>
 
 
+	<test name="Test F15">
+		<classes>
+			<class name="suiteF.TestCase_F15"></class>
+		</classes>
+	</test>
 </suite>
 
