@@ -300,5 +300,12 @@
     </classes>
 </test>
 
+<test name="VerifyStatsOfOwnPost">
+    <classes>
+      <class name="suiteC.VerifyStatsOfOwnPost" ></class>
+    </classes>
+</test>
+
+
 </suite>
 

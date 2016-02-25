@@ -211,5 +211,45 @@
     </classes>
 </test>
 
+<test name="Topic_Typeahead_Options_Validation">
+	<parameter name="oneChar" value="T"/>
+	<parameter name="twoChar" value="te"/>
+    <classes>
+        <class name="suiteD.TopicTypeaheadValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="profile_tab_focus">
+    <classes>
+        <class name="suiteD.ProfileTabFocusTest" ></class> 
+    </classes>
+</test>
+
+<test name="post_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.PostTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="comments_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.CommentsTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Followers_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.FollowersTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Following_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.FollowingTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+
+
 </suite>
 
