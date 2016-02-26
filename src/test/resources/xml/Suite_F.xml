@@ -101,5 +101,11 @@
 		</classes>
 	</test>
 	
+	<test name="Test F17">
+		<classes>
+			<class name="suiteF.TestCase_F17"></class>
+		</classes>
+	</test>
+	
 </suite>
 

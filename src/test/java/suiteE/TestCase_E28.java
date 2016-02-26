@@ -81,7 +81,7 @@ public class TestCase_E28 extends TestBase {
 				Thread.sleep(4000);
 			}
 			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
 			int noOfWatchList = watchLists.size();
 

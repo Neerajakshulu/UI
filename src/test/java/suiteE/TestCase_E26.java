@@ -72,7 +72,7 @@ public class TestCase_E26 extends TestBase {
 
 			createWatchList("private", newWatchlistName, newWatchListDescription);
 			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
 			int count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
@@ -92,7 +92,7 @@ public class TestCase_E26 extends TestBase {
 
 			// Navigating to the private watch list tab
 			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
-			watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
 				if (watchLists.get(i).getText().equals(newWatchlistName)) {

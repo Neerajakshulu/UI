@@ -89,7 +89,7 @@ public class TestCase_E31 extends TestBase {
 			Thread.sleep(8000);
 
 			// Navigating to the default watch list details page
-			ob.findElement(By.xpath("// a[@class='ng-binding']")).click();;
+			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();;
 			
 			// Getting the items count
 			int itemCount = Integer
