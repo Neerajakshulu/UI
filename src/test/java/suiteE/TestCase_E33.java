@@ -56,8 +56,6 @@ public class TestCase_E33 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
 			// 1)Create User1 and logout
 			openBrowser();
 			maximizeWindow();
@@ -66,21 +64,11 @@ public class TestCase_E33 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 
-			// Creating a new public watch list
-			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-			Thread.sleep(2000);
 			String newWatchlistName = "New Watchlist";
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-					.sendKeys("This is my newly created watch list");
-			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+			String newWatchListDescription = "This is my newly created watch list";
 
-			// Clicking on Create button
-			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-			Thread.sleep(4000);
+			createWatchList("public", newWatchlistName, newWatchListDescription);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Login as User2 and navigate to the user1 profile page

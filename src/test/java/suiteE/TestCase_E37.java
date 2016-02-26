@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -18,7 +18,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E17 extends TestBase {
+public class TestCase_E37 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,14 +32,13 @@ public class TestCase_E17 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add an Post from Record View page to a particular watchlist")
+						"Verify that user is able to delete a watchlist||Verify that user is not able to see his watchlist on his own profile page once that particular watchlist is deleted.")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testDeleteWatchList() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -66,46 +65,50 @@ public class TestCase_E17 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			// Creating user
 			createNewUser("mask", "man");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
-
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
-
-			// Watching the post to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-
-			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
-
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
-
+			// Navigate to the watch list landing page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			Thread.sleep(4000);
+			// Creating a new watch list
+			String newWatchlistName = "New Watchlist";
+			for (int i = 1; i <= 2; i++) {
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				Thread.sleep(2000);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list");
+				// Clicking on Create button
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				Thread.sleep(4000);
 			}
 
-			if (!compareNumbers(1, count)) {
+			// Deleting the first watch list
+			ob.findElement(By.xpath("// a[@class='ng-binding']")).click();
+			Thread.sleep(4000);
+			ob.findElement(By.xpath("//button[@event-action='delete watchlist']")).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='modal-footer ng-scope']"), 4);
+			waitForElementTobeClickable(ob, By.xpath("//button[@event-action='delete']"), 2);
+			ob.findElement(By.xpath("//button[@event-action='delete']")).click();
 
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			// Finding the deleted watch list is visible or not
+			int count = 0;
+			for (WebElement watchlist : watchLists) {
+				if (watchlist.getText().equals(newWatchlistName + 2))
+					count++;
+			}
 
+			try {
+				Assert.assertEquals(count, 0);
+				test.log(LogStatus.PASS, "User is able to delete watch list");
+				test.log(LogStatus.PASS, "User is not able to see the deleted watch list");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is not able to delete watch list");
+				test.log(LogStatus.FAIL, "User is able to see the deleted watch list");
 			}
 
 			closeBrowser();

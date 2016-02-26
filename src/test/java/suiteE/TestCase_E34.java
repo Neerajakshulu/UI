@@ -66,7 +66,7 @@ public class TestCase_E34 extends TestBase {
 			user1 = createNewUser(fn1, ln1);
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-
+			Thread.sleep(4000);
 			// Creating 4 private and 1 public watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 5; i++) {
