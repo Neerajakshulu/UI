@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -18,7 +17,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E17 extends TestBase {
+public class TestCase_E36 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,16 +29,13 @@ public class TestCase_E17 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add an Post from Record View page to a particular watchlist")
+		test = extent.startTest(var, "Verify that user is able to see the watchlist items by content type")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testWatchlistItemsDisplayedByContentType() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -57,6 +53,8 @@ public class TestCase_E17 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
+			String search_query = "hello";
+
 			// Opening browser
 			openBrowser();
 			try {
@@ -69,43 +67,44 @@ public class TestCase_E17 extends TestBase {
 
 			createNewUser("mask", "man");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			// Searching for article
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
-
-			// Watching the post to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			// Watching an article to a particular watch list
+			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
+			Thread.sleep(6000);
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
-			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			// Watching a patents to a particular watch list
+			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
+			Thread.sleep(6000);
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			// Watching a posts to a particular watch list
+			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+			Thread.sleep(6000);
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> labels = ob.findElements(By.xpath(OR.getProperty("item_label")));
 
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
+			if (!compareNumbers(watchedItems.size(), labels.size())) {
 
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
-
-			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
+				test.log(LogStatus.FAIL, "Watchlist items are not displayed by content type");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
+						this.getClass().getSimpleName() + "_watchlist_items_are_not_displayed_by_content_type")));// screenshot
 
+			} else {
+				test.log(LogStatus.PASS, "Watchlist items are displayed by content type");
 			}
 
 			closeBrowser();

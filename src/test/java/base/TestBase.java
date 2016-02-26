@@ -850,7 +850,7 @@ public class TestBase {
 		Thread.sleep(8000);
 
 		// Getting all the watch lists
-		List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		// Finding the particular watch list and navigating to it
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {

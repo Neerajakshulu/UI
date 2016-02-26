@@ -15,10 +15,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E28 extends TestBase {
+public class TestCase_E38 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,12 +31,15 @@ public class TestCase_E28 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to create multiple watchlist").assignCategory("Suite E");
+		test = extent
+				.startTest(var,
+						"Verify that a user's public watchlist is not visible to another user once that particular watchlist is deleted.")
+				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testCreateMultipleWatchList() throws Exception {
+	public void testDeletedWatchlistNotVisibleFromOthersProfile() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -53,46 +57,79 @@ public class TestCase_E28 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// Opening browser
+			// String search_query = "biology";
+
+			// 1)Create User1 and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-			// Creating new user
-			createNewUser("mask", "man");
-
+			fn1 = generateRandomName(8);
+			ln1 = generateRandomName(10);
+			System.out.println(fn1 + " " + ln1);
+			user1 = createNewUser(fn1, ln1);
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(4000);
-			// Creating a new watch list
+			// Creating public watch list
 			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 1; i <= 2; i++) {
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				Thread.sleep(2000);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
+				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 				Thread.sleep(4000);
 			}
-			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
-			// Finding the newly created watch list
-			int noOfWatchList = watchLists.size();
 
-			try {
-				Assert.assertEquals(noOfWatchList, 5);
-				test.log(LogStatus.PASS, "User is able to create multiple watch list");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to create multiple watch list");
+			// Deleting the first watch list
+			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+			Thread.sleep(4000);
+			ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 4);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 2);
+			ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
+			Thread.sleep(4000);
+			LoginTR.logOutApp();
+			closeBrowser();
+			// 2)Login as User2 and navigate to the user1 profile page
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			ob.navigate().to(host);
+			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
+			LoginTR.clickLogin();
+			Thread.sleep(15000);
+			// Searching for article
+			selectSearchTypeFromDropDown("People");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(4000);
+			// Navigating to the first user profile page
+			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
+			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
+			Thread.sleep(5000);
+			// Navigating to the watch list tab
+			ob.findElement(By.xpath("//a/span[contains(text(),'Watchlists')]")).click();
+			Thread.sleep(8000);
+			List<WebElement> watchlists = ob.findElements(By.xpath("//a[contains(@ui-sref,'watchlist-detail')]"));
+			int count = 0;
+			for (WebElement watchlist : watchlists) {
+				if (watchlist.getText().equals(newWatchlistName + 2)) {
+					count++;
+					break;
+				}
 			}
 
+			try {
+				Assert.assertEquals(count, 0);
+				test.log(LogStatus.PASS, "Others can not see the deleted watchlist of a user on user's profile page");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "Others able see the deleted watchlist of a user on user's profile page");
+			}
 			closeBrowser();
 
 		} catch (Throwable t) {

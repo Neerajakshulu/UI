@@ -55,10 +55,7 @@ public class TestCase_E26 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			// String search_query = "biology";
-
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -67,29 +64,15 @@ public class TestCase_E26 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			// Creating new user
 			createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
 
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-
-			// Creating a new watch list
-			ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-			Thread.sleep(2000);
 			String newWatchlistName = "New Watchlist";
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-					.sendKeys("This is my newly created watch list");
-			// Clicking on Create button
-			ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-			Thread.sleep(4000);
+			String newWatchListDescription = "This is my newly created watch list";
+
+			createWatchList("private", newWatchlistName, newWatchListDescription);
 			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
 			int count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
@@ -109,7 +92,7 @@ public class TestCase_E26 extends TestBase {
 
 			// Navigating to the private watch list tab
 			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
-			watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
 				if (watchLists.get(i).getText().equals(newWatchlistName)) {

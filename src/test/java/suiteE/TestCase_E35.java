@@ -2,14 +2,11 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -18,7 +15,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E17 extends TestBase {
+public class TestCase_E35 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,16 +27,13 @@ public class TestCase_E17 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add an Post from Record View page to a particular watchlist")
+		test = extent.startTest(var, "Verify that user is able to convert his public watchlist to private")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testChangeStatusPublicToPrivate() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -67,45 +61,23 @@ public class TestCase_E17 extends TestBase {
 			}
 			clearCookies();
 
+			// Creating new user
 			createNewUser("mask", "man");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			String newWatchlistName = "New Watchlist";
+			String newWatchListDescription = "This is my newly created watch list";
 
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
+			createWatchList("public", newWatchlistName, newWatchListDescription);
 
-			// Watching the post to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			// Making the public watch list to private
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 
-			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
-
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
-
-			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
-
+			boolean watchListStatus = ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox")))
+					.isSelected();
+			if (!watchListStatus) {
+				test.log(LogStatus.PASS, "User is able to change the public watch list to private");
+			} else {
+				test.log(LogStatus.FAIL, "User is not able to change the public watch list to private");
 			}
 
 			closeBrowser();
