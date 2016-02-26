@@ -53,9 +53,7 @@ public class TestCase_E28 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -64,17 +62,12 @@ public class TestCase_E28 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			// Creating new user
 			createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-
+			Thread.sleep(4000);
 			// Creating a new watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 5; i++) {

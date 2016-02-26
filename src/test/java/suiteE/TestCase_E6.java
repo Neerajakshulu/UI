@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -58,9 +57,7 @@ public class TestCase_E6 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -71,11 +68,6 @@ public class TestCase_E6 extends TestBase {
 			clearCookies();
 
 			createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
 
 			// Searching for post
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");

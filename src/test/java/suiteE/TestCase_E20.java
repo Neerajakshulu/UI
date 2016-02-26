@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -60,9 +59,7 @@ public class TestCase_E20 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -72,12 +69,7 @@ public class TestCase_E20 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
+			createNewUser("mask", "man");
 
 			// Searching for article
 			selectSearchTypeFromDropDown("Patents");
@@ -85,7 +77,7 @@ public class TestCase_E20 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
 
-			// Getting watch button list for patents 
+			// Getting watch button list for patents
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			String selectedWatchlistName = null;

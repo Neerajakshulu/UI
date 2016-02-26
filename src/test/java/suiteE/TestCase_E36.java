@@ -9,13 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -57,7 +55,7 @@ public class TestCase_E36 extends TestBase {
 
 			String search_query = "hello";
 
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -68,11 +66,6 @@ public class TestCase_E36 extends TestBase {
 			clearCookies();
 
 			createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
 
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
