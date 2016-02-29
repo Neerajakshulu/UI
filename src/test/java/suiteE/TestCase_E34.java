@@ -31,7 +31,10 @@ public class TestCase_E34 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that no one can see the private watchlists of a user on user's profile page").assignCategory("Suite E");
+		test = extent
+				.startTest(var,
+						"Verify that no one can see the private watchlists of a user on user's profile page||Verify that user1 is not able to see a watchlist on user2's profile page,  once user2's public watchlist is reverted to private.")
+				.assignCategory("Suite E");
 
 	}
 
@@ -67,7 +70,7 @@ public class TestCase_E34 extends TestBase {
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(4000);
-			// Creating 4 private and 1 public watch list
+			// Creating 5 public watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 5; i++) {
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
@@ -75,12 +78,14 @@ public class TestCase_E34 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
-				if (i == 5)
-					ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 				Thread.sleep(4000);
 			}
+			// Making the last watch list as private
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+			Thread.sleep(2000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Login as User2 and navigate to the user1 profile page
@@ -101,21 +106,21 @@ public class TestCase_E34 extends TestBase {
 			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
 			Thread.sleep(5000);
 			// Navigating to the watch list tab
-			ob.findElement(By.xpath("//a/span[contains(text(),'Watchlists')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			Thread.sleep(8000);
-			List<WebElement> watchlists = ob.findElements(By.xpath("//a[contains(@ui-sref,'watchlist-detail')]"));
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
-			for (int i = 0; i <= 4; i++) {
-				for (WebElement watchlist : watchlists) {
-					if (watchlist.getText().equals(newWatchlistName + i)) {
-						count++;
-						break;
-					}
+			// Checking if private watch list is visible to others or not
+			for (WebElement watchlist : watchlists) {
+				if (watchlist.getText().equals(newWatchlistName + 5)) {
+					count++;
+					break;
 				}
 			}
 
 			try {
-				Assert.assertEquals(0, count);
+				Assert.assertEquals(count, 0);
 				test.log(LogStatus.PASS, "Others can not see the private watchlists of a user on user's profile page");
 			} catch (Error e) {
 				status = 2;

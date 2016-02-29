@@ -306,6 +306,64 @@
     </classes>
 </test>
 
+<test name="CommentOnOtherUsersPost">
+    <classes>
+      <class name="suiteC.CommentOnOtherUsersPost" ></class>
+    </classes>
+</test>
+
+<test name="ShareOthersPostInFB">
+    <parameter name="fbusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="fbpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOthersPostInFB" ></class>
+    </classes>
+</test>
+
+<test name="ShareOthersPostOnLI">
+    <parameter name="liusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="lipassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOthersPostOnLI" ></class>
+    </classes>
+</test>
+
+<test name="ShareOthersPostOnTwitter">
+    <parameter name="tusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="tpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOthersPostOnTwitter" ></class>
+    </classes>
+</test>
+
+<test name="ShareOwnPostInFB">
+    <parameter name="fbusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="fbpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOwnPostInFB" ></class>
+    </classes>
+</test>
+
+
+<test name="EidtPostContentMinMaxLenValidation">
+    <classes>
+      <class name="suiteC.EidtPostContentMinMaxLenValidation" ></class>
+    </classes>
+</test>
+
+<test name="CommentOnUsersOwnPost">
+    <classes>
+      <class name="suiteC.CommentOnUsersOwnPost" ></class>
+    </classes>
+</test>
+
+<test name="FollowUnfollowPostsAuthor">
+    <classes>
+      <class name="suiteC.FollowUnfollowPostsAuthor" ></class>
+    </classes>
+</test>
+
 
 </suite>
+
 

@@ -32,7 +32,8 @@ public class TestCase_E33 extends TestBase {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
-				.startTest(var, "Verify that anyone can see the public watchlists of a user on user's profile page")
+				.startTest(var,
+						"Verify that anyone can see the public watchlists of a user on user's profile page||Verify that user1 is able to see a watchlist on user2's profile page,  once user2's private watchlist is made to public.")
 				.assignCategory("Suite E");
 
 	}
@@ -67,8 +68,11 @@ public class TestCase_E33 extends TestBase {
 
 			String newWatchlistName = "New Watchlist";
 			String newWatchListDescription = "This is my newly created watch list";
-
-			createWatchList("public", newWatchlistName, newWatchListDescription);
+			// Create private watch list
+			createWatchList("private", newWatchlistName, newWatchListDescription);
+			// Making the watch list from private to public
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+			Thread.sleep(2000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Login as User2 and navigate to the user1 profile page
@@ -89,9 +93,10 @@ public class TestCase_E33 extends TestBase {
 			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
 			Thread.sleep(5000);
 			// Navigating to the watch list tab
-			ob.findElement(By.xpath("//a/span[contains(text(),'Watchlists')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			Thread.sleep(8000);
-			List<WebElement> watchlists = ob.findElements(By.xpath("//a[contains(@ui-sref,'watchlist-detail')]"));
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
 			for (WebElement watchlist : watchlists) {
 				if (watchlist.getText().equals(newWatchlistName)) {
@@ -101,7 +106,7 @@ public class TestCase_E33 extends TestBase {
 			}
 
 			try {
-				Assert.assertEquals(1, count);
+				Assert.assertEquals(count, 1);
 				test.log(LogStatus.PASS, "Others can see the public watchlists of a user on user's profile page");
 			} catch (Error e) {
 				status = 2;
