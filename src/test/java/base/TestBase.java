@@ -879,7 +879,7 @@ public class TestBase {
 		ob.findElement(By.xpath(OR.getProperty("watchlist_watch_button"))).click();
 		Thread.sleep(4000);
 		// Selecting the watch list name
-		String selectedWatchlistName = ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).getText();
+		String selectedWatchlistName = ob.findElement(By.xpath(OR.getProperty("watchlist_name_in_select_model"))).getText();
 		// Closing the select a model
 		ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 		Thread.sleep(4000);
