@@ -112,9 +112,10 @@ public class TestCase_E38 extends TestBase {
 			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
 			Thread.sleep(5000);
 			// Navigating to the watch list tab
-			ob.findElement(By.xpath("//a/span[contains(text(),'Watchlists')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			Thread.sleep(8000);
-			List<WebElement> watchlists = ob.findElements(By.xpath("//a[contains(@ui-sref,'watchlist-detail')]"));
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
 			for (WebElement watchlist : watchlists) {
 				if (watchlist.getText().equals(newWatchlistName + 2)) {
