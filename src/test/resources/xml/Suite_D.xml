@@ -249,6 +249,22 @@
     </classes>
 </test>
 
+<test name="Post_like_count">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostLikeCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="Publish_post_timestamp_validation">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostTimeStampTest" ></class> 
+    </classes>
+</test>
+
 
 
 </suite>

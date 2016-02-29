@@ -11,13 +11,11 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -59,9 +57,7 @@ public class TestCase_E25 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
-			// Making a new user
+			// Opening browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -71,12 +67,7 @@ public class TestCase_E25 extends TestBase {
 			}
 			clearCookies();
 
-			 createNewUser("mask", "man");
-			// ob.navigate().to(host);
-			// LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
-			// LoginTR.clickLogin();
-			// Thread.sleep(15000);
+			createNewUser("mask", "man");
 
 			// Searching for post
 			selectSearchTypeFromDropDown("All");
@@ -99,8 +90,8 @@ public class TestCase_E25 extends TestBase {
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
 			// Getting the items count
-			int itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
 				Assert.assertEquals(itemCount, 10);
@@ -117,8 +108,7 @@ public class TestCase_E25 extends TestBase {
 				Thread.sleep(2000);
 			}
 
-			itemCount = Integer.parseInt(
-					ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
 				Assert.assertEquals(itemCount, 5);
