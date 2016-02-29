@@ -1,6 +1,9 @@
 package pages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -642,7 +645,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostTitle(String postTitle) throws Exception {
 		String enteredPost=getFirstPostTitle();
-		Assert.assertEquals(enteredPost, enteredPost);
+		Assert.assertEquals(enteredPost, postTitle);
 	}
 	
 	
@@ -973,7 +976,29 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		 }
 	}
 	
+	public static int getPostLikeCount() throws Exception {
+		String likeCount=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).getText();
+		return Integer.parseInt(likeCount);
+	}
 	
+	/**
+	 * Method to validate Post TimeStamp
+	 * @throws Exception, When Post doesn't have any title
+	 */
+	public static void validatePostTimeStamp() throws Exception {
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMMMMMM YYYY");
+		//get current date time with Date()
+		Date date = new Date();
+		String current_date=dateFormat.format(date).toString();
+		String postCreationDate = BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH)
+				.getText();
+		System.out.println("current date-->"+current_date);
+		System.out.println("post creation date-->"+postCreationDate);
+		if(!postCreationDate.equalsIgnoreCase(current_date)){
+			throw new Exception("Post creation date and System date should match");
+		}
+		
+	}
 	
 }
 

@@ -221,18 +221,24 @@
 			<class name="suiteE.TestCase_E35"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E36">
 		<classes>
 			<class name="suiteE.TestCase_E36"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test E37">
 		<classes>
 			<class name="suiteE.TestCase_E37"></class>
 		</classes>
 	</test>
 
+	<test name="Test E38">
+		<classes>
+			<class name="suiteE.TestCase_E38"></class>
+		</classes>
+	</test>
+	
 </suite>
 

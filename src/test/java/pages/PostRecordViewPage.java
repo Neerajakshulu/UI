@@ -373,4 +373,13 @@ public class PostRecordViewPage extends TestBase {
 		
 		
 	}
+	
+	/**
+	 * click post link
+	 * @throws Exception
+	 */
+	public static void clickPostLike() throws Exception {
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH);
+		BrowserWaits.waitTime(2);
+	}
 }

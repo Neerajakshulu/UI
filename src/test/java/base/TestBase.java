@@ -850,7 +850,7 @@ public class TestBase {
 		Thread.sleep(8000);
 
 		// Getting all the watch lists
-		List<WebElement> watchLists = ob.findElements(By.xpath("// a[@class='ng-binding']"));
+		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		// Finding the particular watch list and navigating to it
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
@@ -914,6 +914,21 @@ public class TestBase {
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 		Thread.sleep(6000);
+	}
+	
+	public int convertStringToInt(String str){
+		
+		String[] arr=str.split(",");
+		String temp="";
+		for(int i=0;i<arr.length;i++){
+			
+			temp=temp+arr[i];
+		}
+		
+		int num=Integer.parseInt(temp);
+		
+		return num;
+		
 	}
 
 }
