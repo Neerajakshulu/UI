@@ -872,18 +872,16 @@ public class TestBase {
 		watchButton.click();
 
 		// Wait until select a watch list model loads
-		waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
 		// Select the first watch list from the model
-		waitForElementTobeClickable(ob,
-				By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 5);
 		// Adding the item into watch list
-		ob.findElement(By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']")).click();
+		ob.findElement(By.xpath(OR.getProperty("watchlist_watch_button"))).click();
 		Thread.sleep(4000);
 		// Selecting the watch list name
-		String selectedWatchlistName = ob.findElement(By.xpath("//h4[@class='select-watchlist-title ng-binding']"))
-				.getText();
+		String selectedWatchlistName = ob.findElement(By.xpath(OR.getProperty("watchlist_name_in_select_model"))).getText();
 		// Closing the select a model
-		ob.findElement(By.xpath("//button[@class='close']")).click();
+		ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 		Thread.sleep(4000);
 		return selectedWatchlistName;
 	}
@@ -895,8 +893,8 @@ public class TestBase {
 	 * @throws InterruptedException
 	 */
 	public void selectSearchTypeFromDropDown(String type) throws InterruptedException {
-		ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-		waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 5);
+		ob.findElement(By.xpath(OR.getProperty("search_type_dropdown"))).click();
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown_values_panel")), 5);
 		ob.findElement(By.linkText(type)).click();
 		Thread.sleep(2000);
 	}
