@@ -363,6 +363,31 @@
     </classes>
 </test>
 
+
+<test name="ShareOwnPostOnLI">
+    <parameter name="liusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="lipassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOwnPostOnLI" ></class>
+    </classes>
+</test>
+
+<test name="ShareOwnPostOnTwitter">
+    <parameter name="tusername" value="testing.prasadreddy@gmail.com"/>
+	<parameter name="tpassword" value="likhithreddy@123"/>
+    <classes>
+      <class name="suiteC.ShareOwnPostOnTwitter" ></class>
+    </classes>
+</test>
+
+<test name="FlagUnflagUserPost">
+    <classes>
+      <class name="suiteC.FlagUnflagUserPost" ></class>
+    </classes>
+</test>
+
+
+
 <test name="VerifySavePostAsDraft">
     <classes>
       <class name="suiteC.VerifySavePostAsDraft" ></class>

@@ -493,6 +493,48 @@ public class PostRecordViewPage extends TestBase {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH);
 		BrowserWaits.waitTime(2);
 	}
+
+	public static void validateFlagAndUnflagActionOnPost() throws Exception {
+		waitForAjax(ob);
+		String attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
+		if(attribute.contains("flag-inactive")){
+			flagOrUnflagAPost();
+			BrowserWaits.waitTime(6);
+			attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
+			Assert.assertTrue(attribute.contains("flag-active"));
+			test.log(LogStatus.PASS, "User is able to flag the post");
+			
+		}else{
+			flagOrUnflagAPost();
+			BrowserWaits.waitTime(6);
+			attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
+			Assert.assertTrue(attribute.contains("flag-inactive"));
+			test.log(LogStatus.PASS, "User is able to Unflag the post");
+			
+		}
+		
+		
+	}
+
+	private static void flagOrUnflagAPost() {
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")),
+				40);
+		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
+		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+	}
+
+	public static void deletePost() throws Exception {
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS.toString()), 180);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS.toString())));
+		
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString()), 180);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString())));
+		BrowserWaits.waitTime(6);
+	}
 	
 	}	
 
