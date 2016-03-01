@@ -376,6 +376,11 @@
     </classes>
 </test>
 
+<test name="VerifyEditDraftPostFromModalWindow">
+    <classes>
+      <class name="suiteC.VerifyEditDraftPostFromModalWindow" ></class>
+    </classes>
+</test>
 </suite>
 
 
