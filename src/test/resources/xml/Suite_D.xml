@@ -265,7 +265,18 @@
     </classes>
 </test>
 
+<test name="Comments_Timestamp">
+    <classes>
+        <class name="suiteD.CommentsTabTimeStampValidationTest" ></class> 
+    </classes>
+</test>
 
+<test name="HCR_Profile_Badge">
+	<parameter name="hcrProfile" value="professor"></parameter>
+    <classes>
+        <class name="suiteD.HCRProfileBadgeTest" ></class> 
+    </classes>
+</test>
 
 </suite>
 

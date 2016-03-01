@@ -503,6 +503,16 @@ public class ProfilePage  extends TestBase {
 	}
 	
 	
+	public static int getDraftPostsCount() throws InterruptedException {
+		BrowserWaits.waitTime(10);
+		waitForAjax(ob);
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
+		int count = Integer.parseInt(
+				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+						.getText());
+		return count;
+	}
+	
 	/**
 	 * Method to get the count of Comments count in a profile
 	 * @return
@@ -757,6 +767,18 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 				.click();
 	}
 
+	public static void clickOnPostCancelKeepDraftButton() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString()))
+				.click();
+	}
+	
+	public static void clickOnDraftPostsTab() {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+				.click();
+	}
+	
 	public static boolean validatePublishButton() {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		
@@ -998,6 +1020,23 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 			throw new Exception("Post creation date and System date should match");
 		}
 		
+	}
+	
+	/**
+	 * Method for validate comments time stamp
+	 * @throws Exception, When comments doesn't have any time stamp
+	 */
+	public static void commentsTabTimeStamp() throws Exception {
+		clickCommentsTab();
+		List<WebElement> commentTs=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS);
+		if(!(commentTs.size()>0)){
+			throw new Exception("None of the comments are having time stamp");
+		}
+		String timeStamp=commentTs.get(0).getText();
+		//System.out.println("timestamp-->"+timeStamp);
+		if(!(timeStamp.contains("TODAY")||timeStamp.contains("2016")||timeStamp.contains("AM")||timeStamp.contains("PM"))){
+			throw new Exception("Comments timestamp not displaying");
+		}
 	}
 	
 }

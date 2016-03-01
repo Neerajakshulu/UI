@@ -29,7 +29,9 @@ public class TestCase_E39 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that same article can be added to multiple watchlists")
+		test = extent
+				.startTest(var,
+						"Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular watchlist during watching")
 				.assignCategory("Suite E");
 
 	}
