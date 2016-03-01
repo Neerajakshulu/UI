@@ -363,6 +363,11 @@
     </classes>
 </test>
 
+<test name="VerifySavePostAsDraft">
+    <classes>
+      <class name="suiteC.VerifySavePostAsDraft" ></class>
+    </classes>
+</test>
 
 </suite>
 
