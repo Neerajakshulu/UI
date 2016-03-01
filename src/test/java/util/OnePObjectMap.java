@@ -82,6 +82,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click*='appreciateThis']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("div[class='post-button-wrapper'] button[id='posting']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH("//div[@class='modal-body ng-scope']//a[@class='ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("input[class^='post-title-input']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS("div[name='createdPostContent'] div[id^='taTextElement']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg'] p[class='ng-binding'] p"),
@@ -90,6 +91,7 @@ public enum OnePObjectMap {
 	//HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
 	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading'] a"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[class='ng-binding']:nth-child(2)"),
+	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS("a[data-event-category='profiledraft posts'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS("div[modal-controller='PostDialogController'] button[id='editing']"),
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_CSS("i[class^='webui-icon webui-icon-share']"),
 	HOME_PROJECT_NEON_VIEW_POST_WATCH_CSS("i[class^='webui-icon webui-icon-watch']"),
@@ -129,6 +131,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Keep draft')]"),
 	HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS("h6[ng-show='location']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[@class='doc-info' and contains(.,'Comments')]/span[contains(@class,'stat-count')]"),
 	HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS("div[class='full-record'] button[class*='profile-follow-unfollow']"),
@@ -143,7 +146,13 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
-	
+	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH("(//span//a[@class='ng-binding'])[1]"),
+	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("div[class='full-record'] button[class*='webui-icon webui-icon-flag']"),
+	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
+	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
+	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("div[class*='time-stamp']"),
+	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class='award ng-scope ne-profile-object-hcr']"),
+
 	; 
 	
 	

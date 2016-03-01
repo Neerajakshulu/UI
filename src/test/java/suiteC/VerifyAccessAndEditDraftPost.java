@@ -4,25 +4,24 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pages.HeaderFooterLinksPage;
+import pages.ProfilePage;
+
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.TestUtil;
+import base.TestBase;
 
-public class CommentOnUsersOwnPost extends TestBase{
-
-	
-	
+public class VerifyAccessAndEditDraftPost extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,13 +32,13 @@ public class CommentOnUsersOwnPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post a user authored themselves")
+		test = extent.startTest(var, "Verfiy that user is able to access and edit the draft posts from their profile")
 				.assignCategory("Suite C");
 
 	}
-
+	
 	@Test
-	public void testPostComments() throws Exception {
+	public void testEditDrafts() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -56,6 +55,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
+			String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -63,34 +63,37 @@ public class CommentOnUsersOwnPost extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1","PASSWORD1");
+
+			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			Thread.sleep(8000);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
-				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
-			}
+			ProfilePage.clickOnDraftPostsTab();
+			String postTitleBeforeEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					.getText();
+			System.out.println(postTitleBeforeEditing);
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString())).click();
 			
-			ProfilePage.clickOnFirstPost();
-			int countBefore=PostRecordViewPage.getCommentCount();
+			ProfilePage.enterPostTitle(postString);
+			test.log(LogStatus.INFO, "Edited Post Title");
+			ProfilePage.enterPostContent(postString);
+			test.log(LogStatus.INFO, "Edited Post Content");
 			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
-			
-			int countAfter=PostRecordViewPage.getCommentCount();
-			
-			
+			ProfilePage.clickOnPostCancelButton();
+			ProfilePage.clickOnPostCancelKeepDraftButton();
+		//	ProfilePage.clickOnDraftPostsTab();
+			Thread.sleep(5000);
+			String postTitleAfterEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					.getText();
+			System.out.println(postTitleAfterEditing);
+			System.out.println(postString);
 			try {
-				Assert.assertEquals(countBefore+1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
-				
+				Assert.assertTrue(postString.equals(postTitleAfterEditing));
+				test.log(LogStatus.PASS, "Draft Post is accessed and edited successfully");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
+				test.log(LogStatus.FAIL, "Draft Post accessing and editing failed");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -98,6 +101,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
+			 Thread.sleep(5000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -117,7 +121,8 @@ public class CommentOnUsersOwnPost extends TestBase{
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
+	
+	
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
@@ -133,5 +138,4 @@ public class CommentOnUsersOwnPost extends TestBase{
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 }

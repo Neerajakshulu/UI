@@ -239,6 +239,24 @@
 			<class name="suiteE.TestCase_E38"></class>
 		</classes>
 	</test>
+
+	<test name="Test E39">
+		<classes>
+			<class name="suiteE.TestCase_E39"></class>
+		</classes>
+	</test>
 	
+	<test name="Test E40">
+		<classes>
+			<class name="suiteE.TestCase_E40"></class>
+		</classes>
+	</test>
+	
+	<test name="Test E41">
+		<classes>
+			<class name="suiteE.TestCase_E41"></class>
+		</classes>
+	</test>
+
 </suite>
 

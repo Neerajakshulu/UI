@@ -19,10 +19,7 @@ import pages.ProfilePage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CommentOnUsersOwnPost extends TestBase{
-
-	
-	
+public class DeleteUserPost extends TestBase{
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,13 +30,13 @@ public class CommentOnUsersOwnPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post a user authored themselves")
+		test = extent.startTest(var, "Verify that user is able to delete their post")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testPostComments() throws Exception {
+	public void testPostDeletion() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -74,23 +71,15 @@ public class CommentOnUsersOwnPost extends TestBase{
 				ProfilePage.enterPostContent(tilte);
 				ProfilePage.clickOnPostPublishButton();
 			}
-			
+			int postCount=ProfilePage.getPostsCount();
 			ProfilePage.clickOnFirstPost();
-			int countBefore=PostRecordViewPage.getCommentCount();
-			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
-			
-			int countAfter=PostRecordViewPage.getCommentCount();
-			
-			
+			PostRecordViewPage.deletePost();
+			HeaderFooterLinksPage.clickOnProfileLink();
 			try {
-				Assert.assertEquals(countBefore+1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
-				
+			Assert.assertTrue(postCount==(ProfilePage.getPostsCount()+1));
+			test.log(LogStatus.PASS, "Delete post functionality is working as expected");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
+				test.log(LogStatus.FAIL, "Delete post functionality is not working as expected");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

@@ -77,4 +77,17 @@ public class SearchProfile  extends TestBase {
 		}
 	}
 
+	/**
+	 * Method for Click People after searching an profile
+	 * @throws Exception, When People are not present/Disabled
+	 */
+	public static void hcrProfileBadgeValidation() throws Exception {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS);
+			String hcrAttr=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS).findElement(By.tagName("span")).getAttribute("class");
+			//System.out.println("hcr profile badge-->"+hcrAttr);
+			if(!hcrAttr.contains("hcr")){
+			   throw new Exception("HCR Profile should display with Badge");	
+			}
+	}
+	
 }

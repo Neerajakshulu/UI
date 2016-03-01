@@ -3,8 +3,6 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,11 +13,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.SearchResultsPage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CommentOnUsersOwnPost extends TestBase{
+public class FlagUnflagUserPost extends TestBase{
 
 	
 	
@@ -33,7 +31,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post a user authored themselves")
+		test = extent.startTest(var, "Verify that user is able to flag/unflag the posts of others.")
 				.assignCategory("Suite C");
 
 	}
@@ -65,32 +63,14 @@ public class CommentOnUsersOwnPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
-				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
-			}
-			
-			ProfilePage.clickOnFirstPost();
-			int countBefore=PostRecordViewPage.getCommentCount();
-			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
-			
-			int countAfter=PostRecordViewPage.getCommentCount();
-			
-			
+			HeaderFooterLinksPage.searchForText("test");
+			SearchResultsPage.clickOnPostTab();
+			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
 			try {
-				Assert.assertEquals(countBefore+1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
-				
+				PostRecordViewPage.validateFlagAndUnflagActionOnPost();
+				PostRecordViewPage.validateFlagAndUnflagActionOnPost();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
+				test.log(LogStatus.FAIL, "Flag/Unflag validation failed for posts");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

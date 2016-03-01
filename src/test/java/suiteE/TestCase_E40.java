@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,11 +14,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E38 extends TestBase {
+public class TestCase_E40 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -31,15 +29,13 @@ public class TestCase_E38 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that a user's public watchlist is not visible to another user once that particular watchlist is deleted.")
+		test = extent.startTest(var, "Verify that same patent can be added to multiple watchlists")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testDeletedWatchlistNotVisibleFromOthersProfile() throws Exception {
+	public void testWatchPatentToMultipleWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -57,80 +53,80 @@ public class TestCase_E38 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// String search_query = "biology";
-
-			// 1)Create User1 and logout
+			// Opening browser
 			openBrowser();
-			maximizeWindow();
+			try {
+				maximizeWindow();
+			} catch (Throwable t) {
+
+				System.out.println("maximize() command not supported in Selendroid");
+			}
 			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
+
+			createNewUser("mask", "man");
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			Thread.sleep(4000);
-			// Creating public watch list
+			// Creating a new watch list
 			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 2; i++) {
+			for (int i = 1; i <= 3; i++) {
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				Thread.sleep(2000);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
-				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 				Thread.sleep(4000);
 			}
 
-			// Deleting the first watch list
-			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 4);
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 2);
-			ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
-			Thread.sleep(4000);
-			LoginTR.logOutApp();
-			closeBrowser();
-			// 2)Login as User2 and navigate to the user1 profile page
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			Thread.sleep(15000);
-			// Searching for article
-			selectSearchTypeFromDropDown("People");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			// Searching for patent
+			String patentName = "biology";
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-			// Navigating to the first user profile page
-			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
-			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
-			Thread.sleep(5000);
-			// Navigating to the watch list tab
-			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			Thread.sleep(8000);
-			List<WebElement> watchlists = ob
-					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
-			int count = 0;
-			for (WebElement watchlist : watchlists) {
-				if (watchlist.getText().equals(newWatchlistName + 2)) {
-					count++;
-					break;
+
+			// Watching an patent to a multiple watch list
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+			// Watch the patent to multiple watch list
+			for (int i = 1; i <= 3; i++) {
+				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
+				Thread.sleep(4000);
+			}
+
+			// Closing the select a model
+			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+			Thread.sleep(4000);
+
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			int count;
+			List<WebElement> watchedItems;
+			for (int i = 1; i <= 3; i++) {
+				count = 0;
+				// Navigate to a particular watch list page
+				navigateToParticularWatchlistPage(newWatchlistName + i);
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for (int j = 0; j < watchedItems.size(); j++) {
+					if (watchedItems.get(j).getText().equals(documentName))
+						count++;
+
+				}
+				if (compareNumbers(1, count)) {
+					test.log(LogStatus.INFO, "User is able to add the patent into watchlist" + i);
+
+				} else {
+					test.log(LogStatus.FAIL, "User is not able to add the patent into watchlist" + i);// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_add_patent_into_watchlist" + i)));// screenshot
 				}
 			}
 
-			try {
-				Assert.assertEquals(count, 0);
-				test.log(LogStatus.PASS, "Others can not see the deleted watchlist of a user on user's profile page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "Others able see the deleted watchlist of a user on user's profile page");
-			}
 			closeBrowser();
 
 		} catch (Throwable t) {
