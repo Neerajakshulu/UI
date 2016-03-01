@@ -16,10 +16,11 @@ import base.TestBase;
 import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
 import pages.ProfilePage;
+import pages.SearchResultsPage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CommentOnUsersOwnPost extends TestBase{
+public class CommentOnOtherUsersPost extends TestBase{
 
 	
 	
@@ -33,7 +34,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post a user authored themselves")
+		test = extent.startTest(var, "Verify that user is able to add comments on the posts of others.")
 				.assignCategory("Suite C");
 
 	}
@@ -65,17 +66,9 @@ public class CommentOnUsersOwnPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
-				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
-			}
-			
-			ProfilePage.clickOnFirstPost();
+			HeaderFooterLinksPage.searchForText("test");
+			SearchResultsPage.clickOnPostTab();
+			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
 			int countBefore=PostRecordViewPage.getCommentCount();
 			
 			Authoring.enterArticleComment("test comments added on post");
@@ -90,7 +83,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
 				
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
+				test.log(LogStatus.FAIL, "Adding Comments to other users post not working as expected ");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

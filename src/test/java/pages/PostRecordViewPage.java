@@ -1,6 +1,7 @@
 package pages;
 
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,11 +20,11 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on SHARE button in post record view
 	 */
 	public static void clickOnShareButton() {
-
+		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
-				.click();
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 180);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+				
 
 	}
 
@@ -35,7 +36,7 @@ public class PostRecordViewPage extends TestBase {
 		clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS.toString())).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS.toString())));
 	}
 
 	/**
@@ -46,7 +47,7 @@ public class PostRecordViewPage extends TestBase {
 		clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS.toString())).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS.toString())));
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class PostRecordViewPage extends TestBase {
 		clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS.toString())).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS.toString())));
 	}
 
 	/**
@@ -369,10 +370,120 @@ public class PostRecordViewPage extends TestBase {
 		String actComment=ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0).getText();
 		
 		Assert.assertTrue(actComment.contains(comment) );
-		test.log(LogStatus.PASS, "Newly added comment on user's own post is available");
+		test.log(LogStatus.PASS, "Newly added comment on post is available");
 		
 		
 	}
+	
+	
+	public static void shareRecordOnFB(String fbusername,String fbpassword) throws Exception{
+		test.log(LogStatus.INFO,"Sharing Article on Facebook");
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+		//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+		Thread.sleep(3000);
+		
+		String PARENT_WINDOW=ob.getWindowHandle();
+		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
+		Thread.sleep(6000);
+		
+		Set<String> child_window_handles= ob.getWindowHandles();
+		//System.out.println("window hanles-->"+child_window_handles.size());
+		 for(String child_window_handle:child_window_handles) {
+			 if(!child_window_handle.equals(PARENT_WINDOW)) {
+				 ob.switchTo().window(child_window_handle);
+				// maximizeWindow();
+				// System.out.println("child window--->"+ob.getTitle());
+				 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS);
+				 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS, fbusername);
+				 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS, fbpassword);
+				 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
+				 Thread.sleep(6000);
+				 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
+				 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
+				 Thread.sleep(3000);
+				
+				 ob.switchTo().window(PARENT_WINDOW);
+			 }
+		 }
+	}
+	
+	
+	public static void shareOnLI(String liusername, String lipassword) throws Exception {
+			test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			Thread.sleep(3000);
+			
+			String PARENT_WINDOW=ob.getWindowHandle();
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
+			Thread.sleep(6000);
+			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
+			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']")).click();
+			Thread.sleep(6000);
+			Set<String> child_window_handles= ob.getWindowHandles();
+			System.out.println("window hanles-->"+child_window_handles.size());
+			 for(String child_window_handle:child_window_handles) {
+				 if(!child_window_handle.equals(PARENT_WINDOW)) {
+					 ob.switchTo().window(child_window_handle);
+					 Thread.sleep(6000);
+					// ob.manage().window().maximize();
+					// Thread.sleep(6000);
+					 System.out.println("child window--->"+ob.getTitle());
+					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS);
+					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
+					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
+					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
+					 Thread.sleep(10000);
+					ob.switchTo().window(PARENT_WINDOW);
+					Thread.sleep(8000);
+					 jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+				 }
+			 }
+			
+		}
+	
+	public static void shareOnTwitter(String tusername,String tpassword) throws Exception {
+		
+			test.log(LogStatus.INFO,"Sharing Article on Twitter");
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
+			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			Thread.sleep(3000);
+			
+			String PARENT_WINDOW=ob.getWindowHandle();
+			String rvPageurl=ob.getCurrentUrl();
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK);
+			Thread.sleep(3000);
+			ob.manage().window().maximize();
+			
+			Set<String> child_window_handles= ob.getWindowHandles();
+			//System.out.println("window hanles-->"+child_window_handles.size());
+			 for(String child_window_handle:child_window_handles) {
+				 if(!child_window_handle.equals(PARENT_WINDOW)) {
+					 ob.switchTo().window(child_window_handle);
+					 ob.manage().window().maximize();
+					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS);
+					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
+					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
+					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
+					 Thread.sleep(20000);
+					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
+					 String articleDesc=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
+					 System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
+					 if(!articleDesc.contains(rvPageurl)){
+						 throw new Exception("Sharing Article Description not populated on Twitter Page");
+					 }
+					 
+					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
+					 Thread.sleep(3000);
+
+					 ob.switchTo().window(PARENT_WINDOW);
+				 }
+			 }
+	}	
+
 	
 	/**
 	 * click post link
@@ -382,4 +493,6 @@ public class PostRecordViewPage extends TestBase {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH);
 		BrowserWaits.waitTime(2);
 	}
-}
+	
+	}	
+

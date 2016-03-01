@@ -4,10 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -19,7 +19,7 @@ import pages.ProfilePage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CommentOnUsersOwnPost extends TestBase{
+public class ShareOwnPostOnTwitter extends TestBase{
 
 	
 	
@@ -33,13 +33,13 @@ public class CommentOnUsersOwnPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post a user authored themselves")
+		test = extent.startTest(var, "Verify that user is able to share the posts of others in FB.")
 				.assignCategory("Suite C");
 
 	}
 
-	@Test
-	public void testPostComments() throws Exception {
+	@Test@Parameters({"tusername","tpassword"})
+	public void testPostComments(String tusername,String tpassword) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -76,28 +76,9 @@ public class CommentOnUsersOwnPost extends TestBase{
 			}
 			
 			ProfilePage.clickOnFirstPost();
-			int countBefore=PostRecordViewPage.getCommentCount();
-			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
-			
-			int countAfter=PostRecordViewPage.getCommentCount();
-			
-			
-			try {
-				Assert.assertEquals(countBefore+1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
-				
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
-
-			}
+			PostRecordViewPage.clickOnTwitterUnderShareMenu();
+			PostRecordViewPage.shareOnTwitter(tusername, tpassword);
+			 Thread.sleep(5000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
