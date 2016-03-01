@@ -369,6 +369,13 @@
     </classes>
 </test>
 
+
+<test name="VerifyAccessAndEditDraftPost">
+    <classes>
+      <class name="suiteC.VerifyAccessAndEditDraftPost" ></class>
+    </classes>
+</test>
+
 </suite>
 
 
