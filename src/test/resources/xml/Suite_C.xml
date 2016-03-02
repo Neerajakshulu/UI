@@ -412,6 +412,19 @@
       <class name="suiteC.VerifyDraftPostDisplayInUserOwnProfile" ></class>
     </classes>
 </test>
+
+<test name="DeleteDraftPostFromProfile">
+    <classes>
+      <class name="suiteC.DeleteDraftPostFromProfile" ></class>
+    </classes>
+</test>
+
+<test name="DeleteUserPost">
+    <classes>
+      <class name="suiteC.DeleteUserPost" ></class>
+    </classes>
+</test>
+
 </suite>
 
 
