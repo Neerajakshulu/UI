@@ -161,7 +161,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH("//div[contains(@class,'user-drafts-display')]/descendant::div[@class='row ng-scope' and contains(.,'TITLE')]/descendant::button[@id='deleting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH("//div[contains(@class,'user-drafts-display')]/descendant::div[@class='row ng-scope' and contains(.,'TITLE')]/descendant::button[@id='editing']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS("div[class='modal-content'] button[ng-click='close()']"),
-	 
+	
 	; 
 	
 	

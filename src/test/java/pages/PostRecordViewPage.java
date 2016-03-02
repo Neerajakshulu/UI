@@ -17,7 +17,7 @@ import util.OnePObjectMap;
 
 public class PostRecordViewPage extends TestBase {
 
-	/** 
+	/**
 	 * Method to click on SHARE button in post record view
 	 */
 	public static void clickOnShareButton() {
