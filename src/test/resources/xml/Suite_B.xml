@@ -444,7 +444,39 @@
 	</test>
 	
 	
+	<test name="Test B73">
+		<classes>
+			<class name="suiteB.TestCase_B73"></class>
+		</classes>
+	</test>
 	
+	
+	<test name="Test B74">
+		<classes>
+			<class name="suiteB.TestCase_B74"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B75">
+		<classes>
+			<class name="suiteB.TestCase_B75"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B76">
+		<classes>
+			<class name="suiteB.TestCase_B76"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B77">
+		<classes>
+			<class name="suiteB.TestCase_B77"></class>
+		</classes>
+	</test>
 	
 	
 </suite>

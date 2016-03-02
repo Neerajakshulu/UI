@@ -1022,6 +1022,23 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 	
+	/**
+	 * Method for validate comments time stamp
+	 * @throws Exception, When comments doesn't have any time stamp
+	 */
+	public static void commentsTabTimeStamp() throws Exception {
+		clickCommentsTab();
+		List<WebElement> commentTs=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS);
+		if(!(commentTs.size()>0)){
+			throw new Exception("None of the comments are having time stamp");
+		}
+		String timeStamp=commentTs.get(0).getText();
+		//System.out.println("timestamp-->"+timeStamp);
+		if(!(timeStamp.contains("TODAY")||timeStamp.contains("2016")||timeStamp.contains("AM")||timeStamp.contains("PM"))){
+			throw new Exception("Comments timestamp not displaying");
+		}
+	}
+	
 }
 
 	
