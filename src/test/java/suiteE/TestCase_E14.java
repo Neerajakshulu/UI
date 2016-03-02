@@ -94,8 +94,7 @@ public class TestCase_E14 extends TestBase {
 
 			try {
 
-				WebElement defaultMessage = ob
-						.findElement(By.xpath("//div[@class='row'][@ng-show='vm.supportingCopyIsVisible']"));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
 
 				if (defaultMessage.isDisplayed()) {
 
