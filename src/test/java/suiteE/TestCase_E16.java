@@ -91,8 +91,7 @@ public class TestCase_E16 extends TestBase {
 			navigateToParticularWatchlistPage(selectedWatchlistName);
 			try {
 
-				WebElement defaultMessage = ob
-						.findElement(By.xpath("//div[@class='row'][@ng-show='vm.supportingCopyIsVisible']"));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
 
 				if (defaultMessage.isDisplayed()) {
 

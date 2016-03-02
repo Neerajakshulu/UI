@@ -774,6 +774,7 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	public static void clickOnDraftPostsTab() {
+		waitForAjax(ob);		
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
@@ -1021,7 +1022,39 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		}
 		
 	}
+
+	public static void deleteDraftPost(String postString) {
+
+		waitForAjax(ob);
+		BrowserWaits.waitForElementTobeVisible(ob,
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
+						.replaceAll("TITLE", postString)),
+				30);
+
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
+				.replaceAll("TITLE", postString))).click();
+		
+		BrowserWaits.waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString()),
+				30);
+
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString())).click();
+	}
+
+	public static List<String> getAllDraftPostTitle() {
+		List<String> title=new ArrayList<String>();
+		ob.navigate().refresh();
+		waitForAjax(ob);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 60);
+		List<WebElement>  drafts= ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()));
+		for(WebElement we:drafts){
+			title.add(we.getText());
+		}
+		return title;
+	}
 	
+
 	/**
 	 * Method for validate comments time stamp
 	 * @throws Exception, When comments doesn't have any time stamp
