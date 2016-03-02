@@ -58,7 +58,7 @@ public class AppreciateUnAppreciateOthersPost extends TestBase{
 			maximizeWindow();
 			clearCookies();
 
-			// Navigate to TR login page and login with valid TR credentials
+			// Navigate to TR login page and login with valid TR credentials 
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");

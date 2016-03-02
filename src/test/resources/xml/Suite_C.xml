@@ -25,7 +25,7 @@
 
  <test name="Authoring_Deletion_Test">
     <classes>
-    <class name="suiteC.AuthoringDeleteTest" ></class>
+    <class name="suiteC.AuthoringDeleteTest" > </class>
     </classes>
 </test>
 
