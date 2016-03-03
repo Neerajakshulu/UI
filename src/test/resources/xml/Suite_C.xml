@@ -431,6 +431,12 @@
 		</classes>
 	</test>
 
+<test name="VerifyDraftPostTabDisplayForZeroDrafts">
+		<classes>
+			<class name="suiteC.VerifyDraftPostTabDisplayForZeroDrafts"></class>
+		</classes>
+	</test>
+
 </suite>
 
 

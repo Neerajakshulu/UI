@@ -79,6 +79,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS("a[data-event-category='profilefollowers']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS("a[data-event-category='profilefollowing']"),
+	HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS("a[data-event-category='profilewatchlists']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click*='appreciateThis']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("div[class='post-button-wrapper'] button[id='posting']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),

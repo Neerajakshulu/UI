@@ -1071,6 +1071,24 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 			throw new Exception("Comments timestamp not displaying");
 		}
 	}
+	/**
+	 * Method to validate Other profiles Watchlist tab
+	 * @throws Exception, When Post doesn't have any title
+	 */
+	public static void otherProfileWatchlistTab() throws Exception {
+		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+		String watchlistTabText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS).getText();
+		//System.out.println("watchlist tab text-->"+watchlistTabText);
+		if(!(watchlistTabText.contains("Watchlists"))){
+			throw new Exception("Other Profiles watchlist tab should be visible");
+		}
+	}
+	
+	public static int getPostCommentCount() throws Exception {
+		String commentCount=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).get(1).getText();
+		return Integer.parseInt(commentCount);
+	}
+	
 	
 }
 
