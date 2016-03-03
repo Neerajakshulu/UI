@@ -270,5 +270,11 @@
 		</classes>
 	</test>
 
+	<test name="Test E44">
+		<classes>
+			<class name="suiteE.TestCase_E44"></class>
+		</classes>
+	</test>
+
 </suite>
 
