@@ -21,7 +21,7 @@ import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_E42 extends TestBase {
+public class TestCase_E43 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -36,13 +36,13 @@ public class TestCase_E42 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to watch an article to a particular watchlist from notification in home page||Verify that user is able to unwatch an article from watchlist from notification in home page")
+						"Verify that user is able to watch a patent to a particular watchlist from notification in home page||Verify that user is able to unwatch a patent from watchlist from notification in home page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testWatchUnwatchArticleFromHomePage() throws Exception {
+	public void testWatchUnwatchPatentFromHomePage() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -94,7 +94,7 @@ public class TestCase_E42 extends TestBase {
 			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
-			// 3)Login as user1 and comment on some article
+			// 3)Login as user1 and comment on some patent
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
@@ -109,12 +109,10 @@ public class TestCase_E42 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			System.out.println(document_title);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
-					.sendKeys("Automation Script Comment: TestCase_E42");
+					.sendKeys("Automation Script Comment: TestCase_E43");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 
@@ -122,7 +120,7 @@ public class TestCase_E42 extends TestBase {
 			logout();
 			Thread.sleep(5000);
 
-			// 2)Login with user2 and and try to watch the article from
+			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			Thread.sleep(4000);
@@ -142,7 +140,7 @@ public class TestCase_E42 extends TestBase {
 				closeBrowser();
 				return;
 			}
-			// Watching the article to a particular watch list
+			// Watching the patent to a particular watch list
 			WebElement watchButton = ob
 					.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
@@ -166,15 +164,14 @@ public class TestCase_E42 extends TestBase {
 			}
 
 			if (compareNumbers(1, count)) {
-				test.log(LogStatus.PASS, "User is able to add an article into watchlist from home page");
+				test.log(LogStatus.PASS, "User is able to add an patent into watchlist from home page");
 
 			} else {
-				test.log(LogStatus.FAIL, "User not able to add an article into watchlist from home page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an patent into watchlist from home page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_article_into_watchlist_from_home_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_add_patent_into_watchlist_from_home_page")));// screenshot
 				return;
 			}
 
@@ -182,7 +179,7 @@ public class TestCase_E42 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
 			Thread.sleep(10000);
 
-			// Unwatching the article to a particular watch list
+			// Unwatching the patent to a particular watch list
 			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
 			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
@@ -199,14 +196,14 @@ public class TestCase_E42 extends TestBase {
 
 				if (defaultMessage.isDisplayed()) {
 
-					test.log(LogStatus.PASS, "User is able to remove an article from watchlist in home page");// extent
+					test.log(LogStatus.PASS, "User is able to remove an patent from watchlist in home page");// extent
 				} else {
-					test.log(LogStatus.FAIL, "User not able to remove an article from watchlist in home page");// extent
+					test.log(LogStatus.FAIL, "User not able to remove an patent from watchlist in home page");// extent
 					// reports
 					status = 2;// excel
 					test.log(LogStatus.INFO,
 							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_article_from_watchlist_in_home_page")));// screenshot
+									+ "_user_unable_to_remove_patent_from_watchlist_in_home_page")));// screenshot
 				}
 			} catch (NoSuchElementException e) {
 

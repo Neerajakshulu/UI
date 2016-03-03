@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -493,7 +494,53 @@ public class PostRecordViewPage extends TestBase {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH);
 		BrowserWaits.waitTime(2);
 	}
-
+	
+	
+	public  static void validateAppreciationComment() throws Exception  {
+		
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
+		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
+		System.out.println("size of total elemntes-->"+apprDivs.size());
+		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
+				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
+		
+		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
+		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+		scrollingToElementofAPage();
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+		System.out.println("Before count-->"+apprEarCount);
+		
+		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
+		System.out.println("Attribute Status-->"+attrStatus);
+		
+		if(attrStatus.contains("DOWN")) {
+			scrollingToElementofAPage();
+			JavascriptExecutor exe= (JavascriptExecutor)ob;
+			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+			Thread.sleep(4000);
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			System.out.println("Already liked  After count-->"+apprAftCount);
+			   if(!(apprAftCount<apprEarCount)) {
+				   throw new Exception("Comment Appreciation not happended");
+			   }else{
+				   test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
+			   }
+		} 
+		else if (attrStatus.contains("UP")) {
+			scrollingToElementofAPage();
+			JavascriptExecutor exe= (JavascriptExecutor)ob;
+			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+			Thread.sleep(4000);
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			System.out.println("Not liked --After count-->"+apprAftCount);
+			   if(!(apprAftCount>apprEarCount)) {
+				   throw new Exception("Comment Appreciation not happended");
+			   }else{
+				   test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
+			   }
+			}
+	}
+	
 	public static void validateFlagAndUnflagActionOnPost() throws Exception {
 		waitForAjax(ob);
 		String attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");

@@ -479,5 +479,19 @@
 	</test>
 	
 	
+	<test name="Test B78">
+		<classes>
+			<class name="suiteB.TestCase_B78"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B79">
+		<classes>
+			<class name="suiteB.TestCase_B79"></class>
+		</classes>
+	</test>
+	
+	
 </suite>
 
