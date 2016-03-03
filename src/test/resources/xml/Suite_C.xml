@@ -406,6 +406,31 @@
       <class name="suiteC.VerifyEditDraftPostFromModalWindow" ></class>
     </classes>
 </test>
+
+<test name="VerifyDraftPostDisplayInUserOwnProfile">
+    <classes>
+      <class name="suiteC.VerifyDraftPostDisplayInUserOwnProfile" ></class>
+    </classes>
+</test>
+
+<test name="DeleteDraftPostFromProfile">
+    <classes>
+      <class name="suiteC.DeleteDraftPostFromProfile" ></class>
+    </classes>
+</test>
+
+<test name="DeleteUserPost">
+    <classes>
+      <class name="suiteC.DeleteUserPost" ></class>
+    </classes>
+</test>
+
+<test name="VerifyPublishPostDisplayed">
+		<classes>
+			<class name="suiteC.VerifyPublishPostDisplayed"></class>
+		</classes>
+	</test>
+
 </suite>
 
 

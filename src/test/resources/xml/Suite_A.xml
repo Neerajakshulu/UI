@@ -1,9 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite A">
 
-
-
-
 	<test name="Test A1">
 		<classes>
 			<class name="suiteA.TestCase_A1"></class>
