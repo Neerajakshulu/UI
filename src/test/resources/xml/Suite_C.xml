@@ -425,6 +425,12 @@
     </classes>
 </test>
 
+<test name="VerifyPublishPostDisplayed">
+		<classes>
+			<class name="suiteC.VerifyPublishPostDisplayed"></class>
+		</classes>
+	</test>
+
 </suite>
 
 
