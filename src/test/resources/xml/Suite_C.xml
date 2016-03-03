@@ -425,6 +425,23 @@
     </classes>
 </test>
 
+<test name="VerifyPublishPostDisplayed">
+		<classes>
+			<class name="suiteC.VerifyPublishPostDisplayed"></class>
+		</classes>
+	</test>
+
+<test name="VerifyDraftPostTabDisplayForZeroDrafts">
+		<classes>
+			<class name="suiteC.VerifyDraftPostTabDisplayForZeroDrafts"></class>
+		</classes>
+	</test>
+
+<test name="DeleteDraftPostFromPostModal">
+    <classes>
+      <class name="suiteC.DeleteDraftPostFromPostModal" ></class>
+    </classes>
+</test>
 </suite>
 
 

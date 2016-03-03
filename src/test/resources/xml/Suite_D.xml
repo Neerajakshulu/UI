@@ -278,5 +278,21 @@
     </classes>
 </test>
 
+<test name="Post_comment_count">
+	<parameter name="myPost" value="Post for Testing RecordView"/>
+	<parameter name="postContent" value="my post content for RecordView page "/>
+    <classes>
+        <class name="suiteD.PublishedAPostCommentCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="other_profiles_watchlist_tab">
+	<parameter name="profile" value="hao"></parameter>
+    <classes>
+        <class name="suiteD.OtherProfileWatchlistTabTest" ></class> 
+    </classes>
+</test>
+
+
 </suite>
 
