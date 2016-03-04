@@ -437,6 +437,11 @@
 		</classes>
 	</test>
 
+<test name="DeleteDraftPostFromPostModal">
+    <classes>
+      <class name="suiteC.DeleteDraftPostFromPostModal" ></class>
+    </classes>
+</test>
 </suite>
 
 

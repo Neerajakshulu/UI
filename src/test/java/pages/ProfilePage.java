@@ -1089,7 +1089,32 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		return Integer.parseInt(commentCount);
 	}
 	
-	
+	public static void deleteDraftPostFromPostModal(String postString) {
+		waitForAjax(ob);
+		BrowserWaits.waitForElementTobeVisible(ob,
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
+						.replaceAll("TITLE", postString)),
+				30);
+
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
+				.replaceAll("TITLE", postString))).click();
+		
+		clickOnPostCancelButton();
+		clickOnPostCancelDiscardButton();
+		
+	}
+
+	public static boolean isDraftPostTabDispalyed() {
+		try{
+		waitForAjax(ob);
+			BrowserWaits.waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 30);
+		return ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString())).isDisplayed();
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+
 }
 
 	
