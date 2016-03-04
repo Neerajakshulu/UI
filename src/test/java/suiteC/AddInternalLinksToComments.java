@@ -16,12 +16,13 @@ import base.TestBase;
 import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
 import pages.ProfilePage;
+import pages.SearchResultsPage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CreatePostWithExternalLink extends TestBase{
+public class AddInternalLinksToComments extends TestBase{
 
-	private static final String URL = "https://www.yahoo.com";
+	private static final String URL = "https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,7 +33,7 @@ public class CreatePostWithExternalLink extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to add external links to the post and publish it.")
+		test = extent.startTest(var, "Verify that the user is able to add internal links to the comment and publish it.")
 				.assignCategory("Suite C");
 
 	}
@@ -55,7 +56,6 @@ public class CreatePostWithExternalLink extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -65,27 +65,20 @@ public class CreatePostWithExternalLink extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			int postCountBefore=ProfilePage.getPostsCount();
-			test.log(LogStatus.INFO, "Post count:"+postCountBefore);
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle(postString);
-			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
-			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.addExternalLinkToPostContent(URL);
-			ProfilePage.clickOnPostPublishButton();
-			test.log(LogStatus.INFO, "Published the post");
-			ProfilePage.clickFirstPostTitle();	
+			HeaderFooterLinksPage.searchForText("test");
+			SearchResultsPage.clickOnPostTab();
+			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
+			PostRecordViewPage.addExternalLinkComments(URL);
+			Authoring.clickAddCommentButton();
+			test.log(LogStatus.INFO, "Added internal link to the comment");
 			try {
-				Assert.assertTrue(PostRecordViewPage.validatePostContentForExternalLink(URL));
-				test.log(LogStatus.PASS, "Post is published with external link");
-				PostRecordViewPage.clickExternalLinkInPostContent(URL);
+				Assert.assertTrue(PostRecordViewPage.validateCommentForExternalLink(URL));
+				test.log(LogStatus.PASS, "Comment is published with internal link");
+				PostRecordViewPage.clickExternalLinkInComments(URL);
 				Assert.assertTrue(PostRecordViewPage.validateURL(URL));
-				test.log(LogStatus.PASS, "External links added to post are working fine");
+				test.log(LogStatus.PASS, "Internal links added to comment are working fine");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "External links added to post are not working fine");
+				test.log(LogStatus.FAIL, "Internal links added to comment are not working fine");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
