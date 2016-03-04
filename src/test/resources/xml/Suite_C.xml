@@ -442,6 +442,14 @@
       <class name="suiteC.DeleteDraftPostFromPostModal" ></class>
     </classes>
 </test>
+
+<test name="VerifyPostTitleDisplayInDraftSection">
+    <classes>
+      <class name="suiteC.VerifyPostTitleDisplayInDraftSection" ></class>
+    </classes>
+</test>
+
+
 </suite>
 
 
