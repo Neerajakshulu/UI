@@ -510,18 +510,20 @@
 		</classes>
 	</test>
 	
-	
+	 
 	<test name="Test B83">
 		<classes>
 			<class name="suiteB.TestCase_B83"></class>
 		</classes>
 	</test>
 	
+	
+	
 	<test name="Test B84">
 		<classes>
 			<class name="suiteB.TestCase_B84"></class>
 		</classes>
-	</test>
+	</test> 
 	
 	<test name="Test B85">
 		<classes>
@@ -533,7 +535,20 @@
 		<classes>
 			<class name="suiteB.TestCase_B86"></class>
 		</classes>
-	</test>
+	</test>  
+	
+	<test name="Test B87">
+		<classes>
+			<class name="suiteB.TestCase_B87"></class>
+		</classes>
+	</test>  
+	
+	
+	<test name="Test B88">
+		<classes>
+			<class name="suiteB.TestCase_B88"></class>
+		</classes>
+	</test>  
 	
 	
 	
