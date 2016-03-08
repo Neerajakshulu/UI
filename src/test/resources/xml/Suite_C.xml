@@ -449,6 +449,17 @@
     </classes>
 </test>
 
+<test name="AddExternalLinksToComments">
+    <classes>
+      <class name="suiteC.AddExternalLinksToComments" ></class>
+    </classes>
+</test>
+
+<test name="AddInternalLinksToComments">
+    <classes>
+      <class name="suiteC.AddInternalLinksToComments" ></class>
+    </classes>
+</test>
 
 </suite>
 
