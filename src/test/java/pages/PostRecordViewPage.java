@@ -3,6 +3,7 @@ package pages;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -238,8 +239,8 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(6);
 	}
 
-	public static boolean validateURL(String url) {
-
+	public static boolean validateURL(String url) throws Exception {
+		BrowserWaits.waitTime(10);
 		if (ob.getCurrentUrl().toLowerCase().contains(url.toLowerCase()))
 			return true;
 		else
@@ -581,6 +582,37 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString()), 180);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString())));
 		BrowserWaits.waitTime(6);
+	}
+	
+	public static void addExternalLinkComments(String url) throws Exception{
+		BrowserWaits.waitTime(5);	
+		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+			commentArea.click();
+			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
+			BrowserAction.click(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
+			BrowserWaits.waitTime(5);
+			Alert alert=ob.switchTo().alert();
+			alert.sendKeys(url);
+			alert.accept();
+			BrowserWaits.waitTime(5);
+	}
+
+	public static boolean validateCommentForExternalLink(String url) throws Exception {
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
+		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
+		if (link.equalsIgnoreCase(url))
+			return true;
+		else
+			return false;
+	}
+
+	public static void clickExternalLinkInComments(String url) throws Exception {
+		BrowserWaits.waitTime(6);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
+		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
+		if (link.equalsIgnoreCase(url))
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).click();
 	}
 	
 	}	
