@@ -14,14 +14,12 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
 import pages.ProfilePage;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class CreatePostWithExternalLink extends TestBase{
+public class DeleteDraftPostFromPostModal extends TestBase{
 
-	private static final String URL = "https://www.yahoo.com";
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,13 +30,13 @@ public class CreatePostWithExternalLink extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to add external links to the post and publish it.")
+		test = extent.startTest(var, "Verfiy that user is able to delete the draft post from the list in their profile")
 				.assignCategory("Suite C");
 
 	}
 
 	@Test
-	public void testCreateAndPublishPost() throws Exception {
+	public void deleteDraftPostFromProfile() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "C Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteCxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -55,7 +53,7 @@ public class CreatePostWithExternalLink extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
+			String postString="DraftPostCreationTest"+RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -67,25 +65,42 @@ public class CreatePostWithExternalLink extends TestBase{
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			int postCountBefore=ProfilePage.getPostsCount();
-			test.log(LogStatus.INFO, "Post count:"+postCountBefore);
 			ProfilePage.clickOnPublishPostButton();
 			ProfilePage.enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
 			ProfilePage.enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.addExternalLinkToPostContent(URL);
-			ProfilePage.clickOnPostPublishButton();
-			test.log(LogStatus.INFO, "Published the post");
-			ProfilePage.clickFirstPostTitle();	
+			ProfilePage.clickOnPostCancelButton();
+			ProfilePage.clickOnPostCancelKeepDraftButton();
+			test.log(LogStatus.INFO, "Saved the draft post");
+			ProfilePage.clickOnDraftPostsTab();
+			int postCountBefore=ProfilePage.getDraftPostsCount();
+			test.log(LogStatus.INFO, "Draft Post count:"+postCountBefore);
+			
+			ProfilePage.deleteDraftPostFromPostModal(postString);
+			int postCountAfter=0;
+			if (postCountBefore == 1) {
+
+				if (!ProfilePage.isDraftPostTabDispalyed()) {
+					postCountAfter = 0;
+				}
+
+			 else {
+
+				postCountAfter = ProfilePage.getDraftPostsCount();
+
+			}
+			}else{
+				postCountAfter = ProfilePage.getDraftPostsCount();
+			}
+			test.log(LogStatus.INFO, "Draft Post count:"+postCountAfter);
+			
+			
 			try {
-				Assert.assertTrue(PostRecordViewPage.validatePostContentForExternalLink(URL));
-				test.log(LogStatus.PASS, "Post is published with external link");
-				PostRecordViewPage.clickExternalLinkInPostContent(URL);
-				Assert.assertTrue(PostRecordViewPage.validateURL(URL));
-				test.log(LogStatus.PASS, "External links added to post are working fine");
+				Assert.assertEquals(postCountBefore-1, postCountAfter);
+				test.log(LogStatus.PASS, "Post count is decremented after the post deletion");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "External links added to post are not working fine");
+				test.log(LogStatus.FAIL, "Post count is not decremented after the post deletion");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -93,7 +108,20 @@ public class CreatePostWithExternalLink extends TestBase{
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			ob.navigate().back();
+			if(postCountBefore!=1){
+			try {
+				Assert.assertTrue(!ProfilePage.getAllDraftPostTitle().contains(postString) );
+				test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Deleted post is displayed under posts tab in profile");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
+
+			}
+			}
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -129,5 +157,6 @@ public class CreatePostWithExternalLink extends TestBase{
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
+
 	
 }

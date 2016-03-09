@@ -431,6 +431,36 @@
 		</classes>
 	</test>
 
+<test name="VerifyDraftPostTabDisplayForZeroDrafts">
+		<classes>
+			<class name="suiteC.VerifyDraftPostTabDisplayForZeroDrafts"></class>
+		</classes>
+	</test>
+
+<test name="DeleteDraftPostFromPostModal">
+    <classes>
+      <class name="suiteC.DeleteDraftPostFromPostModal" ></class>
+    </classes>
+</test>
+
+<test name="VerifyPostTitleDisplayInDraftSection">
+    <classes>
+      <class name="suiteC.VerifyPostTitleDisplayInDraftSection" ></class>
+    </classes>
+</test>
+
+<test name="AddExternalLinksToComments">
+    <classes>
+      <class name="suiteC.AddExternalLinksToComments" ></class>
+    </classes>
+</test>
+
+<test name="AddInternalLinksToComments">
+    <classes>
+      <class name="suiteC.AddInternalLinksToComments" ></class>
+    </classes>
+</test>
+
 </suite>
 
 
