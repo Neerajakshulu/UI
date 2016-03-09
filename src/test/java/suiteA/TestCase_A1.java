@@ -85,6 +85,7 @@ public class TestCase_A1 extends TestBase{
 		//Navigate to TR login page
 		ob.navigate().to(host);
 //		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		System.out.println("Before clicking login");
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
@@ -124,8 +125,7 @@ public class TestCase_A1 extends TestBase{
 		Thread.sleep(10000);
 		List<WebElement> email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
 		email_list.get(0).click();
-//		Thread.sleep(2000);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_subject_label")), 30);
+		Thread.sleep(2000);
 		String email_subject=ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 		if(!StringContains(email_subject,"Please confirm your email address for your new Project Neon User ID")){
 			
@@ -143,8 +143,8 @@ public class TestCase_A1 extends TestBase{
 		System.out.println("After capturing email body links");
 //		links.get(0).click();
 		ob.get(links.get(0).getAttribute("href"));
-//		Thread.sleep(8000);
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+		Thread.sleep(8000);
+//		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		
 //		//Switch to 2nd window
 //		Set<String> myset=ob.getWindowHandles();
@@ -161,7 +161,7 @@ public class TestCase_A1 extends TestBase{
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-//		Thread.sleep(25000);
+		Thread.sleep(10000);
 		if(!checkElementPresence("help_link")){
 			
 			test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");//extent reports

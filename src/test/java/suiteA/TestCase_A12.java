@@ -106,14 +106,17 @@ public class TestCase_A12 extends TestBase{
 		//Navigate to TR login page
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-		Thread.sleep(8000);
+//		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
 		
 		List<WebElement> tm_list=ob.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_label")));		
@@ -145,7 +148,7 @@ public class TestCase_A12 extends TestBase{
 		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		
 				if(validity.equalsIgnoreCase("YES")){
 					

@@ -80,17 +80,20 @@ public class TestCase_A13 extends TestBase{
 		//Navigate to TR login page and login with valid TR credentials
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-		Thread.sleep(8000);
+//		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_TermsOfUse_link")), 30);
 
 		ob.findElement(By.linkText(OR.getProperty("reg_TermsOfUse_link"))).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		Set<String> myset1=ob.getWindowHandles();
 		Iterator<String> myIT1=myset1.iterator();
@@ -103,7 +106,7 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		
 		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
@@ -115,13 +118,13 @@ public class TestCase_A13 extends TestBase{
 		}
 		ob.close();
 		ob.switchTo().window(al1.get(0));
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
 		myE.click();
 			/*JavascriptExecutor executor = (JavascriptExecutor)ob;
 			executor.executeScript("arguments[0].click();", myE);*/
 		
-		Thread.sleep(10000);
+		Thread.sleep(2000);
 		
 		al1.clear();
 		myset1=ob.getWindowHandles();
@@ -133,7 +136,7 @@ public class TestCase_A13 extends TestBase{
 		}
 		
 		ob.switchTo().window(al1.get(1));
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		if(!checkElementPresence("reg_PageHeading_label_for_privacyStatement")){
 			
