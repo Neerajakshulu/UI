@@ -103,14 +103,16 @@ public class TestCase_A5 extends TestBase{
 		//Navigate to TR login page
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-		Thread.sleep(8000);
+//		Thread.sleep(8000);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_firstName_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
 		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
 		
