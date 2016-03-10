@@ -91,7 +91,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 			chooseArticle(completeArticle);
 			Authoring.enterArticleComments("test");
 			Authoring.clickAddCommentButton();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
@@ -114,14 +114,15 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 		try {
 			
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  Profanity Words execution starts for data set #"+ (count+1)+"--->");
-						
+			waitForAjax(ob);		
 			Authoring.updateComment(profanityWord);
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()),40);
 			String profanityErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			BrowserWaits.waitUntilText(profanityErrorMessage);
 			ob.findElement(By.cssSelector("button[ng-click*='cancelEdit']")).click();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			Assert.assertEquals(profanityErrorMessage, errorMessage);
 			
 			if(!profanityErrorMessage.equalsIgnoreCase(errorMessage)){
@@ -186,17 +187,18 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	
 	public  void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

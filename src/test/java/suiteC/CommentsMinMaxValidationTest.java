@@ -133,7 +133,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			test.log(LogStatus.INFO,"Min and Max Length Comment Validation");
 			//System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
 			String minValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Min Validation Error Message--->"+minValidErrMsg);
 			BrowserWaits.waitUntilText(minValidErrMsg);
@@ -141,13 +141,14 @@ public class CommentsMinMaxValidationTest extends TestBase {
 
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
 			String maxValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			BrowserWaits.waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
 
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			

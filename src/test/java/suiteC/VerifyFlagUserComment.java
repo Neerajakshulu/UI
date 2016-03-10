@@ -65,13 +65,13 @@ public class VerifyFlagUserComment extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			//Thread.sleep(8000);
 			login();
-			Thread.sleep(15000);
+			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			List<WebElement> itemList;
 			while (true) {
@@ -117,7 +117,7 @@ public class VerifyFlagUserComment extends TestBase {
 					isPresent = false;
 				}
 			}
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
@@ -143,10 +143,10 @@ public class VerifyFlagUserComment extends TestBase {
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
 			// 40);
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 
 			try {
-				Thread.sleep(6000);
+				Thread.sleep(4000);
 				// commentsList=ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))

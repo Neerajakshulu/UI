@@ -96,7 +96,8 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 			
 			searchArticle("biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForAjax(ob);
 			SearchResultsPage.clickOnArticleTab();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			
@@ -149,10 +150,11 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

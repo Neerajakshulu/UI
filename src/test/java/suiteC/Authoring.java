@@ -78,7 +78,7 @@ public class Authoring  extends TestBase {
 	
 	public static void updateComment(String steComment) throws Exception {
 		scrollingToElementofAPage();
-		
+		waitForElementTobeVisible(ob, By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"), 40);
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
 		JavascriptExecutor exe= (JavascriptExecutor)ob;
 		exe.executeScript("arguments[0].click();", editCommentElement);
@@ -88,7 +88,7 @@ public class Authoring  extends TestBase {
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){

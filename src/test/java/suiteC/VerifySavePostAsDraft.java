@@ -70,13 +70,13 @@ public class VerifySavePostAsDraft extends TestBase {
 
 			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(8000);
+			//Thread.sleep(8000);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore=ProfilePage.getDraftPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountBefore);
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			ProfilePage.clickOnPublishPostButton();
 			ProfilePage.enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
@@ -102,7 +102,7 @@ public class VerifySavePostAsDraft extends TestBase {
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			 Thread.sleep(5000);					
+			// Thread.sleep(5000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

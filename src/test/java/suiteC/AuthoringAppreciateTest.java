@@ -182,7 +182,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	public static void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 	}
 	

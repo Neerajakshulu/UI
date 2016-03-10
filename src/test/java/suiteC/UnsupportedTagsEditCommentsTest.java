@@ -86,7 +86,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			chooseArticle(completeArticle);
 			Authoring.enterArticleComments("test");
 			Authoring.clickAddCommentButton();
-			Thread.sleep(6000);
+			//Thread.sleep(6000);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
 			//print full stack trace
@@ -110,7 +110,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  UnSupported HTML Tags execution starts for data set #"+ (count+1)+"--->");
 					
 			Authoring.updateComment(htmlTags);
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
 			String unSupporteTagErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			BrowserWaits.waitUntilText(unSupporteTagErrorMessage);
@@ -181,17 +182,18 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	
 	public  void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
