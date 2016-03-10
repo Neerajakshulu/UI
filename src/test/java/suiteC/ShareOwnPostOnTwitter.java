@@ -78,7 +78,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnTwitterUnderShareMenu();
 			PostRecordViewPage.shareOnTwitter(tusername, tpassword);
-			 Thread.sleep(5000);					
+			// Thread.sleep(5000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

@@ -63,9 +63,9 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			//Thread.sleep(8000);
 			login();
-			Thread.sleep(15000);
+			//Thread.sleep(15000);
 			selectAnArticle();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
@@ -155,7 +155,7 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		Thread.sleep(4000);
+	//	Thread.sleep(4000);
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
@@ -186,7 +186,7 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 			((JavascriptExecutor)ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
 		}
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 	}
 
 	@AfterTest

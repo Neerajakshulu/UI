@@ -18,6 +18,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import base.TestBase;
 import util.BrowserAction;
@@ -187,17 +188,18 @@ public class UnsupportedTagsCommentsTest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
