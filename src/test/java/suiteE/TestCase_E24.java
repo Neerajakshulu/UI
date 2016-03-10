@@ -73,7 +73,8 @@ public class TestCase_E24 extends TestBase {
 			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			// Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -94,7 +95,8 @@ public class TestCase_E24 extends TestBase {
 
 			// Unwatching the first document from results
 			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
 			// Checking if first document still exists in the watch list
 			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
 			int count = 0;

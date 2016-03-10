@@ -73,7 +73,8 @@ public class TestCase_E25 extends TestBase {
 			selectSearchTypeFromDropDown("All");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			// Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -106,6 +107,7 @@ public class TestCase_E25 extends TestBase {
 			for (int i = 0; i < 5; i++) {
 				watchButtonList.get(i).click();
 				Thread.sleep(2000);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			}
 
 			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
