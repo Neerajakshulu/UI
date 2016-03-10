@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E43 extends TestBase {
@@ -68,6 +69,9 @@ public class TestCase_E43 extends TestBase {
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
 			Thread.sleep(5000);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			// 180);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
@@ -78,57 +82,69 @@ public class TestCase_E43 extends TestBase {
 			ln2 = generateRandomName(10);
 			System.out.println(fn2 + " " + ln2);
 			user2 = createNewUser(fn2, ln2);
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
+			// Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			Thread.sleep(2000);
+			// Thread.sleep(2000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
 			LoginTR.logOutApp();
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
 
 			// 3)Login as user1 and comment on some patent
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
+			// Thread.sleep(15000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
 
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
 					.sendKeys("Automation Script Comment: TestCase_E43");
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 
 			Thread.sleep(2000);
 			logout();
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
 
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
+			waitForElementTobeClickable(ob, By.id("userid"), 30);
 			ob.findElement(By.id("userid")).clear();
 			ob.findElement(By.id("userid")).sendKeys(user2);
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
+			// Thread.sleep(15000);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("notification")), 30);
 
 			if (!checkElementPresence("notification")) {
 
@@ -177,7 +193,9 @@ public class TestCase_E43 extends TestBase {
 
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			Thread.sleep(10000);
+			// Thread.sleep(10000);
+			waitForElementTobeClickable(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
+					30);
 
 			// Unwatching the patent to a particular watch list
 			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));

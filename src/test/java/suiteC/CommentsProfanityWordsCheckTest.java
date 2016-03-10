@@ -193,10 +193,11 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

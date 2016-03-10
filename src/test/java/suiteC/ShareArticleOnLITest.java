@@ -113,26 +113,27 @@ public class ShareArticleOnLITest extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
-			Thread.sleep(6000);
+			//Thread.sleep(6000);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']")).click();
+			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles= ob.getWindowHandles();
 			System.out.println("window hanles-->"+child_window_handles.size());
 			 for(String child_window_handle:child_window_handles) {
 				 if(!child_window_handle.equals(PARENT_WINDOW)) {
 					 ob.switchTo().window(child_window_handle);
-					 Thread.sleep(6000);
+					// Thread.sleep(6000);
 					 maximizeWindow();
 					 System.out.println("child window--->"+ob.getTitle());
 					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS);
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
-					 Thread.sleep(6000);
+					// Thread.sleep(6000);
 					 
 //					 try {
 //						Set<String> child_sub_window_handles= ob.getWindowHandles();
@@ -151,7 +152,8 @@ public class ShareArticleOnLITest extends TestBase {
 //					}
 //					 ob.close();
 					 ob.switchTo().window(PARENT_WINDOW);
-					Thread.sleep(5000);
+					//Thread.sleep(5000);
+					waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"), 40);
 					 ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")).click();
 				 }
 			 }
@@ -200,10 +202,11 @@ public class ShareArticleOnLITest extends TestBase {
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

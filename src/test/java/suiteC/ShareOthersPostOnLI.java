@@ -73,7 +73,7 @@ public class ShareOthersPostOnLI extends TestBase{
 			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
 			PostRecordViewPage.clickOnLinkedInUnderShareMenu();
 			PostRecordViewPage.shareOnLI(liusername, lipassword);
-			 Thread.sleep(5000);				
+			 //Thread.sleep(5000);				
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

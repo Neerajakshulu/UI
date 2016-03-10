@@ -17,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -640,6 +641,30 @@ public class TestBase {
 		}
 	}
 
+	public static void waitForPageLoad(WebDriver driver) {
+		try {
+			for (int i = 0; i < 90; i++) {
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				// check for the pending request count and break if count is
+				// zero.
+				if (js.executeScript("return document.readyState").equals("complete")) {
+					
+					break;
+				}
+				Thread.sleep(1000);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		waitForAjax(driver);
+	}
+	
+	public static Alert waitForAlertToBePresent(WebDriver driver,int time) {
+		
+		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
+	}
 	/**
 	 * Method to wait till the element is clickable on the web page
 	 * 

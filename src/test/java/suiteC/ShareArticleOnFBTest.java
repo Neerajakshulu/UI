@@ -113,12 +113,12 @@ public class ShareArticleOnFBTest extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-			Thread.sleep(3000);
-			
+			//Thread.sleep(3000);
+		
 			String PARENT_WINDOW=ob.getWindowHandle();
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
-			Thread.sleep(6000);
-			
+			//Thread.sleep(6000);
+			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles= ob.getWindowHandles();
 			//System.out.println("window hanles-->"+child_window_handles.size());
 			 for(String child_window_handle:child_window_handles) {
@@ -133,8 +133,7 @@ public class ShareArticleOnFBTest extends TestBase {
 					 Thread.sleep(6000);
 					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
-					 Thread.sleep(3000);
-					
+						
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
 			 }
@@ -176,17 +175,18 @@ public class ShareArticleOnFBTest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForAjax(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

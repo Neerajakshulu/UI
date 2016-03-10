@@ -19,7 +19,9 @@ public class Authoring  extends TestBase {
 	static int commentSizeAfterAdd;
 	
 	public static int getCommentCount() throws InterruptedException  {
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		
+		waitForPageLoad(ob);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 			//System.out.println("num length-->"+num[num.length-1]);
@@ -38,7 +40,7 @@ public class Authoring  extends TestBase {
 		commentArea.click();
 		//scrollingToElementofAPage();
 		commentArea.sendKeys(addComments+RandomStringUtils.randomNumeric(3));
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 	
 	
@@ -52,7 +54,7 @@ public class Authoring  extends TestBase {
 		commentArea.clear();
 		//scrollingToElementofAPage();
 		commentArea.sendKeys(addComments);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 	
 	
@@ -62,7 +64,8 @@ public class Authoring  extends TestBase {
 		//ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
 		JavascriptExecutor executor = (JavascriptExecutor)ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
+		waitForAjax(ob);
 	}
 	
 	public static void validateCommentAdd() throws Exception {
@@ -78,7 +81,7 @@ public class Authoring  extends TestBase {
 	
 	public static void updateComment(String steComment) throws Exception {
 		scrollingToElementofAPage();
-		
+		waitForElementTobeVisible(ob, By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"), 40);
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
 		JavascriptExecutor exe= (JavascriptExecutor)ob;
 		exe.executeScript("arguments[0].click();", editCommentElement);
@@ -88,7 +91,7 @@ public class Authoring  extends TestBase {
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){
@@ -159,7 +162,7 @@ public class Authoring  extends TestBase {
 	public static void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 	}
 	
 	public static void scrollingToElement(WebElement element) throws InterruptedException  {

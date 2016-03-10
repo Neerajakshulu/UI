@@ -73,7 +73,6 @@ public class TestCase_E25 extends TestBase {
 			selectSearchTypeFromDropDown("All");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
