@@ -98,16 +98,18 @@ public class TestCase_A8 extends TestBase{
 		
 		
 		ob.navigate().to(host);
-		Thread.sleep(8000);
+//		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 		
 		
 		ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-		Thread.sleep(15000);
+		Thread.sleep(5000);
 		
 		
 		if(!checkElementPresence_name("LI_allowAccess_button")){

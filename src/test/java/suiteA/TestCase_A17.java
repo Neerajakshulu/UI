@@ -86,13 +86,17 @@ public class TestCase_A17 extends TestBase{
 			String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+//			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+//			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
+			
 			System.out.println(email);
 			
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
 			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
@@ -132,7 +136,8 @@ public class TestCase_A17 extends TestBase{
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(25000);
+//			Thread.sleep(25000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			
 			
 			String actual_name=ob.findElement(By.xpath(OR.getProperty("header_label")+"//img")).getAttribute("title");

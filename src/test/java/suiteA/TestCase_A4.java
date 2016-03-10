@@ -75,9 +75,11 @@ public class TestCase_A4 extends TestBase{
 		
 		//Navigate to FB login page
 		ob.navigate().to(host);
-		Thread.sleep(8000);
+//		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 		
 		
 		//Verify that existing FB credentials are working fine
