@@ -26,8 +26,8 @@ public class HeaderFooterLinksPage extends TestBase {
 		
 			if (headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")) {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK);
-				//BrowserWaits.waitTime(4);
-				waitForPageLoad(ob);
+				waitForElementTobePresent(ob, By.tagName("h3"), 90);
+				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String cookieText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("cookie text-->"+cookieText);
@@ -36,8 +36,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			
 			else if (headerFooterLinks[i].equalsIgnoreCase("Privacy Statement")) {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
-				//BrowserWaits.waitTime(4);
-				waitForPageLoad(ob);
+				BrowserWaits.waitUntilText("Scope","Highlights","Full Privacy Statement","Cookies","Third Party Services");
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String psText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("ps text-->"+psText);
@@ -46,8 +45,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			
 			else {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
-				//BrowserWaits.waitTime(4);
-				waitForPageLoad(ob);
+				BrowserWaits.waitUntilText("These Terms of Use shall govern your use of the online service known as");
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String tcText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("TC text-->"+tcText);
@@ -62,8 +60,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public static void helpLinkValidation() throws Exception {
 		clickProfileImage();
+		waitForElementTobeClickable(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString()), 90);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
-		//BrowserWaits.waitTime(4);
 		waitForPageLoad(ob);
 		BrowserWaits.waitUntilText("Help","Feedback");
 		BrowserWaits.waitUntilText("We welcome your feedback.");
@@ -75,6 +73,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public static void accountLinkValidation() throws Exception {
 		clickProfileImage();
+		waitForElementTobeClickable(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString()), 90);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		//BrowserWaits.waitTime(4);
 		waitForPageLoad(ob);
