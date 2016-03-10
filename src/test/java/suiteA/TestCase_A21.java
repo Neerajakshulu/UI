@@ -47,11 +47,13 @@ public class TestCase_A21 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+//			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();

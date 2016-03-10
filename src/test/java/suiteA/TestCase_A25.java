@@ -60,15 +60,18 @@ static int status=1;
 					}
 				clearCookies();
 				ob.navigate().to(host);
-				Thread.sleep(8000);
+//				Thread.sleep(8000);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 				
 				ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-				Thread.sleep(4000);
+//				Thread.sleep(4000);
+				waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername").toUpperCase());
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
-				Thread.sleep(8000);
+//				Thread.sleep(8000);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 				Thread.sleep(5000);
 				
