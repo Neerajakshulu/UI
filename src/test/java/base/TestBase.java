@@ -662,6 +662,7 @@ public class TestBase {
 	}
 	
 	public static Alert waitForAlertToBePresent(WebDriver driver,int time) {
+		
 		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
 	}
 	/**

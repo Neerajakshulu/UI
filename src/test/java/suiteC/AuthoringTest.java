@@ -131,7 +131,6 @@ public class AuthoringTest extends TestBase {
 	
 	@AfterTest
 	public void reportTestResult() {
-		
 		extent.endTest(test);
 		
 		if(status==1)

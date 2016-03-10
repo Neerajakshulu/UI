@@ -160,6 +160,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public static void clickOnHelpLink() throws Exception {
 		clickProfileImage();
+		
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString()), 180);
 		ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString())).click();

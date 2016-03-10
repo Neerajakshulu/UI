@@ -23,6 +23,7 @@ public class SearchResultsPage extends TestBase{
 	}
 
 	public static void clickOnArticleTab() throws Exception {
+		
 		waitForAjax(ob);
 		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
 		waitForAjax(ob);

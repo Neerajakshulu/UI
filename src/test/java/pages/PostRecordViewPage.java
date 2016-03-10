@@ -489,7 +489,6 @@ public class PostRecordViewPage extends TestBase {
 					 
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
 					 //Thread.sleep(3000);
-
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
 			 }
