@@ -67,7 +67,6 @@ public class TestCase_E28 extends TestBase {
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating a new watch list
 			String newWatchlistName = "New Watchlist";

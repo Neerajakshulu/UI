@@ -70,8 +70,10 @@ public class TestCase_E44 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			// Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
+			Thread.sleep(5000);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			// 180);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
@@ -82,11 +84,13 @@ public class TestCase_E44 extends TestBase {
 			ln2 = generateRandomName(10);
 			System.out.println(fn2 + " " + ln2);
 			user2 = createNewUser(fn2, ln2);
-			Thread.sleep(5000);
+			// Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			// Thread.sleep(4000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
 			Thread.sleep(2000);

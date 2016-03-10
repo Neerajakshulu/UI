@@ -66,21 +66,18 @@ public class TestCase_E41 extends TestBase {
 			createNewUser("mask", "man");
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating a new watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 3; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				// Thread.sleep(2000);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				// Thread.sleep(4000);
 			}
 
 			// Searching for post
@@ -88,7 +85,6 @@ public class TestCase_E41 extends TestBase {
 			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
 			// Watching an post to a multiple watch list
@@ -100,12 +96,10 @@ public class TestCase_E41 extends TestBase {
 				waitForElementTobeClickable(ob,
 						By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]"), 30);
 				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
-				// Thread.sleep(4000);
 			}
 
 			// Closing the select a model
 			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Selecting the document name

@@ -70,7 +70,6 @@ public class TestCase_E31 extends TestBase {
 			selectSearchTypeFromDropDown("All");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
 			// Clicking on first watch button from the results
@@ -84,14 +83,14 @@ public class TestCase_E31 extends TestBase {
 
 			// Closing the select a model
 			ob.findElement(By.xpath("//button[@class='close']")).click();
-
+			Thread.sleep(2000);
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			// Thread.sleep(8000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+			Thread.sleep(6000);
 
 			// Navigating to the default watch list details page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+			Thread.sleep(6000);
 
 			// Getting the items count
 			int itemCount = Integer

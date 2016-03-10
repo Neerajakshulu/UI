@@ -19,14 +19,15 @@ public class SearchResultsPage extends TestBase{
 		waitForAjax(ob);
 		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 	}
 
 	public static void clickOnArticleTab() throws Exception {
+		
 		waitForAjax(ob);
 		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
 		waitForAjax(ob);
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 	}
 
 	public static void viewOtherUsersPost(String currentUserName) {
@@ -95,7 +96,8 @@ public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
 					isFound = true;
 					jsClick(ob, records.get(i)
 							.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
-					BrowserWaits.waitTime(6);
+					//BrowserWaits.waitTime(6);
+					waitForPageLoad(ob);
 					break;
 				}
 
@@ -158,7 +160,8 @@ public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
 				if (profileTitle.equals(title)) {
 					jsClick(ob, records.get(i)
 							.findElement(By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))));
-					BrowserWaits.waitTime(6);
+					//BrowserWaits.waitTime(6);
+					waitForPageLoad(ob);
 					isFound = true;
 					break;
 				}
