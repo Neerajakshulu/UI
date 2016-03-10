@@ -69,14 +69,12 @@ public class TestCase_E34 extends TestBase {
 			user1 = createNewUser(fn1, ln1);
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating 5 public watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 5; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				// Thread.sleep(2000);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
@@ -84,7 +82,6 @@ public class TestCase_E34 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				// Thread.sleep(4000);
 			}
 			// Making the last watch list as private
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
@@ -98,22 +95,18 @@ public class TestCase_E34 extends TestBase {
 			ob.navigate().to(host);
 			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
 			LoginTR.clickLogin();
-			// Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.linkText(fn1 + " " + ln1), 30);
 			// Navigating to the first user profile page
 			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
 			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
-			// Thread.sleep(5000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 30);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
-			// Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
 			List<WebElement> watchlists = ob
 					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));

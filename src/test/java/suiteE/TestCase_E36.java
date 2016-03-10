@@ -70,26 +70,22 @@ public class TestCase_E36 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_articles_result")), 30);
 
 			// Watching an article to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			// Thread.sleep(6000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 
 			// Watching a patents to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			// Thread.sleep(6000);
 			// waitForElementTobeVisible(ob,
 			// By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 			// Watching a posts to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			// Thread.sleep(6000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);

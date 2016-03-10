@@ -75,14 +75,12 @@ public class TestCase_E27 extends TestBase {
 			String watchlistName = "Updated Watchlist";
 			String watchlistDescription = "This is my watchlist";
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
-			Thread.sleep(2000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
 			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-			// Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 30);
 			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
 			String updatedWatchlistDescription = ob

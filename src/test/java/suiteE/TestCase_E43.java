@@ -68,8 +68,10 @@ public class TestCase_E43 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			// Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
+			Thread.sleep(5000);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			// 180);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1

@@ -19,7 +19,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import suiteC.LoginTR;
 import util.ErrorUtil;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E42 extends TestBase {
@@ -68,8 +67,10 @@ public class TestCase_E42 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			// Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
+			Thread.sleep(5000);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			// 180);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
@@ -94,8 +95,10 @@ public class TestCase_E42 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			// Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
+			Thread.sleep(5000);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			// 30);
 
 			LoginTR.logOutApp();
 			// Thread.sleep(5000);
