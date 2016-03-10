@@ -153,9 +153,10 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS);
 		String postTitle = BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS)
 				.getText();
+		waitForPageLoad(ob);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
-		BrowserWaits.waitTime(10);
+		//BrowserWaits.waitTime(10);
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = BrowserAction
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
@@ -170,9 +171,10 @@ public class PostRecordViewPage extends TestBase {
 
 	public static boolean verifyPostCreationDate() throws Exception {
 		boolean isDisplayed = false;
+		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
-		BrowserWaits.waitTime(6);
+		
 		List<WebElement> timestamp = BrowserAction
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS);
 		String time;
@@ -190,9 +192,10 @@ public class PostRecordViewPage extends TestBase {
 
 	public static boolean verifyPostEditedDate() throws Exception {
 		boolean isDisplayed = false;
+		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 		List<WebElement> timestamp = BrowserAction
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS);
 		String time;
@@ -209,13 +212,15 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static String getPostTitle() throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 		return BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
 	}
 
 	public static String getPostContent() throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		return BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS).getText();
 	}
@@ -232,15 +237,17 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static void clickExternalLinkInPostContent(String url) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		WebElement content = BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		content.findElement(By.linkText(url)).click();
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
 	}
 
 	public static boolean validateURL(String url) throws Exception {
-		BrowserWaits.waitTime(10);
+		waitForPageLoad(ob);
 		if (ob.getCurrentUrl().toLowerCase().contains(url.toLowerCase()))
 			return true;
 		else
@@ -248,7 +255,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static void clickOnAuthorName() throws Exception {
-		BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
 	}
@@ -320,7 +327,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static void validateFollowOrUnfollow() throws InterruptedException {
-		BrowserWaits.waitTime(10);
+		waitForPageLoad(ob);
 
 		String attribute = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
@@ -383,12 +390,12 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 		//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		
 		String PARENT_WINDOW=ob.getWindowHandle();
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
-		Thread.sleep(6000);
-		
+		//Thread.sleep(6000);
+		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles= ob.getWindowHandles();
 		//System.out.println("window hanles-->"+child_window_handles.size());
 		 for(String child_window_handle:child_window_handles) {
@@ -400,10 +407,10 @@ public class PostRecordViewPage extends TestBase {
 				 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS, fbusername);
 				 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS, fbpassword);
 				 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
-				 Thread.sleep(6000);
+				// Thread.sleep(6000);
 				 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
 				 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
-				 Thread.sleep(3000);
+				// Thread.sleep(3000);
 				
 				 ob.switchTo().window(PARENT_WINDOW);
 			 }
@@ -416,20 +423,21 @@ public class PostRecordViewPage extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
-			Thread.sleep(6000);
+			//Thread.sleep(6000);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']")).click();
-			Thread.sleep(6000);
+			waitForNumberOfWindowsToEqual(ob, 2);
+			//Thread.sleep(6000);
 			Set<String> child_window_handles= ob.getWindowHandles();
 			System.out.println("window hanles-->"+child_window_handles.size());
 			 for(String child_window_handle:child_window_handles) {
 				 if(!child_window_handle.equals(PARENT_WINDOW)) {
 					 ob.switchTo().window(child_window_handle);
-					 Thread.sleep(6000);
+					// Thread.sleep(6000);
 					// ob.manage().window().maximize();
 					// Thread.sleep(6000);
 					 System.out.println("child window--->"+ob.getTitle());
@@ -437,9 +445,10 @@ public class PostRecordViewPage extends TestBase {
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
-					 Thread.sleep(10000);
+					 //Thread.sleep(10000);
 					ob.switchTo().window(PARENT_WINDOW);
-					Thread.sleep(8000);
+					//Thread.sleep(8000);
+					waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"), 40);
 					 jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 				 }
 			 }
@@ -452,14 +461,14 @@ public class PostRecordViewPage extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			
 			String PARENT_WINDOW=ob.getWindowHandle();
 			String rvPageurl=ob.getCurrentUrl();
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK);
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			ob.manage().window().maximize();
-			
+			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles= ob.getWindowHandles();
 			//System.out.println("window hanles-->"+child_window_handles.size());
 			 for(String child_window_handle:child_window_handles) {
@@ -470,7 +479,7 @@ public class PostRecordViewPage extends TestBase {
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-					 Thread.sleep(20000);
+					 //Thread.sleep(20000);
 					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 					 String articleDesc=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
 					 System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
@@ -479,7 +488,7 @@ public class PostRecordViewPage extends TestBase {
 					 }
 					 
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
-					 Thread.sleep(3000);
+					 //Thread.sleep(3000);
 
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
@@ -581,16 +590,17 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString()), 180);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS.toString())));
-		BrowserWaits.waitTime(6);
+		waitForAjax(ob);
 	}
 	
 	public static void addExternalLinkComments(String url) throws Exception{
-		BrowserWaits.waitTime(5);	
+		//BrowserWaits.waitTime(5);	
+		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 			commentArea.click();
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
 			BrowserAction.click(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
-			BrowserWaits.waitTime(5);
+			waitForAlertToBePresent(ob, 40);
 			Alert alert=ob.switchTo().alert();
 			alert.sendKeys(url);
 			alert.accept();
@@ -598,7 +608,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static boolean validateCommentForExternalLink(String url) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))
@@ -608,7 +618,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static void clickExternalLinkInComments(String url) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))
