@@ -24,7 +24,8 @@ public class LoginTR extends TestBase{
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
@@ -32,47 +33,27 @@ public class LoginTR extends TestBase{
 	 * Method for enter Application Url and enter Credentials
 	 */
 	public static void enterTRCredentials(String userName, String password) {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
-		//waitUntilTextPresent(TestBase.OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"),"Thomson Reuters ID");
+		//waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}
 	
 	public static void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
+		waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
+		
 	}
 	
 	public static void searchArticle(String article) throws InterruptedException {
-		//waitUntilElementClickable("Watchlist");
-		System.out.println("article name-->"+article);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		Thread.sleep(4000);
-		
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-		Thread.sleep(4000);
-		
-		
-		
-		
-//		List<WebElement> searchElements=ob.findElement(By.cssSelector("ul[class='dropdown-menu ng-isolate-scope']")).findElements(By.tagName("li"));
-//		System.out.println("list of articles-->"+searchElements.size());
-//		for(WebElement searchElement:searchElements){
-//			String articleName=searchElement.findElement(By.tagName("a")).getText();
-//			System.out.println("article name-->"+articleName);
-//			if(searchElement.findElement(By.tagName("a")).getText().equalsIgnoreCase(articleName)){
-//				WebElement element = searchElement.findElement(By.tagName("a"));
-//				JavascriptExecutor executor = (JavascriptExecutor)ob;
-//				executor.executeScript("arguments[0].click();", element);
-//				//searchElement.findElement(By.tagName("a")).click();
-//				Thread.sleep(4000);
-//				BrowserAction.scrollingPageUp();
-//				break;
-//			}//if
-//		}//for
-		//Thread.sleep(4000);
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 	}
 	
 	public static void chooseArticle(String linkName) throws InterruptedException {

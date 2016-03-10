@@ -26,7 +26,8 @@ public class HeaderFooterLinksPage extends TestBase {
 		
 			if (headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")) {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK);
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
+				waitForPageLoad(ob);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String cookieText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("cookie text-->"+cookieText);
@@ -35,7 +36,8 @@ public class HeaderFooterLinksPage extends TestBase {
 			
 			else if (headerFooterLinks[i].equalsIgnoreCase("Privacy Statement")) {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
+				waitForPageLoad(ob);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String psText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("ps text-->"+psText);
@@ -44,7 +46,8 @@ public class HeaderFooterLinksPage extends TestBase {
 			
 			else {
 				BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
-				BrowserWaits.waitTime(4);
+				//BrowserWaits.waitTime(4);
+				waitForPageLoad(ob);
 				BrowserWaits.waitUntilText(headerFooterLinks[i]);
 				String tcText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("TC text-->"+tcText);
@@ -60,7 +63,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	public static void helpLinkValidation() throws Exception {
 		clickProfileImage();
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
-		BrowserWaits.waitTime(4);
+		//BrowserWaits.waitTime(4);
+		waitForPageLoad(ob);
 		BrowserWaits.waitUntilText("Help","Feedback");
 		BrowserWaits.waitUntilText("We welcome your feedback.");
 		
@@ -72,7 +76,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	public static void accountLinkValidation() throws Exception {
 		clickProfileImage();
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
-		BrowserWaits.waitTime(4);
+		//BrowserWaits.waitTime(4);
+		waitForPageLoad(ob);
 		BrowserWaits.waitUntilText("Account","SETTINGS","EMAIL","PASSWORD");
 	}
 	
@@ -94,7 +99,8 @@ public class HeaderFooterLinksPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS.toString()), 180);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS);
-		BrowserWaits.waitTime(4);
+		//BrowserWaits.waitTime(4);
+		waitForPageLoad(ob);
 
 	}
 
@@ -125,7 +131,8 @@ public class HeaderFooterLinksPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString()), 180);
 		jsClick(ob,ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
-BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(4);
+				waitForPageLoad(ob);
 	}
 
 	/**
@@ -153,6 +160,7 @@ BrowserWaits.waitTime(6);
 	 */
 	public static void clickOnHelpLink() throws Exception {
 		clickProfileImage();
+		
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString()), 180);
 		ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString())).click();

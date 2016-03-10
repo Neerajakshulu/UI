@@ -17,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -162,56 +163,56 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*public void openBrowser(){
-
-		if(CONFIG.getProperty("browserType").equals("FF")){
-			ob = new FirefoxDriver();
-		}
-		else if (CONFIG.getProperty("browserType").equals("IE")){
-			System.setProperty("webdriver.ie.driver",
-					"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-			DesiredCapabilities capabilities =
-					DesiredCapabilities.internetExplorer();
-			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
-					true);
-			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-			ob = new InternetExplorerDriver(capabilities);
-		}
-		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-			DesiredCapabilities capability = DesiredCapabilities.chrome();
-			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver",
-					"drivers/chromedriver.exe");
-			ob= new ChromeDriver(capability);
-		}
-
-		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-
-			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-			SafariOptions safariOptions = new SafariOptions();
-			safariOptions.setUseCleanSession(true);
-			desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
-					safariOptions);
-			ob = new SafariDriver(desiredCapabilities);
-		}
-
-
-		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-		String pageWait=CONFIG.getProperty("defaultPageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
-				TimeUnit.SECONDS);
-		try{
-			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
-					TimeUnit.SECONDS);
-		}
-		catch(Throwable t){
-
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
-
-	}*/
+//	public void openBrowser(){
+//
+//		if(CONFIG.getProperty("browserType").equals("FF")){
+//			ob = new FirefoxDriver();
+//		}
+//		else if (CONFIG.getProperty("browserType").equals("IE")){
+//			System.setProperty("webdriver.ie.driver",
+//					"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+//			DesiredCapabilities capabilities =
+//					DesiredCapabilities.internetExplorer();
+//			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
+//					true);
+//			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+//			ob = new InternetExplorerDriver(capabilities);
+//		}
+//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+//			DesiredCapabilities capability = DesiredCapabilities.chrome();
+//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//			System.setProperty("webdriver.chrome.driver",
+//					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+//			System.setProperty("webdriver.chrome.driver",
+//					"drivers/chromedriver.exe");
+//			ob= new ChromeDriver(capability);
+//		}
+//
+//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+//
+//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+//			SafariOptions safariOptions = new SafariOptions();
+//			safariOptions.setUseCleanSession(true);
+//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+//					safariOptions);
+//			ob = new SafariDriver(desiredCapabilities);
+//		}
+//
+//
+//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//		String pageWait=CONFIG.getProperty("defaultPageWait");
+//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
+//				TimeUnit.SECONDS);
+//		try{
+//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
+//					TimeUnit.SECONDS);
+//		}
+//		catch(Throwable t){
+//
+//			System.out.println("Page Load Timeout not supported in safari driver");
+//		}
+//
+//	}
 
 	// Closing the browser
 	public void closeBrowser() {
@@ -375,7 +376,8 @@ public class TestBase {
 	public void login() throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
@@ -639,6 +641,30 @@ public class TestBase {
 		}
 	}
 
+	public static void waitForPageLoad(WebDriver driver) {
+		try {
+			for (int i = 0; i < 90; i++) {
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				// check for the pending request count and break if count is
+				// zero.
+				if (js.executeScript("return document.readyState").equals("complete")) {
+					
+					break;
+				}
+				Thread.sleep(1000);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		waitForAjax(driver);
+	}
+	
+	public static Alert waitForAlertToBePresent(WebDriver driver,int time) {
+		
+		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
+	}
 	/**
 	 * Method to wait till the element is clickable on the web page
 	 * 

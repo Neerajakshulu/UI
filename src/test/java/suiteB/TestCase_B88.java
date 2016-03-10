@@ -2,11 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,7 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B55 extends TestBase {
+public class TestCase_B88 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -33,13 +31,13 @@ public class TestCase_B55 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that only patents get displayed in the summary page when user searches using PATENTS content type in search drop down")
+						"Verify that record view page of a patent gets displayed when user clicks on article title in PATENT search results page")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB55() throws Exception {
+	public void testcaseB88() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -57,67 +55,50 @@ public class TestCase_B55 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
+			
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// Thread.sleep(8000);
+			//ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			Thread.sleep(8000);
 
 			// login using TR credentials
 			login();
-			// Thread.sleep(15000);
-
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			// Thread.sleep(2000);
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+			Thread.sleep(15000);
+			String patent="methods";
 			Thread.sleep(2000);
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(4000);
+			waitForAjax(ob);
+			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
+			waitForAjax(ob);
+			Thread.sleep(4000);;
+			
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			Thread.sleep(6000);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 90);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 90);
+			
+			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
+			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			String patentRVShareLabel=ob.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1).getText();
+			
+		
+			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, patent)
+					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
+					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
 
-			waitForElementTobeVisible(ob, By.tagName("h5"), 30);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-
-			for (int i = 1; i <= 5; i++) {
-
-				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				Thread.sleep(2000);
-
-			}
-
-			List<WebElement> tileTags = ob.findElements(By.tagName("h5"));
-			int count = 0;
-			for (int i = 0; i < tileTags.size(); i++) {
-
-				if (tileTags.get(i).getText().equals("Patent"))
-					count++;
-			}
-
-			if (!compareNumbers(tileTags.size(), count)) {
-
-				test.log(LogStatus.FAIL,
-						"Items other than patents also getting displayed in the summary page when user searches using PATENTS content type in search drop down");// extent
-																																									// report
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_items_other_than_patents_also_getting_displayed_in_the_summary_page_when_user_searches_using_PATENTS_content_type_in_search_drop_down")));// screenshot
-
-			}
-
+			if(!patentRVStatus)
+				throw new Exception("Page is not Navigating to Patent Record View Page");
+			
 			closeBrowser();
 
-		}
-
+		} 
+		
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -128,12 +109,13 @@ public class TestCase_B55 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+
 
 	@AfterTest
 	public void reportTestResult() {
@@ -150,5 +132,6 @@ public class TestCase_B55 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
+
 
 }

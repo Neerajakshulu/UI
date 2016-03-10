@@ -66,7 +66,7 @@ public class VerifyAccessAndEditDraftPost extends TestBase {
 
 			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(8000);
+			//Thread.sleep(8000);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -84,7 +84,8 @@ public class VerifyAccessAndEditDraftPost extends TestBase {
 			ProfilePage.clickOnPostCancelButton();
 			ProfilePage.clickOnPostCancelKeepDraftButton();
 		//	ProfilePage.clickOnDraftPostsTab();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForAjax(ob);
 			String postTitleAfterEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);
@@ -101,7 +102,7 @@ public class VerifyAccessAndEditDraftPost extends TestBase {
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			 Thread.sleep(5000);					
+			// Thread.sleep(5000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

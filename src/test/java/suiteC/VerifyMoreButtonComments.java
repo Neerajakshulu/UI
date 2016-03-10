@@ -62,9 +62,9 @@ public class VerifyMoreButtonComments extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+		//	Thread.sleep(8000);
 			login();
-			Thread.sleep(15000);
+		//	Thread.sleep(15000);
 			selectAnArticle();
 			String comment = "testFlag";
 			Authoring.enterArticleComment(comment);
@@ -128,7 +128,7 @@ public class VerifyMoreButtonComments extends TestBase{
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
@@ -159,7 +159,7 @@ public class VerifyMoreButtonComments extends TestBase{
 			waitForAjax(ob);
 		}
 		if(!isFound) throw new Exception("Article with less than 10 comments not found");
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 	}
 
 	@AfterTest
