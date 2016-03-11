@@ -107,7 +107,7 @@ public class TestCase_E42 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			// Thread.sleep(4000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_email_textBox")), 30);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
