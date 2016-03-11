@@ -73,14 +73,12 @@ public class TestCase_E28 extends TestBase {
 			for (int i = 1; i <= 5; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				// Thread.sleep(2000);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
 				// Clicking on Create button
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				// Thread.sleep(4000);
 
 			}
 			// Getting all the watch lists

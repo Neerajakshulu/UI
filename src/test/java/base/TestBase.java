@@ -163,56 +163,56 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-//	public void openBrowser(){
-//
-//		if(CONFIG.getProperty("browserType").equals("FF")){
-//			ob = new FirefoxDriver();
-//		}
-//		else if (CONFIG.getProperty("browserType").equals("IE")){
-//			System.setProperty("webdriver.ie.driver",
-//					"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
-//			DesiredCapabilities capabilities =
-//					DesiredCapabilities.internetExplorer();
-//			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
-//					true);
-//			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-//			ob = new InternetExplorerDriver(capabilities);
-//		}
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
-//			DesiredCapabilities capability = DesiredCapabilities.chrome();
-//			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-//			System.setProperty("webdriver.chrome.driver",
-//					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-//			System.setProperty("webdriver.chrome.driver",
-//					"drivers/chromedriver.exe");
-//			ob= new ChromeDriver(capability);
-//		}
-//
-//		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-//
-//			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-//			SafariOptions safariOptions = new SafariOptions();
-//			safariOptions.setUseCleanSession(true);
-//			desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
-//					safariOptions);
-//			ob = new SafariDriver(desiredCapabilities);
-//		}
-//
-//
-//		String waitTime=CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait=CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
-//				TimeUnit.SECONDS);
-//		try{
-//			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
-//					TimeUnit.SECONDS);
-//		}
-//		catch(Throwable t){
-//
-//			System.out.println("Page Load Timeout not supported in safari driver");
-//		}
-//
-//	}
+/*	public void openBrowser(){
+
+		if(CONFIG.getProperty("browserType").equals("FF")){
+			ob = new FirefoxDriver();
+		}
+		else if (CONFIG.getProperty("browserType").equals("IE")){
+			System.setProperty("webdriver.ie.driver",
+					"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+			DesiredCapabilities capabilities =
+					DesiredCapabilities.internetExplorer();
+			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
+					true);
+			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+			ob = new InternetExplorerDriver(capabilities);
+		}
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+			DesiredCapabilities capability = DesiredCapabilities.chrome();
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",
+					"drivers/chromedriver.exe");
+			ob= new ChromeDriver(capability);
+		}
+
+		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+
+			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+			SafariOptions safariOptions = new SafariOptions();
+			safariOptions.setUseCleanSession(true);
+			desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+					safariOptions);
+			ob = new SafariDriver(desiredCapabilities);
+		}
+
+
+		String waitTime=CONFIG.getProperty("defaultImplicitWait");
+		String pageWait=CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
+				TimeUnit.SECONDS);
+		try{
+			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
+					TimeUnit.SECONDS);
+		}
+		catch(Throwable t){
+
+			System.out.println("Page Load Timeout not supported in safari driver");
+		}
+
+	}*/
 
 	// Closing the browser
 	public void closeBrowser() {
@@ -431,14 +431,11 @@ public class TestBase {
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-		// Thread.sleep(8000);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		// Thread.sleep(4000);
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		// Thread.sleep(2000);
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
@@ -447,7 +444,6 @@ public class TestBase {
 		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		// Thread.sleep(10000);
 		waitForElementTobeVisible(ob, By.xpath("//div[@class='userprofile']"), 30);
 
 		ob.get("https://www.guerrillamail.com");
@@ -459,22 +455,18 @@ public class TestBase {
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
-		// email_list.get(0).click();
-		// Thread.sleep(8000);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 
 		WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 		List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 		ob.get(links.get(0).getAttribute("href"));
-		// Thread.sleep(8000);
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-		// Thread.sleep(25000);
 		waitForElementTobeVisible(ob, By.xpath("//div[@class='main ng-scope']"), 30);
 
 		return email;
@@ -884,7 +876,6 @@ public class TestBase {
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
 		// Navigate to the watch list landing page
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		// Thread.sleep(8000);
 		waitForElementTobeVisible(ob, By.xpath("//ul[@class='list-unstyled watchlist-refine-panel']"), 10);
 
 		// Getting all the watch lists
@@ -893,8 +884,7 @@ public class TestBase {
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
 				watchLists.get(i).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 10);
-				// Thread.sleep(4000);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 10);
 				break;
 			}
 		}
@@ -916,7 +906,6 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 5);
 		// Adding the item into watch list
 		ob.findElement(By.xpath(OR.getProperty("watchlist_watch_button"))).click();
-		// Thread.sleep(4000);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 10);
 		
 		// Selecting the watch list name
@@ -945,19 +934,16 @@ public class TestBase {
 			throws Exception {
 
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		// Thread.sleep(5000);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 10);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 10);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 10);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
-		// Thread.sleep(3000);
 		if (typeOfWatchList.equals("public"))
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 10);
-		// Thread.sleep(6000);
 	}
 
 	public int convertStringToInt(String str) {

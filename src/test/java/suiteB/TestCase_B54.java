@@ -64,24 +64,19 @@ public class TestCase_B54 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// Thread.sleep(8000);
 
 			// login using TR credentials
 			login();
-			// Thread.sleep(15000);
 			waitForElementTobeVisible(ob,
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
-			// Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-			// Thread.sleep(2000);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(4000);
 			
 			waitForElementTobeVisible(ob, By.tagName("h5"), 30);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
