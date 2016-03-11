@@ -97,7 +97,7 @@ public class TestCase_E43 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			// Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
 			LoginTR.logOutApp();
 			// Thread.sleep(5000);
 
@@ -105,7 +105,7 @@ public class TestCase_E43 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			// Thread.sleep(4000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_email_textBox")), 30);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
