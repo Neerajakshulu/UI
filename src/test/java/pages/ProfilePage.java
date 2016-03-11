@@ -778,8 +778,8 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	public static void clickOnDraftPostsTab() {
-		waitForAjax(ob);		
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
+		waitForPageLoad(ob);	
+		BrowserWaits.waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
 	}

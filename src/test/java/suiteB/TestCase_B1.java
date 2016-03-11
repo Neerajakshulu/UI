@@ -72,21 +72,25 @@ public class TestCase_B1 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
-			Thread.sleep(8000);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+//			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
 			login();
-			Thread.sleep(15000);
+//			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+//			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			
 			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			System.out.println("No of elements="+searchResults.size());
 			ArrayList<String> urls=new ArrayList<String>();
 			for(int i=0;i<searchResults.size();i++){
 				
@@ -100,6 +104,7 @@ public class TestCase_B1 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
+//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("details_link")), 30);
 //				String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
 //				ob.get(link55);
 				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));

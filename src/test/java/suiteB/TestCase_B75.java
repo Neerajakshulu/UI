@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -69,19 +70,22 @@ public class TestCase_B75 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			Thread.sleep(2000);
+			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Patents')]"), 120);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
-			Thread.sleep(2000);
+			waitForAjax(ob);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			
 			
 			WebElement myE=ob.findElement(By.xpath(OR.getProperty("patentsTile")));
@@ -105,7 +109,8 @@ public class TestCase_B75 extends TestBase {
 			}
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
-			Thread.sleep(4000);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.tagName("h2"), 120);
 			
 			String actual_text=ob.findElement(By.tagName("h2")).getText();
 			System.out.println(actual_text);

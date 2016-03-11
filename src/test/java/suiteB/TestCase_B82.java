@@ -28,6 +28,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -73,31 +74,34 @@ public class TestCase_B82 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
-			Thread.sleep(8000);
-			
-			//login using TR credentials
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
+
+			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			waitForAjax(ob);
 			
 			ob.findElement(By.id("single-button")).click();
-			Thread.sleep(2000);
+			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 120);
 			
 			ob.findElement(By.xpath("//a[contains(text(),'Times Cited')]")).click();
-			Thread.sleep(4000);
+			waitForAjax(ob);
 			
 			JavascriptExecutor jse=(JavascriptExecutor)ob;
 			
 			for(int i=1;i<=5;i++){
 			
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
-			Thread.sleep(3000);
+			waitForAjax(ob);
 			
 			}
 			

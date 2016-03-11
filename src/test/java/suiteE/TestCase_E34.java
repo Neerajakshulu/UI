@@ -100,11 +100,10 @@ public class TestCase_E34 extends TestBase {
 			selectSearchTypeFromDropDown("People");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn1 + " " + ln1), 30);
+			waitForElementTobeVisible(ob, By.linkText(fn1 + " " + ln1), 60);
 			// Navigating to the first user profile page
-			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
 			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 30);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);

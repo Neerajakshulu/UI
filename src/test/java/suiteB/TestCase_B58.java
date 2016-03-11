@@ -64,11 +64,9 @@ public class TestCase_B58 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// Thread.sleep(8000);
 
 			// login using TR credentials
 			login();
-			// Thread.sleep(15000);
 
 			waitForElementTobeVisible(ob,
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
