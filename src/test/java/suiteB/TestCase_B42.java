@@ -62,7 +62,6 @@ public class TestCase_B42 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));

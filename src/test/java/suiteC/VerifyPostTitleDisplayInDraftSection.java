@@ -62,7 +62,6 @@ public class VerifyPostTitleDisplayInDraftSection extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-
 			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"),CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			//Thread.sleep(8000);
