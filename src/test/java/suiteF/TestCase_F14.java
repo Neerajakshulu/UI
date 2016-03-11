@@ -67,35 +67,38 @@ public class TestCase_F14 extends TestBase {
 				LoginTR.clickLogin();
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 				ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-				Thread.sleep(5000);
+				//Thread.sleep(3000);
 				ProfilePage.enterPostTitle(postString);
 				test.log(LogStatus.INFO, "Entered Post Title");
 				ProfilePage.enterPostContent(postString);
 				test.log(LogStatus.INFO, "Entered Post Content");
 				ProfilePage.clickOnPostPublishButton();
 				test.log(LogStatus.INFO, "Published the post");
-				Thread.sleep(6000);
+				Thread.sleep(3000);
 				LoginTR.logOutApp();
 				
 				//Login using user1 and like the post
 				LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				LoginTR.clickLogin();
-				Thread.sleep(7000);
-
+				//Thread.sleep(7000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 				Thread.sleep(4000);
 				
 				jse.executeScript("scroll(0,-500)");
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 				test.log(LogStatus.INFO,"Liking the post");
 				ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-				Thread.sleep(5000);
+				//Thread.sleep(5000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
 				
-				Thread.sleep(10000);
+				//Thread.sleep(10000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("post_like_button")), 30);
 				ob.findElement(By.xpath(OR.getProperty("post_like_button"))).click();
-				Thread.sleep(6000);
+				Thread.sleep(3000);
 				LoginTR.logOutApp();
 				
 				//Login using user2 and check for the notification

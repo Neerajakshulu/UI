@@ -72,7 +72,7 @@ public class TestCase_E41 extends TestBase {
 			for (int i = 1; i <= 3; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
@@ -85,7 +85,7 @@ public class TestCase_E41 extends TestBase {
 			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
 			// Watching an post to a multiple watch list
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();

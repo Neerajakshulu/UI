@@ -69,14 +69,13 @@ static int status=1;
 		
 		//Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-		Thread.sleep(10000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		login();
-		Thread.sleep(15000);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 30);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"), 30);
 		ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]")).click();
 		//waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 		

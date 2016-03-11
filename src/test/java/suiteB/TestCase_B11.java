@@ -67,20 +67,22 @@ public class TestCase_B11 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(8000);
 
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
@@ -90,21 +92,20 @@ public class TestCase_B11 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
-			Thread.sleep(4000);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("filter_checkbox")), 30);
+			
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"), 30);
 
 			// ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
 			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector("a[event-action='citingsrcslocalcount:desc']"), 30);
 			// ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
 			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-			Thread.sleep(6000);
 
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al1 = new ArrayList<String>();
@@ -114,11 +115,9 @@ public class TestCase_B11 extends TestBase {
 
 			}
 			jsClick(ob, searchResults.get(5));
-			Thread.sleep(5000);
 
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
-			Thread.sleep(20000);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {

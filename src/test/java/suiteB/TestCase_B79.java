@@ -28,6 +28,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -73,21 +74,24 @@ public class TestCase_B79 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(host);
-			Thread.sleep(8000);
-			
-			//login using TR credentials
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
+
+			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 			
 			WebElement myE1=ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
 			String text1=myE1.getText();
@@ -109,7 +113,8 @@ public class TestCase_B79 extends TestBase{
 			}
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
-			Thread.sleep(4000);
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			
 			String actual_text=ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).getAttribute("value");
 			System.out.println(actual_text);

@@ -68,12 +68,15 @@ public class TestCase_F9 extends TestBase {
 			Thread.sleep(2000);
 			test.log(LogStatus.INFO,"Commenting on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			String postLinkClicked=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F9:Nice Post");
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
@@ -82,7 +85,7 @@ public class TestCase_F9 extends TestBase {
 			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			test.log(LogStatus.INFO,"Checking if Notification is received");
-			Thread.sleep(15000);
+			Thread.sleep(8000);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 		

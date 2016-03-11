@@ -68,21 +68,21 @@ public class TestCase_B63 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 						
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(3000);
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope')]"), 30);
 			
 			List<WebElement> mylist=ob.findElements(By.xpath("//li[contains(@class,'content-type-selector ng-scope')]"));
 			
 			mylist.get(0).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			
 			String actual_text1=ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text1="Your search for tyitutyigtiugiuuioyrfuy found no matches.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
@@ -96,7 +96,7 @@ public class TestCase_B63 extends TestBase {
 			}
 			
 			mylist.get(1).click();
-			Thread.sleep(2000);
+			
 			String actual_text2=ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text2="Your search for tyitutyigtiugiuuioyrfuy found no matches in Articles.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
 			
@@ -109,7 +109,7 @@ public class TestCase_B63 extends TestBase {
 			}
 			
 			mylist.get(2).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text3=ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text3="Your search for tyitutyigtiugiuuioyrfuy found no matches in Patents.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
 			
@@ -123,7 +123,7 @@ public class TestCase_B63 extends TestBase {
 			
 			
 			mylist.get(3).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text4=ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text4="Your search for tyitutyigtiugiuuioyrfuy found no matches in People.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
 			
@@ -136,7 +136,7 @@ public class TestCase_B63 extends TestBase {
 			}
 			
 			mylist.get(4).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text5=ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text5="Your search for tyitutyigtiugiuuioyrfuy found no matches in Posts.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
 			
