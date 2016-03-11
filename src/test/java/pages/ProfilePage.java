@@ -52,7 +52,6 @@ public class ProfilePage  extends TestBase {
 				}
 			}
 		}
-		
 		else
 			System.out.println("Profile Search Results are not available with \t"+lastName+ "\t last Name");
 		
