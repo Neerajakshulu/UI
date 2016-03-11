@@ -98,11 +98,11 @@ public class TestCase_A7 extends TestBase{
 		
 		
 		ob.navigate().to(host);
-//		Thread.sleep(8000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 		
 		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);

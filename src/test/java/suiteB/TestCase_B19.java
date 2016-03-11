@@ -76,16 +76,16 @@ static int status=1;
 	
 		
 		//Navigate to TR login page and login with valid TR credentials
-//		ob.navigate().to(host);
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		Thread.sleep(10000);
+		ob.navigate().to(host);
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		login();
-		Thread.sleep(15000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-		Thread.sleep(4000);
+		
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-		Thread.sleep(4000);
+		
 		ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]")).click();
 		//waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 		
@@ -94,7 +94,7 @@ static int status=1;
 			int checkBoxDisplayed=	0;
 			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			Thread.sleep(4000);
+			
 			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 						
 			for (WebElement element : ckBoxList) {
@@ -115,7 +115,7 @@ static int status=1;
 				}
 			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			Thread.sleep(8000);
+		
 			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {
@@ -137,7 +137,7 @@ static int status=1;
 			}
 			scrollElementIntoView(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
 			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			Thread.sleep(8000);
+			
 			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {

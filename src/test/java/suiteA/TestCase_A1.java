@@ -84,18 +84,18 @@ public class TestCase_A1 extends TestBase{
 		
 		//Navigate to TR login page
 		ob.navigate().to(host);
-//		Thread.sleep(8000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		System.out.println("Before clicking login");
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		System.out.println("After clicking login");
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//		Thread.sleep(2000);
+//		
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
@@ -104,7 +104,7 @@ public class TestCase_A1 extends TestBase{
 		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-//		Thread.sleep(10000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 30);
 		
 		

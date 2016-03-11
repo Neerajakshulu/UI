@@ -31,7 +31,7 @@ public class VerifyPostTitleDisplayInDraftSection extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verfiy that the Drafts Post tab is not displayed when there are no draft posts")
+		test = extent.startTest(var, "Verify that Draft Post section displays the post title Or Untitled if title is not provided and time draft was saved")
 				.assignCategory("Suite C");
 
 	}

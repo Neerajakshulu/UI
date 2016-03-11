@@ -72,26 +72,26 @@ public class TestCase_B17 extends TestBase {
 			
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"), 30);
 			
 
 			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(1).click();
-			Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 			
 			ob.findElement(By.id("single-button")).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]"), 30);
 			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
-			Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath("//*[@class='h6 doc-info']"), 30);
 			
 			List<WebElement> times_cited_labels=ob.findElements(By.xpath("//*[@class='h6 doc-info']"));
 			ArrayList<Integer> counts=new ArrayList<Integer>();

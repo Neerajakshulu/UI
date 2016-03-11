@@ -87,10 +87,10 @@ public class TestCase_A3 extends TestBase{
 		//Navigate to LI login page
 		ob.navigate().to(host);
 //		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//		Thread.sleep(8000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 		
 		//Verify that existing LI user credentials are working fine

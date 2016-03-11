@@ -608,7 +608,8 @@ public class PostRecordViewPage extends TestBase {
 
 	public static boolean validateCommentForExternalLink(String url) throws Exception {
 		//BrowserWaits.waitTime(6);
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
+		BrowserWaits.waitForPageLoad(ob);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 90);
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))
 			return true;
@@ -618,6 +619,7 @@ public class PostRecordViewPage extends TestBase {
 
 	public static void clickExternalLinkInComments(String url) throws Exception {
 		//BrowserWaits.waitTime(6);
+		BrowserWaits.waitForPageLoad(ob);
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))

@@ -88,15 +88,15 @@ public class TestCase_A16 extends TestBase{
 			String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-//			Thread.sleep(8000);
+//			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-//			Thread.sleep(4000);
+//			
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 			
 			
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//			Thread.sleep(2000);
+//			
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
@@ -137,11 +137,11 @@ public class TestCase_A16 extends TestBase{
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-//			Thread.sleep(25000);
+//		
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			
 			logout();
-//			Thread.sleep(4000);
+//			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 
@@ -153,11 +153,11 @@ public class TestCase_A16 extends TestBase{
 			
 
 		ob.findElement(By.linkText(OR.getProperty("TR_forgot_password_link"))).click();
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 30);
 		
 		String text=ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
@@ -192,13 +192,13 @@ public class TestCase_A16 extends TestBase{
 		WebElement reset_link_element=ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
 		String reset_link_url=reset_link_element.getAttribute("href");
 		ob.get(reset_link_url);
-//		Thread.sleep(5000);
+//	
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_newPassword_textBox")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
 		ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
 		ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
-//		Thread.sleep(5000);
+//
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 30);
 		
 		text=ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
@@ -215,10 +215,10 @@ public class TestCase_A16 extends TestBase{
 		
 //		4)login with changed password		
 		ob.findElement(By.linkText(OR.getProperty("TR_projectNeon_link"))).click();
-//		Thread.sleep(8000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-//		Thread.sleep(4000);
+//		
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
