@@ -21,7 +21,8 @@ public class SearchProfile  extends TestBase {
 		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
 		BrowserWaits.waitTime(2);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
-		BrowserWaits.waitTime(4);
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 	}
 	
 	
@@ -56,7 +57,8 @@ public class SearchProfile  extends TestBase {
 	 */
 	public static void clickPeople() throws Exception {
 			BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
-			BrowserWaits.waitTime(6);
+			waitForAjax(ob);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS.toString()), 90);
 	}
 	
 	/**
@@ -68,7 +70,7 @@ public class SearchProfile  extends TestBase {
 		followUnfollowLableBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
 		System.out.println("Follow/Unfollow Label Before-->"+followUnfollowLableBefore);
 		followUnFollowCheck.click();
-		Thread.sleep(4000);
+		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
 		System.out.println("Follow/Unfollow Label After-->"+followUnfollowLableAfter);
 		

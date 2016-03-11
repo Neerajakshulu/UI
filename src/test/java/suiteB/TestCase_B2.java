@@ -74,16 +74,19 @@ public class TestCase_B2 extends TestBase{
 			maximizeWindow();
 			
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+//			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
 			login();
-			Thread.sleep(15000);
+//			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			//Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+//			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			
 			//Put the urls of all the search results documents in a list and test whether documents contain searched keyword or not
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -100,10 +103,11 @@ public class TestCase_B2 extends TestBase{
 				
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
+//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("details_link")), 30);
 				WebElement myE=ob.findElement(By.xpath(OR.getProperty("details_link")));
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", myE);
-				
+				Thread.sleep(5000);
 				
 				Set<String> myset=ob.getWindowHandles();
 				Iterator<String> myIT=myset.iterator();
