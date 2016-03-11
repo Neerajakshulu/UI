@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -67,16 +68,19 @@ public class TestCase_B78 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bikjhaslkjnaslkxjnqalkxdnqlkwnxlk");
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(4);
 //			String text=ob.findElement(By.xpath(OR.getProperty("typeAhead_dropDown"))).getText();
 //			System.out.println("Text="+text);
 //			System.out.println("Text="+"");

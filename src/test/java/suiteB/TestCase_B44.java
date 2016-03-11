@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import base.TestBase;
 import util.ErrorUtil;
@@ -65,25 +66,25 @@ public class TestCase_B44 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
-
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			//Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-
+			//Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
+			//Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
 			((JavascriptExecutor) ob).executeScript("window.scrollBy(0,250)", "");
-            Thread.sleep(3000);
-            
+            //Thread.sleep(3000);
+            waitForPageLoad(ob);
 			
             
             try{
@@ -109,7 +110,7 @@ public class TestCase_B44 extends TestBase {
             List<WebElement> mylist=ob.findElements(By.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope"));
             System.out.println("Count="+mylist.size());
             
-//            closeBrowser();
+         closeBrowser();
             
 
 		} catch (Throwable t) {

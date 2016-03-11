@@ -132,9 +132,10 @@ public class ProfilePage  extends TestBase {
 				BrowserAction.click(OnePObjectMap.HOME_ONEP_APPS_LINK);
 				PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 				ob.findElement(By.linkText(totalAppLinks[i])).click();
-				Thread.sleep(6000);
 				ob.manage().window().maximize();
+				waitForNumberOfWindowsToEqual(ob, 2);
 				Set<String> child_window_handles= ob.getWindowHandles();
+				System.out.println("child windows count-->"+child_window_handles.size());
 				 for(String child_window_handle:child_window_handles) {
 					 if(!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 						 ob.switchTo().window(child_window_handle);
@@ -157,7 +158,6 @@ public class ProfilePage  extends TestBase {
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
 			BrowserWaits.waitUntilText("Interests and Skills","Posts","Comments","Followers","Following");
-			BrowserWaits.waitTime(6);
 	}
 	
 	/**
@@ -186,7 +186,9 @@ public class ProfilePage  extends TestBase {
 		getProfileTitle();
 		getProfileMetadata();
 		BrowserAction.jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
-		BrowserWaits.waitTime(8);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 90);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS.toString()), 90);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS.toString()), 90);
 	}
 	
 	
@@ -230,7 +232,7 @@ public class ProfilePage  extends TestBase {
 		followUnfollowLableBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
 		System.out.println("Follow/Unfollow Label Before-->"+followUnfollowLableBefore);
 		followUnFollowCheck.click();
-		Thread.sleep(4000);
+		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
 		System.out.println("Follow/Unfollow Label After-->"+followUnfollowLableAfter);
 		
@@ -311,7 +313,8 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickEditUpdate() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserWaits.waitTime(6);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS.toString()), 90);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS.toString()), 90);
 	}
 	
 	
@@ -334,7 +337,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickCommentsTab() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
-		BrowserWaits.waitTime(8);
+		waitForAjax(ob);
 	}
 	
 	/**
@@ -343,7 +346,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickFollowingTab() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
-		BrowserWaits.waitTime(8);
+		waitForAjax(ob);
 	}
 	
 	/**
@@ -352,7 +355,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickFollowersTab() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
-		BrowserWaits.waitTime(8);
+		waitForAjax(ob);
 	}
 	
 	/**
@@ -361,7 +364,7 @@ public class ProfilePage  extends TestBase {
 	 */
 	public static void clickPostsTab() throws Exception {
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
-		BrowserWaits.waitTime(12);
+		waitForAjax(ob);
 	}
 	
 	
@@ -370,6 +373,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment like not done
 	 */
 	public static void commentAppreciation() throws Exception {
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
 		String tooltipBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		//System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
@@ -443,7 +447,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static void enterPostTitle(String tilte) throws InterruptedException {
-		BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()), 90);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
 				.clear();
@@ -457,7 +461,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception 
 	 */
 	public static void enterPostContent(String content) throws Exception {
-		BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
@@ -471,7 +475,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception 
 	 */
 	public static void clickOnPostPublishButton() throws Exception {
-		BrowserWaits.waitTime(5);
+		//BrowserWaits.waitTime(5);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
 				.click();
@@ -519,7 +523,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static int getCommentsCount() throws Exception {
-		BrowserWaits.waitTime(10);
+		//BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		int count = 0;
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS);
@@ -719,10 +723,10 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	public static void addPostToWatchlist() throws Exception {
 		watchTextBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
-		BrowserWaits.waitTime(2);
+		//BrowserWaits.waitTime(2);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
-		
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS.toString()), 180);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
 		BrowserWaits.waitTime(2);
 		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
@@ -774,8 +778,8 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	public static void clickOnDraftPostsTab() {
-		waitForAjax(ob);		
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
+		waitForPageLoad(ob);	
+		BrowserWaits.waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
 	}
@@ -835,7 +839,7 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	public static boolean validateProfilePI(String typeAheadOption) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 		String actualPI=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
 		return (StringUtils.containsIgnoreCase(actualPI,typeAheadOption));
 	}
@@ -870,7 +874,7 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * @throws Exception
 	 */
 	public static boolean validateProfileCountry(String country) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
 		String actualCountry=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS).getText();
 		return (actualCountry.trim().equalsIgnoreCase(country));
 	} 

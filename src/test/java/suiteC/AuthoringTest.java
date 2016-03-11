@@ -131,7 +131,6 @@ public class AuthoringTest extends TestBase {
 	
 	@AfterTest
 	public void reportTestResult() {
-		
 		extent.endTest(test);
 		
 		if(status==1)
@@ -156,8 +155,9 @@ public class AuthoringTest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+		waitForPageLoad(ob);
 	}
 	
 	/**
@@ -173,22 +173,25 @@ public class AuthoringTest extends TestBase {
 	
 	public static void clickLogin() throws InterruptedException {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		Thread.sleep(6000);
+		//Thread.sleep(6000);
+		waitForPageLoad(ob);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
 		//waitUntilElementClickable("Home");
 	}
 	
 	public static void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		waitForPageLoad(ob);
 	}
 	
 	public static void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		waitForPageLoad(ob);
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){

@@ -68,18 +68,18 @@ public class TestCase_B65 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);		
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"), 30);
 			
 			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"));
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			
 			String text=ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).getAttribute("value");
 			if(!compareStrings("chemistry",text)){

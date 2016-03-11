@@ -69,9 +69,8 @@ public class TestCase_B15 extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
-			Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
 			waitForAjax(ob);

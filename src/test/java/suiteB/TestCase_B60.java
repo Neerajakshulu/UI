@@ -3,12 +3,9 @@ package suiteB;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -59,26 +56,25 @@ public class TestCase_B60 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-			
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			Thread.sleep(2000);
+
+			waitForElementTobeVisible(ob,
+					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
+					.click();
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
-			Thread.sleep(2000);
-			
+
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
@@ -87,48 +83,52 @@ public class TestCase_B60 extends TestBase {
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
 			Thread.sleep(1000);
-			
-			
-			WebElement myE=ob.findElement(By.xpath(OR.getProperty("patentsTile")));
-			String text=myE.getText();
-			
-			String[] arr=text.split("\n");
-			
-			ArrayList<String> al=new ArrayList<String>();
-			for(int i=1;i<arr.length;i++){
-				
+
+			WebElement myE = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
+			String text = myE.getText();
+
+			String[] arr = text.split("\n");
+
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 1; i < arr.length; i++) {
+
 				al.add(arr[i]);
 			}
-			
-			for(int i=0;i<al.size();i++){
-				
+
+			for (int i = 0; i < al.size(); i++) {
+
 				System.out.println(al.get(i));
 			}
-			
-			if(!compareNumbers(10,al.size())){
-				
-				test.log(LogStatus.FAIL, "More or less than 10 patent suggestions are getting displayed");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_or_less_than_ten_patent_suggestions_getting_displayed")));//screenshot
+
+			if (!compareNumbers(10, al.size())) {
+
+				test.log(LogStatus.FAIL, "More or less than 10 patent suggestions are getting displayed");// extent
+																											// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_ten_patent_suggestions_getting_displayed")));// screenshot
 			}
-			
-			int count=0;
-			for(int i=0;i<al.size();i++){
-				
-				if(!al.get(i).toLowerCase().contains("john"))
+
+			int count = 0;
+			for (int i = 0; i < al.size(); i++) {
+
+				if (!al.get(i).toLowerCase().contains("john"))
 					count++;
 			}
-			
-			if(!compareNumbers(0,count)){
-				
-				test.log(LogStatus.FAIL, "Patent suggestion does not contain the typed keyword");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_patent_suggestion_does_not_contain_typed_keyword")));//screenshot
+
+			if (!compareNumbers(0, count)) {
+
+				test.log(LogStatus.FAIL, "Patent suggestion does not contain the typed keyword");// extent
+																									// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_patent_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -145,7 +145,6 @@ public class TestCase_B60 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {

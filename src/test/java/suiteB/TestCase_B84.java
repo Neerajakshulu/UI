@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -64,17 +65,20 @@ public class TestCase_B84 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-			String patent="Projection exposure apparatus and method which uses multiple diffraction gratings in order to produce a solid state device with fine patterns";
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			
+			String patent = "Projection exposure apparatus and method which uses multiple diffraction gratings in order to produce a solid state device with fine patterns";
+			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			Thread.sleep(4000);
 			
 			String patentTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).getText();
 			String inventor=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_patent_title_css"))).getText();

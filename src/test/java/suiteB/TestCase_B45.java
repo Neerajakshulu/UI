@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -66,18 +67,19 @@ public class TestCase_B45 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
-
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			//Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-			
+			//Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			Thread.sleep(2000);
-			
+			//Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 30);
 			WebElement dd=ob.findElement(By.xpath("//ul[@class='dropdown-menu']"));
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			List<WebElement> dd_options=dd.findElements(By.tagName("a"));
 			
 			boolean cond1=dd_options.get(0).getText().equals("All");

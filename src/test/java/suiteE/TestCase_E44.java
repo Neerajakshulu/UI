@@ -21,6 +21,7 @@ import pages.HeaderFooterLinksPage;
 import pages.ProfilePage;
 import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E44 extends TestBase {
@@ -69,7 +70,9 @@ public class TestCase_E44 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			Thread.sleep(5000);
+			 waitForElementTobeVisible(ob,
+			 By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+			 180);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
@@ -80,11 +83,11 @@ public class TestCase_E44 extends TestBase {
 			ln2 = generateRandomName(10);
 			System.out.println(fn2 + " " + ln2);
 			user2 = createNewUser(fn2, ln2);
-			Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
 			Thread.sleep(2000);
@@ -92,20 +95,21 @@ public class TestCase_E44 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 30);
 			LoginTR.logOutApp();
-			Thread.sleep(5000);
 
 			// 3)Login as user1 and publish a post
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
 
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+					30);
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore = 0;
@@ -136,18 +140,17 @@ public class TestCase_E44 extends TestBase {
 
 			Thread.sleep(2000);
 			logout();
-			Thread.sleep(5000);
 
 			// 2)Login with user2 and and try to watch the post from
 			// notification panel
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.id("userid"), 30);
 			ob.findElement(By.id("userid")).clear();
 			ob.findElement(By.id("userid")).sendKeys(user2);
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")), 30);
 			if (!checkElementPresence("notification")) {
 
 				test.log(LogStatus.FAIL, "User not receiving notification");// extent
@@ -195,7 +198,8 @@ public class TestCase_E44 extends TestBase {
 
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			Thread.sleep(10000);
+			waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
+					30);
 
 			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
@@ -259,14 +263,14 @@ public class TestCase_E44 extends TestBase {
 		extent.endTest(test);
 
 		if (status == 1)
-			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
-					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "PASS");
+			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
-					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "FAIL");
+			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
-					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

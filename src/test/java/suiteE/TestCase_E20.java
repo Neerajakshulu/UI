@@ -75,7 +75,7 @@ public class TestCase_E20 extends TestBase {
 			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
 			// Getting watch button list for patents
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));

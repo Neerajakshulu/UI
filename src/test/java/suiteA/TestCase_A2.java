@@ -72,13 +72,13 @@ public class TestCase_A2 extends TestBase{
 
 				//Navigate to TR login page and login with valid TR credentials
 				ob.navigate().to(host);
-//				Thread.sleep(8000);
+//				
 				
 				//if :checking if user can login with uppercase email address
 				if(iterator.next().equals("upperCase")){
 					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		    	   	ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-//					Thread.sleep(4000);
+//					
 		    	   	waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 					ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 					ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername").toUpperCase());
@@ -104,7 +104,7 @@ public class TestCase_A2 extends TestBase{
 				
 				//String name=ob.findElement(By.xpath("//div[@class='pull-right ng-isolate-scope']//a[@class='dropdown-toggle']//ne-profile-image[@class='data-alt']"));
 			//System.out.println(name);
-//				Thread.sleep(3000);
+//				
 				
 				
 				//Verify that profile name gets displayed correctly

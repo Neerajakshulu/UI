@@ -2,12 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -58,47 +54,49 @@ public class TestCase_B52 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-			
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			Thread.sleep(2000);
+
+			waitForElementTobeVisible(ob,
+					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
+					.click();
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
 			Thread.sleep(2000);
-			
+
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-			
-			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
-			System.out.println(text);
-			
-			if(!StringContains(text,"Posts")){
-				
-				test.log(LogStatus.FAIL, "POSTS option not selected in the left navigation pane by default when user searches using POSTS option in the search drop down");// extent report
-            	status = 2;// excel
-            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_POSTS_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_POSTS_option_in_the_search_drop_down")));// screenshot
 
-				
+			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope active']"), 30);
+			String text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			System.out.println(text);
+
+			if (!StringContains(text, "Posts")) {
+
+				test.log(LogStatus.FAIL,
+						"POSTS option not selected in the left navigation pane by default when user searches using POSTS option in the search drop down");// extent
+																																							// report
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_POSTS_option_not_selected_in_the_left_navigation_pane_by_default_when_user_searches_using_POSTS_option_in_the_search_drop_down")));// screenshot
+
 			}
-			
+
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -115,7 +113,6 @@ public class TestCase_B52 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {

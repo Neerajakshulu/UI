@@ -80,7 +80,7 @@ public class ShareOwnPostOnLI extends TestBase{
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnLinkedInUnderShareMenu();
 			PostRecordViewPage.shareOnLI(liusername, lipassword);
-			 Thread.sleep(10000);					
+			// Thread.sleep(10000);					
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

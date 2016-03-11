@@ -72,8 +72,8 @@ public class TestCase_E6 extends TestBase {
 			// Searching for post
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			// Watching a post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);

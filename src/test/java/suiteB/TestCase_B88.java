@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -62,26 +63,28 @@ public class TestCase_B88 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			//ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			BrowserWaits.waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			
 			String patent="methods";
-			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
 			waitForAjax(ob);
-			Thread.sleep(4000);;
 			
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
-			Thread.sleep(6000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 90);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 90);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
+			BrowserWaits.waitTime(4);
 			
 			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();

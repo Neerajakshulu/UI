@@ -73,11 +73,11 @@ public class TestCase_E10 extends TestBase {
 			selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));

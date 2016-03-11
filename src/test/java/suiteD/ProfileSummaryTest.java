@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.HeaderFooterLinksPage;
 import suiteC.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
@@ -64,13 +65,13 @@ public class ProfileSummaryTest extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			Thread.sleep(8000);
 			login();
-			Thread.sleep(15000);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
+			//waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_dropdown_css")), 90);
+			HeaderFooterLinksPage.clickProfileImage();
+			//ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
 			BrowserWaits.waitUntilText("Profile");
 			ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			BrowserAction.scrollingPageUp();
 			
 			try {
@@ -78,8 +79,9 @@ public class ProfileSummaryTest extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 
 			} catch (Exception e1) {
+				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_edit_button_css")), 90);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_edit_button_css"))).click();
-				Thread.sleep(2000);
+				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 90);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))).click();
 				Thread.sleep(4000);
@@ -108,7 +110,6 @@ public class ProfileSummaryTest extends TestBase {
 			}
 
 			LoginTR.logOutApp();
-			Thread.sleep(5000);
 
 			closeBrowser();
 
