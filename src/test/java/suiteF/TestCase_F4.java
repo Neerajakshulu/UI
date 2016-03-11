@@ -70,61 +70,62 @@ public class TestCase_F4 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
 			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(8000);
+			//Thread.sleep(8000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 
 			// String
 			// document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// System.out.println(document_title);
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
-			Thread.sleep(5000);
+			Thread.sleep(4000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			Thread.sleep(2000);
-			logout();
 			Thread.sleep(5000);
+			LoginTR.logOutApp();
+			//Thread.sleep(5000);
 
 			// 2)Login with user1,like the comment and logout
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id("userid")).clear();
-			ob.findElement(By.id("userid")).sendKeys(user1);
-			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
+
+			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			//Thread.sleep(15000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("apps")), 30);
 
 			ob.navigate().to(document_url);
 			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			//ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			
 			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_commentLike_button")), 30);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
 			Thread.sleep(1000);
-
-			logout();
-			Thread.sleep(5000);
+			LoginTR.logOutApp();
+			//Thread.sleep(5000);
 
 			// 3)Login with user2 again and verify that he receives a correct
 			// notification
 
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id("userid")).clear();
-			ob.findElement(By.id("userid")).sendKeys(user2);
-			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
+
+			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			Thread.sleep(10000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationForLike")), 30);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
 			System.out.println(text);

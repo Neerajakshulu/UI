@@ -64,35 +64,29 @@ public class TestCase_F5 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
+
+			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			ProfilePage.enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
 			ProfilePage.enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
 			ProfilePage.clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			Thread.sleep(6000);
+			Thread.sleep(2000);
 			LoginTR.logOutApp();
 
 			//Login using user2 and check for the notification
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(7000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
+
+			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			Thread.sleep(5000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForNewPost"))).getText();
 			System.out.println(text);

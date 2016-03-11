@@ -70,7 +70,8 @@ public class TestCase_F1 extends TestBase {
 			ln1 = generateRandomName(10);
 			System.out.println(fn1 + " " + ln1);
 			user1 = createNewUser(fn1, ln1);
-			Thread.sleep(5000);
+			System.out.println("User1:"+ user1);
+			Thread.sleep(3000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			// 2)Create User2 and follow User1
@@ -81,33 +82,28 @@ public class TestCase_F1 extends TestBase {
 			ln2 = generateRandomName(10);
 			System.out.println(fn2 +" "+ ln2);
 			user2 = createNewUser(fn2, ln2);
-			Thread.sleep(5000);
+			System.out.println("User2:"+ user2);
+			//Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			Thread.sleep(2000);
-
+			//Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			LoginTR.logOutApp();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 
 			// 3)Verify that User1 receives a notification with correct data
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			Thread.sleep(15000);
-			ob.navigate().refresh();
-			Thread.sleep(15000);
+			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			LoginTR.clickLogin();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")),30);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);
 			
