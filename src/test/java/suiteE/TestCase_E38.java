@@ -73,11 +73,11 @@ public class TestCase_E38 extends TestBase {
 			// Creating public watch list
 			String newWatchlistName = "New Watchlist";
 			for (int i = 1; i <= 2; i++) {
-				// waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				// waitForElementTobeClickable(ob,
+				// By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				Thread.sleep(2000);
-				// waitForElementTobeVisible(ob,
-				// By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"),
+						30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");

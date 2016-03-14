@@ -21,16 +21,13 @@ public class Facebook_Login {
 		
 		//Navigate to FB login page
 		ob.get("https://dev-stable.1p.thomsonreuters.com/ui/demo/#/login");
-		Thread.sleep(8000);
 		ob.findElement(By.xpath("//button[@class='unauth-login-btn fb-btn']")).click();
-		Thread.sleep(4000);
 		
 		
 		//Verify that existing FB credentials are working fine
 		ob.findElement(By.name("email")).sendKeys(email);
 		ob.findElement(By.name("pass")).sendKeys(password);
 		ob.findElement(By.id("loginbutton")).click();
-		Thread.sleep(15000);
 		if(ob.findElement(By.xpath("//span[contains(text(),'Help')]")).isDisplayed())
 			System.out.println("Existing FB user credentials are working fine");
 		else

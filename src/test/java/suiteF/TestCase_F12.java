@@ -71,7 +71,7 @@ public class TestCase_F12 extends TestBase {
 			LoginTR.logOutApp();
 			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(10000);
+			Thread.sleep(6000);
 			String text=ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 			
 			try {

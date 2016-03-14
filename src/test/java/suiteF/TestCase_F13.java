@@ -68,16 +68,18 @@ public class TestCase_F13 extends TestBase {
 				//creating private watchlist
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Creating private watchlist");
 				createWatchList("private",watchListName,watchListDescription);
-				Thread.sleep(8000);
+				//Thread.sleep(8000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("watchListPrivateTabLink")), 30);
 				//making it public
 				ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " making it public watchlist");
-				Thread.sleep(6000);
+				//Thread.sleep(6000);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 				LoginTR.logOutApp();
 				LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				LoginTR.clickLogin();
-				Thread.sleep(10000);
+				Thread.sleep(8000);
 				String text=ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 				System.out.println(text);
 				try {

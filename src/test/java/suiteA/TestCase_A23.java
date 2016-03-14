@@ -70,15 +70,15 @@ public class TestCase_A23 extends TestBase {
 				String email=ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 //				ob.navigate().to(CONFIG.getProperty("testSiteName"));
 				ob.navigate().to(host);
-//				Thread.sleep(8000);
+//			
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 				ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-//				Thread.sleep(4000);
+//			
 				waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 				
 				
 				ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//				Thread.sleep(2000);
+//		
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 				ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
@@ -120,19 +120,19 @@ public class TestCase_A23 extends TestBase {
 				ob.findElement(By.id(OR.getProperty("login_button"))).click();
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//				Thread.sleep(2000);
+//				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 10);
 				ob.findElement(By.xpath(OR.getProperty("change_password_link"))).click();
-//				Thread.sleep(5000);
+//				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_newPassword_textBox")), 10);
 				//changing the passowrd
 				ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
 				ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
 				ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
-//				Thread.sleep(5000);
+//				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")),10);
 				String text=ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
 				String expected_text="Password updated successfully.";

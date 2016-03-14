@@ -75,7 +75,7 @@ public class TestCase_A20 extends TestBase{
 		//Navigate to LI login page
 		ob.navigate().to(host);
 //		ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//		Thread.sleep(8000);
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("new_TR_User_button"))).click();
 		Thread.sleep(4000);

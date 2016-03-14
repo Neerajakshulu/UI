@@ -89,7 +89,7 @@ public class TestCase_A6 extends TestBase{
 		
 		// selenium code
 		openBrowser();
-//		Thread.sleep(25000);
+//	
 		try{
 		maximizeWindow();
 		}
@@ -104,7 +104,7 @@ public class TestCase_A6 extends TestBase{
 		//Navigate to TR login page
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-//		Thread.sleep(8000);
+//
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
@@ -112,7 +112,7 @@ public class TestCase_A6 extends TestBase{
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//		Thread.sleep(2000);
+//		
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_lastName_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
