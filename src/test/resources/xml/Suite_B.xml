@@ -551,6 +551,25 @@
 	</test>  
 	
 	
+	<test name="Test B89">
+		<classes>
+			<class name="suiteB.TestCase_B89"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B90">
+		<classes>
+			<class name="suiteB.TestCase_B90"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B91">
+		<classes>
+			<class name="suiteB.TestCase_B91"></class>
+		</classes>
+	</test>  
+	
+	
 
 	
 	
