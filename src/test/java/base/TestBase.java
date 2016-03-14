@@ -463,8 +463,8 @@ public class TestBase {
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("login_button"))).click();
-		//Thread.sleep(25000);
-		waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notification")), 30);
+		Thread.sleep(15000);
+		//waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notification")), 30);
 		return email;
 
 	}
