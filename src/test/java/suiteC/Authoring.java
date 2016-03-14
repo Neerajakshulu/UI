@@ -19,8 +19,6 @@ public class Authoring  extends TestBase {
 	static int commentSizeAfterAdd;
 	
 	public static int getCommentCount() throws InterruptedException  {
-		//Thread.sleep(10000);
-		
 		waitForPageLoad(ob);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
@@ -64,7 +62,6 @@ public class Authoring  extends TestBase {
 		//ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
 		JavascriptExecutor executor = (JavascriptExecutor)ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
-		//Thread.sleep(5000);
 		waitForAjax(ob);
 	}
 	
@@ -91,7 +88,6 @@ public class Authoring  extends TestBase {
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
-		//Thread.sleep(4000);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){
@@ -162,7 +158,6 @@ public class Authoring  extends TestBase {
 	public static void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
-		//Thread.sleep(4000);
 	}
 	
 	public static void scrollingToElement(WebElement element) throws InterruptedException  {

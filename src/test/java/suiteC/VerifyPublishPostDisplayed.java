@@ -66,7 +66,6 @@ public class VerifyPublishPostDisplayed extends TestBase{
 
 			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(8000);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			
 			//checking for articles
@@ -74,10 +73,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Bio");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_articles_result")), 40);
 			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_ARTICLES_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_ARTICLES_LINK.toString())).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
@@ -88,13 +85,10 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Bio");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 40);
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString())).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
 			boolean patentsPublishButton=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString())).isDisplayed();
 			
@@ -103,13 +97,10 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Post for");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 40);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString())).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
 			boolean postsPublishButton=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString())).isDisplayed();
 			
@@ -132,7 +123,7 @@ public class VerifyPublishPostDisplayed extends TestBase{
 				closeBrowser();
 			}
 			
-			//Thread.sleep(5000);					
+				
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

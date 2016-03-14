@@ -1,21 +1,26 @@
 package suiteF;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pages.ProfilePage;
+
+import com.relevantcodes.extentreports.LogStatus;
+
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class TestCase_F19 extends TestBase {
+public class TestCase_F8 extends TestBase {
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -25,14 +30,13 @@ public class TestCase_F19 extends TestBase {
 	public void beforeTest() throws Exception {
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that follower of the article is able to start conversation from home page when some one commented on the article he is following.")
+		test = extent.startTest(var, "Verify that user able to recevie a notification when other user commented on his post")
 				.assignCategory("Suite F");
 
 	}
 
-
 	@Test
-	public void testcaseF19() throws Exception {
+	public void testcaseF8() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -48,77 +52,61 @@ public class TestCase_F19 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try{
+			String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			//CREATE A NEW USER AND PUBLISH A POST
 			fn3 = generateRandomName(8);
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("brain");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")),30);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			test.log(LogStatus.INFO, " user watching an article");
-			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
-			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
-			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
+			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
+			ProfilePage.enterPostTitle(postString);
+			test.log(LogStatus.INFO, "Entered Post Title");
+			ProfilePage.enterPostContent(postString);
+			test.log(LogStatus.INFO, "Entered Post Content");
+			ProfilePage.clickOnPostPublishButton();
+			test.log(LogStatus.INFO, "Published the post");
+			Thread.sleep(3000);
 			LoginTR.logOutApp();
 
-			//Login with someother user and comment on the article in watchlist of the above user
+			//USER1 WILL COMMENT ON THE POST CREATED
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(2000);
-			ob.navigate().to(document_url);
-			Thread.sleep(4000);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("My Favourite Game");
+
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("scroll(0,-500)");
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("Very Nice Post");
 			Thread.sleep(5000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			test.log(LogStatus.INFO, "another user adding the comment for an article");
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			LoginTR.logOutApp();
+			
+			//LOGIN WITH USER3 AND CHECK FOR THE NOTIFICATION
 
-
-			//Login with first user and check if notification is present
 			LoginTR.enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
 			Thread.sleep(5000);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);
+
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains(fn1 + " " + ln1) && text.contains("My Favourite Game"));
+				Assert.assertTrue(text.contains("New comments on your post") && text.contains("TODAY")
+						&& text.contains(postString) && text.contains(fn1 + " " + ln1) && text.contains("Very Nice Post"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
-				try{
-					test.log(LogStatus.PASS, "User is commenting from home page");
-					ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase19_comment");
-					Thread.sleep(2000);
-					jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-					Thread.sleep(5000);
-
-					String updatedText = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
-					System.out.println(updatedText);
-					Assert.assertTrue(updatedText.contains("TestCase19_comment"));
-					test.log(LogStatus.PASS, "User is able to comment from home page");
-				}catch(Throwable t){
-					test.log(LogStatus.FAIL, "User is not able to comment from homepage");// extent
-					// reports
-					test.log(LogStatus.INFO, "Error--->" + t);
-					ErrorUtil.addVerificationFailure(t);
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_something_went_wrong_while_commenting")));// screenshot
-					closeBrowser();
-
-				}
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
@@ -132,17 +120,23 @@ public class TestCase_F19 extends TestBase {
 
 			}
 			closeBrowser();
+
+
+
+
 		}catch(Throwable t){
-			test.log(LogStatus.FAIL, "Something happened");// extent
+			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
 			// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
+					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 			closeBrowser();
 		}
+
 	}
+
 
 
 	@AfterTest
