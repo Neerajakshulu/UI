@@ -100,7 +100,7 @@ public class TestCase_B89 extends TestBase {
 				List<WebElement> detailsLink = ob.findElements(By.linkText("Details"));
 				// Clicking on the details link
 				ob.findElement(By.linkText("Details")).click();
-				Thread.sleep(8000);
+				Thread.sleep(15000);
 
 				if (detailsLink.size() != 0) {
 
