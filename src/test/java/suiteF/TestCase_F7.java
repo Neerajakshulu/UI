@@ -58,20 +58,16 @@ public class TestCase_F7 extends TestBase {
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			//Thread.sleep(7000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("brain");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchResults_links")), 30);
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			test.log(LogStatus.INFO, " user watching an article");
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
@@ -80,7 +76,6 @@ public class TestCase_F7 extends TestBase {
 			//Login with someother user and comment on the article in watchlist of the above user
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(10000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
 			ob.navigate().to(document_url);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);

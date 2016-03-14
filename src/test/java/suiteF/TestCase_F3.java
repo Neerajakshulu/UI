@@ -66,26 +66,21 @@ public class TestCase_F3 extends TestBase {
 
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchResults_links")), 30);
 			String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			System.out.println(document_url);
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
 
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 
 			// 2)Login with user2,comment on article contained in user1's
 			// watchlist and logout
@@ -97,20 +92,12 @@ public class TestCase_F3 extends TestBase {
 
 			ob.navigate().to(document_url);
 			
-			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(document_title);
-			//ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
-
-			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 
 			// 3)Login with user1 again and verify that he receives a correct
 			// notification
@@ -118,7 +105,6 @@ public class TestCase_F3 extends TestBase {
 
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(25000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationDocumentComment")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);

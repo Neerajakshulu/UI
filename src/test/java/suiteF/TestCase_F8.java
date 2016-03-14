@@ -61,10 +61,8 @@ public class TestCase_F8 extends TestBase {
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			//Thread.sleep(7000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			//Thread.sleep(5000);
 			ProfilePage.enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
 			ProfilePage.enterPostContent(postString);
@@ -77,7 +75,6 @@ public class TestCase_F8 extends TestBase {
 			//USER1 WILL COMMENT ON THE POST CREATED
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -85,13 +82,10 @@ public class TestCase_F8 extends TestBase {
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("Very Nice Post");
 			Thread.sleep(5000);

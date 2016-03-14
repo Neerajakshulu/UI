@@ -60,20 +60,15 @@ public class TestCase_F6 extends TestBase {
 			user3 = createNewUser(fn3, ln3);
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
-			//Thread.sleep(4000);
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			//User1 searches User3
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn3 + " " + ln3);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
@@ -81,13 +76,11 @@ public class TestCase_F6 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			Thread.sleep(3000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 			//User2 Logging in
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
 			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
 			System.out.println(text);

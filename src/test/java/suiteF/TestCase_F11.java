@@ -62,15 +62,12 @@ public class TestCase_F11 extends TestBase {
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 			test.log(LogStatus.INFO,"User1 Commenting on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			String postLinkCommented=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F11:like this Post");
 			Thread.sleep(3000);
@@ -86,7 +83,6 @@ public class TestCase_F11 extends TestBase {
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			//searching the post and commenting on it
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postLinkCommented);
@@ -94,14 +90,11 @@ public class TestCase_F11 extends TestBase {
 			Thread.sleep(4000);
 			
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 			test.log(LogStatus.INFO,"someother user Liking the comment made by user1 on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
 			Thread.sleep(4000);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));

@@ -74,18 +74,15 @@ public class TestCase_F4 extends TestBase {
 
 			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(8000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 
 			// String
 			// document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// System.out.println(document_title);
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
 			Thread.sleep(4000);
@@ -93,14 +90,12 @@ public class TestCase_F4 extends TestBase {
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(5000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 
 			// 2)Login with user1,like the comment and logout
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
 			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("apps")), 30);
 
 			ob.navigate().to(document_url);
@@ -109,13 +104,11 @@ public class TestCase_F4 extends TestBase {
 			//Thread.sleep(4000);
 			
 			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_commentLike_button")), 30);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
 			Thread.sleep(1000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 
 			// 3)Login with user2 again and verify that he receives a correct
 			// notification
