@@ -61,8 +61,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 
 			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
@@ -97,9 +97,9 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Post for");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 40);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_posts_result")), 40);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString()), 40);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString())).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
 			boolean postsPublishButton=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString())).isDisplayed();

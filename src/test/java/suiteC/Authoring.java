@@ -88,6 +88,7 @@ public class Authoring  extends TestBase {
 		System.out.println("no of comment areas enabled-->"+commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
+		BrowserWaits.waitTime(5);
 		List<WebElement> subButtons=ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
 		System.out.println("Buttons available---2--->"+subButtons);
 		for(WebElement subButton:subButtons){
@@ -95,7 +96,7 @@ public class Authoring  extends TestBase {
 			if(subButton.getText().trim().equalsIgnoreCase("submit")){
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", subButton);
-				//subButton.click();
+				
 				break;
 			}
 		}
@@ -170,6 +171,7 @@ public class Authoring  extends TestBase {
 	 * @throws Exception
 	 */
 	public static void validatePreventBotComment() throws Exception  {
+		waitForAjax(ob);
 		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
 		String preventBotText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 		//System.out.println("Prevent Bot--->"+preventBotText);
