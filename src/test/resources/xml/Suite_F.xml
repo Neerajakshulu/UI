@@ -119,5 +119,17 @@
 		</classes>
 	</test>
 	
+	<test name="Test F20">
+		<classes>
+			<class name="suiteF.TestCase_F20"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F21">
+		<classes>
+			<class name="suiteF.TestCase_F21"></class>
+		</classes>
+	</test>
+	
 </suite>
 
