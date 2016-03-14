@@ -68,7 +68,6 @@ public class VerifyDraftPostTabDisplayForZeroDrafts extends TestBase {
 
 			LoginTR.enterTRCredentials(email, password);
 			LoginTR.clickLogin();
-			//Thread.sleep(8000);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			HeaderFooterLinksPage.clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

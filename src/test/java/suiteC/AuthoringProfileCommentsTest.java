@@ -75,7 +75,6 @@ public class AuthoringProfileCommentsTest extends TestBase {
 						ob.navigate().to(System.getProperty("host"));
 						try {
 						AuthoringTest.waitForTRHomePage();
-						Thread.sleep(15000);
 						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 						closeBrowser();
 					} catch (Throwable t) {
