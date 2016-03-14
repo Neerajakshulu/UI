@@ -55,8 +55,9 @@ public class TestCase_F19 extends TestBase {
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			Thread.sleep(7000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("brain");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")),30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
@@ -64,19 +65,20 @@ public class TestCase_F19 extends TestBase {
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			test.log(LogStatus.INFO, " user watching an article");
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			LoginTR.logOutApp();
 
 			//Login with someother user and comment on the article in watchlist of the above user
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 			ob.navigate().to(document_url);
-			Thread.sleep(4000);
 			Thread.sleep(4000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("My Favourite Game");
 			Thread.sleep(5000);
@@ -99,11 +101,9 @@ public class TestCase_F19 extends TestBase {
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				try{
 					test.log(LogStatus.PASS, "User is commenting from home page");
-					ob.findElement(By.xpath(OR.getProperty("documentCommentBoxHomePageUntouched"))).click();
-					Thread.sleep(3000);
-					ob.findElement(By.xpath(OR.getProperty("documentCommentBoxHomePagetouched"))).sendKeys("TestCase19_comment");
+					ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase19_comment");
 					Thread.sleep(2000);
-					ob.findElement(By.xpath(OR.getProperty("documentCommentButtonHomePage"))).click();
+					jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 					Thread.sleep(5000);
 
 					String updatedText = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();

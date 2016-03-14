@@ -75,7 +75,7 @@ public class TestCase_E27 extends TestBase {
 			String watchlistName = "Updated Watchlist";
 			String watchlistDescription = "This is my watchlist";
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();

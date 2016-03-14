@@ -69,14 +69,14 @@ public class TestCase_B70 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
 			
 			WebElement myE2=ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			String text2=myE2.getText();
@@ -98,7 +98,7 @@ public class TestCase_B70 extends TestBase {
 			}
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.tagName("h2"), 30);
 			
 			String actual_text=ob.findElement(By.tagName("h2")).getText();
 			System.out.println(actual_text);

@@ -22,24 +22,17 @@ public class WatchList_SearchPage {
 		
 		//Navigate to TR login page
 		ob.get("https://dev-stable.1p.thomsonreuters.com/ui/demo/#/login");
-		Thread.sleep(8000);
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary unauth-login-btn']")).click();
-		Thread.sleep(4000);
 		
 		
 		//Verify that existing user credentials are working fine
 		ob.findElement(By.id("userid")).sendKeys(email);
 		ob.findElement(By.id("password")).sendKeys(password);
 		ob.findElement(By.id("ajax-submit")).click();
-		Thread.sleep(15000);
 		
 		//Search anything
 		ob.findElement(By.xpath("//input[@type='text']")).sendKeys(search_query);
 		ob.findElement(By.xpath("//button[@class='projectne-search-btn']")).click();
-		Thread.sleep(4000);
-		
-		
-		
 		
 	}
 }

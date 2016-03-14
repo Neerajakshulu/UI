@@ -67,15 +67,15 @@ public class TestCase_B68 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			String all_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]")).getText();
 			String all_temp=all_text.substring(3);

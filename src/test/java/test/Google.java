@@ -16,7 +16,6 @@ public class Google {
 		
 		ob.findElement(By.id("lst-ib")).sendKeys("chemistry");
 		ob.findElement(By.name("btnG")).click();
-		Thread.sleep(2000);
 		
 		String text=ob.findElement(By.id("lst-ib")).getAttribute("value");
 		

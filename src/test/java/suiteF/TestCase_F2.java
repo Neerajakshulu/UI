@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 import base.TestBase;
@@ -77,13 +78,13 @@ public class TestCase_F2 extends TestBase {
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			System.out.println(document_title);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("green tea");
 			Thread.sleep(5000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			//ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
-			Thread.sleep(2000);
-			logout();
+			Thread.sleep(10000);
+			LoginTR.logOutApp();
 			Thread.sleep(5000);
 
 			// 2)Login with user2 and verify that he receives a correct
