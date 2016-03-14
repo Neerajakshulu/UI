@@ -24,19 +24,15 @@ public class SearchDropdown {
 		ob.manage().window().maximize();
 		
 		ob.get("https://dev-stable.1p.thomsonreuters.com/ui/demo/#/login");
-		Thread.sleep(8000);
 		
 		//login using TR credentials
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary unauth-login-btn']")).click();
-		Thread.sleep(4000);
 		ob.findElement(By.id("userid")).sendKeys(email);
 		ob.findElement(By.id("password")).sendKeys(password);
 		ob.findElement(By.id("ajax-submit")).click();
-		Thread.sleep(15000);
 		
 		//Type into the search box and get search results
 		ob.findElement(By.xpath("//input[@type='text']")).sendKeys(search_query);
-		Thread.sleep(3000);
 		
 		//Verify that the search drop down gets displayed
 		if(ob.findElement(By.xpath("//ul[starts-with(@id,'typeahead')]")).isDisplayed())

@@ -25,7 +25,6 @@ public class Test4 {
 		
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Help')]")).click();
-		Thread.sleep(2000);
 		
 		if(ob.findElement(By.xpath("//*[@class='modal-content']")).isDisplayed())
 			System.out.println("Pass");
@@ -33,7 +32,6 @@ public class Test4 {
 			System.out.println("Fail");
 		
 		ob.findElement(By.xpath("//button[@class='close-btn-bottom']")).click();
-		Thread.sleep(2000);
 		
 		//Verify that HELP pop up disappears
 		
