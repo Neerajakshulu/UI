@@ -73,7 +73,7 @@ public class TestCase_E30 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
 			// Clicking on first watch button from the results
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();

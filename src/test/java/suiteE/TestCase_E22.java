@@ -73,7 +73,7 @@ public class TestCase_E22 extends TestBase {
 			selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
 			// Getting watch button list for articles
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));

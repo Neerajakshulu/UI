@@ -68,10 +68,8 @@ public class TestCase_F5 extends TestBase {
 
 			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
 			LoginTR.clickLogin();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			//Thread.sleep(5000);
 			ProfilePage.enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
 			ProfilePage.enterPostContent(postString);

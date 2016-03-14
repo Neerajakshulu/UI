@@ -55,10 +55,8 @@ public class TestCase_F15 extends TestBase {
 				//Logging in with User2
 				LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				LoginTR.clickLogin();
-				//Thread.sleep(8000);
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics")), 30);
 				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics"))));
-				//Thread.sleep(6000);
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_topics_link")), 30);
 				WebElement element=ob.findElement(By.xpath(OR.getProperty("trending_now_topics_link")));
 				String specialCharacterRemovedoutput=element.getText().replaceAll("[^\\dA-Za-z ]","");

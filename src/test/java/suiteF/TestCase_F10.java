@@ -61,21 +61,16 @@ public class TestCase_F10 extends TestBase {
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 			test.log(LogStatus.INFO,"Watching a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			String postWatched=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
-			//Thread.sleep(1000);
 			test.log(LogStatus.INFO,"Post added to user's watchList");
 			Thread.sleep(3000);
 			LoginTR.logOutApp();
@@ -85,21 +80,17 @@ public class TestCase_F10 extends TestBase {
 			ln3 = generateRandomName(10);
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
-			//Thread.sleep(5000);
 			//searching the post and commenting on it
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postWatched);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 			
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 			test.log(LogStatus.INFO,"Commenting on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F10:Post in other user's watchlist");
 			Thread.sleep(3000);
