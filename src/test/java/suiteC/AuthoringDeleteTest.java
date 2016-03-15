@@ -156,7 +156,6 @@ public class AuthoringDeleteTest extends TestBase {
 			
 			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))));
-			//Thread.sleep(6000);
 			waitForAjax(ob);
 			totalCommentsAfterDeletion=Authoring.getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->"+totalCommentsAfterDeletion);

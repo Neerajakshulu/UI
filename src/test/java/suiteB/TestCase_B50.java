@@ -2,12 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -58,9 +54,6 @@ public class TestCase_B50 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -68,22 +61,17 @@ public class TestCase_B50 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			//Thread.sleep(15000);
-			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+				waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
 			// login using TR credentials
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope active']"), 30);
 			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
 			System.out.println(text);

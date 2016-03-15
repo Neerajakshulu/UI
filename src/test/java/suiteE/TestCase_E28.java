@@ -2,10 +2,8 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -62,32 +61,34 @@ public class TestCase_E28 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			// Creating new user
-			createNewUser("mask", "man");
+			
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 
 			// Navigate to the watch list landing page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			BrowserWaits.waitTime(4);
+			int noOfWatchListBefore = ob.findElements(By.xpath(OR.getProperty("watchlist_name"))).size();
 			// Creating a new watch list
 			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 5; i++) {
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-						.sendKeys("This is my newly created watch list");
-				// Clicking on Create button
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
 
 			}
-			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
-			int noOfWatchList = watchLists.size();
+			int noOfWatchListAfter = ob.findElements(By.xpath(OR.getProperty("watchlist_name"))).size();
 
 			try {
-				Assert.assertEquals(noOfWatchList, 5);
+				Assert.assertEquals(noOfWatchListAfter, noOfWatchListBefore + 3);
 				test.log(LogStatus.PASS, "User is able to create multiple watch list");
 			} catch (Error e) {
 				status = 2;

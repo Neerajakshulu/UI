@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -73,6 +74,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -105,16 +107,15 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	@Parameters({"tusername","tpassword"})
 	public void shareOnTwitter(String tusername,String tpassword) throws Exception {
 		try {
+			new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			test.log(LogStatus.INFO,"Sharing Article on Twitter");
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-			//Thread.sleep(3000);
-			
 			String PARENT_WINDOW=ob.getWindowHandle();
 			String rvPageurl=ob.getCurrentUrl();
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK);
-			//Thread.sleep(3000);
+			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString()), 80);
+			jsClick(ob,ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString())));
 			waitForNumberOfWindowsToEqual(ob, 2);
 			maximizeWindow();
 			
@@ -129,7 +130,6 @@ public class ShareArticleOnTwitterTest extends TestBase {
 					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
 					// BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
-					// Thread.sleep(20000);
 					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
@@ -140,8 +140,6 @@ public class ShareArticleOnTwitterTest extends TestBase {
 					 }
 					 
 					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
-					// Thread.sleep(3000);
-
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
 			 }
@@ -183,23 +181,20 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public static void waitForTRHomePage() throws InterruptedException {
-		//Thread.sleep(4000);
 		BrowserWaits.waitUntilText("Sign in with Project Neon");
 	}
 	
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		//Thread.sleep(4000);
-		
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		//Thread.sleep(4000);
-		waitForAjax(ob);
+		waitForPageLoad(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		waitForPageLoad(ob);
 	}
 	
 	public static void waitUntilTextPresent(String locator,String text){

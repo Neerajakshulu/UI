@@ -93,24 +93,6 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
-			//Authoring.enterArticleComment(minComments);
-			//Validate Min Length Error message
-			
-			
-			
-			
-			
-			
-			
-		/*	Authoring.clickAddCommentButton();
-			ob.navigate().refresh();
-			Thread.sleep(8000);
-			Authoring.enterArticleComment(addComments);
-			Authoring.clickAddCommentButton();
-			Authoring.validatePreventBotComment();*/
-			
-			
-			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
 			//print full stack trace
@@ -141,14 +123,11 @@ public class CommentsMinMaxValidationTest extends TestBase {
 
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
 			String maxValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			BrowserWaits.waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
-
-			//Thread.sleep(4000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			

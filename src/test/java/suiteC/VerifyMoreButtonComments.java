@@ -60,16 +60,14 @@ public class VerifyMoreButtonComments extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
-		//	Thread.sleep(8000);
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			login();
-		//	Thread.sleep(15000);
 			selectAnArticle();
-			String comment = "testFlag";
+			/*String comment = "testFlag";
 			Authoring.enterArticleComment(comment);
 			Authoring.clickAddCommentButton();
-					
+					*/
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			try {
@@ -128,7 +126,6 @@ public class VerifyMoreButtonComments extends TestBase{
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		//Thread.sleep(4000);
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
@@ -144,7 +141,7 @@ public class VerifyMoreButtonComments extends TestBase{
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
 						.getText();
 				commentsCount = Integer.parseInt(strCmntCt);
-				if (commentsCount ==0) {
+				if (commentsCount<5) {
 					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
 					isFound = true;
 					break;
@@ -159,7 +156,6 @@ public class VerifyMoreButtonComments extends TestBase{
 			waitForAjax(ob);
 		}
 		if(!isFound) throw new Exception("Article with less than 10 comments not found");
-		//Thread.sleep(5000);
 	}
 
 	@AfterTest

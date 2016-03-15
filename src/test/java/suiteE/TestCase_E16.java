@@ -68,7 +68,13 @@ public class TestCase_E16 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");

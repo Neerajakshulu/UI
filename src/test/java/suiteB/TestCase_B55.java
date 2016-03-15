@@ -74,7 +74,6 @@ public class TestCase_B55 extends TestBase {
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
-			Thread.sleep(2000);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");

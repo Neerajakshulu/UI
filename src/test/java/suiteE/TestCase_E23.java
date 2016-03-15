@@ -67,7 +67,13 @@ public class TestCase_E23 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
 			// Searching for patent
 			selectSearchTypeFromDropDown("Patents");
@@ -80,8 +86,8 @@ public class TestCase_E23 extends TestBase {
 
 			String selectedWatchlistName = null;
 			// Watching 10 patents to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
+			for (int i = 0; i < 2; i++) {
+				WebElement watchButton = watchButtonList.get(i);
 				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				Thread.sleep(2000);
@@ -89,6 +95,7 @@ public class TestCase_E23 extends TestBase {
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
+			waitForPageLoad(ob);
 			// Getting the first result title
 			String firstDocumentTitle = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
 
