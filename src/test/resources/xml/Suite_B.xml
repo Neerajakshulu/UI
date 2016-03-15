@@ -635,5 +635,21 @@
 			<class name="suiteB.TestCase_B96"></class>
 		</classes>
 	</test>
+	
+	
+	<test name="Test B97">
+		<classes>
+			<class name="suiteB.TestCase_B97"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B98">
+		<classes>
+			<class name="suiteB.TestCase_B98"></class>
+		</classes>
+	</test>
+	
+	
 </suite>
 
