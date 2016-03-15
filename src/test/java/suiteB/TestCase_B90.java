@@ -3,13 +3,11 @@ package suiteB;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B70 extends TestBase {
+public class TestCase_B90 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -36,13 +34,13 @@ public class TestCase_B70 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down")
+						"Verify that following options get displayed in SORT BY drop down in ARTICLES search results page: a)Relevance b)Times Cited c)Publication Date(Newest) d)Publication Date(Oldest)")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB70() throws Exception {
+	public void testcaseB90() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -60,63 +58,54 @@ public class TestCase_B70 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			
+			Thread.sleep(8000);
+
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			
-			WebElement myE2=ob.findElement(By.xpath(OR.getProperty("articlesTile")));
-			String text2=myE2.getText();
-			
-			String[] arr2=text2.split("\n");
-			
-			ArrayList<String> al2=new ArrayList<String>();
-			for(int i=1;i<arr2.length;i++){
-				
-				al2.add(arr2[i]);
-			}
-			
-			String expected_text=al2.get(1);
-			System.out.println(expected_text);
-			
-			for(int i=1;i<=7;i++){
-				
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ARROW_DOWN);
-			}
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
-			waitForElementTobeVisible(ob, By.tagName("h2"), 30);
-			
-			String actual_text=ob.findElement(By.tagName("h2")).getText();
-			System.out.println(actual_text);
-			
-			if(!compareStrings(expected_text,actual_text)){
-				
-				
-				test.log(LogStatus.FAIL, "Record view of an article does not get displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down");// extent report
-            	status = 2;// excel
-            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_record_view_of_an_article_not_getting_displayed")));// screenshot
+			Thread.sleep(15000);
+			// Searching for patents
+			selectSearchTypeFromDropDown("Articles");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(8000);
 
+			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
+			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			waitForElementTobeVisible(ob,
+					By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul[@class='dropdown-menu']"),
+					4);
+			List<WebElement> sortByValuesList = ob
+					.findElements(By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul/li"));
+			List<String> expectedDropDownValues = Arrays.asList(new String[] { "Relevance", "Times Cited",
+					"Publication Date (Newest)", "Publication Date (Oldest)" });
+			List<String> actualDropDownValues = new ArrayList<String>();
+
+			for (WebElement sortByValue : sortByValuesList) {
+
+				actualDropDownValues.add(sortByValue.getText());
 			}
-			
+
+			if (actualDropDownValues.equals(expectedDropDownValues)) {
+				test.log(LogStatus.PASS, "All the sort by values are displayed properly in article search result page");
+			} else {
+				status = 2;
+				test.log(LogStatus.FAIL,
+						"All the sort by values are not displayed properly in article search result page");
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_sort_by_values_not_displayed_properly_in_article_results_page")));// screenshot
+			}
+
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -134,7 +123,6 @@ public class TestCase_B70 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
@@ -150,16 +138,5 @@ public class TestCase_B70 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-	
-	public int getHeadingCount(){
-		
-		String heading_text=ob.findElement(By.tagName("h1")).getText();
-		String heading_temp=heading_text.substring(16);
-		int heading_num=convertStringToInt(heading_temp);
-		return heading_num;
-		
-	}
-	
-	
 
 }

@@ -65,10 +65,8 @@ public class TestCase_F19 extends TestBase {
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 			test.log(LogStatus.INFO, " user watching an article");
-			//Thread.sleep(3000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(2000);

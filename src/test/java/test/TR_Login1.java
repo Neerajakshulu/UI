@@ -35,13 +35,10 @@ public class TR_Login1 {
 		
 		//Navigate to TR login page
 		ob.get("https://dev-stable.1p.thomsonreuters.com/ui/demo/#/login");
-		Thread.sleep(8000);
 		ob.findElement(By.xpath("//button[@class='btn webui-btn-primary unauth-login-btn']")).click();
-		Thread.sleep(4000);
 		
 		//Create new TR account
 		ob.findElement(By.linkText("Register now")).click();
-		Thread.sleep(2000);
 		ob.findElement(By.id("uid")).sendKeys(email);
 		ob.findElement(By.id("givenname")).sendKeys(first_name);
 		ob.findElement(By.id("sn")).sendKeys(last_name);
@@ -49,7 +46,6 @@ public class TR_Login1 {
 		ob.findElement(By.id("confirmpassword")).sendKeys(password);
 		ob.findElement(By.id("termsAndConditions")).click();
 		ob.findElement(By.xpath("//button[contains(text(),'Register')]")).click();
-		Thread.sleep(4000);
 		
 		//Verify that confirmation email is sent
 		String text=ob.findElement(By.id("profileMessage")).getText();
@@ -63,7 +59,6 @@ public class TR_Login1 {
 		ob.get("https://www.guerrillamail.com");
 		List<WebElement> email_list=ob.findElements(By.xpath("//tr[starts-with(@id,'mr_')]"));
 		email_list.get(0).click();
-		Thread.sleep(2000);
 		String email_subject=ob.findElement(By.xpath("//*[@class='email_subject']")).getText();
 		if(email_subject.contains("Please confirm your email Address"))
 			System.out.println("Account activation email received successfully");
@@ -74,7 +69,6 @@ public class TR_Login1 {
 		WebElement email_body=ob.findElement(By.xpath("//*[@class='email_body']"));
 		List<WebElement> links=email_body.findElements(By.tagName("a"));
 		links.get(0).click();
-		Thread.sleep(4000);
 		
 		//Switch to 2nd window
 		Set<String> myset=ob.getWindowHandles();
@@ -91,7 +85,6 @@ public class TR_Login1 {
 		ob.findElement(By.id("userid")).sendKeys(email);
 		ob.findElement(By.id("password")).sendKeys(password);
 		ob.findElement(By.id("ajax-submit")).click();
-		Thread.sleep(15000);
 		if(ob.findElement(By.xpath("//span[contains(text(),'Help')]")).isDisplayed())
 			System.out.println("Newly registered user credentials are working fine");
 		else

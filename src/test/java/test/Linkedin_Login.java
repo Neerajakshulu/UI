@@ -22,15 +22,12 @@ public class Linkedin_Login {
 		
 		//Navigate to LI login page
 		ob.get("https://dev-stable.1p.thomsonreuters.com/ui/demo/#/login");
-		Thread.sleep(8000);
 		ob.findElement(By.xpath("//button[@class='unauth-login-btn li-btn']")).click();
-		Thread.sleep(4000);
 		
 		//Verify that exiusting LI user credentials are working fine
 		ob.findElement(By.name("session_key")).sendKeys(email);
 		ob.findElement(By.name("session_password")).sendKeys(password);
 		ob.findElement(By.name("authorize")).click();
-		Thread.sleep(15000);
 		if(ob.findElement(By.xpath("//span[contains(text(),'Help')]")).isDisplayed())
 			System.out.println("Existing LI user credentials are working fine");
 		else

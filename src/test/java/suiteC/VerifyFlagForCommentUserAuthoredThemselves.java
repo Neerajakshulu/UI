@@ -66,13 +66,10 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			//Thread.sleep(8000);
 			login();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();

@@ -68,17 +68,13 @@ public class TestCase_B47 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			String text1=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			System.out.println(text1);
@@ -95,7 +91,6 @@ public class TestCase_B47 extends TestBase {
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			String text2=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			System.out.println(text2);
@@ -110,10 +105,8 @@ public class TestCase_B47 extends TestBase {
 			}
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'People')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			String text3=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			System.out.println(text3);
@@ -129,10 +122,8 @@ public class TestCase_B47 extends TestBase {
 			
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			String text4=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			System.out.println(text4);
@@ -147,10 +138,8 @@ public class TestCase_B47 extends TestBase {
 			}
 			
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'All')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'All')]")).click();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			String text5=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			System.out.println(text5);

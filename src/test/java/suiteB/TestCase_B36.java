@@ -62,7 +62,7 @@ public class TestCase_B36 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
@@ -73,7 +73,7 @@ public class TestCase_B36 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();

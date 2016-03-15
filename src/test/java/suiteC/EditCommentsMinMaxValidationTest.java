@@ -98,8 +98,7 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 			chooseArticle(completeArticle);
 			Authoring.enterArticleComments("test");
 			Authoring.clickAddCommentButton();
-			//Thread.sleep(5000);
-						
+					
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
 			//print full stack trace
@@ -126,23 +125,18 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
 			String minValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Min Validation Error Message--->"+minValidErrMsg);
 			BrowserWaits.waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
-
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
 			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
 			String maxValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			BrowserWaits.waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
-
-			//Thread.sleep(4000);
 			LoginTR.logOutApp();
 			closeBrowser();
 			

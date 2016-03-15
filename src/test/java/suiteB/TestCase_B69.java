@@ -67,18 +67,17 @@ public class TestCase_B69 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(8000);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"), 30);
 			
 			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]")).click();
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			
 			String dd_text=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
 			if(!compareStrings("Patents",dd_text)){

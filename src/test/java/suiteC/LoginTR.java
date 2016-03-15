@@ -50,7 +50,6 @@ public class LoginTR extends TestBase{
 	
 	public static void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);

@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,7 +19,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B70 extends TestBase {
+public class TestCase_B89 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,15 +32,13 @@ public class TestCase_B70 extends TestBase {
 
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down")
+		test = extent.startTest(var, "Verify that DETAILS link is working correctly in record view page of a patent")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB70() throws Exception {
+	public void testcaseB89() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -60,63 +56,95 @@ public class TestCase_B70 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			Thread.sleep(8000);
+
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			
-			WebElement myE2=ob.findElement(By.xpath(OR.getProperty("articlesTile")));
-			String text2=myE2.getText();
-			
-			String[] arr2=text2.split("\n");
-			
-			ArrayList<String> al2=new ArrayList<String>();
-			for(int i=1;i<arr2.length;i++){
-				
-				al2.add(arr2[i]);
-			}
-			
-			String expected_text=al2.get(1);
-			System.out.println(expected_text);
-			
-			for(int i=1;i<=7;i++){
-				
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ARROW_DOWN);
-			}
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
-			waitForElementTobeVisible(ob, By.tagName("h2"), 30);
-			
-			String actual_text=ob.findElement(By.tagName("h2")).getText();
-			System.out.println(actual_text);
-			
-			if(!compareStrings(expected_text,actual_text)){
-				
-				
-				test.log(LogStatus.FAIL, "Record view of an article does not get displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down");// extent report
-            	status = 2;// excel
-            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_record_view_of_an_article_not_getting_displayed")));// screenshot
+			Thread.sleep(15000);
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(8000);
 
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(8000);
+
+			String titleName = "";
+			try {
+
+				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='record-heading ng-binding']"))
+						.size() != 0;
+				titleName = ob.findElement(By.xpath("//div/h2[@class='record-heading ng-binding']")).getText();
+				if (titlePresent) {
+					test.log(LogStatus.PASS, "Title is present in patent record view page");
+				} else {
+					status = 2;
+					test.log(LogStatus.FAIL, "Title is not present in patent record view page");
+				}
+			} catch (NoSuchElementException e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "Title is not displayed present in patent record view page");
 			}
-			
+
+			try {
+
+				List<WebElement> detailsLink = ob.findElements(By.linkText("Details"));
+				// Clicking on the details link
+				ob.findElement(By.linkText("Details")).click();
+				Thread.sleep(15000);
+
+				if (detailsLink.size() != 0) {
+
+					test.log(LogStatus.PASS, "Details link is present in the record view page");
+				} else {
+					test.log(LogStatus.FAIL, "Deatils link is displayed multiple times in the record view page");
+				}
+			} catch (NoSuchElementException e) {
+
+				status = 2;
+				test.log(LogStatus.FAIL, "Details link is not displayed");// extent
+				return;
+			}
+
+			try {
+				// Switching tab
+				List<String> tabs = new ArrayList<String>(ob.getWindowHandles());
+				ob.switchTo().window(tabs.get(1));
+				boolean titlePresent = ob.findElements(By.xpath("//div[@id='PAT.TIOR0']")).size() == 1;
+				if (titlePresent) {
+
+					test.log(LogStatus.PASS, "Original title name is displayed");
+				} else {
+					status = 2;
+					test.log(LogStatus.FAIL, "Original title name is not displayed");
+				}
+
+				String titleNameOriginal = ob.findElement(By.xpath("//div[@id='PAT.TIOR0']")).getText();
+				if (titleNameOriginal.equalsIgnoreCase(titleName)) {
+					test.log(LogStatus.PASS, "Original title name is same as the title displayed in NEON");
+				} else {
+					status = 2;
+					test.log(LogStatus.FAIL, "Original title name is not same as the title displayed in NEON");
+				}
+			} catch (NoSuchElementException e) {
+
+				status = 2;
+				test.log(LogStatus.FAIL, "Details link is not working properly");// extent
+			}
+
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -134,7 +162,6 @@ public class TestCase_B70 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
@@ -150,16 +177,5 @@ public class TestCase_B70 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-	
-	public int getHeadingCount(){
-		
-		String heading_text=ob.findElement(By.tagName("h1")).getText();
-		String heading_temp=heading_text.substring(16);
-		int heading_num=convertStringToInt(heading_temp);
-		return heading_num;
-		
-	}
-	
-	
 
 }

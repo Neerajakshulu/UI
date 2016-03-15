@@ -66,27 +66,22 @@ public class TestCase_B42 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			//Thread.sleep(8000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			//Thread.sleep(15000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
 
 			// Check the filter is collapsed by default
 			collapseFilter();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			// Check if the filter expanded
 			expandFilter();
-			//Thread.sleep(2000);
 			BrowserWaits.waitTime(2);
 			// Check if filter is collapsible
 			collapseFilter();

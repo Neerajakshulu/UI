@@ -83,22 +83,18 @@ public class TestCase_F1 extends TestBase {
 			System.out.println(fn2 +" "+ ln2);
 			user2 = createNewUser(fn2, ln2);
 			System.out.println("User2:"+ user2);
-			//Thread.sleep(5000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//Thread.sleep(4000);
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			//Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			Thread.sleep(3000);
 			LoginTR.logOutApp();
-			//Thread.sleep(5000);
 
 			// 3)Verify that User1 receives a notification with correct data
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
