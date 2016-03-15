@@ -1,0 +1,639 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite B">
+
+	<test name="Test B1">
+		<classes>
+			<class name="suiteB.TestCase_B1"></class>
+		</classes>
+	</test>
+
+	<test name="Test B2">
+		<classes>
+			<class name="suiteB.TestCase_B2"></class>
+		</classes>
+	</test>
+
+	<test name="Test B3">
+		<classes>
+			<class name="suiteB.TestCase_B3"></class>
+		</classes>
+	</test>
+
+	<test name="Test B4">
+		<classes>
+			<class name="suiteB.TestCase_B4"></class>
+		</classes>
+	</test>
+
+	<test name="Test B5">
+		<classes>
+			<class name="suiteB.TestCase_B5"></class>
+		</classes>
+	</test>
+
+	<test name="Test B6">
+		<classes>
+			<class name="suiteB.TestCase_B6"></class>
+		</classes>
+	</test>
+
+	<test name="Test B7">
+		<classes>
+			<class name="suiteB.TestCase_B7"></class>
+		</classes>
+	</test>
+
+	<test name="Test B8">
+		<classes>
+			<class name="suiteB.TestCase_B8"></class>
+		</classes>
+	</test>
+
+	<test name="Test B9">
+		<classes>
+			<class name="suiteB.TestCase_B9"></class>
+		</classes>
+	</test>
+
+	<test name="Test B10">
+		<classes>
+			<class name="suiteB.TestCase_B10"></class>
+		</classes>
+	</test>
+
+	<test name="Test B11">
+		<classes>
+			<class name="suiteB.TestCase_B11"></class>
+		</classes>
+	</test>
+
+	<test name="Test B12">
+		<classes>
+			<class name="suiteB.TestCase_B12"></class>
+		</classes>
+	</test>
+
+	<test name="Test B13">
+		<classes>
+			<class name="suiteB.TestCase_B13"></class>
+		</classes>
+	</test>
+
+	<test name="Test B14">
+		<classes>
+			<class name="suiteB.TestCase_B14"></class>
+		</classes>
+	</test>
+
+	<test name="Test B15">
+		<classes>
+			<class name="suiteB.TestCase_B15"></class>
+		</classes>
+	</test>
+
+	<test name="Test B16">
+		<classes>
+			<class name="suiteB.TestCase_B16"></class>
+		</classes>
+	</test>
+
+	<test name="Test B17">
+		<classes>
+			<class name="suiteB.TestCase_B17"></class>
+		</classes>
+	</test>
+	<test name="Test B18">
+		<classes>
+			<class name="suiteB.TestCase_B18"></class>
+		</classes>
+	</test>
+	<test name="Test B19">
+		<classes>
+			<class name="suiteB.TestCase_B19"></class>
+		</classes>
+	</test>
+
+	<test name="Test B20">
+		<classes>
+			<class name="suiteB.TestCase_B20"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B21">
+		<classes>
+			<class name="suiteB.TestCase_B21"></class>
+		</classes>
+	</test>
+
+	<test name="Test B22">
+		<classes>
+			<class name="suiteB.TestCase_B22"></class>
+		</classes>
+	</test>
+
+	<test name="Test B23">
+		<classes>
+			<class name="suiteB.TestCase_B23"></class>
+		</classes>
+	</test>
+
+	<test name="Test B24">
+		<classes>
+			<class name="suiteB.TestCase_B24"></class>
+		</classes>
+	</test>
+
+	<test name="Test B25">
+		<classes>
+			<class name="suiteB.TestCase_B25"></class>
+		</classes>
+	</test>
+
+	<test name="Test B26">
+		<classes>
+			<class name="suiteB.TestCase_B26"></class>
+		</classes>
+	</test>
+
+	<test name="Test B27">
+		<classes>
+			<class name="suiteB.TestCase_B27"></class>
+		</classes>
+	</test>
+
+	<test name="Test B28">
+		<classes>
+			<class name="suiteB.TestCase_B28"></class>
+		</classes>
+	</test>
+
+	<test name="Test B29">
+		<classes>
+			<class name="suiteB.TestCase_B29"></class>
+		</classes>
+	</test>
+
+	<test name="Test B30">
+		<classes>
+			<class name="suiteB.TestCase_B30"></class>
+		</classes>
+	</test>
+
+	<test name="Test B31">
+		<classes>
+			<class name="suiteB.TestCase_B31"></class>
+		</classes>
+	</test>
+
+	<test name="Test B32">
+		<classes>
+			<class name="suiteB.TestCase_B32"></class>
+		</classes>
+	</test>
+
+	<test name="Test B33">
+		<classes>
+			<class name="suiteB.TestCase_B33"></class>
+		</classes>
+	</test>
+
+	<test name="Test B34">
+		<classes>
+			<class name="suiteB.TestCase_B34"></class>
+		</classes>
+	</test>
+
+	<test name="Test B35">
+		<classes>
+			<class name="suiteB.TestCase_B35"></class>
+		</classes>
+	</test>
+
+	<test name="Test B36">
+		<classes>
+			<class name="suiteB.TestCase_B36"></class>
+		</classes>
+	</test>
+
+	<test name="Test B37">
+		<classes>
+			<class name="suiteB.TestCase_B37"></class>
+		</classes>
+	</test>
+
+	<test name="Test B38">
+		<classes>
+			<class name="suiteB.TestCase_B38"></class>
+		</classes>
+	</test>
+
+	<test name="Test B39">
+		<classes>
+			<class name="suiteB.TestCase_B39"></class>
+		</classes>
+	</test>
+
+	<test name="Test B40">
+		<classes>
+			<class name="suiteB.TestCase_B40"></class>
+		</classes>
+	</test>
+
+	<test name="Test B41">
+		<classes>
+			<class name="suiteB.TestCase_B41"></class>
+		</classes>
+	</test>
+
+	<test name="Test B42">
+		<classes>
+			<class name="suiteB.TestCase_B42"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B43">
+		<classes>
+			<class name="suiteB.TestCase_B43"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B44">
+		<classes>
+			<class name="suiteB.TestCase_B44"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B45">
+		<classes>
+			<class name="suiteB.TestCase_B45"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B46">
+		<classes>
+			<class name="suiteB.TestCase_B46"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B47">
+		<classes>
+			<class name="suiteB.TestCase_B47"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B48">
+		<classes>
+			<class name="suiteB.TestCase_B48"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B49">
+		<classes>
+			<class name="suiteB.TestCase_B49"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B50">
+		<classes>
+			<class name="suiteB.TestCase_B50"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B51">
+		<classes>
+			<class name="suiteB.TestCase_B51"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B52">
+		<classes>
+			<class name="suiteB.TestCase_B52"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B53">
+		<classes>
+			<class name="suiteB.TestCase_B53"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B54">
+		<classes>
+			<class name="suiteB.TestCase_B54"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B55">
+		<classes>
+			<class name="suiteB.TestCase_B55"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B56">
+		<classes>
+			<class name="suiteB.TestCase_B56"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B57">
+		<classes>
+			<class name="suiteB.TestCase_B57"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B58">
+		<classes>
+			<class name="suiteB.TestCase_B58"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B59">
+		<classes>
+			<class name="suiteB.TestCase_B59"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B60">
+		<classes>
+			<class name="suiteB.TestCase_B60"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B61">
+		<classes>
+			<class name="suiteB.TestCase_B61"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B62">
+		<classes>
+			<class name="suiteB.TestCase_B62"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B63">
+		<classes>
+			<class name="suiteB.TestCase_B63"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B64">
+		<classes>
+			<class name="suiteB.TestCase_B64"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B65">
+		<classes>
+			<class name="suiteB.TestCase_B65"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B66">
+		<classes>
+			<class name="suiteB.TestCase_B66"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B67">
+		<classes>
+			<class name="suiteB.TestCase_B67"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B68">
+		<classes>
+			<class name="suiteB.TestCase_B68"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B69">
+		<classes>
+			<class name="suiteB.TestCase_B69"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B70">
+		<classes>
+			<class name="suiteB.TestCase_B70"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B71">
+		<classes>
+			<class name="suiteB.TestCase_B71"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B72">
+		<classes>
+			<class name="suiteB.TestCase_B72"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B73">
+		<classes>
+			<class name="suiteB.TestCase_B73"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B74">
+		<classes>
+			<class name="suiteB.TestCase_B74"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B75">
+		<classes>
+			<class name="suiteB.TestCase_B75"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B76">
+		<classes>
+			<class name="suiteB.TestCase_B76"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B77">
+		<classes>
+			<class name="suiteB.TestCase_B77"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B78">
+		<classes>
+			<class name="suiteB.TestCase_B78"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B79">
+		<classes>
+			<class name="suiteB.TestCase_B79"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B80">
+		<classes>
+			<class name="suiteB.TestCase_B80"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B81">
+		<classes>
+			<class name="suiteB.TestCase_B81"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B82">
+		<classes>
+			<class name="suiteB.TestCase_B82"></class>
+		</classes>
+	</test>
+	
+	 
+	<test name="Test B83">
+		<classes>
+			<class name="suiteB.TestCase_B83"></class>
+		</classes>
+	</test>
+	
+	
+	
+	<test name="Test B84">
+		<classes>
+			<class name="suiteB.TestCase_B84"></class>
+		</classes>
+	</test> 
+	
+	<test name="Test B85">
+		<classes>
+			<class name="suiteB.TestCase_B85"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B86">
+		<classes>
+			<class name="suiteB.TestCase_B86"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B87">
+		<classes>
+			<class name="suiteB.TestCase_B87"></class>
+		</classes>
+	</test>  
+	
+	
+	<test name="Test B88">
+		<classes>
+			<class name="suiteB.TestCase_B88"></class>
+		</classes>
+	</test>  
+	
+	
+	<test name="Test B89">
+		<classes>
+			<class name="suiteB.TestCase_B89"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B90">
+		<classes>
+			<class name="suiteB.TestCase_B90"></class>
+		</classes>
+	</test>  
+
+	
+	<test name="Test B91">
+		<classes>
+			<class name="suiteB.TestCase_B91"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B92">
+		<classes>
+			<class name="suiteB.TestCase_B92"></class>
+		</classes>
+	</test>	
+	
+	<test name="Test B93">
+		<classes>
+			<class name="suiteB.TestCase_B93"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B94">
+		<classes>
+			<class name="suiteB.TestCase_B94"></class>
+		</classes>
+	</test>
+	<test name="Test B95">
+		<classes>
+			<class name="suiteB.TestCase_B95"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B96">
+		<classes>
+			<class name="suiteB.TestCase_B96"></class>
+		</classes>
+	</test>
+
+	
+	<test name="Test B91">
+		<classes>
+			<class name="suiteB.TestCase_B91"></class>
+		</classes>
+	</test>  
+	
+	<test name="Test B92">
+		<classes>
+			<class name="suiteB.TestCase_B92"></class>
+		</classes>
+	</test>	
+	
+	<test name="Test B93">
+		<classes>
+			<class name="suiteB.TestCase_B93"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B94">
+		<classes>
+			<class name="suiteB.TestCase_B94"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B95">
+		<classes>
+			<class name="suiteB.TestCase_B95"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B96">
+		<classes>
+			<class name="suiteB.TestCase_B96"></class>
+		</classes>
+	</test>
+</suite>
+
