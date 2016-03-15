@@ -3,7 +3,6 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
-import pages.ProfilePage;
 import pages.SearchResultsPage;
 import util.ErrorUtil;
 import util.TestUtil;

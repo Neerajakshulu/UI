@@ -62,15 +62,15 @@ public class TestCase_B93 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
-			// Searching for patents
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
+			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();

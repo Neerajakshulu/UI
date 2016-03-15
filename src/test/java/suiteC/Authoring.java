@@ -58,6 +58,7 @@ public class Authoring  extends TestBase {
 	
 	public static void clickAddCommentButton() throws InterruptedException  {
 		scrollingToElementofAPage();
+		waitForElementTobeClickable(ob, By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"), 60);
 		WebElement addCommentElement=ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));
 		//ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
 		JavascriptExecutor executor = (JavascriptExecutor)ob;
