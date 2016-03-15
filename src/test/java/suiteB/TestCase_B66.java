@@ -75,9 +75,11 @@ public class TestCase_B66 extends TestBase {
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
+//			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
+			Thread.sleep(5000);
 			
 			String all_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]")).getText();
+//			System.out.println(all_text);
 			int all_num=Integer.parseInt(all_text.substring(3,4));
 			System.out.println(all_num);
 			boolean cond1=all_num!=0;
