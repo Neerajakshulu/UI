@@ -569,9 +569,11 @@
 		</classes>
 	</test>  
 	
-	
-
-	
+	<test name="Test B92">
+		<classes>
+			<class name="suiteB.TestCase_B92"></class>
+		</classes>
+	</test>	
 	
 </suite>
 
