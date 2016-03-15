@@ -65,7 +65,12 @@ public class VerifyFlagInUserComments extends TestBase{
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			login();
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			
 			PostRecordViewPage.searchForArticleWithComments();
 			PostRecordViewPage.loadComments();
 		

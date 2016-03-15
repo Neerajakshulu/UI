@@ -16,7 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 
-public class TestCase_B92 extends TestBase {
+public class TestCase_B93 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -31,7 +31,7 @@ public class TestCase_B92 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields get displayed correctly for a person in ALL search results page: a)Person name b)Person details")
+						"Verify that profile page of a person gets displayed when clicks on any PEOPLE search result in ALL search results page")
 						.assignCategory("Suite B");
 
 	}
@@ -54,11 +54,7 @@ public class TestCase_B92 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			//below user email and password
-			//email:3ewhun+6c4irdugxznv8@sharklasers.com
-			//password:Tr@12345
 			String userName="STQABLR";
-			String description="Software Tester, Thomson Reuters, India";
 
 			openBrowser();
 			clearCookies();
@@ -71,23 +67,21 @@ public class TestCase_B92 extends TestBase {
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
-			// Searching for patents
+			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
-			String profileName = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).getText();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profile_description_xpath")),8);
-			String profileDescription=ob.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
 			
-			if (profileName.equals(userName) && profileDescription.equals(description)) {
-				test.log(LogStatus.PASS, "Person name and description are displayed as expected");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
+			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
+			boolean isPresent=ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
+			if (isPresent) {
+				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");
 			} else {
 				status = 2;
-				test.log(LogStatus.FAIL, "Person name and description are not displayed as expected");
+				test.log(LogStatus.FAIL, "Profile page of a person is not displayed as expected");
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_Person_name_and_description_not_displayed")));// screenshot
+						this.getClass().getSimpleName() + "_something_wrong_happened")));// screenshot
 			}
 
 			closeBrowser();
@@ -126,5 +120,4 @@ public class TestCase_B92 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 }

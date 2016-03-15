@@ -601,19 +601,19 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	public static void clickExternalLinkInComments(String url) throws Exception {
-		//BrowserWaits.waitTime(6);
-		BrowserWaits.waitForPageLoad(ob);
+		BrowserWaits.waitTime(6);
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString()), 30);
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))
-			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).click();
+			jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())));
+		
 	}
 	
 	public static void loadComments() {
 		boolean isPresent = true;
 		WebElement more;
 		int count=0;
-		while (isPresent&& count<5) {
+		while (isPresent&& count<4) {
 			try {
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
 

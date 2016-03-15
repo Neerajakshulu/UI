@@ -4,19 +4,19 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.ErrorUtil;
-import util.TestUtil;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
+import util.TestUtil;
 
-public class TestCase_B92 extends TestBase {
+public class TestCase_B98 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -31,13 +31,13 @@ public class TestCase_B92 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields get displayed correctly for a person in ALL search results page: a)Person name b)Person details")
-						.assignCategory("Suite B");
+						"Verify that search drop down content type is retained when user navigates back to ALL search results page from record view page")
+				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB92() throws Exception {
+	public void testcaseB98() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -54,11 +54,6 @@ public class TestCase_B92 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			//below user email and password
-			//email:3ewhun+6c4irdugxznv8@sharklasers.com
-			//password:Tr@12345
-			String userName="STQABLR";
-			String description="Software Tester, Thomson Reuters, India";
 
 			openBrowser();
 			clearCookies();
@@ -66,37 +61,47 @@ public class TestCase_B92 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			Thread.sleep(3000);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
-			// Searching for patents
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
-			String profileName = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).getText();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profile_description_xpath")),8);
-			String profileDescription=ob.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
-			if (profileName.equals(userName) && profileDescription.equals(description)) {
-				test.log(LogStatus.PASS, "Person name and description are displayed as expected");
-			} else {
-				status = 2;
-				test.log(LogStatus.FAIL, "Person name and description are not displayed as expected");
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_Person_name_and_description_not_displayed")));// screenshot
+			
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
+			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(5000);
+			
+			ob.navigate().back();
+			
+			
+			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			String text=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+//			System.out.println("Text="+text);
+			
+			if(!compareStrings("Patents",text)){
+				
+				test.log(LogStatus.FAIL, "Search drop down option not retained when user navigates back to ALL search results page from record view page");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
+				
+				
 			}
-
+			
 			closeBrowser();
 
 		}
 
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-			// reports
+																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

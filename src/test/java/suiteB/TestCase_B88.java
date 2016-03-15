@@ -63,8 +63,8 @@ public class TestCase_B88 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -82,9 +82,11 @@ public class TestCase_B88 extends TestBase {
 			waitForAjax(ob);
 			
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
-			BrowserWaits.waitTime(4);
+//			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
+//			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
+//			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
+
 			
 			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();

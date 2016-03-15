@@ -60,14 +60,14 @@ public class VerifyMoreButtonComments extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			login();
 			selectAnArticle();
-			String comment = "testFlag";
+			/*String comment = "testFlag";
 			Authoring.enterArticleComment(comment);
 			Authoring.clickAddCommentButton();
-					
+					*/
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			try {
@@ -141,7 +141,7 @@ public class VerifyMoreButtonComments extends TestBase{
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
 						.getText();
 				commentsCount = Integer.parseInt(strCmntCt);
-				if (commentsCount ==0) {
+				if (commentsCount<5) {
 					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
 					isFound = true;
 					break;
