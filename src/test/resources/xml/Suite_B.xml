@@ -575,5 +575,11 @@
 		</classes>
 	</test>	
 	
+	<test name="Test B93">
+		<classes>
+			<class name="suiteB.TestCase_B93"></class>
+		</classes>
+	</test>
+	
 </suite>
 

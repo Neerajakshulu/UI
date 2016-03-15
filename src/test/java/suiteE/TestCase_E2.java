@@ -67,7 +67,6 @@ public class TestCase_E2 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
 			ob.get(host);
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			

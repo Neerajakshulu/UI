@@ -930,13 +930,12 @@ public class TestBase {
 			throws Exception {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
-		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
-		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).click();
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
@@ -947,17 +946,17 @@ public class TestBase {
 		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 30);
 	}
 
-	public void deleteFirstWatchlist() {
+	public void deleteFirstWatchlist() throws Exception {
 		// Deleting the first watch list
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		waitForPageLoad(ob);
+		BrowserWaits.waitTime(4);
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
 		ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 10);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 10);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 30);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 30);
 		ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
 
