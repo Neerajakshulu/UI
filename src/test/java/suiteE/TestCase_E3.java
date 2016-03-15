@@ -67,7 +67,15 @@ public class TestCase_E3 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			// createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			Thread.sleep(2000);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");

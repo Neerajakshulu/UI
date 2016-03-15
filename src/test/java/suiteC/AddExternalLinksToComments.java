@@ -33,7 +33,7 @@ public class AddExternalLinksToComments extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that the user is able to add internal links to the comment and publish it.")
+		test = extent.startTest(var, "Verify that the user is able to add external links to the comment and publish it.")
 				.assignCategory("Suite C");
 
 	}

@@ -76,7 +76,8 @@ public class TestCase_E37 extends TestBase {
 			for (int i = 1; i <= 2; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
+				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"),
+						30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list");
@@ -85,13 +86,7 @@ public class TestCase_E37 extends TestBase {
 			}
 
 			// Deleting the first watch list
-			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
-			ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 4);
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 2);
-			ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+			deleteFirstWatchlist();
 
 			// Getting all the watch lists
 			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));

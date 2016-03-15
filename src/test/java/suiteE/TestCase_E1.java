@@ -67,8 +67,11 @@ public class TestCase_E1 extends TestBase {
 			}
 			clearCookies();
 			// Creating new user
-			createNewUser("mask", "man");
+			user1 = createNewUser("mask", "man");
 
+			// Create 1st watch list
+			createWatchList("private", "TestWatchlist1", "This is my test watchlist.");
+			
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
