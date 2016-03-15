@@ -64,8 +64,13 @@ public class TestCase_E27 extends TestBase {
 			}
 			clearCookies();
 
-			// Creating new user
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
 			String newWatchlistName = "New Watchlist";
 			String newWatchListDescription = "This is my newly created watch list";

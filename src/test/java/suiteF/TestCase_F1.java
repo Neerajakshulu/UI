@@ -72,7 +72,7 @@ public class TestCase_F1 extends TestBase {
 			user1 = createNewUser(fn1, ln1);
 			System.out.println("User1:"+ user1);
 			Thread.sleep(3000);
-			LoginTR.logOutApp();
+			logout();
 			closeBrowser();
 			// 2)Create User2 and follow User1
 			openBrowser();
@@ -94,7 +94,7 @@ public class TestCase_F1 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			Thread.sleep(3000);
-			LoginTR.logOutApp();
+			logout();
 
 			// 3)Verify that User1 receives a notification with correct data
 			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
