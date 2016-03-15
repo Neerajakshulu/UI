@@ -58,8 +58,8 @@ public class TestCase_B33 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
@@ -73,6 +73,7 @@ public class TestCase_B33 extends TestBase {
 
 			// Clicking on All content result set
 			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			Thread.sleep(3000);
 
 			// Finding out the default sort by value for All content set
 			String defaultSortBy = ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"))
