@@ -43,6 +43,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.Xls_Reader;
 
@@ -163,7 +164,7 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-/*	public void openBrowser(){
+	/*public void openBrowser(){
 
 		if(CONFIG.getProperty("browserType").equals("FF")){
 			ob = new FirefoxDriver();
@@ -429,13 +430,12 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		waitForElementTobeVisible(ob,By.linkText(OR.getProperty("TR_register_link")), 30);
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-		waitForElementTobeVisible(ob,By.id(OR.getProperty("reg_email_textBox")), 30);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
 		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
@@ -443,21 +443,20 @@ public class TestBase {
 		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		Thread.sleep(10000);
+		waitForElementTobeVisible(ob, By.xpath("//div[@class='userprofile']"), 30);
 		ob.get("https://www.guerrillamail.com");
+		waitForElementTobeVisible(ob, By.xpath("//td[contains(text(),'customer.access@thomsonreuters.com')]"), 60);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
-		// email_list.get(0).click();
-		Thread.sleep(8000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 
 		WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 		List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 		ob.get(links.get(0).getAttribute("href"));
-		Thread.sleep(8000);
-		//waitForElementTobeVisible(ob,By.id(OR.getProperty("TR_email_textBox")), 30);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
@@ -871,6 +870,7 @@ public class TestBase {
 	 */
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
 		// Navigate to the watch list landing page
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//ul[@class='list-unstyled watchlist-refine-panel']"), 10);
 
@@ -928,20 +928,57 @@ public class TestBase {
 
 	public void createWatchList(String typeOfWatchList, String watchListName, String watchListDescription)
 			throws Exception {
-
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 10);
+		BrowserWaits.waitTime(4);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 10);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 10);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
-		if (typeOfWatchList.equals("public"))
-			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+		if (typeOfWatchList.equals("public")) {
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
+		}
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 10);
+		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 30);
 	}
 
+	public void deleteFirstWatchlist() throws Exception {
+		// Deleting the first watch list
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		BrowserWaits.waitTime(4);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+		ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
+		ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 30);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 30);
+		ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+
+	}
+	/**
+	 * 
+	 * @param emailId
+	 *            -Login as the specified email id user
+	 * @param password
+	 *            - The user password
+	 * @throws Exception
+	 */
+	public void loginAsSpecifiedUser(String emailId, String password) throws Exception {
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(emailId);
+		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+		jsClick(ob, ob.findElement(By.id(OR.getProperty("login_button"))));
+
+	}
 	public int convertStringToInt(String str) {
 
 		String[] arr = str.split(",");

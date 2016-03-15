@@ -69,7 +69,13 @@ public class TestCase_E21 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
@@ -91,7 +97,7 @@ public class TestCase_E21 extends TestBase {
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(selectedWatchlistName);
-
+			waitForPageLoad(ob);
 			List<WebElement> labelsDisplayedList = ob
 					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
 

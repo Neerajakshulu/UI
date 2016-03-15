@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B89 extends TestBase {
+public class TestCase_B98 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,13 +29,15 @@ public class TestCase_B89 extends TestBase {
 
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that DETAILS link is working correctly in record view page of a patent")
+		test = extent
+				.startTest(var,
+						"Verify that search drop down content type is retained when user navigates back to ALL search results page from record view page")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB89() throws Exception {
+	public void testcaseB98() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -62,85 +61,40 @@ public class TestCase_B89 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			
+			
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
+			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
-			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
-
-			String titleName = "";
-			try {
-
-				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='record-heading ng-binding']"))
-						.size() != 0;
-				titleName = ob.findElement(By.xpath("//div/h2[@class='record-heading ng-binding']")).getText();
-				if (titlePresent) {
-					test.log(LogStatus.PASS, "Title is present in patent record view page");
-				} else {
-					status = 2;
-					test.log(LogStatus.FAIL, "Title is not present in patent record view page");
-				}
-			} catch (NoSuchElementException e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "Title is not displayed present in patent record view page");
+			Thread.sleep(5000);
+			
+			ob.navigate().back();
+			
+			
+			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			String text=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+//			System.out.println("Text="+text);
+			
+			if(!compareStrings("Patents",text)){
+				
+				test.log(LogStatus.FAIL, "Search drop down option not retained when user navigates back to ALL search results page from record view page");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
+				
+				
 			}
-
-			try {
-
-				List<WebElement> detailsLink = ob.findElements(By.linkText("Details"));
-				// Clicking on the details link
-				ob.findElement(By.linkText("Details")).click();
-				Thread.sleep(15000);
-
-				if (detailsLink.size() != 0) {
-
-					test.log(LogStatus.PASS, "Details link is present in the record view page");
-				} else {
-					test.log(LogStatus.FAIL, "Deatils link is displayed multiple times in the record view page");
-				}
-			} catch (NoSuchElementException e) {
-
-				status = 2;
-				test.log(LogStatus.FAIL, "Details link is not displayed");// extent
-				return;
-			}
-
-			try {
-				// Switching tab
-				List<String> tabs = new ArrayList<String>(ob.getWindowHandles());
-				ob.switchTo().window(tabs.get(1));
-				boolean titlePresent = ob.findElements(By.xpath("//div[@id='PAT.TIOR0']")).size() == 1;
-				if (titlePresent) {
-
-					test.log(LogStatus.PASS, "Original title name is displayed");
-				} else {
-					status = 2;
-					test.log(LogStatus.FAIL, "Original title name is not displayed");
-				}
-
-				String titleNameOriginal = ob.findElement(By.xpath("//div[@id='PAT.TIOR0']")).getText();
-				if (titleNameOriginal.equalsIgnoreCase(titleName)) {
-					test.log(LogStatus.PASS, "Original title name is same as the title displayed in NEON");
-				} else {
-					status = 2;
-					test.log(LogStatus.FAIL, "Original title name is not same as the title displayed in NEON");
-				}
-			} catch (NoSuchElementException e) {
-
-				status = 2;
-				test.log(LogStatus.FAIL, "Details link is not working properly");// extent
-			}
-
+			
 			closeBrowser();
 
 		}

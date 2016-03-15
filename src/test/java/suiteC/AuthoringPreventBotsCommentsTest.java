@@ -76,6 +76,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")

@@ -9,13 +9,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B91 extends TestBase {
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+
+public class TestCase_B92 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -30,13 +31,13 @@ public class TestCase_B91 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that search results are sorted by RELEVANCE by default in PATENTS search results page")
-				.assignCategory("Suite B");
+						"Verify that following fields get displayed correctly for a person in ALL search results page: a)Person name b)Person details")
+						.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB91() throws Exception {
+	public void testcaseB92() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -53,6 +54,11 @@ public class TestCase_B91 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+			//below user email and password
+			//email:3ewhun+6c4irdugxznv8@sharklasers.com
+			//password:Tr@12345
+			String userName="STQABLR";
+			String description="Software Tester, Thomson Reuters, India";
 
 			openBrowser();
 			clearCookies();
@@ -60,26 +66,28 @@ public class TestCase_B91 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 
-			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 4);
-			String defaultSortByValue = ob.findElement(By.xpath("//button[@id='single-button']")).getText();
-			if (defaultSortByValue.equalsIgnoreCase("Sort by: Relevance")) {
-				test.log(LogStatus.PASS, "Patents results are sorted by RELEVANCE by default");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
+			String profileName = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).getText();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profile_description_xpath")),8);
+			String profileDescription=ob.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
+			
+			if (profileName.equals(userName) && profileDescription.equals(description)) {
+				test.log(LogStatus.PASS, "Person name and description are displayed as expected");
 			} else {
 				status = 2;
-				test.log(LogStatus.FAIL, "Patents results are not sorted by RELEVANCE by default");
+				test.log(LogStatus.FAIL, "Person name and description are not displayed as expected");
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_default_sort_by_patents_search_results")));// screenshot
+						this.getClass().getSimpleName() + "_Person_name_and_description_not_displayed")));// screenshot
 			}
 
 			closeBrowser();
@@ -88,7 +96,7 @@ public class TestCase_B91 extends TestBase {
 
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
+			// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

@@ -16,6 +16,7 @@ import base.TestBase;
 import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
 import pages.ProfilePage;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -33,7 +34,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that user is able to share the posts of others in FB.")
+		test = extent.startTest(var, "Verify that user is able to share the posts of others on Twitter.")
 				.assignCategory("Suite C");
 
 	}
@@ -78,6 +79,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnTwitterUnderShareMenu();
 			PostRecordViewPage.shareOnTwitter(tusername, tpassword);
+			BrowserWaits.waitTime(5);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
