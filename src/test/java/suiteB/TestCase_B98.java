@@ -2,11 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -19,7 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B66 extends TestBase {
+public class TestCase_B98 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,13 +31,13 @@ public class TestCase_B66 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that counts of search results of all the content types should get displayed irrespective of the content type chosen for searching")
+						"Verify that search drop down content type is retained when user navigates back to ALL search results page from record view page")
 				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB66() throws Exception {
+	public void testcaseB98() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -58,8 +55,6 @@ public class TestCase_B66 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -73,71 +68,37 @@ public class TestCase_B66 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
+			
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
+			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-//			waitForElementTobeVisible(ob, By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(5000);
 			
-			String all_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]")).getText();
-//			System.out.println(all_text);
-			int all_num=Integer.parseInt(all_text.substring(3,4));
-			System.out.println(all_num);
-			boolean cond1=all_num!=0;
-			System.out.println(cond1);
-			
-			String articles_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]")).getText();
-			int articles_num=Integer.parseInt(articles_text.substring(8,9));
-			System.out.println(articles_num);
-			boolean cond2=articles_num!=0;
-			System.out.println(cond2);
-			
-			String patents_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]")).getText();
-			int patents_num=Integer.parseInt(patents_text.substring(7,8));
-			System.out.println(patents_num);
-			boolean cond3=patents_num!=0;
-			System.out.println(cond3);
-			
-			String people_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]")).getText();
-			int people_num=Integer.parseInt(people_text.substring(6,7));
-			System.out.println(people_num);
-			boolean cond4=people_num!=0;
-			System.out.println(cond4);
+			ob.navigate().back();
 			
 			
-			String posts_text=ob.findElement(By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]")).getText();
-			int posts_num=Integer.parseInt(posts_text.substring(5,6));
-			System.out.println(posts_num);
-			boolean cond5=posts_num!=0;
-			System.out.println(cond5);
+			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			String text=ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+//			System.out.println("Text="+text);
 			
-			boolean master_cond=cond1 && cond2 && cond3 && cond4 && cond5;
-			System.out.println("Master condition="+master_cond);
-			
-			try{
+			if(!compareStrings("Patents",text)){
 				
-				Assert.assertTrue(master_cond);
-				test.log(LogStatus.PASS, "Counts of search results of all the content types getting displayed irrespective of the content type chosen for searching");// extent report
-			}
-			
-			catch(Throwable t){
+				test.log(LogStatus.FAIL, "Search drop down option not retained when user navigates back to ALL search results page from record view page");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
 				
-				test.log(LogStatus.FAIL, "Counts of search results of all the content types not getting displayed");// extent report
-
-            	ErrorUtil.addVerificationFailure(t);// testng
-            	status = 2;// excel
-            	test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-            			captureScreenshot(this.getClass().getSimpleName() + "_counts_of_search_results_of_all_the_content_types_not_getting_displayed")));// screenshot
-
 				
 			}
-			
-			
-			
 			
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -154,7 +115,6 @@ public class TestCase_B66 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {

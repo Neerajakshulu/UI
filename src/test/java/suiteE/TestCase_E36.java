@@ -65,7 +65,15 @@ public class TestCase_E36 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			String newWatchlistName = "NewWatchlist";
+			String newWatchListDescription = "This is my newly created watch list";
+			createWatchList("private", newWatchlistName, newWatchListDescription);
 
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
@@ -80,13 +88,12 @@ public class TestCase_E36 extends TestBase {
 
 			// Watching a patents to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			// waitForElementTobeVisible(ob,
-			// By.xpath("//div[@class='search-page-results']"), 30);
+			waitForPageLoad(ob);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 			// Watching a posts to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForPageLoad(ob);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 

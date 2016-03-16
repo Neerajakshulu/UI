@@ -377,7 +377,6 @@ public class TestBase {
 	public void login() throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		// Thread.sleep(4000);
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
@@ -397,10 +396,8 @@ public class TestBase {
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
 		File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
-		// Thread.sleep(5000);
 		String myP = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
 		FileUtils.copyFile(myImg, new File(myP));
-		// Thread.sleep(5000);
 		return myP;
 
 	}

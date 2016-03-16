@@ -562,6 +562,7 @@
 			<class name="suiteB.TestCase_B90"></class>
 		</classes>
 	</test>  
+
 	
 	<test name="Test B91">
 		<classes>
@@ -586,5 +587,34 @@
 			<class name="suiteB.TestCase_B94"></class>
 		</classes>
 	</test>
+	<test name="Test B95">
+		<classes>
+			<class name="suiteB.TestCase_B95"></class>
+		</classes>
+	</test>
+	
+	<test name="Test B96">
+		<classes>
+			<class name="suiteB.TestCase_B96"></class>
+		</classes>
+	</test>
+
+	
+	
+	
+	<test name="Test B97">
+		<classes>
+			<class name="suiteB.TestCase_B97"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Test B98">
+		<classes>
+			<class name="suiteB.TestCase_B98"></class>
+		</classes>
+	</test>
+	
+	
 </suite>
 

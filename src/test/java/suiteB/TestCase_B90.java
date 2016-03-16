@@ -64,11 +64,11 @@ public class TestCase_B90 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			Thread.sleep(8000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
 			selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
