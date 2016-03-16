@@ -2,9 +2,12 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,7 +20,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B104 extends TestBase {
+public class TestCase_B106 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,13 +35,13 @@ public class TestCase_B104 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a post gets displayed when user clicks on article title in ALL search results page")
+						"Verify that following options get displayed in SORT BY drop down in POSTS search results page: a)Relevance b)Create Date(Newest) c)Create Date(Oldest)")
 				.assignCategory("Suite B");	
 
 	}
 
 	@Test
-	public void testcaseB104() throws Exception {
+	public void testcaseB106() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -64,7 +67,7 @@ public class TestCase_B104 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -74,29 +77,29 @@ public class TestCase_B104 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
-			String post="Post for Testing bJ38z9";
-			//String post="Fairy circles";
-			
+			String post="sample post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+			waitForAjax(ob);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
+			List<WebElement> postDropdownmenus=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
+			String postExpectedDropdown="Create Date (Newest)|Create Date (Oldest)|Relevance";
+			List<String> postDropdowndata=new ArrayList<String>();
+			for(WebElement postDropdownmenu:postDropdownmenus){
+				postDropdowndata.add(postDropdownmenu.getText().trim());
+			}
 			
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-
+			String dropDownInputs[]=postExpectedDropdown.split("\\|");
+			List<String> postExpectedDropdowndata=Arrays.asList(dropDownInputs);
 			
-			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
-			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			String patentRVShareLabel=ob.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1).getText();
-			
-		
-			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
-					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
-					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
-
-			if(!patentRVStatus)
-				throw new Exception("Page is not Navigating to Patent Record View Page");
-			
+			if(!postDropdowndata.containsAll(postExpectedDropdowndata)){
+				throw new Exception("Post dropdown menu options not displayed");
+			}
 			closeBrowser();
 
 		} 

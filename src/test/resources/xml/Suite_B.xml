@@ -656,6 +656,12 @@
 		</classes>
 	</test>
 	
+	<test name="TestCase_B106">
+		<classes>
+			<class name="suiteB.TestCase_B106"></class>
+		</classes>
+	</test>
+	
 	
 </suite>
 
