@@ -85,7 +85,7 @@ public class TestCase_E24 extends TestBase {
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
+			// Watching 2 posts to a particular watch list
 			for (int i = 0; i < 2; i++) {
 				WebElement watchButton = watchButtonList.get(i);
 				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
