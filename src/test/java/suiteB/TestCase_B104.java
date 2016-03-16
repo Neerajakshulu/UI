@@ -32,7 +32,7 @@ public class TestCase_B104 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a post gets displayed when user clicks on article title in POSTs search results page")
+						"Verify that record view page of a post gets displayed when user clicks on article title in ALL search results page")
 				.assignCategory("Suite B");	
 
 	}
@@ -63,8 +63,8 @@ public class TestCase_B104 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -74,8 +74,8 @@ public class TestCase_B104 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
-			//String post="Post for Testing bJ38z9";
-			String post="Fairy circles";
+			String post="Post for Testing bJ38z9";
+			//String post="Fairy circles";
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
