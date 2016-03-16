@@ -66,6 +66,7 @@ public class TestCase_E34 extends TestBase {
 			ob.get(host);
 			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			// Navigate to the watch list landing page
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating 5 public watch list
