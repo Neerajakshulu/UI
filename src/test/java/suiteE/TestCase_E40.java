@@ -65,7 +65,7 @@ public class TestCase_E40 extends TestBase {
 			clearCookies();
 
 			ob.get(host);
-			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// Delete first watch list
 			deleteFirstWatchlist();
 			BrowserWaits.waitTime(4);

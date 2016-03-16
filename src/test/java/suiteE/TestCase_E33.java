@@ -79,9 +79,10 @@ public class TestCase_E33 extends TestBase {
 			clearCookies();
 			ob.get(host);
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);

@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -84,12 +85,12 @@ public class TestCase_E25 extends TestBase {
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			String selectedWatchlistName = null;
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
-
+			// Watching 5 posts to a particular watch list
+			for (int i = 0; i < 5; i++) {
+				WebElement watchButton = watchButtonList.get(i);
 				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
+				BrowserWaits.waitTime(2);
 			}
 
 			// Navigate to a particular watch list page
@@ -99,28 +100,28 @@ public class TestCase_E25 extends TestBase {
 					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 10);
-				test.log(LogStatus.INFO, "User is able to watch 10 items into watchlist");
+				Assert.assertEquals(itemCount, 5);
+				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
 			} catch (Exception e) {
 				status = 2;
-				test.log(LogStatus.INFO, "User is not able to watch 10 items into watchlist");
+				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
 			}
 
-			// Unwatching the first 5 document from results
+			// Unwatching the first 3 document from results
 			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 3; i++) {
 				watchButtonList.get(i).click();
-				Thread.sleep(2000);
+				BrowserWaits.waitTime(2);
 			}
 
 			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 5);
-				test.log(LogStatus.PASS, "Items counts is decreased by 5 after unwatching 5 item");
+				Assert.assertEquals(itemCount, 2);
+				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 5 after unwatching 5 item");
+				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
 			}
 
 			closeBrowser();
