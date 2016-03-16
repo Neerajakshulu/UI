@@ -1,10 +1,15 @@
 package suiteB;
 
+
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,54 +22,50 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B100 extends TestBase {
-	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
+public class TestCase_B100 extends TestBase{
+	static int status=1;
+	
+//	Following is the list of status:
+//		1--->PASS
+//		2--->FAIL
+//      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception {
-
-		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that record view page of a post gets displayed when user clicks on article title in POSTs search results page")
-				.assignCategory("Suite B");	
-
+	public void beforeTest() throws Exception{
+		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
+		test = extent.startTest(var, "Verify that more search results get displayed when user scrolls down in PATENTS search results page").assignCategory("Suite B");
+		
 	}
-
+	
 	@Test
-	public void testcaseB88() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
-
-		if (!master_condition) {
-
-			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
-		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try {
-
+	public void testcaseB100() throws Exception{
+		
+		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
+		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
+		boolean master_condition=suiteRunmode && testRunmode;
+		
+		if(!master_condition){
 			
-
+			status=3;//excel
+			test.log(LogStatus.SKIP, "Skipping test case "+this.getClass().getSimpleName()+" as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
+		
+		}
+		
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
+		try{
+		
+		
+			
+			
+			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -74,66 +75,79 @@ public class TestCase_B100 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
-			//String post="Post for Testing bJ38z9";
-			String post="Fairy circles";
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
+			//Type into the search box and get search results
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			content_type_tiles.get(2).click();
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
+			List<WebElement> searchResults1=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-
+			JavascriptExecutor jse=(JavascriptExecutor)ob;
 			
-			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
-			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			String patentRVShareLabel=ob.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1).getText();
+			for(int i=1;i<=5;i++){
 			
-		
-			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
-					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
-					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
-
-			if(!patentRVStatus)
-				throw new Exception("Page is not Navigating to Patent Record View Page");
+			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
+			waitForAjax(ob);
+			
+			}
+			
+			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			
+//			System.out.println(searchResults1.size());
+//			System.out.println(searchResults2.size());
+			
+			try{
+				
+				Assert.assertTrue(searchResults2.size() > searchResults1.size());
+				test.log(LogStatus.PASS,"More search results get displayed when user scrolls down in Patent search results page");//extent reports
+			}
+			
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL,"More search results do not get displayed when user scrolls down in Patent search results page");//extent reports
+				status=2;//excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));//screenshot
+			
+				
+			}
 			
 			closeBrowser();
-
-		} 
-		
-		catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
-			// next 3 lines to print whole testng error in report
+			
+		}
+		catch(Throwable t){
+			test.log(LogStatus.FAIL,"Something unexpected happened");//extent reports
+			//next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+			test.log(LogStatus.INFO,errors.toString());//extent reports
+			ErrorUtil.addVerificationFailure(t);//testng
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
 			closeBrowser();
 		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
+		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends--->");
 	}
-
+	
 
 	@AfterTest
-	public void reportTestResult() {
+	public void reportTestResult(){
 		extent.endTest(test);
-
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		
+		if(status==1)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "PASS");
+		else if(status==2)
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
-
+			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "SKIP");
+	
 	}
+	
 
+	
+	
 
 }

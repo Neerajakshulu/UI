@@ -620,18 +620,30 @@
 			<class name="suiteB.TestCase_B99"></class>
 		</classes>
 	</test>
-	
-	<test name="Test B100">
+	<test name="TestCase_B100">
 		<classes>
 			<class name="suiteB.TestCase_B100"></class>
 		</classes>
 	</test>
 	
-	<test name="Test B101">
+	<test name="TestCase_B101">
 		<classes>
 			<class name="suiteB.TestCase_B101"></class>
 		</classes>
 	</test>
+	
+	
+	<test name="TestCase_B102">
+		<classes>
+			<class name="suiteB.TestCase_B102"></class>
+		</classes>
+	</test>
+	<test name="TestCase_B103">
+		<classes>
+			<class name="suiteB.TestCase_B103"></class>
+		</classes>
+	</test>
+	
 	
 </suite>
 
