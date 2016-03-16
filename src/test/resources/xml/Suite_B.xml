@@ -600,40 +600,26 @@
 	</test>
 
 	
-	<test name="Test B91">
-		<classes>
-			<class name="suiteB.TestCase_B91"></class>
-		</classes>
-	</test>  
 	
-	<test name="Test B92">
-		<classes>
-			<class name="suiteB.TestCase_B92"></class>
-		</classes>
-	</test>	
 	
-	<test name="Test B93">
+	<test name="Test B97">
 		<classes>
-			<class name="suiteB.TestCase_B93"></class>
+			<class name="suiteB.TestCase_B97"></class>
 		</classes>
 	</test>
 	
-	<test name="Test B94">
+	
+	<test name="Test B98">
 		<classes>
-			<class name="suiteB.TestCase_B94"></class>
+			<class name="suiteB.TestCase_B98"></class>
 		</classes>
 	</test>
 	
-	<test name="Test B95">
+	<test name="Test B99">
 		<classes>
-			<class name="suiteB.TestCase_B95"></class>
+			<class name="suiteB.TestCase_B99"></class>
 		</classes>
 	</test>
 	
-	<test name="Test B96">
-		<classes>
-			<class name="suiteB.TestCase_B96"></class>
-		</classes>
-	</test>
 </suite>
 

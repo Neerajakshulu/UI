@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -57,14 +56,14 @@ public class TestCase_E33 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// 1)Create User1 and logout
+			// 1)Create User2 and logout
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
+			fn2 = generateRandomName(8);
+			ln2 = generateRandomName(10);
+			System.out.println(fn2 + " " + ln2);
+			user2 = createNewUser(fn2, ln2);
 
 			String newWatchlistName = "New Watchlist";
 			String newWatchListDescription = "This is my newly created watch list";
@@ -73,24 +72,23 @@ public class TestCase_E33 extends TestBase {
 			// Making the watch list from private to public
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
 			closeBrowser();
-			// 2)Login as User2 and navigate to the user1 profile page
+			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn1 + " " + ln1), 30);
+			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);
 			// Navigating to the first user profile page
-			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
-			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
+			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
+			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 30);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();

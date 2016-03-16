@@ -59,50 +59,50 @@ public class TestCase_E34 extends TestBase {
 
 			// String search_query = "biology";
 
-			// 1)Create User1 and logout
+			// 1) Login as user2
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
+			ob.get(host);
+			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			// Navigate to the watch list landing page
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating 5 public watch list
 			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 5; i++) {
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-						.sendKeys("This is my newly created watch list");
-				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
-				// Clicking on Create button
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
 			}
 			// Making the last watch list as private
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 			Thread.sleep(2000);
 			LoginTR.logOutApp();
 			closeBrowser();
-			// 2)Login as User2 and navigate to the user1 profile page
+			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);
-			LoginTR.enterTRCredentials("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
-			LoginTR.clickLogin();
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn1 + " " + ln1), 60);
+			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
 			// Navigating to the first user profile page
-			ob.findElement(By.linkText(fn1 + " " + ln1)).click();
+			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
+			waitForPageLoad(ob);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();

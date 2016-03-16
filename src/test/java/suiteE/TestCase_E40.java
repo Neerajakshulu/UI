@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -63,21 +64,27 @@ public class TestCase_E40 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			BrowserWaits.waitTime(4);
+
 			// Creating a new watch list
-			String newWatchlistName = "New Watchlist";
+			String newWatchlistName = "TestCaseE40_";
 			for (int i = 1; i <= 3; i++) {
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-						.sendKeys("This is my newly created watch list");
-				// Clicking on Create button
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
 			}
 
 			// Searching for patent
@@ -104,6 +111,7 @@ public class TestCase_E40 extends TestBase {
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			BrowserWaits.waitTime(4);
 			int count;
 			List<WebElement> watchedItems;
 			for (int i = 1; i <= 3; i++) {

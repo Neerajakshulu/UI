@@ -65,27 +65,18 @@ public class TestCase_E37 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			// Creating user
-			createNewUser("mask", "man");
+			
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			String newWatchlistName = "WatchlistToBeDeleted";
+			String newWatchListDescription = "This is my newly created watch list";
+			createWatchList("private", newWatchlistName, newWatchListDescription);
 
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-			// Creating a new watch list
-			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 2; i++) {
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"),
-						30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-						.sendKeys("This is my newly created watch list");
-				// Clicking on Create button
-				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-			}
-
-			// Deleting the first watch list
+			// Deleting the newly created watch list
 			deleteFirstWatchlist();
 
 			// Getting all the watch lists
@@ -93,7 +84,7 @@ public class TestCase_E37 extends TestBase {
 			// Finding the deleted watch list is visible or not
 			int count = 0;
 			for (WebElement watchlist : watchLists) {
-				if (watchlist.getText().equals(newWatchlistName + 2))
+				if (watchlist.getText().equals(newWatchlistName))
 					count++;
 			}
 

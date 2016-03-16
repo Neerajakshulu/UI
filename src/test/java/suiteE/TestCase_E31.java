@@ -52,9 +52,6 @@ public class TestCase_E31 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "biology";
-
-			// Making a new user
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -64,33 +61,17 @@ public class TestCase_E31 extends TestBase {
 			}
 			clearCookies();
 
-			createNewUser("mask", "man");
+			ob.get(host);
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// Delete first watch list
+			deleteFirstWatchlist();
+			waitForPageLoad(ob);
+			// Create watch list
+			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("All");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
-
-			// Clicking on first watch button from the results
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-
-			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
-			// Select the first watch list from the model
-			waitForElementTobeClickable(ob,
-					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
-
-			// Closing the select a model
-			ob.findElement(By.xpath("//button[@class='close']")).click();
-			Thread.sleep(2000);
-			// Navigate to the watch list landing page
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			Thread.sleep(6000);
-
-			// Navigating to the default watch list details page
+			// Navigating to the newly created watch list details page
 			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
-			Thread.sleep(6000);
+			waitForPageLoad(ob);
 
 			// Getting the items count
 			int itemCount = Integer

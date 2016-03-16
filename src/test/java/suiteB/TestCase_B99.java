@@ -9,13 +9,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B33 extends TestBase {
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+
+public class TestCase_B99 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -28,13 +29,16 @@ public class TestCase_B33 extends TestBase {
 
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that the items are sorted by RELEVANCE by default in ALL content type")
-				.assignCategory("Suite B");
+		test = extent
+				.startTest(var,
+						"Verify that following options get displayed in SORT BY drop down in PEOPLE search results page: a)Relevance b)Registration Date and search results are"+
+						"sorted by Relevance by Default.")
+						.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB8() throws Exception {
+	public void testcaseB99() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -51,52 +55,60 @@ public class TestCase_B33 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			String search_query = "biology";
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
-//			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
-			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
+			// Searching for people
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("S");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[class^='content-type-selector ng-scope']"), 30);
-
-			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
-			Thread.sleep(3000);
-
-			// Finding out the default sort by value for All content set
-			String defaultSortBy = ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"))
-					.getText();
-
-			// Comparing the the label of default sort by value
-			if (!defaultSortBy.contains("Relevance")) {
-
-				test.log(LogStatus.FAIL, "Results are not sorted by Relevance by default");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Results_are_not_sorted_by _Relevance_by_default")));// screenshot
-
+			Thread.sleep(4000);
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),8);
+			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+			
+			//checking for Default sort option
+			String defaultSort=ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).getText();
+			System.out.println(defaultSort);
+			
+			//checking for different options available in sort
+			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
+			String text=ob.findElement(By.xpath("//ul[@class='dropdown-menu' and @role='menu']")).getText();
+			System.out.println(text);
+			
+			if (defaultSort.equals("Relevance")) {
+				test.log(LogStatus.PASS, "Relevance is the default sort in people results page");
+				
 			} else {
-				test.log(LogStatus.PASS, "Results are sorted by Relevance by default");
+				status = 2;
+				test.log(LogStatus.FAIL, "Relevance is not the default sort in people results page as expected");
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_something_wrong_happened")));// screenshot
+			}
+			
+			if(text.contains("Relevance") && text.contains("Registration Date")){
+				test.log(LogStatus.PASS, "Relevance and Registration Date options are present in the sort button");
+			}else{
+				status = 2;
+				test.log(LogStatus.FAIL, "PRelevance and Registration Date options are not displayed as expected");
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_something_wrong_happened")));// screenshot
 			}
 
 			closeBrowser();
 
-		} catch (Throwable t) {
+		}
+
+		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
+			// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -126,5 +138,4 @@ public class TestCase_B33 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 }
