@@ -644,6 +644,18 @@
 		</classes>
 	</test>
 	
+	<test name="TestCase_B104">
+		<classes>
+			<class name="suiteB.TestCase_B104"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B105">
+		<classes>
+			<class name="suiteB.TestCase_B105"></class>
+		</classes>
+	</test>
+	
 	
 </suite>
 
