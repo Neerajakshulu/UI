@@ -697,5 +697,18 @@
 			<class name="suiteB.TestCase_B112"></class>
 		</classes>
 	</test>
+	
+	<test name="TestCase_B113">
+		<classes>
+			<class name="suiteB.TestCase_B113"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B114">
+		<classes>
+			<class name="suiteB.TestCase_B114"></class>
+		</classes>
+	</test>
+	
 </suite>
 
