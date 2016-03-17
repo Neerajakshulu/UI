@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -16,11 +13,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B106 extends TestBase {
+public class TestCase_B107 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,14 +31,13 @@ public class TestCase_B106 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following options get displayed in SORT BY drop down in POSTS search results page: a)Relevance b)Create Date(Newest) c)Create Date(Oldest)"
-						+ "Verify that search results are sorted by CREATE DATE(NEWEST) by default in POSTS search results page")
-				.assignCategory("Suite B");	
+						"Verify that left navigation pane content type is retained when user navigates back to ALL search results page from record view page")
+				.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB106() throws Exception {
+	public void testcaseB107() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -60,58 +55,55 @@ public class TestCase_B106 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			BrowserWaits.waitUntilText("Sign in with Project Neon");
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			
-			String post="sample post";
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
-			List<WebElement> postDropdownmenus=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
-			String postExpectedDropdown="Create Date (Newest)|Create Date (Oldest)|Relevance";
-			List<String> postDropdowndata=new ArrayList<String>();
-			for(WebElement postDropdownmenu:postDropdownmenus){
-				postDropdowndata.add(postDropdownmenu.getText().trim());
+			
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Patents')]"), 30);
+			
+			ob.findElement(By.xpath("//li[contains(text(),'Patents')]")).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			Thread.sleep(5000);
+			
+			ob.navigate().back();
+			Thread.sleep(5000);
+			String text=ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			System.out.println(text);
+			
+			try{
+				
+				Assert.assertTrue(text.contains("Patents"));
+				test.log(LogStatus.PASS, "Content type in the left navigation pane getting retained correctly when user navigates back to search results page from record view page");// extent
 			}
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Content type in the left navigation pane not getting retained when user navigates back to search results page from record view page");// extent
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+				captureScreenshot(this.getClass().getSimpleName() + "_content_type_in_left_navigation_pane_not_getting_retained")));// screenshot
 			
-			String dropDownInputs[]=postExpectedDropdown.split("\\|");
-			List<String> postExpectedDropdowndata=Arrays.asList(dropDownInputs);
-			
-			if(!postDropdowndata.containsAll(postExpectedDropdowndata)){
-				throw new Exception("Post dropdown menu options not displayed");
+				
 			}
-			
-			//System.out.println("post first dropdown-->"+postDropdowndata.get(0));
-			if(!postDropdowndata.get(0).equalsIgnoreCase("Create Date (Newest)")){
-				throw new Exception("Create Date (Newest) is the by default POST Sorted by search result");
-			}
-			
 			
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -122,13 +114,12 @@ public class TestCase_B106 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {
@@ -145,6 +136,5 @@ public class TestCase_B106 extends TestBase {
 					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 
 }

@@ -21,7 +21,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B19 extends TestBase{
+public class TestCase_B113 extends TestBase{
 
 	
 
@@ -34,24 +34,19 @@ static int status=1;
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest113() throws Exception{
 		
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that MORE and LESS links in the left navigation pane are working correctly").assignCategory("Suite B");
+		test = extent.startTest(var, "Verify that MORE and LESS links are working correctly in INVENTOR filter in PATENTS search results page").assignCategory("Suite B");
 		
 	}
 	
 	@Test
-	public void testcaseB19() throws Exception{
+	public void testcaseB() throws Exception{
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
 		boolean master_condition=suiteRunmode && testRunmode;
-		Map<String,String> filters= new HashMap<String,String>();
-		filters.put("Category", "category");
-		filters.put("Documents", "doctype");
-		filters.put("Institutions", "institution");
-		filters.put("Authors", "author");
-		
+				
 		if(!master_condition){
 			
 			status=3;//excel
@@ -77,7 +72,7 @@ static int status=1;
 		
 		//Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		login();
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -86,16 +81,16 @@ static int status=1;
 		
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		
-		ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]")).click();
+		ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Patents')]")).click();
 		//waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
+		waitForAjax(ob);
 		
 		List<WebElement> ckBoxList;
-			for(Map.Entry<String, String> entry: filters.entrySet()){
 			int checkBoxDisplayed=	0;
-			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
+			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE","Inventor"))));
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll("FILTER_TYPE", "Inventor"))));
+			waitForAjax(ob);
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE","Inventor")));
 						
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
@@ -104,19 +99,19 @@ static int status=1;
 			
 			try{
 				Assert.assertTrue(checkBoxDisplayed==5);
-				test.log(LogStatus.PASS,String.format("default filters displayed for %s is 5", entry.getKey()) );	
+				test.log(LogStatus.PASS,String.format("default filters displayed for %s is 5", "Inventor") );	
 			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("default filters displayed for %s is not equal to 5", entry.getKey()));
+					test.log(LogStatus.FAIL,String.format("default filters displayed for %s is not equal to 5", "Inventor"));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
 				}
-			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-		
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
+			scrollElementIntoView(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", "Inventor"))));
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll("FILTER_TYPE", "Inventor"))));
+		waitForAjax(ob);
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", "Inventor")));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
@@ -125,9 +120,9 @@ static int status=1;
 			
 			try{
 				Assert.assertTrue(checkBoxDisplayed==10);
-				test.log(LogStatus.PASS,String.format("More link should load 10 filters for %s", entry.getKey()) );	
+				test.log(LogStatus.PASS,String.format("More link should load 10 filters for %s", "Inventor") );	
 			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("More link not loding with 10 filters for", entry.getKey()));
+					test.log(LogStatus.FAIL,String.format("More link not loding with 10 filters for", "Inventor"));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
@@ -135,10 +130,10 @@ static int status=1;
 							captureScreenshot(this.getClass().getSimpleName() + "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
 			
 			}
-			scrollElementIntoView(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", entry.getKey()))));
-			
-			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", entry.getKey())));
+			scrollElementIntoView(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", "Inventor"))));
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll("FILTER_TYPE", "Inventor"))));
+			waitForAjax(ob);
+			ckBoxList=ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath").replaceAll("FILTER_TYPE", "Inventor")));
 			checkBoxDisplayed=0;
 			for (WebElement element : ckBoxList) {
 				if (element.isDisplayed())
@@ -147,16 +142,16 @@ static int status=1;
 		
 			try{
 				Assert.assertTrue(checkBoxDisplayed==5);
-				test.log(LogStatus.PASS,String.format("Less link should load 5 filters for %s", entry.getKey()) );	
+				test.log(LogStatus.PASS,String.format("Less link should load 5 filters for %s", "Inventor") );	
 			}catch(Throwable t){
-					test.log(LogStatus.FAIL,String.format("Less link not loding with 5 filters for", entry.getKey()));
+					test.log(LogStatus.FAIL,String.format("Less link not loding with 5 filters for", "Inventor"));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "left_pane_is_not_ working_ for_ search_ results")));// screenshot
 				}
-			}
+			
 		logout();
 		closeBrowser();
 
