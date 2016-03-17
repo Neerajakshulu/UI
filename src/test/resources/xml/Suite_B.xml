@@ -691,5 +691,11 @@
 			<class name="suiteB.TestCase_B111"></class>
 		</classes>
 	</test>
+	
+	<test name="TestCase_B112">
+		<classes>
+			<class name="suiteB.TestCase_B112"></class>
+		</classes>
+	</test>
 </suite>
 
