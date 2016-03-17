@@ -716,5 +716,17 @@
 		</classes>
 	</test>
 	
+	<test name="TestCase_B116">
+		<classes>
+			<class name="suiteB.TestCase_B116"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B117">
+		<classes>
+			<class name="suiteB.TestCase_B117"></class>
+		</classes>
+	</test>
+	
 </suite>
 
