@@ -2,9 +2,11 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -32,13 +34,15 @@ public class TestCase_B105 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a post gets displayed when user clicks on article title in POSTs search results page")
+						"Verify that record view page of a post gets displayed when user clicks on article title in POSTs search results page||"
+						+ "Verify that following fields get displayed correctly for a post in record view page:"
+						+ "a)Title b)Creation date and time c)Last edited date and time d)Author e)Author details f)Post content g)Likes count h)Comments count")
 				.assignCategory("Suite B");	
 
 	}
 
 	@Test
-	public void testcaseB88() throws Exception {
+	public void testcaseB105() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -82,23 +86,54 @@ public class TestCase_B105 extends TestBase {
 			waitForAjax(ob);
 			
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
-//			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-//			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
-//			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
+			waitForAjax(ob);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
 
 			
 			String patentRVTitle=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			String patentRVTitleWatchLabel=ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
 			String patentRVShareLabel=ob.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1).getText();
 			
-		
+			List<WebElement> postCreationAndEdit=ob.findElements(By.xpath("//div[@class='row timestamp-wrapper']/div/span[@class='meta']"));
+			boolean postEditCreateDate;
+			if(postCreationAndEdit.size()>=2){
+				 postEditCreateDate=postCreationAndEdit.get(0).getText().equalsIgnoreCase("EDITED") && postCreationAndEdit.get(1).getText().equalsIgnoreCase("POSTED");
+			}
+			else {
+				 postEditCreateDate=postCreationAndEdit.get(0).getText().equalsIgnoreCase("POSTED");
+			}
+			
+			//System.out.println("post creationstatus-->"+postEditCreateDate);
+			
+			String postAuthor=ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).getText();
+			String postAuthorMetaData=ob.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
+			
+			//System.out.println("post author-->"+postAuthor);
+			//System.out.println("post author metadata-->"+postAuthorMetaData);
+			
+			List<WebElement> postSocialShare=ob.findElements(By.cssSelector(("div[class='doc-info'] span[class*='stat-count']")));
+			
+			int postCommentCount=Integer.parseInt(postSocialShare.get(0).getText());
+			int postLikeCount=Integer.parseInt(postSocialShare.get(1).getText());
+			
+			boolean socialShareStatus=(postCommentCount>=0 && postLikeCount>=0);
+			
+			//System.out.println("post comment count-->"+postCommentCount);
+			//System.out.println("post like count-->"+postLikeCount);
+			
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
 					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
 					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
 
 			if(!patentRVStatus)
-				throw new Exception("Page is not Navigating to Patent Record View Page");
+				throw new Exception("Page is not Navigating to Post Record View Page");
+			
+			boolean postFieldsStatus=postEditCreateDate&&(!postAuthor.isEmpty())&&(!postAuthorMetaData.isEmpty())&&socialShareStatus;
+			System.out.println("post fields status-->"+postFieldsStatus);
+			if(!postFieldsStatus)
+				throw new Exception("Following post fields not displayed in record view page a)Title b)Creation date and time "
+						+ "c)Last edited date and time d)Author e)Author details f)Post content g)Likes count h)Comments count");
+
 			
 			closeBrowser();
 
