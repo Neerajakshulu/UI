@@ -47,8 +47,6 @@ public class TestCase_B115 extends TestBase {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		List<String> profileOrderBeforeNavigation=new ArrayList<String>();
-		List<String> profileOrderAfterNavigation=new ArrayList<String>();
 		
 		if (!master_condition) {
 
@@ -79,48 +77,22 @@ public class TestCase_B115 extends TestBase {
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),8);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
-			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")),30);
-			//checking for Default sort option
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
-			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_selection").replaceAll("Filter","2")), 30);
-			
-			//Filter=1: Relevance and Filter=2:Registration Date
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_selection").replaceAll("Filter","2"))).click();
-			Thread.sleep(3000);
-			test.log(LogStatus.PASS,"Selected Registration Date as sort option");
-			
-			List<WebElement> webElementOrderBeforeNavigation=ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
-			Iterator<WebElement> iterator=webElementOrderBeforeNavigation.iterator();
-			while(iterator.hasNext()){
-				profileOrderBeforeNavigation.add(iterator.next().getText());
-			}
-			
+						
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),30);
 			
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"),15);
 			test.log(LogStatus.PASS,"Record view page is opened");
 			ob.navigate().back();
-			//checking for Sort option
-			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")) ,30);
-			String sortOptionSelected=ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).getText();
-			System.out.println(sortOptionSelected);
-			Thread.sleep(6000);
-			
-			List<WebElement> webElementOrderAfterNavigation=ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
-			Iterator<WebElement> itr=webElementOrderAfterNavigation.iterator();
-			while(itr.hasNext()){
-				profileOrderAfterNavigation.add(itr.next().getText());
-			}
-			
+			//checking for Search Content type
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")),10);
+			String selectedDropDown=ob.findElement(By.xpath(OR.getProperty("search_type_dropdown"))).getText();
+			System.out.println(selectedDropDown);
 			try{
-				Assert.assertTrue(sortOptionSelected.equals("Registration Date") && profileOrderBeforeNavigation.equals(profileOrderAfterNavigation));
-				test.log(LogStatus.PASS, "Sort option selected is retained after navigating back to people search results page");
+				Assert.assertTrue(selectedDropDown.equals("People"));
+				test.log(LogStatus.PASS, "search drop down content type is retained when user navigates back to PEOPLE search results page from profile page");
 			}catch(Throwable t){
-				test.log(LogStatus.FAIL, "Sort option is not retained");// extent
+				test.log(LogStatus.FAIL, "search drop down content type is not retained");// extent
 				// reports
 				// next 3 lines to print whole testng error in report
 				StringWriter errors = new StringWriter();
