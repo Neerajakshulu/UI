@@ -674,6 +674,23 @@
 		</classes>
 	</test>
 	
+	<test name="TestCase_B109">
+		<classes>
+			<class name="suiteB.TestCase_B109"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B110">
+		<classes>
+			<class name="suiteB.TestCase_B110"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B111">
+		<classes>
+			<class name="suiteB.TestCase_B111"></class>
+		</classes>
+	</test>
 	
 </suite>
 
