@@ -2,12 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +17,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B106 extends TestBase {
+public class TestCase_B116 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,14 +32,13 @@ public class TestCase_B106 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following options get displayed in SORT BY drop down in POSTS search results page: a)Relevance b)Create Date(Newest) c)Create Date(Oldest)"
-						+ "Verify that search results are sorted by CREATE DATE(NEWEST) by default in POSTS search results page")
+						"Verify that more search results get displayed when user scrolls down in POSTS search results page")
 				.assignCategory("Suite B");	
 
 	}
 
 	@Test
-	public void testcaseB106() throws Exception {
+	public void testcaseB116() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -67,8 +63,8 @@ public class TestCase_B106 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -78,7 +74,7 @@ public class TestCase_B106 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
-			String post="sample post";
+			String post="post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
@@ -86,26 +82,18 @@ public class TestCase_B106 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
-			List<WebElement> postDropdownmenus=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
-			String postExpectedDropdown="Create Date (Newest)|Create Date (Oldest)|Relevance";
-			List<String> postDropdowndata=new ArrayList<String>();
-			for(WebElement postDropdownmenu:postDropdownmenus){
-				postDropdowndata.add(postDropdownmenu.getText().trim());
-			}
 			
-			String dropDownInputs[]=postExpectedDropdown.split("\\|");
-			List<String> postExpectedDropdowndata=Arrays.asList(dropDownInputs);
+			int postResultsBeforeScroll=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
 			
-			if(!postDropdowndata.containsAll(postExpectedDropdowndata)){
-				throw new Exception("Post dropdown menu options not displayed");
-			}
-			
-			//System.out.println("post first dropdown-->"+postDropdowndata.get(0));
-			if(!postDropdowndata.get(0).equalsIgnoreCase("Create Date (Newest)")){
-				throw new Exception("Create Date (Newest) is the by default POST Sorted by search result");
-			}
+			int postResultsAfterScroll=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+			System.out.println("before-->"+postResultsBeforeScroll);
+			System.out.println("After-->"+postResultsAfterScroll);
+			if(!(postResultsAfterScroll>=postResultsBeforeScroll))
+				throw new Exception("More search results get displayed when user scrolls down in POSTS search results page");
 			
 			
 			closeBrowser();
@@ -122,7 +110,7 @@ public class TestCase_B106 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+					captureScreenshot(this.getClass().getSimpleName() + "_post_scroll_failed")));// screenshot
 			closeBrowser();
 		}
 

@@ -756,7 +756,9 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 
 	public static boolean validateProfileDetails(List<String> details) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
+		waitForAjax(ob);
 		List<String> expected=getProfileTitleAndMetadata();
 		
 		return (expected.toString().equals(details.toString()));

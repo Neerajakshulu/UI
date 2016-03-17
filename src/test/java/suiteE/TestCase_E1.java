@@ -66,12 +66,24 @@ public class TestCase_E1 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			// Creating new user
-			user1 = createNewUser("mask", "man");
+			// Creating 2 new users to use them across the E module
+			fn2 = generateRandomName(8);
+			ln2 = generateRandomName(10);
+			System.out.println(fn2 + " " + ln2);
+			user2 = createNewUser(fn2, ln2);
+			closeBrowser();
+
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			fn1 = generateRandomName(8);
+			ln1 = generateRandomName(10);
+			System.out.println(fn1 + " " + ln1);
+			user1 = createNewUser(fn1, ln1);
 
 			// Create 1st watch list
 			createWatchList("private", "TestWatchlist1", "This is my test watchlist.");
-			
+
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();

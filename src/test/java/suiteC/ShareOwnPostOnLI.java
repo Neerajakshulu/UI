@@ -18,6 +18,7 @@ import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
 import pages.ProfilePage;
 import pages.SearchResultsPage;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -35,7 +36,7 @@ public class ShareOwnPostOnLI extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that user is able to share the posts of others in FB.")
+		test = extent.startTest(var, "Verify that user is able to share the posts of others in LI.")
 				.assignCategory("Suite C");
 
 	}
@@ -80,6 +81,7 @@ public class ShareOwnPostOnLI extends TestBase{
 			ProfilePage.clickOnFirstPost();
 			PostRecordViewPage.clickOnLinkedInUnderShareMenu();
 			PostRecordViewPage.shareOnLI(liusername, lipassword);
+			BrowserWaits.waitTime(6);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

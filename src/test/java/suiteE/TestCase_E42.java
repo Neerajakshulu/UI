@@ -64,25 +64,18 @@ public class TestCase_E42 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
-			 waitForElementTobeVisible(ob,
-			 By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
-			 180);
-			LoginTR.logOutApp();
-			closeBrowser();
-			// 2)Create User2 and follow User1
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			fn2 = generateRandomName(8);
-			ln2 = generateRandomName(10);
-			System.out.println(fn2 + " " + ln2);
-			user2 = createNewUser(fn2, ln2);
+			ob.get(host);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 
@@ -92,9 +85,8 @@ public class TestCase_E42 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			 waitForElementTobeVisible(ob,
-			 By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
-			 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+					30);
 
 			LoginTR.logOutApp();
 
@@ -136,9 +128,9 @@ public class TestCase_E42 extends TestBase {
 			ob.findElement(By.id("userid")).sendKeys(user2);
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")), 30);
+			waitForElementTobeVisible(ob, By.xpath("(//span[@class='ne-profile-object-title']/a)[1]"), 30);
 
-			if (!checkElementPresence("notification")) {
+			if (!(ob.findElements(By.xpath("(//span[@class='ne-profile-object-title']/a)[1]")).size() == 1)) {
 
 				test.log(LogStatus.FAIL, "User not receiving notification");// extent
 																			// reports
