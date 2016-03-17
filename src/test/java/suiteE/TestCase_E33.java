@@ -60,11 +60,8 @@ public class TestCase_E33 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			fn2 = generateRandomName(8);
-			ln2 = generateRandomName(10);
-			System.out.println(fn2 + " " + ln2);
-			user2 = createNewUser(fn2, ln2);
-
+			ob.get(host);
+			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			String newWatchlistName = "New Watchlist";
 			String newWatchListDescription = "This is my newly created watch list";
 			// Create private watch list
