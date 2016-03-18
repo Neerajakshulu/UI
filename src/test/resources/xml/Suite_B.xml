@@ -754,6 +754,16 @@
 		</classes>
 	</test>
 	
+	<test name="TestCase_B122">
+		<classes>
+			<class name="suiteB.TestCase_B122"></class>
+		</classes>
+	</test>
 	
+	<test name="TestCase_B123">
+		<classes>
+			<class name="suiteB.TestCase_B123"></class>
+		</classes>
+	</test>
 </suite>
 
