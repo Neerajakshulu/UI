@@ -1,5 +1,9 @@
 package suiteA;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -57,9 +61,21 @@ public class TestCase_A21 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
+			
+			Set<String> myset=ob.getWindowHandles();
+			Iterator<String> myIT=myset.iterator();
+			ArrayList<String> al=new ArrayList<String>();
+			for(int i=0;i<myset.size();i++){
+				
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
+			
 			test.log(LogStatus.INFO,"Preference link is present and clicked");
 			BrowserWaits.waitUntilText("ACCESS YOUR PREFERENCE CENTER");
 			test.log(LogStatus.INFO,"Preference page is opened successfully");
+			ob.close();
+			ob.switchTo().window(al.get(0));
 			ob.navigate().back();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("header_label")), 30);
 			logout();
