@@ -765,5 +765,25 @@
 			<class name="suiteB.TestCase_B123"></class>
 		</classes>
 	</test>
+	
+	<test name="TestCase_B124">
+		<classes>
+			<class name="suiteB.TestCase_B124"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B125">
+		<classes>
+			<class name="suiteB.TestCase_B125"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B126">
+		<classes>
+			<class name="suiteB.TestCase_B126"></class>
+		</classes>
+	</test>
+	
+	
 </suite>
 
