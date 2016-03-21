@@ -659,7 +659,10 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostTitle(String postTitle) throws Exception {
 		String enteredPost=getFirstPostTitle();
-		Assert.assertEquals(enteredPost, postTitle);
+		if(!(enteredPost.equalsIgnoreCase(postTitle))) {
+			throw new Exception("Post is not published");
+		}
+		
 	}
 	
 	
