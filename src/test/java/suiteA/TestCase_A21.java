@@ -1,5 +1,7 @@
 package suiteA;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -86,7 +88,9 @@ public class TestCase_A21 extends TestBase {
 			test.log(LogStatus.FAIL, "Preference page not opened");//extent reports
 			status=2;//excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"unable_to_open_preference_page")));//screenshot	
-
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO,errors.toString());//extent reports
 			System.out.println("maximize() command not supported in Selendroid");
 		}
 		closeBrowser();		
