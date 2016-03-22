@@ -60,7 +60,7 @@ public class TestBase {
 	public static Xls_Reader suiteFxls = null;
 
 	public static boolean isInitalized = false;
-	public static WebDriver ob = null;
+	public WebDriver ob = null;
 	public static ExtentReports extent = null;
 	public static ExtentTest test = null;
 
