@@ -17,11 +17,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class VerifyMoreButtonComments extends TestBase{
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -65,8 +67,8 @@ public class VerifyMoreButtonComments extends TestBase{
 			login();
 			selectAnArticle();
 			/*String comment = "testFlag";
-			Authoring.enterArticleComment(comment);
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComment(comment);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 					*/
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
@@ -102,7 +104,7 @@ public class VerifyMoreButtonComments extends TestBase{
 				
 			}
 			
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

@@ -2,12 +2,9 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -20,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -34,7 +32,7 @@ public class AuthoringTest extends TestBase {
 	static int status=1;
 	
 	static int time=15;
-	
+	PageFactory pf=new PageFactory();
 	
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
@@ -88,11 +86,11 @@ public class AuthoringTest extends TestBase {
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
-			Authoring.enterArticleComment(addComments);
-			Authoring.clickAddCommentButton();
-			Authoring.validateCommentAdd();
-			Authoring.validateViewComment(addComments);
-			Authoring.updateComment("comment updated");
+			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getAuthoringInstance(ob).validateCommentAdd();
+			pf.getAuthoringInstance(ob).validateViewComment(addComments);
+			pf.getAuthoringInstance(ob).updateComment("comment updated");
 			validateUpdatedComment("comment updated");
 			closeBrowser();
 		} catch (Exception e) {
@@ -154,7 +152,7 @@ public class AuthoringTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
+	public void waitForTRHomePage() throws InterruptedException {
 		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
 		waitForPageLoad(ob);
 	}
@@ -162,7 +160,7 @@ public class AuthoringTest extends TestBase {
 	/**
 	 * Method for enter Application Url and enter Credentials
 	 */
-	public static void enterTRCredentials(String userName, String password) {
+	public void enterTRCredentials(String userName, String password) {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
 	    waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
@@ -170,26 +168,26 @@ public class AuthoringTest extends TestBase {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
 	}
 	
-	public static void clickLogin() throws InterruptedException {
+	public void clickLogin() throws InterruptedException {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
 		waitForPageLoad(ob);
 		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
 		//waitUntilElementClickable("Home");
 	}
 	
-	public static void searchArticle(String article) throws InterruptedException {
+	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		waitForPageLoad(ob);
 	}
 	
-	public static void chooseArticle(String linkName) throws InterruptedException {
+	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 		waitForPageLoad(ob);
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));
@@ -199,7 +197,7 @@ public class AuthoringTest extends TestBase {
 		}
 	}
 	
-	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
+	public   void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
 		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);

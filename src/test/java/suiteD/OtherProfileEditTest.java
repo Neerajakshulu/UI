@@ -2,12 +2,7 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,10 +12,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import pages.ProfilePage;
 import pages.SearchProfile;
 import suiteC.LoginTR;
-import util.BrowserAction;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -41,6 +36,7 @@ public class OtherProfileEditTest extends TestBase {
 	static String followAfter=null;
 	static boolean isFollowEnable=false;
 	static boolean isFollowDisable=false;
+	PageFactory pf;
 	
 	
 	@BeforeTest
@@ -81,9 +77,21 @@ public class OtherProfileEditTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					
+					/*loginTR= new LoginTR(ob);
+					searchProfile=new SearchProfile(ob);
+					profilePage=new ProfilePage(ob);
+					
+					
+					loginTR.waitForTRHomePage();
+					loginTR.enterTRCredentials(username, password);
+					loginTR.clickLogin();*/
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
+					
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -102,11 +110,19 @@ public class OtherProfileEditTest extends TestBase {
 	public void OtherProfileEditDetails() throws Exception  {
 				try {
 					test.log(LogStatus.INFO,"validate logged user should have previliges to edit others profile");
-					SearchProfile.enterSearchKeyAndClick("hao");
-					SearchProfile.clickPeople();
-					ProfilePage.clickProfile();
-					ProfilePage.validateOtherProfileEdit();
-					LoginTR.logOutApp();
+					pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("hao");
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getProfilePageInstance(ob).clickProfile();
+					pf.getProfilePageInstance(ob).validateOtherProfileEdit();
+					pf.getLoginTRInstance(ob).logOutApp();
+					
+					/*searchProfile.enterSearchKeyAndClick("hao");
+					searchProfile.clickPeople();
+					profilePage.clickProfile();
+					profilePage.validateOtherProfileEdit();
+					
+					loginTR.logOutApp();*/
+					
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
 
@@ -128,12 +144,12 @@ public class OtherProfileEditTest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");*/
 	}
 	
 }

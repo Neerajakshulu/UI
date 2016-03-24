@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -24,7 +22,8 @@ public class CommentOnUsersOwnPost extends TestBase{
 	
 	
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -65,29 +64,29 @@ public class CommentOnUsersOwnPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
 			
-			ProfilePage.clickOnFirstPost();
-			int countBefore=PostRecordViewPage.getCommentCount();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			int countBefore=pf.getpostRVPageInstance(ob).getCommentCount();
 			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			
-			int countAfter=PostRecordViewPage.getCommentCount();
+			int countAfter=pf.getpostRVPageInstance(ob).getCommentCount();
 			
 			
 			try {
 				Assert.assertEquals(countBefore+1, countAfter);
 				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
+				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post");
 				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");

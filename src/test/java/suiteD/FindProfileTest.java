@@ -2,12 +2,7 @@ package suiteD;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,10 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.ProfilePage;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
-import util.BrowserAction;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -41,6 +34,7 @@ public class FindProfileTest extends TestBase {
 	static String followAfter=null;
 	static boolean isFollowEnable=false;
 	static boolean isFollowDisable=false;
+	PageFactory pf;
 	
 	
 	@BeforeTest
@@ -82,9 +76,18 @@ public class FindProfileTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					
+					/*LoginTR lr=new LoginTR(ob);
+					lr.waitForTRHomePage();
+					lr.enterTRCredentials(username, password);
+					lr.clickLogin();*/
+					
+					//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+					pf = new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -103,11 +106,11 @@ public class FindProfileTest extends TestBase {
 	public void getOtherProfileDetails() throws Exception  {
 				try {
 					test.log(LogStatus.INFO,"get other profile details and validate");
-					SearchProfile.enterSearchKeyAndClick("hao");
-					SearchProfile.clickPeople();
-					ProfilePage.clickProfile();
-					ProfilePage.validateProfileTitleAndMetadata();
-					LoginTR.logOutApp();
+					pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("Hao");
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getProfilePageInstance(ob).clickProfile();
+					pf.getProfilePageInstance(ob).validateProfileTitleAndMetadata();
+					pf.getLoginTRInstance(ob).logOutApp();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
 
@@ -129,13 +132,13 @@ public class FindProfileTest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
 		//closeBrowser();
-	}
+*/	}
 	
 }

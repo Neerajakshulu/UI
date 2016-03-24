@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite C">
+<suite name="Suite C" parallel="tests" thread-count="2">
 
 <listeners>
     <listener class-name="listener.TestsListenerAdapter" />
@@ -11,7 +11,7 @@
 <parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
 <parameter name="addComments" value="Testing Comments"></parameter>
 
-<test name="Test Authoring">
+<!-- <test name="Test Authoring">
     <classes>
         <class name="suiteC.AuthoringTest" ></class>  
     </classes>
@@ -447,7 +447,7 @@
     <classes>
       <class name="suiteC.VerifyPostTitleDisplayInDraftSection" ></class>
     </classes>
-</test>
+</test> -->
 
 <test name="AddExternalLinksToComments">
     <classes>

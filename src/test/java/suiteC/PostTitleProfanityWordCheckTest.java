@@ -3,7 +3,6 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,8 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -29,7 +27,8 @@ public class PostTitleProfanityWordCheckTest extends TestBase{
 	static int status=1;
 	
 	static int time=30;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -75,9 +74,9 @@ public class PostTitleProfanityWordCheckTest extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Initiated post creation");
 			} catch (Throwable t) {
 			t.printStackTrace();
@@ -99,13 +98,13 @@ public class PostTitleProfanityWordCheckTest extends TestBase{
 	
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
 	public void testMinMaxLengthValidation(String profanityWord,String errorMessage) throws Exception {
-	ProfilePage.enterPostContent("Test");
+	pf.getProfilePageInstance(ob).enterPostContent("Test");
 	test.log(LogStatus.INFO, "Entered Post content");
-	ProfilePage.enterPostTitle(profanityWord);
+	pf.getProfilePageInstance(ob).enterPostTitle(profanityWord);
 	test.log(LogStatus.INFO, "Entered profanity word in Post Title : "+profanityWord);
-	ProfilePage.clickOnPostPublishButton();
+	pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 	try {
-		Assert.assertTrue(ProfilePage.validatePostErrorMessage(errorMessage));
+		Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
 		test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post title");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post title");
@@ -117,7 +116,7 @@ public class PostTitleProfanityWordCheckTest extends TestBase{
 
 	}
 	try {
-		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostTitle(profanityWord));
+		Assert.assertTrue(pf.getProfilePageInstance(ob).validateProfanityWordsMaskedForPostTitle(profanityWord));
 		test.log(LogStatus.PASS, "Profanity words are masked for post title");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Profanity words are masked for post title");
@@ -133,8 +132,8 @@ public class PostTitleProfanityWordCheckTest extends TestBase{
 	
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void logOut() throws Exception{
-		ProfilePage.clickOnPostCancelButton();
-		ProfilePage.clickOnPostCancelDiscardButton();
+		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 		logout();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

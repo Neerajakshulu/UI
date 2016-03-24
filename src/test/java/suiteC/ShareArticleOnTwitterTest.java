@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -39,6 +39,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -83,8 +84,8 @@ public class ShareArticleOnTwitterTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
@@ -111,7 +112,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 			test.log(LogStatus.INFO,"Sharing Article on Twitter");
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
-			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			String PARENT_WINDOW=ob.getWindowHandle();
 			String rvPageurl=ob.getCurrentUrl();
 			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString()), 80);
@@ -125,26 +126,26 @@ public class ShareArticleOnTwitterTest extends TestBase {
 				 if(!child_window_handle.equals(PARENT_WINDOW)) {
 					 ob.switchTo().window(child_window_handle);
 					 maximizeWindow();
-					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS);
-					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
-					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
+					 pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS);
+					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
+					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-					// BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
+					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
 					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
-					 String articleDesc=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
+					 String articleDesc=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
 					 System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
 					 if(!articleDesc.contains(rvPageurl)){
 						 throw new Exception("Sharing Article Description not populated on Twitter Page");
 					 }
 					 
-					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
+					 pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
 					 ob.switchTo().window(PARENT_WINDOW);
 				 }
 			 }
 			
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			
 		} catch (Exception e) {
@@ -180,8 +181,8 @@ public class ShareArticleOnTwitterTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+	public  void waitForTRHomePage() throws InterruptedException {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -197,7 +198,7 @@ public class ShareArticleOnTwitterTest extends TestBase {
 		waitForPageLoad(ob);
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

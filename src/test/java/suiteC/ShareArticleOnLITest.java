@@ -2,13 +2,10 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -20,7 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -41,6 +38,7 @@ public class ShareArticleOnLITest extends TestBase {
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -84,8 +82,8 @@ public class ShareArticleOnLITest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
@@ -112,9 +110,9 @@ public class ShareArticleOnLITest extends TestBase {
 			test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
-			//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 			String PARENT_WINDOW=ob.getWindowHandle();
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']")).click();
 			waitForNumberOfWindowsToEqual(ob, 2);
@@ -125,10 +123,10 @@ public class ShareArticleOnLITest extends TestBase {
 					 ob.switchTo().window(child_window_handle);
 					 maximizeWindow();
 					 System.out.println("child window--->"+ob.getTitle());
-					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS);
-					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
-					 BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
-					 BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
+					 pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS);
+					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
+					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
+					 pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
 					 ob.switchTo().window(PARENT_WINDOW);
 					waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"), 40);
 					 ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")).click();
@@ -171,9 +169,9 @@ public class ShareArticleOnLITest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
+	public  void waitForTRHomePage() throws InterruptedException {
 		Thread.sleep(4000);
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -188,7 +186,7 @@ public class ShareArticleOnLITest extends TestBase {
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

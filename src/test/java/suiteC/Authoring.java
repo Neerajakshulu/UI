@@ -5,11 +5,12 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
@@ -17,8 +18,14 @@ public class Authoring  extends TestBase {
 
 	static int commentSizeBeforeAdd;
 	static int commentSizeAfterAdd;
+	PageFactory pf;
 	
-	public static int getCommentCount() throws InterruptedException  {
+	public Authoring(WebDriver ob) {
+		this.ob=ob;
+		pf=new PageFactory();
+	}
+	
+	public  int getCommentCount() throws InterruptedException  {
 		waitForPageLoad(ob);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
@@ -26,7 +33,7 @@ public class Authoring  extends TestBase {
 		return Integer.parseInt(commentSizeBeforeAdd);
 	}
 	
-	public static void enterArticleComment(String addComments) throws InterruptedException  {
+	public  void enterArticleComment(String addComments) throws InterruptedException  {
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
@@ -43,7 +50,7 @@ public class Authoring  extends TestBase {
 	
 	
 	
-	public static void enterArticleComments(String addComments) throws InterruptedException  {
+	public  void enterArticleComments(String addComments) throws InterruptedException  {
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
@@ -56,7 +63,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	
-	public static void clickAddCommentButton() throws InterruptedException  {
+	public void clickAddCommentButton() throws InterruptedException  {
 		scrollingToElementofAPage();
 		waitForElementTobeClickable(ob, By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"), 60);
 		WebElement addCommentElement=ob.findElement(By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));
@@ -66,7 +73,7 @@ public class Authoring  extends TestBase {
 		waitForAjax(ob);
 	}
 	
-	public static void validateCommentAdd() throws Exception {
+	public void validateCommentAdd() throws Exception {
 		commentSizeAfterAdd = getCommentCount();
 		System.out.println("before-->"+commentSizeBeforeAdd);
 		System.out.println("After-->"+commentSizeAfterAdd);
@@ -77,7 +84,7 @@ public class Authoring  extends TestBase {
 	
 	
 	
-	public static void updateComment(String steComment) throws Exception {
+	public void updateComment(String steComment) throws Exception {
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(ob, By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"), 40);
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
@@ -103,18 +110,18 @@ public class Authoring  extends TestBase {
 		}
 	}
 	
-	public  static void validateUpdatedComment(String updatedComments) throws Exception  {
+	public   void validateUpdatedComment(String updatedComments) throws Exception  {
 		scrollingToElementofAPage();
 		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
-			AuthoringTest.status=2;
+			new AuthoringTest().status=2;
 			throw new Exception("Updated "+updatedComments+" not present");
 		}
 	}
 	
-	public static void validateAppreciationComment() throws Exception  {
+	public void validateAppreciationComment() throws Exception  {
 		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']"));
 		List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.size());
@@ -148,7 +155,7 @@ public class Authoring  extends TestBase {
 			}
 	}
 	
-	public static void validateViewComment(String addComments) throws Exception  {
+	public void validateViewComment(String addComments) throws Exception  {
 		String commentText=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0).getText();
 		System.out.println("Commentary Text-->"+commentText);
 		if(!commentText.contains(addComments))  {
@@ -157,12 +164,12 @@ public class Authoring  extends TestBase {
 		}
 	}
 	
-	public static void scrollingToElementofAPage() throws InterruptedException  {
+	public void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 	}
 	
-	public static void scrollingToElement(WebElement element) throws InterruptedException  {
+	public void scrollingToElement(WebElement element) throws InterruptedException  {
 		((JavascriptExecutor) ob).executeScript(
                 "arguments[0].scrollIntoView(true);", element);
 	}
@@ -171,16 +178,16 @@ public class Authoring  extends TestBase {
 	 * Method for Validate Prevent Bot Comment
 	 * @throws Exception
 	 */
-	public static void validatePreventBotComment() throws Exception  {
+	public void validatePreventBotComment() throws Exception  {
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
-		String preventBotText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
+		String preventBotText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 		//System.out.println("Prevent Bot--->"+preventBotText);
-		BrowserWaits.waitUntilText(preventBotText);
+		pf.getBrowserWaitsInstance(ob).waitUntilText(preventBotText);
 		Assert.assertEquals("We are still processing your previous comment. Please try again.", preventBotText);
 	}
 	
-	public static void selectArtcleWithComments(){
+	public void selectArtcleWithComments(){
 	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 	List<WebElement> itemList;
 	while (true) {

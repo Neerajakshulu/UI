@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -34,6 +34,7 @@ public class HCRProfileBadgeTest extends TestBase {
 	static String followAfter=null;
 	static boolean isFollowEnable=false;
 	static boolean isFollowDisable=false;
+	PageFactory pf;
 	
 	
 	@BeforeTest
@@ -74,9 +75,11 @@ public class HCRProfileBadgeTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -96,11 +99,11 @@ public class HCRProfileBadgeTest extends TestBase {
 	public void getOtherProfileDetails(String hcrProfile) throws Exception  {
 				try {
 					test.log(LogStatus.INFO,"get other profile details and validate");
-					SearchProfile.enterSearchKeyAndClick(hcrProfile);
-					SearchProfile.clickPeople();
+					pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(hcrProfile);
+					pf.getSearchProfilePageInstance(ob).clickPeople();
 					test.log(LogStatus.INFO,"Validate HCR Profile Badge");
-					SearchProfile.hcrProfileBadgeValidation();
-					LoginTR.logOutApp();
+					pf.getSearchProfilePageInstance(ob).hcrProfileBadgeValidation();
+					pf.getLoginTRInstance(ob).logOutApp();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
 

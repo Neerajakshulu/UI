@@ -2,12 +2,9 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -21,7 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -43,6 +40,7 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 	static boolean master_condition;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -88,8 +86,8 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
@@ -115,12 +113,12 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 			
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  Profanity Words execution starts for data set #"+ (count+1)+"--->");
 			
-			Authoring.enterArticleComments(profanityWord);
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComments(profanityWord);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			
-			String profanityErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String profanityErrorMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
-			BrowserWaits.waitUntilText(profanityErrorMessage);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(profanityErrorMessage);
 			
 			Assert.assertEquals(profanityErrorMessage, errorMessage);
 			
@@ -185,9 +183,9 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
+	public  void waitForTRHomePage() throws InterruptedException {
 		Thread.sleep(4000);
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -202,7 +200,7 @@ public class CommentsProfanityWordsCheckTest extends TestBase {
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

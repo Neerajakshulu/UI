@@ -12,15 +12,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
-import util.TestUtil;
-import base.TestBase;
-
 import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
+import util.TestUtil;
 
 public class TestCase_A21 extends TestBase {
 	static int status=1;
-
 	@BeforeTest
 	public void beforeTest() throws Exception{
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
@@ -74,7 +73,7 @@ public class TestCase_A21 extends TestBase {
 			ob.switchTo().window(al.get(1));
 			
 			test.log(LogStatus.INFO,"Preference link is present and clicked");
-			BrowserWaits.waitUntilText("ACCESS YOUR PREFERENCE CENTER");
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("ACCESS YOUR PREFERENCE CENTER");
 			test.log(LogStatus.INFO,"Preference page is opened successfully");
 			ob.close();
 			ob.switchTo().window(al.get(0));

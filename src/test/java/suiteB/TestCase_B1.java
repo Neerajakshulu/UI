@@ -178,7 +178,7 @@ public class TestCase_B1 extends TestBase{
 	}
 	
 
-	@AfterTest
+	/*@AfterTest
 	public void reportTestResult(){
 		extent.endTest(test);
 		
@@ -189,7 +189,7 @@ public class TestCase_B1 extends TestBase{
 		else
 			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "SKIP");
 	
-	}
+	}*/
 	
 
 	

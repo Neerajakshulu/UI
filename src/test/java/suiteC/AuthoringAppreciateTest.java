@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -27,6 +28,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -71,7 +73,7 @@ public class AuthoringAppreciateTest extends TestBase {
 				
 				ob.navigate().to(System.getProperty("host"));
 				//ob.get(CONFIG.getProperty("testSiteName"));
-				AuthoringTest.waitForTRHomePage();
+				new AuthoringTest().waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	
@@ -81,10 +83,10 @@ public class AuthoringAppreciateTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
-			AuthoringTest.enterTRCredentials(username, password);
-			AuthoringTest.clickLogin();
-			AuthoringTest.searchArticle(article);
-			Authoring.selectArtcleWithComments();
+			new AuthoringTest().enterTRCredentials(username, password);
+			new AuthoringTest().clickLogin();
+			new AuthoringTest().searchArticle(article);
+			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			validateAppreciationComment();
 			validateAppreciationComment();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
@@ -179,7 +181,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	 * Method for Scrolling down to the page
 	 * @throws InterruptedException, When scroll not done
 	 */
-	public static void scrollingToElementofAPage() throws InterruptedException  {
+	public  void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 			

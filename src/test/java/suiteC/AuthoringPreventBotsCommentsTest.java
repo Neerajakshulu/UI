@@ -2,12 +2,9 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -19,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -38,6 +36,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -85,20 +84,20 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 			String article,String completeArticle, String addComments) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
-			Authoring.enterArticleComment(addComments);
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			ob.navigate().refresh();
 			waitForAjax(ob);
-			Authoring.enterArticleComment(addComments);
-			Authoring.clickAddCommentButton();
-			Authoring.validatePreventBotComment();
+			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getAuthoringInstance(ob).validatePreventBotComment();
 			
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
@@ -132,9 +131,9 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
+	public  void waitForTRHomePage() throws InterruptedException {
 		Thread.sleep(4000);
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -149,7 +148,7 @@ public class AuthoringPreventBotsCommentsTest extends TestBase {
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

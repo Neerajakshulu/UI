@@ -10,12 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_A24 extends TestBase {
 
@@ -66,7 +66,7 @@ static int status=1;
 				test.log(LogStatus.INFO," New User created");
 				Thread.sleep(5000);
 				Thread.sleep(5000);
-				LoginTR.logOutApp();
+				new PageFactory().getLoginTRInstance(ob).logOutApp();
 				test.log(LogStatus.INFO," Attempting Login by providing wrong password");
 				ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 				for(int i=0;i<5;i++){

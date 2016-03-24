@@ -11,19 +11,18 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.ProfilePage;
-
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
 
 public class TestCase_F5 extends TestBase {
 
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -66,24 +65,24 @@ public class TestCase_F5 extends TestBase {
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			//Login using user2 and check for the notification
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(5000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForNewPost"))).getText();

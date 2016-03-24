@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class TestCase_F1 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -97,8 +97,8 @@ public class TestCase_F1 extends TestBase {
 			logout();
 
 			// 3)Verify that User1 receives a notification with correct data
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")),30);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);

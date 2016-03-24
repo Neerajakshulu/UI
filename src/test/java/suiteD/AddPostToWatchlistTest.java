@@ -12,9 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
-import pages.Watchlist;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -27,6 +25,7 @@ public class AddPostToWatchlistTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -63,9 +62,11 @@ public class AddPostToWatchlistTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -84,23 +85,23 @@ public class AddPostToWatchlistTest extends TestBase {
 	public void profilePostTabWatchlistValidation() throws Exception  {
 			try {
 //				test.log(LogStatus.INFO," Click Watchlist link on top of page");
-//				HeaderFooterLinksPage.clickOnWatchLink();
+//				pf.getHFPageInstance(ob).clickOnWatchLink();
 //				test.log(LogStatus.INFO,"Clear all watchlists");
 //				Watchlist.clearWatchlist();
 				test.log(LogStatus.INFO,"click on Profile image and go to my profile page");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
 				test.log(LogStatus.INFO,"click on Profile Post tab");
-				ProfilePage.clickPostsTab();
-				String firstPost=ProfilePage.getFirstPostTitle();
+				pf.getProfilePageInstance(ob).clickPostsTab();
+				String firstPost=pf.getProfilePageInstance(ob).getFirstPostTitle();
 				test.log(LogStatus.INFO,"Add Post to your watchlist");
-				ProfilePage.addPostToWatchlist();
-				//HeaderFooterLinksPage.clickOnWatchLink();
+				pf.getProfilePageInstance(ob).addPostToWatchlist();
+				//pf.getHFPageInstance(ob).clickOnWatchLink();
 				test.log(LogStatus.INFO,"Validate Post is added to your watchlist");
-				ProfilePage.postWatchLabelValidation();
+				pf.getProfilePageInstance(ob).postWatchLabelValidation();
 				
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

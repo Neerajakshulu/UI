@@ -43,6 +43,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.Xls_Reader;
@@ -60,7 +61,7 @@ public class TestBase {
 	public static Xls_Reader suiteFxls = null;
 
 	public static boolean isInitalized = false;
-	public WebDriver ob = null;
+	public  WebDriver ob = null;
 	public static ExtentReports extent = null;
 	public static ExtentTest test = null;
 
@@ -69,6 +70,7 @@ public class TestBase {
 	public static String fn1, fn2, ln1, ln2, fn3, ln3;
 	public static int xRows, xCols;
 	public static String[][] xData;
+	
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -133,7 +135,7 @@ public class TestBase {
 		}
 		return extent;
 	}
-
+	
 	// Opening via Sauce Labs
 	public void openBrowser() throws Exception {
 
@@ -215,6 +217,7 @@ public class TestBase {
 
 	}*/
 
+	
 	// Closing the browser
 	public void closeBrowser() {
 
@@ -527,23 +530,17 @@ public class TestBase {
 
 	// Added by Chinna
 
-	public static WebDriver getOb() {
+	public  WebDriver getOb() {
 		return ob;
 	}
 
-	public static void setOb(WebDriver ob) {
-		TestBase.ob = ob;
+	public  void setOb(WebDriver ob) {
+		this.ob = ob;
 	}
 
-	public static Properties getOR() {
-		return OR;
-	}
+	
 
-	public static void setOR(Properties oR) {
-		OR = oR;
-	}
-
-	public static void scrollingToElementofAPage() throws InterruptedException {
+	public  void scrollingToElementofAPage() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(4000);
@@ -559,7 +556,7 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public static WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+	public  WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
@@ -572,7 +569,7 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public static WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+	public  WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
@@ -594,7 +591,7 @@ public class TestBase {
 	 * @param driver
 	 * @param element
 	 */
-	public static void scrollElementIntoView(WebDriver driver, WebElement element) {
+	public  void scrollElementIntoView(WebDriver driver, WebElement element) {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
@@ -617,7 +614,7 @@ public class TestBase {
 	 * 
 	 * @param driver
 	 */
-	public static void waitForAjax(WebDriver driver) {
+	public  void waitForAjax(WebDriver driver) {
 		try {
 			for (int i = 0; i < 60; i++) {
 
@@ -636,7 +633,7 @@ public class TestBase {
 		}
 	}
 
-	public static void waitForPageLoad(WebDriver driver) {
+	public  void waitForPageLoad(WebDriver driver) {
 		try {
 			for (int i = 0; i < 90; i++) {
 
@@ -656,7 +653,7 @@ public class TestBase {
 		waitForAjax(driver);
 	}
 
-	public static Alert waitForAlertToBePresent(WebDriver driver, int time) {
+	public  Alert waitForAlertToBePresent(WebDriver driver, int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
 	}
@@ -669,7 +666,7 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public static WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+	public  WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
 	}
@@ -693,7 +690,7 @@ public class TestBase {
 	 * @param numberOfWindows
 	 * @return
 	 */
-	public static ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver, final int numberOfWindows) {
+	public  ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver, final int numberOfWindows) {
 		return new ExpectedCondition<Boolean>() {
 			@Override
 			public Boolean apply(WebDriver driver) {
@@ -709,7 +706,7 @@ public class TestBase {
 	 * @param driver
 	 * @param numberOfWindows
 	 */
-	public static void waitForNumberOfWindowsToEqual(WebDriver driver, final int numberOfWindows) {
+	public  void waitForNumberOfWindowsToEqual(WebDriver driver, final int numberOfWindows) {
 		new WebDriverWait(driver, 60).until(numberOfWindowsToBe(driver, numberOfWindows));
 	}
 
@@ -719,7 +716,7 @@ public class TestBase {
 	 * @param driver
 	 * @return
 	 */
-	public static String switchToNewWindow(WebDriver driver) {
+	public  String switchToNewWindow(WebDriver driver) {
 		String mainWindow = driver.getWindowHandle();
 		Set<String> windows = driver.getWindowHandles();
 		windows.remove(mainWindow);
@@ -734,7 +731,7 @@ public class TestBase {
 	 * @param driver
 	 * @param mainWindowHandle
 	 */
-	public static void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
+	public void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
 
 		driver.switchTo().window(mainWindowHandle);
 

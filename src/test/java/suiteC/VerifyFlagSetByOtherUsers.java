@@ -5,10 +5,8 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -18,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -30,7 +29,8 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 	private static final String USER_NAME1 = "chinna.putha@thomsonreuters.com";
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -78,9 +78,9 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			String articleTitle = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			String comment = "testFlag";
-			Authoring.enterArticleComment(comment);
-			Authoring.clickAddCommentButton();
-			LoginTR.logOutApp();
+			pf.getAuthoringInstance(ob).enterArticleComment(comment);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getLoginTRInstance(ob).logOutApp();
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME, PASSWORD);
@@ -112,7 +112,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			//ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME1, PASSWORD1);
@@ -178,7 +178,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 		}
 
-		LoginTR.logOutApp();
+		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}

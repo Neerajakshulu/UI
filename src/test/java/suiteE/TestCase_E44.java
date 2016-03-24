@@ -16,14 +16,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E44 extends TestBase {
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -76,19 +76,19 @@ public class TestCase_E44 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
 					30);
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore = 0;
 			test.log(LogStatus.INFO, "Post count:" + postCountBefore);
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle("My Post");
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle("My Post");
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent("This is my post description");
+			pf.getProfilePageInstance(ob).enterPostContent("This is my post description");
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			Thread.sleep(4000);
 			test.log(LogStatus.INFO, "Published the post");
-			int postCountAfter = ProfilePage.getPostsCount();
+			int postCountAfter = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
 
 			try {

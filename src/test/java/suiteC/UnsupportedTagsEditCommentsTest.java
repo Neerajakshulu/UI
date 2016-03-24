@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -34,7 +34,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	static boolean master_condition;
 	
 	static int time=30;
-	
+	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -80,12 +80,12 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
-			Authoring.enterArticleComments("test");
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComments("test");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
 			//print full stack trace
@@ -108,11 +108,11 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  UnSupported HTML Tags execution starts for data set #"+ (count+1)+"--->");
 					
-			Authoring.updateComment(htmlTags);
+			pf.getAuthoringInstance(ob).updateComment(htmlTags);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
-			String unSupporteTagErrorMessage=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String unSupporteTagErrorMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
-			BrowserWaits.waitUntilText(unSupporteTagErrorMessage);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
 			
 			//Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
 			if(!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)){
@@ -179,8 +179,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+	public  void waitForTRHomePage() throws InterruptedException {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -195,7 +195,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

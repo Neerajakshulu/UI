@@ -10,16 +10,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_F3 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -64,8 +64,8 @@ public class TestCase_F3 extends TestBase {
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -80,14 +80,14 @@ public class TestCase_F3 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(1000);
 
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 2)Login with user2,comment on article contained in user1's
 			// watchlist and logout
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("apps")), 30);
 
 			ob.navigate().to(document_url);
@@ -97,14 +97,14 @@ public class TestCase_F3 extends TestBase {
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 3)Login with user1 again and verify that he receives a correct
 			// notification
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationDocumentComment")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);

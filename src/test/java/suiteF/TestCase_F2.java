@@ -10,15 +10,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_F2 extends TestBase {
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -84,7 +85,7 @@ public class TestCase_F2 extends TestBase {
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			//ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))).click();
 			Thread.sleep(10000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			Thread.sleep(5000);
 
 			// 2)Login with user2 and verify that he receives a correct

@@ -14,9 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -30,6 +28,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -76,17 +75,17 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
-			ProfilePage.clickOnFirstPost();
-			PostRecordViewPage.clickOnEditButton();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			pf.getpostRVPageInstance(ob).clickOnEditButton();
 			} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -108,11 +107,11 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
 	public void testMinMaxLengthValidation(String contentMinError,String contentMaxError,String minCharCount,String maxCharCount) throws Exception {
 	
-	ProfilePage.enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
+	pf.getProfilePageInstance(ob).enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+minCharCount);
 	
 	try {
-		Assert.assertFalse(ProfilePage.validatePublishButton());
+		Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());
 		test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Publish button is  not disabled for the post content less than min character count");
@@ -123,10 +122,10 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 	}
-	ProfilePage.enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,5))));
+	pf.getProfilePageInstance(ob).enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,5))));
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+maxCharCount);
 	try {
-		Assert.assertFalse(ProfilePage.validatePublishButton());;
+		Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());;
 		test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Publish button is disabled for the post content less than min character count");
@@ -137,7 +136,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 	}
-	ProfilePage.clickOnPostCancelButton();
+	pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 	logout();
 	closeBrowser();
 	}

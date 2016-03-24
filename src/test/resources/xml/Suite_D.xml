@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite D">
+<suite name="Suite D" parallel="tests" thread-count="4">
 
 <listeners>
     <listener class-name="listener.TestsListenerAdapter" />
@@ -35,13 +35,13 @@
 </test>
 
 
-<test name="Validate_View_Profile" preserve-order="true">
+<test name="Validate_View_Profile" >
     <classes>
         <class name="suiteD.ViewProfileTest"></class> 
     </classes>
 </test>
 
-<test name="Update_User_Own_Profile" preserve-order="true">
+<test name="Update_User_Own_Profile" >
 	<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india"/>
     <classes>
         <class name="suiteD.ProfileUpdateTest" ></class> 
@@ -49,7 +49,7 @@
 </test>
 
 
-<test name="Validate_Application_Links" preserve-order="true">
+<test name="Validate_Application_Links" >
 	<parameter name="appLinks"
 	value="Web of Science|EndNote|InCites|ScholarOne Abstracts|ScholarOne Manuscripts" />
     <classes>
@@ -57,47 +57,47 @@
     </classes>
 </test>
 
-<test name="Validate_Application_Header_and_Footer_Links" preserve-order="true">
+<test name="Validate_Application_Header_and_Footer_Links" >
 	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use"/>
     <classes>
         <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
     </classes>
 </test>
 
-<test name="Validate_User_Own_Profile_Comments_Like" preserve-order="true">
+<test name="Validate_User_Own_Profile_Comments_Like" >
     <classes>
         <class name="suiteD.OwnProfileCommentsLikeTest" ></class> 
     </classes>
 </test>
 
-<test name="Validate_Other_User_Profile_Comments_Like" preserve-order="true">
+<test name="Validate_Other_User_Profile_Comments_Like" >
 	<parameter name="otherProfileName" value="deepak"/>
     <classes>
         <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
     </classes>
 </test>
 
-<test name="Validate_Add_Topic_InterestsAndSkillsUpdate" preserve-order="true">
+<test name="Validate_Add_Topic_InterestsAndSkillsUpdate" >
 	<parameter name="topics" value="tes|aut|dru"/>
     <classes>
         <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
     </classes>
 </test>
 
-<test name="Validate_User_Own_Profile_Following_Others_Profiles" preserve-order="true">
+<test name="Validate_User_Own_Profile_Following_Others_Profiles" >
 	<parameter name="profileName" value="reddy"/>
     <classes>
         <class name="suiteD.ProfileFollowingOthersTest" ></class> 
     </classes>
 </test>
 
-<test name="ProfileSummaryTest" preserve-order="true">
+<test name="ProfileSummaryTest" >
     <classes>
         <class name="suiteD.ProfileSummaryTest" ></class> 
     </classes>
 </test>
 
-<test name="ProfileFollowerTest" preserve-order="true">
+<test name="ProfileFollowerTest" >
     <classes>
         <class name="suiteD.ProfileFollowerTest" ></class> 
     </classes>

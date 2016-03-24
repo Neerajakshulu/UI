@@ -7,15 +7,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_F19 extends TestBase {
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -70,11 +71,11 @@ public class TestCase_F19 extends TestBase {
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			//Login with someother user and comment on the article in watchlist of the above user
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(2000);
 			ob.navigate().to(document_url);
 			Thread.sleep(4000);
@@ -83,12 +84,12 @@ public class TestCase_F19 extends TestBase {
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			test.log(LogStatus.INFO, "another user adding the comment for an article");
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 
 			//Login with first user and check if notification is present
-			LoginTR.enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(5000);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();

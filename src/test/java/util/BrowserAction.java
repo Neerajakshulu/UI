@@ -17,14 +17,23 @@ import base.TestBase;
  * @author CP00421684
  *
  */
-public class BrowserAction extends TestBase{
+public class BrowserAction extends TestBase {
 	
-	
+	//public  static WebDriver ob1 = null;
+	 
 	/**
 	 * click on desired element
 	 * @param locator
 	 */
-	public static void click(Object elementName) throws Exception{
+	
+	public BrowserAction(WebDriver ob){
+		this.ob=ob;
+	}
+	
+	
+	
+	public void click(Object elementName) throws Exception{
+		
 		if ((elementName instanceof Enum)) {
 		  getLocator(((Enum<?>)elementName).name(), elementName.toString()).click();
 		}
@@ -38,7 +47,8 @@ public class BrowserAction extends TestBase{
 	 * double click on desired element
 	 * @param locator
 	 */
-	public static void doubleclick(Object elementName) throws Exception {
+	public void doubleclick(Object elementName) throws Exception {
+		
 		Actions act = new Actions(ob);
 		if ((elementName instanceof Enum)) {
 		 act.doubleClick(getLocator(((Enum<?>)elementName).name(), elementName.toString()));
@@ -53,7 +63,7 @@ public class BrowserAction extends TestBase{
 	 * Method for Clear field
 	 * @param locator
 	 */
-	public static void clear(Object elementName) throws Exception {
+	public void clear(Object elementName) throws Exception {
 		if ((elementName instanceof Enum)) { 
 			  getLocator(((Enum<?>)elementName).name(), elementName.toString()).clear();
 			}
@@ -66,7 +76,7 @@ public class BrowserAction extends TestBase{
 	 * Method for click and then Clear the field
 	 * @param locator
 	 */
-	public static void clickAndClear(Object elementName) throws Exception{
+	public void clickAndClear(Object elementName) throws Exception{
 		if ((elementName instanceof Enum)) { 
 			  getLocator(((Enum<?>)elementName).name(), elementName.toString()).clear();
 			  getLocator(((Enum<?>)elementName).name(), elementName.toString()).click();
@@ -80,7 +90,7 @@ public class BrowserAction extends TestBase{
 	 * Method for enter Filed value
 	 * @param locator
 	 */
-	public static void enterFieldValue(Object elementName,String enterText) throws Exception {
+	public void enterFieldValue(Object elementName,String enterText) throws Exception {
 		if ((elementName instanceof Enum)) { 
 			getLocator(((Enum<?>)elementName).name(), elementName.toString()).sendKeys(enterText);
 		}
@@ -93,7 +103,7 @@ public class BrowserAction extends TestBase{
 	 * Method for Select Drop down value by Visible text
 	 * @param locator
 	 */
-	public static void selectDropdownByText(Object elementName,String dropDownText) throws Exception{
+	public void selectDropdownByText(Object elementName,String dropDownText) throws Exception{
 		if ((elementName instanceof Enum)) { 
 			getLocator(((Enum<?>)elementName).name(), elementName.toString()).click();
 			WebElement ele=getLocator(((Enum<?>)elementName).name(), elementName.toString());
@@ -109,7 +119,7 @@ public class BrowserAction extends TestBase{
 	 * Method for Select Drop down value by Option
 	 * @param locator
 	 */
-	public static void selectDropdownByOption(Object elementName,String optionValue) throws Exception{
+	public void selectDropdownByOption(Object elementName,String optionValue) throws Exception{
 		if ((elementName instanceof Enum)) { 
 			getLocator(((Enum<?>)elementName).name(), elementName.toString()).click();
 			WebElement ele=getLocator(((Enum<?>)elementName).name(), elementName.toString());
@@ -125,7 +135,7 @@ public class BrowserAction extends TestBase{
 	 * Method for Select Drop down value by Index
 	 * @param locator
 	 */
-	public static void selectDropdownByIndex(Object elementName,int index) throws Exception {
+	public void selectDropdownByIndex(Object elementName,int index) throws Exception {
 		if ((elementName instanceof Enum)) { 
 			WebElement ele=getLocator(((Enum<?>)elementName).name(), elementName.toString());
 			Select selectRole=new Select(ele);
@@ -135,7 +145,7 @@ public class BrowserAction extends TestBase{
 		}
 	}
 	
-	public static WebElement getLocator(String locatorType,String locatorText) {
+	public  WebElement getLocator(String locatorType,String locatorText) {
 		WebElement ele = null;
 		//System.out.println("Locator Type-->"+locatorType);
 		//System.out.println("Locator Text-->"+locatorText);
@@ -170,7 +180,7 @@ public class BrowserAction extends TestBase{
 	}
 	
 	
-	public static List<WebElement> getLocators(String locatorType,String locatorText) {
+	public  List<WebElement> getLocators(String locatorType,String locatorText) {
 		List<WebElement> ele = null;
 		
 		try {
@@ -202,7 +212,7 @@ public class BrowserAction extends TestBase{
 		
 	}
 	
-	public static void scrollToElement(Object elementName) throws Exception {
+	public void scrollToElement(Object elementName) throws Exception {
 		if ((elementName instanceof Enum)) { 
 			((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);",
 					getLocator(((Enum<?>) elementName).name(), elementName.toString()));
@@ -213,12 +223,12 @@ public class BrowserAction extends TestBase{
 	}
 	
 	
-	public static void scrollingPageDown() throws InterruptedException  {
+	public void scrollingPageDown() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 	}
 	
-	public static void scrollingPageUp() throws InterruptedException  {
+	public void scrollingPageUp() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, -250);");
 	}
@@ -229,7 +239,7 @@ public class BrowserAction extends TestBase{
 	 * @param element
 	 * @throws Exception 
 	 */
-	public static void jsClick(Object elementName) throws Exception {
+	public void jsClick(Object elementName) throws Exception {
 		WebElement element=getElement(elementName);
 		((JavascriptExecutor) ob).executeScript("arguments[0].click();", element);
 	}
@@ -240,7 +250,7 @@ public class BrowserAction extends TestBase{
 	 * Method for get web element
 	 * @param locator
 	 */
-	public static WebElement getElement(Object elementName) throws Exception{
+	public  WebElement getElement(Object elementName) throws Exception{
 		if ((elementName instanceof Enum)) {
 			return  getLocator(((Enum<?>)elementName).name(), elementName.toString());
 		}
@@ -254,7 +264,7 @@ public class BrowserAction extends TestBase{
 	 * Method for get web elements
 	 * @param locator
 	 */
-	public static List<WebElement> getElements(Object elementName) throws Exception{
+	public List<WebElement> getElements(Object elementName) throws Exception{
 		if ((elementName instanceof Enum)) {
 			return  getLocators(((Enum<?>)elementName).name(), elementName.toString());
 		}
@@ -269,7 +279,7 @@ public class BrowserAction extends TestBase{
 	 * @param element
 	 * @throws Exception 
 	 */
-	public static void jsClick(WebElement elementName) throws Exception {
+	public void jsClick(WebElement elementName) throws Exception {
 		((JavascriptExecutor) ob).executeScript("arguments[0].click();", elementName);
 	}
 }

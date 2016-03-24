@@ -11,16 +11,33 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import base.TestBase;
-import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import org.openqa.selenium.JavascriptExecutor;
 
 public class ProfilePage  extends TestBase {
+	
+	PageFactory pf;
+	public ProfilePage(WebDriver ob){
+		this.ob= ob;
+		pf=new PageFactory();
+	}
+
+	/*private static ProfilePage profilePage = null;
+
+	public static ProfilePage getProfilePageInstance() {
+		if (profilePage == null) {
+			profilePage = new ProfilePage();
+		}
+
+		return profilePage;
+
+	}*/
 	
 	/**
 	 * Search results people count
@@ -43,8 +60,8 @@ public class ProfilePage  extends TestBase {
 	 * @param lastName
 	 * @throws Exception
 	 */
-	public static void validateProfileLastName(String lastName) throws Exception {
-		List<WebElement> profilesLastname=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
+	public void validateProfileLastName(String lastName) throws Exception {
+		List<WebElement> profilesLastname=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
 		if(profilesLastname.size()>0){
 			for(WebElement profileLastname:profilesLastname) {
 				if(!StringUtils.containsIgnoreCase(profileLastname.getText(), lastName)) {
@@ -62,10 +79,10 @@ public class ProfilePage  extends TestBase {
 	 * @param metaData
 	 * @throws Exception
 	 */
-	public static void validateProfileMetaData(String metaData) throws Exception {
-		List<WebElement> profilesLastname=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
+	public void validateProfileMetaData(String metaData) throws Exception {
+		List<WebElement> profilesLastname=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
 		if(profilesLastname.size()>0){
-			List<WebElement> profilesMetaData=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG);
+			List<WebElement> profilesMetaData=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG);
 			System.out.println("Profile metadata--->"+profilesMetaData.size());
 			for(WebElement profileMetaData:profilesMetaData) {
 				System.out.println("Meta Data-->"+profileMetaData.getText());
@@ -83,8 +100,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click People after searching an profile
 	 * @throws Exception, When People are not present/Disabled
 	 */
-	public static void clickPeople() throws Exception {
-			BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+	public void clickPeople() throws Exception {
+			pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
 			BrowserWaits.waitTime(8);
 	}
 	
@@ -94,17 +111,17 @@ public class ProfilePage  extends TestBase {
 	 * @param lastName
 	 * @throws Exception
 	 */
-	public static void validateProfileInterest(String interestAndSkill) throws Exception {
-		List<WebElement> profilesname=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
+	public void validateProfileInterest(String interestAndSkill) throws Exception {
+		List<WebElement> profilesname=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_NAME_CSS);
 		if(profilesname.size()>0){
 			for(WebElement profilename:profilesname) {
 				profilename.findElement(By.tagName("a")).click();
-				BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
 				Thread.sleep(6000);
 				break;
 			}
 			
-			List<WebElement> interestsSkills=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
+			List<WebElement> interestsSkills=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS);
 			List<String> interests=new ArrayList<String>();
 			for(WebElement intSkill:interestsSkills) {
 				interests.add(intSkill.getText());
@@ -126,10 +143,10 @@ public class ProfilePage  extends TestBase {
 	 * @param appLinks
 	 * @throws Exception, When App links not present
 	 */
-	public static void validateAppsLinks(String appLinks) throws Exception  {
+	public void validateAppsLinks(String appLinks) throws Exception  {
 			String []totalAppLinks=appLinks.split("\\|");
 			for(int i=0;i<totalAppLinks.length;i++) {
-				BrowserAction.click(OnePObjectMap.HOME_ONEP_APPS_LINK);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_LINK);
 				PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 				ob.findElement(By.linkText(totalAppLinks[i])).click();
 				ob.manage().window().maximize();
@@ -139,7 +156,7 @@ public class ProfilePage  extends TestBase {
 				 for(String child_window_handle:child_window_handles) {
 					 if(!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 						 ob.switchTo().window(child_window_handle);
-						 String appLinkText=BrowserAction.getElement(OnePObjectMap.HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS).getText();
+						 String appLinkText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS).getText();
 						 Assert.assertEquals(totalAppLinks[i], appLinkText);
 						 ob.close();
 						 ob.switchTo().window(PARENT_WINDOW_HANDLE);
@@ -153,19 +170,19 @@ public class ProfilePage  extends TestBase {
 	 * Method for click on profile
 	 * @throws Exception, When profile link not present
 	 */
-	public static void clickProfileLink() throws Exception {
-			BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK);
-			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-			BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
-			BrowserWaits.waitUntilText("Interests and Skills","Posts","Comments","Followers","Following");
+	public void clickProfileLink() throws Exception {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Interests and Skills","Posts","Comments","Followers","Following");
 	}
 	
 	/**
 	 * Method for get profile title
 	 * @throws Exception
 	 */
-	public static void getProfileTitle() throws Exception {
-		profileTitle=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
+	public void getProfileTitle() throws Exception {
+		profileTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
 		System.out.println("profile title-->"+profileTitle);
 	}
 	
@@ -173,8 +190,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for get Profile Meta Data
 	 * @throws Exception
 	 */
-	public static void getProfileMetadata() throws Exception {
-		profileMetadata=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
+	public void getProfileMetadata() throws Exception {
+		profileMetadata=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
 		System.out.println("profile metadata-->"+profileMetadata);
 	}
 	
@@ -182,10 +199,10 @@ public class ProfilePage  extends TestBase {
 	 * Method for click on first profile of search people page
 	 * @throws Exception
 	 */
-	public static void clickProfile() throws Exception {
+	public void clickProfile() throws Exception {
 		getProfileTitle();
 		getProfileMetadata();
-		BrowserAction.jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 120);
 		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS.toString()), 90);
 		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS.toString()), 90);
@@ -196,12 +213,12 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate Profile Title and Profile Metadata
 	 * @throws Exception, When Profile title or metadata mismatches
 	 */
-	public static void validateProfileTitleAndMetadata() throws Exception {
-		String title=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+	public void validateProfileTitleAndMetadata() throws Exception {
+		String title=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
 		Assert.assertEquals(profileTitle, title);
-		String role=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText();
-		String priInstitution=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
-		String location=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
+		String role=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText();
+		String priInstitution=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
+		String location=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText();
 		
 		if(!(profileMetadata.contains(role)&&profileMetadata.contains(priInstitution)&&profileMetadata.contains(location))){
 			throw new Exception("Profile Metadata not matching");
@@ -214,8 +231,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate user should not edit other profiles
 	 * @throws Exception, When Other profiles having edit option
 	 */
-	public static void validateOtherProfileEdit() throws Exception {
-		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+	public void validateOtherProfileEdit() throws Exception {
+		boolean otherProfileEdit=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
 		System.out.println("profile edit-->"+otherProfileEdit);
 		if(otherProfileEdit) {
 			throw new Exception("Edit option should not available for others profile");
@@ -227,13 +244,13 @@ public class ProfilePage  extends TestBase {
 	 * Method for follow/unfollow other profile from their profile page
 	 * @throws Exception, When user not able to follow
 	 */
-	public static void followOtherProfileFromProfilePage() throws Exception {
-		WebElement followUnFollowCheck=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
-		followUnfollowLableBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
+	public void followOtherProfileFromProfilePage() throws Exception {
+		WebElement followUnFollowCheck=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
+		followUnfollowLableBefore=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label Before-->"+followUnfollowLableBefore);
 		followUnFollowCheck.click();
 		BrowserWaits.waitTime(2);
-		followUnfollowLableAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("tooltip");
+		followUnfollowLableAfter=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label After-->"+followUnfollowLableAfter);
 		
 		if(followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)){
@@ -247,17 +264,17 @@ public class ProfilePage  extends TestBase {
 	 * and profile name should match with profile image title
 	 * @throws Exception, When Other profiles having edit option
 	 */
-	public static void validateOwnrProfile() throws Exception {
-		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+	public void validateOwnrProfile() throws Exception {
+		boolean otherProfileEdit=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
 		//System.out.println("profile edit-->"+otherProfileEdit);
 		if(!otherProfileEdit) {
 			throw new Exception("Edit option should be available for own profile");
 		}
 		
-		String profileName=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		String profileName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
 		//System.out.println("profile name-->"+profileName);
 		
-		String profileImageText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img")).getAttribute("title");
+		String profileImageText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img")).getAttribute("title");
 		//System.out.println("profile image neame-->"+profileImageText);
 		Assert.assertEquals(profileName, profileImageText);
 		
@@ -267,11 +284,11 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate Edit Cancel Button
 	 * @throws Exception, When user not able to click cancel
 	 */
-	public static void clickEditCancel() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+	public void clickEditCancel() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
 	}
 	
 	
@@ -281,29 +298,29 @@ public class ProfilePage  extends TestBase {
 	 * and profile name should match with profile image title
 	 * @throws Exception, When Other profiles having edit option
 	 */
-	public static void editUserOwnProfileMetadata(String profileMetadata) throws Exception {
+	public void editUserOwnProfileMetadata(String profileMetadata) throws Exception {
 		
 		metadata=profileMetadata.split("\\|");
-		boolean otherProfileEdit=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
+		boolean otherProfileEdit=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
 		//System.out.println("profile edit-->"+otherProfileEdit);
 		if(!otherProfileEdit) {
 			throw new Exception("Edit option should be available for own profile");
 		}
 		
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS, metadata[0]);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS, metadata[0]);
 		
 		
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS, metadata[1]);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS, metadata[1]);
 		
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS, metadata[2]);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS, metadata[2]);
 		
 		
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS, metadata[3]+RandomStringUtils.randomAlphabetic(3));
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS, metadata[3]+RandomStringUtils.randomAlphabetic(3));
 	}
 	
 	
@@ -311,8 +328,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate Edit update Button
 	 * @throws Exception, When user not able to click update button
 	 */
-	public static void clickEditUpdate() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+	public void clickEditUpdate() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS.toString()), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS.toString()), 90);
 	}
@@ -323,8 +340,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate profile metadata
 	 * @throws Exception, When data not matching
 	 */
-	public static void validateProfileMetadata() throws Exception {
-		String country=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(0).getText();
+	public void validateProfileMetadata() throws Exception {
+		String country=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(0).getText();
 		System.out.println("country-->"+country);
 		if(country.contains(metadata[3])){
 			throw new Exception("profile meta data not updated");
@@ -335,8 +352,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click profile comment tab
 	 * @throws Exception, comment tab is not click able
 	 */
-	public static void clickCommentsTab() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
+	public void clickCommentsTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -344,8 +361,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click profile Following tab
 	 * @throws Exception, Following tab is not click able
 	 */
-	public static void clickFollowingTab() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
+	public void clickFollowingTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -353,8 +370,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click profile Followers tab
 	 * @throws Exception, Followers tab is not click able
 	 */
-	public static void clickFollowersTab() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
+	public void clickFollowersTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -362,8 +379,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click Posts Following tab
 	 * @throws Exception, Posts tab is not click able
 	 */
-	public static void clickPostsTab() throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+	public void clickPostsTab() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -372,16 +389,16 @@ public class ProfilePage  extends TestBase {
 	 * Method for validate Like own profile comment
 	 * @throws Exception, comment like not done
 	 */
-	public static void commentAppreciation() throws Exception {
+	public void commentAppreciation() throws Exception {
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
-		String tooltipBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
-		String countBeforeAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
+		String tooltipBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+		String countBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		//System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
 		//System.out.println("Appreciate count-->"+countBeforeAppreciate);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
 		BrowserWaits.waitTime(4);
-		String tooltipAfterAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
-		String countAfterAppreciate=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
+		String tooltipAfterAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+		String countAfterAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		//System.out.println("Appreciate tooltip after-->"+tooltipAfterAppreciate);
 		//System.out.println("Appreciate count after-->"+countAfterAppreciate);
 		if(tooltipBeforeAppreciate.equalsIgnoreCase(tooltipAfterAppreciate) && countBeforeAppreciate.equalsIgnoreCase(countAfterAppreciate)){
@@ -393,8 +410,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click profile Following tab
 	 * @throws Exception, Following tab is not click able
 	 */
-	public static int getFollowingCount() throws Exception {
-		String followingCountBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS).getText();
+	public  int getFollowingCount() throws Exception {
+		String followingCountBefore=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS).getText();
 		String followingCount[]=followingCountBefore.split(" ");
 		followingBefore=Integer.parseInt(followingCount[1]);
 		return followingBefore;
@@ -405,7 +422,7 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate Following count
 	 * @throws Exception, validation fails
 	 */
-	public static void validateFollowingCount() throws Exception {
+	public void validateFollowingCount() throws Exception {
 		int followingAfter=getFollowingCount();
 		if((followingBefore>followingAfter)||(followingBefore<followingAfter)) {
 			throw new Exception("Following count should increase or decrease");
@@ -417,11 +434,11 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to click on Publish A Post button in the profile page
 	 */
-	public static void clickOnPublishPostButton() {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+	public void clickOnPublishPostButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
 				.click();
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
 	}
 
 	/**
@@ -429,9 +446,9 @@ public class ProfilePage  extends TestBase {
 	 * @param expErrorMsg
 	 * @return
 	 */
-	public static boolean validatePostErrorMessage(String expErrorMsg) {
+	public  boolean validatePostErrorMessage(String expErrorMsg) {
 		boolean result = false;
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
 		String actErrorMessage = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString()))
 				.getText();
@@ -446,9 +463,9 @@ public class ProfilePage  extends TestBase {
 	 * @param tilte
 	 * @throws InterruptedException 
 	 */
-	public static void enterPostTitle(String tilte) throws InterruptedException {
+	public void enterPostTitle(String tilte) throws InterruptedException {
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()), 90);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))
@@ -460,9 +477,9 @@ public class ProfilePage  extends TestBase {
 	 * @param tilte
 	 * @throws Exception 
 	 */
-	public static void enterPostContent(String content) throws Exception {
+	public void enterPostContent(String content) throws Exception {
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
@@ -474,9 +491,9 @@ public class ProfilePage  extends TestBase {
 	 * Method to click on publish button in post creation modal
 	 * @throws Exception 
 	 */
-	public static void clickOnPostPublishButton() throws Exception {
-		//BrowserWaits.waitTime(5);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
+	public void clickOnPostPublishButton() throws Exception {
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(5);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
 				.click();
 		
@@ -485,8 +502,8 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to click on cancel button in post creation modal
 	 */
-	public static void clickOnPostCancelButton() {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+	public void clickOnPostCancelButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
 				.click();
 	}
@@ -496,10 +513,10 @@ public class ProfilePage  extends TestBase {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public static int getPostsCount() throws InterruptedException {
+	public  int getPostsCount() throws InterruptedException {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString()))
 						.getText());
@@ -507,10 +524,10 @@ public class ProfilePage  extends TestBase {
 	}
 	
 	
-	public static int getDraftPostsCount() throws InterruptedException {
+	public  int getDraftPostsCount() throws InterruptedException {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
 		int count = Integer.parseInt(
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 						.getText());
@@ -522,12 +539,12 @@ public class ProfilePage  extends TestBase {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public static int getCommentsCount() throws Exception {
-		//BrowserWaits.waitTime(10);
+	public  int getCommentsCount() throws Exception {
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(10);
 		waitForAjax(ob);
 		int count = 0;
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS);
-		String commentsCount=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS).getText();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS);
+		String commentsCount=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS).getText();
 		if(commentsCount.contains(",")) {
 			count=Integer.parseInt(commentsCount.replace(",", ""));
 		}
@@ -542,9 +559,9 @@ public class ProfilePage  extends TestBase {
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
 	 */
-	public static String getFirstPostTitle() {
+	public  String getFirstPostTitle() {
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		String postTitle = ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
 				.getText();
@@ -556,8 +573,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Click profile Followers tab
 	 * @throws Exception, Following tab is not click able
 	 */
-	public static int getFollowersCount() throws Exception {
-		String followerCountBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS).getText();
+	public  int getFollowersCount() throws Exception {
+		String followerCountBefore=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS).getText();
 		String followerCount[]=followerCountBefore.split(" ");
 		followersBefore=Integer.parseInt(followerCount[1]);
 		System.out.println("FOLLOWERSBEFORE-->"+followersBefore);
@@ -568,7 +585,7 @@ public class ProfilePage  extends TestBase {
 	 * Method for Validate Followers count
 	 * @throws Exception, validation fails
 	 */
-	public static void validateFollowersCount() throws Exception {
+	public void validateFollowersCount() throws Exception {
 		int followerAfter=getFollowersCount();
 		if((followingBefore == followerAfter)) {
 			throw new Exception("Followers count should increase or decrease while other follow/unfollow");
@@ -579,8 +596,8 @@ public class ProfilePage  extends TestBase {
 	 * Method for Add Topics into Interest and Skills
 	 * @throws Exception, unable to add topic
 	 */
-	public static void addTopicForInterestAndSkills(String topics) throws Exception {
-		List<WebElement> addedTopics=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+	public void addTopicForInterestAndSkills(String topics) throws Exception {
+		List<WebElement> addedTopics=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
 		if(addedTopics.size()>0) {
 			for(WebElement addedTopic:addedTopics) {
 				addedTopic.click();
@@ -589,41 +606,41 @@ public class ProfilePage  extends TestBase {
 		}
 		String topicLists[]=topics.split("\\|");
 		for(String topicList:topicLists) {
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, topicList);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
-		List<WebElement> topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, topicList);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		List<WebElement> topicTypeahead=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		BrowserWaits.waitTime(2);
-		BrowserAction.jsClick(topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))));
+		pf.getBrowserActionInstance(ob).jsClick(topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))));
 		//topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
 		BrowserWaits.waitTime(2);
 		}
 		
-		List<WebElement> newlyAddedTopics=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+		List<WebElement> newlyAddedTopics=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
 		if(!(newlyAddedTopics.size() == topicLists.length)) {
 			throw new Exception("Topics not added for Interests and Skills");
 		}
 	}
 	
-public static int getLengthOfTitleFromPostCreationModal() {
+public  int getLengthOfTitleFromPostCreationModal() {
 		
 		int count=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value").length();
 		return count;
 	}
 
-	public static void clickOnFirstPost(){
+	public void clickOnFirstPost(){
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		jsClick(ob,ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0));
 	}
 
-	public static boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) throws InterruptedException   {
+	public  boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) throws InterruptedException   {
 		BrowserWaits.waitTime(4);
 		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute("value");
 		
 		return (!title.contains(profanityWord) && title.contains("**"));
 	}
 	
-public static boolean validateProfanityWordsMaskedForPostContent(String profanityWord) throws InterruptedException {
+public  boolean validateProfanityWordsMaskedForPostContent(String profanityWord) throws InterruptedException {
 		BrowserWaits.waitTime(4);
 		String title=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString())).getText();
 		
@@ -634,11 +651,11 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 * Method to click on publish button in post creation modal
 	 * @throws Exception 
 	 */
-	public static void clickPublishAPost() throws Exception {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
-		BrowserWaits.waitUntilText("Publish A Post","Give an update, pose a question, share an interesting find.");
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+	public void clickPublishAPost() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Publish A Post","Give an update, pose a question, share an interesting find.");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 	}
 	
 	
@@ -646,18 +663,18 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 * Method to click on publish button cancel button
 	 * @throws Exception 
 	 */
-	public static void clickPublishAPostCancel() throws Exception {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
-		BrowserAction.click((OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS));
-		BrowserWaits.waitUntilNotText("Publish A Post","Give an update, pose a question, share an interesting find.");
+	public void clickPublishAPostCancel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		pf.getBrowserActionInstance(ob).click((OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS));
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Publish A Post","Give an update, pose a question, share an interesting find.");
 	}
 
 	/**
 	 * Method to validate Post Title
 	 * @throws Exception, When Validation not done 
 	 */
-	public static void validatePostTitle(String postTitle) throws Exception {
+	public void validatePostTitle(String postTitle) throws Exception {
 		String enteredPost=getFirstPostTitle();
 		if(!(enteredPost.equalsIgnoreCase(postTitle))) {
 			throw new Exception("Post is not published");
@@ -670,7 +687,7 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 * Method to validate Published post counts
 	 * @throws Exception, When Validation not done 
 	 */
-	public static void validatePostCount(int postCount) throws Exception {
+	public void validatePostCount(int postCount) throws Exception {
 		int totPosts=getPostsCount();
 		if(totPosts == postCount){
 			throw new Exception("Post count not getting updated");
@@ -682,12 +699,12 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 * Method for get Profile information
 	 * @throws Exception, When unable to get info
 	 */
-	public static List<String> getProfileTitleAndMetadata() throws Exception {
+	public  List<String> getProfileTitleAndMetadata() throws Exception {
 		List<String> profileInfo= new ArrayList<String>();
-		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText());
-		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
-		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
-		profileInfo.add(BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
+		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText());
+		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
+		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
+		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
 		return profileInfo;
 	}
 	
@@ -696,24 +713,24 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
 	 */
-	public static void  clickFirstPostTitle() throws Exception {
+	public void  clickFirstPostTitle() throws Exception {
 		waitForAjax(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).click();
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).click();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 	}
 	
 	/**
 	 * Method for validate profile posts, posts are more than 10, by default 10 posts should display
 	 * @throws Exception, When Validation not done
 	 */
-	public static void  validateProfilePostTab() throws Exception {
+	public void  validateProfilePostTab() throws Exception {
 		int totPosts=getPostsCount();
 		if(totPosts>=10){
-			List<WebElement> postsTimeStamp=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS);
-			List<WebElement> postLike=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
-			List<WebElement> postComments=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
-			List<WebElement> postWatch=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+			List<WebElement> postsTimeStamp=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS);
+			List<WebElement> postLike=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH);
+			List<WebElement> postComments=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH);
+			List<WebElement> postWatch=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
 			if(!(postsTimeStamp.size()==10 && postLike.size() ==10 && postComments.size() == 10 && postWatch.size()==10)){
 				throw new Exception("Post's count by default should be 10 if Post tab having more than 10 posts");
 			}
@@ -723,22 +740,22 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	}
 	
 	
-	public static void addPostToWatchlist() throws Exception {
-		watchTextBefore=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
-		//BrowserWaits.waitTime(2);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+	public void addPostToWatchlist() throws Exception {
+		watchTextBefore=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS.toString()), 180);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
 		BrowserWaits.waitTime(2);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
 		BrowserWaits.waitTime(2);
 	}
 	
 	
-	public static void postWatchLabelValidation() throws Exception {
-		String watchTextAfter=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
+	public void postWatchLabelValidation() throws Exception {
+		String watchTextAfter=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS).findElement(By.tagName("span")).getText();
 		System.out.println("watch text before-->"+watchTextBefore);
 		System.out.println("watch text after-->"+watchTextAfter);
 		if(watchTextBefore.equalsIgnoreCase(watchTextAfter)){
@@ -746,11 +763,11 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 		}
 	}
 	
-public static void addExternalLinkToPostContent(String url) throws Exception{
+public void addExternalLinkToPostContent(String url) throws Exception{
 		
 		BrowserWaits.waitTime(5);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
 		BrowserWaits.waitTime(5);
 		Alert alert=ob.switchTo().alert();
 		alert.sendKeys(url);
@@ -758,8 +775,8 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		BrowserWaits.waitTime(5);
 	}
 
-	public static boolean validateProfileDetails(List<String> details) throws Exception {
-		//BrowserWaits.waitTime(6);
+	public  boolean validateProfileDetails(List<String> details) throws Exception {
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(6);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		List<String> expected=getProfileTitleAndMetadata();
@@ -770,27 +787,27 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	/*
 	* Method to click on cancel button in post creation modal
 	 */
-	public static void clickOnPostCancelDiscardButton() {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH);
+	public void clickOnPostCancelDiscardButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH);
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH.toString()))
 				.click();
 	}
 
-	public static void clickOnPostCancelKeepDraftButton() {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
+	public void clickOnPostCancelKeepDraftButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString()))
 				.click();
 	}
 	
-	public static void clickOnDraftPostsTab() {
+	public void clickOnDraftPostsTab() {
 		waitForPageLoad(ob);	
-		BrowserWaits.waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
 	}
 	
-	public static boolean validatePublishButton() {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
+	public  boolean validatePublishButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 		
 		return 	ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString())).isEnabled();
 		
@@ -800,21 +817,21 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for Validate profile Primary Institution typeahead options should display while enter min 2 characters
 	 * @throws Exception, When Typeahead options not occured
 	 */
-	public static void primaryInstitutionTypeaheadOptions(String oneChar,String twoChar) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+	public void primaryInstitutionTypeaheadOptions(String oneChar,String twoChar) throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
 		//enter single character check typeahead options should not display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,oneChar);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,oneChar);
 		BrowserWaits.waitTime(2);
-		BrowserWaits.waitUntilElementIsNotDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
 		
 		//enter two characters check typeahead options should  display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,twoChar);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,twoChar);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
 		BrowserWaits.waitTime(4);
-		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
+		List<WebElement> piTypeaheads=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
 		if(!(piTypeaheads.size()>0))
 			throw new Exception("Primary Instituion Type ahead options are not displayed while enter two characters");
 			
@@ -823,15 +840,15 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for Validate profile Primary Institution
 	 * @throws Exception, When Typeahead options not occured
 	 */
-	public static void selectProfilePITypeAhead(String typeAheadOption) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,typeAheadOption);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+	public void selectProfilePITypeAhead(String typeAheadOption) throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,typeAheadOption);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
 		BrowserWaits.waitTime(4);
-		List<WebElement> piTypeaheads=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
+		List<WebElement> piTypeaheads=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
 		for(WebElement typeAhead:piTypeaheads) {
 			if(StringUtils.containsIgnoreCase(typeAhead.getText(),typeAheadOption.trim()))
 			{
@@ -843,9 +860,9 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		clickEditUpdate();
 	}
 	
-	public static boolean validateProfilePI(String typeAheadOption) throws Exception {
-		//BrowserWaits.waitTime(6);
-		String actualPI=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
+	public  boolean validateProfilePI(String typeAheadOption) throws Exception {
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(6);
+		String actualPI=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText();
 		return (StringUtils.containsIgnoreCase(actualPI,typeAheadOption));
 	}
 	
@@ -853,14 +870,14 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for Select Country from predefined type ahead list
 	 * @throws Exception, When Type ahead options not occurred
 	 */
-	public static void selectProfileCountryTypeAhead(String countyTypeahead,String fullCountry) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,countyTypeahead);
+	public void selectProfileCountryTypeAhead(String countyTypeahead,String fullCountry) throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,countyTypeahead);
 		BrowserWaits.waitTime(4);
-		List<WebElement> countyTypeaheads=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
+		List<WebElement> countyTypeaheads=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
 		for(WebElement typeAhead:countyTypeaheads) {
 			if(typeAhead.getText().equalsIgnoreCase(fullCountry))
 			{
@@ -878,9 +895,9 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean validateProfileCountry(String country) throws Exception {
-		//BrowserWaits.waitTime(6);
-		String actualCountry=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS).getText();
+	public  boolean validateProfileCountry(String country) throws Exception {
+		//BrowserWaits.getBrowserWaitsInstance(ob).waitTime(6);
+		String actualCountry=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COUNTRY_METADATA_CSS).getText();
 		return (actualCountry.trim().equalsIgnoreCase(country));
 	} 
 	
@@ -889,23 +906,23 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for Validate profile Country typeahead options should display while enter min 2 characters
 	 * @throws Exception, When Typeahead options not occurred
 	 */
-	public static void countryTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+	public void countryTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
 		//enter single character check typeahead options should not display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,oneChar);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,oneChar);
 		BrowserWaits.waitTime(2);
-		List<WebElement> countryTyeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
+		List<WebElement> countryTyeahead=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
 		if(countryTyeahead.size()>0){
 			throw new Exception("Country typeahead options should display while enter min 2 chars");
 		}
 
 		//enter two characters check typeahead options should  display
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,twoChar);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,twoChar);
 		BrowserWaits.waitTime(4);
-		List<WebElement> piTypeaheads=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
+		List<WebElement> piTypeaheads=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1).findElements(By.tagName("li"));
 		if(!(piTypeaheads.size()>0))
 			throw new Exception("Country Type ahead options are not displayed while enter two characters");
 			
@@ -915,18 +932,18 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for Validate topic typeahead options should display while enter min 2 characters
 	 * @throws Exception, When Typeahead options not displayed
 	 */
-	public static void topicTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, oneChar);
+	public void topicTypeaheadOptionsMinChars(String oneChar,String twoChar) throws Exception {
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, oneChar);
 		//System.out.println("topic typeahed options-->"+topicTypeahead.size());
-		topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		topicTypeahead=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		if(topicTypeahead.size()>0){
 			throw new Exception("topic typeahead options should display only while enter min 2 characters");
 		}
 		
-		BrowserAction.clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
-		BrowserAction.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, twoChar);
-		topicTypeahead=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, twoChar);
+		topicTypeahead=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		//System.out.println("topic typeahed options-->"+topicTypeahead.size());
 		if(!(topicTypeahead.size()>0)){
 			throw new Exception("topic typeahead options should display while enter min 2 characters");
@@ -937,8 +954,8 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for validate profile tab focus, tab focus should be POST tab only
 	 * @throws Exception, When tab focus on other than POST tab
 	 */
-	public static void profileTabFocus() throws Exception {
-		List<WebElement> profileTabs=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_CSS);
+	public void profileTabFocus() throws Exception {
+		List<WebElement> profileTabs=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_CSS);
 		String tabFocus=profileTabs.get(0).getAttribute("class");
 		if(!tabFocus.contains("active")) {
 			throw new Exception("Tab focus should be on POST Tab");
@@ -946,14 +963,14 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	
-	public static void postTabScroll() throws Exception {
+	public void postTabScroll() throws Exception {
 		int totalPosts=getPostsCount();
 		if(totalPosts>10){
 			profileTabInfiniteScroll("Post");
 		}
 	}
 	
-	public static void commentsTabScroll() throws Exception {
+	public void commentsTabScroll() throws Exception {
 		clickCommentsTab();
 		int totalComments=getCommentsCount();
 		if(totalComments>10){
@@ -961,7 +978,7 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		}
 	}
 	
-	public static void followersTabScroll() throws Exception {
+	public void followersTabScroll() throws Exception {
 		clickFollowersTab();
 		int totalFollowers=getFollowersCount();
 		if(totalFollowers>10){
@@ -969,7 +986,7 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		}
 	}
 	
-	public static void followingTabScroll() throws Exception {
+	public void followingTabScroll() throws Exception {
 		clickFollowingTab();
 		int totalFollowing=getFollowingCount();
 		if(totalFollowing>10){
@@ -981,12 +998,12 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for validate profile tab focus, tab focus should be POST tab only
 	 * @throws Exception, When tab focus on other than POST tab
 	 */
-	public static void profileTabInfiniteScroll(String tabName) throws Exception {
+	public void profileTabInfiniteScroll(String tabName) throws Exception {
 		if(tabName.contains("Followers")||tabName.contains("Following")){
-			profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+			profileTabsRecords=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
 		}
 		else {
-			profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
+			profileTabsRecords=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		}
 		int beforeScroll=profileTabsRecords.size();
 		((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
@@ -994,10 +1011,10 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		 BrowserWaits.waitTime(4);
 		 
 		 if(tabName.contains("Followers")||tabName.contains("Following")){
-				profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+				profileTabsRecords=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
 			}
 			else {
-				profileTabsRecords=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
+				profileTabsRecords=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 			}
 		 
 		 //System.out.println("before scroll-->"+beforeScroll);
@@ -1008,8 +1025,8 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		 }
 	}
 	
-	public static int getPostLikeCount() throws Exception {
-		String likeCount=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).getText();
+	public  int getPostLikeCount() throws Exception {
+		String likeCount=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).getText();
 		return Integer.parseInt(likeCount);
 	}
 	
@@ -1017,12 +1034,12 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method to validate Post TimeStamp
 	 * @throws Exception, When Post doesn't have any title
 	 */
-	public static void validatePostTimeStamp() throws Exception {
+	public void validatePostTimeStamp() throws Exception {
 		DateFormat dateFormat = new SimpleDateFormat("dd MMMMMMMM YYYY");
 		//get current date time with Date()
 		Date date = new Date();
 		String current_date=dateFormat.format(date).toString();
-		String postCreationDate = BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH)
+		String postCreationDate = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH)
 				.getText();
 		System.out.println("current date-->"+current_date);
 		System.out.println("post creation date-->"+postCreationDate);
@@ -1032,10 +1049,10 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 
-	public static void deleteDraftPost(String postString) {
+	public void deleteDraftPost(String postString) {
 
 		waitForAjax(ob);
-		BrowserWaits.waitForElementTobeVisible(ob,
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 						.replaceAll("TITLE", postString)),
 				30);
@@ -1043,18 +1060,18 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 				.replaceAll("TITLE", postString))).click();
 		
-		BrowserWaits.waitForElementTobeVisible(ob,
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString()),
 				30);
 
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS.toString())).click();
 	}
 
-	public static List<String> getAllDraftPostTitle() {
+	public  List<String> getAllDraftPostTitle() {
 		List<String> title=new ArrayList<String>();
 		ob.navigate().refresh();
 		waitForAjax(ob);
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 60);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 60);
 		List<WebElement>  drafts= ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()));
 		for(WebElement we:drafts){
@@ -1068,9 +1085,9 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method for validate comments time stamp
 	 * @throws Exception, When comments doesn't have any time stamp
 	 */
-	public static void commentsTabTimeStamp() throws Exception {
+	public void commentsTabTimeStamp() throws Exception {
 		clickCommentsTab();
-		List<WebElement> commentTs=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS);
+		List<WebElement> commentTs=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS);
 		if(!(commentTs.size()>0)){
 			throw new Exception("None of the comments are having time stamp");
 		}
@@ -1084,23 +1101,23 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	 * Method to validate Other profiles Watchlist tab
 	 * @throws Exception, When Post doesn't have any title
 	 */
-	public static void otherProfileWatchlistTab() throws Exception {
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
-		String watchlistTabText=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS).getText();
+	public void otherProfileWatchlistTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+		String watchlistTabText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS).getText();
 		//System.out.println("watchlist tab text-->"+watchlistTabText);
 		if(!(watchlistTabText.contains("Watchlists"))){
 			throw new Exception("Other Profiles watchlist tab should be visible");
 		}
 	}
 	
-	public static int getPostCommentCount() throws Exception {
-		String commentCount=BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).get(1).getText();
+	public  int getPostCommentCount() throws Exception {
+		String commentCount=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).get(1).getText();
 		return Integer.parseInt(commentCount);
 	}
 	
-	public static void deleteDraftPostFromPostModal(String postString) {
+	public void deleteDraftPostFromPostModal(String postString) {
 		waitForAjax(ob);
-		BrowserWaits.waitForElementTobeVisible(ob,
+		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
 						.replaceAll("TITLE", postString)),
 				30);
@@ -1113,10 +1130,10 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 
-	public static boolean isDraftPostTabDispalyed() {
+	public  boolean isDraftPostTabDispalyed() {
 		try{
 		waitForAjax(ob);
-			BrowserWaits.waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 30);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 30);
 		return ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString())).isDisplayed();
 		}catch(Exception e){
 			return false;

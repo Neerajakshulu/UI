@@ -10,16 +10,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
-import util.ErrorUtil;
-import util.TestUtil;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
+import util.ErrorUtil;
+import util.TestUtil;
 
 public class TestCase_F16 extends TestBase  {
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 		// 1--->PASS
 		// 2--->FAIL
@@ -58,8 +58,8 @@ public class TestCase_F16 extends TestBase  {
 				clearCookies();
 				ob.navigate().to(host);
 				//Logging in with User2
-				LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-				LoginTR.clickLogin();
+				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
 				Thread.sleep(8000);
 				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Posts"))));
 				Thread.sleep(6000);

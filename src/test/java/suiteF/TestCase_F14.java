@@ -12,19 +12,18 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.ProfilePage;
-import suiteC.LoginTR;
-import util.ErrorUtil;
-import util.OnePObjectMap;
-import util.TestUtil;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
+import suiteC.LoginTR;
+import util.ErrorUtil;
+import util.TestUtil;
 
 public class TestCase_F14 extends TestBase {
 
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 		// 1--->PASS
 		// 2--->FAIL
@@ -63,22 +62,22 @@ public class TestCase_F14 extends TestBase {
 				JavascriptExecutor jse = (JavascriptExecutor) ob;
 				ob.navigate().to(host);
 				//Logging in with User2
-				LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-				LoginTR.clickLogin();
+				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 				ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-				ProfilePage.enterPostTitle(postString);
+				pf.getProfilePageInstance(ob).enterPostTitle(postString);
 				test.log(LogStatus.INFO, "Entered Post Title");
-				ProfilePage.enterPostContent(postString);
+				pf.getProfilePageInstance(ob).enterPostContent(postString);
 				test.log(LogStatus.INFO, "Entered Post Content");
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 				test.log(LogStatus.INFO, "Published the post");
 				Thread.sleep(3000);
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				
 				//Login using user1 and like the post
-				LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-				LoginTR.clickLogin();
+				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -94,11 +93,11 @@ public class TestCase_F14 extends TestBase {
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("post_like_button")), 30);
 				ob.findElement(By.xpath(OR.getProperty("post_like_button"))).click();
 				Thread.sleep(3000);
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				
 				//Login using user2 and check for the notification
-				LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-				LoginTR.clickLogin();
+				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
 				Thread.sleep(7000);
 				String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
 				System.out.println(text);

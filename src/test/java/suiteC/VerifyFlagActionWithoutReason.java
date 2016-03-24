@@ -2,11 +2,8 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -17,14 +14,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PostRecordViewPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class VerifyFlagActionWithoutReason extends TestBase {
 	private static final String PROFILE_NAME = "amneet singh";
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -69,9 +66,9 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			
-			PostRecordViewPage.searchForArticleWithComments();
-			PostRecordViewPage.loadComments();
-			PostRecordViewPage.clickOnFlagOfOtherUserComments(PROFILE_NAME);
+			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			pf.getpostRVPageInstance(ob).loadComments();
+			pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
 		
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
@@ -93,7 +90,7 @@ public class VerifyFlagActionWithoutReason extends TestBase {
 
 			}
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

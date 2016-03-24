@@ -2,18 +2,27 @@ package pages;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import base.TestBase;
-import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class Watchlist extends TestBase {
+	
+	PageFactory pf;
+	public Watchlist(WebDriver ob){
+		this.ob=ob;
+		pf=new PageFactory();
+		
+	}
 
-	public static void clearWatchlist() throws Exception {
-		HeaderFooterLinksPage.clickOnWatchLink();
-		List<WebElement> watchLists = BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS);
+	
+
+	public  void clearWatchlist() throws Exception {
+		pf.getHFPageInstance(ob).clickOnWatchLink();
+		List<WebElement> watchLists = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS);
 		if (watchLists.size() > 0) {
 			for (WebElement watchList : watchLists) {
 				watchList.click();
@@ -22,8 +31,8 @@ public class Watchlist extends TestBase {
 		}
 	}
 	
-	public static void validateWatchlist(String watchlist) throws Exception {
-		String expWatchlistPost=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_CSS).getText();
+	public  void validateWatchlist(String watchlist) throws Exception {
+		String expWatchlistPost=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_WATCHLIST_CSS).getText();
 		//System.out.println("postwatch-->"+expWatchlistPost);
 		if(!expWatchlistPost.equalsIgnoreCase(watchlist)){
 			throw new Exception("Post is not adding into my watchlist");

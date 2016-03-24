@@ -11,20 +11,18 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-
 public class VerifyEditDraftPostFromModalWindow extends TestBase {
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -66,12 +64,12 @@ public class VerifyEditDraftPostFromModalWindow extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 
-			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Open Post Modal by clicking on Publish a post ");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString())).click();
 			test.log(LogStatus.INFO, "Click on link for drafts");
@@ -81,14 +79,14 @@ public class VerifyEditDraftPostFromModalWindow extends TestBase {
 			System.out.println(postTitleBeforeEditing);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString())).click();
 			
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Edited Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Edited Post Content");
 			
-			ProfilePage.clickOnPostCancelButton();
-			ProfilePage.clickOnPostCancelKeepDraftButton();
-		//	ProfilePage.clickOnDraftPostsTab();
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
+		//	pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitleAfterEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);

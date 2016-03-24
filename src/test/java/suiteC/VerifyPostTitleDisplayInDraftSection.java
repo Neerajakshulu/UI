@@ -10,19 +10,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-
 public class VerifyPostTitleDisplayInDraftSection extends TestBase {
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -63,12 +61,12 @@ public class VerifyPostTitleDisplayInDraftSection extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 
-			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"),CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnDraftPostsTab();
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			test.log(LogStatus.INFO, "Checking if draft post title is displayed");
 			boolean isPostTitleDisplayed=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString())).isDisplayed();
 			System.out.println(isPostTitleDisplayed);

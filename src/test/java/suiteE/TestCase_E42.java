@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
@@ -88,7 +88,7 @@ public class TestCase_E42 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
 					30);
 
-			LoginTR.logOutApp();
+			new PageFactory().getLoginTRInstance(ob).logOutApp();
 
 			// 3)Login as user1 and comment on some article
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);

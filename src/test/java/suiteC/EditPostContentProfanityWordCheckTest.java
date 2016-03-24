@@ -14,9 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -30,6 +28,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -76,17 +75,17 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
-			ProfilePage.clickOnFirstPost();
-			PostRecordViewPage.clickOnEditButton();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			pf.getpostRVPageInstance(ob).clickOnEditButton();
 			test.log(LogStatus.INFO, "Initiated post edit action");
 			} catch (Throwable t) {
 			t.printStackTrace();
@@ -108,13 +107,13 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
 	public void testMinMaxLengthValidation(String profanityWord,String errorMessage) throws Exception {
-	ProfilePage.enterPostTitle("Test");
+	pf.getProfilePageInstance(ob).enterPostTitle("Test");
 	test.log(LogStatus.INFO, "Entered Post title");
-	ProfilePage.enterPostContent(profanityWord);
+	pf.getProfilePageInstance(ob).enterPostContent(profanityWord);
 	test.log(LogStatus.INFO, "Entered profanity word in Post Content : "+profanityWord);
-	ProfilePage.clickOnPostPublishButton();
+	pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 	try {
-		Assert.assertTrue(ProfilePage.validatePostErrorMessage(errorMessage));
+		Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
 		test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post content");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post content");
@@ -127,7 +126,7 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	}
 		
 	try {
-		Assert.assertTrue(ProfilePage.validateProfanityWordsMaskedForPostContent(profanityWord));
+		Assert.assertTrue(pf.getProfilePageInstance(ob).validateProfanityWordsMaskedForPostContent(profanityWord));
 		test.log(LogStatus.PASS, "Profanity words are masked for post content");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Profanity words are not masked for post content");
@@ -142,8 +141,8 @@ public class EditPostContentProfanityWordCheckTest extends TestBase{
 	
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void logOut() throws Exception{
-		ProfilePage.clickOnPostCancelButton();
-		ProfilePage.clickOnPostCancelDiscardButton();
+		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 		logout();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.ProfilePage;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -35,7 +34,7 @@ public class OtherProfileWatchlistTabTest extends TestBase {
 	static String followAfter=null;
 	static boolean isFollowEnable=false;
 	static boolean isFollowDisable=false;
-	
+	PageFactory pf;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -75,9 +74,11 @@ public class OtherProfileWatchlistTabTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -97,12 +98,12 @@ public class OtherProfileWatchlistTabTest extends TestBase {
 	public void getOtherProfileWatchlistTab(String profile) throws Exception  {
 				try {
 					test.log(LogStatus.INFO,"go to other users profile page");
-					SearchProfile.enterSearchKeyAndClick(profile);
-					SearchProfile.clickPeople();
-					ProfilePage.clickProfile();
+					pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(profile);
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getProfilePageInstance(ob).clickProfile();
 					test.log(LogStatus.INFO,"Validate Watchlist tab exist for other profiles");
-					ProfilePage.otherProfileWatchlistTab();
-					LoginTR.logOutApp();
+					pf.getProfilePageInstance(ob).otherProfileWatchlistTab();
+					pf.getLoginTRInstance(ob).logOutApp();
 					test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution ends ");
 					closeBrowser();
 

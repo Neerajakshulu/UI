@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -14,10 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -27,7 +23,7 @@ public class ShareOwnPostOnLI extends TestBase{
 	
 	
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -68,19 +64,19 @@ public class ShareOwnPostOnLI extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
 			
-			ProfilePage.clickOnFirstPost();
-			PostRecordViewPage.clickOnLinkedInUnderShareMenu();
-			PostRecordViewPage.shareOnLI(liusername, lipassword);
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
+			pf.getpostRVPageInstance(ob).shareOnLI(liusername, lipassword);
 			BrowserWaits.waitTime(6);
 			logout();
 			closeBrowser();

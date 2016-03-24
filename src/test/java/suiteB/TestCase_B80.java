@@ -2,32 +2,22 @@ package suiteB;
 
 
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -77,7 +67,7 @@ public class TestCase_B80 extends TestBase{
 			ob.navigate().to(host);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			BrowserWaits.waitUntilText("Sign in with Project Neon");
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();

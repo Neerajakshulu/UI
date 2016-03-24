@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,10 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -25,6 +21,7 @@ public class VerifyPostRecordDetails extends TestBase{
 
 
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,13 +64,13 @@ public class VerifyPostRecordDetails extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			List<String> details=SearchResultsPage.getAuthorDetailsOfPost();
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			List<String> details=pf. getSearchResultsPageInstance(ob).getAuthorDetailsOfPost();
 			String postTitle=details.get(0);
 			details.remove(0);
 			try{
-			PostRecordViewPage.validatePostTitleAndProfileMetadata(postTitle, details);
+			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, details);
 			test.log(LogStatus.PASS, "Profile data displayed for posts in search results page and record view page are matching");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Profile data displayed for posts in search results page and record view page are not matching");
@@ -85,9 +82,9 @@ public class VerifyPostRecordDetails extends TestBase{
 
 			}
 			
-			PostRecordViewPage.clickOnAuthorName();
+			pf.getpostRVPageInstance(ob).clickOnAuthorName();
 		try {
-				Assert.assertTrue(ProfilePage.validateProfileDetails(details));
+				Assert.assertTrue(pf.getProfilePageInstance(ob).validateProfileDetails(details));
 				test.log(LogStatus.PASS, "Profile data displayed for posts in search results page and profile page are matching");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Profile data displayed for posts in search results page and profile page are not matching");

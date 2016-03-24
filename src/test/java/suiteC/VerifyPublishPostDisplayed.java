@@ -3,7 +3,6 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -11,19 +10,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-
 public class VerifyPublishPostDisplayed extends TestBase{
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -64,8 +61,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			//ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
 
-			LoginTR.enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			
 			//checking for articles

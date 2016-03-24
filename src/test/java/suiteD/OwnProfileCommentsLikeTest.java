@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -26,6 +25,7 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -68,9 +68,11 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					 pf = new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Login not done");
 					status=2;//excel
@@ -88,12 +90,12 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 	public void validateOwnProfileCommentsLike() throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"validating user own profile comments appreciation");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.clickCommentsTab();
-				ProfilePage.commentAppreciation();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).clickCommentsTab();
+				pf.getProfilePageInstance(ob).commentAppreciation();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

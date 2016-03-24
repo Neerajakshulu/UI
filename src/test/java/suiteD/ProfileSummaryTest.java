@@ -14,15 +14,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
+import pages.PageFactory;
 import suiteC.LoginTR;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class ProfileSummaryTest extends TestBase {
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,12 +66,12 @@ public class ProfileSummaryTest extends TestBase {
 			ob.navigate().to(host);
 			login();
 			//waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_dropdown_css")), 90);
-			HeaderFooterLinksPage.clickProfileImage();
+			pf.getHFPageInstance(ob).clickProfileImage();
 			//ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
-			BrowserWaits.waitUntilText("Profile");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile");
 			ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
 			//Thread.sleep(4000);
-			BrowserAction.scrollingPageUp();
+			pf.getBrowserActionInstance(ob).scrollingPageUp();
 			
 			try {
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_add_summary_css")), 30);
@@ -109,7 +108,7 @@ public class ProfileSummaryTest extends TestBase {
 
 			}
 
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			closeBrowser();
 

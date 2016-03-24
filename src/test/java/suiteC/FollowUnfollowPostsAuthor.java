@@ -2,8 +2,6 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -14,10 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -26,6 +21,7 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 	
 	
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,17 +63,17 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
 			
 			
 			
 			try {
-				Assert.assertTrue(PostRecordViewPage.IsFollowOrUnfollowButtonDispayed());
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).IsFollowOrUnfollowButtonDispayed());
 				test.log(LogStatus.PASS, "Follow/Unfollow button is displayed in view post record page");
-				PostRecordViewPage.validateFollowOrUnfollow();
-				PostRecordViewPage.validateFollowOrUnfollow();
+				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
+				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
 				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Follow/Unfollow validation failed in post record view page");

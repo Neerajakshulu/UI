@@ -1,36 +1,25 @@
 package suiteF;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class TestCase_F4 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -72,8 +61,8 @@ public class TestCase_F4 extends TestBase {
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -89,13 +78,13 @@ public class TestCase_F4 extends TestBase {
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(5000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 2)Login with user1,like the comment and logout
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1,CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("apps")), 30);
 
 			ob.navigate().to(document_url);
@@ -108,15 +97,15 @@ public class TestCase_F4 extends TestBase {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")),30);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
 			Thread.sleep(1000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 3)Login with user2 again and verify that he receives a correct
 			// notification
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(10000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationForLike")), 30);
 

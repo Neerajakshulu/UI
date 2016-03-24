@@ -2,13 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -18,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -72,7 +68,7 @@ public class TestCase_B78 extends TestBase {
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			BrowserWaits.waitUntilText("Sign in with Project Neon");
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();

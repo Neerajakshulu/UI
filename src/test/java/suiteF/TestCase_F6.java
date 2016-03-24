@@ -8,16 +8,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_F6 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -59,9 +59,9 @@ public class TestCase_F6 extends TestBase {
 			System.out.println(fn3 + " " + ln3);
 			user3 = createNewUser(fn3, ln3);
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).logOutApp();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			//User1 searches User3
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn3 + " " + ln3);
@@ -75,12 +75,12 @@ public class TestCase_F6 extends TestBase {
 			//User1 follows User3
 			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 			Thread.sleep(3000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			//User2 Logging in
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
 			String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
 			System.out.println(text);
@@ -88,7 +88,7 @@ public class TestCase_F6 extends TestBase {
 				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
 						&& text.contains("is now following") && text.contains(fn3 + " " + ln3));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent

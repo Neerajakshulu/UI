@@ -14,10 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -26,7 +23,7 @@ public class VerifyStatsOfOthersPost extends TestBase{
 	
 	
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -67,14 +64,14 @@ public class VerifyStatsOfOthersPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
 			List<String> list=new ArrayList<String>();
 			
-			if(!PostRecordViewPage.isCommentCountDisplayed())list.add("Comment count");
-			if(!PostRecordViewPage.isLikeButtonDisplayed())list.add("Like Button");
-			if(!PostRecordViewPage.isLikeCountDisplayed())list.add("Likes Count");
+			if(!pf.getpostRVPageInstance(ob).isCommentCountDisplayed())list.add("Comment count");
+			if(!pf.getpostRVPageInstance(ob).isLikeButtonDisplayed())list.add("Like Button");
+			if(!pf.getpostRVPageInstance(ob).isLikeCountDisplayed())list.add("Likes Count");
 			
 			try {
 				Assert.assertTrue(list.size()==0);

@@ -17,12 +17,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class VerifyCommenterDetails extends TestBase{
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -146,7 +147,7 @@ public class VerifyCommenterDetails extends TestBase{
 						this.getClass().getSimpleName() + "Commenter_details_validation_failed")));// screenshot
 
 			}
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
