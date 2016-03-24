@@ -24,14 +24,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,9 +38,9 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
+import util.TestUtil;
 import util.Xls_Reader;
 
 public class TestBase {
@@ -76,6 +71,32 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
+		if(TestUtil.isSuiteRunnable(suiteXls, "F Suite")){
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			fn1 = generateRandomName(8);
+			ln1 = generateRandomName(10);
+			System.out.println(fn1 + " " + ln1);
+			user1 = createNewUser(fn1, ln1);
+			System.out.println("User1:"+ user1);
+			Thread.sleep(3000);
+			logout();
+			closeBrowser();
+			// 2)Create User2 and follow User1
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			fn2 = generateRandomName(8);
+			ln2 = generateRandomName(10);
+			System.out.println(fn2 +" "+ ln2);
+			user2 = createNewUser(fn2, ln2);
+			System.out.println("User2:"+ user2);
+			Thread.sleep(3000);
+			logout();
+			closeBrowser();
+			
+		}
 	}
 
 	@AfterSuite
