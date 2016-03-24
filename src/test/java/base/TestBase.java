@@ -65,36 +65,41 @@ public class TestBase {
 	public static String fn1, fn2, ln1, ln2, fn3, ln3;
 	public static int xRows, xCols;
 	public static String[][] xData;
-	
+	public static int count=0;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
 
 		initialize();
 		if(TestUtil.isSuiteRunnable(suiteXls, "F Suite")){
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
-			System.out.println("User1:"+ user1);
-			Thread.sleep(3000);
-			logout();
-			closeBrowser();
-			// 2)Create User2 and follow User1
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			fn2 = generateRandomName(8);
-			ln2 = generateRandomName(10);
-			System.out.println(fn2 +" "+ ln2);
-			user2 = createNewUser(fn2, ln2);
-			System.out.println("User2:"+ user2);
-			Thread.sleep(3000);
-			logout();
-			closeBrowser();
+			
+			if(count==0){
+				openBrowser();
+				maximizeWindow();
+				clearCookies();
+				fn1 = generateRandomName(8);
+				ln1 = generateRandomName(10);
+				System.out.println(fn1 + " " + ln1);
+				user1 = createNewUser(fn1, ln1);
+				System.out.println("User1:"+ user1);
+				Thread.sleep(3000);
+				logout();
+				closeBrowser();
+				// 2)Create User2 and follow User1
+				openBrowser();
+				maximizeWindow();
+				clearCookies();
+				fn2 = generateRandomName(8);
+				ln2 = generateRandomName(10);
+				System.out.println(fn2 +" "+ ln2);
+				user2 = createNewUser(fn2, ln2);
+				System.out.println("User2:"+ user2);
+				Thread.sleep(3000);
+				logout();
+				closeBrowser();
+				
+				count++;
+			}
 			
 		}
 	}
