@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class TestCase_F1 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -66,23 +66,13 @@ public class TestCase_F1 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			fn1 = generateRandomName(8);
-			ln1 = generateRandomName(10);
-			System.out.println(fn1 + " " + ln1);
-			user1 = createNewUser(fn1, ln1);
-			System.out.println("User1:"+ user1);
-			Thread.sleep(3000);
-			logout();
-			closeBrowser();
-			// 2)Create User2 and follow User1
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			fn2 = generateRandomName(8);
-			ln2 = generateRandomName(10);
-			System.out.println(fn2 +" "+ ln2);
-			user2 = createNewUser(fn2, ln2);
-			System.out.println("User2:"+ user2);
+
+			ob.navigate().to(host);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
+
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -97,8 +87,8 @@ public class TestCase_F1 extends TestBase {
 			logout();
 
 			// 3)Verify that User1 receives a notification with correct data
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")),30);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);

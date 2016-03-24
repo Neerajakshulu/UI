@@ -2,7 +2,6 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -22,8 +21,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.SearchResultsPage;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -44,6 +42,7 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -91,13 +90,13 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
-			SearchResultsPage.clickOnArticleTab();
+			pf. getSearchResultsPageInstance(ob).clickOnArticleTab();
 			chooseArticle(completeArticle);
-			Authoring.enterArticleComments("test");
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComments("test");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 					
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
@@ -124,20 +123,20 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 			WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
-			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
+			pf.getAuthoringInstance(ob).enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
-			String minValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String minValidErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Min Validation Error Message--->"+minValidErrMsg);
-			BrowserWaits.waitUntilText(minValidErrMsg);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
-			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
+			pf.getAuthoringInstance(ob).enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
-			String maxValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String maxValidErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
-			BrowserWaits.waitUntilText(maxValidErrMsg);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			
 		} catch (Exception e) {
@@ -192,9 +191,9 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
+	public  void waitForTRHomePage() throws InterruptedException {
 		Thread.sleep(4000);
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	
 	
@@ -211,7 +210,7 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

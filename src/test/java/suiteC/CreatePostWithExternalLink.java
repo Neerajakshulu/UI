@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -23,6 +21,7 @@ public class CreatePostWithExternalLink extends TestBase{
 
 	private static final String URL = "https://www.yahoo.com";
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -65,24 +64,24 @@ public class CreatePostWithExternalLink extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			int postCountBefore=ProfilePage.getPostsCount();
+			int postCountBefore=pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountBefore);
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.addExternalLinkToPostContent(URL);
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).addExternalLinkToPostContent(URL);
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			ProfilePage.clickFirstPostTitle();	
+			pf.getProfilePageInstance(ob).clickFirstPostTitle();	
 			try {
-				Assert.assertTrue(PostRecordViewPage.validatePostContentForExternalLink(URL));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(URL));
 				test.log(LogStatus.PASS, "Post is published with external link");
-				PostRecordViewPage.clickExternalLinkInPostContent(URL);
-				Assert.assertTrue(PostRecordViewPage.validateURL(URL));
+				pf.getpostRVPageInstance(ob).clickExternalLinkInPostContent(URL);
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(URL));
 				test.log(LogStatus.PASS, "External links added to post are working fine");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "External links added to post are not working fine");

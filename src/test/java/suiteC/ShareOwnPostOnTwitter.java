@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -25,7 +23,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 	
 	
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -66,19 +64,19 @@ public class ShareOwnPostOnTwitter extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
 			
-			ProfilePage.clickOnFirstPost();
-			PostRecordViewPage.clickOnTwitterUnderShareMenu();
-			PostRecordViewPage.shareOnTwitter(tusername, tpassword);
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			pf.getpostRVPageInstance(ob).clickOnTwitterUnderShareMenu();
+			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 			BrowserWaits.waitTime(5);
 			logout();
 			closeBrowser();

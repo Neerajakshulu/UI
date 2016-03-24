@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.HeaderFooterLinksPage;
+import pages.PageFactory;
 import pages.ProfilePage;
 import suiteC.LoginTR;
 import util.ErrorUtil;
@@ -26,6 +27,7 @@ public class ProfileUpdateTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -72,9 +74,9 @@ public class ProfileUpdateTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -94,14 +96,14 @@ public class ProfileUpdateTest extends TestBase {
 	public void profileDataUpdate(String profileInfo) throws Exception  {
 			try {
 				test.log(LogStatus.INFO," Edit user profile own meta data ");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.clickEditCancel();
-				ProfilePage.editUserOwnProfileMetadata(profileInfo);
-				ProfilePage.clickEditUpdate();
-				ProfilePage.validateProfileMetadata();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).clickEditCancel();
+				pf.getProfilePageInstance(ob).editUserOwnProfileMetadata(profileInfo);
+				pf.getProfilePageInstance(ob).clickEditUpdate();
+				pf.getProfilePageInstance(ob).validateProfileMetadata();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

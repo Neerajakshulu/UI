@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
+import pages.PageFactory;
 import pages.ProfilePage;
 import suiteC.LoginTR;
 import util.ErrorUtil;
@@ -31,6 +31,8 @@ public class ProfileTypeaheadCountySelectTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	
+	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -65,9 +67,9 @@ public class ProfileTypeaheadCountySelectTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -92,15 +94,15 @@ public class ProfileTypeaheadCountySelectTest extends TestBase {
 	public void profileCountryTypeaheadUpdate(String countryTypeahead,String fullCountry) throws Exception  {
 			try {
 				test.log(LogStatus.INFO," country from predefined Typeahead list");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.selectProfileCountryTypeAhead(countryTypeahead,fullCountry);
-				boolean countryStatus=ProfilePage.validateProfileCountry(fullCountry);
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).selectProfileCountryTypeAhead(countryTypeahead,fullCountry);
+				boolean countryStatus=pf.getProfilePageInstance(ob).validateProfileCountry(fullCountry);
 				if(!countryStatus){
 					throw new Exception("Profile Country is not updated with Predefined typeahead list values");
 				}
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

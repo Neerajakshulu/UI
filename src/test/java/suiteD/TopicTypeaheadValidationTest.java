@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -26,6 +25,7 @@ public class TopicTypeaheadValidationTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -61,9 +61,9 @@ public class TopicTypeaheadValidationTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -83,12 +83,12 @@ public class TopicTypeaheadValidationTest extends TestBase {
 	public void topicTypeaheadValidation(String oneChar,String twoChar) throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"go to user profile page");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
 				test.log(LogStatus.INFO,"enter two characters and verify topic typeahead options should display");
-				ProfilePage.topicTypeaheadOptionsMinChars(oneChar, twoChar);
+				pf.getProfilePageInstance(ob).topicTypeaheadOptionsMinChars(oneChar, twoChar);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

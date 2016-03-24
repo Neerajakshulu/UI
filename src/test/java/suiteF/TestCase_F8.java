@@ -9,18 +9,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.ProfilePage;
-
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
 
 public class TestCase_F8 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -63,18 +62,18 @@ public class TestCase_F8 extends TestBase {
 			user3 = createNewUser(fn3, ln3);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			Thread.sleep(3000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 			//USER1 WILL COMMENT ON THE POST CREATED
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -92,12 +91,12 @@ public class TestCase_F8 extends TestBase {
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(6000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			
 			//LOGIN WITH USER3 AND CHECK FOR THE NOTIFICATION
 
-			LoginTR.enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(5000);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();

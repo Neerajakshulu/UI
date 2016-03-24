@@ -13,14 +13,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class DeleteUserPost extends TestBase{
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -62,21 +61,21 @@ public class DeleteUserPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if(ProfilePage.getPostsCount()==0){
+			if(pf.getProfilePageInstance(ob).getPostsCount()==0){
 				String tilte="PostAppreciationTest"+RandomStringUtils.randomNumeric(10);
-				ProfilePage.clickOnPublishPostButton();
-				ProfilePage.enterPostTitle(tilte);
-				ProfilePage.enterPostContent(tilte);
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
-			int postCount=ProfilePage.getPostsCount();
-			ProfilePage.clickOnFirstPost();
-			PostRecordViewPage.deletePost();
-			HeaderFooterLinksPage.clickOnProfileLink();
+			int postCount=pf.getProfilePageInstance(ob).getPostsCount();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			pf.getpostRVPageInstance(ob).deletePost();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			try {
-			Assert.assertTrue(postCount==(ProfilePage.getPostsCount()+1));
+			Assert.assertTrue(postCount==(pf.getProfilePageInstance(ob).getPostsCount()+1));
 			test.log(LogStatus.PASS, "Delete post functionality is working as expected");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Delete post functionality is not working as expected");

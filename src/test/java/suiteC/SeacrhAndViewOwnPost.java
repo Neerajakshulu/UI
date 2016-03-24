@@ -12,17 +12,15 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class SeacrhAndViewOwnPost extends TestBase{
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -63,17 +61,17 @@ public class SeacrhAndViewOwnPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to user own profile Page");
-			List<String> profileDeatils=ProfilePage.getProfileTitleAndMetadata();
-			String postTilte=ProfilePage.getFirstPostTitle();
+			List<String> profileDeatils=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
+			String postTilte=pf.getProfilePageInstance(ob).getFirstPostTitle();
 			test.log(LogStatus.INFO, "Captured post tilte");
-			HeaderFooterLinksPage.searchForText(postTilte);
+			pf.getHFPageInstance(ob).searchForText(postTilte);
 			test.log(LogStatus.INFO, "Searched for post:"+postTilte);
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.clickOnPostTitle(postTilte);			
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).clickOnPostTitle(postTilte);			
 			try {
-				PostRecordViewPage.validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
+				pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
 				test.log(LogStatus.PASS, "User is able to search and view his own post");
 				
 			} catch (Throwable t) {

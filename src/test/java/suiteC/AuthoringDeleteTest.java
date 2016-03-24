@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -34,6 +35,7 @@ public class AuthoringDeleteTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf=new PageFactory();
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
@@ -79,7 +81,7 @@ public class AuthoringDeleteTest extends TestBase {
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
 					//ob.get(CONFIG.getProperty("testSiteName"));
-					LoginTR.waitForTRHomePage();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
 					performAuthoringCommentOperations(username, password, article, completeArticle);
 					closeBrowser();
 					
@@ -100,13 +102,13 @@ public class AuthoringDeleteTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle) throws Exception  {
 		try {
-			AuthoringTest.waitForTRHomePage();
-			AuthoringTest.enterTRCredentials(username, password);
-			AuthoringTest.clickLogin();
-			AuthoringTest.searchArticle(article);
-			Authoring.selectArtcleWithComments();
-			Authoring.enterArticleComment("Test comments");
-			Authoring.clickAddCommentButton();
+			new AuthoringTest().waitForTRHomePage();
+			new AuthoringTest().enterTRCredentials(username, password);
+			new AuthoringTest().clickLogin();
+			new AuthoringTest().searchArticle(article);
+			pf.getAuthoringInstance(ob).selectArtcleWithComments();
+			pf.getAuthoringInstance(ob).enterArticleComment("Test comments");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			deleteComments();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -142,8 +144,8 @@ public class AuthoringDeleteTest extends TestBase {
 	 */
 	public void deleteComments() throws Exception {
 		try {
-			AuthoringAppreciateTest.scrollingToElementofAPage();
-			totalCommentsBeforeDeletion=Authoring.getCommentCount();
+			new AuthoringAppreciateTest().scrollingToElementofAPage();
+			totalCommentsBeforeDeletion=pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("Before Deletion count --->"+totalCommentsBeforeDeletion);
 			WebElement deleteCommentButton=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-trash edit-comment-icon'][ng-click='deleteThis(comment.id)']"));
 			//System.out.println("is Delete displayed-->"+deleteCommentButton.isDisplayed());
@@ -157,7 +159,7 @@ public class AuthoringDeleteTest extends TestBase {
 			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))));
 			waitForAjax(ob);
-			totalCommentsAfterDeletion=Authoring.getCommentCount();
+			totalCommentsAfterDeletion=pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->"+totalCommentsAfterDeletion);
 			
 			if(!(totalCommentsBeforeDeletion>totalCommentsAfterDeletion)){

@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -86,7 +86,7 @@ public class TestCase_E34 extends TestBase {
 			// Making the last watch list as private
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			new PageFactory().getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();

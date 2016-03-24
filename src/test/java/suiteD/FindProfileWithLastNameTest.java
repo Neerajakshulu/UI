@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.ProfilePage;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -31,7 +30,7 @@ public class FindProfileWithLastNameTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
-	
+	PageFactory pf;
 	
 	
 	@BeforeTest
@@ -70,9 +69,11 @@ public class FindProfileWithLastNameTest extends TestBase {
 					clearCookies();
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable e) {
 					test.log(LogStatus.FAIL,"Error:"+e);
 					ErrorUtil.addVerificationFailure(e);
@@ -91,13 +92,13 @@ public class FindProfileWithLastNameTest extends TestBase {
 	@Parameters("lastName")
 	public void findOthersProfileWithLastName(String lastName) throws Exception  {
 				try {
-					SearchProfile.enterSearchKeyAndClick(lastName);
-					if(SearchProfile.getPeopleCount()>0) {
-						SearchProfile.clickPeople();
+					pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(lastName);
+					if(pf.getSearchProfilePageInstance(ob).getPeopleCount()>0) {
+						pf.getSearchProfilePageInstance(ob).clickPeople();
 						test.log(LogStatus.INFO, "validate populated search profile results having provided last name");
-						ProfilePage.validateProfileLastName(lastName);
+						pf.getProfilePageInstance(ob).validateProfileLastName(lastName);
 					}
-					LoginTR.logOutApp();
+					pf.getLoginTRInstance(ob).logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");

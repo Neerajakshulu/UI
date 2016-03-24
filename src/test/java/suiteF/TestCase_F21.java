@@ -2,24 +2,23 @@ package suiteF;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.ProfilePage;
-import suiteC.LoginTR;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestCase_F21 extends TestBase {
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -63,21 +62,21 @@ public class TestCase_F21 extends TestBase {
 			//publishing a post
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 20);
 			String post_url=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).getAttribute("href");
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			
 
 			//Login with someother user and comment on the article in watchlist of the above user
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(2000);
 			ob.navigate().to(post_url);
 			Thread.sleep(4000);
@@ -86,12 +85,12 @@ public class TestCase_F21 extends TestBase {
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			test.log(LogStatus.INFO, "another user adding the comment for an article");
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 
 			//Login with first user and check if notification is present
-			LoginTR.enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(5000);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();

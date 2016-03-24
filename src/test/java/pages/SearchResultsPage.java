@@ -6,31 +6,38 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import base.TestBase;
-import util.BrowserAction;
-import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class SearchResultsPage extends TestBase{
+	
+	PageFactory pf;
+	public SearchResultsPage(WebDriver ob){
+		this.ob =ob;
+		pf=new PageFactory();
+	}
 
-	public static void clickOnPostTab() throws Exception {
+	
+
+	public  void clickOnPostTab() throws Exception {
 		waitForAjax(ob);
-		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);
 		//BrowserWaits.waitTime(6);
 	}
 
-	public static void clickOnArticleTab() throws Exception {
+	public  void clickOnArticleTab() throws Exception {
 		
 		waitForAjax(ob);
-		BrowserAction.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
 		waitForAjax(ob);
 		//BrowserWaits.waitTime(6);
 	}
 
-	public static void viewOtherUsersPost(String currentUserName) {
+	public  void viewOtherUsersPost(String currentUserName) {
 
 		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> records;
@@ -60,7 +67,7 @@ public class SearchResultsPage extends TestBase{
 			waitForAjax(ob);
 		}
 	}
-public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
+public  List<String> getAuthorDetailsOfPost() throws InterruptedException{
 		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> records;
 		List<String> authorDetails=new ArrayList<String>();
@@ -114,7 +121,7 @@ public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
 		
 	}
 	
-	public static void clickOnPostTitle(String title) {
+	public  void clickOnPostTitle(String title) {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> records;
@@ -145,7 +152,7 @@ public static List<String> getAuthorDetailsOfPost() throws InterruptedException{
 		}
 	}
 
-	public static void clickOnPeopleName(String title) throws Exception {
+	public  void clickOnPeopleName(String title) throws Exception {
 		List<WebElement> records;
 
 		while (true) {

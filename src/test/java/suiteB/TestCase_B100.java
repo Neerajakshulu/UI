@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -68,7 +68,7 @@ public class TestCase_B100 extends TestBase{
 			ob.navigate().to(host);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			BrowserWaits.waitUntilText("Sign in with Project Neon");
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();

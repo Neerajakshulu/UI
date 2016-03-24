@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -24,6 +22,7 @@ public class CreateAndEditPost extends TestBase{
 	
 	
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,20 +66,20 @@ public class CreateAndEditPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			ProfilePage.clickOnFirstPost();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			
 			
 			try {
-				Assert.assertTrue(PostRecordViewPage.verifyPostCreationDate());
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).verifyPostCreationDate());
 				test.log(LogStatus.PASS, "Post creation timestamp is displayed in post record view page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post creation timestamp is not displayed in post record view page");
@@ -91,15 +90,15 @@ public class CreateAndEditPost extends TestBase{
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			PostRecordViewPage.clickOnEditButton();
-			ProfilePage.enterPostTitle(postStringEdited);
+			pf.getpostRVPageInstance(ob).clickOnEditButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postStringEdited);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postStringEdited);
+			pf.getProfilePageInstance(ob).enterPostContent(postStringEdited);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostPublishButton();
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 
 			try {
-				Assert.assertTrue(PostRecordViewPage.verifyPostEditedDate());
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).verifyPostEditedDate());
 				test.log(LogStatus.PASS, "Post edited timestamp is displayed in post record view page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post edited timestamp is not displayed in post record view page");
@@ -112,7 +111,7 @@ public class CreateAndEditPost extends TestBase{
 			}
 			
 			try {
-				Assert.assertEquals(postStringEdited, PostRecordViewPage.getPostTitle());
+				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostTitle());
 				test.log(LogStatus.PASS, "Actual post title matches expected post title");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Actual post title does not match expected post title");
@@ -125,7 +124,7 @@ public class CreateAndEditPost extends TestBase{
 			}
 			
 			try {
-				Assert.assertEquals(postStringEdited, PostRecordViewPage.getPostContent());
+				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostContent());
 				test.log(LogStatus.PASS, "Actual post content matches expected post content");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Actual post content does not match expected post content");

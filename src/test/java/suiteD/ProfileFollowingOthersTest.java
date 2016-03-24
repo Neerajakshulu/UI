@@ -12,9 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -29,7 +27,7 @@ public class ProfileFollowingOthersTest extends TestBase {
 	static int status=1;
 	static String followBefore=null;
 	static String followAfter=null;
-	
+	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -72,10 +70,10 @@ public class ProfileFollowingOthersTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
 					Thread.sleep(6000);
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -97,11 +95,11 @@ public class ProfileFollowingOthersTest extends TestBase {
 	 */
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void getFollowingUsers() throws Exception  {
-			try {
+			try {pf.getProfilePageInstance(ob).
 				test.log(LogStatus.INFO,"get users who iam following ");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.getFollowingCount();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).getFollowingCount();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");
 				//print full stack trace
@@ -124,10 +122,10 @@ public class ProfileFollowingOthersTest extends TestBase {
 	public void followOthersProfile(String profileName) throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"Search for Profile and follow/unfollow that profile from Search Page itself");
-				SearchProfile.enterSearchKeyAndClick(profileName);
-				if(SearchProfile.getPeopleCount()>0) {
-					SearchProfile.clickPeople();
-					SearchProfile.followProfileFromSeach();
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(profileName);
+				if(pf.getSearchProfilePageInstance(ob).getPeopleCount()>0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
 				}
 				else{
 					throw new SkipException("No Profiles to follow from SEARCH PEOPLE page");
@@ -155,10 +153,10 @@ public class ProfileFollowingOthersTest extends TestBase {
 	public void validateFollowingUsersCount() throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"Following count should be increased/decreased");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.validateFollowingCount();
-				LoginTR.logOutApp();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).validateFollowingCount();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

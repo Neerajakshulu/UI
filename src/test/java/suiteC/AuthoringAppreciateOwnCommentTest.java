@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -28,6 +29,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -71,7 +73,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
-				AuthoringTest.waitForTRHomePage();
+				new AuthoringTest().waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	
@@ -81,12 +83,12 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 
 		try {
-			AuthoringTest.enterTRCredentials(username, password);
-			AuthoringTest.clickLogin();
-			AuthoringTest.searchArticle(article);
-			AuthoringTest.chooseArticle(completeArticle);
-			Authoring.enterArticleComment("Test Appreciation");
-			Authoring.clickAddCommentButton();
+			new AuthoringTest().enterTRCredentials(username, password);
+			new AuthoringTest().clickLogin();
+			new AuthoringTest().searchArticle(article);
+			new AuthoringTest().chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			Thread.sleep(6000);
 			validateAppreciationComment();
 			validateAppreciationComment();
@@ -180,7 +182,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 	 * Method for Scrolling down to the page
 	 * @throws InterruptedException, When scroll not done
 	 */
-	public static void scrollingToElementofAPage() throws InterruptedException  {
+	public  void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(4000);

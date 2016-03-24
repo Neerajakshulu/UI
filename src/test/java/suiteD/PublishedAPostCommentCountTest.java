@@ -15,10 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import suiteC.Authoring;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -28,6 +25,7 @@ public class PublishedAPostCommentCountTest extends TestBase{
 	static int status = 1;
 	static String  postTitle;
 	static List<String> profileDetails;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,9 +65,9 @@ public class PublishedAPostCommentCountTest extends TestBase{
 			test.log(LogStatus.INFO, "Login Neon app with TR valid credentials");
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -94,18 +92,18 @@ public class PublishedAPostCommentCountTest extends TestBase{
 			try {
 				postContent=postContent+RandomStringUtils.randomNumeric(10);
 				test.log(LogStatus.INFO," Click Publish A Post and Post your article");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				profileDetails=ProfilePage.getProfileTitleAndMetadata();
-				ProfilePage.clickPublishAPost();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				profileDetails=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
+				pf.getProfilePageInstance(ob).clickPublishAPost();
 				postTitle=myPost+RandomStringUtils.randomAlphanumeric(6);
-				ProfilePage.enterPostTitle(postTitle);
+				pf.getProfilePageInstance(ob).enterPostTitle(postTitle);
 				test.log(LogStatus.INFO, "Entered Post Title");
-				ProfilePage.enterPostContent(postContent);
+				pf.getProfilePageInstance(ob).enterPostContent(postContent);
 				test.log(LogStatus.INFO, "Entered Post Content");
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 				test.log(LogStatus.INFO, "Published the post and Validate Published Post count");
-				ProfilePage.validatePostTitle(postTitle);
+				pf.getProfilePageInstance(ob).validatePostTitle(postTitle);
 			} catch (Exception e) {
 				e.printStackTrace();
 				test.log(LogStatus.FAIL, "Something unexpected happened");
@@ -125,16 +123,16 @@ public class PublishedAPostCommentCountTest extends TestBase{
 	@Test(dependsOnMethods = "testPublishPost")
 	public void testPostCommentCount() throws Exception {
 			try {
-				int postCommentcount=ProfilePage.getPostCommentCount();
-				ProfilePage.clickFirstPostTitle();
-				PostRecordViewPage.validatePostTitleAndProfileMetadata(postTitle, profileDetails);
+				int postCommentcount=pf.getProfilePageInstance(ob).getPostCommentCount();
+				pf.getProfilePageInstance(ob).clickFirstPostTitle();
+				pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
 				
-				Authoring.enterArticleComment("test comments added on post");
-				Authoring.clickAddCommentButton();
+				pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
+				pf.getAuthoringInstance(ob).clickAddCommentButton();
 				
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				int postCommentAftercount=ProfilePage.getPostCommentCount();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				int postCommentAftercount=pf.getProfilePageInstance(ob).getPostCommentCount();
 				
 				System.out.println("before count-->"+postCommentcount);
 				System.out.println("after count-->"+postCommentAftercount);
@@ -142,7 +140,7 @@ public class PublishedAPostCommentCountTest extends TestBase{
 					throw new Exception("post comment count failed");
 				}
 				
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Exception e) {
 				e.printStackTrace();

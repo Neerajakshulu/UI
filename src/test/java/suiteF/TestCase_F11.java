@@ -10,14 +10,14 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import suiteC.LoginTR;
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
 
 public class TestCase_F11 extends TestBase {
 	static int status = 1;
-
+	PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -55,10 +55,10 @@ public class TestCase_F11 extends TestBase {
 			
 			ob.navigate().to(host);
 			//Logging in with User1
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			//searching for posts
-			LoginTR.searchArticle("POST for");
+			pf.getLoginTRInstance(ob).searchArticle("POST for");
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
@@ -75,7 +75,7 @@ public class TestCase_F11 extends TestBase {
 			Thread.sleep(3000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			
 			//create a new user and comment on the same post in user1's watchlist
 			
@@ -99,11 +99,11 @@ public class TestCase_F11 extends TestBase {
 			Thread.sleep(4000);
 			jsClick(ob,ob.findElement( By.xpath(OR.getProperty("document_commentLike_button"))));
 			Thread.sleep(1000);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			
 			//Login with user1 and check for Notification
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
 			System.out.println(text);

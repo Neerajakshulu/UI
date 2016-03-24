@@ -14,8 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -29,6 +28,7 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -75,9 +75,9 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -99,11 +99,11 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 	@Test(dependsOnMethods="testInitiatePostCreation",dataProvider="getTestData")
 	public void testMinMaxLengthValidation(String titleMinError,String minCharCount,String maxCharCount) throws Exception {
 	
-	ProfilePage.enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
+	pf.getProfilePageInstance(ob).enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+minCharCount);
 	
 	try {
-		Assert.assertFalse(ProfilePage.validatePublishButton());
+		Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());
 		test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 	} catch (Throwable t) {
 		test.log(LogStatus.PASS, "Publish button is not disabled for the post content less than min character count");
@@ -114,10 +114,10 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 	}
-	ProfilePage.enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,3))));
+	pf.getProfilePageInstance(ob).enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,3))));
 	test.log(LogStatus.INFO, "Entered Post Title of length:"+maxCharCount);
 	try {
-		Assert.assertTrue(ProfilePage.getLengthOfTitleFromPostCreationModal()==200);
+		Assert.assertTrue(pf.getProfilePageInstance(ob).getLengthOfTitleFromPostCreationModal()==200);
 		test.log(LogStatus.PASS, "Max char count validation for post title is successful");
 	} catch (Throwable t) {
 		test.log(LogStatus.FAIL, "Max char count validation for post title failed");
@@ -128,8 +128,8 @@ public class MinMaxLengthValidationPostTitle extends TestBase{
 				this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 	}
-	ProfilePage.clickOnPostCancelButton();
-	ProfilePage.clickOnPostCancelDiscardButton();
+	pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+	pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 	logout();
 	closeBrowser();
 	}

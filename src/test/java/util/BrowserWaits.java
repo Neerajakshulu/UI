@@ -26,7 +26,15 @@ public class BrowserWaits extends TestBase{
 	static int time=90;
 	static String locatorType;
 	static String locatorText;
-	public static void IsElementPresent(Object elementName) throws Exception {
+	
+	//WebDriver ob;
+	public BrowserWaits(WebDriver ob){
+		this.ob=ob;
+	}
+
+	
+	
+	public void IsElementPresent(Object elementName) throws Exception {
 		if ((elementName instanceof Enum)) {
 			 locatorType=((Enum<?>)elementName).name();
 			 locatorText= elementName.toString();
@@ -70,7 +78,7 @@ public class BrowserWaits extends TestBase{
 	 * wait until desired element is displayed
 	 * @param locator
 	 */
-	public static void waitUntilElementIsDisplayed(Object elementName) {
+	public void waitUntilElementIsDisplayed(Object elementName) {
 		if ((elementName instanceof Enum)) {
 			 locatorType=((Enum<?>)elementName).name();
 			 locatorText= elementName.toString();
@@ -146,7 +154,7 @@ public class BrowserWaits extends TestBase{
 	 * wait until desired element is not displayed
 	 * @param locator
 	 */
-	public static void waitUntilElementIsNotDisplayed(Object elementName) {
+	public void waitUntilElementIsNotDisplayed(Object elementName) {
 		if ((elementName instanceof Enum)) {
 			 locatorType=((Enum<?>)elementName).name();
 			 locatorText= elementName.toString();
@@ -220,7 +228,7 @@ public class BrowserWaits extends TestBase{
 	 * Wait for Expected PageTitle
 	 * @param title
 	 */
-	public static void waitUntilPageTitle(final String title) {
+	public void waitUntilPageTitle(final String title) {
 		try {
 			(new WebDriverWait(ob, time))
 					.until(new ExpectedCondition<Boolean>() {
@@ -241,7 +249,7 @@ public class BrowserWaits extends TestBase{
 	}
 	
 	
-	public static void waitUntilText(final String... text) {
+	public void waitUntilText(final String... text) {
 		for (String each : text) {
 			waitUntilText(each);
 		}
@@ -251,7 +259,7 @@ public class BrowserWaits extends TestBase{
 	 * wait for until expected text present
 	 * @param text
 	 */
-	public static void waitUntilText(final String text) {
+	public void waitUntilText(final String text) {
 		try {
 			(new WebDriverWait(ob, time))
 					.until(new ExpectedCondition<Boolean>() {
@@ -272,13 +280,13 @@ public class BrowserWaits extends TestBase{
 	
 	/*********************** Wait until specified text is not present **********************/
 
-	public static void waitUntilNotText(final String... text) throws Exception {
+	public void waitUntilNotText(final String... text) throws Exception {
 		for (String each : text) {
 			waitUntilNotText(each, time);
 		}
 	}
 
-	public static void waitUntilNotText(final String text, final int time) {
+	public void waitUntilNotText(final String text, final int time) {
 		try {
 			(new WebDriverWait(ob, time))
 					.until(new ExpectedCondition<Boolean>() {

@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.SearchProfile;
-import suiteC.LoginTR;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -32,6 +31,7 @@ public class ProfileFollowTest extends TestBase {
 	static int status=1;
 	static String followBefore=null;
 	static String followAfter=null;
+	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws  Exception {
@@ -79,9 +79,15 @@ public class ProfileFollowTest extends TestBase {
 					maximizeWindow();
 					test.log(LogStatus.INFO,"Login to Applicaton with TR valid Credentials");
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					/*LoginTR lr=new LoginTR(ob);
+					lr.waitForTRHomePage();
+					lr.enterTRCredentials(username, password);
+					lr.clickLogin();*/
+					
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Error: Login not happended");
 					//print full stack trace
@@ -105,13 +111,13 @@ public class ProfileFollowTest extends TestBase {
 	public void followOthersProfile(String profileName) throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"Search for Profile and follow/unfollow that profile from Search Page itself");
-				SearchProfile.enterSearchKeyAndClick(profileName);
-				if(SearchProfile.getPeopleCount()>0) {
-					SearchProfile.clickPeople();
-					SearchProfile.followProfileFromSeach();
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(profileName);
+				if(pf.getSearchProfilePageInstance(ob).getPeopleCount()>0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
 				}
 				
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 
 			} catch (Throwable t) {
@@ -132,12 +138,12 @@ public class ProfileFollowTest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,this.getClass().getSimpleName()), "SKIP");*/
 	}
 	
 }

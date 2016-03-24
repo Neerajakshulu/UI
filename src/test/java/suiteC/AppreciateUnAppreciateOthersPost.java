@@ -11,9 +11,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -22,6 +20,7 @@ public class AppreciateUnAppreciateOthersPost extends TestBase{
 	
 	
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -63,11 +62,11 @@ public class AppreciateUnAppreciateOthersPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
-			PostRecordViewPage.validateLikeAndUnlikePostActions();
-			PostRecordViewPage.validateLikeAndUnlikePostActions();
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
+			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

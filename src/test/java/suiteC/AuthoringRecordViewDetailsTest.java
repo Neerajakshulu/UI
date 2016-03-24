@@ -13,8 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
-import util.BrowserWaits;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import util.TestUtil;
@@ -27,6 +26,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -70,7 +70,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
-				AuthoringTest.waitForTRHomePage();
+				new AuthoringTest().waitForTRHomePage();
 	}
 	
 	@Test(dependsOnMethods="testAuthoringTestAccount")
@@ -79,13 +79,13 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
-			AuthoringTest.enterTRCredentials(username, password);
-			AuthoringTest.clickLogin();
-			AuthoringTest.searchArticle(article);
-			AuthoringTest.chooseArticle(completeArticle);
+			new AuthoringTest().enterTRCredentials(username, password);
+			new AuthoringTest().clickLogin();
+			new AuthoringTest().searchArticle(article);
+			new AuthoringTest().chooseArticle(completeArticle);
 			recordViewDetailsLinkValidation();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Something UnExpected");
@@ -107,12 +107,12 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 	public void recordViewDetailsLinkValidation() throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH.toString()), 40);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH.toString())));
-		//BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
+		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
 		waitForNumberOfWindowsToEqual(ob, 2);
 		switchToNewWindow(ob);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
-		BrowserAction.click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
-		BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH);
 }
 	
 	

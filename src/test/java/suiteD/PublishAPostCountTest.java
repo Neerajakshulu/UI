@@ -14,7 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -22,6 +22,7 @@ import util.TestUtil;
 public class PublishAPostCountTest extends TestBase{
 
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -61,9 +62,9 @@ public class PublishAPostCountTest extends TestBase{
 			test.log(LogStatus.INFO, "Login Neon app with TR valid credentials");
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -88,20 +89,20 @@ public class PublishAPostCountTest extends TestBase{
 			try {
 				postContent=postContent+RandomStringUtils.randomNumeric(10);
 				test.log(LogStatus.INFO," Click Publish A Post and Post your article");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				int postCount=ProfilePage.getPostsCount();
-				ProfilePage.clickPublishAPost();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				int postCount=pf.getProfilePageInstance(ob).getPostsCount();
+				pf.getProfilePageInstance(ob).clickPublishAPost();
 				
 				String postTitle=myPost+RandomStringUtils.randomAlphanumeric(6);
-				ProfilePage.enterPostTitle(postTitle);
+				pf.getProfilePageInstance(ob).enterPostTitle(postTitle);
 				test.log(LogStatus.INFO, "Entered Post Title");
-				ProfilePage.enterPostContent(postContent);
+				pf.getProfilePageInstance(ob).enterPostContent(postContent);
 				test.log(LogStatus.INFO, "Entered Post Content");
-				ProfilePage.clickOnPostPublishButton();
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 				test.log(LogStatus.INFO, "Published the post and Validate Published Post count");
-				ProfilePage.validatePostCount(postCount);
-				LoginTR.logOutApp();
+				pf.getProfilePageInstance(ob).validatePostCount(postCount);
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 			} catch (Exception e) {

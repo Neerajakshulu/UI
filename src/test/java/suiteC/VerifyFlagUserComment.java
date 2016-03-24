@@ -5,11 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -19,7 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PostRecordViewPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -27,6 +23,7 @@ public class VerifyFlagUserComment extends TestBase {
 
 	private static final String PROFILE_NAME = "amneet singh";
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -70,8 +67,8 @@ public class VerifyFlagUserComment extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			PostRecordViewPage.searchForArticleWithComments();
-			PostRecordViewPage.loadComments();
+			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			pf.getpostRVPageInstance(ob).loadComments();
 			
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
@@ -144,7 +141,7 @@ public class VerifyFlagUserComment extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -31,6 +30,7 @@ public class ProfilePrimaryInstitutionTypeAheadMinCharTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -65,9 +65,9 @@ public class ProfilePrimaryInstitutionTypeAheadMinCharTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -92,11 +92,11 @@ public class ProfilePrimaryInstitutionTypeAheadMinCharTest extends TestBase {
 	public void profilePITypeaheadMinChar(String oneChar,String twoChar) throws Exception  {
 			try {
 				test.log(LogStatus.INFO," Select Primary Institution from predefined Typeahead list while enter min 2 characters");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
-				ProfilePage.primaryInstitutionTypeaheadOptions(oneChar, twoChar);
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
+				pf.getProfilePageInstance(ob).primaryInstitutionTypeaheadOptions(oneChar, twoChar);
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

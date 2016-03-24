@@ -12,18 +12,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchProfile;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class SeacrhAndViewOthersPost extends TestBase{
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -64,22 +60,22 @@ public class SeacrhAndViewOthersPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("chinna putha");
+			pf.getHFPageInstance(ob).searchForText("chinna putha");
 			test.log(LogStatus.INFO, "Searched for chinna putha");
-			SearchProfile.clickPeople();
-			SearchResultsPage.clickOnPeopleName("chinna putha");
+			pf.getSearchProfilePageInstance(ob).clickPeople();
+			pf. getSearchResultsPageInstance(ob).clickOnPeopleName("chinna putha");
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			List<String> profileDeatils=ProfilePage.getProfileTitleAndMetadata();
-			String postTilte=ProfilePage.getFirstPostTitle();
+			List<String> profileDeatils=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
+			String postTilte=pf.getProfilePageInstance(ob).getFirstPostTitle();
 			test.log(LogStatus.INFO, "Captured title of the post");
-			HeaderFooterLinksPage.searchForText(postTilte);
+			pf.getHFPageInstance(ob).searchForText(postTilte);
 			test.log(LogStatus.INFO, "Searched for post tilte:"+postTilte);
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.clickOnPostTitle(postTilte);
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).clickOnPostTitle(postTilte);
 					
 			
 			try {
-				PostRecordViewPage.validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
+				pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
 				test.log(LogStatus.PASS, "User is able to search and view others post");
 				
 			} catch (Throwable t) {

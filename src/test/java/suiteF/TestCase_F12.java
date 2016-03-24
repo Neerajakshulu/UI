@@ -14,16 +14,16 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import suiteC.LoginTR;
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
 
 public class TestCase_F12 extends TestBase {
 	static int status = 1;
 	 String watchListName=null;
 	 String watchListDescription=null;
-
+	 PageFactory pf = new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -62,22 +62,22 @@ public class TestCase_F12 extends TestBase {
 			
 			ob.navigate().to(host);
 			//Logging in with User1
-			LoginTR.enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			watchListName="WatchList"+new Random().nextInt(1000);
 			watchListDescription="WatchList"+RandomStringUtils.randomNumeric(15);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Creating public watchlist");
 			createWatchList("public",watchListName,watchListDescription);
-			LoginTR.logOutApp();
-			LoginTR.enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).logOutApp();
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(6000);
 			String text=ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 			
 			try {
 				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("created a new public watchlist") && text.contains(watchListName) && text.contains(watchListDescription));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 

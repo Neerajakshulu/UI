@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -26,6 +25,7 @@ public class CommentsTabInfiniteScrollValidationTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -61,9 +61,11 @@ public class CommentsTabInfiniteScrollValidationTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf=new PageFactory();
+					
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -82,12 +84,12 @@ public class CommentsTabInfiniteScrollValidationTest extends TestBase {
 	public void commentTabScrollValidation() throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"go to user profile page");
-				HeaderFooterLinksPage.clickProfileImage();
-				ProfilePage.clickProfileLink();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getProfilePageInstance(ob).clickProfileLink();
 				test.log(LogStatus.INFO,"Comment tab records/record count should increase while do scrolldown");
-				ProfilePage.commentsTabScroll();
+				pf.getProfilePageInstance(ob).commentsTabScroll();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");

@@ -13,15 +13,15 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class DeleteDraftPostFromProfile extends TestBase{
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -63,21 +63,21 @@ public class DeleteDraftPostFromProfile extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostCancelButton();
-			ProfilePage.clickOnPostCancelKeepDraftButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the draft post");
-			ProfilePage.clickOnDraftPostsTab();
-			int postCountBefore=ProfilePage.getDraftPostsCount();
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			int postCountBefore=pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:"+postCountBefore);
-			ProfilePage.deleteDraftPost(postString);
-			int postCountAfter=ProfilePage.getDraftPostsCount();
+			pf.getProfilePageInstance(ob).deleteDraftPost(postString);
+			int postCountAfter=pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:"+postCountAfter);
 			
 			try {
@@ -94,7 +94,7 @@ public class DeleteDraftPostFromProfile extends TestBase{
 			}
 			
 			try {
-				Assert.assertTrue(!ProfilePage.getAllDraftPostTitle().contains(postString) );
+				Assert.assertTrue(!pf.getProfilePageInstance(ob).getAllDraftPostTitle().contains(postString) );
 				test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Deleted post is displayed under posts tab in profile");

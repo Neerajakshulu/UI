@@ -3,7 +3,6 @@ package suiteC;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -13,10 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.ProfilePage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -24,6 +20,7 @@ public class AddInternalLinksToComments extends TestBase{
 
 	private static final String URL = "https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -65,17 +62,17 @@ public class AddInternalLinksToComments extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
-			PostRecordViewPage.addExternalLinkComments(URL);
-			Authoring.clickAddCommentButton();
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			test.log(LogStatus.INFO, "Added internal link to the comment");
 			try {
-				Assert.assertTrue(PostRecordViewPage.validateCommentForExternalLink(URL));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForExternalLink(URL));
 				test.log(LogStatus.PASS, "Comment is published with internal link");
-				PostRecordViewPage.clickExternalLinkInComments(URL);
-				Assert.assertTrue(PostRecordViewPage.validateURL(URL));
+				pf.getpostRVPageInstance(ob).clickExternalLinkInComments(URL);
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(URL));
 				test.log(LogStatus.PASS, "Internal links added to comment are working fine");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Internal links added to comment are not working fine");
@@ -107,7 +104,7 @@ public class AddInternalLinksToComments extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	@AfterTest
+	/*@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
@@ -121,6 +118,6 @@ public class AddInternalLinksToComments extends TestBase{
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
 
-	}
+	}*/
 	
 }

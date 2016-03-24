@@ -11,9 +11,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -22,6 +20,7 @@ public class FlagUnflagUserPost extends TestBase{
 	
 	
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -63,12 +62,12 @@ public class FlagUnflagUserPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
 			try {
-				PostRecordViewPage.validateFlagAndUnflagActionOnPost();
-				PostRecordViewPage.validateFlagAndUnflagActionOnPost();
+				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost();
+				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Flag/Unflag validation failed for posts");
 				test.log(LogStatus.INFO, "Error--->" + t);

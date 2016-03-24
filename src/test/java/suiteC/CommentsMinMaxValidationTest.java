@@ -2,13 +2,10 @@ package suiteC;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -22,7 +19,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
@@ -43,6 +40,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	static int status=1;
 	
 	static int time=30;
+	PageFactory pf=new PageFactory();
 	
 	
 	@BeforeTest
@@ -88,8 +86,8 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
@@ -114,21 +112,21 @@ public class CommentsMinMaxValidationTest extends TestBase {
 		try {
 			test.log(LogStatus.INFO,"Min and Max Length Comment Validation");
 			//System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
-			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
+			pf.getAuthoringInstance(ob).enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0,1))));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
-			String minValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String minValidErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Min Validation Error Message--->"+minValidErrMsg);
-			BrowserWaits.waitUntilText(minValidErrMsg);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 
 			System.out.println("MaxCharCount-->"+(maxCharCount.substring(0,4)));
-			Authoring.enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
+			pf.getAuthoringInstance(ob).enterArticleComments(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0,4))));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
-			String maxValidErrMsg=BrowserAction.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+			String maxValidErrMsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
-			BrowserWaits.waitUntilText(maxValidErrMsg);
+			pf.getBrowserWaitsInstance(ob).waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			
 		} catch (Exception e) {
@@ -183,9 +181,10 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	 * Method for wait TR Home Screen
 	 * @throws InterruptedException 
 	 */
-	public static void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
-		BrowserWaits.waitUntilText("Sign in with Project Neon");
+	public  void waitForTRHomePage() throws InterruptedException {
+		BrowserWaits.waitTime(4);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+		
 	}
 	
 	
@@ -198,11 +197,11 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
-	public static void waitUntilTextPresent(String locator,String text){
+	public  void waitUntilTextPresent(String locator,String text){
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));

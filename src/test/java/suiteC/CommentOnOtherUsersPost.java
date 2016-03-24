@@ -12,9 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.PostRecordViewPage;
-import pages.SearchResultsPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -23,7 +21,8 @@ public class CommentOnOtherUsersPost extends TestBase{
 	
 	
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -64,21 +63,21 @@ public class CommentOnOtherUsersPost extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.searchForText("test");
-			SearchResultsPage.clickOnPostTab();
-			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
-			int countBefore=PostRecordViewPage.getCommentCount();
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			int countBefore=pf.getpostRVPageInstance(ob).getCommentCount();
 			
-			Authoring.enterArticleComment("test comments added on post");
-			Authoring.clickAddCommentButton();
+			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			
-			int countAfter=PostRecordViewPage.getCommentCount();
+			int countAfter=pf.getpostRVPageInstance(ob).getCommentCount();
 			
 			
 			try {
 				Assert.assertEquals(countBefore+1, countAfter);
 				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				PostRecordViewPage.validateCommentNewlyAdded("test comments added on post");
+				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post");
 				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Adding Comments to other users post not working as expected ");
@@ -91,8 +90,8 @@ public class CommentOnOtherUsersPost extends TestBase{
 			}
 			
 			try {
-				PostRecordViewPage.validateAppreciationComment();
-				PostRecordViewPage.validateAppreciationComment();
+				pf.getpostRVPageInstance(ob).validateAppreciationComment();
+				pf.getpostRVPageInstance(ob).validateAppreciationComment();
 				test.log(LogStatus.PASS, "Comment appreciation on posts working as expected");
 			
 			} catch (Throwable t) {

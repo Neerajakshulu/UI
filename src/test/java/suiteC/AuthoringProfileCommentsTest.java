@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -32,6 +33,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	static boolean fail=false;
 	static boolean skip=false;
 	static int status=1;
+	PageFactory pf=new PageFactory();
 	
 	    // Checking whether this test case should be skipped or not
 		@BeforeTest
@@ -74,7 +76,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 						maximizeWindow();
 						ob.navigate().to(System.getProperty("host"));
 						try {
-						AuthoringTest.waitForTRHomePage();
+						new AuthoringTest().waitForTRHomePage();
 						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 						closeBrowser();
 					} catch (Throwable t) {
@@ -93,19 +95,19 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle, String addComments) throws Exception  {
 		
-		AuthoringTest.enterTRCredentials(username, password);
-		AuthoringTest.clickLogin();
+		new AuthoringTest().enterTRCredentials(username, password);
+		new AuthoringTest().clickLogin();
 		//Get Total No.of comments
 		totalProfileCommentsBeforeAdd=getProfleComments();
 		System.out.println("comments Before-->"+totalProfileCommentsBeforeAdd);
 		System.out.println();
-		LoginTR.searchArticle(article);
-		LoginTR.chooseArticle(completeArticle);
+		pf.getLoginTRInstance(ob).searchArticle(article);
+		pf.getLoginTRInstance(ob).chooseArticle(completeArticle);
 		//Enter Article Comments
-		Authoring.enterArticleComment(addComments);
-		Authoring.clickAddCommentButton();
-		Authoring.validateCommentAdd();
-		Authoring.validateViewComment(addComments);
+		pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+		pf.getAuthoringInstance(ob).clickAddCommentButton();
+		pf.getAuthoringInstance(ob).validateCommentAdd();
+		pf.getAuthoringInstance(ob).validateViewComment(addComments);
 		totalProfileCommentsAfterAdd = getProfleComments();
 		System.out.println("comments After-->"+totalProfileCommentsAfterAdd);
 		//Validate Comments count increased or not
@@ -147,7 +149,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	 * wait for until expected text present
 	 * @param text
 	 */
-	public  static void waitUntilText(final String text) {
+	public   void waitUntilText(final String text) {
 		try {
 			(new WebDriverWait(ob, time))
 					.until(new ExpectedCondition<Boolean>() {
@@ -171,7 +173,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	 * @param locator
 	 * @throws Exception, When NoSuchElement Present
 	 */
-	public  static void IsElementPresent(String locator) throws Exception {
+	public   void IsElementPresent(String locator) throws Exception {
 		try{
 		 count = ob.findElements(By.cssSelector(locator)).size();
 		} catch (NoSuchElementException ne) {

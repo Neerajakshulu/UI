@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.BrowserWaits;
 import util.ErrorUtil;
@@ -23,6 +22,7 @@ public class ProfileFollowerTest extends TestBase {
 	private static final String PASSWORD = "Welcome123";
 	private static final String USER_NAME = "kavya.revanna@thomsonreuters.com";
 	static int status = 1;
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -60,9 +60,9 @@ public class ProfileFollowerTest extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(System.getProperty("host"));
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something Unexpected");// extent reports
 			// print stack trace
@@ -81,11 +81,11 @@ public class ProfileFollowerTest extends TestBase {
 	public void getFollowers() throws Exception {
 		try {
 			test.log(LogStatus.INFO,"get users who are following me-My Followers");
-			HeaderFooterLinksPage.clickProfileImage();
-			ProfilePage.clickProfileLink();
-			ProfilePage.getFollowersCount();
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
+			pf.getProfilePageInstance(ob).getFollowersCount();
 			test.log(LogStatus.INFO,"Logout from the application");
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Something Unexpected");
 			//print full stack trace
@@ -104,9 +104,9 @@ public class ProfileFollowerTest extends TestBase {
 	public void loginwithOtherUser() throws Exception {
 		try {
 			test.log(LogStatus.INFO,"login with different user");
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(USER_NAME, PASSWORD);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(USER_NAME, PASSWORD);
+			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Something Unexpected");
 			//print full stack trace
@@ -127,9 +127,9 @@ public class ProfileFollowerTest extends TestBase {
 			test.log(LogStatus.INFO,"Follow/unfollow other user");
 			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52");
 			BrowserWaits.waitTime(10);
-			ProfilePage.followOtherProfileFromProfilePage();
+			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO,"Logout from the application and login with tested user");
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,"Something Unexpected");
 			//print full stack trace
@@ -149,15 +149,15 @@ public class ProfileFollowerTest extends TestBase {
 	public void validateFollowersCount(String username, String password) throws Exception {
 		try {
 			test.log(LogStatus.INFO,"login with user");
-			LoginTR.waitForTRHomePage();
-			LoginTR.enterTRCredentials(username, password);
-			LoginTR.clickLogin();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO,"Go to his own profile page");
-			HeaderFooterLinksPage.clickProfileImage();
-			ProfilePage.clickProfileLink();
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
 			test.log(LogStatus.INFO,"validate profile followers count, should increase or decrease");
-			ProfilePage.validateFollowersCount();
-			LoginTR.logOutApp();
+			pf.getProfilePageInstance(ob).validateFollowersCount();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends");
 		} catch (Throwable t) {

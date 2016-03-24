@@ -5,8 +5,6 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -17,7 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PostRecordViewPage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -25,7 +23,7 @@ public class VerifyCancelFlagAction extends TestBase {
 
 	private static final String PROFILE_NAME = "amneet singh";
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -70,8 +68,8 @@ public class VerifyCancelFlagAction extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			PostRecordViewPage.searchForArticleWithComments();
-			PostRecordViewPage.loadComments();
+			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			pf.getpostRVPageInstance(ob).loadComments();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 			System.out.println(commentsList.size());
@@ -114,7 +112,7 @@ public class VerifyCancelFlagAction extends TestBase {
 						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			LoginTR.logOutApp();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

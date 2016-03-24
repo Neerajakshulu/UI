@@ -13,14 +13,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.HeaderFooterLinksPage;
-import pages.ProfilePage;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.TestUtil;
 
 public class CancelPostCreation extends TestBase{
 
 	static int status = 1;
+	PageFactory pf=new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -63,19 +63,19 @@ public class CancelPostCreation extends TestBase{
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1","PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			HeaderFooterLinksPage.clickOnProfileLink();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			int postCountBefore=ProfilePage.getPostsCount();
+			int postCountBefore=pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountBefore);
-			ProfilePage.clickOnPublishPostButton();
-			ProfilePage.enterPostTitle(postString);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			test.log(LogStatus.INFO, "Entered Post Title");
-			ProfilePage.enterPostContent(postString);
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			ProfilePage.clickOnPostCancelButton();
-			ProfilePage.clickOnPostCancelDiscardButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 			test.log(LogStatus.INFO, "Cancelled the post");
-			int postCountAfter=ProfilePage.getPostsCount();
+			int postCountAfter=pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);
 			
 			
@@ -91,7 +91,7 @@ public class CancelPostCreation extends TestBase{
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			String postTitle=ProfilePage.getFirstPostTitle();
+			String postTitle=pf.getProfilePageInstance(ob).getFirstPostTitle();
 			try {
 				Assert.assertNotEquals(postTitle, postString);
 				test.log(LogStatus.PASS, "Cancelled post is not available in profile");

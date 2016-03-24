@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.ProfilePage;
-import pages.SearchProfile;
+import pages.PageFactory;
 import suiteC.LoginTR;
 import util.ErrorUtil;
 import util.TestUtil;
@@ -30,7 +29,7 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	static String followAfter=null;
 	static String profileHeadingName;
 	static String profileDetailsName;
-	
+	PageFactory pf;
 	
 	
 	@BeforeTest
@@ -74,10 +73,11 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 					maximizeWindow();
 					
 					ob.navigate().to(System.getProperty("host"));
-					LoginTR.waitForTRHomePage();
+					pf=new PageFactory();
+					pf.getLoginTRInstance(ob).waitForTRHomePage();
 					Thread.sleep(6000);
-					LoginTR.enterTRCredentials(username, password);
-					LoginTR.clickLogin();
+					pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+					pf.getLoginTRInstance(ob).clickLogin();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL,"Something Unexpected");
 					//print full stack trace
@@ -97,13 +97,13 @@ public class OthersProfileCommentsLikeTest extends TestBase {
 	public void validateOthersProfileCommentsLike(String otherProfileName) throws Exception  {
 			try {
 				test.log(LogStatus.INFO,"validating other user profile comments appreciation");
-				SearchProfile.enterSearchKeyAndClick(otherProfileName);
-				SearchProfile.clickPeople();
-				ProfilePage.clickProfile();
-				ProfilePage.clickCommentsTab();
-				ProfilePage.commentAppreciation();
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(otherProfileName);
+				pf.getSearchProfilePageInstance(ob).clickPeople();
+				pf.getProfilePageInstance(ob).clickProfile();
+				pf.getProfilePageInstance(ob).clickCommentsTab();
+				pf.getProfilePageInstance(ob).commentAppreciation();
 				test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
-				LoginTR.logOutApp();
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,"Something Unexpected");
