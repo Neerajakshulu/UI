@@ -24,9 +24,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -71,7 +76,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if(TestUtil.isSuiteRunnable(suiteXls, "F Suite")){
+		if(TestUtil.isSuiteRunnable(suiteXls, "E Suite") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")){
 			
 			if(count==0){
 				openBrowser();
@@ -456,7 +461,8 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		ob.navigate().to(host);
+//		ob.navigate().to(host);
+		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);

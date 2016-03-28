@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite F" parallel="tests" thread-count="9">
+<suite name="Suite F" parallel="tests" thread-count="10">
 
 	<test name="Test F1">
 		<classes>
