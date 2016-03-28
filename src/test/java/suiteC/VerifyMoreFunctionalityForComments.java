@@ -101,7 +101,6 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 			}
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
-
 			WebElement more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
 			Point point = more.getLocation();
 			int y = point.getY() + 100;
@@ -166,7 +165,7 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-						.getText();
+						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount >10) {
 					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));

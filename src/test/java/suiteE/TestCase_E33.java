@@ -60,7 +60,8 @@ public class TestCase_E33 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host);
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			String newWatchlistName = "New Watchlist";
 			String newWatchListDescription = "This is my newly created watch list";
@@ -74,7 +75,8 @@ public class TestCase_E33 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host);
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article

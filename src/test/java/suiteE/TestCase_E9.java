@@ -68,7 +68,8 @@ public class TestCase_E9 extends TestBase {
 			clearCookies();
 
 			// createNewUser("mask", "man");
-			ob.get(host);
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// Delete first watch list
 			deleteFirstWatchlist();

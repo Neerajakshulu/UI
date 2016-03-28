@@ -190,6 +190,7 @@ public class Authoring  extends TestBase {
 	public void selectArtcleWithComments(){
 	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 	List<WebElement> itemList;
+	
 	while (true) {
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 		int commentsCount, itr = 1;
@@ -198,7 +199,7 @@ public class Authoring  extends TestBase {
 		for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 			strCmntCt = itemList.get(i)
 					.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-					.getText();
+					.getText().replaceAll(",", "").trim();
 			commentsCount = Integer.parseInt(strCmntCt);
 			if (commentsCount !=0) {
 				jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
