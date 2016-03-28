@@ -101,7 +101,6 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 			}
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
-
 			WebElement more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
 			Point point = more.getLocation();
 			int y = point.getY() + 100;

@@ -664,6 +664,7 @@ public class PostRecordViewPage extends TestBase {
 	public void searchForArticleWithComments() {
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 		List<WebElement> itemList;
+		
 		while (true) {
 			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 			int commentsCount, itr = 1;

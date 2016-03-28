@@ -133,6 +133,7 @@ public class VerifyMoreButtonComments extends TestBase{
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 		
 		boolean isFound = false;
+		
 		while (true) {
 			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 			int commentsCount, itr = 1;
