@@ -672,7 +672,7 @@ public class PostRecordViewPage extends TestBase {
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-						.getText();
+						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount != 0) {
 					jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
