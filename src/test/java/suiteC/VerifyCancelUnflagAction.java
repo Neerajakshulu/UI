@@ -96,7 +96,7 @@ public class VerifyCancelUnflagAction extends TestBase {
 			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
 			// 40);
 			try {
-				Thread.sleep(6000);
+				Thread.sleep(6000);//wait for flag modal to disappear
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
 						.getAttribute("class").contains("flag-active");
@@ -174,7 +174,7 @@ public class VerifyCancelUnflagAction extends TestBase {
 					break;
 				}
 			}
-			Thread.sleep(5000);
+			Thread.sleep(5000);//wait for flag modal to appear
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css")),
 					40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();

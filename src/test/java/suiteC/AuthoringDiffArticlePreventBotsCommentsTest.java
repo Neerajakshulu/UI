@@ -136,7 +136,7 @@ public class AuthoringDiffArticlePreventBotsCommentsTest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	

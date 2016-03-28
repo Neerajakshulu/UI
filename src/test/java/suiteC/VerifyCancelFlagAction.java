@@ -96,7 +96,7 @@ public class VerifyCancelFlagAction extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			Thread.sleep(5000);
+			Thread.sleep(5000);//wait for flag modal to disappear
 			try {
 				boolean isFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))

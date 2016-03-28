@@ -89,7 +89,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			new AuthoringTest().chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			Thread.sleep(6000);
+			Thread.sleep(6000);//wait for new comment to get added and displayed.
 			validateAppreciationComment();
 			validateAppreciationComment();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
@@ -149,7 +149,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			//apprSubDivs.findElement(By.tagName("button")).click();
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
@@ -166,7 +166,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
@@ -185,7 +185,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 	public  void scrollingToElementofAPage() throws InterruptedException  {
 		JavascriptExecutor jse = (JavascriptExecutor)ob;
 		jse.executeScript("scroll(0, 250);");
-		Thread.sleep(4000);
+		Thread.sleep(4000);//wait after scrolling before performing any actions.
 		
 	}
 	

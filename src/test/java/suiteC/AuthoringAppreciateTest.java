@@ -147,7 +147,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			//apprSubDivs.findElement(By.tagName("button")).click();
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
@@ -164,7 +164,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {

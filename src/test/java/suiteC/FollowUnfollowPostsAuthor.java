@@ -76,6 +76,7 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
 				
 			} catch (Throwable t) {
+				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Follow/Unfollow validation failed in post record view page");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);

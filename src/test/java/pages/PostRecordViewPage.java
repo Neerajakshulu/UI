@@ -35,8 +35,7 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 180);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
-				
-
+		
 	}
 
 	/**
@@ -337,10 +336,10 @@ public class PostRecordViewPage extends TestBase {
 
 	public void validateFollowOrUnfollow() throws InterruptedException {
 		waitForPageLoad(ob);
-
+		waitForAjax(ob);
 		String attribute = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-				.getAttribute("tooltip");
+				.getAttribute("data-tooltip");
 
 		if (attribute.equalsIgnoreCase("Follow this person")) {
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
@@ -349,7 +348,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-					.getAttribute("tooltip");
+					.getAttribute("data-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Unfollow this person"));
 			test.log(LogStatus.PASS, "Follow functionality is working fine in view post record page");
@@ -360,7 +359,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-					.getAttribute("tooltip");
+					.getAttribute("data-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Follow this person"));
 			test.log(LogStatus.PASS, "UnFollow functionality is working fine in view post record page");

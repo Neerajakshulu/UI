@@ -83,7 +83,7 @@ public class VerifyDraftPostTabDisplayForZeroDrafts extends TestBase {
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			 Thread.sleep(5000);					
+							
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
