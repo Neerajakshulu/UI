@@ -143,7 +143,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 	}
 	
 	public void reportDataSetResult() {
-		if(skip)
+/*		if(skip)
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
 		
 		else if(fail) {
@@ -153,7 +153,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 		}
 		else
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");
-		
+		*/
 		
 		skip=false;
 		fail=false;
@@ -165,13 +165,13 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
-		
+		*/
 		if(master_condition)
 		    closeBrowser();
 	}

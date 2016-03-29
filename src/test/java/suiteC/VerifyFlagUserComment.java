@@ -97,7 +97,7 @@ public class VerifyFlagUserComment extends TestBase {
 			// 40);
 
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(4000);//Wait for modal to disappear
 				// commentsList=ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
@@ -126,7 +126,7 @@ public class VerifyFlagUserComment extends TestBase {
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 			try {
-				Thread.sleep(6000);
+				Thread.sleep(6000);//Wait for modal to disappear
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
 						.getAttribute("class").contains("flag-inactive");
@@ -166,7 +166,7 @@ public class VerifyFlagUserComment extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+	/*	if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -174,7 +174,7 @@ public class VerifyFlagUserComment extends TestBase {
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 

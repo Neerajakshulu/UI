@@ -94,7 +94,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
-			Thread.sleep(5000);
+			Thread.sleep(5000);//Wait for modal to disappear
 
 			try {
 				boolean IsFlagged = commentsList.get(commentsCount)
@@ -163,7 +163,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -171,7 +171,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 

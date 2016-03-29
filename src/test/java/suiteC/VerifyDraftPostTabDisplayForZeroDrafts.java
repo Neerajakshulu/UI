@@ -83,7 +83,7 @@ public class VerifyDraftPostTabDisplayForZeroDrafts extends TestBase {
 						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			 Thread.sleep(5000);					
+							
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -109,7 +109,7 @@ public class VerifyDraftPostTabDisplayForZeroDrafts extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -117,7 +117,7 @@ public class VerifyDraftPostTabDisplayForZeroDrafts extends TestBase {
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 }

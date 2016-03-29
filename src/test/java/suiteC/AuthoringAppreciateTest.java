@@ -83,6 +83,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
+			
 			new AuthoringTest().enterTRCredentials(username, password);
 			new AuthoringTest().clickLogin();
 			new AuthoringTest().searchArticle(article);
@@ -111,13 +112,13 @@ public class AuthoringAppreciateTest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
-		
+		*/
 		//closeBrowser();
 		
 	}
@@ -147,7 +148,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			//apprSubDivs.findElement(By.tagName("button")).click();
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
@@ -164,7 +165,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {

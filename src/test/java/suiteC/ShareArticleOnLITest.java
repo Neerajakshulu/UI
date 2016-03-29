@@ -132,7 +132,7 @@ public class ShareArticleOnLITest extends TestBase {
 					 ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")).click();
 				 }
 			 }
-			 Thread.sleep(5000);
+			 Thread.sleep(5000);//Wait for new window to close and switch to old window.
 			logout();
 			closeBrowser();
 			
@@ -157,12 +157,12 @@ public class ShareArticleOnLITest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+	/*	if(status==1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");*/
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public class ShareArticleOnLITest extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public  void waitForTRHomePage() throws InterruptedException {
-		Thread.sleep(4000);
+		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 	}
 	

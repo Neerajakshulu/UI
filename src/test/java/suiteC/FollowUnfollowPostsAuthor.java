@@ -76,6 +76,7 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
 				
 			} catch (Throwable t) {
+				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Follow/Unfollow validation failed in post record view page");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
@@ -108,7 +109,7 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -116,7 +117,7 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 

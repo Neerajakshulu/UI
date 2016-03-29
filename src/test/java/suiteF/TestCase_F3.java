@@ -151,7 +151,7 @@ public class TestCase_F3 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
+/*
 		if (status == 1)
 			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
 					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "PASS");
@@ -161,7 +161,7 @@ public class TestCase_F3 extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
 					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 }
