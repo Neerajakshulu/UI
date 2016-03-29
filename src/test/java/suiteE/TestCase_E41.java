@@ -159,7 +159,7 @@ public class TestCase_E41 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
 					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -168,7 +168,7 @@ public class TestCase_E41 extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
 					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 }
