@@ -132,7 +132,7 @@ public class ShareArticleOnLITest extends TestBase {
 					 ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")).click();
 				 }
 			 }
-			 Thread.sleep(5000);//wait for new window to close and switch to old window.
+			 Thread.sleep(5000);//Wait for new window to close and switch to old window.
 			logout();
 			closeBrowser();
 			

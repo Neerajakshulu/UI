@@ -34,6 +34,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public  void enterArticleComment(String addComments) throws InterruptedException  {
+		
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));

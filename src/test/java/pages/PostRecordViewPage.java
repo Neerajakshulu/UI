@@ -114,7 +114,7 @@ public class PostRecordViewPage extends TestBase {
 
 		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
 			appreciationButton.click();
-			Thread.sleep(10000);
+			Thread.sleep(10000);//After clicking on like button wait for status to change and count update
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
@@ -130,7 +130,7 @@ public class PostRecordViewPage extends TestBase {
 
 		} else {
 			appreciationButton.click();
-			Thread.sleep(10000);
+			Thread.sleep(10000);//After clicking on unlike button wait for status to change and count update
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
@@ -516,7 +516,7 @@ public class PostRecordViewPage extends TestBase {
 			scrollingToElementofAPage();
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
@@ -529,7 +529,7 @@ public class PostRecordViewPage extends TestBase {
 			scrollingToElementofAPage();
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {

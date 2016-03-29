@@ -96,7 +96,7 @@ public class VerifyCancelUnflagAction extends TestBase {
 			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
 			// 40);
 			try {
-				Thread.sleep(6000);//wait for flag modal to disappear
+				Thread.sleep(6000);//Wait for flag modal to disappear
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
 						.getAttribute("class").contains("flag-active");

@@ -94,7 +94,7 @@ public class VerifyUnflagActionWithoutReason extends TestBase {
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
-			Thread.sleep(5000);
+			Thread.sleep(5000);//Wait for modal to disappear
 
 			try {
 				boolean IsFlagged = commentsList.get(commentsCount)

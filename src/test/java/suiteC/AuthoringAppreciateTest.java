@@ -83,6 +83,7 @@ public class AuthoringAppreciateTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
+			
 			new AuthoringTest().enterTRCredentials(username, password);
 			new AuthoringTest().clickLogin();
 			new AuthoringTest().searchArticle(article);
