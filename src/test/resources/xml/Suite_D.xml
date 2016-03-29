@@ -1,9 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<<<<<<< HEAD
-<suite name="Suite D" parallel="tests" thread-count="4">
-=======
+
+
 <suite name="Suite D" parallel="tests" thread-count="7">
->>>>>>> refs/remotes/origin/Parallel_Run
+
 
 <listeners>
     <listener class-name="listener.TestsListenerAdapter" />
