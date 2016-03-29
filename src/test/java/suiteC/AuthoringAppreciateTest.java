@@ -73,7 +73,7 @@ public class AuthoringAppreciateTest extends TestBase {
 				
 				ob.navigate().to(System.getProperty("host"));
 				//ob.get(CONFIG.getProperty("testSiteName"));
-				new AuthoringTest().waitForTRHomePage();
+				pf.getAuthoringInstance(ob).waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	

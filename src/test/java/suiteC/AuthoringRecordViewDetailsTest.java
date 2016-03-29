@@ -70,7 +70,7 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
-				new AuthoringTest().waitForTRHomePage();
+				pf.getAuthoringInstance(ob).waitForTRHomePage();
 	}
 	
 	@Test(dependsOnMethods="testAuthoringTestAccount")

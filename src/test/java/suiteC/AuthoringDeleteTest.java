@@ -102,7 +102,7 @@ public class AuthoringDeleteTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle) throws Exception  {
 		try {
-			new AuthoringTest().waitForTRHomePage();
+			pf.getAuthoringInstance(ob).waitForTRHomePage();
 			new AuthoringTest().enterTRCredentials(username, password);
 			new AuthoringTest().clickLogin();
 			new AuthoringTest().searchArticle(article);
