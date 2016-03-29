@@ -143,7 +143,7 @@ public class EditPostTitleMinMaxLengthValidation extends TestBase{
 	}
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void reportDataSetResult() {
-		if(skip)
+		/*if(skip)
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
 		
 		else if(fail) {
@@ -153,7 +153,7 @@ public class EditPostTitleMinMaxLengthValidation extends TestBase{
 		}
 		else
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");
-		
+		*/
 		
 		skip=false;
 		fail=false;

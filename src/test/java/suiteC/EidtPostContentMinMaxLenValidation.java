@@ -142,7 +142,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 	}
 	@Test(dependsOnMethods="testMinMaxLengthValidation")
 	public void reportDataSetResult() {
-		if(skip)
+		/*if(skip)
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
 		
 		else if(fail) {
@@ -152,7 +152,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 		}
 		else
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");
-		
+		*/
 		
 		skip=false;
 		fail=false;
@@ -163,7 +163,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -171,7 +171,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 

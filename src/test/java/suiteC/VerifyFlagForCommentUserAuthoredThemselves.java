@@ -126,7 +126,7 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
+/*
 		if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
@@ -136,7 +136,7 @@ public class VerifyFlagForCommentUserAuthoredThemselves extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 }
