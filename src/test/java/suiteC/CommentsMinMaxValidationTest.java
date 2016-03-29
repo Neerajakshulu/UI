@@ -147,7 +147,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	
 	@Test(dependsOnMethods="commentMinMaxValidation")
 	public void reportDataSetResult() {
-		if(skip)
+		/*if(skip)
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "SKIP");
 		
 		else if(fail) {
@@ -156,7 +156,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "FAIL");
 		}
 		else
-			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");
+			TestUtil.reportDataSetResult(suiteCxls, this.getClass().getSimpleName(), count+2, "PASS");*/
 		
 		
 		skip=false;
@@ -169,12 +169,12 @@ public class CommentsMinMaxValidationTest extends TestBase {
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "FAIL");
 		else
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");
+			TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,this.getClass().getSimpleName()), "SKIP");*/
 	}
 	
 	/**
@@ -190,10 +190,9 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		Thread.sleep(4000);
-		
+		waitForAjax(ob);	
 		jsClick(ob,ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		Thread.sleep(4000);
+		waitForPageLoad(ob);
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {

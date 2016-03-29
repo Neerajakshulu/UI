@@ -102,7 +102,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+	/*	if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -110,7 +110,7 @@ public class ShareOwnPostOnTwitter extends TestBase{
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 

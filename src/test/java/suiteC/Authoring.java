@@ -34,6 +34,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public  void enterArticleComment(String addComments) throws InterruptedException  {
+		
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
@@ -45,7 +46,7 @@ public class Authoring  extends TestBase {
 		commentArea.click();
 		//scrollingToElementofAPage();
 		commentArea.sendKeys(addComments+RandomStringUtils.randomNumeric(3));
-		Thread.sleep(2000);
+		Thread.sleep(2000);//after entering the comments wait for submit button to get enabled or disabled
 	}
 	
 	
@@ -59,7 +60,7 @@ public class Authoring  extends TestBase {
 		commentArea.clear();
 		//scrollingToElementofAPage();
 		commentArea.sendKeys(addComments);
-		Thread.sleep(2000);
+		Thread.sleep(2000);//after entering the comments wait for submit button to get enabled or disabled
 	}
 	
 	
@@ -136,7 +137,7 @@ public class Authoring  extends TestBase {
 		if(attrStatus.contains("NONE")) {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
@@ -146,7 +147,7 @@ public class Authoring  extends TestBase {
 		else if (attrStatus.contains("UP")) {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
-			Thread.sleep(4000);
+			Thread.sleep(4000);//After clicking on Unlike button wait for status to change and count update
 			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
@@ -190,6 +191,7 @@ public class Authoring  extends TestBase {
 	public void selectArtcleWithComments(){
 	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
 	List<WebElement> itemList;
+	
 	while (true) {
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 		int commentsCount, itr = 1;
@@ -198,7 +200,7 @@ public class Authoring  extends TestBase {
 		for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 			strCmntCt = itemList.get(i)
 					.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-					.getText();
+					.getText().replaceAll(",", "").trim();
 			commentsCount = Integer.parseInt(strCmntCt);
 			if (commentsCount !=0) {
 				jsClick(ob,itemList.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));

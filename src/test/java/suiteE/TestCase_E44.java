@@ -63,7 +63,8 @@ public class TestCase_E44 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host);
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// 1)Login as user1 and publish a post
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();

@@ -83,7 +83,8 @@ public class TestCase_A1 extends TestBase{
 		System.out.println(email);
 		
 		//Navigate to TR login page
-		ob.navigate().to(host);
+//		ob.navigate().to(host);
+		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 //		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		

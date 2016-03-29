@@ -96,7 +96,7 @@ public class VerifyCancelFlagAction extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css")),
 					40);
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
-			Thread.sleep(5000);
+			Thread.sleep(5000);//Wait for flag modal to disappear
 			try {
 				boolean isFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
@@ -136,7 +136,7 @@ public class VerifyCancelFlagAction extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -145,7 +145,7 @@ public class VerifyCancelFlagAction extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 }
