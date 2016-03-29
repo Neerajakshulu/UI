@@ -163,7 +163,7 @@ public class PublishedAPostCommentCountTest extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -172,7 +172,7 @@ public class PublishedAPostCommentCountTest extends TestBase{
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 	

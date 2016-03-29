@@ -123,7 +123,7 @@ public class ApplicationLinksValidationTest extends TestBase {
 	public void reportTestResult() {
 
 		extent.endTest(test);
-
+/*
 		if (status == 1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
@@ -132,7 +132,7 @@ public class ApplicationLinksValidationTest extends TestBase {
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");*/
 	}
 
 }

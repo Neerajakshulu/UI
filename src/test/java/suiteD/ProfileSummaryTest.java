@@ -135,7 +135,7 @@ public class ProfileSummaryTest extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -143,7 +143,7 @@ public class ProfileSummaryTest extends TestBase {
 					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");
+					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");*/
 
 	}
 
