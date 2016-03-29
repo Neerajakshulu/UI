@@ -1,0 +1,306 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<<<<<<< HEAD
+<suite name="Suite D" parallel="tests" thread-count="4">
+=======
+<suite name="Suite D" parallel="tests" thread-count="7">
+>>>>>>> refs/remotes/origin/Parallel_Run
+
+<listeners>
+    <listener class-name="listener.TestsListenerAdapter" />
+</listeners>
+
+<parameter name="username" value="chinna.putha@thomsonreuters.com"/>
+<parameter name="password" value="Welcome01"/>
+	
+<test name="Follow_Other_Profile" preserve-order="true">
+	<parameter name="profileName" value="reddy"/>
+    <classes>
+       	<class name="suiteD.ProfileFollowTest" ></class> 
+    </classes>
+</test>
+
+ <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+    <classes>
+     	 <class name="suiteD.FindProfileTest" ></class>
+    </classes>
+</test>
+
+<test name="Others_Profile_Edit" preserve-order="true">
+    <classes>
+     	 <class name="suiteD.OtherProfileEditTest" ></class>
+    </classes>
+</test>
+
+<test name="Others_Profile_Follow_Unfollow_ProfilePage" preserve-order="true">
+	<parameter name="otherProfileName" value="hao"></parameter>
+    <classes>
+     	 <class name="suiteD.OtherProfilePageFollowTest" ></class>
+    </classes>
+</test>
+
+
+<test name="Validate_View_Profile" >
+    <classes>
+        <class name="suiteD.ViewProfileTest"></class> 
+    </classes>
+</test>
+
+<test name="Update_User_Own_Profile" >
+	<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india"/>
+    <classes>
+        <class name="suiteD.ProfileUpdateTest" ></class> 
+    </classes>
+</test>
+
+
+<test name="Validate_Application_Links" >
+	<parameter name="appLinks"
+	value="Web of Science|EndNote|InCites|ScholarOne Abstracts|ScholarOne Manuscripts" />
+    <classes>
+        <class name="suiteD.ApplicationLinksValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_Application_Header_and_Footer_Links" >
+	<parameter name="appHeadFooterLinks" value="Cookie Policy|Privacy Statement|Terms of Use"/>
+    <classes>
+        <class name="suiteD.AppHeaderFooterLinkValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_User_Own_Profile_Comments_Like" >
+    <classes>
+        <class name="suiteD.OwnProfileCommentsLikeTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_Other_User_Profile_Comments_Like" >
+	<parameter name="otherProfileName" value="deepak"/>
+    <classes>
+        <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_Add_Topic_InterestsAndSkillsUpdate" >
+	<parameter name="topics" value="tes|aut|dru"/>
+    <classes>
+        <class name="suiteD.ProfileInterestSkillsUpdateTest" ></class> 
+    </classes>
+</test>
+
+<test name="Validate_User_Own_Profile_Following_Others_Profiles" >
+	<parameter name="profileName" value="reddy"/>
+    <classes>
+        <class name="suiteD.ProfileFollowingOthersTest" ></class> 
+    </classes>
+</test>
+
+<test name="ProfileSummaryTest" >
+    <classes>
+        <class name="suiteD.ProfileSummaryTest" ></class> 
+    </classes>
+</test>
+
+<test name="ProfileFollowerTest" >
+    <classes>
+        <class name="suiteD.ProfileFollowerTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_Lastname">
+	<parameter name="lastName" value="reddy"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithLastNameTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_Role">
+	<parameter name="role" value="engineer"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithRoleTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_PrimaryInstitution">
+	<parameter name="primaryInstitution" value="thomson reuters"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithPrimaryInstitutionTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Search_with_Country">
+	<parameter name="country" value="United States of America"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithCountryTest" ></class> 
+    </classes>
+</test>
+
+
+<test name="Profile_Search_with_Interests">
+	<parameter name="interest" value="computers"></parameter>
+    <classes>
+        <class name="suiteD.FindProfileWithInterestTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Publish_A_Post">
+	<parameter name="myPost" value="Post for Testing "></parameter>
+	<parameter name="postContent" value="my post content "></parameter>
+    <classes>
+        <class name="suiteD.PublishAPostTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Publish_A_Post_Count_Validation">
+	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
+	<parameter name="password" value="Reddys@123"/>
+	<parameter name="myPost" value="Post for Testing Post count"></parameter>
+	<parameter name="postContent" value="my post content for post count "></parameter>
+    <classes>
+        <class name="suiteD.PublishAPostCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Publish_A_Post_Record_View_Page">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostNavigateToRVTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Post_Tab_Validation">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.ProfilePostsValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Post_Watchlist">
+	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
+	<parameter name="password" value="Reddys@123"/>
+    <classes>
+        <class name="suiteD.AddPostToWatchlistTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_PI_Typeahead">
+	<parameter name="piTypeahead" value="india"/>
+    <classes>
+        <class name="suiteD.ProfilePrimaryInstitutionTypeAheadTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_PI_Typeahead_Options_Validation">
+	<parameter name="oneChar" value="I"/>
+	<parameter name="twoChar" value="N"/>
+    <classes>
+        <class name="suiteD.ProfilePrimaryInstitutionTypeAheadMinCharTest" ></class> 
+    </classes>
+</test>
+
+<test name="Profile_Country_Typeahead">
+	<parameter name="countryTypeahead" value="In"/>
+	<parameter name="fullCountry" value="India"/>
+    <classes>
+        <class name="suiteD.ProfileTypeaheadCountySelectTest" ></class> 
+    </classes>
+</test>
+
+
+<test name="Profile_Country_Typeahead_Options">
+	<parameter name="oneChar" value="I"/>
+	<parameter name="twoChar" value="N"/>
+    <classes>
+        <class name="suiteD.ProfileCountryTypeaheadOptionsDisplayTest" ></class> 
+    </classes>
+</test>
+
+<test name="Topic_Typeahead_Options_Validation">
+	<parameter name="oneChar" value="T"/>
+	<parameter name="twoChar" value="te"/>
+    <classes>
+        <class name="suiteD.TopicTypeaheadValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="profile_tab_focus">
+    <classes>
+        <class name="suiteD.ProfileTabFocusTest" ></class> 
+    </classes>
+</test>
+
+<test name="post_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.PostTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="comments_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.CommentsTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Followers_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.FollowersTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Following_tab_infinite_Scroll">
+    <classes>
+        <class name="suiteD.FollowingTabInfiniteScrollValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="Post_like_count">
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostLikeCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="Publish_post_timestamp_validation">
+	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
+	<parameter name="password" value="Reddys@123"/>
+	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
+	<parameter name="postContent" value="my post content for RecordView page "></parameter>
+    <classes>
+        <class name="suiteD.PublishedAPostTimeStampTest" ></class> 
+    </classes>
+</test>
+
+<test name="Comments_Timestamp">
+    <classes>
+        <class name="suiteD.CommentsTabTimeStampValidationTest" ></class> 
+    </classes>
+</test>
+
+<test name="HCR_Profile_Badge">
+	<parameter name="hcrProfile" value="professor"></parameter>
+    <classes>
+        <class name="suiteD.HCRProfileBadgeTest" ></class> 
+    </classes>
+</test>
+
+<test name="Post_comment_count">
+	<parameter name="myPost" value="Post for Testing RecordView"/>
+	<parameter name="postContent" value="my post content for RecordView page "/>
+    <classes>
+        <class name="suiteD.PublishedAPostCommentCountTest" ></class> 
+    </classes>
+</test>
+
+<test name="other_profiles_watchlist_tab">
+	<parameter name="profile" value="hao"></parameter>
+    <classes>
+        <class name="suiteD.OtherProfileWatchlistTabTest" ></class> 
+    </classes>
+</test>
+
+
+</suite>
+
