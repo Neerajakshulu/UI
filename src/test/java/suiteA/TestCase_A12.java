@@ -228,14 +228,14 @@ public class TestCase_A12 extends TestBase{
 		
 		extent.endTest(test);
 		
-		if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteAxls, "Test Cases", TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteAxls, "Test Cases", TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "FAIL");
 		else
 			TestUtil.reportDataSetResult(suiteAxls, "Test Cases", TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "SKIP");
 		
-	
+	*/
 	}
 
 	@DataProvider

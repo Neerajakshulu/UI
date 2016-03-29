@@ -104,10 +104,10 @@ public class AddInternalLinksToComments extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	/*@AfterTest
+	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
+/*
 		if (status == 1)
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
@@ -117,7 +117,7 @@ public class AddInternalLinksToComments extends TestBase{
 		else
 			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
 					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
-
-	}*/
+*/
+	}
 	
 }
