@@ -60,7 +60,8 @@ public class TestCase_E38 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host);
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
@@ -91,7 +92,8 @@ public class TestCase_E38 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
