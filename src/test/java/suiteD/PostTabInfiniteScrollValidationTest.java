@@ -13,8 +13,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class PostTabInfiniteScrollValidationTest extends TestBase {
@@ -27,7 +27,7 @@ public class PostTabInfiniteScrollValidationTest extends TestBase {
 	static int status=1;
 	PageFactory pf = new PageFactory();
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var,
 				"Verify that Post tab infinite scroll displaying the more available records").assignCategory("Suite D");

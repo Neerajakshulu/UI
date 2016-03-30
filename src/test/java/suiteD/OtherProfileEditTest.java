@@ -13,10 +13,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import pages.ProfilePage;
-import pages.SearchProfile;
-import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 /**
@@ -40,7 +38,7 @@ public class OtherProfileEditTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
 				.startTest(var,
