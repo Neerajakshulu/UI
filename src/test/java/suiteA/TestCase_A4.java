@@ -86,7 +86,7 @@ public class TestCase_A4 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-		Thread.sleep(15000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")),20);
 		if(!checkElementPresence("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
@@ -107,7 +107,7 @@ public class TestCase_A4 extends TestBase{
 		}
 		
 		logout();
-		Thread.sleep(5000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")),8);
 		
 		if(!checkElementPresence("login_banner")){
 			

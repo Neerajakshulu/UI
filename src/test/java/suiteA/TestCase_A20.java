@@ -41,7 +41,7 @@ public class TestCase_A20 extends TestBase{
 	}
 	
 	@Test
-	public void testcaseA3() throws Exception{
+	public void testcaseA20() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
@@ -78,7 +78,7 @@ public class TestCase_A20 extends TestBase{
 //		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("new_TR_User_button"))).click();
-		Thread.sleep(4000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 15);
 		
 		if(!checkElementPresence("reg_register_button")){
 

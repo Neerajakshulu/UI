@@ -94,7 +94,7 @@ public class TestCase_A14 extends TestBase{
 		
 	
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		Thread.sleep(3000);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),5);
 		
 		boolean email_error=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).isDisplayed();
 		boolean firstName_error=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).isDisplayed();

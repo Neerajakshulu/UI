@@ -73,11 +73,10 @@ static int status=1;
 //				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-				Thread.sleep(5000);
-				
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
 				try{
 					ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
-					Thread.sleep(8000);
+					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_text_in_helpPage")),10);
 					Assert.assertEquals(checkElementPresence("help_text_in_helpPage") && checkElementPresence("feedback_text_in_helpPage"),true);
 					test.log(LogStatus.INFO," Help link is working as expected");
 				}catch(Throwable t){

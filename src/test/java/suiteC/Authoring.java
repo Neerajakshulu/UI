@@ -217,4 +217,9 @@ public class Authoring  extends TestBase {
 		waitForAjax(ob);
 	}
 	}
+	
+	public void waitForTRHomePage() throws InterruptedException {
+		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+		waitForPageLoad(ob);
+	}
 }

@@ -110,8 +110,7 @@ public class TestCase_A19 extends TestBase{
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-		Thread.sleep(2000);
-		
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),10);
 		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_emailError_label")));		
 				
 		

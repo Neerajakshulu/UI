@@ -80,8 +80,7 @@ public class TestCase_A21 extends TestBase {
 			ob.navigate().back();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("header_label")), 30);
 			logout();
-			Thread.sleep(5000);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL, "Preference page not opened");//extent reports

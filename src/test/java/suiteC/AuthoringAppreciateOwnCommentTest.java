@@ -73,7 +73,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 				maximizeWindow();
 				
 				ob.navigate().to(System.getProperty("host"));
-				new AuthoringTest().waitForTRHomePage();
+				pf.getAuthoringInstance(ob).waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	

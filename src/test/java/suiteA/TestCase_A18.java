@@ -83,7 +83,7 @@ public class TestCase_A18 extends TestBase{
 //	
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_cancel_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("LI_cancel_link"))).click();
-		Thread.sleep(5000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")),10);
 		
 		if(!checkElementPresence("login_banner")){
 			

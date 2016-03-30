@@ -91,8 +91,7 @@ public class TestCase_A2 extends TestBase{
 				}
 
 
-				Thread.sleep(10000);
-				
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 10);
 
 				//Verify that login is successful
 				if(!checkElementPresence("apps")){
@@ -118,8 +117,7 @@ public class TestCase_A2 extends TestBase{
 				}
 
 				logout();
-				Thread.sleep(5000);
-
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 				if(!checkElementPresence("login_banner")){
 
 					test.log(LogStatus.FAIL, "User not able to logout successfully");//extent reports
