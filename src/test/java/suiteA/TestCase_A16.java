@@ -165,7 +165,7 @@ public class TestCase_A16 extends TestBase{
 		ob.close();
 		ob.switchTo().window(al.get(0));
 		Thread.sleep(2000);
-//		ob.get("https://www.guerrillamail.com");
+		ob.get("https://www.guerrillamail.com");
 		email_list=ob.findElements(By.xpath(OR.getProperty("email_list")));
 		myE=email_list.get(0);
 		executor.executeScript("arguments[0].click();", myE);
