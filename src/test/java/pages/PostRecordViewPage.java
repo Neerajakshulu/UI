@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -334,7 +336,7 @@ public class PostRecordViewPage extends TestBase {
 		return result;
 	}
 
-	public void validateFollowOrUnfollow() throws InterruptedException {
+	public void validateFollowOrUnfollow(ExtentTest test) throws InterruptedException {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		String attribute = ob
@@ -379,7 +381,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 
 	
-	public void validateCommentNewlyAdded(String comment){
+	public void validateCommentNewlyAdded(String comment,ExtentTest test){
 		
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 180);
@@ -495,7 +497,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 	
 	
-	public   void validateAppreciationComment() throws Exception  {
+	public   void validateAppreciationComment(ExtentTest test) throws Exception  {
 		
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
 		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
@@ -540,7 +542,7 @@ public class PostRecordViewPage extends TestBase {
 			}
 	}
 	
-	public void validateFlagAndUnflagActionOnPost() throws Exception {
+	public void validateFlagAndUnflagActionOnPost(ExtentTest test) throws Exception {
 		waitForAjax(ob);
 		String attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
 		if(attribute.contains("flag-inactive")){
