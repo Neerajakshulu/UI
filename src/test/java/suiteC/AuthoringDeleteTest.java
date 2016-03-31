@@ -22,6 +22,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class AuthoringDeleteTest extends TestBase {
@@ -39,7 +40,7 @@ public class AuthoringDeleteTest extends TestBase {
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() throws Exception {
+		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 			String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 			test = extent.startTest(var, "Verify that user can delete the comments user authored themselves and validate the comment count").assignCategory("Suite C");
 			runmodes=TestUtil.getDataSetRunmodes(suiteCxls, this.getClass().getSimpleName());
@@ -102,7 +103,7 @@ public class AuthoringDeleteTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle) throws Exception  {
 		try {
-			new AuthoringTest().waitForTRHomePage();
+			pf.getAuthoringInstance(ob).waitForTRHomePage();
 			new AuthoringTest().enterTRCredentials(username, password);
 			new AuthoringTest().clickLogin();
 			new AuthoringTest().searchArticle(article);

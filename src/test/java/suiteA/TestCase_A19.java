@@ -1,15 +1,11 @@
 package suiteA;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -21,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 
@@ -35,7 +32,7 @@ public class TestCase_A19 extends TestBase{
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() throws Exception{
+		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 			test = extent.startTest(var, "Verify that following special characters are not allowed in EMAIL ADDRESS field in new TR user registration page:1--->*2--->(3--->)4--->&5)--->!").assignCategory("Suite A");
 			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
@@ -110,8 +107,7 @@ public class TestCase_A19 extends TestBase{
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-		Thread.sleep(2000);
-		
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),10);
 		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_emailError_label")));		
 				
 		

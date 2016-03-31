@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class EidtPostContentMinMaxLenValidation extends TestBase{
@@ -36,7 +37,7 @@ public class EidtPostContentMinMaxLenValidation extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var, "EDIT POST:Verfiy that proper error messages are displyed for min max length validation of POST CONTENT")
 				.assignCategory("Suite C");

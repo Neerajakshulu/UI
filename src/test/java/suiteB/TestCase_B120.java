@@ -2,13 +2,8 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.annotation.ThreadSafe;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_B120 extends TestBase {
@@ -30,7 +26,7 @@ public class TestCase_B120 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -181,15 +177,15 @@ public class TestCase_B120 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+//		if (status == 1)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+//		else if (status == 2)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+//		else
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

@@ -19,8 +19,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_F18 extends TestBase {
@@ -32,7 +32,7 @@ public class TestCase_F18 extends TestBase {
 		// 3--->SKIP
 		// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() throws Exception {
+		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 			String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 					Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 			test = extent.startTest(var, "Verify that Featured Post move down when new notification event occur")

@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class AuthoringAppreciateTest extends TestBase {
@@ -31,7 +32,7 @@ public class AuthoringAppreciateTest extends TestBase {
 	PageFactory pf=new PageFactory();
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var, "Verfiy that user can appreciate comments made by other neon users and validate appreciation count").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");
@@ -73,7 +74,7 @@ public class AuthoringAppreciateTest extends TestBase {
 				
 				ob.navigate().to(System.getProperty("host"));
 				//ob.get(CONFIG.getProperty("testSiteName"));
-				new AuthoringTest().waitForTRHomePage();
+				pf.getAuthoringInstance(ob).waitForTRHomePage();
 				//authoringAppreciation(username, password, article, completeArticle, addComments);
 	}
 	

@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_A24 extends TestBase {
@@ -24,7 +25,7 @@ static int status=1;
 	
 	
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify that TR account gets locked after 5 consecutive unsuccessful login attempts").assignCategory("Suite A");
 
@@ -64,8 +65,6 @@ static int status=1;
 				System.out.println(firstName + " " + lastName);
 				String email = createNewUser(firstName, lastName);
 				test.log(LogStatus.INFO," New User created");
-				Thread.sleep(5000);
-				Thread.sleep(5000);
 				new PageFactory().getLoginTRInstance(ob).logOutApp();
 				test.log(LogStatus.INFO," Attempting Login by providing wrong password");
 				ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
@@ -79,7 +78,7 @@ static int status=1;
 					Thread.sleep(5000);
 				}
 				test.log(LogStatus.INFO," 5 unsuccessfull login attempts");
-				Thread.sleep(8000);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_lock_message")),10);
 				String message=ob.findElement(By.xpath(OR.getProperty("account_lock_message"))).getText();
 				String expectedMessage="Your account has been locked out due to 5 invalid sign in attempts. Please wait 30 minutes, then try again.";
 				System.out.println(message);

@@ -2,31 +2,21 @@ package suiteA;
 
 
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 
@@ -39,7 +29,7 @@ public class TestCase_A14 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify that user is not able to submit new TR user registration form without filling in the required fields").assignCategory("Suite A");
 		
@@ -94,7 +84,7 @@ public class TestCase_A14 extends TestBase{
 		
 	
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		Thread.sleep(3000);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),5);
 		
 		boolean email_error=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).isDisplayed();
 		boolean firstName_error=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).isDisplayed();

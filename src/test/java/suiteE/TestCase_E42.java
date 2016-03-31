@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
@@ -32,7 +33,7 @@ public class TestCase_E42 extends TestBase {
 	// Checking whether this test case should be skipped or not
 
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -243,7 +244,7 @@ public class TestCase_E42 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
 					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -252,7 +253,7 @@ public class TestCase_E42 extends TestBase {
 		else
 			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
 					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-
+*/
 	}
 
 }

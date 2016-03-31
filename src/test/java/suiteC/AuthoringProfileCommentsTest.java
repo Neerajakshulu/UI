@@ -20,6 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class AuthoringProfileCommentsTest extends TestBase {
@@ -37,7 +38,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	
 	    // Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() throws Exception {
+		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 			String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 			test = extent.startTest(var, "Verify that comments added by the neon user are listed in profile page of the user").assignCategory("Suite C");
 			//load the run modes of the tests			
@@ -76,7 +77,7 @@ public class AuthoringProfileCommentsTest extends TestBase {
 						maximizeWindow();
 						ob.navigate().to(System.getProperty("host"));
 						try {
-						new AuthoringTest().waitForTRHomePage();
+							pf.getAuthoringInstance(ob).waitForTRHomePage();
 						performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 						closeBrowser();
 					} catch (Throwable t) {

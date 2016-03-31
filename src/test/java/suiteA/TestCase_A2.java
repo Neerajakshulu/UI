@@ -13,11 +13,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.ErrorUtil;
-import util.TestUtil;
-import base.TestBase;
-
 import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import util.ErrorUtil;
+import util.ExtentManager;
+import util.TestUtil;
 
 
 public class TestCase_A2 extends TestBase{
@@ -29,7 +30,8 @@ public class TestCase_A2 extends TestBase{
 	//      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ 
+		extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify that existing TR user is able to login successfully and that case-sensitivity of email id doesn't have any effect on login process").assignCategory("Suite A");
 
@@ -91,8 +93,7 @@ public class TestCase_A2 extends TestBase{
 				}
 
 
-				Thread.sleep(10000);
-				
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 10);
 
 				//Verify that login is successful
 				if(!checkElementPresence("apps")){
@@ -118,8 +119,7 @@ public class TestCase_A2 extends TestBase{
 				}
 
 				logout();
-				Thread.sleep(5000);
-
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 				if(!checkElementPresence("login_banner")){
 
 					test.log(LogStatus.FAIL, "User not able to logout successfully");//extent reports

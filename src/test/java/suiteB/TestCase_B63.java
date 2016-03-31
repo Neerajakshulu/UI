@@ -2,11 +2,9 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -214,17 +212,17 @@ public class TestCase_B63 extends TestBase {
 
 	@AfterTest
 	public void reportTestResult() {
-		extent.endTest(test);
-
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+//		extent.endTest(test);
+//
+//		if (status == 1)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+//		else if (status == 2)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+//		else
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

@@ -2,28 +2,20 @@ package suiteA;
 
 
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 
@@ -36,7 +28,7 @@ public class TestCase_A4 extends TestBase{
 //      3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify that existing FB user is able to login and logout successfully").assignCategory("Suite A");
 		
@@ -86,7 +78,7 @@ public class TestCase_A4 extends TestBase{
 		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-		Thread.sleep(15000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")),20);
 		if(!checkElementPresence("apps")){
 			
 			test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");//extent reports
@@ -107,7 +99,7 @@ public class TestCase_A4 extends TestBase{
 		}
 		
 		logout();
-		Thread.sleep(5000);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")),8);
 		
 		if(!checkElementPresence("login_banner")){
 			

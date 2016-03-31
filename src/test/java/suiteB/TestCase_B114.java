@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_B114 extends TestBase {
@@ -29,7 +30,7 @@ static int status=1;
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{
-		
+		extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify that left navigation pane content type is retained when user navigates back to PATENTS search results page from record view page").assignCategory("Suite B");
 		
@@ -131,12 +132,12 @@ static int status=1;
 	public void reportTestResult(){
 		extent.endTest(test);
 		
-		if(status==1)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "PASS");
-		else if(status==2)
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "SKIP");
+//		if(status==1)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "PASS");
+//		else if(status==2)
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "FAIL");
+//		else
+//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases", TestUtil.getRowNum(suiteBxls,this.getClass().getSimpleName()), "SKIP");
 	
 	}
 	

@@ -34,7 +34,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			if (headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")) {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK);
 				waitForElementTobePresent(ob, By.tagName("h3"), 90);
-				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Cookie Policy","Cookies","Cookie name","Description","Additional information");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String cookieText=ob.findElement(By.tagName("h3")).getText();
 				//System.out.println("cookie text-->"+cookieText);

@@ -16,12 +16,13 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_A21 extends TestBase {
 	static int status=1;
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify View additional email preferences link is working").assignCategory("Suite A");
 
@@ -80,8 +81,7 @@ public class TestCase_A21 extends TestBase {
 			ob.navigate().back();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("header_label")), 30);
 			logout();
-			Thread.sleep(5000);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 		}
 		catch(Throwable t){
 			test.log(LogStatus.FAIL, "Preference page not opened");//extent reports

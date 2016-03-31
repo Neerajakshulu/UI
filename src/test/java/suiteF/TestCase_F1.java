@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class TestCase_F1 extends TestBase {
@@ -35,7 +36,7 @@ public class TestCase_F1 extends TestBase {
 	 * @throws NumberFormatException
 	 */
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
