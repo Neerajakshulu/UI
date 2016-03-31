@@ -6,17 +6,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.TestUtil;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ExtentManager;
+import util.TestUtil;
 
 public class TestCase_A22 extends TestBase {
 	static int status=1;
 
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 		test = extent.startTest(var, "Verify the checkbox for \"Receive email notifications for likes,comments and other activity\" is working correctly").assignCategory("Suite A");
 

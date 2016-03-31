@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class AuthoringAppreciateOwnCommentTest extends TestBase{
@@ -32,7 +33,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 	PageFactory pf = new PageFactory();
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var,"Verfiy that user can appreciate their own comment validate appreciation count").assignCategory("Suite C");
 		//test.log(LogStatus.INFO, "****************************");

@@ -1,15 +1,9 @@
 package suiteA;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -21,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 
@@ -35,7 +30,7 @@ public class TestCase_A8 extends TestBase{
 	
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
-		public void beforeTest() throws Exception{
+		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
 			test = extent.startTest(var, "Verify that user is not able to login using LI option for different negative combinations of username/password").assignCategory("Suite A");
 //			test.log(LogStatus.INFO, "****************************");

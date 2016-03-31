@@ -22,6 +22,7 @@ import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
@@ -44,7 +45,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent
 				.startTest(var,

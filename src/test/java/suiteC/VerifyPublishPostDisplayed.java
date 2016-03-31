@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
@@ -27,7 +28,7 @@ public class VerifyPublishPostDisplayed extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var, "Verify that Publish a Post option is displayed in Home page and all Record view pages like Article,Post ,Patent")
 				.assignCategory("Suite C");

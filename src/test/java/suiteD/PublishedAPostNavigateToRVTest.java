@@ -16,8 +16,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class PublishedAPostNavigateToRVTest extends TestBase{
@@ -33,7 +33,7 @@ public class PublishedAPostNavigateToRVTest extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var, "verify that the total count of posts available under 'POST' tab of user profile")
 				.assignCategory("Suite D");

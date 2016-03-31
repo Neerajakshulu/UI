@@ -15,8 +15,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import suiteC.LoginTR;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 public class ProfileSummaryTest extends TestBase {
@@ -29,7 +29,7 @@ public class ProfileSummaryTest extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent
 				.startTest(var,

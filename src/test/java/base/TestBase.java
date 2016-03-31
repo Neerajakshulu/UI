@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+//import util.ExtentManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -62,8 +63,11 @@ public class TestBase {
 
 	public static boolean isInitalized = false;
 	public  WebDriver ob = null;
-	public static ExtentReports extent = null;
-	public static ExtentTest test = null;
+	
+	protected ExtentReports extent;
+    protected final String filePath = "testReports/test_report.html";
+    protected ExtentTest test;
+
 
 	public static String host = null;
 	public static String user1, user2, user3;
@@ -108,6 +112,11 @@ public class TestBase {
 			
 		}
 	}
+	
+//	 @BeforeClass
+//	    public void beforeClass() {
+//	        extent = ExtentManager.getReporter(filePath);
+//	    }
 
 	@AfterSuite
 	public void afterSuite() {
@@ -121,7 +130,7 @@ public class TestBase {
 		// logs
 		if (!isInitalized) {
 			// extent-reports
-			extent = getInstance();
+//			extent = getInstance();
 			// config
 			CONFIG = new Properties();
 			// FileInputStream ip = new
@@ -154,18 +163,18 @@ public class TestBase {
 
 	}
 
-	public static ExtentReports getInstance() {
-		if (extent == null) {
-			extent = new ExtentReports("testReports/test_report.html", true);
-
-			// optional
-			extent.config().documentTitle("Automation Report").reportName("Regression").reportHeadline("1-P PLATFORM");
-
-			// optional
-			extent.addSystemInfo("Selenium Version", "2.43").addSystemInfo("Environment", "stage");
-		}
-		return extent;
-	}
+//	public static ExtentReports getInstance() {
+//		if (extent == null) {
+//			extent = new ExtentReports("testReports/test_report.html", true);
+//
+//			// optional
+//			extent.config().documentTitle("Automation Report").reportName("Regression").reportHeadline("1-P PLATFORM");
+//
+//			// optional
+//			extent.addSystemInfo("Selenium Version", "2.43").addSystemInfo("Environment", "stage");
+//		}
+//		return extent;
+//	}
 	
 	// Opening via Sauce Labs
 	public void openBrowser() throws Exception {

@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
+import util.ExtentManager;
 import util.TestUtil;
 
 /**
@@ -35,7 +36,7 @@ public class ProfileFollowTest extends TestBase {
 	
 	@BeforeTest
 	public void beforeTest() throws  Exception {
-		
+		extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		//System.out.println("column name-->"+var);
 		test = extent.startTest(var,
