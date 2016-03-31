@@ -85,9 +85,9 @@ public class AuthoringAppreciateTest extends TestBase {
 
 		try {
 			
-			new AuthoringTest().enterTRCredentials(username, password);
-			new AuthoringTest().clickLogin();
-			new AuthoringTest().searchArticle(article);
+			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
+			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			validateAppreciationComment();
 			validateAppreciationComment();

@@ -80,10 +80,10 @@ public class AuthoringRecordViewDetailsTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 
 		try {
-			new AuthoringTest().enterTRCredentials(username, password);
-			new AuthoringTest().clickLogin();
-			new AuthoringTest().searchArticle(article);
-			new AuthoringTest().chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
+			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			recordViewDetailsLinkValidation();
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" Test execution ends ");
 			pf.getLoginTRInstance(ob).logOutApp();

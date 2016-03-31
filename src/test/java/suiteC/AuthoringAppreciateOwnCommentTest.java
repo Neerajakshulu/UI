@@ -85,10 +85,10 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 
 		try {
 			
-			new AuthoringTest().enterTRCredentials(username, password);
-			new AuthoringTest().clickLogin();
-			new AuthoringTest().searchArticle(article);
-			new AuthoringTest().chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
+			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			Thread.sleep(6000);//wait for new comment to get added and displayed.

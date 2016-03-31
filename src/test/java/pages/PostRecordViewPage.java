@@ -394,7 +394,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	
 	public void shareRecordOnFB(String fbusername,String fbpassword) throws Exception{
-		test.log(LogStatus.INFO,"Sharing Article on Facebook");
+	//	test.log(LogStatus.INFO,"Sharing Article on Facebook");
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 		//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
@@ -422,7 +422,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	
 	public void shareOnLI(String liusername, String lipassword) throws Exception {
-			test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
+			//test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
@@ -452,7 +452,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	public void shareOnTwitter(String tusername,String tpassword) throws Exception {
 		
-			test.log(LogStatus.INFO,"Sharing Article on Twitter");
+			//test.log(LogStatus.INFO,"Sharing Article on Twitter");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
