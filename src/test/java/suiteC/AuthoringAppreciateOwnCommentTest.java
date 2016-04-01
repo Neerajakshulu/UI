@@ -140,7 +140,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		scrollingToElementofAPage();
-		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
@@ -152,7 +152,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   //status=2;
@@ -169,7 +169,7 @@ public class AuthoringAppreciateOwnCommentTest extends TestBase{
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			
 			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   status=2;

@@ -110,7 +110,7 @@ public class PostRecordViewPage extends TestBase {
 		countBefore = Integer.parseInt(ob
 				.findElement(
 						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-				.getText());
+				.getText().replaceAll(",", "").trim());
 		appreciationButton = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS.toString()));
 
@@ -120,7 +120,7 @@ public class PostRecordViewPage extends TestBase {
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-					.getText());
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore + 1);
 				test.log(LogStatus.PASS, "Appreciation action on post is working as expected");
@@ -136,7 +136,7 @@ public class PostRecordViewPage extends TestBase {
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-					.getText());
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore - 1);
 				test.log(LogStatus.PASS, "un Appreciation action on post is working as expected");
@@ -375,7 +375,7 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString()), 90);
 		String count=ob.findElement(
-				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).getText();	
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).getText().replaceAll(",", "").trim();	
 		
 		return Integer.parseInt(count);
 	}
@@ -508,7 +508,7 @@ public class PostRecordViewPage extends TestBase {
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		scrollingToElementofAPage();
-		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
@@ -519,7 +519,7 @@ public class PostRecordViewPage extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -532,7 +532,7 @@ public class PostRecordViewPage extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");

@@ -30,7 +30,7 @@ public class Authoring  extends TestBase {
 	
 	public  int getCommentCount() throws InterruptedException  {
 		waitForPageLoad(ob);
-		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
+		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText().replaceAll(",", "").trim();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 			//System.out.println("num length-->"+num[num.length-1]);
 		return Integer.parseInt(commentSizeBeforeAdd);
@@ -131,7 +131,7 @@ public class Authoring  extends TestBase {
 		System.out.println("app sub divs-->"+apprSubDivs.size());
 		scrollingToElementofAPage();
 		apprSubDivs.get(1).getText();
-		int apprEarCount=Integer.parseInt(apprSubDivs.get(1).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.get(0).findElement(By.tagName("button")).getAttribute("ng-click");
@@ -141,7 +141,7 @@ public class Authoring  extends TestBase {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
 			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -151,7 +151,7 @@ public class Authoring  extends TestBase {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
 			Thread.sleep(4000);//After clicking on Unlike button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
