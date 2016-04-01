@@ -5,6 +5,10 @@ public class TestUtil {
 	
 	// finds if the test suite is runnable 
 		public static boolean isSuiteRunnable(Xls_Reader xls , String suiteName){
+			System.out.println("suiteName="+suiteName);
+			
+			System.out.println("suite row count="+xls.getRowCount("Test Suite"));
+			
 			boolean isExecutable=false;
 			for(int i=2; i <= xls.getRowCount("Test Suite") ;i++ ){
 				//String suite = xls.getCellData("Test Suite", "TSID", i);
@@ -20,6 +24,9 @@ public class TestUtil {
 
 			}
 			xls=null; // release memory
+			
+			System.out.println("isExecutable="+isExecutable);
+			
 			return isExecutable;
 			
 		}
@@ -27,6 +34,10 @@ public class TestUtil {
 		
 		// returns true if runmode of the test is equal to Y
 		public static boolean isTestCaseRunnable(Xls_Reader xls, String testCaseName){
+			
+			System.out.println("testCaseName="+testCaseName);
+			System.out.println("xls row count="+xls.getRowCount("Test Cases"));
+			
 			boolean isExecutable=false;
 			for(int i=2; i<= xls.getRowCount("Test Cases") ; i++){
 				//String tcid=xls.getCellData("Test Cases", "TCID", i);
@@ -42,7 +53,7 @@ public class TestUtil {
 					}
 				}
 			}
-			
+			System.out.println("isExecutable="+isExecutable);
 			return isExecutable;
 			
 		}

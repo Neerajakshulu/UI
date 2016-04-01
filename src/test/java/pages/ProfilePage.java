@@ -394,6 +394,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment like not done
 	 */
 	public void commentAppreciation() throws Exception {
+		BrowserWaits.waitTime(10);
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
 		String tooltipBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
@@ -569,8 +570,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public  String getFirstPostTitle() {
+	public  String getFirstPostTitle() throws InterruptedException {
+		BrowserWaits.waitTime(8);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		String postTitle = ob

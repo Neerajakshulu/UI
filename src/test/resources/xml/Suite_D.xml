@@ -288,6 +288,8 @@
 </test>
 
 <test name="Post_comment_count">
+	<parameter name="username" value="avinash.p1229@gmail.com"/>
+	<parameter name="password" value="1Platform"/>
 	<parameter name="myPost" value="Post for Testing RecordView"/>
 	<parameter name="postContent" value="my post content for RecordView page "/>
     <classes>
