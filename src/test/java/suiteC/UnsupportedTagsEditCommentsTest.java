@@ -71,8 +71,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
-				ob.navigate().to(System.getProperty("host"));
-				//ob.get(CONFIG.getProperty("testSiteName"));
+				//ob.navigate().to(System.getProperty("host"));
+				ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")

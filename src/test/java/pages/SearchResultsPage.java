@@ -154,7 +154,7 @@ public  List<String> getAuthorDetailsOfPost() throws InterruptedException{
 
 	public  void clickOnPeopleName(String title) throws Exception {
 		List<WebElement> records;
-
+		waitForAjax(ob);
 		while (true) {
 			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 			int itr = 1;

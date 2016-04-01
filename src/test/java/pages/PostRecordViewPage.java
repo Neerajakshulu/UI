@@ -88,7 +88,7 @@ public class PostRecordViewPage extends TestBase {
 	public void clickOnEditButton() {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString()),
 				180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString())).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString())));
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class PostRecordViewPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_STOP_WATCH_CSS.toString())).click();
 	}
 
-	public boolean validateLikeAndUnlikePostActions() throws InterruptedException {
+	public boolean validateLikeAndUnlikePostActions(ExtentTest test) throws InterruptedException {
 		boolean result;
 		WebElement appreciationButton;
 		int countBefore, countAfter;
