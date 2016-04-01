@@ -570,8 +570,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public  String getFirstPostTitle() {
+	public  String getFirstPostTitle() throws InterruptedException {
+		BrowserWaits.waitTime(8);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		String postTitle = ob
