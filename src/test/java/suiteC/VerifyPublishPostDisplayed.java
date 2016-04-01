@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -59,8 +60,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
@@ -83,7 +84,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Bio");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 40);
+			BrowserWaits.waitTime(10);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 60);
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString())).click();
