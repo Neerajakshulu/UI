@@ -79,11 +79,12 @@ public class VerifyDraftPostDisplayInUserOwnProfile extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the Post as a draft");
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			int postCountAfter=pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);
-			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			
 			String postTitle=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
-					.getText();
+					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter==(postCountBefore+1) && postString.equals(postTitle));
 				test.log(LogStatus.PASS, "Draft Post section is present in the user profile");

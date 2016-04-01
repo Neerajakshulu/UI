@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -85,6 +86,7 @@ public class AddInternalLinksToComments extends TestBase{
 
 			}
 			ob.navigate().back();
+			BrowserWaits.waitTime(10);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

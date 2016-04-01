@@ -62,8 +62,8 @@ public class VerifySavePostAsDraft extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
@@ -84,7 +84,7 @@ public class VerifySavePostAsDraft extends TestBase {
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
-					.getText();
+					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter==(postCountBefore+1) && postString.equals(postTitle));
 				test.log(LogStatus.PASS, "Draft Post count is  incremented and post is present in saved drafts section");

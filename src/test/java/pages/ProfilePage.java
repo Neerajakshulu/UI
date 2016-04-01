@@ -819,6 +819,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
+		waitForAjax(ob);
 	}
 	
 	public  boolean validatePublishButton() {
@@ -1135,7 +1136,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
 						.replaceAll("TITLE", postString)),
-				30);
+				60);
 
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
 				.replaceAll("TITLE", postString))).click();

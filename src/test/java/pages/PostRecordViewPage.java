@@ -371,6 +371,7 @@ public class PostRecordViewPage extends TestBase {
 
 	public  int getCommentCount() throws Exception {
 		//pf.waitTime(10);
+		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString()), 90);
