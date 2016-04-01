@@ -161,6 +161,8 @@
 </test>
 
 <test name="Profile_Publish_A_Post_Record_View_Page">
+	<parameter name="username" value="avinash.p1229@gmail.com"/>
+	<parameter name="password" value="1Platform"/>
 	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 	<parameter name="postContent" value="my post content for RecordView page "></parameter>
     <classes>
