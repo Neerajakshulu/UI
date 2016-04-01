@@ -73,7 +73,9 @@ public class TestBase {
 	public static String user1, user2, user3;
 	public static String fn1, fn2, ln1, ln2, fn3, ln3;
 	//public static int xRows, xCols;
-	public static String[][] xData;
+	//made changes by sachin
+	//public static String[][] xData;
+	private String[][] xData;
 	public static int count=0;
 
 	@BeforeSuite
