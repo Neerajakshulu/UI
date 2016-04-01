@@ -96,8 +96,8 @@ public class AuthoringProfileCommentsTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle, String addComments) throws Exception  {
 		
-		new AuthoringTest().enterTRCredentials(username, password);
-		new AuthoringTest().clickLogin();
+		pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
+		pf.getAuthoringInstance(ob).clickLogin();
 		//Get Total No.of comments
 		totalProfileCommentsBeforeAdd=getProfleComments();
 		System.out.println("comments Before-->"+totalProfileCommentsBeforeAdd);

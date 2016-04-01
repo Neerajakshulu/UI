@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -108,7 +110,7 @@ public class PostRecordViewPage extends TestBase {
 		countBefore = Integer.parseInt(ob
 				.findElement(
 						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-				.getText());
+				.getText().replaceAll(",", "").trim());
 		appreciationButton = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS.toString()));
 
@@ -118,7 +120,7 @@ public class PostRecordViewPage extends TestBase {
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-					.getText());
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore + 1);
 				test.log(LogStatus.PASS, "Appreciation action on post is working as expected");
@@ -134,7 +136,7 @@ public class PostRecordViewPage extends TestBase {
 			countAfter = Integer.parseInt(ob
 					.findElement(
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()))
-					.getText());
+					.getText().replaceAll(",", "").trim());
 			try {
 				Assert.assertEquals(countAfter, countBefore - 1);
 				test.log(LogStatus.PASS, "un Appreciation action on post is working as expected");
@@ -334,7 +336,7 @@ public class PostRecordViewPage extends TestBase {
 		return result;
 	}
 
-	public void validateFollowOrUnfollow() throws InterruptedException {
+	public void validateFollowOrUnfollow(ExtentTest test) throws InterruptedException {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		String attribute = ob
@@ -373,13 +375,13 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString()), 90);
 		String count=ob.findElement(
-				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).getText();	
+				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH.toString())).getText().replaceAll(",", "").trim();	
 		
 		return Integer.parseInt(count);
 	}
 
 	
-	public void validateCommentNewlyAdded(String comment){
+	public void validateCommentNewlyAdded(String comment,ExtentTest test){
 		
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 180);
@@ -394,7 +396,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	
 	public void shareRecordOnFB(String fbusername,String fbpassword) throws Exception{
-		test.log(LogStatus.INFO,"Sharing Article on Facebook");
+	//	test.log(LogStatus.INFO,"Sharing Article on Facebook");
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 		//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
@@ -422,7 +424,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	
 	public void shareOnLI(String liusername, String lipassword) throws Exception {
-			test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
+			//test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
@@ -452,7 +454,7 @@ public class PostRecordViewPage extends TestBase {
 	
 	public void shareOnTwitter(String tusername,String tpassword) throws Exception {
 		
-			test.log(LogStatus.INFO,"Sharing Article on Twitter");
+			//test.log(LogStatus.INFO,"Sharing Article on Twitter");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString())));
 			//pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
@@ -495,7 +497,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 	
 	
-	public   void validateAppreciationComment() throws Exception  {
+	public   void validateAppreciationComment(ExtentTest test) throws Exception  {
 		
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
 		List<WebElement> apprDivs=ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
@@ -506,7 +508,7 @@ public class PostRecordViewPage extends TestBase {
 		//List<WebElement> apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"+apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		scrollingToElementofAPage();
-		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
@@ -517,7 +519,7 @@ public class PostRecordViewPage extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);//After clicking on unlike button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -530,7 +532,7 @@ public class PostRecordViewPage extends TestBase {
 			JavascriptExecutor exe= (JavascriptExecutor)ob;
 			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
 			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText().replaceAll(",", "").trim());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -540,7 +542,7 @@ public class PostRecordViewPage extends TestBase {
 			}
 	}
 	
-	public void validateFlagAndUnflagActionOnPost() throws Exception {
+	public void validateFlagAndUnflagActionOnPost(ExtentTest test) throws Exception {
 		waitForAjax(ob);
 		String attribute=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
 		if(attribute.contains("flag-inactive")){

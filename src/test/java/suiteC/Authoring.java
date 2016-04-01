@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import base.TestBase;
@@ -18,7 +21,7 @@ public class Authoring  extends TestBase {
 
 	static int commentSizeBeforeAdd;
 	static int commentSizeAfterAdd;
-	PageFactory pf;
+	PageFactory pf;static int time=15;
 	
 	public Authoring(WebDriver ob) {
 		this.ob=ob;
@@ -27,7 +30,7 @@ public class Authoring  extends TestBase {
 	
 	public  int getCommentCount() throws InterruptedException  {
 		waitForPageLoad(ob);
-		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText();
+		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText().replaceAll(",", "").trim();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 			//System.out.println("num length-->"+num[num.length-1]);
 		return Integer.parseInt(commentSizeBeforeAdd);
@@ -128,7 +131,7 @@ public class Authoring  extends TestBase {
 		System.out.println("app sub divs-->"+apprSubDivs.size());
 		scrollingToElementofAPage();
 		apprSubDivs.get(1).getText();
-		int apprEarCount=Integer.parseInt(apprSubDivs.get(1).getText());
+		int apprEarCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 		System.out.println("Before count-->"+apprEarCount);
 		
 		String attrStatus=apprSubDivs.get(0).findElement(By.tagName("button")).getAttribute("ng-click");
@@ -138,7 +141,7 @@ public class Authoring  extends TestBase {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
 			Thread.sleep(4000);//After clicking on like button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 			System.out.println("Already liked  After count-->"+apprAftCount);
 			   if(!(apprAftCount<apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -148,7 +151,7 @@ public class Authoring  extends TestBase {
 			scrollingToElementofAPage();
 			apprSubDivs.get(0).findElement(By.tagName("button")).click();
 			Thread.sleep(4000);//After clicking on Unlike button wait for status to change and count update
-			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText());
+			int apprAftCount=Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
 			System.out.println("Not liked --After count-->"+apprAftCount);
 			   if(!(apprAftCount>apprEarCount)) {
 				   throw new Exception("Comment Appreciation not happended");
@@ -222,4 +225,44 @@ public class Authoring  extends TestBase {
 		//ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
 		waitForPageLoad(ob);
 	}
-}
+	
+	public void enterTRCredentials(String userName, String password) {
+		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+	    waitForElementTobeVisible(ob,By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+	}
+	
+	public void clickLogin() throws InterruptedException {
+		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
+		waitForPageLoad(ob);
+		//waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
+		//waitUntilElementClickable("Home");
+	}
+	
+	public void searchArticle(String article) throws InterruptedException {
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
+		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		waitForPageLoad(ob);
+	}
+	
+	public void chooseArticle(String linkName) throws InterruptedException {
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		waitForPageLoad(ob);
+	}
+	
+	public void waitUntilTextPresent(String locator,String text){
+		try {
+			WebDriverWait wait = new WebDriverWait(ob, time);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator),text));
+		} catch (TimeoutException e) {
+			throw new TimeoutException("Failed to find element Locator , after waiting for " + time
+					+ "ms");
+		}
+	}
+	
+	
+	}
+
