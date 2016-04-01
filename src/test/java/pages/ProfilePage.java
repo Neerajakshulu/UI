@@ -363,6 +363,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Following tab is not click able
 	 */
 	public void clickFollowingTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
@@ -372,6 +373,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Followers tab is not click able
 	 */
 	public void clickFollowersTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
 		waitForAjax(ob);
 	}
@@ -381,6 +383,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Posts tab is not click able
 	 */
 	public void clickPostsTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
