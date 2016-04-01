@@ -103,9 +103,10 @@ public class AuthoringDeleteTest extends TestBase {
 	public void performAuthoringCommentOperations(String username,String password,
 			String article,String completeArticle) throws Exception  {
 		try {
+			
+			
 			pf.getAuthoringInstance(ob).waitForTRHomePage();
-			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
-			pf.getAuthoringInstance(ob).clickLogin();
+			loginAs("USERNAME2", "PASSWORD2");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			pf.getAuthoringInstance(ob).enterArticleComment("Test comments");

@@ -72,7 +72,7 @@ public class TestBase {
 	public static String host = null;
 	public static String user1, user2, user3;
 	public static String fn1, fn2, ln1, ln2, fn3, ln3;
-	public static int xRows, xCols;
+	//public static int xRows, xCols;
 	public static String[][] xData;
 	public static int count=0;
 
@@ -802,6 +802,7 @@ public class TestBase {
 
 	// Method to read excel worksheet
 	public String xlRead(String sPath, int r, int c) throws Exception {
+		int xRows, xCols;
 		File myxl = new File(sPath);
 		FileInputStream myStream = new FileInputStream(myxl);
 
@@ -825,6 +826,7 @@ public class TestBase {
 	}
 
 	public String xlRead2(String sPath, String cellValue, int c) throws Exception {
+		int xRows, xCols;
 		int r = 0;
 		File myxl = new File(sPath);
 		FileInputStream myStream = new FileInputStream(myxl);
