@@ -353,6 +353,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment tab is not click able
 	 */
 	public void clickCommentsTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
 		waitForAjax(ob);
 	}
@@ -444,7 +445,7 @@ public class ProfilePage  extends TestBase {
 				break;
 			}
 		}
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+
 	}
 
 	/**
@@ -805,7 +806,8 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 				.click();
 	}
 	
-	public void clickOnDraftPostsTab() {
+	public void clickOnDraftPostsTab() throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);	
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))

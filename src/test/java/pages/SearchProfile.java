@@ -69,7 +69,8 @@ public class SearchProfile  extends TestBase {
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public void clickPeople() throws Exception {
-			pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		BrowserWaits.waitTime(10);	
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS.toString()), 90);
 	}
