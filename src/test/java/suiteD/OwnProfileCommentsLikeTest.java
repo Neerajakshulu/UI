@@ -22,8 +22,7 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 	String runmodes[]=null;
 	static int count=-1;
 	
-	static boolean fail=false;
-	static boolean skip=false;
+		static boolean skip=false;
 	static int status=1;
 	PageFactory pf;
 	

@@ -62,6 +62,11 @@ public class Xls_Reader {
 	
 	// returns the data from a cell
 	public String getCellData(String sheetName,String colName,int rowNum){
+		
+		System.out.println("sheetName="+sheetName);
+		System.out.println("colName="+colName);
+		System.out.println("rowNum="+rowNum);
+		
 		try{
 			if(rowNum <=0)
 				return "";
