@@ -691,7 +691,7 @@ public class TestBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		waitForAjax(driver);
+		//waitForAjax(driver);
 	}
 
 	public  Alert waitForAlertToBePresent(WebDriver driver, int time) {
