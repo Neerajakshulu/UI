@@ -91,8 +91,7 @@ public class EditCommentsMinMaxValidationTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME4", "PASSWORD4");
 			searchArticle(article);
 			pf. getSearchResultsPageInstance(ob).clickOnArticleTab();
 			chooseArticle(completeArticle);
