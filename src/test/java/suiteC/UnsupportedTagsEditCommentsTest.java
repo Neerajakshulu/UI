@@ -71,8 +71,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
-				//ob.navigate().to(System.getProperty("host"));
-				ob.get(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(System.getProperty("host"));
+				//ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -114,7 +114,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			String unSupporteTagErrorMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
-			
+			System.out.println("testxyz:"+unSupporteTagErrorMessage);
+			System.out.println("testxyz:"+errorMessage);
 			//Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
 			if(!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)){
 				throw new Exception("UnSupported_HTML_tags_doesnot_allow_comments_validation");

@@ -29,8 +29,9 @@ public class Authoring  extends TestBase {
 	}
 	
 	public  int getCommentCount() throws InterruptedException  {
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
-		waitForPageLoad(ob);
+		waitForAjax(ob);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText().replaceAll(",", "").trim();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 			//System.out.println("num length-->"+num[num.length-1]);

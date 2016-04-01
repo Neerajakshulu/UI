@@ -97,7 +97,8 @@ public class VerifyPublishPostDisplayed extends TestBase{
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Post for");
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_posts_result")), 40);
+			BrowserWaits.waitTime(10);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_posts_result")), 60);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString())).click();
