@@ -29,7 +29,7 @@ public class SeacrhAndViewOthersPost extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that user is able to search the  posts a user authored themselves and view them.")
+		test = extent.startTest(var, "Verify that user is able to search the posts of others and view them.")
 				.assignCategory("Suite C");
 
 	}

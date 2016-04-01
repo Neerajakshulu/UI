@@ -65,8 +65,8 @@ public class VerifyEditOtherUsersComments extends TestBase{
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");

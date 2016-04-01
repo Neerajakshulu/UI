@@ -113,6 +113,7 @@ public class AuthoringDeleteTest extends TestBase {
 			deleteComments();
 			closeBrowser();
 		} catch (Throwable t) {
+			t.printStackTrace();
 			test.log(LogStatus.FAIL,"Error: Delete Comments not done"+t);//extent reports
 			ErrorUtil.addVerificationFailure(t);//testng
 			status=2;//excel
@@ -145,7 +146,7 @@ public class AuthoringDeleteTest extends TestBase {
 	 */
 	public void deleteComments() throws Exception {
 		try {
-			new AuthoringAppreciateTest().scrollingToElementofAPage();
+			scrollingToElementofAPage();
 			totalCommentsBeforeDeletion=pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("Before Deletion count --->"+totalCommentsBeforeDeletion);
 			WebElement deleteCommentButton=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-trash edit-comment-icon'][ng-click='deleteThis(comment.id)']"));

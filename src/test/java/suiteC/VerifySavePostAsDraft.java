@@ -62,8 +62,8 @@ public class VerifySavePostAsDraft extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			ob.get(CONFIG.getProperty("testSiteName"));
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();

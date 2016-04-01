@@ -75,8 +75,8 @@ public class AppreciateUnAppreciateOwnPost extends TestBase{
 			}
 			
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			boolean result1=pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
-			boolean result2=pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
+			boolean result1=pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
+			boolean result2=pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
 			if(!result1 || !result2){
 				status=2;
 			}
