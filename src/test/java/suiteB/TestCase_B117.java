@@ -3,7 +3,6 @@ package suiteB;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,7 +19,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
-public class TestCase_B106 extends TestBase {
+public class TestCase_B117 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,14 +34,14 @@ public class TestCase_B106 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following options get displayed in SORT BY drop down in POSTS search results page: a)Relevance b)Create Date(Newest) c)Create Date(Oldest)"
-						+ "Verify that search results are sorted by CREATE DATE(NEWEST) by default in POSTS search results page")
+						"Verify that sorting is retained when user navigates back to POSTS search results page from record view page||"
+						+ "Verify that search drop down content type is retained when user navigates back to POSTS search results page from record view page")
 				.assignCategory("Suite B");	
 
 	}
 
 	@Test
-	public void testcaseB106() throws Exception {
+	public void testcaseB117() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -67,8 +66,8 @@ public class TestCase_B106 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			BrowserWaits.waitUntilText("Sign in with Project Neon");
@@ -78,35 +77,58 @@ public class TestCase_B106 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			
-			String post="sample post";
+			String post="post";
+			String sortBy="Relevance";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
+			
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
 			List<WebElement> postDropdownmenus=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
-			String postExpectedDropdown="Create Date (Newest)|Create Date (Oldest)|Relevance";
-			List<String> postDropdowndata=new ArrayList<String>();
 			for(WebElement postDropdownmenu:postDropdownmenus){
-				postDropdowndata.add(postDropdownmenu.getText().trim());
+				if(postDropdownmenu.getText().trim().equalsIgnoreCase(sortBy)){
+					postDropdownmenu.click();
+					waitForAjax(ob);
+					waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+					break;
+				}
 			}
 			
-			String dropDownInputs[]=postExpectedDropdown.split("\\|");
-			List<String> postExpectedDropdowndata=Arrays.asList(dropDownInputs);
-			
-			if(!postDropdowndata.containsAll(postExpectedDropdowndata)){
-				throw new Exception("Post dropdown menu options not displayed");
+			List<String> postTitlesdata=new ArrayList<String>();
+			List<String> postTitlesFromRVdata=new ArrayList<String>();
+			List<WebElement> postTitles=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")));
+			for(WebElement postTitle:postTitles){
+				postTitlesdata.add(postTitle.getText().trim());
 			}
 			
-			//System.out.println("post first dropdown-->"+postDropdowndata.get(0));
-			if(!postDropdowndata.get(0).equalsIgnoreCase("Create Date (Newest)")){
-				throw new Exception("Create Date (Newest) is the by default POST Sorted by search result");
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			waitForAjax(ob);
+			BrowserWaits.waitTime(6);
+			
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
+			ob.navigate().back();
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
+			String sortByFromRV=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).getText();
+
+			System.out.println("sortby value From record view page-->"+sortByFromRV);
+			if(!(sortByFromRV.trim().equalsIgnoreCase(sortBy))) {
+				throw new Exception(
+						"sorting is not retained when user navigates back to POSTS search results page from record view page");
+			}
+					
+			List<WebElement> postTitlesRV=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")));
+			for(WebElement postTitleRV:postTitlesRV){
+				postTitlesFromRVdata.add(postTitleRV.getText().trim());
 			}
 			
+			
+			if(!(postTitlesRV.containsAll(postTitlesdata))){
+				throw new Exception(
+						"Search dropdown content type is not retained when user navigates back to POSTS search results page from record view page");
+			}
 			
 			closeBrowser();
 
@@ -122,7 +144,7 @@ public class TestCase_B106 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+					captureScreenshot(this.getClass().getSimpleName() + "_sortby_retain_post_search_results_failed")));// screenshot
 			closeBrowser();
 		}
 

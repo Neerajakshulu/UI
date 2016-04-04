@@ -606,7 +606,7 @@ public class PostRecordViewPage extends TestBase {
 		String link=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())).getText();
 		if (link.equalsIgnoreCase(url))
 			jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_RECORD_COMMENTS_DIV_CSS.toString())));
-		
+		waitForPageLoad(ob);
 	}
 	
 	public static void loadComments() {

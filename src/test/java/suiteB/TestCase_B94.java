@@ -71,10 +71,10 @@ public class TestCase_B94 extends TestBase {
 			selectSearchTypeFromDropDown("People");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
 			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),8);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"),10);
 			boolean isPresent=ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");

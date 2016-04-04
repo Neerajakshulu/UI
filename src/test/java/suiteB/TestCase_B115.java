@@ -2,10 +2,11 @@ package suiteB;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -15,11 +16,12 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.TestUtil;
-import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class TestCase_B111 extends TestBase {
+import base.TestBase;
+
+public class TestCase_B115 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,18 +36,18 @@ public class TestCase_B111 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that more search results get displayed when user scrolls down in PEOPLE search results page.")
+						"Verify that search drop down content type is retained when user navigates back to PEOPLE search results page from profile page")
 						.assignCategory("Suite B");
 
 	}
 
 	@Test
-	public void testcaseB111() throws Exception {
+	public void testcaseB115() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		
 		if (!master_condition) {
 
 			status = 3;// excel
@@ -69,29 +71,27 @@ public class TestCase_B111 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Amneet");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")),30);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+						
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),30);
 			
-			//checking for Default sort option
-			List<WebElement> beforeScrollSize=ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
-			System.out.println(beforeScrollSize.size());
-			
-			
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 500);");
-			Thread.sleep(4000);
-			
-			List<WebElement> afterScrollSize=ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
-			System.out.println(afterScrollSize.size());
-			
+			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"),15);
+			test.log(LogStatus.PASS,"Record view page is opened");
+			ob.navigate().back();
+			//checking for Search Content type
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")),10);
+			String selectedDropDown=ob.findElement(By.xpath(OR.getProperty("search_type_dropdown"))).getText();
+			System.out.println(selectedDropDown);
 			try{
-				Assert.assertTrue(afterScrollSize.size()>beforeScrollSize.size());
-				test.log(LogStatus.PASS, "More people search results are displayed when user scroll's down");
+				Assert.assertTrue(selectedDropDown.equals("People"));
+				test.log(LogStatus.PASS, "search drop down content type is retained when user navigates back to PEOPLE search results page from profile page");
 			}catch(Throwable t){
-				test.log(LogStatus.FAIL, "Scroll down is not displaying more results / Results are less");// extent
+				test.log(LogStatus.FAIL, "search drop down content type is not retained");// extent
 				// reports
 				// next 3 lines to print whole testng error in report
 				StringWriter errors = new StringWriter();

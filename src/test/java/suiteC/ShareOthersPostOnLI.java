@@ -18,6 +18,7 @@ import pages.HeaderFooterLinksPage;
 import pages.PostRecordViewPage;
 import pages.ProfilePage;
 import pages.SearchResultsPage;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 
@@ -73,6 +74,7 @@ public class ShareOthersPostOnLI extends TestBase{
 			SearchResultsPage.viewOtherUsersPost("Kavya Revanna");
 			PostRecordViewPage.clickOnLinkedInUnderShareMenu();
 			PostRecordViewPage.shareOnLI(liusername, lipassword);
+			BrowserWaits.waitTime(6);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

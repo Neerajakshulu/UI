@@ -186,9 +186,9 @@ public class ProfilePage  extends TestBase {
 		getProfileTitle();
 		getProfileMetadata();
 		BrowserAction.jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 90);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS.toString()), 90);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS.toString()), 90);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 120);
+		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS.toString()), 90);
+		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS.toString()), 90);
 	}
 	
 	
@@ -659,7 +659,10 @@ public static boolean validateProfanityWordsMaskedForPostContent(String profanit
 	 */
 	public static void validatePostTitle(String postTitle) throws Exception {
 		String enteredPost=getFirstPostTitle();
-		Assert.assertEquals(enteredPost, postTitle);
+		if(!(enteredPost.equalsIgnoreCase(postTitle))) {
+			throw new Exception("Post is not published");
+		}
+		
 	}
 	
 	
@@ -756,7 +759,9 @@ public static void addExternalLinkToPostContent(String url) throws Exception{
 	}
 
 	public static boolean validateProfileDetails(List<String> details) throws Exception {
-		BrowserWaits.waitTime(6);
+		//BrowserWaits.waitTime(6);
+		waitForPageLoad(ob);
+		waitForAjax(ob);
 		List<String> expected=getProfileTitleAndMetadata();
 		
 		return (expected.toString().equals(details.toString()));

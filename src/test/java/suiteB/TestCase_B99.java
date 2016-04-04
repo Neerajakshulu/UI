@@ -69,9 +69,8 @@ public class TestCase_B99 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("S");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
 			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),8);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 			
 			//checking for Default sort option
@@ -79,6 +78,7 @@ public class TestCase_B99 extends TestBase {
 			System.out.println(defaultSort);
 			
 			//checking for different options available in sort
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")),35);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
 			String text=ob.findElement(By.xpath("//ul[@class='dropdown-menu' and @role='menu']")).getText();
 			System.out.println(text);
