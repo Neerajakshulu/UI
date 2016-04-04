@@ -363,7 +363,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Following tab is not click able
 	 */
 	public void clickFollowingTab() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(15);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS.toString()), 120);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
@@ -394,8 +395,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment like not done
 	 */
 	public void commentAppreciation() throws Exception {
-		BrowserWaits.waitTime(10);
-		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
+		BrowserWaits.waitTime(15);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 120);
 		String tooltipBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		//System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
@@ -438,14 +439,18 @@ public class ProfilePage  extends TestBase {
 	
 	/**
 	 * Method to click on Publish A Post button in the profile page
+	 * @throws InterruptedException 
 	 */
-	public void clickOnPublishPostButton() {
+	public void clickOnPublishPostButton() throws InterruptedException {
+		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
+		BrowserWaits.waitTime(4);
 		List<WebElement> buttons=ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()));
 		for(WebElement button:buttons){
 			
 			if(button.isDisplayed()){
-				button.click();
+				
+				jsClick(ob, button);
 				break;
 			}
 		}
@@ -514,7 +519,8 @@ public class ProfilePage  extends TestBase {
 	 * Method to click on cancel button in post creation modal
 	 */
 	public void clickOnPostCancelButton() {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()), 120);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
 				.click();
 	}
@@ -536,13 +542,16 @@ public class ProfilePage  extends TestBase {
 	
 	
 	public  int getDraftPostsCount() throws InterruptedException {
-		BrowserWaits.waitTime(10);
+		ob.navigate().refresh();
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
-		int count = Integer.parseInt(
-				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
-						.getText().replaceAll(",", ""));
+		String strCount=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+		.getText().replaceAll(",", "");
+		if(strCount.equalsIgnoreCase("")){
+			strCount="0";
+		}
+		int count = Integer.parseInt(strCount);
 		return count;
 	}
 	
@@ -1078,13 +1087,14 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 
-	public void deleteDraftPost(String postString) {
+	public void deleteDraftPost(String postString) throws InterruptedException {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
+		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 						.replaceAll("TITLE", postString)),
-				30);
+				90);
 
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 				.replaceAll("TITLE", postString))).click();
@@ -1144,7 +1154,8 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		return Integer.parseInt(commentCount);
 	}
 	
-	public void deleteDraftPostFromPostModal(String postString) {
+	public void deleteDraftPostFromPostModal(String postString) throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()

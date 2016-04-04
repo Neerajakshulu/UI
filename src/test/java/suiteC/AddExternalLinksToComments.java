@@ -86,6 +86,7 @@ public class AddExternalLinksToComments extends TestBase{
 
 			}
 			ob.navigate().back();
+			waitForPageLoad(ob);
 			BrowserWaits.waitTime(10);
 			logout();
 			closeBrowser();

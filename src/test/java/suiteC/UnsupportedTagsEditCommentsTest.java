@@ -81,7 +81,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			loginAs("USERNAME5", "USERNAME5");
+			loginAs("USERNAME12", "PASSWORD12");
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComments("test");

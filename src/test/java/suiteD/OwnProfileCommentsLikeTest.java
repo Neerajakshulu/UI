@@ -18,11 +18,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 public class OwnProfileCommentsLikeTest extends TestBase {
-	
-	String runmodes[]=null;
-	static int count=-1;
-	
-		static boolean skip=false;
+
 	static int status=1;
 	PageFactory pf;
 	
@@ -30,7 +26,6 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var=xlRead2(returnExcelPath('D'),this.getClass().getSimpleName(),1);
 		test = extent.startTest(var, "Verity that user is able to Like his own comments from his profile page").assignCategory("Suite D");
-		runmodes=TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
 	}
 	
 	/**
@@ -51,14 +46,6 @@ public class OwnProfileCommentsLikeTest extends TestBase {
 			throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
 		}
 		
-		
-		// test the runmode of current dataset
-		count++;
-		if(!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no "+count);
-			skip=true;
-			throw new SkipException("Runmode for test set data set to no "+count);
-		}
 		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ count+"--->");
 		
 				try {
