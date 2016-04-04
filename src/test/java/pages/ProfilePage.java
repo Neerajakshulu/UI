@@ -1089,7 +1089,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 						.replaceAll("TITLE", postString)),
-				30);
+				90);
 
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 				.replaceAll("TITLE", postString))).click();
