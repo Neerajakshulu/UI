@@ -150,7 +150,7 @@ public class VerifyMoreFunctionalityForComments extends TestBase{
 	}
 
 	private void selectAnArticle() throws InterruptedException {
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 180);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
