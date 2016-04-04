@@ -62,7 +62,7 @@ public class AddInternalLinksToComments extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME3","PASSWORD3");
+			loginAs("USERNAME8","PASSWORD8");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
@@ -86,6 +86,7 @@ public class AddInternalLinksToComments extends TestBase{
 
 			}
 			ob.navigate().back();
+			waitForPageLoad(ob);
 			BrowserWaits.waitTime(10);
 			logout();
 			closeBrowser();

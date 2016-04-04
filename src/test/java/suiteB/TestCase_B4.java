@@ -67,8 +67,8 @@ public class TestCase_B4 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(System.getProperty("host"));
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(System.getProperty("host"));
 //			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			

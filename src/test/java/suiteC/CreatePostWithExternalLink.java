@@ -63,7 +63,7 @@ public class CreatePostWithExternalLink extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1","PASSWORD1");
+			loginAs("USERNAME13","PASSWORD13");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

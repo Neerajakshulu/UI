@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -28,12 +29,13 @@ public class TestCase_E1 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add an Article from ALL content search results page to a particular watchlist")
+						"Verify that user is able to add an Article from ALL content search results page to a particular watchlist||Verify that user is able to unwatch an Article from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
@@ -59,55 +61,26 @@ public class TestCase_E1 extends TestBase {
 		try {
 
 			// Opening browser
-//			openBrowser();
-//			try {
-//				maximizeWindow();
-//			} catch (Throwable t) {
-//
-//				System.out.println("maximize() command not supported in Selendroid");
-//			}
-//			clearCookies();
-//			// Creating 2 new users to use them across the E module
-//			fn2 = generateRandomName(8);
-//			ln2 = generateRandomName(10);
-//			System.out.println(fn2 + " " + ln2);
-//			user2 = createNewUser(fn2, ln2);
-//			closeBrowser();
-//
-//			openBrowser();
-//			maximizeWindow();
-//			clearCookies();
-//			fn1 = generateRandomName(8);
-//			ln1 = generateRandomName(10);
-//			System.out.println(fn1 + " " + ln1);
-//			user1 = createNewUser(fn1, ln1);
-			
-			
-			
+
 			openBrowser();
-			try{
+			try {
 				maximizeWindow();
-			}
-			catch(Throwable t){
+			} catch (Throwable t) {
 
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
 			System.out.println("Begore opening site");
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			System.out.println("After opening site");
-			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-
+			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
+			// "Techm@2015");
 
 			// Create 1st watch list
-			createWatchList("private", "TestWatchlist1", "This is my test watchlist.");
+			String newWatchlistName = "Watchlist_TestCase_E1";
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
@@ -116,13 +89,13 @@ public class TestCase_E1 extends TestBase {
 
 			// Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -146,6 +119,47 @@ public class TestCase_E1 extends TestBase {
 
 			}
 
+			// Searching for article
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("cancer");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForPageLoad(ob);
+
+			// Watching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Unwatching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Selecting the document name
+			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+
+			try {
+
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
+				test.log(LogStatus.PASS,
+						"User is able to remove an article from watchlist in ALL content search results page");// extent
+			} catch (Throwable t) {
+
+				test.log(LogStatus.FAIL,
+						"User is unable to remove an article from watchlist in ALL content search results page");// extent
+			}
+
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -169,16 +183,16 @@ public class TestCase_E1 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-
-	*/}
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 * 
+		 */}
 
 }
