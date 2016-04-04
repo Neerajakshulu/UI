@@ -39,7 +39,7 @@ public class TestCase_B32 extends TestBase {
 	}
 
 	@Test
-	public void testcaseB8() throws Exception {
+	public void testcaseB32() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
@@ -63,8 +63,8 @@ public class TestCase_B32 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
@@ -78,9 +78,12 @@ public class TestCase_B32 extends TestBase {
 
 			// Clicking on All content result set
 			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
-
+			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 30);
+			
 			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
+//			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
+			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			Thread.sleep(3000);
 
 			// Finding out the types by which we can sort the All content
 			// results
