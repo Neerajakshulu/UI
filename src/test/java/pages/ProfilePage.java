@@ -794,7 +794,20 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		List<String> expected=getProfileTitleAndMetadata();
-		
+		while(true){
+			
+			if(!expected.contains("")){
+				break;
+			}
+			expected.remove("");
+		}
+		while(true){
+			
+			if(!details.contains("")){
+				break;
+			}
+			details.remove("");
+		}
 		return (expected.toString().equals(details.toString()));
 	}
 	
@@ -1066,7 +1079,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 	}
 
 	public void deleteDraftPost(String postString) {
-
+		waitForPageLoad(ob);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
