@@ -519,7 +519,8 @@ public class ProfilePage  extends TestBase {
 	 * Method to click on cancel button in post creation modal
 	 */
 	public void clickOnPostCancelButton() {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()), 120);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
 				.click();
 	}
@@ -541,13 +542,16 @@ public class ProfilePage  extends TestBase {
 	
 	
 	public  int getDraftPostsCount() throws InterruptedException {
+		ob.navigate().refresh();
 		waitForPageLoad(ob);
 		waitForAjax(ob);
-		BrowserWaits.waitTime(15);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
-		int count = Integer.parseInt(
-				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
-						.getText().replaceAll(",", ""));
+		String strCount=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+		.getText().replaceAll(",", "");
+		if(strCount.equalsIgnoreCase("")){
+			strCount="0";
+		}
+		int count = Integer.parseInt(strCount);
 		return count;
 	}
 	
