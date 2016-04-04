@@ -255,6 +255,8 @@
 </test>
 
 <test name="Post_like_count">
+	<parameter name="username" value="projectneon.test2@gmail.com"/>
+	<parameter name="password" value="Welcome01"/>
 	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 	<parameter name="postContent" value="my post content for RecordView page "></parameter>
     <classes>
