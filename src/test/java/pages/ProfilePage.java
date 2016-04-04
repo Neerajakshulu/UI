@@ -438,14 +438,18 @@ public class ProfilePage  extends TestBase {
 	
 	/**
 	 * Method to click on Publish A Post button in the profile page
+	 * @throws InterruptedException 
 	 */
-	public void clickOnPublishPostButton() {
+	public void clickOnPublishPostButton() throws InterruptedException {
+		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
+		BrowserWaits.waitTime(4);
 		List<WebElement> buttons=ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()));
 		for(WebElement button:buttons){
 			
 			if(button.isDisplayed()){
-				button.click();
+				
+				jsClick(ob, button);
 				break;
 			}
 		}
@@ -794,7 +798,20 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		List<String> expected=getProfileTitleAndMetadata();
-		
+		while(true){
+			
+			if(!expected.contains("")){
+				break;
+			}
+			expected.remove("");
+		}
+		while(true){
+			
+			if(!details.contains("")){
+				break;
+			}
+			details.remove("");
+		}
 		return (expected.toString().equals(details.toString()));
 	}
 	
@@ -1065,9 +1082,10 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		
 	}
 
-	public void deleteDraftPost(String postString) {
-
+	public void deleteDraftPost(String postString) throws InterruptedException {
+		waitForPageLoad(ob);
 		waitForAjax(ob);
+		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH.toString()
 						.replaceAll("TITLE", postString)),
@@ -1131,7 +1149,8 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		return Integer.parseInt(commentCount);
 	}
 	
-	public void deleteDraftPostFromPostModal(String postString) {
+	public void deleteDraftPostFromPostModal(String postString) throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
