@@ -60,6 +60,7 @@ public class Authoring  extends TestBase {
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		scrollElementIntoView(ob, commentArea);
 		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
 		commentArea.click();
 		commentArea.clear();
