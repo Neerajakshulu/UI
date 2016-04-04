@@ -62,7 +62,7 @@ public class DeleteDraftPostFromProfile extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1","PASSWORD1");
+			loginAs("USERNAME5","PASSWORD5");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -75,6 +75,9 @@ public class DeleteDraftPostFromProfile extends TestBase{
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the draft post");
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			ob.navigate().refresh();
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			int postCountBefore=pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:"+postCountBefore);
 			pf.getProfilePageInstance(ob).deleteDraftPost(postString);

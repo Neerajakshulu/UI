@@ -75,6 +75,9 @@ public class DeleteDraftPostFromPostModal extends TestBase{
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the draft post");
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			ob.navigate().refresh();
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			int postCountBefore=pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:"+postCountBefore);
 			

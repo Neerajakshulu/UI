@@ -25,15 +25,9 @@ import util.TestUtil;
 public class FindProfileTest extends TestBase {
 	
 	String runmodes[]=null;
-	static int count=-1;
-	
-	static boolean fail=false;
-	static boolean skip=false;
-	static int status=1;
-	static String followBefore=null;
-	static String followAfter=null;
-	static boolean isFollowEnable=false;
-	static boolean isFollowDisable=false;
+	int count=-1;
+	int status=1;
+	boolean skip=false;
 	PageFactory pf;
 	
 	
@@ -77,12 +71,6 @@ public class FindProfileTest extends TestBase {
 					maximizeWindow();
 					ob.navigate().to(System.getProperty("host"));
 					
-					/*LoginTR lr=new LoginTR(ob);
-					lr.waitForTRHomePage();
-					lr.enterTRCredentials(username, password);
-					lr.clickLogin();*/
-					
-					//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 					pf = new PageFactory();
 					
 					pf.getLoginTRInstance(ob).waitForTRHomePage();
