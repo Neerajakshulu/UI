@@ -57,12 +57,13 @@ public class Authoring  extends TestBase {
 	
 	
 	public  void enterArticleComments(String addComments) throws InterruptedException  {
-		BrowserWaits.waitTime(10);
+		
 		commentSizeBeforeAdd=getCommentCount();
 		System.out.println("Before-->"+commentSizeBeforeAdd);
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		scrollElementIntoView(ob, commentArea);
 		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
+		BrowserWaits.waitTime(10);
 		commentArea.click();
 		commentArea.clear();
 		//scrollingToElementofAPage();

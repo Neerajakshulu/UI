@@ -540,9 +540,9 @@ public class ProfilePage  extends TestBase {
 	
 	
 	public  int getDraftPostsCount() throws InterruptedException {
-		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
+		BrowserWaits.waitTime(15);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
 		int count = Integer.parseInt(
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
