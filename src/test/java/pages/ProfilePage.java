@@ -363,7 +363,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Following tab is not click able
 	 */
 	public void clickFollowingTab() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(15);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS.toString()), 120);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
@@ -394,8 +395,8 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment like not done
 	 */
 	public void commentAppreciation() throws Exception {
-		BrowserWaits.waitTime(10);
-		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
+		BrowserWaits.waitTime(15);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 120);
 		String tooltipBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		//System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
