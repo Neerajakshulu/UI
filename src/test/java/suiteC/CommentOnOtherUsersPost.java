@@ -78,7 +78,7 @@ public class CommentOnOtherUsersPost extends TestBase{
 			try {
 				Assert.assertEquals(countBefore+1, countAfter);
 				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post");
+				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post",test);
 				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Adding Comments to other users post not working as expected ");
@@ -91,8 +91,8 @@ public class CommentOnOtherUsersPost extends TestBase{
 			}
 			
 			try {
-				pf.getpostRVPageInstance(ob).validateAppreciationComment();
-				pf.getpostRVPageInstance(ob).validateAppreciationComment();
+				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
+				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
 				test.log(LogStatus.PASS, "Comment appreciation on posts working as expected");
 			
 			} catch (Throwable t) {

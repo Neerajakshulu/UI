@@ -87,7 +87,7 @@ public class CommentOnUsersOwnPost extends TestBase{
 			try {
 				Assert.assertEquals(countBefore+1, countAfter);
 				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post");
+				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post",test);
 				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");

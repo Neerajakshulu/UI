@@ -73,8 +73,8 @@ public class FollowUnfollowPostsAuthor extends TestBase{
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).IsFollowOrUnfollowButtonDispayed());
 				test.log(LogStatus.PASS, "Follow/Unfollow button is displayed in view post record page");
-				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
-				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow();
+				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow(test);
+				pf.getpostRVPageInstance(ob).validateFollowOrUnfollow(test);
 				
 			} catch (Throwable t) {
 				t.printStackTrace();

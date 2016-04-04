@@ -161,6 +161,8 @@
 </test>
 
 <test name="Profile_Publish_A_Post_Record_View_Page">
+	<parameter name="username" value="avinash.p1229@gmail.com"/>
+	<parameter name="password" value="1Platform"/>
 	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 	<parameter name="postContent" value="my post content for RecordView page "></parameter>
     <classes>
@@ -177,8 +179,6 @@
 </test>
 
 <test name="Profile_Post_Watchlist">
-	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
-	<parameter name="password" value="Reddys@123"/>
     <classes>
         <class name="suiteD.AddPostToWatchlistTest" ></class> 
     </classes>
@@ -263,8 +263,8 @@
 </test>
 
 <test name="Publish_post_timestamp_validation">
-	<parameter name="username" value="chinnareddy.putha@gmail.com"/>
-	<parameter name="password" value="Reddys@123"/>
+	<parameter name="username" value="projectneon.test@gmail.com"/>
+	<parameter name="password" value="Welcome01"/>
 	<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 	<parameter name="postContent" value="my post content for RecordView page "></parameter>
     <classes>
@@ -286,6 +286,8 @@
 </test>
 
 <test name="Post_comment_count">
+	<parameter name="username" value="avinash.p1229@gmail.com"/>
+	<parameter name="password" value="1Platform"/>
 	<parameter name="myPost" value="Post for Testing RecordView"/>
 	<parameter name="postContent" value="my post content for RecordView page "/>
     <classes>

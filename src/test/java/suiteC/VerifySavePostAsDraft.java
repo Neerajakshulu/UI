@@ -65,8 +65,7 @@ public class VerifySavePostAsDraft extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME1", "PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -84,7 +83,7 @@ public class VerifySavePostAsDraft extends TestBase {
 			test.log(LogStatus.INFO, "Post count:"+postCountAfter);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
-					.getText();
+					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter==(postCountBefore+1) && postString.equals(postTitle));
 				test.log(LogStatus.PASS, "Draft Post count is  incremented and post is present in saved drafts section");

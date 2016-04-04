@@ -353,6 +353,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment tab is not click able
 	 */
 	public void clickCommentsTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
 		waitForAjax(ob);
 	}
@@ -362,6 +363,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Following tab is not click able
 	 */
 	public void clickFollowingTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
@@ -371,6 +373,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Followers tab is not click able
 	 */
 	public void clickFollowersTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
 		waitForAjax(ob);
 	}
@@ -380,6 +383,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, Posts tab is not click able
 	 */
 	public void clickPostsTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
@@ -390,6 +394,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws Exception, comment like not done
 	 */
 	public void commentAppreciation() throws Exception {
+		BrowserWaits.waitTime(10);
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 90);
 		String tooltipBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
@@ -435,10 +440,16 @@ public class ProfilePage  extends TestBase {
 	 * Method to click on Publish A Post button in the profile page
 	 */
 	public void clickOnPublishPostButton() {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
-				.click();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
+		List<WebElement> buttons=ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()));
+		for(WebElement button:buttons){
+			
+			if(button.isDisplayed()){
+				button.click();
+				break;
+			}
+		}
+
 	}
 
 	/**
@@ -526,11 +537,12 @@ public class ProfilePage  extends TestBase {
 	
 	public  int getDraftPostsCount() throws InterruptedException {
 		BrowserWaits.waitTime(10);
+		waitForPageLoad(ob);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
 		int count = Integer.parseInt(
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
-						.getText());
+						.getText().replaceAll(",", ""));
 		return count;
 	}
 	
@@ -558,8 +570,10 @@ public class ProfilePage  extends TestBase {
 	/**
 	 * Method to get the title of the most recent post in the profile.
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public  String getFirstPostTitle() {
+	public  String getFirstPostTitle() throws InterruptedException {
+		BrowserWaits.waitTime(8);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		String postTitle = ob
@@ -799,11 +813,13 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 				.click();
 	}
 	
-	public void clickOnDraftPostsTab() {
+	public void clickOnDraftPostsTab() throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);	
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 				.click();
+		waitForAjax(ob);
 	}
 	
 	public  boolean validatePublishButton() {
@@ -1120,7 +1136,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 		waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
 						.replaceAll("TITLE", postString)),
-				30);
+				60);
 
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH.toString()
 				.replaceAll("TITLE", postString))).click();

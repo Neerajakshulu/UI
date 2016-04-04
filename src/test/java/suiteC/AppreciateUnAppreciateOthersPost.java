@@ -66,8 +66,8 @@ public class AppreciateUnAppreciateOthersPost extends TestBase{
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
-			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
-			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions();
+			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
+			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {

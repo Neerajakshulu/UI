@@ -67,8 +67,8 @@ public class FlagUnflagUserPost extends TestBase{
 			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf. getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
 			try {
-				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost();
-				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost();
+				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost(test);
+				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost(test);
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Flag/Unflag validation failed for posts");
 				test.log(LogStatus.INFO, "Error--->" + t);

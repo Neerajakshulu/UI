@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -61,7 +62,7 @@ public class AddExternalLinksToComments extends TestBase{
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1","PASSWORD1");
+			loginAs("USERNAME2","PASSWORD2");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf. getSearchResultsPageInstance(ob).clickOnPostTab();
@@ -85,6 +86,7 @@ public class AddExternalLinksToComments extends TestBase{
 
 			}
 			ob.navigate().back();
+			BrowserWaits.waitTime(10);
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
