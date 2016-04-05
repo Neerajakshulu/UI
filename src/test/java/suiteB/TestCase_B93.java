@@ -61,18 +61,19 @@ public class TestCase_B93 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 180);
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			
 			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),50);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")),180);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"),10);
 			boolean isPresent=ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
