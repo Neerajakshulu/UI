@@ -133,6 +133,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * Method to click on Profile link under profile dropdown in header
 	 */
 	public void clickOnProfileLink() throws Exception {
+		waitForPageLoad(ob);
 		clickProfileImage();
 		waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString()), 180);

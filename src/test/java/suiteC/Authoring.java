@@ -197,7 +197,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public void selectArtcleWithComments(){
-	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
+	waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 	List<WebElement> itemList;
 	
 	while (true) {
@@ -253,7 +253,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 		waitForPageLoad(ob);
 	}

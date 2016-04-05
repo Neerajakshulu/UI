@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class SearchResultsPage extends TestBase{
@@ -23,6 +24,7 @@ public class SearchResultsPage extends TestBase{
 	
 
 	public  void clickOnPostTab() throws Exception {
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);

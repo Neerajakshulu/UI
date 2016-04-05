@@ -69,7 +69,8 @@ public class TestCase_B15 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
@@ -158,7 +159,7 @@ public class TestCase_B15 extends TestBase {
 						this.getClass().getSimpleName() + "Comments for search results validation failed")));// screenshot
 
 			}
-			logout();
+//			logout();
 			closeBrowser();
 		}
 
