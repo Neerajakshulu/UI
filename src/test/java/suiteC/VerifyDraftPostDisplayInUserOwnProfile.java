@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -66,6 +67,8 @@ public class VerifyDraftPostDisplayInUserOwnProfile extends TestBase {
 
 			loginAs("USERNAME3", "PASSWORD3");
 			test.log(LogStatus.INFO, "Logged in to NEON");
+			pf.getHFPageInstance(ob).clickOnProfileLink();
+			BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore=pf.getProfilePageInstance(ob).getDraftPostsCount();
