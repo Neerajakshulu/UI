@@ -69,8 +69,8 @@ public class TestCase_B17 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
@@ -90,6 +90,7 @@ public class TestCase_B17 extends TestBase {
 			ob.findElement(By.id("single-button")).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]"), 30);
 			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
+			Thread.sleep(5000);
 			waitForElementTobeVisible(ob, By.xpath("//*[@class='h6 doc-info']"), 30);
 			
 			List<WebElement> times_cited_labels=ob.findElements(By.xpath("//*[@class='h6 doc-info']"));

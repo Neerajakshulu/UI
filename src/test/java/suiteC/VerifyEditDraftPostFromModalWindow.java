@@ -65,7 +65,7 @@ public class VerifyEditDraftPostFromModalWindow extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("USERNAME4", "USERNAME4");
+			loginAs("USERNAME4", "PASSWORD4");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -77,6 +77,8 @@ public class VerifyEditDraftPostFromModalWindow extends TestBase {
 			String postTitleBeforeEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
 					.getText();
 			System.out.println(postTitleBeforeEditing);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()), 40);
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString())).click();
 			
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
@@ -87,6 +89,8 @@ public class VerifyEditDraftPostFromModalWindow extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 		//	pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			String postTitleAfterEditing=ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);

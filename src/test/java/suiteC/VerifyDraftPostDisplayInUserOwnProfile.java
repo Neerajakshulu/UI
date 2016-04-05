@@ -64,7 +64,7 @@ public class VerifyDraftPostDisplayInUserOwnProfile extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("USERNAME3", "USERNAME3");
+			loginAs("USERNAME3", "PASSWORD3");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

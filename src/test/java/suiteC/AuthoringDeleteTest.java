@@ -106,7 +106,7 @@ public class AuthoringDeleteTest extends TestBase {
 			
 			
 			pf.getAuthoringInstance(ob).waitForTRHomePage();
-			loginAs("USERNAME2", "PASSWORD2");
+			loginAs("USERNAME6", "PASSWORD6");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			pf.getAuthoringInstance(ob).enterArticleComment("Test comments");

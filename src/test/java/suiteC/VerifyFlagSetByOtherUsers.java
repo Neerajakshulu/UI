@@ -25,7 +25,7 @@ import util.TestUtil;
 public class VerifyFlagSetByOtherUsers extends TestBase {
 	private static final String PASSWORD = "Welcome123";
 	private static final String USER_NAME = "kavya.revanna@thomsonreuters.com";
-	private static final String PROFILE_NAME = "amneet singh";
+	private static final String PROFILE_NAME = "Avinash Potti";
 	private static final String PASSWORD1 = "Welcome01";
 	private static final String USER_NAME1 = "chinna.putha@thomsonreuters.com";
 
@@ -71,11 +71,11 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			login();
+			loginAs("USERNAME5", "PASSWORD5");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Synergistic");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 			String articleTitle = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			String comment = "testFlag";
@@ -89,6 +89,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 			ob.findElement(By.linkText(articleTitle)).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 
@@ -114,8 +115,8 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 
 			pf.getLoginTRInstance(ob).logOutApp();
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsOther(USER_NAME1, PASSWORD1);
 			BrowserWaits.waitTime(15);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
@@ -187,6 +188,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 	private void searchAnArticle(String articleTitle) throws InterruptedException, Exception {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 120);
 		int count=0;
 		boolean found=false;
 		while(count<10){

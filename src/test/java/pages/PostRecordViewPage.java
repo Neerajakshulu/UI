@@ -267,7 +267,7 @@ public class PostRecordViewPage extends TestBase {
 	public void clickOnAuthorName() throws Exception {
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS.toString())));
 	}
 
 	public boolean isCommentCountDisplayed() {
@@ -664,7 +664,7 @@ public class PostRecordViewPage extends TestBase {
 	}
 	
 	public void searchForArticleWithComments() {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 		List<WebElement> itemList;
 		
 		while (true) {

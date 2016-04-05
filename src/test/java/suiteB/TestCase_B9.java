@@ -66,8 +66,8 @@ public class TestCase_B9 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 //			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
@@ -86,8 +86,9 @@ public class TestCase_B9 extends TestBase{
 			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
 			Thread.sleep(1000);
 			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
+			Thread.sleep(10000);
 //	
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			//System.out.println("search results-->"+searchResults.size());
@@ -116,6 +117,23 @@ public class TestCase_B9 extends TestBase{
 			}
 			
 			//System.out.println("list2-->"+al2);
+			
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			
+			
+			for(int i=0;i<al1.size();i++){
+				
+				
+				System.out.println(al1.get(i));
+			}
+			
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			for(int i=0;i<al2.size();i++){
+				
+				
+				System.out.println(al2.get(i));
+			}
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 			
 			try{
 				Assert.assertTrue(al1.equals(al2));

@@ -65,8 +65,8 @@ public class TestCase_B8 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 //			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
@@ -90,7 +90,7 @@ public class TestCase_B8 extends TestBase{
 			
 			JavascriptExecutor jse=(JavascriptExecutor)ob;
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			
 			searchResults.clear();
 			searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -98,7 +98,7 @@ public class TestCase_B8 extends TestBase{
 			int count2=searchResults.size();
 			
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			
 			searchResults.clear();
 			searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));

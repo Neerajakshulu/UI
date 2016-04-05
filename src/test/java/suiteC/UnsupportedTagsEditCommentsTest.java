@@ -81,8 +81,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME12", "PASSWORD12");
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComments("test");
@@ -113,6 +112,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
 			String unSupporteTagErrorMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			//System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
+			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
 			System.out.println("testxyz:"+unSupporteTagErrorMessage);
 			System.out.println("testxyz:"+errorMessage);
@@ -193,7 +193,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
