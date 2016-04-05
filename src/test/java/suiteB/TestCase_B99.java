@@ -60,7 +60,8 @@ public class TestCase_B99 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials

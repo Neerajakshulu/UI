@@ -93,8 +93,9 @@ public class VerifyCommenterDetails extends TestBase{
 
 			}
 			waitForPageLoad(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_name_css")), 180);
 			String actProfileName=ob.findElement(By.cssSelector(OR.getProperty("tr_profile_name_css"))).getText();
-			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_profile_details_css")), 80);
+			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_profile_details_css")), 180);
 			details=ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
 			List<String> profileDetailsInProfile=new ArrayList<String>();
 			for(WebElement we:details){

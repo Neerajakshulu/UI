@@ -98,7 +98,9 @@ public class DeleteDraftPostFromProfile extends TestBase{
 			}
 			
 			try {
+				if(postCountAfter!=0){
 				Assert.assertTrue(!pf.getProfilePageInstance(ob).getAllDraftPostTitle().contains(postString) );
+				}
 				test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Deleted post is displayed under posts tab in profile");

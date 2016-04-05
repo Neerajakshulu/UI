@@ -82,8 +82,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME11","PASSWORD11");
 			searchArticle(article);
 			pf. getSearchResultsPageInstance(ob).clickOnArticleTab();
 			chooseArticle(completeArticle);

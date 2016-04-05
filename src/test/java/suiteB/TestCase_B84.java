@@ -64,16 +64,16 @@ public class TestCase_B84 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 180);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 180);
 			
 			String patent = "Projection exposure apparatus and method which uses multiple diffraction gratings in order to produce a solid state device with fine patterns";
 			
