@@ -75,7 +75,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Synergistic");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 			String articleTitle = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			String comment = "testFlag";
@@ -89,7 +89,7 @@ public class VerifyFlagSetByOtherUsers extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 120);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 			ob.findElement(By.linkText(articleTitle)).click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
 

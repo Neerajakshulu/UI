@@ -1022,7 +1022,7 @@ public class TestBase {
 		// Deleting the first watch list
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		BrowserWaits.waitTime(4);
+		waitForPageLoad(ob);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		for (WebElement watchList : listOfWatchlist) {

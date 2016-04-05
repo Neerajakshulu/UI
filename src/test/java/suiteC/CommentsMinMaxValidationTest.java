@@ -197,7 +197,7 @@ public class CommentsMinMaxValidationTest extends TestBase {
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	

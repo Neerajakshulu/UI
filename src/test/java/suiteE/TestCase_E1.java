@@ -75,8 +75,7 @@ public class TestCase_E1 extends TestBase {
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			System.out.println("After opening site");
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create 1st watch list
 			String newWatchlistName = "Watchlist_TestCase_E1";
@@ -85,7 +84,7 @@ public class TestCase_E1 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
 			// Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -121,9 +120,9 @@ public class TestCase_E1 extends TestBase {
 
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("cancer");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForPageLoad(ob);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
 			// Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));

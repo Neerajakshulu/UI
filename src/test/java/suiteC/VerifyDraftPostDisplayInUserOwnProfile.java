@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -61,11 +62,13 @@ public class VerifyDraftPostDisplayInUserOwnProfile extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 
 			loginAs("USERNAME3", "PASSWORD3");
 			test.log(LogStatus.INFO, "Logged in to NEON");
+			pf.getHFPageInstance(ob).clickOnProfileLink();
+			BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			int postCountBefore=pf.getProfilePageInstance(ob).getDraftPostsCount();

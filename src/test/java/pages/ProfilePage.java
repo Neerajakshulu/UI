@@ -545,12 +545,15 @@ public class ProfilePage  extends TestBase {
 		ob.navigate().refresh();
 		waitForPageLoad(ob);
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS);
-		String strCount=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+		String strCount;
+		try{
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 30);
+		strCount=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
 		.getText().replaceAll(",", "");
-		if(strCount.equalsIgnoreCase("")){
+		}catch(Exception e){
 			strCount="0";
 		}
+		
 		int count = Integer.parseInt(strCount);
 		return count;
 	}

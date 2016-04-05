@@ -82,8 +82,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME11","PASSWORD11");
 			searchArticle(article);
 			pf. getSearchResultsPageInstance(ob).clickOnArticleTab();
 			chooseArticle(completeArticle);
@@ -193,7 +192,7 @@ public class EditCommentProfanityWordChkTest extends TestBase{
 	}
 	
 	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 	
