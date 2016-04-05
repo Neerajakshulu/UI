@@ -36,7 +36,7 @@ public class TestCase_E3 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add a Post from ALL content search results page to a particular watchlist")
+						"Verify that user is able to add a Post from ALL content search results page to a particular watchlist||Verify that user is able to unwatch a Post from ALL content search results page")
 				.assignCategory("Suite E");
 
 	}
@@ -83,7 +83,7 @@ public class TestCase_E3 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
 			// Watching a post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -122,7 +122,7 @@ public class TestCase_E3 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + 2 + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 			// Watching a post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
