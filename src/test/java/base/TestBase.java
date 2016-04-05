@@ -107,7 +107,7 @@ public class TestBase {
 				Thread.sleep(3000);
 				logout();
 				closeBrowser();
-				
+				System.out.println("User count:"+count);
 				count++;
 			}
 
