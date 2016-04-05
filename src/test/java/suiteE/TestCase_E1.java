@@ -61,7 +61,6 @@ public class TestCase_E1 extends TestBase {
 		try {
 
 			// Opening browser
-
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -77,7 +76,7 @@ public class TestCase_E1 extends TestBase {
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
-			// Create 1st watch list
+			// Create watch list
 			String newWatchlistName = "Watchlist_TestCase_E1";
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
