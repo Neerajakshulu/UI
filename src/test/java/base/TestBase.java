@@ -107,7 +107,7 @@ public class TestBase {
 				Thread.sleep(3000);
 				logout();
 				closeBrowser();
-				
+				System.out.println("User count:"+count);
 				count++;
 			}
 
@@ -899,7 +899,7 @@ public class TestBase {
 		// Navigate to the watch list landing page
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//ul[@class='list-unstyled watchlist-refine-panel']"), 10);
+		waitForElementTobeVisible(ob, By.xpath("//ul[@class='list-unstyled watchlist-refine-panel']"), 30);
 
 		// Getting all the watch lists
 		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
@@ -907,7 +907,7 @@ public class TestBase {
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
 				watchLists.get(i).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 10);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 30);
 				break;
 			}
 		}
@@ -1022,7 +1022,7 @@ public class TestBase {
 		// Deleting the first watch list
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		waitForPageLoad(ob);
+		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		for (WebElement watchList : listOfWatchlist) {

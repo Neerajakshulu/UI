@@ -62,8 +62,8 @@ public class TestCase_B60 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
 			// login using TR credentials
 			login();
@@ -83,7 +83,7 @@ public class TestCase_B60 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
 			String text = myE.getText();

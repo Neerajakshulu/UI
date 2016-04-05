@@ -127,7 +127,7 @@ public class TestCase_B117 extends TestBase {
 			}
 			
 			
-			if(!(postTitlesRV.containsAll(postTitlesdata))){
+			if(!(postTitlesFromRVdata.containsAll(postTitlesdata))){
 				throw new Exception(
 						"Search dropdown content type is not retained when user navigates back to POSTS search results page from record view page");
 			}

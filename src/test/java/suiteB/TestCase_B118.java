@@ -120,22 +120,23 @@ public class TestCase_B118 extends TestBase{
 
 			jsClick(ob, searchResults.get(8));
 			waitForPageLoad(ob);
-			
+			Thread.sleep(10000);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")),50);
 			
 //			ob.navigate().back();
 			JavascriptExecutor js = (JavascriptExecutor)ob;
 			js.executeScript("window.history.back();");
 			waitForPageLoad(ob);
 			waitForAjax(ob);
-			
+			Thread.sleep(6000);
 			List<WebElement> searchResults2=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			//System.out.println("search results2-->"+searchResults2.size());
 			ArrayList<String> al2=new ArrayList<String>();
 			for(int i=0;i<searchResults2.size();i++){
 				al2.add(searchResults2.get(i).getText());
 			}
-			
-			//System.out.println("list2-->"+al2);
+			System.out.println("list1-->"+al1);
+			System.out.println("list2-->"+al2);
 			
 			try{
 				Assert.assertTrue(al1.equals(al2));
@@ -152,6 +153,7 @@ public class TestCase_B118 extends TestBase{
 				}
 			
 			String option=ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			System.out.println(option);
 			if(!compareStrings("Times Cited",option)){
 				
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");//extent reports
