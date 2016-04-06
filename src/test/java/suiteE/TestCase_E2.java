@@ -76,7 +76,7 @@ public class TestCase_E2 extends TestBase {
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_TestCase_E2";
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Searching for patent
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");

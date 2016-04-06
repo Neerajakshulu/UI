@@ -2,22 +2,16 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -35,16 +29,13 @@ public class TestCase_E20 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+		test = extent.startTest(var, "Verify that user is able to convert his public watchlist to private")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "patentName" })
-	public void testDisplayedFieldsForPatentsInWatchlist(String patentName) throws Exception {
+	public void testChangeStatusPublicToPrivate() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -81,63 +72,19 @@ public class TestCase_E20 extends TestBase {
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for article
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			// Making the public watch list to private
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 
-			// Getting watch button list for patents
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			// Watching 10 patents to a particular watch list
-			for (int i = 0; i < 3; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
+			boolean watchListStatus = ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox")))
+					.isSelected();
+			if (!watchListStatus) {
+				test.log(LogStatus.PASS, "User is able to change the public watch list to private");
+			} else {
+				test.log(LogStatus.FAIL, "User is not able to change the public watch list to private");
 			}
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
-			BrowserWaits.waitTime(3);
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelTimesCited = "Times Cited";
-			String expectedLabelComments = "Comments";
-
-			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelTimesCited);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
-			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_patent_in_the_watchlist_page:a)Times cited b)Comments")));
-			}
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
-			
 			closeBrowser();
 
 		} catch (Throwable t) {

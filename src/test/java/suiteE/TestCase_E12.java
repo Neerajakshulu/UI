@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -30,19 +31,20 @@ public class TestCase_E12 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to unwatch an Patent from Patents content search results page")
+						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "patentName" })
-	public void testUnwatchPatentFromPatentContentSearchResult(String patentName) throws Exception {
+	@Parameters({ "postName" })
+	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -70,64 +72,73 @@ public class TestCase_E12 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
-			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
+			// Create watch list
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
+
+			// Searching for post
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
-			// Watching a patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			// Getting watch button list for posts
+			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
-			// Unwatching a patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			// Watching 10 posts to a particular watch list
+			for (WebElement watchButton : watchButtonList) {
 
-			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+				BrowserWaits.waitTime(2);
+			}
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
+			BrowserWaits.waitTime(3);
+			List<WebElement> labelsDisplayedList = ob
+					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
+
+			boolean flag = Boolean.TRUE;
+			String actualLabel = "";
+			String expectedLabelLikes = "Likes";
+			String expectedLabelComments = "Comments";
 
 			try {
+				for (WebElement label : labelsDisplayedList) {
+					actualLabel = label.getText();
+					if (flag) {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+						flag = Boolean.FALSE;
+						Assert.assertEquals(actualLabel, expectedLabelLikes);
+					} else {
 
-				if (defaultMessage.isDisplayed()) {
-
-					test.log(LogStatus.PASS,
-							"User is able to remove an patent from watchlist in Patent content search results page");// extent
-				} else {
-					test.log(LogStatus.FAIL,
-							"User not able to remove an patent from watchlist in Patent content search results page");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
-							.getClass().getSimpleName()
-							+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_content_searchResults_page")));// screenshot
+						flag = Boolean.TRUE;
+						Assert.assertEquals(actualLabel, expectedLabelComments);
+					}
 				}
-			} catch (NoSuchElementException e) {
+				test.log(LogStatus.PASS,
+						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+			} catch (Error e) {
 
-				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				int count = 0;
-				for (int i = 0; i < watchedItems.size(); i++) {
-
-					if (watchedItems.get(i).getText().equals(documentName))
-						count++;
-
-				}
-				Assert.assertEquals(count, 0);
+				ErrorUtil.addVerificationFailure(e);
+				test.log(LogStatus.FAIL,
+						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
 			}
+
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
+			
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -151,16 +162,16 @@ public class TestCase_E12 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

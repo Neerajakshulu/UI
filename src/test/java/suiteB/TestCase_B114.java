@@ -78,11 +78,12 @@ static int status=1;
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
-			waitForAjax(ob);			
+			waitForAjax(ob);
 			List<WebElement> searchResults=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			jsClick(ob, searchResults.get(8));
+			Thread.sleep(6000);
 			waitForPageLoad(ob);
-			
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")),50);
 			
 //			ob.navigate().back();
 			JavascriptExecutor js = (JavascriptExecutor)ob;
