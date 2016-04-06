@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -31,15 +31,13 @@ public class TestCase_E26 extends TestBase {
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to create a new watchlist||Verify that user is able to see his private watchlists on his own profile page")
+		test = extent.startTest(var, "Verify that same post can be added to multiple watchlists")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testCreateWatchList() throws Exception {
+	public void testWatchPostToMultipleWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -56,6 +54,7 @@ public class TestCase_E26 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+
 			// Opening browser
 			openBrowser();
 			try {
@@ -71,50 +70,71 @@ public class TestCase_E26 extends TestBase {
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// Delete first watch list
 			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			BrowserWaits.waitTime(4);
+			// Creating a new watch list
+			String newWatchlistName = "TestCaseE41_";
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
+			}
+			// Searching for post
+			String postName = "biology";
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
-			String newWatchlistName = "New Watchlist";
-			String newWatchListDescription = "This is my newly created watch list";
+			// Watching an post to a multiple watch list
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+			// Watch the post to multiple watch list
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeClickable(ob,
+						By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]"), 30);
+				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
+			}
 
-			createWatchList("private", newWatchlistName, newWatchListDescription);
-			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
-			// Finding the newly created watch list
-			int count = 0;
-			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
-					count++;
-					break;
+			// Closing the select a model
+			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			BrowserWaits.waitTime(4);
+
+			int count;
+			List<WebElement> watchedItems;
+			for (int i = 1; i <= 3; i++) {
+				count = 0;
+				// Navigate to a particular watch list page
+				navigateToParticularWatchlistPage(newWatchlistName + i);
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for (int j = 0; j < watchedItems.size(); j++) {
+					if (watchedItems.get(j).getText().equals(documentName))
+						count++;
+
 				}
-			}
+				if (compareNumbers(1, count)) {
+					test.log(LogStatus.INFO, "User is able to add the post into watchlist" + i);
 
-			try {
-				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to create new watch list with name and description");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
-			}
-
-			// Navigating to the private watch list tab
-			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
-			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
-			count = 0;
-			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
-					count++;
-					break;
+				} else {
+					test.log(LogStatus.FAIL, "User is not able to add the post into watchlist" + i);// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist" + i)));// screenshot
 				}
-			}
-
-			try {
-				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to see private watch list in own profile page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to see private watch list in own profile page");
 			}
 
 			closeBrowser();

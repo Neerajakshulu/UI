@@ -5,9 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -33,15 +31,13 @@ public class TestCase_E25 extends TestBase {
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
+		test = extent.startTest(var, "Verify that same patent can be added to multiple watchlists")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testItemsCountInWatchlist() throws Exception {
+	public void testWatchPatentToMultipleWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -74,56 +70,72 @@ public class TestCase_E25 extends TestBase {
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// Delete first watch list
 			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			BrowserWaits.waitTime(4);
 
-			// Searching for post
-			selectSearchTypeFromDropDown("All");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			// Creating a new watch list
+			String newWatchlistName = "TestCaseE40_";
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
+			}
+
+			// Searching for patent
+			String patentName = "biology";
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 5 posts to a particular watch list
-			for (int i = 0; i < 5; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
+			// Watching an patent to a multiple watch list
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+			// Watch the patent to multiple watch list
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeClickable(ob,
+						By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]"), 30);
+				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
 			}
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-			// Getting the items count
-			int itemCount = Integer
-					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+			// Closing the select a model
+			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
-			try {
-				Assert.assertEquals(itemCount, 5);
-				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
-			} catch (Exception e) {
-				status = 2;
-				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
-			}
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			BrowserWaits.waitTime(4);
+			int count;
+			List<WebElement> watchedItems;
+			for (int i = 1; i <= 3; i++) {
+				count = 0;
+				// Navigate to a particular watch list page
+				navigateToParticularWatchlistPage(newWatchlistName + i);
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for (int j = 0; j < watchedItems.size(); j++) {
+					if (watchedItems.get(j).getText().equals(documentName))
+						count++;
 
-			// Unwatching the first 3 document from results
-			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
-			for (int i = 0; i < 3; i++) {
-				watchButtonList.get(i).click();
-				BrowserWaits.waitTime(2);
-			}
+				}
+				if (compareNumbers(1, count)) {
+					test.log(LogStatus.INFO, "User is able to add the patent into watchlist" + i);
 
-			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
-
-			try {
-				Assert.assertEquals(itemCount, 2);
-				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
+				} else {
+					test.log(LogStatus.FAIL, "User is not able to add the patent into watchlist" + i);// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_add_patent_into_watchlist" + i)));// screenshot
+				}
 			}
 
 			closeBrowser();

@@ -5,18 +5,16 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -30,17 +28,19 @@ public class TestCase_E24 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch a Post from watchlist page")
+		test = extent
+				.startTest(var,
+						"Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular watchlist during watching")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testUnwathArticlesFromWatchlist(String postName) throws Exception {
+	public void testWatchArticleToMultipleWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -68,60 +68,86 @@ public class TestCase_E24 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
+			// "Techm@2015");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			// Create multiple watch list
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			BrowserWaits.waitTime(4);
+			for (int i = 1; i <= 2; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
+						.sendKeys(newWatchlistName + "_" + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
+						30);
+			}
+
+			// Searching for article
+			String articleName = "biology";
+			selectSearchTypeFromDropDown("Articles");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 2 posts to a particular watch list
-			for (int i = 0; i < 2; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
+			// Watching an article to a multiple watch list
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+			// Watch the article to multiple watch list
+			for (int i = 1; i <= 2; i++) {
+				waitForElementTobeClickable(ob,
+						By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]"), 30);
+				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
 			}
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-			waitForPageLoad(ob);
-			// Getting the first result title
-			String firstDocumentTitle = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
+			// Closing the select a model
+			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
-			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
-			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
-			int count = 0;
-			String documentTitle;
-			for (WebElement document : documentList) {
-				documentTitle = document.getText();
-				if (documentTitle.equals(firstDocumentTitle))
-					count++;
+			// Selecting the document name
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			BrowserWaits.waitTime(4);
+			int count;
+			List<WebElement> watchedItems;
+			for (int i = 1; i <= 3; i++) {
+				count = 0;
+				// Navigate to a particular watch list page
+				navigateToParticularWatchlistPage(newWatchlistName + "_" + i);
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				for (int j = 0; j < watchedItems.size(); j++) {
+					if (watchedItems.get(j).getText().equals(documentName))
+						count++;
+
+				}
+				if (compareNumbers(1, count)) {
+					test.log(LogStatus.INFO, "User is able to add the article into watchlist" + i);
+
+				} else {
+					test.log(LogStatus.FAIL, "User is not able to add the article into watchlist" + i);// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_add_article_into_watchlist" + i)));// screenshot
+				}
 			}
 
-			try {
-				Assert.assertEquals(0, count);
-				test.log(LogStatus.PASS, "User is able to unwatch a Post from watchlist page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to unwatch a Post from watchlist page");
-			}
-
+			// Deleting watch list
+			deleteParticularWatchlist(newWatchlistName + "_1");
+			deleteParticularWatchlist(newWatchlistName + "_2");
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -145,16 +171,16 @@ public class TestCase_E24 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

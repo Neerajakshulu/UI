@@ -5,18 +5,17 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -35,14 +34,13 @@ public class TestCase_E19 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields are getting displayed for each article in the watchlist page: a)Times cited b)Comments")
+						"Verify that no one can see the private watchlists of a user on user's profile page||Verify that user1 is not able to see a watchlist on user2's profile page,  once user2's public watchlist is reverted to private.")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "articleName" })
-	public void testDisplayedFieldsForArticlesInWatchlist(String articleName) throws Exception {
+	public void testPrivateWatchlistNotVisibleFromOthersProfile() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -60,81 +58,76 @@ public class TestCase_E19 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// Opening browser
+			// String search_query = "biology";
+
+			// 1) Login as user2
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			// Navigate to the watch list landing page
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			// Creating 5 public watch list
+			String newWatchlistName = "New Watchlist";
+			for (int i = 1; i <= 3; i++) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
+			}
+			// Making the last watch list as private
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+			Thread.sleep(2000);
+			new PageFactory().getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			// 2)Login as User1 and navigate to the user2 profile page
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
 //			ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
+			selectSearchTypeFromDropDown("People");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
-
-			// Getting watch button list for articles
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			String selectedWatchlistName = null;
-			// Watching 10 articles to a particular watch list
-			for (int i = 0; i < 5; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				Thread.sleep(2000);
-			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
+			// Navigating to the first user profile page
+			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelTimesCited = "Times Cited";
-			String expectedLabelComments = "Comments";
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
+			// Navigating to the watch list tab
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
+			int count = 0;
+			// Checking if private watch list is visible to others or not
+			for (WebElement watchlist : watchlists) {
+				if (watchlist.getText().equals(newWatchlistName + 5)) {
+					count++;
+					break;
+				}
+			}
 
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelTimesCited);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each article in the watchlist page: a)Times cited b)Comments");// extent
+				Assert.assertEquals(count, 0);
+				test.log(LogStatus.PASS, "Others can not see the private watchlists of a user on user's profile page");
 			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each article in the watchlist page: a)Times cited b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_article_in_the_watchlist_page:a)Times cited b)Comments")));
+				status = 2;
+				test.log(LogStatus.FAIL, "Others able to see the private watchlists of a user on user's profile page");
 			}
-
 			closeBrowser();
 
 		} catch (Throwable t) {

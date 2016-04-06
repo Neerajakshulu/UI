@@ -2,8 +2,12 @@ package suiteE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -13,8 +17,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E27 extends TestBase {
@@ -25,19 +31,20 @@ public class TestCase_E27 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
+
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist||Verify that watchlist name is customizable")
+						"Verify that user is able to watch an article to a particular watchlist from notification in home page||Verify that user is able to unwatch an article from watchlist from notification in home page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	public void testEditWatchList() throws Exception {
+	public void testWatchUnwatchArticleFromHomePage() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -54,63 +61,166 @@ public class TestCase_E27 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			// Opening browser
+			// 1)Create User1 and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-
 //			ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 
-			String newWatchlistName = "New Watchlist";
-			String newWatchListDescription = "This is my newly created watch list";
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("scroll(0,-500)");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+					30);
 
-			createWatchList("private", newWatchlistName, newWatchListDescription);
-			// Editing the first watch list
-			String watchlistName = "Updated Watchlist";
-			String watchlistDescription = "This is my watchlist";
-			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
-			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 30);
-			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
-			String updatedWatchlistDescription = ob
-					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
+			new PageFactory().getLoginTRInstance(ob).logOutApp();
 
-			// Compare watch list name
-			try {
-				Assert.assertEquals(watchlistName, updatedWatchlistName);
-				test.log(LogStatus.PASS, "User is able to update watch list name");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is not able to update watch list name");
+			// 3)Login as user1 and comment on some article
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
+			selectSearchTypeFromDropDown("Patents");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+
+			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			System.out.println(document_title);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
+					.sendKeys("Automation Script Comment: TestCase_E42");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+
+			Thread.sleep(2000);
+			logout();
+
+			// 2)Login with user2 and and try to watch the article from
+			// notification panel
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			waitForElementTobeVisible(ob, By.id("userid"), 30);
+			ob.findElement(By.id("userid")).clear();
+			ob.findElement(By.id("userid")).sendKeys(user2);
+			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("(//span[@class='ne-profile-object-title']/a)[1]"), 30);
+
+			if (!(ob.findElements(By.xpath("(//span[@class='ne-profile-object-title']/a)[1]")).size() == 1)) {
+
+				test.log(LogStatus.FAIL, "User not receiving notification");// extent
+																			// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_user_not_receiving_notification")));// screenshot
+				closeBrowser();
+				return;
+			}
+			// Watching the article to a particular watch list
+			WebElement watchButton = ob
+					.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+
+			// Selecting the document name
+			String documentName = ob
+					.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
+					.getText();
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(selectedWatchlistName);
+
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+
+			int count = 0;
+			for (int i = 0; i < watchedItems.size(); i++) {
+
+				if (watchedItems.get(i).getText().equals(documentName))
+					count++;
+
 			}
 
-			// Compare watch list description
-			try {
-				Assert.assertEquals(watchlistDescription, updatedWatchlistDescription);
-				test.log(LogStatus.PASS, "User is able to update watch list description");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is not able to update watch list description");
+			if (compareNumbers(1, count)) {
+				test.log(LogStatus.PASS, "User is able to add an article into watchlist from home page");
+
+			} else {
+				test.log(LogStatus.FAIL, "User not able to add an article into watchlist from home page");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_unable_to_add_article_into_watchlist_from_home_page")));// screenshot
+				return;
 			}
 
+			// Navigating to the home page
+			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+			waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
+					30);
+
+			// Unwatching the article to a particular watch list
+			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+
+			// Selecting the document name
+			documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
+					.getText();
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(selectedWatchlistName);
+
+			try {
+
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+
+				if (defaultMessage.isDisplayed()) {
+
+					test.log(LogStatus.PASS, "User is able to remove an article from watchlist in home page");// extent
+				} else {
+					test.log(LogStatus.FAIL, "User not able to remove an article from watchlist in home page");// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO,
+							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_unable_to_remove_article_from_watchlist_in_home_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
+
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
+			}
 			closeBrowser();
 
 		} catch (Throwable t) {

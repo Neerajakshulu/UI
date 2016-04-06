@@ -87,7 +87,7 @@ public class TestCase_B110 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]"), 30);
 			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
 			waitForElementTobeVisible(ob, By.xpath("//*[@class='h6 doc-info']"), 30);
-			
+			Thread.sleep(6000);
 			List<WebElement> times_cited_labels=ob.findElements(By.xpath("//*[@class='h6 doc-info']"));
 			ArrayList<Integer> counts=new ArrayList<Integer>();
 			String temp;

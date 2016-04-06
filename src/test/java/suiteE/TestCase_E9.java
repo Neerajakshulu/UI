@@ -36,14 +36,14 @@ public class TestCase_E9 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add an Article from Record View page to a particular watchlist||Verify that user is able to unwatch an Article from Record View page")
+						"Verify that user is able to add an Post from Record View page to a particular watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "articleName" })
-	public void testWatchArticleFromArticleRecordViewPage(String articleName) throws Exception {
+	@Parameters({ "postName" })
+	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -79,22 +79,21 @@ public class TestCase_E9 extends TestBase {
 			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-
-			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			// Searching for post
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-			// Watching the article to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Selecting the article name
+			// Watching the post to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton,newWatchlistName);
+
+			// Selecting the post name
 			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -111,52 +110,46 @@ public class TestCase_E9 extends TestBase {
 
 			if (!compareNumbers(1, count)) {
 
-				test.log(LogStatus.FAIL,
-						"Verify that user is able to add an Article from Record View page to a particular watchlist||Verify that user is able to unwatch an Article from Record View page");// extent
+				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_article_into_watchlist_Record_view_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
 
 			}
+
 			// Step2: Unwatching the document from record view page
-			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			// Searching for post
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-
-			// Unwatching the article to a particular watch list
+			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton,newWatchlistName);
 
-			// Selecting the article name
+			// Selecting the post name
 			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-
 			try {
 
 				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
 
 				if (defaultMessage.isDisplayed()) {
 
-					test.log(LogStatus.PASS,
-							"User is able to remove an article from watchlist in Article record view page");// extent
+					test.log(LogStatus.PASS, "User is able to remove an post from watchlist in Post record view page");// extent
 				} else {
-					test.log(LogStatus.FAIL,
-							"User not able to remove an article from watchlist in Article record view page");// extent
+					test.log(LogStatus.FAIL, "User not able to remove an Post from watchlist in Post record view page");// extent
 					// reports
 					status = 2;// excel
 					test.log(LogStatus.INFO,
 							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_article_from_watchlist_in_Article_record_view_page")));// screenshot
+									+ "_user_unable_to_remove_post_from_watchlist_in_Post_record_view_page")));// screenshot
 				}
 			} catch (NoSuchElementException e) {
 
@@ -170,10 +163,8 @@ public class TestCase_E9 extends TestBase {
 				}
 				Assert.assertEquals(count, 0);
 			}
-
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
-
 			closeBrowser();
 
 		} catch (Throwable t) {

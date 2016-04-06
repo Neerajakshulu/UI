@@ -5,18 +5,18 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -36,14 +36,13 @@ public class TestCase_E13 extends TestBase {
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add a Patent from Record View page to a particular watchlist||Verify that user is able to unwatch a Patent from Record View page")
+						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "patentName" })
-	public void testWatchPatentFromPatentsRecordViewPage(String patentName) throws Exception {
+	public void testItemsCountInWatchlist() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -80,98 +79,58 @@ public class TestCase_E13 extends TestBase {
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			// Searching for post
+			selectSearchTypeFromDropDown("All");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			// Getting watch button list for posts
+			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
-			// Watching the patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-
-			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
-
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
-
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
-
+			// Watching 5 item to a particular watch list
+			for (int i = 0; i < 5; i++) {
+				WebElement watchButton = watchButtonList.get(i);
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+				BrowserWaits.waitTime(2);
 			}
 
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an patent into watchlist from Record view page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_patent_into_watchlist_Record_view_page")));// screenshot
-
-			}
-
-			// Step2: Unwatching the document from record view page
-			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-
-			// Unwatching the patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-
-			// Selecting the patent name
-			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
+			waitForPageLoad(ob);
+			// Getting the items count
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
-
-				if (defaultMessage.isDisplayed()) {
-
-					test.log(LogStatus.PASS,
-							"User is able to remove an patent from watchlist in Patent record view page");// extent
-				} else {
-					test.log(LogStatus.FAIL,
-							"User not able to remove an patent from watchlist in Patent record view page");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_record_view_page")));// screenshot
-				}
-			} catch (NoSuchElementException e) {
-
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				count = 0;
-				for (int i = 0; i < watchedItems.size(); i++) {
-
-					if (watchedItems.get(i).getText().equals(documentName))
-						count++;
-
-				}
-				Assert.assertEquals(count, 0);
+				Assert.assertEquals(itemCount, 5);
+				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
+			} catch (Exception e) {
+				status = 2;
+				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
 			}
+
+			// Unwatching the first 3 document from watch list page
+			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
+			for (int i = 0; i < 3; i++) {
+				watchButtonList.get(i).click();
+				BrowserWaits.waitTime(2);
+			}
+
+			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+
+			try {
+				Assert.assertEquals(itemCount, 2);
+				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
+			}
+
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
+
 			closeBrowser();
 
 		} catch (Throwable t) {

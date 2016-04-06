@@ -77,7 +77,7 @@ public class TestCase_E1 extends TestBase {
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_TestCase_E1";
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
