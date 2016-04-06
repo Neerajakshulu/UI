@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -28,12 +29,11 @@ public class TestCase_E30 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that a user has 1 watchlist by default once we try to watch an item")
+		test = extent.startTest(var, "Verify that a user has 1 watchlist by default once we try to watch an item")
 				.assignCategory("Suite E");
 
 	}
@@ -57,9 +57,7 @@ public class TestCase_E30 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String search_query = "biology";
-
-			// Making a new user
+			// Opening the browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -69,14 +67,12 @@ public class TestCase_E30 extends TestBase {
 			}
 			clearCookies();
 
+			// Creating new user as need to test default watch list
 			createNewUser("mask", "man");
 
-			// Searching for article
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
-
-			// Clicking on first watch button from the results
+			// Step1: Checking the default watch list
+			// Clicking on first watch button from home page
+			waitForPageLoad(ob);
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads
@@ -89,12 +85,45 @@ public class TestCase_E30 extends TestBase {
 				// Finding the no of watch lists
 				List<WebElement> watchLists = ob.findElements(
 						By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"));
+				// Closing the select a model
+				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+				BrowserWaits.waitTime(3);
 				Assert.assertEquals(watchLists.size(), 1);
 				test.log(LogStatus.PASS, "User has 1 watchlist by default once we try to watch an item");
 			} catch (Throwable t) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User does not have 1 watchlist by default once we try to watch an item");
 			}
+
+			// Step2: Verify that every user watch list is private by default
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			BrowserWaits.waitTime(4);
+			// Check if watch list is private by default
+			boolean watchListStatus = ob.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected();
+			if (!watchListStatus) {
+				test.log(LogStatus.PASS, "User watchlist is private by default");
+			} else {
+				test.log(LogStatus.FAIL, "User watchlist is not private by default");
+			}
+
+			// Step3: Verify that user is able to have a watch list with 0 item
+			// Navigating to the default watch list details page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+			waitForPageLoad(ob);
+
+			// Getting the items count
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+
+			try {
+				Assert.assertEquals(itemCount, 0);
+				test.log(LogStatus.PASS, "User can have a watchlist with 0 item under it");
+			} catch (Exception e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User can not have a watchlist with 0 item under it");
+			}
+
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -118,16 +147,16 @@ public class TestCase_E30 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

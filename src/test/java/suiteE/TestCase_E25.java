@@ -30,7 +30,8 @@ public class TestCase_E25 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -69,34 +70,35 @@ public class TestCase_E25 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
+
 			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for post
 			selectSearchTypeFromDropDown("All");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
-			String selectedWatchlistName = null;
-			// Watching 5 posts to a particular watch list
+			// Watching 5 item to a particular watch list
 			for (int i = 0; i < 5; i++) {
 				WebElement watchButton = watchButtonList.get(i);
-				selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
+			waitForPageLoad(ob);
 			// Getting the items count
 			int itemCount = Integer
 					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
@@ -109,7 +111,7 @@ public class TestCase_E25 extends TestBase {
 				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
 			}
 
-			// Unwatching the first 3 document from results
+			// Unwatching the first 3 document from watch list page
 			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
 			for (int i = 0; i < 3; i++) {
 				watchButtonList.get(i).click();
@@ -125,6 +127,9 @@ public class TestCase_E25 extends TestBase {
 				status = 2;
 				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
 			}
+
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 
 			closeBrowser();
 
@@ -149,16 +154,16 @@ public class TestCase_E25 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

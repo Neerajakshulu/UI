@@ -28,10 +28,13 @@ public class TestCase_E29 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to share watchlist publically")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to create multiple watchlists||Verify that user is able to share watchlist publically||Verify that user is able to see his public watchlists on his own profile page")
 				.assignCategory("Suite E");
 
 	}
@@ -65,56 +68,57 @@ public class TestCase_E29 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
-			String newWatchlistName = "New Watchlist";
+			// Create multiple watch list
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			String newWatchListDescription = "This is my newly created watch list";
+			createWatchList("public", newWatchlistName + "_1", newWatchListDescription);
+			createWatchList("public", newWatchlistName + "_2", newWatchListDescription);
 
-			createWatchList("public", newWatchlistName, newWatchListDescription);
 			// Getting all the watch lists
 			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
 			int count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
+				if (watchLists.get(i).getText().contains(newWatchlistName)) {
 					count++;
-					break;
 				}
 			}
 
 			try {
-				Assert.assertEquals(1, count);
-				test.log(LogStatus.PASS, "User is able to create public watch list with name and description");
+				Assert.assertEquals(count, 2);
+				test.log(LogStatus.PASS, "User is able to create multiple public watch list with name and description");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to create public watch list with name and description");
+				test.log(LogStatus.FAIL,
+						"User is unable to create multiple public watch list with name and description");
 			}
 			// Navigating to the public watch list tab
 			ob.findElement(By.xpath(OR.getProperty("watchListPublicTabLink"))).click();
 			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {
-				if (watchLists.get(i).getText().equals(newWatchlistName)) {
+				if (watchLists.get(i).getText().contains(newWatchlistName)) {
 					count++;
-					break;
 				}
 			}
 
 			try {
-				Assert.assertEquals(1, count);
+				Assert.assertEquals(count, 2);
 				test.log(LogStatus.PASS, "User is able to see public watch list in own profile page");
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is unable to see public watch list in own profile page");
 			}
 
+			// Deleting watch list
+			deleteParticularWatchlist(newWatchlistName + "_1");
+			waitForPageLoad(ob);
+			deleteParticularWatchlist(newWatchlistName + "_2");
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -138,16 +142,16 @@ public class TestCase_E29 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }
