@@ -66,8 +66,7 @@ public class TestCase_E20 extends TestBase {
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
@@ -84,10 +83,9 @@ public class TestCase_E20 extends TestBase {
 				test.log(LogStatus.FAIL, "User is not able to change the public watch list to private");
 			}
 
-			closeBrowser();
-
-			// Deleting the watch lis
+			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
