@@ -66,8 +66,8 @@ public class TestCase_B110 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			//login using TR credentials
 			login();
