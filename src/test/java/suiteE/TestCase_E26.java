@@ -28,7 +28,8 @@ public class TestCase_E26 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -66,19 +67,15 @@ public class TestCase_E26 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
+
 			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			String newWatchlistName = "New Watchlist";
-			String newWatchListDescription = "This is my newly created watch list";
-
-			createWatchList("private", newWatchlistName, newWatchListDescription);
 			// Getting all the watch lists
 			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			// Finding the newly created watch list
@@ -117,6 +114,8 @@ public class TestCase_E26 extends TestBase {
 				test.log(LogStatus.FAIL, "User is unable to see private watch list in own profile page");
 			}
 
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -140,16 +139,16 @@ public class TestCase_E26 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }
