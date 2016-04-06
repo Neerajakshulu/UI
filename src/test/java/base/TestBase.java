@@ -910,6 +910,8 @@ public class TestBase {
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 30);
 				break;
 			}
+			// Scrolling down to make the watch list visible
+			((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchLists.get(i));
 		}
 	}
 
@@ -1027,7 +1029,8 @@ public class TestBase {
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		for (WebElement watchList : listOfWatchlist) {
 			if (watchList.getText().equals(watchListName)) {
-				ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+				
+				watchList.click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 30);
