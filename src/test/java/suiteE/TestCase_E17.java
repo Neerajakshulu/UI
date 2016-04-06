@@ -5,18 +5,17 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -34,16 +33,13 @@ public class TestCase_E17 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add an Post from Record View page to a particular watchlist")
+		test = extent.startTest(var, "Verify that a user has 1 watchlist by default once we try to watch an item")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testDefaultWatchListPresent() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -61,7 +57,7 @@ public class TestCase_E17 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// Opening browser
+			// Opening the browser
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -71,100 +67,63 @@ public class TestCase_E17 extends TestBase {
 			}
 			clearCookies();
 
-			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
+			// Creating new user as need to test default watch list
+			createNewUser("mask", "man");
 
-			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
-			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			// Step1: Checking the default watch list
+			// Clicking on first watch button from home page
+			waitForPageLoad(ob);
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			// Wait until select a watch list model loads
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			// Select the first watch list from the model
+			waitForElementTobeClickable(ob,
+					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
 
-			// Watching the post to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton,newWatchlistName);
-
-			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
-
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
-
-				if (watchedItems.get(i).getText().equals(documentName))
-					count++;
-
-			}
-
-			if (!compareNumbers(1, count)) {
-
-				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
-
-			}
-
-			// Step2: Unwatching the document from record view page
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-			// Unwatching the post to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton,newWatchlistName);
-
-			// Selecting the post name
-			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
 			try {
-
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
-
-				if (defaultMessage.isDisplayed()) {
-
-					test.log(LogStatus.PASS, "User is able to remove an post from watchlist in Post record view page");// extent
-				} else {
-					test.log(LogStatus.FAIL, "User not able to remove an Post from watchlist in Post record view page");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_post_from_watchlist_in_Post_record_view_page")));// screenshot
-				}
-			} catch (NoSuchElementException e) {
-
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				count = 0;
-				for (int i = 0; i < watchedItems.size(); i++) {
-
-					if (watchedItems.get(i).getText().equals(documentName))
-						count++;
-
-				}
-				Assert.assertEquals(count, 0);
+				// Finding the no of watch lists
+				List<WebElement> watchLists = ob.findElements(
+						By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"));
+				// Closing the select a model
+				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+				BrowserWaits.waitTime(3);
+				Assert.assertEquals(watchLists.size(), 1);
+				test.log(LogStatus.PASS, "User has 1 watchlist by default once we try to watch an item");
+			} catch (Throwable t) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User does not have 1 watchlist by default once we try to watch an item");
 			}
-			// Deleting the watch list
-			deleteParticularWatchlist(newWatchlistName);
+
+			// Step2: Verify that every user watch list is private by default
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			BrowserWaits.waitTime(4);
+			// Check if watch list is private by default
+			boolean watchListStatus = ob.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected();
+			if (!watchListStatus) {
+				test.log(LogStatus.PASS, "User watchlist is private by default");
+			} else {
+				test.log(LogStatus.FAIL, "User watchlist is not private by default");
+			}
+
+			// Step3: Verify that user is able to have a watch list with 0 item
+			// Navigating to the default watch list details page
+			ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
+			waitForPageLoad(ob);
+
+			// Getting the items count
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+
+			try {
+				Assert.assertEquals(itemCount, 0);
+				test.log(LogStatus.PASS, "User can have a watchlist with 0 item under it");
+			} catch (Exception e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User can not have a watchlist with 0 item under it");
+			}
+
 			closeBrowser();
 
 		} catch (Throwable t) {

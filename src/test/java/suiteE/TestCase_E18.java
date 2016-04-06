@@ -5,13 +5,11 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -33,14 +31,15 @@ public class TestCase_E18 extends TestBase {
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch an Post from Record view page")
+		test = extent
+				.startTest(var,
+						"Verify that anyone can see the public watchlists of a user on user's profile page||Verify that user1 is able to see a watchlist on user2's profile page,  once user2's private watchlist is made to public.")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testUnwatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testPublicWatchListVisibleFromOthersProfile() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -58,74 +57,60 @@ public class TestCase_E18 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// Opening browser
+			// 1)Create User2 and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-
+//			ob.get(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			String newWatchlistName = "New Watchlist";
+			String newWatchListDescription = "This is my newly created watch list";
+			// Create private watch list
+			createWatchList("private", newWatchlistName, newWatchListDescription);
+			// Making the watch list from private to public
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+			Thread.sleep(2000);
+			closeBrowser();
+			// 2)Login as User1 and navigate to the user2 profile page
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
 //			ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
-			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
-
-			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
+			// Searching for article
+			selectSearchTypeFromDropDown("People");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-
-			// Watching the post to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-
-			// Unwatching the post to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
-
-			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
-			try {
-
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
-
-				if (defaultMessage.isDisplayed()) {
-
-					test.log(LogStatus.PASS, "User is able to remove an post from watchlist in Post record view page");// extent
-				} else {
-					test.log(LogStatus.FAIL, "User not able to remove an Post from watchlist in Post record view page");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_post_from_watchlist_in_Post_record_view_page")));// screenshot
+			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);
+			// Navigating to the first user profile page
+			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
+			waitForPageLoad(ob);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 30);
+			// Navigating to the watch list tab
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
+			int count = 0;
+			for (WebElement watchlist : watchlists) {
+				if (watchlist.getText().equals(newWatchlistName)) {
+					count++;
+					break;
 				}
-			} catch (NoSuchElementException e) {
-
-				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				int count = 0;
-				for (int i = 0; i < watchedItems.size(); i++) {
-
-					if (watchedItems.get(i).getText().equals(documentName))
-						count++;
-
-				}
-				Assert.assertEquals(count, 0);
 			}
+
+			try {
+				Assert.assertEquals(count, 1);
+				test.log(LogStatus.PASS, "Others can see the public watchlists of a user on user's profile page");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "Others unable to see the public watchlists of a user on user's profile page");
+			}
+
 			closeBrowser();
 
 		} catch (Throwable t) {

@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -30,17 +31,20 @@ public class TestCase_E6 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to unwatch an Post from ALL content search results page")
+		test = extent
+				.startTest(var,
+						"Verify that user is able to add a Patent from Patents content search results page to a particular watchlist||Verify that user is able to unwatch a Patent from watchlist page||Verify that user is able to unwatch a Patent from Patents content search results page")
 				.assignCategory("Suite E");
 
 	}
 
 	@Test
-	@Parameters({ "postName" })
-	public void testUnwatchPostFromAllContentSearchResult(String postName) throws Exception {
+	@Parameters({ "patentName" })
+	public void testWatchPatentFromPatentContentSearchResult(String patentName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
@@ -68,56 +72,112 @@ public class TestCase_E6 extends TestBase {
 			}
 			clearCookies();
 
-			// createNewUser("mask", "man");
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
+
 			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for post
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
-			// Watching a post to a particular watch list
+			// Getting watch button list for patents
+			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+
+			// Watching 2 patents to a particular watch list
+			for (int i = 0; i < 2; i++) {
+				WebElement watchButton = watchButtonList.get(i);
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+				BrowserWaits.waitTime(2);
+			}
+
+			// Selecting the patent name
+			String firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+			waitForPageLoad(ob);
+
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+
+			int count = 0;
+			for (int i = 0; i < watchedItems.size(); i++) {
+
+				if (watchedItems.get(i).getText().equals(firstDocumentName))
+					count++;
+
+			}
+
+			if (!compareNumbers(1, count)) {
+
+				test.log(LogStatus.FAIL,
+						"User not able to add an patent into watchlist from Patents content search results page");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_add_patent_into_watchlist_from_Patents_content_searchResults_page")));// screenshot
+
+			}
+
+			// Steps2: Removing the first item from watch list page
+			firstDocumentName = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
+			// Unwatching the first document from results
+			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
+			// Checking if first document still exists in the watch list
+			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
+			count = 0;
+			String documentTitle;
+			for (WebElement document : documentList) {
+				documentTitle = document.getText();
+				if (documentTitle.equals(firstDocumentName))
+					count++;
+			}
+
+			try {
+				Assert.assertEquals(0, count);
+				test.log(LogStatus.PASS, "User is able to unwatch a Patent from watchlist page");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is unable to unwatch a Patent from watchlist page");
+			}
+
+			// Steps3: Unwatching a patent from patent content result page
+
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+
+			// Watching a patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Unwatching an article to a particular watch list
+			// Unwatching a patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Selecting the document name
+			// Selecting the patent name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
-
-				if (defaultMessage.isDisplayed()) {
-
-					test.log(LogStatus.PASS,
-							"User is able to remove an post from watchlist in ALL content search results page");// extent
-				} else {
-					test.log(LogStatus.FAIL,
-							"User not able to remove an post from watchlist in ALL content search results page");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_post_from_watchlist_in_all_content_searchResults_page")));// screenshot
-				}
-			} catch (NoSuchElementException e) {
-
-				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				int count = 0;
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 
 					if (watchedItems.get(i).getText().equals(documentName))
@@ -125,7 +185,22 @@ public class TestCase_E6 extends TestBase {
 
 				}
 				Assert.assertEquals(count, 0);
+
+				test.log(LogStatus.PASS,
+						"User is able to remove an patent from watchlist in Patent content search results page");// extent
+
+			} catch (Error e) {
+
+				test.log(LogStatus.FAIL,
+						"User not able to remove an patent from watchlist in Patent content search results page");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_content_searchResults_page")));// screenshot
 			}
+			// Delete the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -149,16 +224,16 @@ public class TestCase_E6 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }
