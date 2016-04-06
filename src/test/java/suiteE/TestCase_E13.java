@@ -5,7 +5,9 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -28,12 +30,13 @@ public class TestCase_E13 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
 				.startTest(var,
-						"Verify that user is able to add an Patent from Record View page to a particular watchlist")
+						"Verify that user is able to add a Patent from Record View page to a particular watchlist||Verify that user is able to unwatch a Patent from Record View page")
 				.assignCategory("Suite E");
 
 	}
@@ -68,18 +71,18 @@ public class TestCase_E13 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// Delete first watch list
-			deleteFirstWatchlist();
-			waitForPageLoad(ob);
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
+
 			// Create watch list
-			createWatchList("private", "TestWatchlist2", "This is my test watchlist.");
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for patents
 			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
@@ -89,12 +92,12 @@ public class TestCase_E13 extends TestBase {
 
 			// Watching the patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the patent name
 			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -117,6 +120,58 @@ public class TestCase_E13 extends TestBase {
 
 			}
 
+			// Step2: Unwatching the document from record view page
+			// Searching for patents
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+
+			// Unwatching the patent to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Selecting the patent name
+			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+
+			try {
+
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+
+				if (defaultMessage.isDisplayed()) {
+
+					test.log(LogStatus.PASS,
+							"User is able to remove an patent from watchlist in Patent record view page");// extent
+				} else {
+					test.log(LogStatus.FAIL,
+							"User not able to remove an patent from watchlist in Patent record view page");// extent
+					// reports
+					status = 2;// excel
+					test.log(LogStatus.INFO,
+							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_record_view_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
+
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
+			}
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -140,16 +195,16 @@ public class TestCase_E13 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

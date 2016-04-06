@@ -944,11 +944,11 @@ public class TestBase {
 			throws InterruptedException {
 
 		watchButton.click();
-
+		BrowserWaits.waitTime(2);
 		// Wait until select a watch list model loads
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 30);
 		// Select the first watch list from the model
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 5);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 30);
 
 		List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button")));
 		List<WebElement> listOfWatchListName = ob
@@ -957,7 +957,7 @@ public class TestBase {
 			if (listOfWatchListName.get(i).getText().equals(watchListName)) {
 				// Adding the item into watch list
 				listOfWatchListButton.get(i).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 10);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 30);
 				break;
 			}
 			// Scrolling down to make the watch list visible in select model
