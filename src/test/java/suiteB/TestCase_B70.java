@@ -65,8 +65,8 @@ public class TestCase_B70 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			// login using TR credentials
@@ -75,6 +75,7 @@ public class TestCase_B70 extends TestBase {
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
+			Thread.sleep(3000);
 			
 			WebElement myE2=ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			String text2=myE2.getText();
@@ -97,6 +98,7 @@ public class TestCase_B70 extends TestBase {
 			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
 			waitForElementTobeVisible(ob, By.tagName("h2"), 30);
+			Thread.sleep(3000);
 			
 			String actual_text=ob.findElement(By.tagName("h2")).getText();
 			System.out.println(actual_text);
