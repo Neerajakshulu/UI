@@ -97,6 +97,7 @@ public class TestCase_E17 extends TestBase {
 
 			// Step2: Verify that every user watch list is private by default
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);
 			// Check if watch list is private by default
