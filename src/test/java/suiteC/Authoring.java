@@ -29,7 +29,7 @@ public class Authoring  extends TestBase {
 	}
 	
 	public  int getCommentCount() throws InterruptedException  {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(15);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText().replaceAll(",", "").trim();
@@ -63,7 +63,7 @@ public class Authoring  extends TestBase {
 		WebElement commentArea=ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		scrollingToElementofAPage();
 		System.out.println("Attribute-->"+commentArea.getAttribute("placeholder"));
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(20);
 		commentArea.click();
 		commentArea.clear();
 		//scrollingToElementofAPage();
@@ -94,6 +94,7 @@ public class Authoring  extends TestBase {
 	
 	
 	public void updateComment(String steComment) throws Exception {
+		BrowserWaits.waitTime(10);
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(ob, By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"), 40);
 		WebElement editCommentElement=ob.findElement(By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
@@ -113,7 +114,7 @@ public class Authoring  extends TestBase {
 			if(subButton.getText().trim().equalsIgnoreCase("submit")){
 				JavascriptExecutor executor = (JavascriptExecutor)ob;
 				executor.executeScript("arguments[0].click();", subButton);
-				
+				waitForPageLoad(ob);
 				break;
 			}
 		}
