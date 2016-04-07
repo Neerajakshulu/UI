@@ -75,6 +75,11 @@ public class TestCase_E27 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			
+			// Create watch list
+						String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+						createWatchList("private", newWatchlistName, "This is my test watchlist.");
+						
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -221,6 +226,8 @@ public class TestCase_E27 extends TestBase {
 				}
 				Assert.assertEquals(count, 0);
 			}
+			
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
