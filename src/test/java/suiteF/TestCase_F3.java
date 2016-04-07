@@ -70,7 +70,7 @@ public class TestCase_F3 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchResults_links")),120);
 			String document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			System.out.println(document_url);
@@ -94,10 +94,12 @@ public class TestCase_F3 extends TestBase {
 			ob.navigate().to(document_url);
 			
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
+			Thread.sleep(70000);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
+			Thread.sleep(5000);
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 3)Login with user1 again and verify that he receives a correct
@@ -106,15 +108,15 @@ public class TestCase_F3 extends TestBase {
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationDocumentComment")), 50);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationDocumentComment")), 100);
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);
 
 			String expected_text = fn2 + " " + ln2;
 
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains(expected_text) && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains("TestCase_F3:green tea"));
+				Assert.assertTrue(text.contains("New comments") && text.contains(expected_text) && /*text.contains("TODAY")
+						&&*/ text.contains(document_title) && text.contains("TestCase_F3:green tea"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
