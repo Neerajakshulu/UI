@@ -109,6 +109,13 @@ public class VerifyCommenterDetails extends TestBase{
 					profileDetailsInProfile.remove("");
 				else break;
 			}
+			
+			while(true){
+				
+				if(profileDetailsInComment.contains(""))
+					profileDetailsInComment.remove("");
+				else break;
+			}
 			try {
 				
 				Assert.assertEquals(profileDetailsInProfile,profileDetailsInComment);
