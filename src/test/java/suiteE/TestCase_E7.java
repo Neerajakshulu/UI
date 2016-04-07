@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -134,6 +135,7 @@ public class TestCase_E7 extends TestBase {
 
 			// Unwatching the patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			BrowserWaits.waitTime(2);
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the patent name
