@@ -86,7 +86,7 @@ public class TestCase_F6 extends TestBase {
 			String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
 			System.out.println(text);
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1)
 						&& text.contains("is now following") && text.contains(fn3 + " " + ln3));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				pf.getLoginTRInstance(ob).logOutApp();

@@ -87,7 +87,7 @@ public class TestCase_F14 extends TestBase {
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
 				test.log(LogStatus.INFO,"Liking the post");
 				ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 150);
 				ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
 				
 				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("post_like_button")), 30);
@@ -104,7 +104,7 @@ public class TestCase_F14 extends TestBase {
 				
 				String expected_text = fn1 + " " + ln1;
 				try {
-					Assert.assertTrue(text.contains("TODAY") && text.contains(expected_text)
+					Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(expected_text)
 							&& text.contains("Liked your post") && text.contains(postString));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");
 				} catch (Throwable t) {

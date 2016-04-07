@@ -99,7 +99,9 @@ public class TestCase_F18 extends TestBase {
 				ob.close();
 				test.log(LogStatus.INFO, "Switching to user 2 session to check notification ");
 				ob.switchTo().window(al1.get(0));
+				Thread.sleep(5000);
 				ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+				ob.navigate().refresh();
 				Thread.sleep(8000);
 				List<WebElement> listOfNotifications=ob.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
 				String text=listOfNotifications.get(0).getText();

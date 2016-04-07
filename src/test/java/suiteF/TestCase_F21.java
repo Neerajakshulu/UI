@@ -97,8 +97,8 @@ public class TestCase_F21 extends TestBase {
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains("TODAY")
-						&& text.contains(postString) && text.contains(fn1 + " " + ln1) && text.contains("TestCase_F21:comment"));
+				Assert.assertTrue(text.contains("New comments") && /*text.contains("TODAY")
+						&&*/ text.contains(postString) && text.contains(fn1 + " " + ln1) && text.contains("TestCase_F21:comment"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				try{
 					test.log(LogStatus.PASS, "User is commenting from home page");
