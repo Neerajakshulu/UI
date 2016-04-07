@@ -80,6 +80,7 @@ public class TestCase_E27 extends TestBase {
 						String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 						createWatchList("private", newWatchlistName, "This is my test watchlist.");
 						
+						
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
