@@ -69,23 +69,24 @@ public class TestCase_F1 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-			pf.getLoginTRInstance(ob).clickLogin();
+//			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+//			pf.getLoginTRInstance(ob).clickLogin();
 			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
-			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(3000);
-			logout();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
+//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+//
+//			JavascriptExecutor jse = (JavascriptExecutor) ob;
+//			jse.executeScript("scroll(0,-500)");
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
+//			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+//			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+//			Thread.sleep(3000);
+//			logout();
 
 			// 3)Verify that User1 receives a notification with correct data
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));

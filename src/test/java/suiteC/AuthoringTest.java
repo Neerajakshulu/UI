@@ -82,8 +82,7 @@ public class AuthoringTest extends TestBase {
 			String article,String completeArticle, String addComments) throws Exception  {
 		try {
 			waitForTRHomePage();
-			enterTRCredentials(username, password);
-			clickLogin();
+			loginAs("USERNAME15","PASSWORD15");
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			
