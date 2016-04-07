@@ -63,6 +63,8 @@ public class TestCase_F19 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
+			
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
@@ -96,8 +98,8 @@ public class TestCase_F19 extends TestBase {
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains(fn1 + " " + ln1) && text.contains("My Favourite Game"));
+				Assert.assertTrue(text.contains("New comments") && /*text.contains("TODAY")
+						&&*/ text.contains(document_title) && text.contains(fn1 + " " + ln1) && text.contains("My Favourite Game"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				try{
 					test.log(LogStatus.PASS, "User is commenting from home page");

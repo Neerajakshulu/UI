@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -71,6 +72,7 @@ public class TestCase_F4 extends TestBase {
 			// String
 			// document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// System.out.println(document_title);
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("searchResults_links")),150);
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
@@ -108,6 +110,15 @@ public class TestCase_F4 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2,CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(10000);
+			
+			JavascriptExecutor jse=(JavascriptExecutor)ob;
+			
+			for(int i=1;i<=3;i++){
+			
+			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)","");
+			Thread.sleep(3000);			
+			}
+			
 			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notificationForLike")), 30);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
@@ -116,7 +127,7 @@ public class TestCase_F4 extends TestBase {
 			String expected_text = fn1 + " " + ln1 + " liked your comment";
 
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains("Liked your comment") && text.contains("beach") && text.contains(fn1 + " " + ln1));
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains("Liked your comment") && text.contains("beach") && text.contains(fn1 + " " + ln1));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

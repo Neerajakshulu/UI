@@ -76,7 +76,7 @@ public class TestCase_F12 extends TestBase {
 			String text=ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 			
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("created a new public watchlist") && text.contains(watchListName) && text.contains(watchListDescription));
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1) && text.contains("created a new public watchlist") && text.contains(watchListName) && text.contains(watchListDescription));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();

@@ -71,8 +71,7 @@ public class TestCase_E24 extends TestBase {
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create multiple watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
@@ -104,18 +103,12 @@ public class TestCase_E24 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
 			// Watching an article to a multiple watch list
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the article to multiple watch list
 			for (int i = 1; i <= 2; i++) {
-				waitForElementTobeClickable(ob,
-						By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]"), 30);
-				ob.findElement(By.xpath("(" + OR.getProperty("watchlist_watch_button") + ")[" + i + "]")).click();
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName + "_" + i);
 			}
 
-			// Closing the select a model
-			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Selecting the document name
@@ -123,7 +116,7 @@ public class TestCase_E24 extends TestBase {
 			BrowserWaits.waitTime(4);
 			int count;
 			List<WebElement> watchedItems;
-			for (int i = 1; i <= 3; i++) {
+			for (int i = 1; i <= 2; i++) {
 				count = 0;
 				// Navigate to a particular watch list page
 				navigateToParticularWatchlistPage(newWatchlistName + "_" + i);
@@ -147,6 +140,7 @@ public class TestCase_E24 extends TestBase {
 
 			// Deleting watch list
 			deleteParticularWatchlist(newWatchlistName + "_1");
+			BrowserWaits.waitTime(2);
 			deleteParticularWatchlist(newWatchlistName + "_2");
 			closeBrowser();
 

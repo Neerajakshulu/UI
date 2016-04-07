@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -71,8 +72,7 @@ public class TestCase_E22 extends TestBase {
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
@@ -80,6 +80,7 @@ public class TestCase_E22 extends TestBase {
 
 			// Deleting the newly created watch list
 			deleteParticularWatchlist(newWatchlistName);
+			BrowserWaits.waitTime(2);
 
 			// Getting all the watch lists
 			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
