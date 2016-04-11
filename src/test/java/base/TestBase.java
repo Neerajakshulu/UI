@@ -2,6 +2,8 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -141,6 +143,13 @@ public class TestBase {
 					
 					System.out.println("There is some problem in the creation of users");
 					System.out.println(t);
+
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					
+					test.addScreenCapture(captureScreenshot("UserCreationError" +
+							this.getClass().getSimpleName() + "_user_creation_error_screenshot"));// screenshot
+
 					
 				}
 				
