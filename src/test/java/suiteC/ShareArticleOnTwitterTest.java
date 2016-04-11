@@ -131,7 +131,9 @@ public class ShareArticleOnTwitterTest extends TestBase {
 					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
 					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
+					 waitForPageLoad(ob);
+					 BrowserWaits.waitTime(10);
+					 // pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
 					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
 //					 BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
@@ -143,11 +145,12 @@ public class ShareArticleOnTwitterTest extends TestBase {
 					 
 					 pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
 					 ob.switchTo().window(PARENT_WINDOW);
+					 BrowserWaits.waitTime(10);
 				 }
 			 }
 			
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,"UnExpected Error");
@@ -159,6 +162,10 @@ public class ShareArticleOnTwitterTest extends TestBase {
 			ErrorUtil.addVerificationFailure(e);
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 					this.getClass().getSimpleName() + "_Unable_to_Tweet_Article_On_Twitter")));
+			
+		}
+		
+		finally{
 			closeBrowser();
 		}
 		
