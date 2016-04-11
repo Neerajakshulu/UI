@@ -74,7 +74,7 @@
 </test>
 
 <test name="Validate_Other_User_Profile_Comments_Like" >
-	<parameter name="otherProfileName" value="deepak"/>
+	<parameter name="otherProfileName" value="kavya"/>
     <classes>
         <class name="suiteD.OthersProfileCommentsLikeTest" ></class> 
     </classes>
