@@ -67,8 +67,8 @@ public class TestCase_B118 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
@@ -82,6 +82,7 @@ public class TestCase_B118 extends TestBase{
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(15000);
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
@@ -103,6 +104,7 @@ public class TestCase_B118 extends TestBase{
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 40);
+			Thread.sleep(5000);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
 			waitForAjax(ob);
