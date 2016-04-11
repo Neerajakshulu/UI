@@ -78,6 +78,7 @@ public class UnsupportedTagsCommentsTest extends TestBase {
 				clearCookies();
 				maximizeWindow();
 				ob.navigate().to(System.getProperty("host"));
+			//	ob.get(CONFIG.getProperty("testSiteName"));
 	}
 	
 	@Test(dependsOnMethods="testOpenApplication")
@@ -86,8 +87,7 @@ public class UnsupportedTagsCommentsTest extends TestBase {
 			String article,String completeArticle) throws Exception  {
 		try {
 			waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
+			loginAs("USERNAME13","PASSWORD13");
 			searchArticle(article);
 			chooseArticle(completeArticle);
 			

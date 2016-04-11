@@ -202,6 +202,7 @@ public class PostRecordViewPage extends TestBase {
 
 	public boolean verifyPostEditedDate() throws Exception {
 		boolean isDisplayed = false;
+		BrowserWaits.waitTime(5);
 		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
@@ -474,6 +475,8 @@ public class PostRecordViewPage extends TestBase {
 					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS, tusername);
 					 pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 					 jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
+					 waitForPageLoad(ob);
+					 BrowserWaits.waitTime(10);
 					 waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 					 String articleDesc=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
 					 System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
@@ -483,6 +486,7 @@ public class PostRecordViewPage extends TestBase {
 					 
 					 pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
 					 ob.switchTo().window(PARENT_WINDOW);
+					 BrowserWaits.waitTime(10);
 				 }
 			 }
 	}	

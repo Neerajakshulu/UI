@@ -93,8 +93,8 @@ public class AuthoringTest extends TestBase {
 			pf.getAuthoringInstance(ob).updateComment("comment updated");
 			validateUpdatedComment("comment updated");
 			closeBrowser();
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL,"Error: Login not happended");
+		} catch (Throwable e) {
+			test.log(LogStatus.FAIL,"Error: Something went wrong");
 			//print full stack trace
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
