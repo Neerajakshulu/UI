@@ -47,9 +47,15 @@ public class TestCase_F1 extends TestBase {
 
 	@Test
 	public void testcaseF1() throws Exception {
-		
+		try{
 		Assert.assertEquals("hjhgj", "ngfjhfjhg");
 
+		}
+		
+		catch(Throwable t){
+			
+			ErrorUtil.addVerificationFailure(t);
+		}
 //		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 //		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 //		boolean master_condition = suiteRunmode && testRunmode;
