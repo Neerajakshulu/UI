@@ -111,7 +111,7 @@ public class TestCase_F11 extends TestBase {
 
 
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains("Liked your comment") && text.contains("TestCase_F11:like this Post") && text.contains(fn3 + " " + ln3));
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains("Liked your comment") && text.contains("TestCase_F11:like this Post") && text.contains(fn3 + " " + ln3));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

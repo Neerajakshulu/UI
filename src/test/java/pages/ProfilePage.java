@@ -480,6 +480,7 @@ public class ProfilePage  extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	public void enterPostTitle(String tilte) throws InterruptedException {
+		BrowserWaits.waitTime(5);
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()), 90);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()))

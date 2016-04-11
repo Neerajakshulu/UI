@@ -64,6 +64,9 @@ public class TestCase_E23 extends TestBase {
 			clearCookies();
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// user2 = "3m62ab+lpstnkat051k@sharklasers.com";
+			// fn2 = "uwiyfdyd";
+			// ln2 = "uwiyfdydvb";
 			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
@@ -71,12 +74,13 @@ public class TestCase_E23 extends TestBase {
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating two public watch list
-			String newWatchlistName = "WatchlistToBeDeleted";
+			String newWatchlistName = this.getClass().getSimpleName() + "_ToBeDeleted";
 			for (int i = 1; i <= 2; i++) {
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
+						.sendKeys(newWatchlistName + "_" + i);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list.");
@@ -84,11 +88,12 @@ public class TestCase_E23 extends TestBase {
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
+				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
+						30);
 			}
 
 			// Deleting the first watch list
-			deleteFirstWatchlist();
+			deleteParticularWatchlist(newWatchlistName + "_1");
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
@@ -97,6 +102,7 @@ public class TestCase_E23 extends TestBase {
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			// loginAsSpecifiedUser("Prasenjit.Patra@thomsonreuters.com", "Techm@2015");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
@@ -129,6 +135,9 @@ public class TestCase_E23 extends TestBase {
 				status = 2;
 				test.log(LogStatus.FAIL, "Others able see the deleted watchlist of a user on user's profile page");
 			}
+
+			// Deleting the second watch list
+			deleteParticularWatchlist(newWatchlistName + "_2");
 			closeBrowser();
 
 		} catch (Throwable t) {

@@ -107,7 +107,7 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 		try {
 			
 			test.log(LogStatus.INFO,this.getClass().getSimpleName()+"  UnSupported HTML Tags execution starts for data set #"+ (count+1)+"--->");
-					
+			BrowserWaits.waitTime(10);
 			pf.getAuthoringInstance(ob).updateComment(htmlTags);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
 			String unSupporteTagErrorMessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
@@ -136,6 +136,8 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 		} finally {
 			reportDataSetResult();
 			++count;
+			ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")).click();
+			
 		}
 		
 	}

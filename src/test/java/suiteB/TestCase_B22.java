@@ -67,8 +67,8 @@ public class TestCase_B22 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
@@ -87,7 +87,7 @@ public class TestCase_B22 extends TestBase{
 				
 				urls.add(searchResults.get(i).getAttribute("href"));
 			}
-			boolean condition1,condition2,condition3,masterSearchCondition;
+			boolean condition1,condition2,condition3,condition4,condition5,masterSearchCondition;
 			String pageText;
 			ArrayList<Integer> error_list=new ArrayList<Integer>();
 			int count=0;
@@ -120,7 +120,9 @@ public class TestCase_B22 extends TestBase{
 				condition1=pageText.contains("educate");
 				condition2=pageText.contains("educated");
 				condition3=pageText.contains("education");
-				masterSearchCondition=condition1 || condition2 || condition3;
+				condition4=pageText.contains("educating");
+				condition5=pageText.contains("educational");
+				masterSearchCondition=condition1 || condition2 || condition3 || condition4 || condition5;
 				System.out.println(masterSearchCondition);
 				if(masterSearchCondition){
 					

@@ -70,7 +70,7 @@ public class ShareOthersPostOnTwitter extends TestBase{
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 								
 			logout();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -84,7 +84,9 @@ public class ShareOthersPostOnTwitter extends TestBase{
 
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			closeBrowser();
+			
+		}finally{
+		closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}

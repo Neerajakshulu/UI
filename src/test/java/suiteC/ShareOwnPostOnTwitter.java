@@ -78,9 +78,9 @@ public class ShareOwnPostOnTwitter extends TestBase{
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			pf.getpostRVPageInstance(ob).clickOnTwitterUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
-			BrowserWaits.waitTime(5);
+			
 			logout();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -94,6 +94,8 @@ public class ShareOwnPostOnTwitter extends TestBase{
 
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			
+		}finally{
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

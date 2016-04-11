@@ -85,11 +85,11 @@ public class TestCase_F9 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO,"Checking if Notification is received");
 			Thread.sleep(8000);
-			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationCommentEvent"))).getText();
 			System.out.println(text);
 		
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

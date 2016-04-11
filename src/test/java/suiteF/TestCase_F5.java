@@ -89,7 +89,7 @@ public class TestCase_F5 extends TestBase {
 			System.out.println(text);
 			String expected_text = fn1 + " " + ln1;
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(expected_text)
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(expected_text)
 						&& text.contains("published a post") && text.contains(postString));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
