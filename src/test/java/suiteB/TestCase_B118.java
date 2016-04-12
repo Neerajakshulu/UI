@@ -150,7 +150,7 @@ public class TestCase_B118 extends TestBase{
 					test.log(LogStatus.INFO, "Error--->"+t);
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
+//					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
 					
 				}
 			
@@ -160,7 +160,7 @@ public class TestCase_B118 extends TestBase{
 				
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
 				
 			}
 			
@@ -172,7 +172,7 @@ public class TestCase_B118 extends TestBase{
 				
 				test.log(LogStatus.FAIL, "Search drop down option not retained when user navigates back to Patent search results page from record view page");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
 				
 				
 			}
@@ -189,7 +189,7 @@ public class TestCase_B118 extends TestBase{
 					test.log(LogStatus.INFO, "Error--->"+t);
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
+//					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
 					
 				}
 			closeBrowser();

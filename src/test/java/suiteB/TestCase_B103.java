@@ -138,8 +138,8 @@ public class TestCase_B103 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));// screenshot
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+//						this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));// screenshot
 
 			}
 
@@ -159,9 +159,9 @@ public class TestCase_B103 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_filters_not_retained_when_user_navigates_back_to_patent_search_results_page_from_record_view_page")));// screenshot
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+//						.getSimpleName()
+//						+ "_filters_not_retained_when_user_navigates_back_to_patent_search_results_page_from_record_view_page")));// screenshot
 
 			}
 
@@ -176,8 +176,8 @@ public class TestCase_B103 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
