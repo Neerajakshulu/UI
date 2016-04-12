@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -117,6 +118,7 @@ public class TestCase_E23 extends TestBase {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 60);
 			List<WebElement> watchlists = ob
 					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));

@@ -101,6 +101,7 @@ public class TestCase_E19 extends TestBase {
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
+			BrowserWaits.waitTime(2);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
