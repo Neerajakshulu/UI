@@ -68,8 +68,8 @@ public class TestCase_B79 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
@@ -86,6 +86,7 @@ public class TestCase_B79 extends TestBase{
 			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
 			BrowserWaits.waitTime(1);
+			Thread.sleep(8000);
 			
 			WebElement myE1=ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
 			String text1=myE1.getText();
