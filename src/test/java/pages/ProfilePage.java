@@ -840,7 +840,7 @@ public void addExternalLinkToPostContent(String url) throws Exception{
 	}
 	
 	public void clickOnDraftPostsTab() throws InterruptedException {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(20);
 		waitForPageLoad(ob);	
 		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
