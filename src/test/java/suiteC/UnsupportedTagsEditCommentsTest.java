@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -197,6 +198,10 @@ public class UnsupportedTagsEditCommentsTest extends TestBase{
 	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		waitForPageLoad(ob);
+		Actions builder = new Actions(ob);   
+		builder.moveToElement(ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")),30, 0).click().build().perform();
+		BrowserWaits.waitTime(5);
 	}
 	
 	public  void waitUntilTextPresent(String locator,String text){
