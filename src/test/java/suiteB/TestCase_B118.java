@@ -67,8 +67,8 @@ public class TestCase_B118 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			
 			//login using TR credentials
@@ -82,6 +82,7 @@ public class TestCase_B118 extends TestBase{
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(15000);
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
@@ -103,6 +104,7 @@ public class TestCase_B118 extends TestBase{
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 40);
+			Thread.sleep(5000);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
 			waitForAjax(ob);
@@ -148,7 +150,7 @@ public class TestCase_B118 extends TestBase{
 					test.log(LogStatus.INFO, "Error--->"+t);
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
+//					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
 					
 				}
 			
@@ -158,7 +160,7 @@ public class TestCase_B118 extends TestBase{
 				
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_sorting_option_getting_displayed")));//screenshot	
 				
 			}
 			
@@ -170,7 +172,7 @@ public class TestCase_B118 extends TestBase{
 				
 				test.log(LogStatus.FAIL, "Search drop down option not retained when user navigates back to Patent search results page from record view page");//extent reports
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot	
 				
 				
 			}
@@ -187,7 +189,7 @@ public class TestCase_B118 extends TestBase{
 					test.log(LogStatus.INFO, "Error--->"+t);
 					ErrorUtil.addVerificationFailure(t);
 					status=2;//excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
+//					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_documents_getting_displayed")));//screenshot	
 					
 				}
 			closeBrowser();

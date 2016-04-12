@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -17,10 +16,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class TestCase_E27 extends TestBase {
@@ -33,7 +30,8 @@ public class TestCase_E27 extends TestBase {
 	// Checking whether this test case should be skipped or not
 
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -61,38 +59,17 @@ public class TestCase_E27 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			// 1)Create User1 and logout
+			// Open browser
 			openBrowser();
 			maximizeWindow();
+
 			clearCookies();
-//			ob.get(host);
+			// user1 = "3m7azf+11i838rghpghs@sharklasers.com";
+			// user2 = "3m62ab+lpstnkat051k@sharklasers.com";
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user2);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
 
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
-					30);
-
-			new PageFactory().getLoginTRInstance(ob).logOutApp();
-
-			// 3)Login as user1 and comment on some article
+			// 1)Login as user1 and comment on some article
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
@@ -130,6 +107,14 @@ public class TestCase_E27 extends TestBase {
 			ob.findElement(By.id("userid")).sendKeys(user2);
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+
+			// Create watch list
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
+			// Navigating to the home page
+			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+
+			// Check if user gets the notification
 			waitForElementTobeVisible(ob, By.xpath("(//span[@class='ne-profile-object-title']/a)[1]"), 30);
 
 			if (!(ob.findElements(By.xpath("(//span[@class='ne-profile-object-title']/a)[1]")).size() == 1)) {
@@ -145,7 +130,7 @@ public class TestCase_E27 extends TestBase {
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob
 					.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			String selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
 			String documentName = ob
@@ -153,7 +138,7 @@ public class TestCase_E27 extends TestBase {
 					.getText();
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -185,14 +170,14 @@ public class TestCase_E27 extends TestBase {
 
 			// Unwatching the article to a particular watch list
 			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			selectedWatchlistName = watchOrUnwatchItemToAParticularWatchlist(watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
 			documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
 					.getText();
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(selectedWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
 
@@ -221,6 +206,9 @@ public class TestCase_E27 extends TestBase {
 				}
 				Assert.assertEquals(count, 0);
 			}
+
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -244,16 +232,16 @@ public class TestCase_E27 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }

@@ -41,6 +41,8 @@ public class TestCase_F2 extends TestBase {
 	@Test
 	public void testcaseF2() throws Exception {
 
+		
+		
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -99,7 +101,7 @@ public class TestCase_F2 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
 
-			if (!checkElementPresence("notification")) {
+			/*if (!checkElementPresence("notification")) {
 
 				test.log(LogStatus.FAIL, "User not receiving notification");// extent
 																			// reports
@@ -108,12 +110,12 @@ public class TestCase_F2 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_user_not_receiving_notification")));// screenshot
 				closeBrowser();
 				return;
-			}
-			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+			}*/
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationCommentEvent"))).getText();
 			System.out.println(text);
 			try {
 				Assert.assertTrue(
-						text.contains("TODAY") && text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(document_title));
+						/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(document_title));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
@@ -134,6 +136,8 @@ public class TestCase_F2 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
+			
+			
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -143,6 +147,7 @@ public class TestCase_F2 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
+			throw new Exception();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

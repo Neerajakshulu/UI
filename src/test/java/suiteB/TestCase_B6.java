@@ -107,7 +107,7 @@ public class TestCase_B6 extends TestBase{
 				test.log(LogStatus.PASS,"Search drop down not getting displayed");//extent reports
 				ErrorUtil.addVerificationFailure(t);//testng
 				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_dropdown_not_getting_displayed")));//screenshot
 				
 			}
 			
@@ -138,7 +138,7 @@ public class TestCase_B6 extends TestBase{
 			test.log(LogStatus.INFO,errors.toString());//extent reports
 			ErrorUtil.addVerificationFailure(t);//testng
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_something_unexpected_happened")));//screenshot
 			closeBrowser();
 		}
 		

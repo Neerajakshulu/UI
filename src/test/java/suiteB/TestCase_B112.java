@@ -66,7 +66,8 @@ public class TestCase_B112 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
+//			ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -77,6 +78,7 @@ public class TestCase_B112 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")),50);
+			Thread.sleep(15000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")),30);
@@ -88,7 +90,7 @@ public class TestCase_B112 extends TestBase {
 			//Filter=1: Relevance and Filter=2:Registration Date
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_selection").replaceAll("Filter","2"))).click();
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 			test.log(LogStatus.PASS,"Selected Registration Date as sort option");
 			
 			List<WebElement> webElementOrderBeforeNavigation=ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
@@ -127,8 +129,8 @@ public class TestCase_B112 extends TestBase {
 				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 				closeBrowser();
 			}
 			
@@ -145,8 +147,8 @@ public class TestCase_B112 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

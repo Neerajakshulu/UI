@@ -98,8 +98,8 @@ public class TestCase_F7 extends TestBase {
 			System.out.println(text);
 			
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains("TODAY")
-						&& text.contains(document_title) && text.contains(fn1 + " " + ln1) && text.contains("It is Important"));
+				Assert.assertTrue(text.contains("New comments") && /*text.contains("TODAY")
+						&&*/ text.contains(document_title) && text.contains(fn1 + " " + ln1) && text.contains("It is Important"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 

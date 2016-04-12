@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -70,8 +71,7 @@ public class TestCase_E21 extends TestBase {
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com", "Techm@2015");
 
 			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
@@ -90,11 +90,13 @@ public class TestCase_E21 extends TestBase {
 
 			// Watching a patents to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
+			BrowserWaits.waitTime(2);
 			waitForPageLoad(ob);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 			// Watching a posts to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+			BrowserWaits.waitTime(2);
 			waitForPageLoad(ob);
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
@@ -117,11 +119,9 @@ public class TestCase_E21 extends TestBase {
 			} else {
 				test.log(LogStatus.PASS, "Watchlist items are displayed by content type");
 			}
-
-			closeBrowser();
-
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

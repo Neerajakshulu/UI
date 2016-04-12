@@ -32,6 +32,7 @@ public class Authoring  extends TestBase {
 		BrowserWaits.waitTime(15);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
+		scrollingToElementofAPage();
 		String commentSizeBeforeAdd=ob.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText().replaceAll(",", "").trim();
 		//System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
 			//System.out.println("num length-->"+num[num.length-1]);
@@ -87,6 +88,7 @@ public class Authoring  extends TestBase {
 		System.out.println("before-->"+commentSizeBeforeAdd);
 		System.out.println("After-->"+commentSizeAfterAdd);
 		if(!(commentSizeAfterAdd>commentSizeBeforeAdd))  {
+		
 			throw new Exception("Entered Comment not updated");
 		}
 	}
@@ -126,7 +128,7 @@ public class Authoring  extends TestBase {
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
-			new AuthoringTest().status=2;
+			new Authoring1().status=2;
 			throw new Exception("Updated "+updatedComments+" not present");
 		}
 	}

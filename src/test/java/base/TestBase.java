@@ -2,6 +2,8 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,14 +27,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,14 +37,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 import util.Xls_Reader;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class TestBase {
 	public static Properties CONFIG = null;
@@ -76,6 +73,7 @@ public class TestBase {
 	// public static String[][] xData;
 	private String[][] xData;
 	public static int count = 0;
+	public static int flag=0;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -84,6 +82,12 @@ public class TestBase {
 		if (TestUtil.isSuiteRunnable(suiteXls, "E Suite") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
 
 			if (count == 0) {
+				
+				if(flag<3){
+				
+				flag++;	
+					
+				try{
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
@@ -95,6 +99,7 @@ public class TestBase {
 				Thread.sleep(3000);
 				logout();
 				closeBrowser();
+				
 				// 2)Create User2 and follow User1
 				openBrowser();
 				maximizeWindow();
@@ -105,10 +110,45 @@ public class TestBase {
 				user2 = createNewUser(fn2, ln2);
 				System.out.println("User2:"+ user2);
 				Thread.sleep(3000);
+				
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
+				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+
+				JavascriptExecutor jse = (JavascriptExecutor) ob;
+				jse.executeScript("scroll(0,-500)");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
+				ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+				ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+				
+				Thread.sleep(3000);
+
+				
 				logout();
 				closeBrowser();
 				System.out.println("User count:"+count);
 				count++;
+				
+				
+				
+				}
+				
+				catch(Throwable t){
+					
+					System.out.println("There is some problem in the creation of users");
+					System.out.println(t);
+
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					
+					test.addScreenCapture(captureScreenshot("UserCreationError" +
+							this.getClass().getSimpleName() + "_user_creation_error_screenshot"));// screenshot
+
+					
+				}
+				
+				}
 			}
 
 		}
