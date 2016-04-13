@@ -1,5 +1,7 @@
 package suiteF;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -16,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F15 extends TestBase {
+public class Notifications016 extends TestBase  {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 	// Following is the list of status:
@@ -26,15 +28,16 @@ public class TestCase_F15 extends TestBase {
 		// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-					Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-			test = extent.startTest(var, "Verify that users should be able to select from a list of suggested topics and check selected topic is presented in users type ahead")
-					.assignCategory("Suite F");
+			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify that Trending now section include articles and posts and able to navigate from tending now section and"+ 
+"Verify that Maximum count on the trending list is 10")
+					.assignCategory("Notifications");
 
 		}
 		
+		
 		@Test
-		public void testcaseF15() throws Exception {
+		public void testcaseF16() throws Exception {
 			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 			boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 			boolean master_condition = suiteRunmode && testRunmode;
@@ -57,24 +60,24 @@ public class TestCase_F15 extends TestBase {
 				//Logging in with User2
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics")), 30);
+				Thread.sleep(8000);
+				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Posts"))));
+				Thread.sleep(6000);
+				List<WebElement> listOfPosts=ob.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
+				Thread.sleep(3000);
+				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Articles"))));
+				Thread.sleep(6000);
+				List<WebElement> listOfArticles=ob.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
+				Thread.sleep(3000);
 				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics"))));
-				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_topics_link")), 30);
-				WebElement element=ob.findElement(By.xpath(OR.getProperty("trending_now_topics_link")));
-				String specialCharacterRemovedoutput=element.getText().replaceAll("[^\\dA-Za-z ]","");
-				String expectedTitle=specialCharacterRemovedoutput.replaceAll("( )+"," ");
-				element.click();
-				Thread.sleep(4000);
-				waitForElementTobeVisible(ob,By.xpath("//input[@type='text']"), 30);
-				String searchText=ob.findElement(By.xpath("//input[@type='text']")).getAttribute("value");
-				System.out.println(searchText);
-
-				try {
-					Assert.assertTrue(searchText.equals(expectedTitle));
-					test.log(LogStatus.PASS, "User receiving notification with correct content");
-				} catch (Throwable t) {
-
-					test.log(LogStatus.FAIL, "Title selected is not same in search text box");// extent
+				Thread.sleep(6000);
+				List<WebElement> listOfTopics=ob.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
+				Thread.sleep(3000);
+				
+				try{
+					Assert.assertTrue(listOfPosts.size()<=10 && listOfArticles.size()<=10 && listOfTopics.size()<=10);
+				}catch(Throwable t){
+					test.log(LogStatus.FAIL, "Count is more than expected 10");// extent
 					// reports
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
@@ -83,8 +86,6 @@ public class TestCase_F15 extends TestBase {
 							this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 					closeBrowser();
 				}
-
-				closeBrowser();
 				
 			}catch(Throwable t){
 				test.log(LogStatus.FAIL, "Something happened");// extent
@@ -96,7 +97,9 @@ public class TestCase_F15 extends TestBase {
 						this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 				closeBrowser();
 			}
+			closeBrowser();
 		}
+		
 		
 		@AfterTest
 		public void reportTestResult() {

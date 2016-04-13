@@ -1,5 +1,8 @@
 package suiteF;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -16,9 +19,10 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F6 extends TestBase {
+public class Notifications009 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -26,15 +30,14 @@ public class TestCase_F6 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-		test = extent.startTest(var, "Verify that user is able to receive notification when my friend is following some other user.")
-				.assignCategory("Suite F");
+		String var =  xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that user receives a notification when someone he is following user comments on a post")
+				.assignCategory("Notifications");
 
 	}
-
+	
 	@Test
-	public void testcaseF6() throws Exception {
+	public void testCaseF9() throws Exception{
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -49,63 +52,59 @@ public class TestCase_F6 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try{
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			//Create User 3
-			fn3 = generateRandomName(8);
-			ln3 = generateRandomName(10);
-			System.out.println(fn3 + " " + ln3);
-			user3 = createNewUser(fn3, ln3);
-			Thread.sleep(2000);
-			pf.getLoginTRInstance(ob).logOutApp();
+			
+			ob.navigate().to(host);
+			//Logging in with User1
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
-			//User1 searches User3
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn3 + " " + ln3);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			//searching for posts
+			pf.getLoginTRInstance(ob).searchArticle("POST for");
 			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
-			ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-			//User1 follows User3
-			ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
+			test.log(LogStatus.INFO,"Commenting on a post");
+			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("search_results_post_link")), 30);
+			String postLinkClicked=ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
+			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_comment_textbox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F9:Nice Post");
+			waitForElementTobeVisible(ob,By.xpath(OR.getProperty("document_addComment_button")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+			Thread.sleep(2000);
 			pf.getLoginTRInstance(ob).logOutApp();
-			//User2 Logging in
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")),20);
-
+			
+			//Login with User2 who is following user1 and check if he's notified
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
-			String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
+			test.log(LogStatus.INFO,"Checking if Notification is received");
+			Thread.sleep(8000);
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationCommentEvent"))).getText();
 			System.out.println(text);
+		
 			try {
-				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1)
-						&& text.contains("is now following") && text.contains(fn3 + " " + ln3));
+				Assert.assertTrue(/*text.contains("TODAY") &&*/ text.contains(fn1 + " " + ln1) && text.contains("commented on") && text.contains(postLinkClicked));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
-				pf.getLoginTRInstance(ob).logOutApp();
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-				// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 				closeBrowser();
-			}
 
+			}
 			closeBrowser();
-			
-			
-			
 			
 		}catch(Throwable t){
 			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
@@ -113,20 +112,19 @@ public class TestCase_F6 extends TestBase {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 			closeBrowser();
 		}
 		
-		
 	}
+	
 	
 	
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-	/*	if (status == 1)
+		/*if (status == 1)
 			TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
 					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "PASS");
 		else if (status == 2)
@@ -137,6 +135,4 @@ public class TestCase_F6 extends TestBase {
 					TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "SKIP");
 */
 	}
-
-	
 }

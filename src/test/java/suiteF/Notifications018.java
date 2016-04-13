@@ -1,8 +1,13 @@
 package suiteF;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -18,7 +23,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F17 extends TestBase {
+public class Notifications018 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 	// Following is the list of status:
@@ -28,16 +33,15 @@ public class TestCase_F17 extends TestBase {
 		// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-					Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-			test = extent.startTest(var, "Verify that Featured Post is at the top of event stream after login and that feature post should be top in post tab of trending section")
-					.assignCategory("Suite F");
+			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify that Featured Post move down when new notification event occur")
+					.assignCategory("Notifications");
 
 		}
 		
 		
 		@Test
-		public void testcaseF17() throws Exception {
+		public void testcaseF18() throws Exception {
 			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 			boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 			boolean master_condition = suiteRunmode && testRunmode;
@@ -53,48 +57,78 @@ public class TestCase_F17 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 			try{
+				String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
 				//Logging in with User2
+				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
+				Thread.sleep(8000);
+				ob.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL ,Keys.SHIFT+"n");
+				
+				Set<String> myset1=ob.getWindowHandles();
+				Iterator<String> myIT1=myset1.iterator();
+				ArrayList<String> al1=new ArrayList<String>();
+				
+				for(int i=0;i<myset1.size();i++){
+					
+					al1.add(myIT1.next());
+					
+				}
+				
+				ob.switchTo().window(al1.get(1));
+				ob.navigate().to(host);
+				test.log(LogStatus.INFO, " User 1 logging in");
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
 				Thread.sleep(8000);
 				
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
+				ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
+				Thread.sleep(5000);
+				pf.getProfilePageInstance(ob).enterPostTitle(postString);
+				test.log(LogStatus.INFO, "Entered Post Title");
+				pf.getProfilePageInstance(ob).enterPostContent(postString);
+				test.log(LogStatus.INFO, "Entered Post Content");
+				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+				test.log(LogStatus.INFO, " User 1 published a post and user2 should get notification at the top");
+				Thread.sleep(6000);
+				ob.close();
+				test.log(LogStatus.INFO, "Switching to user 2 session to check notification ");
+				ob.switchTo().window(al1.get(0));
+				Thread.sleep(5000);
+				ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+				ob.navigate().refresh();
+				Thread.sleep(8000);
 				List<WebElement> listOfNotifications=ob.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
 				String text=listOfNotifications.get(0).getText();
 				System.out.println(text);
-				Assert.assertTrue(text.contains("Featured post"));
-				test.log(LogStatus.PASS, "Featured post is at the top of the home page");
-				List<WebElement> listOfPostsLinks=ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
-				String expectedTitle=listOfPostsLinks.get(0).getText();
-				System.out.println(expectedTitle);
 				
 				try{
-					Assert.assertTrue(text.contains(expectedTitle));
-					test.log(LogStatus.PASS, "Featured post is same as the post in trending section");
-					pf.getLoginTRInstance(ob).logOutApp();
+					Assert.assertTrue(text.contains("published a post") && text.contains(fn1+" "+ln1));
+					test.log(LogStatus.PASS, "New Notification is at the top and featured post is in second position");
 					closeBrowser();
 				}catch(Throwable t){
-					test.log(LogStatus.FAIL, "Featured Post title is not same as the post in the trending section");// extent
+					test.log(LogStatus.FAIL, "New Notification is not at First position");// extent
 					// reports
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_Featured Post title is not same as the post in the trending section")));// screenshot
+							this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 					closeBrowser();
 				}
 				
 			}catch(Throwable t){
-				test.log(LogStatus.FAIL, "Featured Post is not at the top");// extent
+				test.log(LogStatus.FAIL, "Something happened");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_Featured Post is not at the top")));// screenshot
+						this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 				closeBrowser();
 			}
 		}
@@ -116,4 +150,3 @@ public class TestCase_F17 extends TestBase {
 */
 		}
 }
-

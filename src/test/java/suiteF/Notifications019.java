@@ -15,7 +15,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F19 extends TestBase {
+public class Notifications019 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 	// Following is the list of status:
@@ -25,10 +25,9 @@ public class TestCase_F19 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
+		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that follower of the article is able to start conversation from home page when some one commented on the article he is following.")
-				.assignCategory("Suite F");
+				.assignCategory("Notifications");
 
 	}
 

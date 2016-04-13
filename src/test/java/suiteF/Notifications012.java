@@ -20,7 +20,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F12 extends TestBase {
+public class Notifications012 extends TestBase {
 	static int status = 1;
 	 String watchListName=null;
 	 String watchListDescription=null;
@@ -32,10 +32,9 @@ public class TestCase_F12 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
+		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that user is receiving notification when someone he is following created a public watch list. (single event notification)")
-				.assignCategory("Suite F");
+				.assignCategory("Notifications");
 
 	}
 	

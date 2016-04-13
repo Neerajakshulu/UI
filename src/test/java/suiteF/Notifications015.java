@@ -1,13 +1,6 @@
 package suiteF;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -23,7 +16,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_F18 extends TestBase {
+public class Notifications015 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 	// Following is the list of status:
@@ -33,16 +26,14 @@ public class TestCase_F18 extends TestBase {
 		// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
-					Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
-			test = extent.startTest(var, "Verify that Featured Post move down when new notification event occur")
-					.assignCategory("Suite F");
+			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify that users should be able to select from a list of suggested topics and check selected topic is presented in users type ahead")
+					.assignCategory("Notifications");
 
 		}
 		
-		
 		@Test
-		public void testcaseF18() throws Exception {
+		public void testcaseF15() throws Exception {
 			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
 			boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
 			boolean master_condition = suiteRunmode && testRunmode;
@@ -58,61 +49,31 @@ public class TestCase_F18 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 			try{
-				String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
 				//Logging in with User2
-				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
-				pf.getLoginTRInstance(ob).clickLogin();
-				Thread.sleep(8000);
-				ob.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL ,Keys.SHIFT+"n");
-				
-				Set<String> myset1=ob.getWindowHandles();
-				Iterator<String> myIT1=myset1.iterator();
-				ArrayList<String> al1=new ArrayList<String>();
-				
-				for(int i=0;i<myset1.size();i++){
-					
-					al1.add(myIT1.next());
-					
-				}
-				
-				ob.switchTo().window(al1.get(1));
-				ob.navigate().to(host);
-				test.log(LogStatus.INFO, " User 1 logging in");
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				Thread.sleep(8000);
-				
-				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("home_page_publish_post_link")),3000);
-				ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-				Thread.sleep(5000);
-				pf.getProfilePageInstance(ob).enterPostTitle(postString);
-				test.log(LogStatus.INFO, "Entered Post Title");
-				pf.getProfilePageInstance(ob).enterPostContent(postString);
-				test.log(LogStatus.INFO, "Entered Post Content");
-				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-				test.log(LogStatus.INFO, " User 1 published a post and user2 should get notification at the top");
-				Thread.sleep(6000);
-				ob.close();
-				test.log(LogStatus.INFO, "Switching to user 2 session to check notification ");
-				ob.switchTo().window(al1.get(0));
-				Thread.sleep(5000);
-				ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-				ob.navigate().refresh();
-				Thread.sleep(8000);
-				List<WebElement> listOfNotifications=ob.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
-				String text=listOfNotifications.get(0).getText();
-				System.out.println(text);
-				
-				try{
-					Assert.assertTrue(text.contains("published a post") && text.contains(fn1+" "+ln1));
-					test.log(LogStatus.PASS, "New Notification is at the top and featured post is in second position");
-					closeBrowser();
-				}catch(Throwable t){
-					test.log(LogStatus.FAIL, "New Notification is not at First position");// extent
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics")), 30);
+				jsClick(ob,ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE","Topics"))));
+				waitForElementTobeVisible(ob,By.xpath(OR.getProperty("trending_now_topics_link")), 30);
+				WebElement element=ob.findElement(By.xpath(OR.getProperty("trending_now_topics_link")));
+				String specialCharacterRemovedoutput=element.getText().replaceAll("[^\\dA-Za-z ]","");
+				String expectedTitle=specialCharacterRemovedoutput.replaceAll("( )+"," ");
+				element.click();
+				Thread.sleep(4000);
+				waitForElementTobeVisible(ob,By.xpath("//input[@type='text']"), 30);
+				String searchText=ob.findElement(By.xpath("//input[@type='text']")).getAttribute("value");
+				System.out.println(searchText);
+
+				try {
+					Assert.assertTrue(searchText.equals(expectedTitle));
+					test.log(LogStatus.PASS, "User receiving notification with correct content");
+				} catch (Throwable t) {
+
+					test.log(LogStatus.FAIL, "Title selected is not same in search text box");// extent
 					// reports
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
@@ -121,6 +82,8 @@ public class TestCase_F18 extends TestBase {
 							this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 					closeBrowser();
 				}
+
+				closeBrowser();
 				
 			}catch(Throwable t){
 				test.log(LogStatus.FAIL, "Something happened");// extent
@@ -134,12 +97,11 @@ public class TestCase_F18 extends TestBase {
 			}
 		}
 		
-		
 		@AfterTest
 		public void reportTestResult() {
 			extent.endTest(test);
 
-		/*	if (status == 1)
+			/*if (status == 1)
 				TestUtil.reportDataSetResult(suiteFxls, "Test Cases",
 						TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "PASS");
 			else if (status == 2)
