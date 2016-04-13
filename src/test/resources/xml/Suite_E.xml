@@ -12,177 +12,177 @@
 	<parameter name="postName" value="Unique Post for Automation" />
 
 
-	<test name="Test E1">
+	<test name="Watchlist001">
 		<classes>
-			<class name="suiteE.TestCase_E1"></class>
+			<class name="suiteE.Watchlist001"></class>
 		</classes>
 	</test>
 
-	<test name="Test E2">
+	<test name="Watchlist002">
 		<classes>
-			<class name="suiteE.TestCase_E2"></class>
+			<class name="suiteE.Watchlist002"></class>
 		</classes>
 	</test>
 
-	<test name="Test E3">
+	<test name="Watchlist003">
 		<classes>
-			<class name="suiteE.TestCase_E3"></class>
+			<class name="suiteE.Watchlist003"></class>
 		</classes>
 	</test>
 
-	<test name="Test E4">
+	<test name="Watchlist004">
 		<classes>
-			<class name="suiteE.TestCase_E4"></class>
+			<class name="suiteE.Watchlist004"></class>
 		</classes>
 	</test>
 
-	<test name="Test E5">
+	<test name="Watchlist005">
 		<classes>
-			<class name="suiteE.TestCase_E5"></class>
+			<class name="suiteE.Watchlist005"></class>
 		</classes>
 	</test>
 
-	<test name="Test E6">
+	<test name="Watchlist006">
 		<classes>
-			<class name="suiteE.TestCase_E6"></class>
+			<class name="suiteE.Watchlist006"></class>
 		</classes>
 	</test>
 
-	<test name="Test E7">
+	<test name="Watchlist007">
 		<classes>
-			<class name="suiteE.TestCase_E7"></class>
+			<class name="suiteE.Watchlist007"></class>
 		</classes>
 	</test>
 
-	<test name="Test E8">
+	<test name="Watchlist008">
 		<classes>
-			<class name="suiteE.TestCase_E8"></class>
+			<class name="suiteE.Watchlist008"></class>
 		</classes>
 	</test>
 
-	<test name="Test E9">
+	<test name="Watchlist009">
 		<classes>
-			<class name="suiteE.TestCase_E9"></class>
+			<class name="suiteE.Watchlist009"></class>
 		</classes>
 	</test>
 
-	<test name="Test E10">
+	<test name="Watchlist010">
 		<classes>
-			<class name="suiteE.TestCase_E10"></class>
+			<class name="suiteE.Watchlist010"></class>
 		</classes>
 	</test>
 
-	<test name="Test E11">
+	<test name="Watchlist011">
 		<classes>
-			<class name="suiteE.TestCase_E11"></class>
+			<class name="suiteE.Watchlist011"></class>
 		</classes>
 	</test>
 
-	<test name="Test E12">
+	<test name="Watchlist012">
 		<classes>
-			<class name="suiteE.TestCase_E12"></class>
+			<class name="suiteE.Watchlist012"></class>
 		</classes>
 	</test>
 
-	<test name="Test E13">
+	<test name="Watchlist013">
 		<classes>
-			<class name="suiteE.TestCase_E13"></class>
+			<class name="suiteE.Watchlist013"></class>
 		</classes>
 	</test>
 
-	<test name="Test E14">
+	<test name="Watchlist014">
 		<classes>
-			<class name="suiteE.TestCase_E14"></class>
+			<class name="suiteE.Watchlist014"></class>
 		</classes>
 	</test>
 
-	<test name="Test E15">
+	<test name="Watchlist015">
 		<classes>
-			<class name="suiteE.TestCase_E15"></class>
+			<class name="suiteE.Watchlist015"></class>
 		</classes>
 	</test>
 
-	<test name="Test E16">
+	<test name="Watchlist016">
 		<classes>
-			<class name="suiteE.TestCase_E16"></class>
+			<class name="suiteE.Watchlist016"></class>
 		</classes>
 	</test>
 
-	<test name="Test E17">
+	<test name="Watchlist017">
 		<classes>
-			<class name="suiteE.TestCase_E17"></class>
+			<class name="suiteE.Watchlist017"></class>
 		</classes>
 	</test>
 
-	<test name="Test E18">
+	<test name="Watchlist018">
 		<classes>
-			<class name="suiteE.TestCase_E18"></class>
+			<class name="suiteE.Watchlist018"></class>
 		</classes>
 	</test>
 
-	<test name="Test E19">
+	<test name="Watchlist019">
 		<classes>
-			<class name="suiteE.TestCase_E19"></class>
+			<class name="suiteE.Watchlist019"></class>
 		</classes>
 	</test>
 
-	<test name="Test E20">
+	<test name="Watchlist020">
 		<classes>
-			<class name="suiteE.TestCase_E20"></class>
+			<class name="suiteE.Watchlist020"></class>
 		</classes>
 	</test>
 
-	<test name="Test E21">
+	<test name="Watchlist021">
 		<classes>
-			<class name="suiteE.TestCase_E21"></class>
+			<class name="suiteE.Watchlist021"></class>
 		</classes>
 	</test>
 
-	<test name="Test E22">
+	<test name="Watchlist022">
 		<classes>
-			<class name="suiteE.TestCase_E22"></class>
+			<class name="suiteE.Watchlist022"></class>
 		</classes>
 	</test>
 
-	<test name="Test E23">
+	<test name="Watchlist023">
 		<classes>
-			<class name="suiteE.TestCase_E23"></class>
+			<class name="suiteE.Watchlist023"></class>
 		</classes>
 	</test>
 
-	<test name="Test E24">
+	<test name="Watchlist024">
 		<classes>
-			<class name="suiteE.TestCase_E24"></class>
+			<class name="suiteE.Watchlist024"></class>
 		</classes>
 	</test>
 
-	<test name="Test E25">
+	<test name="Watchlist025">
 		<classes>
-			<class name="suiteE.TestCase_E25"></class>
+			<class name="suiteE.Watchlist025"></class>
 		</classes>
 	</test>
 
-	<test name="Test E26">
+	<test name="Watchlist026">
 		<classes>
-			<class name="suiteE.TestCase_E26"></class>
+			<class name="suiteE.Watchlist026"></class>
 		</classes>
 	</test>
 
-	<test name="Test E27">
+	<test name="Watchlist027">
 		<classes>
-			<class name="suiteE.TestCase_E27"></class>
+			<class name="suiteE.Watchlist027"></class>
 		</classes>
 	</test>
 
-	<test name="Test E28">
+	<test name="Watchlist028">
 		<classes>
-			<class name="suiteE.TestCase_E28"></class>
+			<class name="suiteE.Watchlist028"></class>
 		</classes>
 	</test>
 
-	<test name="Test E29">
+	<test name="Watchlist029">
 		<classes>
-			<class name="suiteE.TestCase_E29"></class>
+			<class name="suiteE.Watchlist029"></class>
 		</classes>
 	</test>
 
