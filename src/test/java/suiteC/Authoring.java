@@ -128,7 +128,7 @@ public class Authoring  extends TestBase {
 		System.out.println("Commentary Text-->"+commentText);
 		if(!(commentText.contains(updatedComments) && commentText.contains("edited")))  {
 			//TestBase.test.log(LogStatus.INFO, "Snapshot below: " + TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
-			new AuthoringTest().status=2;
+			new Authoring1().status=2;
 			throw new Exception("Updated "+updatedComments+" not present");
 		}
 	}
