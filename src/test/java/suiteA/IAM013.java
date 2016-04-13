@@ -4,8 +4,12 @@ package suiteA;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +23,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A15 extends TestBase{
+public class IAM013 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -29,13 +33,13 @@ public class TestCase_A15 extends TestBase{
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that app doesn't allow the user to create a new account with an email id that has already been used").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly").assignCategory("IAM");
 		
 	}
 	
 	@Test
-	public void testcaseA15() throws Exception{
+	public void testcaseA13() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
@@ -76,41 +80,67 @@ public class TestCase_A15 extends TestBase{
 //		
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
-		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//	
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
+//		
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_TermsOfUse_link")), 30);
+
+		ob.findElement(By.linkText(OR.getProperty("reg_TermsOfUse_link"))).click();
+		Thread.sleep(2000);
 		
+		Set<String> myset1=ob.getWindowHandles();
+		Iterator<String> myIT1=myset1.iterator();
+		ArrayList<String> al1=new ArrayList<String>();
 		
-		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
-		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-		
-	
-		if(!checkElementPresence_id("reg_emailError_label")){
+		for(int i=0;i<myset1.size();i++){
 			
-			test.log(LogStatus.FAIL, "User able to create a new TR account with an email id that has already been used");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));//screenshot	
-			
+			al1.add(myIT1.next());
 			
 		}
 		
-		String error_message=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
-//		System.out.println(error_message);
-
-		if(!compareStrings("Your id has already been created, please sign in.",error_message)){
+		ob.switchTo().window(al1.get(1));
+		Thread.sleep(2000);
+		
+		
+		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
 			
-			test.log(LogStatus.FAIL, "Error text is incorrect");//extent reports
+			test.log(LogStatus.FAIL, "Either TERMS OF USE link is not working or the page is not getting displayed correctly");//extent reports
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_error_text")));//screenshot	
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_termsOfUse_link")));//screenshot	
 			
+		}
+		ob.close();
+		ob.switchTo().window(al1.get(0));
+		Thread.sleep(2000);
+		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
+		myE.click();
+			/*JavascriptExecutor executor = (JavascriptExecutor)ob;
+			executor.executeScript("arguments[0].click();", myE);*/
+		
+		Thread.sleep(2000);
+		
+		al1.clear();
+		myset1=ob.getWindowHandles();
+		myIT1=myset1.iterator();
+//		System.out.println(myset1.size());
+		for(int i=0;i<myset1.size();i++){
+			
+			al1.add(myIT1.next());
+		}
+		
+		ob.switchTo().window(al1.get(1));
+		Thread.sleep(2000);
+		
+		if(!checkElementPresence("reg_PageHeading_label_for_privacyStatement")){
+			
+			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_privacyStatement_link")));//screenshot	
 			
 		}
 		
 		
 		closeBrowser();
-		
 		}
 		
 		catch(Throwable t){

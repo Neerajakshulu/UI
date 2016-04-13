@@ -22,15 +22,15 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_A23 extends TestBase {
+public class IAM023 extends TestBase {
 	static int status=1;
 
 	
 	
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify change password link in the account page is working correctly.").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify change password link in the account page is working correctly.").assignCategory("IAM");
 
 	}
 	

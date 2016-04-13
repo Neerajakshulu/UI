@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +19,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A14 extends TestBase{
+public class IAM015 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -30,13 +29,13 @@ public class TestCase_A14 extends TestBase{
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that user is not able to submit new TR user registration form without filling in the required fields").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that app doesn't allow the user to create a new account with an email id that has already been used").assignCategory("IAM");
 		
 	}
 	
 	@Test
-	public void testcaseA14() throws Exception{
+	public void testcaseA15() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
@@ -70,57 +69,48 @@ public class TestCase_A14 extends TestBase{
 		//Navigate to TR login page and login with valid TR credentials
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-//	
+//		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 //		
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
+		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 //	
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 30);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
+		
+		
+		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
+		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
 		
 	
-		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),5);
-		
-		boolean email_error=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).isDisplayed();
-		boolean firstName_error=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).isDisplayed();
-		boolean lastName_error=ob.findElement(By.id(OR.getProperty("reg_lastNameError_label"))).isDisplayed();
-		boolean password_error=ob.findElement(By.id(OR.getProperty("reg_passwordError_label"))).isDisplayed();
-		boolean confirmPassword_error=ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).isDisplayed();
-		boolean termsAndConditions_error=ob.findElement(By.id(OR.getProperty("reg_termsAndConditionsError_label"))).isDisplayed();
-		
-//		System.out.println(email_error);
-//		System.out.println(firstName_error);
-//		System.out.println(lastName_error);
-//		System.out.println(password_error);
-//		System.out.println(confirmPassword_error);
-//		System.out.println(termsAndConditions_error);
-		
-		boolean master_error_condition=email_error && firstName_error && lastName_error && password_error && confirmPassword_error && termsAndConditions_error;
-//		System.out.println(master_error_condition);
-		
-		try{
+		if(!checkElementPresence_id("reg_emailError_label")){
 			
-			Assert.assertTrue(master_error_condition, "User able to submit new TR user registration form without filling in the required fields");
-			test.log(LogStatus.PASS, "User not able to submit new TR user registration form without filling in the required fields");
-		}
-		
-		catch(Throwable t){
-			
-			test.log(LogStatus.FAIL, "User able to submit new TR user registration form without filling in the required fields");
-			test.log(LogStatus.INFO, "Error--->"+t);
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_able_to_submit_new_TR_user_registration_form_without_filling_required_fields")));//screenshot
-			ErrorUtil.addVerificationFailure(t);
+			test.log(LogStatus.FAIL, "User able to create a new TR account with an email id that has already been used");//extent reports
 			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));//screenshot	
+			
+			
 		}
 		
+		String error_message=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
+//		System.out.println(error_message);
+
+		if(!compareStrings("Your id has already been created, please sign in.",error_message)){
+			
+			test.log(LogStatus.FAIL, "Error text is incorrect");//extent reports
+			status=2;//excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_error_text")));//screenshot	
+			
+			
+		}
 		
 		
 		closeBrowser();
+		
 		}
 		
 		catch(Throwable t){

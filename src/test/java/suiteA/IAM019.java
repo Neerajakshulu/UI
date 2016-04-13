@@ -22,7 +22,7 @@ import util.TestUtil;
 
 
 
-public class TestCase_A11 extends TestBase{
+public class IAM019 extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -33,18 +33,14 @@ public class TestCase_A11 extends TestBase{
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-			test = extent.startTest(var, "Verify CONFIRM PASSWORD field in new TR user registration page").assignCategory("Suite A");
-//			test.log(LogStatus.INFO, "****************************");
-			//load the runmodes of the tests			
-			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());	
+			String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify that following special characters are not allowed in EMAIL ADDRESS field in new TR user registration page:1--->*2--->(3--->)4--->&5)--->!").assignCategory("IAM");
+			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
 		}
-	
 			
 	@Test(dataProvider="getTestData")
-	public void testcaseA11(
-								String password,
-								String validity
+	public void testcaseA19(
+								String special_char
 						  ) throws Exception{
 		
 		
@@ -71,15 +67,20 @@ public class TestCase_A11 extends TestBase{
 //			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no "+(count+1));
 		}
-
+		
 		
 		try{
 		
-			test.log(LogStatus.INFO,password +" -- "+validity);	
+			
+			test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ (count+1)+"--->");
+			test.log(LogStatus.INFO,special_char);
+			
+			System.out.println(special_char);
+			String email=generateRandomName(10) + special_char + "@abc.com";
+			System.out.println(email);
 		
 		// selenium code
 		openBrowser();
-//		
 		try{
 		maximizeWindow();
 		}
@@ -90,44 +91,28 @@ public class TestCase_A11 extends TestBase{
 		clearCookies();
 		
 		
+		
 		//Navigate to TR login page
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
 //		
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-//	
+//		
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
-		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys("Transaction@2");
-		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
-		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
+//		
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
+		ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
+		ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),10);
+		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_emailError_label")));		
+				
 		
-		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_confirmPasswordError_label")));		
-				
-				if(validity.equalsIgnoreCase("YES")){
-					
-				
-				//verifying that error message is not getting displayed
-				if(!compareNumbers(0,errorList.size())){
-					
-					fail=true;//excel
-					test.log(LogStatus.FAIL,"Error message getting displayed unnecessarily");//extent report
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_error_message_getting_displayed_unnecessarily_"+(count+1))));
-					closeBrowser();
-					return;
-				}
 				
 				
-				}
-				
-				else
-				{
 					
 					if(!compareNumbers(1,errorList.size())){
 						
@@ -138,18 +123,17 @@ public class TestCase_A11 extends TestBase{
 						return;
 					}
 					
-					String errorText=ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).getText();
-					if(!compareStrings("Passwords do not match.",errorText)){
+					String error="Please enter a valid Email Address.";
+					String errorText=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
+					if(!compareStrings(error,errorText)){
 						
 						fail=true;//excel
 						test.log(LogStatus.FAIL,"Error text is incorrect");//extent report
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_error_text_"+(count+1))));
-						closeBrowser();
-						return;
 						
 					}
 					
-				}
+				
 				
 				closeBrowser();
 				
@@ -200,7 +184,7 @@ public class TestCase_A11 extends TestBase{
 		
 		extent.endTest(test);
 		
-	/*	if(status==1)
+		/*if(status==1)
 			TestUtil.reportDataSetResult(suiteAxls, "Test Cases", TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "PASS");
 		else if(status==2)
 			TestUtil.reportDataSetResult(suiteAxls, "Test Cases", TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "FAIL");

@@ -2,8 +2,10 @@ package suiteA;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -20,7 +22,7 @@ import util.TestUtil;
 
 
 
-public class TestCase_A7 extends TestBase{
+public class IAM011 extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -31,8 +33,8 @@ public class TestCase_A7 extends TestBase{
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-			test = extent.startTest(var, "Verify that user is not able to login using FB option for different negative combinations of username/password").assignCategory("Suite A");
+			String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify CONFIRM PASSWORD field in new TR user registration page").assignCategory("IAM");
 //			test.log(LogStatus.INFO, "****************************");
 			//load the runmodes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());	
@@ -40,9 +42,9 @@ public class TestCase_A7 extends TestBase{
 	
 			
 	@Test(dataProvider="getTestData")
-	public void testcaseA7(
-								String email,
-								String password
+	public void testcaseA11(
+								String password,
+								String validity
 						  ) throws Exception{
 		
 		
@@ -69,17 +71,15 @@ public class TestCase_A7 extends TestBase{
 //			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no "+(count+1));
 		}
-		
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts for data set #"+ (count+1)+"--->");
-		test.log(LogStatus.INFO,email +" -- "+password);
-		
-		
+
 		
 		try{
 		
+			test.log(LogStatus.INFO,password +" -- "+validity);	
 		
 		// selenium code
 		openBrowser();
+//		
 		try{
 		maximizeWindow();
 		}
@@ -90,32 +90,68 @@ public class TestCase_A7 extends TestBase{
 		clearCookies();
 		
 		
-		
-		
+		//Navigate to TR login page
+//		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
 //		
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
-		ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
-//		
-		waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
+		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+//	
+		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		
-		ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
-		ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-		ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-		Thread.sleep(5000);
+		//Create new TR account
+		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+//
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
+		ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys("Transaction@2");
+		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
+		ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
 		
-		
-		if(!checkElementPresence_name("FB_page_login_button")){
-			
-			
-			fail=true;//excel
-			test.log(LogStatus.FAIL,"Unexpected login happened");//extent report
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_unexpected_login_happened_"+(count+1))));
-			
-		}
+		List<WebElement> errorList=ob.findElements(By.id(OR.getProperty("reg_confirmPasswordError_label")));		
 				
-		closeBrowser();
+				if(validity.equalsIgnoreCase("YES")){
+					
+				
+				//verifying that error message is not getting displayed
+				if(!compareNumbers(0,errorList.size())){
+					
+					fail=true;//excel
+					test.log(LogStatus.FAIL,"Error message getting displayed unnecessarily");//extent report
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_error_message_getting_displayed_unnecessarily_"+(count+1))));
+					closeBrowser();
+					return;
+				}
+				
+				
+				}
+				
+				else
+				{
+					
+					if(!compareNumbers(1,errorList.size())){
+						
+						fail=true;//excel
+						test.log(LogStatus.FAIL,"Error message not getting displayed");//extent report
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_error_message_not_getting_displayed_"+(count+1))));
+						closeBrowser();
+						return;
+					}
+					
+					String errorText=ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).getText();
+					if(!compareStrings("Passwords do not match.",errorText)){
+						
+						fail=true;//excel
+						test.log(LogStatus.FAIL,"Error text is incorrect");//extent report
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_incorrect_error_text_"+(count+1))));
+						closeBrowser();
+						return;
+						
+					}
+					
+				}
+				
+				closeBrowser();
 				
 		}
 		

@@ -4,12 +4,9 @@ package suiteA;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -23,7 +20,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A13 extends TestBase{
+public class IAM014 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -33,13 +30,13 @@ public class TestCase_A13 extends TestBase{
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that user is not able to submit new TR user registration form without filling in the required fields").assignCategory("IAM");
 		
 	}
 	
 	@Test
-	public void testcaseA13() throws Exception{
+	public void testcaseA14() throws Exception{
 		
 		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "A Suite");
 		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteAxls,this.getClass().getSimpleName());
@@ -73,7 +70,7 @@ public class TestCase_A13 extends TestBase{
 		//Navigate to TR login page and login with valid TR credentials
 //		ob.get(CONFIG.getProperty("testSiteName"));
 		ob.navigate().to(host);
-//		
+//	
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
@@ -82,62 +79,45 @@ public class TestCase_A13 extends TestBase{
 		
 		//Create new TR account
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-//		
-		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_TermsOfUse_link")), 30);
-
-		ob.findElement(By.linkText(OR.getProperty("reg_TermsOfUse_link"))).click();
-		Thread.sleep(2000);
+//	
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 30);
 		
-		Set<String> myset1=ob.getWindowHandles();
-		Iterator<String> myIT1=myset1.iterator();
-		ArrayList<String> al1=new ArrayList<String>();
+	
+		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")),5);
 		
-		for(int i=0;i<myset1.size();i++){
+		boolean email_error=ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).isDisplayed();
+		boolean firstName_error=ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).isDisplayed();
+		boolean lastName_error=ob.findElement(By.id(OR.getProperty("reg_lastNameError_label"))).isDisplayed();
+		boolean password_error=ob.findElement(By.id(OR.getProperty("reg_passwordError_label"))).isDisplayed();
+		boolean confirmPassword_error=ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).isDisplayed();
+		boolean termsAndConditions_error=ob.findElement(By.id(OR.getProperty("reg_termsAndConditionsError_label"))).isDisplayed();
+		
+//		System.out.println(email_error);
+//		System.out.println(firstName_error);
+//		System.out.println(lastName_error);
+//		System.out.println(password_error);
+//		System.out.println(confirmPassword_error);
+//		System.out.println(termsAndConditions_error);
+		
+		boolean master_error_condition=email_error && firstName_error && lastName_error && password_error && confirmPassword_error && termsAndConditions_error;
+//		System.out.println(master_error_condition);
+		
+		try{
 			
-			al1.add(myIT1.next());
-			
+			Assert.assertTrue(master_error_condition, "User able to submit new TR user registration form without filling in the required fields");
+			test.log(LogStatus.PASS, "User not able to submit new TR user registration form without filling in the required fields");
 		}
 		
-		ob.switchTo().window(al1.get(1));
-		Thread.sleep(2000);
-		
-		
-		if(!checkElementPresence("reg_PageHeading_label_for_termsOfUse")){
+		catch(Throwable t){
 			
-			test.log(LogStatus.FAIL, "Either TERMS OF USE link is not working or the page is not getting displayed correctly");//extent reports
+			test.log(LogStatus.FAIL, "User able to submit new TR user registration form without filling in the required fields");
+			test.log(LogStatus.INFO, "Error--->"+t);
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_user_able_to_submit_new_TR_user_registration_form_without_filling_required_fields")));//screenshot
+			ErrorUtil.addVerificationFailure(t);
 			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_termsOfUse_link")));//screenshot	
-			
-		}
-		ob.close();
-		ob.switchTo().window(al1.get(0));
-		Thread.sleep(2000);
-		WebElement myE=ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
-		myE.click();
-			/*JavascriptExecutor executor = (JavascriptExecutor)ob;
-			executor.executeScript("arguments[0].click();", myE);*/
-		
-		Thread.sleep(2000);
-		
-		al1.clear();
-		myset1=ob.getWindowHandles();
-		myIT1=myset1.iterator();
-//		System.out.println(myset1.size());
-		for(int i=0;i<myset1.size();i++){
-			
-			al1.add(myIT1.next());
 		}
 		
-		ob.switchTo().window(al1.get(1));
-		Thread.sleep(2000);
-		
-		if(!checkElementPresence("reg_PageHeading_label_for_privacyStatement")){
-			
-			test.log(LogStatus.FAIL, "Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");//extent reports
-			status=2;//excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_issue_with_privacyStatement_link")));//screenshot	
-			
-		}
 		
 		
 		closeBrowser();

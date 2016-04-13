@@ -21,7 +21,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A1 extends TestBase{
+public class IAM001 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -32,8 +32,8 @@ public class TestCase_A1 extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception{ 
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that user is able to register for new TR account and login with that").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that user is able to register for new TR account and login with that").assignCategory("IAM");
 		
 	}
 	

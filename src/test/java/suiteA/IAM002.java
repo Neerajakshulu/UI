@@ -21,7 +21,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A2 extends TestBase{
+public class IAM002 extends TestBase{
 	static int status=1;
 
 	//	Following is the list of status:
@@ -32,8 +32,8 @@ public class TestCase_A2 extends TestBase{
 	@BeforeTest
 	public void beforeTest() throws Exception{ 
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that existing TR user is able to login successfully and that case-sensitivity of email id doesn't have any effect on login process").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that existing TR user is able to login successfully and that case-sensitivity of email id doesn't have any effect on login process").assignCategory("IAM");
 
 	}
 

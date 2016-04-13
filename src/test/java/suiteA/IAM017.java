@@ -25,7 +25,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 
-public class TestCase_A17 extends TestBase{
+public class IAM017 extends TestBase{
 	static int status=1;
 	
 //	Following is the list of status:
@@ -35,8 +35,8 @@ public class TestCase_A17 extends TestBase{
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that name of a user is truncated using ellipse if the name is very long").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that name of a user is truncated using ellipse if the name is very long").assignCategory("IAM");
 		
 	}
 	

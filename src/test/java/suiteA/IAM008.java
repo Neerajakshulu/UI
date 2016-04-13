@@ -20,7 +20,7 @@ import util.TestUtil;
 
 
 
-public class TestCase_A8 extends TestBase{
+public class IAM008 extends TestBase{
 	String runmodes[]=null;
 	static int count=-1;
 	
@@ -31,8 +31,8 @@ public class TestCase_A8 extends TestBase{
 	// Checking whether this test case should be skipped or not
 		@BeforeTest
 		public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-			String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-			test = extent.startTest(var, "Verify that user is not able to login using LI option for different negative combinations of username/password").assignCategory("Suite A");
+			String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+			test = extent.startTest(var, "Verify that user is not able to login using LI option for different negative combinations of username/password").assignCategory("IAM");
 //			test.log(LogStatus.INFO, "****************************");
 			//load the runmodes of the tests			
 			runmodes=TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());	

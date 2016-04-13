@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class TestCase_A25 extends TestBase {
+public class IAM025 extends TestBase {
 
 
 static int status=1;
@@ -26,8 +26,8 @@ static int status=1;
 	
 	@BeforeTest
 	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),Integer.parseInt(this.getClass().getSimpleName().substring(10)+""),1);
-		test = extent.startTest(var, "Verify that Help link is working properly").assignCategory("Suite A");
+		String var=xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that Help link is working properly").assignCategory("IAM");
 
 	}
 	
