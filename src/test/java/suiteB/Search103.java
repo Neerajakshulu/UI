@@ -14,14 +14,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search103 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,7 +33,7 @@ public class Search103 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
 						"Verify that filtering is retained when user navigates back to PATENTS search results page from record view page")
@@ -50,8 +51,8 @@ public class Search103 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -66,20 +67,21 @@ public class Search103 extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(host);
-			//			
+			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-//			
+			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-//
+			//
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By
+					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
 			waitForAjax(ob);
 
@@ -127,18 +129,21 @@ public class Search103 extends TestBase {
 
 			try {
 				Assert.assertTrue(al1.equals(al2));
-				test.log(LogStatus.PASS,
+				test.log(
+						LogStatus.PASS,
 						"Correct filtered search results getting displayed when user navigates back to patent search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(LogStatus.PASS,
+				test.log(
+						LogStatus.PASS,
 						"Incorrect filtered search results getting displayed when user navigates back to patent search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//						this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));// screenshot
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				// this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));//
+				// screenshot
 
 			}
 
@@ -158,9 +163,11 @@ public class Search103 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-//						.getSimpleName()
-//						+ "_filters_not_retained_when_user_navigates_back_to_patent_search_results_page_from_record_view_page")));// screenshot
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+				// .getSimpleName()
+				// +
+				// "_filters_not_retained_when_user_navigates_back_to_patent_search_results_page_from_record_view_page")));//
+				// screenshot
 
 			}
 
@@ -175,8 +182,8 @@ public class Search103 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+			// captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -187,15 +194,15 @@ public class Search103 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

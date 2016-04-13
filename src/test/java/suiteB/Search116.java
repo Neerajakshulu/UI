@@ -10,15 +10,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search116 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,11 +30,10 @@ public class Search116 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
-		test = extent
-				.startTest(var,
-						"Verify that more search results get displayed when user scrolls down in POSTS search results page")
-				.assignCategory("Search suite");	
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var,
+				"Verify that more search results get displayed when user scrolls down in POSTS search results page")
+				.assignCategory("Search suite");
 
 	}
 
@@ -47,8 +47,8 @@ public class Search116 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,15 +56,13 @@ public class Search116 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
@@ -73,8 +71,8 @@ public class Search116 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-			
-			String post="post";
+
+			String post = "post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
@@ -82,24 +80,26 @@ public class Search116 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			
-			int postResultsBeforeScroll=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+
+			int postResultsBeforeScroll = ob.findElements(
+					By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
 			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			
-			int postResultsAfterScroll=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
-			System.out.println("before-->"+postResultsBeforeScroll);
-			System.out.println("After-->"+postResultsAfterScroll);
-			if(!(postResultsAfterScroll>=postResultsBeforeScroll))
-				throw new Exception("More search results get displayed when user scrolls down in POSTS search results page");
-			
-			
+
+			int postResultsAfterScroll = ob.findElements(
+					By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+			System.out.println("before-->" + postResultsBeforeScroll);
+			System.out.println("After-->" + postResultsAfterScroll);
+			if (!(postResultsAfterScroll >= postResultsBeforeScroll))
+				throw new Exception(
+						"More search results get displayed when user scrolls down in POSTS search results page");
+
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -109,30 +109,31 @@ public class Search116 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_post_scroll_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_post_scroll_failed")));// screenshot
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 
 }

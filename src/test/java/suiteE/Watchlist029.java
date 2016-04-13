@@ -13,17 +13,18 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Watchlist029 extends TestBase {
+
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -38,7 +39,8 @@ public class Watchlist029 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that user is able to watch a post(user generated content) to a particular watchlist from notification in home page||Verify that user is able to unwatch a post from watchlist from notification in home page")
 				.assignCategory("Watchlist");
 
@@ -54,8 +56,8 @@ public class Watchlist029 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -123,21 +125,23 @@ public class Watchlist029 extends TestBase {
 				test.log(LogStatus.FAIL, "User not receiving notification");// extent
 																			// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_not_receiving_notification")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_not_receiving_notification")));// screenshot
 				closeBrowser();
 				return;
 			}
 
 			// Watching the post to a particular watch list
-			WebElement watchButton = ob
-					.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+			WebElement watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2
+					+ "]"));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
-			String documentName = ob
-					.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
-					.getText();
+			String documentName = ob.findElement(
+					By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]")).getText();
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -159,22 +163,25 @@ public class Watchlist029 extends TestBase {
 				test.log(LogStatus.FAIL, "User not able to add a post into watchlist from home page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_from_home_page")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_unable_to_add_post_into_watchlist_from_home_page")));// screenshot
 				return;
 			}
 
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
-					30);
+			waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"), 30);
 
 			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
-			documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
+			documentName = ob
+					.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
 					.getText();
 
 			// Navigate to a particular watch list page
@@ -191,9 +198,11 @@ public class Watchlist029 extends TestBase {
 					test.log(LogStatus.FAIL, "User not able to remove a post from watchlist in home page");// extent
 					// reports
 					status = 2;// excel
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_remove_post_from_watchlist_in_home_page")));// screenshot
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_user_unable_to_remove_post_from_watchlist_in_home_page")));// screenshot
 				}
 			} catch (NoSuchElementException e) {
 
@@ -220,8 +229,11 @@ public class Watchlist029 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -233,14 +245,11 @@ public class Watchlist029 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
-		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

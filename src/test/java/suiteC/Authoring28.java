@@ -13,26 +13,31 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
 
-public class Authoring28 extends TestBase{
+import com.relevantcodes.extentreports.LogStatus;
+
+public class Authoring28 extends TestBase {
+
 	static int status = 1;
-	PageFactory pf=new PageFactory();
+	PageFactory pf = new PageFactory();
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
+		test = extent
+				.startTest(var,
+						"Verify that commenter details is diplayed in the comment and clicking on name redirects to the user's profile")
 				.assignCategory("Authoring");
 
 	}
@@ -46,8 +51,8 @@ public class Authoring28 extends TestBase{
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,8 +67,8 @@ public class Authoring28 extends TestBase{
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
-			//.sleep(8000);
+			// ob.get(CONFIG.getProperty("testSiteName"));
+			// .sleep(8000);
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
@@ -72,53 +77,61 @@ public class Authoring28 extends TestBase{
 
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			String commentText, profileName=null;
-			List<String> profileDetailsInComment=new ArrayList<String>();
+			String commentText, profileName = null;
+			List<String> profileDetailsInComment = new ArrayList<String>();
 			List<WebElement> details;
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
 				if (!commentText.contains("Comment deleted")) {
-					
-					profileName	=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))).getText();
-					String str=commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath"))).getText();
-					
-					for(String str1:str.split(",")){
+
+					profileName = commentsList.get(i)
+							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath")))
+							.getText();
+					String str = commentsList.get(i)
+							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath")))
+							.getText();
+
+					for (String str1 : str.split(",")) {
 						profileDetailsInComment.add(str1.trim());
 					}
-				jsClick(ob,commentsList.get(i).findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
+					jsClick(ob,
+							commentsList.get(i).findElement(
+									By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
 					break;
 				}
 
 			}
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_name_css")), 180);
-			String actProfileName=ob.findElement(By.cssSelector(OR.getProperty("tr_profile_name_css"))).getText();
+			String actProfileName = ob.findElement(By.cssSelector(OR.getProperty("tr_profile_name_css"))).getText();
 			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_profile_details_css")), 180);
-			details=ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
-			List<String> profileDetailsInProfile=new ArrayList<String>();
-			for(WebElement we:details){
+			details = ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
+			List<String> profileDetailsInProfile = new ArrayList<String>();
+			for (WebElement we : details) {
 				profileDetailsInProfile.add(we.getText().trim());
-				
+
 			}
-			
-			while(true){
-				
-				if(profileDetailsInProfile.contains(""))
+
+			while (true) {
+
+				if (profileDetailsInProfile.contains(""))
 					profileDetailsInProfile.remove("");
-				else break;
+				else
+					break;
 			}
-			
-			while(true){
-				
-				if(profileDetailsInComment.contains(""))
+
+			while (true) {
+
+				if (profileDetailsInComment.contains(""))
 					profileDetailsInComment.remove("");
-				else break;
+				else
+					break;
 			}
 			try {
-				
-				Assert.assertEquals(profileDetailsInProfile,profileDetailsInComment);
+
+				Assert.assertEquals(profileDetailsInProfile, profileDetailsInComment);
 				Assert.assertEquals(profileName, actProfileName);
 				test.log(LogStatus.PASS, "Commenter details are displayed correctly");
 			} catch (Throwable t) {
@@ -126,8 +139,11 @@ public class Authoring28 extends TestBase{
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Commenter_details_validation_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Commenter_details_validation_failed")));// screenshot
 
 			}
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -143,8 +159,11 @@ public class Authoring28 extends TestBase{
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -154,16 +173,13 @@ public class Authoring28 extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteCxls,
+		 * "Test Cases", TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,
+		 * this.getClass().getSimpleName()), "SKIP");
+		 */
 	}
 
 }

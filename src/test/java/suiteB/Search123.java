@@ -14,56 +14,61 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search123 extends TestBase {
-	static int status=1;
 
-	//	Following is the list of status:
-	//		1--->PASS
-	//		2--->FAIL
-	//      3--->SKIP
+	static int status = 1;
+
+	// Following is the list of status:
+	// 1--->PASS
+	// 2--->FAIL
+	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that filtering is retained when user navigates back to PEOPLE search results page from profile page").assignCategory("Search suite");
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
+		test = extent
+				.startTest(var,
+						"Verify that filtering is retained when user navigates back to PEOPLE search results page from profile page")
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
-	public void testcaseB123() throws Exception{
+	public void testcaseB123() throws Exception {
 
-		boolean suiteRunmode=TestUtil.isSuiteRunnable(suiteXls, "B Suite");
-		boolean testRunmode=TestUtil.isTestCaseRunnable(suiteBxls,this.getClass().getSimpleName());
-		boolean master_condition=suiteRunmode && testRunmode;
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "B Suite");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
+		boolean master_condition = suiteRunmode && testRunmode;
 
-		if(!master_condition){
+		if (!master_condition) {
 
-			status=3;//excel
-			test.log(LogStatus.SKIP, "Skipping test case "+this.getClass().getSimpleName()+" as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case"+this.getClass().getSimpleName()+" as runmode set to NO");//reports
+			status = 3;// excel
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
 
-		test.log(LogStatus.INFO,this.getClass().getSimpleName()+" execution starts--->");
-		try{
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		try {
 
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
-			//login using TR credentials
+			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
@@ -72,7 +77,8 @@ public class Search123 extends TestBase {
 			Thread.sleep(4000);
 
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By
+					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(3).click();
 			waitForAjax(ob);
 
@@ -89,7 +95,8 @@ public class Search123 extends TestBase {
 			filterValues.get(0).click();
 			Thread.sleep(8000);
 
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
+			List<WebElement> searchResults = ob.findElements(By.xpath(OR
+					.getProperty("tr_search_people_profilename_link_xpath")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -103,7 +110,8 @@ public class Search123 extends TestBase {
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
 			Thread.sleep(5000);
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")));
+			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR
+					.getProperty("tr_search_people_profilename_link_xpath")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {
@@ -116,18 +124,21 @@ public class Search123 extends TestBase {
 
 			try {
 				Assert.assertTrue(al1.equals(al2));
-				test.log(LogStatus.PASS,
+				test.log(
+						LogStatus.PASS,
 						"Correct filtered search results getting displayed when user navigates back to people search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(LogStatus.PASS,
+				test.log(
+						LogStatus.PASS,
 						"Incorrect filtered search results getting displayed when user navigates back to people search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//						this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));// screenshot
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				// this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));//
+				// screenshot
 
 			}
 
@@ -147,9 +158,11 @@ public class Search123 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-//						.getSimpleName()
-//						+ "_filters_not_retained_when_user_navigates_back_to_people_search_results_page_from_record_view_page")));// screenshot
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+				// .getSimpleName()
+				// +
+				// "_filters_not_retained_when_user_navigates_back_to_people_search_results_page_from_record_view_page")));//
+				// screenshot
 
 			}
 
@@ -164,8 +177,8 @@ public class Search123 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+			// captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -176,15 +189,15 @@ public class Search123 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 }

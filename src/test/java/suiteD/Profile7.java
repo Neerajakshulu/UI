@@ -9,13 +9,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile7 extends TestBase {
 
@@ -26,12 +26,14 @@ public class Profile7 extends TestBase {
 	static boolean skip = false;
 	static int status = 1;
 	PageFactory pf;
-	
+
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that  below Application links working as expected \n 1. Web of Science \n 2.End Note \n 3.InCities \n 4.ScholarOne Abstracts \n 5.ScholarOne Manuscripts")
 				.assignCategory("Profile");
 		runmodes = TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
@@ -40,12 +42,12 @@ public class Profile7 extends TestBase {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception,
-	 *             When TR Login screen not displayed
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginTRAccount(String username, String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "D Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteDxls, this.getClass().getSimpleName());
@@ -53,8 +55,8 @@ public class Profile7 extends TestBase {
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -73,7 +75,7 @@ public class Profile7 extends TestBase {
 			maximizeWindow();
 			test.log(LogStatus.INFO, " Login to Application with TR Valid Credentials ");
 			ob.navigate().to(System.getProperty("host"));
-			pf=new PageFactory();
+			pf = new PageFactory();
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
@@ -85,8 +87,11 @@ public class Profile7 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Login_is_not_done")));
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Login_is_not_done")));
 			closeBrowser();
 		}
 	}
@@ -94,8 +99,7 @@ public class Profile7 extends TestBase {
 	/**
 	 * Method for Validate Application links
 	 * 
-	 * @throws Exception,
-	 *             When validation not done and Element Not found
+	 * @throws Exception, When validation not done and Element Not found
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
 	@Parameters("appLinks")
@@ -112,8 +116,11 @@ public class Profile7 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_Apps_links_are_not_working")));
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Apps_links_are_not_working")));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		}
@@ -123,16 +130,13 @@ public class Profile7 extends TestBase {
 	public void reportTestResult() {
 
 		extent.endTest(test);
-/*
-		if (status == 1)
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteDxls,
+		 * "Test Cases", TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,
+		 * this.getClass().getSimpleName()), "SKIP");
+		 */
 	}
 
 }

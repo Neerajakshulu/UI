@@ -11,14 +11,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search109 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,7 +30,7 @@ public class Search109 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
 						"Verify that following filters are present in PATENTS search results page(Inventor,IPC Codes,Assignee)")
@@ -47,8 +48,8 @@ public class Search109 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -73,16 +74,17 @@ public class Search109 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles=ob.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By
+					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
 			// Finding out the types filer in refine panel
 			waitForAjax(ob);
-			List<WebElement> content_types = ob
-					.findElements(By.cssSelector("span[class='h6 agg-category-title ng-binding']"));
+			List<WebElement> content_types = ob.findElements(By
+					.cssSelector("span[class='h6 agg-category-title ng-binding']"));
 			String filter1 = content_types.get(0).getText();
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();
-			
+
 			// Comparing the the label of the type of sort item
 			if (!filter1.equalsIgnoreCase("Inventor") || !filter2.equalsIgnoreCase("IPC Codes")
 					|| !filter3.equalsIgnoreCase("Assignee")) {
@@ -90,9 +92,11 @@ public class Search109 extends TestBase {
 				test.log(LogStatus.FAIL, "All filters are not displayed in the refine panel for patent content set");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "All_filters_are_not_displayed_in_the_refine_panel_for_patent_content_set")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "All_filters_are_not_displayed_in_the_refine_panel_for_patent_content_set")));// screenshot
 
 			} else {
 				test.log(LogStatus.PASS, "Filters are properly displayed in refine panel for patent content set");
@@ -109,8 +113,11 @@ public class Search109 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -121,15 +128,15 @@ public class Search109 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

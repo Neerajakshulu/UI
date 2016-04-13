@@ -11,14 +11,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search61 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,9 +30,10 @@ public class Search61 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that 10 post suggestions get displayed in the search type ahead when user searches using POSTS option in the search drop down and that the searched keyword is present in all the suggestions")
 				.assignCategory("Search suite");
 
@@ -47,8 +49,8 @@ public class Search61 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,26 +58,26 @@ public class Search61 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-//			ob.navigate().to(host);
+			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).click();
+			waitForElementTobeVisible(ob,
+					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+
+			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
+					.click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			
+
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("p");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
@@ -84,48 +86,56 @@ public class Search61 extends TestBase {
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("t");
 			Thread.sleep(1000);
-			
-			
-			WebElement myE=ob.findElement(By.xpath(OR.getProperty("postsTile")));
-			String text=myE.getText();
-			
-			String[] arr=text.split("\n");
-			
-			ArrayList<String> al=new ArrayList<String>();
-			for(int i=1;i<arr.length;i++){
-				
+
+			WebElement myE = ob.findElement(By.xpath(OR.getProperty("postsTile")));
+			String text = myE.getText();
+
+			String[] arr = text.split("\n");
+
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 1; i < arr.length; i++) {
+
 				al.add(arr[i]);
 			}
-			
-			for(int i=0;i<al.size();i++){
-				
+
+			for (int i = 0; i < al.size(); i++) {
+
 				System.out.println(al.get(i));
 			}
-			
-			if(!compareNumbers(10,al.size())){
-				
-				test.log(LogStatus.FAIL, "More or less than 10 post suggestions are getting displayed");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_more_or_less_than_ten_post_suggestions_getting_displayed")));//screenshot
+
+			if (!compareNumbers(10, al.size())) {
+
+				test.log(LogStatus.FAIL, "More or less than 10 post suggestions are getting displayed");// extent
+																										// reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_more_or_less_than_ten_post_suggestions_getting_displayed")));// screenshot
 			}
-			
-			int count=0;
-			for(int i=0;i<al.size();i++){
-				
-				if(!al.get(i).toLowerCase().contains("post"))
+
+			int count = 0;
+			for (int i = 0; i < al.size(); i++) {
+
+				if (!al.get(i).toLowerCase().contains("post"))
 					count++;
 			}
-			
-			if(!compareNumbers(0,count)){
-				
-				test.log(LogStatus.FAIL, "Post suggestion does not contain the typed keyword");//extent reports
-				status=2;//excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_post_suggestion_does_not_contain_typed_keyword")));//screenshot
+
+			if (!compareNumbers(0, count)) {
+
+				test.log(LogStatus.FAIL, "Post suggestion does not contain the typed keyword");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_post_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -135,28 +145,30 @@ public class Search61 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

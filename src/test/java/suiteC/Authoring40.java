@@ -10,20 +10,18 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
 
-public class Authoring40 extends TestBase{
+import com.relevantcodes.extentreports.LogStatus;
 
-	
-	
+public class Authoring40 extends TestBase {
+
 	static int status = 1;
-	PageFactory pf=new PageFactory();
+	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -31,9 +29,11 @@ public class Authoring40 extends TestBase{
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('C'),this.getClass().getSimpleName(),1);
-		test = extent.startTest(var, "Verify that user is able to create and edit post and verify that time stamp is displayed ")
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var,
+				"Verify that user is able to create and edit post and verify that time stamp is displayed ")
 				.assignCategory("Authoring");
 
 	}
@@ -47,8 +47,8 @@ public class Authoring40 extends TestBase{
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,16 +56,16 @@ public class Authoring40 extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String postString="PostCreationTest"+RandomStringUtils.randomNumeric(10);
-			String postStringEdited="PostEditTest"+RandomStringUtils.randomNumeric(10);
+			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
+			String postStringEdited = "PostEditTest" + RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME4","PASSWORD4");
+			// ob.get(CONFIG.getProperty("testSiteName"));
+			loginAs("USERNAME4", "PASSWORD4");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -77,8 +77,7 @@ public class Authoring40 extends TestBase{
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			
-			
+
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).verifyPostCreationDate());
 				test.log(LogStatus.PASS, "Post creation timestamp is displayed in post record view page");
@@ -87,8 +86,11 @@ public class Authoring40 extends TestBase{
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_count_validation_failed")));// screenshot
 
 			}
 			pf.getpostRVPageInstance(ob).clickOnEditButton();
@@ -106,11 +108,14 @@ public class Authoring40 extends TestBase{
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_count_validation_failed")));// screenshot
 
 			}
-			
+
 			try {
 				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostTitle());
 				test.log(LogStatus.PASS, "Actual post title matches expected post title");
@@ -119,11 +124,14 @@ public class Authoring40 extends TestBase{
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_creation_validation_failed")));// screenshot
 
 			}
-			
+
 			try {
 				Assert.assertEquals(postStringEdited, pf.getpostRVPageInstance(ob).getPostContent());
 				test.log(LogStatus.PASS, "Actual post content matches expected post content");
@@ -132,11 +140,14 @@ public class Authoring40 extends TestBase{
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_creation_validation_failed")));// screenshot
 
 			}
-		
+
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -150,8 +161,11 @@ public class Authoring40 extends TestBase{
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -161,17 +175,13 @@ public class Authoring40 extends TestBase{
 	public void reportTestResult() {
 		extent.endTest(test);
 
-	/*	if (status == 1)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteCxls, "Test Cases",
-					TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteCxls,
+		 * "Test Cases", TestUtil.getRowNum(suiteCxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteCxls, "Test Cases", TestUtil.getRowNum(suiteCxls,
+		 * this.getClass().getSimpleName()), "SKIP");
+		 */
 	}
 
-	
 }

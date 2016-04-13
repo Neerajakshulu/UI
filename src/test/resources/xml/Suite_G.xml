@@ -2,9 +2,9 @@
 <suite name="Sanity suite" parallel="tests" thread-count="5">
 
 
-<listeners>
-    <listener class-name="listener.TestsListenerAdapter" />
-</listeners>
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
 
 	<test name="Authoring1">
 		<classes>
@@ -17,15 +17,15 @@
 			<class name="suiteB.Search2"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Search3">
 		<classes>
 			<class name="suiteB.Search3"></class>
 		</classes>
 	</test>
-	
-	
 
-	
+
+
+
 </suite>
 

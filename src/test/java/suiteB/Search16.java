@@ -11,14 +11,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search16 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -27,12 +28,10 @@ public class Search16 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{
+	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to expand and collapse SORT BY drop down")
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var, "Verify that user is able to expand and collapse SORT BY drop down")
 				.assignCategory("Search suite");
 
 	}
@@ -47,8 +46,8 @@ public class Search16 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -67,7 +66,7 @@ public class Search16 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-//			ob.navigate().to(host);
+			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
@@ -75,7 +74,7 @@ public class Search16 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 20);
-			jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))));
+			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
 
 			try {
@@ -87,8 +86,11 @@ public class Search16 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "sortby_ is_not_ working_ for_ search_ results")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "sortby_ is_not_ working_ for_ search_ results")));// screenshot
 			}
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).click();
 
@@ -101,8 +103,11 @@ public class Search16 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "sortby_ is_not_ working_ for_ search_ results")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "sortby_ is_not_ working_ for_ search_ results")));// screenshot
 			}
 			logout();
 			closeBrowser();
@@ -117,8 +122,11 @@ public class Search16 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -129,15 +137,15 @@ public class Search16 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

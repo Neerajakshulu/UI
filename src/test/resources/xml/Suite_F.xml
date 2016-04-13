@@ -27,19 +27,19 @@
 			<class name="suiteF.Notifications004"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F5">
 		<classes>
 			<class name="suiteF.Notifications005"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F6">
 		<classes>
 			<class name="suiteF.Notifications006"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F7">
 		<classes>
 			<class name="suiteF.Notifications007"></class>
@@ -51,31 +51,31 @@
 			<class name="suiteF.Notifications008"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F9">
 		<classes>
 			<class name="suiteF.Notifications009"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F10">
 		<classes>
 			<class name="suiteF.Notifications010"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F11">
 		<classes>
 			<class name="suiteF.Notifications011"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F12">
 		<classes>
 			<class name="suiteF.Notifications012"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F13">
 		<classes>
 			<class name="suiteF.Notifications013"></class>
@@ -94,42 +94,42 @@
 			<class name="suiteF.Notifications015"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F16">
 		<classes>
 			<class name="suiteF.Notifications016"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F17">
 		<classes>
 			<class name="suiteF.Notifications017"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F18">
 		<classes>
 			<class name="suiteF.Notifications018"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F19">
 		<classes>
 			<class name="suiteF.Notifications019"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F20">
 		<classes>
 			<class name="suiteF.Notifications020"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F21">
 		<classes>
 			<class name="suiteF.Notifications021"></class>
 		</classes>
 	</test>
-	
+
 </suite>
 

@@ -2,6 +2,7 @@ package util;
 
 /**
  * Enum for OneP Object Repository
+ * 
  * @author UC202376
  *
  */
@@ -29,37 +30,37 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS("button[class='btn webui-btn-primary ng-binding']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS("button[class='btn btn-default pub-action-btn dropdown-toggle']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK("Share on Twitter"),
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS("input#username_or_email"),	
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS("input#username_or_email"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS("input#password"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS("input[value='Log in and Tweet']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS("textarea#status"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS("input[value='Tweet']"),
-	
+
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK("Share on LinkedIn"),
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS("input#session_key-oauthAuthorizeForm"),	
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS("input#session_key-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS("input#session_password-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS("input[name='authorize']"),
-	
+
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS("input[class='btn-primary'][value='Share']"),
-	
+
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK("Share on Facebook"),
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),	
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS("input#pass"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS("input[value='Log In']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS("*[type='submit'][name*='CONFIRM']"),
-	
+
 	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG("h6"),
 	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("li[class='interest-or-skill ng-binding ng-scope']"),
 	HOME_PROJECT_NEON_SEARCH_BOX_CSS("input[placeholder='Search']"),
 	HOME_PROJECT_NEON_SEARCH_CLICK_CSS("i[class='webui-icon webui-icon-search']"),
-	
+
 	HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS("li[class='content-type-selector ng-scope']"),
 	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("span[class='ne-profile-image-wrapper']"),
 	HOME_PROJECT_NEON_PROFILE_LINK("Profile"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
 	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help"),
-	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("ne-profile-follow-unfollow button span"), 
+	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("ne-profile-follow-unfollow button span"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-profile-follow-unfollow button"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS("span[class='ne-profile-object-title ng-scope'] a"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS("h6[class='ne-profile-object-metadata-wrapper ng-binding']"),
@@ -89,7 +90,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg'] p[class='ng-binding'] p"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("button[event-action='cancel']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[event-action='publish']"),
-	//HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
+	// HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
 	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h2[class='profile-tab-heading'] a"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("a[data-event-category='profileposts'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS("a[data-event-category='profiledraft posts'] span[class='ng-binding']:nth-child(2)"),
@@ -103,14 +104,14 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS("a[href='#/watchlist']"),
 	HOME_PROJECT_NEON_HEADER_HOME_LINK("Home"),
 	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK("Publish a Post"),
-	
+
 	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
 	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS("input[placeholder='Add a Topic']"),
-	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li"), 
+	HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS("div[class='autocomplete ng-scope'] ul li"),
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS("div[class*='post-stat'] div[class='doc-info']:nth-child(3) span[class*='stat-count']"),
-	
+
 	HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS("div[class*='post-stat'] button[class*='webui-icon-like']"),
-	
+
 	HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS("button[id='posting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("div[class='full-record'] h2[class$='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("h3[class$='ne-profile-object-title-wrapper']"),
@@ -122,7 +123,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[2]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[data-ng-show='vm.hasPosts'] button"),
-	
+
 	HOME_PROJECT_NEON_WATCHLIST_RECORDS_CSS("span[class='webui-icon-btn-text']"),
 	HOME_PROJECT_NEON_WATCHLIST_CSS("h2[class='search-results-title']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS("button[ng-click='vm.close(vm.buttons.DISCARD)']"),
@@ -142,7 +143,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_FOLLOWING_COUNT_CSS("a[data-event-category='profilefollowing'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_TABS_CSS("li[ng-repeat='tab in vm.detailTabs']"),
 	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("h2[class='profile-tab-heading']"),
-	
+
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
@@ -153,7 +154,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("div[class*='time-stamp']"),
 	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class='award ng-scope ne-profile-object-hcr']"),
-	
+
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
 	HOME_PROJECT_SEARCH_TEXTBOX_XPATH("//input[@placeholder='Search']"),
@@ -167,19 +168,16 @@ public enum OnePObjectMap {
 	HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK("//ne-post-results//a[@class='ng-binding']"),
 	HOME_PROJECT_COMMENTS_INSERT_LINK_CSS("button[name='insertLink']"),
 	HOME_PROJECT_RECORD_COMMENTS_DIV_CSS("div[class='comment-list-wrapper'] div[class='ng-scope'] div[class='comment-content'] a")
-	
-	; 
-	
-	
-	
-	
+
+	;
+
 	private String locator;
 
 	OnePObjectMap(String locator) {
-	    this.locator = locator;
-	  }
-	
-	  public String toString() {
-	    return this.locator;
-	  }
+		this.locator = locator;
+	}
+
+	public String toString() {
+		return this.locator;
+	}
 }

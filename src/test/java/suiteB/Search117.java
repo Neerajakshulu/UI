@@ -12,16 +12,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search117 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -32,12 +33,13 @@ public class Search117 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that sorting is retained when user navigates back to POSTS search results page from record view page||"
-						+ "Verify that search drop down content type is retained when user navigates back to POSTS search results page from record view page")
-				.assignCategory("Search suite");	
+								+ "Verify that search drop down content type is retained when user navigates back to POSTS search results page from record view page")
+				.assignCategory("Search suite");
 
 	}
 
@@ -51,8 +53,8 @@ public class Search117 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -60,15 +62,13 @@ public class Search117 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
@@ -77,64 +77,69 @@ public class Search117 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-			
-			String post="post";
-			String sortBy="Relevance";
+
+			String post = "post";
+			String sortBy = "Relevance";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
-			
+
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
-			List<WebElement> postDropdownmenus=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
-			for(WebElement postDropdownmenu:postDropdownmenus){
-				if(postDropdownmenu.getText().trim().equalsIgnoreCase(sortBy)){
+			List<WebElement> postDropdownmenus = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
+			for (WebElement postDropdownmenu : postDropdownmenus) {
+				if (postDropdownmenu.getText().trim().equalsIgnoreCase(sortBy)) {
 					postDropdownmenu.click();
 					waitForAjax(ob);
-					waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+					waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")),
+							120);
 					break;
 				}
 			}
-			
-			List<String> postTitlesdata=new ArrayList<String>();
-			List<String> postTitlesFromRVdata=new ArrayList<String>();
-			List<WebElement> postTitles=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")));
-			for(WebElement postTitle:postTitles){
+
+			List<String> postTitlesdata = new ArrayList<String>();
+			List<String> postTitlesFromRVdata = new ArrayList<String>();
+			List<WebElement> postTitles = ob.findElements(By.cssSelector(OR
+					.getProperty("tr_search_results_item_title_css")));
+			for (WebElement postTitle : postTitles) {
 				postTitlesdata.add(postTitle.getText().trim());
 			}
-			
+
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
 			waitForAjax(ob);
 			BrowserWaits.waitTime(6);
-			
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
+
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
+					120);
 			ob.navigate().back();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			String sortByFromRV=ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).getText();
+			String sortByFromRV = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")))
+					.getText();
 
-			System.out.println("sortby value From record view page-->"+sortByFromRV);
-			if(!(sortByFromRV.trim().equalsIgnoreCase(sortBy))) {
+			System.out.println("sortby value From record view page-->" + sortByFromRV);
+			if (!(sortByFromRV.trim().equalsIgnoreCase(sortBy))) {
 				throw new Exception(
 						"sorting is not retained when user navigates back to POSTS search results page from record view page");
 			}
-					
-			List<WebElement> postTitlesRV=ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")));
-			for(WebElement postTitleRV:postTitlesRV){
+
+			List<WebElement> postTitlesRV = ob.findElements(By.cssSelector(OR
+					.getProperty("tr_search_results_item_title_css")));
+			for (WebElement postTitleRV : postTitlesRV) {
 				postTitlesFromRVdata.add(postTitleRV.getText().trim());
 			}
-			
-			
-			if(!(postTitlesFromRVdata.containsAll(postTitlesdata))){
+
+			if (!(postTitlesFromRVdata.containsAll(postTitlesdata))) {
 				throw new Exception(
 						"Search dropdown content type is not retained when user navigates back to POSTS search results page from record view page");
 			}
-			
+
 			closeBrowser();
 
-		} 
-		
+		}
+
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -144,30 +149,31 @@ public class Search117 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_sortby_retain_post_search_results_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_sortby_retain_post_search_results_failed")));// screenshot
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
-
 
 }

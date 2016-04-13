@@ -13,14 +13,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search90 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,11 +30,13 @@ public class Search90 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 
-	String var=xlRead2(returnExcelPath('B'),this.getClass().getSimpleName(),1);
+		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that following options get displayed in SORT BY drop down in ARTICLES search results page: a)Relevance b)Times Cited c)Publication Date(Newest) d)Publication Date(Oldest)")
 				.assignCategory("Search suite");
 
@@ -49,8 +52,8 @@ public class Search90 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -77,13 +80,14 @@ public class Search90 extends TestBase {
 
 			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
 			ob.findElement(By.xpath("//button[@id='single-button']")).click();
-			waitForElementTobeVisible(ob,
+			waitForElementTobeVisible(
+					ob,
 					By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul[@class='dropdown-menu']"),
 					4);
-			List<WebElement> sortByValuesList = ob
-					.findElements(By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul/li"));
-			List<String> expectedDropDownValues = Arrays.asList(new String[] { "Relevance", "Times Cited",
-					"Publication Date (Newest)", "Publication Date (Oldest)" });
+			List<WebElement> sortByValuesList = ob.findElements(By
+					.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul/li"));
+			List<String> expectedDropDownValues = Arrays.asList(new String[] {"Relevance", "Times Cited",
+					"Publication Date (Newest)", "Publication Date (Oldest)"});
 			List<String> actualDropDownValues = new ArrayList<String>();
 
 			for (WebElement sortByValue : sortByValuesList) {
@@ -97,9 +101,11 @@ public class Search90 extends TestBase {
 				status = 2;
 				test.log(LogStatus.FAIL,
 						"All the sort by values are not displayed properly in article search result page");
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_sort_by_values_not_displayed_properly_in_article_results_page")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_sort_by_values_not_displayed_properly_in_article_results_page")));// screenshot
 			}
 
 			closeBrowser();
@@ -115,8 +121,11 @@ public class Search90 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -127,15 +136,15 @@ public class Search90 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-//		if (status == 1)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
-//		else if (status == 2)
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
-//		else
-//			TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-//					TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// if (status == 1)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// else if (status == 2)
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// else
+		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
+		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

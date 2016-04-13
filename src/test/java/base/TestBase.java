@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,14 +21,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-//import util.ExtentManager;
+// import util.ExtentManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,6 +50,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class TestBase {
+
 	public static Properties CONFIG = null;
 	public static Properties OR = null;
 	public static Properties LOGIN = null;
@@ -68,12 +72,9 @@ public class TestBase {
 	public static String host = null;
 	public static String user1, user2, user3;
 	public static String fn1, fn2, ln1, ln2, fn3, ln3;
-	// public static int xRows, xCols;
-	// made changes by sachin
-	// public static String[][] xData;
 	private String[][] xData;
 	public static int count = 0;
-	public static int flag=0;
+	public static int flag = 0;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -82,72 +83,68 @@ public class TestBase {
 		if (TestUtil.isSuiteRunnable(suiteXls, "E Suite") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
 
 			if (count == 0) {
-				
-				if(flag<3){
-				
-				flag++;	
-					
-				try{
-				openBrowser();
-				maximizeWindow();
-				clearCookies();
-				fn1 = generateRandomName(8);
-				ln1 = generateRandomName(10);
-				System.out.println(fn1 + " " + ln1);
-				user1 = createNewUser(fn1, ln1);
-				System.out.println("User1:" + user1);
-				Thread.sleep(3000);
-				logout();
-				closeBrowser();
-				
-				// 2)Create User2 and follow User1
-				openBrowser();
-				maximizeWindow();
-				clearCookies();
-				fn2 = generateRandomName(8);
-				ln2 = generateRandomName(10);
-				System.out.println(fn2 +" "+ ln2);
-				user2 = createNewUser(fn2, ln2);
-				System.out.println("User2:"+ user2);
-				Thread.sleep(3000);
-				
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),30);
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
-				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-				JavascriptExecutor jse = (JavascriptExecutor) ob;
-				jse.executeScript("scroll(0,-500)");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")),30);
-				ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-				ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-				
-				Thread.sleep(3000);
+				if (flag < 3) {
 
-				
-				logout();
-				closeBrowser();
-				System.out.println("User count:"+count);
-				count++;
-				
-				
-				
-				}
-				
-				catch(Throwable t){
-					
-					System.out.println("There is some problem in the creation of users");
-					System.out.println(t);
+					flag++;
 
-					StringWriter errors = new StringWriter();
-					t.printStackTrace(new PrintWriter(errors));
-					
-					test.addScreenCapture(captureScreenshot("UserCreationError" +
-							this.getClass().getSimpleName() + "_user_creation_error_screenshot"));// screenshot
+					try {
+						openBrowser();
+						maximizeWindow();
+						clearCookies();
+						fn1 = generateRandomName(8);
+						ln1 = generateRandomName(10);
+						System.out.println(fn1 + " " + ln1);
+						user1 = createNewUser(fn1, ln1);
+						System.out.println("User1:" + user1);
+						Thread.sleep(3000);
+						logout();
+						closeBrowser();
 
-					
-				}
-				
+						// 2)Create User2 and follow User1
+						openBrowser();
+						maximizeWindow();
+						clearCookies();
+						fn2 = generateRandomName(8);
+						ln2 = generateRandomName(10);
+						System.out.println(fn2 + " " + ln2);
+						user2 = createNewUser(fn2, ln2);
+						System.out.println("User2:" + user2);
+						Thread.sleep(3000);
+
+						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+						ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+						ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+
+						JavascriptExecutor jse = (JavascriptExecutor) ob;
+						jse.executeScript("scroll(0,-500)");
+						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
+						ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+						ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+
+						Thread.sleep(3000);
+
+						logout();
+						closeBrowser();
+						System.out.println("User count:" + count);
+						count++;
+
+					}
+
+					catch (Throwable t) {
+
+						System.out.println("There is some problem in the creation of users");
+						System.out.println(t);
+
+						StringWriter errors = new StringWriter();
+						t.printStackTrace(new PrintWriter(errors));
+
+						test.addScreenCapture(captureScreenshot("UserCreationError" + this.getClass().getSimpleName()
+								+ "_user_creation_error_screenshot"));// screenshot
+
+					}
+
 				}
 			}
 
@@ -220,36 +217,26 @@ public class TestBase {
 	// }
 
 	// Opening via Sauce Labs
-	public void openBrowser() throws Exception {
-
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		System.out.println("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
-		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-		// desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-		ob = new RemoteWebDriver(
-				new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-				desiredCapabilities);
-		String waitTime = CONFIG.getProperty("defaultImplicitWait");
-		String pageWait = CONFIG.getProperty("defaultPageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try {
-			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
-		} catch (Throwable t) {
-
-			System.out.println("Page Load Timeout not supported in safari driver");
-		}
-
-	}
+	/*
+	 * public void openBrowser() throws Exception { DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+	 * desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+	 * System.out.println("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
+	 * desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION")); System.out.println("Selenium Version-->" +
+	 * System.getenv("SELENIUM_VERSION")); System.out.println("Selenium Plaform-->" +
+	 * System.getenv("SELENIUM_PLATFORM")); desiredCapabilities.setCapability(CapabilityType.PLATFORM,
+	 * System.getenv("SELENIUM_PLATFORM")); desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
+	 * desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true); ob = new RemoteWebDriver( new
+	 * URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+	 * desiredCapabilities); String waitTime = CONFIG.getProperty("defaultImplicitWait"); String pageWait =
+	 * CONFIG.getProperty("defaultPageWait"); ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
+	 * TimeUnit.SECONDS); try { ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS); }
+	 * catch (Throwable t) { System.out.println("Page Load Timeout not supported in safari driver"); } }
+	 */
 
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*public void openBrowser() {
+	public void openBrowser() {
 
 		if (CONFIG.getProperty("browserType").equals("FF")) {
 			ob = new FirefoxDriver();
@@ -287,7 +274,7 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}*/
+	}
 
 	// Closing the browser
 	public void closeBrowser() {
@@ -310,7 +297,8 @@ public class TestBase {
 	}
 
 	// compareStrings
-	public boolean compareStrings(String expectedString, String actualString) {
+	public boolean compareStrings(String expectedString,
+			String actualString) {
 		try {
 			Assert.assertEquals(actualString, expectedString);
 			test.log(LogStatus.PASS, "Strings matching");
@@ -323,7 +311,8 @@ public class TestBase {
 	}
 
 	// compareStrings by ignoring case
-	public boolean compareStringsIgnoringCase(String expectedString, String actualString) {
+	public boolean compareStringsIgnoringCase(String expectedString,
+			String actualString) {
 
 		try {
 			Assert.assertEquals(actualString.toLowerCase(), expectedString.toLowerCase());
@@ -337,7 +326,8 @@ public class TestBase {
 	}
 
 	// compare numbers
-	public boolean compareNumbers(int expectedVal, int actualValue) {
+	public boolean compareNumbers(int expectedVal,
+			int actualValue) {
 		try {
 			Assert.assertEquals(actualValue, expectedVal);
 			test.log(LogStatus.PASS, "Numbers are matching");
@@ -495,7 +485,8 @@ public class TestBase {
 	}
 
 	// Creates a new TR user
-	public String createNewUser(String first_name, String last_name) throws Exception {
+	public String createNewUser(String first_name,
+			String last_name) throws Exception {
 
 		String password = "Transaction@2";
 
@@ -542,7 +533,8 @@ public class TestBase {
 	}
 
 	// verifies whether a particular string contains another string or not
-	public boolean StringContains(String MainString, String ToBeCheckedString) {
+	public boolean StringContains(String MainString,
+			String ToBeCheckedString) {
 		try {
 			Assert.assertTrue(MainString.contains(ToBeCheckedString), "MainString doesn't contain ToBeCheckedString");
 			test.log(LogStatus.PASS, "MainString doesn't contain ToBeCheckedString");
@@ -555,7 +547,9 @@ public class TestBase {
 	}
 
 	// To verify that a date falls between 2 particular dates
-	public boolean checkDate(String date, String minDate, String maxDate) {
+	public boolean checkDate(String date,
+			String minDate,
+			String maxDate) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 
@@ -627,7 +621,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobeVisible(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
@@ -640,7 +636,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobePresent(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
@@ -651,7 +649,8 @@ public class TestBase {
 	 * @param driver
 	 * @param element
 	 */
-	public static void jsClick(WebDriver driver, WebElement element) {
+	public static void jsClick(WebDriver driver,
+			WebElement element) {
 
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 	}
@@ -662,7 +661,8 @@ public class TestBase {
 	 * @param driver
 	 * @param element
 	 */
-	public void scrollElementIntoView(WebDriver driver, WebElement element) {
+	public void scrollElementIntoView(WebDriver driver,
+			WebElement element) {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
@@ -676,7 +676,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public static List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+	public static List<WebElement> waitForAllElementsToBePresent(WebDriver driver,
+			By locator,
+			int time) {
 		return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 	}
 
@@ -692,8 +694,8 @@ public class TestBase {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// check for the pending request count and break if count is
 				// zero.
-				if ((Long) js.executeScript(
-						"return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+				if ((Long) js
+						.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
 					break;
 				}
 				Thread.sleep(1000);
@@ -724,7 +726,8 @@ public class TestBase {
 		// waitForAjax(driver);
 	}
 
-	public Alert waitForAlertToBePresent(WebDriver driver, int time) {
+	public Alert waitForAlertToBePresent(WebDriver driver,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
 	}
@@ -737,12 +740,15 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobeClickable(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
 	}
 
-	public boolean checkElementIsDisplayed(WebDriver driver, By locator) {
+	public boolean checkElementIsDisplayed(WebDriver driver,
+			By locator) {
 		boolean result = false;
 		try {
 
@@ -761,8 +767,10 @@ public class TestBase {
 	 * @param numberOfWindows
 	 * @return
 	 */
-	public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver, final int numberOfWindows) {
+	public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver,
+			final int numberOfWindows) {
 		return new ExpectedCondition<Boolean>() {
+
 			@Override
 			public Boolean apply(WebDriver driver) {
 				driver.getWindowHandles();
@@ -777,7 +785,8 @@ public class TestBase {
 	 * @param driver
 	 * @param numberOfWindows
 	 */
-	public void waitForNumberOfWindowsToEqual(WebDriver driver, final int numberOfWindows) {
+	public void waitForNumberOfWindowsToEqual(WebDriver driver,
+			final int numberOfWindows) {
 		new WebDriverWait(driver, 60).until(numberOfWindowsToBe(driver, numberOfWindows));
 	}
 
@@ -802,7 +811,8 @@ public class TestBase {
 	 * @param driver
 	 * @param mainWindowHandle
 	 */
-	public void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
+	public void switchToMainWindow(WebDriver driver,
+			String mainWindowHandle) {
 
 		driver.switchTo().window(mainWindowHandle);
 
@@ -831,7 +841,9 @@ public class TestBase {
 	}
 
 	// Method to read excel worksheet
-	public String xlRead(String sPath, int r, int c) throws Exception {
+	public String xlRead(String sPath,
+			int r,
+			int c) throws Exception {
 		int xRows, xCols;
 		File myxl = new File(sPath);
 		FileInputStream myStream = new FileInputStream(myxl);
@@ -855,7 +867,9 @@ public class TestBase {
 		return xData[r][c];
 	}
 
-	public String xlRead2(String sPath, String cellValue, int c) throws Exception {
+	public String xlRead2(String sPath,
+			String cellValue,
+			int c) throws Exception {
 		int xRows, xCols;
 		int r = 0;
 		File myxl = new File(sPath);
@@ -887,37 +901,36 @@ public class TestBase {
 		int type = cell.getCellType();
 		Object result;
 		switch (type) {
-		case XSSFCell.CELL_TYPE_NUMERIC: // 0
-			result = cell.getNumericCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_STRING: // 1
-			result = cell.getStringCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_FORMULA: // 2
-			throw new RuntimeException("We can't evaluate formulas in Java");
-		case XSSFCell.CELL_TYPE_BLANK: // 3
-			result = "-";
-			break;
-		case XSSFCell.CELL_TYPE_BOOLEAN: // 4
-			result = cell.getBooleanCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_ERROR: // 5
-			throw new RuntimeException("This cell has an error");
-		default:
-			throw new RuntimeException("We don't support this cell type: " + type);
+			case XSSFCell.CELL_TYPE_NUMERIC: // 0
+				result = cell.getNumericCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_STRING: // 1
+				result = cell.getStringCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_FORMULA: // 2
+				throw new RuntimeException("We can't evaluate formulas in Java");
+			case XSSFCell.CELL_TYPE_BLANK: // 3
+				result = "-";
+				break;
+			case XSSFCell.CELL_TYPE_BOOLEAN: // 4
+				result = cell.getBooleanCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_ERROR: // 5
+				throw new RuntimeException("This cell has an error");
+			default:
+				throw new RuntimeException("We don't support this cell type: " + type);
 		}
 		return result.toString();
 	}
 
 	/**
 	 * 
-	 * @param username
-	 *            -USERNAME Field from the login.properties file
-	 * @param pwd
-	 *            - PASSWORD Field from the login.properties file
+	 * @param username -USERNAME Field from the login.properties file
+	 * @param pwd - PASSWORD Field from the login.properties file
 	 * @throws Exception
 	 */
-	public void loginAs(String usernameKey, String pwdKey) throws Exception {
+	public void loginAs(String usernameKey,
+			String pwdKey) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
@@ -931,8 +944,7 @@ public class TestBase {
 	/**
 	 * Method to navigate to a particular watch list details page
 	 * 
-	 * @param selectedWatchlistName
-	 *            watch list name
+	 * @param selectedWatchlistName watch list name
 	 * @throws InterruptedException
 	 */
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
@@ -957,8 +969,7 @@ public class TestBase {
 
 	/**
 	 * 
-	 * @param watchButton
-	 *            passing the particular button element to watch
+	 * @param watchButton passing the particular button element to watch
 	 * @return the watch list name the item got added
 	 * @throws InterruptedException
 	 */
@@ -982,8 +993,8 @@ public class TestBase {
 		return selectedWatchlistName;
 	}
 
-	public void watchOrUnwatchItemToAParticularWatchlist(WebElement watchButton, String watchListName)
-			throws InterruptedException {
+	public void watchOrUnwatchItemToAParticularWatchlist(WebElement watchButton,
+			String watchListName) throws InterruptedException {
 
 		watchButton.click();
 		BrowserWaits.waitTime(2);
@@ -993,8 +1004,8 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 30);
 
 		List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button")));
-		List<WebElement> listOfWatchListName = ob
-				.findElements(By.xpath(OR.getProperty("watchlist_name_in_select_model")));
+		List<WebElement> listOfWatchListName = ob.findElements(By.xpath(OR
+				.getProperty("watchlist_name_in_select_model")));
 		for (int i = 0; i < listOfWatchListName.size(); i++) {
 			if (listOfWatchListName.get(i).getText().equals(watchListName)) {
 				// Adding the item into watch list
@@ -1013,8 +1024,7 @@ public class TestBase {
 
 	/**
 	 * 
-	 * @param type
-	 *            search type from dropdown
+	 * @param type search type from dropdown
 	 * @throws InterruptedException
 	 */
 	public void selectSearchTypeFromDropDown(String type) throws InterruptedException {
@@ -1024,8 +1034,9 @@ public class TestBase {
 		Thread.sleep(2000);
 	}
 
-	public void createWatchList(String typeOfWatchList, String watchListName, String watchListDescription)
-			throws Exception {
+	public void createWatchList(String typeOfWatchList,
+			String watchListName,
+			String watchListDescription) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
@@ -1069,7 +1080,7 @@ public class TestBase {
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		for (WebElement watchList : listOfWatchlist) {
 			if (watchList.getText().equals(watchListName)) {
-				
+
 				watchList.click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
@@ -1087,13 +1098,12 @@ public class TestBase {
 
 	/**
 	 * 
-	 * @param emailId
-	 *            -Login as the specified email id user
-	 * @param password
-	 *            - The user password
+	 * @param emailId -Login as the specified email id user
+	 * @param password - The user password
 	 * @throws Exception
 	 */
-	public void loginAsSpecifiedUser(String emailId, String password) throws Exception {
+	public void loginAsSpecifiedUser(String emailId,
+			String password) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
 		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
