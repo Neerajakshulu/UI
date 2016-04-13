@@ -121,8 +121,8 @@ public class TestCase_B18 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "reset_ is_not_ working_ for_ search_ results")));// screenshot
+//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+//						this.getClass().getSimpleName() + "reset_ is_not_ working_ for_ search_ results")));// screenshot
 			}
 			logout();
 			closeBrowser();
@@ -136,8 +136,8 @@ public class TestCase_B18 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

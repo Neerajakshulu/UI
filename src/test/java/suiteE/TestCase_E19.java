@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -29,7 +30,8 @@ public class TestCase_E19 extends TestBase {
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),
 				Integer.parseInt(this.getClass().getSimpleName().substring(10) + ""), 1);
 		test = extent
@@ -64,37 +66,29 @@ public class TestCase_E19 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-			// Creating 5 public watch list
-			String newWatchlistName = "New Watchlist";
-			for (int i = 1; i <= 3; i++) {
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(newWatchlistName + i);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
-						.sendKeys("This is my newly created watch list.");
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + i + "')]"), 30);
-			}
+			// Creating 2 public watch list
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName() + "_";
+			String watchListDescription = "This is newly created watchlist.";
+			createWatchList("public", newWatchlistName + 1, watchListDescription);
+			BrowserWaits.waitTime(2);
+			createWatchList("public", newWatchlistName + 2, watchListDescription);
 			// Making the last watch list as private
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			new PageFactory().getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-//			ob.get(host);
+			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
@@ -107,6 +101,7 @@ public class TestCase_E19 extends TestBase {
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
+			BrowserWaits.waitTime(2);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
@@ -115,7 +110,7 @@ public class TestCase_E19 extends TestBase {
 			int count = 0;
 			// Checking if private watch list is visible to others or not
 			for (WebElement watchlist : watchlists) {
-				if (watchlist.getText().equals(newWatchlistName + 5)) {
+				if (watchlist.getText().equals(newWatchlistName + 2)) {
 					count++;
 					break;
 				}
@@ -127,6 +122,9 @@ public class TestCase_E19 extends TestBase {
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "Others able to see the private watchlists of a user on user's profile page");
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_others_able_to_see_the_private_watchlists_of_a_user_on_users_profile_page")));// screenshot
 			}
 			closeBrowser();
 
@@ -151,16 +149,16 @@ public class TestCase_E19 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-					TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "SKIP");
-*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
 	}
 
 }
