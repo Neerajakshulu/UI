@@ -4,10 +4,10 @@
 	</listeners>
 	<suite-files>
 		<suite-file path="./IAM.xml" />
-		<suite-file path="./Suite_B.xml" />
+		<suite-file path="./Search.xml" />
 		<suite-file path="./Suite_C.xml" />
 		<suite-file path="./Suite_D.xml" />
-		<suite-file path="./Suite_E.xml" />
+		<suite-file path="./Watchlist.xml" />
 		<suite-file path="./Suite_F.xml" />
 
 	</suite-files>
