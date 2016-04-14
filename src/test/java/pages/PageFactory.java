@@ -2,26 +2,25 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import suiteC.Authoring;
-import suiteC.LoginTR;
+import Authoring.Authoring;
+import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
 
 public class PageFactory {
 
+	private SearchProfile searchProfilePage = null;
+	private ProfilePage profilePage = null;
+	private PostRecordViewPage postRVPage = null;
+	private SearchResultsPage searchResultsPage = null;
+	private Watchlist WatchlistPage = null;
+	private HeaderFooterLinksPage hfPage = null;
+	private BrowserAction browserAction = null;
+	private BrowserWaits browserWaits = null;
+	private LoginTR loginTR = null;
+	private Authoring authoring = null;
 
-	private  SearchProfile searchProfilePage = null;
-	private  ProfilePage profilePage = null;
-	private  PostRecordViewPage postRVPage = null;
-	private  SearchResultsPage searchResultsPage = null;
-	private  Watchlist WatchlistPage = null;
-	private  HeaderFooterLinksPage hfPage = null;
-	private  BrowserAction browserAction = null;
-	private  BrowserWaits browserWaits = null;
-	private  LoginTR loginTR = null;
-	private  Authoring authoring = null;
-
-	public   SearchProfile getSearchProfilePageInstance(WebDriver ob) {
+	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
 			searchProfilePage = new SearchProfile(ob);
 		}
@@ -29,10 +28,8 @@ public class PageFactory {
 		return searchProfilePage;
 
 	}
-	
-	
 
-	public  ProfilePage getProfilePageInstance(WebDriver ob) {
+	public ProfilePage getProfilePageInstance(WebDriver ob) {
 		if (profilePage == null) {
 			profilePage = new ProfilePage(ob);
 		}
@@ -40,10 +37,8 @@ public class PageFactory {
 		return profilePage;
 
 	}
-	
-	
 
-	public  PostRecordViewPage getpostRVPageInstance(WebDriver ob) {
+	public PostRecordViewPage getpostRVPageInstance(WebDriver ob) {
 		if (postRVPage == null) {
 			postRVPage = new PostRecordViewPage(ob);
 		}
@@ -51,8 +46,6 @@ public class PageFactory {
 		return postRVPage;
 
 	}
-	
-	
 
 	public SearchResultsPage getSearchResultsPageInstance(WebDriver ob) {
 		if (searchResultsPage == null) {
@@ -62,8 +55,6 @@ public class PageFactory {
 		return searchResultsPage;
 
 	}
-	
-	
 
 	public Watchlist getWatchlistPageInstance(WebDriver ob) {
 		if (WatchlistPage == null) {
@@ -73,30 +64,24 @@ public class PageFactory {
 		return WatchlistPage;
 
 	}
-	
 
-	
-	public HeaderFooterLinksPage getHFPageInstance(WebDriver ob){
-		if(hfPage == null){
+	public HeaderFooterLinksPage getHFPageInstance(WebDriver ob) {
+		if (hfPage == null) {
 			hfPage = new HeaderFooterLinksPage(ob);
 		}
-		
-		return hfPage;
-		
-	}
-	
 
-	
-	public BrowserAction getBrowserActionInstance(WebDriver ob){
-		if(browserAction == null){
+		return hfPage;
+
+	}
+
+	public BrowserAction getBrowserActionInstance(WebDriver ob) {
+		if (browserAction == null) {
 			browserAction = new BrowserAction(ob);
 		}
-		
+
 		return browserAction;
-		
+
 	}
-	
-	
 
 	public BrowserWaits getBrowserWaitsInstance(WebDriver ob) {
 		if (browserWaits == null) {
@@ -106,7 +91,7 @@ public class PageFactory {
 		return browserWaits;
 
 	}
-	
+
 	public Authoring getAuthoringInstance(WebDriver ob) {
 		if (authoring == null) {
 			authoring = new Authoring(ob);
@@ -115,16 +100,14 @@ public class PageFactory {
 		return authoring;
 
 	}
-	
-	public  LoginTR getLoginTRInstance(WebDriver ob) {
-			if (loginTR == null) {
-				loginTR = new LoginTR(ob);
-			}
-		
+
+	public LoginTR getLoginTRInstance(WebDriver ob) {
+		if (loginTR == null) {
+			loginTR = new LoginTR(ob);
+		}
 
 		return loginTR;
 
 	}
-	
-	
+
 }

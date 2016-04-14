@@ -73,19 +73,10 @@
 			<version>1.2.17</version>
 		</dependency>
 
-<!--  
-
-		<dependency>
-			<groupId>io.selendroid</groupId>
-			<version>0.16.0</version>
-			<artifactId>selendroid-standalone</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.selendroid</groupId>
-			<version>0.16.0</version>
-			<artifactId>selendroid-client</artifactId>
-		</dependency>
--->
+		<!-- <dependency> <groupId>io.selendroid</groupId> <version>0.16.0</version> 
+			<artifactId>selendroid-standalone</artifactId> </dependency> <dependency> 
+			<groupId>io.selendroid</groupId> <version>0.16.0</version> <artifactId>selendroid-client</artifactId> 
+			</dependency> -->
 
 	</dependencies>
 
@@ -111,7 +102,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile>
-						 <!-- <suiteXmlFile>src/test/resources/xml/testng.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>src/test/resources/xml/testng.xml</suiteXmlFile> -->
 					</suiteXmlFiles>
 
 					<systemProperties>
