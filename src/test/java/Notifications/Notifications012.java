@@ -1,10 +1,11 @@
-package suiteF;
+package Notifications;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -19,9 +20,11 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications009 extends TestBase {
+public class Notifications012 extends TestBase {
 
 	static int status = 1;
+	String watchListName = null;
+	String watchListDescription = null;
 	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
@@ -33,16 +36,18 @@ public class Notifications009 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that user receives a notification when someone he is following user comments on a post")
+		test = extent
+				.startTest(
+						var,
+						"Verify that user is receiving notification when someone he is following created a public watch list. (single event notification)")
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testCaseF9() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
+	public void testcaseF12() throws Exception {
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -55,6 +60,7 @@ public class Notifications009 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+
 		try {
 			openBrowser();
 			maximizeWindow();
@@ -64,42 +70,29 @@ public class Notifications009 extends TestBase {
 			// Logging in with User1
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			// searching for posts
-			pf.getLoginTRInstance(ob).searchArticle("POST for");
-
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0,-500)");
-			Thread.sleep(2000);
-			test.log(LogStatus.INFO, "Commenting on a post");
-			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_post_link")), 30);
-			String postLinkClicked = ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F9:Nice Post");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			Thread.sleep(2000);
+			watchListName = "WatchList" + new Random().nextInt(1000);
+			watchListDescription = "WatchList" + RandomStringUtils.randomNumeric(15);
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Creating public watchlist");
+			createWatchList("public", watchListName, watchListDescription);
 			pf.getLoginTRInstance(ob).logOutApp();
-
-			// Login with User2 who is following user1 and check if he's notified
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			test.log(LogStatus.INFO, "Checking if Notification is received");
-			Thread.sleep(8000);
-			String text = ob.findElement(By.xpath(OR.getProperty("notificationCommentEvent"))).getText();
-			System.out.println(text);
+			Thread.sleep(6000);
+			String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 
 			try {
 				Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn1 + " " + ln1)
-						&& text.contains("commented on") && text.contains(postLinkClicked));
+						&& text.contains("created a new public watchlist") && text.contains(watchListName)
+						&& text.contains(watchListDescription));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
+				pf.getLoginTRInstance(ob).logOutApp();
+				closeBrowser();
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// reports
+				test.log(LogStatus.INFO, errors.toString()); // reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
@@ -109,13 +102,13 @@ public class Notifications009 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_user_receiving_notification_with_incorrect_content")));// screenshot
 				closeBrowser();
-
 			}
-			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-			// reports
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
@@ -126,7 +119,6 @@ public class Notifications009 extends TestBase {
 									+ "_user_receiving_notification_with_incorrect_content")));// screenshot
 			closeBrowser();
 		}
-
 	}
 
 	@AfterTest
@@ -134,10 +126,10 @@ public class Notifications009 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteFxls,
-		 * "Test Cases", TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
+		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

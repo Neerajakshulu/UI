@@ -1,4 +1,7 @@
-package suiteF;
+package Notifications;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +19,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications010 extends TestBase {
+public class Notifications009 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -31,15 +34,15 @@ public class Notifications010 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var,
-				"Verify that user receives a notification when someone comments on an post contained in his watchlist")
+				"Verify that user receives a notification when someone he is following user comments on a post")
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testcaseF10() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
+	public void testCaseF9() throws Exception {
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -58,6 +61,7 @@ public class Notifications010 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
+			// Logging in with User1
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			// searching for posts
@@ -65,64 +69,37 @@ public class Notifications010 extends TestBase {
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
-			test.log(LogStatus.INFO, "Watching a post");
-			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_post_link")), 30);
-			String postWatched = ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
-			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
-			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
-			test.log(LogStatus.INFO, "Post added to user's watchList");
-			Thread.sleep(3000);
-			pf.getLoginTRInstance(ob).logOutApp();
-			// create a new user and comment on the same post in user1's watchlist
-
-			fn3 = generateRandomName(8);
-			ln3 = generateRandomName(10);
-			System.out.println(fn3 + " " + ln3);
-			user3 = createNewUser(fn3, ln3);
-			// searching the post and commenting on it
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postWatched);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
+			Thread.sleep(2000);
 			test.log(LogStatus.INFO, "Commenting on a post");
 			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_post_link")), 30);
+			String postLinkClicked = ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys(
-					"TestCase_F10:Post in other user's watchlist");
-			Thread.sleep(3000);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F9:Nice Post");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
-			Thread.sleep(3000);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 			Thread.sleep(2000);
 			pf.getLoginTRInstance(ob).logOutApp();
 
-			// Login with user1 and check for notification
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			// Login with User2 who is following user1 and check if he's notified
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-
 			test.log(LogStatus.INFO, "Checking if Notification is received");
-			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
+			Thread.sleep(8000);
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationCommentEvent"))).getText();
 			System.out.println(text);
 
 			try {
-				Assert.assertTrue(text.contains("New comments") && text.contains(postWatched)
-						&& text.contains(fn3 + " " + ln3)
-						&& text.contains("TestCase_F10:Post in other user's watchlist")
-				/* && text.contains("TODAY") */);
+				Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn1 + " " + ln1)
+						&& text.contains("commented on") && text.contains(postLinkClicked));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-				// reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
@@ -157,12 +134,11 @@ public class Notifications010 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteFxls,
-		 * "Test Cases", TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
+		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-
 }

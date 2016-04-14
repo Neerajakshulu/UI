@@ -62,7 +62,7 @@ public class TestBase {
 	public static Xls_Reader authoringxls = null;
 	public static Xls_Reader profilexls = null;
 	public static Xls_Reader watchlistXls = null;
-	public static Xls_Reader suiteFxls = null;
+	public static Xls_Reader notificationxls = null;
 
 	public static boolean isInitalized = false;
 	public WebDriver ob = null;
@@ -196,7 +196,7 @@ public class TestBase {
 			authoringxls = new Xls_Reader("src/test/resources/xls/Authoring.xlsx");
 			profilexls = new Xls_Reader("src/test/resources/xls/Profile.xlsx");
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
-			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
+			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -844,7 +844,7 @@ public class TestBase {
 		else if (ch == 'E')
 			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
-			return "src/test/resources/xls/F suite.xlsx";
+			return "src/test/resources/xls/Notifications.xlsx";
 		else
 			return "No such excel file present";
 

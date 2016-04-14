@@ -1,4 +1,6 @@
-package suiteF;
+package Notifications;
+
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,7 +18,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications015 extends TestBase {
+public class Notifications017 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -33,15 +35,15 @@ public class Notifications015 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that users should be able to select from a list of suggested topics and check selected topic is presented in users type ahead")
+						"Verify that Featured Post is at the top of event stream after login and that feature post should be top in post tab of trending section")
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testcaseF15() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
+	public void testcaseF17() throws Exception {
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -62,27 +64,25 @@ public class Notifications015 extends TestBase {
 			// Logging in with User2
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob,
-					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Topics")), 30);
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
-							"Topics"))));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("trending_now_topics_link")), 30);
-			WebElement element = ob.findElement(By.xpath(OR.getProperty("trending_now_topics_link")));
-			String specialCharacterRemovedoutput = element.getText().replaceAll("[^\\dA-Za-z ]", "");
-			String expectedTitle = specialCharacterRemovedoutput.replaceAll("( )+", " ");
-			element.click();
-			Thread.sleep(4000);
-			waitForElementTobeVisible(ob, By.xpath("//input[@type='text']"), 30);
-			String searchText = ob.findElement(By.xpath("//input[@type='text']")).getAttribute("value");
-			System.out.println(searchText);
+			Thread.sleep(8000);
+
+			List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
+					.getProperty("all_notifications_in_homepage")));
+			String text = listOfNotifications.get(0).getText();
+			System.out.println(text);
+			Assert.assertTrue(text.contains("Featured post"));
+			test.log(LogStatus.PASS, "Featured post is at the top of the home page");
+			List<WebElement> listOfPostsLinks = ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
+			String expectedTitle = listOfPostsLinks.get(0).getText();
+			System.out.println(expectedTitle);
 
 			try {
-				Assert.assertTrue(searchText.equals(expectedTitle));
-				test.log(LogStatus.PASS, "User receiving notification with correct content");
+				Assert.assertTrue(text.contains(expectedTitle));
+				test.log(LogStatus.PASS, "Featured post is same as the post in trending section");
+				pf.getLoginTRInstance(ob).logOutApp();
+				closeBrowser();
 			} catch (Throwable t) {
-
-				test.log(LogStatus.FAIL, "Title selected is not same in search text box");// extent
+				test.log(LogStatus.FAIL, "Featured Post title is not same as the post in the trending section");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
@@ -91,14 +91,12 @@ public class Notifications015 extends TestBase {
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Title selected is not same in search text box")));// screenshot
+										+ "_Featured Post title is not same as the post in the trending section")));// screenshot
 				closeBrowser();
 			}
 
-			closeBrowser();
-
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something happened");// extent
+			test.log(LogStatus.FAIL, "Featured Post is not at the top");// extent
 			// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
@@ -107,7 +105,7 @@ public class Notifications015 extends TestBase {
 					LogStatus.INFO,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Title selected is not same in search text box")));// screenshot
+									+ "_Featured Post is not at the top")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -117,10 +115,10 @@ public class Notifications015 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteFxls,
-		 * "Test Cases", TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
+		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

@@ -1,10 +1,9 @@
-package suiteF;
+package Notifications;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -19,7 +18,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications004 extends TestBase {
+public class Notifications003 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -33,16 +32,18 @@ public class Notifications004 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user receives a notification when someone likes his comment")
+		test = extent
+				.startTest(var,
+						"Verify that user receives a notificatication when his follower comments on an article contained in his watchlist")
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testcaseF4() throws Exception {
+	public void testcaseF3() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "F Suite");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteFxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -57,7 +58,8 @@ public class Notifications004 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// 1)Login with user2,comment on some article and logout
+			// 1)Login with user1,add an article to watchlist and logout
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -65,78 +67,67 @@ public class Notifications004 extends TestBase {
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("tiger");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			// String
-			// document_title=ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			// System.out.println(document_title);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 150);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
+			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			String document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("beach");
-			Thread.sleep(4000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			Thread.sleep(5000);
+			System.out.println(document_url);
+			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
+			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
+			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
+			Thread.sleep(1000);
+
 			pf.getLoginTRInstance(ob).logOutApp();
 
-			// 2)Login with user1,like the comment and logout
+			// 2)Login with user2,comment on article contained in user1's
+			// watchlist and logout
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 30);
 
 			ob.navigate().to(document_url);
-			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("australia");
-			// ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// Thread.sleep(4000);
 
-			// ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_commentLike_button")), 30);
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button")), 30);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_commentLike_button"))));
-			Thread.sleep(1000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
+			Thread.sleep(70000);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("TestCase_F3:green tea");
+			Thread.sleep(5000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+			Thread.sleep(10000);
 			pf.getLoginTRInstance(ob).logOutApp();
 
-			// 3)Login with user2 again and verify that he receives a correct
+			// 3)Login with user1 again and verify that he receives a correct
 			// notification
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(10000);
-
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-
-			for (int i = 1; i <= 3; i++) {
-
-				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				Thread.sleep(3000);
-			}
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notificationForLike")), 30);
-
-			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike"))).getText();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notificationDocumentComment")), 100);
+			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
 			System.out.println(text);
 
+			String expected_text = fn2 + " " + ln2;
 
 			try {
-				Assert.assertTrue(/* text.contains("TODAY") && */text.contains("Liked your comment")
-						&& text.contains("beach") && text.contains(fn1 + " " + ln1));
+				Assert.assertTrue(text.contains("New comments") && text.contains(expected_text)
+						&& /*
+							 * text.contains("TODAY") &&
+							 */text.contains(document_title) && text.contains("TestCase_F3:green tea"));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// extent reports // reports
+				test.log(LogStatus.INFO, errors.toString()); // reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
@@ -149,6 +140,7 @@ public class Notifications004 extends TestBase {
 			}
 
 			closeBrowser();
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -172,12 +164,11 @@ public class Notifications004 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteFxls,
-		 * "Test Cases", TestUtil.getRowNum(suiteFxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteFxls, "Test Cases", TestUtil.getRowNum(suiteFxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
+		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
