@@ -502,8 +502,8 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		// ob.navigate().to(host);
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		 ob.navigate().to(host);
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
