@@ -27,5 +27,299 @@
 
 
 
+
+
+	<test name="Search45">
+		<classes>
+			<class name="suiteB.Search45"></class>
+		</classes>
+	</test>
+
+	<test name="Search46">
+		<classes>
+			<class name="suiteB.Search46"></class>
+		</classes>
+	</test>
+	
+	<test name="Search58">
+		<classes>
+			<class name="suiteB.Search58"></class>
+		</classes>
+	</test>
+	
+	<test name="Search48">
+		<classes>
+			<class name="suiteB.Search48"></class>
+		</classes>
+	</test>
+	
+	<test name="Search49">
+		<classes>
+			<class name="suiteB.Search49"></class>
+		</classes>
+	</test>
+	
+	<test name="Search32">
+		<classes>
+			<class name="suiteB.Search32"></class>
+		</classes>
+	</test>
+	
+	<test name="Search81">
+		<classes>
+			<class name="suiteB.Search81"></class>
+		</classes>
+	</test>
+	
+	<test name="Search97">
+		<classes>
+			<class name="suiteB.Search97"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search59">
+		<classes>
+			<class name="suiteB.Search59"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search50">
+		<classes>
+			<class name="suiteB.Search50"></class>
+		</classes>
+	</test>
+	
+	<test name="Search54">
+		<classes>
+			<class name="suiteB.Search54"></class>
+		</classes>
+	</test>
+	
+	<test name="Search90">
+		<classes>
+			<class name="suiteB.Search90"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search39">
+		<classes>
+			<class name="suiteB.Search39"></class>
+		</classes>
+	</test>
+	
+	<test name="Search40">
+		<classes>
+			<class name="suiteB.Search40"></class>
+		</classes>
+	</test>
+	
+	<test name="Search70">
+		<classes>
+			<class name="suiteB.Search70"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search2">
+		<classes>
+			<class name="suiteB.Search2"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search60">
+		<classes>
+			<class name="suiteB.Search60"></class>
+		</classes>
+	</test>
+	
+	<test name="Search51">
+		<classes>
+			<class name="suiteB.Search51"></class>
+		</classes>
+	</test>
+	
+	<test name="Search55">
+		<classes>
+			<class name="suiteB.Search55"></class>
+		</classes>
+	</test>
+	
+	<test name="Search36">
+		<classes>
+			<class name="suiteB.Search36"></class>
+		</classes>
+	</test>
+	
+	<test name="Search91">
+		<classes>
+			<class name="suiteB.Search91"></class>
+		</classes>
+	</test>
+	
+	<test name="Search109">
+		<classes>
+			<class name="suiteB.Search109"></class>
+		</classes>
+	</test>
+	
+	<test name="Search71">
+		<classes>
+			<class name="suiteB.Search71"></class>
+		</classes>
+	</test>
+	
+	<test name="Search89">
+		<classes>
+			<class name="suiteB.Search89"></class>
+		</classes>
+	</test>
+	
+	<test name="Search61">
+		<classes>
+			<class name="suiteB.Search61"></class>
+		</classes>
+	</test>
+	
+	<test name="Search52">
+		<classes>
+			<class name="suiteB.Search52"></class>
+		</classes>
+	</test>
+	
+	<test name="Search56">
+		<classes>
+			<class name="suiteB.Search56"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search106">
+		<classes>
+			<class name="suiteB.Search106"></class>
+		</classes>
+	</test>
+	
+	<test name="Search44">
+		<classes>
+			<class name="suiteB.Search44"></class>
+		</classes>
+	</test>
+	
+	<test name="Search72">
+		<classes>
+			<class name="suiteB.Search72"></class>
+		</classes>
+	</test>
+	
+	<test name="Search62">
+		<classes>
+			<class name="suiteB.Search62"></class>
+		</classes>
+	</test>
+	
+	<test name="Search53">
+		<classes>
+			<class name="suiteB.Search53"></class>
+		</classes>
+	</test>
+
+	<test name="Search57">
+		<classes>
+			<class name="suiteB.Search57"></class>
+		</classes>
+	</test>
+	
+	<test name="Search99">
+		<classes>
+			<class name="suiteB.Search99"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search123">
+		<classes>
+			<class name="suiteB.Search123"></class>
+		</classes>
+	</test>
+	
+	<test name="Search73">
+		<classes>
+			<class name="suiteB.Search73"></class>
+		</classes>
+	</test>
+	
+	<test name="Search66">
+		<classes>
+			<class name="suiteB.Search66"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Search74">
+		<classes>
+			<class name="suiteB.Search74"></class>
+		</classes>
+	</test>
+	
+	<test name="Search75">
+		<classes>
+			<class name="suiteB.Search75"></class>
+		</classes>
+	</test>
+	
+	<test name="Search76">
+		<classes>
+			<class name="suiteB.Search76"></class>
+		</classes>
+	</test>
+	
+	<test name="Search77">
+		<classes>
+			<class name="suiteB.Search77"></class>
+		</classes>
+	</test>
+	
+	<test name="Search87">
+		<classes>
+			<class name="suiteB.Search87"></class>
+		</classes>
+	</test>
+	
+	<test name="Search88">
+		<classes>
+			<class name="suiteB.Search88"></class>
+		</classes>
+	</test>
+	
+	<test name="Search79">
+		<classes>
+			<class name="suiteB.Search79"></class>
+		</classes>
+	</test>
+	
+	<test name="Search93">
+		<classes>
+			<class name="suiteB.Search93"></class>
+		</classes>
+	</test>
+	
+	<test name="Search94">
+		<classes>
+			<class name="suiteB.Search94"></class>
+		</classes>
+	</test>
+	
+	
+	
+	
+	
+	
+	
+
+
 </suite>
 
