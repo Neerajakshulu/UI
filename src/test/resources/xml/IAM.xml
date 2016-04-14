@@ -1,0 +1,167 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite A" parallel="tests" thread-count="10">
+
+	<test name="IAM001">
+		<classes>
+			<class name="IAM.IAM001"></class>
+		</classes>
+	</test>
+
+	<test name="IAM002">
+		<classes>
+			<class name="IAM.IAM002"></class>
+		</classes>
+	</test>
+
+	<test name="IAM003">
+		<classes>
+			<class name="IAM.IAM003"></class>
+		</classes>
+	</test>
+
+	<test name="IAM004">
+		<classes>
+			<class name="IAM.IAM004"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM005">
+		<classes>
+			<class name="IAM.IAM005"></class>
+		</classes>
+	</test>
+
+	<test name="IAM006">
+		<classes>
+			<class name="IAM.IAM006"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM007">
+		<classes>
+			<class name="IAM.IAM007"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM008">
+		<classes>
+			<class name="IAM.IAM008"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM009">
+		<classes>
+			<class name="IAM.IAM009"></class>
+		</classes>
+	</test>
+
+	<test name="IAM010">
+		<classes>
+			<class name="IAM.IAM010"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM011">
+		<classes>
+			<class name="IAM.IAM011"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM012">
+		<classes>
+			<class name="IAM.IAM012"></class>
+		</classes>
+	</test>
+
+	<test name="IAM013">
+		<classes>
+			<class name="IAM.IAM013"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM014">
+		<classes>
+			<class name="IAM.IAM014"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM015">
+		<classes>
+			<class name="IAM.IAM015"></class>
+		</classes>
+	</test>
+
+
+
+	<test name="IAM016">
+		<classes>
+			<class name="IAM.IAM016"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM017">
+		<classes>
+			<class name="IAM.IAM017"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM018">
+		<classes>
+			<class name="IAM.IAM018"></class>
+		</classes>
+	</test>
+
+
+	<test name="IAM019">
+		<classes>
+			<class name="IAM.IAM019"></class>
+		</classes>
+	</test>
+
+	<test name="IAM020">
+		<classes>
+			<class name="IAM.IAM020"></class>
+		</classes>
+	</test>
+
+	<test name="IAM021">
+		<classes>
+			<class name="IAM.IAM021"></class>
+		</classes>
+	</test>
+
+	<test name="IAM022">
+		<classes>
+			<class name="IAM.IAM022"></class>
+		</classes>
+	</test>
+
+	<test name="IAM023">
+		<classes>
+			<class name="IAM.IAM023"></class>
+		</classes>
+	</test>
+
+	<test name="IAM024">
+		<classes>
+			<class name="IAM.IAM024"></class>
+		</classes>
+	</test>
+
+	<test name="IAM025">
+		<classes>
+			<class name="IAM.IAM025"></class>
+		</classes>
+	</test>
+</suite>
+

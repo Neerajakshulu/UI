@@ -57,11 +57,11 @@ public class TestBase {
 	public static Properties OR = null;
 	public static Properties LOGIN = null;
 	public static Xls_Reader suiteXls = null;
-	public static Xls_Reader suiteAxls = null;
-	public static Xls_Reader suiteBxls = null;
+	public static Xls_Reader iamxls = null;
+	public static Xls_Reader searchxls = null;
 	public static Xls_Reader suiteCxls = null;
 	public static Xls_Reader suiteDxls = null;
-	public static Xls_Reader suiteExls = null;
+	public static Xls_Reader watchlistXls = null;
 	public static Xls_Reader suiteFxls = null;
 
 	public static boolean isInitalized = false;
@@ -82,7 +82,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if (TestUtil.isSuiteRunnable(suiteXls, "E Suite") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
+		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
 
 			if (count == 0) {
 
@@ -191,11 +191,11 @@ public class TestBase {
 
 			// System.out.println(host);
 			// xls file
-			suiteAxls = new Xls_Reader("src/test/resources/xls/A suite.xlsx");
-			suiteBxls = new Xls_Reader("src/test/resources/xls/B suite.xlsx");
+			iamxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
+			searchxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
 			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
 			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
-			suiteExls = new Xls_Reader("src/test/resources/xls/E suite.xlsx");
+			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
@@ -834,15 +834,15 @@ public class TestBase {
 	public String returnExcelPath(char ch) {
 
 		if (ch == 'A')
-			return "src/test/resources/xls/A suite.xlsx";
+			return "src/test/resources/xls/IAM.xlsx";
 		else if (ch == 'B')
-			return "src/test/resources/xls/B suite.xlsx";
+			return "src/test/resources/xls/Search.xlsx";
 		else if (ch == 'C')
 			return "src/test/resources/xls/C suite.xlsx";
 		else if (ch == 'D')
 			return "src/test/resources/xls/D suite.xlsx";
 		else if (ch == 'E')
-			return "src/test/resources/xls/E suite.xlsx";
+			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
 			return "src/test/resources/xls/F suite.xlsx";
 		else
