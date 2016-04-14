@@ -7,6 +7,11 @@ import org.testng.Assert;
 import util.OnePObjectMap;
 import base.TestBase;
 
+/**
+ * This class contains all the method related to header and footer of the application
+ * @author uc205521
+ *
+ */
 public class HeaderFooterLinksPage extends TestBase {
 
 	PageFactory pf;

@@ -13,6 +13,11 @@ import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
 
+/**
+ * This class contains all the methods related to search results page.
+ * @author uc205521
+ *
+ */
 public class SearchResultsPage extends TestBase {
 
 	PageFactory pf;
@@ -22,24 +27,32 @@ public class SearchResultsPage extends TestBase {
 		pf = new PageFactory();
 	}
 
+	/**
+	 * Method to click on post tab in search results page
+	 * @throws Exception
+	 */
 	public void clickOnPostTab() throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);
-		// BrowserWaits.waitTime(6);
 	}
-
+	/**
+	 * Method to click on articles tab in search results page
+	 * @throws Exception
+	 */
 	public void clickOnArticleTab() throws Exception {
-
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
 		waitForAjax(ob);
-		// BrowserWaits.waitTime(6);
 	}
 
+	/**
+	 * Method to click on posts of other users than the current user in search results page 
+	 * @param currentUserName
+	 */
 	public void viewOtherUsersPost(String currentUserName) {
-
 		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> records;
 
@@ -70,6 +83,11 @@ public class SearchResultsPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to capture the post details in search results page
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public List<String> getAuthorDetailsOfPost() throws InterruptedException {
 		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> records;
@@ -105,7 +123,6 @@ public class SearchResultsPage extends TestBase {
 					jsClick(ob,
 							records.get(i).findElement(
 									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
-					// BrowserWaits.waitTime(6);
 					waitForPageLoad(ob);
 					break;
 				}
@@ -123,6 +140,10 @@ public class SearchResultsPage extends TestBase {
 
 	}
 
+	/**
+	 * Method to click on specified post title in search results page.
+	 * @param title
+	 */
 	public void clickOnPostTitle(String title) {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
@@ -154,6 +175,11 @@ public class SearchResultsPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to click on people name in search results page.
+	 * @param title
+	 * @throws Exception
+	 */
 	public void clickOnPeopleName(String title) throws Exception {
 		List<WebElement> records;
 		waitForAjax(ob);
@@ -169,7 +195,6 @@ public class SearchResultsPage extends TestBase {
 					jsClick(ob,
 							records.get(i).findElement(
 									By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))));
-					// BrowserWaits.waitTime(6);
 					waitForPageLoad(ob);
 					isFound = true;
 					break;
