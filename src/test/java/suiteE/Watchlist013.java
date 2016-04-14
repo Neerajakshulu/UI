@@ -13,15 +13,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Watchlist013 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -50,8 +51,8 @@ public class Watchlist013 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -100,8 +101,8 @@ public class Watchlist013 extends TestBase {
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 			// Getting the items count
-			int itemCount = Integer
-					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+			int itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist")))
+					.getText());
 
 			try {
 				Assert.assertEquals(itemCount, 5);
@@ -142,8 +143,11 @@ public class Watchlist013 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -155,14 +159,11 @@ public class Watchlist013 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
-		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

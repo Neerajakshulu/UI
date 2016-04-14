@@ -9,13 +9,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile8 extends TestBase {
 
@@ -28,10 +28,12 @@ public class Profile8 extends TestBase {
 	PageFactory pf;
 
 	@BeforeTest
-	public void beforeTest() throws Exception{ extent = ExtentManager.getReporter(filePath);
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
+				.startTest(
+						var,
 						"Verify that below Project Neon Header and Footer links working as expected \n 1.Cookie Policy \n 2.Privacy Statement \n 3.Terms of Use \n 4.Help \n 5.Account ")
 				.assignCategory("Profile");
 		runmodes = TestUtil.getDataSetRunmodes(suiteDxls, this.getClass().getSimpleName());
@@ -40,12 +42,12 @@ public class Profile8 extends TestBase {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception,
-	 *             When TR Login screen not displayed
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginTRAccount(String username, String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "D Suite");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteDxls, this.getClass().getSimpleName());
@@ -53,8 +55,8 @@ public class Profile8 extends TestBase {
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -73,7 +75,7 @@ public class Profile8 extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(System.getProperty("host"));
-			pf=new PageFactory();
+			pf = new PageFactory();
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
@@ -85,18 +87,20 @@ public class Profile8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Login is not done")));
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Login is not done")));
 			closeBrowser();
 		}
 	}
 
 	/**
-	 * Method for Validate Application Header and Footer links Header Link -
-	 * Help, Account Footer Links - Cookie Policy,Privacy Statement,Terms of Use
+	 * Method for Validate Application Header and Footer links Header Link - Help, Account Footer Links - Cookie
+	 * Policy,Privacy Statement,Terms of Use
 	 * 
-	 * @throws Exception,
-	 *             When validation not done and Element Not found
+	 * @throws Exception, When validation not done and Element Not found
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
 	@Parameters("appHeadFooterLinks")
@@ -116,8 +120,11 @@ public class Profile8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_HeaderFooters_links_are_not_working")));
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_HeaderFooters_links_are_not_working")));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		}
@@ -126,15 +133,13 @@ public class Profile8 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(suiteDxls, "Test Cases",
-					TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "SKIP");*/
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteDxls,
+		 * "Test Cases", TestUtil.getRowNum(suiteDxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteDxls, "Test Cases", TestUtil.getRowNum(suiteDxls,
+		 * this.getClass().getSimpleName()), "SKIP");
+		 */
 	}
 
 }

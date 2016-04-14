@@ -14,15 +14,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Watchlist011 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -42,7 +43,7 @@ public class Watchlist011 extends TestBase {
 	}
 
 	@Test
-	@Parameters({ "patentName" })
+	@Parameters({"patentName"})
 	public void testDisplayedFieldsForPatentsInWatchlist(String patentName) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
@@ -52,8 +53,8 @@ public class Watchlist011 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -101,8 +102,8 @@ public class Watchlist011 extends TestBase {
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			BrowserWaits.waitTime(3);
-			List<WebElement> labelsDisplayedList = ob
-					.findElements(By.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
+			List<WebElement> labelsDisplayedList = ob.findElements(By
+					.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
 
 			boolean flag = Boolean.TRUE;
 			String actualLabel = "";
@@ -131,9 +132,11 @@ public class Watchlist011 extends TestBase {
 						"Following fields are not getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_Following_fields_are_not_getting_displayed_for_each_patent_in_the_watchlist_page:a)Times cited b)Comments")));
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_Following_fields_are_not_getting_displayed_for_each_patent_in_the_watchlist_page:a)Times cited b)Comments")));
 			}
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
@@ -149,8 +152,11 @@ public class Watchlist011 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -162,14 +168,11 @@ public class Watchlist011 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
-		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

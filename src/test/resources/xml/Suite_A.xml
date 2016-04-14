@@ -3,99 +3,99 @@
 
 	<test name="Test A1">
 		<classes>
-			<class name="suiteA.TestCase_A1"></class>
+			<class name="suiteA.IAM001"></class>
 		</classes>
 	</test>
 
 	<test name="Test A2">
 		<classes>
-			<class name="suiteA.TestCase_A2"></class>
+			<class name="suiteA.IAM002"></class>
 		</classes>
 	</test>
 
 	<test name="Test A3">
 		<classes>
-			<class name="suiteA.TestCase_A3"></class>
+			<class name="suiteA.IAM003"></class>
 		</classes>
 	</test>
 
 	<test name="Test A4">
 		<classes>
-			<class name="suiteA.TestCase_A4"></class>
+			<class name="suiteA.IAM004"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A5">
 		<classes>
-			<class name="suiteA.TestCase_A5"></class>
+			<class name="suiteA.IAM005"></class>
 		</classes>
 	</test>
 
 	<test name="Test A6">
 		<classes>
-			<class name="suiteA.TestCase_A6"></class>
+			<class name="suiteA.IAM006"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A7">
 		<classes>
-			<class name="suiteA.TestCase_A7"></class>
+			<class name="suiteA.IAM007"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A8">
 		<classes>
-			<class name="suiteA.TestCase_A8"></class>
+			<class name="suiteA.IAM008"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A9">
 		<classes>
-			<class name="suiteA.TestCase_A9"></class>
+			<class name="suiteA.IAM009"></class>
 		</classes>
 	</test>
 
 	<test name="Test A10">
 		<classes>
-			<class name="suiteA.TestCase_A10"></class>
+			<class name="suiteA.IAM010"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A11">
 		<classes>
-			<class name="suiteA.TestCase_A11"></class>
+			<class name="suiteA.IAM011"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A12">
 		<classes>
-			<class name="suiteA.TestCase_A12"></class>
+			<class name="suiteA.IAM012"></class>
 		</classes>
 	</test>
 
 	<test name="Test A13">
 		<classes>
-			<class name="suiteA.TestCase_A13"></class>
+			<class name="suiteA.IAM013"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A14">
 		<classes>
-			<class name="suiteA.TestCase_A14"></class>
+			<class name="suiteA.IAM014"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A15">
 		<classes>
-			<class name="suiteA.TestCase_A15"></class>
+			<class name="suiteA.IAM015"></class>
 		</classes>
 	</test>
 
@@ -103,64 +103,64 @@
 
 	<test name="Test A16">
 		<classes>
-			<class name="suiteA.TestCase_A16"></class>
+			<class name="suiteA.IAM016"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A17">
 		<classes>
-			<class name="suiteA.TestCase_A17"></class>
+			<class name="suiteA.IAM017"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A18">
 		<classes>
-			<class name="suiteA.TestCase_A18"></class>
+			<class name="suiteA.IAM018"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test A19">
 		<classes>
-			<class name="suiteA.TestCase_A19"></class>
+			<class name="suiteA.IAM019"></class>
 		</classes>
 	</test>
 
 	<test name="Test A20">
 		<classes>
-			<class name="suiteA.TestCase_A20"></class>
+			<class name="suiteA.IAM020"></class>
 		</classes>
 	</test>
 
 	<test name="Test A21">
 		<classes>
-			<class name="suiteA.TestCase_A21"></class>
+			<class name="suiteA.IAM021"></class>
 		</classes>
 	</test>
 
 	<test name="Test A22">
 		<classes>
-			<class name="suiteA.TestCase_A22"></class>
+			<class name="suiteA.IAM022"></class>
 		</classes>
 	</test>
 
 	<test name="Test A23">
 		<classes>
-			<class name="suiteA.TestCase_A23"></class>
+			<class name="suiteA.IAM023"></class>
 		</classes>
 	</test>
 
 	<test name="Test A24">
 		<classes>
-			<class name="suiteA.TestCase_A24"></class>
+			<class name="suiteA.IAM024"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test A25">
 		<classes>
-			<class name="suiteA.TestCase_A25"></class>
+			<class name="suiteA.IAM025"></class>
 		</classes>
 	</test>
 </suite>
