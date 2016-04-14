@@ -6,9 +6,6 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="Welcome01" />
-
 	<test name="Authoring1">
 		<classes>
 			<class name="suiteC.Authoring1"></class>
@@ -317,53 +314,8 @@
 	</test>
 	
 	
-	<!-- Profile Sanity Testcases -->
-	<test name="Validate_View_Profile">
-		<classes>
-			<class name="Profile.Profile5"></class>
-		</classes>
-	</test>
-
-	<test name="edit_User_Own_Profile">
-		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
-		<classes>
-			<class name="Profile.Profile6"></class>
-		</classes>
-	</test>
-
-	<test name="Profile_Country_Typeahead">
-		<parameter name="countryTypeahead" value="In" />
-		<parameter name="fullCountry" value="India" />
-		<classes>
-			<class name="Profile.Profile27"></class>
-		</classes>
-	</test>
-
-	<test name="Validate_Add_Topics">
-		<parameter name="topics" value="tes|aut|dru" />
-		<classes>
-			<class name="Profile.Profile11"></class>
-		</classes>
-	</test>
-
-	<test name="Others_Profile_View">
-		<classes>
-			<class name="Profile.Profile3"></class>
-		</classes>
-	</test>
-
-	<test name="Follow_UnFollow_Other_Profile_from_SearchResults">
-		<parameter name="profileName" value="chinna" />
-		<classes>
-			<class name="Profile.Profile1"></class>
-		</classes>
-	</test>
-
-	<test name="Follow_UnFollow_Other_Profile_from_ProfilePage">
-		<classes>
-			<class name="Profile.Profile2"></class>
-		</classes>
-	</test>
+	
+	
 	
 	
 	
