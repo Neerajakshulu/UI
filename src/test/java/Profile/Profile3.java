@@ -76,13 +76,8 @@ public class Profile3 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
-
-			/*
-			 * loginTR= new LoginTR(ob); searchProfile=new SearchProfile(ob); profilePage=new ProfilePage(ob);
-			 * loginTR.waitForTRHomePage(); loginTR.enterTRCredentials(username, password); loginTR.clickLogin();
-			 */
+			
 			pf = new PageFactory();
-
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
