@@ -20,6 +20,12 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that a user's public watchlist is not visible to another user once that particular watchlist is deleted.
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist023 extends TestBase {
 
 	static int status = 1;
@@ -50,8 +56,8 @@ public class Watchlist023 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -83,8 +89,8 @@ public class Watchlist023 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
 						.sendKeys(newWatchlistName + "_" + i);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(
-						"This is my newly created watch list.");
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
@@ -121,8 +127,8 @@ public class Watchlist023 extends TestBase {
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 60);
-			List<WebElement> watchlists = ob.findElements(By.xpath(OR
-					.getProperty("tr_watchlist_results_in_profile_page")));
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
 			for (WebElement watchlist : watchlists) {
 				if (watchlist.getText().equals(newWatchlistName + 2)) {
@@ -152,11 +158,8 @@ public class Watchlist023 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

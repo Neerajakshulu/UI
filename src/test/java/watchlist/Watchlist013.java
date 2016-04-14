@@ -21,6 +21,12 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist013 extends TestBase {
 
 	static int status = 1;
@@ -51,8 +57,8 @@ public class Watchlist013 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -101,8 +107,8 @@ public class Watchlist013 extends TestBase {
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 			// Getting the items count
-			int itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist")))
-					.getText());
+			int itemCount = Integer
+					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
 				Assert.assertEquals(itemCount, 5);
@@ -143,11 +149,8 @@ public class Watchlist013 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

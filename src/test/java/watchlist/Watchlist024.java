@@ -19,6 +19,13 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular
+ * watchlist during watching
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist024 extends TestBase {
 
 	static int status = 1;
@@ -33,8 +40,7 @@ public class Watchlist024 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(
-						var,
+				.startTest(var,
 						"Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular watchlist during watching")
 				.assignCategory("Watchlist");
 
@@ -50,8 +56,8 @@ public class Watchlist024 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -87,8 +93,8 @@ public class Watchlist024 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
 						.sendKeys(newWatchlistName + "_" + i);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(
-						"This is my newly created watch list.");
+				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
+						.sendKeys("This is my newly created watch list.");
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
@@ -135,11 +141,8 @@ public class Watchlist024 extends TestBase {
 					test.log(LogStatus.FAIL, "User is not able to add the article into watchlist" + i);// extent
 					// reports
 					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_add_article_into_watchlist" + i)));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_add_article_into_watchlist" + i)));// screenshot
 				}
 			}
 
@@ -158,11 +161,8 @@ public class Watchlist024 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

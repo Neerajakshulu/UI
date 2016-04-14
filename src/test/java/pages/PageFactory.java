@@ -2,8 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import suiteC.Authoring;
-import suiteC.LoginTR;
+import Authoring.Authoring;
+import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
 

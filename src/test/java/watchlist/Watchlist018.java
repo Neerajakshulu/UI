@@ -20,6 +20,13 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that anyone can see the public watchlists of a user on user's profile page||Verify that user1 is able to see a
+ * watchlist on user2's profile page, once user2's private watchlist is made to public.
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist018 extends TestBase {
 
 	static int status = 1;
@@ -34,8 +41,7 @@ public class Watchlist018 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(
-						var,
+				.startTest(var,
 						"Verify that anyone can see the public watchlists of a user on user's profile page||Verify that user1 is able to see a watchlist on user2's profile page,  once user2's private watchlist is made to public.")
 				.assignCategory("Watchlist");
 
@@ -51,8 +57,8 @@ public class Watchlist018 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -97,8 +103,8 @@ public class Watchlist018 extends TestBase {
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
-			List<WebElement> watchlists = ob.findElements(By.xpath(OR
-					.getProperty("tr_watchlist_results_in_profile_page")));
+			List<WebElement> watchlists = ob
+					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
 			for (WebElement watchlist : watchlists) {
 				if (watchlist.getText().equals(newWatchlistName)) {
@@ -126,11 +132,8 @@ public class Watchlist018 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
