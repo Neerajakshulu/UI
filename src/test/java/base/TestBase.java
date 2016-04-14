@@ -61,7 +61,7 @@ public class TestBase {
 	public static Xls_Reader suiteBxls = null;
 	public static Xls_Reader suiteCxls = null;
 	public static Xls_Reader suiteDxls = null;
-	public static Xls_Reader suiteExls = null;
+	public static Xls_Reader watchlistXls = null;
 	public static Xls_Reader suiteFxls = null;
 
 	public static boolean isInitalized = false;
@@ -191,11 +191,11 @@ public class TestBase {
 
 			// System.out.println(host);
 			// xls file
-			suiteAxls = new Xls_Reader("src/test/resources/xls/A suite.xlsx");
+			suiteAxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
 			suiteBxls = new Xls_Reader("src/test/resources/xls/B suite.xlsx");
 			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
 			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
-			suiteExls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
+			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
@@ -834,7 +834,7 @@ public class TestBase {
 	public String returnExcelPath(char ch) {
 
 		if (ch == 'A')
-			return "src/test/resources/xls/A suite.xlsx";
+			return "src/test/resources/xls/IAM.xlsx";
 		else if (ch == 'B')
 			return "src/test/resources/xls/B suite.xlsx";
 		else if (ch == 'C')

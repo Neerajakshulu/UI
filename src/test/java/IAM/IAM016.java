@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -22,7 +22,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM017 extends TestBase {
+public class IAM016 extends TestBase {
 
 	static int status = 1;
 
@@ -35,15 +35,18 @@ public class IAM017 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that name of a user is truncated using ellipse if the name is very long")
+		test = extent
+				.startTest(
+						var,
+						"Verify that user is able to change his TR password by using FORGOT YOUR PASSWORD link and that he is able to login with his new password")
 				.assignCategory("IAM");
 
 	}
 
 	@Test
-	public void testcaseA17() throws Exception {
+	public void testcaseA16() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -61,8 +64,8 @@ public class IAM017 extends TestBase {
 		try {
 
 			String password = "Transaction@2";
-			String first_name = "firstfirstfirstfirstfiirstfiirstfirstfirst";
-			String last_name = "lastlastlastlastlast";
+			String first_name = "disco";
+			String last_name = "dancer";
 
 			// 1)Create a new user
 			// 2)Login with new user and logout
@@ -84,8 +87,6 @@ public class IAM017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
-
-			System.out.println(email);
 
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			//
@@ -111,7 +112,7 @@ public class IAM017 extends TestBase {
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 			links.get(0).click();
 			// ob.get(links.get(0).getAttribute("href"));
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
@@ -121,7 +122,7 @@ public class IAM017 extends TestBase {
 				al.add(myIT.next());
 			}
 			ob.switchTo().window(al.get(1));
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
@@ -129,23 +130,110 @@ public class IAM017 extends TestBase {
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 
-			String actual_name = ob.findElement(By.xpath(OR.getProperty("header_label") + "//img")).getAttribute(
-					"title");
-			// System.out.println(actual_name);
-			String expected_name = "firstfirstfirstfirstfiirstfiirstfirstfirst lastlas ...";
-			if (!compareStrings(expected_name, actual_name)) {
+			logout();
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
-				test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");// extent reports
+			// 3)Change the password
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			Thread.sleep(4000);
+
+			ob.findElement(By.linkText(OR.getProperty("TR_forgot_password_link"))).click();
+			//
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 30);
+
+			String text = ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
+			String expected_text = "A reset password email has been sent to the address on file. Please check your email and follow link to reset your password. The link is valid for 24 hours. You may need to check your spam folder or unblock customer.access@thomsonreuters.com. If you have any questions, please contact: ProjectNeon@thomsonreuters.com";
+			if (!StringContains(text, expected_text)) {
+
+				test.log(LogStatus.FAIL, "Email for password change not sent");// extent reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_long_name_not_getting_ellipsed_correctly")));// screenshot
+										+ "_password_change_email_not_sent")));// screenshot
+
+			}
+			Thread.sleep(10000);
+			ob.close();
+			ob.switchTo().window(al.get(0));
+			Thread.sleep(2000);
+			ob.get("https://www.guerrillamail.com");
+			email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+			myE = email_list.get(0);
+			executor.executeScript("arguments[0].click();", myE);
+			// email_list.get(0).click();
+			Thread.sleep(2000);
+
+			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
+			if (!StringContains(email_subject, "Thomson Reuters Reset Password")) {
+
+				test.log(LogStatus.FAIL, "Email for changing password not received");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_password_change_email_not_received")));// screenshot
 
 			}
 
-			closeBrowser();
+			WebElement reset_link_element = ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
+			String reset_link_url = reset_link_element.getAttribute("href");
+			ob.get(reset_link_url);
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_newPassword_textBox")), 30);
+
+			ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
+			ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
+			ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 30);
+
+			text = ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
+			expected_text = "Password reset successful.";
+			if (!StringContains(text, expected_text)) {
+
+				test.log(LogStatus.FAIL, "Password not changed successfully");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_password_not_changed_successfully")));// screenshot
+
+			}
+
+			// 4)login with changed password
+			ob.findElement(By.linkText(OR.getProperty("TR_projectNeon_link"))).click();
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			//
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("Transaction@3");
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			Thread.sleep(15000);
+			if (!checkElementPresence("help_link")) {
+
+				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_unable_to_login_with_changed_password")));// screenshot
+
+			}
+
+			ob.quit();
 		}
 
 		catch (Throwable t) {

@@ -1,16 +1,14 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -18,23 +16,28 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM024 extends TestBase {
+public class IAM004 extends TestBase {
 
 	static int status = 1;
 
+	// Following is the list of status:
+	// 1--->PASS
+	// 2--->FAIL
+	// 3--->SKIP
+	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that TR account gets locked after 5 consecutive unsuccessful login attempts").assignCategory(
-				"IAM");
+		test = extent.startTest(var, "Verify that existing FB user is able to login and logout successfully")
+				.assignCategory("IAM");
 
 	}
 
 	@Test
-	public void testCaseA24() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+	public void testcaseA4() throws Exception {
+
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -49,10 +52,10 @@ public class IAM024 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		try {
+		String email = "amneetsingh500@gmail.com";
+		String password = "Transaction@2";
 
-			// 1)Create a new user
-			// 2)Login with new user and logout
+		try {
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -61,49 +64,65 @@ public class IAM024 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			String firstName = generateRandomName(8);
-			String lastName = generateRandomName(10);
-			System.out.println(firstName + " " + lastName);
-			String email = createNewUser(firstName, lastName);
-			test.log(LogStatus.INFO, " New User created");
-			new PageFactory().getLoginTRInstance(ob).logOutApp();
-			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			for (int i = 0; i < 5; i++) {
-				Thread.sleep(3000);
-				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).clear();
-				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("password@2");
-				ob.findElement(By.id(OR.getProperty("login_button"))).click();
-				Thread.sleep(5000);
-			}
-			test.log(LogStatus.INFO, " 5 unsuccessfull login attempts");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_lock_message")), 10);
-			String message = ob.findElement(By.xpath(OR.getProperty("account_lock_message"))).getText();
-			String expectedMessage = "Your account has been locked out due to 5 invalid sign in attempts. Please wait 30 minutes, then try again.";
-			System.out.println(message);
-			try {
-				Assert.assertEquals(expectedMessage, message);
-				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " message is displayed as expected");
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, " Message is either not displayed or displaying wrong message");// extent
-																											// reports
-				// next 3 lines to print whole testng error in report
-				StringWriter errors = new StringWriter();
-				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// extent reports
-				ErrorUtil.addVerificationFailure(t);// testng
+
+			// Navigate to FB login page
+			// ob.navigate().to(host);
+			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			//
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
+			//
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
+
+			// Verify that existing FB credentials are working fine
+			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
+			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 20);
+			if (!checkElementPresence("apps")) {
+
+				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_unexpected_happened")));// screenshot
-				closeBrowser();
+										+ "_existing_FB_User_credentials_not_working_fine")));// screenshot
+
 			}
 
+			// Verify that profile name gets displayed correctly
+			if (!checkElementPresence("header_label")) {
+
+				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_incorrect_profile_name_getting_displayed")));// screenshot
+
+			}
+
+			logout();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+
+			if (!checkElementPresence("login_banner")) {
+
+				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_unable_to_logout_successfully")));// screenshot
+
+			}
+
+			closeBrowser();
+
 		} catch (Throwable t) {
+
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
@@ -117,8 +136,10 @@ public class IAM024 extends TestBase {
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
+
 		}
-		closeBrowser();
+
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

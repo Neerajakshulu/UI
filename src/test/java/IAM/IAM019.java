@@ -1,9 +1,11 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -18,7 +20,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM007 extends TestBase {
+public class IAM019 extends TestBase {
 
 	String runmodes[] = null;
 	static int count = -1;
@@ -33,19 +35,17 @@ public class IAM007 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
-						"Verify that user is not able to login using FB option for different negative combinations of username/password")
+				.startTest(
+						var,
+						"Verify that following special characters are not allowed in EMAIL ADDRESS field in new TR user registration page:1--->*2--->(3--->)4--->&5)--->!")
 				.assignCategory("IAM");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA7(String email,
-			String password) throws Exception {
+	public void testcaseA19(String special_char) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -70,11 +70,15 @@ public class IAM007 extends TestBase {
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
-				+ "--->");
-		test.log(LogStatus.INFO, email + " -- " + password);
-
 		try {
+
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
+					+ "--->");
+			test.log(LogStatus.INFO, special_char);
+
+			System.out.println(special_char);
+			String email = generateRandomName(10) + special_char + "@abc.com";
+			System.out.println(email);
 
 			// selenium code
 			openBrowser();
@@ -86,28 +90,48 @@ public class IAM007 extends TestBase {
 			}
 			clearCookies();
 
+			// Navigate to TR login page
+			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
-
-			ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
+			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 
-			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-			Thread.sleep(5000);
+			// Create new TR account
+			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+			//
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
+			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")), 10);
+			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_emailError_label")));
 
-			if (!checkElementPresence_name("FB_page_login_button")) {
+			if (!compareNumbers(1, errorList.size())) {
 
 				fail = true;// excel
-				test.log(LogStatus.FAIL, "Unexpected login happened");// extent report
+				test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_unexpected_login_happened_" + (count + 1))));
+										+ "_error_message_not_getting_displayed_" + (count + 1))));
+				closeBrowser();
+				return;
+			}
+
+			String error = "Please enter a valid Email Address.";
+			String errorText = ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
+			if (!compareStrings(error, errorText)) {
+
+				fail = true;// excel
+				test.log(LogStatus.FAIL, "Error text is incorrect");// extent report
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_incorrect_error_text_" + (count + 1))));
 
 			}
 

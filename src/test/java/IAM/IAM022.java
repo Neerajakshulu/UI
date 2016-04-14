@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import org.openqa.selenium.By;
 import org.testng.SkipException;
@@ -29,7 +29,7 @@ public class IAM022 extends TestBase {
 
 	@Test
 	public void testCaseA22() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
