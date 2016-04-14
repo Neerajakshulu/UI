@@ -1,0 +1,181 @@
+package Profile;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.SkipException;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import pages.PageFactory;
+import util.ErrorUtil;
+import util.ExtentManager;
+import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+public class Profile35 extends TestBase {
+
+	static int status = 1;
+	static String postTitle;
+	static List<String> profileDetails;
+	PageFactory pf = new PageFactory();
+
+	// Following is the list of status:
+	// 1--->PASS
+	// 2--->FAIL
+	// 3--->SKIP
+	// Checking whether this test case should be skipped or not
+	@BeforeTest
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
+		test = extent.startTest(var,
+				"Verify that POST tab count getting increased while appreciate post from Record view page")
+				.assignCategory("Profile");
+
+	}
+
+	@Test
+	@Parameters({"username", "password"})
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
+		boolean master_condition = suiteRunmode && testRunmode;
+
+		if (!master_condition) {
+
+			status = 3;// excel
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+
+		}
+
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+
+		try {
+			openBrowser();
+			maximizeWindow();
+			clearCookies();
+			test.log(LogStatus.INFO, "Login Neon app with TR valid credentials");
+			// Navigate to TR login page and login with valid TR credentials
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
+			test.log(LogStatus.INFO, "Logged in to NEON");
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			status = 2;// excel
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_loginNotDone")));// screenshot
+			closeBrowser();
+		}
+
+	}
+
+	@Test(dependsOnMethods = "testLoginTRAccount")
+	@Parameters({"myPost", "postContent"})
+	public void testPublishPost(String myPost,
+			String postContent) throws Exception {
+		try {
+			postContent = postContent + RandomStringUtils.randomNumeric(10);
+			test.log(LogStatus.INFO, " Click Publish A Post and Post your article");
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
+			profileDetails = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
+			pf.getProfilePageInstance(ob).clickPublishAPost();
+			postTitle = myPost + RandomStringUtils.randomAlphanumeric(6);
+			pf.getProfilePageInstance(ob).enterPostTitle(postTitle);
+			test.log(LogStatus.INFO, "Entered Post Title");
+			pf.getProfilePageInstance(ob).enterPostContent(postContent);
+			test.log(LogStatus.INFO, "Entered Post Content");
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+			test.log(LogStatus.INFO, "Published the post and Validate Published Post count");
+			pf.getProfilePageInstance(ob).validatePostTitle(postTitle);
+		} catch (Exception e) {
+			e.printStackTrace();
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			status = 2;// excel
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(e);// testng
+
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "post_not_increased")));// screenshot
+			closeBrowser();
+		}
+
+	}
+
+	@Test(dependsOnMethods = "testPublishPost")
+	public void testPostLikeCount() throws Exception {
+		try {
+			int profilePostcount = pf.getProfilePageInstance(ob).getPostLikeCount();
+			pf.getProfilePageInstance(ob).clickFirstPostTitle();
+			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
+			pf.getpostRVPageInstance(ob).clickPostLike();
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
+			int profilePostRVcount = pf.getProfilePageInstance(ob).getPostLikeCount();
+
+			System.out.println("before count-->" + profilePostcount);
+			System.out.println("after count-->" + profilePostRVcount);
+			if (profilePostRVcount == profilePostcount) {
+				throw new Exception("post like count failed");
+			}
+
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+		} catch (Exception e) {
+			e.printStackTrace();
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			status = 2;// excel
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(e);// testng
+
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "post_like_count_failed")));// screenshot
+			closeBrowser();
+		}
+
+	}
+
+	@AfterTest
+	public void reportTestResult() {
+		extent.endTest(test);
+
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "SKIP");
+		 */
+	}
+
+}

@@ -59,8 +59,8 @@ public class TestBase {
 	public static Xls_Reader suiteXls = null;
 	public static Xls_Reader iamxls = null;
 	public static Xls_Reader searchxls = null;
-	public static Xls_Reader suiteCxls = null;
-	public static Xls_Reader suiteDxls = null;
+	public static Xls_Reader authoringxls = null;
+	public static Xls_Reader profilexls = null;
 	public static Xls_Reader watchlistXls = null;
 	public static Xls_Reader suiteFxls = null;
 
@@ -193,8 +193,8 @@ public class TestBase {
 			// xls file
 			iamxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
 			searchxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
-			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
-			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
+			authoringxls = new Xls_Reader("src/test/resources/xls/Authoring.xlsx");
+			profilexls = new Xls_Reader("src/test/resources/xls/Profile.xlsx");
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
@@ -838,9 +838,9 @@ public class TestBase {
 		else if (ch == 'B')
 			return "src/test/resources/xls/Search.xlsx";
 		else if (ch == 'C')
-			return "src/test/resources/xls/C suite.xlsx";
+			return "src/test/resources/xls/Authoring.xlsx";
 		else if (ch == 'D')
-			return "src/test/resources/xls/D suite.xlsx";
+			return "src/test/resources/xls/Profile.xlsx";
 		else if (ch == 'E')
 			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
