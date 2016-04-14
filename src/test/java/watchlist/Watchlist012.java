@@ -22,6 +22,12 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist012 extends TestBase {
 
 	static int status = 1;
@@ -53,8 +59,8 @@ public class Watchlist012 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -102,8 +108,8 @@ public class Watchlist012 extends TestBase {
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			BrowserWaits.waitTime(3);
-			List<WebElement> labelsDisplayedList = ob.findElements(By
-					.xpath("//div[@class='doc-info ng-scope']/span[2]"));
+			List<WebElement> labelsDisplayedList = ob
+					.findElements(By.xpath("//div[@class='doc-info ng-scope']/span[2]"));
 
 			boolean flag = Boolean.TRUE;
 			String actualLabel = "";
@@ -132,11 +138,9 @@ public class Watchlist012 extends TestBase {
 						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
 			}
 
 			// Deleting the watch list
@@ -153,11 +157,8 @@ public class Watchlist012 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
