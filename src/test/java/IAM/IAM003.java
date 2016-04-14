@@ -45,7 +45,7 @@ public class IAM003 extends TestBase {
 	public void testcaseA3() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -157,12 +157,12 @@ public class IAM003 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

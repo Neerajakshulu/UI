@@ -22,6 +22,14 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that user is able to add an Article from Articles content search results page to a particular
+ * watchlist||Verify that user is able to unwatch an Article from watchlist page||Verify that user is able to unwatch an
+ * Article from Articles content search results page
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist004 extends TestBase {
 
 	static int status = 1;
@@ -36,8 +44,7 @@ public class Watchlist004 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(
-						var,
+				.startTest(var,
 						"Verify that user is able to add an Article from Articles content search results page to a particular watchlist||Verify that user is able to unwatch an Article from watchlist page||Verify that user is able to unwatch an Article from Articles content search results page")
 				.assignCategory("Watchlist");
 
@@ -54,8 +61,8 @@ public class Watchlist004 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -122,11 +129,9 @@ public class Watchlist004 extends TestBase {
 						"User not able to add an article into watchlist from Article content search results page");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_add_article_into_watchlist_from_Article_content_searchResults_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_add_article_into_watchlist_from_Article_content_searchResults_page")));// screenshot
 
 			}
 
@@ -196,11 +201,9 @@ public class Watchlist004 extends TestBase {
 						"User not able to remove an article from watchlist in Article content search results page");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_remove_article_from_watchlist_in_Article_content_searchResults_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_remove_article_from_watchlist_in_Article_content_searchResults_page")));// screenshot
 			}
 			// Delete the watch list
 			deleteParticularWatchlist(newWatchlistName);
@@ -215,11 +218,8 @@ public class Watchlist004 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

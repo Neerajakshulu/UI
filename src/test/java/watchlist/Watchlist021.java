@@ -19,6 +19,12 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * Verify that user is able to see the watchlist items by content type
+ * 
+ * @author Prasenjit Patra
+ *
+ */
 public class Watchlist021 extends TestBase {
 
 	static int status = 1;
@@ -47,8 +53,8 @@ public class Watchlist021 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -114,11 +120,8 @@ public class Watchlist021 extends TestBase {
 				test.log(LogStatus.FAIL, "Watchlist items are not displayed by content type");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_watchlist_items_are_not_displayed_by_content_type")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_watchlist_items_are_not_displayed_by_content_type")));// screenshot
 
 			} else {
 				test.log(LogStatus.PASS, "Watchlist items are displayed by content type");
@@ -136,11 +139,8 @@ public class Watchlist021 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

@@ -1,0 +1,787 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite B" parallel="tests" thread-count="10">
+
+	<test name="Test B1">
+		<classes>
+			<class name="Search.Search1"></class>
+		</classes>
+	</test>
+
+	<test name="Test B2">
+		<classes>
+			<class name="Search.Search2"></class>
+		</classes>
+	</test>
+
+	<test name="Test B3">
+		<classes>
+			<class name="Search.Search3"></class>
+		</classes>
+	</test>
+
+	<test name="Test B4">
+		<classes>
+			<class name="Search.Search4"></class>
+		</classes>
+	</test>
+
+	<test name="Test B5">
+		<classes>
+			<class name="Search.Search5"></class>
+		</classes>
+	</test>
+
+	<test name="Test B6">
+		<classes>
+			<class name="Search.Search6"></class>
+		</classes>
+	</test>
+
+	<test name="Test B7">
+		<classes>
+			<class name="Search.Search7"></class>
+		</classes>
+	</test>
+
+	<test name="Test B8">
+		<classes>
+			<class name="Search.Search8"></class>
+		</classes>
+	</test>
+
+	<test name="Test B9">
+		<classes>
+			<class name="Search.Search9"></class>
+		</classes>
+	</test>
+
+	<test name="Test B10">
+		<classes>
+			<class name="Search.Search10"></class>
+		</classes>
+	</test>
+
+	<test name="Test B11">
+		<classes>
+			<class name="Search.Search11"></class>
+		</classes>
+	</test>
+
+	<test name="Test B12">
+		<classes>
+			<class name="Search.Search12"></class>
+		</classes>
+	</test>
+
+	<test name="Test B13">
+		<classes>
+			<class name="Search.Search13"></class>
+		</classes>
+	</test>
+
+	<test name="Test B14">
+		<classes>
+			<class name="Search.Search14"></class>
+		</classes>
+	</test>
+
+	<test name="Test B15">
+		<classes>
+			<class name="Search.Search15"></class>
+		</classes>
+	</test>
+
+	<test name="Test B16">
+		<classes>
+			<class name="Search.Search16"></class>
+		</classes>
+	</test>
+
+	<test name="Test B17">
+		<classes>
+			<class name="Search.Search17"></class>
+		</classes>
+	</test>
+	<test name="Test B18">
+		<classes>
+			<class name="Search.Search18"></class>
+		</classes>
+	</test>
+	<test name="Test B19">
+		<classes>
+			<class name="Search.Search19"></class>
+		</classes>
+	</test>
+
+	<test name="Test B20">
+		<classes>
+			<class name="Search.Search20"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B21">
+		<classes>
+			<class name="Search.Search21"></class>
+		</classes>
+	</test>
+
+	<test name="Test B22">
+		<classes>
+			<class name="Search.Search22"></class>
+		</classes>
+	</test>
+
+	<test name="Test B23">
+		<classes>
+			<class name="Search.Search23"></class>
+		</classes>
+	</test>
+
+	<test name="Test B24">
+		<classes>
+			<class name="Search.Search24"></class>
+		</classes>
+	</test>
+
+	<test name="Test B25">
+		<classes>
+			<class name="Search.Search25"></class>
+		</classes>
+	</test>
+
+	<test name="Test B26">
+		<classes>
+			<class name="Search.Search26"></class>
+		</classes>
+	</test>
+
+	<test name="Test B27">
+		<classes>
+			<class name="Search.Search27"></class>
+		</classes>
+	</test>
+
+	<test name="Test B28">
+		<classes>
+			<class name="Search.Search28"></class>
+		</classes>
+	</test>
+
+	<test name="Test B29">
+		<classes>
+			<class name="Search.Search29"></class>
+		</classes>
+	</test>
+
+	<test name="Test B30">
+		<classes>
+			<class name="Search.Search30"></class>
+		</classes>
+	</test>
+
+	<test name="Test B31">
+		<classes>
+			<class name="Search.Search31"></class>
+		</classes>
+	</test>
+
+	<test name="Test B32">
+		<classes>
+			<class name="Search.Search32"></class>
+		</classes>
+	</test>
+
+	<test name="Test B33">
+		<classes>
+			<class name="Search.Search33"></class>
+		</classes>
+	</test>
+
+	<test name="Test B34">
+		<classes>
+			<class name="Search.Search34"></class>
+		</classes>
+	</test>
+
+	<test name="Test B35">
+		<classes>
+			<class name="Search.Search35"></class>
+		</classes>
+	</test>
+
+	<test name="Test B36">
+		<classes>
+			<class name="Search.Search36"></class>
+		</classes>
+	</test>
+
+	<test name="Test B37">
+		<classes>
+			<class name="Search.Search37"></class>
+		</classes>
+	</test>
+
+	<test name="Test B38">
+		<classes>
+			<class name="Search.Search38"></class>
+		</classes>
+	</test>
+
+	<test name="Test B39">
+		<classes>
+			<class name="Search.Search39"></class>
+		</classes>
+	</test>
+
+	<test name="Test B40">
+		<classes>
+			<class name="Search.Search40"></class>
+		</classes>
+	</test>
+
+	<test name="Test B41">
+		<classes>
+			<class name="Search.Search41"></class>
+		</classes>
+	</test>
+
+	<test name="Test B42">
+		<classes>
+			<class name="Search.Search42"></class>
+		</classes>
+	</test>
+
+	<test name="Test B43">
+		<classes>
+			<class name="Search.Search43"></class>
+		</classes>
+	</test>
+
+	<test name="Test B44">
+		<classes>
+			<class name="Search.Search44"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B45">
+		<classes>
+			<class name="Search.Search45"></class>
+		</classes>
+	</test>
+
+	<test name="Test B46">
+		<classes>
+			<class name="Search.Search46"></class>
+		</classes>
+	</test>
+
+	<test name="Test B47">
+		<classes>
+			<class name="Search.Search47"></class>
+		</classes>
+	</test>
+
+	<test name="Test B48">
+		<classes>
+			<class name="Search.Search48"></class>
+		</classes>
+	</test>
+
+	<test name="Test B49">
+		<classes>
+			<class name="Search.Search49"></class>
+		</classes>
+	</test>
+
+	<test name="Test B50">
+		<classes>
+			<class name="Search.Search50"></class>
+		</classes>
+	</test>
+
+	<test name="Test B51">
+		<classes>
+			<class name="Search.Search51"></class>
+		</classes>
+	</test>
+
+	<test name="Test B52">
+		<classes>
+			<class name="Search.Search52"></class>
+		</classes>
+	</test>
+
+	<test name="Test B53">
+		<classes>
+			<class name="Search.Search53"></class>
+		</classes>
+	</test>
+
+	<test name="Test B54">
+		<classes>
+			<class name="Search.Search54"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B55">
+		<classes>
+			<class name="Search.Search55"></class>
+		</classes>
+	</test>
+
+	<test name="Test B56">
+		<classes>
+			<class name="Search.Search56"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B57">
+		<classes>
+			<class name="Search.Search57"></class>
+		</classes>
+	</test>
+
+	<test name="Test B58">
+		<classes>
+			<class name="Search.Search58"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B59">
+		<classes>
+			<class name="Search.Search59"></class>
+		</classes>
+	</test>
+
+	<test name="Test B60">
+		<classes>
+			<class name="Search.Search60"></class>
+		</classes>
+	</test>
+
+	<test name="Test B61">
+		<classes>
+			<class name="Search.Search61"></class>
+		</classes>
+	</test>
+
+	<test name="Test B62">
+		<classes>
+			<class name="Search.Search62"></class>
+		</classes>
+	</test>
+
+	<test name="Test B63">
+		<classes>
+			<class name="Search.Search63"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B64">
+		<classes>
+			<class name="Search.Search64"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B65">
+		<classes>
+			<class name="Search.Search65"></class>
+		</classes>
+	</test>
+
+	<test name="Test B66">
+		<classes>
+			<class name="Search.Search66"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B67">
+		<classes>
+			<class name="Search.Search67"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B68">
+		<classes>
+			<class name="Search.Search68"></class>
+		</classes>
+	</test>
+
+	<test name="Test B69">
+		<classes>
+			<class name="Search.Search69"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B70">
+		<classes>
+			<class name="Search.Search70"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B71">
+		<classes>
+			<class name="Search.Search71"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B72">
+		<classes>
+			<class name="Search.Search72"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B73">
+		<classes>
+			<class name="Search.Search73"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B74">
+		<classes>
+			<class name="Search.Search74"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B75">
+		<classes>
+			<class name="Search.Search75"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B76">
+		<classes>
+			<class name="Search.Search76"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B77">
+		<classes>
+			<class name="Search.Search77"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B78">
+		<classes>
+			<class name="Search.Search78"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B79">
+		<classes>
+			<class name="Search.Search79"></class>
+		</classes>
+	</test>
+
+	<test name="Test B80">
+		<classes>
+			<class name="Search.Search80"></class>
+		</classes>
+	</test>
+
+	<test name="Test B81">
+		<classes>
+			<class name="Search.Search81"></class>
+		</classes>
+	</test>
+
+	<test name="Test B82">
+		<classes>
+			<class name="Search.Search82"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B83">
+		<classes>
+			<class name="Search.Search83"></class>
+		</classes>
+	</test>
+
+
+
+	<test name="Test B84">
+		<classes>
+			<class name="Search.Search84"></class>
+		</classes>
+	</test>
+
+	<test name="Test B85">
+		<classes>
+			<class name="Search.Search85"></class>
+		</classes>
+	</test>
+
+	<test name="Test B86">
+		<classes>
+			<class name="Search.Search86"></class>
+		</classes>
+	</test>
+
+	<test name="Test B87">
+		<classes>
+			<class name="Search.Search87"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B88">
+		<classes>
+			<class name="Search.Search88"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B89">
+		<classes>
+			<class name="Search.Search89"></class>
+		</classes>
+	</test>
+
+	<test name="Test B90">
+		<classes>
+			<class name="Search.Search90"></class>
+		</classes>
+	</test>
+
+	<test name="Test B91">
+		<classes>
+			<class name="Search.Search91"></class>
+		</classes>
+	</test>
+
+	<test name="Test B92">
+		<classes>
+			<class name="Search.Search92"></class>
+		</classes>
+	</test>
+
+	<test name="Test B93">
+		<classes>
+			<class name="Search.Search93"></class>
+		</classes>
+	</test>
+
+	<test name="Test B94">
+		<classes>
+			<class name="Search.Search94"></class>
+		</classes>
+	</test>
+	<test name="Test B95">
+		<classes>
+			<class name="Search.Search95"></class>
+		</classes>
+	</test>
+
+	<test name="Test B96">
+		<classes>
+			<class name="Search.Search96"></class>
+		</classes>
+	</test>
+
+
+
+	<test name="Test B97">
+		<classes>
+			<class name="Search.Search97"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test B98">
+		<classes>
+			<class name="Search.Search98"></class>
+		</classes>
+	</test>
+
+	<test name="Test B99">
+		<classes>
+			<class name="Search.Search99"></class>
+		</classes>
+	</test>
+	<test name="TestCase_B100">
+		<classes>
+			<class name="Search.Search100"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B101">
+		<classes>
+			<class name="Search.Search101"></class>
+		</classes>
+	</test>
+
+
+	<test name="TestCase_B102">
+		<classes>
+			<class name="Search.Search102"></class>
+		</classes>
+	</test>
+	<test name="TestCase_B103">
+		<classes>
+			<class name="Search.Search103"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B104">
+		<classes>
+			<class name="Search.Search104"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B105">
+		<classes>
+			<class name="Search.Search105"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B106">
+		<classes>
+			<class name="Search.Search106"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B107">
+		<classes>
+			<class name="Search.Search107"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B108">
+		<classes>
+			<class name="Search.Search108"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B109">
+		<classes>
+			<class name="Search.Search109"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B110">
+		<classes>
+			<class name="Search.Search110"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B111">
+		<classes>
+			<class name="Search.Search111"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B112">
+		<classes>
+			<class name="Search.Search112"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B113">
+		<classes>
+			<class name="Search.Search113"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B114">
+		<classes>
+			<class name="Search.Search114"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B115">
+		<classes>
+			<class name="Search.Search115"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B116">
+		<classes>
+			<class name="Search.Search116"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B117">
+		<classes>
+			<class name="Search.Search117"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B118">
+		<classes>
+			<class name="Search.Search118"></class>
+		</classes>
+	</test>
+
+
+	<test name="TestCase_B119">
+		<classes>
+			<class name="Search.Search119"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B120">
+		<classes>
+			<class name="Search.Search120"></class>
+		</classes>
+	</test>
+
+
+	<test name="TestCase_B121">
+		<classes>
+			<class name="Search.Search121"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B122">
+		<classes>
+			<class name="Search.Search122"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B123">
+		<classes>
+			<class name="Search.Search123"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B124">
+		<classes>
+			<class name="Search.Search124"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B125">
+		<classes>
+			<class name="Search.Search125"></class>
+		</classes>
+	</test>
+
+	<test name="TestCase_B126">
+		<classes>
+			<class name="Search.Search126"></class>
+		</classes>
+	</test>
+
+
+</suite>
+
