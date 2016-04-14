@@ -1,4 +1,4 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -19,7 +19,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist025 extends TestBase {
+public class Watchlist024 extends TestBase {
 
 	static int status = 1;
 
@@ -32,15 +32,18 @@ public class Watchlist025 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that same patent can be added to multiple watchlists").assignCategory(
-				"Watchlist");
+		test = extent
+				.startTest(
+						var,
+						"Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular watchlist during watching")
+				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	public void testWatchPatentToMultipleWatchlist() throws Exception {
+	public void testWatchArticleToMultipleWatchlist() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -77,7 +80,6 @@ public class Watchlist025 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);
-
 			for (int i = 1; i <= 2; i++) {
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
@@ -95,16 +97,16 @@ public class Watchlist025 extends TestBase {
 						30);
 			}
 
-			// Searching for patent
-			String patentName = "biology";
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
+			// Searching for article
+			String articleName = "biology";
+			selectSearchTypeFromDropDown("Articles");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
 
-			// Watching an patent to a multiple watch list
+			// Watching an article to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			// Watch the patent to multiple watch list
+			// Watch the article to multiple watch list
 			for (int i = 1; i <= 2; i++) {
 				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName + "_" + i);
 			}
@@ -127,19 +129,20 @@ public class Watchlist025 extends TestBase {
 
 				}
 				if (compareNumbers(1, count)) {
-					test.log(LogStatus.INFO, "User is able to add the patent into watchlist" + i);
+					test.log(LogStatus.INFO, "User is able to add the article into watchlist" + i);
 
 				} else {
-					test.log(LogStatus.FAIL, "User is not able to add the patent into watchlist" + i);// extent
+					test.log(LogStatus.FAIL, "User is not able to add the article into watchlist" + i);// extent
 					// reports
 					status = 2;// excel
 					test.log(
 							LogStatus.INFO,
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_add_patent_into_watchlist" + i)));// screenshot
+											+ "_user_unable_to_add_article_into_watchlist" + i)));// screenshot
 				}
 			}
+
 			// Deleting watch list
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			BrowserWaits.waitTime(2);

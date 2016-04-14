@@ -1,4 +1,4 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -11,7 +11,6 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import util.BrowserWaits;
@@ -22,7 +21,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist011 extends TestBase {
+public class Watchlist013 extends TestBase {
 
 	static int status = 1;
 
@@ -37,16 +36,15 @@ public class Watchlist011 extends TestBase {
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	@Parameters({"patentName"})
-	public void testDisplayedFieldsForPatentsInWatchlist(String patentName) throws Exception {
+	public void testItemsCountInWatchlist() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -82,17 +80,17 @@ public class Watchlist011 extends TestBase {
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for article
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
+			// Searching for post
+			selectSearchTypeFromDropDown("All");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
-			// Getting watch button list for patents
+			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
-			// Watching 10 patents to a particular watch list
-			for (int i = 0; i < 3; i++) {
+			// Watching 5 item to a particular watch list
+			for (int i = 0; i < 5; i++) {
 				WebElement watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
@@ -101,43 +99,36 @@ public class Watchlist011 extends TestBase {
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-			BrowserWaits.waitTime(3);
-			List<WebElement> labelsDisplayedList = ob.findElements(By
-					.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
-
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelTimesCited = "Times Cited";
-			String expectedLabelComments = "Comments";
+			waitForPageLoad(ob);
+			// Getting the items count
+			int itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist")))
+					.getText());
 
 			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
-
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelTimesCited);
-					} else {
-
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
-			} catch (Error e) {
-
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
-				// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Following_fields_are_not_getting_displayed_for_each_patent_in_the_watchlist_page:a)Times cited b)Comments")));
+				Assert.assertEquals(itemCount, 5);
+				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
+			} catch (Exception e) {
+				status = 2;
+				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
 			}
+
+			// Unwatching the first 3 document from watch list page
+			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
+			for (int i = 0; i < 3; i++) {
+				watchButtonList.get(i).click();
+				BrowserWaits.waitTime(2);
+			}
+
+			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
+
+			try {
+				Assert.assertEquals(itemCount, 2);
+				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
+			}
+
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
 

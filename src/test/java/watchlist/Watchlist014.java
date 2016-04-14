@@ -1,11 +1,10 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -13,7 +12,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -21,7 +19,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist013 extends TestBase {
+public class Watchlist014 extends TestBase {
 
 	static int status = 1;
 
@@ -35,16 +33,17 @@ public class Watchlist013 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(var,
-						"Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist")
+				.startTest(
+						var,
+						"Verify that user is able to create a new watchlist||Verify that user is able to see his private watchlists on his own profile page")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	public void testItemsCountInWatchlist() throws Exception {
+	public void testCreateWatchList() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -59,7 +58,6 @@ public class Watchlist013 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
 			// Opening browser
 			openBrowser();
 			try {
@@ -80,58 +78,46 @@ public class Watchlist013 extends TestBase {
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for post
-			selectSearchTypeFromDropDown("All");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
-
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-
-			// Watching 5 item to a particular watch list
-			for (int i = 0; i < 5; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
+			// Getting all the watch lists
+			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
+			// Finding the newly created watch list
+			int count = 0;
+			for (int i = 0; i < watchLists.size(); i++) {
+				if (watchLists.get(i).getText().equals(newWatchlistName)) {
+					count++;
+					break;
+				}
 			}
-
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
-			waitForPageLoad(ob);
-			// Getting the items count
-			int itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist")))
-					.getText());
 
 			try {
-				Assert.assertEquals(itemCount, 5);
-				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
-			} catch (Exception e) {
-				status = 2;
-				test.log(LogStatus.INFO, "User is not able to watch 5 items into watchlist");
-			}
-
-			// Unwatching the first 3 document from watch list page
-			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
-			for (int i = 0; i < 3; i++) {
-				watchButtonList.get(i).click();
-				BrowserWaits.waitTime(2);
-			}
-
-			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
-
-			try {
-				Assert.assertEquals(itemCount, 2);
-				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
+				Assert.assertEquals(1, count);
+				test.log(LogStatus.PASS, "User is able to create new watch list with name and description");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
+				test.log(LogStatus.FAIL, "User is unable to create new watch list with name and description");
+			}
+
+			// Navigating to the private watch list tab
+			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
+			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
+			count = 0;
+			for (int i = 0; i < watchLists.size(); i++) {
+				if (watchLists.get(i).getText().equals(newWatchlistName)) {
+					count++;
+					break;
+				}
+			}
+
+			try {
+				Assert.assertEquals(1, count);
+				test.log(LogStatus.PASS, "User is able to see private watch list in own profile page");
+			} catch (Error e) {
+				status = 2;
+				test.log(LogStatus.FAIL, "User is unable to see private watch list in own profile page");
 			}
 
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
-
 			closeBrowser();
 
 		} catch (Throwable t) {

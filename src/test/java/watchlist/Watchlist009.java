@@ -1,11 +1,11 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -14,7 +14,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -22,7 +21,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist012 extends TestBase {
+public class Watchlist009 extends TestBase {
 
 	static int status = 1;
 
@@ -35,18 +34,17 @@ public class Watchlist012 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+		test = extent.startTest(var,
+				"Verify that user is able to add an Post from Record View page to a particular watchlist")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
 	@Parameters({"postName"})
-	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
+	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -81,67 +79,97 @@ public class Watchlist012 extends TestBase {
 			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
-			// Getting watch button list for posts
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 
-			// Watching 10 posts to a particular watch list
-			for (WebElement watchButton : watchButtonList) {
+			// Watching the post to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
-			}
-
+			// Selecting the post name
+			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-			BrowserWaits.waitTime(3);
-			List<WebElement> labelsDisplayedList = ob.findElements(By
-					.xpath("//div[@class='doc-info ng-scope']/span[2]"));
 
-			boolean flag = Boolean.TRUE;
-			String actualLabel = "";
-			String expectedLabelLikes = "Likes";
-			String expectedLabelComments = "Comments";
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
-			try {
-				for (WebElement label : labelsDisplayedList) {
-					actualLabel = label.getText();
-					if (flag) {
+			int count = 0;
+			for (int i = 0; i < watchedItems.size(); i++) {
 
-						flag = Boolean.FALSE;
-						Assert.assertEquals(actualLabel, expectedLabelLikes);
-					} else {
+				if (watchedItems.get(i).getText().equals(documentName))
+					count++;
 
-						flag = Boolean.TRUE;
-						Assert.assertEquals(actualLabel, expectedLabelComments);
-					}
-				}
-				test.log(LogStatus.PASS,
-						"Following fields are getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
-			} catch (Error e) {
+			}
 
-				ErrorUtil.addVerificationFailure(e);
-				test.log(LogStatus.FAIL,
-						"Following fields are not getting displayed for each post in the watchlist page: a)Likes b)Comments");// extent
+			if (!compareNumbers(1, count)) {
+
+				test.log(LogStatus.FAIL, "User not able to add an post into watchlist from Record view page");// extent
 				// reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Following_fields_are_not_getting_displayed_for_each_post_in_the_watchlist_page:a)Likes b)Comments")));
+										+ "_user_unable_to_add_post_into_watchlist_Record_view_page")));// screenshot
+
 			}
 
+			// Step2: Unwatching the document from record view page
+			// Searching for post
+			selectSearchTypeFromDropDown("Posts");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+
+			// Navigating to record view page
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			// Unwatching the post to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Selecting the post name
+			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+			try {
+
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+
+				if (defaultMessage.isDisplayed()) {
+
+					test.log(LogStatus.PASS, "User is able to remove an post from watchlist in Post record view page");// extent
+				} else {
+					test.log(LogStatus.FAIL, "User not able to remove an Post from watchlist in Post record view page");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_user_unable_to_remove_post_from_watchlist_in_Post_record_view_page")));// screenshot
+				}
+			} catch (NoSuchElementException e) {
+
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
+						count++;
+
+				}
+				Assert.assertEquals(count, 0);
+			}
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
-
 			closeBrowser();
 
 		} catch (Throwable t) {

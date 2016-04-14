@@ -1,14 +1,17 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import util.BrowserWaits;
@@ -19,7 +22,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist021 extends TestBase {
+public class Watchlist011 extends TestBase {
 
 	static int status = 1;
 
@@ -32,15 +35,18 @@ public class Watchlist021 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to see the watchlist items by content type")
+		test = extent
+				.startTest(var,
+						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	public void testWatchlistItemsDisplayedByContentType() throws Exception {
+	@Parameters({"patentName"})
+	public void testDisplayedFieldsForPatentsInWatchlist(String patentName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -55,8 +61,6 @@ public class Watchlist021 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			String search_query = "hello";
 
 			// Opening browser
 			openBrowser();
@@ -79,52 +83,64 @@ public class Watchlist021 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			selectSearchTypeFromDropDown("Patents");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_articles_result")), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
-			// Watching an article to a particular watch list
-			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			// Getting watch button list for patents
+			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
-			// Watching a patents to a particular watch list
-			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			BrowserWaits.waitTime(2);
-			waitForPageLoad(ob);
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-			// Watching a posts to a particular watch list
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			BrowserWaits.waitTime(2);
-			waitForPageLoad(ob);
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			// Watching 10 patents to a particular watch list
+			for (int i = 0; i < 3; i++) {
+				WebElement watchButton = watchButtonList.get(i);
+				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+				BrowserWaits.waitTime(2);
+			}
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-			waitForPageLoad(ob);
+			BrowserWaits.waitTime(3);
+			List<WebElement> labelsDisplayedList = ob.findElements(By
+					.xpath("//div[starts-with(@class,'h6 doc-info')]/span[2]"));
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			List<WebElement> labels = ob.findElements(By.xpath(OR.getProperty("item_label")));
+			boolean flag = Boolean.TRUE;
+			String actualLabel = "";
+			String expectedLabelTimesCited = "Times Cited";
+			String expectedLabelComments = "Comments";
 
-			if (!compareNumbers(watchedItems.size(), labels.size())) {
+			try {
+				for (WebElement label : labelsDisplayedList) {
+					actualLabel = label.getText();
+					if (flag) {
 
-				test.log(LogStatus.FAIL, "Watchlist items are not displayed by content type");// extent
+						flag = Boolean.FALSE;
+						Assert.assertEquals(actualLabel, expectedLabelTimesCited);
+					} else {
+
+						flag = Boolean.TRUE;
+						Assert.assertEquals(actualLabel, expectedLabelComments);
+					}
+				}
+				test.log(LogStatus.PASS,
+						"Following fields are getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
+			} catch (Error e) {
+
+				ErrorUtil.addVerificationFailure(e);
+				test.log(LogStatus.FAIL,
+						"Following fields are not getting displayed for each patent in the watchlist page: a)Times cited b)Comments");// extent
 				// reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_watchlist_items_are_not_displayed_by_content_type")));// screenshot
-
-			} else {
-				test.log(LogStatus.PASS, "Watchlist items are displayed by content type");
+										+ "_Following_fields_are_not_getting_displayed_for_each_patent_in_the_watchlist_page:a)Times cited b)Comments")));
 			}
 			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
+
 			closeBrowser();
 
 		} catch (Throwable t) {

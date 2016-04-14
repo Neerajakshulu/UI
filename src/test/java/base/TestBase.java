@@ -82,7 +82,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if (TestUtil.isSuiteRunnable(suiteXls, "E Suite") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
+		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
 
 			if (count == 0) {
 
@@ -195,7 +195,7 @@ public class TestBase {
 			suiteBxls = new Xls_Reader("src/test/resources/xls/B suite.xlsx");
 			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
 			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
-			suiteExls = new Xls_Reader("src/test/resources/xls/E suite.xlsx");
+			suiteExls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
@@ -842,7 +842,7 @@ public class TestBase {
 		else if (ch == 'D')
 			return "src/test/resources/xls/D suite.xlsx";
 		else if (ch == 'E')
-			return "src/test/resources/xls/E suite.xlsx";
+			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
 			return "src/test/resources/xls/F suite.xlsx";
 		else

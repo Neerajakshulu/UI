@@ -1,11 +1,11 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -14,7 +14,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -22,7 +21,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist004 extends TestBase {
+public class Watchlist003 extends TestBase {
 
 	static int status = 1;
 
@@ -38,16 +37,16 @@ public class Watchlist004 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that user is able to add an Article from Articles content search results page to a particular watchlist||Verify that user is able to unwatch an Article from watchlist page||Verify that user is able to unwatch an Article from Articles content search results page")
+						"Verify that user is able to add a Post from ALL content search results page to a particular watchlist||Verify that user is able to unwatch a Post from ALL content search results page")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	@Parameters({"articleName"})
-	public void testWatchArticleFromArticleContentSearchResult(String articleName) throws Exception {
+	@Parameters({"postName"})
+	public void testWatchPostFromAllContentSearchResult(String postName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -79,39 +78,31 @@ public class Watchlist004 extends TestBase {
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
 			// "Techm@2015");
 
-			// Create watch list
+			// Create 1st watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
-			// Getting watch button list for articles
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
-			// Watching 2 articles to a particular watch list
-			for (int i = 0; i < 2; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
-			}
+
+			// Watching a post to a particular watch list
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
-			String firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-			waitForPageLoad(ob);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
 
-				if (watchedItems.get(i).getText().equals(firstdocumentName))
+				if (watchedItems.get(i).getText().equals(documentName))
 					count++;
 
 			}
@@ -119,51 +110,25 @@ public class Watchlist004 extends TestBase {
 			if (!compareNumbers(1, count)) {
 
 				test.log(LogStatus.FAIL,
-						"User not able to add an article into watchlist from Article content search results page");// extent
+						"User not able to add an post into watchlist from ALL content search results page");// extent
 				// reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_add_article_into_watchlist_from_Article_content_searchResults_page")));// screenshot
+										+ "_user_unable_to_add_post_into_watchlist_from_all_content_searchResults_page")));// screenshot
 
 			}
 
-			// Steps2: Removing the first item from watch list page
-			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
-			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
-			BrowserWaits.waitTime(2);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
-			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
-			count = 0;
-			String documentTitle;
-			for (WebElement document : documentList) {
-				documentTitle = document.getText();
-				if (documentTitle.equals(firstdocumentName))
-					count++;
-			}
-
-			try {
-				Assert.assertEquals(count, 0);
-				test.log(LogStatus.PASS, "User is able to unwatch an Article from watchlist page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to unwatch an Article from watchlist page");
-			}
-
-			// Steps3: Unwatching an article from article content result page
-			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
+			// Searching for post
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + 2 + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
-			// Watching an article to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			// Watching a post to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Unwatching an article to a particular watch list
@@ -171,7 +136,7 @@ public class Watchlist004 extends TestBase {
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -184,25 +149,24 @@ public class Watchlist004 extends TestBase {
 
 					if (watchedItems.get(i).getText().equals(documentName))
 						count++;
-
 				}
 				Assert.assertEquals(count, 0);
 				test.log(LogStatus.PASS,
-						"User is able to remove an article from watchlist in Article content search results page");// extent
+						"User is able to remove an post from watchlist in ALL content search results page");// extent
 
-			} catch (Throwable t) {
+			} catch (NoSuchElementException e) {
 
 				test.log(LogStatus.FAIL,
-						"User not able to remove an article from watchlist in Article content search results page");// extent
+						"User not able to remove an post from watchlist in ALL content search results page");// extent
 				// reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_remove_article_from_watchlist_in_Article_content_searchResults_page")));// screenshot
+										+ "_user_unable_to_remove_post_from_watchlist_in_all_content_searchResults_page")));// screenshot
 			}
-			// Delete the watch list
+
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 

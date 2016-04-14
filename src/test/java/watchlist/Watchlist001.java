@@ -1,4 +1,4 @@
-package suiteE;
+package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -6,12 +6,13 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -19,7 +20,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Watchlist024 extends TestBase {
+public class Watchlist001 extends TestBase {
 
 	static int status = 1;
 
@@ -35,15 +36,16 @@ public class Watchlist024 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular watchlist during watching")
+						"Verify that user is able to add an Article from ALL content search results page to a particular watchlist||Verify that user is able to unwatch an Article from ALL content search results page")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	public void testWatchArticleToMultipleWatchlist() throws Exception {
+	@Parameters({"articleName"})
+	public void testWatchArticleFromAllContentSearchResult(String articleName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "E Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteExls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -68,85 +70,98 @@ public class Watchlist024 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
+			System.out.println("Begore opening site");
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			System.out.println("After opening site");
 			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
 			// "Techm@2015");
 
-			// Create multiple watch list
+			// Create watch list
 			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			BrowserWaits.waitTime(4);
-			for (int i = 1; i <= 2; i++) {
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
-						.sendKeys(newWatchlistName + "_" + i);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(
-						"This is my newly created watch list.");
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
-				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
-						30);
-			}
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			String articleName = "biology";
-			selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
-			// Watching an article to a multiple watch list
+			// Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			// Watch the article to multiple watch list
-			for (int i = 1; i <= 2; i++) {
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName + "_" + i);
-			}
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			BrowserWaits.waitTime(4);
-			int count;
-			List<WebElement> watchedItems;
-			for (int i = 1; i <= 2; i++) {
-				count = 0;
-				// Navigate to a particular watch list page
-				navigateToParticularWatchlistPage(newWatchlistName + "_" + i);
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+
+			int count = 0;
+			for (int i = 0; i < watchedItems.size(); i++) {
+
+				if (watchedItems.get(i).getText().equals(documentName))
+					count++;
+
+			}
+
+			if (!compareNumbers(1, count)) {
+
+				test.log(LogStatus.FAIL,
+						"User not able to add an article into watchlist from ALL content search results page");// extent
+				// reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_unable_to_add_article_into_watchlist_from_all_content_searchResults_page")));// screenshot
+
+			}
+
+			// Searching for article
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+
+			// Watching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Unwatching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+
+			// Selecting the document name
+			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+
+			// Navigate to a particular watch list page
+			navigateToParticularWatchlistPage(newWatchlistName);
+
+			try {
+
 				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				for (int j = 0; j < watchedItems.size(); j++) {
-					if (watchedItems.get(j).getText().equals(documentName))
+				count = 0;
+				for (int i = 0; i < watchedItems.size(); i++) {
+
+					if (watchedItems.get(i).getText().equals(documentName))
 						count++;
 
 				}
-				if (compareNumbers(1, count)) {
-					test.log(LogStatus.INFO, "User is able to add the article into watchlist" + i);
+				Assert.assertEquals(count, 0);
+				test.log(LogStatus.PASS,
+						"User is able to remove an article from watchlist in ALL content search results page");// extent
+			} catch (Throwable t) {
 
-				} else {
-					test.log(LogStatus.FAIL, "User is not able to add the article into watchlist" + i);// extent
-					// reports
-					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_add_article_into_watchlist" + i)));// screenshot
-				}
+				test.log(LogStatus.FAIL,
+						"User is unable to remove an article from watchlist in ALL content search results page");// extent
 			}
 
-			// Deleting watch list
-			deleteParticularWatchlist(newWatchlistName + "_1");
-			BrowserWaits.waitTime(2);
-			deleteParticularWatchlist(newWatchlistName + "_2");
+			// Deleting the watch list
+			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -179,7 +194,6 @@ public class Watchlist024 extends TestBase {
 		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
 		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
 		 * this.getClass().getSimpleName()), "SKIP");
-		 */
-	}
+		 */}
 
 }
