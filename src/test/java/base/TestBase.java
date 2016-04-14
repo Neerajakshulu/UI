@@ -82,7 +82,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
+		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
 			if (count == 0) {
 
