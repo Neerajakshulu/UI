@@ -18,6 +18,11 @@ import base.TestBase;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+/**
+ * This class contains all the methods related to Post record view page
+ * @author uc205521
+ *
+ */
 public class PostRecordViewPage extends TestBase {
 
 	PageFactory pf;
@@ -99,6 +104,12 @@ public class PostRecordViewPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_STOP_WATCH_CSS.toString())).click();
 	}
 
+	/**
+	 * This method performs like or Un-like operations on posts and validate the count increment. 
+	 * @param test
+	 * @return 
+	 * @throws InterruptedException
+	 */
 	public boolean validateLikeAndUnlikePostActions(ExtentTest test) throws InterruptedException {
 		boolean result;
 		WebElement appreciationButton;
@@ -169,7 +180,6 @@ public class PostRecordViewPage extends TestBase {
 		waitForPageLoad(ob);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
-		// pf.waitTime(10);
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
@@ -182,6 +192,11 @@ public class PostRecordViewPage extends TestBase {
 
 	}
 
+	/**
+	 * This method is to validate the Post Creation date in Post record view page.
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean verifyPostCreationDate() throws Exception {
 		boolean isDisplayed = false;
 		waitForPageLoad(ob);
@@ -202,14 +217,18 @@ public class PostRecordViewPage extends TestBase {
 
 		return isDisplayed;
 	}
-
+	
+	/**
+	 * This method is to validate the Post modification date in Post record view page.
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean verifyPostEditedDate() throws Exception {
 		boolean isDisplayed = false;
 		BrowserWaits.waitTime(5);
 		waitForPageLoad(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS.toString()), 180);
-		// pf.waitTime(6);
 		List<WebElement> timestamp = pf.getBrowserActionInstance(ob).getElements(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS);
 		String time;
@@ -225,24 +244,37 @@ public class PostRecordViewPage extends TestBase {
 		return isDisplayed;
 	}
 
+	/**
+	 * This method captures and returns the post title from Post record view page
+	 * @return
+	 * @throws Exception
+	 */
 	public String getPostTitle() throws Exception {
-		// pf.waitTime(6);
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS)
 				.getText();
 	}
-
+	/**
+	 * This method captures and returns the post content from Post record view page
+	 * @return
+	 * @throws Exception
+	 */
 	public String getPostContent() throws Exception {
-		// pf.waitTime(6);
-
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS)
 				.getText();
 	}
 
+	/**
+	 * This method takes the link as as argument and validates that the post content
+	 * contains the specified link.
+	 * @param string
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean validatePostContentForExternalLink(String string) throws Exception {
 		BrowserWaits.waitTime(6);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
@@ -256,18 +288,28 @@ public class PostRecordViewPage extends TestBase {
 
 	}
 
+	/**
+	 * This method takes the link as as argument and click on it.
+	 * @param string
+	 * @return
+	 * @throws Exception
+	 */
 	public void clickExternalLinkInPostContent(String url) throws Exception {
-		// pf.waitTime(6);
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		WebElement content = pf.getBrowserActionInstance(ob).getElement(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
 		content.findElement(By.linkText(url)).click();
-		// pf.waitTime(6);
 		waitForPageLoad(ob);
 	}
 
+	/**
+	 * This method validates the page URL
+	 * @param url
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean validateURL(String url) throws Exception {
 		waitForPageLoad(ob);
 		if (ob.getCurrentUrl().toLowerCase().contains(url.toLowerCase()))
@@ -276,6 +318,10 @@ public class PostRecordViewPage extends TestBase {
 			return false;
 	}
 
+	/**
+	 * Method to click on post author name in Post record view page.
+	 * @throws Exception
+	 */
 	public void clickOnAuthorName() throws Exception {
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
@@ -284,6 +330,10 @@ public class PostRecordViewPage extends TestBase {
 				.toString())));
 	}
 
+	/**
+	 * Method to check whether comment count is displayed in Post record view page
+	 * @return
+	 */
 	public boolean isCommentCountDisplayed() {
 		boolean result = false;
 		try {
@@ -300,7 +350,10 @@ public class PostRecordViewPage extends TestBase {
 
 		return result;
 	}
-
+	/**
+	 * Method to check whether like count is displayed in Post record view page
+	 * @return
+	 */
 	public boolean isLikeCountDisplayed() {
 		boolean result = false;
 		try {
@@ -317,7 +370,10 @@ public class PostRecordViewPage extends TestBase {
 
 		return result;
 	}
-
+	/**
+	 * Method to check whether Like button is displayed in Post record view page
+	 * @return
+	 */
 	public boolean isLikeButtonDisplayed() {
 		boolean result = false;
 		try {
@@ -333,7 +389,10 @@ public class PostRecordViewPage extends TestBase {
 
 		return result;
 	}
-
+	/**
+	 * Method to check whether Follow/Un-follow button is displayed in Post record view page
+	 * @return
+	 */
 	public boolean IsFollowOrUnfollowButtonDispayed() {
 		boolean result = false;
 		try {
@@ -350,6 +409,12 @@ public class PostRecordViewPage extends TestBase {
 		return result;
 	}
 
+	
+	/**
+	 * This method validates the follow or un follow function in Post record view page.
+	 * @param test
+	 * @throws InterruptedException
+	 */
 	public void validateFollowOrUnfollow(ExtentTest test) throws InterruptedException {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
@@ -383,8 +448,12 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Metod returns the count of the comments on post record view page.
+	 * @return
+	 * @throws Exception
+	 */
 	public int getCommentCount() throws Exception {
-		// pf.waitTime(10);
 		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
@@ -396,6 +465,11 @@ public class PostRecordViewPage extends TestBase {
 		return Integer.parseInt(count);
 	}
 
+	/**
+	 * Method validates that specified comment is displayed in Post record view page. 
+	 * @param comment
+	 * @param test
+	 */
 	public void validateCommentNewlyAdded(String comment,
 			ExtentTest test) {
 
@@ -411,25 +485,26 @@ public class PostRecordViewPage extends TestBase {
 
 	}
 
+	/**
+	 * Method to share the records on Facebook
+	 * @param fbusername
+	 * @param fbpassword
+	 * @throws Exception
+	 */
 	public void shareRecordOnFB(String fbusername,
 			String fbpassword) throws Exception {
-		// test.log(LogStatus.INFO,"Sharing Article on Facebook");
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));
-		// pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-
+		
 		String PARENT_WINDOW = ob.getWindowHandle();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
-		// System.out.println("window hanles-->"+child_window_handles.size());
 		for (String child_window_handle : child_window_handles) {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
-				// maximizeWindow();
-				// System.out.println("child window--->"+ob.getTitle());
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS);
 				pf.getBrowserActionInstance(ob).enterFieldValue(
@@ -446,15 +521,18 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to share the records on LinkedIn
+	 * @param liusername
+	 * @param lipassword
+	 * @throws Exception
+	 */
 	public void shareOnLI(String liusername,
 			String lipassword) throws Exception {
-		// test.log(LogStatus.INFO,"Sharing Article on LinkedIn");
-		waitForElementTobeVisible(ob,
+			waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));
-		// pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-
 		String PARENT_WINDOW = ob.getWindowHandle();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
@@ -486,15 +564,18 @@ public class PostRecordViewPage extends TestBase {
 
 	}
 
+	/**
+	 * Method to share the records on Twitter
+	 * @param tusername
+	 * @param tpassword
+	 * @throws Exception
+	 */
 	public void shareOnTwitter(String tusername,
 			String tpassword) throws Exception {
-
-		// test.log(LogStatus.INFO,"Sharing Article on Twitter");
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));
-		// pf.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		String rvPageurl = ob.getCurrentUrl();
 		pf.getBrowserActionInstance(ob)
@@ -502,7 +583,6 @@ public class PostRecordViewPage extends TestBase {
 		ob.manage().window().maximize();
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
-		// System.out.println("window hanles-->"+child_window_handles.size());
 		for (String child_window_handle : child_window_handles) {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
@@ -544,6 +624,11 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(2);
 	}
 
+	/**
+	 * Method to validate the appreciate or un appreciate functionality of the comments.
+	 * @param test
+	 * @throws Exception
+	 */
 	public void validateAppreciationComment(ExtentTest test) throws Exception {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
@@ -551,9 +636,6 @@ public class PostRecordViewPage extends TestBase {
 		System.out.println("size of total elemntes-->" + apprDivs.size());
 		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
 				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
-
-		// List<WebElement>
-		// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
 		System.out.println("app sub divs-->"
 				+ apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
 		scrollingToElementofAPage();
@@ -595,6 +677,11 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to validate whether a commented is flagged or unflagged.
+	 * @param test
+	 * @throws Exception
+	 */
 	public void validateFlagAndUnflagActionOnPost(ExtentTest test) throws Exception {
 		waitForAjax(ob);
 		String attribute = ob.findElement(
@@ -619,6 +706,9 @@ public class PostRecordViewPage extends TestBase {
 
 	}
 
+	/**
+	 * Method to click on FLAG or UNFLAG on the comment
+	 */
 	private void flagOrUnflagAPost() {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
@@ -626,6 +716,10 @@ public class PostRecordViewPage extends TestBase {
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
 	}
 
+	/**
+	 * Method to delete the post from Post record view page
+	 * @throws Exception
+	 */
 	public void deletePost() throws Exception {
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
@@ -639,8 +733,12 @@ public class PostRecordViewPage extends TestBase {
 		waitForAjax(ob);
 	}
 
+	/**
+	 * Method to add links to the comments.
+	 * @param url
+	 * @throws Exception
+	 */
 	public void addExternalLinkComments(String url) throws Exception {
-		// pf.waitTime(5);
 		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		commentArea.click();
@@ -652,7 +750,11 @@ public class PostRecordViewPage extends TestBase {
 		alert.accept();
 		BrowserWaits.waitTime(5);
 	}
-
+	/**
+	 * Method to validate a specified link added in the comment.
+	 * @param url
+	 * @throws Exception
+	 */
 	public boolean validateCommentForExternalLink(String url) throws Exception {
 		BrowserWaits.waitTime(6);
 		pf.getBrowserWaitsInstance(ob).waitForPageLoad(ob);
@@ -666,6 +768,11 @@ public class PostRecordViewPage extends TestBase {
 			return false;
 	}
 
+	/**
+	 * Method to click on specified link added in the comment.
+	 * @param url
+	 * @throws Exception
+	 */
 	public void clickExternalLinkInComments(String url) throws Exception {
 		BrowserWaits.waitTime(6);
 		waitForAllElementsToBePresent(ob,
@@ -677,6 +784,9 @@ public class PostRecordViewPage extends TestBase {
 		waitForPageLoad(ob);
 	}
 
+	/**
+	 * Method loads up to 40 comments in a record view page.
+	 */
 	public void loadComments() {
 		boolean isPresent = true;
 		WebElement more;
@@ -700,6 +810,10 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to click FlAG button on the comments in record view page
+	 * @param currentuser
+	 */
 	public void clickOnFlagOfOtherUserComments(String currentuser) {
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 		List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
@@ -721,6 +835,9 @@ public class PostRecordViewPage extends TestBase {
 		}
 	}
 
+	/**
+	 * Method to access the article which has comments added to it.
+	 */
 	public void searchForArticleWithComments() {
 		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 		List<WebElement> itemList;
