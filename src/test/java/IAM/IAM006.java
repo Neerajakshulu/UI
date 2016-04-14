@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -20,7 +20,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM011 extends TestBase {
+public class IAM006 extends TestBase {
 
 	String runmodes[] = null;
 	static int count = -1;
@@ -34,18 +34,17 @@ public class IAM011 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify CONFIRM PASSWORD field in new TR user registration page").assignCategory(
-				"IAM");
+		test = extent.startTest(var, "Verify LAST NAME field in new TR user registration page").assignCategory("IAM");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA11(String password,
+	public void testcaseA6(String charLength,
 			String validity) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -72,7 +71,15 @@ public class IAM011 extends TestBase {
 
 		try {
 
-			test.log(LogStatus.INFO, password + " -- " + validity);
+			String characterLength = charLength.substring(0, 2);
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
+					+ "--->");
+			test.log(LogStatus.INFO, characterLength + " -- " + validity);
+
+			System.out.println(characterLength);
+			System.out.println(Integer.parseInt(characterLength));
+			String last_name = generateRandomName(Integer.parseInt(characterLength));
+			System.out.println(last_name);
 
 			// selenium code
 			openBrowser();
@@ -92,18 +99,16 @@ public class IAM011 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 
 			// Create new TR account
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys("Transaction@2");
-			ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_lastName_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys(last_name);
+			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
 
-			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_confirmPasswordError_label")));
+			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_lastNameError_label")));
 
 			if (validity.equalsIgnoreCase("YES")) {
 
@@ -138,8 +143,8 @@ public class IAM011 extends TestBase {
 					return;
 				}
 
-				String errorText = ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label"))).getText();
-				if (!compareStrings("Passwords do not match.", errorText)) {
+				String errorText = ob.findElement(By.id(OR.getProperty("reg_lastNameError_label"))).getText();
+				if (!compareStrings("Please enter no more than 70 characters.", errorText)) {
 
 					fail = true;// excel
 					test.log(LogStatus.FAIL, "Error text is incorrect");// extent report

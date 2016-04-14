@@ -191,7 +191,7 @@ public class TestBase {
 
 			// System.out.println(host);
 			// xls file
-			suiteAxls = new Xls_Reader("src/test/resources/xls/A suite.xlsx");
+			suiteAxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
 			suiteBxls = new Xls_Reader("src/test/resources/xls/B suite.xlsx");
 			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
 			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
@@ -834,7 +834,7 @@ public class TestBase {
 	public String returnExcelPath(char ch) {
 
 		if (ch == 'A')
-			return "src/test/resources/xls/A suite.xlsx";
+			return "src/test/resources/xls/IAM.xlsx";
 		else if (ch == 'B')
 			return "src/test/resources/xls/B suite.xlsx";
 		else if (ch == 'C')

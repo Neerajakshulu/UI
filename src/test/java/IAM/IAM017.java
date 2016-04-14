@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -22,22 +22,28 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM023 extends TestBase {
+public class IAM017 extends TestBase {
 
 	static int status = 1;
 
+	// Following is the list of status:
+	// 1--->PASS
+	// 2--->FAIL
+	// 3--->SKIP
+	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify change password link in the account page is working correctly.")
+		test = extent.startTest(var, "Verify that name of a user is truncated using ellipse if the name is very long")
 				.assignCategory("IAM");
 
 	}
 
 	@Test
-	public void testCaseA23() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+	public void testcaseA17() throws Exception {
+
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -53,9 +59,10 @@ public class IAM023 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
+
 			String password = "Transaction@2";
-			String first_name = "disco";
-			String last_name = "dancer";
+			String first_name = "firstfirstfirstfirstfiirstfiirstfirstfirst";
+			String last_name = "lastlastlastlastlast";
 
 			// 1)Create a new user
 			// 2)Login with new user and logout
@@ -77,6 +84,8 @@ public class IAM023 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
+
+			System.out.println(email);
 
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			//
@@ -117,50 +126,30 @@ public class IAM023 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 10);
-			ob.findElement(By.xpath(OR.getProperty("change_password_link"))).click();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_newPassword_textBox")), 10);
-			// changing the passowrd
-			ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 10);
-			String text = ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
-			String expected_text = "Password updated successfully.";
-			if (!StringContains(text, expected_text)) {
+			String actual_name = ob.findElement(By.xpath(OR.getProperty("header_label") + "//img")).getAttribute(
+					"title");
+			// System.out.println(actual_name);
+			String expected_name = "firstfirstfirstfirstfiirstfiirstfirstfirst lastlas ...";
+			if (!compareStrings(expected_name, actual_name)) {
 
-				test.log(LogStatus.FAIL, "Password not changed successfully");// extent reports
+				test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");// extent reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_password_not_changed_successfully")));// screenshot
+										+ "_long_name_not_getting_ellipsed_correctly")));// screenshot
 
 			}
-			ob.findElement(By.xpath("//a[contains(text(),'Project Neon')]")).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			logout();
 
-			// login with updated password again
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 10);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			logout();
-		} catch (Throwable t) {
+			closeBrowser();
+		}
+
+		catch (Throwable t) {
+
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
@@ -175,7 +164,8 @@ public class IAM023 extends TestBase {
 									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		closeBrowser();
+
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

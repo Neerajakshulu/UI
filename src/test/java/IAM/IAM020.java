@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -16,7 +16,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM015 extends TestBase {
+public class IAM020 extends TestBase {
 
 	static int status = 1;
 
@@ -29,17 +29,15 @@ public class IAM015 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that app doesn't allow the user to create a new account with an email id that has already been used")
+		test = extent.startTest(var, "Verify that CREATE A NEW PROJECT NEON ACCOUNT button is working correctly")
 				.assignCategory("IAM");
 
 	}
 
 	@Test
-	public void testcaseA15() throws Exception {
+	public void testcaseA20() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -65,50 +63,24 @@ public class IAM015 extends TestBase {
 			}
 			clearCookies();
 
-			// Navigate to TR login page and login with valid TR credentials
-			// ob.get(CONFIG.getProperty("testSiteName"));
+			// Navigate to LI login page
 			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("new_TR_User_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 15);
 
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
+			if (!checkElementPresence("reg_register_button")) {
 
-			// Create new TR account
-			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
-
-			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-
-			if (!checkElementPresence_id("reg_emailError_label")) {
-
-				test.log(LogStatus.FAIL,
-						"User able to create a new TR account with an email id that has already been used");// extent
+				test.log(LogStatus.FAIL, "CREATE A NEW PROJECT NEON ACCOUNT button not working correctly");// extent
 																											// reports
 				status = 2;// excel
 				test.log(
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));// screenshot
-
-			}
-
-			String error_message = ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
-			// System.out.println(error_message);
-
-			if (!compareStrings("Your id has already been created, please sign in.", error_message)) {
-
-				test.log(LogStatus.FAIL, "Error text is incorrect");// extent reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_error_text")));// screenshot
+										+ "_CREATE_A_NEW_PROJECT_NEON_ACCOUNT_button_not_working")));// screenshot
 
 			}
 
@@ -131,8 +103,8 @@ public class IAM015 extends TestBase {
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
-		}
 
+		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 

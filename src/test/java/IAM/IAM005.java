@@ -1,4 +1,4 @@
-package suiteA;
+package IAM;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -20,7 +20,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IAM012 extends TestBase {
+public class IAM005 extends TestBase {
 
 	String runmodes[] = null;
 	static int count = -1;
@@ -34,21 +34,17 @@ public class IAM012 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that PASSWORD field in new TR user registration page").assignCategory(
-				"IAM");
+		test = extent.startTest(var, "Verify FIRST NAME field in new TR user registration page").assignCategory("IAM");
 		// test.log(LogStatus.INFO, "****************************");
-
 		// load the runmodes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA12(String password,
-			String strength,
-			String checks,
+	public void testcaseA5(String charLength,
 			String validity) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "A Suite");
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -75,13 +71,15 @@ public class IAM012 extends TestBase {
 
 		try {
 
+			String characterLength = charLength.substring(0, 2);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
 					+ "--->");
-			test.log(LogStatus.INFO, password + " -- " + validity);
+			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			String temp = checks.substring(0, 1);
-			int tickMarks = Integer.parseInt(temp);
-			String email = generateRandomName(5) + "@abc.com";
+			System.out.println(characterLength);
+			System.out.println(Integer.parseInt(characterLength));
+			String first_name = generateRandomName(Integer.parseInt(characterLength));
+			System.out.println(first_name);
 
 			// selenium code
 			openBrowser();
@@ -101,88 +99,64 @@ public class IAM012 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
+
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 
 			// Create new TR account
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_firstName_textBox")), 30);
+			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
+			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
+			//
 
-			List<WebElement> tm_list = ob.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_label")));
-			// System.out.println(tm_list.size());
-			if (!compareNumbers(tickMarks, tm_list.size())) {
-
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Password strength checking functionality not working correctly");// extent
-																											// report
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_password_strength_checking_functionality_not_working_correctly_"
-										+ (count + 1))));
-
-			}
-
-			String password_strength = ob.findElement(By.id(OR.getProperty("reg_passwordStrength_label"))).getText();
-			if (!compareStrings(strength, password_strength)) {
-
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Password strength not displayed correctly");// extent report
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_password_strength_not_displayed_correctly_" + (count + 1))));
-
-			}
-
-			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys("ricky");
-			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys("behl");
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
-			ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-			Thread.sleep(5000);
+			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_firstNameError_label")));
 
 			if (validity.equalsIgnoreCase("YES")) {
 
-				// Verifying that confirmation email is sent
-
-				if (!checkElementPresence("reg_accountConfirmationMessage_label")) {
+				// verifying that error message is not getting displayed
+				if (!compareNumbers(0, errorList.size())) {
 
 					fail = true;// excel
-					test.log(LogStatus.FAIL,
-							"User not able to register himself even when the password strength is strong");// extent
-																											// report
+					test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent report
 					test.log(
 							LogStatus.INFO,
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_register_himself_even_when_password_strength_is_strong_"
-											+ (count + 1))));
-
+											+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
+					closeBrowser();
+					return;
 				}
 
 			}
 
 			else {
 
-				if (!checkElementPresence("reg_passwordStrengthMessageOnSubmit_label")) {
+				if (!compareNumbers(1, errorList.size())) {
 
 					fail = true;// excel
-					test.log(LogStatus.FAIL,
-							"Either password strength message getting displayed is incorrect or unexpected login happened");// extent
-																															// report
+					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
 					test.log(
 							LogStatus.INFO,
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_password_strength_message_incorrect_or_unexpected_login_" + (count + 1))));
+											+ "_error_message_not_getting_displayed_" + (count + 1))));
+					closeBrowser();
+					return;
+				}
+
+				String errorText = ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).getText();
+				if (!compareStrings("Please enter no more than 70 characters.", errorText)) {
+
+					fail = true;// excel
+					test.log(LogStatus.FAIL, "Error text is incorrect");// extent report
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_incorrect_error_text_" + (count + 1))));
+					closeBrowser();
+					return;
 
 				}
 
@@ -244,6 +218,7 @@ public class IAM012 extends TestBase {
 		 * TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
 		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "SKIP");
 		 */
+
 	}
 
 	@DataProvider
