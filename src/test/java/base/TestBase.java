@@ -57,8 +57,8 @@ public class TestBase {
 	public static Properties OR = null;
 	public static Properties LOGIN = null;
 	public static Xls_Reader suiteXls = null;
-	public static Xls_Reader suiteAxls = null;
-	public static Xls_Reader suiteBxls = null;
+	public static Xls_Reader iamxls = null;
+	public static Xls_Reader searchxls = null;
 	public static Xls_Reader suiteCxls = null;
 	public static Xls_Reader suiteDxls = null;
 	public static Xls_Reader watchlistXls = null;
@@ -191,8 +191,8 @@ public class TestBase {
 
 			// System.out.println(host);
 			// xls file
-			suiteAxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
-			suiteBxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
+			iamxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
+			searchxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
 			suiteCxls = new Xls_Reader("src/test/resources/xls/C suite.xlsx");
 			suiteDxls = new Xls_Reader("src/test/resources/xls/D suite.xlsx");
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");

@@ -38,7 +38,7 @@ public class IAM011 extends TestBase {
 				"IAM");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests
-		runmodes = TestUtil.getDataSetRunmodes(suiteAxls, this.getClass().getSimpleName());
+		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
@@ -46,14 +46,14 @@ public class IAM011 extends TestBase {
 			String validity) throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteAxls, this.getClass().getSimpleName());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-			// TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "SKIP");
+			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
+			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -66,7 +66,7 @@ public class IAM011 extends TestBase {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count+2, "SKIP");
+			// TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
@@ -184,14 +184,14 @@ public class IAM011 extends TestBase {
 	@AfterMethod
 	public void reportDataSetResult() {
 		if (skip)
-			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count + 2, "SKIP");
+			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "SKIP");
 
 		else if (fail) {
 
 			status = 2;
-			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count + 2, "FAIL");
+			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "FAIL");
 		} else
-			TestUtil.reportDataSetResult(suiteAxls, this.getClass().getSimpleName(), count + 2, "PASS");
+			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "PASS");
 
 		skip = false;
 		fail = false;
@@ -204,19 +204,19 @@ public class IAM011 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteAxls, "Test Cases",
-		 * TestUtil.getRowNum(suiteAxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return TestUtil.getData(suiteAxls, this.getClass().getSimpleName());
+		return TestUtil.getData(iamxls, this.getClass().getSimpleName());
 	}
 
 }

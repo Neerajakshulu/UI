@@ -41,7 +41,7 @@ public class Search126 extends TestBase {
 	public void testcaseB126() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(suiteBxls, this.getClass().getSimpleName());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -148,14 +148,14 @@ public class Search126 extends TestBase {
 		extent.endTest(test);
 
 		// if (status == 1)
-		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "PASS");
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
 		// else if (status == 2)
-		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "FAIL");
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
 		// else
-		// TestUtil.reportDataSetResult(suiteBxls, "Test Cases",
-		// TestUtil.getRowNum(suiteBxls, this.getClass().getSimpleName()), "SKIP");
+		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
+		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 
