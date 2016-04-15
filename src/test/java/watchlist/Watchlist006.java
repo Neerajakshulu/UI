@@ -80,11 +80,11 @@ public class Watchlist006 extends TestBase {
 			}
 			clearCookies();
 
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME"), LOGIN.getProperty("PASSWORD"));
+			ob.navigate().to(host);
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for patents

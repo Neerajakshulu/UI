@@ -359,7 +359,48 @@
 		</classes>
 	</test>
 
+<!-- iam test cases -->
+	<test name="IAM001">
+	<classes>
+		<class name="iam.IAM001"></class>
+	</classes>
+	</test>
 
+	<test name="IAM002">
+		<classes>
+			<class name="iam.IAM002"></class>
+		</classes>
+	</test>
+
+	<test name="IAM003">
+		<classes>
+			<class name="iam.IAM003"></class>
+		</classes>
+	</test>
+
+	<test name="IAM004">
+		<classes>
+			<class name="iam.IAM004"></class>
+		</classes>
+	</test>
+
+	<test name="IAM016">
+		<classes>
+			<class name="iam.IAM016"></class>
+		</classes>
+	</test>
+	
+	<test name="IAM021">
+		<classes>
+			<class name="iam.IAM021"></class>
+		</classes>
+	</test>
+	
+	<test name="IAM023">
+		<classes>
+			<class name="iam.IAM023"></class>
+		</classes>
+	</test>
 
 
 
