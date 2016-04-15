@@ -68,6 +68,8 @@
 	</test>
 
 	<test name="Authoring10">
+		<parameter name="username" value="3ksdi6+se3xrozg@sharklasers.com" />
+		<parameter name="password" value="Welcome123" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
@@ -414,6 +416,8 @@
 	</test>
 
 	<test name="Authoring64">
+		<parameter name="username" value="avinash.p1229@gmail.com"></parameter>
+	<parameter name="password" value="1Platform"></parameter>
 		<classes>
 			<class name="Authoring.Authoring64"></class>
 		</classes>
@@ -438,6 +442,8 @@
 	</test>
 
 	<test name="Authoring67">
+		<parameter name="username" value="3kt23h+27ptj43glc@sharklasers.com"></parameter>
+		<parameter name="password" value="Welcome123"></parameter>
 		<classes>
 			<class name="Authoring.Authoring67"></class>
 		</classes>

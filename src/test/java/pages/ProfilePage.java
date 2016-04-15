@@ -1348,4 +1348,17 @@ public class ProfilePage extends TestBase {
 		}
 	}
 
+	
+	public boolean validateExternalLinkInPostModal(String url) throws Exception {
+		BrowserWaits.waitTime(10);
+		waitForElementTobeClickable(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
+		
+		WebElement content=ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()));
+		if (content.findElements(By.linkText(url)).size() != 0)
+			return true;
+		else
+			return false;
+	}
+	
 }

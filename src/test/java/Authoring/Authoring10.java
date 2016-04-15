@@ -91,7 +91,7 @@ public class Authoring10 extends TestBase {
 			String completeArticle) throws Exception {
 		try {
 			waitForTRHomePage();
-			loginAs("USERNAME13", "PASSWORD13");
+			loginAs(username, password);
 			searchArticle(article);
 			chooseArticle(completeArticle);
 
