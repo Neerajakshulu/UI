@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -1139,4 +1140,8 @@ public class TestBase {
 
 	}
 
+	public Timestamp getCurrentTimeStamp() {
+
+		return new Timestamp(new Date().getTime());
+	}
 }
