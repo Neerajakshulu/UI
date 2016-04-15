@@ -62,7 +62,7 @@ public class Notifications017 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 			// Logging in with User2
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			Thread.sleep(8000);
 

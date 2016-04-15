@@ -78,7 +78,7 @@ public class Notifications024 extends TestBase {
 			// Login with first user and check if notification is present
 			try{
 				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));
-				Assert.assertTrue(elements.size()==1);
+				Assert.assertTrue(elements.size()>=1);
 				test.log(LogStatus.INFO,"user is able to see most viewed documents in home page");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 				pf.getLoginTRInstance(ob).logOutApp();
