@@ -6,23 +6,360 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
+	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+	<parameter name="password" value="Welcome01" />
+
 	<test name="Authoring1">
 		<classes>
-			<class name="suiteC.Authoring1"></class>
+			<class name="Authoring.Authoring1"></class>
 		</classes>
 	</test>
 
 	<test name="Search2">
 		<classes>
-			<class name="suiteB.Search2"></class>
+			<class name="search.Search2"></class>
 		</classes>
 	</test>
 
 	<test name="Search3">
 		<classes>
-			<class name="suiteB.Search3"></class>
+			<class name="search.Search3"></class>
 		</classes>
 	</test>
+
+	<test name="Search45">
+		<classes>
+			<class name="search.Search45"></class>
+		</classes>
+	</test>
+
+	<test name="Search46">
+		<classes>
+			<class name="search.Search46"></class>
+		</classes>
+	</test>
+
+	<test name="Search58">
+		<classes>
+			<class name="search.Search58"></class>
+		</classes>
+	</test>
+
+	<test name="Search48">
+		<classes>
+			<class name="search.Search48"></class>
+		</classes>
+	</test>
+
+	<test name="Search49">
+		<classes>
+			<class name="search.Search49"></class>
+		</classes>
+	</test>
+
+	<test name="Search32">
+		<classes>
+			<class name="search.Search32"></class>
+		</classes>
+	</test>
+
+	<test name="Search81">
+		<classes>
+			<class name="search.Search81"></class>
+		</classes>
+	</test>
+
+	<test name="Search97">
+		<classes>
+			<class name="search.Search97"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search59">
+		<classes>
+			<class name="search.Search59"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search50">
+		<classes>
+			<class name="search.Search50"></class>
+		</classes>
+	</test>
+
+	<test name="Search54">
+		<classes>
+			<class name="search.Search54"></class>
+		</classes>
+	</test>
+
+	<test name="Search90">
+		<classes>
+			<class name="search.Search90"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search39">
+		<classes>
+			<class name="search.Search39"></class>
+		</classes>
+	</test>
+
+	<test name="Search40">
+		<classes>
+			<class name="search.Search40"></class>
+		</classes>
+	</test>
+
+	<test name="Search70">
+		<classes>
+			<class name="search.Search70"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search2">
+		<classes>
+			<class name="search.Search2"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search60">
+		<classes>
+			<class name="search.Search60"></class>
+		</classes>
+	</test>
+
+	<test name="Search51">
+		<classes>
+			<class name="search.Search51"></class>
+		</classes>
+	</test>
+
+	<test name="Search55">
+		<classes>
+			<class name="search.Search55"></class>
+		</classes>
+	</test>
+
+	<test name="Search36">
+		<classes>
+			<class name="search.Search36"></class>
+		</classes>
+	</test>
+
+	<test name="Search91">
+		<classes>
+			<class name="search.Search91"></class>
+		</classes>
+	</test>
+
+	<test name="Search109">
+		<classes>
+			<class name="search.Search109"></class>
+		</classes>
+	</test>
+
+	<test name="Search71">
+		<classes>
+			<class name="search.Search71"></class>
+		</classes>
+	</test>
+
+	<test name="Search89">
+		<classes>
+			<class name="search.Search89"></class>
+		</classes>
+	</test>
+
+	<test name="Search61">
+		<classes>
+			<class name="search.Search61"></class>
+		</classes>
+	</test>
+
+	<test name="Search52">
+		<classes>
+			<class name="search.Search52"></class>
+		</classes>
+	</test>
+
+	<test name="Search56">
+		<classes>
+			<class name="search.Search56"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search106">
+		<classes>
+			<class name="search.Search106"></class>
+		</classes>
+	</test>
+
+	<test name="Search44">
+		<classes>
+			<class name="search.Search44"></class>
+		</classes>
+	</test>
+
+	<test name="Search72">
+		<classes>
+			<class name="search.Search72"></class>
+		</classes>
+	</test>
+
+	<test name="Search62">
+		<classes>
+			<class name="search.Search62"></class>
+		</classes>
+	</test>
+
+	<test name="Search53">
+		<classes>
+			<class name="search.Search53"></class>
+		</classes>
+	</test>
+
+	<test name="Search57">
+		<classes>
+			<class name="search.Search57"></class>
+		</classes>
+	</test>
+
+	<test name="Search99">
+		<classes>
+			<class name="search.Search99"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search123">
+		<classes>
+			<class name="search.Search123"></class>
+		</classes>
+	</test>
+
+	<test name="Search73">
+		<classes>
+			<class name="search.Search73"></class>
+		</classes>
+	</test>
+
+	<test name="Search66">
+		<classes>
+			<class name="search.Search66"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search74">
+		<classes>
+			<class name="search.Search74"></class>
+		</classes>
+	</test>
+
+	<test name="Search75">
+		<classes>
+			<class name="search.Search75"></class>
+		</classes>
+	</test>
+
+	<test name="Search76">
+		<classes>
+			<class name="search.Search76"></class>
+		</classes>
+	</test>
+
+	<test name="Search77">
+		<classes>
+			<class name="search.Search77"></class>
+		</classes>
+	</test>
+
+	<test name="Search87">
+		<classes>
+			<class name="search.Search87"></class>
+		</classes>
+	</test>
+
+	<test name="Search88">
+		<classes>
+			<class name="search.Search88"></class>
+		</classes>
+	</test>
+
+	<test name="Search79">
+		<classes>
+			<class name="search.Search79"></class>
+		</classes>
+	</test>
+
+	<test name="Search93">
+		<classes>
+			<class name="search.Search93"></class>
+		</classes>
+	</test>
+
+	<test name="Search94">
+		<classes>
+			<class name="search.Search94"></class>
+		</classes>
+	</test>
+
+	<!-- Profile Sanity Testcases -->
+	<test name="Validate_View_Profile">
+		<classes>
+			<class name="Profile.Profile5"></class>
+		</classes>
+	</test>
+
+	<test name="edit_User_Own_Profile">
+		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
+		<classes>
+			<class name="Profile.Profile6"></class>
+		</classes>
+	</test>
+
+	<test name="Profile_Country_Typeahead">
+		<parameter name="countryTypeahead" value="In" />
+		<parameter name="fullCountry" value="India" />
+		<classes>
+			<class name="Profile.Profile27"></class>
+		</classes>
+	</test>
+
+	<test name="Validate_Add_Topics">
+		<parameter name="topics" value="tes|aut|dru" />
+		<classes>
+			<class name="Profile.Profile11"></class>
+		</classes>
+	</test>
+
+	<test name="Others_Profile_View">
+		<classes>
+			<class name="Profile.Profile3"></class>
+		</classes>
+	</test>
+
+	<test name="Follow_UnFollow_Other_Profile_from_SearchResults">
+		<parameter name="profileName" value="chinna" />
+		<classes>
+			<class name="Profile.Profile1"></class>
+		</classes>
+	</test>
+
+	<test name="Follow_UnFollow_Other_Profile_from_ProfilePage">
+		<classes>
+			<class name="Profile.Profile2"></class>
+		</classes>
+	</test>
+
+
 
 
 

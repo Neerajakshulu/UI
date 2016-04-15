@@ -78,12 +78,10 @@ public class Watchlist022 extends TestBase {
 
 			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME"), LOGIN.getProperty("PASSWORD"));
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Deleting the newly created watch list

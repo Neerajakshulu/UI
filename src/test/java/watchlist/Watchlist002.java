@@ -77,14 +77,11 @@ public class Watchlist002 extends TestBase {
 			}
 			clearCookies();
 
-			// ob.get(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME"), LOGIN.getProperty("PASSWORD"));
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Searching for patent
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
