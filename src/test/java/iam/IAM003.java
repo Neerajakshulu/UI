@@ -74,8 +74,8 @@ public class IAM003 extends TestBase {
 			String password = "Transaction@2";
 
 			// Navigate to LI login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();

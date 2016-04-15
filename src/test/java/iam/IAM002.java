@@ -72,8 +72,8 @@ public class IAM002 extends TestBase {
 				clearCookies();
 
 				// Navigate to TR login page and login with valid TR credentials
-				// ob.navigate().to(host);
-				ob.navigate().to(CONFIG.getProperty("testSiteName"));
+				 ob.navigate().to(host);
+				//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 				//
 
 				// if :checking if user can login with uppercase email address

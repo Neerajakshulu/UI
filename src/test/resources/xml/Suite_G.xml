@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Sanity suite" parallel="tests" thread-count="5">
+<suite name="Sanity suite" parallel="tests" thread-count="10">
 
 
 	<listeners>
@@ -117,13 +117,6 @@
 	<test name="Search70">
 		<classes>
 			<class name="search.Search70"></class>
-		</classes>
-	</test>
-
-
-	<test name="Search2">
-		<classes>
-			<class name="search.Search2"></class>
 		</classes>
 	</test>
 
