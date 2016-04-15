@@ -66,14 +66,15 @@ public class Watchlist018 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			// 1)Create User2 and logout
+			// 1)Login as User2 and create watch list
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			ob.navigate().to(host);
+			// loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			String newWatchListDescription = "This is my newly created watch list";
 			// Create private watch list
 			createWatchList("private", newWatchlistName, newWatchListDescription);
@@ -86,8 +87,11 @@ public class Watchlist018 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			ob.navigate().to(host);
+			// loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			fn2 = LOGIN.getProperty("FN2");
+			ln2 = LOGIN.getProperty("LN2");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");

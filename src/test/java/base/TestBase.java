@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,7 +63,7 @@ public class TestBase {
 	public static Xls_Reader authoringxls = null;
 	public static Xls_Reader profilexls = null;
 	public static Xls_Reader watchlistXls = null;
-	public static Xls_Reader suiteFxls = null;
+	public static Xls_Reader notificationxls = null;
 
 	public static boolean isInitalized = false;
 	public WebDriver ob = null;
@@ -82,7 +83,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "F Suite")) {
+		if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
 			if (count == 0) {
 
@@ -196,7 +197,7 @@ public class TestBase {
 			authoringxls = new Xls_Reader("src/test/resources/xls/Authoring.xlsx");
 			profilexls = new Xls_Reader("src/test/resources/xls/Profile.xlsx");
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
-			suiteFxls = new Xls_Reader("src/test/resources/xls/F suite.xlsx");
+			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -502,8 +503,8 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		// ob.navigate().to(host);
-		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		 ob.navigate().to(host);
+//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
@@ -844,7 +845,7 @@ public class TestBase {
 		else if (ch == 'E')
 			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
-			return "src/test/resources/xls/F suite.xlsx";
+			return "src/test/resources/xls/Notifications.xlsx";
 		else
 			return "No such excel file present";
 
@@ -1139,4 +1140,8 @@ public class TestBase {
 
 	}
 
+	public Timestamp getCurrentTimeStamp() {
+
+		return new Timestamp(new Date().getTime());
+	}
 }
