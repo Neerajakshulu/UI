@@ -3,133 +3,158 @@
 
 	<test name="Test F1">
 		<classes>
-			<class name="Notifications.Notifications001"></class>
+			<class name="notifications.Notifications001"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test F2">
 		<classes>
-			<class name="Notifications.Notifications002"></class>
+			<class name="notifications.Notifications002"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test F3">
 		<classes>
-			<class name="Notifications.Notifications003"></class>
+			<class name="notifications.Notifications003"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test F4">
 		<classes>
-			<class name="Notifications.Notifications004"></class>
+			<class name="notifications.Notifications004"></class>
 		</classes>
 	</test>
 
 	<test name="Test F5">
 		<classes>
-			<class name="Notifications.Notifications005"></class>
+			<class name="notifications.Notifications005"></class>
 		</classes>
 	</test>
 
 	<test name="Test F6">
 		<classes>
-			<class name="Notifications.Notifications006"></class>
+			<class name="notifications.Notifications006"></class>
 		</classes>
 	</test>
 
 	<test name="Test F7">
 		<classes>
-			<class name="Notifications.Notifications007"></class>
+			<class name="notifications.Notifications007"></class>
 		</classes>
 	</test>
 
 	<test name="Test F8">
 		<classes>
-			<class name="Notifications.Notifications008"></class>
+			<class name="notifications.Notifications008"></class>
 		</classes>
 	</test>
 
 	<test name="Test F9">
 		<classes>
-			<class name="Notifications.Notifications009"></class>
+			<class name="notifications.Notifications009"></class>
 		</classes>
 	</test>
 
 	<test name="Test F10">
 		<classes>
-			<class name="Notifications.Notifications010"></class>
+			<class name="notifications.Notifications010"></class>
 		</classes>
 	</test>
 
 	<test name="Test F11">
 		<classes>
-			<class name="Notifications.Notifications011"></class>
+			<class name="notifications.Notifications011"></class>
 		</classes>
 	</test>
 
 	<test name="Test F12">
 		<classes>
-			<class name="Notifications.Notifications012"></class>
+			<class name="notifications.Notifications012"></class>
 		</classes>
 	</test>
 
 	<test name="Test F13">
 		<classes>
-			<class name="Notifications.Notifications013"></class>
+			<class name="notifications.Notifications013"></class>
 		</classes>
 	</test>
 
 	<test name="Test F14">
 		<classes>
-			<class name="Notifications.Notifications014"></class>
+			<class name="notifications.Notifications014"></class>
 		</classes>
 	</test>
 
 
 	<test name="Test F15">
 		<classes>
-			<class name="Notifications.Notifications015"></class>
+			<class name="notifications.Notifications015"></class>
 		</classes>
 	</test>
 
 	<test name="Test F16">
 		<classes>
-			<class name="Notifications.Notifications016"></class>
+			<class name="notifications.Notifications016"></class>
 		</classes>
 	</test>
 
 	<test name="Test F17">
 		<classes>
-			<class name="Notifications.Notifications017"></class>
+			<class name="notifications.Notifications017"></class>
 		</classes>
 	</test>
 
 	<test name="Test F18">
 		<classes>
-			<class name="Notifications.Notifications018"></class>
+			<class name="notifications.Notifications018"></class>
 		</classes>
 	</test>
 
 	<test name="Test F19">
 		<classes>
-			<class name="Notifications.Notifications019"></class>
+			<class name="notifications.Notifications019"></class>
 		</classes>
 	</test>
 
 	<test name="Test F20">
 		<classes>
-			<class name="Notifications.Notifications020"></class>
+			<class name="notifications.Notifications020"></class>
 		</classes>
 	</test>
 
 	<test name="Test F21">
 		<classes>
-			<class name="Notifications.Notifications021"></class>
+			<class name="notifications.Notifications021"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F23">
+		<classes>
+			<class name="notifications.Notifications023"></class>
 		</classes>
 	</test>
 
+
+	<test name="Test F24">
+		<classes>
+			<class name="notifications.Notifications024"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F22">
+		<classes>
+			<class name="notifications.Notifications022"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F25">
+		<classes>
+			<class name="notifications.Notifications025"></class>
+		</classes>
+	</test>
+	
 </suite>
 

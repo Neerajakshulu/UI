@@ -62,9 +62,14 @@ public class SearchResultsPage extends TestBase {
 			String profileName;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
+				
 				profileName = records.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_post_author_css")))
 						.getText();
+				String title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+						.getText();
+				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member"))
+				{
 				if (!profileName.equalsIgnoreCase(currentUserName)) {
 					jsClick(ob,
 							records.get(i).findElement(
@@ -72,7 +77,7 @@ public class SearchResultsPage extends TestBase {
 					isFound = true;
 					break;
 				}
-
+				}
 			}
 
 			if (isFound)

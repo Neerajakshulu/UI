@@ -76,16 +76,13 @@ public class Watchlist001 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			System.out.println("Begore opening site");
-			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+
+			ob.navigate().to(host);
 			System.out.println("After opening site");
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
-			// "Techm@2015");
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article

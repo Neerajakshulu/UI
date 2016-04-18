@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -82,74 +83,77 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if (TestUtil.isSuiteRunnable(suiteXls, "Watchlist") || TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
+		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
 
-			if (count == 0) {
+			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
-				if (flag < 3) {
+				if (count == 0) {
 
-					flag++;
+					if (flag < 3) {
 
-					try {
-						openBrowser();
-						maximizeWindow();
-						clearCookies();
-						fn1 = generateRandomName(8);
-						ln1 = generateRandomName(10);
-						System.out.println(fn1 + " " + ln1);
-						user1 = createNewUser(fn1, ln1);
-						System.out.println("User1:" + user1);
-						Thread.sleep(3000);
-						logout();
-						closeBrowser();
+						flag++;
 
-						// 2)Create User2 and follow User1
-						openBrowser();
-						maximizeWindow();
-						clearCookies();
-						fn2 = generateRandomName(8);
-						ln2 = generateRandomName(10);
-						System.out.println(fn2 + " " + ln2);
-						user2 = createNewUser(fn2, ln2);
-						System.out.println("User2:" + user2);
-						Thread.sleep(3000);
+						try {
+							openBrowser();
+							maximizeWindow();
+							clearCookies();
+							fn1 = generateRandomName(8);
+							ln1 = generateRandomName(10);
+							System.out.println(fn1 + " " + ln1);
+							user1 = createNewUser(fn1, ln1);
+							System.out.println("User1:" + user1);
+							Thread.sleep(3000);
+							logout();
+							closeBrowser();
 
-						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-						ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
-						ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+							// 2)Create User2 and follow User1
+							openBrowser();
+							maximizeWindow();
+							clearCookies();
+							fn2 = generateRandomName(8);
+							ln2 = generateRandomName(10);
+							System.out.println(fn2 + " " + ln2);
+							user2 = createNewUser(fn2, ln2);
+							System.out.println("User2:" + user2);
+							Thread.sleep(3000);
 
-						JavascriptExecutor jse = (JavascriptExecutor) ob;
-						jse.executeScript("scroll(0,-500)");
-						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
-						ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-						ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
+							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+							ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
+							ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-						Thread.sleep(3000);
+							JavascriptExecutor jse = (JavascriptExecutor) ob;
+							jse.executeScript("scroll(0,-500)");
+							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
+							ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
+							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
+							ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
 
-						logout();
-						closeBrowser();
-						System.out.println("User count:" + count);
-						count++;
+							Thread.sleep(3000);
+
+							logout();
+							closeBrowser();
+							System.out.println("User count:" + count);
+							count++;
+
+						}
+
+						catch (Throwable t) {
+
+							System.out.println("There is some problem in the creation of users");
+							System.out.println(t);
+
+							StringWriter errors = new StringWriter();
+							t.printStackTrace(new PrintWriter(errors));
+
+							test.addScreenCapture(captureScreenshot("UserCreationError" + this.getClass().getSimpleName()
+									+ "_user_creation_error_screenshot"));// screenshot
+
+						}
 
 					}
-
-					catch (Throwable t) {
-
-						System.out.println("There is some problem in the creation of users");
-						System.out.println(t);
-
-						StringWriter errors = new StringWriter();
-						t.printStackTrace(new PrintWriter(errors));
-
-						test.addScreenCapture(captureScreenshot("UserCreationError" + this.getClass().getSimpleName()
-								+ "_user_creation_error_screenshot"));// screenshot
-
-					}
-
 				}
-			}
 
+			}
 		}
 	}
 
@@ -1139,4 +1143,8 @@ public class TestBase {
 
 	}
 
+	public Timestamp getCurrentTimeStamp() {
+
+		return new Timestamp(new Date().getTime());
+	}
 }

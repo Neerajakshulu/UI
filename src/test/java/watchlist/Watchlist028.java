@@ -71,19 +71,9 @@ public class Watchlist028 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// user1 = "3m7azf+11i838rghpghs@sharklasers.com";
-			// user2 = "3m62ab+lpstnkat051k@sharklasers.com";
+			ob.navigate().to(host);
 			// 1)Login as user1 and comment on some patent
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 90);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 90);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(user1);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 90);
 			selectSearchTypeFromDropDown("Patents");
@@ -104,16 +94,10 @@ public class Watchlist028 extends TestBase {
 
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("TR_login_button")), 90);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeClickable(ob, By.id("userid"), 30);
-			ob.findElement(By.id("userid")).clear();
-			ob.findElement(By.id("userid")).sendKeys(user2);
-			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName();
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Navigating to the home page

@@ -83,10 +83,6 @@ public class Profile1 extends TestBase {
 			maximizeWindow();
 			test.log(LogStatus.INFO, "Login to Applicaton with TR valid Credentials");
 			ob.navigate().to(System.getProperty("host"));
-			/*
-			 * LoginTR lr=new LoginTR(ob); lr.waitForTRHomePage(); lr.enterTRCredentials(username, password);
-			 * lr.clickLogin();
-			 */
 
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -124,7 +120,7 @@ public class Profile1 extends TestBase {
 				pf.getSearchProfilePageInstance(ob).clickPeople();
 				pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
 			}
-
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
