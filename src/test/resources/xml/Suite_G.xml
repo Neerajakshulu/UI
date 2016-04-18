@@ -307,7 +307,7 @@
 	</test>
 
 	<test name="edit_User_Own_Profile">
-		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="user test automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
@@ -366,21 +366,9 @@
 		</classes>
 	</test>
 
-	<test name="IAM016">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test>
-
 	<test name="IAM021">
 		<classes>
 			<class name="iam.IAM021"></class>
-		</classes>
-	</test>
-
-	<test name="IAM023">
-		<classes>
-			<class name="iam.IAM023"></class>
 		</classes>
 	</test>
 
@@ -452,23 +440,6 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist027">
-		<classes>
-			<class name="watchlist.Watchlist027"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist028">
-		<classes>
-			<class name="watchlist.Watchlist028"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist029">
-		<classes>
-			<class name="watchlist.Watchlist029"></class>
-		</classes>
-	</test>
 
 <!-- Notifications Test Cases -->
 
@@ -514,7 +485,6 @@
 			<class name="notifications.Notifications025"></class>
 		</classes>
 	</test>
-
 
 <test name="Authoring43">
 		<classes>

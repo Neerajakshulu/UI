@@ -23,11 +23,10 @@ public class Profile20 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	/**
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * @throws Exception, When Something unexpected
+	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -129,6 +128,9 @@ public class Profile20 extends TestBase {
 
 	}
 
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 */
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

@@ -86,6 +86,7 @@ public class Search77 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
 			BrowserWaits.waitTime(2);
+			Thread.sleep(3000);
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("peopleTile")));
 			String text = myE.getText();
