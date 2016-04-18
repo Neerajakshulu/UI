@@ -870,4 +870,76 @@ public class PostRecordViewPage extends TestBase {
 			waitForAjax(ob);
 		}
 	}
+
+	
+		public boolean isFlagButtonDispalyedForOthersPost() {
+			boolean result = false;
+			try {
+
+				waitForElementTobeVisible(ob,
+						By.xpath(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()), 60);
+				if (ob.findElement(
+						By.xpath(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
+						.isDisplayed())
+					result = true;
+			} catch (Exception e) {
+				return false;
+			}
+
+			return result;
+		}
+
+		public boolean validateCommentForLink(String url) throws InterruptedException {
+			BrowserWaits.waitTime(10);
+			
+			waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
+			WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+			
+			if (commentArea.findElements(By.linkText(url)).size() != 0)
+				return true;
+			else
+				return false;
+			
+		}
+
+		public boolean validateFormatOptions(ExtentTest test) {
+		boolean result=true;
+			try {
+
+				waitForElementTobeVisible(ob,
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"),40);
+				if (!ob.findElement(
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"))
+						.isEnabled()){
+					test.log(LogStatus.FAIL, "Bold format option is not enable for comments");
+					result=false;
+				}
+				waitForElementTobeVisible(ob,
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"),40);
+				if (!ob.findElement(
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"))
+						.isEnabled()){
+					test.log(LogStatus.FAIL, "Italics format option is not enable for comments");
+					result=false;
+				}
+				
+				waitForElementTobeVisible(ob,
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"),40);
+				if (!ob.findElement(
+						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"))
+						.isEnabled()){
+					test.log(LogStatus.FAIL, "Insert link format option is not enable for comments");
+					result=false;
+				}
+				
+				
+					
+			} catch (Exception e) {
+				result= false;
+			}
+			return result;
+		}
+
+		
+	
 }

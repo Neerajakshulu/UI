@@ -3,6 +3,7 @@ package notifications;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -17,9 +18,10 @@ import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 
-public class Notifications017 extends TestBase {
 
+public class Notifications023 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -33,19 +35,18 @@ public class Notifications017 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 		test = extent
-				.startTest(
-						var,
-						"Verify that Featured Post is at the top of event stream after login and that feature post should be top in post tab of trending section")
-				.assignCategory("Notifications");
+				.startTest(var,
+						"Verify that user is able to view top commenters information in home page")
+						.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testcaseF17() throws Exception {
+	public void notifications023() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		int scrollCount=0;
 		if (!master_condition) {
 
 			status = 3;// excel
@@ -56,33 +57,35 @@ public class Notifications017 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			// Login with someother user and comment on the article in watchlist of the above user
 			ob.navigate().to(host);
-			// Logging in with User2
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(8000);
+			Thread.sleep(2000);
+			test.log(LogStatus.INFO," Scrolling down to find Top commenters--->");
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			while(scrollCount<15){
+				jse.executeScript("scroll(0,10000)");
+				Thread.sleep(3500);
+				scrollCount++;
+								
+			}
 
-			List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
-					.getProperty("all_notifications_in_homepage")));
-			String text = listOfNotifications.get(0).getText();
-			System.out.println(text);
-			Assert.assertTrue(text.contains("Featured post"));
-			test.log(LogStatus.PASS, "Featured post is at the top of the home page");
-			List<WebElement> listOfPostsLinks = ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
-			String expectedTitle = listOfPostsLinks.get(0).getText();
-			System.out.println(expectedTitle);
-
-			try {
-				Assert.assertTrue(text.contains(expectedTitle));
-				test.log(LogStatus.PASS, "Featured post is same as the post in trending section");
+			// Login with first user and check if notification is present
+			try{
+				List<WebElement> elements=ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
+				Assert.assertTrue(elements.size()==1);
+				test.log(LogStatus.INFO,"user is able to view top commenters information in home page");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Featured Post title is not same as the post in the trending section");// extent
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "user is not able to view top commenters information in home page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
@@ -91,12 +94,12 @@ public class Notifications017 extends TestBase {
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Featured Post title is not same as the post in the trending section")));// screenshot
+										+ "_user is not able to view top commenters information in home page")));// screenshot
 				closeBrowser();
 			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Featured Post is not at the top");// extent
+			test.log(LogStatus.FAIL, "Something happened");// extent
 			// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
@@ -105,7 +108,7 @@ public class Notifications017 extends TestBase {
 					LogStatus.INFO,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Featured Post is not at the top")));// screenshot
+									+ "_Something happened")));// screenshot
 			closeBrowser();
 		}
 	}

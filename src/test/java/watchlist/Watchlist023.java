@@ -70,18 +70,18 @@ public class Watchlist023 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			// ob.get(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// user2 = "3m62ab+lpstnkat051k@sharklasers.com";
-			// fn2 = "uwiyfdyd";
-			// ln2 = "uwiyfdydvb";
-			loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			ob.navigate().to(host);
+			// loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			fn2 = LOGIN.getProperty("FN2");
+			ln2 = LOGIN.getProperty("LN2");
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating two public watch list
-			String newWatchlistName = this.getClass().getSimpleName() + "_ToBeDeleted";
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			for (int i = 1; i <= 2; i++) {
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
@@ -107,10 +107,9 @@ public class Watchlist023 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
-			// loginAsSpecifiedUser("Prasenjit.Patra@thomsonreuters.com",
-			// "Techm@2015");
+			ob.navigate().to(host);
+			// loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			selectSearchTypeFromDropDown("People");
@@ -119,7 +118,6 @@ public class Watchlist023 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);
 			// Navigating to the first user profile page
-			// ob.findElement(By.xpath("//a[@event-category='searchresult-ck-profile']")).click();
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);

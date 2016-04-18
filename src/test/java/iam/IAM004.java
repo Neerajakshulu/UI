@@ -66,8 +66,8 @@ public class IAM004 extends TestBase {
 			clearCookies();
 
 			// Navigate to FB login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
