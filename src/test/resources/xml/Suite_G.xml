@@ -299,7 +299,7 @@
 		</classes>
 	</test>
 
-	<!-- Profile Sanity Testcases -->
+	Profile Sanity Testcases
 	<test name="Validate_View_Profile">
 		<classes>
 			<class name="Profile.Profile5"></class>
@@ -366,21 +366,9 @@
 		</classes>
 	</test>
 
-	<test name="IAM016">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test>
-
 	<test name="IAM021">
 		<classes>
 			<class name="iam.IAM021"></class>
-		</classes>
-	</test>
-
-	<test name="IAM023">
-		<classes>
-			<class name="iam.IAM023"></class>
 		</classes>
 	</test>
 
@@ -470,7 +458,7 @@
 		</classes>
 	</test>
 
-<!-- Notifications Test Cases -->
+Notifications Test Cases
 
 	<test name="Test F17">
 		<classes>
@@ -680,5 +668,6 @@
 			<class name="Authoring.Authoring74"></class>
 		</classes>
 	</test>
-</suite>
+
+ </suite>
 
