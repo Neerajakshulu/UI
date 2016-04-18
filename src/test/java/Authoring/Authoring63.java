@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
@@ -44,7 +45,8 @@ public class Authoring63 extends TestBase {
 	}
 
 	@Test
-	public void testEditDraftsFromModalWindow() throws Exception {
+	@Parameters({"waittime"})
+	public void testEditDraftsFromModalWindow(int time) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -62,6 +64,7 @@ public class Authoring63 extends TestBase {
 
 		try {
 			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
+			BrowserWaits.waitTime(time);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();

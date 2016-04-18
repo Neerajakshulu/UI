@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -40,8 +41,8 @@ public class Authoring64 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"username", "password"})
-	public void deleteDraftPostFromProfile(String username,String pwd) throws Exception {
+	@Parameters({"waittime"})
+	public void deleteDraftPostFromProfile(int time) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -59,6 +60,7 @@ public class Authoring64 extends TestBase {
 
 		try {
 			String postString = "DraftPostCreationTest" + RandomStringUtils.randomNumeric(10);
+			BrowserWaits.waitTime(time);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -66,7 +68,7 @@ public class Authoring64 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs(username, pwd);
+			loginAs("USERNAME1", "PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
