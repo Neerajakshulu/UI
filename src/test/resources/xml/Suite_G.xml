@@ -6,8 +6,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="Welcome01" />
+	<parameter name="username" value="uiautomationuser1@gmail.com" />
+	<parameter name="password" value="Transaction@2" />
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
@@ -299,7 +299,7 @@
 		</classes>
 	</test>
 
-	Profile Sanity Testcases
+	<!-- Profile Sanity Testcases -->
 	<test name="Validate_View_Profile">
 		<classes>
 			<class name="Profile.Profile5"></class>
@@ -458,7 +458,7 @@
 		</classes>
 	</test>
 
-Notifications Test Cases
+<!-- Notifications Test Cases -->
 
 	<test name="Test F17">
 		<classes>
@@ -530,16 +530,12 @@ Notifications Test Cases
 
 		
 	<test name="Authoring64">
-		<parameter name="username" value="USERNAME5"></parameter>
-	<parameter name="password" value="PASSWORD5"></parameter>
 		<classes>
 			<class name="Authoring.Authoring64"></class>
 		</classes>
 	</test>
 	
 	<test name="Authoring67">
-		<parameter name="username" value="USERNAME14"></parameter>
-		<parameter name="password" value="PASSWORD14"></parameter>
 		<classes>
 			<class name="Authoring.Authoring67"></class>
 		</classes>
@@ -583,8 +579,6 @@ Notifications Test Cases
 	</test>
 	
 	<test name="Authoring10">
-		<parameter name="username" value="kavya.revanna@thomsonreuters.com" />
-		<parameter name="password" value="Welcome123" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
@@ -592,7 +586,7 @@ Notifications Test Cases
 	
 	<test name="Authoring11">
 		<classes>
-			<class name="Authoring.Authoring12"></class>
+			<class name="Authoring.Authoring11"></class>
 		</classes>
 	</test>
 	
@@ -668,6 +662,5 @@ Notifications Test Cases
 			<class name="Authoring.Authoring74"></class>
 		</classes>
 	</test>
-
- </suite>
+</suite>
 

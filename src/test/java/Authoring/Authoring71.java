@@ -61,10 +61,11 @@ public class Authoring71 extends TestBase {
 			ob.navigate().to(host);
 			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1", "PASSWORD1");
+			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			try {
 				pf.getpostRVPageInstance(ob).isFlagButtonDispalyedForOthersPost();
 				test.log(LogStatus.PASS, "Flag button is displayed for posts");
