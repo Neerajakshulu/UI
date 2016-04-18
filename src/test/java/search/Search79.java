@@ -68,8 +68,8 @@ public class Search79 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
 			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");

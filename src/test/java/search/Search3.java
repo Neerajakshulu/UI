@@ -64,8 +64,9 @@ public class Search3 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			
+			ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
