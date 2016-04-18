@@ -68,8 +68,8 @@
 	</test>
 
 	<test name="Authoring10">
-		<parameter name="username" value="3ksdi6+se3xrozg@sharklasers.com" />
-		<parameter name="password" value="Welcome123" />
+		<parameter name="username" value="USERNAME13" />
+		<parameter name="password" value="PASSWORD13" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>

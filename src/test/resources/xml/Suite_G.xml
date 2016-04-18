@@ -599,6 +599,8 @@
 	</test>
 	
 	<test name="Authoring10">
+		<parameter name="username" value="USERNAME1" />
+		<parameter name="password" value="PASSWORD1" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
