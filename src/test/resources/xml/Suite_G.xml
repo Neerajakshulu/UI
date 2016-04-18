@@ -570,6 +570,8 @@
 	</test>
 	
 	<test name="Authoring60">
+	<parameter name="username" value="USERNAME1"></parameter>
+		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -582,6 +584,8 @@
 	</test>
 	
 	<test name="Authoring62">
+		<parameter name="username" value="USERNAME1"></parameter>
+		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -601,8 +605,6 @@
 	</test>
 	
 	<test name="Authoring10">
-		<parameter name="username" value="kavya.revanna@thomsonreuters.com" />
-		<parameter name="password" value="Welcome123" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
@@ -610,7 +612,7 @@
 	
 	<test name="Authoring11">
 		<classes>
-			<class name="Authoring.Authoring12"></class>
+			<class name="Authoring.Authoring11"></class>
 		</classes>
 	</test>
 	

@@ -65,10 +65,11 @@ public class Authoring74 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME1", "PASSWORD1");
+			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("post");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).verifyPostCreationDate());

@@ -60,11 +60,12 @@ public class Authoring39 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
+			String profileName=LOGIN.getProperty("PROFILE1");
 			loginAs("USERNAME1", "PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
 			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
 			logout();
