@@ -101,7 +101,7 @@ public class Authoring19 extends TestBase {
 			WebElement flagWe;
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
-				if (!commentText.contains("Kavya Revanna") && !commentText.contains("Comment deleted")) {
+				if (!commentText.contains(LOGIN.getProperty("PROFILE1")) && !commentText.contains("Comment deleted")) {
 					flagWe = commentsList.get(i).findElement(
 							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
 					if (flagWe.getAttribute("class").contains("flag-inactive")) {
