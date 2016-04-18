@@ -6,8 +6,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="Welcome01" />
+	<parameter name="username" value="uiautomationuser1@gmail.com" />
+	<parameter name="password" value="Transaction@2" />
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
