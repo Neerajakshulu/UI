@@ -64,11 +64,12 @@ public class Authoring69 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME2", "PASSWORD2");
+			loginAs("USERNAME1", "PASSWORD1");
+			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			test.log(LogStatus.INFO, "Added external link to the comment");

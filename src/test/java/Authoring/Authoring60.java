@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
@@ -41,7 +42,8 @@ public class Authoring60 extends TestBase {
 	}
 
 	@Test
-	public void testSaveDrafts() throws Exception {
+	@Parameters({"username", "password"})
+	public void testSaveDrafts(String username,String pwd) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;

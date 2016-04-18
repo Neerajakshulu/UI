@@ -70,7 +70,7 @@ public class Notifications024 extends TestBase {
 			test.log(LogStatus.INFO," Scrolling down to find most viewed documents--->");
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while(scrollCount<15){
-				jse.executeScript("scroll(0,7000)");
+				jse.executeScript("scroll(0,10000)");
 				Thread.sleep(3500);
 				scrollCount++;
 			}
@@ -78,7 +78,7 @@ public class Notifications024 extends TestBase {
 			// Login with first user and check if notification is present
 			try{
 				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));
-				Assert.assertTrue(elements.size()==1);
+				Assert.assertTrue(elements.size()>=1);
 				test.log(LogStatus.INFO,"user is able to see most viewed documents in home page");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 				pf.getLoginTRInstance(ob).logOutApp();

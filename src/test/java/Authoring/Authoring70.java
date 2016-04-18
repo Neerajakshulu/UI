@@ -65,10 +65,11 @@ public class Authoring70 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME8", "PASSWORD8");
+			String profileName=LOGIN.getProperty("PROFILE8");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			test.log(LogStatus.INFO, "Added internal link to the comment");

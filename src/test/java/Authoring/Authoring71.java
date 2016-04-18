@@ -3,12 +3,9 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
@@ -19,7 +16,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Authoring67 extends TestBase {
+public class Authoring71 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -33,15 +30,13 @@ public class Authoring67 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var, "Verfiy that user is able to delete the draft post from the list in their profile")
-				.assignCategory("Authoring");
+		test = extent.startTest(var, "Verify that user can see the flag option for post of other neon users").assignCategory(
+				"Authoring");
 
 	}
 
 	@Test
-	@Parameters({"username", "password"})
-	public void deleteDraftPostFromProfile(String username,String pwd) throws Exception {
+	public void authoring71() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -58,56 +53,25 @@ public class Authoring67 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String postString = "DraftPostCreationTest" + RandomStringUtils.randomNumeric(10);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs(username, pwd);
+			//ob.get(CONFIG.getProperty("testSiteName"));
+			loginAs("USERNAME1", "PASSWORD1");
+			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			pf.getHFPageInstance(ob).clickOnProfileLink();
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
-			pf.getProfilePageInstance(ob).enterPostTitle(postString);
-			test.log(LogStatus.INFO, "Entered Post Title");
-			pf.getProfilePageInstance(ob).enterPostContent(postString);
-			test.log(LogStatus.INFO, "Entered Post Content");
-			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
-			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
-			test.log(LogStatus.INFO, "Saved the draft post");
-			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
-			ob.navigate().refresh();
-			waitForPageLoad(ob);
-			waitForAjax(ob);
-			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
-			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
-
-			pf.getProfilePageInstance(ob).deleteDraftPostFromPostModal(postString);
-			int postCountAfter = 0;
-			if (postCountBefore == 1) {
-
-				if (!pf.getProfilePageInstance(ob).isDraftPostTabDispalyed()) {
-					postCountAfter = 0;
-				}
-
-				else {
-
-					postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
-
-				}
-			} else {
-				postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
-			}
-			test.log(LogStatus.INFO, "Draft Post count:" + postCountAfter);
-
+			pf.getHFPageInstance(ob).searchForText("test");
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			try {
-				Assert.assertEquals(postCountBefore - 1, postCountAfter);
-				test.log(LogStatus.PASS, "Post count is decremented after the post deletion");
+				pf.getpostRVPageInstance(ob).isFlagButtonDispalyedForOthersPost();
+				test.log(LogStatus.PASS, "Flag button is displayed for posts");
+		
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Post count is not decremented after the post deletion");
+				test.log(LogStatus.FAIL, "Flag button is not displayed for posts");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -117,23 +81,6 @@ public class Authoring67 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "Post_count_validation_failed")));// screenshot
 
-			}
-			if (postCountBefore != 1) {
-				try {
-					Assert.assertTrue(!pf.getProfilePageInstance(ob).getAllDraftPostTitle().contains(postString));
-					test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
-				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "Deleted post is displayed under posts tab in profile");
-					test.log(LogStatus.INFO, "Error--->" + t);
-					ErrorUtil.addVerificationFailure(t);
-					status = 2;
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "Post_creation_validation_failed")));// screenshot
-
-				}
 			}
 			logout();
 			closeBrowser();

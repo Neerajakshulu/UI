@@ -62,11 +62,12 @@ public class Authoring51 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
+			String profileName=LOGIN.getProperty("PROFILE9");
 			loginAs("USERNAME9", "PASSWORD9");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost("Kavya Revanna");
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			int countBefore = pf.getpostRVPageInstance(ob).getCommentCount();
 
 			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");

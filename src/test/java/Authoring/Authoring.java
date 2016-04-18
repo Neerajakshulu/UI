@@ -17,6 +17,11 @@ import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
 
+/**
+ * 
+ * This class contains common methods that used in authoring tests.
+ *
+ */
 public class Authoring extends TestBase {
 
 	static int commentSizeBeforeAdd;
@@ -29,6 +34,11 @@ public class Authoring extends TestBase {
 		pf = new PageFactory();
 	}
 
+	/**
+	 * Method to return comment count from article record view
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public int getCommentCount() throws InterruptedException {
 		BrowserWaits.waitTime(15);
 		waitForPageLoad(ob);
@@ -37,29 +47,25 @@ public class Authoring extends TestBase {
 		String commentSizeBeforeAdd = ob
 				.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText()
 				.replaceAll(",", "").trim();
-		// System.out.println("comment size before adding the comment-->"+commentSizeBeforeAdd);
-		// System.out.println("num length-->"+num[num.length-1]);
 		return Integer.parseInt(commentSizeBeforeAdd);
 	}
 
+	/**
+	 * Method to enter the text into comment text area 
+	 * @param addComments
+	 * @throws InterruptedException
+	 */
 	public void enterArticleComment(String addComments) throws InterruptedException {
-
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-
-		// Instantiating JavascriptExecutor
-		// JavascriptExecutor js = (JavascriptExecutor)ob;
-		// js.executeScript("arguments[0].setAttribute('value','"+addComments+"');", commentArea);
 		commentArea.click();
-		// scrollingToElementofAPage();
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 	public void enterArticleComments(String addComments) throws InterruptedException {
-
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
@@ -68,7 +74,6 @@ public class Authoring extends TestBase {
 		BrowserWaits.waitTime(20);
 		commentArea.click();
 		commentArea.clear();
-		// scrollingToElementofAPage();
 		commentArea.sendKeys(addComments);
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
@@ -78,7 +83,6 @@ public class Authoring extends TestBase {
 		waitForElementTobeClickable(ob, By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"), 60);
 		WebElement addCommentElement = ob.findElement(By
 				.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));
-		// ob.findElement(By.cssSelector("button[class^='btn webui-btn-primary comment-add-button']")).click();
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
 		waitForAjax(ob);
@@ -89,7 +93,8 @@ public class Authoring extends TestBase {
 		System.out.println("before-->" + commentSizeBeforeAdd);
 		System.out.println("After-->" + commentSizeAfterAdd);
 		if (!(commentSizeAfterAdd > commentSizeBeforeAdd)) {
-
+			System.out.println("before-->" + commentSizeBeforeAdd);
+			System.out.println("After-->" + commentSizeAfterAdd);
 			throw new Exception("Entered Comment not updated");
 		}
 	}
@@ -130,8 +135,6 @@ public class Authoring extends TestBase {
 		String commentText = ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("edited"))) {
-			// TestBase.test.log(LogStatus.INFO, "Snapshot below: " +
-			// TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
 			new Authoring1().status = 2;
 			throw new Exception("Updated " + updatedComments + " not present");
 		}
@@ -176,8 +179,6 @@ public class Authoring extends TestBase {
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!commentText.contains(addComments)) {
-			// TestBase.test.log(LogStatus.INFO, "Snapshot below: " +
-			// TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
 			throw new Exception("Entered " + addComments + " not present");
 		}
 	}
@@ -192,7 +193,7 @@ public class Authoring extends TestBase {
 	}
 
 	/**
-	 * Method for Validate Prevent Bot Comment
+	 * Method to Validate Prevent Bot Comment
 	 * 
 	 * @throws Exception
 	 */
@@ -202,7 +203,6 @@ public class Authoring extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
 		String preventBotText = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
-		// System.out.println("Prevent Bot--->"+preventBotText);
 		pf.getBrowserWaitsInstance(ob).waitUntilText(preventBotText);
 		Assert.assertEquals("We are still processing your previous comment. Please try again.", preventBotText);
 	}
@@ -240,7 +240,6 @@ public class Authoring extends TestBase {
 	}
 
 	public void waitForTRHomePage() throws InterruptedException {
-		// ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
 		waitForPageLoad(ob);
 	}
 
@@ -256,8 +255,6 @@ public class Authoring extends TestBase {
 	public void clickLogin() throws InterruptedException {
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
 		waitForPageLoad(ob);
-		// waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		// waitUntilElementClickable("Home");
 	}
 
 	public void searchArticle(String article) throws InterruptedException {

@@ -138,12 +138,23 @@
 	</test>
 
 
-<test name="Test F24">
+	<test name="Test F24">
 		<classes>
 			<class name="notifications.Notifications024"></class>
 		</classes>
 	</test>
 	
+	<test name="Test F22">
+		<classes>
+			<class name="notifications.Notifications022"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F25">
+		<classes>
+			<class name="notifications.Notifications025"></class>
+		</classes>
+	</test>
 	
 </suite>
 

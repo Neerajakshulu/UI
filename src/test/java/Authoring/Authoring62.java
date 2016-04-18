@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
@@ -41,7 +42,8 @@ public class Authoring62 extends TestBase {
 	}
 
 	@Test
-	public void testEditDraftsFromModalWindow() throws Exception {
+	@Parameters({"username", "password"})
+	public void testEditDraftsFromModalWindow(String username,String pwd) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -67,7 +69,7 @@ public class Authoring62 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("USERNAME4", "PASSWORD4");
+			loginAs(username, pwd);
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
