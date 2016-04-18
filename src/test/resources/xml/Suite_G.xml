@@ -348,12 +348,6 @@
 	</test>
 
 	<!-- iam test cases -->
-	<test name="IAM001">
-		<classes>
-			<class name="iam.IAM001"></class>
-		</classes>
-	</test>
-
 	<test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>

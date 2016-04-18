@@ -18,6 +18,7 @@ import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 
 
 public class Notifications023 extends TestBase {
@@ -69,9 +70,10 @@ public class Notifications023 extends TestBase {
 			test.log(LogStatus.INFO," Scrolling down to find Top commenters--->");
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while(scrollCount<15){
-				jse.executeScript("scroll(0,7000)");
+				jse.executeScript("scroll(0,10000)");
 				Thread.sleep(3500);
 				scrollCount++;
+								
 			}
 
 			// Login with first user and check if notification is present
