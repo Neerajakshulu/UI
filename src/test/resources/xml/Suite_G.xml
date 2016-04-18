@@ -12,12 +12,6 @@
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
 
-	<test name="Authoring1">
-		<classes>
-			<class name="Authoring.Authoring1"></class>
-		</classes>
-	</test>
-
 	<test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
@@ -354,12 +348,6 @@
 	</test>
 
 	<!-- iam test cases -->
-	<test name="IAM001">
-		<classes>
-			<class name="iam.IAM001"></class>
-		</classes>
-	</test>
-
 	<test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>
@@ -527,5 +515,170 @@
 		</classes>
 	</test>
 
+
+<test name="Authoring43">
+		<classes>
+			<class name="Authoring.Authoring43"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring41">
+		<classes>
+			<class name="Authoring.Authoring41"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring47">
+		<classes>
+			<class name="Authoring.Authoring47"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring44">
+		<classes>
+			<class name="Authoring.Authoring44"></class>
+		</classes>
+	</test>
+
+		
+	<test name="Authoring64">
+		<parameter name="username" value="USERNAME5"></parameter>
+	<parameter name="password" value="PASSWORD5"></parameter>
+		<classes>
+			<class name="Authoring.Authoring64"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring67">
+		<parameter name="username" value="USERNAME14"></parameter>
+		<parameter name="password" value="PASSWORD14"></parameter>
+		<classes>
+			<class name="Authoring.Authoring67"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring68">
+		<classes>
+			<class name="Authoring.Authoring67"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring60">
+		<classes>
+			<class name="Authoring.Authoring60"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring61">
+		<classes>
+			<class name="Authoring.Authoring60"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring62">
+		<classes>
+			<class name="Authoring.Authoring60"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring8">
+		<classes>
+			<class name="Authoring.Authoring8"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring9">
+		<classes>
+			<class name="Authoring.Authoring9"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring10">
+		<parameter name="username" value="kavya.revanna@thomsonreuters.com" />
+		<parameter name="password" value="Welcome123" />
+		<classes>
+			<class name="Authoring.Authoring10"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring11">
+		<classes>
+			<class name="Authoring.Authoring12"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring12">
+		<classes>
+			<class name="Authoring.Authoring12"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring13">
+		<classes>
+			<class name="Authoring.Authoring13"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring52">
+		<classes>
+			<class name="Authoring.Authoring52"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring53">
+		<classes>
+			<class name="Authoring.Authoring53"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring54">
+		<classes>
+			<class name="Authoring.Authoring54"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring65">
+		<classes>
+			<class name="Authoring.Authoring65"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring49">
+		<classes>
+			<class name="Authoring.Authoring49"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring21">
+		<classes>
+			<class name="Authoring.Authoring21"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring71">
+		<classes>
+			<class name="Authoring.Authoring71"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring72">
+		<classes>
+			<class name="Authoring.Authoring72"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring73">
+		<classes>
+			<class name="Authoring.Authoring73"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring74">
+		<classes>
+			<class name="Authoring.Authoring74"></class>
+		</classes>
+	</test>
 </suite>
 
