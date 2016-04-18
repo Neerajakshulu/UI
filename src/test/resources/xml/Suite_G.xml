@@ -307,7 +307,7 @@
 	</test>
 
 	<test name="edit_User_Own_Profile">
-		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="user test automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
@@ -502,7 +502,6 @@
 			<class name="notifications.Notifications025"></class>
 		</classes>
 	</test>
-
 
 <test name="Authoring43">
 		<classes>
