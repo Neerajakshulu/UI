@@ -32,7 +32,11 @@ public class Profile19 extends TestBase {
 	static boolean skip = false;
 	static int status = 1;
 	PageFactory pf;
-
+	
+	/**
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * @throws Exception, When Something unexpected
+	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -124,6 +128,9 @@ public class Profile19 extends TestBase {
 		}
 	}
 
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 */
 	@AfterTest
 	public void reportTestResult() {
 

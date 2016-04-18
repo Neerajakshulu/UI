@@ -31,6 +31,11 @@ public class Profile10 extends TestBase {
 	static String profileDetailsName;
 	PageFactory pf;
 
+	/**
+	 * Method for displaying JIRA ID's for test case in specified patsh of Extent Reports
+	 * @throws Exception, When Something unexpected
+	 */
+	
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -41,9 +46,8 @@ public class Profile10 extends TestBase {
 	}
 
 	/**
-	 * Method for wait TR Login Screen
-	 * 
-	 * @throws Exception, When TR Login screen not displayed
+	 * Method for login into Neon application using TR ID
+	 * @throws Exception, When TR Login is not done
 	 */
 	@Test
 	@Parameters({"username", "password"})
@@ -98,6 +102,11 @@ public class Profile10 extends TestBase {
 		}
 	}
 
+	/**
+	 * Method for Validating other user Profile comments appreciation
+	 * @param otherProfileName
+	 * @throws Exception, When other Profile comments appreciation not done
+	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
 	@Parameters("otherProfileName")
 	public void validateOthersProfileCommentsLike(String otherProfileName) throws Exception {
@@ -128,6 +137,9 @@ public class Profile10 extends TestBase {
 		}
 	}
 
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 */
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
