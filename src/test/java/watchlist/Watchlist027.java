@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -93,7 +94,7 @@ public class Watchlist027 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
 
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			logout();
 
 			// 2)Login with user2 and and try to watch the article from

@@ -80,7 +80,7 @@ public class Watchlist015 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Editing the first watch list
-			String watchlistName = this.getClass().getSimpleName() + "_Updated";
+			String watchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_Updated";
 			String watchlistDescription = "This is my watchlist";
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);

@@ -74,6 +74,7 @@ public class Search99 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+			Thread.sleep(5000);
 
 			// checking for Default sort option
 			String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))

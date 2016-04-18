@@ -307,7 +307,7 @@
 	</test>
 
 	<test name="edit_User_Own_Profile">
-		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="user test automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
@@ -366,21 +366,9 @@
 		</classes>
 	</test>
 
-	<test name="IAM016">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test>
-
 	<test name="IAM021">
 		<classes>
 			<class name="iam.IAM021"></class>
-		</classes>
-	</test>
-
-	<test name="IAM023">
-		<classes>
-			<class name="iam.IAM023"></class>
 		</classes>
 	</test>
 
@@ -452,23 +440,6 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist027">
-		<classes>
-			<class name="watchlist.Watchlist027"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist028">
-		<classes>
-			<class name="watchlist.Watchlist028"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist029">
-		<classes>
-			<class name="watchlist.Watchlist029"></class>
-		</classes>
-	</test>
 
 <!-- Notifications Test Cases -->
 
@@ -515,7 +486,6 @@
 		</classes>
 	</test>
 
-
 <test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
@@ -542,16 +512,12 @@
 
 		
 	<test name="Authoring64">
-		<parameter name="username" value="USERNAME5"></parameter>
-	<parameter name="password" value="PASSWORD5"></parameter>
 		<classes>
 			<class name="Authoring.Authoring64"></class>
 		</classes>
 	</test>
 	
 	<test name="Authoring67">
-		<parameter name="username" value="USERNAME14"></parameter>
-		<parameter name="password" value="PASSWORD14"></parameter>
 		<classes>
 			<class name="Authoring.Authoring67"></class>
 		</classes>
@@ -564,8 +530,6 @@
 	</test>
 	
 	<test name="Authoring60">
-	<parameter name="username" value="USERNAME1"></parameter>
-		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -578,8 +542,6 @@
 	</test>
 	
 	<test name="Authoring62">
-		<parameter name="username" value="USERNAME1"></parameter>
-		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>

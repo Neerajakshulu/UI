@@ -34,7 +34,12 @@ public class Profile1 extends TestBase {
 	static String followBefore = null;
 	static String followAfter = null;
 	PageFactory pf = new PageFactory();
-
+	
+	
+	/**
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * @throws Exception, When Something unexpected
+	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -48,9 +53,8 @@ public class Profile1 extends TestBase {
 	}
 
 	/**
-	 * Method for wait TR Login Screen
-	 * 
-	 * @throws Exception, When TR Login screen not displayed
+	 * Method for login into Neon application using TR ID
+	 * @throws Exception, When TR Login is not done
 	 */
 	@Test
 	@Parameters({"username", "password"})
@@ -107,8 +111,7 @@ public class Profile1 extends TestBase {
 
 	/**
 	 * Method for find and follow others profile
-	 * 
-	 * @throws Exception
+	 * @throws Exception, When user is not able to follow others
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
 	@Parameters("profileName")
@@ -141,6 +144,9 @@ public class Profile1 extends TestBase {
 		}
 	}
 
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 */
 	@AfterTest
 	public void reportTestResult() {
 
