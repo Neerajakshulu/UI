@@ -542,16 +542,12 @@
 
 		
 	<test name="Authoring64">
-		<parameter name="username" value="USERNAME5"></parameter>
-	<parameter name="password" value="PASSWORD5"></parameter>
 		<classes>
 			<class name="Authoring.Authoring64"></class>
 		</classes>
 	</test>
 	
 	<test name="Authoring67">
-		<parameter name="username" value="USERNAME14"></parameter>
-		<parameter name="password" value="PASSWORD14"></parameter>
 		<classes>
 			<class name="Authoring.Authoring67"></class>
 		</classes>
@@ -564,8 +560,6 @@
 	</test>
 	
 	<test name="Authoring60">
-	<parameter name="username" value="USERNAME1"></parameter>
-		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -578,8 +572,6 @@
 	</test>
 	
 	<test name="Authoring62">
-		<parameter name="username" value="USERNAME1"></parameter>
-		<parameter name="password" value="PASSWORD1"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -599,8 +591,6 @@
 	</test>
 	
 	<test name="Authoring10">
-		<parameter name="username" value="USERNAME1" />
-		<parameter name="password" value="PASSWORD1" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
