@@ -73,6 +73,7 @@ public class Search99 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 			Thread.sleep(5000);
 
@@ -84,6 +85,7 @@ public class Search99 extends TestBase {
 			// checking for different options available in sort
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 35);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
+			Thread.sleep(2000);
 			String text = ob.findElement(By.xpath("//ul[@class='dropdown-menu' and @role='menu']")).getText();
 			System.out.println(text);
 

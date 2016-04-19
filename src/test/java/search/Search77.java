@@ -80,9 +80,12 @@ public class Search77 extends TestBase {
 
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
+			
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'People')]"), 120);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
 			BrowserWaits.waitTime(2);

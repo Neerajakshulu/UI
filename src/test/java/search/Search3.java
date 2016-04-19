@@ -80,6 +80,7 @@ public class Search3 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			Thread.sleep(2000);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not

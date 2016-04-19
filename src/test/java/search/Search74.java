@@ -81,11 +81,13 @@ public class Search74 extends TestBase {
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Articles')]"), 120);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
 			waitForAjax(ob);
-
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			BrowserWaits.waitTime(2);
+			Thread.sleep(2000);
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			String text = myE.getText();
@@ -109,6 +111,7 @@ public class Search74 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.tagName("h2"), 120);
+			Thread.sleep(2000);
 
 			String actual_text = ob.findElement(By.tagName("h2")).getText();
 			System.out.println(actual_text);

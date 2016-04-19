@@ -80,6 +80,7 @@ public class Search71 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
 			BrowserWaits.waitTime(2);
+			Thread.sleep(2000);
 
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
 			String text2 = myE2.getText();
@@ -104,6 +105,7 @@ public class Search71 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.tagName("h2"), 120);
+			Thread.sleep(2000);
 
 			String actual_text = ob.findElement(By.tagName("h2")).getText();
 			System.out.println(actual_text);

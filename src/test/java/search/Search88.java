@@ -35,7 +35,7 @@ public class Search88 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that record view page of a patent gets displayed when user clicks on article title in PATENT search results page")
+						"Verify that record view page of a patent gets displayed when user clicks on patent title in PATENT search results page")
 				.assignCategory("Search suite");
 
 	}
@@ -79,8 +79,10 @@ public class Search88 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
 			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
@@ -88,6 +90,7 @@ public class Search88 extends TestBase {
 			// 120);
 			// BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
+			
 
 			Thread.sleep(5000);
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))

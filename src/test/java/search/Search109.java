@@ -74,11 +74,13 @@ public class Search109 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 			List<WebElement> content_type_tiles = ob.findElements(By
 					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(2).click();
 			// Finding out the types filer in refine panel
 			waitForAjax(ob);
+			Thread.sleep(2000);
 			List<WebElement> content_types = ob.findElements(By
 					.cssSelector("span[class='h6 agg-category-title ng-binding']"));
 			String filter1 = content_types.get(0).getText();

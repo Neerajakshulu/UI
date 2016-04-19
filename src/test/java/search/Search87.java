@@ -78,8 +78,10 @@ public class Search87 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
 			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);

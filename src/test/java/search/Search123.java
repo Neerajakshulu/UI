@@ -81,7 +81,8 @@ public class Search123 extends TestBase {
 					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
 			content_type_tiles.get(3).click();
 			waitForAjax(ob);
-
+			Thread.sleep(2000);
+			
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters

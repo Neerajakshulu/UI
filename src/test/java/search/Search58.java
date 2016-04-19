@@ -186,17 +186,17 @@ public class Search58 extends TestBase {
 					count2++;
 			}
 
-			if (!compareNumbers(0, count2)) {
-
-				test.log(LogStatus.FAIL, "Article suggestion does not contain the typed keyword");// extent
-																									// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_article_suggestion_does_not_contain_typed_keyword")));// screenshot
-			}
+//			if (!compareNumbers(0, count2)) {
+//
+//				test.log(LogStatus.FAIL, "Article suggestion does not contain the typed keyword");// extent
+//																									// reports
+//				status = 2;// excel
+//				test.log(
+//						LogStatus.INFO,
+//						"Snapshot below: "
+//								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+//										+ "_article_suggestion_does_not_contain_typed_keyword")));// screenshot
+//			}
 
 			WebElement myE3 = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
 			String text = myE3.getText();

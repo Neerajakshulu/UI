@@ -42,8 +42,7 @@ public class Authoring60 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"username", "password"})
-	public void testSaveDrafts(String username,String pwd) throws Exception {
+	public void testSaveDrafts(String username,String pwd,int time) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -68,7 +67,6 @@ public class Authoring60 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-
 			loginAs("USERNAME2", "PASSWORD2");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();

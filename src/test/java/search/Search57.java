@@ -75,8 +75,9 @@ public class Search57 extends TestBase {
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
-			Thread.sleep(2000);
+			
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'People')]"), 30);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
 			Thread.sleep(2000);
 
@@ -85,6 +86,7 @@ public class Search57 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.tagName("h5"), 30);
+			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {

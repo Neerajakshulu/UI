@@ -75,8 +75,10 @@ public class Search93 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 180);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"), 10);
+			Thread.sleep(2000);
 			boolean isPresent = ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");

@@ -22,7 +22,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Authoring63 extends TestBase {
+public class Authoring75 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -36,16 +36,13 @@ public class Authoring63 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that Draft Post tab is displayed only in the users own profile and only when the user has at least one draft post")
-				.assignCategory("Authoring");
+		test = extent.startTest(var, "Verify saving post as draft, accessing it for edit from profile,delete post from prfile").assignCategory(
+				"Authoring");
 
 	}
 
 	@Test
-	public void testEditDraftsFromModalWindow() throws Exception {
+	public void testSaveDrafts() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -69,9 +66,8 @@ public class Authoring63 extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			// ob.get(CONFIG.getProperty("testSiteName"));
-
-			loginAs("USERNAME3", "PASSWORD3");
+			 //ob.get(CONFIG.getProperty("testSiteName"));
+			loginAs("USERNAME1" ,"PASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(10);
@@ -87,40 +83,78 @@ public class Authoring63 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the Post as a draft");
-			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			int postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
-
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle = ob
 					.findElement(
 							By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
 					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter == (postCountBefore + 1) && postString.equals(postTitle));
-				test.log(LogStatus.PASS, "Draft Post section is present in the user profile");
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SECTION_HEADING_LABEL.toString())).click();
-				waitForElementTobeVisible(ob,
-						By.xpath(OnePObjectMap.HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH.toString()), 40);
-				ob.findElement(
-						By.xpath(OnePObjectMap.HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH.toString()))
-						.click();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()), 40);
-				test.log(LogStatus.INFO, "Searching for someother users");
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(
-						"Sachin Traveller");
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString()), 40);
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString()), 40);
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString())).click();
-
-				boolean isPresent = ob.findElement(
-						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
-						.isDisplayed();
-				Assert.assertEquals(false, isPresent);
-				test.log(LogStatus.INFO, "Draft posts are not visible");
+				test.log(LogStatus.PASS, "Draft Post count is  incremented and post is present in saved drafts section");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"Draft Post section is not present in the user profile/ it is displayed in other user profile");
+						"Draft Post count is not incremented and post is not present after clicking keep draft button");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_count_validation_failed")));// screenshot
+
+			}
+			
+			String postTitleBeforeEditing = ob.findElement(
+					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					.getText();
+			System.out.println(postTitleBeforeEditing);
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					.click();
+
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
+			test.log(LogStatus.INFO, "Edited Post Title");
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
+			test.log(LogStatus.INFO, "Edited Post Content");
+
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
+			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			waitForAjax(ob);
+			String postTitleAfterEditing = ob.findElement(
+					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					.getText();
+			System.out.println(postTitleAfterEditing);
+			System.out.println(postString);
+			try {
+				Assert.assertTrue(postString.equals(postTitleAfterEditing));
+				test.log(LogStatus.PASS, "Draft Post is accessed and edited successfully");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Draft Post accessing and editing failed");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_count_validation_failed")));// screenshot
+
+			}
+			
+			 postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
+			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
+			pf.getProfilePageInstance(ob).deleteDraftPost(postString);
+			postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
+			test.log(LogStatus.INFO, "Draft Post count:" + postCountAfter);
+
+			try {
+				Assert.assertEquals(postCountBefore - 1, postCountAfter);
+				test.log(LogStatus.PASS, "Post count is decremented after the post deletion");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Post count is not decremented after the post deletion");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -132,6 +166,23 @@ public class Authoring63 extends TestBase {
 
 			}
 
+			try {
+				if (postCountAfter != 0) {
+					Assert.assertTrue(!pf.getProfilePageInstance(ob).getAllDraftPostTitle().contains(postString));
+				}
+				test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Deleted post is displayed under posts tab in profile");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_creation_validation_failed")));// screenshot
+
+			}
 			logout();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -167,4 +218,5 @@ public class Authoring63 extends TestBase {
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
+
 }

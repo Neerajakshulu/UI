@@ -75,11 +75,14 @@ public class Search44 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+			Thread.sleep(2000);
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(2000);
 			ob.findElement(
 					By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"))
 					.click();
+			Thread.sleep(2000);
 			((JavascriptExecutor) ob).executeScript("window.scrollBy(0,250)", "");
 			waitForPageLoad(ob);
 
@@ -108,6 +111,7 @@ public class Search44 extends TestBase {
 					By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"))
 					.click();
 
+			Thread.sleep(2000);
 			List<WebElement> mylist = ob.findElements(By
 					.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope"));
 			System.out.println("Count=" + mylist.size());
@@ -134,7 +138,7 @@ public class Search44 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void expandFilter() {
+	private void expandFilter() throws Exception {
 		List<WebElement> filterPanelHeadingList;
 		List<WebElement> filterPanelBodyList;
 		WebElement documentTypePanelBody;
@@ -158,6 +162,7 @@ public class Search44 extends TestBase {
 
 		// Collapse the document type filter by clicking it again
 		documentTypePanelHeading.click();
+		Thread.sleep(2000);
 
 	}
 
