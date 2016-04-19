@@ -575,22 +575,6 @@
 		</classes>
 	</test>
 	
-	<test name="Authoring60">
-		
-		<classes>
-		<parameter name="username" value="USERNAME1"></parameter>
-		<parameter name="password" value="PASSWORD1"></parameter>
-			<class name="Authoring.Authoring60"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring64">
-		<classes>
-			<class name="Authoring.Authoring64"></class>
-		</classes>
-	</test>
-	
-	
 	<test name="Authoring49">
 		<classes>
 			<class name="Authoring.Authoring49"></class>
