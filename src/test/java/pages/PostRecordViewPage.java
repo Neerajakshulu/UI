@@ -596,8 +596,8 @@ public class PostRecordViewPage extends TestBase {
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 				jsClick(ob, ob.findElement(By
 						.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-				waitForPageLoad(ob);
-				BrowserWaits.waitTime(10);
+				//waitForPageLoad(ob);
+				BrowserWaits.waitTime(20);
 				// waitForElementTobeVisible(ob,
 				// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 				// String
