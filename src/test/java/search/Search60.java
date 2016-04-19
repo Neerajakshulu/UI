@@ -64,8 +64,8 @@ public class Search60 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
 			// login using TR credentials
 			login();
@@ -74,8 +74,10 @@ public class Search60 extends TestBase {
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
+			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+			Thread.sleep(2000);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");

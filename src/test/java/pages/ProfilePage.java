@@ -602,6 +602,7 @@ public class ProfilePage extends TestBase {
 		ob.navigate().refresh();
 		waitForPageLoad(ob);
 		waitForAjax(ob);
+		BrowserWaits.waitTime(15);
 		String strCount;
 		try {
 			waitForElementTobeVisible(ob,

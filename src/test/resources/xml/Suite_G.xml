@@ -11,7 +11,10 @@
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
-
+	<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
+	<parameter name="addComments" value="Testing Comments"></parameter>
+	<parameter name="article" value="Biology"></parameter>
+	
 	<test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
@@ -307,7 +310,7 @@
 	</test>
 
 	<test name="edit_User_Own_Profile">
-		<parameter name="profileInfo" value="chinna putha|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="user automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
@@ -440,23 +443,6 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist027">
-		<classes>
-			<class name="watchlist.Watchlist027"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist028">
-		<classes>
-			<class name="watchlist.Watchlist028"></class>
-		</classes>
-	</test>
-
-	<test name="Watchlist029">
-		<classes>
-			<class name="watchlist.Watchlist029"></class>
-		</classes>
-	</test>
 
 <!-- Notifications Test Cases -->
 
@@ -503,7 +489,6 @@
 		</classes>
 	</test>
 
-
 <test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
@@ -528,44 +513,6 @@
 		</classes>
 	</test>
 
-		
-	<test name="Authoring64">
-		<classes>
-			<class name="Authoring.Authoring64"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring67">
-		<classes>
-			<class name="Authoring.Authoring67"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring68">
-		<classes>
-			<class name="Authoring.Authoring67"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring60">
-		<classes>
-			<class name="Authoring.Authoring60"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring61">
-		<classes>
-			<class name="Authoring.Authoring60"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring62">
-		<classes>
-			<class name="Authoring.Authoring60"></class>
-		</classes>
-	</test>
-	
-	
 	<test name="Authoring8">
 		<classes>
 			<class name="Authoring.Authoring8"></class>
@@ -579,6 +526,8 @@
 	</test>
 	
 	<test name="Authoring10">
+		<parameter name="username" value="USERNAME1" />
+		<parameter name="password" value="PASSWORD1" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
@@ -603,26 +552,26 @@
 	</test>
 	
 	<test name="Authoring52">
+		<parameter name="fbusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="fbpassword" value="likhithreddy@123" />
 		<classes>
 			<class name="Authoring.Authoring52"></class>
 		</classes>
 	</test>
 	
 	<test name="Authoring53">
+		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="lipassword" value="likhithreddy@123" />
 		<classes>
 			<class name="Authoring.Authoring53"></class>
 		</classes>
 	</test>
 	
 	<test name="Authoring54">
+		<parameter name="tusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="tpassword" value="likhithreddy@123" />
 		<classes>
 			<class name="Authoring.Authoring54"></class>
-		</classes>
-	</test>
-	
-	<test name="Authoring65">
-		<classes>
-			<class name="Authoring.Authoring65"></class>
 		</classes>
 	</test>
 	
@@ -660,6 +609,19 @@
 	<test name="Authoring74">
 		<classes>
 			<class name="Authoring.Authoring74"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring75">
+		<classes>
+			<class name="Authoring.Authoring75"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring76">
+		<classes>
+			<class name="Authoring.Authoring76"></class>
 		</classes>
 	</test>
 </suite>

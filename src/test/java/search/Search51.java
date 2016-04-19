@@ -79,6 +79,7 @@ public class Search51 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope active']"), 30);
+			Thread.sleep(5000);
 			String text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
 			System.out.println(text);
 

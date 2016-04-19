@@ -21,7 +21,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring17 extends TestBase {
 
-	private static final String PROFILE_NAME = "amneet singh";
+	private static final String PROFILE_NAME = LOGIN.getProperty("PROFILE1");;
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -66,6 +66,7 @@ public class Authoring17 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			login();
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
