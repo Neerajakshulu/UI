@@ -59,7 +59,6 @@ public class Authoring67 extends TestBase {
 
 		try {
 			String postString = "DraftPostCreationTest" + RandomStringUtils.randomNumeric(10);
-			BrowserWaits.waitTime(time);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
