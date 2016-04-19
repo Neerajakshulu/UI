@@ -609,6 +609,7 @@ public class PostRecordViewPage extends TestBase {
 				waitForElementTobeVisible(ob,
 						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS.toString()), 180);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
+				BrowserWaits.waitTime(10);
 				ob.switchTo().window(PARENT_WINDOW);
 				BrowserWaits.waitTime(10);
 			}
