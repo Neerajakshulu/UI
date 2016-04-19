@@ -416,6 +416,7 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void validateFollowOrUnfollow(ExtentTest test) throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		String attribute = ob.findElement(
@@ -739,6 +740,7 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void addExternalLinkComments(String url) throws Exception {
+		BrowserWaits.waitTime(15);
 		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		commentArea.click();

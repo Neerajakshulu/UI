@@ -71,7 +71,7 @@ public class Authoring extends TestBase {
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		scrollingToElementofAPage();
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		BrowserWaits.waitTime(20);
+		BrowserWaits.waitTime(30);
 		commentArea.click();
 		commentArea.clear();
 		commentArea.sendKeys(addComments);
