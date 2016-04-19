@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -182,7 +183,6 @@ public class Authoring10 extends TestBase {
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 
-		if (master_condition)
 			closeBrowser();
 	}
 
@@ -199,11 +199,16 @@ public class Authoring10 extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		waitForAjax(ob);
+		BrowserWaits.waitTime(4);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(4);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		waitForPageLoad(ob);
+		
 	}
 
 	public void waitUntilTextPresent(String locator,
