@@ -43,8 +43,7 @@ public class Authoring62 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"waittime"})
-	public void testEditDraftsFromModalWindow(int time) throws Exception {
+	public void testEditDraftsFromModalWindow() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -62,7 +61,6 @@ public class Authoring62 extends TestBase {
 
 		try {
 			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
-			BrowserWaits.waitTime(time);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -71,7 +69,7 @@ public class Authoring62 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("USERNAME4", "PASSWORD4");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

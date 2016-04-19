@@ -41,8 +41,7 @@ public class Authoring67 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"waittime"})
-	public void deleteDraftPostFromProfile(int time) throws Exception {
+	public void deleteDraftPostFromProfile() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -68,7 +67,7 @@ public class Authoring67 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("USERNAME14", "PASSWORD14");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

@@ -14,8 +14,7 @@
 	<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
 	<parameter name="addComments" value="Testing Comments"></parameter>
 	<parameter name="article" value="Biology"></parameter>
-	<parameter name="waittime" value="70"></parameter>
-
+	
 	<test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
@@ -626,6 +625,19 @@
 	<test name="Authoring74">
 		<classes>
 			<class name="Authoring.Authoring74"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring75">
+		<classes>
+			<class name="Authoring.Authoring75"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring76">
+		<classes>
+			<class name="Authoring.Authoring76"></class>
 		</classes>
 	</test>
 </suite>

@@ -45,8 +45,7 @@ public class Authoring63 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"waittime"})
-	public void testEditDraftsFromModalWindow(int time) throws Exception {
+	public void testEditDraftsFromModalWindow() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -64,7 +63,6 @@ public class Authoring63 extends TestBase {
 
 		try {
 			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
-			BrowserWaits.waitTime(time);
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
