@@ -203,9 +203,11 @@ public class Authoring8 extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		waitForAjax(ob);
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		waitForPageLoad(ob);
+		waitForAjax(ob);
+		BrowserWaits.waitTime(4);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(4);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
