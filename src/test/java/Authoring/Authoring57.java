@@ -32,12 +32,12 @@ public class Authoring57 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to share the posts of others on Twitter.")
+		test = extent.startTest(var, "Verify that user is able to share own post on Twitter.")
 				.assignCategory("Authoring");
 
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	@Parameters({"tusername", "tpassword"})
 	public void testPostComments(String tusername,
 			String tpassword) throws Exception {
