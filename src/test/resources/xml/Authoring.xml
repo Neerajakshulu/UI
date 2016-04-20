@@ -11,6 +11,7 @@
 	<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
 	<parameter name="addComments" value="Testing Comments"></parameter>
 
+	
 	<test name="Authoring1">
 		<classes>
 			<class name="Authoring.Authoring1"></class>
@@ -391,8 +392,6 @@
 
 
 	<test name="Authoring60">
-	<parameter name="username" value="USERNAME2"></parameter>
-		<parameter name="password" value="PASSWORD2"></parameter>
 		<classes>
 			<class name="Authoring.Authoring60"></class>
 		</classes>
@@ -406,8 +405,6 @@
 	</test>
 
 	<test name="Authoring62">
-		<parameter name="username" value="USERNAME4"></parameter>
-		<parameter name="password" value="PASSWORD4"></parameter>
 		<classes>
 			<class name="Authoring.Authoring62"></class>
 		</classes>
@@ -420,8 +417,6 @@
 	</test>
 
 	<test name="Authoring64">
-		<parameter name="username" value="USERNAME5"></parameter>
-	<parameter name="password" value="PASSWORD5"></parameter>
 		<classes>
 			<class name="Authoring.Authoring64"></class>
 		</classes>
@@ -446,8 +441,6 @@
 	</test>
 
 	<test name="Authoring67">
-		<parameter name="username" value="USERNAME14"></parameter>
-		<parameter name="password" value="PASSWORD14"></parameter>
 		<classes>
 			<class name="Authoring.Authoring67"></class>
 		</classes>
@@ -470,6 +463,7 @@
 			<class name="Authoring.Authoring70"></class>
 		</classes>
 	</test>
+	
 
 </suite>
 

@@ -60,9 +60,9 @@ public class Authoring44 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1", "PASSWORD1");
+			//ob.navigate().to(host);
+			 ob.get(CONFIG.getProperty("testSiteName"));
+			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
@@ -94,10 +94,23 @@ public class Authoring44 extends TestBase {
 										+ "Post_count_validation_failed")));// screenshot
 
 			}
-			String postTitle = pf.getProfilePageInstance(ob).getFirstPostTitle();
+			
+			
 			try {
-				Assert.assertNotEquals(postTitle, postString);
-				test.log(LogStatus.PASS, "Cancelled post is not available in profile");
+				
+				if(postCountBefore!=0){
+					String postTitle = pf.getProfilePageInstance(ob).getFirstPostTitle();
+					Assert.assertNotEquals(postTitle, postString);
+					test.log(LogStatus.PASS, "Cancelled post is not available in profile");
+				}else{
+					try{
+					pf.getProfilePageInstance(ob).getFirstPostTitle();
+					test.log(LogStatus.FAIL, "Cancelled post is available in profile");
+					}catch(Exception e){
+						test.log(LogStatus.PASS, "Cancelled post is not available in profile");
+					}
+				}
+				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Cancelled post is available in profile");
 				test.log(LogStatus.INFO, "Error--->" + t);

@@ -44,6 +44,7 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		scrollingToElementofAPage();
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 40);
 		String commentSizeBeforeAdd = ob
 				.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText()
 				.replaceAll(",", "").trim();
@@ -68,10 +69,10 @@ public class Authoring extends TestBase {
 	public void enterArticleComments(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		scrollingToElementofAPage();
+		BrowserWaits.waitTime(30);
+		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		BrowserWaits.waitTime(20);
 		commentArea.click();
 		commentArea.clear();
 		commentArea.sendKeys(addComments);

@@ -70,9 +70,10 @@ public class Search91 extends TestBase {
 			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
+			
 
 			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 4);
+			Thread.sleep(8000);
 			String defaultSortByValue = ob.findElement(By.xpath("//button[@id='single-button']")).getText();
 			if (defaultSortByValue.equalsIgnoreCase("Sort by: Relevance")) {
 				test.log(LogStatus.PASS, "Patents results are sorted by RELEVANCE by default");

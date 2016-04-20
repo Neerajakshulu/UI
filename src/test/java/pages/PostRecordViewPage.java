@@ -416,6 +416,7 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void validateFollowOrUnfollow(ExtentTest test) throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		String attribute = ob.findElement(
@@ -595,8 +596,8 @@ public class PostRecordViewPage extends TestBase {
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS, tpassword);
 				jsClick(ob, ob.findElement(By
 						.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS.toString())));
-				waitForPageLoad(ob);
-				BrowserWaits.waitTime(10);
+				//waitForPageLoad(ob);
+				//BrowserWaits.waitTime(20);
 				// waitForElementTobeVisible(ob,
 				// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()), 180);
 				// String
@@ -608,6 +609,7 @@ public class PostRecordViewPage extends TestBase {
 				waitForElementTobeVisible(ob,
 						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS.toString()), 180);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
+				BrowserWaits.waitTime(10);
 				ob.switchTo().window(PARENT_WINDOW);
 				BrowserWaits.waitTime(10);
 			}
@@ -739,6 +741,7 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void addExternalLinkComments(String url) throws Exception {
+		BrowserWaits.waitTime(15);
 		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		commentArea.click();

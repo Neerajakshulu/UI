@@ -92,6 +92,8 @@ public class Notifications001 extends TestBase {
 			// 3)Verify that User1 receives a notification with correct data
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
+			Thread.sleep(6000);
+			ob.navigate().refresh();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")), 30);
 			String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
 			System.out.println(text);

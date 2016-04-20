@@ -61,8 +61,8 @@ public class Search99 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -73,7 +73,9 @@ public class Search99 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+			Thread.sleep(5000);
 
 			// checking for Default sort option
 			String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
@@ -83,6 +85,7 @@ public class Search99 extends TestBase {
 			// checking for different options available in sort
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 35);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
+			Thread.sleep(2000);
 			String text = ob.findElement(By.xpath("//ul[@class='dropdown-menu' and @role='menu']")).getText();
 			System.out.println(text);
 
