@@ -148,8 +148,8 @@ public class Authoring11 extends TestBase {
 					jsClick(ob, ob.findElement(By
 							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS
 									.toString())));
-					waitForPageLoad(ob);
-					BrowserWaits.waitTime(10);
+					//waitForPageLoad(ob);
+					//BrowserWaits.waitTime(10);
 					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
 					// waitForElementTobeVisible(ob,
 					// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()),
