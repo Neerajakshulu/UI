@@ -650,8 +650,8 @@ public class ProfilePage extends TestBase {
 	public String getFirstPostTitle() throws InterruptedException {
 		BrowserWaits.waitTime(8);
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 20);
+				
 		String postTitle = ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).get(0)
 				.getText();

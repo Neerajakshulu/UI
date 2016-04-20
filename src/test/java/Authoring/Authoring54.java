@@ -36,7 +36,7 @@ public class Authoring54 extends TestBase {
 
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	@Parameters({"tusername", "tpassword"})
 	public void testPostComments(String tusername,
 			String tpassword) throws Exception {
@@ -63,7 +63,7 @@ public class Authoring54 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");

@@ -32,12 +32,12 @@ public class Authoring57 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to share the posts of others on Twitter.")
+		test = extent.startTest(var, "Verify that user is able to share own post on Twitter.")
 				.assignCategory("Authoring");
 
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	@Parameters({"tusername", "tpassword"})
 	public void testPostComments(String tusername,
 			String tpassword) throws Exception {
@@ -64,7 +64,7 @@ public class Authoring57 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

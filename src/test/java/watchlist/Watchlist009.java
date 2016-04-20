@@ -11,15 +11,14 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Verify that user is able to add an Post from Record View page to a particular watchlist
@@ -48,8 +47,7 @@ public class Watchlist009 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"postName"})
-	public void testWatchPostFromPostRecordViewPage(String postName) throws Exception {
+	public void testWatchPostFromPostRecordViewPage() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
@@ -85,13 +83,13 @@ public class Watchlist009 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 60);
 
 			// Watching the post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
@@ -125,9 +123,10 @@ public class Watchlist009 extends TestBase {
 			// Step2: Unwatching the document from record view page
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();

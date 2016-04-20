@@ -42,7 +42,7 @@ public class Authoring60 extends TestBase {
 	}
 
 	@Test
-	public void testSaveDrafts(String username,String pwd,int time) throws Exception {
+	public void testSaveDrafts() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;

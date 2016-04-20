@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -61,23 +62,21 @@ public class Authoring43 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			pf.getHFPageInstance(ob).searchForText("chinna putha");
-			test.log(LogStatus.INFO, "Searched for chinna putha");
-			pf.getSearchProfilePageInstance(ob).clickPeople();
-			pf.getSearchResultsPageInstance(ob).clickOnPeopleName("chinna putha");
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			List<String> profileDeatils = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
-			String postTilte = pf.getProfilePageInstance(ob).getFirstPostTitle();
-			test.log(LogStatus.INFO, "Captured title of the post");
+			pf.getHFPageInstance(ob).searchForText("post");
+			test.log(LogStatus.INFO, "Searched for post");
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(LOGIN.getProperty("PROFILE1"));
+			String postTilte=pf.getpostRVPageInstance(ob).getPostTitle();
+			
 			pf.getHFPageInstance(ob).searchForText(postTilte);
 			test.log(LogStatus.INFO, "Searched for post tilte:" + postTilte);
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTitle(postTilte);
-
+			String postTilte1=pf.getpostRVPageInstance(ob).getPostTitle();
 			try {
-				pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
+				Assert.assertEquals(postTilte, postTilte1);
 				test.log(LogStatus.PASS, "User is able to search and view others post");
 
 			} catch (Throwable t) {

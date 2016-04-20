@@ -55,7 +55,7 @@ public class Search94 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "STQABLR";
+			String userName = "john";
 
 			openBrowser();
 			clearCookies();
