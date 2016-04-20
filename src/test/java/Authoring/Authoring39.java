@@ -61,7 +61,7 @@ public class Authoring39 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			String profileName=LOGIN.getProperty("PROFILE1");
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();

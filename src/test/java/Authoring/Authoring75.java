@@ -67,7 +67,7 @@ public class Authoring75 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			 //ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME1" ,"PASSWORD1");
+			loginAs("LOGINUSERNAME1" ,"LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(10);
