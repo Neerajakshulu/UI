@@ -21,7 +21,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring17 extends TestBase {
 
-	private static final String PROFILE_NAME = LOGIN.getProperty("PROFILE1");;
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
