@@ -130,7 +130,7 @@ public class Authoring46 extends TestBase {
 			waitForElementTobeVisible(
 					ob,
 					By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"),
-					40);
+					180);
 			WebElement editCommentElement = ob
 					.findElement(By
 							.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
