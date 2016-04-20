@@ -66,7 +66,7 @@ public class Authoring15 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");;
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
