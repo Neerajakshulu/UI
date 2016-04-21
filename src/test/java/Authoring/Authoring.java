@@ -12,6 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.OnePObjectMap;
@@ -89,13 +92,13 @@ public class Authoring extends TestBase {
 		waitForAjax(ob);
 	}
 
-	public void validateCommentAdd() throws Exception {
+	public void validateCommentAdd(ExtentTest test) throws Exception {
 		commentSizeAfterAdd = getCommentCount();
 		System.out.println("before-->" + commentSizeBeforeAdd);
 		System.out.println("After-->" + commentSizeAfterAdd);
 		if (!(commentSizeAfterAdd > commentSizeBeforeAdd)) {
-			System.out.println("before-->" + commentSizeBeforeAdd);
-			System.out.println("After-->" + commentSizeAfterAdd);
+			test.log(LogStatus.INFO, "before-->" + commentSizeBeforeAdd);
+			test.log(LogStatus.INFO, "After-->" + commentSizeAfterAdd);
 			throw new Exception("Entered Comment not updated");
 		}
 	}
