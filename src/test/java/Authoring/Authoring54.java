@@ -36,7 +36,7 @@ public class Authoring54 extends TestBase {
 
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	@Parameters({"tusername", "tpassword"})
 	public void testPostComments(String tusername,
 			String tpassword) throws Exception {

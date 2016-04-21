@@ -52,7 +52,7 @@ public class Authoring11 extends TestBase {
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	public void testOpenApplication() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());

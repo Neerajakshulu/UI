@@ -78,7 +78,7 @@ public class Search72 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("what");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			BrowserWaits.waitTime(2);
 			Thread.sleep(3000);
 
@@ -93,10 +93,10 @@ public class Search72 extends TestBase {
 				al2.add(arr2[i]);
 			}
 
-			String expected_text = al2.get(1);
+			String expected_text = al2.get(2);
 			System.out.println(expected_text);
 
-			for (int i = 1; i <= 15; i++) {
+			for (int i = 1; i <= 16; i++) {
 
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ARROW_DOWN);
 			}

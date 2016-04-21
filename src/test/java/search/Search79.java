@@ -99,6 +99,17 @@ public class Search79 extends TestBase {
 			}
 
 			int index = al1.get(2).indexOf(' ');
+//			if(host.equals("https://projectne.thomsonreuters.com")){
+//			
+//				expected_text = al1.get(2).substring(0,3);
+//				
+//			}
+//			else{
+//				
+//				expected_text = al1.get(2).substring(0,3);
+//				
+//			}
+			
 			String expected_text = al1.get(2).substring(0,3);
 			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 			System.out.println(expected_text);
