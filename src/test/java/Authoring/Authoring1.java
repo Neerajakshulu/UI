@@ -90,10 +90,10 @@ public class Authoring1 extends TestBase {
 			loginAs("USERNAME15", "PASSWORD15");
 			searchArticle(article);
 			chooseArticle(completeArticle);
-
+			int count=pf.getAuthoringInstance(ob).getCommentCount();
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validateCommentAdd(test);
+			pf.getAuthoringInstance(ob).validateCommentAdd(test,count);
 			pf.getAuthoringInstance(ob).validateViewComment(addComments);
 			pf.getAuthoringInstance(ob).updateComment("comment updated");
 			validateUpdatedComment("comment updated");
