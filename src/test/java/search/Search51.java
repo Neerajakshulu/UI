@@ -73,12 +73,16 @@ public class Search51 extends TestBase {
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
+			
+			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope active']"), 30);
+			Thread.sleep(5000);
 			String text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
 			System.out.println(text);
 

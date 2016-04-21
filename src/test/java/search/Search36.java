@@ -77,12 +77,15 @@ public class Search36 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+			Thread.sleep(2000);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(3000);
 
 			// Clicking on the sort by drop down
 			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
+			Thread.sleep(2000);
 
 			// Finding out the types by which we can sort the Article content
 			// results

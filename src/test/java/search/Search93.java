@@ -56,15 +56,15 @@ public class Search93 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "STQABLR";
+			String userName = "uiautomation user2";
 
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -75,8 +75,10 @@ public class Search93 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 180);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"), 10);
+			Thread.sleep(2000);
 			boolean isPresent = ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");

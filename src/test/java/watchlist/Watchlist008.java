@@ -14,13 +14,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Verify that user is able to add a Post from Posts content search results page to a particular watchlist||Verify that
@@ -89,7 +89,7 @@ public class Watchlist008 extends TestBase {
 
 			// Searching for post
 			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hi");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 

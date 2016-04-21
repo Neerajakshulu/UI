@@ -52,7 +52,7 @@ public class Authoring11 extends TestBase {
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
-	@Test
+	@Test(timeOut=300000)
 	public void testOpenApplication() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
@@ -148,8 +148,8 @@ public class Authoring11 extends TestBase {
 					jsClick(ob, ob.findElement(By
 							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS
 									.toString())));
-					waitForPageLoad(ob);
-					BrowserWaits.waitTime(10);
+					//waitForPageLoad(ob);
+					//BrowserWaits.waitTime(10);
 					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
 					// waitForElementTobeVisible(ob,
 					// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()),

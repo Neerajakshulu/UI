@@ -55,7 +55,7 @@ public class Search94 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "STQABLR";
+			String userName = "john";
 
 			openBrowser();
 			clearCookies();
@@ -70,12 +70,16 @@ public class Search94 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
 			selectSearchTypeFromDropDown("People");
+			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			Thread.sleep(3000);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 50);
+			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"), 10);
+			Thread.sleep(2000);
 			boolean isPresent = ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");

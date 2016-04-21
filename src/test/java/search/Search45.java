@@ -75,8 +75,10 @@ public class Search45 extends TestBase {
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//ul[@class='dropdown-menu']"), 30);
+			Thread.sleep(2000);
 			WebElement dd = ob.findElement(By.xpath("//ul[@class='dropdown-menu']"));
 			BrowserWaits.waitTime(2);
+			Thread.sleep(2000);
 			List<WebElement> dd_options = dd.findElements(By.tagName("a"));
 
 			boolean cond1 = dd_options.get(0).getText().equals("All");

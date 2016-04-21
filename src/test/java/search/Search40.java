@@ -77,9 +77,11 @@ public class Search40 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+			Thread.sleep(2000);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			Thread.sleep(2000);
 
 			// Finding out the types filer in refine panel
 			List<WebElement> content_types = ob.findElements(By

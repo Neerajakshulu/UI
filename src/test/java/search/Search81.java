@@ -75,6 +75,7 @@ public class Search81 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			Thread.sleep(2000);
 
 			String text = ob.findElement(By.id("single-button")).getText();
 			System.out.println(text);

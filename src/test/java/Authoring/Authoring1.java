@@ -93,7 +93,7 @@ public class Authoring1 extends TestBase {
 
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validateCommentAdd();
+			pf.getAuthoringInstance(ob).validateCommentAdd(test);
 			pf.getAuthoringInstance(ob).validateViewComment(addComments);
 			pf.getAuthoringInstance(ob).updateComment("comment updated");
 			validateUpdatedComment("comment updated");

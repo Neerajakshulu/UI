@@ -84,6 +84,7 @@ public class Search90 extends TestBase {
 					ob,
 					By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul[@class='dropdown-menu']"),
 					4);
+			Thread.sleep(2000);
 			List<WebElement> sortByValuesList = ob.findElements(By
 					.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul/li"));
 			List<String> expectedDropDownValues = Arrays.asList(new String[] {"Relevance", "Times Cited",

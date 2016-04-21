@@ -74,48 +74,62 @@ public class Search44 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
-			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			ob.findElement(
-					By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"))
-					.click();
-			((JavascriptExecutor) ob).executeScript("window.scrollBy(0,250)", "");
-			waitForPageLoad(ob);
-
-			try {
-
-				Assert.assertTrue(ob.findElement(
-						By.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope"))
-						.isDisplayed());
+			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'Articles')]"), 30);
+			Thread.sleep(2000);
+			ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'Articles')]")).click();
+			waitForElementTobeVisible(ob, By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"), 30);
+			Thread.sleep(2000);
+			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+			Thread.sleep(3000);
+			
+			if(!checkElementPresence("filter_up_icon")){
+				
+				test.log(LogStatus.FAIL, "Filter not getting expended");// extent report
+				status = 2;// excel
+				test.log(
+				LogStatus.INFO,
+				"Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+				+ "_filter_not_expanding")));// screenshot	
+				
+				
 			}
-
-			catch (Throwable t) {
-
-				test.log(LogStatus.PASS, "User unable to expand INSTITUTIONS filter");// extent report
-
+			
+			
+			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+			Thread.sleep(3000);
+			
+			List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("filter_up_icon")));
+			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			System.out.println(mylist.size());
+			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			
+			try{
+				
+				Assert.assertEquals(mylist.size(), 0);
+				
+				test.log(LogStatus.PASS, "Filter getting collapsed");// extent report
+				
+			}
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Filter not getting collapsed");// extent report
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
 				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_unexpected_happened")));// screenshot
-
+				LogStatus.INFO,
+				"Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+				+ "_filter_not_getting_collapsed")));// screenshot
+				
+				
 			}
-
-			ob.findElement(
-					By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"))
-					.click();
-
-			List<WebElement> mylist = ob.findElements(By
-					.cssSelector("div.panel-collapse.in > div.panel-body > button.load-more-button.ng-scope"));
-			System.out.println("Count=" + mylist.size());
 
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.PASS, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
@@ -134,7 +148,7 @@ public class Search44 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void expandFilter() {
+	private void expandFilter() throws Exception {
 		List<WebElement> filterPanelHeadingList;
 		List<WebElement> filterPanelBodyList;
 		WebElement documentTypePanelBody;
@@ -158,6 +172,7 @@ public class Search44 extends TestBase {
 
 		// Collapse the document type filter by clicking it again
 		documentTypePanelHeading.click();
+		Thread.sleep(2000);
 
 	}
 

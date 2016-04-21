@@ -22,7 +22,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring14 extends TestBase {
 
-	private static final String PROFILE_NAME = "amneet singh";
+	
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -61,7 +61,7 @@ public class Authoring14 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));

@@ -98,7 +98,7 @@ public class Notifications002 extends TestBase {
 			ob.findElement(By.id("password")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
 			Thread.sleep(15000);
-
+			ob.navigate().refresh();
 			/*
 			 * if (!checkElementPresence("notification")) { test.log(LogStatus.FAIL,
 			 * "User not receiving notification");// extent // reports status = 2;// excel test.log(LogStatus.INFO,

@@ -130,12 +130,13 @@ public class Authoring46 extends TestBase {
 			waitForElementTobeVisible(
 					ob,
 					By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"),
-					40);
+					180);
 			WebElement editCommentElement = ob
 					.findElement(By
 							.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
+			test.log(LogStatus.INFO, "minCharCount:"+minCharCount);
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
 			waitForElementTobeVisible(ob,

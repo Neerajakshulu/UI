@@ -180,8 +180,7 @@ public class Authoring9 extends TestBase {
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
-		if (master_condition)
-			closeBrowser();
+		closeBrowser();
 	}
 
 	/**
@@ -198,6 +197,9 @@ public class Authoring9 extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		waitForAjax(ob);
+		BrowserWaits.waitTime(4);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(4);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {

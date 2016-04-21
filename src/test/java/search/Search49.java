@@ -72,6 +72,7 @@ public class Search49 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
+			Thread.sleep(2000);
 			String all_text = ob.findElement(
 					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"))
 					.getText();
