@@ -981,41 +981,15 @@ public class TestBase {
 		}
 	}
 
-	/**
-	 * 
-	 * @param watchButton passing the particular button element to watch
-	 * @return the watch list name the item got added
-	 * @throws InterruptedException
-	 */
-	public String watchOrUnwatchItemToAParticularWatchlist(WebElement watchButton) throws InterruptedException {
-		watchButton.click();
-
-		// Wait until select a watch list model loads
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 5);
-		// Select the first watch list from the model
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 5);
-		// Adding the item into watch list
-		ob.findElement(By.xpath(OR.getProperty("watchlist_watch_button"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 10);
-
-		// Selecting the watch list name
-		String selectedWatchlistName = ob.findElement(By.xpath(OR.getProperty("watchlist_name_in_select_model")))
-				.getText();
-		// Closing the select a model
-		ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
-		Thread.sleep(3000);
-		return selectedWatchlistName;
-	}
-
 	public void watchOrUnwatchItemToAParticularWatchlist(WebElement watchButton,
 			String watchListName) throws InterruptedException {
 
 		watchButton.click();
 		BrowserWaits.waitTime(2);
 		// Wait until select a watch list model loads
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_select_model")), 60);
 		// Select the first watch list from the model
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 30);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 60);
 
 		List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button")));
 		List<WebElement> listOfWatchListName = ob.findElements(By.xpath(OR
@@ -1024,7 +998,7 @@ public class TestBase {
 			if (listOfWatchListName.get(i).getText().equals(watchListName)) {
 				// Adding the item into watch list
 				listOfWatchListButton.get(i).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name_in_select_model")), 60);
 				break;
 			}
 			// Scrolling down to make the watch list visible in select model
@@ -1051,57 +1025,41 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 60);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
 		}
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 30);
-	}
-
-	public void deleteFirstWatchlist() throws Exception {
-		// Deleting the first watch list
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
-		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
-		ob.findElement(By.xpath(OR.getProperty("watchlist_name"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
-		ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 30);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 30);
-		ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
-
+		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
 	}
 
 	public void deleteParticularWatchlist(String watchListName) throws Exception {
 		// Deleting the first watch list
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 60);
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 		for (WebElement watchList : listOfWatchlist) {
 			if (watchList.getText().equals(watchListName)) {
 
 				watchList.click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_image")), 60);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_image"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 30);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_watchlist_popup")), 60);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_in_popup")), 60);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name")), 60);
 				break;
 			}
 			// Scrolling down to make the watch list visible

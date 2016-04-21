@@ -89,7 +89,7 @@ public class Watchlist021 extends TestBase {
 
 			// Watching an article to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 

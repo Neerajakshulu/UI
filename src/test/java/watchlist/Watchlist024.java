@@ -105,7 +105,7 @@ public class Watchlist024 extends TestBase {
 			selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
 
 			// Watching an article to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
