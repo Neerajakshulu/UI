@@ -52,7 +52,7 @@ public class Authoring11 extends TestBase {
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
-	@Test(timeOut=300000)
+	@Test
 	public void testOpenApplication() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
@@ -111,7 +111,7 @@ public class Authoring11 extends TestBase {
 		}
 	}
 
-	@Test(dependsOnMethods = "chooseArtilce")
+	@Test(dependsOnMethods = "chooseArtilce",timeOut=300000)
 	@Parameters({"tusername", "tpassword"})
 	public void shareOnTwitter(String tusername,
 			String tpassword) throws Exception {
@@ -149,7 +149,7 @@ public class Authoring11 extends TestBase {
 							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS
 									.toString())));
 					//waitForPageLoad(ob);
-					//BrowserWaits.waitTime(10);
+					BrowserWaits.waitTime(10);
 					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
 					// waitForElementTobeVisible(ob,
 					// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()),

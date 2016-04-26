@@ -290,6 +290,102 @@ public class TestBase {
 
 	}*/
 
+	
+	public void runOnSauceLabsFromLocal(String os,String browser) throws Exception{
+		  
+		  String username = "amneetsingh";
+		  String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
+		  String url = "http://" + username + ":" + access_key + "@ondemand.saucelabs.com:80/wd/hub";
+		  
+		  DesiredCapabilities caps = null;
+		  
+		  if(os.equals("Windows")){
+			  
+			  if(browser.equals("Chrome")){
+				  
+				  caps = DesiredCapabilities.chrome();
+				  caps.setCapability("platform", "Windows 7");
+				  caps.setCapability("version", "48.0");
+			  }
+			  
+			  if(browser.equals("FF")){
+				  
+				  caps = DesiredCapabilities.firefox();
+				  caps.setCapability("platform", "Windows 7");
+				  caps.setCapability("version", "44.0");
+				  
+				  
+			  }
+			  
+			  if(browser.equals("IE")){
+				  
+				  caps = DesiredCapabilities.internetExplorer();
+				  caps.setCapability("platform", "Windows 8.1");
+				  caps.setCapability("version", "11.0");
+				  
+			  }
+			  
+			  
+		  }
+		  
+		  if(os.equals("Mac")){
+			  
+			  
+			  if(browser.equals("Chrome")){
+				  
+				  
+				  caps = DesiredCapabilities.chrome();
+				  caps.setCapability("platform", "OS X 10.11");
+				  caps.setCapability("version", "48.0");
+			  }
+			  
+			  if(browser.equals("FF")){
+				  
+				  
+				  caps = DesiredCapabilities.firefox();
+				  caps.setCapability("platform", "OS X 10.11");
+				  caps.setCapability("version", "44.0");
+			  }
+			  
+			  
+			  if(browser.equals("Safari")){
+				  
+				  
+				  caps = DesiredCapabilities.safari();
+				  caps.setCapability("platform", "OS X 10.11");
+				  caps.setCapability("version", "9.0");
+			  }
+		  }
+		  
+		  
+		  
+		  if(os.equals("iOS")){
+			  
+			  
+			  caps = DesiredCapabilities.iphone();
+			  caps.setCapability("platform", "OS X 10.10");
+			  caps.setCapability("version", "9.2");
+			  caps.setCapability("deviceName","iPhone 6");
+			  caps.setCapability("deviceOrientation", "portrait");
+		  }
+		  
+		  if(os.equals("Android")){
+			  
+			  
+			  caps = DesiredCapabilities.android();
+			  caps.setCapability("platform", "Linux");
+			  caps.setCapability("version", "5.1");
+			  caps.setCapability("deviceName","Android Emulator");
+			  caps.setCapability("deviceType","phone");
+			  caps.setCapability("deviceOrientation", "portrait");
+		  }
+		  
+		  ob = new RemoteWebDriver(new URL(url), caps);
+		  
+	  }
+
+	
+	
 	// Closing the browser
 	public void closeBrowser() {
 
