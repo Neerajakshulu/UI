@@ -198,11 +198,6 @@
 		</classes>
 	</test>
 
-	<test name="Search72">
-		<classes>
-			<class name="search.Search72"></class>
-		</classes>
-	</test>
 
 	<test name="Search62">
 		<classes>
@@ -260,11 +255,7 @@
 		</classes>
 	</test>
 
-	<test name="Search76">
-		<classes>
-			<class name="search.Search76"></class>
-		</classes>
-	</test>
+	
 
 	<test name="Search77">
 		<classes>
