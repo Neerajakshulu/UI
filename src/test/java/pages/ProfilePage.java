@@ -953,7 +953,8 @@ public class ProfilePage extends TestBase {
 		waitForAjax(ob);
 	}
 
-	public boolean validatePublishButton() {
+	public boolean validatePublishButton() throws InterruptedException {
+		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 

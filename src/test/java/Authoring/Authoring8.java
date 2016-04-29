@@ -124,7 +124,7 @@ public class Authoring8 extends TestBase {
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Min Validation Error Message--->"+minValidErrMsg);
@@ -135,7 +135,7 @@ public class Authoring8 extends TestBase {
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
 			String maxValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Max Validation Error Message--->"+maxValidErrMsg);

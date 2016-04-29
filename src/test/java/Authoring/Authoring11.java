@@ -164,11 +164,11 @@ public class Authoring11 extends TestBase {
 					// if(!articleDesc.contains(rvPageurl)){
 					// throw new Exception("Sharing Article Description not populated on Twitter Page");
 					// }
-					waitForElementTobeVisible(ob,
+					/*waitForElementTobeVisible(ob,
 							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS.toString()),
 							180);
 					pf.getBrowserActionInstance(ob)
-							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);
+							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);*/
 					ob.switchTo().window(PARENT_WINDOW);
 					BrowserWaits.waitTime(10);
 				}

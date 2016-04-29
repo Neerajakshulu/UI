@@ -127,6 +127,7 @@ public class Authoring46 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, "Min and Max Length Comment Validation");
 			// System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
+			BrowserWaits.waitTime(10);
 			waitForElementTobeVisible(
 					ob,
 					By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"),
