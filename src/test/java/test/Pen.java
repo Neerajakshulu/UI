@@ -27,7 +27,7 @@ public class Pen {
  
 //    driver.get("http://www.google.com");
     
-    driver.get("https://dev-stable.1p.thomsonreuters.com");
+    driver.get("https://dev-snapshot.1p.thomsonreuters.com");
     Thread.sleep(5000);
     driver.findElement(By.xpath("//button[@title='Sign in with Project Neon']")).click();
     Thread.sleep(5000);
