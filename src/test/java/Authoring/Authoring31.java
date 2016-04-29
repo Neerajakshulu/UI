@@ -136,7 +136,7 @@ public class Authoring31 extends TestBase {
 			Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());;
 			test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Publish button is disabled for the post content less than min character count");
+			test.log(LogStatus.FAIL, "Publish button is not disabled for the post content less than min character count");
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;

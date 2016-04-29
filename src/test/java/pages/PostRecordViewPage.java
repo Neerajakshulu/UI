@@ -126,7 +126,7 @@ public class PostRecordViewPage extends TestBase {
 
 		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
 			appreciationButton.click();
-			Thread.sleep(10000);// After clicking on like button wait for status to change and count update
+			Thread.sleep(15000);// After clicking on like button wait for status to change and count update
 			countAfter = Integer
 					.parseInt(ob
 							.findElement(
@@ -143,7 +143,7 @@ public class PostRecordViewPage extends TestBase {
 
 		} else {
 			appreciationButton.click();
-			Thread.sleep(10000);// After clicking on unlike button wait for status to change and count update
+			Thread.sleep(15000);// After clicking on unlike button wait for status to change and count update
 			countAfter = Integer
 					.parseInt(ob
 							.findElement(
