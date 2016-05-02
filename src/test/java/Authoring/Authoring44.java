@@ -60,8 +60,8 @@ public class Authoring44 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			 ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();

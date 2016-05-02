@@ -71,9 +71,10 @@ public class Search111 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Amneet");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
+			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+			waitForPageLoad(ob);
 
 			// checking for Default sort option
 			List<WebElement> beforeScrollSize = ob.findElements(By.xpath(OR
@@ -81,7 +82,7 @@ public class Search111 extends TestBase {
 			System.out.println(beforeScrollSize.size());
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0, 500);");
+			jse.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 			Thread.sleep(4000);
 
 			List<WebElement> afterScrollSize = ob.findElements(By.xpath(OR

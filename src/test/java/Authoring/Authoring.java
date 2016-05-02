@@ -47,7 +47,7 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		scrollingToElementofAPage();
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 180);
 		String commentSizeBeforeAdd = ob
 				.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText()
 				.replaceAll(",", "").trim();
@@ -92,13 +92,13 @@ public class Authoring extends TestBase {
 		waitForAjax(ob);
 	}
 
-	public void validateCommentAdd(ExtentTest test) throws Exception {
-		commentSizeAfterAdd = getCommentCount();
-		System.out.println("before-->" + commentSizeBeforeAdd);
+	public void validateCommentAdd(ExtentTest test,int expCommentCount) throws Exception {
+		int commentCount = getCommentCount();
+		
 		System.out.println("After-->" + commentSizeAfterAdd);
-		if (!(commentSizeAfterAdd > commentSizeBeforeAdd)) {
-			test.log(LogStatus.INFO, "before-->" + commentSizeBeforeAdd);
-			test.log(LogStatus.INFO, "After-->" + commentSizeAfterAdd);
+		if (!(commentCount > expCommentCount)) {
+			test.log(LogStatus.INFO, "before-->" + commentCount);
+			test.log(LogStatus.INFO, "After-->" + expCommentCount);
 			throw new Exception("Entered Comment not updated");
 		}
 	}
