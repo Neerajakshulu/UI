@@ -64,10 +64,6 @@ public class Xls_Reader {
 			String colName,
 			int rowNum) {
 
-		System.out.println("sheetName=" + sheetName);
-		System.out.println("colName=" + colName);
-		System.out.println("rowNum=" + rowNum);
-
 		try {
 			if (rowNum <= 0)
 				return "";
