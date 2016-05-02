@@ -589,7 +589,7 @@ public class ProfilePage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public int getPostsCount() throws InterruptedException {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(20);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);

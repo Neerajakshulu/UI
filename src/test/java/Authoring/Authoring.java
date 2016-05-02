@@ -47,7 +47,7 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		scrollingToElementofAPage();
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 180);
 		String commentSizeBeforeAdd = ob
 				.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText()
 				.replaceAll(",", "").trim();
