@@ -45,6 +45,7 @@ public class TestUtil {
 			// System.out.println(tcid +" -- "+ runmode);
 
 			if (xls.getCellData("Test Cases", "TCID", i).equalsIgnoreCase(testCaseName)) {
+					System.out.println("Test run mode-->"+xls.getCellData("Test Cases", "Runmode", i)+"test case name-->"+testCaseName);
 				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("Y")) {
 					isExecutable = true;
 				} else {
