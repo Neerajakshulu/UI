@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
@@ -72,11 +73,32 @@ public class Search70 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("c");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("e");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("m");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("s");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("t");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("r");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("y");
+			Thread.sleep(1000);
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("arguments[0].scrollIntoView(true);",myE2);
+			Thread.sleep(1000);
 			String text2 = myE2.getText();
 
 			String[] arr2 = text2.split("\n");
@@ -93,6 +115,7 @@ public class Search70 extends TestBase {
 			for (int i = 1; i <= 7; i++) {
 
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ARROW_DOWN);
+				Thread.sleep(500);
 			}
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);

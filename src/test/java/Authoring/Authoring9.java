@@ -180,6 +180,7 @@ public class Authoring9 extends TestBase {
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
+		if(master_condition)
 		closeBrowser();
 	}
 

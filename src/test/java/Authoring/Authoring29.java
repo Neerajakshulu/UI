@@ -83,7 +83,7 @@ public class Authoring29 extends TestBase {
 				Assert.assertEquals(postCountBefore + 1, postCountAfter);
 				test.log(LogStatus.PASS, "Post count is incremented after the new post creation");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Post count is incremented after the new post creation");
+				test.log(LogStatus.FAIL, "Post count is not incremented after the new post creation");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

@@ -77,10 +77,10 @@ public class Authoring61 extends TestBase {
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitleBeforeEditing = ob.findElement(
-					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleBeforeEditing);
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.click();
 
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
@@ -93,7 +93,7 @@ public class Authoring61 extends TestBase {
 			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			waitForAjax(ob);
 			String postTitleAfterEditing = ob.findElement(
-					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);
 			System.out.println(postString);

@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
@@ -85,11 +86,21 @@ public class Search74 extends TestBase {
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
+			Thread.sleep(1000);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
+			Thread.sleep(1000);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
+			
 			BrowserWaits.waitTime(2);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
+			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			jse.executeScript("arguments[0].scrollIntoView(true);",myE);
+			Thread.sleep(1000);
 			String text = myE.getText();
 
 			String[] arr = text.split("\n");
@@ -106,6 +117,7 @@ public class Search74 extends TestBase {
 			for (int i = 1; i <= 3; i++) {
 
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ARROW_DOWN);
+				Thread.sleep(500);
 			}
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
