@@ -148,7 +148,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
-	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH("(//a[@class='ng-binding' and @event-category='profileposts-ck-posts']"),
+	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("(a[class='ng-binding'][event-category='profileposts-ck-posts']"),
 	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("div[class='full-record'] button[class*='webui-icon webui-icon-flag']"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),

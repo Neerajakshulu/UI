@@ -88,7 +88,7 @@ public class Authoring75 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle = ob
 					.findElement(
-							By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter == (postCountBefore + 1) && postString.equals(postTitle));
@@ -108,10 +108,10 @@ public class Authoring75 extends TestBase {
 			}
 			
 			String postTitleBeforeEditing = ob.findElement(
-					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleBeforeEditing);
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.click();
 
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
@@ -124,7 +124,7 @@ public class Authoring75 extends TestBase {
 			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			waitForAjax(ob);
 			String postTitleAfterEditing = ob.findElement(
-					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);
 			System.out.println(postString);
