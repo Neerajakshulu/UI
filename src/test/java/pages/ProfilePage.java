@@ -1051,7 +1051,8 @@ public class ProfilePage extends TestBase {
 				.findElements(By.tagName("li"));
 		for (WebElement typeAhead : countyTypeaheads) {
 			if (typeAhead.getText().equalsIgnoreCase(fullCountry)) {
-				typeAhead.click();
+				//typeAhead.click();
+				jsClick(ob, typeAhead);
 				BrowserWaits.waitTime(2);
 				break;
 			}
