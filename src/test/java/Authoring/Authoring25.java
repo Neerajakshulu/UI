@@ -147,7 +147,7 @@ public class Authoring25 extends TestBase {
 		} finally {
 			reportDataSetResult();
 			++count;
-			ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")).click();
+			jsClick(ob,ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")));
 
 		}
 
