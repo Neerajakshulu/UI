@@ -61,8 +61,8 @@ public class Search23 extends TestBase {
 
 			String search_query = "wom?n";
 
-//			openBrowser();s
-			runOnSauceLabsFromLocal("Windows","FF");
+			openBrowser();
+//			runOnSauceLabsFromLocal("Windows","FF");
 			clearCookies();
 			maximizeWindow();
 
