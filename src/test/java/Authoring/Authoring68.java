@@ -75,7 +75,7 @@ public class Authoring68 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			test.log(LogStatus.INFO, "Checking if draft post title is displayed");
 			boolean isPostTitleDisplayed = ob.findElement(
-					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.isDisplayed();
 			System.out.println(isPostTitleDisplayed);
 			try {

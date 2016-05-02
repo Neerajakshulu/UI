@@ -59,7 +59,7 @@ public class Authoring10 extends TestBase {
 	public void testOpenApplication() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
+		master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
@@ -182,7 +182,7 @@ public class Authoring10 extends TestBase {
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
-
+		if(master_condition)
 			closeBrowser();
 	}
 

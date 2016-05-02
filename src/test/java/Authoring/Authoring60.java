@@ -88,7 +88,7 @@ public class Authoring60 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle = ob
 					.findElement(
-							By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_XPATH.toString()))
+							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter == (postCountBefore + 1) && postString.equals(postTitle));
