@@ -85,6 +85,8 @@ public class Authoring64 extends TestBase {
 			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
 			pf.getProfilePageInstance(ob).deleteDraftPost(postString);
+			ob.navigate().refresh();
+			waitForPageLoad(ob);
 			int postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountAfter);
 

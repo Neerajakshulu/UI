@@ -115,6 +115,7 @@ public class Authoring23 extends TestBase {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  Profanity Words execution starts for data set #" + (count + 1) + "--->");
+			BrowserWaits.waitTime(10);
 			waitForAjax(ob);
 			pf.getAuthoringInstance(ob).updateComment(profanityWord);
 			waitForElementTobeVisible(ob,
@@ -148,6 +149,8 @@ public class Authoring23 extends TestBase {
 		} finally {
 			reportDataSetResult();
 			++count;
+			jsClick(ob,ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")));
+			
 		}
 
 	}
