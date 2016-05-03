@@ -85,7 +85,7 @@ public class Search22 extends TestBase {
 
 				urls.add(searchResults.get(i).getAttribute("href"));
 			}
-			boolean condition1, condition2, condition3, condition4, condition5, masterSearchCondition;
+			boolean condition1, condition2, condition3, condition4, condition5,condition6, masterSearchCondition;
 			String pageText;
 			ArrayList<Integer> error_list = new ArrayList<Integer>();
 			int count = 0;
@@ -118,7 +118,8 @@ public class Search22 extends TestBase {
 				condition3 = pageText.contains("education");
 				condition4 = pageText.contains("educating");
 				condition5 = pageText.contains("educational");
-				masterSearchCondition = condition1 || condition2 || condition3 || condition4 || condition5;
+				condition6 = pageText.contains("educat");
+				masterSearchCondition = condition1 || condition2 || condition3 || condition4 || condition5 || condition6 ;
 				System.out.println(masterSearchCondition);
 				if (masterSearchCondition) {
 

@@ -115,8 +115,8 @@ public class Search23 extends TestBase {
 				Thread.sleep(15000);
 
 				pageText = ob.getPageSource().toLowerCase();
-				condition1 = pageText.contains("wom");
-				condition2 = pageText.contains("wom");
+				condition1 = pageText.contains("woman");
+				condition2 = pageText.contains("women");
 				masterSearchCondition = condition1 || condition2;
 				System.out.println(masterSearchCondition);
 				if (masterSearchCondition) {
