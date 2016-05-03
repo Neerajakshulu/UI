@@ -15,6 +15,7 @@ public class TestUtil {
 			// String runmode = xls.getCellData("Test Suite", "Runmode", i);
 
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
+				System.out.println("Suite Runmode-->"+xls.getCellData("Test Suite", "Runmode", i));
 				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("Y")) {
 					isExecutable = true;
 				} else {
