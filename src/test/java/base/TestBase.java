@@ -83,7 +83,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
- 		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
+ 		/*if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
 
 			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
@@ -154,7 +154,7 @@ public class TestBase {
 				}
 
 			}
-		}
+		}*/
 	}
 
 	// @BeforeClass
