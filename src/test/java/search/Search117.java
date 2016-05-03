@@ -85,6 +85,7 @@ public class Search117 extends TestBase {
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
+			Thread.sleep(1000);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
@@ -120,7 +121,7 @@ public class Search117 extends TestBase {
 					.getText();
 
 			System.out.println("sortby value From record view page-->" + sortByFromRV);
-			if (!(sortByFromRV.trim().equalsIgnoreCase(sortBy))) {
+			if ((sortByFromRV.trim().equalsIgnoreCase(sortBy))) {
 				throw new Exception(
 						"sorting is not retained when user navigates back to POSTS search results page from record view page");
 			}

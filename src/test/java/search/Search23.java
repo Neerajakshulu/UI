@@ -62,11 +62,12 @@ public class Search23 extends TestBase {
 			String search_query = "wom?n";
 
 			openBrowser();
+//			runOnSauceLabsFromLocal("Windows","FF");
 			clearCookies();
 			maximizeWindow();
 
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			 ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
@@ -114,8 +115,8 @@ public class Search23 extends TestBase {
 				Thread.sleep(15000);
 
 				pageText = ob.getPageSource().toLowerCase();
-				condition1 = pageText.contains("woman");
-				condition2 = pageText.contains("women");
+				condition1 = pageText.contains("wom");
+				condition2 = pageText.contains("wom");
 				masterSearchCondition = condition1 || condition2;
 				System.out.println(masterSearchCondition);
 				if (masterSearchCondition) {

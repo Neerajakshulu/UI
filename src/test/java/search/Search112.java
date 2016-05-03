@@ -66,8 +66,8 @@ public class Search112 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -82,17 +82,14 @@ public class Search112 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 30);
-			// checking for Default sort option
+			
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
-
-			waitForElementTobeVisible(ob,
-					By.xpath(OR.getProperty("tr_search_people_sortBy_selection").replaceAll("Filter", "2")), 30);
-
-			// Filter=1: Relevance and Filter=2:Registration Date
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_selection").replaceAll("Filter", "2")))
-					.click();
-			Thread.sleep(6000);
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Registration Date')]"), 30);
+			ob.findElement(By.xpath("//a[contains(text(),'Registration Date')]")).click();
+			
+			
+			
+			Thread.sleep(3000);
 			test.log(LogStatus.PASS, "Selected Registration Date as sort option");
 
 			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By.xpath(OR
