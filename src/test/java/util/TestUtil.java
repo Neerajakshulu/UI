@@ -3,7 +3,7 @@ package util;
 public class TestUtil {
 
 	// finds if the test suite is runnable
-	public static boolean isSuiteRunnable(Xls_Reader xls,
+	public synchronized static boolean isSuiteRunnable(Xls_Reader xls,
 			String suiteName) {
 		System.out.println("suiteName=" + suiteName);
 
@@ -13,9 +13,7 @@ public class TestUtil {
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
 			// String suite = xls.getCellData("Test Suite", "TSID", i);
 			// String runmode = xls.getCellData("Test Suite", "Runmode", i);
-
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
-				System.out.println("Suite Runmode-->"+xls.getCellData("Test Suite", "Runmode", i));
 				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("Y")) {
 					isExecutable = true;
 				} else {
@@ -33,7 +31,7 @@ public class TestUtil {
 	}
 
 	// returns true if runmode of the test is equal to Y
-	public static boolean isTestCaseRunnable(Xls_Reader xls,
+	public synchronized static boolean isTestCaseRunnable(Xls_Reader xls,
 			String testCaseName) {
 
 		System.out.println("testCaseName=" + testCaseName);

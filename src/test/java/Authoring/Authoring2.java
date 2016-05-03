@@ -142,63 +142,67 @@ public class Authoring2 extends TestBase {
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
 		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
 		System.out.println("size of total elemntes-->" + apprDivs.size());
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
-				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
+		for (int i = 0; i < apprDivs.size(); i++) {
+			WebElement apprSubDivs = apprDivs.get(i).findElement(By.cssSelector("div[class='comment-content']"))
+					.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
 
-		// List<WebElement>
-		// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-		System.out.println("app sub divs-->"
-				+ apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
-		scrollingToElementofAPage();
-		int apprEarCount = Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
-				.getText().replaceAll(",", "").trim());
-		System.out.println("Before count-->" + apprEarCount);
-
-		String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
-		System.out.println("Attribute Status-->" + attrStatus);
-
-		if (attrStatus.contains("DOWN")) {
+			// List<WebElement>
+			// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
+			String count = apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText();
+			System.out.println("app sub divs-->" + count);
 			scrollingToElementofAPage();
-			// apprSubDivs.findElement(By.tagName("button")).click();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on like button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Already liked  After count-->" + apprAftCount);
-			if (!(apprAftCount < apprEarCount)) {
-				// status=2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Comment Appreciation not happended")));
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
-			}
-		} else if (attrStatus.contains("UP")) {
-			scrollingToElementofAPage();
-			// apprSubDivs.findElement(By.tagName("button")).click();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+			if (count.equalsIgnoreCase(""))
+				continue;
+			else {
+				int apprEarCount = Integer
+						.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
+								.replaceAll(",", "").trim());
+				System.out.println("Before count-->" + apprEarCount);
 
-			Thread.sleep(4000);// After clicking on unlike button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Not liked --After count-->" + apprAftCount);
-			if (!(apprAftCount > apprEarCount)) {
-				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Comment Appreciation not happended")));
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
+				String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
+				System.out.println("Attribute Status-->" + attrStatus);
+
+				if (attrStatus.contains("DOWN")) {
+					scrollingToElementofAPage();
+					// apprSubDivs.findElement(By.tagName("button")).click();
+					JavascriptExecutor exe = (JavascriptExecutor) ob;
+					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+					Thread.sleep(4000);// After clicking on like button wait for
+										// status to change and count update
+					int apprAftCount = Integer
+							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
+									.getText().replaceAll(",", "").trim());
+					System.out.println("Already liked  After count-->" + apprAftCount);
+					if (!(apprAftCount < apprEarCount)) {
+						// status=2;
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+						throw new Exception("Comment Appreciation not happended");
+					} else {
+						test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
+					}
+				} else if (attrStatus.contains("UP")) {
+					scrollingToElementofAPage();
+					// apprSubDivs.findElement(By.tagName("button")).click();
+					JavascriptExecutor exe = (JavascriptExecutor) ob;
+					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+
+					Thread.sleep(4000);// After clicking on unlike button wait
+										// for status to change and count update
+					int apprAftCount = Integer
+							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
+									.getText().replaceAll(",", "").trim());
+					System.out.println("Not liked --After count-->" + apprAftCount);
+					if (!(apprAftCount > apprEarCount)) {
+						status = 2;
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+						throw new Exception("Comment Appreciation not happended");
+					} else {
+						test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
+					}
+				}
+				break;
 			}
 		}
 	}
