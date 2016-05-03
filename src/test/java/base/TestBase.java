@@ -83,7 +83,7 @@ public class TestBase {
 	public void beforeSuite() throws Exception {
 
 		initialize();
-		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
+ 		/*if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
 
 			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
@@ -154,7 +154,7 @@ public class TestBase {
 				}
 
 			}
-		}
+		}*/
 	}
 
 	// @BeforeClass
@@ -562,9 +562,9 @@ public class TestBase {
 	// logging out
 	public void logout() throws Exception {
 
-		ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("header_label"))));
 		Thread.sleep(5000);
-		ob.findElement(By.xpath(OR.getProperty("signOut_link"))).click();
+		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
 
 	// capturing screenshot

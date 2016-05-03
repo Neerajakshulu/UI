@@ -91,9 +91,9 @@ public class LoginTR extends TestBase {
 	}
 
 	public void logOutApp() throws Exception {
-		browserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		browserWait.waitUntilText("Sign out");
-		browserAction.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 		browserWait.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_LOGIN_BUTTON_CSS);
 
 	}

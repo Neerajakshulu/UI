@@ -83,6 +83,8 @@ public class Authoring60 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the Post as a draft");
+			ob.navigate().refresh();
+			waitForPageLoad(ob);
 			int postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
