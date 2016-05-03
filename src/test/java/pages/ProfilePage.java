@@ -940,8 +940,8 @@ public class ProfilePage extends TestBase {
 	public void clickOnPostCancelKeepDraftButton() {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
-		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString()))
-				.click();
+		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString())));
+				
 	}
 
 	public void clickOnDraftPostsTab() throws InterruptedException {
@@ -949,7 +949,7 @@ public class ProfilePage extends TestBase {
 		waitForPageLoad(ob);
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString())).click();
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString())));
 		waitForAjax(ob);
 	}
 
