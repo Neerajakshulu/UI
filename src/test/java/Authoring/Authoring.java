@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -64,11 +65,19 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(20);
-		scrollingToElementofAPage();
+		
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		
 		jsClick(ob,commentArea);
+
+        
+        //Used points class to get x and y coordinates of element.
+        Point point = commentArea.getLocation();
+        //int xcord = point.getX();
+        int ycord = point.getY();
+        ycord=ycord+100;
+        JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0, ycord);");
 		BrowserWaits.waitTime(5);
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
 		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
