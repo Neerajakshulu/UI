@@ -443,12 +443,6 @@
 		</classes>
 	</test>
 
-	<test name="Test F23">
-		<classes>
-			<class name="notifications.Notifications023"></class>
-		</classes>
-	</test>
-
 
 	<test name="Test F24">
 		<classes>
