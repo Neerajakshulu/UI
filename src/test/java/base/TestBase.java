@@ -72,7 +72,7 @@ public class TestBase {
 	public static int count = 0;
 	public static int flag = 0;
 	
-	public TestUtil testUtil=null;
+	public TestUtil testUtil=new TestUtil();
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -197,9 +197,6 @@ public class TestBase {
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
-			
-			testUtil=new TestUtil();
-			
 			isInitalized = true;
 		}
 
