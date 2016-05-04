@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -65,7 +66,8 @@ public class Authoring extends TestBase {
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		jsClick(ob,commentArea);
-		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
+		//commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
+		new Actions(ob).moveToElement(commentArea).sendKeys(addComments);
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
