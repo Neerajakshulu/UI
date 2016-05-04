@@ -66,9 +66,11 @@ public class Authoring extends TestBase {
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		jsClick(ob,commentArea);
-		//commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
-		new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
+		jsClick(ob,commentArea);
+		BrowserWaits.waitTime(10);
+		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
+		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 	public void enterArticleComments(String addComments) throws InterruptedException {
