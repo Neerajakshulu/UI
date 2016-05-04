@@ -63,14 +63,13 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
+		BrowserWaits.waitTime(20);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		jsClick(ob,commentArea);
 		BrowserWaits.waitTime(5);
-		jsClick(ob,commentArea);
-		BrowserWaits.waitTime(5);
-		//commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
-		new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
+		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
 		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
