@@ -72,101 +72,68 @@ public class Search123 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Sachin");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("amneet");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(4000);
 
-			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
-			content_type_tiles.get(3).click();
-			waitForAjax(ob);
+			ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'People')]")).click();
+			Thread.sleep(3000);
+
+			ob.findElement(By.xpath("//span[contains(text(),'Institutions')]")).click();
 			Thread.sleep(2000);
 			
-			List<WebElement> filterPanelHeadingList;
-			WebElement documentTypePanelHeading;
-			// Capturing panel heading for filters
-			filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
-			documentTypePanelHeading = filterPanelHeadingList.get(0);
-
-			// Expand the document type filter by clicking it again
-			documentTypePanelHeading.click();
-			Thread.sleep(4000);
-			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-			filterValues.get(0).click();
-			Thread.sleep(8000);
-
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR
-					.getProperty("tr_search_people_profilename_link_xpath")));
-			System.out.println("Search Results-->" + searchResults.size());
-			ArrayList<String> al1 = new ArrayList<String>();
-			for (int i = 0; i < searchResults.size(); i++) {
-				al1.add(searchResults.get(i).getText());
+			boolean condition11;
+			
+			if(!host.contains("stable")){
+			ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
+			Thread.sleep(3000);
+			
+			ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
+			Thread.sleep(3000);
+			
+			ob.navigate().back();
+			Thread.sleep(6000);
+			
+			condition11=ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected();
+			System.out.println(condition11);
 			}
-
-			System.out.println("al1-->" + al1.size());
-			jsClick(ob, searchResults.get(0));
-			Thread.sleep(5000);
-
-			JavascriptExecutor js = (JavascriptExecutor) ob;
-			js.executeScript("window.history.back();");
-			Thread.sleep(5000);
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR
-					.getProperty("tr_search_people_profilename_link_xpath")));
-			System.out.println("Search Results-->" + searchResults.size());
-			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i = 0; i < searchResults2.size(); i++) {
-
-				al2.add(searchResults2.get(i).getText());
-
+			
+			else{
+				
+				
+				ob.findElement(By.xpath("//input[@type='checkbox']")).click();
+				Thread.sleep(3000);
+				
+				ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
+				Thread.sleep(3000);
+				
+				ob.navigate().back();
+				Thread.sleep(6000);
+				
+				condition11=ob.findElement(By.xpath("//input[@type='checkbox']")).isSelected();
+				System.out.println(condition11);
+				
 			}
-
-			System.out.println("al2--->" + al2.size());
-
-			try {
-				Assert.assertTrue(al1.equals(al2));
-				test.log(
-						LogStatus.PASS,
-						"Correct filtered search results getting displayed when user navigates back to people search results page from record view page");
-			} catch (Throwable t) {
-
-				test.log(
-						LogStatus.FAIL,
-						"Incorrect filtered search results getting displayed when user navigates back to people search results page from record view page");// extent
+			
+			
+			
+			try{
+				
+				Assert.assertTrue(condition11);
+			}
+			
+			catch(Throwable t){
+				
+				test.log(LogStatus.FAIL, "Filtering not retained when user navigates back to PEOPLE search results page from profile page");// extent
 				// reports
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
+				
+				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-				// this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));//
-				// screenshot
-
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+				captureScreenshot(this.getClass().getSimpleName() + "_filtering_not_retained")));// screenshot
+				
 			}
-
-			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-
-			boolean filtering_condition = filterValues.get(0).isSelected();
-
-//			try {
-//				Assert.assertTrue(filtering_condition);
-//				test.log(LogStatus.PASS,
-//						"Filters are retained when user navigates back to people search results page from record view page");
-//			} catch (Throwable t) {
-//
-//				test.log(LogStatus.PASS,
-//						"Filters are not retained when user navigates back to people search results page from record view page");// extent
-				// reports
-//				test.log(LogStatus.INFO, "Error--->" + t);
-//				ErrorUtil.addVerificationFailure(t);
-//				status = 2;// excel
-				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-				// .getSimpleName()
-				// +
-				// "_filters_not_retained_when_user_navigates_back_to_people_search_results_page_from_record_view_page")));//
-				// screenshot
-
-//			}
-
+			
 			closeBrowser();
 
 		} catch (Throwable t) {
