@@ -15,15 +15,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for Performing Authoring Comments Profaned Words Check Test
@@ -50,13 +49,13 @@ public class Authoring9 extends TestBase {
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that profanity words are not allowed while creating the comments.")
 				.assignCategory("Authoring");
-		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
+		runmodes = testUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -157,9 +156,9 @@ public class Authoring9 extends TestBase {
 
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
-		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
-		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
+		 * if(fail) { status=2; testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
+		 * "FAIL"); } else testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 
 		skip = false;
@@ -173,12 +172,12 @@ public class Authoring9 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) testUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 		if(master_condition)
 		closeBrowser();
@@ -220,7 +219,7 @@ public class Authoring9 extends TestBase {
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return TestUtil.getData(authoringxls, this.getClass().getSimpleName());
+		return testUtil.getData(authoringxls, this.getClass().getSimpleName());
 	}
 
 }

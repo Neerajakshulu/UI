@@ -9,12 +9,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search51 extends TestBase {
 
@@ -41,8 +40,8 @@ public class Search51 extends TestBase {
 	@Test
 	public void testcaseB51() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Search");
+		boolean testRunmode = testUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -130,14 +129,14 @@ public class Search51 extends TestBase {
 		extent.endTest(test);
 
 		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
+		// testUtil.reportDataSetResult(searchxls, "Test Cases",
+		// testUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
 		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
+		// testUtil.reportDataSetResult(searchxls, "Test Cases",
+		// testUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
 		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
+		// testUtil.reportDataSetResult(searchxls, "Test Cases",
+		// testUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

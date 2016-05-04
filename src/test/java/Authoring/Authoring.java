@@ -15,10 +15,10 @@ import org.testng.Assert;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 /**
  * 

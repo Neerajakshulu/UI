@@ -2,8 +2,6 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -28,14 +26,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,14 +36,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.TestUtil;
 import util.Xls_Reader;
-
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class TestBase {
 
@@ -78,6 +71,8 @@ public class TestBase {
 	private String[][] xData;
 	public static int count = 0;
 	public static int flag = 0;
+	
+	public TestUtil testUtil=null;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -202,6 +197,9 @@ public class TestBase {
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
+			
+			testUtil=new TestUtil();
+			
 			isInitalized = true;
 		}
 

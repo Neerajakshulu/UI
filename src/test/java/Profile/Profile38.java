@@ -9,13 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for find HCR profile badge
@@ -47,7 +46,7 @@ public class Profile38 extends TestBase {
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that HCR profile having badge along with their name").assignCategory(
 				"Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
+		runmodes = testUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	@Test
@@ -55,8 +54,8 @@ public class Profile38 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
+		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Profile");
+		boolean testRunmode = testUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
@@ -143,12 +142,12 @@ public class Profile38 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) testUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * testUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * testUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * testUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "FAIL"); else
+		 * testUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * testUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 		// closeBrowser();
 	}

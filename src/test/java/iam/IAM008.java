@@ -11,12 +11,11 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM008 extends TestBase {
 
@@ -38,22 +37,22 @@ public class IAM008 extends TestBase {
 				.assignCategory("IAM");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests
-		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
+		runmodes = testUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
 	public void testcaseA8(String email,
 			String password) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "IAM");
+		boolean testRunmode = testUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
+			// testUtil.reportDataSetResult(iamxls, "Test Cases",
+			// testUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -66,7 +65,7 @@ public class IAM008 extends TestBase {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count+2, "SKIP");
+			// testUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
@@ -140,14 +139,14 @@ public class IAM008 extends TestBase {
 	@AfterMethod
 	public void reportDataSetResult() {
 		if (skip)
-			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "SKIP");
+			testUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "SKIP");
 
 		else if (fail) {
 
 			status = 2;
-			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "FAIL");
+			testUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "FAIL");
 		} else
-			TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "PASS");
+			testUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count + 2, "PASS");
 
 		skip = false;
 		fail = false;
@@ -160,19 +159,19 @@ public class IAM008 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) testUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * testUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * testUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * testUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * testUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * testUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return TestUtil.getData(iamxls, this.getClass().getSimpleName());
+		return testUtil.getData(iamxls, this.getClass().getSimpleName());
 	}
 
 }

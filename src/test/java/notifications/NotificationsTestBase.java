@@ -8,7 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeSuite;
 
 import base.TestBase;
-import util.TestUtil;
 
 public class NotificationsTestBase extends TestBase {
 	
@@ -18,7 +17,7 @@ public class NotificationsTestBase extends TestBase {
 		initialize();
  		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
 
-			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
+			if (testUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
 				if (count == 0) {
 
