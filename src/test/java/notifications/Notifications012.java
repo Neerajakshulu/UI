@@ -20,7 +20,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications012 extends TestBase {
+public class Notifications012 extends NotificationsTestBase {
 
 	static int status = 1;
 	String watchListName = null;
