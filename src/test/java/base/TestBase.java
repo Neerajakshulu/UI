@@ -255,7 +255,6 @@ public class TestBase {
 		if (CONFIG.getProperty("browserType").equals("FF")) {
 			ob = new FirefoxDriver();
 		} else if (CONFIG.getProperty("browserType").equals("IE")) {
-			System.setProperty("webdriver.ie.driver", "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
@@ -263,8 +262,6 @@ public class TestBase {
 		} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
 			DesiredCapabilities capability = DesiredCapabilities.chrome();
 			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 			ob = new ChromeDriver(capability);
 		}
