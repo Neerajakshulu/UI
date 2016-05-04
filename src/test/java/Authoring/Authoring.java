@@ -67,7 +67,7 @@ public class Authoring extends TestBase {
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		jsClick(ob,commentArea);
 		//commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
-		new Actions(ob).moveToElement(commentArea).sendKeys(addComments);
+		new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
