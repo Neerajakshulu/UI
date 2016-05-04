@@ -64,7 +64,7 @@ public class Authoring extends TestBase {
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		commentArea.click();
+		jsClick(ob,commentArea);
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
