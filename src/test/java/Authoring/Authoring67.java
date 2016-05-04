@@ -64,8 +64,8 @@ public class Authoring67 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			ob.navigate().to(host);
-			// ob.get(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(host);
+			 ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME14", "PASSWORD14");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
@@ -78,15 +78,16 @@ public class Authoring67 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the draft post");
-			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
-			ob.navigate().refresh();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			waitForPageLoad(ob);
 			waitForAjax(ob);
+			
+			
 			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
-
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			pf.getProfilePageInstance(ob).deleteDraftPostFromPostModal(postString);
-			ob.navigate().refresh();
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			waitForPageLoad(ob);
 			int postCountAfter = 0;
 			if (postCountBefore == 1) {
@@ -122,6 +123,7 @@ public class Authoring67 extends TestBase {
 			}
 			if (postCountBefore != 1) {
 				try {
+					pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 					Assert.assertTrue(!pf.getProfilePageInstance(ob).getAllDraftPostTitle().contains(postString));
 					test.log(LogStatus.PASS, "Deleted post is not displayed under posts tab in profile");
 				} catch (Throwable t) {

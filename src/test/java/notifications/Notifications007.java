@@ -15,7 +15,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Notifications007 extends TestBase {
+public class Notifications007 extends NotificationsTestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();

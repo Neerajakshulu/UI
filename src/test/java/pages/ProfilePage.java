@@ -598,8 +598,7 @@ public class ProfilePage extends TestBase {
 		return count;
 	}
 
-	public int getDraftPostsCount() throws InterruptedException {
-		ob.navigate().refresh();
+	public int getDraftPostsCount() throws Exception {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		BrowserWaits.waitTime(15);
@@ -1267,7 +1266,6 @@ public class ProfilePage extends TestBase {
 
 	public List<String> getAllDraftPostTitle() {
 		List<String> title = new ArrayList<String>();
-		ob.navigate().refresh();
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 60);
