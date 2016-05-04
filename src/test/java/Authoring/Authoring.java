@@ -68,17 +68,17 @@ public class Authoring extends TestBase {
 		
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		jsClick(ob,commentArea);
+		//jsClick(ob,commentArea);
 
-        
         //Used points class to get x and y coordinates of element.
         Point point = commentArea.getLocation();
         //int xcord = point.getX();
         int ycord = point.getY();
-        ycord=ycord+100;
+        ycord=ycord+200;
         JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, ycord);");
 		BrowserWaits.waitTime(5);
+		jsClick(ob,commentArea);
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
 		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
 		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
