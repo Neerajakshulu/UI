@@ -17,6 +17,7 @@ public class TestUtil {
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
 				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("Y")) {
 					isExecutable = true;
+					break;
 				} else {
 					isExecutable = false;
 				}
@@ -48,6 +49,7 @@ public class TestUtil {
 					System.out.println("Test run mode-->"+xls.getCellData("Test Cases", "Runmode", i)+"test case name-->"+testCaseName);
 				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("Y")) {
 					isExecutable = true;
+					break;
 				} else {
 					isExecutable = false;
 				}
