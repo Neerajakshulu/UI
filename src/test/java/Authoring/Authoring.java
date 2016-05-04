@@ -64,8 +64,10 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(20);
+		scrollingToElementofAPage();
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		
 		jsClick(ob,commentArea);
 		BrowserWaits.waitTime(5);
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
@@ -269,6 +271,8 @@ public class Authoring extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		waitForPageLoad(ob);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(10);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
