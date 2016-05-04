@@ -76,7 +76,7 @@ public class Authoring extends TestBase {
         int ycord = point.getY();
         ycord=ycord+200;
         JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0, ycord);");
+		jse.executeScript("scroll(0,"+ ycord+");");
 		BrowserWaits.waitTime(5);
 		jsClick(ob,commentArea);
 		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
