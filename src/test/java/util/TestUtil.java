@@ -9,23 +9,24 @@ public class TestUtil {
 
 		System.out.println("suite row count=" + xls.getRowCount("Test Suite"));
 
-		boolean isExecutable = false;
+		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
 			// String suite = xls.getCellData("Test Suite", "TSID", i);
 			// String runmode = xls.getCellData("Test Suite", "Runmode", i);
-			
+			//changing the logic due to skip happening in Extent reports even Runmodes are Y in both the places, due to this reason changed the logic
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
-				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("Y")) {
-					isExecutable = true;
-				} else {
+				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("N") || xls.getCellData("Test Suite", "Runmode", i).trim().isEmpty()) {
 					isExecutable = false;
+					break;
+				} else {
+					isExecutable = true;
 				}
 			}
 
 		}
 		xls = null; // release memory
 
-		System.out.println("isExecutable=" + isExecutable);
+		System.out.println("isExecutable master suite=" + isExecutable);
 
 		return isExecutable;
 
@@ -38,22 +39,23 @@ public class TestUtil {
 		System.out.println("testCaseName=" + testCaseName);
 		System.out.println("xls row count=" + xls.getRowCount("Test Cases"));
 
-		boolean isExecutable = false;
+		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Cases"); i++) {
 			// String tcid=xls.getCellData("Test Cases", "TCID", i);
 			// String runmode=xls.getCellData("Test Cases", "Runmode", i);
 			// System.out.println(tcid +" -- "+ runmode);
-
+			//changing the logic due to skip happening in Extent reports even Runmodes are Y in both the places, due to this reason changed the logic
 			if (xls.getCellData("Test Cases", "TCID", i).equalsIgnoreCase(testCaseName)) {
 					System.out.println("Test run mode-->"+xls.getCellData("Test Cases", "Runmode", i)+"test case name-->"+testCaseName);
-				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("Y")) {
-					isExecutable = true;
-				} else {
+				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("N") || xls.getCellData("Test Cases", "Runmode", i).trim().isEmpty()) {
 					isExecutable = false;
+					break;
+				} else {
+					isExecutable = true;
 				}
 			}
 		}
-		System.out.println("isExecutable=" + isExecutable);
+		System.out.println("isExecutable child suite=" + isExecutable);
 		return isExecutable;
 
 	}

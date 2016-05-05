@@ -120,6 +120,7 @@ public class Search123 extends TestBase {
 			try{
 				
 				Assert.assertTrue(condition11);
+				test.log(LogStatus.PASS, "Filtering retained when user navigates back to PEOPLE search results page from profile page");// extent
 			}
 			
 			catch(Throwable t){
