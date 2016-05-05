@@ -8,7 +8,6 @@ public class TestUtil {
 		System.out.println("suiteName=" + suiteName);
 
 		System.out.println("suite row count=" + xls.getRowCount("Test Suite"));
-		BrowserWaits.waitTime(2);
 
 		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
@@ -40,7 +39,6 @@ public class TestUtil {
 		System.out.println("testCaseName=" + testCaseName);
 		System.out.println("xls row count=" + xls.getRowCount("Test Cases"));
 		
-		BrowserWaits.waitTime(2);
 
 		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Cases"); i++) {
