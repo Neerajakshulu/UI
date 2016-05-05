@@ -10,15 +10,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class Notifications017 extends NotificationsTestBase {
+public class Notifications017 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -37,7 +37,6 @@ public class Notifications017 extends NotificationsTestBase {
 						var,
 						"Verify that Featured Post is at the top of event stream after login and that feature post should be top in post tab of trending section")
 				.assignCategory("Notifications");
-
 	}
 
 	@Test
@@ -69,12 +68,12 @@ public class Notifications017 extends NotificationsTestBase {
 			List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
 					.getProperty("all_notifications_in_homepage")));
 			String text = listOfNotifications.get(0).getText();
-			System.out.println(text);
+			logger.info(text);
 			Assert.assertTrue(text.contains("Featured post"));
 			test.log(LogStatus.PASS, "Featured post is at the top of the home page");
 			List<WebElement> listOfPostsLinks = ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
 			String expectedTitle = listOfPostsLinks.get(0).getText();
-			System.out.println(expectedTitle);
+			logger.info(expectedTitle);
 
 			try {
 				Assert.assertTrue(text.contains(expectedTitle));
