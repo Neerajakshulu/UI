@@ -13,7 +13,7 @@ public class TestUtil {
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
 			// String suite = xls.getCellData("Test Suite", "TSID", i);
 			// String runmode = xls.getCellData("Test Suite", "Runmode", i);
-			
+			//changing the logic due to skip happening in Extent reports even Runmodes are Y in both the places, due to this reason changed the logic
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
 				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("N") || xls.getCellData("Test Suite", "Runmode", i).trim().isEmpty()) {
 					isExecutable = false;
@@ -44,11 +44,12 @@ public class TestUtil {
 			// String tcid=xls.getCellData("Test Cases", "TCID", i);
 			// String runmode=xls.getCellData("Test Cases", "Runmode", i);
 			// System.out.println(tcid +" -- "+ runmode);
-
+			//changing the logic due to skip happening in Extent reports even Runmodes are Y in both the places, due to this reason changed the logic
 			if (xls.getCellData("Test Cases", "TCID", i).equalsIgnoreCase(testCaseName)) {
 					System.out.println("Test run mode-->"+xls.getCellData("Test Cases", "Runmode", i)+"test case name-->"+testCaseName);
 				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("N") || xls.getCellData("Test Cases", "Runmode", i).trim().isEmpty()) {
 					isExecutable = false;
+					break;
 				} else {
 					isExecutable = true;
 				}
