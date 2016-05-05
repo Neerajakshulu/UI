@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -62,11 +64,26 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
+		BrowserWaits.waitTime(20);
+		
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		//jsClick(ob,commentArea);
+
+        //Used points class to get x and y coordinates of element.
+        Point point = commentArea.getLocation();
+        //int xcord = point.getX();
+        int ycord = point.getY();
+        ycord=ycord+200;
+        JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0,"+ ycord+");");
+		BrowserWaits.waitTime(5);
 		jsClick(ob,commentArea);
-		commentArea.sendKeys(addComments + RandomStringUtils.randomNumeric(3));
-		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
+		commentArea.clear();
+		String comment=addComments + RandomStringUtils.randomNumeric(3);
+		commentArea.sendKeys(comment);
+		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 	public void enterArticleComments(String addComments) throws InterruptedException {
@@ -265,6 +282,8 @@ public class Authoring extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 		waitForPageLoad(ob);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(10);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {

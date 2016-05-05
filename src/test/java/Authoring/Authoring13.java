@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -119,32 +120,26 @@ public class Authoring13 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 					.toString())));
-			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
-
+			
 			String PARENT_WINDOW = ob.getWindowHandle();
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
+			new Actions(ob).moveToElement(ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK.toString()))).click().build().perform();
+			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
-			// System.out.println("window hanles-->"+child_window_handles.size());
 			for (String child_window_handle : child_window_handles) {
 				if (!child_window_handle.equals(PARENT_WINDOW)) {
 					ob.switchTo().window(child_window_handle);
-					// maximizeWindow();
-					// System.out.println("child window--->"+ob.getTitle());
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS);
 					pf.getBrowserActionInstance(ob).enterFieldValue(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS, fbusername);
 					pf.getBrowserActionInstance(ob).enterFieldValue(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS, fbpassword);
-					pf.getBrowserActionInstance(ob).click(
-							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
-					Thread.sleep(6000);// wait for login to happen
+					pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
 					pf.getBrowserActionInstance(ob).click(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
-
 					ob.switchTo().window(PARENT_WINDOW);
 				}
 			}
