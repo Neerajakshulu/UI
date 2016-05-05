@@ -17,6 +17,7 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 public class Profile35 extends TestBase {
 
@@ -43,8 +44,8 @@ public class Profile35 extends TestBase {
 	@Parameters({"username", "password"})
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Profile");
-		boolean testRunmode = testUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
@@ -171,10 +172,10 @@ public class Profile35 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(profilexls, "Test Cases", testUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", testUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(profilexls, "Test Cases", testUtil.getRowNum(profilexls,
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases", TestUtil.getRowNum(profilexls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

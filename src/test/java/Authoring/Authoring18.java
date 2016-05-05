@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 public class Authoring18 extends TestBase {
 
@@ -41,8 +42,8 @@ public class Authoring18 extends TestBase {
 
 	@Test
 	public void testFlagForCommentUserAuthoredThemselves() throws Exception {
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -134,10 +135,10 @@ public class Authoring18 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(authoringxls, "Test Cases", testUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", testUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases", testUtil.getRowNum(authoringxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

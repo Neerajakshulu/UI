@@ -18,6 +18,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 /**
  * Verify that anyone can see the public watchlists of a user on user's profile page||Verify that user1 is able to see a
@@ -49,8 +50,8 @@ public class Watchlist018 extends TestBase {
 	@Test
 	public void testPublicWatchListVisibleFromOthersProfile() throws Exception {
 
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Watchlist");
-		boolean testRunmode = testUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -148,10 +149,10 @@ public class Watchlist018 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(suiteExls, "Test Cases" , testUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(suiteExls,
-		 * "Test Cases", testUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(suiteExls, "Test Cases", testUtil.getRowNum(suiteExls,
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

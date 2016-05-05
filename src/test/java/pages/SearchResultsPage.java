@@ -9,9 +9,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 /**
  * This class contains all the methods related to search results page.

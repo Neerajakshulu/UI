@@ -16,9 +16,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 public class ProfilePage extends TestBase {
 

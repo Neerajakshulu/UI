@@ -17,6 +17,7 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 public class Authoring36 extends TestBase {
 
@@ -41,13 +42,13 @@ public class Authoring36 extends TestBase {
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "EDIT POST:Verfiy that profanity words are not allowed in post title")
 				.assignCategory("Authoring");
-		runmodes = testUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
+		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testInitiatePostCreation() throws Exception {
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -160,9 +161,9 @@ public class Authoring36 extends TestBase {
 	@Test(dependsOnMethods = "logOut")
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
-		 * if(fail) { status=2; testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
-		 * "FAIL"); } else testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
+		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
+		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 
 		skip = false;
@@ -175,10 +176,10 @@ public class Authoring36 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(authoringxls, "Test Cases", testUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", testUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases", testUtil.getRowNum(authoringxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
@@ -186,6 +187,6 @@ public class Authoring36 extends TestBase {
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return testUtil.getData(authoringxls, "PostProfanityWordCheckTest");
+		return TestUtil.getData(authoringxls, "PostProfanityWordCheckTest");
 	}
 }

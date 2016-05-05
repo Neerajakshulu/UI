@@ -3,23 +3,23 @@ package util;
 public class TestUtil {
 
 	// finds if the test suite is runnable
-	public  boolean isSuiteRunnable(Xls_Reader xls,
+	public  static boolean isSuiteRunnable(Xls_Reader xls,
 			String suiteName) {
 		System.out.println("suiteName=" + suiteName);
 
 		System.out.println("suite row count=" + xls.getRowCount("Test Suite"));
 
-		boolean isExecutable = false;
+		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
 			// String suite = xls.getCellData("Test Suite", "TSID", i);
 			// String runmode = xls.getCellData("Test Suite", "Runmode", i);
 			
 			if (xls.getCellData("Test Suite", "TSID", i).equalsIgnoreCase(suiteName)) {
-				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("Y")) {
-					isExecutable = true;
+				if (xls.getCellData("Test Suite", "Runmode", i).equalsIgnoreCase("N")) {
+					isExecutable = false;
 					break;
 				} else {
-					isExecutable = false;
+					isExecutable = true;
 				}
 			}
 
@@ -33,13 +33,13 @@ public class TestUtil {
 	}
 
 	// returns true if runmode of the test is equal to Y
-	public  boolean isTestCaseRunnable(Xls_Reader xls,
+	public  static boolean isTestCaseRunnable(Xls_Reader xls,
 			String testCaseName) {
 
 		System.out.println("testCaseName=" + testCaseName);
 		System.out.println("xls row count=" + xls.getRowCount("Test Cases"));
 
-		boolean isExecutable = false;
+		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Cases"); i++) {
 			// String tcid=xls.getCellData("Test Cases", "TCID", i);
 			// String runmode=xls.getCellData("Test Cases", "Runmode", i);
@@ -47,11 +47,11 @@ public class TestUtil {
 
 			if (xls.getCellData("Test Cases", "TCID", i).equalsIgnoreCase(testCaseName)) {
 					System.out.println("Test run mode-->"+xls.getCellData("Test Cases", "Runmode", i)+"test case name-->"+testCaseName);
-				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("Y")) {
-					isExecutable = true;
+				if (xls.getCellData("Test Cases", "Runmode", i).equalsIgnoreCase("N")) {
+					isExecutable = false;
 					break;
 				} else {
-					isExecutable = false;
+					isExecutable = true;
 				}
 			}
 		}
@@ -61,7 +61,7 @@ public class TestUtil {
 	}
 
 	// return the test data from a test in a 2 dim array
-	public  Object[][] getData(Xls_Reader xls,
+	public  static Object[][] getData(Xls_Reader xls,
 			String testCaseName) {
 		// if the sheet is not present
 		if (!xls.isSheetExist(testCaseName)) {
@@ -87,7 +87,7 @@ public class TestUtil {
 	}
 
 	// checks RUnmode for dataSet
-	public  String[] getDataSetRunmodes(Xls_Reader xlsFile,
+	public  static String[] getDataSetRunmodes(Xls_Reader xlsFile,
 			String sheetName) {
 		String[] runmodes = null;
 		if (!xlsFile.isSheetExist(sheetName)) {
@@ -108,9 +108,9 @@ public class TestUtil {
 		return runmodes;
 
 	}
-
+  
 	// update results for a particular data set
-	public  void reportDataSetResult(Xls_Reader xls,
+	public  static void reportDataSetResult(Xls_Reader xls,
 			String testCaseName,
 			int rowNum,
 			String result) {
@@ -118,7 +118,7 @@ public class TestUtil {
 	}
 
 	// return the row num for a test
-	public  int getRowNum(Xls_Reader xls,
+	public  static int getRowNum(Xls_Reader xls,
 			String id) {
 		for (int i = 2; i <= xls.getRowCount("Test Cases"); i++) {
 			String tcid = xls.getCellData("Test Cases", "TCID", i);

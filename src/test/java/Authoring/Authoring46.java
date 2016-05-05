@@ -26,6 +26,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 /**
  * Class for Performing Authoring Min and Max Length Comments Validation
@@ -53,13 +54,13 @@ public class Authoring46 extends TestBase {
 				.startTest(var,
 						"Verify that  proper error messages are diplayed for min and max length validation for editing the comments")
 				.assignCategory("Authoring");
-		runmodes = testUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
+		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -180,9 +181,9 @@ public class Authoring46 extends TestBase {
 	@Test(dependsOnMethods = "commentMinMaxValidation")
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
-		 * if(fail) { status=2; testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
-		 * "FAIL"); } else testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
+		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
+		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 
 		skip = false;
@@ -196,12 +197,12 @@ public class Authoring46 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 
@@ -239,7 +240,7 @@ public class Authoring46 extends TestBase {
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return testUtil.getData(authoringxls, this.getClass().getSimpleName());
+		return TestUtil.getData(authoringxls, this.getClass().getSimpleName());
 	}
 
 }

@@ -8,16 +8,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeSuite;
 
 import base.TestBase;
+import util.TestUtil;
 
 public class NotificationsTestBase extends TestBase {
 	
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
-
+		System.out.println("before suite notifications");
 		initialize();
  		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
 
-			if (testUtil.isSuiteRunnable(suiteXls, "Notifications")) {
+			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 
 				if (count == 0) {
 

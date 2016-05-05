@@ -5,9 +5,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 public class Watchlist extends TestBase {
 

@@ -17,6 +17,7 @@ import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class Authoring5 extends TestBase {
 
@@ -35,7 +36,7 @@ public class Authoring5 extends TestBase {
 		test = extent.startTest(var,
 				"Verify that details link in article record view is redirected to full record view of WOS")
 				.assignCategory("Authoring");
-		runmodes = testUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
+		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	/**
@@ -46,8 +47,8 @@ public class Authoring5 extends TestBase {
 	@Test
 	public void testAuthoringTestAccount() throws Exception {
 
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -132,12 +133,12 @@ public class Authoring5 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

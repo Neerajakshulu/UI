@@ -21,6 +21,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 public class Authoring1 extends TestBase {
 
@@ -42,15 +43,15 @@ public class Authoring1 extends TestBase {
 		test = extent.startTest(var,
 				"Verify that user Is able to comment on any article and validate the comment count increment")
 				.assignCategory("Authoring");
-		runmodes = testUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
+		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->" + runmodes.length);
 	}
 
 	@Test
 	public void testLoginTRAccount() throws Exception {
 
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = testUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -117,14 +118,14 @@ public class Authoring1 extends TestBase {
 	@AfterMethod
 	public void reportDataSetResult() {
 		if (skip)
-			testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "SKIP");
+			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "SKIP");
 
 		else if (fail) {
 
 			status = 2;
-			testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "FAIL");
+			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "FAIL");
 		} else
-			testUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "PASS");
+			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "PASS");
 
 		skip = false;
 		fail = false;
@@ -136,19 +137,19 @@ public class Authoring1 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * testUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 		// closeBrowser();
 	}
 
 	@DataProvider
 	public Object[][] getTestData() {
-		return testUtil.getData(authoringxls, this.getClass().getSimpleName());
+		return TestUtil.getData(authoringxls, this.getClass().getSimpleName());
 	}
 
 	/**

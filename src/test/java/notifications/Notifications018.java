@@ -20,6 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 public class Notifications018 extends NotificationsTestBase {
 
@@ -42,8 +43,8 @@ public class Notifications018 extends NotificationsTestBase {
 
 	@Test
 	public void testcaseF18() throws Exception {
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = testUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -145,10 +146,10 @@ public class Notifications018 extends NotificationsTestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(notificationxls, "Test Cases", testUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", testUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(notificationxls, "Test Cases", testUtil.getRowNum(notificationxls,
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
+		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

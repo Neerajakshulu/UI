@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import util.OnePObjectMap;
 import base.TestBase;
+import util.OnePObjectMap;
 
 /**
  * This class contains all the method related to header and footer of the application

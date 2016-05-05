@@ -26,9 +26,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,7 +47,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import util.BrowserWaits;
 import util.ErrorUtil;
-import util.TestUtil;
 import util.Xls_Reader;
 
 public class TestBase {
@@ -72,7 +76,6 @@ public class TestBase {
 	public static int count = 0;
 	public static int flag = 0;
 	
-	public TestUtil testUtil=new TestUtil();
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
@@ -167,6 +170,8 @@ public class TestBase {
 	// initializing the Tests
 	public void initialize() throws Exception {
 		// logs
+		int count=0;
+		System.out.println("before suite "+ ++count);
 		if (!isInitalized) {
 			// extent-reports
 			// extent = getInstance();
@@ -219,7 +224,7 @@ public class TestBase {
 
 	// Opening via Sauce Labs
 	
-	public void openBrowser() throws Exception {
+	/*public void openBrowser() throws Exception {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
 		System.out.println("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
@@ -240,12 +245,12 @@ public class TestBase {
 		} catch (Throwable t) {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
-	}
+	}*/
 
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*public void openBrowser() {
+	public void openBrowser() {
 
 		if (CONFIG.getProperty("browserType").equals("FF")) {
 			ob = new FirefoxDriver();
@@ -280,7 +285,7 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}*/
+	}
 
 	
 	public void runOnSauceLabsFromLocal(String os,String browser) throws Exception{

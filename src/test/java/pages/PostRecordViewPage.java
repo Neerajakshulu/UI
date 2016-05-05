@@ -12,12 +12,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
-import util.BrowserWaits;
-import util.OnePObjectMap;
-import base.TestBase;
-
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import util.BrowserWaits;
+import util.OnePObjectMap;
 
 /**
  * This class contains all the methods related to Post record view page

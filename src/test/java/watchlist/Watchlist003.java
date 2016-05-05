@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.TestUtil;
 
 /**
  * Verify that user is able to add a Post from ALL content search results page to a particular watchlist||Verify that
@@ -51,8 +52,8 @@ public class Watchlist003 extends TestBase {
 	@Parameters({"postName"})
 	public void testWatchPostFromAllContentSearchResult(String postName) throws Exception {
 
-		boolean suiteRunmode = testUtil.isSuiteRunnable(suiteXls, "Watchlist");
-		boolean testRunmode = testUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -190,10 +191,10 @@ public class Watchlist003 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) testUtil.reportDataSetResult(suiteExls, "Test Cases" , testUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) testUtil.reportDataSetResult(suiteExls,
-		 * "Test Cases", testUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
-		 * testUtil.reportDataSetResult(suiteExls, "Test Cases", testUtil.getRowNum(suiteExls,
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
 		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
