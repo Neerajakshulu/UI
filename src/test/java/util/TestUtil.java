@@ -4,10 +4,11 @@ public class TestUtil {
 
 	// finds if the test suite is runnable
 	public  static boolean isSuiteRunnable(Xls_Reader xls,
-			String suiteName) {
+			String suiteName) throws InterruptedException {
 		System.out.println("suiteName=" + suiteName);
 
 		System.out.println("suite row count=" + xls.getRowCount("Test Suite"));
+		BrowserWaits.waitTime(2);
 
 		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Suite"); i++) {
@@ -34,10 +35,12 @@ public class TestUtil {
 
 	// returns true if runmode of the test is equal to Y
 	public  static boolean isTestCaseRunnable(Xls_Reader xls,
-			String testCaseName) {
+			String testCaseName) throws InterruptedException {
 
 		System.out.println("testCaseName=" + testCaseName);
 		System.out.println("xls row count=" + xls.getRowCount("Test Cases"));
+		
+		BrowserWaits.waitTime(2);
 
 		boolean isExecutable = true;
 		for (int i = 2; i <= xls.getRowCount("Test Cases"); i++) {
