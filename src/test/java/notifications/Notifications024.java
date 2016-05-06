@@ -13,13 +13,15 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
 
-public class Notifications024 extends NotificationsTestBase {
+public class Notifications024 extends TestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -36,7 +38,6 @@ public class Notifications024 extends NotificationsTestBase {
 				.startTest(var,
 						"Verify that user is able to view Most viewed documents in home page")
 						.assignCategory("Notifications");
-
 	}
 
 	@Test
@@ -64,15 +65,17 @@ public class Notifications024 extends NotificationsTestBase {
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			test.log(LogStatus.INFO," Scrolling down to find most viewed documents--->");
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			while(scrollCount<15){
+			while(scrollCount<30){
 				jse.executeScript("scroll(0,10000)");
-				Thread.sleep(3500);
+				BrowserWaits.waitTime(3);
+				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));
+				if (elements.size() > 0)
+					break;
 				scrollCount++;
 			}
-
 			// Login with first user and check if notification is present
 			try{
 				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));

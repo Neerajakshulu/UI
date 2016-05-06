@@ -6,7 +6,10 @@
 	<artifactId>1p-ui-automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>1p-ui-automation</name>
-
+	
+	<properties>
+		<log4j2.version>2.3</log4j2.version>
+	</properties>
 
 	<dependencies>
 
@@ -72,6 +75,25 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		
+		<!-- Binding for Log4J 2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+
+		<!-- Log4j 2 API and Core implementation required for binding -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
 
 		<!-- <dependency> <groupId>io.selendroid</groupId> <version>0.16.0</version> 
 			<artifactId>selendroid-standalone</artifactId> </dependency> <dependency> 
@@ -79,7 +101,6 @@
 			</dependency> -->
 
 	</dependencies>
-
 
 	<build>
 		<plugins>

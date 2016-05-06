@@ -196,17 +196,15 @@ public class Authoring25 extends TestBase {
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		waitForAjax(ob);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(4);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 		waitForPageLoad(ob);
-		Actions builder = new Actions(ob);
-		builder.moveToElement(ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")), 30, 0).click()
-				.build().perform();
-		BrowserWaits.waitTime(5);
+		
 	}
 
 	public void waitUntilTextPresent(String locator,

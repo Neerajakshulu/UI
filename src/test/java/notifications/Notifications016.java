@@ -10,15 +10,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class Notifications016 extends NotificationsTestBase {
+public class Notifications016 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();

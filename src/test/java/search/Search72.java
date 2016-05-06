@@ -120,12 +120,12 @@ public class Search72 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.ENTER);
 			waitForAjax(ob);
 			Thread.sleep(2000);
-			waitForElementTobeVisible(ob, By.tagName("h2"), 120);
 
-			String actual_text = ob.findElement(By.tagName("h2")).getText();
-			System.out.println(actual_text);
+			
+			String value=ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).getAttribute("value");
 
-			if (!compareStrings(expected_text, actual_text)) {
+
+			if (!compareStrings(value,"post")) {
 
 				test.log(
 						LogStatus.FAIL,
@@ -139,7 +139,7 @@ public class Search72 extends TestBase {
 										+ "_record_view_of_a_post_not_getting_displayed")));// screenshot
 
 			}
-
+			
 			closeBrowser();
 
 		}

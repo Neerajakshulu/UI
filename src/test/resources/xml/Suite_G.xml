@@ -392,17 +392,7 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist008">
-		<classes>
-			<class name="watchlist.Watchlist008"></class>
-		</classes>
-	</test>
 
-	<test name="Watchlist009">
-		<classes>
-			<class name="watchlist.Watchlist009"></class>
-		</classes>
-	</test>
 
 	<test name="Watchlist014">
 		<classes>

@@ -1,12 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Notifications">
 
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
 	<test name="Test F1">
 		<classes>
 			<class name="notifications.Notifications001"></class>
 		</classes>
 	</test>
-
 
 	<test name="Test F2">
 		<classes>
@@ -14,13 +17,11 @@
 		</classes>
 	</test>
 
-
 	<test name="Test F3">
 		<classes>
 			<class name="notifications.Notifications003"></class>
 		</classes>
 	</test>
-
 
 	<test name="Test F4">
 		<classes>
@@ -88,22 +89,9 @@
 		</classes>
 	</test>
 
-
 	<test name="Test F15">
 		<classes>
 			<class name="notifications.Notifications015"></class>
-		</classes>
-	</test>
-
-	<test name="Test F16">
-		<classes>
-			<class name="notifications.Notifications016"></class>
-		</classes>
-	</test>
-
-	<test name="Test F17">
-		<classes>
-			<class name="notifications.Notifications017"></class>
 		</classes>
 	</test>
 
@@ -130,31 +118,6 @@
 			<class name="notifications.Notifications021"></class>
 		</classes>
 	</test>
-	
-	<test name="Test F23">
-		<classes>
-			<class name="notifications.Notifications023"></class>
-		</classes>
-	</test>
 
-
-	<test name="Test F24">
-		<classes>
-			<class name="notifications.Notifications024"></class>
-		</classes>
-	</test>
-	
-	<test name="Test F22">
-		<classes>
-			<class name="notifications.Notifications022"></class>
-		</classes>
-	</test>
-	
-	<test name="Test F25">
-		<classes>
-			<class name="notifications.Notifications025"></class>
-		</classes>
-	</test>
-	
 </suite>
 

@@ -13,13 +13,15 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
+public class Notifications023 extends TestBase {
 
-public class Notifications023 extends NotificationsTestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -32,11 +34,8 @@ public class Notifications023 extends NotificationsTestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to view top commenters information in home page")
-						.assignCategory("Notifications");
-
+		test = extent.startTest(var, "Verify that user is able to view top commenters information in home page")
+				.assignCategory("Notifications");
 	}
 
 	@Test
@@ -44,55 +43,51 @@ public class Notifications023 extends NotificationsTestBase {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		int scrollCount=0;
+		int scrollCount = 0;
 		if (!master_condition) {
-
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			// Login with someother user and comment on the article in watchlist of the above user
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(2000);
-			test.log(LogStatus.INFO," Scrolling down to find Top commenters--->");
+			BrowserWaits.waitTime(2);
+			test.log(LogStatus.INFO, " Scrolling down to find Top commenters--->");
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			while(scrollCount<15){
+			while (scrollCount < 30) {
 				jse.executeScript("scroll(0,10000)");
-				Thread.sleep(3500);
+				BrowserWaits.waitTime(3);
+				List<WebElement> elements = ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
+				if (elements.size() > 0)
+					break;
 				scrollCount++;
-								
 			}
-
 			// Login with first user and check if notification is present
-			try{
-				List<WebElement> elements=ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
-				Assert.assertTrue(elements.size()==1);
-				test.log(LogStatus.INFO,"user is able to view top commenters information in home page");
+			try {
+				List<WebElement> elements = ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
+				Assert.assertTrue(elements.size() == 1);
+				test.log(LogStatus.INFO, "user is able to view top commenters information in home page");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
-			}catch(Throwable t){
+			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "user is not able to view top commenters information in home page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user is not able to view top commenters information in home page")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user is not able to view top commenters information in home page")));// screenshot
 				closeBrowser();
 			}
 
@@ -102,11 +97,8 @@ public class Notifications023 extends NotificationsTestBase {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Something happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -116,11 +108,11 @@ public class Notifications023 extends NotificationsTestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
 		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 }
