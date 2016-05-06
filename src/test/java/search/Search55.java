@@ -71,8 +71,7 @@ public class Search55 extends TestBase {
 			// login using TR credentials
 			login();
 
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			Thread.sleep(15000);
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
