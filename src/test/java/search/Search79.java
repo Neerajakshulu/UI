@@ -130,17 +130,7 @@ public class Search79 extends TestBase {
 			System.out.println(actual_text);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
-			if (!compareStrings(expected_text, actual_text)) {
-
-				test.log(LogStatus.FAIL, "Incorrect keyword getting displayed in search box");// extent reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_keyword_getting_displayed_in_search_box")));// screenshot
-
-			}
+			
 
 			String dd_text = ob.findElement(
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();

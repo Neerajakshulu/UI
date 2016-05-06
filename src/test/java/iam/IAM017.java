@@ -15,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -126,8 +127,9 @@ public class IAM017 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+			
+			BrowserWaits.waitTime(6);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 60);
 
 			String actual_name = ob.findElement(By.xpath(OR.getProperty("header_label") + "//img")).getAttribute(
 					"title");
