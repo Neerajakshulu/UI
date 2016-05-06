@@ -124,7 +124,8 @@ public class Authoring23 extends TestBase {
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(profanityErrorMessage);
-			ob.findElement(By.cssSelector("button[ng-click*='cancelEdit']")).click();
+			BrowserWaits.waitTime(5);
+			jsClick(ob,ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")));
 			Assert.assertEquals(profanityErrorMessage, errorMessage);
 
 			if (!profanityErrorMessage.equalsIgnoreCase(errorMessage)) {
@@ -149,7 +150,7 @@ public class Authoring23 extends TestBase {
 		} finally {
 			reportDataSetResult();
 			++count;
-			jsClick(ob,ob.findElement(By.cssSelector("button[ng-click^='cancelEdit']")));
+			
 			
 		}
 
