@@ -82,7 +82,9 @@ public class Watchlist026 extends TestBase {
 			BrowserWaits.waitTime(4);
 
 			for (int i = 1; i <= 2; i++) {
+				Thread.sleep(4000);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+				
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
