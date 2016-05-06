@@ -3,8 +3,12 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
@@ -95,14 +99,14 @@ public class Authoring7 extends TestBase {
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
-			searchArticle("biology");
+			searchArticle("micro biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 
 			// ob.navigate().refresh();
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			pf.getAuthoringInstance(ob).validatePreventBotComment();
 
@@ -155,6 +159,9 @@ public class Authoring7 extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
 		waitForAjax(ob);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(3);
+		
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
@@ -170,6 +177,28 @@ public class Authoring7 extends TestBase {
 		} catch (TimeoutException e) {
 			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
 		}
+	}
+	
+	
+	private void enterArticleComment(String addComments) throws InterruptedException {
+		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		//jsClick(ob,commentArea);
+
+        //Used points class to get x and y coordinates of element.
+        Point point = commentArea.getLocation();
+        //int xcord = point.getX();
+        int ycord = point.getY();
+        ycord=ycord+200;
+        JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0,"+ ycord+");");
+		BrowserWaits.waitTime(5);
+		jsClick(ob,commentArea);
+		commentArea.clear();
+		String comment=addComments + RandomStringUtils.randomNumeric(3);
+		commentArea.sendKeys(comment);
+		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 }
