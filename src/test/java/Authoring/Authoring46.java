@@ -79,12 +79,27 @@ public class Authoring46 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
+		try {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
 		ob.navigate().to(System.getProperty("host"));
 		// ob.get(CONFIG.getProperty("testSiteName"));
-
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "UnExpected Error");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(e);
+			status = 2;// excel
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			closeBrowser();
+		}
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")

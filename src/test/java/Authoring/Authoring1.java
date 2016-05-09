@@ -40,8 +40,9 @@ public class Authoring1 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that user Is able to comment on any article and validate the comment count increment")
+		test = extent
+				.startTest(var,
+						"Verify that user Is able to comment on any article and validate the comment count increment")
 				.assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->" + runmodes.length);
@@ -56,8 +57,8 @@ public class Authoring1 extends TestBase {
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -71,29 +72,39 @@ public class Authoring1 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 
 		// selenium code
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
+		try {
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
+			// ob.get(CONFIG.getProperty("testSiteName"));
+		} catch (Throwable e) {
+			test.log(LogStatus.FAIL, "Error: Something went wrong");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(e);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
+			closeBrowser();
 
-		ob.navigate().to(System.getProperty("host"));
-		// ob.get(CONFIG.getProperty("testSiteName"));
+		}
 	}
 
 	@Test(dependsOnMethods = "testLoginTRAccount", dataProvider = "getTestData")
-	public void performAuthoringCommentOperations(String username,
-			String password,
-			String article,
-			String completeArticle,
-			String addComments) throws Exception {
+	public void performAuthoringCommentOperations(String username, String password, String article,
+			String completeArticle, String addComments) throws Exception {
 		try {
 			waitForTRHomePage();
 			loginAs("USERNAME15", "PASSWORD15");
 			searchArticle(article);
 			chooseArticle(completeArticle);
-			int count=pf.getAuthoringInstance(ob).getCommentCount();
+			int count = pf.getAuthoringInstance(ob).getCommentCount();
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validateCommentAdd(test,count);
+			pf.getAuthoringInstance(ob).validateCommentAdd(test, count);
 			pf.getAuthoringInstance(ob).validateViewComment(addComments);
 			pf.getAuthoringInstance(ob).updateComment("comment updated");
 			validateUpdatedComment("comment updated");
@@ -106,11 +117,8 @@ public class Authoring1 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -137,12 +145,14 @@ public class Authoring1 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 		// closeBrowser();
 	}
@@ -158,15 +168,15 @@ public class Authoring1 extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void waitForTRHomePage() throws InterruptedException {
-		// ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign in with Project Neon");
+		// ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign
+		// in with Project Neon");
 		waitForPageLoad(ob);
 	}
 
 	/**
 	 * Method for enter Application Url and enter Credentials
 	 */
-	public void enterTRCredentials(String userName,
-			String password) {
+	public void enterTRCredentials(String userName, String password) {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
 		waitForElementTobeVisible(ob, By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
 		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
@@ -193,8 +203,7 @@ public class Authoring1 extends TestBase {
 		waitForPageLoad(ob);
 	}
 
-	public void waitUntilTextPresent(String locator,
-			String text) {
+	public void waitUntilTextPresent(String locator, String text) {
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
@@ -210,7 +219,8 @@ public class Authoring1 extends TestBase {
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
 			// TestBase.test.log(LogStatus.INFO, "Snapshot below: " +
-			// TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered comment not added")));
+			// TestBase.test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"Entered
+			// comment not added")));
 			status = 2;
 			throw new Exception("Updated " + updatedComments + " not present");
 		}

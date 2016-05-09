@@ -70,7 +70,7 @@ public class Authoring22 extends TestBase {
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
-
+		try {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
@@ -78,6 +78,21 @@ public class Authoring22 extends TestBase {
 		ob.navigate().to(System.getProperty("host"));
 		pf.getAuthoringInstance(ob).waitForTRHomePage();
 		// authoringAppreciation(username, password, article, completeArticle, addComments);
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something UnExpected");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_profile_data_updation_not_done")));// screenshot
+			closeBrowser();
+		}
 	}
 
 	@Test(dependsOnMethods = "testAuthoringTestAccount")

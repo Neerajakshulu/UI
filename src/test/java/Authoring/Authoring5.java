@@ -66,13 +66,28 @@ public class Authoring5 extends TestBase {
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
-
+		try {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
 
 		ob.navigate().to(System.getProperty("host"));
 		pf.getAuthoringInstance(ob).waitForTRHomePage();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something UnExpected");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Page is not moving back from Back To Project Neon")));// screenshot
+			closeBrowser();
+		}	
 	}
 
 	@Test(dependsOnMethods = "testAuthoringTestAccount")
