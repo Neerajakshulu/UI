@@ -15,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -79,6 +80,7 @@ public class IAM016 extends TestBase {
 			clearCookies();
 
 			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(6);
 			String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
@@ -98,21 +100,22 @@ public class IAM016 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 			ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-			Thread.sleep(10000);
+			BrowserWaits.waitTime(10);
 
 			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(6);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", myE);
 			// email_list.get(0).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 
 			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 			links.get(0).click();
 			// ob.get(links.get(0).getAttribute("href"));
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(4);
 
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
@@ -122,7 +125,7 @@ public class IAM016 extends TestBase {
 				al.add(myIT.next());
 			}
 			ob.switchTo().window(al.get(1));
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
@@ -136,7 +139,7 @@ public class IAM016 extends TestBase {
 
 			// 3)Change the password
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(4);
 
 			ob.findElement(By.linkText(OR.getProperty("TR_forgot_password_link"))).click();
 			//
@@ -160,9 +163,9 @@ public class IAM016 extends TestBase {
 
 			}
 			Thread.sleep(10000);
-			ob.close();
-			ob.switchTo().window(al.get(0));
-			Thread.sleep(2000);
+			//ob.close();
+			//ob.switchTo().window(al.get(0));
+			//Thread.sleep(2000);
 			ob.get("https://www.guerrillamail.com");
 			email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			myE = email_list.get(0);
