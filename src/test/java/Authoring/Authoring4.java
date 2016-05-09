@@ -76,12 +76,12 @@ public class Authoring4 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
-
+		try {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
 		ob.navigate().to(System.getProperty("host"));
-		try {
+		
 			pf.getAuthoringInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 			closeBrowser();
@@ -109,6 +109,7 @@ public class Authoring4 extends TestBase {
 			String addComments) throws Exception {
 		loginAs("USERNAME3", "PASSWORD3");
 
+	try{
 		// Get Total No.of comments
 		totalProfileCommentsBeforeAdd = getProfleComments();
 		System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
@@ -132,6 +133,21 @@ public class Authoring4 extends TestBase {
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "_Comments count not updated in My Profile Screen")));
 			throw new Exception("Comments count is not updated in My Profile Screen");
+		}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something UnExpected");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_profile_data_updation_not_done")));// screenshot
+			closeBrowser();
 		}
 	}
 

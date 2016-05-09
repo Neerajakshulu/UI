@@ -67,13 +67,28 @@ public class Authoring25 extends TestBase {
 			skip = true;
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
-
+		try{
 		// selenium code
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
 		ob.navigate().to(System.getProperty("host"));
 		// ob.get(CONFIG.getProperty("testSiteName"));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "UnExpected Error");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(e);
+			status = 2;// excel
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Article_Search_not_happening")));
+			// closeBrowser();
+		}
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")

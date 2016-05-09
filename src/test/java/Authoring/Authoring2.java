@@ -35,8 +35,9 @@ public class Authoring2 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verfiy that user can appreciate comments made by other neon users and validate appreciation count")
+		test = extent
+				.startTest(var,
+						"Verfiy that user can appreciate comments made by other neon users and validate appreciation count")
 				.assignCategory("Authoring");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests
@@ -47,7 +48,8 @@ public class Authoring2 extends TestBase {
 	/**
 	 * Method for validating TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login Home screen not displaying
+	 * @throws Exception,
+	 *             When TR Login Home screen not displaying
 	 */
 	@Test
 	public void testAuthoringTestAccount() throws Exception {
@@ -58,8 +60,8 @@ public class Authoring2 extends TestBase {
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -71,23 +73,34 @@ public class Authoring2 extends TestBase {
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		try {
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
 
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-
-		ob.navigate().to(System.getProperty("host"));
-		// ob.get(CONFIG.getProperty("testSiteName"));
-		pf.getAuthoringInstance(ob).waitForTRHomePage();
-		// authoringAppreciation(username, password, article, completeArticle, addComments);
+			ob.navigate().to(System.getProperty("host"));
+			// ob.get(CONFIG.getProperty("testSiteName"));
+			pf.getAuthoringInstance(ob).waitForTRHomePage();
+			// authoringAppreciation(username, password, article,
+			// completeArticle, addComments);
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something UnExpected");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
+			closeBrowser();
+		}
 	}
 
 	@Test(dependsOnMethods = "testAuthoringTestAccount")
-	@Parameters({"username", "password", "article", "completeArticle"})
-	public void authoringAppreciation(String username,
-			String password,
-			String article,
-			String completeArticle) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle" })
+	public void authoringAppreciation(String username, String password, String article, String completeArticle)
+			throws Exception {
 
 		try {
 
@@ -107,11 +120,8 @@ public class Authoring2 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -122,12 +132,14 @@ public class Authoring2 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 		// closeBrowser();
 
@@ -136,7 +148,8 @@ public class Authoring2 extends TestBase {
 	/**
 	 * Method for Validate the Article Appreciation functionality
 	 * 
-	 * @throws Exception, When Validation not done
+	 * @throws Exception,
+	 *             When Validation not done
 	 */
 	public void validateAppreciationComment() throws Exception {
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
@@ -210,7 +223,8 @@ public class Authoring2 extends TestBase {
 	/**
 	 * Method for Scrolling down to the page
 	 * 
-	 * @throws InterruptedException, When scroll not done
+	 * @throws InterruptedException,
+	 *             When scroll not done
 	 */
 	public void scrollingToElementofAPage() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;

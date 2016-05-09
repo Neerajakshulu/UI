@@ -289,8 +289,8 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}*/
-
+	}
+*/
 	
 	public void runOnSauceLabsFromLocal(String os,String browser) throws Exception{
 		  
@@ -552,7 +552,8 @@ public class TestBase {
 	public void login() throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
+		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
+		Thread.sleep(5000);
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));

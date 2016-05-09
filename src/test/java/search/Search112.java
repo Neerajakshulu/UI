@@ -80,6 +80,7 @@ public class Search112 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 			Thread.sleep(15000);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+			Thread.sleep(5000);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 30);
 			
@@ -107,6 +108,7 @@ public class Search112 extends TestBase {
 			ob.navigate().back();
 			// checking for Sort option
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 30);
+			Thread.sleep(5000);
 			String sortOptionSelected = ob.findElement(
 					By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).getText();
 			System.out.println(sortOptionSelected);
