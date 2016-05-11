@@ -74,7 +74,7 @@ public class Authoring3 extends TestBase {
 			skip = true;
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
 			// selenium code
@@ -178,6 +178,7 @@ public class Authoring3 extends TestBase {
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->" + totalCommentsAfterDeletion);
 
 			if (!(totalCommentsBeforeDeletion > totalCommentsAfterDeletion)) {
+				test.log(LogStatus.FAIL, "Error: Delete Comments not done");// extent reports
 				status = 2;
 				test.log(
 						LogStatus.INFO,
