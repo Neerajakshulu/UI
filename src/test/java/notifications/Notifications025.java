@@ -59,8 +59,16 @@ public class Notifications025 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			BrowserWaits.waitTime(2);
+			for (int i = 0; i < 3; i++) {
+				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
+				if (mylist.size() > 0) {
+					break;
+				} else {
+					BrowserWaits.waitTime(5);
+				}
+			}
 			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
-			// System.out.println(mylist.size());
+			// logger.info(mylist.size());
 			WebElement myE = null;
 			String text;
 			for (int i = 0; i < mylist.size(); i++) {
@@ -72,7 +80,7 @@ public class Notifications025 extends TestBase {
 
 			}
 			List<WebElement> articles = myE.findElements(By.tagName("a"));
-			// System.out.println("No of articles="+articles.size());
+			// logger.info("No of articles="+articles.size());
 			if (!compareNumbers(3, articles.size() - 3)) {
 				test.log(LogStatus.FAIL, "6 article suggesstions not getting displayed");// extent reports
 				status = 2;// excel

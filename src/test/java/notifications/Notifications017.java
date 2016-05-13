@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -63,20 +64,32 @@ public class Notifications017 extends TestBase {
 			// Logging in with User2
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(8000);
-
+			BrowserWaits.waitTime(8);
+			for(int i=0;i<3;i++){
+				List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
+						.getProperty("all_notifications_in_homepage")));
+				if(listOfNotifications.size()>0){
+					break;
+				}else{
+					BrowserWaits.waitTime(5);
+				}
+			}
 			List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
 					.getProperty("all_notifications_in_homepage")));
 			String text = listOfNotifications.get(0).getText();
-			logger.info(text);
+			logger.info("Featured Post Titile in Notifications - "+text);
 			Assert.assertTrue(text.contains("Featured post"));
 			test.log(LogStatus.PASS, "Featured post is at the top of the home page");
 			List<WebElement> listOfPostsLinks = ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
 			String expectedTitle = listOfPostsLinks.get(0).getText();
-			logger.info(expectedTitle);
+			logger.info("Top Post Titile in Trending - "+expectedTitle);
 
 			try {
-				Assert.assertTrue(text.contains(expectedTitle));
+				if(expectedTitle.length()==text.length()){
+					Assert.assertTrue(text.contains(expectedTitle));
+				}else{
+					Assert.assertTrue(text.contains(expectedTitle.substring(0,expectedTitle.length()-5)));
+				}
 				test.log(LogStatus.PASS, "Featured post is same as the post in trending section");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();

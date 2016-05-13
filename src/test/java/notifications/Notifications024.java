@@ -20,8 +20,8 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-
 public class Notifications024 extends TestBase {
+
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -34,10 +34,8 @@ public class Notifications024 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to view Most viewed documents in home page")
-						.assignCategory("Notifications");
+		test = extent.startTest(var, "Verify that user is able to view Most viewed documents in home page")
+				.assignCategory("Notifications");
 	}
 
 	@Test
@@ -45,12 +43,12 @@ public class Notifications024 extends TestBase {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		int scrollCount=0;
+		int scrollCount = 0;
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,52 +61,51 @@ public class Notifications024 extends TestBase {
 			clearCookies();
 			// Login with someother user and comment on the article in watchlist of the above user
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			if (user1 == null) {
+				pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+						CONFIG.getProperty("defaultPassword"));
+			} else {
+				// login with user1
+				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			}
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(2);
-			test.log(LogStatus.INFO," Scrolling down to find most viewed documents--->");
+			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents--->");
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			while(scrollCount<30){
+			while (scrollCount < 30) {
 				jse.executeScript("scroll(0,10000)");
 				BrowserWaits.waitTime(3);
-				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));
+				List<WebElement> elements = ob.findElements(By.xpath("//ne-most-viewed-documents"));
 				if (elements.size() > 0)
 					break;
 				scrollCount++;
 			}
-			// Login with first user and check if notification is present
-			try{
-				List<WebElement> elements=ob.findElements(By.xpath("//ne-most-viewed-documents"));
-				Assert.assertTrue(elements.size()>=1);
-				test.log(LogStatus.INFO,"user is able to see most viewed documents in home page");
+			try {
+				List<WebElement> elements = ob.findElements(By.xpath("//ne-most-viewed-documents"));
+				Assert.assertTrue(elements.size() >= 1);
+				test.log(LogStatus.INFO, "user is able to see most viewed documents in home page");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
-			}catch(Throwable t){
+			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "user is not able to see most viewed documents in home page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user is not able to see most viewed documents in home pagee")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user is not able to see most viewed documents in home pagee")));// screenshot
 				closeBrowser();
 			}
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something happened");// extent
 			// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Something happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -116,14 +113,5 @@ public class Notifications024 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }
-
