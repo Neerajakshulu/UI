@@ -1,123 +1,78 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Notifications">
+<suite name="Notifications" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
-
 	<test name="Test F1">
 		<classes>
-			<class name="notifications.Notifications001"></class>
+			<class name="notifications.Notifications0001"></class>
 		</classes>
 	</test>
-
 	<test name="Test F2">
 		<classes>
-			<class name="notifications.Notifications002"></class>
+			<class name="notifications.Notifications0002"></class>
 		</classes>
 	</test>
-
 	<test name="Test F3">
 		<classes>
-			<class name="notifications.Notifications003"></class>
+			<class name="notifications.Notifications0003"></class>
 		</classes>
 	</test>
-
 	<test name="Test F4">
 		<classes>
-			<class name="notifications.Notifications004"></class>
+			<class name="notifications.Notifications0004"></class>
 		</classes>
 	</test>
-
 	<test name="Test F5">
 		<classes>
-			<class name="notifications.Notifications005"></class>
+			<class name="notifications.Notifications0005"></class>
 		</classes>
 	</test>
-
 	<test name="Test F6">
 		<classes>
-			<class name="notifications.Notifications006"></class>
+			<class name="notifications.Notifications0006"></class>
 		</classes>
 	</test>
-
 	<test name="Test F7">
 		<classes>
-			<class name="notifications.Notifications007"></class>
+			<class name="notifications.Notifications0007"></class>
 		</classes>
 	</test>
-
 	<test name="Test F8">
 		<classes>
-			<class name="notifications.Notifications008"></class>
+			<class name="notifications.Notifications0008"></class>
 		</classes>
 	</test>
-
 	<test name="Test F9">
 		<classes>
-			<class name="notifications.Notifications009"></class>
+			<class name="notifications.Notifications0009"></class>
 		</classes>
 	</test>
-
 	<test name="Test F10">
 		<classes>
-			<class name="notifications.Notifications010"></class>
+			<class name="notifications.Notifications0010"></class>
 		</classes>
 	</test>
-
 	<test name="Test F11">
 		<classes>
-			<class name="notifications.Notifications011"></class>
+			<class name="notifications.Notifications0011"></class>
 		</classes>
 	</test>
-
 	<test name="Test F12">
 		<classes>
-			<class name="notifications.Notifications012"></class>
+			<class name="notifications.Notifications0012"></class>
 		</classes>
 	</test>
-
 	<test name="Test F13">
 		<classes>
-			<class name="notifications.Notifications013"></class>
+			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
-
 	<test name="Test F14">
 		<classes>
-			<class name="notifications.Notifications014"></class>
+			<class name="notifications.Notifications0014"></class>
 		</classes>
 	</test>
-
-	<test name="Test F15">
-		<classes>
-			<class name="notifications.Notifications015"></class>
-		</classes>
-	</test>
-
-	<test name="Test F18">
-		<classes>
-			<class name="notifications.Notifications018"></class>
-		</classes>
-	</test>
-
-	<test name="Test F19">
-		<classes>
-			<class name="notifications.Notifications019"></class>
-		</classes>
-	</test>
-
-	<test name="Test F20">
-		<classes>
-			<class name="notifications.Notifications020"></class>
-		</classes>
-	</test>
-
-	<test name="Test F21">
-		<classes>
-			<class name="notifications.Notifications021"></class>
-		</classes>
-	</test>
-
 </suite>
 
