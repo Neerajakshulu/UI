@@ -84,5 +84,20 @@
 			<class name="notifications.Notifications0016"></class>
 		</classes>
 	</test>
+	<test name="Test F17">
+		<classes>
+			<class name="notifications.Notifications0017"></class>
+		</classes>
+	</test>
+	<test name="Test F18">
+		<classes>
+			<class name="notifications.Notifications0018"></class>
+		</classes>
+	</test>
+	<test name="Test F19">
+		<classes>
+			<class name="notifications.Notifications0019"></class>
+		</classes>
+	</test>
 </suite>
 
