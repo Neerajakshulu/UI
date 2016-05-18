@@ -17,14 +17,36 @@ public class NotificationsTestBase extends TestBase {
 
 	protected static final String TOKENIZER_DOUBLE_PIPE = "||";
 	PageFactory pf = new PageFactory();
+	int count = 0;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
-		logger.info("Notification UI automation starting time - "+new Date());
-		logger.info("Notification UI automation Running environment - "+host);
+		logger.info("Notification UI automation starting time - " + new Date());
 		initialize();
+		logger.info("Notification UI automation Running environment - " + host);
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
 			createNewUsers();
+			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
+			if (user1 == null) {
+				user1 = "3sgor3+a7lpxeq96gte0@sharklasers.com";
+				fn1 = "prjleohp";
+				ln1 = "prjleohpai";
+				count++;
+			}
+			if (user2 == null) {
+				user2 = "3sgpav+ak12q8xmmb280@sharklasers.com";
+				fn2 = "ucbvpwab";
+				ln2 = "ucbvpwabqs";
+				count++;
+			}
+			if (user3 == null) {
+				user3 = "3sgpjq+7gysrhor017d0@sharklasers.com";
+				fn3 = "usylbleh";
+				ln3 = "usylbleheq";
+				count++;
+			}
+			}
+			if(count<3)
 			followUsers();
 		}
 	}
@@ -32,7 +54,7 @@ public class NotificationsTestBase extends TestBase {
 	@AfterSuite
 	public void afterSuite() {
 		extent.flush();
-		logger.info("Notification UI automation ending time - "+new Date());
+		logger.info("Notification UI automation ending time - " + new Date());
 	}
 
 	public void followUsers() {
@@ -98,15 +120,6 @@ public class NotificationsTestBase extends TestBase {
 
 	public void createNewUsers() {
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
-			// user1 = "3sgor3+a7lpxeq96gte0@sharklasers.com";
-			// fn1 = "prjleohp";
-			// ln1 = "prjleohpai";
-			// user2 = "3sgpav+ak12q8xmmb280@sharklasers.com";
-			// fn2 = "ucbvpwab";
-			// ln2 = "ucbvpwabqs";
-			// user3 = "3sgpjq+7gysrhor017d0@sharklasers.com";
-			// fn3 = "usylbleh";
-			// ln3 = "usylbleheq";
 			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
 				while (flag < 3) {
 					try {

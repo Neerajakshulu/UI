@@ -26,6 +26,7 @@ public class Notifications0008 extends NotificationsTestBase {
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 	String postString;
+	int screen = 0;
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -45,7 +46,6 @@ public class Notifications0008 extends NotificationsTestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			extent = ExtentManager.getReporter(filePath);
 			extent = ExtentManager.getReporter(filePath);
 			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 			String dec = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 2);
@@ -69,7 +69,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				ob.navigate().to(host);
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				publishPost();
+				boolean poststatus = publishPost();
 
 				// Verify that user receives a notification when someone he is following user publishes a post
 				try {
@@ -79,8 +79,13 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that user receives a notification when someone he is following  publishes a post")
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, "Published a post -" + postString);
-					notification1();
+					if (poststatus) {
+						notification1();
+					} else
+						throw new Exception("Post creation Exception");
+
 				} catch (Exception e) {
+					test.log(LogStatus.FAIL, e.getMessage());
 					e.printStackTrace();
 				} finally {
 					extent.endTest(test);
@@ -94,8 +99,12 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that user is receiving notification when someone liked his post(aggregated notification)")
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, "Published a post -" + postString);
-					notification2();
+					if (poststatus) {
+						notification2();
+					} else
+						throw new Exception("Post creation Exception");
 				} catch (Exception e) {
+					test.log(LogStatus.FAIL, e.getMessage());
 					e.printStackTrace();
 				} finally {
 					extent.endTest(test);
@@ -108,8 +117,12 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that user able to recevie's a notification when other user commented on his post")
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, "Published a post -" + postString);
-					notification3();
+					if (poststatus) {
+						notification3();
+					} else
+						throw new Exception("Post creation Exception");
 				} catch (Exception e) {
+					test.log(LogStatus.FAIL, e.getMessage());
 					e.printStackTrace();
 				} finally {
 					extent.endTest(test);
@@ -121,13 +134,27 @@ public class Notifications0008 extends NotificationsTestBase {
 				throw new Exception("User creation problem hence throwing exception");
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-			// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
-			ErrorUtil.addVerificationFailure(t);
-			status = 2;// excel
+			if (test == null) {
+				extent = ExtentManager.getReporter(filePath);
+				String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
+				String dec = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 2);
+				String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+				for (int i = 0; i < tests.length; i++) {
+					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("Notifications");
+					test.log(LogStatus.FAIL, "FAIL - "+t.getMessage());
+					extent.endTest(test);
+				}
+			}else{
+				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
+				// reports
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;// excel
+			}
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+					this.getClass().getSimpleName() + screen++)));// screenshot
+		} finally {
 			closeBrowser();
 		}
 
@@ -177,7 +204,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+						this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -235,7 +262,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+						this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -281,7 +308,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+						this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Fail");
@@ -292,7 +319,8 @@ public class Notifications0008 extends NotificationsTestBase {
 		}
 	}
 
-	private void publishPost() throws Exception {
+	private boolean publishPost() throws Exception {
+		boolean status = false;
 		try {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("home_page_publish_post_link")), 3000);
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
@@ -303,12 +331,14 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			logger.info("Published the post");
 			BrowserWaits.waitTime(3);
+			status = true;
 		} catch (Exception e) {
 			logger.error("Post creation problem" + e.getMessage());
 			throw new Exception("Post creation problem" + e.getMessage());
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}
+		return status;
 	}
 
 	@AfterTest

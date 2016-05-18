@@ -102,7 +102,6 @@ public class Notifications0014 extends NotificationsTestBase {
 			ob.switchTo().window(al1.get(0));
 			BrowserWaits.waitTime(5);
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			ob.navigate().refresh();
 			BrowserWaits.waitTime(8);
 			List<WebElement> listOfNotifications = ob.findElements(By.xpath(OR
 					.getProperty("all_notifications_in_homepage")));
@@ -110,8 +109,8 @@ public class Notifications0014 extends NotificationsTestBase {
 			logger.info(text);
 
 			try {
-				Assert.assertTrue(text.contains("published a post") && text.contains(fn2 + " " + ln2));
-				test.log(LogStatus.PASS, "New Notification is at the top and featured post is in second position");
+				Assert.assertTrue(!text.contains("Featured post"));
+				test.log(LogStatus.PASS, "New Notification is at the top and featured post is moving down");
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "New Notification is not at First position");// extent
