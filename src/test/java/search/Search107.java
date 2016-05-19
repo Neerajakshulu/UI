@@ -74,9 +74,11 @@ public class Search107 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Patents')]"), 30);
+			Thread.sleep(2000);
 
 			ob.findElement(By.xpath("//li[contains(text(),'Patents')]")).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(5000);
 

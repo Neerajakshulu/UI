@@ -1,5 +1,7 @@
 package notifications;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,36 +14,32 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class Notifications015 extends TestBase {
+public class Notifications0017 extends NotificationsTestBase {
 
 	static int status = 1;
+
 	PageFactory pf = new PageFactory();
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that users should be able to select from a list of suggested topics and check selected topic is presented in users type ahead")
+						"Verify that user is able to navigate record view page by clicking article title from Recommended articles section on Home page")
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
-	public void testcaseF15() throws Exception {
+	public void testcaseF17() throws Exception {
+
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -60,62 +58,64 @@ public class Notifications015 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+
 			ob.navigate().to(host);
-			// Logging in with User2
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
-					CONFIG.getProperty("defaultPassword"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			BrowserWaits.waitTime(8);
-			for (int i = 0; i < 3; i++) {
-				List<WebElement> listOfPostsLinks = ob
-						.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
-				if (listOfPostsLinks.size() > 0) {
+			BrowserWaits.waitTime(4);
+			List<WebElement> element = ob
+					.findElements(By.cssSelector("div[class='article-wrapper top-articles ng-scope']"));
+			String actual = null;
+			for (WebElement elem : element) {
+				if (!elem.getAttribute("ng-repeat").contains("article in vm.item.publication")) {
+					List<WebElement> elment = elem
+							.findElements(By.cssSelector("div[class='notification-publication'] h2 a"));
+					actual = elment.get(0).getText();
+					logger.info("Actual--> " + actual);
+					elment.get(0).click();
 					break;
-				} else {
-					BrowserWaits.waitTime(5);
 				}
 			}
-			waitForElementTobeVisible(ob,
-					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Topics")), 30);
-			jsClick(ob, ob.findElement(
-					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Topics"))));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("trending_now_topics_link")), 30);
-			WebElement element = ob.findElement(By.xpath(OR.getProperty("trending_now_topics_link")));
-			String specialCharacterRemovedoutput = element.getText().replaceAll("[^\\dA-Za-z ]", "");
-			String expectedTitle = specialCharacterRemovedoutput.replaceAll("( )+", " ");
-			element.click();
-			Thread.sleep(4000);
-			waitForElementTobeVisible(ob, By.xpath("//input[@type='text']"), 30);
-			String searchText = ob.findElement(By.xpath("//input[@type='text']")).getAttribute("value");
-			logger.info(searchText);
 
+			BrowserWaits.waitTime(4);
+			String result = ob.findElement(By.cssSelector("div[class='col-xs-12 col-sm-8 col-md-9'] h2")).getText();
+			logger.info("Result--> " + result);
 			try {
-				Assert.assertTrue(searchText.equals(expectedTitle));
-				test.log(LogStatus.PASS, "User receiving notification with correct content");
+				Assert.assertEquals(actual, result);
+				test.log(LogStatus.PASS,
+						"User is able to navigate record view page by clicking article title from Recommended articles section on Home page");
+				logout();
+				closeBrowser();
 			} catch (Throwable t) {
 
-				test.log(LogStatus.FAIL, "Title selected is not same in search text box");// extent
-				// reports
+				test.log(LogStatus.FAIL,
+						"User is not able to navigate record view page by clicking article title from Recommended articles section on Home page");// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString()); // reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "User_is_not_able_to_navigate_record_view_page_by_clicking_article_title_from_Recommended_articles_section_on_Home_page")));// screenshot
 				closeBrowser();
 			}
 
-			closeBrowser();
-
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something happened");// extent
+			test.log(LogStatus.FAIL,
+					"User is not able to navigate record view page by clicking article title from Recommended articles section on Home page");// extent
 			// reports
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+					.getSimpleName()
+					+ "User_is_not_able_to_navigate_record_view_page_by_clicking_article_title_from_Recommended_articles_section_on_Home_page")));// screenshot
 			closeBrowser();
 		}
+
 	}
 
 	@AfterTest

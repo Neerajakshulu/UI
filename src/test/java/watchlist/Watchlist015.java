@@ -74,6 +74,7 @@ public class Watchlist015 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
@@ -89,8 +90,10 @@ public class Watchlist015 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchlistDescription);
 			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 30);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
+			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
 			String updatedWatchlistDescription = ob
 					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
 

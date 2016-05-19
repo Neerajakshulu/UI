@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class Notifications017 extends TestBase {
+public class Notifications0011 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -41,7 +41,7 @@ public class Notifications017 extends TestBase {
 	}
 
 	@Test
-	public void testcaseF17() throws Exception {
+	public void testcaseF11() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;

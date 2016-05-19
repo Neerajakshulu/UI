@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class Notifications025 extends TestBase {
+public class Notifications0012 extends TestBase {
 
 	static int status = 1;
 
@@ -32,12 +32,12 @@ public class Notifications025 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that system is able to recommend three articles for user ")
+		test = extent.startTest(var, "Verify that system is able to recommend six people for user")
 				.assignCategory("Notifications");
 	}
 
 	@Test
-	public void testcaseF22() throws Exception {
+	public void testcaseF12() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -48,44 +48,45 @@ public class Notifications025 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		logger.info(" execution starts--->");
 		try {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			BrowserWaits.waitTime(2);
-			for (int i = 0; i < 3; i++) {
-				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
-				if (mylist.size() > 0) {
+			BrowserWaits.waitTime(8);
+			for(int i=0;i<3;i++){
+				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
+				ob.findElements(By.xpath("//*[contains(@tag,'ne-profile-follow-unfollow')]"));
+				if(mylist.size()>0){
 					break;
-				} else {
+				}else{
 					BrowserWaits.waitTime(5);
 				}
 			}
-			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
-			// logger.info(mylist.size());
+			//BrowserWaits.waitTime(8);
+			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
 			WebElement myE = null;
 			String text;
 			for (int i = 0; i < mylist.size(); i++) {
 				text = mylist.get(i).getText();
-				if (text.contains("Recommended articles")) {
+				if (text.contains("Recommended people to follow")) {
+					logger.info(text);
 					myE = mylist.get(i);
 					break;
 				}
-
 			}
-			List<WebElement> articles = myE.findElements(By.tagName("a"));
-			// logger.info("No of articles="+articles.size());
-			if (!compareNumbers(3, articles.size() - 3)) {
-				test.log(LogStatus.FAIL, "6 article suggesstions not getting displayed");// extent reports
+			List<WebElement> people = myE.findElements(By.xpath("//img[@class='ne-profile-image']"));
+			logger.info("No of people=" + people.size());
+			int temp = ob.findElements(By.xpath("//img[@class='ne-profile-image']")).size() - 6;
+			if (!compareNumbers(6, people.size() - temp)) {
+				test.log(LogStatus.FAIL, "6 people suggesstions not getting displayed");// extent reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_6_article_suggesstions_not_getting_displayed")));// screenshot
+						this.getClass().getSimpleName() + "_6_people_suggesstions_not_getting_displayed")));// screenshot
 			}
 			closeBrowser();
 		} catch (Throwable t) {
@@ -114,4 +115,5 @@ public class Notifications025 extends TestBase {
 		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
+
 }

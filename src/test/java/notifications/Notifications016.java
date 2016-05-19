@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -63,27 +64,27 @@ public class Notifications016 extends TestBase {
 			// Logging in with User2
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(8000);
+			BrowserWaits.waitTime(8);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
 					"Posts"))));
-			Thread.sleep(6000);
+			BrowserWaits.waitTime(6);
 			List<WebElement> listOfPosts = ob
 					.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 			jsClick(ob,
 					ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
 							"Articles"))));
-			Thread.sleep(6000);
+			BrowserWaits.waitTime(6);
 			List<WebElement> listOfArticles = ob.findElements(By.xpath(OR
 					.getProperty("trending_categories_list_of_links")));
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 			jsClick(ob,
 					ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
 							"Topics"))));
-			Thread.sleep(6000);
+			BrowserWaits.waitTime(6);
 			List<WebElement> listOfTopics = ob.findElements(By.xpath(OR
 					.getProperty("trending_categories_list_of_links")));
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 
 			try {
 				Assert.assertTrue(listOfPosts.size() <= 10 && listOfArticles.size() <= 10 && listOfTopics.size() <= 10);
