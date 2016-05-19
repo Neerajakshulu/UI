@@ -10,7 +10,7 @@
 	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 	<parameter name="password" value="Welcome01" />
 
-	<!-- <test name="Follow_Other_Profile" preserve-order="true">
+	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -253,7 +253,7 @@
 		<classes>
 			<class name="Profile.Profile34"></class>
 		</classes>
-	</test> -->
+	</test>
 
 	<test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
@@ -265,7 +265,7 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Publish_post_timestamp_validation">
+	<test name="Publish_post_timestamp_validation">
 		<parameter name="username" value="projectneon.test@gmail.com" />
 		<parameter name="password" value="Welcome01" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -279,7 +279,7 @@
 		<classes>
 			<class name="Profile.Profile37"></class>
 		</classes>
-	</test> -->
+	</test>
 
 	<test name="HCR_Profile_Badge">
 		<parameter name="hcrProfile" value="professor"></parameter>
@@ -288,7 +288,7 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Post_comment_count">
+	<test name="Post_comment_count">
 		<parameter name="username" value="avinash.p1229@gmail.com" />
 		<parameter name="password" value="1Platform" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
@@ -303,7 +303,7 @@
 		<classes>
 			<class name="Profile.Profile40"></class>
 		</classes>
-	</test> -->
+	</test>
 
 
 </suite>
