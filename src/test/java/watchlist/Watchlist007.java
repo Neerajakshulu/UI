@@ -95,7 +95,7 @@ public class Watchlist007 extends TestBase {
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
-
+			BrowserWaits.waitTime(3);
 			// Watching the patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
