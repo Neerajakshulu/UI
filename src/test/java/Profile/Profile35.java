@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -135,10 +136,11 @@ public class Profile35 extends TestBase {
 			pf.getpostRVPageInstance(ob).clickPostLike();
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
+			BrowserWaits.waitTime(2);
 			int profilePostRVcount = pf.getProfilePageInstance(ob).getPostLikeCount();
-
-			System.out.println("before count-->" + profilePostcount);
-			System.out.println("after count-->" + profilePostRVcount);
+			logger.info("before count-->" + profilePostcount);
+			logger.info("after count-->" + profilePostRVcount);
+			
 			if (profilePostRVcount == profilePostcount) {
 				throw new Exception("post like count failed");
 			}

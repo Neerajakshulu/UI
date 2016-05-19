@@ -9,7 +9,6 @@
 		<suite-file path="./Authoring.xml" />
 		<suite-file path="./Profile.xml" />
 		<suite-file path="./Watchlist.xml" />
-		<suite-file path="./NotificationsParallel.xml" />
 		<suite-file path="./Notifications.xml" />
 	</suite-files>
 </suite>
