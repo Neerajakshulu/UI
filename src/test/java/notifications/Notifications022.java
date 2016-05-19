@@ -57,7 +57,16 @@ public class Notifications022 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			BrowserWaits.waitTime(25);
+			BrowserWaits.waitTime(8);
+			for(int i=0;i<3;i++){
+				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
+				if(mylist.size()>0){
+					break;
+				}else{
+					BrowserWaits.waitTime(5);
+				}
+			}
+			//BrowserWaits.waitTime(8);
 			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
 			WebElement myE = null;
 			String text;

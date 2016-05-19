@@ -12,7 +12,7 @@
 	<parameter name="postName" value="Unique Post for Automation" />
 
 
-	<test name="Watchlist001">
+	<!-- <test name="Watchlist001">
 		<classes>
 			<class name="watchlist.Watchlist001"></class>
 		</classes>
@@ -64,7 +64,7 @@
 		<classes>
 			<class name="watchlist.Watchlist009"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Watchlist010">
 		<classes>
@@ -72,7 +72,7 @@
 		</classes>
 	</test>
 
-	<test name="Watchlist011">
+	<!-- <test name="Watchlist011">
 		<classes>
 			<class name="watchlist.Watchlist011"></class>
 		</classes>
@@ -184,7 +184,7 @@
 		<classes>
 			<class name="watchlist.Watchlist029"></class>
 		</classes>
-	</test>
+	</test> -->
 
 </suite>
 

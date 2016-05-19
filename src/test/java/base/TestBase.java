@@ -18,8 +18,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -57,6 +55,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class TestBase {
+
 	protected static final Logger logger = LogManager.getLogger();
 	public static Properties CONFIG = null;
 	public static Properties OR = null;
@@ -85,80 +84,7 @@ public class TestBase {
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {
-
 		initialize();
-// 		if(!host.equalsIgnoreCase("https://projectne.thomsonreuters.com")){
-//
-//			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
-//
-//				if (count == 0) {
-//
-//					if (flag < 3) {
-//
-//						flag++;
-//
-//						try {
-//							openBrowser();
-//							maximizeWindow();
-//							clearCookies();
-//							fn1 = generateRandomName(8);
-//							ln1 = generateRandomName(10);
-//							System.out.println(fn1 + " " + ln1);
-//							user1 = createNewUser(fn1, ln1);
-//							System.out.println("User1:" + user1);
-//							Thread.sleep(3000);
-//							logout();
-//							closeBrowser();
-//
-//							// 2)Create User2 and follow User1
-//							openBrowser();
-//							maximizeWindow();
-//							clearCookies();
-//							fn2 = generateRandomName(8);
-//							ln2 = generateRandomName(10);
-//							System.out.println(fn2 + " " + ln2);
-//							user2 = createNewUser(fn2, ln2);
-//							System.out.println("User2:" + user2);
-//							Thread.sleep(3000);
-//
-//							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-//							ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn1 + " " + ln1);
-//							ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-//
-//							JavascriptExecutor jse = (JavascriptExecutor) ob;
-//							jse.executeScript("scroll(0,-500)");
-//							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
-//							ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-//							waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-//							ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-//
-//							Thread.sleep(3000);
-//
-//							logout();
-//							closeBrowser();
-//							System.out.println("User count:" + count);
-//							count++;
-//
-//						}
-//
-//						catch (Throwable t) {
-//
-//							System.out.println("There is some problem in the creation of users");
-//							System.out.println(t);
-//
-//							StringWriter errors = new StringWriter();
-//							t.printStackTrace(new PrintWriter(errors));
-//
-//							test.addScreenCapture(captureScreenshot("UserCreationError" + this.getClass().getSimpleName()
-//									+ "_user_creation_error_screenshot"));// screenshot
-//
-//						}
-//
-//					}
-//				}
-//
-//			}
-//		}
 	}
 
 	// @BeforeClass
@@ -197,7 +123,7 @@ public class TestBase {
 			// Getting url
 			host = System.getProperty("host");
 
-			// System.out.println(host);
+			// logger.info(host);
 			// xls file
 			iamxls = new Xls_Reader("src/test/resources/xls/IAM.xlsx");
 			searchxls = new Xls_Reader("src/test/resources/xls/Search.xlsx");
@@ -227,19 +153,19 @@ public class TestBase {
 	// }
 
 	// Opening via Sauce Labs
-	
+
 	public void openBrowser() throws Exception {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		System.out.println("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
+		logger.info("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
 		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
-		System.out.println("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
+		logger.info("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
+		logger.info("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-		ob = new RemoteWebDriver(new URL(
-				"http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+		ob = new RemoteWebDriver(
+				new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
 				desiredCapabilities);
 		String waitTime = CONFIG.getProperty("defaultImplicitWait");
 		String pageWait = CONFIG.getProperty("defaultPageWait");
@@ -247,146 +173,116 @@ public class TestBase {
 		try {
 			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
 		} catch (Throwable t) {
-			System.out.println("Page Load Timeout not supported in safari driver");
+			logger.info("Page Load Timeout not supported in safari driver");
 		}
 	}
 
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*public void openBrowser() {
+	/*
+	 * public void openBrowser() { if (CONFIG.getProperty("browserType").equals("FF")) { ob = new FirefoxDriver(); }
+	 * else if (CONFIG.getProperty("browserType").equals("IE")) { DesiredCapabilities capabilities =
+	 * DesiredCapabilities.internetExplorer();
+	 * capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+	 * System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe"); ob = new
+	 * InternetExplorerDriver(capabilities); } else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
+	 * DesiredCapabilities capability = DesiredCapabilities.chrome();
+	 * capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); System.setProperty("webdriver.chrome.driver",
+	 * "drivers/chromedriver.exe"); ob = new ChromeDriver(capability); } else if
+	 * (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) { DesiredCapabilities desiredCapabilities =
+	 * DesiredCapabilities.safari(); SafariOptions safariOptions = new SafariOptions();
+	 * safariOptions.setUseCleanSession(true); desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+	 * safariOptions); ob = new SafariDriver(desiredCapabilities); } String waitTime =
+	 * CONFIG.getProperty("defaultImplicitWait"); String pageWait = CONFIG.getProperty("defaultPageWait");
+	 * ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS); try {
+	 * ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS); } catch (Throwable t) {
+	 * logger.info("Page Load Timeout not supported in safari driver"); } }
+	 */
 
-		if (CONFIG.getProperty("browserType").equals("FF")) {
-			ob = new FirefoxDriver();
-		} else if (CONFIG.getProperty("browserType").equals("IE")) {
-			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-			capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-			System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-			ob = new InternetExplorerDriver(capabilities);
-		} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
-			DesiredCapabilities capability = DesiredCapabilities.chrome();
-			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-			ob = new ChromeDriver(capability);
+	public void runOnSauceLabsFromLocal(String os,
+			String browser) throws Exception {
+
+		String username = "amneetsingh";
+		String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
+		String url = "http://" + username + ":" + access_key + "@ondemand.saucelabs.com:80/wd/hub";
+
+		DesiredCapabilities caps = null;
+
+		if (os.equals("Windows")) {
+
+			if (browser.equals("Chrome")) {
+
+				caps = DesiredCapabilities.chrome();
+				caps.setCapability("platform", "Windows 7");
+				caps.setCapability("version", "48.0");
+			}
+
+			if (browser.equals("FF")) {
+
+				caps = DesiredCapabilities.firefox();
+				caps.setCapability("platform", "Windows 7");
+				caps.setCapability("version", "44.0");
+
+			}
+
+			if (browser.equals("IE")) {
+
+				caps = DesiredCapabilities.internetExplorer();
+				caps.setCapability("platform", "Windows 8.1");
+				caps.setCapability("version", "11.0");
+
+			}
+
 		}
 
-		else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) {
+		if (os.equals("Mac")) {
 
-			DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-			SafariOptions safariOptions = new SafariOptions();
-			safariOptions.setUseCleanSession(true);
-			desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
-			ob = new SafariDriver(desiredCapabilities);
+			if (browser.equals("Chrome")) {
+
+				caps = DesiredCapabilities.chrome();
+				caps.setCapability("platform", "OS X 10.11");
+				caps.setCapability("version", "48.0");
+			}
+
+			if (browser.equals("FF")) {
+
+				caps = DesiredCapabilities.firefox();
+				caps.setCapability("platform", "OS X 10.11");
+				caps.setCapability("version", "44.0");
+			}
+
+			if (browser.equals("Safari")) {
+
+				caps = DesiredCapabilities.safari();
+				caps.setCapability("platform", "OS X 10.11");
+				caps.setCapability("version", "9.0");
+			}
 		}
 
-		String waitTime = CONFIG.getProperty("defaultImplicitWait");
-		String pageWait = CONFIG.getProperty("defaultPageWait");
-		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-		try {
-			ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
-		} catch (Throwable t) {
+		if (os.equals("iOS")) {
 
-			System.out.println("Page Load Timeout not supported in safari driver");
+			caps = DesiredCapabilities.iphone();
+			caps.setCapability("platform", "OS X 10.10");
+			caps.setCapability("version", "9.2");
+			caps.setCapability("deviceName", "iPhone 6");
+			caps.setCapability("deviceOrientation", "portrait");
 		}
+
+		if (os.equals("Android")) {
+
+			caps = DesiredCapabilities.android();
+			caps.setCapability("platform", "Linux");
+			caps.setCapability("version", "5.1");
+			caps.setCapability("deviceName", "Android Emulator");
+			caps.setCapability("deviceType", "phone");
+			caps.setCapability("deviceOrientation", "portrait");
+		}
+
+		ob = new RemoteWebDriver(new URL(url), caps);
 
 	}
-*/
-	
-	public void runOnSauceLabsFromLocal(String os,String browser) throws Exception{
-		  
-		  String username = "amneetsingh";
-		  String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
-		  String url = "http://" + username + ":" + access_key + "@ondemand.saucelabs.com:80/wd/hub";
-		  
-		  DesiredCapabilities caps = null;
-		  
-		  if(os.equals("Windows")){
-			  
-			  if(browser.equals("Chrome")){
-				  
-				  caps = DesiredCapabilities.chrome();
-				  caps.setCapability("platform", "Windows 7");
-				  caps.setCapability("version", "48.0");
-			  }
-			  
-			  if(browser.equals("FF")){
-				  
-				  caps = DesiredCapabilities.firefox();
-				  caps.setCapability("platform", "Windows 7");
-				  caps.setCapability("version", "44.0");
-				  
-				  
-			  }
-			  
-			  if(browser.equals("IE")){
-				  
-				  caps = DesiredCapabilities.internetExplorer();
-				  caps.setCapability("platform", "Windows 8.1");
-				  caps.setCapability("version", "11.0");
-				  
-			  }
-			  
-			  
-		  }
-		  
-		  if(os.equals("Mac")){
-			  
-			  
-			  if(browser.equals("Chrome")){
-				  
-				  
-				  caps = DesiredCapabilities.chrome();
-				  caps.setCapability("platform", "OS X 10.11");
-				  caps.setCapability("version", "48.0");
-			  }
-			  
-			  if(browser.equals("FF")){
-				  
-				  
-				  caps = DesiredCapabilities.firefox();
-				  caps.setCapability("platform", "OS X 10.11");
-				  caps.setCapability("version", "44.0");
-			  }
-			  
-			  
-			  if(browser.equals("Safari")){
-				  
-				  
-				  caps = DesiredCapabilities.safari();
-				  caps.setCapability("platform", "OS X 10.11");
-				  caps.setCapability("version", "9.0");
-			  }
-		  }
-		  
-		  
-		  
-		  if(os.equals("iOS")){
-			  
-			  
-			  caps = DesiredCapabilities.iphone();
-			  caps.setCapability("platform", "OS X 10.10");
-			  caps.setCapability("version", "9.2");
-			  caps.setCapability("deviceName","iPhone 6");
-			  caps.setCapability("deviceOrientation", "portrait");
-		  }
-		  
-		  if(os.equals("Android")){
-			  
-			  
-			  caps = DesiredCapabilities.android();
-			  caps.setCapability("platform", "Linux");
-			  caps.setCapability("version", "5.1");
-			  caps.setCapability("deviceName","Android Emulator");
-			  caps.setCapability("deviceType","phone");
-			  caps.setCapability("deviceOrientation", "portrait");
-		  }
-		  
-		  ob = new RemoteWebDriver(new URL(url), caps);
-		  
-	  }
 
-	
-	
 	// Closing the browser
 	public void closeBrowser() {
 
@@ -454,14 +350,14 @@ public class TestBase {
 	// via xpath)
 	public boolean checkElementPresence(String xpathkey) {
 		int count = ob.findElements(By.xpath(OR.getProperty(xpathkey))).size();
-		System.out.println("Count is " + count);
+		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
 			test.log(LogStatus.PASS, "Particular element is present");
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			System.out.println("Error:" + t);
+			logger.info("Error:" + t);
 			return false;
 		}
 		return true;
@@ -471,14 +367,14 @@ public class TestBase {
 	// via link text)
 	public boolean checkElementPresence_link_text(String linkKey) {
 		int count = ob.findElements(By.linkText(OR.getProperty(linkKey))).size();
-		System.out.println("Count is " + count);
+		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
 			test.log(LogStatus.PASS, "Particular element is present");
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			System.out.println("Error:" + t);
+			logger.info("Error:" + t);
 			return false;
 		}
 		return true;
@@ -488,14 +384,14 @@ public class TestBase {
 	// via id)
 	public boolean checkElementPresence_id(String id) {
 		int count = ob.findElements(By.id(OR.getProperty(id))).size();
-		System.out.println("Count is " + count);
+		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
 			test.log(LogStatus.PASS, "Particular element is present");
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			System.out.println("Error:" + t);
+			logger.info("Error:" + t);
 			return false;
 		}
 		return true;
@@ -505,14 +401,14 @@ public class TestBase {
 	// via name)
 	public boolean checkElementPresence_name(String name_key) {
 		int count = ob.findElements(By.name(OR.getProperty(name_key))).size();
-		System.out.println("Count is " + count);
+		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
 			test.log(LogStatus.PASS, "Particular element is present");
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			System.out.println("Error:" + t);
+			logger.info("Error:" + t);
 			return false;
 		}
 		return true;
@@ -522,7 +418,7 @@ public class TestBase {
 	public boolean checkElementDisappearance(String xpathKey) {
 
 		int count = ob.findElements(By.xpath(OR.getProperty(xpathKey))).size();
-		System.out.println("Count is" + count);
+		logger.info("Count is" + count);
 		try {
 
 			Assert.assertEquals(count, 0);
@@ -530,7 +426,7 @@ public class TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			System.out.println("Error:" + t);
+			logger.info("Error:" + t);
 			return false;
 		}
 
@@ -564,9 +460,9 @@ public class TestBase {
 	// logging out
 	public void logout() throws Exception {
 
-		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("header_label"))));
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("header_label"))));
 		Thread.sleep(5000);
-		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
 
 	// capturing screenshot
@@ -604,8 +500,8 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		 ob.navigate().to(host);
-//		ob.navigate().to(CONFIG.getProperty("testSiteName"));
+		ob.navigate().to(host);
+		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
@@ -806,8 +702,8 @@ public class TestBase {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// check for the pending request count and break if count is
 				// zero.
-				if ((Long) js
-						.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+				if ((Long) js.executeScript(
+						"return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
 					break;
 				}
 				Thread.sleep(1000);
@@ -964,8 +860,8 @@ public class TestBase {
 		XSSFSheet mySheet = myWB.getSheetAt(0); // Referring to 1st sheet
 		xRows = mySheet.getLastRowNum() + 1;
 		xCols = mySheet.getRow(0).getLastCellNum();
-		System.out.println("Rows are " + xRows);
-		System.out.println("Cols are " + xCols);
+		logger.info("Rows are " + xRows);
+		logger.info("Cols are " + xCols);
 		xData = new String[xRows][xCols];
 		for (int i = 0; i < xRows; i++) {
 			XSSFRow row = mySheet.getRow(i);
@@ -1090,8 +986,8 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_watch_button")), 60);
 
 		List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button")));
-		List<WebElement> listOfWatchListName = ob.findElements(By.xpath(OR
-				.getProperty("watchlist_name_in_select_model")));
+		List<WebElement> listOfWatchListName = ob
+				.findElements(By.xpath(OR.getProperty("watchlist_name_in_select_model")));
 		for (int i = 0; i < listOfWatchListName.size(); i++) {
 			if (listOfWatchListName.get(i).getText().equals(watchListName)) {
 				// Adding the item into watch list

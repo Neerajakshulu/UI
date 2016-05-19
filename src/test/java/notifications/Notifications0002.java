@@ -13,14 +13,18 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-
-public class Notifications024 extends TestBase {
+/**
+ * The {@code Notifications0002} for testing test case of Verify that user is able to view Most viewed documents in home page.
+ * by someone
+ *
+ * @author Avinash Potti 
+ */
+public class Notifications0002 extends NotificationsTestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -39,7 +43,7 @@ public class Notifications024 extends TestBase {
 	}
 
 	@Test
-	public void notifications024() throws Exception {
+	public void testcaseF2() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;

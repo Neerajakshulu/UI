@@ -427,40 +427,40 @@
 
 <!-- Notifications Test Cases -->
 
-	<test name="Test F17">
+	<test name="Test F11">
 		<classes>
-			<class name="notifications.Notifications017"></class>
+			<class name="notifications.Notifications0011"></class>
 		</classes>
 	</test>
 
 
-	<test name="Test F24">
+	<test name="Test F2">
 		<classes>
-			<class name="notifications.Notifications024"></class>
+			<class name="notifications.Notifications0002"></class>
 		</classes>
 	</test>
 
-	<test name="Test F15">
+	<test name="Test F9">
 		<classes>
-			<class name="notifications.Notifications015"></class>
+			<class name="notifications.Notifications0009"></class>
 		</classes>
 	</test>
 
-	<test name="Test F16">
+	<test name="Test F10">
 		<classes>
-			<class name="notifications.Notifications016"></class>
+			<class name="notifications.Notifications0010"></class>
 		</classes>
 	</test>
 	
-	<test name="Test F22">
+	<test name="Test F12">
 		<classes>
-			<class name="notifications.Notifications022"></class>
+			<class name="notifications.Notifications0012"></class>
 		</classes>
 	</test>
 	
-	<test name="Test F25">
+	<test name="Test F13">
 		<classes>
-			<class name="notifications.Notifications025"></class>
+			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
 
