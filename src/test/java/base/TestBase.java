@@ -966,7 +966,7 @@ public class TestBase {
 		// Finding the particular watch list and navigating to it
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
-				watchLists.get(i).click();
+				jsClick(ob, watchLists.get(i));
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 30);
 				break;
 			}
