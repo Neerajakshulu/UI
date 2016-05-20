@@ -13,13 +13,11 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
-public class Notifications0013 extends TestBase {
+public class Notifications0013 extends NotificationsTestBase {
 
 	static int status = 1;
 
@@ -31,15 +29,14 @@ public class Notifications0013 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that system is able to recommend three articles for user ")
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
 				.assignCategory("Notifications");
 	}
 
 	@Test
 	public void testcaseF13() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 			status = 3;// excel
