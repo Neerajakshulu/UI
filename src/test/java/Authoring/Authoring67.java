@@ -64,8 +64,8 @@ public class Authoring67 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			//ob.navigate().to(host);
-			 ob.get(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			//ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME14", "PASSWORD14");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
@@ -87,6 +87,7 @@ public class Authoring67 extends TestBase {
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			pf.getProfilePageInstance(ob).deleteDraftPostFromPostModal(postString);
+			BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			waitForPageLoad(ob);
 			int postCountAfter = 0;
