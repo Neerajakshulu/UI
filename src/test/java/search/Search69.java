@@ -76,12 +76,18 @@ public class Search69 extends TestBase {
 			waitForElementTobeVisible(ob,
 					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"),
 					30);
+			Thread.sleep(2000);
 
 			ob.findElement(
 					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
 					.click();
+			
+			
+			
 			waitForElementTobeVisible(ob,
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			
+			Thread.sleep(3000);
 
 			String dd_text = ob.findElement(
 					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
