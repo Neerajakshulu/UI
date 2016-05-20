@@ -80,7 +80,7 @@ public class Notifications0014 extends NotificationsTestBase {
 				al1.add(myIT1.next());
 
 			}
-
+			BrowserWaits.waitTime(4);
 			ob.switchTo().window(al1.get(1));
 			ob.navigate().to(host);
 			test.log(LogStatus.INFO, " User 3 logging in");
