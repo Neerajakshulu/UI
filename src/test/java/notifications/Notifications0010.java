@@ -12,14 +12,12 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
-public class Notifications0010 extends TestBase {
+public class Notifications0010 extends NotificationsTestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -32,25 +30,21 @@ public class Notifications0010 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(
-				var,
-				"Verify that Trending now section include articles and posts and able to navigate from tending now section and"
-						+ "Verify that Maximum count on the trending list is 10").assignCategory("Notifications");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Notifications");
 
 	}
 
 	@Test
 	public void testcaseF10() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,28 +56,27 @@ public class Notifications0010 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 			// Logging in with User2
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(8);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
-					"Posts"))));
+			jsClick(ob, ob.findElement(
+					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Posts"))));
 			BrowserWaits.waitTime(6);
 			List<WebElement> listOfPosts = ob
 					.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
 			BrowserWaits.waitTime(3);
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
-							"Articles"))));
+			jsClick(ob, ob.findElement(
+					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Articles"))));
 			BrowserWaits.waitTime(6);
-			List<WebElement> listOfArticles = ob.findElements(By.xpath(OR
-					.getProperty("trending_categories_list_of_links")));
+			List<WebElement> listOfArticles = ob
+					.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
 			BrowserWaits.waitTime(3);
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE",
-							"Topics"))));
+			jsClick(ob, ob.findElement(
+					By.xpath(OR.getProperty("trending_now_menu_links").replaceAll("FILTER_TYPE", "Topics"))));
 			BrowserWaits.waitTime(6);
-			List<WebElement> listOfTopics = ob.findElements(By.xpath(OR
-					.getProperty("trending_categories_list_of_links")));
+			List<WebElement> listOfTopics = ob
+					.findElements(By.xpath(OR.getProperty("trending_categories_list_of_links")));
 			BrowserWaits.waitTime(3);
 
 			try {
@@ -94,11 +87,8 @@ public class Notifications0010 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Title selected is not same in search text box")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 				closeBrowser();
 			}
 
@@ -108,11 +98,8 @@ public class Notifications0010 extends TestBase {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Title selected is not same in search text box")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Title selected is not same in search text box")));// screenshot
 			closeBrowser();
 		}
 		closeBrowser();
@@ -123,11 +110,11 @@ public class Notifications0010 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
 		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 }

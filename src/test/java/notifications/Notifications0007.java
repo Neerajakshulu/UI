@@ -18,7 +18,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Notifications0007 extends NotificationsTestBase {
 
@@ -36,20 +35,20 @@ public class Notifications0007 extends NotificationsTestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
+		rowData = testcase.get(this.getClass().getSimpleName());
 		// extent = ExtentManager.getReporter(filePath);
 	}
 
 	@Test
 	public void testcaseF7() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 		if (!master_condition) {
 			status = 3;// excel
 			extent = ExtentManager.getReporter(filePath);
-			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-			String dec = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 2);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
 			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 			for (int i = 0; i < tests.length; i++) {
