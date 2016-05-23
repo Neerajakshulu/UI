@@ -63,6 +63,7 @@ public class Search76 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
+//			runOnSauceLabsFromLocal("Windows","Chrome");
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
