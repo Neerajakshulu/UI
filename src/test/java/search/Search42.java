@@ -74,9 +74,11 @@ public class Search42 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Articles')]"), 30);
+			Thread.sleep(2000);
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			ob.findElement(By.xpath("//li[contains(text(),'Articles')]")).click();
+			Thread.sleep(3000);
 
 			// Check the filter is collapsed by default
 			collapseFilter();

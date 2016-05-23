@@ -19,7 +19,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Notifications0008 extends NotificationsTestBase {
 
@@ -35,20 +34,20 @@ public class Notifications0008 extends NotificationsTestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
+		rowData = testcase.get(this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testcaseF8() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
 			extent = ExtentManager.getReporter(filePath);
-			String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-			String dec = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 2);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
 			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 			for (int i = 0; i < tests.length; i++) {
@@ -136,24 +135,24 @@ public class Notifications0008 extends NotificationsTestBase {
 		} catch (Throwable t) {
 			if (test == null) {
 				extent = ExtentManager.getReporter(filePath);
-				String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-				String dec = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 2);
+				String var = rowData.getTestcaseId();
+				String dec = rowData.getTestcaseDescription();
 				String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 				for (int i = 0; i < tests.length; i++) {
 					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("Notifications");
-					test.log(LogStatus.FAIL, "FAIL - "+t.getMessage());
+					test.log(LogStatus.FAIL, "FAIL - " + t.getMessage());
 					extent.endTest(test);
 				}
-			}else{
+			} else {
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 			}
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + screen++)));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screen++)));// screenshot
 		} finally {
 			closeBrowser();
 		}
@@ -203,8 +202,8 @@ public class Notifications0008 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + screen++)));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -261,8 +260,8 @@ public class Notifications0008 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + screen++)));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -307,8 +306,8 @@ public class Notifications0008 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + screen++)));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screen++)));// screenshot
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Fail");

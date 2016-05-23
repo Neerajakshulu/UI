@@ -17,13 +17,12 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
- * The {@code Notifications0001} for testing test case of Verify that user is able to view top commenter's information in home page.
- * by someone
+ * The {@code Notifications0001} for testing test case of Verify that user is able to view top commenter's information
+ * in home page. by someone
  *
- * @author Avinash Potti 
+ * @author Avinash Potti
  */
 public class Notifications0001 extends NotificationsTestBase {
 
@@ -38,15 +37,14 @@ public class Notifications0001 extends NotificationsTestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to view top commenters information in home page")
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
 				.assignCategory("Notifications");
 	}
 
 	@Test
 	public void testcaseF1() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		int scrollCount = 0;
 		if (!master_condition) {
@@ -92,14 +90,15 @@ public class Notifications0001 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "user is not able to view top commenters information in home page afer 30 scrolls");// extent
+				test.log(LogStatus.FAIL,
+						"user is not able to view top commenters information in home page afer 30 scrolls");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user is not able to view top commenters information in home page afer 30 scrolls")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user is not able to view top commenters information in home page afer 30 scrolls")));// screenshot
 				closeBrowser();
 			}
 
@@ -109,10 +108,10 @@ public class Notifications0001 extends NotificationsTestBase {
 			test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			try{
+			try {
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
-			}catch(Throwable t1){
+			} catch (Throwable t1) {
 				t1.printStackTrace();
 			}
 			closeBrowser();
