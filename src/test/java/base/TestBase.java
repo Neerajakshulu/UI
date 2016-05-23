@@ -224,7 +224,7 @@ public class TestBase {
 
 	// Opening via Sauce Labs
 	
-	public void openBrowser() throws Exception {
+	/*public void openBrowser() throws Exception {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
 		System.out.println("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
@@ -245,12 +245,12 @@ public class TestBase {
 		} catch (Throwable t) {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
-	}
+	}*/
 
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*public void openBrowser() {
+	public void openBrowser() {
 
 		if (CONFIG.getProperty("browserType").equals("FF")) {
 			ob = new FirefoxDriver();
@@ -285,7 +285,7 @@ public class TestBase {
 			System.out.println("Page Load Timeout not supported in safari driver");
 		}
 
-	}*/
+	}
 
 	
 	public void runOnSauceLabsFromLocal(String os,String browser) throws Exception{
