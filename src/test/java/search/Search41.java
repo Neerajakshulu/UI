@@ -91,7 +91,7 @@ public class Search41 extends TestBase {
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.PASS, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
@@ -148,7 +148,7 @@ public class Search41 extends TestBase {
 		WebElement documentTypePanelBody = filterPanelBodyList.get(0);
 
 		if (!documentTypePanelBody.isDisplayed()) {
-			test.log(LogStatus.PASS, "Document type filter values are not displayed");
+			test.log(LogStatus.FAIL, "Document type filter values are not displayed");
 		}
 		// Expanding the document type filter by clicking it
 		documentTypePanelHeading.click();

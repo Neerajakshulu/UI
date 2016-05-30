@@ -100,7 +100,7 @@ public class Search6 extends TestBase {
 
 			catch (Throwable t) {
 
-				test.log(LogStatus.PASS, "Search drop down not getting displayed");// extent reports
+				test.log(LogStatus.FAIL, "Search drop down not getting displayed");// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
 				// test.log(LogStatus.INFO, "Snapshot below: " +
@@ -123,7 +123,7 @@ public class Search6 extends TestBase {
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.PASS, "Something unexpected happened");// extent reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
