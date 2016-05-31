@@ -137,7 +137,7 @@ public class Search10 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(
-						LogStatus.PASS,
+						LogStatus.FAIL,
 						"Incorrect filtered search results getting displayed when user navigates back to Articles search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -159,7 +159,7 @@ public class Search10 extends TestBase {
 						"Filters are retained when user navigates back to Articles search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(LogStatus.PASS,
+				test.log(LogStatus.FAIL,
 						"Filters are not retained when user navigates back to Articles search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -176,7 +176,7 @@ public class Search10 extends TestBase {
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.PASS, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();

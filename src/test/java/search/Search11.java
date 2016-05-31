@@ -132,7 +132,7 @@ public class Search11 extends TestBase {
 						"Search page maintains the sorting order state when user navigates back to articles search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(LogStatus.PASS,
+				test.log(LogStatus.FAIL,
 						"Search does not maintain state when user navigates back to articles search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -151,7 +151,7 @@ public class Search11 extends TestBase {
 
 			if (!compareStrings("Times Cited", option)) {
 
-				test.log(LogStatus.PASS, "Incorrect sorting option getting displayed");// extent
+				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent
 																						// reports
 				status = 2;// excel
 				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
@@ -170,7 +170,7 @@ public class Search11 extends TestBase {
 						"Filters are retained when user navigates back to articles search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(LogStatus.PASS,
+				test.log(LogStatus.FAIL,
 						"Filters are not retained when user navigates back to articles search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -187,7 +187,7 @@ public class Search11 extends TestBase {
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.PASS, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();

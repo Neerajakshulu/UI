@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Notifications" parallel="tests" thread-count="10">
+<suite name="Notifications" parallel="tests" thread-count="5">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -97,6 +97,11 @@
 	<test name="Test F19">
 		<classes>
 			<class name="notifications.Notifications0019"></class>
+		</classes>
+	</test>
+	<test name="Test F20">
+		<classes>
+			<class name="notifications.Notifications0020"></class>
 		</classes>
 	</test>
 </suite>
