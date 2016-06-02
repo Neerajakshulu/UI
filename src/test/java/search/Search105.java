@@ -141,10 +141,22 @@ public class Search105 extends TestBase {
 			boolean postFieldsStatus = postEditCreateDate && (!postAuthor.isEmpty()) && (!postAuthorMetaData.isEmpty())
 					&& socialShareStatus;
 			System.out.println("post fields status-->" + postFieldsStatus);
-			if (!postFieldsStatus)
-				throw new Exception(
-						"Following post fields not displayed in record view page a)Title b)Creation date and time "
-								+ "c)Last edited date and time d)Author e)Author details f)Post content g)Likes count h)Comments count");
+			
+			if(!checkElementPresence("watchlist_button_record_view_page")){
+				
+				
+
+				test.log(
+						LogStatus.FAIL,
+						"Record view page of a post not getting displayed");// extent
+																																																// report
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
+			}
 
 			closeBrowser();
 

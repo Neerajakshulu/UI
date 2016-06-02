@@ -82,7 +82,7 @@ public class Search16 extends TestBase {
 						By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))));
 				test.log(LogStatus.PASS, "user is able to expand the sort by menu for search results");
 			} catch (Throwable t) {
-				test.log(LogStatus.PASS, "Sort by menu is not getting expanded in search results page");
+				test.log(LogStatus.FAIL, "Sort by menu is not getting expanded in search results page");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -99,7 +99,7 @@ public class Search16 extends TestBase {
 						By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))));
 				test.log(LogStatus.PASS, "User is able to collapse sort by menu for search results");
 			} catch (Throwable t) {
-				test.log(LogStatus.PASS, "Sort by menu is not getting collapsed in search results page");
+				test.log(LogStatus.FAIL, "Sort by menu is not getting collapsed in search results page");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -115,7 +115,7 @@ public class Search16 extends TestBase {
 
 		catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.PASS, "Something went wrong");// extent reports
+			test.log(LogStatus.FAIL, "Something went wrong");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

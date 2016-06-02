@@ -12,14 +12,12 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
-public class Notifications0009 extends TestBase {
+public class Notifications0009 extends NotificationsTestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -32,18 +30,15 @@ public class Notifications0009 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that users should be able to select from a list of suggested topics and check selected topic is presented in users type ahead")
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
 	public void testcaseF9() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {

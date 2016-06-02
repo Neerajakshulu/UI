@@ -13,13 +13,11 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
-public class Notifications0012 extends TestBase {
+public class Notifications0012 extends NotificationsTestBase {
 
 	static int status = 1;
 
@@ -31,15 +29,14 @@ public class Notifications0012 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that system is able to recommend six people for user")
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
 				.assignCategory("Notifications");
 	}
 
 	@Test
 	public void testcaseF12() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 			status = 3;// excel
@@ -58,16 +55,17 @@ public class Notifications0012 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			BrowserWaits.waitTime(8);
-			for(int i=0;i<3;i++){
-				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
+			for (int i = 0; i < 3; i++) {
+				List<WebElement> mylist = ob
+						.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
 				ob.findElements(By.xpath("//*[contains(@tag,'ne-profile-follow-unfollow')]"));
-				if(mylist.size()>0){
+				if (mylist.size() > 0) {
 					break;
-				}else{
+				} else {
 					BrowserWaits.waitTime(5);
 				}
 			}
-			//BrowserWaits.waitTime(8);
+			// BrowserWaits.waitTime(8);
 			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event ng-scope')]"));
 			WebElement myE = null;
 			String text;

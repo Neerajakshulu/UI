@@ -21,7 +21,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Notifications0014 extends NotificationsTestBase {
 
@@ -36,16 +35,15 @@ public class Notifications0014 extends NotificationsTestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('F'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that Featured Post move down when new notification event occur")
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
 				.assignCategory("Notifications");
 
 	}
 
 	@Test
 	public void testcaseF14() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(notificationxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -80,7 +78,7 @@ public class Notifications0014 extends NotificationsTestBase {
 				al1.add(myIT1.next());
 
 			}
-
+			BrowserWaits.waitTime(4);
 			ob.switchTo().window(al1.get(1));
 			ob.navigate().to(host);
 			test.log(LogStatus.INFO, " User 3 logging in");

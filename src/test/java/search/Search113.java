@@ -78,108 +78,57 @@ public class Search113 extends TestBase {
 
 			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
 
-			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Patents')]"))
-					.click();
-			// waitForAllElementsToBePresent(ob,
-			// By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
-			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Patents')]"), 30);
+			Thread.sleep(2000);
 
-			List<WebElement> ckBoxList;
-			int checkBoxDisplayed = 0;
-			scrollElementIntoView(
-					ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			waitForAjax(ob);
-			ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
-					.replaceAll("FILTER_TYPE", "Inventor")));
+			ob.findElement(By.xpath("//li[contains(text(),'Patents')]")).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			Thread.sleep(3000);
 
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
-
-			try {
-				Assert.assertTrue(checkBoxDisplayed == 5);
-				test.log(LogStatus.PASS, String.format("default filters displayed for %s is 5", "Inventor"));
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						String.format("default filters displayed for %s is not equal to 5", "Inventor"));
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
+			List<WebElement> filter_list=ob.findElements(By.xpath("//div[@class='panel-heading']"));
+//			System.out.println(filter_list.size());
+			
+			filter_list.get(0).click();
+			Thread.sleep(2000);
+			
+//			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
+			ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).click();
+			Thread.sleep(2000);
+			
+//			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
+			
+			String temp1=ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText();
+			if(!compareStrings("LESS",temp1)){
+				
+				test.log(LogStatus.FAIL, "MORE link not working");// extent
+				// reports
+				status = 2;// excel
 				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
-			}
-			scrollElementIntoView(
-					ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			waitForAjax(ob);
-			ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
-					.replaceAll("FILTER_TYPE", "Inventor")));
-			checkBoxDisplayed = 0;
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
+				LogStatus.INFO,
+				"Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+				+ "_more_link_not_working")));// screenshot
 
-			try {
-				Assert.assertTrue(checkBoxDisplayed == 10);
-				test.log(LogStatus.PASS, String.format("More link should load 10 filters for %s", "Inventor"));
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, String.format("More link not loding with 10 filters for", "Inventor"));
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
+			}
+			
+		
+			ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).click();
+			Thread.sleep(2000);
+			
+			String temp2=ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText();
+			if(!compareStrings("MORE",temp2)){
+				
+				test.log(LogStatus.FAIL, "LESS link not working");// extent
+				// reports
+				status = 2;// excel
 				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "left_pane_ is_not_ working_ for_ search_ results")));// screenshot
+				LogStatus.INFO,
+				"Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+				+ "_less_link_not_working")));// screenshot
 
 			}
-			scrollElementIntoView(
-					ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			jsClick(ob,
-					ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll(
-							"FILTER_TYPE", "Inventor"))));
-			waitForAjax(ob);
-			ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
-					.replaceAll("FILTER_TYPE", "Inventor")));
-			checkBoxDisplayed = 0;
-			for (WebElement element : ckBoxList) {
-				if (element.isDisplayed())
-					checkBoxDisplayed++;
-			}
-
-			try {
-				Assert.assertTrue(checkBoxDisplayed == 5);
-				test.log(LogStatus.PASS, String.format("Less link should load 5 filters for %s", "Inventor"));
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, String.format("Less link not loding with 5 filters for", "Inventor"));
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "left_pane_is_not_ working_ for_ search_ results")));// screenshot
-			}
-
-			logout();
+			
 			closeBrowser();
 
 		} catch (Throwable t) {

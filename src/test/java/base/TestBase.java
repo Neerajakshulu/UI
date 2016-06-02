@@ -180,25 +180,49 @@ public class TestBase {
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	/*
-	 * public void openBrowser() { if (CONFIG.getProperty("browserType").equals("FF")) { ob = new FirefoxDriver(); }
-	 * else if (CONFIG.getProperty("browserType").equals("IE")) { DesiredCapabilities capabilities =
-	 * DesiredCapabilities.internetExplorer();
-	 * capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-	 * System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe"); ob = new
-	 * InternetExplorerDriver(capabilities); } else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
-	 * DesiredCapabilities capability = DesiredCapabilities.chrome();
-	 * capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); System.setProperty("webdriver.chrome.driver",
-	 * "drivers/chromedriver.exe"); ob = new ChromeDriver(capability); } else if
-	 * (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) { DesiredCapabilities desiredCapabilities =
-	 * DesiredCapabilities.safari(); SafariOptions safariOptions = new SafariOptions();
-	 * safariOptions.setUseCleanSession(true); desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
-	 * safariOptions); ob = new SafariDriver(desiredCapabilities); } String waitTime =
-	 * CONFIG.getProperty("defaultImplicitWait"); String pageWait = CONFIG.getProperty("defaultPageWait");
-	 * ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS); try {
-	 * ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS); } catch (Throwable t) {
-	 * logger.info("Page Load Timeout not supported in safari driver"); } }
-	 */
+//	public void openBrowser(){
+//	if(CONFIG.getProperty("browserType").equals("FF")){
+//		ob = new FirefoxDriver();
+//	}
+//	else if (CONFIG.getProperty("browserType").equals("IE")){
+//		System.setProperty("webdriver.ie.driver",
+//				"C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe");
+//		DesiredCapabilities capabilities =
+//				DesiredCapabilities.internetExplorer();
+//		capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION,
+//				true);
+//		System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+//		ob = new InternetExplorerDriver(capabilities);
+//	}
+//	else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+//		DesiredCapabilities capability = DesiredCapabilities.chrome();
+//		capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//		System.setProperty("webdriver.chrome.driver",
+//				"C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver",
+//				"drivers/chromedriver.exe");
+//		ob= new ChromeDriver(capability);
+//	}
+//	else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
+//		DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+//		SafariOptions safariOptions = new SafariOptions();
+//		safariOptions.setUseCleanSession(true);
+//		desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+//				safariOptions);
+//		ob = new SafariDriver(desiredCapabilities);
+//	}
+//	String waitTime=CONFIG.getProperty("defaultImplicitWait");
+//	String pageWait=CONFIG.getProperty("defaultPageWait");
+//	ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
+//			TimeUnit.SECONDS);
+//	try{
+//		ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
+//				TimeUnit.SECONDS);
+//	}
+//	catch(Throwable t){
+//		System.out.println("Page Load Timeout not supported in safari driver");
+//	}
+//}
 
 	public void runOnSauceLabsFromLocal(String os,
 			String browser) throws Exception {
@@ -446,14 +470,14 @@ public class TestBase {
 
 	// logging in
 	public void login() throws Exception {
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 180);
+	
+		
+		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		Thread.sleep(3000);
+		ob.findElement(By.name("loginEmail")).sendKeys(CONFIG.getProperty("defaultUsername"));
+		ob.findElement(By.name("loginPassword")).sendKeys(CONFIG.getProperty("defaultPassword"));
+		ob.findElement(By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']")).click();
 		Thread.sleep(5000);
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
-		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
-		ob.findElement(By.id(OR.getProperty("login_button"))).click();
 
 	}
 
@@ -966,7 +990,7 @@ public class TestBase {
 		// Finding the particular watch list and navigating to it
 		for (int i = 0; i < watchLists.size(); i++) {
 			if (watchLists.get(i).getText().equals(selectedWatchlistName)) {
-				watchLists.get(i).click();
+				jsClick(ob, watchLists.get(i));
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watch_list_details_heading")), 30);
 				break;
 			}

@@ -38,7 +38,7 @@ public class LoginTR extends TestBase {
 	public void waitForTRHomePage() throws InterruptedException {
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
-		browserWait.waitUntilText("Sign in with Project Neon");
+		browserWait.waitUntilText("Thomson Reuters","Project Neon");
 		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 	}
@@ -48,8 +48,8 @@ public class LoginTR extends TestBase {
 	 */
 	public void enterTRCredentials(String userName,
 			String password) {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
+		//ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		//waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
 		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
