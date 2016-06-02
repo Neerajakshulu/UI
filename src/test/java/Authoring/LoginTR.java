@@ -45,21 +45,24 @@ public class LoginTR extends TestBase {
 
 	/**
 	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
 	 */
 	public void enterTRCredentials(String userName,
-			String password) {
+			String password) throws InterruptedException {
 		//ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
 		//waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
 		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+		BrowserWaits.waitTime(2);
 	}
 
 	public void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
+		//ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
+		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))));
 		//waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 
 	}
 
