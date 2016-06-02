@@ -58,7 +58,7 @@ public class LoginTR extends TestBase {
 
 	public void clickLogin() throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
-		waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
+		//waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
 
 	}
