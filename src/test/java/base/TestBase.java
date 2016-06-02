@@ -150,7 +150,7 @@ public class TestBase {
 	// return extent;
 	// }
 
-	// Opening via Sauce Labs
+	// Env Status returns true scripts will run on Sauce labs otherwise run on local machine configurations
 	public void openBrowser() throws Exception {
 		logger.info("Env status-->"+StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
 		if(StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
@@ -174,8 +174,8 @@ public class TestBase {
 			} catch (Throwable t) {
 				logger.info("Page Load Timeout not supported in safari driver");
 			}
-		
-	}else {
+			//else part having local machine configuration
+	    }else {
 			if(CONFIG.getProperty("browserType").equals("FF")){
 				ob = new FirefoxDriver();
 			}

@@ -55,14 +55,13 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-		BrowserWaits.waitTime(2);
 	}
 
 	public void clickLogin() throws InterruptedException {
 		//ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))));
 		//waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
 
 	}
 
