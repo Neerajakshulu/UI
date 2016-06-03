@@ -154,33 +154,33 @@ public class TestBase {
 
 	// Opening via Sauce Labs
 
-//	public void openBrowser() throws Exception {
-//		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-//		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-//		logger.info("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
-//		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-//		logger.info("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
-//		logger.info("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
-//		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-//		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
-//		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-//		ob = new RemoteWebDriver(
-//				new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
-//				desiredCapabilities);
-//		String waitTime = CONFIG.getProperty("defaultImplicitWait");
-//		String pageWait = CONFIG.getProperty("defaultPageWait");
-//		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
-//		try {
-//			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
-//		} catch (Throwable t) {
-//			logger.info("Page Load Timeout not supported in safari driver");
-//		}
-//	}
+	public void openBrowser() throws Exception {
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+		logger.info("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
+		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+		logger.info("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
+		logger.info("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
+		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+		desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
+		desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+		ob = new RemoteWebDriver(
+				new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+				desiredCapabilities);
+		String waitTime = CONFIG.getProperty("defaultImplicitWait");
+		String pageWait = CONFIG.getProperty("defaultPageWait");
+		ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+		try {
+			ob.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
+		} catch (Throwable t) {
+			logger.info("Page Load Timeout not supported in safari driver");
+		}
+	}
 
 	// selenium RC/ Webdriver
 
 	// Opening the desired browser
-	public void openBrowser(){
+	/*public void openBrowser(){
 	if(CONFIG.getProperty("browserType").equals("FF")){
 		ob = new FirefoxDriver();
 	}
@@ -222,7 +222,7 @@ public class TestBase {
 	catch(Throwable t){
 		System.out.println("Page Load Timeout not supported in safari driver");
 	}
-}
+}*/
 
 	public void runOnSauceLabsFromLocal(String os,
 			String browser) throws Exception {
