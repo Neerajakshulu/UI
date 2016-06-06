@@ -34,7 +34,7 @@ public class SearchResultsPage extends TestBase {
 	public void clickOnPostTab() throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(4).click();
 		waitForAjax(ob);
 	}
 	/**
@@ -44,7 +44,7 @@ public class SearchResultsPage extends TestBase {
 	public void clickOnArticleTab() throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
 		waitForAjax(ob);
 	}
 

@@ -100,7 +100,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public void clickPeople() throws Exception {
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		BrowserWaits.waitTime(8);
 	}
 
