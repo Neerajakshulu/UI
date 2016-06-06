@@ -81,11 +81,11 @@ public class IAM002 extends TestBase {
 					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 					//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 					//
-					waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("TR_email_textBox")), 30);
-					ob.findElement(By.cssSelector(OR.getProperty("TR_email_textBox"))).clear();
-					ob.findElement(By.cssSelector(OR.getProperty("TR_email_textBox"))).sendKeys(
+					waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(
 							CONFIG.getProperty("defaultUsername").toUpperCase());
-					ob.findElement(By.cssSelector(OR.getProperty("TR_password_textBox"))).sendKeys(
+					ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
 							CONFIG.getProperty("defaultPassword"));
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				} else {// else: checking if user can login successfully using smallcase email address
