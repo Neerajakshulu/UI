@@ -8,7 +8,7 @@
 	</listeners>
 
 	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="Welcome01" />
+	<parameter name="password" value="bLz4be22{" />
 
 	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
@@ -153,7 +153,7 @@
 
 	<test name="Profile_Publish_A_Post_Count_Validation">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
-		<parameter name="password" value="Reddys@123" />
+		<parameter name="password" value="!r7yNlc@eYz8" />
 		<parameter name="myPost" value="Post for Testing Post count"></parameter>
 		<parameter name="postContent" value="my post content for post count "></parameter>
 		<classes>
@@ -163,7 +163,7 @@
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
 		<parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="1Platform" />
+		<parameter name="password" value="luFKme2D2\E" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -257,7 +257,7 @@
 
 	<test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
-		<parameter name="password" value="Welcome01" />
+		<parameter name="password" value="f!Z]t|B$0" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -267,7 +267,7 @@
 
 	<test name="Publish_post_timestamp_validation">
 		<parameter name="username" value="projectneon.test@gmail.com" />
-		<parameter name="password" value="Welcome01" />
+		<parameter name="password" value="UMJv*1yvA" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -290,7 +290,7 @@
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="1Platform" />
+		<parameter name="password" value="luFKme2D2\E" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
 		<parameter name="postContent" value="my post content for RecordView page " />
 		<classes>
