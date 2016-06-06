@@ -68,7 +68,7 @@ public class SearchProfile extends TestBase {
 	 */
 	public void clickPeople() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS.toString()), 90);

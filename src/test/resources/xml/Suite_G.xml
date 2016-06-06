@@ -15,7 +15,7 @@
 	<parameter name="addComments" value="Testing Comments"></parameter>
 	<parameter name="article" value="Biology"></parameter>
 	
-	<test name="Search2">
+	<!-- <test name="Search2">
 		<classes>
 			<class name="search.Search2"></class>
 		</classes>
@@ -291,7 +291,7 @@
 		<classes>
 			<class name="search.Search94"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- Profile Sanity Testcases -->
 	<test name="Validate_View_Profile">
@@ -341,8 +341,8 @@
 		</classes>
 	</test>
 
-	<!-- iam test cases -->
-	<test name="IAM002">
+	 <!-- iam test cases -->
+	 <!--<test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>
 		</classes>
@@ -366,7 +366,7 @@
 		</classes>
 	</test>
 
-	<!-- Watch list test cases -->
+	Watch list test cases
 
 	<test name="Watchlist004">
 		<classes>
@@ -425,7 +425,7 @@
 	</test>
 
 
-<!-- Notifications Test Cases -->
+Notifications Test Cases
 
 	<test name="Test F11">
 		<classes>
@@ -604,6 +604,6 @@
 		<classes>
 			<class name="Authoring.Authoring76"></class>
 		</classes>
-	</test>
+	</test> -->
 </suite>
 
