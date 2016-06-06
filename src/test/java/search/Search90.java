@@ -68,7 +68,7 @@ public class Search90 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
