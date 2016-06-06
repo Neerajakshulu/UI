@@ -489,18 +489,13 @@ public class ProfilePage extends TestBase {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
 		BrowserWaits.waitTime(4);
-		List<WebElement> buttons = ob.findElements(By
-				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()));
-		for (WebElement button : buttons) {
-
-			if (button.isDisplayed()) {
-
-				jsClick(ob, button);
-				break;
-			}
+		jsClick(ob,
+		ob.findElement(By
+				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString())));
+		
 		}
 
-	}
+	
 
 	/**
 	 * Method to validate various error messages while creating the post
@@ -545,10 +540,10 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void enterPostContent(String content) throws Exception {
-		waitForElementTobeClickable(ob,
+		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
