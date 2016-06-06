@@ -112,7 +112,7 @@ public class Search19 extends TestBase {
 					Assert.assertTrue(checkBoxDisplayed == 5);
 					test.log(LogStatus.PASS, String.format("default filters displayed for %s is 5", entry.getKey()));
 				} catch (Throwable t) {
-					test.log(LogStatus.PASS,
+					test.log(LogStatus.FAIL,
 							String.format("default filters displayed for %s is not equal to 5", entry.getKey()));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
@@ -141,7 +141,7 @@ public class Search19 extends TestBase {
 					Assert.assertTrue(checkBoxDisplayed == 10);
 					test.log(LogStatus.PASS, String.format("More link should load 10 filters for %s", entry.getKey()));
 				} catch (Throwable t) {
-					test.log(LogStatus.PASS, String.format("More link not loding with 10 filters for", entry.getKey()));
+					test.log(LogStatus.FAIL, String.format("More link not loding with 10 filters for", entry.getKey()));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
@@ -170,7 +170,7 @@ public class Search19 extends TestBase {
 					Assert.assertTrue(checkBoxDisplayed == 5);
 					test.log(LogStatus.PASS, String.format("Less link should load 5 filters for %s", entry.getKey()));
 				} catch (Throwable t) {
-					test.log(LogStatus.PASS, String.format("Less link not loding with 5 filters for", entry.getKey()));
+					test.log(LogStatus.FAIL, String.format("Less link not loding with 5 filters for", entry.getKey()));
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
@@ -184,7 +184,7 @@ public class Search19 extends TestBase {
 
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.PASS, "Something went wrong");// extent reports
+			test.log(LogStatus.FAIL, "Something went wrong");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

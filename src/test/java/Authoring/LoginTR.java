@@ -38,18 +38,19 @@ public class LoginTR extends TestBase {
 	public void waitForTRHomePage() throws InterruptedException {
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
-		browserWait.waitUntilText("Sign in with Project Neon");
+		browserWait.waitUntilText("Thomson Reuters","Project Neon");
 		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 	}
 
 	/**
 	 * Method for enter Application Url and enter Credentials
+	 * @throws InterruptedException 
 	 */
 	public void enterTRCredentials(String userName,
-			String password) {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
+			String password) throws InterruptedException {
+		//ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		//waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
 		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
 		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
@@ -57,8 +58,9 @@ public class LoginTR extends TestBase {
 	}
 
 	public void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
-		waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
+		//ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
+		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))));
+		//waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
 
 	}

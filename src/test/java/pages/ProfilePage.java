@@ -100,7 +100,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public void clickPeople() throws Exception {
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		BrowserWaits.waitTime(8);
 	}
 
@@ -289,19 +289,18 @@ public class ProfilePage extends TestBase {
 	public void validateOwnrProfile() throws Exception {
 		boolean otherProfileEdit = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
-		// System.out.println("profile edit-->"+otherProfileEdit);
+		logger.info("profile edit-->"+otherProfileEdit);
 		if (!otherProfileEdit) {
 			throw new Exception("Edit option should be available for own profile");
 		}
 
 		String profileName = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
-		// System.out.println("profile name-->"+profileName);
-
-		String profileImageText = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img"))
-				.getAttribute("title");
-		// System.out.println("profile image neame-->"+profileImageText);
+		logger.info("profile name-->"+profileName);
+		String profileImageText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img"))
+									.getAttribute("title");
+		logger.info("profile image text-->"+profileImageText);
+		
 		Assert.assertEquals(profileName, profileImageText);
 
 	}
