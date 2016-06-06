@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import pages.PageFactory;
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 import base.TestBase;
@@ -59,7 +60,7 @@ public class IAM021 extends TestBase {
 			
 			//
 			//BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("TR_email_textBox")), 30);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
@@ -99,7 +100,7 @@ public class IAM021 extends TestBase {
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
-			System.out.println("maximize() command not supported in Selendroid");
+			ErrorUtil.addVerificationFailure(t);
 		}
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
