@@ -67,26 +67,29 @@ public class Search90 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			selectSearchTypeFromDropDown("Articles");
+			//selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(8000);
-
+			ob.findElement(By.partialLinkText("Article")).click();
 			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
 			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			
+		    //waitForElementTobeClickable(ob, By.xpath("//a[@class='wui-side-menu__link']").partialLinkText("Article"), 4);
 			waitForElementTobeVisible(
 					ob,
-					By.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul[@class='dropdown-menu']"),
+					By.xpath("//div[@class='search-sort-dropdown dropdown open']/ul[@class='dropdown-menu search-sort-dropdown__menu']"),
 					4);
 			Thread.sleep(2000);
 			List<WebElement> sortByValuesList = ob.findElements(By
-					.xpath("//div[@class='btn-group search-sort-dropdown dropdown open']/ul/li"));
+					.xpath("//div[@class='search-sort-dropdown dropdown open']/ul/li"));
 			List<String> expectedDropDownValues = Arrays.asList(new String[] {"Relevance", "Times Cited",
 					"Publication Date (Newest)", "Publication Date (Oldest)"});
 			List<String> actualDropDownValues = new ArrayList<String>();

@@ -62,16 +62,16 @@ public class Search48 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope active']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link']"), 30);
 			Thread.sleep(2000);
-			String text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			String text = ob.findElement(By.xpath("//a[@class='wui-side-menu__link']")).getText();
 			System.out.println(text);
 
 			if (!StringContains(text, "All")) {
