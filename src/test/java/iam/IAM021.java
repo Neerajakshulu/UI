@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ExtentManager;
 import util.TestUtil;
 import base.TestBase;
@@ -55,15 +56,18 @@ public class IAM021 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
+			
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("TR_email_textBox")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			//
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
 
 			Set<String> myset = ob.getWindowHandles();

@@ -4,11 +4,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -30,12 +32,7 @@ public class IAM003 extends TestBase {
 
 		extent = ExtentManager.getReporter(filePath);
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		// String p1=returnExcelPath(this.getClass().getSimpleName().charAt(9));
-		// int p2=Integer.parseInt(this.getClass().getSimpleName().charAt(10)+"");
-		// System.out.println(1);
-		// System.out.println(xlRead(p1,p2,1));
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		// System.out.println(xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),this.getClass().getSimpleName().charAt(10),1));
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
 				.assignCategory("IAM");
@@ -70,25 +67,28 @@ public class IAM003 extends TestBase {
 			}
 			clearCookies();
 
-			String email = "amneetsingh100@gmail.com";
-			String password = "Transaction@2";
+			String email = "linkedinloginid@gmail.com";
+			String password = "1Pproject";
 
 			// Navigate to LI login page
 			 ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
+			 //BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			//
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
+			//BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 15);
-
-			if (!checkElementPresence("apps")) {
+			
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 15);
+			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent reports
 				status = 2;// excel
@@ -97,6 +97,7 @@ public class IAM003 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_existing_LI_User_credentials_not_working_fine")));// screenshot
+				closeBrowser();
 
 			}
 
@@ -111,6 +112,7 @@ public class IAM003 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_incorrect_profile_name_getting_displayed")));// screenshot
+				closeBrowser();
 
 			}
 
@@ -125,6 +127,7 @@ public class IAM003 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_user_unable_to_logout_successfully")));// screenshot
+				closeBrowser();
 
 			}
 

@@ -64,8 +64,8 @@ public class Search49 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			 //ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -74,7 +74,7 @@ public class Search49 extends TestBase {
 			BrowserWaits.waitTime(4);
 			Thread.sleep(2000);
 			String all_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"))
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
 					.getText();
 			int all_num = Integer.parseInt(all_text.substring(3, 4));
 			System.out.println(all_num);
@@ -83,7 +83,7 @@ public class Search49 extends TestBase {
 
 			String articles_text = ob
 					.findElement(
-							By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]"))
+							By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Articles')]"))
 					.getText();
 			int articles_num = Integer.parseInt(articles_text.substring(8, 9));
 			System.out.println(articles_num);
@@ -91,7 +91,7 @@ public class Search49 extends TestBase {
 			System.out.println(cond2);
 
 			String patents_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Patents')]"))
 					.getText();
 			int patents_num = Integer.parseInt(patents_text.substring(7, 8));
 			System.out.println(patents_num);
@@ -99,7 +99,7 @@ public class Search49 extends TestBase {
 			System.out.println(cond3);
 
 			String people_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]"))
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'People')]"))
 					.getText();
 			int people_num = Integer.parseInt(people_text.substring(6, 7));
 			System.out.println(people_num);
@@ -107,7 +107,7 @@ public class Search49 extends TestBase {
 			System.out.println(cond4);
 
 			String posts_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"))
+					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Posts')]"))
 					.getText();
 			int posts_num = Integer.parseInt(posts_text.substring(5, 6));
 			System.out.println(posts_num);

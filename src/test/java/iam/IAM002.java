@@ -78,25 +78,25 @@ public class IAM002 extends TestBase {
 
 				// if :checking if user can login with uppercase email address
 				if (iterator.next().equals("upperCase")) {
-					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-					ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+					//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 					//
-					waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
-					ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-					ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(
+					waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(
 							CONFIG.getProperty("defaultUsername").toUpperCase());
-					ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(
+					ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
 							CONFIG.getProperty("defaultPassword"));
-					ob.findElement(By.id(OR.getProperty("login_button"))).click();
+					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				} else {// else: checking if user can login successfully using smallcase email address
 
 					login();
 				}
 
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 10);
+				//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 10);
 
 				// Verify that login is successful
-				if (!checkElementPresence("apps")) {
+				if (!checkElementPresence("ul_name")) {
 
 					test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");// extent reports
 					status = 2;// excel
@@ -105,6 +105,7 @@ public class IAM002 extends TestBase {
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 											+ "_existing_TR_credentials_not_working_fine")));// screenshot
+					closeBrowser();
 
 				}
 
@@ -123,6 +124,7 @@ public class IAM002 extends TestBase {
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 											+ "_incorrect_profile_name_getting_displayed")));// screenshot
+					closeBrowser();
 
 				}
 
@@ -137,6 +139,7 @@ public class IAM002 extends TestBase {
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 											+ "_user_unable_to_logout_successfully")));// screenshot
+					closeBrowser();
 
 				}
 

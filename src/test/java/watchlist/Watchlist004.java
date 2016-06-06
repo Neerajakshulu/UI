@@ -81,18 +81,23 @@ public class Watchlist004 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			login();
+			
+			//loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+			logger.info("New WatchList Name : "+newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
+			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OR.getProperty("searchArticle"))).click();
+			//selectArticlefromSearchResultTypeMenu("Articles");
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='col-xs-12 col-md-9']"), 60);
 			// Getting watch button list for articles
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watching 2 articles to a particular watch list
@@ -105,6 +110,7 @@ public class Watchlist004 extends TestBase {
 
 			// Selecting the document name
 			String firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			logger.info("First Document Name : "+firstdocumentName);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

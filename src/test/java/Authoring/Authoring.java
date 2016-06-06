@@ -101,9 +101,9 @@ public class Authoring extends TestBase {
 
 	public void clickAddCommentButton() throws InterruptedException {
 		scrollingToElementofAPage();
-		waitForElementTobeClickable(ob, By.xpath("//button[@class='btn webui-btn-primary comment-add-button']"), 60);
+		waitForElementTobeClickable(ob, By.xpath("//button[@ng-click='createComment()']"), 60);
 		WebElement addCommentElement = ob.findElement(By
-				.xpath("//button[@class='btn webui-btn-primary comment-add-button']"));
+				.xpath("//button[@ng-click='createComment()']"));
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
 		waitForAjax(ob);
