@@ -125,8 +125,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * Method to click on Home link in header
 	 */
 	public void clickOnHomeLink() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_HOME_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_HOME_LINK.toString())).click();
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS.toString()), 180);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS.toString())).click();
 	}
 
 	/**
@@ -135,8 +135,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	public void clickOnPublishAPostLink() {
 
 		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK.toString()), 180);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_LINK.toString())).click();
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_CSS.toString()), 180);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_CSS.toString())).click();
 	}
 
 	/**
