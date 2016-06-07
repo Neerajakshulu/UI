@@ -168,12 +168,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK("//ne-post-results//a[@class='ng-binding']"),
 	HOME_PROJECT_COMMENTS_INSERT_LINK_CSS("button[name='insertLink']"),
 	HOME_PROJECT_RECORD_COMMENTS_DIV_CSS("div[class='comment-list-wrapper'] div[class='ng-scope'] div[class='comment-content'] a"),
-	
-	//HOME PAGE
-	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
-	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents")
 
-	;
+	// HOME PAGE
+	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
+	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents"),
+	NEWSFEED_FEATURED_POST_XPATH("//div[@class='wui-card wui-card--featured-post']");
 
 	private String locator;
 
