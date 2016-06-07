@@ -65,9 +65,9 @@ public class Search32 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			 ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+         	ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 //ob.navigate().to(host);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -76,11 +76,11 @@ public class Search32 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[class^='content-type-selector ng-scope']"), 30);
+			waitForElementTobeVisible(ob, By.partialLinkText("Articles"), 30);
 			Thread.sleep(2000);
 
 			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			ob.findElement(By.partialLinkText("Articles")).click();
 			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 30);
 			Thread.sleep(2000);
 
