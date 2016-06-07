@@ -6,8 +6,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="uiautomationuser1@gmail.com" />
-	<parameter name="password" value="fWs0l)*9aMf" />
+	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="password" value="Neon@123" />
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
@@ -341,7 +341,7 @@
 		</classes>
 	</test>
 
-	 <!-- iam test cases -->
+	 <!-- IAM test cases -->
 	 <test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>
@@ -366,7 +366,7 @@
 		</classes>
 	</test>
 
-	<!-- Watch list test cases -->
+	<!-- Watchlist test cases -->
 
 	<test name="Watchlist004">
 		<classes>
@@ -391,8 +391,6 @@
 			<class name="watchlist.Watchlist007"></class>
 		</classes>
 	</test>
-
-
 
 	<test name="Watchlist014">
 		<classes>
@@ -463,8 +461,9 @@
 			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
-
-<test name="Authoring43">
+	
+	<!-- Authoring Test cases -->
+	<test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
 		</classes>

@@ -7,8 +7,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="bLz4be22{" />
+	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="password" value="Neon@123" />
 
 	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
