@@ -61,17 +61,19 @@ public class Search91 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
+			//selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.partialLinkText("Patents"), 4);
+			Thread.sleep(7000);
+			ob.findElement(By.partialLinkText("Patents")).click();
 			
-
 			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 4);
 			Thread.sleep(8000);
 			String defaultSortByValue = ob.findElement(By.xpath("//button[@id='single-button']")).getText();

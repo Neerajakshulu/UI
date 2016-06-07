@@ -136,8 +136,8 @@
 
 				<configuration>
 					<suiteXmlFiles>
-						<!-- <suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile> -->
-						<suiteXmlFile>src/test/resources/xml/Suite_G.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile>
+						<!-- <suiteXmlFile>src/test/resources/xml/Suite_G.xml</suiteXmlFile> -->
 					</suiteXmlFiles>
 
 					<systemProperties>

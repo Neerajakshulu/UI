@@ -6,8 +6,8 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="uiautomationuser1@gmail.com" />
-	<parameter name="password" value="fWs0l)*9aMf" />
+	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="password" value="Neon@123" />
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="Percutaneous placement valve stent" />
 	<parameter name="postName" value="Unique Post for Automation" />
@@ -24,18 +24,6 @@
 	<test name="Search3">
 		<classes>
 			<class name="search.Search3"></class>
-		</classes>
-	</test>
-
-	<test name="Search45">
-		<classes>
-			<class name="search.Search45"></class>
-		</classes>
-	</test>
-
-	<test name="Search46">
-		<classes>
-			<class name="search.Search46"></class>
 		</classes>
 	</test>
 
@@ -82,11 +70,6 @@
 		</classes>
 	</test>
 
-	<test name="Search50">
-		<classes>
-			<class name="search.Search50"></class>
-		</classes>
-	</test>
 
 	<test name="Search54">
 		<classes>
@@ -122,12 +105,6 @@
 	<test name="Search60">
 		<classes>
 			<class name="search.Search60"></class>
-		</classes>
-	</test>
-
-	<test name="Search51">
-		<classes>
-			<class name="search.Search51"></class>
 		</classes>
 	</test>
 
@@ -173,12 +150,6 @@
 		</classes>
 	</test>
 
-	<test name="Search52">
-		<classes>
-			<class name="search.Search52"></class>
-		</classes>
-	</test>
-
 	<test name="Search56">
 		<classes>
 			<class name="search.Search56"></class>
@@ -205,11 +176,6 @@
 		</classes>
 	</test>
 
-	<test name="Search53">
-		<classes>
-			<class name="search.Search53"></class>
-		</classes>
-	</test>
 
 	<test name="Search57">
 		<classes>
@@ -341,7 +307,7 @@
 		</classes>
 	</test>
 
-	 <!-- iam test cases -->
+	 <!-- IAM test cases -->
 	 <test name="IAM002">
 		<classes>
 			<class name="iam.IAM002"></class>
@@ -366,7 +332,7 @@
 		</classes>
 	</test>
 
-	<!-- Watch list test cases -->
+	<!-- Watchlist test cases -->
 
 	<test name="Watchlist004">
 		<classes>
@@ -391,8 +357,6 @@
 			<class name="watchlist.Watchlist007"></class>
 		</classes>
 	</test>
-
-
 
 	<test name="Watchlist014">
 		<classes>
@@ -463,8 +427,9 @@
 			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
-
-<test name="Authoring43">
+	
+	<!-- Authoring Test cases -->
+	<test name="Authoring43">
 		<classes>
 			<class name="Authoring.Authoring43"></class>
 		</classes>

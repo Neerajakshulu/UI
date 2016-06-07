@@ -59,6 +59,9 @@ public class Search99 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
+			
+			String email = "neonfbook@gmail.com";
+			String password = "1Pproject";
 
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
@@ -67,9 +70,10 @@ public class Search99 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
-			// Searching for people
+	      waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
+			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("S");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
@@ -78,18 +82,20 @@ public class Search99 extends TestBase {
 			Thread.sleep(5000);
 
 			// checking for Default sort option
-			String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
+//			String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
+//					.getText();
+			String defaultSort = ob.findElement(By.xpath("//button[@id='single-button']"))
 					.getText();
 			System.out.println(defaultSort);
 
 			// checking for different options available in sort
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")), 35);
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 35);
+			ob.findElement(By.xpath("//button[@id='single-button']")).click();
 			Thread.sleep(2000);
-			String text = ob.findElement(By.xpath("//ul[@class='dropdown-menu' and @role='menu']")).getText();
+			String text = ob.findElement(By.xpath("//ul[@class='dropdown-menu search-sort-dropdown__menu' and @role='menu']")).getText();
 			System.out.println(text);
 
-			if (defaultSort.equals("Relevance")) {
+			if (defaultSort.equals("Sort by: Relevance")) {
 				test.log(LogStatus.PASS, "Relevance is the default sort in people results page");
 
 			} else {
