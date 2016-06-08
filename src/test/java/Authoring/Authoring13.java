@@ -103,7 +103,7 @@ public class Authoring13 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
@@ -132,14 +132,14 @@ public class Authoring13 extends TestBase {
 			String fbpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on Facebook");
-			waitForElementTobeVisible(ob,
+			/*waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			new Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString()))).click().build().perform();
+					.toString()))).click().build().perform();*/
 			
 			String PARENT_WINDOW = ob.getWindowHandle();
-			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK.toString()), 40);
-			new Actions(ob).moveToElement(ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK.toString()))).click().build().perform();
+			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
+			new Actions(ob).moveToElement(ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()))).click().build().perform();
 			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
 			
 			waitForNumberOfWindowsToEqual(ob, 2);

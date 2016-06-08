@@ -29,21 +29,21 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_WATCHLIST_MORE_BUTTON_XPATH("//button[@class='btn webui-btn-primary']"),
 	HOME_PROJECT_NEON_ARTICLE_SEARCH_MORE_BUTTON_CSS("button[class='btn webui-btn-primary ng-binding']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS("button[class='btn btn-default pub-action-btn dropdown-toggle']"),
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK("Share on Twitter"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS("i[class='fa fa-twitter share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_USERNAME_CSS("input#username_or_email"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_PASSWORD_CSS("input#password"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS("input[value='Log in and Tweet']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS("textarea#status"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS("input[value='Tweet']"),
 
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK("Share on LinkedIn"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS("i[class='fa fa-linkedin share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS("input#session_key-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS("input#session_password-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS("input[name='authorize']"),
 
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS("input[class='btn-primary'][value='Share']"),
 
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK("Share on Facebook"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS("i[class='fa fa-facebook share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS("input#pass"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS("input[value='Log In']"),
@@ -84,7 +84,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS("button[ng-click*='appreciateThis']"),
 	HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS("a[redirect-state='profile.post'] button[id='posting']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CSS("div[class='modal-content']"),
-	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH("//div[@class='modal-body ng-scope']//a[@class='ng-binding']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH("//div[@class='modal-content']/descendant::a[@class='ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("div[class='modal-content'] input[placeholder='Add a title']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS("div[class='modal-content'] div[id*='taTextElement']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg'] p"),
@@ -117,7 +117,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='ne-profile-object-info'] a"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-profile-object-info'] div[class^='wui-descriptor']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='full-record'] div[class*='timestamp-wrapper'] div"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']s"),
 
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
@@ -149,7 +149,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
-	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("div[class='full-record'] button[class*='webui-icon webui-icon-flag']"),
+	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag']"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("div[class*='time-stamp']"),
@@ -168,12 +168,13 @@ public enum OnePObjectMap {
 	HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK("//ne-post-results//a[@class='ng-binding']"),
 	HOME_PROJECT_COMMENTS_INSERT_LINK_CSS("button[name='insertLink']"),
 	HOME_PROJECT_RECORD_COMMENTS_DIV_CSS("div[class='comment-list-wrapper'] div[class='ng-scope'] div[class='comment-content'] a"),
-	
-	//HOME PAGE
-	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
-	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents")
 
-	;
+	// HOME PAGE
+	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
+	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents"),
+	NEWSFEED_FEATURED_POST_XPATH("//div[@class='wui-card wui-card--featured-post']"),
+	NEWSFEED_TRENDINDING_MENU_XPATH("//ul[@class='nav nav-tabs']//tab-heading[contains(.,'FILTER_TYPE')]"),
+	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li");
 
 	private String locator;
 

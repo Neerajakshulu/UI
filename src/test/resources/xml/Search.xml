@@ -269,20 +269,7 @@
 		</classes>
 	</test>
 
-
-	<test name="Test B45">
-		<classes>
-			<class name="search.Search45"></class>
-		</classes>
-	</test>
-
-	<test name="Test B46">
-		<classes>
-			<class name="search.Search46"></class>
-		</classes>
-	</test>
-
-	<test name="Test B47">
+		<test name="Test B47">
 		<classes>
 			<class name="search.Search47"></class>
 		</classes>
@@ -299,31 +286,7 @@
 			<class name="search.Search49"></class>
 		</classes>
 	</test>
-
-	<test name="Test B50">
-		<classes>
-			<class name="search.Search50"></class>
-		</classes>
-	</test>
-
-	<test name="Test B51">
-		<classes>
-			<class name="search.Search51"></class>
-		</classes>
-	</test>
-
-	<test name="Test B52">
-		<classes>
-			<class name="search.Search52"></class>
-		</classes>
-	</test>
-
-	<test name="Test B53">
-		<classes>
-			<class name="search.Search53"></class>
-		</classes>
-	</test>
-
+	
 	<test name="Test B54">
 		<classes>
 			<class name="search.Search54"></class>

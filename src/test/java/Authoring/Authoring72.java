@@ -71,15 +71,15 @@ public class Authoring72 extends TestBase {
 			pf.getAuthoringInstance(ob).chooseArticle("");
 			
 			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
-			test.log(LogStatus.INFO, "Added external link to the comment");
+			test.log(LogStatus.INFO, "Added internal link to the comment");
 			
 			
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForLink(URL));
-				test.log(LogStatus.PASS, "Comment is added with external link");
+				test.log(LogStatus.PASS, "Comment is added with inernal link");
 				
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Comment is added with external link");
+				test.log(LogStatus.FAIL, "Comment is added with internal link");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

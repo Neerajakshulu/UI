@@ -64,56 +64,55 @@ public class Notifications0002 extends NotificationsTestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			logger.info("test");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			if (user1 == null) {
+				// login with default user
 				pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 						CONFIG.getProperty("defaultPassword"));
-				
 			} else {
 				// login with user1
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			}
 			pf.getLoginTRInstance(ob).clickLogin();
-			
-			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEWSFEED_SHAREANIDEA_LINK_XPATH);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_SHAREANIDEA_LINK_XPATH.toString()), 60);
-			test.log(LogStatus.INFO, "user Logged in  successfully");
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60);
+			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");
 			List<WebElement> elements = null;
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while (scrollCount < 30) {
-				jse.executeScript("scroll(0,10000)");
-				BrowserWaits.waitTime(3);
 				elements = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_MOST_VIEWED_ARTICLES_XPATH.toString()));
 				if (elements.size() > 0)
 					break;
+				jse.executeScript("scroll(0,10000)");
+				BrowserWaits.waitTime(3);
 				scrollCount++;
 			}
 			try {
 				Assert.assertTrue(elements.size() >= 1);
-				test.log(LogStatus.INFO, "user is able to see most viewed documents in home page");
-				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+				test.log(LogStatus.INFO, "User is able to see most viewed documents in home page");
+				test.log(LogStatus.INFO, "PASS");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "user is not able to see most viewed documents in home page");// extent
 				// reports
-				test.log(LogStatus.INFO, "Error--->" + t);
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
+				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				status = 2;// excel
-				test.log(LogStatus.INFO,
+				test.log(LogStatus.FAIL,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "_user is not able to see most viewed documents in home pagee")));// screenshot
 				closeBrowser();
 			}
 		} catch (Throwable t) {
-			//test.log(LogStatus.FAIL, "Something happened");// extent
-			test.log(LogStatus.INFO, "Error--->" + t);
+			// test.log(LogStatus.FAIL, "Something happened");// extent
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test
+			test.log(LogStatus.FAIL, "Snapshot below: " + test
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}

@@ -104,7 +104,7 @@ public class Authoring11 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
@@ -134,18 +134,19 @@ public class Authoring11 extends TestBase {
 		try {
 			new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			test.log(LogStatus.INFO, "Sharing Article on Twitter");
-			waitForElementTobeClickable(ob,
+			/*waitForElementTobeClickable(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString())));
+					.toString())));*/
 			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			
 			String PARENT_WINDOW = ob.getWindowHandle();
 			String rvPageurl = ob.getCurrentUrl();
 			waitForElementTobeVisible(ob,
-					By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString()),
+					By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()),
 					80);
 			jsClick(ob, ob.findElement(By
-					.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString())));
+					.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString())));
 			waitForNumberOfWindowsToEqual(ob, 2);
 			maximizeWindow();
 
@@ -240,8 +241,11 @@ public class Authoring11 extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		waitForPageLoad(ob);
+		jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
+		waitForAjax(ob);
+		BrowserWaits.waitTime(4);
+		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		BrowserWaits.waitTime(4);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {

@@ -103,7 +103,7 @@ public class Authoring12 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
@@ -132,16 +132,16 @@ public class Authoring12 extends TestBase {
 			String lipassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on LinkedIn");
-			waitForElementTobeVisible(ob,
+			/*waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString())));
+					.toString())));*/
 			String PARENT_WINDOW = ob.getWindowHandle();
-			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK.toString()), 40);
-			new Actions(ob).moveToElement(ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK.toString()))).click().build().perform();
+			waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
+			new Actions(ob).moveToElement(ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()))).click().build().perform();
 			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-			ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']"))
+			ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']"))
 					.click();
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
@@ -160,10 +160,10 @@ public class Authoring12 extends TestBase {
 					ob.switchTo().window(PARENT_WINDOW);
 					waitForElementTobeVisible(
 							ob,
-							By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+							By.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 							40);
 					jsClick(ob, ob.findElement(By
-							.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+							.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 				}
 			}
 
