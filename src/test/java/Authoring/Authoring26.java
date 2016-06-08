@@ -137,7 +137,7 @@ public class Authoring26 extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 180);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
 

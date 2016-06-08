@@ -66,14 +66,14 @@ public class SearchResultsPage extends TestBase {
 				profileName = records.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_post_author_css")))
 						.getText();
-				String title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+				String title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member"))
 				{
 				if (!profileName.equalsIgnoreCase(currentUserName)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
 					isFound = true;
 					break;
 				}
@@ -104,7 +104,7 @@ public class SearchResultsPage extends TestBase {
 
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
-				title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+				title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member")) {
 					profileName = records.get(i)
@@ -127,7 +127,7 @@ public class SearchResultsPage extends TestBase {
 					isFound = true;
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
 					waitForPageLoad(ob);
 					break;
 				}
@@ -161,11 +161,11 @@ public class SearchResultsPage extends TestBase {
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				postTitle = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).getText();
+						.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).getText();
 				if (postTitle.equals(title)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
 					isFound = true;
 					break;
 				}
