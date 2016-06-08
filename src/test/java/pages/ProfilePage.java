@@ -1213,7 +1213,7 @@ public class ProfilePage extends TestBase {
 		String likeCount = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).getText();
 		return Integer.parseInt(likeCount);
-	}
+	} 
 
 	/**
 	 * Method to validate Post TimeStamp
