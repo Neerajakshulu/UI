@@ -70,7 +70,7 @@ public class Authoring53 extends TestBase {
 			pf.getHFPageInstance(ob).searchForText("sample");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
-			pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
+			//pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnLI(liusername, lipassword);
 			BrowserWaits.waitTime(6);
 			logout();

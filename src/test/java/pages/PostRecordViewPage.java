@@ -49,7 +49,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on Facebook link under share menu in post record view
 	 */
 	public void clickOnFacebookUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS.toString()), 180);
 		jsClick(ob,
@@ -60,7 +60,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on LinkedIn Link under share menu in post record view
 	 */
 	public void clickOnLinkedInUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS.toString()), 180);
 		jsClick(ob,
@@ -71,7 +71,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on Twitter link under share menu in post record view
 	 */
 	public void clickOnTwitterUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS.toString()), 180);
 		jsClick(ob,
@@ -501,7 +501,7 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));*/
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS);
 		waitForNumberOfWindowsToEqual(ob, 2);
@@ -538,7 +538,7 @@ public class PostRecordViewPage extends TestBase {
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));*/
 		String PARENT_WINDOW = ob.getWindowHandle();
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS);
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 		ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']"))
@@ -581,7 +581,7 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
 				.toString())));*/
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		String rvPageurl = ob.getCurrentUrl();
 		pf.getBrowserActionInstance(ob)

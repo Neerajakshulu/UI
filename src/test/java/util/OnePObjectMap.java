@@ -117,7 +117,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='ne-profile-object-info'] a"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-profile-object-info'] div[class^='wui-descriptor']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']s"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
 
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),

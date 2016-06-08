@@ -143,10 +143,10 @@ public class Authoring11 extends TestBase {
 			String PARENT_WINDOW = ob.getWindowHandle();
 			String rvPageurl = ob.getCurrentUrl();
 			waitForElementTobeVisible(ob,
-					By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()),
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()),
 					80);
 			jsClick(ob, ob.findElement(By
-					.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString())));
+					.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString())));
 			waitForNumberOfWindowsToEqual(ob, 2);
 			maximizeWindow();
 

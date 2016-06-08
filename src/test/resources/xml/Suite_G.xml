@@ -500,8 +500,8 @@
 	</test>
 	
 	<test name="Authoring10">
-		<parameter name="username" value="USERNAME1" />
-		<parameter name="password" value="PASSWORD1" />
+		<parameter name="username" value="LOGINUSERNAME1" />
+		<parameter name="password" value="LOGINPASSWORD1" />
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>

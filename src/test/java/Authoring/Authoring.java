@@ -280,7 +280,7 @@ public class Authoring extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")).click();
 		waitForPageLoad(ob);
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
 		BrowserWaits.waitTime(10);
