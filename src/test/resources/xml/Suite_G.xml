@@ -27,18 +27,6 @@
 		</classes>
 	</test>
 
-	<test name="Search45">
-		<classes>
-			<class name="search.Search45"></class>
-		</classes>
-	</test>
-
-	<test name="Search46">
-		<classes>
-			<class name="search.Search46"></class>
-		</classes>
-	</test>
-
 	<test name="Search58">
 		<classes>
 			<class name="search.Search58"></class>
@@ -82,11 +70,6 @@
 		</classes>
 	</test>
 
-	<test name="Search50">
-		<classes>
-			<class name="search.Search50"></class>
-		</classes>
-	</test>
 
 	<test name="Search54">
 		<classes>
@@ -122,12 +105,6 @@
 	<test name="Search60">
 		<classes>
 			<class name="search.Search60"></class>
-		</classes>
-	</test>
-
-	<test name="Search51">
-		<classes>
-			<class name="search.Search51"></class>
 		</classes>
 	</test>
 
@@ -173,12 +150,6 @@
 		</classes>
 	</test>
 
-	<test name="Search52">
-		<classes>
-			<class name="search.Search52"></class>
-		</classes>
-	</test>
-
 	<test name="Search56">
 		<classes>
 			<class name="search.Search56"></class>
@@ -205,11 +176,6 @@
 		</classes>
 	</test>
 
-	<test name="Search53">
-		<classes>
-			<class name="search.Search53"></class>
-		</classes>
-	</test>
 
 	<test name="Search57">
 		<classes>
