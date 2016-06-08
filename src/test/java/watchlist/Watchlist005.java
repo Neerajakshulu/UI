@@ -201,7 +201,7 @@ public class Watchlist005 extends TestBase {
 				}
 			} catch (NoSuchElementException e) {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 

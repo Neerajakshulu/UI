@@ -1121,13 +1121,23 @@ public class TestBase {
 	 */
 	public void loginAsSpecifiedUser(String emailId,
 			String password) throws Exception {
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
+		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 180);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(emailId);
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("login_button"))));
+		*/
+		
+		
+		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		Thread.sleep(3000);
+		ob.findElement(By.name("loginEmail")).sendKeys(emailId);
+		ob.findElement(By.name("loginPassword")).sendKeys(password);
+		ob.findElement(By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']"))
+				.click();
+		Thread.sleep(5000);
 
 	}
 
