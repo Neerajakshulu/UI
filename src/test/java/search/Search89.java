@@ -65,27 +65,31 @@ public class Search89 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
+			//selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.partialLinkText("Patents"), 4);
+			Thread.sleep(7000);
+			ob.findElement(By.partialLinkText("Patents")).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 
 			// Navigating to record view page
+			
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(8000);
 
 			String titleName = "";
 			try {
 
-				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='record-heading ng-binding']")).size() != 0;
-				titleName = ob.findElement(By.xpath("//div/h2[@class='record-heading ng-binding']")).getText();
+				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).size() != 0;
+				titleName = ob.findElement(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).getText();
 				if (titlePresent) {
 					test.log(LogStatus.PASS, "Title is present in patent record view page");
 				} else {
@@ -99,21 +103,22 @@ public class Search89 extends TestBase {
 
 			try {
 
-				List<WebElement> detailsLink = ob.findElements(By.linkText("Details"));
+				List<WebElement> detailsLink = ob.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
-				ob.findElement(By.linkText("Details")).click();
+				ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).click();
+				//ob.findElement(By.linkText("Details")).click();
 				Thread.sleep(15000);
 
 				if (detailsLink.size() != 0) {
 
-					test.log(LogStatus.PASS, "Details link is present in the record view page");
+					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
 				} else {
-					test.log(LogStatus.FAIL, "Deatils link is displayed multiple times in the record view page");
+					test.log(LogStatus.FAIL, "View in Thomson Innovation is displayed multiple times in the record view page");
 				}
 			} catch (NoSuchElementException e) {
 
 				status = 2;
-				test.log(LogStatus.FAIL, "Details link is not displayed");// extent
+				test.log(LogStatus.FAIL, "View in Thomson Innovation link is not displayed");// extent
 				return;
 			}
 
@@ -140,7 +145,7 @@ public class Search89 extends TestBase {
 			} catch (NoSuchElementException e) {
 
 				status = 2;
-				test.log(LogStatus.FAIL, "Details link is not working properly");// extent
+				test.log(LogStatus.FAIL, "View in Thomson Innovation link is not working properly");// extent
 			}
 
 			closeBrowser();
