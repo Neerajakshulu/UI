@@ -350,7 +350,7 @@ public class ProfilePage extends TestBase {
 
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,
-				metadata[3] + RandomStringUtils.randomAlphabetic(3));
+				metadata[3]);
 	}
 
 	/**
@@ -373,7 +373,7 @@ public class ProfilePage extends TestBase {
 	public void validateProfileMetadata() throws Exception {
 		String country = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(0).getText();
-		System.out.println("country-->" + country);
+		logger.info("country-->" + country);
 		if (country.contains(metadata[3])) {
 			throw new Exception("profile meta data not updated");
 		}
