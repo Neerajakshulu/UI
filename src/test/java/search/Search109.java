@@ -58,13 +58,13 @@ public class Search109 extends TestBase {
 		try {
 
 			String search_query = "biology";
-
+		
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -76,18 +76,18 @@ public class Search109 extends TestBase {
 			waitForAjax(ob);
 			Thread.sleep(2000);
 			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
-			content_type_tiles.get(2).click();
+					.xpath("//*[contains(@class,'wui-side-menu__list')]"));
+			content_type_tiles.get(3).click();
 			// Finding out the types filer in refine panel
 			waitForAjax(ob);
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			List<WebElement> content_types = ob.findElements(By
-					.cssSelector("span[class='h6 agg-category-title ng-binding']"));
+					.cssSelector("div[class='panel-heading']"));
 			String filter1 = content_types.get(0).getText();
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();
-
-			// Comparing the the label of the type of sort item
+			
+				// Comparing the the label of the type of sort item
 			if (!filter1.equalsIgnoreCase("Inventor") || !filter2.equalsIgnoreCase("IPC Codes")
 					|| !filter3.equalsIgnoreCase("Assignee")) {
 

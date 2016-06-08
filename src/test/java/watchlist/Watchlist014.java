@@ -101,7 +101,7 @@ public class Watchlist014 extends TestBase {
 			}
 
 			// Navigating to the private watch list tab
-			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
+			ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink1"))).click();
 			watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
 			count = 0;
 			for (int i = 0; i < watchLists.size(); i++) {

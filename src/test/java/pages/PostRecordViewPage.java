@@ -847,7 +847,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to access the article which has comments added to it.
 	 */
 	public void searchForArticleWithComments() {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> itemList;
 
 		while (true) {
