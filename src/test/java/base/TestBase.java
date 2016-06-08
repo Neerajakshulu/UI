@@ -666,6 +666,29 @@ public class TestBase {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	
+	/**
+	 * Method to wait till the element is visible on the web page
+	 * 
+	 * @param driver
+	 * @param locator
+	 * @param time
+	 * @return
+	 * @throws Exception 
+	 */
+	public WebElement waitForElementTobeVisible(WebDriver driver,
+			By locator,
+			int time,String Errormsg) throws Exception {
+		WebElement element = null;
+		try{
+			element = 	waitForElementTobeVisible(driver,locator,time);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(Errormsg);
+		}
+		return element;
+	}
 
 	/**
 	 * Method to wait till the element is present on the web page
