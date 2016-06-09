@@ -75,7 +75,7 @@ public class Search88 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 
-			String patent = "methods";
+			String patent = "ice cream";
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
 			
 			//click on Patents tab
@@ -92,9 +92,8 @@ public class Search88 extends TestBase {
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			boolean patentRVTitleWatchLabel = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
 			
-
 			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
-
+			
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");
 			
