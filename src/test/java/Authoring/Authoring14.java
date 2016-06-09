@@ -68,7 +68,7 @@ public class Authoring14 extends TestBase {
 			login();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Synthetic Biology");
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
