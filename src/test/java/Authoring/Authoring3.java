@@ -83,7 +83,7 @@ public class Authoring3 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			//pf.getLoginTRInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle);
 			closeBrowser();
 
@@ -111,7 +111,7 @@ public class Authoring3 extends TestBase {
 			String completeArticle) throws Exception {
 		try {
 
-			pf.getAuthoringInstance(ob).waitForTRHomePage();
+			//pf.getAuthoringInstance(ob).waitForTRHomePage();
 			loginAs("USERNAME6", "PASSWORD6");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();

@@ -82,7 +82,7 @@ public class Authoring4 extends TestBase {
 		maximizeWindow();
 		ob.navigate().to(System.getProperty("host"));
 		
-			pf.getAuthoringInstance(ob).waitForTRHomePage();
+			//pf.getAuthoringInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 			closeBrowser();
 		} catch (Throwable t) {

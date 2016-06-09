@@ -110,7 +110,7 @@ public class Authoring46 extends TestBase {
 			String completeArticle) throws Exception {
 		try {
 			waitForTRHomePage();
-			loginAs("USERNAME4", "PASSWORD4");
+			//loginAs("USERNAME4", "PASSWORD4");
 			searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			chooseArticle(completeArticle);
@@ -234,7 +234,7 @@ public class Authoring46 extends TestBase {
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
 		waitForAjax(ob);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
+		jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
 		waitForPageLoad(ob);
 	}
 

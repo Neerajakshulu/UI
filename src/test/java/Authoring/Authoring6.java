@@ -102,7 +102,7 @@ public class Authoring6 extends TestBase {
 			String completeArticle,
 			String addComments) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			searchArticle(article);
@@ -162,7 +162,7 @@ public class Authoring6 extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
+		jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
 		waitForAjax(ob);
 	}
 

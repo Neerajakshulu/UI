@@ -125,11 +125,11 @@ public class Authoring extends TestBase {
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(
 				ob,
-				By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"),
+				By.cssSelector("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='editThis(comment.id)']"),
 				40);
 		WebElement editCommentElement = ob
 				.findElement(By
-						.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
+						.cssSelector("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='editThis(comment.id)']"));
 		JavascriptExecutor exe = (JavascriptExecutor) ob;
 		exe.executeScript("arguments[0].click();", editCommentElement);
 
@@ -138,11 +138,11 @@ public class Authoring extends TestBase {
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
 		BrowserWaits.waitTime(5);
-		List<WebElement> subButtons = ob.findElements(By.cssSelector("button[class='btn webui-btn-primary']"));
+		List<WebElement> subButtons = ob.findElements(By.cssSelector("button[class='wui-btn wui-btn--primary']"));
 		System.out.println("Buttons available---2--->" + subButtons);
 		for (WebElement subButton : subButtons) {
 			System.out.println("Button Text-->" + subButton.getText());
-			if (subButton.getText().trim().equalsIgnoreCase("submit")) {
+			if (subButton.getText().trim().equalsIgnoreCase("Submit")) {
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", subButton);
 				waitForPageLoad(ob);
@@ -153,18 +153,18 @@ public class Authoring extends TestBase {
 
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
-		String commentText = ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7'")).get(0).getText();
+		String commentText = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']")).get(0).getText();
 		System.out.println("Commentary Text-->" + commentText);
-		if (!(commentText.contains(updatedComments) && commentText.contains("edited"))) {
+		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
 			new Authoring1().status = 2;
 			throw new Exception("Updated " + updatedComments + " not present");
 		}
 	}
 
 	public void validateAppreciationComment() throws Exception {
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='col-xs-12 col-sm-7']"));
-		List<WebElement> apprSubDivs = apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0)
-				.findElements(By.cssSelector("div[class^='col-xs-']"));
+		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']"));
+		List<WebElement> apprSubDivs = apprDivs.get(0).findElements(By.cssSelector("div[class='ne-comment-list__comment-footer']")).get(0)
+				.findElements(By.cssSelector("div[class^='ne-comment-list__comment-footer-item']"));
 		System.out.println("app sub divs-->" + apprSubDivs.size());
 		scrollingToElementofAPage();
 		apprSubDivs.get(1).getText();

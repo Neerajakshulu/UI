@@ -72,7 +72,7 @@ public class Authoring5 extends TestBase {
 		maximizeWindow();
 
 		ob.navigate().to(System.getProperty("host"));
-		pf.getAuthoringInstance(ob).waitForTRHomePage();
+		//pf.getAuthoringInstance(ob).waitForTRHomePage();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
 			// print full stack trace

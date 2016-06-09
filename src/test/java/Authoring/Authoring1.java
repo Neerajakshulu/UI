@@ -89,7 +89,7 @@ public class Authoring1 extends TestBase {
 	public void performAuthoringCommentOperations(String username, String password, String article,
 			String completeArticle, String addComments) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			loginAs("USERNAME15", "PASSWORD15");
 			searchArticle(article);
 			chooseArticle(completeArticle);
@@ -185,7 +185,7 @@ public class Authoring1 extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")).click();
 		waitForPageLoad(ob);
 	}
 

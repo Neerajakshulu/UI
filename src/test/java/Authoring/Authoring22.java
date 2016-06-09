@@ -76,7 +76,7 @@ public class Authoring22 extends TestBase {
 		maximizeWindow();
 
 		ob.navigate().to(System.getProperty("host"));
-		pf.getAuthoringInstance(ob).waitForTRHomePage();
+		//pf.getAuthoringInstance(ob).waitForTRHomePage();
 		// authoringAppreciation(username, password, article, completeArticle, addComments);
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");

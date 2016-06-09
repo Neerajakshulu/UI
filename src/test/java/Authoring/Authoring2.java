@@ -80,7 +80,7 @@ public class Authoring2 extends TestBase {
 
 			ob.navigate().to(System.getProperty("host"));
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			pf.getAuthoringInstance(ob).waitForTRHomePage();
+			//pf.getAuthoringInstance(ob).waitForTRHomePage();
 			// authoringAppreciation(username, password, article,
 			// completeArticle, addComments);
 		} catch (Throwable t) {
