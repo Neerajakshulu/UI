@@ -17,6 +17,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -39,7 +40,7 @@ public class Search74 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead while ARTICLES option is selected in the search drop down")
+						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead while ARTICLES tab is selected in the left pane of search results page")
 				.assignCategory("Search suite");
 
 	}
@@ -71,27 +72,21 @@ public class Search74 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Articles')]"), 120);
-			Thread.sleep(2000);
-			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
 			waitForAjax(ob);
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+			new PageFactory().getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
+			waitForAjax(ob);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("b");
 			Thread.sleep(1000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("i");
 			Thread.sleep(1000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("o");
 			Thread.sleep(1000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
 			

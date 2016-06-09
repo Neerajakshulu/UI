@@ -89,7 +89,7 @@ public class Watchlist022 extends TestBase {
 			BrowserWaits.waitTime(2);
 
 			// Getting all the watch lists
-			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name")));
+			List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));
 			// Finding the deleted watch list is visible or not
 			int count = 0;
 			for (WebElement watchlist : watchLists) {

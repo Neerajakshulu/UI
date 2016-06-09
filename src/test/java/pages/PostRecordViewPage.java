@@ -541,8 +541,8 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS);
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-		ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']"))
-				.click();
+		jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
+		
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		System.out.println("window hanles-->" + child_window_handles.size());
@@ -560,10 +560,10 @@ public class PostRecordViewPage extends TestBase {
 				ob.switchTo().window(PARENT_WINDOW);
 				waitForElementTobeVisible(
 						ob,
-						By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+						By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 						40);
 				jsClick(ob, ob.findElement(By
-						.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+						.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 			}
 		}
 
@@ -847,7 +847,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to access the article which has comments added to it.
 	 */
 	public void searchForArticleWithComments() {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
 		List<WebElement> itemList;
 
 		while (true) {
@@ -856,9 +856,13 @@ public class PostRecordViewPage extends TestBase {
 			String strCmntCt;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+				try{
 				strCmntCt = itemList.get(i)
 						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
 						.getText().replaceAll(",", "").trim();
+				}catch(Exception e){
+					continue;
+				}
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount != 0) {
 					jsClick(ob,
@@ -915,26 +919,26 @@ public class PostRecordViewPage extends TestBase {
 			try {
 
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"),40);
+						By.cssSelector("div[class='ne-create-comment'] button[name='bold']"),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"))
+						By.cssSelector("div[class='ne-create-comment'] button[name='bold']"))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Bold format option is not enable for comments");
 					result=false;
 				}
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"),40);
+						By.cssSelector("div[class='ne-create-comment'] button[name='italics']"),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"))
+						By.cssSelector("div[class='ne-create-comment'] button[name='italics']"))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Italics format option is not enable for comments");
 					result=false;
 				}
 				
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"),40);
+						By.cssSelector("div[class='ne-create-comment'] button[name='insertLink']"),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"))
+						By.cssSelector("div[class='ne-create-comment'] button[name='insertLink']"))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Insert link format option is not enable for comments");
 					result=false;
