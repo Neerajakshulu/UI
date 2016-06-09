@@ -1,7 +1,5 @@
 package notifications;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0013 extends NotificationsTestBase {
 
@@ -44,71 +43,60 @@ public class Notifications0013 extends NotificationsTestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			// login using TR credentials
-			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			BrowserWaits.waitTime(2);
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+					CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
+			logger.info("Home Page loaded success fully");
 			for (int i = 0; i < 3; i++) {
-				List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
-				if (mylist.size() > 0) {
+				List<WebElement> listOfNotifications = pf.getBrowserActionInstance(ob)
+						.getElements(OnePObjectMap.NEWSFEED_RECOMMEND_ARTICLE_XPATH);
+				if (listOfNotifications.size() > 0) {
 					break;
 				} else {
 					BrowserWaits.waitTime(5);
 				}
 			}
-			List<WebElement> mylist = ob.findElements(By.xpath("//*[contains(@class,'notification-event')]"));
-			// logger.info(mylist.size());
-			WebElement myE = null;
+			List<WebElement> mylist = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH);
 			String text;
 			for (int i = 0; i < mylist.size(); i++) {
 				text = mylist.get(i).getText();
 				if (text.contains("Recommended articles")) {
-					myE = mylist.get(i);
 					break;
 				}
-
 			}
-			List<WebElement> articles = myE.findElements(By.tagName("a"));
-			// logger.info("No of articles="+articles.size());
-			if (!compareNumbers(3, articles.size() - 3)) {
-				test.log(LogStatus.FAIL, "6 article suggesstions not getting displayed");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_6_article_suggesstions_not_getting_displayed")));// screenshot
+			List<WebElement> articles = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.NEWSFEED_RECOMMEND_ARTICLE_A_XPATH);
+			if (articles.size() == 3) {
+				test.log(LogStatus.INFO, "Three article suggesstions are getting displayed");// extent reports
+				test.log(LogStatus.PASS, "Pass");
+			} else {
+				throw new Exception("Three article suggesstions are not getting displayed");
 			}
 			closeBrowser();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
-			// next 3 lines to print whole testng error in report
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }
