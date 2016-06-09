@@ -92,7 +92,7 @@ public class Notifications0002 extends NotificationsTestBase {
 			try {
 				Assert.assertTrue(elements.size() >= 1);
 				test.log(LogStatus.INFO, "User is able to see most viewed documents in home page");
-				test.log(LogStatus.INFO, "PASS");
+				test.log(LogStatus.PASS, "PASS");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
