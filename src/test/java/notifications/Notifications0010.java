@@ -92,7 +92,7 @@ public class Notifications0010 extends NotificationsTestBase {
 			try {
 				Assert.assertTrue(listOfPosts.size() <= 5 && listOfArticles.size() <= 5 && listOfTopics.size() <= 5);
 				test.log(LogStatus.INFO, "Maximum count on the trending list is 5 per page");
-				test.log(LogStatus.INFO, "PASS");
+				test.log(LogStatus.PASS, "PASS");
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Maximum count on the trending list is not 5 per page");
