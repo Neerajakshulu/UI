@@ -16,6 +16,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0011 extends NotificationsTestBase {
 
@@ -49,33 +50,39 @@ public class Notifications0011 extends NotificationsTestBase {
 
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			// Logging in with User2
+			// Logging in with Default user
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			BrowserWaits.waitTime(8);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
+			List<WebElement> listOfNotifications = null;
 			for (int i = 0; i < 3; i++) {
-				List<WebElement> listOfNotifications = ob
-						.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
+				listOfNotifications = pf.getBrowserActionInstance(ob)
+						.getElements(OnePObjectMap.NEWSFEED_ALL_NOTIFICATIONS_XPATH);
 				if (listOfNotifications.size() > 0) {
 					break;
 				} else {
 					BrowserWaits.waitTime(5);
 				}
 			}
-			List<WebElement> listOfNotifications = ob
-					.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
 			String text = listOfNotifications.get(0).getText();
 			logger.info("Featured Post Titile in Notifications - " + text);
 			Assert.assertTrue(text.contains("Featured post"));
-			test.log(LogStatus.PASS, "Featured post is at the top of the home page");
-			List<WebElement> listOfPostsLinks = ob.findElements(By.xpath(OR.getProperty("all_posts_in_trending_now")));
+			test.log(LogStatus.INFO, "Featured post is at the top of the home page");
+
+			// li[@class='ne-trending__list-item ng-scope']/a
+
+			List<WebElement> listOfPostsLinks = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH);
+			logger.info("Size" + listOfPostsLinks.size());
 			String expectedTitle = listOfPostsLinks.get(0).getText();
 			logger.info("Top Post Titile in Trending - " + expectedTitle);
 
@@ -90,24 +97,24 @@ public class Notifications0011 extends NotificationsTestBase {
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Featured Post title is not same as the post in the trending section");// extent
-				// reports
-				test.log(LogStatus.INFO, "Error--->" + t);
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
+				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_Featured Post title is not same as the post in the trending section")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 				closeBrowser();
 			}
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Featured Post is not at the top");// extent
 			// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_Featured Post is not at the top")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -115,13 +122,5 @@ public class Notifications0011 extends NotificationsTestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }
