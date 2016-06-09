@@ -65,7 +65,6 @@ public class Search94 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
