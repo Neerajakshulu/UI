@@ -114,11 +114,13 @@
 		</classes>
 	</test>
 
-	<test name="Search36">
+	<!-- Duplicated
+	 <test name="Search36">
 		<classes>
 			<class name="search.Search36"></class>
 		</classes>
 	</test>
+	 -->
 
 	<test name="Search91">
 		<classes>
@@ -222,13 +224,13 @@
 	</test>
 
 	
-
-	<test name="Search77">
-		<classes>
+<!-- Duplicated
+    <test name="Search77">
+      	<classes>
 			<class name="search.Search77"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="Search87">
 		<classes>
 			<class name="search.Search87"></class>
