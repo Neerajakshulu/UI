@@ -14,6 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -66,33 +67,33 @@ public class Search123 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("amneet");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(4000);
-
-			ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'People')]")).click();
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]"), 50);
+			ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]")).click();
+			BrowserWaits.waitTime(3);
 
 			ob.findElement(By.xpath("//span[contains(text(),'Institutions')]")).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			
-			boolean condition11;
+			boolean condition11 = false;
 			
 			if(!host.contains("stable")){
 			ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 			
 			ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 			
 			ob.navigate().back();
-			Thread.sleep(6000);
+			BrowserWaits.waitTime(6);
 			
 			condition11=ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected();
 			System.out.println(condition11);
@@ -100,18 +101,30 @@ public class Search123 extends TestBase {
 			
 			else{
 				
-				
-				ob.findElement(By.xpath("//input[@type='checkbox']")).click();
+				System.out.println("In else");
 				Thread.sleep(3000);
 				
+				ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).click();
+				waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 50);
 				ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
 				Thread.sleep(3000);
 				
 				ob.navigate().back();
-				Thread.sleep(6000);
+				Thread.sleep(2000);
+				waitForElementTobeVisible(ob, By.cssSelector("span[class='wui-checkbox__visible']"), 50);
+				String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
+				//condition11=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).isSelected();
 				
-				condition11=ob.findElement(By.xpath("//input[@type='checkbox']")).isSelected();
-				System.out.println(condition11);
+				if (!backgrundValue.contains("rgb(255, 255, 255)")) {
+					test.log(LogStatus.INFO, "check box is selected");
+					condition11=true;
+				} else {
+					test.log(LogStatus.INFO, "check box is not selected by default");
+					status = 2;
+				}
+				
+				
+				logger.info(condition11);
 				
 			}
 			
