@@ -229,7 +229,7 @@ public class Authoring extends TestBase {
 	}
 
 	public void selectArtcleWithComments() {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
 		List<WebElement> itemList;
 
 		while (true) {

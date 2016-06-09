@@ -15,7 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -37,17 +36,17 @@ public class NotificationsTestBase extends TestBase {
 	protected RowData rowData = null;
 
 	@BeforeSuite
-	public void beforeSuite(ITestContext ctx) throws Exception {
+	public void beforeSuite() throws Exception {
 		logger.info("Notification UI automation starting time - " + new Date());
-		String suiteName = ctx.getSuite().getName();
+
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		logger.info("Notifications Suit runmode is - " + suiteRunmode);
+
 		logger.info("Notification UI automation Running environment - " + host);
 		readNotifications();
-		logger.info(testcase.size());
-		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
-				&& !(suiteName.equals("Sanity suite"))) {
+		// logger.info(testcase.size());
+		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
 			createNewUsers();
 			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
 				if (user1 == null) {
@@ -111,7 +110,7 @@ public class NotificationsTestBase extends TestBase {
 					// Get current row information
 					row = sheet.getRow(i);
 					rowData = getRowData(row);
-					// logger.info(rowData);
+					//logger.info(rowData);
 					testcase.put(rowData.getTestclassName(), rowData);
 				}
 			}

@@ -160,10 +160,10 @@ public class Authoring12 extends TestBase {
 					ob.switchTo().window(PARENT_WINDOW);
 					waitForElementTobeVisible(
 							ob,
-							By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+							By.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 							40);
 					jsClick(ob, ob.findElement(By
-							.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+							.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 				}
 			}
 

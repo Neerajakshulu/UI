@@ -87,34 +87,25 @@ public class Watchlist007 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for patents
-			//selectSearchTypeFromDropDown("Patents");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-			
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
-			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			BrowserWaits.waitTime(3);
 			// Watching the patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
+			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -137,38 +128,29 @@ public class Watchlist007 extends TestBase {
 
 			// Step2: Unwatching the document from record view page
 			// Searching for patents
-//			selectSearchTypeFromDropDown("Patents");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
-			
+			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
-			
-			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 
 			// Unwatching the patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
+			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
 			BrowserWaits.waitTime(2);
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the patent name
-			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
+			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist1")));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
 
 				if (defaultMessage.isDisplayed()) {
 
@@ -185,7 +167,7 @@ public class Watchlist007 extends TestBase {
 				}
 			} catch (NoSuchElementException e) {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 

@@ -10,20 +10,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search87 extends TestBase {
 
 	static int status = 1;
-	PageFactory pf= new PageFactory();
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -67,40 +64,58 @@ public class Search87 extends TestBase {
 
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String patent = "Projection exposure apparatus and method which uses multiple diffraction gratings in order to produce a solid state device with fine patterns";
-			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
-			
-			//click on Patents tab
-			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
-			BrowserWaits.waitTime(4);
-			
-			//validate page is navigating to patent record view page from search results page
-			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
-			boolean patentRVTitleWatchLabel = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
+			waitForAjax(ob);
+			Thread.sleep(2000);
 
-			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
+			// waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
+			// 120);
+			// BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
+
+			Thread.sleep(5000);
+			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
+					.getText();
+			String patentRVTitleWatchLabel = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			String patentRVShareLabel = ob
+					.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1)
+					.getText();
+
+			System.out.println("title-->" + patentRVTitle);
+			System.out.println("watch-->" + patentRVTitleWatchLabel);
+			System.out.println("share-->" + patentRVShareLabel);
+			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, patent)
+					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
+					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
 
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");
-			
-			pf.getLoginTRInstance(ob).logOutApp();
+
 			closeBrowser();
 
 		}
 
 		catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

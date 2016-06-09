@@ -83,9 +83,8 @@ public class Watchlist015 extends TestBase {
 			// Editing the first watch list
 			String watchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_Updated";
 			String watchlistDescription = "This is my watchlist";
-			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
-			//waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-card__content']"), 30);
+			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).clear();
@@ -94,11 +93,9 @@ public class Watchlist015 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
-			//waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
-			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
 			String updatedWatchlistDescription = ob
-					.findElement(By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']")).getText();
-			logger.info("Updated WatchList Description : "+updatedWatchlistDescription);
+					.findElement(By.xpath("//p[@class='watchlist-item-description ng-binding']")).getText();
 
 			// Compare watch list name
 			try {

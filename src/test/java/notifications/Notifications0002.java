@@ -74,8 +74,7 @@ public class Notifications0002 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			}
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60);
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");
@@ -92,7 +91,7 @@ public class Notifications0002 extends NotificationsTestBase {
 			try {
 				Assert.assertTrue(elements.size() >= 1);
 				test.log(LogStatus.INFO, "User is able to see most viewed documents in home page");
-				test.log(LogStatus.PASS, "PASS");
+				test.log(LogStatus.INFO, "PASS");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {

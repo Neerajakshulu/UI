@@ -9,18 +9,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search79 extends TestBase {
 
@@ -66,12 +68,15 @@ public class Search79 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			 ob.navigate().to(host);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
+			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			Thread.sleep(2000);
 			// Type into the search box and get search results
@@ -80,7 +85,8 @@ public class Search79 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
 			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(1);
+			Thread.sleep(8000);
 
 			WebElement myE1 = ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
 			String text1 = myE1.getText();
@@ -88,13 +94,26 @@ public class Search79 extends TestBase {
 			String[] arr1 = text1.split("\n");
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 1; i < arr1.length; i++) {
+
 				al1.add(arr1[i]);
 			}
-			
-			logger.info("arraylist"+al1);
+
+			int index = al1.get(2).indexOf(' ');
+//			if(host.equals("https://projectne.thomsonreuters.com")){
+//			
+//				expected_text = al1.get(2).substring(0,3);
+//				
+//			}
+//			else{
+//				
+//				expected_text = al1.get(2).substring(0,3);
+//				
+//			}
 			
 			String expected_text = al1.get(2).substring(0,3);
-			logger.info(expected_text);
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			System.out.println(expected_text);
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
 			for (int i = 1; i <= 4; i++) {
 
@@ -107,16 +126,17 @@ public class Search79 extends TestBase {
 			Thread.sleep(2000);
 
 			String actual_text = ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).getAttribute("value");
-			logger.info(actual_text);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println(actual_text);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
 			
-			
-			//Deprecated due to UI Refresh - options dropdown not populated in searchtypeahed
-			/*String result_text = ob.findElement(
-					By.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']/descendant::a")).getText();
-			logger.info("Search Result focus-->"+result_text);
 
-			if (!compareStrings("Articles", result_text)) {
+			String dd_text = ob.findElement(
+					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+			System.out.println(dd_text);
+
+			if (!compareStrings("Articles", dd_text)) {
 
 				test.log(LogStatus.FAIL, "ARTICLES option not getting selected in search drop down");// extent reports
 				status = 2;// excel
@@ -126,11 +146,11 @@ public class Search79 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_ARTICLES_option_not_getting_selected_in_search_drop_down")));// screenshot
 
-			}*/
+			}
 
-			String lnp_text = ob.findElement(By.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"))
+			String lnp_text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']"))
 					.getText().substring(0, 8);
-			logger.info("Article tab text-->"+lnp_text);
+			System.out.println(lnp_text);
 
 			if (!compareStrings("Articles", lnp_text)) {
 
@@ -150,7 +170,7 @@ public class Search79 extends TestBase {
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				BrowserWaits.waitTime(3);
+				Thread.sleep(3000);
 
 			}
 

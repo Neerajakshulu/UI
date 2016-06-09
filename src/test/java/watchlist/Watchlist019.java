@@ -80,7 +80,7 @@ public class Watchlist019 extends TestBase {
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating 2 public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_";
 			String watchListDescription = "This is newly created watchlist.";
@@ -88,11 +88,7 @@ public class Watchlist019 extends TestBase {
 			BrowserWaits.waitTime(2);
 			createWatchList("public", newWatchlistName + 2, watchListDescription);
 			// Making the last watch list as private
-			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 30);
-			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchListUpdateButton")), 30);
-			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
+			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 			BrowserWaits.waitTime(2);
 			new PageFactory().getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -106,21 +102,19 @@ public class Watchlist019 extends TestBase {
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			fn2 = LOGIN.getProperty("FN2");
 			ln2 = LOGIN.getProperty("LN2");
-			// Searching for article
-			//selectSearchTypeFromDropDown("People");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			// Searching for article
+			selectSearchTypeFromDropDown("People");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchPepole")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchPepole"))).click();
 			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
 			// Navigating to the first user profile page
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1")), 60);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page")), 60);
 			BrowserWaits.waitTime(2);
 			// Navigating to the watch list tab
-			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1"))).click();
+			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
 			List<WebElement> watchlists = ob
 					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));

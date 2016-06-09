@@ -174,13 +174,8 @@ public enum OnePObjectMap {
 	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents"),
 	NEWSFEED_FEATURED_POST_XPATH("//div[@class='wui-card wui-card--featured-post']"),
 	NEWSFEED_TRENDINDING_MENU_XPATH("//ul[@class='nav nav-tabs']//tab-heading[contains(.,'FILTER_TYPE')]"),
-	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li"),
-	NEWSFEED_TRENDINDING_TOPICS_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li[2]//a"),
-	NEWSFEED_RECOMMEND_PEOPLE_XPATH("//ne-recommend-people[@class='ng-scope']"),
-	NEWSFEED_RECOMMEND_PEOPLE_LABEL_XPATH("//ne-recommend-people[@class='ng-scope']//div"),
-	NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH("//ne-recommend-people[@class='ng-scope']//img");
-	
-	
+	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li");
+
 	private String locator;
 
 	OnePObjectMap(String locator) {
