@@ -71,21 +71,21 @@ public class Search56 extends TestBase {
 			// login using TR credentials
 			login();
 
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bi");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
 			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
-			waitForElementTobeVisible(ob, By.tagName("h5"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card__header-left ng-binding']"), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
@@ -96,11 +96,11 @@ public class Search56 extends TestBase {
 
 			}
 
-			List<WebElement> tileTags = ob.findElements(By.tagName("h5"));
+			List<WebElement> tileTags = ob.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
 			int count = 0;
 			for (int i = 0; i < tileTags.size(); i++) {
 
-				if (tileTags.get(i).getText().equals("Posts"))
+				if (tileTags.get(i).getText().equals("POST"))
 					count++;
 			}
 
