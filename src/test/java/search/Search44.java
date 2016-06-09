@@ -76,7 +76,7 @@ public class Search44 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"), 30);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			ob.findElement(By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']")).click();
 			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"), 30);
 			Thread.sleep(2000);
