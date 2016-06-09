@@ -9,22 +9,27 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search93 extends TestBase {
 
 	static int status = 1;
-
+	PageFactory pf=new PageFactory();
+	
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
+	
+	
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -56,7 +61,7 @@ public class Search93 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "uiautomation user2";
+			String userName = "Neon Testing2";
 
 			openBrowser();
 			clearCookies();
@@ -64,8 +69,6 @@ public class Search93 extends TestBase {
 
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(3000);
 
 			// login using TR credentials
 			login();
@@ -74,22 +77,11 @@ public class Search93 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 180);
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"), 10);
-			Thread.sleep(2000);
-			boolean isPresent = ob.findElement(By.xpath("//h2[contains(text(),'Interests')]")).isDisplayed();
-			if (isPresent) {
-				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");
-			} else {
-				status = 2;
-				test.log(LogStatus.FAIL, "Profile page of a person is not displayed as expected");
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_wrong_happened")));// screenshot
+			pf.getProfilePageInstance(ob).clickProfile();
+			boolean isPresent = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString())).isDisplayed();
+			if (!isPresent) {
+				test.log(LogStatus.FAIL, "Profile page of a person is displayed as expected");
+				throw new Exception("Proifle page of a person should displayed");
 			}
 
 			closeBrowser();
@@ -97,19 +89,19 @@ public class Search93 extends TestBase {
 		}
 
 		catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Proifle Page not displayed from Search Results page");// extent
 			// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
+			test.log(LogStatus.ERROR, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
 			test.log(
-					LogStatus.INFO,
+					LogStatus.ERROR,
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+									+ "_profile_page_not_displayed")));// screenshot
 			closeBrowser();
 		}
 

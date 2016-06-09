@@ -47,6 +47,16 @@ public class SearchResultsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
 		waitForAjax(ob);
 	}
+	
+	/**
+	 * Method to click on Patents tab in search results page
+	 * @throws Exception
+	 */
+	public void clickOnPatentsTab() throws Exception {
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		waitForAjax(ob);
+	}
 
 	/**
 	 * Method to click on posts of other users than the current user in search results page 

@@ -241,11 +241,13 @@
 		</classes>
 	</test>
 
+	<!-- Deprecated - Need to remove
 	<test name="Search79">
 		<classes>
 			<class name="search.Search79"></class>
 		</classes>
 	</test>
+	-->
 
 	<test name="Search93">
 		<classes>
@@ -253,12 +255,15 @@
 		</classes>
 	</test>
 
+	<!-- Deprecated - Need to remove
 	<test name="Search94">
 		<classes>
 			<class name="search.Search94"></class>
 		</classes>
 	</test>
-
+	
+	 -->
+	
 	<!-- Profile Sanity Testcases -->
 	<test name="Validate_View_Profile">
 		<classes>
