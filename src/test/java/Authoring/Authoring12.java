@@ -141,8 +141,8 @@ public class Authoring12 extends TestBase {
 			new Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()))).click().build().perform();
 			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-			ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']"))
-					.click();
+			jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
+					
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
 			System.out.println("window hanles-->" + child_window_handles.size());
@@ -160,10 +160,10 @@ public class Authoring12 extends TestBase {
 					ob.switchTo().window(PARENT_WINDOW);
 					waitForElementTobeVisible(
 							ob,
-							By.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+							By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 							40);
 					jsClick(ob, ob.findElement(By
-							.cssSelector("modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+							.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 				}
 			}
 

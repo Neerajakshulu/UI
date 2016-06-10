@@ -808,15 +808,33 @@ public class ProfilePage extends TestBase {
 	 */
 	public List<String> getProfileTitleAndMetadata() throws Exception {
 		List<String> profileInfo = new ArrayList<String>();
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS)
 				.getText());
-		profileInfo.add(pf.getBrowserActionInstance(ob)
+		}catch(Exception e){//do nothing
+			
+		}
+		try{
+			profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
+		}catch(Exception e1){//do nothing
+			
+		}
+			
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
+		}catch(Exception e2){//do nothing
+			
+		}
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
-		return profileInfo;
+		}catch(Exception e3){//do nothing
+			
+		}
+		
+			return profileInfo;
 	}
 
 	/**

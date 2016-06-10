@@ -751,7 +751,7 @@ public class PostRecordViewPage extends TestBase {
 		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
 		commentArea.click();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())));
 		waitForAlertToBePresent(ob, 40);
 		Alert alert = ob.switchTo().alert();
 		alert.sendKeys(url);
