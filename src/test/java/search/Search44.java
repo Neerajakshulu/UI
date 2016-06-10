@@ -97,7 +97,7 @@ public class Search44 extends TestBase {
 			}
 			
 			
-			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
+			jsClick(ob,ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")));
 			Thread.sleep(3000);
 			
 			List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("filter_up_icon")));
