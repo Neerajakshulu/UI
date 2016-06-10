@@ -60,9 +60,6 @@ public class Search99 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			
-			String email = "neonfbook@gmail.com";
-			String password = "1Pproject";
-
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
@@ -91,7 +88,7 @@ public class Search99 extends TestBase {
 			// checking for different options available in sort
 			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 35);
 			ob.findElement(By.xpath("//button[@id='single-button']")).click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			String text = ob.findElement(By.xpath("//ul[@class='dropdown-menu search-sort-dropdown__menu' and @role='menu']")).getText();
 			System.out.println(text);
 

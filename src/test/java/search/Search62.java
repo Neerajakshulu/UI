@@ -90,10 +90,7 @@ public class Search62 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			Thread.sleep(1000);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
+			Thread.sleep(2000);
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("peopleTile")));
 			String text = myE.getText();
 
