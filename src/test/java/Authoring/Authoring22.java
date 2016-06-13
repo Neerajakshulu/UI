@@ -74,7 +74,6 @@ public class Authoring22 extends TestBase {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
-
 		ob.navigate().to(System.getProperty("host"));
 		//pf.getAuthoringInstance(ob).waitForTRHomePage();
 		// authoringAppreciation(username, password, article, completeArticle, addComments);

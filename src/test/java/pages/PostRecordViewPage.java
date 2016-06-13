@@ -476,7 +476,6 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void validateCommentNewlyAdded(String comment,
 			ExtentTest test) {
-
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 180);
 

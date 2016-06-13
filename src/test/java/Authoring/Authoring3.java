@@ -164,7 +164,6 @@ public class Authoring3 extends TestBase {
 					.findElement(By  
 							.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS.toString()));
 			// System.out.println("is Delete displayed-->"+deleteCommentButton.isDisplayed());
-
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", deleteCommentButton);
 

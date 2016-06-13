@@ -168,6 +168,7 @@ public class Authoring extends TestBase {
 	 *             When Validation not done
 	 */
 	public void validateAppreciationComment(ExtentTest test) throws Exception {
+		
 		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='ne-comment-list__comment-content']"), 90);
 		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']"));
 		System.out.println("size of total elemntes-->" + apprDivs.size());

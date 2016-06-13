@@ -109,7 +109,6 @@ public class Authoring4 extends TestBase {
 			String completeArticle,
 			String addComments) throws Exception {
 		loginAs("USERNAME3", "PASSWORD3");
-
 	try{
 		// Get Total No.of comments
 		totalProfileCommentsBeforeAdd = getProfleComments();

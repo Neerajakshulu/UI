@@ -101,7 +101,6 @@ public class Authoring2 extends TestBase {
 	@Parameters({ "username", "password", "article", "completeArticle" })
 	public void authoringAppreciation(String username, String password, String article, String completeArticle)
 			throws Exception {
-
 		try {
 
 			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);

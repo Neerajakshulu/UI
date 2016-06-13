@@ -58,7 +58,6 @@ public class Authoring51 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
