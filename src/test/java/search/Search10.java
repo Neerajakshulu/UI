@@ -14,8 +14,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -23,6 +26,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Search10 extends TestBase {
 
+	PageFactory pf= new PageFactory();
 	static int status = 1;
 
 	// Following is the list of status:
@@ -69,9 +73,7 @@ public class Search10 extends TestBase {
 
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			
 			// login using TR credentials
 			login();
 			//
@@ -81,10 +83,14 @@ public class Search10 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
-
+			Thread.sleep(1000);
+		   waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()),60);
+            
+			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_PAGE_ARTICLES__CSS);
+			
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			waitForAjax(ob);
+		  ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			Thread.sleep(8000);
 
 			List<WebElement> filterPanelHeadingList;
@@ -95,7 +101,8 @@ public class Search10 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
-			Thread.sleep(4000);
+			waitForAjax(ob);
+			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
 			Thread.sleep(8000);
@@ -103,7 +110,6 @@ public class Search10 extends TestBase {
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
 			Thread.sleep(8000);
-
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
@@ -117,7 +123,7 @@ public class Search10 extends TestBase {
 
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
-			Thread.sleep(5000);
+			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
@@ -148,10 +154,11 @@ public class Search10 extends TestBase {
 				// screenshot
 
 			}
-
+            waitForElementTobeVisible(ob,By.xpath(OR.getProperty("filter_checkbox")), 40);
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-
-			boolean filtering_condition = filterValues.get(0).isSelected() && filterValues.get(1).isSelected();
+			waitForAjax(ob);
+		//	String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
+			boolean filtering_condition = filterValues.get(0).isDisplayed() && filterValues.get(1).isDisplayed();
 
 			try {
 				Assert.assertTrue(filtering_condition);
