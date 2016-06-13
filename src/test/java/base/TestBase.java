@@ -1127,6 +1127,7 @@ public class TestBase {
 				ob.findElement(By.xpath(OR.getProperty("delete_button_image1"))).click();
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup1"))).click();
+				BrowserWaits.waitTime(6);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
 				break;
 			}

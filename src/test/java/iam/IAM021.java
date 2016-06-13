@@ -68,6 +68,7 @@ public class IAM021 extends TestBase {
 			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
+			BrowserWaits.waitTime(4);
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
 
@@ -78,6 +79,7 @@ public class IAM021 extends TestBase {
 
 				al.add(myIT.next());
 			}
+			
 			ob.switchTo().window(al.get(1));
 
 			test.log(LogStatus.INFO, "Preference link is present and clicked");
