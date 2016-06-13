@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -160,8 +161,8 @@ public class Authoring3 extends TestBase {
 			totalCommentsBeforeDeletion = pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("Before Deletion count --->" + totalCommentsBeforeDeletion);
 			WebElement deleteCommentButton = ob
-					.findElement(By
-							.cssSelector("button[class='webui-icon webui-icon-trash edit-comment-icon'][ng-click='deleteThis(comment.id)']"));
+					.findElement(By  
+							.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS.toString()));
 			// System.out.println("is Delete displayed-->"+deleteCommentButton.isDisplayed());
 
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -170,9 +171,9 @@ public class Authoring3 extends TestBase {
 			waitUntilText("Delete Comment");
 			waitUntilText("Are you sure you wish to delete this comment?");
 
-			IsElementPresent(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"));
+			IsElementPresent(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString());
 			jsClick(ob,
-					ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_delete_confirmation_ok_button_css"))));
+					ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString())));
 			waitForAjax(ob);
 			totalCommentsAfterDeletion = pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->" + totalCommentsAfterDeletion);

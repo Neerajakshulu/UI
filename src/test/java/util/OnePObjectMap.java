@@ -14,7 +14,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK("Cookie Policy"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy Statement"),
 	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
-	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'Details')]"),
+	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'View in Web of Science')]"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS("a[title='Back to Project Neon']"),
 	HOME_PROJECT_NEON_OWN_PROFILE_COMMENTS_LIKE_XPATH("//span[@class='webui-icon webui-icon-like']/following-sibling::span"),
 	HOME_PROJECT_NEON_APP_PROFILE_COMMENTS_CSS("li[class='search-heading tabs ng-isolate-scope active']"),
@@ -138,7 +138,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_COMMENTS_COUNT_XPATH("//div[contains(@class,'wui-icon-metric') and contains(.,'Comments')]/descendant::span[@class='wui-icon-metric__value ng-binding']"),
 	HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS("div[ng-if*='PUBLISHED'] button[class*='profile-follow-unfollow']"),
 	HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS("div[class='ne-comment-list__comment-content']"),
-	HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS("a[data-event-category='profilecomments'] span[class='ng-binding']:nth-child(2)"),
+	HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS("a[data-event-category='profilecomments'] span[class*='ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_FOLLOWERS_COUNT_CSS("a[data-event-category='profilefollowers'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_FOLLOWING_COUNT_CSS("a[data-event-category='profilefollowing'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_TABS_CSS("li[ng-repeat='tab in vm.detailTabs']"),
@@ -183,7 +183,11 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//div"),
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[@class='row notifications-wrapper ng-scope']//div[@class='notification-component ng-scope']"),
-	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a");
+	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']")
+	
+	;
 	
 	
 	private String locator;

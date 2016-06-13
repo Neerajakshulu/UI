@@ -161,42 +161,88 @@ public class Authoring extends TestBase {
 		}
 	}
 
-	public void validateAppreciationComment() throws Exception {
+	/**
+	 * Method for Validate the Article Appreciation functionality
+	 * 
+	 * @throws Exception,
+	 *             When Validation not done
+	 */
+	public void validateAppreciationComment(ExtentTest test) throws Exception {
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='ne-comment-list__comment-content']"), 90);
 		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']"));
-		List<WebElement> apprSubDivs = apprDivs.get(0).findElements(By.cssSelector("div[class='ne-comment-list__comment-footer']")).get(0)
-				.findElements(By.cssSelector("div[class^='ne-comment-list__comment-footer-item']"));
-		System.out.println("app sub divs-->" + apprSubDivs.size());
-		scrollingToElementofAPage();
-		apprSubDivs.get(1).getText();
-		int apprEarCount = Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
-		System.out.println("Before count-->" + apprEarCount);
+		System.out.println("size of total elemntes-->" + apprDivs.size());
+		WebElement apprSubDivs;
+		for (int i = 0; i < apprDivs.size(); i++) {
+		try{
+			
+		
+			apprSubDivs = apprDivs.get(i).findElement(By.cssSelector("div[class='ne-comment-list__comment-footer']"))
+					.findElement(By.cssSelector("div[class^='ne-comment-list__comment-footer-item']"));
 
-		String attrStatus = apprSubDivs.get(0).findElement(By.tagName("button")).getAttribute("ng-click");
-		System.out.println("Attribute Status-->" + attrStatus);
+			// List<WebElement>
+			// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
+			String count = apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']")).getText();
+			System.out.println("app sub divs-->" + count);
+			scrollingToElementofAPage();
+			
+		}catch(Exception e){
+			continue;
+		}
+			
+				int apprEarCount = Integer
+						.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']")).getText()
+								.replaceAll(",", "").trim());
+				System.out.println("Before count-->" + apprEarCount);
 
-		if (attrStatus.contains("NONE")) {
-			scrollingToElementofAPage();
-			apprSubDivs.get(0).findElement(By.tagName("button")).click();
-			Thread.sleep(4000);// After clicking on like button wait for status to change and count update
-			int apprAftCount = Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
-			System.out.println("Already liked  After count-->" + apprAftCount);
-			if (!(apprAftCount < apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
-			}
-		} else if (attrStatus.contains("UP")) {
-			scrollingToElementofAPage();
-			apprSubDivs.get(0).findElement(By.tagName("button")).click();
-			Thread.sleep(4000);// After clicking on Unlike button wait for status to change and count update
-			int apprAftCount = Integer.parseInt(apprSubDivs.get(1).getText().replaceAll(",", "").trim());
-			System.out.println("Not liked --After count-->" + apprAftCount);
-			if (!(apprAftCount > apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
+				String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
+				System.out.println("Attribute Status-->" + attrStatus);
+
+				if (attrStatus.contains("DOWN")) {
+					scrollingToElementofAPage();
+					// apprSubDivs.findElement(By.tagName("button")).click();
+					JavascriptExecutor exe = (JavascriptExecutor) ob;
+					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+					Thread.sleep(4000);// After clicking on like button wait for
+										// status to change and count update
+					int apprAftCount = Integer
+							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']"))
+									.getText().replaceAll(",", "").trim());
+					System.out.println("Already liked  After count-->" + apprAftCount);
+					if (!(apprAftCount < apprEarCount)) {
+						// status=2;
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+						throw new Exception("Comment Appreciation not happended");
+					} else {
+						test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
+					}
+				} else if (attrStatus.contains("UP")) {
+					scrollingToElementofAPage();
+					// apprSubDivs.findElement(By.tagName("button")).click();
+					JavascriptExecutor exe = (JavascriptExecutor) ob;
+					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+
+					Thread.sleep(4000);// After clicking on unlike button wait
+										// for status to change and count update
+					int apprAftCount = Integer
+							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']"))
+									.getText().replaceAll(",", "").trim());
+					System.out.println("Not liked --After count-->" + apprAftCount);
+					if (!(apprAftCount > apprEarCount)) {
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+						throw new Exception("Comment Appreciation not happended");
+					} else {
+						test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
+					}
+				}
+				break;
 			}
 		}
-	}
+	
 
 	public void validateViewComment(String addComments) throws Exception {
-		String commentText = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0)
+		String commentText = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']")).get(0)
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!commentText.contains(addComments)) {

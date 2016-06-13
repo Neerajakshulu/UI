@@ -631,59 +631,7 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(2);
 	}
 
-	/**
-	 * Method to validate the appreciate or un appreciate functionality of the comments.
-	 * @param test
-	 * @throws Exception
-	 */
-	public void validateAppreciationComment(ExtentTest test) throws Exception {
-
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
-		System.out.println("size of total elemntes-->" + apprDivs.size());
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
-				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
-		System.out.println("app sub divs-->"
-				+ apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
-		scrollingToElementofAPage();
-		int apprEarCount = Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
-				.getText().replaceAll(",", "").trim());
-		System.out.println("Before count-->" + apprEarCount);
-
-		String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
-		System.out.println("Attribute Status-->" + attrStatus);
-
-		if (attrStatus.contains("DOWN")) {
-			scrollingToElementofAPage();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on unlike button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Already liked  After count-->" + apprAftCount);
-			if (!(apprAftCount < apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
-			}
-		} else if (attrStatus.contains("UP")) {
-			scrollingToElementofAPage();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on like button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Not liked --After count-->" + apprAftCount);
-			if (!(apprAftCount > apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
-			}
-		}
-	}
-
+	
 	/**
 	 * Method to validate whether a commented is flagged or unflagged.
 	 * @param test

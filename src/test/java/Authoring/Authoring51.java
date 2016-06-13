@@ -94,8 +94,8 @@ public class Authoring51 extends TestBase {
 			}
 
 			try {
-				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
-				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
+				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 				test.log(LogStatus.PASS, "Comment appreciation on posts working as expected");
 
 			} catch (Throwable t) {
