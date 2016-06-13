@@ -414,7 +414,7 @@ public class TestBase {
 	// Check whether a particular element is present or not(detecting element
 	// via id)
 	public boolean checkElementPresence_id(String id) {
-		int count = ob.findElements(By.id(OR.getProperty(id))).size();
+		int count = ob.findElements(By.cssSelector(OR.getProperty(id))).size();
 		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
