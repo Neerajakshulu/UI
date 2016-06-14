@@ -67,46 +67,14 @@ public class IAM001 extends TestBase {
 			String password = "Transaction@2";
 			String first_name = "duster";
 			String last_name = "man";
+			
+			String email=createNewUser("duster", "man");
+			logger.info("Email Address : "+email);
 
-			// Open Guerilla Mail and get email id
+			/*// Open Guerilla Mail and get email id
 			ob.get("https://www.guerrillamail.com");
 			String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			System.out.println(email);
-
-			// Navigate to TR login page
-			// ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-			/*
-			 * waitForElementTobeVisible(ob,
-			 * By.xpath(OR.getProperty("TR_login_button")), 30);
-			 * 
-			 * System.out.println("Before clicking login");
-			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click
-			 * (); System.out.println("After clicking login"); //
-			 * waitForElementTobeVisible(ob,
-			 * By.linkText(OR.getProperty("TR_register_link")), 30);
-			 * 
-			 * // Create new TR account
-			 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).
-			 * click(); // waitForElementTobeVisible(ob,
-			 * By.id(OR.getProperty("reg_email_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).
-			 * sendKeys(email);
-			 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).
-			 * sendKeys(first_name);
-			 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).
-			 * sendKeys(last_name);
-			 * ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).
-			 * sendKeys(password);
-			 * ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"
-			 * ))).sendKeys(password);
-			 * ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click
-			 * ();
-			 * ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).
-			 * click();
-			 */
-
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 
@@ -126,12 +94,6 @@ public class IAM001 extends TestBase {
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
-			//
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")),
-			// 30);
-
-			// Verify that confirmation email is sent
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
 			if (!StringContains(text, email)) {
 
@@ -143,16 +105,14 @@ public class IAM001 extends TestBase {
 
 			}
 
-			//BrowserWaits.waitTime(4);
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			// Verify that account activation email has been received
 			ob.get("https://www.guerrillamail.com");
 			Thread.sleep(10000);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			email_list.get(0).click();
 			Thread.sleep(2000);
 			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
-			if (!StringContains(email_subject, "Please confirm your email address for your new Project Neon User ID")) {
+			if (!StringContains(email_subject, "Please activate your Project Neon account")) {
 
 				test.log(LogStatus.FAIL, "Account activation email not received");
 				status = 2;// excel
@@ -161,43 +121,20 @@ public class IAM001 extends TestBase {
 
 			}
 
-			// Activate the account
 			System.out.println("Before capturing email body links");
 			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 			System.out.println(links.size());
 			System.out.println("After capturing email body links");
-			// links.get(0).click();
 			ob.get(links.get(0).getAttribute("href"));
 			Thread.sleep(8000);
-			// waitForElementTobeVisible(ob,
-			// By.id(OR.getProperty("TR_email_textBox")), 30);
-
-			// //Switch to 2nd window
-			// Set<String> myset=ob.getWindowHandles();
-			// Iterator<String> myIT=myset.iterator();
-			// ArrayList<String> al=new ArrayList<String>();
-			// for(int i=0;i<myset.size();i++){
-			//
-			// al.add(myIT.next());
-			// }
-			// ob.switchTo().window(al.get(1));
-
-			// Verify that newly registered user credentials are working fine
-			/*
-			 * ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).
-			 * sendKeys(email);
-			 * ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).
-			 * sendKeys(password);
-			 * ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			 */
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			BrowserWaits.waitTime(4);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			Thread.sleep(10000);
+			Thread.sleep(10000);*/
 			
 			if (!checkElementPresence("ul_name")) {
 
@@ -234,7 +171,7 @@ public class IAM001 extends TestBase {
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 
 			}
-
+			logout();
 			closeBrowser();
 
 		} catch (Throwable t) {

@@ -417,7 +417,7 @@ public class TestBase {
 	// Check whether a particular element is present or not(detecting element
 	// via id)
 	public boolean checkElementPresence_id(String id) {
-		int count = ob.findElements(By.cssSelector(OR.getProperty(id))).size();
+		int count = ob.findElements(By.xpath(OR.getProperty(id))).size();
 		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
@@ -536,7 +536,7 @@ public class TestBase {
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		ob.navigate().to(host);
 		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 		ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 		waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 		ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
@@ -548,9 +548,38 @@ public class TestBase {
 		ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
 		ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
 		ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//div[@class='userprofile']"), 30);
+		waitForElementTobeVisible(ob, By.xpath("//div[@class='userprofile']"), 30);*/
+		
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+		ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+		waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
+		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+		ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+		BrowserWaits.waitTime(4);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
+
+		String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
+		
+		if (!StringContains(text, email)) {
+
+			test.log(LogStatus.FAIL, "Account activation email not sent");// extent
+																			// reports
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+
+		}
+		
+		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		
 		ob.get("https://www.guerrillamail.com");
-		waitForElementTobeVisible(ob, By.xpath("//td[contains(text(),'customer.access@thomsonreuters.com')]"), 60);
+		BrowserWaits.waitTime(10);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -561,15 +590,16 @@ public class TestBase {
 		List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 		ob.get(links.get(0).getAttribute("href"));
+		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		BrowserWaits.waitTime(4);
+		
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-		Thread.sleep(15000);
-		// waitForElementTobeVisible(ob,By.xpath(OR.getProperty("notification")),
-		// 30);
+		BrowserWaits.waitTime(10);
+
 		return email;
 
 	}

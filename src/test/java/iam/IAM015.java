@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -65,25 +66,18 @@ public class IAM015 extends TestBase {
 			}
 			clearCookies();
 
-			// Navigate to TR login page and login with valid TR credentials
-			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+						
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
-
-			// Create new TR account
-			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
-
-			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-
-			if (!checkElementPresence_id("reg_emailError_label")) {
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+			BrowserWaits.waitTime(4);
+			
+			if (!checkElementPresence_id("reg_errorMessage")) {
 
 				test.log(LogStatus.FAIL,
 						"User able to create a new TR account with an email id that has already been used");// extent
@@ -97,10 +91,12 @@ public class IAM015 extends TestBase {
 
 			}
 
-			String error_message = ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
-			// System.out.println(error_message);
+			String error_message = ob.findElement(By.xpath(OR.getProperty("reg_errorMessage"))).getText();
+			logger.info("Error Message : "+error_message);
+			String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
+			logger.info("Email Address : "+emailAddress);
 
-			if (!compareStrings("Your id has already been created, please sign in.", error_message)) {
+			if (!compareStrings("Already have an account?", error_message)) {
 
 				test.log(LogStatus.FAIL, "Error text is incorrect");// extent reports
 				status = 2;// excel
@@ -111,7 +107,8 @@ public class IAM015 extends TestBase {
 										+ "_incorrect_error_text")));// screenshot
 
 			}
-
+			ob.findElement(By.xpath(OR.getProperty("tryAgain"))).click();
+			BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		}
