@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -65,29 +66,26 @@ public class Authoring21 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			loginAs("USERNAME16","PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			System.out.println(commentsList.size());
 			String commentText;
 			int commentsCount = 0;
 			for (WebElement we : commentsList) {
 				commentText = we.getText();
-				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
+				if (!commentText.contains(PROFILE_NAME)) {
 					commentsCount++;
 				}
 
 			}
 			List<WebElement> flagList = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_css")));
+					.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS.toString()));
 			int flagCount = 0;
 			for (WebElement we : flagList) {
 

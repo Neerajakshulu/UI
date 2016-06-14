@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -65,45 +66,27 @@ public class Authoring15 extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			loginAs("USERNAME16","PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 			// pf.getLoginTRInstance(ob).logOutApp();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			String commentText;
-			int commentsCount = 0;
-			WebElement flagWe;
-			for (int i = 0; i < commentsList.size(); i++) {
-				commentText = commentsList.get(i).getText();
-
-				if (!commentText.contains(PROFILE_NAME) && !commentText.contains("Comment deleted")) {
-					flagWe = commentsList.get(i).findElement(
-							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
-					if (flagWe.getAttribute("class").contains("flag-inactive")) {
-						jsClick(ob, flagWe);
-						commentsCount = i;
-						break;
-					}
-				}
-			}
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+			int commentsCount=pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
+			pf.getpostRVPageInstance(ob).selectReasonInFlagModal();
+			pf.getpostRVPageInstance(ob).clickFlagButtonInFlagModal();
 			// waitForAllElementsToBePresent(ob,
 			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
 			// 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			try {
+				
 				Thread.sleep(6000);// Wait for flag modal to disappear
 				boolean IsFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-active");
-				Assert.assertTrue(IsFlagged);
+						.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
+						.getAttribute("class").contains("fa-flag-o");
+				Assert.assertTrue(!IsFlagged);
 				test.log(LogStatus.PASS, "User comment is flagged");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User comment is not flagged");
@@ -117,21 +100,18 @@ public class Authoring15 extends TestBase {
 										+ "Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			 commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 
 			jsClick(ob,
 					commentsList.get(commentsCount).findElement(
-							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+							By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString())));
 
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
+			pf.getpostRVPageInstance(ob).clickCancelButtonInFlagModal();
 			try {
 				boolean isFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-active");
-				Assert.assertTrue(isFlagged);
+						.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
+						.getAttribute("class").contains("fa-flag-o");
+				Assert.assertTrue(!isFlagged);
 				test.log(LogStatus.PASS, "Cancel unflag action without reason selected is working fine for comments");
 
 			} catch (Throwable t) {
@@ -147,21 +127,19 @@ public class Authoring15 extends TestBase {
 
 			}
 
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 
 			jsClick(ob,
 					commentsList.get(commentsCount).findElement(
-							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
+							By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString())));
+			pf.getpostRVPageInstance(ob).selectReasonInFlagModal();
+			
+			pf.getpostRVPageInstance(ob).clickCancelButtonInFlagModal();
 			try {
 				boolean isFlagged = commentsList.get(commentsCount)
-						.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-						.getAttribute("class").contains("flag-active");
-				Assert.assertTrue(isFlagged);
+						.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
+						.getAttribute("class").contains("fa-flag-o");
+				Assert.assertTrue(!isFlagged);
 				test.log(LogStatus.PASS, "Cancel unflag action with reason selected is working fine for comments");
 
 			} catch (Throwable t) {
@@ -176,13 +154,12 @@ public class Authoring15 extends TestBase {
 										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 
 			jsClick(ob,
 					commentsList.get(commentsCount).findElement(
-							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
-			List<WebElement> chkBoxList = ob.findElements(By.cssSelector(OR
-					.getProperty("tr_authoring_comments_flag_reason_chkbox_css")));
+							By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString())));
+			List<WebElement> chkBoxList = ob.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString()));
 			for (WebElement we : chkBoxList) {
 				if (!we.isSelected()) {
 					jsClick(ob, we);
@@ -190,9 +167,7 @@ public class Authoring15 extends TestBase {
 				}
 			}
 			Thread.sleep(5000);// wait for flag modal to appear
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css")), 40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))).click();
+			pf.getpostRVPageInstance(ob).clickFlagButtonInFlagModal();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

@@ -640,12 +640,12 @@ public class PostRecordViewPage extends TestBase {
 		waitForAjax(ob);
 		String attribute = ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
-		if (attribute.contains("flag-inactive")) {
+		if (attribute.contains("fa-flag-o")) {
 			flagOrUnflagAPost();
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("flag-active"));
+			Assert.assertTrue(!attribute.contains("fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to flag the post");
 
 		} else {
@@ -653,7 +653,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("flag-inactive"));
+			Assert.assertTrue(attribute.contains("fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to Unflag the post");
 
 		}
@@ -665,9 +665,9 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	private void flagOrUnflagAPost() {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString())), 40);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}
 
 	/**
@@ -748,9 +748,9 @@ public class PostRecordViewPage extends TestBase {
 		int count = 0;
 		while (isPresent && count < 4) {
 			try {
-				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()), 40);
 
-				more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+				more = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 				Point point = more.getLocation();
 				int y = point.getY() + 100;
 				String script = "scroll(0," + y + ");";
@@ -769,67 +769,32 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click FlAG button on the comments in record view page
 	 * @param currentuser
 	 */
-	public void clickOnFlagOfOtherUserComments(String currentuser) {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
-		List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+	public int clickOnFlagOfOtherUserComments(String currentuser) {
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+		List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 		String commentText;
+		int commentsCount = 0;
 		WebElement flagWe;
 		for (int i = 0; i < commentsList.size(); i++) {
 			commentText = commentsList.get(i).getText();
-			if (!commentText.contains(currentuser) && !commentText.contains("Comment deleted")) {
+			if (!commentText.contains(currentuser)) {
+				try{
 				flagWe = commentsList.get(i).findElement(
-						By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
-				if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
+				if (flagWe.getAttribute("class").contains("fa-flag-o")) {
 					jsClick(ob,
 							commentsList.get(i).findElement(
-									By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+									By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString())));
+					commentsCount = i;
 					break;
 				}
-
+				}catch(Exception e){continue;}
 			}
 		}
+		return commentsCount;
 	}
 
-	/**
-	 * Method to access the article which has comments added to it.
-	 */
-	public void searchForArticleWithComments() {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
-		List<WebElement> itemList;
-
-		while (true) {
-			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
-			int commentsCount, itr = 1;
-			String strCmntCt;
-			boolean isFound = false;
-			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
-				try{
-				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-						.getText().replaceAll(",", "").trim();
-				}catch(Exception e){
-					continue;
-				}
-				commentsCount = Integer.parseInt(strCmntCt);
-				if (commentsCount != 0) {
-					jsClick(ob,
-							itemList.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
-
-					isFound = true;
-					break;
-				}
-
-			}
-
-			if (isFound)
-				break;
-			itr++;
-			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
-			waitForAjax(ob);
-		}
-	}
-
+	
 	
 		public boolean isFlagButtonDispalyedForOthersPost() {
 			boolean result = false;
@@ -900,5 +865,33 @@ public class PostRecordViewPage extends TestBase {
 		}
 
 		
+		public void selectReasonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		}
+		
+		public void clickCancelButtonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString())));
+		}	
+		
+	public void clickFlagButtonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
+		}
 	
+	public void createComment(String comment){
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
+		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())).sendKeys(comment);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
+	}
+		
+		
 }

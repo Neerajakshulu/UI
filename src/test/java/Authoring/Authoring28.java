@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -69,69 +70,32 @@ public class Authoring28 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			// .sleep(8000);
-			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			loginAs("USERNAME16","PASSWORD16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			String commentText, profileName = null;
-			List<String> profileDetailsInComment = new ArrayList<String>();
-			List<WebElement> details;
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
+			String profileName = null;
 			waitForPageLoad(ob);
 			waitForAjax(ob);
-			for (int i = 0; i < commentsList.size(); i++) {
-				commentText = commentsList.get(i).getText();
-				if (!commentText.contains("Comment deleted")) {
-
-					profileName = commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath")))
+			
+					
+			profileName = commentsList.get(0)
+							.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_USER_PROFILE_LINK_XPATH.toString()))
 							.getText();
-					String str = commentsList.get(i)
-							.findElement(By.xpath(OR.getProperty("tr_authoring_comments_profile_details_xpath")))
-							.getText();
-
-					for (String str1 : str.split(",")) {
-						profileDetailsInComment.add(str1.trim());
-					}
+					
 					jsClick(ob,
-							commentsList.get(i).findElement(
-									By.xpath(OR.getProperty("tr_authoring_comments_profile_name_xpath"))));
-					break;
-				}
+							commentsList.get(0).findElement(
+									By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_USER_PROFILE_LINK_XPATH.toString())));
+					
 
-			}
 			waitForPageLoad(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_name_css")), 180);
-			String actProfileName = ob.findElement(By.cssSelector(OR.getProperty("tr_profile_name_css"))).getText();
-			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_profile_details_css")), 180);
-			details = ob.findElements(By.cssSelector(OR.getProperty("tr_profile_details_css")));
-			List<String> profileDetailsInProfile = new ArrayList<String>();
-			for (WebElement we : details) {
-				profileDetailsInProfile.add(we.getText().trim());
-
-			}
-
-			while (true) {
-
-				if (profileDetailsInProfile.contains(""))
-					profileDetailsInProfile.remove("");
-				else
-					break;
-			}
-
-			while (true) {
-
-				if (profileDetailsInComment.contains(""))
-					profileDetailsInComment.remove("");
-				else
-					break;
-			}
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 180);
+			String actProfileName = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString())).getText();
+			
 			try {
-
-				Assert.assertEquals(profileDetailsInProfile, profileDetailsInComment);
+			
 				Assert.assertEquals(profileName, actProfileName);
 				test.log(LogStatus.PASS, "Commenter details are displayed correctly");
 			} catch (Throwable t) {

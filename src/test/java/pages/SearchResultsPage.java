@@ -225,5 +225,46 @@ public class SearchResultsPage extends TestBase {
 		}
 
 	}
+	
+	/**
+	 * Method to access the article which has comments added to it.
+	 */
+	public void searchForArticleWithComments() {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
+		List<WebElement> itemList;
+
+		while (true) {
+			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+			int commentsCount, itr = 1;
+			String strCmntCt;
+			boolean isFound = false;
+			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+				try{
+				strCmntCt = itemList.get(i)
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+						.getText().replaceAll(",", "").trim();
+				}catch(Exception e){
+					continue;
+				}
+				commentsCount = Integer.parseInt(strCmntCt);
+				if (commentsCount != 0) {
+					jsClick(ob,
+							itemList.get(i).findElement(
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+
+					isFound = true;
+					break;
+				}
+
+			}
+
+			if (isFound)
+				break;
+			itr++;
+			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+		}
+	}
+
 
 }

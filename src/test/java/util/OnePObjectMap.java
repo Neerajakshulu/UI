@@ -148,7 +148,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
-	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag']"),
+	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag'] i"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("div[class*='time-stamp']"),
@@ -185,15 +185,35 @@ public enum OnePObjectMap {
 	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	
+	//Search Page Elements
+	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
+	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
+	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
+	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
+	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
+	SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH("//div[@class='wui-content-title wui-content-title--medium']/a"),
+	
+	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
-
-
-	//Search Page Elements
-	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']");
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']")	,
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
+	RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS("button[ng-click='reportThis()']"),
+	RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS("button[ng-click='grabMore()']"),
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS("button[ng-click='editThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENTS_DELETE_BUTTON_CSS("button[ng-click='deleteThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH("//div[@class='ne-comment-list__comment-content']"),
+	RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH("descendant::button[@ng-click='reportThis()']/i"),
+	RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS("div[id^='taTextElement']"),
+	RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS("button[ng-click='createComment()']"),
+	RECORD_VIEW_PAGE_COMMENTS_USER_PROFILE_LINK_XPATH("descendant::div[contains(@class,'ne-profile-object-name')]/descendant::a[contains(@href,'#/profile')]"),
+	RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS("h3[class*='comment-list'] span"),
 	
-	
-	private String locator;
+	;
+
+	String locator;
 
 	OnePObjectMap(String locator) {
 		this.locator = locator;

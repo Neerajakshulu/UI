@@ -68,12 +68,10 @@ public class Authoring24 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
-			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			loginAs("USERNAME16","PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));

@@ -15,6 +15,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -65,29 +66,21 @@ public class Authoring18 extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
-			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 40);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))));
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox"))).sendKeys("test");
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
+			loginAs("USERNAME16","PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getAuthoringInstance(ob).chooseArticle("");
+			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
 			BrowserWaits.waitTime(10);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
-			System.out.println(commentsList.size());
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			String commentText;
 			for (WebElement we : commentsList) {
 				commentText = we.getText();
 				if (commentText.contains(PROFILE_NAME)) {
 
 					try {
-						if (we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
+						if (we.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
 								.isDisplayed()) {
 							test.log(LogStatus.FAIL, "Flag is displayed for comment user authored themselves");
 							status = 2;

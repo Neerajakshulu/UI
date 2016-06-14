@@ -17,18 +17,13 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring19 extends TestBase {
-
-	private static final String PASSWORD = "Welcome123";
-	private static final String USER_NAME = "kavya.revanna@thomsonreuters.com";
-	private static final String PROFILE_NAME = "Avinash Potti";
-	private static final String PASSWORD1 = "Welcome01";
-	private static final String USER_NAME1 = "chinna.putha@thomsonreuters.com";
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();
@@ -73,67 +68,62 @@ public class Authoring19 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			loginAs("USERNAME5", "PASSWORD5");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 40);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("Synergistic");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
-			String articleTitle = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			loginAs("USERNAME16", "PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Synergistic");
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+			String articleTitle = ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).getText();
+			ob.findElement((By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()))).click();
 			String comment = "testFlag";
 			pf.getAuthoringInstance(ob).enterArticleComment(comment);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			pf.getLoginTRInstance(ob).logOutApp();
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAsOther(USER_NAME, PASSWORD);
+			loginAs("USERNAME3", "PASSWORD3");
 			BrowserWaits.waitTime(15);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 60);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
-			ob.findElement(By.linkText(articleTitle)).click();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 40);
+			pf.getHFPageInstance(ob).searchForText(articleTitle);
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+			jsClick(ob,ob.findElement(By.linkText(articleTitle)));
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 40);
 
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			System.out.println(commentsList.size());
 			String commentText;
 			WebElement flagWe;
 			for (int i = 0; i < commentsList.size(); i++) {
 				commentText = commentsList.get(i).getText();
-				if (!commentText.contains(LOGIN.getProperty("PROFILE1")) && !commentText.contains("Comment deleted")) {
-					flagWe = commentsList.get(i).findElement(
-							By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
-					if (flagWe.getAttribute("class").contains("flag-inactive")) {
-						scrollElementIntoView(ob, flagWe);
+				if (commentText.contains(PROFILE_NAME)) {
+					flagWe = commentsList.get(i)
+							.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
+					if (flagWe.getAttribute("class").contains("fa-flag-o")) {
+						//scrollingToElementofAPage();
+						BrowserWaits.waitTime(5);
 						jsClick(ob, flagWe);
+						BrowserWaits.waitTime(5);
 						break;
 					}
 				}
 
 			}
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+			pf.getpostRVPageInstance(ob).selectReasonInFlagModal();
+			pf.getpostRVPageInstance(ob).clickFlagButtonInFlagModal();
 
 			pf.getLoginTRInstance(ob).logOutApp();
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAsOther(USER_NAME1, PASSWORD1);
+			loginAs("USERNAME5", "PASSWORD5");
 			BrowserWaits.waitTime(15);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
 			searchAnArticle(articleTitle);
 			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob, By.cssSelector("h2 span[class='stat-count ng-binding']"), 180);
-			String commentCount = ob.findElement(By.cssSelector("h2 span[class='stat-count ng-binding']")).getText();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()), 180);
+			String commentCount = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString())).getText();
 
 			if (commentCount.equals("0")) {
 				searchAnArticle(articleTitle);
 			}
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 180);
-
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			boolean flag = false;
 			for (WebElement we : commentsList) {
 				commentText = we.getText();
@@ -141,8 +131,8 @@ public class Authoring19 extends TestBase {
 
 					try {
 
-						if (we.findElement(By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")))
-								.getAttribute("class").contains("flag-inactive")) {
+						if (we.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
+								.getAttribute("class").contains("fa-flag-o")) {
 							test.log(LogStatus.PASS, "Flag set by other user is not visible to the current user");
 							flag = true;
 						} else {
@@ -198,9 +188,8 @@ public class Authoring19 extends TestBase {
 	}
 
 	private void searchAnArticle(String articleTitle) throws InterruptedException, Exception {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(articleTitle);
-		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 120);
+		pf.getHFPageInstance(ob).searchForText(articleTitle);
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 120);
 		int count = 0;
 		boolean found = false;
 		while (count < 10) {
