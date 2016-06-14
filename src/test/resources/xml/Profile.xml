@@ -17,7 +17,7 @@
 		</classes>
 	</test>
 
-	<!--<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
@@ -231,9 +231,9 @@
 		<classes>
 			<class name="Profile.Profile30"></class>
 		</classes>
-	</test> -->
+	</test> 
 
-	<!-- <test name="post_tab_infinite_Scroll">
+	 <test name="post_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile31"></class>
 		</classes>
@@ -308,7 +308,7 @@
 			<class name="Profile.Profile40"></class>
 		</classes>
 	</test>
- -->
+ 
 
 </suite>
 
