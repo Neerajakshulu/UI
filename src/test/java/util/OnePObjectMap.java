@@ -183,6 +183,8 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[@class='row notifications-wrapper ng-scope']//div[@class='notification-component ng-scope']"),
 	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
+	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
+	
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
 
