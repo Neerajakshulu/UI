@@ -86,6 +86,7 @@ public class Notifications0003 extends NotificationsTestBase {
 					Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
 							&& text.contains("Now following you"));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");
+					test.log(LogStatus.PASS,"PASS");
 					closeBrowser();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
