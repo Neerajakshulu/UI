@@ -40,10 +40,10 @@ public class SearchProfile extends TestBase {
 	 */
 	public int getPeopleCount() throws Exception {
 		String listPeople = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).findElement(By.tagName("span"))
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).findElement(By.tagName("span"))
 				.getText();
 		peopleCount = Integer.parseInt(listPeople);
-		System.out.println("Total People search results-->" + peopleCount);
+		logger.info("Total People search results-->" + peopleCount);
 		return peopleCount;
 	}
 

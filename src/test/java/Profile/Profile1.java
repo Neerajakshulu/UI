@@ -9,13 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for follow/unfollow profile from search page itself
@@ -33,7 +32,7 @@ public class Profile1 extends TestBase {
 	static int status = 1;
 	static String followBefore = null;
 	static String followAfter = null;
-	PageFactory pf = new PageFactory();
+	
 	
 	
 	/**

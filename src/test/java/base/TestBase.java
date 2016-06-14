@@ -48,6 +48,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.Xls_Reader;
@@ -79,6 +80,8 @@ public class TestBase {
 	private String[][] xData;
 	public static int count = 0;
 	public static int flag = 0;
+	
+	public PageFactory pf = new PageFactory();
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception {

@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Profile" parallel="tests" thread-count="10">
+<suite name="Profile">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -10,14 +10,14 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	<test name="Follow_Other_Profile" preserve-order="true">
+	 <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
 		</classes>
 	</test>
 
-	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	<!--<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
@@ -162,8 +162,8 @@
 	</test>
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
-		<!-- <parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="luFKme2D2\E" /> -->
+		<parameter name="username" value="avinash.p1229@gmail.com" />
+		<parameter name="password" value="luFKme2D2\E" />
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="1Pproject!" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -231,15 +231,15 @@
 		<classes>
 			<class name="Profile.Profile30"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="post_tab_infinite_Scroll">
+	<!-- <test name="post_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile31"></class>
 		</classes>
 	</test>
 
-	<test name="comments_tab_infinite_Scroll">
+	 <test name="comments_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile32"></class>
 		</classes>
@@ -257,7 +257,7 @@
 		</classes>
 	</test>
 
-	<test name="Post_like_count">
+	 <test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -291,8 +291,8 @@
 	</test>
 
 	<test name="Post_comment_count">
-		<!-- <parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="luFKme2D2\E" /> -->
+		<parameter name="username" value="avinash.p1229@gmail.com" />
+		<parameter name="password" value="luFKme2D2\E" />
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="1Pproject!" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
@@ -308,7 +308,7 @@
 			<class name="Profile.Profile40"></class>
 		</classes>
 	</test>
-
+ -->
 
 </suite>
 

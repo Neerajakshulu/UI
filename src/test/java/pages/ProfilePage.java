@@ -1219,9 +1219,9 @@ public class ProfilePage extends TestBase {
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		}
 
-		// System.out.println("before scroll-->"+beforeScroll);
+		logger.info("before scroll-->"+beforeScroll);
 		int firstScroll = profileTabsRecords.size();
-		// System.out.println(" first scroll-->"+firstScroll);
+		logger.info(" first scroll-->"+firstScroll);
 		if (!(firstScroll > beforeScroll)) {
 			throw new Exception("Records/Records Count should be increase while do page scrolldown");
 		}

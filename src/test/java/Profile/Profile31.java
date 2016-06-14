@@ -53,7 +53,8 @@ public class Profile31 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -74,7 +75,7 @@ public class Profile31 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");
+			test.log(LogStatus.FAIL, "Login not done");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -97,7 +98,7 @@ public class Profile31 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			test.log(LogStatus.INFO, "Post tab records/record count should increase while do scrolldown");
-			pf.getProfilePageInstance(ob).commentsTabScroll();
+			pf.getProfilePageInstance(ob).postTabScroll();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

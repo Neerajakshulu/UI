@@ -137,6 +137,31 @@ public class BrowserWaits extends TestBase {
 		}
 
 	}
+	
+	
+	/**
+	 * wait until desired element is Clickable
+	 * 
+	 * @param locator
+	 */
+	public void waitUntilElementIsClickable(Object elementName) {
+		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
+			try {
+				(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+
+					public Boolean apply(WebDriver d) {
+						try {
+							return Boolean.valueOf(element != null && element.isEnabled());
+						} catch (Exception e) {
+							return Boolean.valueOf(false);
+						}
+					}
+				});
+			} catch (TimeoutException te) {
+				throw new TimeoutException("Failed to find element [Locator = {" + locatorText
+						+ "}], after waiting for " + time + "ms");
+			}
+	}
 
 	/**
 	 * wait until desired element is not displayed
@@ -289,6 +314,39 @@ public class BrowserWaits extends TestBase {
 	 */
 	public static void waitTime(final int secs) throws InterruptedException {
 		Thread.sleep(secs * 1000);
+	}
+	
+	public WebElement getLocator(String locatorType,
+			String locatorText) {
+		WebElement ele = null;
+		// System.out.println("Locator Type-->"+locatorType);
+		// System.out.println("Locator Text-->"+locatorText);
+
+		try {
+			if (locatorType.endsWith("_CSS")) {
+				ele = ob.findElement(By.cssSelector(locatorText));
+			} else if (locatorType.endsWith("_XPATH")) {
+				ele = ob.findElement(By.xpath(locatorText));
+			} else if (locatorType.endsWith("_LINK")) {
+				ele = ob.findElement(By.linkText(locatorText));
+			} else if (locatorType.endsWith("_PLINK")) {
+				ele = ob.findElement(By.partialLinkText(locatorText));
+			} else if (locatorType.endsWith("_ID")) {
+				ele = ob.findElement(By.id(locatorText));
+			} else if (locatorType.endsWith("_CLASS")) {
+				ele = ob.findElement(By.className(locatorText));
+			} else if (locatorType.endsWith("_TAG")) {
+				ele = ob.findElement(By.tagName(locatorText));
+			} else {
+				ele = ob.findElement(By.name(locatorText));
+			}
+
+		} catch (NoSuchElementException nse) {
+			throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
+					+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+		}
+		return ele;
+
 	}
 
 }

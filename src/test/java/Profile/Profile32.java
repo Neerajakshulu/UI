@@ -75,7 +75,7 @@ public class Profile32 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");
+			test.log(LogStatus.FAIL, "login not done");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
