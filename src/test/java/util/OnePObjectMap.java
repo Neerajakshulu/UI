@@ -209,11 +209,9 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS("div[id^='taTextElement']"),
 	RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS("button[ng-click='createComment()']"),
 	RECORD_VIEW_PAGE_COMMENTS_USER_PROFILE_LINK_XPATH("descendant::div[contains(@class,'ne-profile-object-name')]/descendant::a[contains(@href,'#/profile')]"),
-	RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS("h3[class*='comment-list'] span"),
-	
-	;
+	RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS("h3[class*='comment-list'] span");
 
-	String locator;
+	private String locator;
 
 	OnePObjectMap(String locator) {
 		this.locator = locator;
