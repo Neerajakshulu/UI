@@ -113,7 +113,7 @@ public enum OnePObjectMap {
 
 	HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS("button[id='posting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("h2[class^='wui-content-title']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='ne-profile-object-info'] a"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='wui-subtitle ne-profile-object-name ng-scope'] a"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-profile-object-info'] div[class^='wui-descriptor']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
@@ -141,7 +141,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_FOLLOWERS_COUNT_CSS("a[data-event-category='profilefollowers'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_FOLLOWING_COUNT_CSS("a[data-event-category='profilefollowing'] span[class='ng-binding']:nth-child(2)"),
 	HOME_PROJECT_NEON_PROFILE_TABS_CSS("li[ng-repeat='tab in vm.detailTabs']"),
-	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("h2[class='profile-tab-heading']"),
+	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("div[class='wui-card__content']"),
 
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
