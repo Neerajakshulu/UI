@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -68,11 +69,10 @@ public class Search16 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology", Keys.ENTER);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
+			//waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 40);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 20);
 			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 20);
@@ -109,6 +109,7 @@ public class Search16 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "sortby_ is_not_ working_ for_ search_ results")));// screenshot
 			}
+			
 			logout();
 			closeBrowser();
 		}

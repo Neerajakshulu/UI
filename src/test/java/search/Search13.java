@@ -66,7 +66,6 @@ public class Search13 extends TestBase {
 
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -110,7 +109,7 @@ public class Search13 extends TestBase {
 				}
 
 				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(15000);
+				Thread.sleep(4000);
 
 				pageText = ob.getPageSource().toLowerCase();
 				condition1 = pageText.contains("cat");

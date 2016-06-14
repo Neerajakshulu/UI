@@ -14,8 +14,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -69,19 +71,18 @@ public class Search11 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
+			
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
+			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
@@ -98,25 +99,32 @@ public class Search11 extends TestBase {
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			waitForElementTobeVisible(ob, By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("button[id='single-button']"), 30);
 
 			// ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
+			ob.findElement(By.cssSelector("button[id='single-button']")).click();
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector("a[event-action='citingsrcslocalcount:desc']"), 30);
 			// ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
 			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-
+             waitForAjax(ob);
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 
 				al1.add(searchResults.get(i).getText());
+		
+			}
+			for (int i = 0; i < searchResults.size(); i++) {
 
+				System.out.println(searchResults.get(i).getText());
+		
 			}
 			jsClick(ob, searchResults.get(5));
 
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
+			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {
@@ -146,9 +154,9 @@ public class Search11 extends TestBase {
 
 			// String option =
 			// ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
-			String option = ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"))
-					.getText();
-
+			String option = ob.findElement(By.cssSelector("button[id='single-button']"))
+					.getText().substring(9);
+			
 			if (!compareStrings("Times Cited", option)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent
@@ -161,13 +169,15 @@ public class Search11 extends TestBase {
 
 			// Finding the filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-
-			boolean filtering_condition = filterValues.get(0).isSelected() && filterValues.get(1).isSelected();
+			BrowserWaits.waitTime(3);
+			String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
+			//boolean filtering_condition = filterValues.get(0).isEnabled() && filterValues.get(1).isEnabled();
 
 			try {
-				Assert.assertTrue(filtering_condition);
+				if (!backgrundValue.contains("rgb(255, 255, 255)")) {
 				test.log(LogStatus.PASS,
 						"Filters are retained when user navigates back to articles search results page from record view page");
+				}
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL,
