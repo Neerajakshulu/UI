@@ -1,8 +1,5 @@
 package notifications;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -17,21 +14,18 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * The {@code Notifications0003} for testing test case of Verify that user receives a notification when he is followed
  * by someone
  *
- * @author Avinash Potti 
+ * @author Avinash Potti
  */
 public class Notifications0003 extends NotificationsTestBase {
+
 	static int status = 1;
 	PageFactory pf = new PageFactory();
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
 
 	/**
 	 * class for Notification
@@ -58,59 +52,63 @@ public class Notifications0003 extends NotificationsTestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + "execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			if (user1 != null && user2 != null) {
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				// Login with user2 for verify that to receives a notification with correct data
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				ob.navigate().refresh();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notification")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");
+				logger.info("Home Page loaded success fully");
+				test.log(LogStatus.INFO, "User Logged in  successfully");
 				JavascriptExecutor jse = (JavascriptExecutor) ob;
 				for (int i = 1; i <= 3; i++) {
-					String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+					String text = ob
+							.findElement(By.xpath(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH.toString()))
+							.getText();
 					if (text.length() > 0) {
 						break;
 					}
 					jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 					BrowserWaits.waitTime(3);
 				}
-				String text = ob.findElement(By.xpath(OR.getProperty("notification"))).getText();
+				String text = ob
+						.findElement(By.xpath(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH.toString()))
+						.getText();
 				logger.info("Notification Text: " + text);
 				try {
-					Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn1 + " " + ln1)
-							&& text.contains("is now following you"));
+					Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
+							&& text.contains("Now following you"));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");
+					closeBrowser();
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-					test.log(LogStatus.INFO, "Error--->" + t.getMessage());
+					// reports
+					test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 					ErrorUtil.addVerificationFailure(t);
+					logger.error(this.getClass().getSimpleName() + "--->" + t);
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+					test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 				}
-				closeBrowser();
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened" + t);// extent
-			// next 3 lines to print whole testng error in report
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+			test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
-			throw new Exception();
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest
