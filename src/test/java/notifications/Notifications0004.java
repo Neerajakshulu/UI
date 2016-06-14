@@ -14,6 +14,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0004 extends NotificationsTestBase {
 
@@ -45,47 +46,51 @@ public class Notifications0004 extends NotificationsTestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			if (user1 != null && user2 != null && user3 != null) {
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
-				
-				// User2 Logging in
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
+				// Login with user2 for verify that to receives a notification with correct data
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 50);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");
+				logger.info("Home Page loaded success fully");
+				test.log(LogStatus.INFO, "User Logged in  successfully");
 				JavascriptExecutor jse = (JavascriptExecutor) ob;
 				for (int i = 1; i <= 3; i++) {
-					jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-					BrowserWaits.waitTime(3);
-					String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
+					String text = ob
+							.findElement(
+									By.xpath(OnePObjectMap.NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH.toString()))
+							.getText();
 					if (text.length() > 0) {
 						break;
 					}
+					jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
+					BrowserWaits.waitTime(3);
 				}
-				String text = ob.findElement(By.xpath(OR.getProperty("following_friend_notification"))).getText();
+				String text = ob
+						.findElement(By.xpath(OnePObjectMap.NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH.toString()))
+						.getText();
 				logger.info("Notification Text: " + text);
 				try {
-//					logger.info("user 2 details" + text.contains(fn1 + " " + ln1));
-//					logger.info("user 3 details" + text.contains(fn3 + " " + ln3));
-//					logger.info("text " + text.contains("is now following"));
-					Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn2 + " " + ln2)
-							&& text.contains("is now following") && text.contains(fn3 + " " + ln3));
+					Assert.assertTrue(text.contains("TODAY") && text.contains(fn2 + " " + ln2)
+							&& text.contains("Now following") && text.contains(fn3 + " " + ln3));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");
+					test.log(LogStatus.PASS, "PASS");
 					pf.getLoginTRInstance(ob).logOutApp();
 				} catch (Throwable t) {
-
-					test.log(LogStatus.FAIL, "User receiving notification with incorrect content" + t);// extent
+					test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
 					// reports
-					test.log(LogStatus.INFO, "Error--->" + t);
+					test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 					ErrorUtil.addVerificationFailure(t);
+					logger.error(this.getClass().getSimpleName() + "--->" + t);
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 							this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 					closeBrowser();
 				}
@@ -94,10 +99,11 @@ public class Notifications0004 extends NotificationsTestBase {
 				throw new Exception("User creation problem hence throwing exception");
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
+			test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
 			// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
