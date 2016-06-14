@@ -9,23 +9,20 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile7 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	PageFactory pf;
 
 	
 	/**
@@ -41,7 +38,6 @@ public class Profile7 extends TestBase {
 						var,
 						"Verify that  below Application links working as expected \n 1. Web of Science \n 2.End Note \n 3.InCities \n 4.ScholarOne Abstracts \n 5.ScholarOne Manuscripts")
 				.assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	/**
@@ -56,7 +52,8 @@ public class Profile7 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -64,14 +61,7 @@ public class Profile7 extends TestBase {
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -80,12 +70,11 @@ public class Profile7 extends TestBase {
 			maximizeWindow();
 			test.log(LogStatus.INFO, " Login to Application with TR Valid Credentials ");
 			ob.navigate().to(System.getProperty("host"));
-			pf = new PageFactory();
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");// extent reports
+			test.log(LogStatus.FAIL, "login_not_done");// extent reports
 			// print stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

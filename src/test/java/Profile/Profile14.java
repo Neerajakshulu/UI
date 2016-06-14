@@ -41,7 +41,8 @@ public class Profile14 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -62,7 +63,7 @@ public class Profile14 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");// extent reports
+			test.log(LogStatus.FAIL, "Login_not_done");// extent reports
 			// print stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

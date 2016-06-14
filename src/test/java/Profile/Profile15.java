@@ -9,13 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for profile search with last name
@@ -25,13 +24,11 @@ import com.relevantcodes.extentreports.LogStatus;
  */
 public class Profile15 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	PageFactory pf;
 	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -43,7 +40,6 @@ public class Profile15 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify Profile Search with last name").assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	@Test
@@ -62,27 +58,19 @@ public class Profile15 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set ");
 
 		try {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
-			pf = new PageFactory();
 
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable e) {
-			test.log(LogStatus.FAIL, "Error:" + e);
+			test.log(LogStatus.FAIL, "Error:Login_not_done");
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
 			test.log(

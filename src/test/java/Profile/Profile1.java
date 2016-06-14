@@ -24,7 +24,6 @@ import util.TestUtil;
  */
 public class Profile1 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
@@ -48,7 +47,6 @@ public class Profile1 extends TestBase {
 				var,
 				"1.Verify that user is able to Start/Stop following a user from profile search results page \n"
 						+ "2.Verify that user is able to search for profiles").assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	/**
@@ -63,7 +61,7 @@ public class Profile1 extends TestBase {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -72,13 +70,7 @@ public class Profile1 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {

@@ -11,19 +11,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile13 extends TestBase {
 
 	static int status = 1;
-	PageFactory pf = new PageFactory();
-
 	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports

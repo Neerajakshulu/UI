@@ -10,20 +10,17 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile21 extends TestBase {
 
 	static int status = 1;
-	PageFactory pf = new PageFactory();
-	
-	
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
 	 * @throws Exception, When Something unexpected
@@ -43,7 +40,8 @@ public class Profile21 extends TestBase {
 			String password) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 

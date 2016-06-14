@@ -9,13 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile5 extends TestBase {
 
@@ -25,7 +24,6 @@ public class Profile5 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	PageFactory pf = new PageFactory();
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -55,7 +53,8 @@ public class Profile5 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -63,14 +62,7 @@ public class Profile5 extends TestBase {
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {

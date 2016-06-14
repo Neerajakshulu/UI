@@ -9,13 +9,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for find other profiles watchlists
@@ -25,7 +25,6 @@ import com.relevantcodes.extentreports.LogStatus;
  */
 public class Profile40 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
@@ -35,7 +34,6 @@ public class Profile40 extends TestBase {
 	static String followAfter = null;
 	static boolean isFollowEnable = false;
 	static boolean isFollowDisable = false;
-	PageFactory pf;
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -46,7 +44,6 @@ public class Profile40 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that user is able to watch others watchlists").assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	@Test
@@ -64,14 +61,7 @@ public class Profile40 extends TestBase {
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
