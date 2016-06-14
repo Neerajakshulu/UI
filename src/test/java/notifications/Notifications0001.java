@@ -17,6 +17,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * The {@code Notifications0001} for testing test case of Verify that user is able to view top commenter's information
@@ -53,15 +54,15 @@ public class Notifications0001 extends NotificationsTestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			if (user1 == null) {
+				// login with default user
 				pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 						CONFIG.getProperty("defaultPassword"));
 			} else {
@@ -69,31 +70,34 @@ public class Notifications0001 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			}
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			BrowserWaits.waitTime(2);
-			test.log(LogStatus.INFO, " Scrolling down to find Top commenters--->");
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
+			logger.info("Home Page loaded success fully");
+			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");
+			List<WebElement> elements = null;
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while (scrollCount < 30) {
-				jse.executeScript("scroll(0,10000)");
 				BrowserWaits.waitTime(3);
-				List<WebElement> elements = ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
+				elements = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMEND_ARTICLE_XPATH);
 				if (elements.size() > 0)
 					break;
 				scrollCount++;
+				jse.executeScript("scroll(0,10000)");
 			}
 			// Login with first user and check if notification is present
 			try {
-				List<WebElement> elements = ob.findElements(By.xpath("//*[contains(@ng-if,'TopUserCommenters')]"));
 				Assert.assertTrue(elements.size() == 1);
-				test.log(LogStatus.INFO, "user is able to view top commenters information in home page");
-				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+				test.log(LogStatus.INFO, "User is able to view top commenters information in home page");
+				test.log(LogStatus.PASS, "PASS");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"user is not able to view top commenters information in home page afer 30 scrolls");// extent
-				// reports
-				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
+						"User is not able to view top commenters information in home page afer 30 scrolls");// extent
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+				ErrorUtil.addVerificationFailure(t);
+				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()

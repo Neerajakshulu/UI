@@ -185,6 +185,7 @@ public enum OnePObjectMap {
 	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH("//ne-notify-friend-follows[@class='ng-scope']"),
+	NEWSFEED_TOP_COMMENTERS_XPATH("//div[contains(@ng-if,'TopUserCommenters')]"),
 	
 	//Search Page Elements
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
