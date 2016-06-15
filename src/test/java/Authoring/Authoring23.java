@@ -100,9 +100,9 @@ public class Authoring23 extends TestBase {
 		try {
 			//waitForTRHomePage();
 			loginAs("USERNAME11", "PASSWORD11");
-			searchArticle(article);
+			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComments("test");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
@@ -198,36 +198,6 @@ public class Authoring23 extends TestBase {
 		 */
 		if (master_condition)
 			closeBrowser();
-	}
-
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
-		waitForAjax(ob);
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-	}
-
-	public void waitUntilTextPresent(String locator,
-			String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
 	}
 
 	@DataProvider

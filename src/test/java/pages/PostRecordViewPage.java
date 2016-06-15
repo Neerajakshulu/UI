@@ -539,8 +539,8 @@ public class PostRecordViewPage extends TestBase {
 		String PARENT_WINDOW = ob.getWindowHandle();
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS);
-		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-		jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
 		
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
@@ -559,10 +559,10 @@ public class PostRecordViewPage extends TestBase {
 				ob.switchTo().window(PARENT_WINDOW);
 				waitForElementTobeVisible(
 						ob,
-						By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS.toString()),
 						40);
 				jsClick(ob, ob.findElement(By
-						.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+						.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS.toString())));
 			}
 		}
 
@@ -576,10 +576,7 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void shareOnTwitter(String tusername,
 			String tpassword) throws Exception {
-		/*waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-				.toString())));*/
+	
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		String rvPageurl = ob.getCurrentUrl();
@@ -694,8 +691,8 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void addExternalLinkComments(String url) throws Exception {
 		BrowserWaits.waitTime(15);
-		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		commentArea.click();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())));
@@ -816,8 +813,8 @@ public class PostRecordViewPage extends TestBase {
 		public boolean validateCommentForLink(String url) throws InterruptedException {
 			BrowserWaits.waitTime(10);
 			
-			waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
-			WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+			WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 			
 			if (commentArea.findElements(By.linkText(url)).size() != 0)
 				return true;
@@ -831,26 +828,26 @@ public class PostRecordViewPage extends TestBase {
 			try {
 
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='ne-create-comment'] button[name='bold']"),40);
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_BOLD_ICON_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='ne-create-comment'] button[name='bold']"))
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_BOLD_ICON_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Bold format option is not enable for comments");
 					result=false;
 				}
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='ne-create-comment'] button[name='italics']"),40);
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='ne-create-comment'] button[name='italics']"))
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Italics format option is not enable for comments");
 					result=false;
 				}
 				
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='ne-create-comment'] button[name='insertLink']"),40);
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='ne-create-comment'] button[name='insertLink']"))
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Insert link format option is not enable for comments");
 					result=false;

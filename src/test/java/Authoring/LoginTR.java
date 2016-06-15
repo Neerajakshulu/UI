@@ -52,16 +52,16 @@ public class LoginTR extends TestBase {
 		//ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
 		//waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
 		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
-		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(userName);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString())).sendKeys(password);
 	}
 
 	public void clickLogin() throws InterruptedException {
 		//ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).click();
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))));
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString())));
 		//waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 90);
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 90);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 90);
 
 	}
 

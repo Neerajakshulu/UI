@@ -103,8 +103,8 @@ public class Authoring22 extends TestBase {
 
 		try {
 
-			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
-			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");

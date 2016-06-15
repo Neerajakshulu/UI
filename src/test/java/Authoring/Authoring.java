@@ -49,9 +49,9 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		scrollingToElementofAPage();
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css")), 180);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()), 180);
 		String commentSizeBeforeAdd = ob
-				.findElement(By.cssSelector(OR.getProperty("tr_cp_authoring_commentCount_css"))).getText()
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString())).getText()
 				.replaceAll(",", "").trim();
 		return Integer.parseInt(commentSizeBeforeAdd);
 	}
@@ -66,7 +66,7 @@ public class Authoring extends TestBase {
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(20);
 		
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		//jsClick(ob,commentArea);
 
@@ -91,7 +91,7 @@ public class Authoring extends TestBase {
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
 		BrowserWaits.waitTime(30);
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		commentArea.click();
 		commentArea.clear();
@@ -101,9 +101,9 @@ public class Authoring extends TestBase {
 
 	public void clickAddCommentButton() throws InterruptedException {
 		scrollingToElementofAPage();
-		waitForElementTobeClickable(ob, By.xpath("//button[@ng-click='createComment()']"), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()), 60);
 		WebElement addCommentElement = ob.findElement(By
-				.xpath("//button[@ng-click='createComment()']"));
+				.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()));
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
 		waitForAjax(ob);
@@ -125,20 +125,20 @@ public class Authoring extends TestBase {
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(
 				ob,
-				By.cssSelector("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='editThis(comment.id)']"),
+				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()),
 				40);
 		WebElement editCommentElement = ob
 				.findElement(By
-						.cssSelector("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='editThis(comment.id)']"));
+						.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
 		JavascriptExecutor exe = (JavascriptExecutor) ob;
 		exe.executeScript("arguments[0].click();", editCommentElement);
 
-		List<WebElement> commentArea = ob.findElements(By.cssSelector("div[id^='taTextElement']"));
+		List<WebElement> commentArea = ob.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("no of comment areas enabled-->" + commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
 		BrowserWaits.waitTime(5);
-		List<WebElement> subButtons = ob.findElements(By.cssSelector("button[class='wui-btn wui-btn--primary']"));
+		List<WebElement> subButtons = ob.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()));
 		System.out.println("Buttons available---2--->" + subButtons);
 		for (WebElement subButton : subButtons) {
 			System.out.println("Button Text-->" + subButton.getText());
@@ -153,7 +153,7 @@ public class Authoring extends TestBase {
 
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
-		String commentText = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']")).get(0).getText();
+		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0).getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
 			new Authoring1().status = 2;
@@ -169,8 +169,8 @@ public class Authoring extends TestBase {
 	 */
 	public void validateAppreciationComment(ExtentTest test) throws Exception {
 		
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='ne-comment-list__comment-content']"), 90);
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']"));
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 90);
+		List<WebElement> apprDivs = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()));
 		System.out.println("size of total elemntes-->" + apprDivs.size());
 		WebElement apprSubDivs;
 		for (int i = 0; i < apprDivs.size(); i++) {
@@ -182,16 +182,16 @@ public class Authoring extends TestBase {
 
 			// List<WebElement>
 			// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-			String count = apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']")).getText();
+			String count = apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString())).getText();
 			System.out.println("app sub divs-->" + count);
 			scrollingToElementofAPage();
 			
 		}catch(Exception e){
 			continue;
 		}
-			
+		
 				int apprEarCount = Integer
-						.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']")).getText()
+						.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString())).getText()
 								.replaceAll(",", "").trim());
 				System.out.println("Before count-->" + apprEarCount);
 
@@ -206,7 +206,7 @@ public class Authoring extends TestBase {
 					Thread.sleep(4000);// After clicking on like button wait for
 										// status to change and count update
 					int apprAftCount = Integer
-							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']"))
+							.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
 									.getText().replaceAll(",", "").trim());
 					System.out.println("Already liked  After count-->" + apprAftCount);
 					if (!(apprAftCount < apprEarCount)) {
@@ -226,7 +226,7 @@ public class Authoring extends TestBase {
 					Thread.sleep(4000);// After clicking on unlike button wait
 										// for status to change and count update
 					int apprAftCount = Integer
-							.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='wui-icon-metric__value ng-binding']"))
+							.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
 									.getText().replaceAll(",", "").trim());
 					System.out.println("Not liked --After count-->" + apprAftCount);
 					if (!(apprAftCount > apprEarCount)) {
@@ -243,7 +243,7 @@ public class Authoring extends TestBase {
 	
 
 	public void validateViewComment(String addComments) throws Exception {
-		String commentText = ob.findElements(By.cssSelector("div[class='ne-comment-list__comment-content']")).get(0)
+		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!commentText.contains(addComments)) {
@@ -276,23 +276,23 @@ public class Authoring extends TestBase {
 	}
 
 	public void selectArtcleWithComments() {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> itemList;
 
 		while (true) {
-			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int commentsCount, itr = 1;
 			String strCmntCt;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount != 0) {
 					jsClick(ob,
 							itemList.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -311,31 +311,18 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 	}
 
-	public void enterTRCredentials(String userName,
-			String password) {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitForElementTobeVisible(ob, By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-
-	public void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		waitForPageLoad(ob);
-	}
-
 	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")).click();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(article);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 		waitForPageLoad(ob);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		BrowserWaits.waitTime(10);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
+		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
 		waitForPageLoad(ob);
 	}
 

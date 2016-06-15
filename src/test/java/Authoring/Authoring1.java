@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -91,8 +92,8 @@ public class Authoring1 extends TestBase {
 		try {
 			//waitForTRHomePage();
 			loginAs("USERNAME15", "PASSWORD15");
-			searchArticle(article);
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			int count = pf.getAuthoringInstance(ob).getCommentCount();
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
@@ -154,59 +155,9 @@ public class Authoring1 extends TestBase {
 		return TestUtil.getData(authoringxls, this.getClass().getSimpleName());
 	}
 
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		// ob.waitUntilTextPresent(TestBase.OR.getProperty("tr_home_signInwith_projectNeon_css"),"Sign
-		// in with Project Neon");
-		waitForPageLoad(ob);
-	}
-
-	/**
-	 * Method for enter Application Url and enter Credentials
-	 */
-	public void enterTRCredentials(String userName, String password) {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		waitForElementTobeVisible(ob, By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css")), 60);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).clear();
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_username_css"))).sendKeys(userName);
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_password_css"))).sendKeys(password);
-	}
-
-	public void clickLogin() throws InterruptedException {
-		ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_signIn_login_css"))).click();
-		waitForPageLoad(ob);
-		// waitUntilTextPresent(TestBase.OR.getProperty("tr_home_css"), "Home");
-		// waitUntilElementClickable("Home");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")).click();
-		waitForPageLoad(ob);
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-		waitForPageLoad(ob);
-	}
-
-	public void waitUntilTextPresent(String locator, String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
-	}
-
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
-		String commentText = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']")).get(0)
+		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {

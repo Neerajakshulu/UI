@@ -103,8 +103,8 @@ public class Authoring2 extends TestBase {
 			throws Exception {
 		try {
 
-			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
-			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
@@ -144,17 +144,5 @@ public class Authoring2 extends TestBase {
 
 	}
 	
-
-	/**
-	 * Method for Scrolling down to the page
-	 * 
-	 * @throws InterruptedException,
-	 *             When scroll not done
-	 */
-	public void scrollingToElementofAPage() throws InterruptedException {
-		JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0, 250);");
-
-	}
 
 }

@@ -194,6 +194,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH("//div[@class='wui-content-title wui-content-title--medium']/a"),
+	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
+	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
 	
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
@@ -211,8 +213,22 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS("div[id^='taTextElement']"),
 	RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS("button[ng-click='createComment()']"),
 	RECORD_VIEW_PAGE_COMMENTS_USER_PROFILE_LINK_XPATH("descendant::div[contains(@class,'ne-profile-object-name')]/descendant::a[contains(@href,'#/profile')]"),
-	RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS("h3[class*='comment-list'] span");
+	RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS("h3[class*='comment-list'] span"),
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
+	RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS("span[class='wui-icon-metric__value ng-binding']"),
+	RECORD_VIEW_PAGE_COMMENTS_BOLD_ICON_CSS("div[class='ne-create-comment'] button[name='bold']"),
+	RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS("div[class='ne-create-comment'] button[name='italics']"),
+	RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']"),
+	RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+	
+	// login page elements
+	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
+	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
+	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"),
+	;
 
+	
+	
 	private String locator;
 
 	OnePObjectMap(String locator) {

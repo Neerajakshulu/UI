@@ -114,8 +114,8 @@ public class Authoring4 extends TestBase {
 		totalProfileCommentsBeforeAdd = getProfleComments();
 		System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
 		System.out.println();
-		pf.getLoginTRInstance(ob).searchArticle(article);
-		pf.getLoginTRInstance(ob).chooseArticle(completeArticle);
+		pf.getAuthoringInstance(ob).searchArticle(article);
+		pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 		// Enter Article Comments
 		int expCount=pf.getAuthoringInstance(ob).getCommentCount();
 		pf.getAuthoringInstance(ob).enterArticleComment(addComments);

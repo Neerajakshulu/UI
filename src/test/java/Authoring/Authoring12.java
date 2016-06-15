@@ -47,8 +47,8 @@ public class Authoring12 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to add an article on LinkedIn").assignCategory(
-				"Authoring");
+		test = extent.startTest(var, "Verify that user is able to add an article on LinkedIn")
+				.assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
@@ -60,8 +60,8 @@ public class Authoring12 extends TestBase {
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -75,10 +75,10 @@ public class Authoring12 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
 		try {
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
@@ -87,27 +87,22 @@ public class Authoring12 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_share_the_Article")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
 		}
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({"username", "password", "article", "completeArticle"})
-	public void chooseArtilce(String username,
-			String password,
-			String article,
-			String completeArticle) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle" })
+	public void chooseArtilce(String username, String password, String article, String completeArticle)
+			throws Exception {
 		try {
-			//waitForTRHomePage();
+			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			searchArticle(article);
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -117,32 +112,29 @@ public class Authoring12 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_share_the_Article")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
 		}
 	}
 
 	@Test(dependsOnMethods = "chooseArtilce")
-	@Parameters({"liusername", "lipassword"})
-	public void shareOnTwitter(String liusername,
-			String lipassword) throws Exception {
+	@Parameters({ "liusername", "lipassword" })
+	public void shareOnTwitter(String liusername, String lipassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on LinkedIn");
-			/*waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString())));*/
 			String PARENT_WINDOW = ob.getWindowHandle();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
-			new Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()))).click().build().perform();
-			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
+			new Actions(ob)
+					.moveToElement(ob.findElement(By.cssSelector(
+							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())))
+					.click().build().perform();
+			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-			jsClick(ob,ob.findElement(By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
-					
+			jsClick(ob, ob.findElement(By.cssSelector(
+					"div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
+
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
 			System.out.println("window hanles-->" + child_window_handles.size());
@@ -156,18 +148,20 @@ public class Authoring12 extends TestBase {
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS, liusername);
 					pf.getBrowserActionInstance(ob).enterFieldValue(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS, lipassword);
-					pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
+					pf.getBrowserActionInstance(ob)
+							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS);
 					ob.switchTo().window(PARENT_WINDOW);
-					waitForElementTobeVisible(
-							ob,
-							By.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+					waitForElementTobeVisible(ob,
+							By.cssSelector(
+									"div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 							40);
-					jsClick(ob, ob.findElement(By
-							.cssSelector("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+					jsClick(ob, ob.findElement(By.cssSelector(
+							"div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
 				}
 			}
 
-			Thread.sleep(5000);// Wait for new window to close and switch to old window.
+			Thread.sleep(5000);// Wait for new window to close and switch to old
+								// window.
 			logout();
 			closeBrowser();
 
@@ -179,11 +173,8 @@ public class Authoring12 extends TestBase {
 			e.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_Tweet_Article_On_Twitter")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_Tweet_Article_On_Twitter")));
 			closeBrowser();
 		}
 
@@ -195,44 +186,15 @@ public class Authoring12 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
-	}
-
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		waitForPageLoad(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
-		waitForAjax(ob);
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-	}
-
-	public void waitUntilTextPresent(String locator,
-			String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
 	}
 
 }

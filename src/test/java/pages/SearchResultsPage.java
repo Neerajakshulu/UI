@@ -63,27 +63,27 @@ public class SearchResultsPage extends TestBase {
 	 * @param currentUserName
 	 */
 	public void viewOtherUsersPost(String currentUserName) {
-		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
-
+		
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String profileName;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				
 				profileName = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_post_author_css")))
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS.toString()))
 						.getText();
-				String title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
+				String title = records.get(i).findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member"))
 				{
 				if (!profileName.equalsIgnoreCase(currentUserName)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -104,24 +104,24 @@ public class SearchResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public List<String> getAuthorDetailsOfPost() throws InterruptedException {
-		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
 		List<String> authorDetails = new ArrayList<String>();
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String title, profileName, profileDetails;
 
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
-				title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
+				title = records.get(i).findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member")) {
 					profileName = records.get(i)
-							.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_profile_name_css")))
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS.toString()))
 							.getText().trim();
 					profileDetails = records.get(i)
-							.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_profile_details_css")))
+							.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()))
 							.getText().trim();
 
 					authorDetails.add(title);
@@ -137,7 +137,7 @@ public class SearchResultsPage extends TestBase {
 					isFound = true;
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					waitForPageLoad(ob);
 					break;
 				}
@@ -161,21 +161,21 @@ public class SearchResultsPage extends TestBase {
 	 */
 	public void clickOnPostTitle(String title) {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
 
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String postTitle;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				postTitle = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).getText();
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())).getText();
 				if (postTitle.equals(title)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -199,17 +199,17 @@ public class SearchResultsPage extends TestBase {
 		List<WebElement> records;
 		waitForAjax(ob);
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String profileTitle;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				profileTitle = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))).getText();
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS.toString())).getText();
 				if (profileTitle.equals(title)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS.toString())));
 					waitForPageLoad(ob);
 					isFound = true;
 					break;
