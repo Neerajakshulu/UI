@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -66,11 +67,15 @@ public class IAM013 extends TestBase {
 		}
 
 		ob.navigate().to(host);
+		BrowserWaits.waitTime(6);
 		termofUserAndPrivacyStatement();
+		
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			BrowserWaits.waitTime(6);
 			termofUserAndPrivacyStatement();
 
 		} catch (Throwable t) {
@@ -115,14 +120,14 @@ public class IAM013 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_termsOfUse_link")));// screenshot
 
 			}
-
+			//BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
-
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(2);
+			//waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_PricayStatement_link")), 30);
 			WebElement myE = ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
 			myE.click();
 
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(3);
 			headerModalText = ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();
 			logger.info("Modal Text : " + headerModalText);
 
@@ -136,7 +141,7 @@ public class IAM013 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
 
 			}
-
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			// closeBrowser();
 

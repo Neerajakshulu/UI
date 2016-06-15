@@ -98,17 +98,17 @@ public class IAM012 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
-
-			// Create new TR account
 			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-			//
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_password_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
+			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);*/
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
 
 			List<WebElement> tm_list = ob.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_label")));
 			// System.out.println(tm_list.size());

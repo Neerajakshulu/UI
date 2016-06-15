@@ -118,7 +118,7 @@ public class IAM005 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();*/
 			//
 
-			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("signup_firstNameError_label")));
+			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
 			logger.info("Errors Count : "+errorList.size());
 
 			if (validity.equalsIgnoreCase("YES")) {
@@ -158,7 +158,7 @@ public class IAM005 extends TestBase {
 				}
 
 			}
-				String errorText = ob.findElement(By.xpath(OR.getProperty("signup_firstNameError_label"))).getText();
+				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
 				logger.info("Error Text  : "+errorText);
 				if (!compareStrings("First name is too long.", errorText)) {
 

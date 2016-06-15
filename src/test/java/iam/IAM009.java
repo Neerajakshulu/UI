@@ -103,8 +103,9 @@ public class IAM009 extends TestBase {
 			
 			
 			Thread.sleep(5000);
+			
 
-			if (!checkElementPresence_id("login_button")) {
+			if (!checkElementPresence_id("login_error")) {
 
 				fail = true;// excel
 				test.log(LogStatus.FAIL, "Unexpected login happened");// extent report

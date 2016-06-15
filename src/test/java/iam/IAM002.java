@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -92,9 +93,8 @@ public class IAM002 extends TestBase {
 
 					login();
 				}
-
-				//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 10);
-
+				BrowserWaits.waitTime(4);
+//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 				// Verify that login is successful
 				if (!checkElementPresence("ul_name")) {
 
@@ -115,6 +115,7 @@ public class IAM002 extends TestBase {
 				//
 
 				// Verify that profile name gets displayed correctly
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				if (!checkElementPresence("header_label")) {
 
 					test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports

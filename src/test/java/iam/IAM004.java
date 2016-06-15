@@ -68,7 +68,7 @@ public class IAM004 extends TestBase {
 
 			// Navigate to FB login page
 			ob.navigate().to(host);
-			//BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			//
@@ -78,12 +78,12 @@ public class IAM004 extends TestBase {
 			// Verify that existing FB credentials are working fine
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
-			//BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			
-			
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 20);
+			BrowserWaits.waitTime(4);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports
@@ -96,7 +96,6 @@ public class IAM004 extends TestBase {
 				closeBrowser();
 
 			}
-
 			// Verify that profile name gets displayed correctly
 			if (!checkElementPresence("header_label")) {
 
