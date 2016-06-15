@@ -70,6 +70,7 @@ public class Authoring58 extends TestBase {
 				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost(test);
 				pf.getpostRVPageInstance(ob).validateFlagAndUnflagActionOnPost(test);
 			} catch (Throwable t) {
+				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Flag/Unflag validation failed for posts");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);

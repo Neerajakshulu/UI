@@ -36,7 +36,7 @@ public class Authoring65 extends TestBase {
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that Publish a Post option is displayed in Home page and all Record view pages like Article,Post ,Patent")
+						"Verify that Publish a Post option is displayed in the Header")
 				.assignCategory("Authoring");
 
 	}
@@ -72,61 +72,18 @@ public class Authoring65 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.INFO, "Logged in to NEON");
 
-			// checking for articles
-			test.log(LogStatus.INFO, "Checking for article record view");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Bio");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_articles_result")), 40);
-			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_ARTICLES_LINK.toString()),
-					40);
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_ARTICLES_LINK.toString())).click();
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
-			boolean articlePublishButton = ob.findElement(
+			// checking for publish a post button in header
+			boolean publishButton = ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
 					.isDisplayed();
 
-			// checking for patents
-			test.log(LogStatus.INFO, "Checking for patents record view");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Bio");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_patents_result")), 60);
-			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString()),
-					40);
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_PATENTS_LINK.toString())).click();
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
-			boolean patentsPublishButton = ob.findElement(
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
-					.isDisplayed();
-
-			// checking for posts
-			test.log(LogStatus.INFO, "Checking for posts record view");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).clear();
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("Post for");
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_posts_result")), 60);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString()), 40);
-			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_RESULTS_POSTS_LINK.toString())).click();
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
-			boolean postsPublishButton = ob.findElement(
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()))
-					.isDisplayed();
-
+			
 			try {
-				Assert.assertTrue(articlePublishButton && patentsPublishButton && postsPublishButton);
-				test.log(LogStatus.INFO, "Publish a post button is displyed in Article,Patent,Post record view");
+				Assert.assertTrue(publishButton);
+				test.log(LogStatus.PASS, "Publish a post button is displyed in the header");
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Publish button is not present");// extent
+				test.log(LogStatus.FAIL, "Publish A Post button is not present");// extent
 																			// reports
 				// next 3 lines to print whole testng error in report
 				status = 2;// excel

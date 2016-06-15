@@ -73,6 +73,14 @@ public class Authoring62 extends TestBase {
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
+			if (pf.getProfilePageInstance(ob).getDraftPostsCount() == 0) {
+				String tilte = "DraftPostTest" + RandomStringUtils.randomNumeric(10);
+				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
+				pf.getProfilePageInstance(ob).enterPostContent(tilte);
+				pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+				pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
+			}
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Open Post Modal by clicking on Publish a post ");
 			ob.findElement(
