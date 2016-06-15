@@ -91,7 +91,7 @@ public class Search18 extends TestBase {
 			for (int i = 0; i < 2; i++) {
 				checkboxList = ob.findElements(By.cssSelector(OR
 						.getProperty("tr_search_results_all_refine_checkboxes_css")));
-				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).getCssValue("background").contains("rgb(69, 183, 231)"))
+				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
 					jsClick(ob, checkboxList.get(i));
 				waitForAjax(ob);
 
