@@ -12,8 +12,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -66,18 +68,21 @@ public class Search18 extends TestBase {
 			}
 			clearCookies();
 			// Navigate to TR login page and login with valid TR credentials
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 20);
-			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+			//waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("")), 20);
+			//ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"), 20);
-			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"))
-					.click();
+					By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 20);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			BrowserWaits.waitTime(4);
 			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
 
@@ -86,7 +91,7 @@ public class Search18 extends TestBase {
 			for (int i = 0; i < 2; i++) {
 				checkboxList = ob.findElements(By.cssSelector(OR
 						.getProperty("tr_search_results_all_refine_checkboxes_css")));
-				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
+				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).getCssValue("background").contains("rgb(69, 183, 231)"))
 					jsClick(ob, checkboxList.get(i));
 				waitForAjax(ob);
 
@@ -95,7 +100,7 @@ public class Search18 extends TestBase {
 			checkboxList = ob
 					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
 			for (WebElement element : checkboxList) {
-				if (element.isSelected())
+				if (element.getCssValue("background").contains("rgb(69, 183, 231)"))
 					checkboxesSelected++;
 
 			}
@@ -110,7 +115,7 @@ public class Search18 extends TestBase {
 
 			checkboxesSelected = 0;
 			for (WebElement element : checkboxList) {
-				if (element.isSelected())
+				if (element.getCssValue("background").contains("rgb(69, 183, 231)"))
 					checkboxesSelected++;
 
 			}

@@ -156,10 +156,9 @@ public class Search10 extends TestBase {
 			}
             waitForElementTobeVisible(ob,By.xpath(OR.getProperty("filter_checkbox")), 40);
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
-			waitForAjax(ob);
-		//	String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
-			boolean filtering_condition = filterValues.get(0).isDisplayed() && filterValues.get(1).isDisplayed();
-
+			BrowserWaits.waitTime(4);
+			boolean filtering_condition = filterValues.get(0).getCssValue("background").contains("rgb(69, 183, 231)")&&filterValues.get(1).getCssValue("background") .contains("rgb(69, 183, 231)");
+			
 			try {
 				Assert.assertTrue(filtering_condition);
 				test.log(LogStatus.PASS,

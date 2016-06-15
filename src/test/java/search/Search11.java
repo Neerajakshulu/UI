@@ -170,14 +170,13 @@ public class Search11 extends TestBase {
 			// Finding the filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			BrowserWaits.waitTime(3);
-			String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
-			//boolean filtering_condition = filterValues.get(0).isEnabled() && filterValues.get(1).isEnabled();
+		boolean filtering_condition = filterValues.get(0).getCssValue("background").contains("rgb(69, 183, 231)")&& filterValues.get(1).getCssValue("background").contains("rgb(69, 183, 231)");
 
 			try {
-				if (!backgrundValue.contains("rgb(255, 255, 255)")) {
+				Assert.assertTrue(filtering_condition);
 				test.log(LogStatus.PASS,
 						"Filters are retained when user navigates back to articles search results page from record view page");
-				}
+				
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL,

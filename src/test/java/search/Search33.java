@@ -62,8 +62,7 @@ public class Search33 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -71,15 +70,15 @@ public class Search33 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 30);
 
 			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			ob.findElement(By.cssSelector("a[class='wui-side-menu__link']")).click();
 			Thread.sleep(3000);
 
 			// Finding out the default sort by value for All content set
 			String defaultSortBy = ob
-					.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).getText();
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).getText().substring(9);
 
 			// Comparing the the label of default sort by value
 			if (!defaultSortBy.contains("Relevance")) {
