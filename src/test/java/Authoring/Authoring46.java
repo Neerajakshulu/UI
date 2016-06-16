@@ -145,20 +145,20 @@ public class Authoring46 extends TestBase {
 			BrowserWaits.waitTime(10);
 			waitForElementTobeVisible(
 					ob,
-					By.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"),
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()),
 					180);
 			WebElement editCommentElement = ob
 					.findElement(By
-							.cssSelector("button[class='webui-icon webui-icon-edit edit-comment-icon'][ng-click='editThis(comment.id)']"));
+							.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
 			test.log(LogStatus.INFO, "minCharCount:"+minCharCount);
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			// System.out.println("Min Validation Error Message--->"+minValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
@@ -166,9 +166,9 @@ public class Authoring46 extends TestBase {
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 30);
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String maxValidErrMsg = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			// System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);

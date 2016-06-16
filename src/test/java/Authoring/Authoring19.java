@@ -226,15 +226,4 @@ public class Authoring19 extends TestBase {
 
 	}
 
-	private void loginAsOther(String username,
-			String pwd) throws Exception {
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
-		waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-		ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(username);
-		ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(pwd);
-		jsClick(ob, ob.findElement(By.id(OR.getProperty("login_button"))));
-
 	}
-
-}

@@ -86,7 +86,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH("//div[@class='modal-content']/descendant::a[@class='ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS("div[class='modal-content'] input[placeholder='Add a title']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS("div[class='modal-content'] div[id*='taTextElement']"),
-	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class='post-error-msg'] p"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("span[class^='wui-textarea__error']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("div[class='modal-content'] button[data-event-action='cancel'][class^='wui-btn wui-btn']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("div[class='modal-content'] button[data-event-action='publish']"),
 	// HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
@@ -115,7 +115,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("h2[class^='wui-content-title']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='wui-subtitle ne-profile-object-name ng-scope'] a"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-profile-object-info'] div[class^='wui-descriptor']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class='full-record'] div[class='ng-binding']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='body ne-publication__body--post']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
 
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
@@ -220,7 +220,8 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS("div[class='ne-create-comment'] button[name='italics']"),
 	RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']"),
 	RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
-	
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS("button[ng-click^='cancelEdit']"),
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS("div[class=ne-comment-list__comment-content] div[class='wui-textarea__error']"),
 	// login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),

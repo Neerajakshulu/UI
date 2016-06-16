@@ -21,6 +21,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -116,10 +117,10 @@ public class Authoring7 extends TestBase {
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
 			pf.getAuthoringInstance(ob).searchArticle("micro biology");
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 40);
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).click();
 
 			// ob.navigate().refresh();
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);

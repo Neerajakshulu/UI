@@ -125,7 +125,7 @@ public class PostRecordViewPage extends TestBase {
 		appreciationButton = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS
 				.toString()));
 
-		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
+		if (!appreciationButton.getAttribute("class").contains("active")) {
 			appreciationButton.click();
 			Thread.sleep(15000);// After clicking on like button wait for status to change and count update
 			new Actions(ob).moveByOffset(100, 200).build().perform();

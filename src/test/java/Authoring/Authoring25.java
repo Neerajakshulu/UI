@@ -131,9 +131,9 @@ public class Authoring25 extends TestBase {
 			BrowserWaits.waitTime(10);
 			pf.getAuthoringInstance(ob).updateComment(htmlTags);
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
 			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
+					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			// System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
