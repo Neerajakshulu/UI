@@ -16,23 +16,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 public class ProfilePage extends TestBase {
 
-	PageFactory pf;
 
 	public ProfilePage(WebDriver ob) {
 		this.ob = ob;
 		pf = new PageFactory();
 	}
-
-	/*
-	 * private static ProfilePage profilePage = null; public static ProfilePage getProfilePageInstance() { if
-	 * (profilePage == null) { profilePage = new ProfilePage(); } return profilePage; }
-	 */
 
 	/**
 	 * Search results people count
@@ -149,13 +143,14 @@ public class ProfilePage extends TestBase {
 	public void validateAppsLinks(String appLinks) throws Exception {
 		String[] totalAppLinks = appLinks.split("\\|");
 		for (int i = 0; i < totalAppLinks.length; i++) {
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_LINK);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			BrowserWaits.waitTime(4);
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 			ob.findElement(By.linkText(totalAppLinks[i])).click();
 			ob.manage().window().maximize();
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
-			System.out.println("child windows count-->" + child_window_handles.size());
+			logger.info("child windows count-->" + child_window_handles.size());
 			for (String child_window_handle : child_window_handles) {
 				if (!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 					ob.switchTo().window(child_window_handle);
