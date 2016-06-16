@@ -103,7 +103,7 @@
 
 	<test name="ProfileFollowerTest">
 		<parameter name="otherUsername" value="tridlogin@gmail.com" />
-		<parameter name="otherUserPassword" value="1Pproject!" />
+		<parameter name="otherUserPassword" value="1Pproject#" />
 		<classes>
 			<class name="Profile.Profile14"></class>
 		</classes>
@@ -165,7 +165,7 @@
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
 		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="1Pproject!" />
+		<parameter name="password" value="1Pproject#" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -292,7 +292,7 @@
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="1Pproject!" />
+		<parameter name="password" value="1Pproject#" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
 		<parameter name="postContent" value="my post content for RecordView page " />
 		<classes>
