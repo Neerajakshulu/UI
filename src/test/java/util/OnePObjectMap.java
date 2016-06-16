@@ -194,8 +194,12 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH("//div[@class='wui-content-title wui-content-title--medium']/a"),
-	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
-	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
+	SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS("button[id='single-button']"),
+	SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS("a[class='wui-side-menu__link']"),
+	SEARCH_RESULT_PAGE_POSTS_CSS("a[class='wui-side-menu__link'][ng-click*='POSTS']"),
+	SEARCH_RESULT_PAGE_PEOPLE_CSS("a[class='wui-side-menu__link'][ng-click*='PEOPLE']"),
+	SEARCH_RESULT_PAGE_ALL_CSS("a[class='wui-side-menu__link'][ng-click*='ALL']"),
+	SEARCH_RESULT_PAGE_PATENTS_CSS("a[class='wui-side-menu__link'][ng-click*='PATENTS']"),
 	
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),

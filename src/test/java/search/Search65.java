@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -63,7 +64,6 @@ public class Search65 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -72,11 +72,9 @@ public class Search65 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("chemistry");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"),
-					30);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()),30);
 
-			ob.findElement(By
-					.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"));
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 
 			String text = ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).getAttribute("value");

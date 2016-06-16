@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -66,7 +67,6 @@ public class Search69 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -74,35 +74,34 @@ public class Search69 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"),
-					30);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()),30);
 			Thread.sleep(2000);
 
 			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()))
 					.click();
 			
 			
 			
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			
-			Thread.sleep(3000);
+//			waitForElementTobeVisible(ob,
+//					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+//			
+//			Thread.sleep(3000);
 
-			String dd_text = ob.findElement(
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
-			if (!compareStrings("Patents", dd_text)) {
-
-				test.log(LogStatus.FAIL, "Search drop down option not getting changed to the switched content type");// extent
-																														// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_search_drop_down_option_not_getting_changed_to_the_switched_content_type")));// screenshot
-
-			}
+//			String dd_text = ob.findElement(
+//					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+//			if (!compareStrings("Patents", dd_text)) {
+//
+//				test.log(LogStatus.FAIL, "Search drop down option not getting changed to the switched content type");// extent
+//																														// reports
+//				status = 2;// excel
+//				test.log(
+//						LogStatus.INFO,
+//						"Snapshot below: "
+//								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+//										+ "_search_drop_down_option_not_getting_changed_to_the_switched_content_type")));// screenshot
+//
+//			}
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 

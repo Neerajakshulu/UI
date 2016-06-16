@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -67,17 +68,16 @@ public class Search42 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Articles')]"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			Thread.sleep(2000);
 			// Clicking on Articles content result set
-			ob.findElement(By.xpath("//li[contains(text(),'Articles')]")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			Thread.sleep(3000);
 
 			// Check the filter is collapsed by default
@@ -121,16 +121,16 @@ public class Search42 extends TestBase {
 		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		documentTypePanelHeading = filterPanelHeadingList.get(1);
 		WebElement upArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-up']"));
+				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
 		if (upArrow != null) {
-			test.log(LogStatus.PASS, "Up arrow is visible for Authors filter");
+			test.log(LogStatus.PASS, "Down arrow is visible for Authors filter");
 		}
 
 		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
 		documentTypePanelBody = filterPanelBodyList.get(0);
 
-		if (documentTypePanelBody.isDisplayed()) {
+		if (!documentTypePanelBody.isDisplayed()) {
 			test.log(LogStatus.PASS, "Authors filter values are displayed");
 		}
 
@@ -144,15 +144,15 @@ public class Search42 extends TestBase {
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(1);
 		WebElement downArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-down']"));
+				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
 		if (downArrow != null) {
-			test.log(LogStatus.PASS, "Down arrow is visible for Authors filter");
+			test.log(LogStatus.PASS, "UP arrow is visible for Authors filter");
 		}
 		List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));
 		WebElement documentTypePanelBody = filterPanelBodyList.get(1);
 
-		if (!documentTypePanelBody.isDisplayed()) {
+		if (documentTypePanelBody.isDisplayed()) {
 			test.log(LogStatus.PASS, "Authors filter values are not displayed");
 		}
 		// Expanding the document type filter by clicking it
