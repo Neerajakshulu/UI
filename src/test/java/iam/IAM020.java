@@ -67,11 +67,13 @@ public class IAM020 extends TestBase {
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("new_TR_User_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 15);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 15);*/
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 
-			if (!checkElementPresence("reg_register_button")) {
+			if (!checkElementPresence("signup_title")) {
 
 				test.log(LogStatus.FAIL, "CREATE A NEW PROJECT NEON ACCOUNT button not working correctly");// extent
 																											// reports

@@ -15,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -53,7 +54,7 @@ public class IAM023 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String password = "Transaction@2";
+			String password = "Neon@123";
 			String first_name = "disco";
 			String last_name = "dancer";
 
@@ -67,8 +68,11 @@ public class IAM023 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
+			//login();
+			
+			String email=createNewUser("disco", "dancer");
 
-			ob.get("https://www.guerrillamail.com");
+			/*ob.get("https://www.guerrillamail.com");
 			String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
@@ -116,7 +120,8 @@ public class IAM023 extends TestBase {
 
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			//
@@ -126,16 +131,81 @@ public class IAM023 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 10);
 			ob.findElement(By.xpath(OR.getProperty("change_password_link"))).click();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_newPassword_textBox")), 10);
-			// changing the passowrd
-			ob.findElement(By.xpath(OR.getProperty("TR_newPassword_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.xpath(OR.getProperty("TR_confirmPassword_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.xpath(OR.getProperty("TR_forgot_password_submit_button"))).click();
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
+			ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);
+			ob.findElement(By.xpath(OR.getProperty("verification_email_button"))).click();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_accountConfirmationMessage_label")), 10);
-			String text = ob.findElement(By.xpath(OR.getProperty("reg_accountConfirmationMessage_label"))).getText();
-			String expected_text = "Password updated successfully.";
-			if (!StringContains(text, expected_text)) {
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("confomr_message")), 30);
+
+			String text = ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText();
+			logger.info("Email Address : "+text);
+			
+			String expected_text = "An email with password reset instructions has been sent to "+email;
+			logger.info("Expected Email : "+expected_text);
+			
+			String checkEmail1 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
+			logger.info("Email Address : "+checkEmail1);
+			String checkEmail="Please check your email";
+			if (!StringContains(text, expected_text)&&!StringContains(checkEmail, checkEmail1)) {
+
+				test.log(LogStatus.FAIL, "Email for password change not sent");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_password_change_email_not_sent")));// screenshot
+
+			}
+			BrowserWaits.waitTime(10);
+			//ob.close();
+			//ob.switchTo().window(al.get(0));
+			//Thread.sleep(2000);
+			ob.get("https://www.guerrillamail.com");
+			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+			WebElement myE = email_list.get(0);
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", myE);
+			// email_list.get(0).click();
+			Thread.sleep(2000);
+
+			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
+			logger.info("Email Subject Text : "+email_subject);
+			if (!StringContains(email_subject, "EndNote&trade; password change request")) {
+
+				test.log(LogStatus.FAIL, "Email for changing password not received");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_password_change_email_not_received")));// screenshot
+
+			}
+
+			WebElement reset_link_element = ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
+			String reset_link_url = reset_link_element.getAttribute("href");
+			ob.get(reset_link_url);
+			//
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
+
+			ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
+			ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
+			ob.findElement(By.id(OR.getProperty("update_password"))).click();
+			//
+			
+			String checkEmail2 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
+			logger.info("Email Address : "+checkEmail2);
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("confomr_message")), 30);
+
+			text = ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText();
+			logger.info("Expected Text : "+text);
+			
+			expected_text = "Your password has been updated";
+			String expectedText="Your password has been successfully updated. A confirmation has been sent to your email address.";
+			
+			if (!StringContains(checkEmail2, expected_text)&&!StringContains(text, expectedText)) {
 
 				test.log(LogStatus.FAIL, "Password not changed successfully");// extent reports
 				status = 2;// excel
@@ -146,20 +216,30 @@ public class IAM023 extends TestBase {
 										+ "_password_not_changed_successfully")));// screenshot
 
 			}
-			ob.findElement(By.xpath("//a[contains(text(),'Project Neon')]")).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			logout();
 
-			// login with updated password again
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 10);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("Transaction@3");
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+			// 4)login with changed password
+			ob.navigate().to(host);
 			logout();
+			BrowserWaits.waitTime(4);
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			Thread.sleep(10000);
+
+			if (!checkElementPresence("header_label")) {
+
+				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_user_unable_to_login_with_changed_password")));// screenshot
+
+			}
+			logout();
+			ob.quit();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report

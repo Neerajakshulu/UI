@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -68,20 +69,26 @@ public class IAM024 extends TestBase {
 			test.log(LogStatus.INFO, " New User created");
 			new PageFactory().getLoginTRInstance(ob).logOutApp();
 			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			for (int i = 0; i < 5; i++) {
-				Thread.sleep(3000);
+			//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			for (int i = 0; i < 10; i++) {
+				/*Thread.sleep(3000);
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("password@2");
-				ob.findElement(By.id(OR.getProperty("login_button"))).click();
+				ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
+				
+				BrowserWaits.waitTime(4);
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("neon@126");
+				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				Thread.sleep(5000);
 			}
 			test.log(LogStatus.INFO, " 5 unsuccessfull login attempts");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_lock_message")), 10);
-			String message = ob.findElement(By.xpath(OR.getProperty("account_lock_message"))).getText();
-			String expectedMessage = "Your account has been locked out due to 5 invalid sign in attempts. Please wait 30 minutes, then try again.";
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("lock_title")), 10);
+			String message = ob.findElement(By.xpath(OR.getProperty("lock_title"))).getText();
+			String expectedMessage = "Your account has been locked.";
 			System.out.println(message);
 			try {
 				Assert.assertEquals(expectedMessage, message);
@@ -101,6 +108,19 @@ public class IAM024 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_something_unexpected_happened")));// screenshot
 				closeBrowser();
+			}
+			
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+			if (!checkElementPresence("login_banner")) {
+
+				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
+																					// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
+				closeBrowser();
+
 			}
 
 		} catch (Throwable t) {
