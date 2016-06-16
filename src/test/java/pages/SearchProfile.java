@@ -102,13 +102,13 @@ public class SearchProfile extends TestBase {
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public void hcrProfileBadgeValidation() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS);
 		String hcrAttr = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS).findElement(By.tagName("span"))
-				.getAttribute("class");
-		// System.out.println("hcr profile badge-->"+hcrAttr);
-		if (!hcrAttr.contains("hcr")) {
+				.getAttribute("data-tooltip");
+		logger.info("hcr profile badge-->"+hcrAttr);
+		if (!hcrAttr.contains("Highly Cited Researcher")) {
 			throw new Exception("HCR Profile should display with Badge");
 		}
 	}

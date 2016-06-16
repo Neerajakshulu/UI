@@ -152,7 +152,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
-	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class='award ng-scope ne-profile-object-hcr']"),
+	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-hcr']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
