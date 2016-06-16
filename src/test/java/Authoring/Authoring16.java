@@ -80,7 +80,6 @@ public class Authoring16 extends TestBase {
 
 			try {
 				Thread.sleep(4000);// Wait for modal to disappear
-				// commentsList=ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
 				boolean IsFlagged = commentsList.get(commentsCount)
 						.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()))
 						.getAttribute("class").contains("fa-flag-o");

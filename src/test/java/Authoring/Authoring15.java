@@ -75,9 +75,6 @@ public class Authoring15 extends TestBase {
 			int commentsCount=pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
 			pf.getpostRVPageInstance(ob).selectReasonInFlagModal();
 			pf.getpostRVPageInstance(ob).clickFlagButtonInFlagModal();
-			// waitForAllElementsToBePresent(ob,
-			// By.xpath(OR.getProperty("tr_authoring_comments_flag_xpath")),
-			// 40);
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
 			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			try {
