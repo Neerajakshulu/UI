@@ -69,8 +69,14 @@ public class IAM014 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			String buttonName=ob.findElement(By.xpath(OR.getProperty("sinup_button_disable"))).getText();
+			logger.info("Button Name : "+buttonName);
+			
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
@@ -91,7 +97,7 @@ public class IAM014 extends TestBase {
 			boolean confirmPassword_error = ob.findElement(By.id(OR.getProperty("reg_confirmPasswordError_label")))
 					.isDisplayed();
 			boolean termsAndConditions_error = ob.findElement(
-					By.id(OR.getProperty("reg_termsAndConditionsError_label"))).isDisplayed();
+					By.id(OR.getProperty("reg_termsAndConditionsError_label"))).isDisplayed();*/
 
 			// System.out.println(email_error);
 			// System.out.println(firstName_error);
@@ -100,14 +106,13 @@ public class IAM014 extends TestBase {
 			// System.out.println(confirmPassword_error);
 			// System.out.println(termsAndConditions_error);
 
-			boolean master_error_condition = email_error && firstName_error && lastName_error && password_error
-					&& confirmPassword_error && termsAndConditions_error;
+			//boolean master_error_condition = email_error && firstName_error && lastName_error && password_error
+			//		&& confirmPassword_error && termsAndConditions_error;
 			// System.out.println(master_error_condition);
 
 			try {
 
-				Assert.assertTrue(master_error_condition,
-						"User able to submit new TR user registration form without filling in the required fields");
+				Assert.assertEquals(buttonName,"Sign up");
 				test.log(LogStatus.PASS,
 						"User not able to submit new TR user registration form without filling in the required fields");
 			}
