@@ -130,16 +130,11 @@ public class Authoring25 extends TestBase {
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			BrowserWaits.waitTime(10);
 			pf.getAuthoringInstance(ob).updateComment(htmlTags);
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
 			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
-			// System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
-			System.out.println("testxyz:" + unSupporteTagErrorMessage);
-			System.out.println("testxyz:" + errorMessage);
-			// Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
 			if (!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)) {
 				throw new Exception("UnSupported_HTML_tags_doesnot_allow_comments_validation");
 			}
@@ -195,8 +190,7 @@ public class Authoring25 extends TestBase {
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 
-		if (master_condition)
-			closeBrowser();
+		closeBrowser();
 	}
 
 

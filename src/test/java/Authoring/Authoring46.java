@@ -62,7 +62,7 @@ public class Authoring46 extends TestBase {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		try {
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
@@ -72,14 +72,14 @@ public class Authoring46 extends TestBase {
 
 		// test the runmode of current dataset
 		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
+		if (runmodes[count].equalsIgnoreCase("N")) {
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
 			skip = true;
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
-		try {
+		
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
@@ -110,7 +110,7 @@ public class Authoring46 extends TestBase {
 			String completeArticle) throws Exception {
 		try {
 			
-			//loginAs("USERNAME4", "PASSWORD4");
+			loginAs("USERNAME4", "PASSWORD4");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
@@ -153,8 +153,12 @@ public class Authoring46 extends TestBase {
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
 			test.log(LogStatus.INFO, "minCharCount:"+minCharCount);
-			pf.getAuthoringInstance(ob).enterArticleComments(
-					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
+			WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS.toString()));
+			commentArea.clear();
+			commentArea.sendKeys(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
+			Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
+			
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
@@ -163,8 +167,11 @@ public class Authoring46 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 			System.out.println("MaxCharCount-->" + (maxCharCount.substring(0, 4)));
-			pf.getAuthoringInstance(ob).enterArticleComments(
-					RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
+			commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS.toString()));
+			commentArea.clear();
+			commentArea.sendKeys(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
+			Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String maxValidErrMsg = pf.getBrowserActionInstance(ob)
@@ -172,10 +179,11 @@ public class Authoring46 extends TestBase {
 			// System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
+			test.log(LogStatus.PASS, "Error validation for min and max length passed");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
 			StringWriter errors = new StringWriter();

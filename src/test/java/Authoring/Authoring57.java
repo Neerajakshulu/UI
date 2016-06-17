@@ -77,7 +77,6 @@ public class Authoring57 extends TestBase {
 			}
 
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			pf.getpostRVPageInstance(ob).clickOnTwitterUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 
 			logout();

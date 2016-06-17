@@ -69,7 +69,6 @@ public class Authoring54 extends TestBase {
 			pf.getHFPageInstance(ob).searchForText("sample");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
-			//pf.getpostRVPageInstance(ob).clickOnTwitterUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 
 			logout();

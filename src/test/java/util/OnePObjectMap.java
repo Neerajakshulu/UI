@@ -226,6 +226,8 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS("button[ng-click^='cancelEdit']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS("div[class=ne-comment-list__comment-content] div[class='wui-textarea__error']"),
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
+	
 	// login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),

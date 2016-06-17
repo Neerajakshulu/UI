@@ -90,7 +90,7 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
-		BrowserWaits.waitTime(30);
+		BrowserWaits.waitTime(5);
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		commentArea.click();
