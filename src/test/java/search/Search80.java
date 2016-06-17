@@ -13,8 +13,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -66,37 +68,35 @@ public class Search80 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-
+			waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()),30);
+           ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
+         BrowserWaits.waitTime(4);
 			ob.findElement(By.id("single-button")).click();
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(@ng-click,'vm.sortElements')]"), 120);
 
 			List<WebElement> mylist = ob.findElements(By.xpath("//a[contains(@ng-click,'vm.sortElements')]"));
-			// System.out.println(mylist.size());
-			//
-			// for(int i=0;i<mylist.size();i++){
-			//
-			// System.out.println(mylist.get(i).getText());
-			// }
-
+//			System.out.println(mylist.size());
+//			
+//			 for(int i=0;i<mylist.size();i++){
+//		
+//			System.out.println(mylist.get(i).getText());
+//		}
+//      
 			boolean cond1 = mylist.get(0).getText().equals("Relevance");
 			boolean cond2 = mylist.get(1).getText().equals("Times Cited");
-			boolean cond3 = mylist.get(2).getText().equals("Date");
+			boolean cond3 = mylist.get(2).getText().equals("Date (Newest)");
+			boolean cond4 = mylist.get(3).getText().equals("Date (Oldest)");
 
-			boolean master_cond = cond1 && cond2 && cond3;
-			// System.out.println(master_cond);
+			boolean master_cond = cond1 && cond2 && cond3 && cond4;
+//			System.out.println(master_cond);
 
 			try {
 
