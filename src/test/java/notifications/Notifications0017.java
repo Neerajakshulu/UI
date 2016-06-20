@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0017 extends NotificationsTestBase {
 
@@ -55,17 +56,16 @@ public class Notifications0017 extends NotificationsTestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			List<WebElement> element = ob
-					.findElements(By.cssSelector("div[class='article-wrapper top-articles ng-scope']"));
+					.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH.toString()));
 			String actual = null;
 			for (WebElement elem : element) {
-				if (!elem.getAttribute("ng-repeat").contains("article in vm.item.publication")) {
-					List<WebElement> elment = elem
-							.findElements(By.cssSelector("div[class='notification-publication'] h2 a"));
+				if (elem.getAttribute("ng-repeat").contains("article in vm.articles track by")) {
+					List<WebElement> elment = elem.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLE_TITLE_XPATH.toString()));
 					actual = elment.get(0).getText();
 					logger.info("Actual--> " + actual);
 					elment.get(0).click();
@@ -74,7 +74,8 @@ public class Notifications0017 extends NotificationsTestBase {
 			}
 
 			BrowserWaits.waitTime(4);
-			String result = ob.findElement(By.cssSelector("div[class='col-xs-12 col-sm-8 col-md-9'] h2")).getText();
+			
+			String result = ob.findElement(By.cssSelector(OnePObjectMap.ARTICLE_TITLE_IN_RECORD_VIEW_PAGE_CSS.toString())).getText();
 			logger.info("Result--> " + result);
 			try {
 				Assert.assertEquals(actual, result);

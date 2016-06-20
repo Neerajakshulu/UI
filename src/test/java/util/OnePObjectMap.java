@@ -185,7 +185,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//div"),
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[@class='row notifications-wrapper ng-scope']//div[@class='notification-component ng-scope']"),
-	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
+	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/div/div"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH("//ne-notify-friend-follows[@class='ng-scope']"),
 	NEWSFEED_TOP_COMMENTERS_XPATH("//div[contains(@ng-if,'TopUserCommenters')]"),
@@ -240,6 +240,15 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
+	WTCHLISH_LINK_XPATH("//span[contains(text(),'Watchlist')]"),
+	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH("(//div[@class='wui-card wui-card--recommended-articles']/div)[2]/div"), 
+	NEWSFEED_RECOMMENDED_ARTICLE_TITLE_XPATH("//div[@class='wui-content-title ng-binding wui-content-title--small']"),
+	ARTICLE_TITLE_IN_RECORD_VIEW_PAGE_CSS("div[class='ne-publication__header'] h2"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS("div[class='wui-card ng-scope'] span[class='fa fa-check unfollow']"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS("div[class='col-xs-12 images image-wrapper ng-scope"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS("span[class='ne-profile-object-title']"),
+	
+	
 	;
 
 	
