@@ -42,7 +42,7 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnArticleTab() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
 		waitForAjax(ob);
