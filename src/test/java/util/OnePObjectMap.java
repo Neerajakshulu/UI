@@ -144,15 +144,18 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("div[class='wui-card__content']"),
 
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
-	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
-	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
+	//HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[@class='ne-publication-sidebar__metrics']/button/i"),
+	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
+	//HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
+	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
+	
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
 	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag'] i"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
-	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-hcr']"),
+	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-name']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),

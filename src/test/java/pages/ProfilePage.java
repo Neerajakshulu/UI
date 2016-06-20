@@ -1232,7 +1232,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When Post doesn't have any title
 	 */
 	public void validatePostTimeStamp() throws Exception {
-		DateFormat dateFormat = new SimpleDateFormat("dd MMMMMMMM YYYY");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm");
 		// get current date time with Date()
 		Date date = new Date();
 		String current_date = dateFormat.format(date).toString();

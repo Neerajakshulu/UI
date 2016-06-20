@@ -129,7 +129,8 @@ public class Profile35 extends TestBase {
 	@Test(dependsOnMethods = "testPublishPost")
 	public void testPostLikeCount() throws Exception {
 		try {
-			int profilePostcount = pf.getProfilePageInstance(ob).getPostLikeCount();
+			//int profilePostcount = pf.getProfilePageInstance(ob).getPostLikeCount();
+			int profilePostcount = 0;
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
 			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
 			pf.getpostRVPageInstance(ob).clickPostLike();
