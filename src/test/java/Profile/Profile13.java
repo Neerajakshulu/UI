@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class Profile13 extends TestBase {
@@ -93,8 +94,8 @@ public class Profile13 extends TestBase {
 			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))));
 			ob.navigate().refresh();
 			Thread.sleep(8000);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr-profile_summary_css")), 30);
-			String str3 = ob.findElement(By.cssSelector(OR.getProperty("tr-profile_summary_css"))).getText();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString()), 30);
+			String str3 = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString())).getText();
 			try {
 				Assert.assertEquals(str3.length(), maxLength);
 				test.log(LogStatus.PASS, "Maximum length for add summary field validation success");

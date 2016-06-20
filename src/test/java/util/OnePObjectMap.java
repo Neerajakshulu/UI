@@ -118,7 +118,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='body ne-publication__body--post']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
 
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
+	//HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[2]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[data-ng-show='vm.hasPosts'] button"),
@@ -149,7 +149,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
 	//HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
-	
+	HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS("div[ng-hide='vm.shouldShowSummaryInput()'] p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
 	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag'] i"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
