@@ -751,10 +751,8 @@ public class ProfilePage extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Publish A Post",
-				"Give an update, pose a question, share an interesting find.");
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Post");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 	}
 
 	/**
@@ -1368,5 +1366,6 @@ public class ProfilePage extends TestBase {
 		else
 			return false;
 	}
+	
 	
 }
