@@ -64,7 +64,7 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		BrowserWaits.waitTime(20);
+		BrowserWaits.waitTime(5);
 		
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
@@ -77,13 +77,13 @@ public class Authoring extends TestBase {
         ycord=ycord+200;
         JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0,"+ ycord+");");
-		BrowserWaits.waitTime(5);
+		BrowserWaits.waitTime(2);
 		jsClick(ob,commentArea);
 		commentArea.clear();
 		String comment=addComments + RandomStringUtils.randomNumeric(3);
 		commentArea.sendKeys(comment);
 		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
+		Thread.sleep(3000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 	public void enterArticleComments(String addComments) throws InterruptedException {
@@ -317,7 +317,7 @@ public class Authoring extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 		waitForPageLoad(ob);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(3);
 	}
 
 	public void chooseArticle(String linkName) throws InterruptedException {
