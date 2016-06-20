@@ -63,23 +63,17 @@ public class Search121 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-
-			String search_term = "Fostering synergy between cell biology and systems biology";
-
+			String search_term = "Systems Biology of Cell Behavior";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_term + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForAjax(ob);
+	  waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
+	   ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
+			 waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(15000);
 			String title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// System.out.println(search_term);
@@ -97,9 +91,9 @@ public class Search121 extends TestBase {
 										+ "_title_not_getting_displayed_correctly")));// screenshot
 			}
 
-			String author = ob.findElement(By.xpath("//span[@ng-hide='vm.record.author.length == 0']")).getText();
+			String author = ob.findElement(By.xpath("//div[@ng-hide='vm.record.author.length == 0']")).getText();
 			// System.out.println(author);
-			// String expected_author="By: Eddy, James A. ; Funk, Cory C. ; Price, Nathan D.";
+			// String expected_author="Valeyev, Najl V. • Bates, Declan G. Umezawa, Yoshinori . et al.";
 
 			if (author.equals("") || author.equals(null)) {
 
@@ -116,7 +110,7 @@ public class Search121 extends TestBase {
 			String pub_name = ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'BIOLOGY')]"))
 					.getText();
 			// System.out.println(pub_name);
-			// String expected_pub_name="TRENDS IN CELL BIOLOGY";
+			// String expected_pub_name="SYSTEMS BIOLOGY IN DRUG DISCOVERY AND DEVELOPMENT: METHODS AND PROTOCOLS";
 
 			if (pub_name.equals("") || pub_name.equals(null)) {
 
@@ -131,8 +125,8 @@ public class Search121 extends TestBase {
 			}
 
 			String pub_date = ob.findElement(By.xpath("//span[@ng-hide='!vm.record.date']")).getText();
-			// System.out.println(pub_date);
-			// String expected_pub_date="Published: AUG 2015";
+			//System.out.println(pub_date);
+			// String expected_pub_date="Published: 2010 ";
 
 			if (pub_date.equals("") || pub_date.equals(null)) {
 
@@ -146,9 +140,9 @@ public class Search121 extends TestBase {
 										+ "_publication_date_not_getting_displayed_correctly")));// screenshot
 			}
 
-			String times_cited = ob.findElement(By.xpath("//*[@class='h6 doc-info']")).getText();
+		String times_cited = ob.findElement(By.xpath("//div[@tooltip='Times Cited']")).getText();
 			// System.out.println(times_cited);
-			// String expected_times_cited="0 Times Cited";
+			// String expected_times_cited="2 Times Cited";
 
 			if (times_cited.equals("") || times_cited.equals(null)) {
 
@@ -162,9 +156,9 @@ public class Search121 extends TestBase {
 										+ "_times_cited_information_not_getting_displayed_correctly")));// screenshot
 			}
 
-			String comments = ob.findElement(By.xpath("//*[@class='h6 doc-info ng-scope']")).getText();
-			// System.out.println(comments);
-			// String expected_comments="0 Comments";
+			String comments = ob.findElement(By.xpath("//div[@class='wui-icon-metric ng-scope']")).getText();
+			 System.out.println(comments);
+			// String expected_comments="3 Comments";
 
 			if (comments.equals("") || comments.equals(null)) {
 
