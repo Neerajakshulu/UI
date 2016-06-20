@@ -64,18 +64,15 @@ public class Search95 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 180);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 180);
 
-			String postToSearch = "Post for Testing bJ38z9";
+			String postToSearch = "Post for Testing P9mW5A";
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postToSearch);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -83,38 +80,37 @@ public class Search95 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
 
-			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 					.getText();
-			String postAuthor = ob.findElement(By.cssSelector("h3[class*='ne-profile-object-title-wrapper']"))
+			String postAuthor = ob.findElement(By.cssSelector("div[class*='ne-profile-object-name'] a"))
 					.getText();
-			String postCreationDate = ob.findElement(By.cssSelector("h6[class*='ng-binding']")).getText();
-			String profileMetaData = ob.findElements(By.cssSelector("h6[class*='ng-binding']")).get(1).getText();
+			String postCreationDate = ob.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
+			String profileMetaData = ob.findElement(By.cssSelector("div[class*='wui-descriptor wui-descriptor__profile']")).getText();
+			String statsXpath="div[class='wui-card__footer-right ng-scope'] span";
 			String postLikeCount = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).get(0)
+					.findElements(By.cssSelector(statsXpath)).get(4)
 					.getText();
 			String postLikeLabel = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).get(1)
+					.findElements(By.cssSelector(statsXpath)).get(5)
 					.getText();
 
 			String postCommentCount = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).get(2)
+					.findElements(By.cssSelector(statsXpath)).get(2)
 					.getText();
 			String postCommentLabel = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css"))).get(3)
+					.findElements(By.cssSelector(statsXpath)).get(3)
 					.getText();
 
 			boolean isPostTitleAvailable = StringUtils.containsIgnoreCase(postTitle, postToSearch);
 			boolean isPostedByAuthor = postAuthor.isEmpty();
-			boolean ispostCreationDateAndTimeAvailable = StringUtils.containsIgnoreCase(postCreationDate, "2016")
-					&& (StringUtils.containsIgnoreCase(postCreationDate, "AM") || StringUtils.containsIgnoreCase(
-							postCreationDate, "PM"));
+			boolean ispostCreationDateAndTimeAvailable = StringUtils.containsIgnoreCase(postCreationDate, "2016");
+					//&& (StringUtils.containsIgnoreCase(postCreationDate, "AM") || StringUtils.containsIgnoreCase(
+						//	postCreationDate, "PM"));
 			boolean ispostAuthorMetadataAvailable = profileMetaData.isEmpty();
 			boolean isPostLikeCountAvailable = Integer.parseInt(postLikeCount) >= 0
 					&& postLikeLabel.equalsIgnoreCase("Likes");
 			boolean isPostCommentCountAvailable = Integer.parseInt(postCommentCount) >= 0
 					&& postCommentLabel.equalsIgnoreCase("Comments");
-
-			// System.out.println("status-->"+isPostTitleAvailable+"2."+isPostedByAuthor+"3."+ispostCreationDateAndTimeAvailable+"4."+ispostAuthorMetadataAvailable+"5."+isPostLikeCountAvailable+"6."+isPostCommentCountAvailable);
 
 			if (!(isPostTitleAvailable && (!isPostedByAuthor) && ispostCreationDateAndTimeAvailable
 					&& (!ispostAuthorMetadataAvailable) && isPostLikeCountAvailable && isPostCommentCountAvailable)) {
