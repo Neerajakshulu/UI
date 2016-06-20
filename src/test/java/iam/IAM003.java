@@ -4,11 +4,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -30,12 +32,7 @@ public class IAM003 extends TestBase {
 
 		extent = ExtentManager.getReporter(filePath);
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		// String p1=returnExcelPath(this.getClass().getSimpleName().charAt(9));
-		// int p2=Integer.parseInt(this.getClass().getSimpleName().charAt(10)+"");
-		// System.out.println(1);
-		// System.out.println(xlRead(p1,p2,1));
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		// System.out.println(xlRead(returnExcelPath(this.getClass().getSimpleName().charAt(9)),this.getClass().getSimpleName().charAt(10),1));
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
 				.assignCategory("IAM");
@@ -51,8 +48,8 @@ public class IAM003 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -70,47 +67,44 @@ public class IAM003 extends TestBase {
 			}
 			clearCookies();
 
-			String email = "amneetsingh100@gmail.com";
-			String password = "Transaction@2";
+			String email = "linkedinloginid@gmail.com";
+			String password = "1Pproject";
 
 			// Navigate to LI login page
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
-			//
+			ob.navigate().to(host);
+			
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
+			
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
+			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 15);
+			BrowserWaits.waitTime(4);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+			if (!checkElementPresence("ul_name")) {
 
-			if (!checkElementPresence("apps")) {
-
-				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent reports
+				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
+																								// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_existing_LI_User_credentials_not_working_fine")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_existing_LI_User_credentials_not_working_fine")));// screenshot
+				closeBrowser();
 
 			}
 
 			// Verify that profile name gets displayed correctly
-
 			if (!checkElementPresence("header_label")) {
 
-				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports
+				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
+																						// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_profile_name_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
+				closeBrowser();
 
 			}
 
@@ -118,13 +112,12 @@ public class IAM003 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
 
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
+				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
+																					// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_logout_successfully")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
+				closeBrowser();
 
 			}
 
@@ -134,18 +127,16 @@ public class IAM003 extends TestBase {
 
 		catch (Throwable t) {
 
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 
 		}
@@ -158,10 +149,10 @@ public class IAM003 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
+		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
+		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

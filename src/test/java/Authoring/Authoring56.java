@@ -78,7 +78,6 @@ public class Authoring56 extends TestBase {
 			}
 
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnLI(liusername, lipassword);
 			BrowserWaits.waitTime(6);
 			logout();

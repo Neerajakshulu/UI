@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -68,10 +69,10 @@ public class Authoring27 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			login();
+			loginAs("USERNAME16","PASSWORD16");
 			selectAnArticle();
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			waitForAllElementsToBePresent(ob, By.xpath("//div[@class='ne-comment-list__comment ng-scope']"), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath("//div[@class='ne-comment-list__comment ng-scope']"));
 			try {
 
 				Assert.assertTrue(commentsList.size() == 10);
@@ -92,7 +93,7 @@ public class Authoring27 extends TestBase {
 
 			try {
 
-				Assert.assertTrue(ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")))
+				Assert.assertTrue(ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()))
 						.isDisplayed());
 				test.log(LogStatus.PASS, "More button is displayed for comments more than 10");
 
@@ -109,8 +110,8 @@ public class Authoring27 extends TestBase {
 										+ "more_button_validation_for_comments_failed")));// screenshot
 			}
 
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
-			WebElement more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()), 40);
+			WebElement more = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 			Point point = more.getLocation();
 			int y = point.getY() + 100;
 			String script = "scroll(0," + y + ");";
@@ -118,7 +119,7 @@ public class Authoring27 extends TestBase {
 			jsClick(ob, more);
 			waitForAjax(ob);
 
-			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			commentsList = ob.findElements(By.xpath("//div[@class='ne-comment-list__comment ng-scope']"));
 
 			try {
 
@@ -162,27 +163,25 @@ public class Authoring27 extends TestBase {
 	}
 
 	private void selectAnArticle() throws InterruptedException {
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 180);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 80);
+		pf.getHFPageInstance(ob).searchForText("Biology");
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 80);
 		List<WebElement> itemList;
-		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+		itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 
 		while (true) {
-			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			itemList =ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int commentsCount, itr = 1;
 			String strCmntCt;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount > 10) {
 					jsClick(ob,
 							itemList.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
 
 					isFound = true;
 					break;

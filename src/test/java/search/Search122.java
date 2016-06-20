@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -64,22 +65,23 @@ public class Search122 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+            waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 30);
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 30);
-
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//h2[contains(text(),'Interests')]"), 15);
+			ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath("//h3[contains(text(),'Interests')]"), 15);
 			test.log(LogStatus.PASS, "Record view page is opened");
 			ob.navigate().back();
 
@@ -87,8 +89,8 @@ public class Search122 extends TestBase {
 
 			try {
 				WebElement peopleTab = ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath")));
-
-				Assert.assertTrue(peopleTab.getAttribute("class").contains("active"));
+                   waitForAjax(ob);
+				Assert.assertTrue(peopleTab.findElement(By.xpath("parent::li")).getAttribute("class").contains("active"));
 				test.log(LogStatus.PASS,
 						"Left navigation panel content type is retained in people search result page after page navigation");
 			} catch (Throwable t) {

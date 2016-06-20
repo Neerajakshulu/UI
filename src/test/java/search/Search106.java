@@ -65,33 +65,33 @@ public class Search106 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
+			
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
-			// login using TR credentials
+			 
+			 // login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
+//			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String post = "sample post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+			ob.findElement(By.partialLinkText("Posts")).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
-			List<WebElement> postDropdownmenus = ob.findElement(
-					By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
+			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
+			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			waitForElementTobeVisible(
+					ob,
+					By.xpath("//div[@class='search-sort-dropdown dropdown open']/ul[@class='dropdown-menu search-sort-dropdown__menu']"),
+					4);
+			Thread.sleep(2000);
+				List<WebElement> postDropdownmenus = ob.findElement(
+					By.cssSelector("div[class='search-sort-dropdown dropdown open']")).findElements(By.tagName("li"));
 			String postExpectedDropdown = "Create Date (Newest)|Create Date (Oldest)|Relevance";
 			List<String> postDropdowndata = new ArrayList<String>();
 			for (WebElement postDropdownmenu : postDropdownmenus) {

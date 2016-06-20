@@ -1,7 +1,5 @@
 package notifications;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,9 +13,9 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0005 extends NotificationsTestBase {
 
@@ -49,60 +47,66 @@ public class Notifications0005 extends NotificationsTestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
 			if (user1 != null && user2 != null && user2 != null) {
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				// Logging in with User1
 				pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");
+				test.log(LogStatus.INFO, "User Logged in  successfully");
+				logger.info("Home Page loaded success fully");
 				watchListName = "Creating WatchList for notification testing" + new Random().nextInt(1000);
 				watchListDescription = "Creating Public WatchList for UI notification testing" + RandomStringUtils.randomNumeric(15);
-				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Creating public watchlist");
-				createWatchList("public", watchListName, watchListDescription);
+				try {
+					createWatchList("public", watchListName, watchListDescription);
+					test.log(LogStatus.INFO, "User created watchlist \""+watchListName+"\" successfully");
+				} catch (Exception e) {
+					throw new Exception("Facing issue while create Watchlist");
+				}
 				pf.getLoginTRInstance(ob).logOutApp();
+				test.log(LogStatus.INFO, "User logged out successfully");
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-				BrowserWaits.waitTime(6);
-				String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");
+				test.log(LogStatus.INFO, "User Logged in successfully for verifying notification");
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString()), 30,
+						"user did not recevied notification");
+				String text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString())).getText();
 				logger.info("Notification Text: " + text);
 				try {
-					Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn3 + " " + ln3)
+					Assert.assertTrue(text.contains("TODAY")/* &&  text.contains(fn3 + " " + ln3)*/
 							&& text.contains("created a new public watchlist") && text.contains(watchListName)
 							&& text.contains(watchListDescription));
-					test.log(LogStatus.PASS, "User receiving notification with correct content");
+					test.log(LogStatus.PASS, "User received notification with correct content");
 					pf.getLoginTRInstance(ob).logOutApp();
 					closeBrowser();
 				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-					StringWriter errors = new StringWriter();
-					t.printStackTrace(new PrintWriter(errors));
-					test.log(LogStatus.INFO, errors.toString()); // reports
-					test.log(LogStatus.INFO, "Error--->" + t);
+					test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
+					test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 					ErrorUtil.addVerificationFailure(t);
+					logger.error(this.getClass().getSimpleName() + "--->" + t);
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
-					closeBrowser();
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
 				}
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "User receiving notification with incorrect content: \n" +t);// extent
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
 			closeBrowser();
 		}
 	}
@@ -110,13 +114,5 @@ public class Notifications0005 extends NotificationsTestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }

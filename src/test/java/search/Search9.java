@@ -69,9 +69,7 @@ public class Search9 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			
 			// login using TR credentials
 			login();
 			//
@@ -100,7 +98,7 @@ public class Search9 extends TestBase {
 			// System.out.println("list-->"+al1);
 
 			// searchResults.get(8).click();
-			jsClick(ob, searchResults.get(8));
+			jsClick(ob, searchResults.get(7));
 			Thread.sleep(5000);
 
 			// ob.navigate().back();
@@ -122,12 +120,13 @@ public class Search9 extends TestBase {
 
 				System.out.println(al1.get(i));
 			}
-
+			
 			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 			for (int i = 0; i < al2.size(); i++) {
 
 				System.out.println(al2.get(i));
 			}
+						
 			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
 			try {
@@ -147,8 +146,8 @@ public class Search9 extends TestBase {
 
 			}
 
-			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
-			if (!compareStrings("Times Cited", option)) {
+			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText().substring(9);
+				if (!compareStrings("Times Cited",option)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent reports
 				status = 2;// excel

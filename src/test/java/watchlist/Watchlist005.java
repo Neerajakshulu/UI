@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -66,6 +67,8 @@ public class Watchlist005 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		String email = "linkedinloginid@gmail.com";
+		String password = "1Pproject";
 		try {
 
 			// Opening browser
@@ -79,32 +82,58 @@ public class Watchlist005 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			
+			login();
+			
+			/*waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
+			//
+			//BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
+
+			// Verify that existing LI user credentials are working fine
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
+			//BrowserWaits.waitTime(2);
+			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();*/
+			
+			//loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+			logger.info("New WatchList Name : "+newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
+			/*selectSearchTypeFromDropDown("Articles");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();*/
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OR.getProperty("searchArticle"))).click();
+			
+			
+			
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 60);
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
 			// Watching the article to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the article name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
+			logger.info("Article Document Name : "+documentName);
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -127,28 +156,35 @@ public class Watchlist005 extends TestBase {
 			}
 			// Step2: Unwatching the document from record view page
 			// Searching for article
-			selectSearchTypeFromDropDown("Articles");
+//			selectSearchTypeFromDropDown("Articles");
+//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
+			ob.findElement(By.xpath(OR.getProperty("searchArticle"))).click();
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 60);
 
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
 
 			// Unwatching the article to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the article name
-			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist1")));
 
 				if (defaultMessage.isDisplayed()) {
 
@@ -165,7 +201,7 @@ public class Watchlist005 extends TestBase {
 				}
 			} catch (NoSuchElementException e) {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 

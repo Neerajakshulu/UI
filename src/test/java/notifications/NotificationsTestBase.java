@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -36,40 +36,40 @@ public class NotificationsTestBase extends TestBase {
 	protected RowData rowData = null;
 
 	@BeforeSuite
-	public void beforeSuite() throws Exception {
+	public void beforeSuite(ITestContext ctx) throws Exception {
 		logger.info("Notification UI automation starting time - " + new Date());
-
+		String suiteName = ctx.getSuite().getName();
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Notifications");
 		logger.info("Notifications Suit runmode is - " + suiteRunmode);
-
 		logger.info("Notification UI automation Running environment - " + host);
 		readNotifications();
-		// logger.info(testcase.size());
-		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
+		logger.info(testcase.size());
+		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
+				&& !(suiteName.equals("Sanity suite"))) {
 			createNewUsers();
-			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
-				if (user1 == null) {
-					user1 = "3sgor3+a7lpxeq96gte0@sharklasers.com";
-					fn1 = "prjleohp";
-					ln1 = "prjleohpai";
-					count++;
-				}
-				if (user2 == null) {
-					user2 = "3sgpav+ak12q8xmmb280@sharklasers.com";
-					fn2 = "ucbvpwab";
-					ln2 = "ucbvpwabqs";
-					count++;
-				}
-				if (user3 == null) {
-					user3 = "3sgpjq+7gysrhor017d0@sharklasers.com";
-					fn3 = "usylbleh";
-					ln3 = "usylbleheq";
-					count++;
-				}
-			}
-			if (count < 3)
-				followUsers();
+			// if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
+			// if (user1 == null) {
+			// user1 = "potti1229@gmail.com";
+			// fn1 = "Manoj";
+			// ln1 = "Potti";
+			// count++;
+			// }
+			// if (user2 == null) {
+			// user2 = "avinash.potti@thomsonreuters.com";
+			// fn2 = "Avinash";
+			// ln2 = "Potti";
+			// count++;
+			// }
+			// if (user3 == null) {
+			// user3 = "3sgpjq+7gysrhor017d0@sharklasers.com";
+			// fn3 = "chinna";
+			// ln3 = "putha";
+			// count++;
+			// }
+			// }
+			//// if (count < 3)
+			followUsers();
 		}
 	}
 
@@ -110,7 +110,7 @@ public class NotificationsTestBase extends TestBase {
 					// Get current row information
 					row = sheet.getRow(i);
 					rowData = getRowData(row);
-					//logger.info(rowData);
+					// logger.info(rowData);
 					testcase.put(rowData.getTestclassName(), rowData);
 				}
 			}
@@ -194,21 +194,18 @@ public class NotificationsTestBase extends TestBase {
 				maximizeWindow();
 				clearCookies();
 				ob.navigate().to(host);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				// login with user1
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
-				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-				JavascriptExecutor jse = (JavascriptExecutor) ob;
-				jse.executeScript("scroll(0,-500)");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
-				ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-				ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-				BrowserWaits.waitTime(3);
-				logout();
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
+				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
+				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				}
+				pf.getLoginTRInstance(ob).logOutApp();
 				// closeBrowser();
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
@@ -223,21 +220,16 @@ public class NotificationsTestBase extends TestBase {
 				// maximizeWindow();
 				// clearCookies();
 				// ob.navigate().to(host);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-				// login with user2
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn3 + " " + ln3);
-				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-				JavascriptExecutor jse = (JavascriptExecutor) ob;
-				jse.executeScript("scroll(0,-500)");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("profilesTabHeading_link")), 30);
-				ob.findElement(By.xpath(OR.getProperty("profilesTabHeading_link"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_follow_button")), 40);
-				ob.findElement(By.xpath(OR.getProperty("search_follow_button"))).click();
-				BrowserWaits.waitTime(3);
-				logout();
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn3 + " " + ln3);
+				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				}
+				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} else {
 				throw new Exception("User creation problem hence throwing exception");

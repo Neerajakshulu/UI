@@ -99,29 +99,41 @@ public class Authoring63 extends TestBase {
 			try {
 				Assert.assertTrue(postCountAfter == (postCountBefore + 1) && postString.equals(postTitle));
 				test.log(LogStatus.PASS, "Draft Post section is present in the user profile");
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SECTION_HEADING_LABEL.toString())).click();
-				waitForElementTobeVisible(ob,
-						By.xpath(OnePObjectMap.HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH.toString()), 40);
-				ob.findElement(
-						By.xpath(OnePObjectMap.HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH.toString()))
-						.click();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()), 40);
-				test.log(LogStatus.INFO, "Searching for someother users");
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(
-						"Sachin Traveller");
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString()), 40);
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_BUTTON_XPATH.toString())).click();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString()), 40);
-				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString())).click();
-
-				boolean isPresent = ob.findElement(
-						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
-						.isDisplayed();
-				Assert.assertEquals(false, isPresent);
-				test.log(LogStatus.INFO, "Draft posts are not visible");
+				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"Draft Post section is not present in the user profile/ it is displayed in other user profile");
+						"Draft Post section is not present in user profile");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Post_count_validation_failed")));// screenshot
+
+			}
+				
+				pf.getHFPageInstance(ob).searchForText("Sachin Traveller");
+				pf.getSearchProfilePageInstance(ob).clickPeople();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString()), 40);
+				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString())).click();
+				try{
+					waitForAjax(ob);
+					boolean isPresent = ob.findElement(
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()))
+						.isDisplayed();
+				Assert.assertTrue(!isPresent);
+				test.log(LogStatus.PASS,
+						"Draft Post section is not present in other user profile");
+			} catch( Exception e){
+				
+				test.log(LogStatus.PASS,
+						"Draft Post section is not present in other user profile");
+			}
+				catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"Draft Post section is present in other user profile");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

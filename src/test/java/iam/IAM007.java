@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -88,16 +89,22 @@ public class IAM007 extends TestBase {
 
 			ob.navigate().to(host);
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
-
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
-			//
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
-
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
+			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();*/
+			
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
+			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(5);
 
 			if (!checkElementPresence_name("FB_page_login_button")) {
 

@@ -67,10 +67,10 @@ public class Authoring53 extends TestBase {
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			pf.getHFPageInstance(ob).searchForText("test");
+			pf.getHFPageInstance(ob).searchForText("sample");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
-			pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
+			//pf.getpostRVPageInstance(ob).clickOnLinkedInUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnLI(liusername, lipassword);
 			BrowserWaits.waitTime(6);
 			logout();

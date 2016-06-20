@@ -72,7 +72,7 @@ public class Authoring5 extends TestBase {
 		maximizeWindow();
 
 		ob.navigate().to(System.getProperty("host"));
-		pf.getAuthoringInstance(ob).waitForTRHomePage();
+		//pf.getAuthoringInstance(ob).waitForTRHomePage();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
 			// print full stack trace
@@ -98,8 +98,8 @@ public class Authoring5 extends TestBase {
 			String completeArticle) throws Exception {
 
 		try {
-			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
-			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			recordViewDetailsLinkValidation();

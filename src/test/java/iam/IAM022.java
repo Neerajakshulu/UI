@@ -48,36 +48,35 @@ public class IAM022 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//span[@class='webui-custom-checkbox']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 30);
 			test.log(LogStatus.INFO, "The Check box for changing email preferences is visible");
 			//
 
-			String cssValue = ob.findElement(By.xpath("(//span[@class='webui-custom-checkbox'])")).getCssValue(
-					"background");
+			String cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
 
-			if (cssValue.contains("rgb(255, 128, 0)")) {
+			
+			if (cssValue.contains("rgb(69, 183, 231)")) {
 				test.log(LogStatus.INFO, "check box is selected");
 			} else {
 				test.log(LogStatus.INFO, "check box is not selected by default");
 				status = 2;
 			}
 			// unchecking the check box n checking if it is working
-			ob.findElement(By.xpath("//span[@class='webui-custom-checkbox']")).click();
-			cssValue = ob.findElement(By.xpath("(//span[@class='webui-custom-checkbox'])")).getCssValue("background");
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();
+			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
 
 			Thread.sleep(5000);
 			if (cssValue.contains("rgb(255, 255, 255)")) {
 				test.log(LogStatus.INFO, "unchecking is working fine");
 				// restoring the check status
-				ob.findElement(By.xpath("//span[@class='webui-custom-checkbox']")).click();
+				ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();
 			} else {
 				test.log(LogStatus.INFO, "Unchecking is not working");
 				status = 2;

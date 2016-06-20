@@ -9,17 +9,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile12 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
@@ -27,7 +25,6 @@ public class Profile12 extends TestBase {
 	static int status = 1;
 	static String followBefore = null;
 	static String followAfter = null;
-	PageFactory pf = new PageFactory();
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -40,7 +37,6 @@ public class Profile12 extends TestBase {
 		test = extent.startTest(var,
 				"Verify that user is able to follow other profile and test for count of users following me")
 				.assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	/**
@@ -63,14 +59,7 @@ public class Profile12 extends TestBase {
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 
 		try {
@@ -84,7 +73,7 @@ public class Profile12 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");
+			test.log(LogStatus.FAIL, "Login_not_done");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

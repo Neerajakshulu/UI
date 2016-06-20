@@ -34,7 +34,7 @@ public class SearchResultsPage extends TestBase {
 	public void clickOnPostTab() throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(4).click();
 		waitForAjax(ob);
 	}
 	/**
@@ -44,7 +44,17 @@ public class SearchResultsPage extends TestBase {
 	public void clickOnArticleTab() throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(0).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
+		waitForAjax(ob);
+	}
+	
+	/**
+	 * Method to click on Patents tab in search results page
+	 * @throws Exception
+	 */
+	public void clickOnPatentsTab() throws Exception {
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
 		waitForAjax(ob);
 	}
 
@@ -53,27 +63,27 @@ public class SearchResultsPage extends TestBase {
 	 * @param currentUserName
 	 */
 	public void viewOtherUsersPost(String currentUserName) {
-		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
-
+		
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String profileName;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				
 				profileName = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_post_author_css")))
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS.toString()))
 						.getText();
-				String title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+				String title = records.get(i).findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member"))
 				{
 				if (!profileName.equalsIgnoreCase(currentUserName)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -94,24 +104,24 @@ public class SearchResultsPage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public List<String> getAuthorDetailsOfPost() throws InterruptedException {
-		waitForElementTobePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
 		List<String> authorDetails = new ArrayList<String>();
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String title, profileName, profileDetails;
 
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
-				title = records.get(i).findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css")))
+				title = records.get(i).findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()))
 						.getText();
 				if (!title.contains("Post removed by Community Manager") && !title.contains("Post removed by member")) {
 					profileName = records.get(i)
-							.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_profile_name_css")))
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS.toString()))
 							.getText().trim();
 					profileDetails = records.get(i)
-							.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_profile_details_css")))
+							.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()))
 							.getText().trim();
 
 					authorDetails.add(title);
@@ -127,7 +137,7 @@ public class SearchResultsPage extends TestBase {
 					isFound = true;
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					waitForPageLoad(ob);
 					break;
 				}
@@ -151,21 +161,21 @@ public class SearchResultsPage extends TestBase {
 	 */
 	public void clickOnPostTitle(String title) {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_item_css")), 180);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
 		List<WebElement> records;
 
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String postTitle;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				postTitle = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).getText();
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())).getText();
 				if (postTitle.equals(title)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -189,17 +199,17 @@ public class SearchResultsPage extends TestBase {
 		List<WebElement> records;
 		waitForAjax(ob);
 		while (true) {
-			records = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			records = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int itr = 1;
 			String profileTitle;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < records.size(); i++) {
 				profileTitle = records.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))).getText();
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS.toString())).getText();
 				if (profileTitle.equals(title)) {
 					jsClick(ob,
 							records.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_profile_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS.toString())));
 					waitForPageLoad(ob);
 					isFound = true;
 					break;
@@ -215,5 +225,46 @@ public class SearchResultsPage extends TestBase {
 		}
 
 	}
+	
+	/**
+	 * Method to access the article which has comments added to it.
+	 */
+	public void searchForArticleWithComments() {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
+		List<WebElement> itemList;
+
+		while (true) {
+			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+			int commentsCount, itr = 1;
+			String strCmntCt;
+			boolean isFound = false;
+			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+				try{
+				strCmntCt = itemList.get(i)
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+						.getText().replaceAll(",", "").trim();
+				}catch(Exception e){
+					continue;
+				}
+				commentsCount = Integer.parseInt(strCmntCt);
+				if (commentsCount != 0) {
+					jsClick(ob,
+							itemList.get(i).findElement(
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+
+					isFound = true;
+					break;
+				}
+
+			}
+
+			if (isFound)
+				break;
+			itr++;
+			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+		}
+	}
+
 
 }

@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -68,18 +69,17 @@ public class Search20 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			login();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 30);
-			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"), 30);
-			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"))
-					.click();
+					By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 20);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			// waitForAllElementsToBePresent(ob,
 			// By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 

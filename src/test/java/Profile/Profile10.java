@@ -19,7 +19,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile10 extends TestBase {
 
-	String runmodes[] = null;
 	static int count = -1;
 
 	static boolean fail = false;
@@ -29,7 +28,6 @@ public class Profile10 extends TestBase {
 	static String followAfter = null;
 	static String profileHeadingName;
 	static String profileDetailsName;
-	PageFactory pf;
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified patsh of Extent Reports
@@ -42,7 +40,6 @@ public class Profile10 extends TestBase {
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verity that user is able to Like others comments from their profile page")
 				.assignCategory("Profile");
-		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 	}
 
 	/**
@@ -56,7 +53,8 @@ public class Profile10 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -65,13 +63,7 @@ public class Profile10 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 
 		try {

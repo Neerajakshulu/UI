@@ -94,7 +94,7 @@ public class IAM019 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
@@ -104,11 +104,37 @@ public class IAM019 extends TestBase {
 			//
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_emailError_label")), 10);
-			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_emailError_label")));
+			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();*/
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_error_label")), 10);
+			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("email_error_label")));
+			logger.info("Error List Size : "+errorList.size());
 
-			if (!compareNumbers(1, errorList.size())) {
+			if (runmodes[count].equalsIgnoreCase("Y")) {
+			for (WebElement text : errorList) {
+				if (!text.getText().equals("Please enter a valid email address.")) {
+
+					fail = true;// excel
+					test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent
+																								// report
+					test.log(LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
+					closeBrowser();
+					return;
+				}
+
+			}
+		}
+			
+			/*if (!compareNumbers(1, errorList.size())) {
 
 				fail = true;// excel
 				test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
@@ -119,10 +145,10 @@ public class IAM019 extends TestBase {
 										+ "_error_message_not_getting_displayed_" + (count + 1))));
 				closeBrowser();
 				return;
-			}
+			}*/
 
-			String error = "Please enter a valid Email Address.";
-			String errorText = ob.findElement(By.id(OR.getProperty("reg_emailError_label"))).getText();
+			/*String error = "Please enter a valid Email Address.";
+			String errorText = ob.findElement(By.id(OR.getProperty("reg_error_label"))).getText();
 			if (!compareStrings(error, errorText)) {
 
 				fail = true;// excel
@@ -133,7 +159,7 @@ public class IAM019 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_incorrect_error_text_" + (count + 1))));
 
-			}
+			}*/
 
 			closeBrowser();
 

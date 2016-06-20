@@ -67,8 +67,7 @@ public class Search31 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -76,11 +75,11 @@ public class Search31 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[class^='content-type-selector ng-scope']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link']"), 30);
 
 			// Finding out the name of all types of content set in result page
 			List<WebElement> content_types = ob.findElements(By
-					.cssSelector("li[class^='content-type-selector ng-scope']"));
+					.cssSelector("a[class='wui-side-menu__link']"));
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();

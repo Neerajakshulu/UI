@@ -96,26 +96,37 @@ public class IAM005 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 
-			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
+			//waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
 
 			// Create new TR account
-			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
+			//ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
 			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_firstName_textBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_firstName_textbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
+
+
+			/*waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_firstName_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
-			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();
+			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();*/
 			//
 
-			List<WebElement> errorList = ob.findElements(By.id(OR.getProperty("reg_firstNameError_label")));
+			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
+			logger.info("Errors Count : "+errorList.size());
 
 			if (validity.equalsIgnoreCase("YES")) {
 
+				for(WebElement text : errorList){
+					
 				// verifying that error message is not getting displayed
-				if (!compareNumbers(0, errorList.size())) {
+				if (text.getText().equals("First name is too long.")) {
 
 					fail = true;// excel
 					test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent report
@@ -127,12 +138,13 @@ public class IAM005 extends TestBase {
 					closeBrowser();
 					return;
 				}
+			}
 
 			}
 
 			else {
-
-				if (!compareNumbers(1, errorList.size())) {
+				for(WebElement text : errorList){
+				if (!text.getText().equals("First name is too long.")) {
 
 					fail = true;// excel
 					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
@@ -145,8 +157,10 @@ public class IAM005 extends TestBase {
 					return;
 				}
 
-				String errorText = ob.findElement(By.id(OR.getProperty("reg_firstNameError_label"))).getText();
-				if (!compareStrings("Please enter no more than 70 characters.", errorText)) {
+			}
+				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
+				logger.info("Error Text  : "+errorText);
+				if (!compareStrings("First name is too long.", errorText)) {
 
 					fail = true;// excel
 					test.log(LogStatus.FAIL, "Error text is incorrect");// extent report

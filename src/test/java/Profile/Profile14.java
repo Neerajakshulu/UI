@@ -9,21 +9,18 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile14 extends TestBase {
 
-	private static final String PASSWORD = "Welcome123";
-	private static final String USER_NAME = "kavya.revanna@thomsonreuters.com";
+	
 	static int status = 1;
-	PageFactory pf = new PageFactory();
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -44,7 +41,8 @@ public class Profile14 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -65,7 +63,7 @@ public class Profile14 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");// extent reports
+			test.log(LogStatus.FAIL, "Login_not_done");// extent reports
 			// print stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -109,14 +107,15 @@ public class Profile14 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "getFollowers")
-	public void loginwithOtherUser() throws Exception {
+	@Parameters({"otherUsername","otherUserPassword"})
+	public void loginwithOtherUser(String otherUsername,String otherUserPassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "login with different user");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(USER_NAME, PASSWORD);
+			pf.getLoginTRInstance(ob).enterTRCredentials(otherUsername, otherUserPassword);
 			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");
+			test.log(LogStatus.FAIL, "login_not_done");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -137,7 +136,7 @@ public class Profile14 extends TestBase {
 	public void followUserAndLogout() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow/unfollow other user");
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52");
+			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/profile/59f15292-a2d0-4555-bfc8-4fe37b95fa60");
 			BrowserWaits.waitTime(10);
 			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
@@ -178,7 +177,7 @@ public class Profile14 extends TestBase {
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends");
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something Unexpected");
+			test.log(LogStatus.FAIL, "others are unable to following me");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

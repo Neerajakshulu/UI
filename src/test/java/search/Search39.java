@@ -9,8 +9,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -63,8 +65,7 @@ public class Search39 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -72,17 +73,17 @@ public class Search39 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
-			Thread.sleep(2000);
-
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
+			BrowserWaits.waitTime(2);
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			waitForElementTobeVisible(ob, By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']"), 30);
-			Thread.sleep(2000);
-
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			waitForElementTobeVisible(ob, By.cssSelector("button[class='wui-btn--block search-sort-dropdown__button dropdown-toggle']"), 30);
+			BrowserWaits.waitTime(2);
 			// Finding out the default sort by value for Article content set
 			String defaultSortBy = ob
-					.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).getText();
+					.findElement(By.cssSelector("button[class='wui-btn--block search-sort-dropdown__button dropdown-toggle']")).getText().substring(9);
+			System.out.println("the value " +defaultSortBy);
 
 			// Comparing the the label of default sort by value
 			if (!defaultSortBy.equalsIgnoreCase("Relevance")) {

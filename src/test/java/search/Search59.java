@@ -69,17 +69,16 @@ public class Search59 extends TestBase {
 
 			// login using TR credentials
 			login();
-
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
 			Thread.sleep(2000);
 			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-			
+			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			Thread.sleep(1000);
@@ -88,8 +87,8 @@ public class Search59 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
-			Thread.sleep(1000);
-
+			Thread.sleep(3000);
+		
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			String text = myE.getText();
 

@@ -58,7 +58,6 @@ public class Authoring51 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
@@ -94,8 +93,8 @@ public class Authoring51 extends TestBase {
 			}
 
 			try {
-				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
-				pf.getpostRVPageInstance(ob).validateAppreciationComment(test);
+				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 				test.log(LogStatus.PASS, "Comment appreciation on posts working as expected");
 
 			} catch (Throwable t) {

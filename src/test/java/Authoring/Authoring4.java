@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -82,7 +83,7 @@ public class Authoring4 extends TestBase {
 		maximizeWindow();
 		ob.navigate().to(System.getProperty("host"));
 		
-			pf.getAuthoringInstance(ob).waitForTRHomePage();
+			//pf.getAuthoringInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 			closeBrowser();
 		} catch (Throwable t) {
@@ -108,14 +109,13 @@ public class Authoring4 extends TestBase {
 			String completeArticle,
 			String addComments) throws Exception {
 		loginAs("USERNAME3", "PASSWORD3");
-
 	try{
 		// Get Total No.of comments
 		totalProfileCommentsBeforeAdd = getProfleComments();
 		System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
 		System.out.println();
-		pf.getLoginTRInstance(ob).searchArticle(article);
-		pf.getLoginTRInstance(ob).chooseArticle(completeArticle);
+		pf.getAuthoringInstance(ob).searchArticle(article);
+		pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 		// Enter Article Comments
 		int expCount=pf.getAuthoringInstance(ob).getCommentCount();
 		pf.getAuthoringInstance(ob).enterArticleComment(addComments);
@@ -168,13 +168,13 @@ public class Authoring4 extends TestBase {
 
 	public int getProfleComments() throws InterruptedException {
 		waitForAjax(ob);
-		jsClick(ob, ob.findElement(By.cssSelector(TestBase.OR.getProperty("tr_profile_dropdown_css"))));
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		waitUntilText("Profile");
-		jsClick(ob, ob.findElement(By.linkText(TestBase.OR.getProperty("tr_profile_link"))));
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
 		waitUntilText("Comments");
 		scrollingToElementofAPage();
 		String commentsCount = ob.findElement(
-				By.cssSelector("a[data-event-category='profilecomments'] span[class='ng-binding']:nth-child(2)"))
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS.toString()))
 				.getText();
 		int totalComments = Integer.parseInt(commentsCount.replace(",", "").trim());
 		return totalComments;

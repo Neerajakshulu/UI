@@ -34,7 +34,7 @@ public class Authoring74 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var,
-				"Verify that user is able to view the comment and like counts on posts created by others")
+				"Verify that user is able to view the post creation date")
 				.assignCategory("Authoring");
 
 	}

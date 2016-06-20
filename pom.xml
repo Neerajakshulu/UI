@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.thomsonreuters.ips</groupId>
 	<artifactId>1p-ui-automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>1p-ui-automation</name>
 	
 	<properties>
@@ -123,7 +124,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile>
-						<!-- <suiteXmlFile>src/test/resources/xml/testng.xml</suiteXmlFile> -->
+						<!-- <suiteXmlFile>src/test/resources/xml/Suite_G.xml</suiteXmlFile> -->
 					</suiteXmlFiles>
 
 					<systemProperties>

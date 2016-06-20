@@ -7,10 +7,10 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-	<parameter name="password" value="Welcome01" />
+	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="password" value="Neon@123" />
 
-	<test name="Follow_Other_Profile" preserve-order="true">
+	  <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -99,9 +99,11 @@
 		<classes>
 			<class name="Profile.Profile13"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="ProfileFollowerTest">
+		<parameter name="otherUsername" value="tridlogin@gmail.com" />
+		<parameter name="otherUserPassword" value="1Pproject#" />
 		<classes>
 			<class name="Profile.Profile14"></class>
 		</classes>
@@ -153,7 +155,7 @@
 
 	<test name="Profile_Publish_A_Post_Count_Validation">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
-		<parameter name="password" value="Reddys@123" />
+		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing Post count"></parameter>
 		<parameter name="postContent" value="my post content for post count "></parameter>
 		<classes>
@@ -162,8 +164,8 @@
 	</test>
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
-		<parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="1Platform" />
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="1Pproject#" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -229,15 +231,15 @@
 		<classes>
 			<class name="Profile.Profile30"></class>
 		</classes>
-	</test>
+	</test> 
 
-	<test name="post_tab_infinite_Scroll">
+	 <test name="post_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile31"></class>
 		</classes>
 	</test>
 
-	<test name="comments_tab_infinite_Scroll">
+	 <test name="comments_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile32"></class>
 		</classes>
@@ -255,9 +257,9 @@
 		</classes>
 	</test>
 
-	<test name="Post_like_count">
+	 <test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
-		<parameter name="password" value="Welcome01" />
+		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -267,7 +269,7 @@
 
 	<test name="Publish_post_timestamp_validation">
 		<parameter name="username" value="projectneon.test@gmail.com" />
-		<parameter name="password" value="Welcome01" />
+		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -289,8 +291,8 @@
 	</test>
 
 	<test name="Post_comment_count">
-		<parameter name="username" value="avinash.p1229@gmail.com" />
-		<parameter name="password" value="1Platform" />
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="1Pproject#" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
 		<parameter name="postContent" value="my post content for RecordView page " />
 		<classes>
@@ -304,7 +306,7 @@
 			<class name="Profile.Profile40"></class>
 		</classes>
 	</test>
-
+ 
 
 </suite>
 

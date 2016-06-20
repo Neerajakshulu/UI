@@ -59,8 +59,9 @@ public class IAM025 extends TestBase {
 			}
 			clearCookies();
 			ob.navigate().to(host);
+			login();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			//
@@ -70,7 +71,7 @@ public class IAM025 extends TestBase {
 					CONFIG.getProperty("defaultUsername").toUpperCase());
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();

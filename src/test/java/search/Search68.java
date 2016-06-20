@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -63,7 +64,6 @@ public class Search68 extends TestBase {
 			// Navigating to the NEON login page
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -72,75 +72,65 @@ public class Search68 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			Thread.sleep(3000);
 
-			String all_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"))
+			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.getText();
 			String all_temp = all_text.substring(3);
 			int all_num = convertStringToInt(all_temp);
 			System.out.println(all_num);
 
 			String articles_text = ob
-					.findElement(
-							By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]"))
-					.getText();
+					.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).getText();
 			String articles_temp = articles_text.substring(8);
 			int articles_num = convertStringToInt(articles_temp);
 			System.out.println(articles_num);
 
 			String patents_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
-					.getText();
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
 			String patents_temp = patents_text.substring(7);
 			int patents_num = convertStringToInt(patents_temp);
 			System.out.println(patents_num);
 
 			String people_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]"))
-					.getText();
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).getText();
 			String people_temp = people_text.substring(6);
 			int people_num = convertStringToInt(people_temp);
 			System.out.println(people_num);
 
 			String posts_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"))
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()))
 					.getText();
 			String posts_temp = posts_text.substring(5);
 			int posts_num = convertStringToInt(posts_temp);
 			System.out.println(posts_num);
 
 			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]"))
-					.click();
+					By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			Thread.sleep(2000);
 			boolean cond1 = getHeadingCount() == articles_num;
 			System.out.println(cond1);
 
-			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
-					.click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 			Thread.sleep(2000);
 			boolean cond2 = getHeadingCount() == patents_num;
 			System.out.println(cond2);
 
-			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]"))
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()))
 					.click();
 			Thread.sleep(2000);
 			boolean cond3 = getHeadingCount() == people_num;
 			System.out.println(cond3);
 
-			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"))
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()))
 					.click();
 			Thread.sleep(2000);
 			boolean cond4 = getHeadingCount() == posts_num;
 			System.out.println(cond4);
 
 			ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"))
+				 By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.click();
 			Thread.sleep(2000);
 			boolean cond5 = getHeadingCount() == all_num;
@@ -211,7 +201,7 @@ public class Search68 extends TestBase {
 
 	public int getHeadingCount() {
 
-		String heading_text = ob.findElement(By.tagName("h1")).getText();
+		String heading_text = ob.findElement(By.tagName("h2")).getText();
 		String heading_temp = heading_text.substring(16);
 		int heading_num = convertStringToInt(heading_temp);
 		return heading_num;

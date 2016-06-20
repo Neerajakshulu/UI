@@ -9,13 +9,12 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Profile34 extends TestBase {
 
@@ -25,7 +24,6 @@ public class Profile34 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	PageFactory pf;
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -52,7 +50,8 @@ public class Profile34 extends TestBase {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -69,7 +68,6 @@ public class Profile34 extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(System.getProperty("host"));
-			pf = new PageFactory();
 
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);

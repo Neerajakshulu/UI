@@ -98,10 +98,10 @@ public class Authoring25 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			loginAs("USERNAME12", "PASSWORD12");
-			searchArticle(article);
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComments("test");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 		} catch (Exception e) {
@@ -130,16 +130,11 @@ public class Authoring25 extends TestBase {
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			BrowserWaits.waitTime(10);
 			pf.getAuthoringInstance(ob).updateComment(htmlTags);
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 40);
-			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
-			// System.out.println("Profanity Word Error Message--->"+profanityErrorMessage);
 			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
-			System.out.println("testxyz:" + unSupporteTagErrorMessage);
-			System.out.println("testxyz:" + errorMessage);
-			// Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
+			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS).getText();
 			if (!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)) {
 				throw new Exception("UnSupported_HTML_tags_doesnot_allow_comments_validation");
 			}
@@ -195,42 +190,9 @@ public class Authoring25 extends TestBase {
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 
-		if (master_condition)
-			closeBrowser();
+		closeBrowser();
 	}
 
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
-		BrowserWaits.waitTime(4);
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-		waitForPageLoad(ob);
-		
-	}
-
-	public void waitUntilTextPresent(String locator,
-			String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
-	}
 
 	@DataProvider
 	public Object[][] getTestData() {

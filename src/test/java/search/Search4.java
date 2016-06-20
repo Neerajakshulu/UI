@@ -67,10 +67,8 @@ public class Search4 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(System.getProperty("host"));
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+			
+		// login using TR credentials
 			login();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -126,7 +124,7 @@ public class Search4 extends TestBase {
 				}
 
 				ob.close();
-				ob.switchTo().window(mylist55.get(0));
+		ob.switchTo().window(mylist55.get(0));
 
 			}
 			String message = "";

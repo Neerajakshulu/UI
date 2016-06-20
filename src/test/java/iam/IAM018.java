@@ -67,8 +67,8 @@ public class IAM018 extends TestBase {
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("LI_login_button"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_cancel_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("LI_cancel_link"))).click();

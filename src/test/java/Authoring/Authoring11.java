@@ -104,11 +104,11 @@ public class Authoring11 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			searchArticle(article);
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -134,18 +134,14 @@ public class Authoring11 extends TestBase {
 		try {
 			new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			test.log(LogStatus.INFO, "Sharing Article on Twitter");
-			waitForElementTobeClickable(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString())));
-			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS);
+			
 			String PARENT_WINDOW = ob.getWindowHandle();
 			String rvPageurl = ob.getCurrentUrl();
 			waitForElementTobeVisible(ob,
-					By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString()),
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()),
 					80);
 			jsClick(ob, ob.findElement(By
-					.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString())));
+					.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString())));
 			waitForNumberOfWindowsToEqual(ob, 2);
 			maximizeWindow();
 
@@ -164,27 +160,9 @@ public class Authoring11 extends TestBase {
 					jsClick(ob, ob.findElement(By
 							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS
 									.toString())));
-					//waitForPageLoad(ob);
+					
 					BrowserWaits.waitTime(10);
-					// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWITTER_LOGIN_CSS);
-					// waitForElementTobeVisible(ob,
-					// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS.toString()),
-					// 180);
-					// //
-					// BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
-					// //
-					// BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS);
-					// String
-					// articleDesc=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_DESC_CSS).getText();
-					// System.out.println("Article Desc-->"+articleDesc+"page url-->"+rvPageurl);
-					// if(!articleDesc.contains(rvPageurl)){
-					// throw new Exception("Sharing Article Description not populated on Twitter Page");
-					// }
-					/*waitForElementTobeVisible(ob,
-							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS.toString()),
-							180);
-					pf.getBrowserActionInstance(ob)
-							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_TWEET_CSS);*/
+				
 					ob.switchTo().window(PARENT_WINDOW);
 					BrowserWaits.waitTime(10);
 				}
@@ -229,35 +207,5 @@ public class Authoring11 extends TestBase {
 		 */
 	}
 
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		waitForPageLoad(ob);
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-		waitForPageLoad(ob);
-	}
-
-	public void waitUntilTextPresent(String locator,
-			String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
-	}
 
 }

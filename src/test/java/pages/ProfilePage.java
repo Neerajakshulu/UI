@@ -16,23 +16,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 public class ProfilePage extends TestBase {
 
-	PageFactory pf;
 
 	public ProfilePage(WebDriver ob) {
 		this.ob = ob;
 		pf = new PageFactory();
 	}
-
-	/*
-	 * private static ProfilePage profilePage = null; public static ProfilePage getProfilePageInstance() { if
-	 * (profilePage == null) { profilePage = new ProfilePage(); } return profilePage; }
-	 */
 
 	/**
 	 * Search results people count
@@ -100,7 +94,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When People are not present/Disabled
 	 */
 	public void clickPeople() throws Exception {
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		BrowserWaits.waitTime(8);
 	}
 
@@ -149,13 +143,14 @@ public class ProfilePage extends TestBase {
 	public void validateAppsLinks(String appLinks) throws Exception {
 		String[] totalAppLinks = appLinks.split("\\|");
 		for (int i = 0; i < totalAppLinks.length; i++) {
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_LINK);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			BrowserWaits.waitTime(4);
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 			ob.findElement(By.linkText(totalAppLinks[i])).click();
 			ob.manage().window().maximize();
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
-			System.out.println("child windows count-->" + child_window_handles.size());
+			logger.info("child windows count-->" + child_window_handles.size());
 			for (String child_window_handle : child_window_handles) {
 				if (!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 					ob.switchTo().window(child_window_handle);
@@ -289,19 +284,18 @@ public class ProfilePage extends TestBase {
 	public void validateOwnrProfile() throws Exception {
 		boolean otherProfileEdit = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
-		// System.out.println("profile edit-->"+otherProfileEdit);
+		logger.info("profile edit-->"+otherProfileEdit);
 		if (!otherProfileEdit) {
 			throw new Exception("Edit option should be available for own profile");
 		}
 
 		String profileName = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
-		// System.out.println("profile name-->"+profileName);
-
-		String profileImageText = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img"))
-				.getAttribute("title");
-		// System.out.println("profile image neame-->"+profileImageText);
+		logger.info("profile name-->"+profileName);
+		String profileImageText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS).findElement(By.tagName("img"))
+									.getAttribute("title");
+		logger.info("profile image text-->"+profileImageText);
+		
 		Assert.assertEquals(profileName, profileImageText);
 
 	}
@@ -351,7 +345,7 @@ public class ProfilePage extends TestBase {
 
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,
-				metadata[3] + RandomStringUtils.randomAlphabetic(3));
+				metadata[3]);
 	}
 
 	/**
@@ -374,7 +368,7 @@ public class ProfilePage extends TestBase {
 	public void validateProfileMetadata() throws Exception {
 		String country = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).get(0).getText();
-		System.out.println("country-->" + country);
+		logger.info("country-->" + country);
 		if (country.contains(metadata[3])) {
 			throw new Exception("profile meta data not updated");
 		}
@@ -490,18 +484,13 @@ public class ProfilePage extends TestBase {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()), 40);
 		BrowserWaits.waitTime(4);
-		List<WebElement> buttons = ob.findElements(By
-				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString()));
-		for (WebElement button : buttons) {
-
-			if (button.isDisplayed()) {
-
-				jsClick(ob, button);
-				break;
-			}
+		jsClick(ob,
+		ob.findElement(By
+				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS.toString())));
+		
 		}
 
-	}
+	
 
 	/**
 	 * Method to validate various error messages while creating the post
@@ -546,10 +535,10 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void enterPostContent(String content) throws Exception {
-		waitForElementTobeClickable(ob,
+		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
@@ -762,10 +751,8 @@ public class ProfilePage extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Publish A Post",
-				"Give an update, pose a question, share an interesting find.");
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Post");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 	}
 
 	/**
@@ -814,15 +801,33 @@ public class ProfilePage extends TestBase {
 	 */
 	public List<String> getProfileTitleAndMetadata() throws Exception {
 		List<String> profileInfo = new ArrayList<String>();
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS)
 				.getText());
-		profileInfo.add(pf.getBrowserActionInstance(ob)
+		}catch(Exception e){//do nothing
+			
+		}
+		try{
+			profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS).getText());
+		}catch(Exception e1){//do nothing
+			
+		}
+			
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS).getText());
+		}catch(Exception e2){//do nothing
+			
+		}
+		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS).getText());
-		return profileInfo;
+		}catch(Exception e3){//do nothing
+			
+		}
+		
+			return profileInfo;
 	}
 
 	/**
@@ -1207,9 +1212,9 @@ public class ProfilePage extends TestBase {
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		}
 
-		// System.out.println("before scroll-->"+beforeScroll);
+		logger.info("before scroll-->"+beforeScroll);
 		int firstScroll = profileTabsRecords.size();
-		// System.out.println(" first scroll-->"+firstScroll);
+		logger.info(" first scroll-->"+firstScroll);
 		if (!(firstScroll > beforeScroll)) {
 			throw new Exception("Records/Records Count should be increase while do page scrolldown");
 		}
@@ -1219,7 +1224,7 @@ public class ProfilePage extends TestBase {
 		String likeCount = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS).getText();
 		return Integer.parseInt(likeCount);
-	}
+	} 
 
 	/**
 	 * Method to validate Post TimeStamp
@@ -1361,5 +1366,6 @@ public class ProfilePage extends TestBase {
 		else
 			return false;
 	}
+	
 	
 }

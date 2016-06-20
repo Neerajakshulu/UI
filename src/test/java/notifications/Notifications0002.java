@@ -17,12 +17,15 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
+
 /**
- * The {@code Notifications0002} for testing test case of Verify that user is able to view Most viewed documents in home page.
- * by someone
+ * The {@code Notifications0002} for testing test case of Verify that user is able to view Most viewed documents in home
+ * page. by someone
  *
- * @author Avinash Potti 
+ * @author Avinash Potti
  */
+@Test
 public class Notifications0002 extends NotificationsTestBase {
 
 	static int status = 1;
@@ -41,7 +44,6 @@ public class Notifications0002 extends NotificationsTestBase {
 				.assignCategory("Notifications");
 	}
 
-	@Test
 	public void testcaseF2() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -55,15 +57,16 @@ public class Notifications0002 extends NotificationsTestBase {
 
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			// Login with someother user and comment on the article in watchlist of the above user
 			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			if (user1 == null) {
+				// login with default user
 				pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 						CONFIG.getProperty("defaultPassword"));
 			} else {
@@ -71,42 +74,46 @@ public class Notifications0002 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			}
 			pf.getLoginTRInstance(ob).clickLogin();
-			BrowserWaits.waitTime(2);
-			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents--->");
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
+			logger.info("Home Page loaded success fully");
+			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");
+			List<WebElement> elements = null;
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while (scrollCount < 30) {
-				jse.executeScript("scroll(0,10000)");
-				BrowserWaits.waitTime(3);
-				List<WebElement> elements = ob.findElements(By.xpath("//ne-most-viewed-documents"));
+				elements = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_MOST_VIEWED_ARTICLES_XPATH.toString()));
 				if (elements.size() > 0)
 					break;
+				jse.executeScript("scroll(0,10000)");
+				BrowserWaits.waitTime(3);
 				scrollCount++;
 			}
 			try {
-				List<WebElement> elements = ob.findElements(By.xpath("//ne-most-viewed-documents"));
 				Assert.assertTrue(elements.size() >= 1);
-				test.log(LogStatus.INFO, "user is able to see most viewed documents in home page");
-				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+				test.log(LogStatus.INFO, "User is able to see most viewed documents in home page");
+				test.log(LogStatus.PASS, "PASS");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "user is not able to see most viewed documents in home page");// extent
 				// reports
-				test.log(LogStatus.INFO, "Error--->" + t);
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
+				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				status = 2;// excel
-				test.log(LogStatus.INFO,
+				test.log(LogStatus.FAIL,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "_user is not able to see most viewed documents in home pagee")));// screenshot
 				closeBrowser();
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something happened");// extent
-			// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
+			// test.log(LogStatus.FAIL, "Something happened");// extent
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
+			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test
+			test.log(LogStatus.FAIL, "Snapshot below: " + test
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 			closeBrowser();
 		}

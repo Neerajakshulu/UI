@@ -63,8 +63,6 @@ public class Search124 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -76,9 +74,9 @@ public class Search124 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(5000);
 			waitForPageLoad(ob);
-			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='record-heading']"), 40);
+			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 40);
 
-			String title2 = ob.findElement(By.cssSelector("h2[class^='record-heading']")).getText();
+			String title2 = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
 
 			if (!compareStrings(title1, title2)) {
 

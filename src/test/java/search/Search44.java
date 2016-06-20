@@ -67,19 +67,20 @@ public class Search44 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			Thread.sleep(15000);
 			// Type into the search box and get search results
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'Articles')]"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"), 30);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope' and contains(text(),'Articles')]")).click();
-			waitForElementTobeVisible(ob, By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]"), 30);
+			ob.findElement(By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']")).click();
+			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"), 30);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
 			Thread.sleep(3000);
 			
 			if(!checkElementPresence("filter_up_icon")){
@@ -96,7 +97,7 @@ public class Search44 extends TestBase {
 			}
 			
 			
-			ob.findElement(By.xpath("//span[@class='h6 agg-category-title ng-binding' and contains(text(),'Institutions')]")).click();
+			jsClick(ob,ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")));
 			Thread.sleep(3000);
 			
 			List<WebElement> mylist=ob.findElements(By.xpath(OR.getProperty("filter_up_icon")));

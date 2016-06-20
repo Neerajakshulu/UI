@@ -68,7 +68,7 @@ public class Search3 extends TestBase {
 			ob.navigate().to(host);
 //			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -85,11 +85,13 @@ public class Search3 extends TestBase {
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			logger.info("Links Size : "+searchResults.size());
 			ArrayList<String> urls = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 
 				urls.add(searchResults.get(i).getAttribute("href"));
 			}
+			logger.info("Urls Size : "+urls.size());
 			boolean condition1;
 			String pageText;
 			ArrayList<Integer> error_list = new ArrayList<Integer>();
@@ -116,8 +118,10 @@ public class Search3 extends TestBase {
 				Thread.sleep(15000);
 
 				pageText = ob.getPageSource().toLowerCase();
-				condition1 = !(pageText.contains("dog"));
-				System.out.println(condition1);
+				int length=pageText.concat("dog").length();
+				condition1=!(length==3);
+				//condition1 = !(pageText.contains(" dog"))&&!(pageText.contains("dog "));
+				logger.info(condition1);
 				if (condition1) {
 
 					count++;
@@ -130,6 +134,7 @@ public class Search3 extends TestBase {
 				ob.switchTo().window(mylist55.get(0));
 
 			}
+			logger.info("Total Count : "+count);
 			String message = "";
 			for (int i = 0; i < error_list.size(); i++) {
 

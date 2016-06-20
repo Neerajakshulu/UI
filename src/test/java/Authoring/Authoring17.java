@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -64,22 +65,19 @@ public class Authoring17 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			login();
-			String PROFILE_NAME = LOGIN.getProperty("PROFILE1");
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			loginAs("USERNAME16","PASSWORD16");
+			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
+			pf.getHFPageInstance(ob).searchForText("Biology");
 
-			pf.getpostRVPageInstance(ob).searchForArticleWithComments();
+			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 			pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
 
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 180);
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 180);
 
 			try {
-				WebElement flagButton = ob.findElement(By.cssSelector(OR
-						.getProperty("tr_authoring_comments_flag_button_modal_css")));
+				WebElement flagButton = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString()));
 				Assert.assertFalse(flagButton.isEnabled());
 				test.log(LogStatus.PASS, "flag action without selecting the reason is working for comments as expected");
 
@@ -95,7 +93,7 @@ public class Authoring17 extends TestBase {
 										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			}
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_cancel_button_modal_css"))));
+			pf.getpostRVPageInstance(ob).clickCancelButtonInFlagModal();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

@@ -77,7 +77,6 @@ public class Authoring55 extends TestBase {
 			}
 
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			pf.getpostRVPageInstance(ob).clickOnFacebookUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareRecordOnFB(fbusername, fbpassword);
 
 			logout();

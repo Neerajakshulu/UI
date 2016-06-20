@@ -68,13 +68,11 @@ public class Search8 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			
 			// login using TR credentials
 			login();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);

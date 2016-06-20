@@ -14,8 +14,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -46,8 +48,8 @@ public class Search19 extends TestBase {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		Map<String, String> filters = new HashMap<String, String>();
-		filters.put("Category", "category");
-		filters.put("Documents", "doctype");
+		filters.put("Categories", "category");
+		filters.put("Document Type", "doctype");
 		filters.put("Institutions", "institution");
 		filters.put("Authors", "author");
 
@@ -74,18 +76,17 @@ public class Search19 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page and login with valid TR credentials
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 
-			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 
-			ob.findElement(By.xpath("//li[contains(@class,'content-type-selector') and contains(text(),'Articles')]"))
-					.click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			// waitForAllElementsToBePresent(ob,
 			// By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 
@@ -99,7 +100,7 @@ public class Search19 extends TestBase {
 				jsClick(ob,
 						ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_expand_xpath").replaceAll(
 								"FILTER_TYPE", entry.getKey()))));
-
+				BrowserWaits.waitTime(5);
 				ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey())));
 
@@ -128,7 +129,7 @@ public class Search19 extends TestBase {
 				jsClick(ob,
 						ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath").replaceAll(
 								"FILTER_TYPE", entry.getKey()))));
-
+				BrowserWaits.waitTime(4);
 				ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey())));
 				checkBoxDisplayed = 0;
@@ -157,7 +158,7 @@ public class Search19 extends TestBase {
 				jsClick(ob,
 						ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath").replaceAll(
 								"FILTER_TYPE", entry.getKey()))));
-
+				BrowserWaits.waitTime(4);
 				ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey())));
 				checkBoxDisplayed = 0;

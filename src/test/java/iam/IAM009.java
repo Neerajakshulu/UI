@@ -87,18 +87,25 @@ public class IAM009 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
+			
+			
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			
+			
 			Thread.sleep(5000);
+			
 
-			if (!checkElementPresence_id("login_button")) {
+			if (!checkElementPresence_id("login_error")) {
 
 				fail = true;// excel
 				test.log(LogStatus.FAIL, "Unexpected login happened");// extent report

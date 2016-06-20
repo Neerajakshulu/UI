@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -67,14 +68,14 @@ public class Authoring26 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
-			login();
+			loginAs("USERNAME16","PASSWORD16");
 			selectAnArticle();
 			/*
 			 * String comment = "testFlag"; pf.getAuthoringInstance(ob).enterArticleComment(comment);
 			 * pf.getAuthoringInstance(ob).clickAddCommentButton();
 			 */
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			try {
 
 				Assert.assertTrue(commentsList.size() < 10);
@@ -95,7 +96,7 @@ public class Authoring26 extends TestBase {
 
 			try {
 				ob.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-				WebElement more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+				WebElement more = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 				Assert.assertTrue(more.isDisplayed());
 				test.log(LogStatus.FAIL, "More button is displayed for comments less than 10");
 				status = 2;
@@ -133,30 +134,27 @@ public class Authoring26 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void selectAnArticle() throws Exception {
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 80);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-		ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
+	private void selectAnArticle() throws InterruptedException {
+		pf.getHFPageInstance(ob).searchForText("Biology");
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 80);
 		List<WebElement> itemList;
-		itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
-
-		boolean isFound = false;
+		itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 
 		while (true) {
-			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
+			itemList =ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int commentsCount, itr = 1;
 			String strCmntCt;
-			isFound = false;
+			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
+						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount < 5) {
 					jsClick(ob,
 							itemList.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
+									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+
 					isFound = true;
 					break;
 				}
@@ -169,10 +167,7 @@ public class Authoring26 extends TestBase {
 			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
 		}
-		if (!isFound)
-			throw new Exception("Article with less than 10 comments not found");
 	}
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

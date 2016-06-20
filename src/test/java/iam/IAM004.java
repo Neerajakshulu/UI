@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -52,8 +53,8 @@ public class IAM004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		String email = "amneetsingh500@gmail.com";
-		String password = "Transaction@2";
+		String email = "neonfbook@gmail.com";
+		String password = "1Pproject";
 
 		try {
 			openBrowser();
@@ -66,20 +67,24 @@ public class IAM004 extends TestBase {
 			clearCookies();
 
 			// Navigate to FB login page
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("FB_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("FB_login_button"))).click();
-			//
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
 			// Verify that existing FB credentials are working fine
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("apps")), 20);
-			if (!checkElementPresence("apps")) {
+			
+			BrowserWaits.waitTime(4);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports
 				status = 2;// excel
@@ -88,9 +93,9 @@ public class IAM004 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_existing_FB_User_credentials_not_working_fine")));// screenshot
+				closeBrowser();
 
 			}
-
 			// Verify that profile name gets displayed correctly
 			if (!checkElementPresence("header_label")) {
 
@@ -101,6 +106,7 @@ public class IAM004 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_incorrect_profile_name_getting_displayed")));// screenshot
+				closeBrowser();
 
 			}
 
@@ -116,6 +122,7 @@ public class IAM004 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_user_unable_to_logout_successfully")));// screenshot
+				closeBrowser();
 
 			}
 

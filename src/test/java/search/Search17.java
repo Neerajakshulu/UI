@@ -14,6 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -70,35 +71,35 @@ public class Search17 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+				// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"), 30);
-
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link']"), 30);
+			waitForAjax(ob);
+     			List<WebElement> content_type_tiles = ob.findElements(By
+					.xpath("//a[@class='wui-side-menu__link']"));
 			content_type_tiles.get(1).click();
+			
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
-
 			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]"), 30);
-			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
-			Thread.sleep(5000);
-			waitForElementTobeVisible(ob, By.xpath("//*[@class='h6 doc-info']"), 30);
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.xpath("//a[@event-action='citingsrcslocalcount:desc' and contains(text(),'Times Cited')]"), 30);
+			ob.findElement(By.xpath("//a[@event-action='citingsrcslocalcount:desc' and contains(text(),'Times Cited')]")).click();
+		   waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-icon-metric ng-scope' and contains(.,'Times Cited')]"), 30);
 
-			List<WebElement> times_cited_labels = ob.findElements(By.xpath("//*[@class='h6 doc-info']"));
+			List<WebElement> times_cited_labels = ob.findElements(By.xpath("//div[@class='wui-icon-metric ng-scope' and contains(.,'Times Cited')]"));
 			ArrayList<Integer> counts = new ArrayList<Integer>();
 			String temp;
 			for (int i = 0; i < times_cited_labels.size(); i++) {
-
+				System.out.println(times_cited_labels.get(i).getText());
 				temp = times_cited_labels.get(i).getText()
 						.substring(0, times_cited_labels.get(0).getText().indexOf(" "));
+				System.out.println(temp);
 				counts.add(Integer.parseInt(temp));
 				// System.out.println(counts.get(i));
 			}

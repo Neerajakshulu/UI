@@ -68,6 +68,8 @@ public class Watchlist006 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+//		String email = "linkedinloginid@gmail.com";
+//		String password = "1Pproject";
 		try {
 
 			// Opening browser
@@ -81,20 +83,37 @@ public class Watchlist006 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			
+			/*waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
+			//
+			//BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
+			// Verify that existing LI user credentials are working fine
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
+			//BrowserWaits.waitTime(2);
+			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();*/
+			
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
+			/*selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
-
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);*/
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
 			// Getting watch button list for patents
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image1")));
 
 			// Watching 2 patents to a particular watch list
 			for (int i = 0; i < 2; i++) {
@@ -105,13 +124,14 @@ public class Watchlist006 extends TestBase {
 			}
 
 			// Selecting the patent name
-			String firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
+			logger.info("First Document Name : "+firstDocumentName);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -134,13 +154,15 @@ public class Watchlist006 extends TestBase {
 			}
 
 			// Steps2: Removing the first item from watch list page
-			firstDocumentName = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
+			firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
+			logger.info("First Document Name : "+firstDocumentName);
 			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image1"))).click();
 			BrowserWaits.waitTime(2);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+			
 			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("result_title_in_watchlist")));
+			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 			count = 0;
 			String documentTitle;
 			for (WebElement document : documentList) {
@@ -160,29 +182,38 @@ public class Watchlist006 extends TestBase {
 			// Steps3: Unwatching a patent from patent content result page
 
 			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
+			/*selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);*/
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
 
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='col-xs-12 col-md-9']"), 60);
+			
+			BrowserWaits.waitTime(2);
 			// Watching a patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-
+			BrowserWaits.waitTime(4);
 			// Unwatching a patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 

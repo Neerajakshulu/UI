@@ -66,10 +66,9 @@ public class Authoring54 extends TestBase {
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			String profileName=LOGIN.getProperty("PROFILE1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			pf.getHFPageInstance(ob).searchForText("test");
+			pf.getHFPageInstance(ob).searchForText("sample");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
-			pf.getpostRVPageInstance(ob).clickOnTwitterUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 
 			logout();

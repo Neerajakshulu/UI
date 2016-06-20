@@ -21,6 +21,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -106,23 +107,23 @@ public class Authoring7 extends TestBase {
 			String completeArticle,
 			String addComments) throws Exception {
 		try {
-			waitForTRHomePage();
+			//waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			searchArticle(article);
-			chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 
 			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
-			searchArticle("micro biology");
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 40);
+			pf.getAuthoringInstance(ob).searchArticle("micro biology");
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 40);
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).click();
 
 			// ob.navigate().refresh();
-			enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			pf.getAuthoringInstance(ob).validatePreventBotComment();
 
@@ -160,61 +161,5 @@ public class Authoring7 extends TestBase {
 		 */
 	}
 
-	/**
-	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		waitForPageLoad(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-	}
-
-	public void searchArticle(String article) throws InterruptedException {
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")));
-		waitForAjax(ob);
-		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
-		BrowserWaits.waitTime(3);
-		
-	}
-
-	public void chooseArticle(String linkName) throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
-	}
-
-	public void waitUntilTextPresent(String locator,
-			String text) {
-		try {
-			WebDriverWait wait = new WebDriverWait(ob, time);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
-		} catch (TimeoutException e) {
-			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
-		}
-	}
 	
-	
-	private void enterArticleComment(String addComments) throws InterruptedException {
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
-		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		//jsClick(ob,commentArea);
-
-        //Used points class to get x and y coordinates of element.
-        Point point = commentArea.getLocation();
-        //int xcord = point.getX();
-        int ycord = point.getY();
-        ycord=ycord+200;
-        JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0,"+ ycord+");");
-		BrowserWaits.waitTime(5);
-		jsClick(ob,commentArea);
-		commentArea.clear();
-		String comment=addComments + RandomStringUtils.randomNumeric(3);
-		commentArea.sendKeys(comment);
-		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(5000);// after entering the comments wait for submit button to get enabled or disabled
-	}
-
 }

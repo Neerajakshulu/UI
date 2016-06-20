@@ -56,8 +56,8 @@ public class Authoring66 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String email = "3cxymr+b219a94iluwos@sharklasers.com";
-			String password = "Tr@12345";
+			String email = "40kw5f+1ikizl8hkf62l7@sharklasers.com";
+			String password = "Welcome@123";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();

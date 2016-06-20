@@ -74,9 +74,8 @@ public class Authoring22 extends TestBase {
 		openBrowser();
 		clearCookies();
 		maximizeWindow();
-
 		ob.navigate().to(System.getProperty("host"));
-		pf.getAuthoringInstance(ob).waitForTRHomePage();
+		//pf.getAuthoringInstance(ob).waitForTRHomePage();
 		// authoringAppreciation(username, password, article, completeArticle, addComments);
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
@@ -104,15 +103,15 @@ public class Authoring22 extends TestBase {
 
 		try {
 
-			pf.getAuthoringInstance(ob).enterTRCredentials(username, password);
-			pf.getAuthoringInstance(ob).clickLogin();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			Thread.sleep(6000);// wait for new comment to get added and displayed.
-			validateAppreciationComment();
-			validateAppreciationComment();
+			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			closeBrowser();
 		} catch (Throwable t) {
@@ -150,85 +149,6 @@ public class Authoring22 extends TestBase {
 
 	}
 
-	/**
-	 * Method for Validate the Article Appreciation functionality
-	 * 
-	 * @throws Exception, When Validation not done
-	 */
-	public void validateAppreciationComment() throws Exception {
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
-		System.out.println("size of total elemntes-->" + apprDivs.size());
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
-				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper"));
 
-		// List<WebElement>
-		// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-		System.out.println("app sub divs-->"
-				+ apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
-		scrollingToElementofAPage();
-		int apprEarCount = Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
-				.getText().replaceAll(",", "").trim());
-		System.out.println("Before count-->" + apprEarCount);
-
-		String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
-		System.out.println("Attribute Status-->" + attrStatus);
-
-		if (attrStatus.contains("NONE")) {
-			scrollingToElementofAPage();
-			// apprSubDivs.findElement(By.tagName("button")).click();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on like button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Already liked  After count-->" + apprAftCount);
-			if (!(apprAftCount < apprEarCount)) {
-				// status=2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Comment Appreciation not happended")));
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
-			}
-		} else if (attrStatus.contains("UP")) {
-			scrollingToElementofAPage();
-			// apprSubDivs.findElement(By.tagName("button")).click();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-
-			Thread.sleep(4000);// After clicking on unlike button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Not liked --After count-->" + apprAftCount);
-			if (!(apprAftCount > apprEarCount)) {
-				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Comment Appreciation not happended")));
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
-			}
-		}
-	}
-
-	/**
-	 * Method for Scrolling down to the page
-	 * 
-	 * @throws InterruptedException, When scroll not done
-	 */
-	public void scrollingToElementofAPage() throws InterruptedException {
-		JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0, 250);");
-		Thread.sleep(4000);// wait after scrolling before performing any actions.
-
-	}
 
 }

@@ -62,20 +62,20 @@ public class Search35 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[class^='content-type-selector ng-scope']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link']"), 30);
 
 			// Clicking on All content result set
-			ob.findElement(By.cssSelector("li[class^='content-type-selector ng-scope']")).click();
+			ob.findElement(By.cssSelector("a[class='wui-side-menu__link']")).click();
 
 			// Comparing the the label of the type of sort item
-			if (ob.findElements(By.cssSelector("div[class='refine-panel ng-hide']")).size() != 1) {
+			if (ob.findElements(By.cssSelector("div[class='search-result-refine-menu']")).size() != 1) {
 
 				test.log(LogStatus.FAIL, "Refine panel is displayed for All content set");// extent
 				// reports

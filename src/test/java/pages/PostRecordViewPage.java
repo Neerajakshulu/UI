@@ -49,7 +49,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on Facebook link under share menu in post record view
 	 */
 	public void clickOnFacebookUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_FACEBOOK_CSS.toString()), 180);
 		jsClick(ob,
@@ -60,7 +60,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on LinkedIn Link under share menu in post record view
 	 */
 	public void clickOnLinkedInUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_LINKEDIN_CSS.toString()), 180);
 		jsClick(ob,
@@ -71,7 +71,7 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on Share on Twitter link under share menu in post record view
 	 */
 	public void clickOnTwitterUnderShareMenu() {
-		clickOnShareButton();
+		//clickOnShareButton();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS.toString()), 180);
 		jsClick(ob,
@@ -125,7 +125,7 @@ public class PostRecordViewPage extends TestBase {
 		appreciationButton = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_CSS
 				.toString()));
 
-		if (appreciationButton.getAttribute("event-action").equalsIgnoreCase("like")) {
+		if (!appreciationButton.getAttribute("class").contains("active")) {
 			appreciationButton.click();
 			Thread.sleep(15000);// After clicking on like button wait for status to change and count update
 			new Actions(ob).moveByOffset(100, 200).build().perform();
@@ -476,7 +476,6 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void validateCommentNewlyAdded(String comment,
 			ExtentTest test) {
-
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 180);
 
@@ -497,13 +496,13 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void shareRecordOnFB(String fbusername,
 			String fbpassword) throws Exception {
-		waitForElementTobeVisible(ob,
+		/*waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-				.toString())));
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK.toString()), 40);
+				.toString())));*/
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS);
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		for (String child_window_handle : child_window_handles) {
@@ -533,16 +532,16 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void shareOnLI(String liusername,
 			String lipassword) throws Exception {
-			waitForElementTobeVisible(ob,
+			/*waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-				.toString())));
+				.toString())));*/
 		String PARENT_WINDOW = ob.getWindowHandle();
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK.toString()), 40);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
-		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
-		ob.findElement(By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.close()']"))
-				.click();
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
+		
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		System.out.println("window hanles-->" + child_window_handles.size());
@@ -560,10 +559,10 @@ public class PostRecordViewPage extends TestBase {
 				ob.switchTo().window(PARENT_WINDOW);
 				waitForElementTobeVisible(
 						ob,
-						By.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS.toString()),
 						40);
 				jsClick(ob, ob.findElement(By
-						.cssSelector("div[class='modal-footer ng-scope'] button[data-ng-click='shareModal.cancel()']")));
+						.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS.toString())));
 			}
 		}
 
@@ -577,15 +576,12 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void shareOnTwitter(String tusername,
 			String tpassword) throws Exception {
-		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-				.toString())));
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK.toString()), 40);
+	
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		String rvPageurl = ob.getCurrentUrl();
 		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_LINK);
+				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS);
 		ob.manage().window().maximize();
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
@@ -631,59 +627,7 @@ public class PostRecordViewPage extends TestBase {
 		BrowserWaits.waitTime(2);
 	}
 
-	/**
-	 * Method to validate the appreciate or un appreciate functionality of the comments.
-	 * @param test
-	 * @throws Exception
-	 */
-	public void validateAppreciationComment(ExtentTest test) throws Exception {
-
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='col-xs-12 watching-article-comments']"), 90);
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector("div[class='col-xs-12 watching-article-comments']"));
-		System.out.println("size of total elemntes-->" + apprDivs.size());
-		WebElement apprSubDivs = apprDivs.get(0).findElement(By.cssSelector("div[class='comment-content']"))
-				.findElement(By.cssSelector("div[class='comment-timestamp-wrapper']"));
-		System.out.println("app sub divs-->"
-				+ apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText());
-		scrollingToElementofAPage();
-		int apprEarCount = Integer.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']"))
-				.getText().replaceAll(",", "").trim());
-		System.out.println("Before count-->" + apprEarCount);
-
-		String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
-		System.out.println("Attribute Status-->" + attrStatus);
-
-		if (attrStatus.contains("DOWN")) {
-			scrollingToElementofAPage();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on unlike button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Already liked  After count-->" + apprAftCount);
-			if (!(apprAftCount < apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
-			}
-		} else if (attrStatus.contains("UP")) {
-			scrollingToElementofAPage();
-			JavascriptExecutor exe = (JavascriptExecutor) ob;
-			exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-			Thread.sleep(4000);// After clicking on like button wait for status to change and count update
-			int apprAftCount = Integer
-					.parseInt(apprSubDivs.findElement(By.cssSelector("span[class='award ng-binding']")).getText()
-							.replaceAll(",", "").trim());
-			System.out.println("Not liked --After count-->" + apprAftCount);
-			if (!(apprAftCount > apprEarCount)) {
-				throw new Exception("Comment Appreciation not happended");
-			} else {
-				test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
-			}
-		}
-	}
-
+	
 	/**
 	 * Method to validate whether a commented is flagged or unflagged.
 	 * @param test
@@ -693,12 +637,12 @@ public class PostRecordViewPage extends TestBase {
 		waitForAjax(ob);
 		String attribute = ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
-		if (attribute.contains("flag-inactive")) {
+		if (attribute.contains("fa-flag-o")) {
 			flagOrUnflagAPost();
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("flag-active"));
+			Assert.assertTrue(!attribute.contains("fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to flag the post");
 
 		} else {
@@ -706,7 +650,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("flag-inactive"));
+			Assert.assertTrue(attribute.contains("fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to Unflag the post");
 
 		}
@@ -718,9 +662,9 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	private void flagOrUnflagAPost() {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_modal_css")), 40);
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_reason_chkbox_css"))));
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_flag_button_modal_css"))));
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}
 
 	/**
@@ -747,11 +691,11 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void addExternalLinkComments(String url) throws Exception {
 		BrowserWaits.waitTime(15);
-		waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
-		WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		commentArea.click();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())));
 		waitForAlertToBePresent(ob, 40);
 		Alert alert = ob.switchTo().alert();
 		alert.sendKeys(url);
@@ -801,9 +745,9 @@ public class PostRecordViewPage extends TestBase {
 		int count = 0;
 		while (isPresent && count < 4) {
 			try {
-				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")), 40);
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()), 40);
 
-				more = ob.findElement(By.cssSelector(OR.getProperty("tr_authoring_comments_more_css")));
+				more = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 				Point point = more.getLocation();
 				int y = point.getY() + 100;
 				String script = "scroll(0," + y + ");";
@@ -822,63 +766,32 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click FlAG button on the comments in record view page
 	 * @param currentuser
 	 */
-	public void clickOnFlagOfOtherUserComments(String currentuser) {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_authoring_comments_xpath")), 80);
-		List<WebElement> commentsList = ob.findElements(By.xpath(OR.getProperty("tr_authoring_comments_xpath")));
+	public int clickOnFlagOfOtherUserComments(String currentuser) {
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+		List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 		String commentText;
+		int commentsCount = 0;
 		WebElement flagWe;
 		for (int i = 0; i < commentsList.size(); i++) {
 			commentText = commentsList.get(i).getText();
-			if (!commentText.contains(currentuser) && !commentText.contains("Comment deleted")) {
+			if (!commentText.contains(currentuser)) {
+				try{
 				flagWe = commentsList.get(i).findElement(
-						By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath")));
-				if (flagWe.getAttribute("class").contains("flag-inactive")) {
+						By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
+				if (flagWe.getAttribute("class").contains("fa-flag-o")) {
 					jsClick(ob,
 							commentsList.get(i).findElement(
-									By.xpath(OR.getProperty("tr_authoring_comments_flag_dynamic_xpath"))));
+									By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString())));
+					commentsCount = i;
 					break;
 				}
-
+				}catch(Exception e){continue;}
 			}
 		}
+		return commentsCount;
 	}
 
-	/**
-	 * Method to access the article which has comments added to it.
-	 */
-	public void searchForArticleWithComments() {
-		waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 180);
-		List<WebElement> itemList;
-
-		while (true) {
-			itemList = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_item_css")));
-			int commentsCount, itr = 1;
-			String strCmntCt;
-			boolean isFound = false;
-			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
-				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_comments_count_css")))
-						.getText().replaceAll(",", "").trim();
-				commentsCount = Integer.parseInt(strCmntCt);
-				if (commentsCount != 0) {
-					jsClick(ob,
-							itemList.get(i).findElement(
-									By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))));
-
-					isFound = true;
-					break;
-				}
-
-			}
-
-			if (isFound)
-				break;
-			itr++;
-			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
-			waitForAjax(ob);
-		}
-	}
-
+	
 	
 		public boolean isFlagButtonDispalyedForOthersPost() {
 			boolean result = false;
@@ -900,8 +813,8 @@ public class PostRecordViewPage extends TestBase {
 		public boolean validateCommentForLink(String url) throws InterruptedException {
 			BrowserWaits.waitTime(10);
 			
-			waitForElementTobeVisible(ob, By.cssSelector("div[id^='taTextElement']"), 40);
-			WebElement commentArea = ob.findElement(By.cssSelector("div[id^='taTextElement']"));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+			WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 			
 			if (commentArea.findElements(By.linkText(url)).size() != 0)
 				return true;
@@ -915,26 +828,26 @@ public class PostRecordViewPage extends TestBase {
 			try {
 
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"),40);
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_BOLD_ICON_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='bold']"))
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_BOLD_ICON_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Bold format option is not enable for comments");
 					result=false;
 				}
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"),40);
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='italics']"))
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ITALIC_ICON_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Italics format option is not enable for comments");
 					result=false;
 				}
 				
 				waitForElementTobeVisible(ob,
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"),40);
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString()),40);
 				if (!ob.findElement(
-						By.cssSelector("div[class='comment-add-comment-wrapper'] button[name='insertLink']"))
+						By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString()))
 						.isEnabled()){
 					test.log(LogStatus.FAIL, "Insert link format option is not enable for comments");
 					result=false;
@@ -949,5 +862,33 @@ public class PostRecordViewPage extends TestBase {
 		}
 
 		
+		public void selectReasonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		}
+		
+		public void clickCancelButtonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString())));
+		}	
+		
+	public void clickFlagButtonInFlagModal(){
+			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString()), 180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
+		}
 	
+	public void createComment(String comment){
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 40);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
+		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())).sendKeys(comment);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
+	}
+		
+		
 }
