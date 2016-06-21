@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -71,23 +72,15 @@ public class Search118 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(15000);
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 			content_type_tiles.get(2).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
@@ -157,7 +150,7 @@ public class Search118 extends TestBase {
 
 			}
 
-			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText().substring(9);
 			System.out.println(option);
 			if (!compareStrings("Times Cited", option)) {
 
@@ -168,28 +161,27 @@ public class Search118 extends TestBase {
 
 			}
 
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			String text = ob.findElement(
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
-			// System.out.println("Text="+text);
-
-			if (!compareStrings("Patents", text)) {
-
-				test.log(LogStatus.FAIL,
-						"Search drop down option not retained when user navigates back to Patent search results page from record view page");// extent
-																																				// reports
-				status = 2;// excel
-				// test.log(LogStatus.INFO, "Snapshot below: " +
-				// test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot
-
-			}
+//			waitForElementTobeVisible(ob,
+//					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+//			String text = ob.findElement(
+//					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
+//			// System.out.println("Text="+text);
+//
+//			if (!compareStrings("Patents", text)) {
+//
+//				test.log(LogStatus.FAIL,
+//						"Search drop down option not retained when user navigates back to Patent search results page from record view page");// extent
+//																																				// reports
+//				status = 2;// excel
+//				// test.log(LogStatus.INFO, "Snapshot below: " +
+//				// test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+"_search_drop_down_option_not_retained")));//screenshot
+//
+//			}
 
 			try {
-				content_type_tiles = ob
-						.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
-
-				Assert.assertTrue(content_type_tiles.get(2).getAttribute("class").contains("active"));
+				WebElement element= ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()));
+				boolean text3 =element.findElement(By.xpath("parent::li")).getAttribute("class").contains("active");
+				Assert.assertTrue(text3);
 				test.log(LogStatus.PASS,
 						"Left navigation panel content type is retained in patent search result page after page navigation");
 			} catch (Throwable t) {

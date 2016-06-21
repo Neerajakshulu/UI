@@ -14,8 +14,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -69,7 +71,6 @@ public class Search110 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -77,19 +78,20 @@ public class Search110 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"), 30);
-
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
-			content_type_tiles.get(2).click();
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+        
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 
 			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]"), 30);
-			ob.findElement(By.xpath("//a[@class='ng-binding' and contains(text(),'Times Cited')]")).click();
-			waitForElementTobeVisible(ob, By.xpath("//*[@class='h6 doc-info']"), 30);
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"), 30);
+			ob.findElement(By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]")).click();
+			waitForElementTobeVisible(ob, By.xpath("//div[@tooltip='Times Cited']"), 30);
 			Thread.sleep(6000);
-			List<WebElement> times_cited_labels = ob.findElements(By.xpath("//*[@class='h6 doc-info']"));
+			List<WebElement> times_cited_labels = ob.findElements(By.xpath("//div[@tooltip='Times Cited']"));
 			ArrayList<Integer> counts = new ArrayList<Integer>();
 			String temp;
 			for (int i = 0; i < times_cited_labels.size(); i++) {

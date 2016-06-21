@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -68,8 +69,7 @@ public class Search114 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			//
@@ -80,8 +80,7 @@ public class Search114 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 			content_type_tiles.get(2).click();
 			waitForAjax(ob);
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -100,9 +99,9 @@ public class Search114 extends TestBase {
 
 			try {
 				content_type_tiles = ob
-						.findElements(By.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+						.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 
-				Assert.assertTrue(content_type_tiles.get(2).getAttribute("class").contains("active"));
+				Assert.assertTrue(content_type_tiles.get(2).findElement(By.xpath("parent::li")).getAttribute("class").contains("active"));
 				test.log(LogStatus.PASS,
 						"Left navigation panel content type is retained in patent search result page after page navigation");
 			} catch (Throwable t) {
