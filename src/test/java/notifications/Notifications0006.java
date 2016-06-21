@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0006 extends NotificationsTestBase {
 
@@ -53,7 +54,7 @@ public class Notifications0006 extends NotificationsTestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			if (user1 != null && user2 != null && user2 != null) {
-				openBrowser();
+				/*openBrowser();
 				maximizeWindow();
 				clearCookies();
 
@@ -67,21 +68,55 @@ public class Notifications0006 extends NotificationsTestBase {
 				logger.info("Notification Text: " + watchListName);
 				// creating private watchlist
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Creating private watchlist");
-				createWatchList("private", watchListName, watchListDescription);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchListPrivateTabLink")), 30);
+				createWatchList("private", watchListName, watchListDescription);*/
+
+				openBrowser();
+				maximizeWindow();
+				clearCookies();
+				ob.navigate().to(host);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
+				// Logging in with User1
+				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");
+				test.log(LogStatus.INFO, "User Logged in  successfully");
+				logger.info("Home Page loaded success fully");
+				watchListName = "Creating WatchList for notification testing" + new Random().nextInt(1000);
+				watchListDescription = "Creating Public WatchList for UI notification testing" + RandomStringUtils.randomNumeric(15);
+				
+				try {
+					ob.findElement(By.xpath(OnePObjectMap.WTCHLISH_LINK_XPATH.toString())).click();
+					createWatchList("private", watchListName, watchListDescription);
+					test.log(LogStatus.INFO, "User created watchlist \""+watchListName+"\" successfully");
+				} catch (Exception e) {
+					throw new Exception("Facing issue while create Watchlist");
+				}
+			
+				/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchListPrivateTabLink")), 30);
 				// making it public
-				ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();
+				ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink"))).click();*/
+				
+				ob.findElement(By.xpath(OR.getProperty("watchListPrivateTabLink1"))).click();
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " making it public watchlist");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
-				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
+				BrowserWaits.waitTime(4);
+				ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
+				ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
+				
+				/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 30);
+				ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();*/
+				String name=fn2+" "+ln2;
 				pf.getLoginTRInstance(ob).logOutApp();
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
 				BrowserWaits.waitTime(8);
 				String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 				logger.info("Notification Text: " + text);
+				//String userName=ob.findElement(By.xpath("//div[@class='wui-card wui-card--watchlist-event']//a[@class='ng-binding ng-scope']")).getText();
 				try {
-					Assert.assertTrue(/* text.contains("TODAY") && */text.contains(fn2 + " " + ln2)
+					Assert.assertTrue( text.contains("TODAY") && name.contains(fn2 + " " + ln2)
 							&& text.contains("made a watchlist public") && text.contains(watchListName)
 							&& text.contains(watchListDescription));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");

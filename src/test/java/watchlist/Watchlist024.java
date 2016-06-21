@@ -23,7 +23,7 @@ import com.relevantcodes.extentreports.LogStatus;
  * Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular
  * watchlist during watching
  * 
- * @author Prasenjit Patra
+ * @author chinna putha
  *
  */
 public class Watchlist024 extends TestBase {
@@ -101,12 +101,14 @@ public class Watchlist024 extends TestBase {
 			}
 
 			// Searching for article
-			String articleName = "biology";
-			selectSearchTypeFromDropDown("Articles");
+			String articleName = "drug";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
-
+			//click on Article tab
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
+			
 			// Watching an article to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the article to multiple watch list
@@ -118,6 +120,7 @@ public class Watchlist024 extends TestBase {
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			logger.info("document name-->"+documentName);
 			BrowserWaits.waitTime(4);
 			int count;
 			List<WebElement> watchedItems;
@@ -127,8 +130,9 @@ public class Watchlist024 extends TestBase {
 				navigateToParticularWatchlistPage(newWatchlistName + "_" + i);
 				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 				for (int j = 0; j < watchedItems.size(); j++) {
-					if (watchedItems.get(j).getText().equals(documentName))
+					if (watchedItems.get(j).getText().equals(documentName)) {
 						count++;
+					}
 
 				}
 				if (compareNumbers(1, count)) {
@@ -147,6 +151,8 @@ public class Watchlist024 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			BrowserWaits.waitTime(2);
 			deleteParticularWatchlist(newWatchlistName + "_2");
+			
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {
