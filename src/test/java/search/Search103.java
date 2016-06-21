@@ -67,9 +67,6 @@ public class Search103 extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(host);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			//
@@ -81,7 +78,7 @@ public class Search103 extends TestBase {
 			//
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
 			content_type_tiles.get(2).click();
 			waitForAjax(ob);
 
@@ -100,7 +97,7 @@ public class Search103 extends TestBase {
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			Thread.sleep(8000);
+			waitForAjax(ob);
 
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
@@ -115,7 +112,8 @@ public class Search103 extends TestBase {
 
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
-			Thread.sleep(5000);
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
@@ -149,7 +147,8 @@ public class Search103 extends TestBase {
 
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 
-			boolean filtering_condition = filterValues.get(0).isSelected() && filterValues.get(1).isSelected();
+			boolean filtering_condition = filterValues.get(0).getCssValue("background").contains("rgb(69, 183, 231)") 
+					&& filterValues.get(1).getCssValue("background").contains("rgb(69, 183, 231)");
 
 			try {
 				Assert.assertTrue(filtering_condition);
