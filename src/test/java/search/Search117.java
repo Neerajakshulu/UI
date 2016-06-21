@@ -69,13 +69,9 @@ public class Search117 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
+			
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String post = "post";
@@ -95,7 +91,7 @@ public class Search117 extends TestBase {
 				if (postDropdownmenu.getText().trim().equalsIgnoreCase(sortBy)) {
 					postDropdownmenu.click();
 					waitForAjax(ob);
-					waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")),
+					waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")),
 							120);
 					break;
 				}
@@ -104,12 +100,12 @@ public class Search117 extends TestBase {
 			List<String> postTitlesdata = new ArrayList<String>();
 			List<String> postTitlesFromRVdata = new ArrayList<String>();
 			List<WebElement> postTitles = ob.findElements(By.cssSelector(OR
-					.getProperty("tr_search_results_item_title_css")));
+					.getProperty("tr_search_results_post_title_css")));
 			for (WebElement postTitle : postTitles) {
 				postTitlesdata.add(postTitle.getText().trim());
 			}
 
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForAjax(ob);
 			BrowserWaits.waitTime(6);
 
@@ -127,7 +123,7 @@ public class Search117 extends TestBase {
 			}
 
 			List<WebElement> postTitlesRV = ob.findElements(By.cssSelector(OR
-					.getProperty("tr_search_results_item_title_css")));
+					.getProperty("tr_search_results_post_title_css")));
 			for (WebElement postTitleRV : postTitlesRV) {
 				postTitlesFromRVdata.add(postTitleRV.getText().trim());
 			}

@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -70,18 +71,16 @@ public class Search113 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			ob.findElement(By.cssSelector("i[class='webui-icon webui-icon-search']")).click();
-
-			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Patents')]"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
 			Thread.sleep(2000);
 
-			ob.findElement(By.xpath("//li[contains(text(),'Patents')]")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(3000);
 
@@ -91,14 +90,14 @@ public class Search113 extends TestBase {
 			filter_list.get(0).click();
 			Thread.sleep(2000);
 			
-//			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
-			ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).click();
+	//	System.out.println(ob.findElement(By.xpath("/button[@class='search-result-refine-menu__load-button ng-scope']")).getText());
+			ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).click();
 			Thread.sleep(2000);
 			
 //			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
 			
-			String temp1=ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText();
-			if(!compareStrings("LESS",temp1)){
+			String temp1=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
+			if(!compareStrings("Less",temp1)){
 				
 				test.log(LogStatus.FAIL, "MORE link not working");// extent
 				// reports
@@ -112,11 +111,11 @@ public class Search113 extends TestBase {
 			}
 			
 		
-			ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).click();
+			ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).click();
 			Thread.sleep(2000);
 			
-			String temp2=ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText();
-			if(!compareStrings("MORE",temp2)){
+			String temp2=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
+			if(!compareStrings("More",temp2)){
 				
 				test.log(LogStatus.FAIL, "LESS link not working");// extent
 				// reports

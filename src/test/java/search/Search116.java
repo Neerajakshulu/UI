@@ -63,13 +63,9 @@ public class Search116 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
+			
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String post = "post";
@@ -78,18 +74,18 @@ public class Search116 extends TestBase {
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
 
 			int postResultsBeforeScroll = ob.findElements(
-					By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+					By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).size();
 			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 			waitForAjax(ob);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_item_title_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
 
 			int postResultsAfterScroll = ob.findElements(
-					By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).size();
+					By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).size();
 			System.out.println("before-->" + postResultsBeforeScroll);
 			System.out.println("After-->" + postResultsAfterScroll);
 			if (!(postResultsAfterScroll >= postResultsBeforeScroll))

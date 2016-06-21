@@ -67,20 +67,17 @@ public class Search108 extends TestBase {
 			// ob.navigate().to(host);
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
+            waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Times Cited')]")).click();
-
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"), 30);
+			ob.findElement(By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]")).click();
 			Thread.sleep(5000);
 
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -127,8 +124,8 @@ public class Search108 extends TestBase {
 										+ "_sorting_not_retained")));// screenshot
 			}
 
-			String text = ob.findElement(By.id("single-button")).getText();
-			System.out.println(text);
+			String text = ob.findElement(By.id("single-button")).getText().substring(9);
+			//System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {
 

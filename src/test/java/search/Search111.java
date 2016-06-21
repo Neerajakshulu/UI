@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -72,9 +73,12 @@ public class Search111 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Amneet");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForPageLoad(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
-			waitForPageLoad(ob);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
+//			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
+//			waitForPageLoad(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
+			  waitForAjax(ob);
 
 			// checking for Default sort option
 			List<WebElement> beforeScrollSize = ob.findElements(By.xpath(OR
