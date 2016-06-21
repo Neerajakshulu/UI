@@ -872,11 +872,9 @@ public class ProfilePage extends TestBase {
 				.findElement(By.tagName("span")).getText();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
 		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
-		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS.toString()), 180);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		BrowserWaits.waitTime(2);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
 		BrowserWaits.waitTime(2);
@@ -886,8 +884,8 @@ public class ProfilePage extends TestBase {
 		String watchTextAfter = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS)
 				.findElement(By.tagName("span")).getText();
-		System.out.println("watch text before-->" + watchTextBefore);
-		System.out.println("watch text after-->" + watchTextAfter);
+		logger.info("watch text before-->" + watchTextBefore);
+		logger.info("watch text after-->" + watchTextAfter);
 		if (watchTextBefore.equalsIgnoreCase(watchTextAfter)) {
 			throw new Exception("post watch label not getting changed");
 		}
@@ -1230,15 +1228,15 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When Post doesn't have any title
 	 */
 	public void validatePostTimeStamp() throws Exception {
-		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm");
+		DateFormat dateFormat = new SimpleDateFormat("h:mm a");
 		// get current date time with Date()
 		Date date = new Date();
 		String current_date = dateFormat.format(date).toString();
 		String postCreationDate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH).getText();
-		System.out.println("current date-->" + current_date);
-		System.out.println("post creation date-->" + postCreationDate);
-		if (!postCreationDate.equalsIgnoreCase(current_date)) {
+		logger.info("current date-->" + current_date);
+		logger.info("post creation date-->" + postCreationDate);
+		if (StringUtils.containsIgnoreCase(current_date, postCreationDate)) {
 			throw new Exception("Post creation date and System date should match");
 		}
 

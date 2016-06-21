@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -102,7 +101,6 @@ public class Profile24 extends TestBase {
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			test.log(LogStatus.INFO, "click on Profile Post tab");
 			pf.getProfilePageInstance(ob).clickPostsTab();
-			BrowserWaits.waitTime(10);
 			// String firstPost=pf.getProfilePageInstance(ob).getFirstPostTitle();
 			// BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Add Post to your watchlist");

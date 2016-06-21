@@ -129,7 +129,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS("div[class*='modal-dialog'] button[name='insertLink']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("div[class='ne-profile-object-info'] a"),
 	HOME_PROJECT_NEON_POST_WATCH_CSS("button[class='pull-left btn webui-icon-btn watchlist-toggle-button']"),
-	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']"),
+	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[ng-click='WatchlistModal.close()']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Keep draft')]"),
@@ -156,6 +156,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
 	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-name']"),
+	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("span[class='ne-action-modal__icons'] i[ng-class*='active']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
