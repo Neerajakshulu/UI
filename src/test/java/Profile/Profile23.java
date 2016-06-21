@@ -35,7 +35,7 @@ public class Profile23 extends TestBase {
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verity that user is able to edit  info like title/role,Primary Institution and country from his own profile")
+						"Verify that user is able to see all his POST's from his profile page.")
 				.assignCategory("Profile");
 		runmodes = TestUtil.getDataSetRunmodes(profilexls, this.getClass().getSimpleName());
 		// System.out.println("Run modes-->"+runmodes.length);

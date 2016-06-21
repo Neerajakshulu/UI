@@ -39,7 +39,7 @@ public class Search86 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that following fields get displayed correctly for an patent in record view page: a)Title b)Inventors c)Assignees d)Publication Date e)Publication Number f)Times Cited count g)Cited patents count h)Cited Articles count i)Comments count j)Abstract k)IPC Codes l)DETAILS link")
+						"Verify that following fields get displayed correctly for an patent in record view page: a)Title b)Inventors c)Assignees d)Publication Date e)Publication Number f)Times Cited count g)Cited patents count h)Cited Articles count i)Comments count j)Abstract k)IPC Codes l)VIEW IN THOMSON INNOVATION link")
 				.assignCategory("Search suite");
 
 	}
@@ -63,127 +63,171 @@ public class Search86 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
+			String search_query="Color-corrected heat-reflecting composite films and glazing products containing the same";
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+			 ob.navigate().to(host);
+//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 
+			 	login();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
-			// login using TR credentials
-			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-
-			// Searching for patents
-			selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-
-			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			waitForAjax(ob);
-
-			try {
-				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='record-heading ng-binding']")).size() == 1;
-				if (titlePresent) {
-					test.log(LogStatus.PASS, "Title is present in patent record view page");
-				} else {
-					test.log(LogStatus.INFO, "Title is present multiple times in patent record view page");
+				// Type into the search box and get search results
+				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+				
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+				Thread.sleep(2000);
+				
+				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
+				Thread.sleep(5000);
+				
+				ob.findElement(By.xpath("//a[@class='ng-binding']")).click();
+				Thread.sleep(5000);
+				
+				String text1=ob.findElement(By.xpath("//*[@class='ne-publication__header']")).getText();
+//				System.out.println(text1);
+				String expectedText1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
+				
+				if(!compareStrings(expectedText1,text1)){
+					
+					
+					test.log(LogStatus.FAIL, "Some or all of the following fields are not getting displayed correctly for a patent: a)Title b)Patent number c)Assignees d)Inventors e)Publication date");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_patent_fields_not_getting_displayed_correctly")));// screenshot
 				}
-			} catch (NoSuchElementException e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "Title is not displayed present in patent record view page");
-			}
-
-			// Checking the content types
-			List<WebElement> cotentTypeList = ob.findElements(By
-					.xpath("//div[@class='full-record-content']/h5[@class='inline']"));
-			List<String> expectedList = Arrays.asList(new String[] {"Assignee", "Inventor", "Publication date",
-					"Publication number"});
-			List<String> actualList = new ArrayList<String>();
-			String tagType;
-			for (WebElement cotentType : cotentTypeList) {
-				tagType = cotentType.getText();
-				actualList.add(tagType.substring(0, tagType.length() - 1));
-			}
-
-			if (expectedList.equals(actualList)) {
-				test.log(LogStatus.PASS,
-						"Assignee,Inventor,Publication date,Publication number tags are displayed properly");
-			} else {
-				test.log(LogStatus.FAIL,
-						"Assignee,Inventor,Publication date,Publication number tags are not displayed properly");// extent
-																													// report
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_assignee_inventor_publicationDate_publicationNumber_tags_are_not_displayed_properly")));// screenshot
-			}
-
-			// Checking the doc info types
-			expectedList = Arrays.asList(new String[] {"Times Cited", "Cited Patents", "Cited Articles", "Comments"});
-			actualList.clear();
-			List<WebElement> docInfoTypeList = ob
-					.findElements(By.xpath("//div[@class='doc-info']/h6[@class='inline']"));
-
-			for (WebElement docInfoType : docInfoTypeList) {
-
-				actualList.add(docInfoType.getText());
-			}
-
-			if (expectedList.equals(actualList)) {
-				test.log(LogStatus.PASS,
-						"Times Cited,Cited Patents,Cited Articles,Comments doc info types are displayed properly");
-			} else {
-				test.log(LogStatus.FAIL,
-						"Times Cited,Cited Patents,Cited Articles,Comments doc info types are not displayed properly");// extent
-																														// report
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_TimesCited_CitedPatents_CitedArticles_Comments_doc_info_types_are_not_displayed_properly")));// screenshot
-			}
-
-			try {
-				List<WebElement> abstractTag = ob.findElements(By.xpath("//div/h3[contains(text(),'Abstract')]"));
-				List<WebElement> ipcTag = ob.findElements(By.xpath("//div/h3[contains(text(),'IPC')]"));
-				List<WebElement> detailsLink = ob.findElements(By.linkText("Details"));
-				if (abstractTag.size() != 0) {
-
-					test.log(LogStatus.PASS, "Abstract tag is present in the record view page");
-				} else {
-					test.log(LogStatus.PASS, "Abstract tag is not displayed in the record view page");
+				
+				if(!checkElementPresence("recordView_abstract")){
+					
+					test.log(LogStatus.FAIL, "Abstract not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_abstract_not_getting_displayed")));// screenshot
+					
 				}
-
-				if (ipcTag.size() != 0) {
-
-					test.log(LogStatus.PASS, "IPC tag is present in the record view page");
-				} else {
-					test.log(LogStatus.PASS, "IPC tag is not displayed in the record view page");
+				
+				
+				if(!checkElementPresence("recordView_IPC")){
+					
+					test.log(LogStatus.FAIL, "IPC code not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_IPC_code_not_getting_displayed")));// screenshot
+					
 				}
-
-				if (detailsLink.size() != 0) {
-
-					test.log(LogStatus.PASS, "Details link is present in the record view page");
-				} else {
-					test.log(LogStatus.PASS, "Deatils link is not displayed in the record view page");
+				
+				
+				if(!checkElementPresence("recordView_VITI")){
+					
+					test.log(LogStatus.FAIL, "VIEW IN THOMSON INNOVATION button not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_VIEW_IN_TI_button_not_getting_displayed")));// screenshot
+					
 				}
-			} catch (NoSuchElementException e) {
+				
+				if(!checkElementPresence("recordView_VITI")){
+					
+					test.log(LogStatus.FAIL, "VIEW IN THOMSON INNOVATION button not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_VIEW_IN_TI_button_not_getting_displayed")));// screenshot
+					
+				}
+				
+				
+				if(!checkElementPresence("recordView_views")){
+					
+					test.log(LogStatus.FAIL, "View count not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_view_count_not_getting_displayed")));// screenshot
+					
+				}
+				
+				if(!checkElementPresence("recordView_comments")){
+					
+					test.log(LogStatus.FAIL, "Comment count not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_comment_count_not_getting_displayed")));// screenshot
+					
+				}
+				
+				if(!checkElementPresence("recordView_tc")){
+					
+					test.log(LogStatus.FAIL, "Times cited count not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_tc_count_not_getting_displayed")));// screenshot
+					
+				}
+				
+				if(!checkElementPresence("recordView_cp")){
+					
+					test.log(LogStatus.FAIL, "Cited patents count not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_cp_count_not_getting_displayed")));// screenshot
+					
+				}
+				
+				if(!checkElementPresence("recordView_ca")){
+					
+					test.log(LogStatus.FAIL, "Cited articles count not getting displayed");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+					+ "_ca_count_not_getting_displayed")));// screenshot
+					
+				}
+				
+				closeBrowser();
 
-				status = 2;
-				test.log(LogStatus.FAIL, "Abstract or IPC or Details lisnk is not displayed");// extent
-			}
-			closeBrowser();
 
 		}
 

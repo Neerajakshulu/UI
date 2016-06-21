@@ -118,7 +118,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='body ne-publication__body--post']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
 
-	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
+	//HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[2]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[data-ng-show='vm.hasPosts'] button"),
@@ -129,7 +129,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS("div[class*='modal-dialog'] button[name='insertLink']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_AUTHORNAME_CSS("div[class='ne-profile-object-info'] a"),
 	HOME_PROJECT_NEON_POST_WATCH_CSS("button[class='pull-left btn webui-icon-btn watchlist-toggle-button']"),
-	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[class='close']"),
+	HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS("button[ng-click='WatchlistModal.close()']"),
 	HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS("ul[ng-show='isOpen() && !moveInProgress']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Discard')]"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='cancel' and contains(.,'Keep draft')]"),
@@ -144,15 +144,19 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("div[class='wui-card__content']"),
 
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
-	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class*='orange-counter']"),
-	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
+	//HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[@class='ne-publication-sidebar__metrics']/button/i"),
+	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
+	//HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
+	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
+	HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS("div[ng-hide='vm.shouldShowSummaryInput()'] p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
 	HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS("button[event-category='post-flag'] i"),
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
-	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-hcr']"),
+	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-name']"),
+	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("span[class='ne-action-modal__icons'] i[ng-class*='active']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
@@ -182,7 +186,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//div"),
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[@class='row notifications-wrapper ng-scope']//div[@class='notification-component ng-scope']"),
-	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/a"),
+	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/div/div"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH("//ne-notify-friend-follows[@class='ng-scope']"),
 	NEWSFEED_TOP_COMMENTERS_XPATH("//div[contains(@ng-if,'TopUserCommenters')]"),
@@ -237,6 +241,15 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
+	WTCHLISH_LINK_XPATH("//span[contains(text(),'Watchlist')]"),
+	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH("(//div[@class='wui-card wui-card--recommended-articles']/div)[2]/div"), 
+	NEWSFEED_RECOMMENDED_ARTICLE_TITLE_XPATH("//div[@class='wui-content-title ng-binding wui-content-title--small']"),
+	ARTICLE_TITLE_IN_RECORD_VIEW_PAGE_CSS("div[class='ne-publication__header'] h2"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS("div[class='wui-card ng-scope'] span[class='fa fa-check unfollow']"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS("div[class='col-xs-12 images image-wrapper ng-scope"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS("span[class='ne-profile-object-title']"),
+	
+	
 	;
 
 	

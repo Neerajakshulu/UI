@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -67,8 +68,8 @@ public class Search92 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -81,6 +82,7 @@ public class Search92 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 180);
 			String profileName = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")))
 					.getText();
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profile_description_xpath")), 50);
 			String profileDescription = ob.findElement(
 					By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();

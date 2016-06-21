@@ -73,11 +73,20 @@ public class Notifications0011 extends NotificationsTestBase {
 					BrowserWaits.waitTime(5);
 				}
 			}
-			String text = listOfNotifications.get(0).getText();
+			
+			String text=listOfNotifications.get(0).getText();
+			
+			
+			//String text = listOfNotifications.get(0).getText();
 			logger.info("Featured Post Titile in Notifications - " + text);
+			logger.info("Text Lenght : "+text.length());
 			Assert.assertTrue(text.contains("Featured post"));
 			test.log(LogStatus.INFO, "Featured post is at the top of the home page");
-
+			WebElement element=listOfNotifications.get(0);
+			//String postTitle=element.findElement(By.xpath("")).getText();
+			String postTitle=element.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']")).getText();
+			logger.info("Post Title : "+postTitle);
+			logger.info("Post Title length : "+postTitle.length());
 			// li[@class='ne-trending__list-item ng-scope']/a
 
 			List<WebElement> listOfPostsLinks = pf.getBrowserActionInstance(ob)
@@ -85,9 +94,10 @@ public class Notifications0011 extends NotificationsTestBase {
 			logger.info("Size" + listOfPostsLinks.size());
 			String expectedTitle = listOfPostsLinks.get(0).getText();
 			logger.info("Top Post Titile in Trending - " + expectedTitle);
+			logger.info("Top Post Titile in Trending length - " + expectedTitle.length());
 
 			try {
-				if (expectedTitle.length() == text.length()) {
+				if (expectedTitle.length() == postTitle.length()) {
 					Assert.assertTrue(text.contains(expectedTitle));
 				} else {
 					Assert.assertTrue(text.contains(expectedTitle.substring(0, expectedTitle.length() - 5)));

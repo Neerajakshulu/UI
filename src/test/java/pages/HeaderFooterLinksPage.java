@@ -40,7 +40,7 @@ public class HeaderFooterLinksPage extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Cookie Policy", "Cookies", "Cookie name", "Description",
 						"Additional information");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
-				String cookieText = ob.findElement(By.tagName("h3")).getText();
+				String cookieText = ob.findElement(By.tagName("h2")).getText();
 				// System.out.println("cookie text-->"+cookieText);
 				Assert.assertEquals(headerFooterLinks[i], cookieText);
 			}
@@ -50,7 +50,7 @@ public class HeaderFooterLinksPage extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement",
 						"Cookies", "Third Party Services");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
-				String psText = ob.findElement(By.tagName("h3")).getText();
+				String psText = ob.findElement(By.tagName("h2")).getText();
 				// System.out.println("ps text-->"+psText);
 				Assert.assertEquals(headerFooterLinks[i], psText);
 			}
@@ -60,7 +60,7 @@ public class HeaderFooterLinksPage extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilText(
 						"These Terms of Use shall govern your use of the online service known as");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
-				String tcText = ob.findElement(By.tagName("h3")).getText();
+				String tcText = ob.findElement(By.tagName("h2")).getText();
 				// System.out.println("TC text-->"+tcText);
 				Assert.assertEquals(headerFooterLinks[i], tcText);
 			}
@@ -74,7 +74,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public void helpLinkValidation() throws Exception {
 		clickProfileImage();
-		waitForElementTobeClickable(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK.toString()), 90);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
 		waitForPageLoad(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Help", "Feedback");
@@ -89,8 +89,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public void accountLinkValidation() throws Exception {
 		clickProfileImage();
-		waitForElementTobeClickable(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString()),
-				90);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		// pf.waitTime(4);
 		waitForPageLoad(ob);

@@ -19,6 +19,7 @@ import pages.ProfilePage;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0016 extends NotificationsTestBase {
 
@@ -57,28 +58,28 @@ public class Notifications0016 extends NotificationsTestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
+			logger.info("Home Page loaded success fully");
 			BrowserWaits.waitTime(4);
-			// ((JavascriptExecutor)ob).executeScript("arguments[0].scrollIntoView(true);",ob.findElement(By.cssSelector("div[class='col-xs-12
-			// notification-event ng-scope'] span[class='webui-icon webui-icon-checkmark unfollow']")));
-			// ob.findElement(By.cssSelector("div[class='col-xs-12 notification-event ng-scope'] span[class='webui-icon
-			// webui-icon-checkmark unfollow']")).click();
-			// WebElement elements=ob.findElement(By.cssSelector("div[class='col-xs-12 notification-event ng-scope']"));
-			ob.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_user_css")))
+
+			ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS.toString()))
 					.click();
 			List<WebElement> elements = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_css")));
+					.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS.toString()));
 			String actual = null;
 			for (WebElement ele : elements) {
-				System.out.println("attribute value-->" + ele.getAttribute("ng-if"));
-				if (!(ele.getAttribute("ng-if").contains("TopUserCommenters"))) {
-					actual = ele
-							.findElement(By.cssSelector(
-									OR.getProperty("tr_notification_recommended_people_follow_username_css")))
+				System.out.println("attribute value-->" + ele.getAttribute("ng-repeat"));
+				if ((ele.getAttribute("ng-repeat").contains("profile in vm.profiles"))) {
+					actual = ob
+							.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()))
 							.getText();
-					System.out.println("Text : " + actual);
+					logger.info("Text : " + actual);
 					break;
 				}
 			}
@@ -96,11 +97,11 @@ public class Notifications0016 extends NotificationsTestBase {
 			page.clickProfileLink();
 			page.clickFollowingTab();
 
-			WebElement elem = ob.findElement(By.cssSelector(OR.getProperty("tr_notification_following_css")));
+			WebElement elem = ob.findElement(By.cssSelector("div[class='col-sm-9 profile-tab-content'] div div div"));
 			List<WebElement> elemn = elem.findElements(By.tagName("div"));
 			WebElement elem1 = elemn.get(0);
 
-			String result = elem1.findElement(By.cssSelector(OR.getProperty("tr_notification_following_topusername")))
+			String result = elem1.findElement(By.cssSelector("a[class='ng-binding ng-scope']"))
 					.getText();
 			logger.info("Result " + result);
 

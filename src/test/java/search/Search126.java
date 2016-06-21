@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -63,16 +64,14 @@ public class Search126 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+			List<WebElement> content_type_tiles = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 			content_type_tiles.get(1).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			String title1 = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -80,9 +79,9 @@ public class Search126 extends TestBase {
 			Thread.sleep(5000);
 			waitForPageLoad(ob);
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='record-heading']"), 40);
+			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 40);
 
-			String title2 = ob.findElement(By.cssSelector("h2[class^='record-heading']")).getText();
+			String title2 = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
 
 			if (!compareStrings(title1, title2)) {
 
@@ -100,23 +99,23 @@ public class Search126 extends TestBase {
 
 			}
 			checkIfFieldIsDisplyed(
-					By.xpath("//div[@class='doc-info' and contains(.,'Times Cited')]/descendant::span[@class='badge ng-binding']"),
+					By.xpath("//div[@class='wui-icon-metric wui-metric--ne-publication-sidebar' and contains(.,'Times Cited')]/descendant::span[@class='wui-icon-metric__label']"),
 					"Times Cited");
 
 			checkIfFieldIsDisplyed(
-					By.xpath("//div[@class='doc-info' and contains(.,'Cited References')]/descendant::span[@class='badge ng-binding']"),
+					By.xpath("//div[@class='wui-metric wui-metric--ne-publication-sidebar' and contains(.,'Cited References')]/descendant::span[@class='wui-metric__label']"),
 					"Cited References");
 
 			checkIfFieldIsDisplyed(
-					By.xpath("//div[@class='doc-info' and contains(.,'Comments')]/descendant::span[@class='badge ng-binding']"),
+					By.xpath("//div[@class='wui-icon-metric wui-metric--ne-publication-sidebar' and contains(.,'Comments')]/descendant::span[@class='wui-icon-metric__label']"),
 					"Comments");
 
-			checkIfFieldIsDisplyed(By.linkText("Details"), "Details Link");
+			checkIfFieldIsDisplyed(By.xpath("//a[@class='wui-btn wui-btn--secondary wui-btn--view-in-wos']"), "View in Web of Science");
 			checkIfFieldIsDisplyed(By.xpath("//h3[contains(.,'Abstract')]"), "Abstract Heading");
 
-			checkIfFieldIsDisplyed(By.xpath("//h3[contains(.,'Abstract')]/following-sibling::p[@class='ng-binding']"),
+			checkIfFieldIsDisplyed(By.xpath("//h3[contains(.,'Abstract')]/following-sibling::p[@class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
 					"Abstract Content");
-			checkIfFieldIsDisplyed(By.cssSelector("div[class='full-record'] span[class='meta ng-binding']"),
+			checkIfFieldIsDisplyed(By.cssSelector("div[class='ne-publication__metadata'] span[class='ng-binding']"),
 					"Publication details");
 
 			closeBrowser();

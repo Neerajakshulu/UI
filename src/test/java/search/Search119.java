@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -67,19 +68,16 @@ public class Search119 extends TestBase {
 			// Navigating to the NEON login page
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 			ob.findElement(By.id("single-button")).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 30);
@@ -130,7 +128,7 @@ public class Search119 extends TestBase {
 										+ "_sorting_not_retained")));// screenshot
 			}
 
-			String text = ob.findElement(By.id("single-button")).getText();
+			String text = ob.findElement(By.id("single-button")).getText().substring(9);
 			// System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {
@@ -145,30 +143,12 @@ public class Search119 extends TestBase {
 
 			}
 
-			String text1 = ob.findElement(
-					By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
-			// System.out.println("Text1="+text1);
-
-			if (!compareStrings("Patents", text1)) {
-
-				test.log(LogStatus.FAIL,
-						"Search drop down option not retained when user navigates back to ALL search results page from record view page");// extent
-																																			// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_search_drop_down_option_not_retained")));// screenshot
-
-			}
-
-			String text3 = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
-			// System.out.println(text3);
+			String text3 = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).getText().substring(0,3);
+			//System.out.println(text3);
 
 			try {
 
-				Assert.assertTrue(text3.contains("Patents"));
+				Assert.assertTrue(text3.contains("All"));
 				test.log(
 						LogStatus.PASS,
 						"Content type in the left navigation pane getting retained correctly when user navigates back to search results page from record view page");// extent
