@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0018 extends NotificationsTestBase {
 
@@ -53,33 +54,51 @@ public class Notifications0018 extends NotificationsTestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			// Logging in with Default user
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(4);
-			List<WebElement> element = ob
-					.findElements(By.cssSelector("div[class='article-wrapper top-articles ng-scope']"));
+			
+			List<WebElement> recArticleSection=ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH.toString()));
+			String text=recArticleSection.get(0).getText();
+			
+			logger.info("Recommended Articel Section Text"+text);
+			try{
+				Assert.assertTrue(text.contains("Recommended articles"));
+				test.log(LogStatus.INFO, "Recommended Article section in home page");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Recommended Article section not found in Newsfeed page.");// extent
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
+				closeBrowser();
+			}
+			WebElement elemt=recArticleSection.get(0);
+			List<WebElement> element = elemt
+					.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_XPATH.toString()));
 			String actual = null;
 			String watchstatus = null;
 			for (WebElement elem : element) {
-				if (!elem.getAttribute("ng-repeat").contains("article in vm.item.publication")) {
+				if (elem.getAttribute("ng-repeat").contains("article in vm.articles track by")) {
 					List<WebElement> elment = elem
-							.findElements(By.cssSelector("div[class='notification-publication'] h2 a"));
+							.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_NAME_XPATH.toString()));
 					actual = elment.get(0).getText();
 					logger.info("Actual--> " + actual);
-					List<WebElement> element1 = elem
-							.findElements(By.cssSelector("div[class='notification-publication'] button"));
+					BrowserWaits.waitTime(3);
+					List<WebElement> element1 = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH.toString()));
 					element1.get(0).click();
-					// allWatchLis=ob.findElements(By.cssSelector("div[class='select-watchlist ng-scope'] h4"));
-
-					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
-					ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-					BrowserWaits.waitTime(4);
-					ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
+					List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
+					listOfWatchListButton.get(0).click();
+					BrowserWaits.waitTime(3);
+					ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
+					BrowserWaits.waitTime(3);
 					List<WebElement> element2 = elem
-							.findElements(By.cssSelector("div[class='notification-publication'] button"));
+							.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH.toString()));
 					watchstatus = element2.get(0).getText();
 					logger.info("Watch Status--> " + watchstatus);
 					break;
@@ -87,22 +106,9 @@ public class Notifications0018 extends NotificationsTestBase {
 			}
 
 			BrowserWaits.waitTime(4);
-			// List<WebElement> elements=ob.findElements(By.cssSelector("li[class='ne-subnav-link-wrapper']"));
-			// String str=elements.get(1).getText();
-			// logger.info("Link Name : "+str);
-			// elements.get(1).click();
-
-			// List<WebElement> allWatchList=ob.findElements(By.cssSelector("div[class='col-xs-12 col-md-10
-			// col-md-pull-2' ] h2 a"));
-
-			/*
-			 * for(WebElement ele : elements){ if(ele.getAttribute("href").contains("watchlist")){ ele. } }
-			 */
-
-			// String result=ob.findElement(By.cssSelector("div[class='col-xs-12 col-sm-8 col-md-9'] h2")).getText();
-			// logger.info("Result--> "+result);
+			
 			try {
-				Assert.assertEquals(watchstatus, "Stop Watching");
+				Assert.assertEquals(watchstatus, "Watching");
 				test.log(LogStatus.PASS,
 						"User is able to watch article from Recommended articles section on Home page.");
 				logout();
@@ -120,7 +126,7 @@ public class Notifications0018 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
 						.getSimpleName()
 						+ "user_is_not_able_to_watch_article_from_Recommended_articles_section_on_Home_page.")));// screenshot
-				closeBrowser();
+				//closeBrowser();
 			}
 
 		} catch (Throwable t) {

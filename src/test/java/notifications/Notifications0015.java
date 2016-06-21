@@ -18,6 +18,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Notifications0015 extends NotificationsTestBase {
 
@@ -54,46 +55,59 @@ public class Notifications0015 extends NotificationsTestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			// Logging in with Default user
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
+					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(4);
-			/*
-			 * WebElement elements =
-			 * ob.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_css")));
-			 * WebElement elements1 = elements.findElement(By.cssSelector(OR.getProperty(
-			 * "tr_notification_recommended_people_follow_username_css"))); String actual = elements1.getText();
-			 * System.out.println("Text : " + actual); elements1.click();
-			 */
-			ob.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_user_css")));
-			List<WebElement> elements = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_css")));
-			String actual = null;
-			for (WebElement ele : elements) {
-				System.out.println("attribute value-->" + ele.getAttribute("ng-if"));
-				if (!(ele.getAttribute("ng-if").contains("TopUserCommenters"))) {
-					actual = ele
-							.findElement(By.cssSelector(
-									OR.getProperty("tr_notification_recommended_people_follow_username_css")))
-							.getText();
-					System.out.println("Text : " + actual);
-					ele.findElement(
-							By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_username_css")))
-							.click();
-					break;
-				}
-
+			WebElement elment=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
+			String text=elment.getText();
+			logger.info("Rcommended People Section Text : "+text);
+			try{
+				Assert.assertTrue(text.contains("Recommended people to follow"));
+				test.log(LogStatus.INFO, "Recommended people to follow section in home page");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Recommended people to follow section not found in Newsfeed page.");// extent
+				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
+				closeBrowser();
 			}
-
+			
+			WebElement recPeople=ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()));
+			String recPeopleUserNaem=recPeople.getText();
+			logger.info("Recommended People Section User Name : "+recPeopleUserNaem);
+			recPeople.click();
+			
+//			//ob.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_user_css")));
+//			List<WebElement> elements = ob
+//					.findElements(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_css")));
+//			String actual = null;
+//			for (WebElement ele : elements) {
+//				System.out.println("attribute value-->" + ele.getAttribute("ng-if"));
+//				if (!(ele.getAttribute("ng-if").contains("TopUserCommenters"))) {
+//					actual = ele
+//							.findElement(By.cssSelector(
+//									OR.getProperty("tr_notification_recommended_people_follow_username_css")))
+//							.getText();
+//					System.out.println("Text : " + actual);
+//					ele.findElement(
+//							By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_username_css")))
+//							.click();
+//					break;
+//				}
+//
+//			}
 			BrowserWaits.waitTime(4);
-			String result = ob.findElement(By.cssSelector(OR.getProperty("tr_notification_profile_name_css")))
-					.getText();
-			System.out.println("Result " + result);
+			String profilePageUserName=ob.findElement(By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString())).getText();
+			System.out.println("Profile Page User Name :  " + profilePageUserName);
 
 			try {
-				Assert.assertEquals(actual, result);
+				Assert.assertEquals(recPeopleUserNaem, profilePageUserName);
 				test.log(LogStatus.PASS,
 						"User is displaying profile page by clicking author name in Recommended people to follow section on home page");
 				closeBrowser();

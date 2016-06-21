@@ -86,7 +86,8 @@ public class Watchlist002 extends TestBase {
 			// Searching for patent
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 
 			// Watching a patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -124,7 +125,8 @@ public class Watchlist002 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"GLOVE BOX FOR VEHICLE\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 			// Watching a patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);

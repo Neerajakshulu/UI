@@ -61,7 +61,7 @@ public class Notifications0017 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			List<WebElement> element = ob
-					.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH.toString()));
+					.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_XPATH.toString()));
 			String actual = null;
 			for (WebElement elem : element) {
 				if (elem.getAttribute("ng-repeat").contains("article in vm.articles track by")) {

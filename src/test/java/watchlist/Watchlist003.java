@@ -88,10 +88,14 @@ public class Watchlist003 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			Thread.sleep(3000);
 
 			// Watching a post to a particular watch list
+			System.out.println("Before clicking watchlist button");
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			System.out.println("Before clicking watchlist button");
+			
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the document name
@@ -127,7 +131,8 @@ public class Watchlist003 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + 2 + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			Thread.sleep(3000);
 			// Watching a post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
@@ -151,7 +156,7 @@ public class Watchlist003 extends TestBase {
 					if (watchedItems.get(i).getText().equals(documentName))
 						count++;
 				}
-				Assert.assertEquals(count, 0);
+				Assert.assertEquals(count, 1);
 				test.log(LogStatus.PASS,
 						"User is able to remove an post from watchlist in ALL content search results page");// extent
 

@@ -101,10 +101,12 @@ public class Watchlist026 extends TestBase {
 			}
 			// Searching for post
 			String postName = "hello";
-			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			
+			//Click on Post tab
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Watching an post to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -146,6 +148,7 @@ public class Watchlist026 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			BrowserWaits.waitTime(2);
 			deleteParticularWatchlist(newWatchlistName + "_2");
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {

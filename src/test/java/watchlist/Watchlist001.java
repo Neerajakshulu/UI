@@ -88,16 +88,17 @@ public class Watchlist001 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 
-			// Watching an article to a particular watch list
+//			// Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Selecting the document name
+//			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-
-			// Navigate to a particular watch list page
+			
+//			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -126,20 +127,21 @@ public class Watchlist001 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 
-			// Watching an article to a particular watch list
+//			// Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Unwatching an article to a particular watch list
+//			// Unwatching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
-			// Selecting the document name
+//			// Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-			// Navigate to a particular watch list page
+//			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
@@ -161,7 +163,7 @@ public class Watchlist001 extends TestBase {
 						"User is unable to remove an article from watchlist in ALL content search results page");// extent
 			}
 
-			// Deleting the watch list
+//			// Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
