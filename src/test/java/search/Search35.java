@@ -69,6 +69,7 @@ public class Search35 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link']"), 30);
 
 			// Clicking on All content result set
