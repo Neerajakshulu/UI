@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -108,7 +109,7 @@ public class IAM010 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("duster");
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 			BrowserWaits.waitTime(4);
 
 			if (email.contains(".com")) {
@@ -131,6 +132,22 @@ public class IAM010 extends TestBase {
 						closeBrowser();
 						return;
 					}
+					
+					String textSignup=ob.findElement(By.cssSelector(OR.getProperty("tr_signIn_login_css"))).getText();
+					try {
+						Assert.assertTrue(textSignup.contains("Sign up"));
+						test.log(LogStatus.PASS, "User receiving notification with correct content");
+					} catch (Throwable t) {
+						test.log(LogStatus.FAIL, "User receiving notification with incorrect content" + t);// extent
+						StringWriter errors = new StringWriter();
+						t.printStackTrace(new PrintWriter(errors));
+						// test.log(LogStatus.INFO, errors.toString()); // reports
+						test.log(LogStatus.INFO, "Error--->" + t);
+						ErrorUtil.addVerificationFailure(t);
+						status = 2;// excel
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName())));// screenshot
+					}
 					// ob.navigate().back();
 
 				}
@@ -151,10 +168,11 @@ public class IAM010 extends TestBase {
 					}
 
 					String title = ob.findElement(By.xpath("//h2[@class='login-title']")).getText();
-					if (title.contains("Already have an account")) {
+					ob.findElement(By.xpath(OR.getProperty("sinup_button_disable")));
+					/*if (title.contains("Already have an account")) {
 						ob.findElement(By.xpath(OR.getProperty("tryAgain"))).click();
 					}
-
+*/
 				}
 			}
 			closeBrowser();

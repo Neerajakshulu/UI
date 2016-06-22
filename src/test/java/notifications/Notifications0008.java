@@ -236,6 +236,7 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
 					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User logged in successfully for verifying comment on post");
 			String text = ob
 					.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH.toString()))
 					.getText();
