@@ -65,7 +65,6 @@ public class Search105 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			// Navigating to the NEON login page
 			 ob.navigate().to(host);
 			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
