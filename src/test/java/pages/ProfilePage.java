@@ -1364,4 +1364,25 @@ public class ProfilePage extends TestBase {
 	}
 	
 	
+	
+	/**
+	 * Method for follow profile from their profile page
+	 * 
+	 * @throws Exception, When user not able to follow
+	 */
+	public void followOtherProfile()throws Exception {
+		ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/profile/59f15292-a2d0-4555-bfc8-4fe37b95fa60");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
+		BrowserWaits.waitTime(6);
+		String followInfo = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
+		logger.info("Follow/Unfollow Label Before-->" + followInfo);
+		
+		if(!followInfo.equals("Unfollow this person")) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
+			BrowserWaits.waitTime(2);
+		}
+		
+	}
+	
 }
