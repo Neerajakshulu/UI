@@ -194,7 +194,7 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_FOLLOWUSER_NAME_XPATH("//ne-notification-comment-event[@class='ng-scope ng-isolate-scope']//div[@class='ne-profile-object-name wui-emphasis ng-scope']//a"),
 	NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH("//div[@class='notification-component ng-scope']//ne-notification-watchlist-event"),
 	NEWSFEED_NOTIFICATION_LIKE_POST_XPATH("//ne-notification-like[@class='ng-scope']"),
-	
+	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 	//Search Page Elements
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
 	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
