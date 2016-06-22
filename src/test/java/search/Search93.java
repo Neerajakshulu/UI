@@ -61,7 +61,7 @@ public class Search93 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "Neon Testing2";
+			String userName = "user automation";
 
 			openBrowser();
 			clearCookies();
@@ -76,7 +76,7 @@ public class Search93 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
+			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getProfilePageInstance(ob).clickProfile();
 			boolean isPresent = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString())).isDisplayed();
 			if (!isPresent) {
