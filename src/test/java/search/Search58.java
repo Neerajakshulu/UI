@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -74,13 +75,13 @@ public class Search58 extends TestBase {
 			//waitForElementTobeVisible(ob,
 					//By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(1);
 
 			String autocompleted_keyword = ob.findElement(By.xpath(OR.getProperty("autocompleteTile"))).getText();
 

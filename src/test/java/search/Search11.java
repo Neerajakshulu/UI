@@ -92,6 +92,7 @@ public class Search11 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
+			BrowserWaits.waitTime(2);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("filter_checkbox")), 30);
