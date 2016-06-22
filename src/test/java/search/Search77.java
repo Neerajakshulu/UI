@@ -17,6 +17,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -71,29 +72,27 @@ public class Search77 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+			
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-
-			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
-					.click();
 			
-			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'People')]"), 120);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
+			waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 120);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath("//a[contains(text(),'People')]")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
-
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(Keys.BACK_SPACE);
 			Thread.sleep(1000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			Thread.sleep(1000);
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("peopleTile")), 30);
