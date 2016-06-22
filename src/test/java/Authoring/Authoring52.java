@@ -72,7 +72,7 @@ public class Authoring52 extends TestBase {
 			//pf.getpostRVPageInstance(ob).clickOnFacebookUnderShareMenu();
 			pf.getpostRVPageInstance(ob).shareRecordOnFB(fbusername, fbpassword);
 
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

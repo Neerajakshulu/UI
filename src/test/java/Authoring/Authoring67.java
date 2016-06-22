@@ -140,7 +140,7 @@ public class Authoring67 extends TestBase {
 
 				}
 			}
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

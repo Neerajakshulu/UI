@@ -94,7 +94,7 @@ public class Authoring47 extends TestBase {
 										+ "Post_count_validation_failed")));// screenshot
 
 			}
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

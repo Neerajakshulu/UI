@@ -68,7 +68,7 @@ public class Authoring39 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
 			pf.getpostRVPageInstance(ob).validateLikeAndUnlikePostActions(test);
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
