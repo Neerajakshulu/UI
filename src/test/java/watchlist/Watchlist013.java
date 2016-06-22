@@ -84,10 +84,10 @@ public class Watchlist013 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for post
-			selectSearchTypeFromDropDown("All");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
@@ -116,7 +116,7 @@ public class Watchlist013 extends TestBase {
 			}
 
 			// Unwatching the first 3 document from watch list page
-			watchButtonList = ob.findElements(By.xpath(OR.getProperty("watchlist_watchlist_image")));
+			watchButtonList = ob.findElements(By.xpath("//button[@class='wui-icon-btn watchlist-toggle-button ng-scope']"));
 			for (int i = 0; i < 3; i++) {
 				watchButtonList.get(i).click();
 				BrowserWaits.waitTime(2);

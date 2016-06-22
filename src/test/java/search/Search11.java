@@ -78,12 +78,12 @@ public class Search11 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(2000);
+		waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-
+            waitForAjax(ob);
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
@@ -92,6 +92,7 @@ public class Search11 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
+			BrowserWaits.waitTime(2);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("filter_checkbox")), 30);

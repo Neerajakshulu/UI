@@ -98,7 +98,7 @@ public class Authoring45 extends TestBase {
 
 			}
 			ob.navigate().back();
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -78,12 +79,13 @@ public class Search85 extends TestBase {
 				// Type into the search box and get search results
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+				waitForAjax(ob);
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 				Thread.sleep(2000);
 				
 				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
-				Thread.sleep(5000);
+				BrowserWaits.waitTime(5);
 				
 				List<WebElement> searchTiles=ob.findElements(By.xpath("//*[@class='wui-card__content']"));
 				String tileText=searchTiles.get(0).getText();

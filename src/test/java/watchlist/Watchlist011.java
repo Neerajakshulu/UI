@@ -43,7 +43,7 @@ public class Watchlist011 extends TestBase {
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments")
+						"Verify that following fields are getting displayed for each patent in the watchlist page: a)Times cited b)Comments")
 				.assignCategory("Watchlist");
 
 	}
@@ -86,10 +86,12 @@ public class Watchlist011 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
+			ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
+			Thread.sleep(3000);
 
 			// Getting watch button list for patents
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));

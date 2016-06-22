@@ -71,7 +71,7 @@ public class Authoring54 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 		} catch (Throwable t) {
 			t.printStackTrace();

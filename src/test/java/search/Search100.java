@@ -65,13 +65,8 @@ public class Search100 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			// Type into the search box and get search results
@@ -79,7 +74,7 @@ public class Search100 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
 			content_type_tiles.get(2).click();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));

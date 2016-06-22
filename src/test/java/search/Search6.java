@@ -53,7 +53,6 @@ public class Search6 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
@@ -67,11 +66,9 @@ public class Search6 extends TestBase {
 			// System.out.println(System.getProperty("host"));
 			// System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			//

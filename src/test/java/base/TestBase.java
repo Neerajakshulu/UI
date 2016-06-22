@@ -1028,11 +1028,11 @@ public class TestBase {
 		// By.xpath(OR.getProperty("TR_login_button")), 180);
 		// jsClick(ob,
 		// ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
-		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 180);
-		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty(usernameKey));
-		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(LOGIN.getProperty(pwdKey));
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("login_button"))));
+		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		ob.findElement(By.name("loginEmail")).clear();
+		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
+		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
+		jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
 
 	}
 

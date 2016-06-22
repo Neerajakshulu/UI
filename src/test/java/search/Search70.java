@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -72,30 +73,29 @@ public class Search70 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("c");
-			Thread.sleep(1000);
+		      BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("e");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("m");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("s");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("t");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("r");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("y");
-			Thread.sleep(1000);
+			 BrowserWaits.waitTime(1);
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			Thread.sleep(1000);
-
+			 BrowserWaits.waitTime(1);
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("arguments[0].scrollIntoView(true);",myE2);

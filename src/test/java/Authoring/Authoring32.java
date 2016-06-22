@@ -80,7 +80,7 @@ public class Authoring32 extends TestBase {
 				status = 2;
 			}
 
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

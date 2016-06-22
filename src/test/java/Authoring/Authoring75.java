@@ -183,7 +183,7 @@ public class Authoring75 extends TestBase {
 										+ "Post_creation_validation_failed")));// screenshot
 
 			}
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

@@ -72,10 +72,11 @@ public class Search12 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("contentType_span")), 30);
 
 			List<WebElement> content_types = ob.findElements(By.xpath(OR.getProperty("contentType_span")));
+			BrowserWaits.waitTime(5);
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();

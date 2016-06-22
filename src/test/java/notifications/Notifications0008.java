@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -83,6 +82,7 @@ public class Notifications0008 extends NotificationsTestBase {
 							.assignCategory("Notifications");
 
 					if (poststatus) {
+						test.log(LogStatus.INFO, this.getClass().getSimpleName());
 						test.log(LogStatus.INFO, "User logged in successfully");
 						test.log(LogStatus.INFO, "Published a post -" + postString);
 						test.log(LogStatus.INFO, "User logged out successfully");
@@ -104,6 +104,7 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that all users receive notification when other user published a post and validate notification.")
 							.assignCategory("Notifications");
 					if (poststatus) {
+						test.log(LogStatus.INFO, this.getClass().getSimpleName());
 						test.log(LogStatus.INFO, "User logged in successfully");
 						test.log(LogStatus.INFO, "Published a post -" + postString);
 						test.log(LogStatus.INFO, "User logged out successfully");
@@ -126,6 +127,7 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that user is receiving notification when someone liked his post(aggregated notification)")
 							.assignCategory("Notifications");
 					if (poststatus) {
+						test.log(LogStatus.INFO, this.getClass().getSimpleName());
 						test.log(LogStatus.INFO, "User logged in successfully");
 						test.log(LogStatus.INFO, "Published a post -" + postString);
 						test.log(LogStatus.INFO, "User logged out successfully");
@@ -150,8 +152,18 @@ public class Notifications0008 extends NotificationsTestBase {
 									"Verify that user able to recevie's a notification when other user commented on his post")
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, "Published a post -" + postString);
-					if (commentstatus && poststatus) {
-						notification3();
+					if (poststatus) {
+						test.log(LogStatus.INFO, this.getClass().getSimpleName());
+						test.log(LogStatus.INFO, "User logged in successfully");
+						test.log(LogStatus.INFO, "Published a post -" + postString);
+						test.log(LogStatus.INFO, "User logged out successfully");
+						if (commentstatus) {
+							test.log(LogStatus.INFO, "User logged in successfully");
+							test.log(LogStatus.INFO, "Published comment on a post -" + postString);
+							test.log(LogStatus.INFO, "User logged out successfully");
+							verifyCommentOnOwnPost();
+						} else
+							throw new Exception("Facing issue while publishing comment");
 					} else
 						throw new Exception("Post creation Exception");
 				} catch (Exception e) {
@@ -160,30 +172,6 @@ public class Notifications0008 extends NotificationsTestBase {
 				} finally {
 					extent.endTest(test);
 				}
-				try {
-					extent = ExtentManager.getReporter(filePath);
-					test = extent
-							.startTest("OPQA-1397",
-									"Verify that all users receive notification when other user published a comment on post and validate notification.")
-							.assignCategory("Notifications");
-					if (commentstatus && poststatus) {
-						test.log(LogStatus.INFO, "added commnet on post successfully");
-						verifycommentNotification();
-					} else {
-						if (!commentstatus) {
-							test.log(LogStatus.INFO, "Facing issue with adding comment");
-						}
-						throw new Exception(
-								"Failed to recevie a notification when someone he is following user comments on a post");
-					}
-
-				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, t.getMessage());
-					logger.info(t.getMessage());
-				} finally {
-					extent.endTest(test);
-				}
-
 				closeBrowser();
 			} else {
 				test.log(LogStatus.INFO, "User creation problem hence Failing this test case");
@@ -216,80 +204,18 @@ public class Notifications0008 extends NotificationsTestBase {
 
 	}
 
-	private void verifycommentNotification() throws Exception {
-		try {
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
-					CONFIG.getProperty("defaultPassword"));
-			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			BrowserWaits.waitTime(10);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			List<WebElement> listOfNotifications = null;
-			String text = null;
-			for (int i = 1; i <= 3; i++) {
-
-				BrowserWaits.waitTime(3);
-				listOfNotifications = ob.findElements(By.xpath(OR.getProperty("all_notifications_in_homepage")));
-				for (int j = 0; j < listOfNotifications.size(); j++) {
-					String temp = listOfNotifications.get(j).getText();
-					if (temp.contains(fn1 + " " + ln1) && temp.contains("New Comment") && temp.contains(postString)) {
-						text = temp;
-					}
-				}
-				if (text.length() > 0) {
-					break;
-				}
-				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-			}
-			logger.info("Notification Text: " + text);
-			try {
-				Assert.assertTrue(text.contains("New Comment") && text.contains(fn1 + " " + ln1)
-						&& text.contains("commented on") && text.contains(postString));
-				test.log(LogStatus.PASS, "User receiving notification with correct content");
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-				test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
-				ErrorUtil.addVerificationFailure(t);
-				logger.error(this.getClass().getSimpleName() + "--->" + t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: "
-						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA-877")));
-			}
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
-			ErrorUtil.addVerificationFailure(t);
-			logger.error(this.getClass().getSimpleName() + "--->" + t);
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA-877")));// screenshot
-		} finally {
-			pf.getLoginTRInstance(ob).logOutApp();
-		}
-	}
-
 	private boolean addCommentOnPost() throws Exception {
 		boolean status = false;
 		try {
+			clearCookies();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postString);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
-
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("scroll(0,-500)");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_posts_tab_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("search_results_posts_tab_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_results_post_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("search_results_post_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
-					.sendKeys(OR.getProperty("COMMENT_TEXT"));
-			BrowserWaits.waitTime(5);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_addComment_button")), 30);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_addComment_button"))));
-			BrowserWaits.waitTime(6);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");
+			ob.navigate().to(document_url);
+			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			status = true;
 		} catch (Exception e) {
 			logger.error("Probem happens while adding comment on post" + e.getMessage());
@@ -301,33 +227,45 @@ public class Notifications0008 extends NotificationsTestBase {
 		return status;
 	}
 
-	private void notification3() throws Exception {
+	private void verifyCommentOnOwnPost() throws Exception {
 		try {
 			// LOGIN WITH USER3 AND CHECK FOR THE NOTIFICATION
+			clearCookies();
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			BrowserWaits.waitTime(5);
-			String text = ob.findElement(By.xpath(OR.getProperty("notificationDocumentComment"))).getText();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");
+			test.log(LogStatus.INFO, "User logged in successfully for verifying comment on post");
+			String text = ob
+					.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH.toString()))
+					.getText();
 			logger.info("Notification Text: " + text);
+			logger.info(text.contains(postString));
+			logger.info(text.contains(fn1 + " " + ln1));
+			logger.info(text.contains(OR.getProperty("COMMENT_TEXT")));
+			logger.info(text.contains("New comments on your post"));
 			try {
-				Assert.assertTrue(text.contains("New comments on your post") && /*
-																				 * text.contains("TODAY") &&
-																				 */text.contains(postString)
-						&& text.contains(fn1 + " " + ln1) && text.contains(OR.getProperty("COMMENT_TEXT")));
+				Assert.assertTrue(text.contains("New comments on your post") /* && text.contains("TODAY") */
+						&& text.contains(postString)/* && text.contains(fn1 + " " + ln1) */
+						&& text.contains(OR.getProperty("COMMENT_TEXT")));
 				test.log(LogStatus.PASS, "User receivied notification with correct content");
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receivied notification with incorrect content");// extent
 				// reports
-				test.log(LogStatus.INFO, "Error--->" + t);
+				test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: "
-						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screen++)));// screenshot
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA-215")));// screenshot
 			}
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			e.printStackTrace();
+		} catch (Exception t) {
+			test.log(LogStatus.INFO, "Error--->" + t.getMessage());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA-215")));// screenshot
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}

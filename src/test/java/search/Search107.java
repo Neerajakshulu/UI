@@ -64,8 +64,7 @@ public class Search107 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+		
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -73,10 +72,10 @@ public class Search107 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath("//li[contains(text(),'Patents')]"), 30);
+			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Patents')]"), 30);
 			Thread.sleep(2000);
 
-			ob.findElement(By.xpath("//li[contains(text(),'Patents')]")).click();
+			ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
@@ -84,7 +83,7 @@ public class Search107 extends TestBase {
 
 			ob.navigate().back();
 			Thread.sleep(5000);
-			String text = ob.findElement(By.xpath("//li[@class='content-type-selector ng-scope active']")).getText();
+			String text = ob.findElement(By.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']")).getText();
 			System.out.println(text);
 
 			try {

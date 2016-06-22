@@ -79,7 +79,7 @@ public class Authoring57 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			pf.getpostRVPageInstance(ob).shareOnTwitter(tusername, tpassword);
 
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 
 		} catch (Throwable t) {
 			t.printStackTrace();

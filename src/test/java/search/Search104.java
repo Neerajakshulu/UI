@@ -33,7 +33,7 @@ public class Search104 extends TestBase {
 		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a post gets displayed when user clicks on article title in ALL search results page")
+						"Verify that record view page of a post gets displayed when user clicks on post title in ALL search results page")
 
 				.assignCategory("Search suite");
 
@@ -64,14 +64,8 @@ public class Search104 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String post = "Post for Testing bJ38z9";
@@ -81,20 +75,18 @@ public class Search104 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
 			String patentRVTitleWatchLabel = ob.findElement(
 					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			String patentRVShareLabel = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1)
-					.getText();
+			
 
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
 					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
-					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
+					;
 
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");

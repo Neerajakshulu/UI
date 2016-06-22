@@ -155,7 +155,7 @@ public class Authoring35 extends TestBase {
 	public void logOut() throws Exception {
 		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
-		logout();
+		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}

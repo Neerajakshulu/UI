@@ -94,7 +94,7 @@ public class Authoring69 extends TestBase {
 			ob.navigate().back();
 			waitForPageLoad(ob);
 			BrowserWaits.waitTime(10);
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();

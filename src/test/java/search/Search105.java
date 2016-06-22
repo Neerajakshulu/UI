@@ -65,17 +65,11 @@ public class Search105 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 120);
-			new PageFactory().getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
-
+			 ob.navigate().to(host);
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector("i[class='webui-icon webui-icon-search']"), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			String post = "sample post";
@@ -87,7 +81,7 @@ public class Search105 extends TestBase {
 			waitForAjax(ob);
 
 			Thread.sleep(5000);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_item_title_css"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
 					120);
@@ -96,18 +90,32 @@ public class Search105 extends TestBase {
 					.getText();
 			String patentRVTitleWatchLabel = ob.findElement(
 					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			String patentRVShareLabel = ob
-					.findElements(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).get(1)
-					.getText();
 
+			boolean  googleShare= ob
+					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(0)
+					.getAttribute("tooltip").contains("Share on Google");
+			
+			boolean twitterShare = ob
+					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(2)
+					.getAttribute("tooltip").contains("Share on Twitter");
+			
+			
+			boolean fbShare = ob
+					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(0)
+					.getAttribute("tooltip").contains("Share on Facebook");
+
+			boolean liShare = ob
+					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(1)
+					.getAttribute("tooltip").contains("Share on LinkedIn");
+			
 			List<WebElement> postCreationAndEdit = ob.findElements(By
-					.xpath("//div[@class='row timestamp-wrapper']/div/span[@class='meta']"));
+					.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
 			boolean postEditCreateDate;
 			if (postCreationAndEdit.size() >= 2) {
 				postEditCreateDate = postCreationAndEdit.get(0).getText().equalsIgnoreCase("EDITED")
 						&& postCreationAndEdit.get(1).getText().equalsIgnoreCase("POSTED");
 			} else {
-				postEditCreateDate = postCreationAndEdit.get(0).getText().equalsIgnoreCase("POSTED");
+				postEditCreateDate = postCreationAndEdit.get(0).getText().contains("POSTED");
 			}
 
 			// System.out.println("post creationstatus-->"+postEditCreateDate);
@@ -121,7 +129,7 @@ public class Search105 extends TestBase {
 			// System.out.println("post author metadata-->"+postAuthorMetaData);
 
 			List<WebElement> postSocialShare = ob.findElements(By
-					.cssSelector(("div[class='doc-info'] span[class*='stat-count']")));
+					.cssSelector(("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
 
 			int postCommentCount = Integer.parseInt(postSocialShare.get(0).getText());
 			int postLikeCount = Integer.parseInt(postSocialShare.get(1).getText());
@@ -132,14 +140,14 @@ public class Search105 extends TestBase {
 			// System.out.println("post like count-->"+postLikeCount);
 
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
-					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "watch")
-					&& StringUtils.containsIgnoreCase(patentRVShareLabel, "Share");
+					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "Watch")
+					&& googleShare && twitterShare && fbShare && liShare;
 
 			// if(!patentRVStatus)
 			// throw new Exception("Page is not Navigating to Post Record View Page");
 
 			boolean postFieldsStatus = postEditCreateDate && (!postAuthor.isEmpty()) && (!postAuthorMetaData.isEmpty())
-					&& socialShareStatus;
+					&& socialShareStatus &&patentRVStatus;
 			System.out.println("post fields status-->" + postFieldsStatus);
 			
 			if(!checkElementPresence("watchlist_button_record_view_page")){

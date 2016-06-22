@@ -66,10 +66,8 @@ public class Search101 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			 ob.navigate().to(host);
 			// login using TR credentials
 			login();
 			//
@@ -81,7 +79,7 @@ public class Search101 extends TestBase {
 			//
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'content-type-selector ng-scope')]"));
+					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
 			content_type_tiles.get(2).click();
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
 
@@ -138,6 +136,7 @@ public class Search101 extends TestBase {
 			}
 
 			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			option=option.substring(option.indexOf(":")+1).trim();
 			if (!compareStrings("Times Cited", option)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent reports

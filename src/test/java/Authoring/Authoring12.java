@@ -162,7 +162,7 @@ public class Authoring12 extends TestBase {
 
 			Thread.sleep(5000);// Wait for new window to close and switch to old
 								// window.
-			logout();
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
 		} catch (Exception e) {
