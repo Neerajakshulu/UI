@@ -76,7 +76,7 @@ public class Watchlist020 extends TestBase {
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-
+			ob.findElement(By.cssSelector("button[event-action='edit watchlist']")).click();
 			// Making the public watch list to private
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
 
