@@ -16,8 +16,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 /**
@@ -82,13 +84,16 @@ public class Watchlist009 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("test");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 60);
 
 			// Watching the post to a particular watch list
@@ -96,11 +101,13 @@ public class Watchlist009 extends TestBase {
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the post name
-			String documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 60);
+
+			String documentName = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> watchedItems = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -122,26 +129,28 @@ public class Watchlist009 extends TestBase {
 
 			// Step2: Unwatching the document from record view page
 			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("test");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
-
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			// Selecting the post name
-			documentName = ob.findElement(By.xpath("//h2[@class='record-heading ng-binding']")).getText();
+			documentName = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+				WebElement defaultMessage = ob.findElement(By.cssSelector("h2[class^='wui-content-title']"));
 
 				if (defaultMessage.isDisplayed()) {
 
@@ -156,7 +165,7 @@ public class Watchlist009 extends TestBase {
 				}
 			} catch (NoSuchElementException e) {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				watchedItems = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 
