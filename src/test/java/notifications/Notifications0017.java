@@ -68,6 +68,7 @@ public class Notifications0017 extends NotificationsTestBase {
 					List<WebElement> elment = elem.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLE_TITLE_XPATH.toString()));
 					actual = elment.get(0).getText();
 					logger.info("Actual--> " + actual);
+					BrowserWaits.waitTime(2);
 					elment.get(0).click();
 					break;
 				}
@@ -103,7 +104,7 @@ public class Notifications0017 extends NotificationsTestBase {
 			test.log(LogStatus.FAIL,
 					"User is not able to navigate record view page by clicking article title from Recommended articles section on Home page");// extent
 			// reports
-			test.log(LogStatus.INFO, "Error--->" + t);
+			test.log(LogStatus.INFO, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
