@@ -92,7 +92,7 @@ public class Watchlist021 extends TestBase {
 			// Watching an article to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
 			waitForAjax(ob);
-			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);;
+			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);;
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
@@ -124,7 +124,7 @@ public class Watchlist021 extends TestBase {
 				
 				actualWatchedItems.add(we.getText());
 			}
-			List<String> expectedWatchedItems=Arrays.asList(new String[]{"POST","POST","ARTICLE","ARTCILE","PATENT","PATENT"});
+			List<String> expectedWatchedItems=Arrays.asList(new String[]{"PATENT","PATENT","POST","POST","ARTICLE","ARTICLE"});
 			
 			if (!actualWatchedItems.equals(expectedWatchedItems)) {
 
