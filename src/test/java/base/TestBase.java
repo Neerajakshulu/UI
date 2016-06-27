@@ -426,7 +426,7 @@ public class TestBase {
 	// Check whether a particular element is present or not(detecting element
 	// via id)
 	public boolean checkElementPresence_id(String id) {
-		int count = ob.findElements(By.xpath(OR.getProperty(id))).size();
+		int count = ob.findElements(By.cssSelector(OR.getProperty(id))).size();
 		logger.info("Count is " + count);
 		try {
 			Assert.assertEquals(count, 1);
@@ -541,6 +541,7 @@ public class TestBase {
 		String password = "Neon@123";
 
 		ob.get("https://www.guerrillamail.com");
+		BrowserWaits.waitTime(2);
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		ob.navigate().to(host);
 		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
@@ -596,7 +597,7 @@ public class TestBase {
 		}
 
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-
+		BrowserWaits.waitTime(2);
 		ob.get("https://www.guerrillamail.com");
 		BrowserWaits.waitTime(10);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));

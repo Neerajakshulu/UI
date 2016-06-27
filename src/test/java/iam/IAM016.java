@@ -146,6 +146,7 @@ public class IAM016 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
 			//
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
 			ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);
 			ob.findElement(By.xpath(OR.getProperty("verification_email_button"))).click();

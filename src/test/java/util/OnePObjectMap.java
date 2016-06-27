@@ -192,7 +192,7 @@ public enum OnePObjectMap {
 	NEWSFEED_TOP_COMMENTERS_XPATH("//div[contains(@ng-if,'TopUserCommenters')]"),
 	NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_XPATH("//ne-notification-comment-event[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NOTIFICATION_FOLLOWUSER_NAME_XPATH("//ne-notification-comment-event[@class='ng-scope ng-isolate-scope']//div[@class='ne-profile-object-name wui-emphasis ng-scope']//a"),
-	NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH("//div[@class='notification-component ng-scope']//ne-notification-watchlist-event"),
+	NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH("//div[@class='ng-scope']//ne-notification-watchlist-event"),
 	NEWSFEED_NOTIFICATION_LIKE_POST_XPATH("//ne-notification-like[@class='ng-scope']"),
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 	//Search Page Elements
