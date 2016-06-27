@@ -79,7 +79,7 @@ public class Search123 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]"), 50);
 			ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]")).click();
 			BrowserWaits.waitTime(3);
-
+			waitForElementTobeVisible(ob, By.xpath("//span[contains(text(),'Institutions')]"), 50);
 			ob.findElement(By.xpath("//span[contains(text(),'Institutions')]")).click();
 			BrowserWaits.waitTime(2);
 			

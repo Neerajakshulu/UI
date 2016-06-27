@@ -82,15 +82,15 @@ public class Watchlist017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='select-watchlist-modal ng-scope']"), 5);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='modal-dialog modal-md']"), 5);
 			// Select the first watch list from the model
 			waitForElementTobeClickable(ob,
-					By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"), 5);
+					By.xpath("//a[@class='ne-action-modal__item-content']"), 5);
 
 			try {
 				// Finding the no of watch lists
 				List<WebElement> watchLists = ob.findElements(
-						By.xpath("//button[@class='pull-left btn webui-icon-btn watchlist-toggle-button']"));
+						By.xpath("//a[@class='ne-action-modal__item-content']"));
 				// Closing the select a model
 				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 				BrowserWaits.waitTime(3);
@@ -107,7 +107,10 @@ public class Watchlist017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);
 			// Check if watch list is private by default
-			boolean watchListStatus = ob.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected();
+			ob.findElement(By.cssSelector("button[event-action='edit watchlist']")).click();
+			//BrowserWaits.waitTime(5);
+			waitForElementTobePresent(ob, By.cssSelector("span[class='wui-checkbox__visible']"), 60);
+			boolean watchListStatus = ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background").contains("rgb(rgb(69, 183, 231)");
 			if (!watchListStatus) {
 				test.log(LogStatus.PASS, "User watchlist is private by default");
 			} else {

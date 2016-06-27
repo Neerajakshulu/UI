@@ -609,6 +609,7 @@ public class TestBase {
 		List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 		ob.get(links.get(0).getAttribute("href"));
+		BrowserWaits.waitTime(3);
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		BrowserWaits.waitTime(4);
 
