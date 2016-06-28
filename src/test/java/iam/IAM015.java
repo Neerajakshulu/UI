@@ -73,9 +73,10 @@ public class IAM015 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(CONFIG.getProperty("defaultUsername"));
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_password_textbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(6);
 			
 			if (!checkElementPresence_id("reg_errorMessage")) {
 
@@ -93,8 +94,9 @@ public class IAM015 extends TestBase {
 
 			String error_message = ob.findElement(By.xpath(OR.getProperty("reg_errorMessage"))).getText();
 			logger.info("Error Message : "+error_message);
-			String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
-			logger.info("Email Address : "+emailAddress);
+			BrowserWaits.waitTime(4);
+			//String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
+			//logger.info("Email Address : "+emailAddress);
 
 			if (!compareStrings("Already have an account?", error_message)) {
 
@@ -107,7 +109,7 @@ public class IAM015 extends TestBase {
 										+ "_incorrect_error_text")));// screenshot
 
 			}
-			ob.findElement(By.xpath(OR.getProperty("tryAgain"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("tryAgain"))).click();
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 

@@ -132,7 +132,6 @@ public class Authoring11 extends TestBase {
 	public void shareOnTwitter(String tusername,
 			String tpassword) throws Exception {
 		try {
-			new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			test.log(LogStatus.INFO, "Sharing Article on Twitter");
 			
 			String PARENT_WINDOW = ob.getWindowHandle();

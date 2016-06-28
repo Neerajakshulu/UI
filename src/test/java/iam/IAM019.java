@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -105,6 +106,7 @@ public class IAM019 extends TestBase {
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
 			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
 			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();*/
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);

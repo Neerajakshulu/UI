@@ -62,6 +62,7 @@ public class IAM021 extends TestBase {
 			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			login();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			//

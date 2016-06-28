@@ -69,6 +69,7 @@ public class Watchlist001 extends TestBase {
 
 			// Opening browser
 			openBrowser();
+//			runOnSauceLabsFromLocal("Windows","IE");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {

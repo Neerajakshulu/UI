@@ -88,16 +88,19 @@ public class Watchlist008 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for post
-			selectSearchTypeFromDropDown("Posts");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
+			
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			Thread.sleep(3000);
+			ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Posts')]")).click();
+			Thread.sleep(3000);
 
 			// Getting watch button list for posts
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			// Watching 2 posts to a particular watch list
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 1; i++) {
 				WebElement watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
@@ -137,7 +140,7 @@ public class Watchlist008 extends TestBase {
 			// Getting the first result title
 			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
 			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image"))).click();
+			ob.findElement(By.xpath("//span[contains(text(),'Stop watching')]")).click();
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("result_title_in_watchlist")), 30);
 			// Checking if first document still exists in the watch list

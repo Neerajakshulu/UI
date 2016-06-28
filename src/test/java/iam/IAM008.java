@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -98,7 +99,7 @@ public class IAM008 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			//
-			// BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
 			// Verify that existing LI user credentials are working fine

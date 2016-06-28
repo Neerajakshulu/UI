@@ -116,7 +116,7 @@ public class Watchlist013 extends TestBase {
 			}
 
 			// Unwatching the first 3 document from watch list page
-			watchButtonList = ob.findElements(By.xpath("//button[@class='wui-icon-btn watchlist-toggle-button ng-scope']"));
+			watchButtonList = ob.findElements(By.xpath("//span[contains(text(),'Stop watching')]"));
 			for (int i = 0; i < 3; i++) {
 				watchButtonList.get(i).click();
 				BrowserWaits.waitTime(2);
@@ -136,6 +136,7 @@ public class Watchlist013 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName);
 
 			closeBrowser();
+			
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

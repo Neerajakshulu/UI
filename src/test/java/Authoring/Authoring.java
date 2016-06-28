@@ -93,8 +93,8 @@ public class Authoring extends TestBase {
 		BrowserWaits.waitTime(5);
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		commentArea.click();
 		commentArea.clear();
+		commentArea.click();
 		commentArea.sendKeys(addComments);
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}
@@ -168,8 +168,8 @@ public class Authoring extends TestBase {
 	 *             When Validation not done
 	 */
 	public void validateAppreciationComment(ExtentTest test) throws Exception {
-		
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 90);
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 120);
 		List<WebElement> apprDivs = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()));
 		System.out.println("size of total elemntes-->" + apprDivs.size());
 		WebElement apprSubDivs;

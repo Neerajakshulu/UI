@@ -139,7 +139,7 @@ public class Authoring13 extends TestBase {
 			
 			String PARENT_WINDOW = ob.getWindowHandle();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
-			new Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()))).click().build().perform();
+			jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString())));
 			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
 			
 			waitForNumberOfWindowsToEqual(ob, 2);

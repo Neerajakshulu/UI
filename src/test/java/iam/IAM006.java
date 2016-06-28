@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -122,9 +123,10 @@ public class IAM006 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-
+			
+			BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
-
+			logger.info("Error List Size : "+errorList.size());
 			if (validity.equalsIgnoreCase("YES")) {
 
 				// verifying that error message is not getting displayed
@@ -158,7 +160,7 @@ public class IAM006 extends TestBase {
 					return;
 				}
 			}
-
+				/*BrowserWaits.waitTime(3);
 				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
 				logger.info("Error Message : "+errorText);
 				if (!compareStrings("Last name is too long.", errorText)) {
@@ -171,7 +173,7 @@ public class IAM006 extends TestBase {
 					closeBrowser();
 					return;
 
-				}
+				}*/
 
 			}
 

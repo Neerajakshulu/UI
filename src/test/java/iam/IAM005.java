@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -117,7 +118,7 @@ public class IAM005 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys(first_name);
 			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).click();*/
 			//
-
+			BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
 			logger.info("Errors Count : "+errorList.size());
 
@@ -158,6 +159,7 @@ public class IAM005 extends TestBase {
 				}
 
 			}
+				/*BrowserWaits.waitTime(3);
 				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
 				logger.info("Error Text  : "+errorText);
 				if (!compareStrings("First name is too long.", errorText)) {
@@ -172,7 +174,7 @@ public class IAM005 extends TestBase {
 					closeBrowser();
 					return;
 
-				}
+				}*/
 
 			}
 

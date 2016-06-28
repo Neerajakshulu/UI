@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -94,7 +95,7 @@ public class IAM009 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
 			
-			
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
