@@ -502,7 +502,7 @@ public class PostRecordViewPage extends TestBase {
 				.toString())));*/
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString())));
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		for (String child_window_handle : child_window_handles) {
@@ -538,7 +538,8 @@ public class PostRecordViewPage extends TestBase {
 				.toString())));*/
 		String PARENT_WINDOW = ob.getWindowHandle();
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS);
+		jsClick(ob,ob.findElement(By.cssSelector(
+				OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
 		
@@ -580,9 +581,9 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()), 40);
 		String PARENT_WINDOW = ob.getWindowHandle();
 		String rvPageurl = ob.getCurrentUrl();
-		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS);
-		ob.manage().window().maximize();
+		jsClick(ob, ob.findElement(By
+				.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString())));
+		//ob.manage().window().maximize();
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		for (String child_window_handle : child_window_handles) {

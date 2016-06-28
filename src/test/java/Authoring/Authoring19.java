@@ -70,7 +70,7 @@ public class Authoring19 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Synergistic");
+			pf.getHFPageInstance(ob).searchForText("Biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
 			String articleTitle = ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).getText();
 			ob.findElement((By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()))).click();

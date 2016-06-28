@@ -126,10 +126,9 @@ public class Authoring12 extends TestBase {
 			String PARENT_WINDOW = ob.getWindowHandle();
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
-			new Actions(ob)
-					.moveToElement(ob.findElement(By.cssSelector(
-							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())))
-					.click().build().perform();
+			jsClick(ob,ob.findElement(By.cssSelector(
+							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
+					
 			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 			jsClick(ob, ob.findElement(By.cssSelector(
