@@ -68,8 +68,8 @@ public class TestBase {
 	public static Xls_Reader notificationxls = null;
 
 	public static boolean isInitalized = false;
-	public WebDriver ob = null;
 
+	public WebDriver ob = null;
 	protected ExtentReports extent;
 	protected final String filePath = "testReports/test_report.html";
 	protected ExtentTest test;
@@ -429,8 +429,15 @@ public class TestBase {
 		int count = ob.findElements(By.cssSelector(OR.getProperty(id))).size();
 		logger.info("Count is " + count);
 		try {
+			if(count==0){
+				List<WebElement> element=ob.findElements(By.cssSelector(OR.getProperty("login_error1")));
+				if(element.size()==2||element.size()==1){
+					test.log(LogStatus.PASS, "Particular element is present");
+				}
+			}else{
 			Assert.assertEquals(count, 1);
 			test.log(LogStatus.PASS, "Particular element is present");
+			}
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
@@ -599,7 +606,7 @@ public class TestBase {
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		BrowserWaits.waitTime(2);
 		ob.get("https://www.guerrillamail.com");
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(14);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
