@@ -28,7 +28,7 @@ public class IAM024 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var,
-				"Verify that TR account gets locked after 5 consecutive unsuccessful login attempts").assignCategory(
+				"Verify that TR account gets locked after 10 consecutive unsuccessful login attempts").assignCategory(
 				"IAM");
 
 	}
@@ -67,7 +67,8 @@ public class IAM024 extends TestBase {
 			System.out.println(firstName + " " + lastName);
 			String email = createNewUser(firstName, lastName);
 			test.log(LogStatus.INFO, " New User created");
-			new PageFactory().getLoginTRInstance(ob).logOutApp();
+			logout();
+			//new PageFactory().getLoginTRInstance(ob).logOutApp();
 			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
 			//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			for (int i = 0; i < 10; i++) {
@@ -85,7 +86,7 @@ public class IAM024 extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				Thread.sleep(5000);
 			}
-			test.log(LogStatus.INFO, " 5 unsuccessfull login attempts");
+			test.log(LogStatus.INFO, " 10 unsuccessfull login attempts");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("lock_title")), 10);
 			String message = ob.findElement(By.xpath(OR.getProperty("lock_title"))).getText();
 			String expectedMessage = "Your account has been locked.";
