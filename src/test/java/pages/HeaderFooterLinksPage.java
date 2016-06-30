@@ -93,7 +93,7 @@ public class HeaderFooterLinksPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		// pf.waitTime(4);
 		waitForPageLoad(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "SETTINGS", "EMAIL", "PASSWORD");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "Settings", "EMAIL", "PASSWORD");
 	}
 
 	/**
