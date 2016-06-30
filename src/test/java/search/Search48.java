@@ -69,6 +69,7 @@ public class Search48 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link']"), 30);
 			Thread.sleep(2000);
 			String text = ob.findElement(By.xpath("//a[@class='wui-side-menu__link']")).getText();

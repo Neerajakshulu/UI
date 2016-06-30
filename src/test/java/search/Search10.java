@@ -82,16 +82,15 @@ public class Search10 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			waitForAjax(ob);
 		   waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()),60);
             
 			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_PAGE_ARTICLES__CSS);
 			
 			// Clicking on Articles content result set
-			waitForAjax(ob);
-		  ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			Thread.sleep(8000);
-
+		   ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+		   waitForAjax(ob);
+			
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
@@ -104,11 +103,11 @@ public class Search10 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-			Thread.sleep(8000);
+		BrowserWaits.waitTime(8);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			Thread.sleep(8000);
+        BrowserWaits.waitTime(5);
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
@@ -124,6 +123,7 @@ public class Search10 extends TestBase {
 			js.executeScript("window.history.back();");
 			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			BrowserWaits.waitTime(3);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {

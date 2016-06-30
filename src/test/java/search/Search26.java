@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -72,7 +73,7 @@ public class Search26 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			Thread.sleep(2000);
+		    BrowserWaits.waitTime(2);
 
 			List<WebElement> headings = ob.findElements(By.xpath(OR.getProperty("sectionHeading_label")));
 			// if(!compareNumbers(4,headings.size())){
