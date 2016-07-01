@@ -75,11 +75,11 @@ public class IAM015 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			
-			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			jsClick(ob, ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+			//jsClick(ob, ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
+			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
 			BrowserWaits.waitTime(6);
 			
 			if (!checkElementPresence_id("reg_errorMessage")) {
