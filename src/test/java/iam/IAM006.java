@@ -78,10 +78,9 @@ public class IAM006 extends TestBase {
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			System.out.println(characterLength);
-			System.out.println(Integer.parseInt(characterLength));
+			logger.info("Character Length : "+characterLength);
 			String last_name = generateRandomName(Integer.parseInt(characterLength));
-			System.out.println(last_name);
+			logger.info("Last Name : "+last_name);
 
 			// selenium code
 			openBrowser();
@@ -90,7 +89,7 @@ public class IAM006 extends TestBase {
 				maximizeWindow();
 			} catch (Throwable t) {
 
-				System.out.println("maximize() command not supported in Selendroid");
+				logger.info("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
 

@@ -127,9 +127,9 @@ public class IAM023 extends TestBase {
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 10);
-			ob.findElement(By.xpath(OR.getProperty("change_password_link"))).click();
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 			//
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
 			ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);

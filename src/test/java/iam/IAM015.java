@@ -74,8 +74,12 @@ public class IAM015 extends TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_password_textbox")), 30);
+			BrowserWaits.waitTime(2);
+			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+			//jsClick(ob, ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
+			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
 			BrowserWaits.waitTime(6);
 			
 			if (!checkElementPresence_id("reg_errorMessage")) {
@@ -92,7 +96,7 @@ public class IAM015 extends TestBase {
 
 			}
 
-			String error_message = ob.findElement(By.xpath(OR.getProperty("reg_errorMessage"))).getText();
+			String error_message = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			logger.info("Error Message : "+error_message);
 			BrowserWaits.waitTime(4);
 			//String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
@@ -109,7 +113,7 @@ public class IAM015 extends TestBase {
 										+ "_incorrect_error_text")));// screenshot
 
 			}
-			ob.findElement(By.cssSelector(OR.getProperty("tryAgain"))).click();
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tryAgain"))));
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 

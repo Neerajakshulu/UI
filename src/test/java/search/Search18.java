@@ -85,12 +85,14 @@ public class Search18 extends TestBase {
 			BrowserWaits.waitTime(4);
 			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
+			BrowserWaits.waitTime(5);
 
 			int checkboxesSelected = 0;
 			List<WebElement> checkboxList;
 			for (int i = 0; i < 2; i++) {
 				checkboxList = ob.findElements(By.cssSelector(OR
 						.getProperty("tr_search_results_all_refine_checkboxes_css")));
+				BrowserWaits.waitTime(1);
 				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
 					jsClick(ob, checkboxList.get(i));
 				waitForAjax(ob);

@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -75,6 +76,7 @@ public class Search63 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()), 30);
 			
 
@@ -116,6 +118,7 @@ public class Search63 extends TestBase {
 			}
 
 			mylist.get(2).click();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text3 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text3 = "Your search for tyitutyigtiugiuuioyrfuy found no matches in Patents.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
@@ -133,6 +136,7 @@ public class Search63 extends TestBase {
 			}
 
 			mylist.get(3).click();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text4 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text4 = "Your search for tyitutyigtiugiuuioyrfuy found no matches in People.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
@@ -150,6 +154,7 @@ public class Search63 extends TestBase {
 			}
 
 			mylist.get(4).click();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text5 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text5 = "Your search for tyitutyigtiugiuuioyrfuy found no matches in Posts.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";

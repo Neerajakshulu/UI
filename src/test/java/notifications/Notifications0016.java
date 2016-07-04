@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -68,21 +69,42 @@ public class Notifications0016 extends NotificationsTestBase {
 			logger.info("Home Page loaded success fully");
 			BrowserWaits.waitTime(4);
 
-			ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS.toString()))
-					.click();
-			List<WebElement> elements = ob
-					.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS.toString()));
+			List<WebElement> element=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+			logger.info("Size : "+element.size());
 			String actual = null;
-			for (WebElement ele : elements) {
-				System.out.println("attribute value-->" + ele.getAttribute("ng-repeat"));
-				if ((ele.getAttribute("ng-repeat").contains("profile in vm.profiles"))) {
-					actual = ob
-							.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()))
-							.getText();
-					logger.info("Text : " + actual);
+			for(int i=0;i<element.size();i++){
+				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+				String str=element.get(i).getText();
+				if(str.contains("Recommended people to follow")){
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);
+					BrowserWaits.waitTime(3);
+					List<WebElement> numUser=element.get(i).findElements(By.cssSelector("div[class='clearfix horizontal-wrapper'] div[class='ne-user-profile-image-wrapper']"));
+					logger.info("Number of Users : "+numUser.size());
+						if(numUser.size()==6){
+							actual=element.get(i).findElement(By.cssSelector("span[class='ne-user-profile-object-title'] a")).getText();
+							logger.info("Text : " + actual);
+						}
 					break;
 				}
 			}
+			//((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);",ele.get(1));
+			
+			//pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+			//pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);
+			//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);
+			//ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS.toString()))
+					//.click();
+			/*List<WebElement> elements = ob
+					.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS.toString()));
+			
+			for (WebElement ele : elements) {
+				System.out.println("attribute value-->" + ele.getAttribute("ng-repeat"));
+				if ((ele.getAttribute("ng-repeat").contains("profile in vm.profiles"))) {
+					actual = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS).getText();
+					logger.info("Text : " + actual);
+					break;
+				}
+			}*/
 
 			// List<WebElement> str=ob.findElements(By.cssSelector("div[class='col-xs-12 profile-info'] span a"));
 			// String actual=str.get(0).getText();
@@ -92,12 +114,11 @@ public class Notifications0016 extends NotificationsTestBase {
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			// BrowserWaits.waitTime(3);
 			ProfilePage page = new ProfilePage(ob);
 			page.clickProfileLink();
 			page.clickFollowingTab();
-
-			WebElement elem = ob.findElement(By.cssSelector("div[class='col-sm-9 profile-tab-content'] div div div"));
+			BrowserWaits.waitTime(3);
+			WebElement elem = ob.findElement(By.cssSelector("div[class='follower-list']"));
 			List<WebElement> elemn = elem.findElements(By.tagName("div"));
 			WebElement elem1 = elemn.get(0);
 

@@ -14,6 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -75,7 +76,6 @@ public class Search103 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//
 			waitForAjax(ob);
 			List<WebElement> content_type_tiles = ob.findElements(By
 					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
@@ -90,10 +90,10 @@ public class Search103 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(5);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-			Thread.sleep(8000);
+		BrowserWaits.waitTime(8);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
@@ -115,6 +115,7 @@ public class Search103 extends TestBase {
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			BrowserWaits.waitTime(3);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {

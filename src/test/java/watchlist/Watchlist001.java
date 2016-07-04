@@ -69,7 +69,7 @@ public class Watchlist001 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","IE");
+//			runOnSauceLabsFromLocal("Mac","Safari");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {
@@ -79,7 +79,7 @@ public class Watchlist001 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			System.out.println("After opening site");
+//			System.out.println("After opening site");
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
@@ -134,10 +134,11 @@ public class Watchlist001 extends TestBase {
 //			// Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
-
+			
 //			// Unwatching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			
 
 //			// Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

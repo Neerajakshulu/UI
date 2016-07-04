@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -87,16 +88,14 @@ public class Search8 extends TestBase {
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-			Thread.sleep(5000);
-
+			BrowserWaits.waitTime(6);
 			searchResults.clear();
 			searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			// System.out.println("No of search results visible="+searchResults.size());
 			int count2 = searchResults.size();
 
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-			Thread.sleep(5000);
-
+		BrowserWaits.waitTime(6);
 			searchResults.clear();
 			searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			// System.out.println("No of search results visible="+searchResults.size());

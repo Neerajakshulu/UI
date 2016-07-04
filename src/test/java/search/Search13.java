@@ -15,12 +15,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 public class Search13 extends TestBase {
 
@@ -74,6 +76,8 @@ public class Search13 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
+			BrowserWaits.waitTime(20);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
@@ -97,7 +101,7 @@ public class Search13 extends TestBase {
 				WebElement myE = ob.findElement(By.xpath(OR.getProperty("details_link")));
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-
+				waitForNumberOfWindowsToEqual(ob, 2);
 				Set<String> myset = ob.getWindowHandles();
 				Iterator<String> myIT = myset.iterator();
 				ArrayList<String> mylist55 = new ArrayList<String>();
@@ -109,7 +113,7 @@ public class Search13 extends TestBase {
 				}
 
 				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(4000);
+				waitForPageLoad(ob);
 
 				pageText = ob.getPageSource().toLowerCase();
 				condition1 = pageText.contains("cat");
