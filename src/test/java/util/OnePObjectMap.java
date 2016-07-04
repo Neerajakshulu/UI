@@ -68,7 +68,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_PRIMARYINSTITUTION_METADATA_CSS("span[ng-if*='user.primaryInstitution']"),
 	HOME_PROJECT_NEON_PROFILE_LOCATION_METADATA_CSS("span[ng-if*='user.location']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CSS("button[ng-show='vm.shouldShowEditButton()']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_TITLE_CSS("input[ng-model*='title']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS("input[name='firstName']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS("input[name='lastName']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='Add your country']"),
@@ -155,7 +156,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_BUTTON_CSS("button[id='deleting']"),
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
-	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-profile-object-name']"),
+	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-user-profile-object-name']"),
 	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-watchlist-dropdown__add-button']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),

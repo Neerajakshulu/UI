@@ -99,14 +99,16 @@ public class Profile8 extends TestBase {
 	@Parameters("appHeadFooterLinks")
 	public void validateAppHeaderFooterLinks(String appHeadFooterLinks) throws Exception {
 		try {
-			test.log(LogStatus.INFO, "Help,Account and Footer Link Validation");
+			test.log(LogStatus.INFO, "Cookie Policy,Privacy Statement and Terms of Use Links Validation");
 			pf.getHFPageInstance(ob).validateLinks(appHeadFooterLinks);
+			test.log(LogStatus.INFO, "Help Link Validation");
 			pf.getHFPageInstance(ob).helpLinkValidation();
+			test.log(LogStatus.INFO, "Account Link Validation");
 			pf.getHFPageInstance(ob).accountLinkValidation();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "UnExpected Error");
+			test.log(LogStatus.FAIL, "Profile links not working");
 			// print stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
