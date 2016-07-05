@@ -57,40 +57,54 @@ public class Authoring8 extends TestBase {
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
+		try {
+			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+			boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+			boolean master_condition = suiteRunmode && testRunmode;
 
-		if (!master_condition) {
-			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-		}
+			if (!master_condition) {
+				status = 3;
+				test.log(LogStatus.SKIP,
+						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+				throw new SkipException(
+						"Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+			}
 
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
+			// test the runmode of current dataset
+			count++;
+			if (!runmodes[count].equalsIgnoreCase("Y")) {
+				test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
+				skip = true;
+				throw new SkipException("Runmode for test set data set to no " + count);
+			}
+			test.log(LogStatus.INFO,
+					this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+			// selenium code
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "UnExpected Error");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(e);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			closeBrowser();
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
-		// selenium code
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({"username", "password", "article", "completeArticle"})
-	public void chooseArtilce(String username,
-			String password,
-			String article,
-			String completeArticle) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle" })
+	public void chooseArtilce(String username, String password, String article, String completeArticle)
+			throws Exception {
 		try {
-			//waitForTRHomePage();
+			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
@@ -104,19 +118,14 @@ public class Authoring8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
 			closeBrowser();
 		}
 	}
 
 	@Test(dependsOnMethods = "chooseArtilce", dataProvider = "getTestData")
-	public void commentMinMaxValidation(String minCharCount,
-			String expMinComment,
-			String maxCharCount,
+	public void commentMinMaxValidation(String minCharCount, String expMinComment, String maxCharCount,
 			String expMaxComment) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Min and Max Length Comment Validation");
@@ -127,7 +136,8 @@ public class Authoring8 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
-			// System.out.println("Min Validation Error Message--->"+minValidErrMsg);
+			// System.out.println("Min Validation Error
+			// Message--->"+minValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 
@@ -138,7 +148,8 @@ public class Authoring8 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
 			String maxValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
-			// System.out.println("Max Validation Error Message--->"+maxValidErrMsg);
+			// System.out.println("Max Validation Error
+			// Message--->"+maxValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(maxValidErrMsg);
 			Assert.assertEquals(maxValidErrMsg, expMaxComment);
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -152,11 +163,8 @@ public class Authoring8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
 			closeBrowser();
 		}
 
@@ -165,9 +173,12 @@ public class Authoring8 extends TestBase {
 	@Test(dependsOnMethods = "commentMinMaxValidation")
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
-		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
-		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "SKIP"); else if(fail) {
+		 * status=2; TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else
+		 * TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 
 		skip = false;
@@ -181,15 +192,16 @@ public class Authoring8 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
-
 
 	@DataProvider
 	public Object[][] getTestData() {
