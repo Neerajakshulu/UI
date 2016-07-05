@@ -75,8 +75,6 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='Add your country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click*='cancelEditing()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click*='saveUserData()']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.firstName.$error']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.lastName.$error']"),
 
 	HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS("a[data-event-category='profileposts']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
@@ -189,6 +187,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//div"),
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[contains(@class,'notification-component')][2]"),
+	NEWSFEED_NEW_POST_NOTIFICATIONS_XPATH("//ne-notification-post-creation"),
 	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/div/div"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH("//ne-notify-friend-follows[@class='ng-scope']"),
@@ -259,6 +258,11 @@ public enum OnePObjectMap {
 	PROFILE_PAGE_AUTOR_NAME_CSS("h2[class='wui-title wui-title--user-profile-name ng-binding']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS("div[class='wui-card ng-scope']"),
 	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--inactive']"),
+	WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS("button[class='wui-icon-btn dropdown-toggle']"),
+	DOCUMENT_TITILE_IN_SEARCHPAGE_XPATH("//div[@class='wui-content-title wui-content-title--medium ng-binding']"),
+	DOCUMENT_URL_IN_SEARCHPAGE_XPATH("//ne-post-results[@class='ng-scope ng-isolate-scope']/a"),
+	DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
+	ADD_COMMENT_BUTTON_XPATH("//button[contains(text(),'Add Comment')]"),
 	;
 
 	

@@ -57,6 +57,7 @@ public class Authoring10 extends TestBase {
 
 	@Test
 	public void testOpenApplication() throws Exception {
+		try {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		master_condition = suiteRunmode && testRunmode;
@@ -75,7 +76,7 @@ public class Authoring10 extends TestBase {
 			skip = true;
 			throw new SkipException("Runmode for test set data set to no " + count);
 		}
-		try {
+		
 		// selenium code
 		openBrowser();
 		clearCookies();

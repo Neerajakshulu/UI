@@ -93,8 +93,8 @@ public class Authoring extends TestBase {
 		BrowserWaits.waitTime(5);
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		commentArea.clear();
 		commentArea.click();
+		commentArea.clear();
 		commentArea.sendKeys(addComments);
 		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
 	}

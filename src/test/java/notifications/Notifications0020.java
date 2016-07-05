@@ -208,7 +208,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_commentLike_button1"))));
 			BrowserWaits.waitTime(1);
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(6);
 
 			// 3)Login with user2 again and verify that he receives a correct
 			// notification
@@ -217,6 +217,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(10);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notificationForLike1")), 30);
@@ -232,7 +233,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			logger.info("Notification Text: " + text);
 			try {
 				Assert.assertTrue(text.contains("Liked your comment") && text.contains(OR.getProperty("COMMENT_TEXT"))
-						&& text.contains(fn2 + " " + ln2) && text.contains(document_title));
+						&& text.contains(fn2 + " " + ln2) /*&& text.contains(document_title)*/);
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
@@ -270,6 +271,8 @@ public class Notifications0020 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(10);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			BrowserWaits.waitTime(4);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
@@ -324,6 +327,8 @@ public class Notifications0020 extends NotificationsTestBase {
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("comment_section")), 100);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			BrowserWaits.waitTime(4);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
@@ -379,17 +384,20 @@ public class Notifications0020 extends NotificationsTestBase {
 			ob.navigate().to(document_url);
 			BrowserWaits.waitTime(4);
 			try{
-				String doc_title=ob.findElement(By.xpath("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).getText();
+				String doc_title=ob.findElement(By.xpath(OnePObjectMap.DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH.toString())).getText();
 				logger.info("Document Title in record view page :"+doc_title);
 				if(document_title.contains(doc_title)){
-					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
-					BrowserWaits.waitTime(7);
-					ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
+					
+					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
+					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
+					BrowserWaits.waitTime(4);
+					ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
 							.sendKeys(OR.getProperty("COMMENT_TEXT"));
 					BrowserWaits.waitTime(5);
-					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("add_comment_button")), 30);
-					jsClick(ob, ob.findElement(By.xpath(OR.getProperty("add_comment_button"))));
-					BrowserWaits.waitTime(10);
+					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("add_comment_button")), 30);
+					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString()), 30);
+					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString())));
+					BrowserWaits.waitTime(6);
 				}else{
 					logger.info("Document title is not match with record with page doucument title");
 					closeBrowser();
@@ -428,6 +436,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();*/
+			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("sample");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
@@ -435,26 +444,27 @@ public class Notifications0020 extends NotificationsTestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_result_links")), 120);
 			WebElement eleme=ob.findElement(By.xpath(OR.getProperty("search_result_links")));
 			
-			document_title=eleme.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']")).getText();
+			document_title=eleme.findElement(By.xpath(OnePObjectMap.DOCUMENT_TITILE_IN_SEARCHPAGE_XPATH.toString())).getText();
 			logger.info("Document Title : "+document_title);
 			//document_title = ob.findElement(By.xpath(OR.getProperty("search_result_links"))).getText();
-			document_url = ob.findElement(By.xpath(OR.getProperty("search_result_links1"))).getAttribute("href");
+			document_url = ob.findElement(By.xpath(OnePObjectMap.DOCUMENT_URL_IN_SEARCHPAGE_XPATH.toString())).getAttribute("href");
 			logger.info("Document URL : "+document_url);
-			String watchStatus = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).getText();
+			String watchStatus = ob.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString())).getText();
 			logger.info("Watch Button Status : "+watchStatus);
 			if (watchStatus.contains("Watching")) {
-				ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_watch_button1")), 30);
-				ob.findElement(By.xpath(OR.getProperty("watchlist_watch_button1"))).click();
-				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
+				List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+				element.get(0).click();
+				List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--active']"));
+				listOfWatchListButton.get(0).click();
+				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
 				BrowserWaits.waitTime(3);
 			}
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
-			List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
+			List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+			element.get(0).click();
+			List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
 			listOfWatchListButton.get(0).click();
-			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+			BrowserWaits.waitTime(3);
 			//BrowserWaits.waitTime(3);
 			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
 			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
