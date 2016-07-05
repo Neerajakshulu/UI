@@ -187,6 +187,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_LABEL_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//div"),
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[contains(@class,'notification-component')][2]"),
+	NEWSFEED_NEW_POST_NOTIFICATIONS_XPATH("//ne-notification-post-creation"),
 	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/div/div"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH("//ne-notification-new-follower[@class='ng-scope ng-isolate-scope']"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_XPATH("//ne-notify-friend-follows[@class='ng-scope']"),
