@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -63,7 +65,7 @@ public class Notifications0018 extends NotificationsTestBase {
 					"Home page is not loaded successfully");
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(4);
-			
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH);
 			List<WebElement> recArticleSection=ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH.toString()));
 			String text=recArticleSection.get(0).getText();
 			
@@ -92,13 +94,15 @@ public class Notifications0018 extends NotificationsTestBase {
 					BrowserWaits.waitTime(3);
 					List<WebElement> element1 = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH.toString()));
 					element1.get(0).click();
-					List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
+					List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
 					listOfWatchListButton.get(0).click();
 					BrowserWaits.waitTime(3);
-					ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH);
+					//ob.findElement(By.cssSelector("div[data-auto-close='outsideClick']")).click();
+					//ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+					//ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
 					BrowserWaits.waitTime(3);
-					List<WebElement> element2 = elem
-							.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH.toString()));
+					List<WebElement> element2 = elem.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH.toString()));
 					watchstatus = element2.get(0).getText();
 					logger.info("Watch Status--> " + watchstatus);
 					break;

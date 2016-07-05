@@ -36,7 +36,7 @@ public class Notifications0015 extends NotificationsTestBase {
 	}
 
 	@Test
-	public void notifications026() throws Exception {
+	public void notifications015() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -64,7 +64,29 @@ public class Notifications0015 extends NotificationsTestBase {
 					"Home page is not loaded successfully");
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(4);
-			WebElement elment=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
+			
+			List<WebElement> element=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+			logger.info("Size : "+element.size());
+			String actual = null;
+			for(int i=0;i<element.size();i++){
+				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+				String str=element.get(i).getText();
+				if(str.contains("Recommended people to follow")){
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);
+					BrowserWaits.waitTime(3);
+					List<WebElement> numUser=element.get(i).findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS.toString()));
+					logger.info("Number of Users : "+numUser.size());
+						if(numUser.size()==6){
+						WebElement	actual1=element.get(i).findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()));
+						actual=actual1.getText();
+							logger.info("Text : " + actual);
+							actual1.click();
+						}
+					break;
+				}
+			}
+			
+		/*	WebElement elment=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
 			String text=elment.getText();
 			logger.info("Rcommended People Section Text : "+text);
 			try{
@@ -76,13 +98,13 @@ public class Notifications0015 extends NotificationsTestBase {
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Something happened")));// screenshot
 				closeBrowser();
-			}
+			}*/
 			
-			WebElement recPeople=ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()));
+			/*WebElement recPeople=ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString()));
 			String recPeopleUserNaem=recPeople.getText();
 			logger.info("Recommended People Section User Name : "+recPeopleUserNaem);
 			recPeople.click();
-			
+			*/
 //			//ob.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_user_css")));
 //			List<WebElement> elements = ob
 //					.findElements(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_css")));
@@ -104,10 +126,10 @@ public class Notifications0015 extends NotificationsTestBase {
 //			}
 			BrowserWaits.waitTime(4);
 			String profilePageUserName=ob.findElement(By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString())).getText();
-			System.out.println("Profile Page User Name :  " + profilePageUserName);
+			logger.info("Profile Page User Name :  " + profilePageUserName);
 
 			try {
-				Assert.assertEquals(recPeopleUserNaem, profilePageUserName);
+				Assert.assertEquals(actual, profilePageUserName);
 				test.log(LogStatus.PASS,
 						"User is displaying profile page by clicking author name in Recommended people to follow section on home page");
 				closeBrowser();

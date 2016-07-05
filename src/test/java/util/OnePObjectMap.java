@@ -249,13 +249,14 @@ public enum OnePObjectMap {
 	ARTICLE_TITLE_IN_RECORD_VIEW_PAGE_CSS("div[class='ne-publication__header'] h2"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS("div[class='wui-card ng-scope'] span[class='fa fa-check unfollow']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS("div[class='clearfix horizontal-wrapper'] div[class='ne-user-profile-image-wrapper']"),
-	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS("span[class='ne-profile-object-title']"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS("span[class='ne-user-profile-object-title'] a"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH("//div[@class='wui-card wui-card--recommended-articles']"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_NAME_XPATH("//div[@class='wui-content-title ng-binding wui-content-title--small']"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH("//div[@class='wui-card wui-card--recommended-articles']//button"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH("//div[@class='wui-card ng-scope']"),
 	PROFILE_PAGE_AUTOR_NAME_CSS("h2[class='wui-title wui-title--user-profile-name ng-binding']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS("div[class='wui-card ng-scope']"),
+	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--inactive']"),
 	;
 
 	
