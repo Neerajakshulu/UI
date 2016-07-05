@@ -1389,4 +1389,22 @@ public class ProfilePage extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for Validate HCR Badge in Profile page
+	 * 
+	 * @throws Exception, When HCR Badge not displayed in Profile page
+	 */
+	public void hcrBadgeValidation(String hcrProfile) throws Exception {
+		String profileName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		logger.info("profile name-->"+profileName);
+		String hcrProfileTooltip = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).findElement(By.cssSelector("span[class*='wui-icon--hcr']"))
+									.getAttribute("data-tooltip");
+		logger.info("HCR profile-->"+hcrProfileTooltip);
+		
+		if(!(profileName.equalsIgnoreCase(hcrProfile) && hcrProfileTooltip.equalsIgnoreCase("Highly Cited Researcher"))){
+			throw new Exception("HCR Badge is not displayed in HCR profile page");
+		}
+	}
+	
 }
