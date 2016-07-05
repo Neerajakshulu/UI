@@ -61,7 +61,7 @@ public class Notifications0016 extends NotificationsTestBase {
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
 					"Home page is not loaded successfully");
@@ -78,10 +78,10 @@ public class Notifications0016 extends NotificationsTestBase {
 				if(str.contains("Recommended people to follow")){
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);
 					BrowserWaits.waitTime(3);
-					List<WebElement> numUser=element.get(i).findElements(By.cssSelector("div[class='clearfix horizontal-wrapper'] div[class='ne-user-profile-image-wrapper']"));
+					List<WebElement> numUser=element.get(i).findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS.toString()));
 					logger.info("Number of Users : "+numUser.size());
 						if(numUser.size()==6){
-							actual=element.get(i).findElement(By.cssSelector("span[class='ne-user-profile-object-title'] a")).getText();
+							actual=element.get(i).findElement(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_COPY_USER_NAME_CSS.toString())).getText();
 							logger.info("Text : " + actual);
 						}
 					break;

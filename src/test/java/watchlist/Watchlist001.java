@@ -93,8 +93,8 @@ public class Watchlist001 extends TestBase {
 			Thread.sleep(3000);
 
 //			// Watching an article to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+//			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 //			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -132,12 +132,10 @@ public class Watchlist001 extends TestBase {
 			Thread.sleep(3000);
 
 //			// Watching an article to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 			
 //			// Unwatching an article to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 			
 
 //			// Selecting the document name

@@ -90,8 +90,7 @@ public class Watchlist002 extends TestBase {
 			Thread.sleep(3000);
 
 			// Watching a patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -128,12 +127,10 @@ public class Watchlist002 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			Thread.sleep(3000);
 			// Watching a patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
 			// Unwatching a patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

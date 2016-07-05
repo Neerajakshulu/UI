@@ -48,28 +48,28 @@ public class NotificationsTestBase extends TestBase {
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
 				&& !(suiteName.equals("Sanity suite"))) {
 			createNewUsers();
-			// if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
-			// if (user1 == null) {
-			// user1 = "potti1229@gmail.com";
-			// fn1 = "Manoj";
-			// ln1 = "Potti";
-			// count++;
-			// }
-			// if (user2 == null) {
-			// user2 = "avinash.potti@thomsonreuters.com";
-			// fn2 = "Avinash";
-			// ln2 = "Potti";
-			// count++;
-			// }
-			// if (user3 == null) {
-			// user3 = "3sgpjq+7gysrhor017d0@sharklasers.com";
-			// fn3 = "chinna";
-			// ln3 = "putha";
-			// count++;
-			// }
-			// }
-			//// if (count < 3)
-			followUsers();
+			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
+				if (user1 == null) {
+					user1 = "41zbbp+5s285rol6idz4@sharklasers.com";
+					fn1 = "ynowdhms";
+					ln1 = "ynowdhmsbi";
+					count++;
+				}
+				if (user2 == null) {
+					user2 = "41zbhb+2hb552i1rsv3w@sharklasers.com";
+					fn2 = "iuybquao";
+					ln2 = "iuybquaoek";
+					count++;
+				}
+				if (user3 == null) {
+					user3 = "41zbn1+3qz12vzogmfcg@sharklasers.com";
+					fn3 = "xouoygfm";
+					ln3 = "xouoygfmyk";
+					count++;
+				}
+			}
+			if (count < 3)
+				followUsers();
 		}
 	}
 
@@ -126,31 +126,32 @@ public class NotificationsTestBase extends TestBase {
 	/**
 	 * This function will convert an object of type excel cell to a string value
 	 * 
-	 * @param cell excel cell
+	 * @param cell
+	 *            excel cell
 	 * @return the cell value
 	 */
 	protected String getCellData(XSSFCell cell) {
 		int type = cell.getCellType();
 		Object result;
 		switch (type) {
-			case Cell.CELL_TYPE_STRING:
-				result = cell.getStringCellValue();
-				break;
-			case Cell.CELL_TYPE_NUMERIC:
-				result = cell.getNumericCellValue();
-				break;
-			case Cell.CELL_TYPE_FORMULA:
-				throw new RuntimeException("We can't evaluate formulas in Java");
-			case Cell.CELL_TYPE_BLANK:
-				result = EMPTY_STRING;
-				break;
-			case Cell.CELL_TYPE_BOOLEAN:
-				result = cell.getBooleanCellValue();
-				break;
-			case Cell.CELL_TYPE_ERROR:
-				throw new RuntimeException("This cell has an error");
-			default:
-				throw new RuntimeException("We don't support this cell type: " + type);
+		case Cell.CELL_TYPE_STRING:
+			result = cell.getStringCellValue();
+			break;
+		case Cell.CELL_TYPE_NUMERIC:
+			result = cell.getNumericCellValue();
+			break;
+		case Cell.CELL_TYPE_FORMULA:
+			throw new RuntimeException("We can't evaluate formulas in Java");
+		case Cell.CELL_TYPE_BLANK:
+			result = EMPTY_STRING;
+			break;
+		case Cell.CELL_TYPE_BOOLEAN:
+			result = cell.getBooleanCellValue();
+			break;
+		case Cell.CELL_TYPE_ERROR:
+			throw new RuntimeException("This cell has an error");
+		default:
+			throw new RuntimeException("We don't support this cell type: " + type);
 		}
 		return result.toString();
 	}
@@ -165,16 +166,16 @@ public class NotificationsTestBase extends TestBase {
 			currentCellData = getCellData(row.getCell(currentCell, Row.CREATE_NULL_AS_BLANK));
 
 			switch (currentCell) {
-				case 0:
-					rowData.setTestclassName(currentCellData);
-				case 1:
-					rowData.setTestcaseId(currentCellData);
-				case 2:
-					rowData.setTestcaseDescription(currentCellData);
-				case 3:
-					rowData.setTestcaseRunmode(currentCellData);
-				case 4:
-					rowData.setTestResults(currentCellData);
+			case 0:
+				rowData.setTestclassName(currentCellData);
+			case 1:
+				rowData.setTestcaseId(currentCellData);
+			case 2:
+				rowData.setTestcaseDescription(currentCellData);
+			case 3:
+				rowData.setTestcaseRunmode(currentCellData);
+			case 4:
+				rowData.setTestResults(currentCellData);
 			}
 		}
 		return rowData;
@@ -200,7 +201,8 @@ public class NotificationsTestBase extends TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
-				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
+				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
+				// + " " + ln2);
 				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
 					pf.getSearchProfilePageInstance(ob).clickPeople();
 					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();

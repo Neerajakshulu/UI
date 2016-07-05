@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	  <test name="Follow_Other_Profile" preserve-order="true">
+	 <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -99,11 +99,11 @@
 		<classes>
 			<class name="Profile.Profile13"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="ProfileFollowerTest">
 		<parameter name="otherUsername" value="tridlogin@gmail.com" />
-		<parameter name="otherUserPassword" value="1Pproject#" />
+		<parameter name="otherUserPassword" value="Project@123" />
 		<classes>
 			<class name="Profile.Profile14"></class>
 		</classes>
@@ -165,7 +165,7 @@
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
 		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="1Pproject#" />
+		<parameter name="password" value="Project@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -231,15 +231,15 @@
 		<classes>
 			<class name="Profile.Profile30"></class>
 		</classes>
-	</test> 
+	</test>
 
-	 <test name="post_tab_infinite_Scroll">
+	<test name="post_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile31"></class>
 		</classes>
 	</test>
 
-	 <test name="comments_tab_infinite_Scroll">
+	<test name="comments_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile32"></class>
 		</classes>
@@ -257,7 +257,7 @@
 		</classes>
 	</test>
 
-	 <test name="Post_like_count">
+	<test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -292,7 +292,7 @@
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="1Pproject#" />
+		<parameter name="password" value="Project@123" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
 		<parameter name="postContent" value="my post content for RecordView page " />
 		<classes>
@@ -306,7 +306,24 @@
 			<class name="Profile.Profile40"></class>
 		</classes>
 	</test>
- 
+
+	<test name="HCR_Badge_Profile_Page">
+		<parameter name="hcrProfile" value="professor"></parameter>
+		<classes>
+			<class name="Profile.Profile41"></class>
+		</classes>
+	</test> 
+	
+	<test name="Validate_Profile_First_Last_Names">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="firstLastNames" value="Add your first name|Add your last name|Please enter your first name.|Please enter your last name." />
+		<parameter name="firstName" value="Chinna" />
+		<parameter name="lastName" value="Putha" />
+		<classes>
+			<class name="Profile.Profile42"></class>
+		</classes>
+	</test>
 
 </suite>
 

@@ -85,8 +85,8 @@ public class Authoring19 extends TestBase {
 			pf.getHFPageInstance(ob).searchForText(articleTitle);
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
 			jsClick(ob,ob.findElement(By.linkText(articleTitle)));
+			waitForAjax(ob);
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 40);
-
 			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			System.out.println(commentsList.size());
 			String commentText;
@@ -97,8 +97,8 @@ public class Authoring19 extends TestBase {
 					flagWe = commentsList.get(i)
 							.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_FLAG_XPATH.toString()));
 					if (flagWe.getAttribute("class").contains("fa-flag-o")) {
-						//scrollingToElementofAPage();
-						BrowserWaits.waitTime(5);
+						scrollElementIntoView(ob, flagWe);
+						BrowserWaits.waitTime(10);
 						jsClick(ob, flagWe);
 						BrowserWaits.waitTime(5);
 						break;

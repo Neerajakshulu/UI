@@ -241,10 +241,6 @@ public class Notifications0008 extends NotificationsTestBase {
 					.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH.toString()))
 					.getText();
 			logger.info("Notification Text: " + text);
-			logger.info(text.contains(postString));
-			logger.info(text.contains(fn1 + " " + ln1));
-			logger.info(text.contains(OR.getProperty("COMMENT_TEXT")));
-			logger.info(text.contains("New comments on your post"));
 			try {
 				Assert.assertTrue(text.contains("New comments on your post") /* && text.contains("TODAY") */
 						&& text.contains(postString)/* && text.contains(fn1 + " " + ln1) */
@@ -311,11 +307,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			test.log(LogStatus.INFO, "User logged in successfully for verifiying notification");
 			String text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_LIKE_POST_XPATH.toString()))
 					.getText();
-			System.out.println(text);
-
 			String expected_text = fn1 + " " + ln1;
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(expected_text)
+				Assert.assertTrue(/* text.contains("TODAY") && */text.contains(expected_text)
 						&& text.contains("Liked your post") && text.contains(postString));
 				test.log(LogStatus.PASS, "User receivied notification with correct content");
 			} catch (Throwable t) {
@@ -359,7 +353,7 @@ public class Notifications0008 extends NotificationsTestBase {
 			// String text = ob.findElement(By.xpath(OR.getProperty("notificationForNewPost"))).getText();
 			String text = null;
 			List<WebElement> listOfNotifications = ob
-					.findElements(By.xpath(OnePObjectMap.NEWSFEED_ALL_NOTIFICATIONS_XPATH.toString()));
+					.findElements(By.xpath(OnePObjectMap.NEWSFEED_NEW_POST_NOTIFICATIONS_XPATH.toString()));
 			for (int i = 0; i < listOfNotifications.size(); i++) {
 				text = listOfNotifications.get(i).getText();
 				if (text.contains("New post") && text.contains(postString)) {
@@ -369,8 +363,8 @@ public class Notifications0008 extends NotificationsTestBase {
 			logger.info("Notification Text: " + text);
 			String expected_text = fn2 + " " + ln2;
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(expected_text) && text.contains("New post")
-						&& text.contains(postString));
+				Assert.assertTrue(/* text.contains("TODAY") && */ text.contains(expected_text)
+						&& text.contains("New post") && text.contains(postString));
 				test.log(LogStatus.PASS, "User received notification with correct content");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User receivied notification with incorrect content");// extent
@@ -414,7 +408,7 @@ public class Notifications0008 extends NotificationsTestBase {
 			test.log(LogStatus.INFO, "User logged in successfully for verifying notification");
 			String text = null;
 			List<WebElement> listOfNotifications = ob
-					.findElements(By.xpath(OnePObjectMap.NEWSFEED_ALL_NOTIFICATIONS_XPATH.toString()));
+					.findElements(By.xpath(OnePObjectMap.NEWSFEED_NEW_POST_NOTIFICATIONS_XPATH.toString()));
 			for (int i = 0; i < listOfNotifications.size(); i++) {
 				text = listOfNotifications.get(i).getText();
 				if (text.contains("New post") && text.contains(postString)) {
@@ -424,8 +418,8 @@ public class Notifications0008 extends NotificationsTestBase {
 			logger.info("Notification Text: " + text);
 			String expected_text = fn2 + " " + ln2;
 			try {
-				Assert.assertTrue(text.contains("TODAY") && text.contains(expected_text) && text.contains("New post")
-						&& text.contains(postString));
+				Assert.assertTrue(/* text.contains("TODAY") && */ text.contains(expected_text)
+						&& text.contains("New post") && text.contains(postString));
 				test.log(LogStatus.PASS, "User received notification with correct content");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent

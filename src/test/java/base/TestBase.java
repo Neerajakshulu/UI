@@ -1085,37 +1085,9 @@ public class TestBase {
 	 * @param watchListName
 	 * @throws InterruptedException
 	 */
-	public void watchOrUnwatchItemToAParticularWatchlist(WebElement watchButton, String watchListName)
+	public void watchOrUnwatchItemToAParticularWatchlist( String watchListName)
 			throws InterruptedException {
 
-//		watchButton.click();
-//		BrowserWaits.waitTime(2);
-//		// Wait until select a watch list model loads
-//		// waitForElementTobeVisible(ob,
-//		// By.xpath(OR.getProperty("watchlist_select_model")), 60);
-//		// Select the first watch list from the model
-//		// waitForElementTobeClickable(ob,
-//		// By.xpath(OR.getProperty("watchlist_watch_button1")), 60);
-//
-//		List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
-//		List<WebElement> listOfWatchListName = ob
-//				.findElements(By.xpath(OR.getProperty("watchlist_name_in_select_model1")));
-//		for (int i = 0; i < listOfWatchListName.size(); i++) {
-//			if (listOfWatchListName.get(i).getText().equals(watchListName)) {
-//				// Adding the item into watch list
-//				listOfWatchListButton.get(i).click();
-//				BrowserWaits.waitTime(3);
-//				break;
-//			}
-//			// Scrolling down to make the watch list visible in select model
-//			// ((JavascriptExecutor)
-//			// ob).executeScript("arguments[0].scrollIntoView(true);",
-//			// listOfWatchListButton.get(i));
-//		}
-//
-//		// Closing the select a model
-//		ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
-//		BrowserWaits.waitTime(3);
 		
 		ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
 		waitForElementTobeVisible(ob, By.xpath("//button[@class='wui-mini-btn wui-mini-btn--primary']"), 60);
