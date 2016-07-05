@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	<test name="Follow_Other_Profile" preserve-order="true">
+	 <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -311,6 +311,17 @@
 		<parameter name="hcrProfile" value="professor"></parameter>
 		<classes>
 			<class name="Profile.Profile41"></class>
+		</classes>
+	</test> 
+	
+	<test name="Validate_Profile_First_Last_Names">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="firstLastNames" value="Add your first name|Add your last name|Please enter your first name.|Please enter your last name." />
+		<parameter name="firstName" value="Chinna" />
+		<parameter name="lastName" value="Putha" />
+		<classes>
+			<class name="Profile.Profile42"></class>
 		</classes>
 	</test>
 

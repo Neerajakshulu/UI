@@ -3,6 +3,7 @@ package pages;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -1407,4 +1408,97 @@ public class ProfilePage extends TestBase {
 		}
 	}
 	
+	
+	/**
+	 * Method for Validate First Name and Last Names fields
+	 * 
+	 * @throws Exception, Validation not done
+	 */
+	public void validateFirstNameAndLastNameFields(String namesErrorMessages) throws Exception {
+		
+		String[] errorMessages=(String[]) namesErrorMessages.split("\\|");
+		List<String> errorMsgList=Arrays.asList(errorMessages);
+		
+		List<String> namesInfo=new ArrayList<String>();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+		
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS).getAttribute("placeholder"));
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS).getAttribute("placeholder"));
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS).getText());
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS).getText());
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		logger.info("list data-->"+errorMsgList);
+		logger.info("list data2-->"+namesInfo);
+		if(!namesInfo.containsAll(errorMsgList)) {
+			throw new Exception("First Name and Last Names Fields are not displaying any Error messages");
+		}
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+	
+	}
+	
+	
+	/**
+	 * Method for update first name and last name
+	 * 
+	 * @throws Exception, When First and last  names are not updated
+	 */
+	public void updateFirstNameAndLastName(String firstName,String LastName) throws Exception {
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,firstName);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,LastName);
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserWaits.waitTime(4);
+		
+		String firstLastName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		logger.info("first and last name-->"+firstLastName);
+		if(!(StringUtils.containsIgnoreCase(firstLastName, firstName) && StringUtils.containsIgnoreCase(firstLastName, LastName))) {
+			throw new Exception("First name and last names are not getting updated in Profile page ");
+		}
+	}
+	
+	
+	/**
+	 * Method for Validate First Name and Last Names fields with Max length 50 characters
+	 * 
+	 * @throws Exception, When Validation not done
+	 */
+	public void validateFirstNameAndLastNameFieldsMaxLength(int firstNameLength,int LastNameLength) throws Exception {
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,RandomStringUtils.random(firstNameLength));
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,RandomStringUtils.random(LastNameLength));
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		
+		String firstLastName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		int nameLength=firstLastName.trim().replace(" ", "").length();
+		logger.info("First name and Last name length-->"+nameLength);
+		if(!(nameLength==100)){
+			throw new Exception("First name and last name length should not exceed morethan 100 characters");
+		}
+		
+		
+	}
 }
