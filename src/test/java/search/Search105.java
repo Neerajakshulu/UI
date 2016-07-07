@@ -88,8 +88,10 @@ public class Search105 extends TestBase {
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
+			System.out.println(patentRVTitle);
 			String patentRVTitleWatchLabel = ob.findElement(
 					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			System.out.println(patentRVTitleWatchLabel);
 
 			boolean  googleShare= ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(0)

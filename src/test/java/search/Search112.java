@@ -14,6 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -86,10 +87,7 @@ public class Search112 extends TestBase {
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Registration Date')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Registration Date')]")).click();
-			
-			
-			
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(4);
 			test.log(LogStatus.PASS, "Selected Registration Date as sort option");
 
 			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By.xpath(OR

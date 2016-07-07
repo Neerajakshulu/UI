@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -73,21 +74,22 @@ public class Search111 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Amneet");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForPageLoad(ob);
+			BrowserWaits.waitTime(5);
 //			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 //			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
 //			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-			  waitForAjax(ob);
-
+			BrowserWaits.waitTime(5);
 			// checking for Default sort option
 			List<WebElement> beforeScrollSize = ob.findElements(By.xpath(OR
 					.getProperty("tr_search_people_profilename_link_xpath")));
+			BrowserWaits.waitTime(4);
 			System.out.println(beforeScrollSize.size());
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-			Thread.sleep(4000);
+			BrowserWaits.waitTime(5);
 
 			List<WebElement> afterScrollSize = ob.findElements(By.xpath(OR
 					.getProperty("tr_search_people_profilename_link_xpath")));

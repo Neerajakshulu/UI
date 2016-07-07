@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -78,8 +79,10 @@ public class Search96 extends TestBase {
 			
 			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 					.getText();
-			String postAuthor = ob.findElement(By.cssSelector("div[class*='ne-profile-object-name'] a"))
+			BrowserWaits.waitTime(3);
+			String postAuthor = ob.findElement(By.cssSelector("a[class='ng-binding ng-scope']"))
 					.getText();
+			BrowserWaits.waitTime(3);
 			String postCreationDate = ob.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
 			String profileMetaData = ob.findElement(By.cssSelector("div[class*='wui-descriptor wui-descriptor__profile']")).getText();
 			String statsXpath="div[class^='wui-card__footer-right'] span";
