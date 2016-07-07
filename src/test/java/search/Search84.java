@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -78,12 +79,14 @@ public class Search84 extends TestBase {
 				// Type into the search box and get search results
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+				waitForAjax(ob);
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-				Thread.sleep(2000);
+				BrowserWaits.waitTime(4);
 				
 				List<WebElement> searchTiles=ob.findElements(By.xpath("//*[@class='wui-card__content']"));
 				String tileText=searchTiles.get(0).getText();
+		          BrowserWaits.waitTime(2);
 				String text1="Color-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
 				
 				try{
