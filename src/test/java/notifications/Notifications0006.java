@@ -111,12 +111,14 @@ public class Notifications0006 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).logOutApp();
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				BrowserWaits.waitTime(8);
+				BrowserWaits.waitTime(4);
+				pf.getHFPageInstance(ob).clickOnHomeLink();
+				BrowserWaits.waitTime(4);
 				String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
 				logger.info("Notification Text: " + text);
 				//String userName=ob.findElement(By.xpath("//div[@class='wui-card wui-card--watchlist-event']//a[@class='ng-binding ng-scope']")).getText();
 				try {
-					Assert.assertTrue( text.contains("TODAY") && name.contains(fn2 + " " + ln2)
+					Assert.assertTrue( /*text.contains("TODAY") && */name.contains(fn2 + " " + ln2)
 							&& text.contains("made a watchlist public") && text.contains(watchListName)
 							&& text.contains(watchListDescription));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");

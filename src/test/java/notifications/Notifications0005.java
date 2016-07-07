@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -49,7 +50,7 @@ public class Notifications0005 extends NotificationsTestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName());
 		try {
-			if (user1 != null && user2 != null && user2 != null) {
+			if (user1 != null && user2 != null && user3 != null) {
 				openBrowser();
 				maximizeWindow();
 				clearCookies();
@@ -76,13 +77,16 @@ public class Notifications0005 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
 						"Home page is not loaded successfully");
+				pf.getHFPageInstance(ob).clickOnHomeLink();
+				BrowserWaits.waitTime(4);
 				test.log(LogStatus.INFO, "User Logged in successfully for verifying notification");
+				
 				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString()), 30,
 						"user did not recevied notification");
 				String text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString())).getText();
 				logger.info("Notification Text: " + text);
 				try {
-					Assert.assertTrue(text.contains("TODAY")/* &&  text.contains(fn3 + " " + ln3)*/
+					Assert.assertTrue(/*text.contains("TODAY") &&  */  text.contains(fn3 + " " + ln3)
 							&& text.contains("created a new public watchlist") && text.contains(watchListName)
 							&& text.contains(watchListDescription));
 					test.log(LogStatus.PASS, "User received notification with correct content");
@@ -96,6 +100,7 @@ public class Notifications0005 extends NotificationsTestBase {
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
+					closeBrowser();
 				}
 			} else {
 				throw new Exception("User creation problem hence throwing exception");

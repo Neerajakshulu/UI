@@ -72,7 +72,7 @@ public class IAM004 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			//
-			//BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
 			// Verify that existing FB credentials are working fine
