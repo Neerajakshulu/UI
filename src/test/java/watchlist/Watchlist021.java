@@ -93,26 +93,26 @@ public class Watchlist021 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
 			waitForAjax(ob);
 			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);;
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 			// Watching a patents to a particular watch list
 			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
 			BrowserWaits.waitTime(2);
 			waitForPageLoad(ob);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 			// Watching a posts to a particular watch list
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			BrowserWaits.waitTime(2);
 			waitForPageLoad(ob);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

@@ -99,7 +99,7 @@ public class Watchlist012 extends TestBase {
 			// Watching 10 posts to a particular watch list
 			for (WebElement watchButton : watchButtonList) {
 
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}

@@ -95,7 +95,7 @@ public class Watchlist013 extends TestBase {
 			// Watching 5 item to a particular watch list
 			for (int i = 0; i < 5; i++) {
 				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}

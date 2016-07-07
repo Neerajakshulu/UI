@@ -147,7 +147,7 @@ public class Watchlist028 extends TestBase {
 				// Watching the article to a particular watch list
 				/*WebElement watchButton = ob
 						.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));*/
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 				// Selecting the document name
 				/*String documentName = ob
@@ -199,7 +199,7 @@ public class Watchlist028 extends TestBase {
 
 				// Unwatching the article to a particular watch list
 				//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
 				// Selecting the document name
 				//documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))

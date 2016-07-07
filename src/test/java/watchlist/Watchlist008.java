@@ -102,7 +102,7 @@ public class Watchlist008 extends TestBase {
 			// Watching 2 posts to a particular watch list
 			for (int i = 0; i < 1; i++) {
 				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}
@@ -171,11 +171,11 @@ public class Watchlist008 extends TestBase {
 
 			// Watching a post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
 			// Unwatching a post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
 			// Selecting the post name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

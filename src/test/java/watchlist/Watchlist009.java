@@ -98,7 +98,7 @@ public class Watchlist009 extends TestBase {
 
 			// Watching the post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the post name
 			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 60);
@@ -142,7 +142,7 @@ public class Watchlist009 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the post name
 			documentName = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();

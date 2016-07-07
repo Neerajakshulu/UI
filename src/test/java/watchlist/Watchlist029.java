@@ -149,7 +149,7 @@ public class Watchlist029 extends TestBase {
 			// Watching the post to a particular watch list
 			//WebElement watchButton = ob
 				//	.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			
 			// Navigate to a particular watch list page
@@ -194,7 +194,7 @@ public class Watchlist029 extends TestBase {
 
 			// Unwatching the post to a particular watch list
 			//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 
 			// Navigate to a particular watch list page

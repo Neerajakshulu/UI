@@ -125,7 +125,7 @@ public class Watchlist005 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the article name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
@@ -175,7 +175,7 @@ public class Watchlist005 extends TestBase {
 
 			// Unwatching the article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist(watchButton, newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the article name
 			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
