@@ -47,7 +47,12 @@ public class NotificationsTestBase extends TestBase {
 		logger.info(testcase.size());
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
 				&& !(suiteName.equals("Sanity suite"))) {
-			createNewUsers();
+			try {
+				createNewUsers();
+			} catch (Exception e) {
+			
+			}
+
 			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
 				if (user1 == null) {
 					user1 = "41zbbp+5s285rol6idz4@sharklasers.com";
