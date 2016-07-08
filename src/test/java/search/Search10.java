@@ -131,9 +131,7 @@ public class Search10 extends TestBase {
 			
 			System.out.println("al2--->" + al2.size());
 				try {
-//				if(al1.size()==al2.size())
-//				{
-				Assert.assertTrue(al1.equals(al2));
+						Assert.assertTrue(al1.equals(al2));
 				
 				test.log(
 						LogStatus.PASS,
