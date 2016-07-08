@@ -82,7 +82,7 @@ public class Notifications0018 extends NotificationsTestBase {
 			}
 			WebElement elemt=recArticleSection.get(0);
 			List<WebElement> element = elemt
-					.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_XPATH.toString()));
+					.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_CSS.toString()));
 			String actual = null;
 			String watchstatus = null;
 			for (WebElement elem : element) {
@@ -130,7 +130,7 @@ public class Notifications0018 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
 						.getSimpleName()
 						+ "user_is_not_able_to_watch_article_from_Recommended_articles_section_on_Home_page.")));// screenshot
-				//closeBrowser();
+				closeBrowser();
 			}
 
 		} catch (Throwable t) {

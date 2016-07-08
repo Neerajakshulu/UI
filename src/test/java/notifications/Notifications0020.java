@@ -387,14 +387,15 @@ public class Notifications0020 extends NotificationsTestBase {
 				String doc_title=ob.findElement(By.xpath(OnePObjectMap.DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH.toString())).getText();
 				logger.info("Document Title in record view page :"+doc_title);
 				if(document_title.contains(doc_title)){
-					
-					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
-					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox")), 30);
 					BrowserWaits.waitTime(4);
-					ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
-							.sendKeys(OR.getProperty("COMMENT_TEXT"));
+					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
+					pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS);
+					//jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
+					/*ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
+							.sendKeys(OR.getProperty("COMMENT_TEXT"));*/
+					pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS,OR.getProperty("COMMENT_TEXT"));
+					
 					BrowserWaits.waitTime(5);
-					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("add_comment_button")), 30);
 					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString()), 30);
 					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString())));
 					BrowserWaits.waitTime(6);
@@ -403,14 +404,13 @@ public class Notifications0020 extends NotificationsTestBase {
 					closeBrowser();
 				}
 			}catch(Throwable t){
-				logger.error("Document Title is not displaying in recored view page " + t.getMessage());
+				logger.error("Document Title is not displaying in recored view page" + t.getMessage());
 				captureScreenshot(this.getClass().getSimpleName() + "_adding_cooment");
 			}
 			status = true;
 		} catch (Exception e) {
-			logger.error("Probem happens while adding comment on post" + e.getMessage());
+			logger.error("Probem happens while adding comment on post " + e.getMessage());
 			captureScreenshot(this.getClass().getSimpleName() + "_adding_cooment");
-			//throw new Exception("Probem happens while adding comment on post" + e.getMessage());
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}
@@ -418,7 +418,7 @@ public class Notifications0020 extends NotificationsTestBase {
 	}
 
 	private boolean watchPost() throws Exception {
-		boolean status = false;
+ 		boolean status = false;
 		try {
 			
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
@@ -450,7 +450,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			document_url = ob.findElement(By.xpath(OnePObjectMap.DOCUMENT_URL_IN_SEARCHPAGE_XPATH.toString())).getAttribute("href");
 			logger.info("Document URL : "+document_url);
 			String watchStatus = ob.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString())).getText();
-			logger.info("Watch Button Status : "+watchStatus);
+			logger.info("Watch Button Status :"+watchStatus);
 			if (watchStatus.contains("Watching")) {
 				List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
 				element.get(0).click();
