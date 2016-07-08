@@ -83,21 +83,11 @@ public class Watchlist005 extends TestBase {
 
 			ob.navigate().to(host);
 			
-			login();
 			
-			/*waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			//
-			//BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-
-			// Verify that existing LI user credentials are working fine
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			//BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();*/
 			
-			//loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			
+			
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
@@ -105,26 +95,25 @@ public class Watchlist005 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			/*selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();*/
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("unix");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchArticle"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 			
 			
 			
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 60);
+			
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
 
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			// Watching the article to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
+			
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			// Selecting the article name
@@ -154,30 +143,28 @@ public class Watchlist005 extends TestBase {
 								+ "_user_unable_to_add_article_into_watchlist_Record_view_page")));// screenshot
 
 			}
-			// Step2: Unwatching the document from record view page
+//			// Step2: Unwatching the document from record view page
 			// Searching for article
-//			selectSearchTypeFromDropDown("Articles");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("unix");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchArticle"))).click();
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+			Thread.sleep(3000);
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 60);
 
-			// Navigating to record view page
+//			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 
-			// Unwatching the article to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
+//			// Unwatching the article to a particular watch list
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
-			// Selecting the article name
+//			// Selecting the article name
 			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

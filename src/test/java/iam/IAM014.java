@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -72,7 +73,8 @@ public class IAM014 extends TestBase {
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			String buttonName=ob.findElement(By.xpath(OR.getProperty("sinup_button_disable"))).getText();
+			BrowserWaits.waitTime(4);
+			String buttonName=ob.findElement(By.cssSelector(OR.getProperty("sinup_button_disable"))).getText();
 			logger.info("Button Name : "+buttonName);
 			
 			//

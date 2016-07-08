@@ -70,7 +70,7 @@ public class Notifications0003 extends NotificationsTestBase {
 				JavascriptExecutor jse = (JavascriptExecutor) ob;
 				for (int i = 1; i <= 3; i++) {
 					String text = ob
-							.findElement(By.xpath(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH.toString()))
+							.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_CSS.toString()))
 							.getText();
 					if (text.length() > 0) {
 						break;
@@ -79,11 +79,11 @@ public class Notifications0003 extends NotificationsTestBase {
 					BrowserWaits.waitTime(3);
 				}
 				String text = ob
-						.findElement(By.xpath(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_XPATH.toString()))
+						.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_CSS.toString()))
 						.getText();
 				logger.info("Notification Text: " + text);
 				try {
-					Assert.assertTrue(text.contains("TODAY") && text.contains(fn1 + " " + ln1)
+					Assert.assertTrue(/*text.contains("TODAY") && */text.contains(fn1 + " " + ln1)
 							&& text.contains("Now following you"));
 					test.log(LogStatus.PASS, "User receiving notification with correct content");
 					test.log(LogStatus.PASS,"PASS");

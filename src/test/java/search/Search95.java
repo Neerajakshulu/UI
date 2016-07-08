@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -77,13 +78,14 @@ public class Search95 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postToSearch);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			waitForAjax(ob);
 
 			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 					.getText();
-			String postAuthor = ob.findElement(By.cssSelector("div[class*='ne-profile-object-name'] a"))
+			String postAuthor = ob.findElement(By.cssSelector("a[class='ng-binding ng-scope']"))
 					.getText();
+		
 			String postCreationDate = ob.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
 			String profileMetaData = ob.findElement(By.cssSelector("div[class*='wui-descriptor wui-descriptor__profile']")).getText();
 			String statsXpath="div[class^='wui-card__footer-right'] span";

@@ -138,7 +138,7 @@ public class Watchlist008 extends TestBase {
 			// Steps2: Removing the first item from watch list page
 
 			// Getting the first result title
-			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("result_title_in_watchlist"))).getText();
+			firstdocumentName = ob.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']")).getText();
 			// Unwatching the first document from results
 			ob.findElement(By.xpath("//span[contains(text(),'Stop watching')]")).click();
 			BrowserWaits.waitTime(2);

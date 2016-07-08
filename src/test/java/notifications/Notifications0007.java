@@ -238,20 +238,22 @@ public class Notifications0007 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
 					"Home page is not loaded successfully");
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			BrowserWaits.waitTime(4);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			String notification_text = null;
 			for (int i = 1; i <= 3; i++) {
-				notification_text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_XPATH.toString())).getText();
+				notification_text = ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_CSS.toString())).getText();
 				if (notification_text.length() > 0) {
 					break;
 				}
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 				BrowserWaits.waitTime(3);
 			}
-			String notification_text_author = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_NAME_XPATH.toString())).getText();;
+			String notification_text_author = ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_CSS.toString())).getText();;
 			logger.info("Notification Text: " + notification_text +"\n Author-Name -"+notification_text_author);
 			try {
-				Assert.assertTrue(notification_text.contains("TODAY")/* &&notification_text_author.contains(fn2 + " " + ln2)*/
+				Assert.assertTrue(notification_text_author.contains(fn2 + " " + ln2)
 						&& notification_text.contains("New Comment") && notification_text.contains(document_title));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				test.log(LogStatus.PASS, "PASS");
@@ -286,6 +288,8 @@ public class Notifications0007 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			BrowserWaits.waitTime(4);
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notificationDocumentComment")), 100);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
@@ -363,11 +367,33 @@ public class Notifications0007 extends NotificationsTestBase {
 			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
 			BrowserWaits.waitTime(1);*/
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
-			List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
+			//ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
+			String watchStatus = ob.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString())).getText();
+			logger.info("Watch Button Status : "+watchStatus);
+			if (watchStatus.contains("Watching")) {
+				List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+				element.get(0).click();
+				BrowserWaits.waitTime(2);
+				List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--active']"));
+				listOfWatchListButton.get(0).click();
+				BrowserWaits.waitTime(2);
+				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+				BrowserWaits.waitTime(2);
+			}
+			
+			List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+			element.get(0).click();
+			BrowserWaits.waitTime(2);
+			List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
+			listOfWatchListButton.get(0).click();
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+			BrowserWaits.waitTime(3);
+			
+			/*List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
 			listOfWatchListButton.get(0).click();
 			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();
+			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();*/
 			
 			status = true;
 		} catch (Exception e) {

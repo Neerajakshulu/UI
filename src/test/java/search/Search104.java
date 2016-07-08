@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -76,7 +77,9 @@ public class Search104 extends TestBase {
 			waitForAjax(ob);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
+			BrowserWaits.waitTime(3);
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();

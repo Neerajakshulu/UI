@@ -73,7 +73,7 @@ public class Search123 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
 			// Searching for people
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("amneet");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("kavya");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]"), 50);
@@ -102,9 +102,10 @@ public class Search123 extends TestBase {
 			else{
 				
 				System.out.println("In else");
-				Thread.sleep(3000);
+				BrowserWaits.waitTime(6);
+				waitForElementTobePresent(ob,By.cssSelector("span[class='wui-checkbox__visible']"), 50);
+				jsClick(ob,ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")));
 				
-				ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).click();
 				waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 50);
 				ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
 				Thread.sleep(3000);

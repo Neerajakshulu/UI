@@ -73,172 +73,153 @@ public class Watchlist006 extends TestBase {
 		try {
 
 			// Opening browser
-			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
+						openBrowser();
+						try {
+							maximizeWindow();
+						} catch (Throwable t) {
 
-				System.out.println("maximize() command not supported in Selendroid");
-			}
-			clearCookies();
+							System.out.println("maximize() command not supported in Selendroid");
+						}
+						clearCookies();
 
-			ob.navigate().to(host);
-			
-			/*waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			//
-			//BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
+						ob.navigate().to(host);
+						
+//						login();
+						
+						loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
-			// Verify that existing LI user credentials are working fine
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			//BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();*/
-			
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
-			// Create watch list
-			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
-			createWatchList("private", newWatchlistName, "This is my test watchlist.");
+						// Create watch list
+						String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+						logger.info("New WatchList Name : "+newWatchlistName);
+						createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for patents
-			/*selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);*/
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
-			// Getting watch button list for patents
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
-			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image1")));
+						// Searching for article
+						
+						ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("unix");
+						ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+						waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+						Thread.sleep(3000);
+						ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+						waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+						Thread.sleep(3000);
+						
+						
+						
+						List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
+						// Watching 2 articles to a particular watch list
+						for (int i = 0; i < 2; i++) {
+							
+							WebElement watchButton = watchButtonList.get(i);
+							watchButton.click();
+							Thread.sleep(5000);
+							ob.findElement(By.linkText(newWatchlistName)).click();
+							Thread.sleep(3000);
+							ob.findElement(By.xpath("//input[@type='text']")).click();
+						}
 
-			// Watching 2 patents to a particular watch list
-			for (int i = 0; i < 2; i++) {
-				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
-			}
+						// Selecting the document name
+						String firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
+						logger.info("First Document Name : "+firstdocumentName);
 
-			// Selecting the patent name
-			String firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
-			logger.info("First Document Name : "+firstDocumentName);
+						// Navigate to a particular watch list page
+						navigateToParticularWatchlistPage(newWatchlistName);
+						waitForPageLoad(ob);
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
-			waitForPageLoad(ob);
+						List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
+						int count = 0;
+						for (int i = 0; i < watchedItems.size(); i++) {
 
-			int count = 0;
-			for (int i = 0; i < watchedItems.size(); i++) {
+							if (watchedItems.get(i).getText().equals(firstdocumentName))
+								count++;
 
-				if (watchedItems.get(i).getText().equals(firstDocumentName))
-					count++;
+						}
 
-			}
+						if (!compareNumbers(1, count)) {
 
-			if (!compareNumbers(1, count)) {
+							test.log(LogStatus.FAIL,
+									"User not able to add a patent into watchlist from Patent content search results page");// extent
+							// reports
+							status = 2;// excel
+							test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+									.getSimpleName()
+									+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
 
-				test.log(LogStatus.FAIL,
-						"User not able to add an patent into watchlist from Patents content search results page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_user_unable_to_add_patent_into_watchlist_from_Patents_content_searchResults_page")));// screenshot
+						}
 
-			}
+						// Steps2: Removing the first item from watch list page
+						firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
+						// Unwatching the first document from results
+						watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+						// Checking if first document still exists in the watch list
+						List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
+						count = 0;
+						String documentTitle;
+						for (WebElement document : documentList) {
+							documentTitle = document.getText();
+							if (documentTitle.equals(firstdocumentName))
+								count++;
+						}
 
-			// Steps2: Removing the first item from watch list page
-			firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
-			logger.info("First Document Name : "+firstDocumentName);
-			// Unwatching the first document from results
-			ob.findElement(By.xpath(OR.getProperty("watchlist_watchlist_image1"))).click();
-			BrowserWaits.waitTime(2);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
-			
-			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
-			count = 0;
-			String documentTitle;
-			for (WebElement document : documentList) {
-				documentTitle = document.getText();
-				if (documentTitle.equals(firstDocumentName))
-					count++;
-			}
+						try {
+							Assert.assertEquals(count, 0);
+							test.log(LogStatus.PASS, "User is able to unwatch a Patent from watchlist page");
+						} catch (Error e) {
+							status = 2;
+							test.log(LogStatus.FAIL, "User is unable to unwatch a Patent from watchlist page");
+						}
 
-			try {
-				Assert.assertEquals(0, count);
-				test.log(LogStatus.PASS, "User is able to unwatch a Patent from watchlist page");
-			} catch (Error e) {
-				status = 2;
-				test.log(LogStatus.FAIL, "User is unable to unwatch a Patent from watchlist page");
-			}
+						// Steps3: Unwatching an article from article content result page
+						// Searching for article
+						ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+						ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+						ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+						waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+						Thread.sleep(3000);
+						ob.findElement(By.xpath("//a[contains(text(),'Patents')]")).click();
+						waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
+						Thread.sleep(3000);
+						
+						// Watching an article to a particular watch list
+						watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+						BrowserWaits.waitTime(4);
+//						// Unwatching an article to a particular watch list
+						watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 
-			// Steps3: Unwatching a patent from patent content result page
+//						// Selecting the document name
+						String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
 
-			// Searching for patents
-			/*selectSearchTypeFromDropDown("Patents");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='search-page-results']"), 60);*/
-			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
+						// Navigate to a particular watch list page
+						navigateToParticularWatchlistPage(newWatchlistName);
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='col-xs-12 col-md-9']"), 60);
-			
-			BrowserWaits.waitTime(2);
-			// Watching a patent to a particular watch list
-			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
-			BrowserWaits.waitTime(4);
-			// Unwatching a patent to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+						try {
 
-			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
+							watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
+							count = 0;
+							for (int i = 0; i < watchedItems.size(); i++) {
 
-			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
+								if (watchedItems.get(i).getText().equals(documentName))
+									count++;
 
-			try {
+							}
+							Assert.assertEquals(count, 0);
+							test.log(LogStatus.PASS,
+									"User is able to remove a patent from watchlist in Patent content search results page");// extent
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
-				count = 0;
-				for (int i = 0; i < watchedItems.size(); i++) {
+						} catch (Throwable t) {
 
-					if (watchedItems.get(i).getText().equals(documentName))
-						count++;
-
-				}
-				Assert.assertEquals(count, 0);
-
-				test.log(LogStatus.PASS,
-						"User is able to remove an patent from watchlist in Patent content search results page");// extent
-
-			} catch (Error e) {
-
-				test.log(LogStatus.FAIL,
-						"User not able to remove an patent from watchlist in Patent content search results page");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_content_searchResults_page")));// screenshot
-			}
-			// Delete the watch list
-			deleteParticularWatchlist(newWatchlistName);
-			closeBrowser();
+							test.log(LogStatus.FAIL,
+									"User not able to remove a patent from watchlist in Patent content search results page");// extent
+							// reports
+							status = 2;// excel
+							test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+									.getSimpleName()
+									+ "_user_unable_to_remove_patent_from_watchlist_in_Patent_content_searchResults_page")));// screenshot
+						}
+						// Delete the watch list
+						deleteParticularWatchlist(newWatchlistName);
+						closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

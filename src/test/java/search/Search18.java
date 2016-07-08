@@ -101,6 +101,7 @@ public class Search18 extends TestBase {
 
 			checkboxList = ob
 					.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
+			BrowserWaits.waitTime(2);
 			for (WebElement element : checkboxList) {
 				if (element.getCssValue("background").contains("rgb(69, 183, 231)"))
 					checkboxesSelected++;
