@@ -84,11 +84,7 @@ public class Search10 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 		   waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()),60);
-            
-			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_PAGE_ARTICLES__CSS);
-			
-			// Clicking on Articles content result set
-		   ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+        	ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 		   waitForAjax(ob);
 			
 			List<WebElement> filterPanelHeadingList;
@@ -103,27 +99,28 @@ public class Search10 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-		BrowserWaits.waitTime(8);
+		     waitForAjax(ob);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-        BrowserWaits.waitTime(5);
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			waitForAjax(ob);
+        			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 				al1.add(searchResults.get(i).getText());
+				
 			}
-
+			
 			System.out.println("al1-->" + al1.size());
 			jsClick(ob, searchResults.get(8));
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(4);
 
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
 			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(8);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {
@@ -131,15 +128,17 @@ public class Search10 extends TestBase {
 				al2.add(searchResults2.get(i).getText());
 
 			}
-
+			
 			System.out.println("al2--->" + al2.size());
-
-			try {
+				try {
+//				if(al1.size()==al2.size())
+//				{
 				Assert.assertTrue(al1.equals(al2));
+				
 				test.log(
 						LogStatus.PASS,
 						"Correct filtered search results getting displayed when user navigates back to Articles search results page from record view page");
-			} catch (Throwable t) {
+			}catch (Throwable t) {
 
 				test.log(
 						LogStatus.FAIL,
@@ -151,7 +150,7 @@ public class Search10 extends TestBase {
 				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 				// this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));//
 				// screenshot
-
+			
 			}
             waitForElementTobeVisible(ob,By.xpath(OR.getProperty("filter_checkbox")), 40);
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));

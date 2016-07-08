@@ -88,10 +88,10 @@ public class Search105 extends TestBase {
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			System.out.println(patentRVTitle);
+			//System.out.println(patentRVTitle);
 			String patentRVTitleWatchLabel = ob.findElement(
 					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			System.out.println(patentRVTitleWatchLabel);
+			//System.out.println(patentRVTitleWatchLabel);
 
 			boolean  googleShare= ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(0)
@@ -124,11 +124,12 @@ public class Search105 extends TestBase {
 
 			String postAuthor = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")))
 					.getText();
+			
 			String postAuthorMetaData = ob.findElement(
 					By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
 
-			// System.out.println("post author-->"+postAuthor);
-			// System.out.println("post author metadata-->"+postAuthorMetaData);
+			//System.out.println("post author-->"+postAuthor);
+		// System.out.println("post author metadata-->"+postAuthorMetaData);
 
 			List<WebElement> postSocialShare = ob.findElements(By
 					.cssSelector(("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
@@ -142,7 +143,7 @@ public class Search105 extends TestBase {
 			// System.out.println("post like count-->"+postLikeCount);
 
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
-					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "Watch")
+					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "Watching")
 					&& googleShare && twitterShare && fbShare && liShare;
 
 			// if(!patentRVStatus)
