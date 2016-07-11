@@ -880,8 +880,8 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
-		BrowserWaits.waitTime(2);
-		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
+		BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
 		BrowserWaits.waitTime(2);
 	}
 

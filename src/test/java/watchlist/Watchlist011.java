@@ -97,7 +97,7 @@ public class Watchlist011 extends TestBase {
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			// Watching 10 patents to a particular watch list
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 1; i++) {
 				WebElement watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);

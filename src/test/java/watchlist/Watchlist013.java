@@ -93,7 +93,7 @@ public class Watchlist013 extends TestBase {
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 
 			// Watching 5 item to a particular watch list
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 1; i++) {
 				WebElement watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
@@ -108,7 +108,7 @@ public class Watchlist013 extends TestBase {
 					.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 5);
+				Assert.assertEquals(itemCount, 1);
 				test.log(LogStatus.INFO, "User is able to watch 5 items into watchlist");
 			} catch (Exception e) {
 				status = 2;
@@ -116,20 +116,16 @@ public class Watchlist013 extends TestBase {
 			}
 
 			// Unwatching the first 3 document from watch list page
-			watchButtonList = ob.findElements(By.xpath("//span[contains(text(),'Stop watching')]"));
-			for (int i = 0; i < 3; i++) {
-				watchButtonList.get(i).click();
-				BrowserWaits.waitTime(2);
-			}
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
 
 			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 
 			try {
-				Assert.assertEquals(itemCount, 2);
-				test.log(LogStatus.PASS, "Items counts is decreased by 3 after unwatching 3 item");
+				Assert.assertEquals(itemCount, 0);
+				test.log(LogStatus.PASS, "Items counts is decreased  after unwatching ");
 			} catch (Error e) {
 				status = 2;
-				test.log(LogStatus.FAIL, "Items counts is not decreased by 3 after unwatching 3 item");
+				test.log(LogStatus.FAIL, "Items counts is not decreased by  unwatching");
 			}
 
 			// Deleting the watch list
