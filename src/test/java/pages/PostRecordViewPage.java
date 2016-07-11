@@ -401,7 +401,7 @@ public class PostRecordViewPage extends TestBase {
 		try {
 
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()), 60);
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()), 120);
 			if (ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
 					.isDisplayed())
 				result = true;
@@ -636,6 +636,7 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void validateFlagAndUnflagActionOnPost(ExtentTest test) throws Exception {
 		waitForAjax(ob);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()), 60);
 		String attribute = ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).getAttribute("class");
 		if (attribute.contains("fa-flag-o")) {
