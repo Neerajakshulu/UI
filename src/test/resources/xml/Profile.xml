@@ -45,7 +45,7 @@
 	</test>
 
 	<test name="Update_User_Own_Profile">
-		<parameter name="profileInfo" value="test|user|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="user|automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
