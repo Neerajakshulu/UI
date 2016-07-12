@@ -74,6 +74,8 @@ public class Watchlist006 extends TestBase {
 
 			// Opening browser
 						openBrowser();
+//			runOnSauceLabsFromLocal("Windows","Chrome");
+
 						try {
 							maximizeWindow();
 						} catch (Throwable t) {
@@ -152,6 +154,7 @@ public class Watchlist006 extends TestBase {
 						// Unwatching the first document from results
 						watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
 						waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+						ob.navigate().refresh();
 						// Checking if first document still exists in the watch list
 						List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 						count = 0;

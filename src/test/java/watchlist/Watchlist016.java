@@ -82,6 +82,7 @@ public class Watchlist016 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			String newWatchListDescription = "This is my newly created watch list";
 			createWatchList("public", newWatchlistName + "_1", newWatchListDescription);
+			ob.navigate().refresh();
 			createWatchList("public", newWatchlistName + "_2", newWatchListDescription);
 
 			// Getting all the watch lists

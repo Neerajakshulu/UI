@@ -69,7 +69,7 @@ public class Watchlist001 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Mac","Safari");
+//			runOnSauceLabsFromLocal("Windows","Chrome");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {

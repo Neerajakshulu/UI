@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -81,17 +82,18 @@ public class Search113 extends TestBase {
 			Thread.sleep(2000);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(3000);
-
-			List<WebElement> filter_list=ob.findElements(By.xpath("//div[@class='panel-heading']"));
+			waitForElementTobeVisible(ob, By.cssSelector("div[class='panel panel-default ng-isolate-scope']"), 30);
+			List<WebElement> filter_list=ob.findElements(By.cssSelector("div[class='panel panel-default ng-isolate-scope']"));
 //			System.out.println(filter_list.size());
-			
 			filter_list.get(0).click();
-			Thread.sleep(2000);
-			
+			BrowserWaits.waitTime(4);
+		 
 	//	System.out.println(ob.findElement(By.xpath("/button[@class='search-result-refine-menu__load-button ng-scope']")).getText());
-			ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).click();
+			waitForElementTobeVisible(ob,By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);	
+				jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
 			Thread.sleep(2000);
 			
 //			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
@@ -111,9 +113,8 @@ public class Search113 extends TestBase {
 			}
 			
 		
-			ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).click();
-			Thread.sleep(2000);
-			
+			jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
+			BrowserWaits.waitTime(2);
 			String temp2=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
 			if(!compareStrings("More",temp2)){
 				

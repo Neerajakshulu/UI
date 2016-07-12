@@ -182,8 +182,8 @@ public class IAM010 extends TestBase {
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 								this.getClass().getSimpleName())));// screenshot
 					}
-					BrowserWaits.waitTime(3);
-					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("sinup_button_disable")), 30);
+					//BrowserWaits.waitTime(3);
+					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("sinup_button_disable")), 30);
 					/*String disableButton=ob.findElement(By.xpath(OR.getProperty("sinup_button_disable"))).getAttribute("disabled");
 					logger.info("Button Status : "+disableButton);
 					try {

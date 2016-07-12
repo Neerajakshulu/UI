@@ -117,6 +117,7 @@ public class Watchlist013 extends TestBase {
 
 			// Unwatching the first 3 document from watch list page
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			ob.navigate().refresh();
 
 			itemCount = Integer.parseInt(ob.findElement(By.xpath(OR.getProperty("itemsCount_in_watchlist"))).getText());
 

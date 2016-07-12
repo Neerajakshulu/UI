@@ -60,15 +60,18 @@ public class Notifications0017 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_CSS);
 			List<WebElement> element = ob.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_CSS.toString()));
+			BrowserWaits.waitTime(2);
 			String actual = null;
 			for (WebElement elem : element) {
 				if (elem.getAttribute("ng-repeat").contains("article in vm.articles track by")) {
 					List<WebElement> elment = elem.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLE_TITLE_CSS.toString()));
 					actual = elment.get(0).getText();
 					logger.info("Actual--> " + actual);
+					jsClick(ob, elment.get(0));
+					//elment.get(0).click();
 					BrowserWaits.waitTime(2);
-					elment.get(0).click();
 					break;
 				}
 			}

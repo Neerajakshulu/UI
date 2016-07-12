@@ -115,6 +115,7 @@ public class Notifications0016 extends NotificationsTestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			ProfilePage page = new ProfilePage(ob);
+			BrowserWaits.waitTime(3);
 			page.clickProfileLink();
 			page.clickFollowingTab();
 			BrowserWaits.waitTime(3);
