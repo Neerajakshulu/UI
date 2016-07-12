@@ -13,6 +13,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -105,11 +106,9 @@ public class Search89 extends TestBase {
                   waitForAjax(ob);
 				List<WebElement> detailsLink = ob.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
-				ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).click();
-				//ob.findElement(By.linkText("Details")).click();
-				Thread.sleep(15000);
-
-				if (detailsLink.size() != 0) {
+				jsClick(ob,ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
+				  BrowserWaits.waitTime(4);
+					if (detailsLink.size() != 0) {
 
 					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
 				} else {
