@@ -61,6 +61,8 @@ public class Notifications0004 extends NotificationsTestBase {
 						"Home page is not loaded successfully");
 				logger.info("Home Page loaded success fully");
 				test.log(LogStatus.INFO, "User Logged in  successfully");
+				pf.getHFPageInstance(ob).clickOnHomeLink();
+				BrowserWaits.waitTime(4);
 				JavascriptExecutor jse = (JavascriptExecutor) ob;
 				for (int i = 1; i <= 3; i++) {
 					String text = ob

@@ -77,10 +77,10 @@ public class IAM005 extends TestBase {
 					+ "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			System.out.println(characterLength);
-			System.out.println(Integer.parseInt(characterLength));
+			logger.info("Char length : "+characterLength);
+			//System.out.println(Integer.parseInt(characterLength));
 			String first_name = generateRandomName(Integer.parseInt(characterLength));
-			System.out.println(first_name);
+			logger.info("First Name : "+first_name);
 
 			// selenium code
 			openBrowser();

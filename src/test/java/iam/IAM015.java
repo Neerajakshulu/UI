@@ -74,14 +74,28 @@ public class IAM015 extends TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			BrowserWaits.waitTime(2);
-			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			
+			String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
+			if(error_message1.contains("Sign up")){
+				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
+				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Neon12");
+				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("Neon12");
+				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				BrowserWaits.waitTime(3);
+			}
+			
+		
+			
+			/*//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			//jsClick(ob, ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
 			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
-			BrowserWaits.waitTime(6);
-			
+			BrowserWaits.waitTime(6);*/
 			if (!checkElementPresence_id("reg_errorMessage")) {
 
 				test.log(LogStatus.FAIL,

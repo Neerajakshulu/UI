@@ -549,6 +549,10 @@ public class TestBase {
 
 		ob.get("https://www.guerrillamail.com");
 		BrowserWaits.waitTime(2);
+		if(CONFIG.getProperty("browserType").equals("IE")){
+			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+		    Thread.sleep(5000);
+		}
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		ob.navigate().to(host);
 		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
@@ -606,6 +610,10 @@ public class TestBase {
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		BrowserWaits.waitTime(2);
 		ob.get("https://www.guerrillamail.com");
+		if(CONFIG.getProperty("browserType").equals("IE")){
+			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+		    Thread.sleep(5000);
+		}
 		BrowserWaits.waitTime(14);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 		WebElement myE = email_list.get(0);

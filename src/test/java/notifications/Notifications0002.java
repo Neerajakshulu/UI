@@ -79,6 +79,8 @@ public class Notifications0002 extends NotificationsTestBase {
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			BrowserWaits.waitTime(4);
 			List<WebElement> elements = null;
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			while (scrollCount < 30) {
