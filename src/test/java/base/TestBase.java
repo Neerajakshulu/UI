@@ -1100,6 +1100,8 @@ public class TestBase {
 		ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
 		waitForElementTobeVisible(ob, By.xpath("//button[@class='wui-mini-btn wui-mini-btn--primary']"), 60);
 		Thread.sleep(2000);
+		waitForElementTobeVisible(ob, By.linkText(watchListName), 60);
+		Thread.sleep(3000);
 		ob.findElement(By.linkText(watchListName)).click();
 		Thread.sleep(3000);
 		ob.findElement(By.xpath("//input[@type='text']")).click();
