@@ -148,8 +148,8 @@ public class Search103 extends TestBase {
 
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 
-			boolean filtering_condition = filterValues.get(0).getCssValue("background").contains("rgb(69, 183, 231)") 
-					&& filterValues.get(1).getCssValue("background").contains("rgb(69, 183, 231)");
+			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)") 
+					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");
 
 			try {
 				Assert.assertTrue(filtering_condition);

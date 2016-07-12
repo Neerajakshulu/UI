@@ -102,7 +102,7 @@ public class Search89 extends TestBase {
 			}
 
 			try {
-
+                  waitForAjax(ob);
 				List<WebElement> detailsLink = ob.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
 				ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).click();
