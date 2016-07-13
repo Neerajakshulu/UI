@@ -48,9 +48,9 @@ public class NotificationsTestBase extends TestBase {
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
 				&& !(suiteName.equals("Sanity suite"))) {
 			try {
-				createNewUsers();
+				// createNewUsers();
 			} catch (Exception e) {
-			
+
 			}
 
 			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
@@ -131,32 +131,31 @@ public class NotificationsTestBase extends TestBase {
 	/**
 	 * This function will convert an object of type excel cell to a string value
 	 * 
-	 * @param cell
-	 *            excel cell
+	 * @param cell excel cell
 	 * @return the cell value
 	 */
 	protected String getCellData(XSSFCell cell) {
 		int type = cell.getCellType();
 		Object result;
 		switch (type) {
-		case Cell.CELL_TYPE_STRING:
-			result = cell.getStringCellValue();
-			break;
-		case Cell.CELL_TYPE_NUMERIC:
-			result = cell.getNumericCellValue();
-			break;
-		case Cell.CELL_TYPE_FORMULA:
-			throw new RuntimeException("We can't evaluate formulas in Java");
-		case Cell.CELL_TYPE_BLANK:
-			result = EMPTY_STRING;
-			break;
-		case Cell.CELL_TYPE_BOOLEAN:
-			result = cell.getBooleanCellValue();
-			break;
-		case Cell.CELL_TYPE_ERROR:
-			throw new RuntimeException("This cell has an error");
-		default:
-			throw new RuntimeException("We don't support this cell type: " + type);
+			case Cell.CELL_TYPE_STRING:
+				result = cell.getStringCellValue();
+				break;
+			case Cell.CELL_TYPE_NUMERIC:
+				result = cell.getNumericCellValue();
+				break;
+			case Cell.CELL_TYPE_FORMULA:
+				throw new RuntimeException("We can't evaluate formulas in Java");
+			case Cell.CELL_TYPE_BLANK:
+				result = EMPTY_STRING;
+				break;
+			case Cell.CELL_TYPE_BOOLEAN:
+				result = cell.getBooleanCellValue();
+				break;
+			case Cell.CELL_TYPE_ERROR:
+				throw new RuntimeException("This cell has an error");
+			default:
+				throw new RuntimeException("We don't support this cell type: " + type);
 		}
 		return result.toString();
 	}
@@ -171,16 +170,16 @@ public class NotificationsTestBase extends TestBase {
 			currentCellData = getCellData(row.getCell(currentCell, Row.CREATE_NULL_AS_BLANK));
 
 			switch (currentCell) {
-			case 0:
-				rowData.setTestclassName(currentCellData);
-			case 1:
-				rowData.setTestcaseId(currentCellData);
-			case 2:
-				rowData.setTestcaseDescription(currentCellData);
-			case 3:
-				rowData.setTestcaseRunmode(currentCellData);
-			case 4:
-				rowData.setTestResults(currentCellData);
+				case 0:
+					rowData.setTestclassName(currentCellData);
+				case 1:
+					rowData.setTestcaseId(currentCellData);
+				case 2:
+					rowData.setTestcaseDescription(currentCellData);
+				case 3:
+					rowData.setTestcaseRunmode(currentCellData);
+				case 4:
+					rowData.setTestResults(currentCellData);
 			}
 		}
 		return rowData;
