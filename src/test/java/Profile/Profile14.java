@@ -136,7 +136,7 @@ public class Profile14 extends TestBase {
 	public void followUserAndLogout() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow/unfollow other user");
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/profile/59f15292-a2d0-4555-bfc8-4fe37b95fa60");
+			ob.navigate().to("http://dev-stable.1p.thomsonreuters.com/#/profile/59f15292-a2d0-4555-bfc8-4fe37b95fa60");
 			BrowserWaits.waitTime(10);
 			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
