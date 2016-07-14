@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -16,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import base.TestBase;
@@ -76,6 +78,10 @@ public class NotificationsTestBase extends TestBase {
 			if (count < 3)
 				followUsers();
 		}
+	}
+	@BeforeClass
+	public void  beforeClass(){
+		logger=  LogManager.getLogger(this.getClass().getSimpleName());
 	}
 
 	protected boolean getTestRunMode(String testRunmode) {

@@ -151,9 +151,9 @@ public class Notifications0008 extends NotificationsTestBase {
 							.startTest("OPQA-215",
 									"Verify that user able to recevie's a notification when other user commented on his post")
 							.assignCategory("Notifications");
+					test.log(LogStatus.INFO, this.getClass().getSimpleName());
 					test.log(LogStatus.INFO, "Published a post -" + postString);
 					if (poststatus) {
-						test.log(LogStatus.INFO, this.getClass().getSimpleName());
 						test.log(LogStatus.INFO, "User logged in successfully");
 						test.log(LogStatus.INFO, "Published a post -" + postString);
 						test.log(LogStatus.INFO, "User logged out successfully");
@@ -186,6 +186,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 				for (int i = 0; i < tests.length; i++) {
 					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("Notifications");
+					test.log(LogStatus.INFO, this.getClass().getSimpleName());
 					test.log(LogStatus.FAIL, "FAIL - " + t.getMessage());
 					extent.endTest(test);
 				}

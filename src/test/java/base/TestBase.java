@@ -56,7 +56,7 @@ import util.Xls_Reader;
 
 public class TestBase {
 
-	protected static final Logger logger = LogManager.getLogger();
+	protected static Logger logger = LogManager.getLogger();
 	public static Properties CONFIG = null;
 	public static Properties OR = null;
 	public static Properties LOGIN = null;
