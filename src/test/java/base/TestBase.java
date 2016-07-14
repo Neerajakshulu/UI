@@ -41,6 +41,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -82,9 +83,12 @@ public class TestBase {
 	public static int flag = 0;
 
 	public PageFactory pf = new PageFactory();
+	public String suiteName;
 
 	@BeforeSuite
-	public void beforeSuite() throws Exception {
+	public void beforeSuite(ITestContext ctx) throws Exception {
+		suiteName = ctx.getSuite().getName();
+		logger.info(suiteName + " ui automation start time - " + new Date());
 		initialize();
 	}
 
@@ -95,9 +99,8 @@ public class TestBase {
 
 	@AfterSuite
 	public void afterSuite() {
-
 		extent.flush();
-
+		logger.info(suiteName + " ui automation end time - " + new Date());
 	}
 
 	// initializing the Tests
@@ -214,40 +217,28 @@ public class TestBase {
 
 	// Opening the desired browser
 	/*
-	 * public void openBrowser(){
-	 * if(CONFIG.getProperty("browserType").equals("FF")){ ob = new
-	 * FirefoxDriver(); } else if
-	 * (CONFIG.getProperty("browserType").equals("IE")){
-	 * System.setProperty("webdriver.ie.driver",
-	 * "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe"); DesiredCapabilities
-	 * capabilities = DesiredCapabilities.internetExplorer();
-	 * capabilities.setCapability(InternetExplorerDriver.
-	 * IE_ENSURE_CLEAN_SESSION, true); System.setProperty("webdriver.ie.driver",
-	 * "drivers/IEDriverServer.exe"); ob = new
-	 * InternetExplorerDriver(capabilities); } else if
-	 * (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
+	 * public void openBrowser(){ if(CONFIG.getProperty("browserType").equals("FF")){ ob = new FirefoxDriver(); } else
+	 * if (CONFIG.getProperty("browserType").equals("IE")){ System.setProperty("webdriver.ie.driver",
+	 * "C:\\Users\\UC201214\\Desktop\\IEDriverServer.exe"); DesiredCapabilities capabilities =
+	 * DesiredCapabilities.internetExplorer(); capabilities.setCapability(InternetExplorerDriver.
+	 * IE_ENSURE_CLEAN_SESSION, true); System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe"); ob = new
+	 * InternetExplorerDriver(capabilities); } else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")){
 	 * DesiredCapabilities capability = DesiredCapabilities.chrome();
-	 * capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	 * System.setProperty("webdriver.chrome.driver",
+	 * capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); System.setProperty("webdriver.chrome.driver",
 	 * "C:\\Users\\UC201214\\Desktop\\compatibility issues\\chromedriver.exe");
-	 * System.setProperty("webdriver.chrome.driver",
-	 * "drivers/chromedriver.exe"); ob= new ChromeDriver(capability); } else if
-	 * (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){
-	 * DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
-	 * SafariOptions safariOptions = new SafariOptions();
-	 * safariOptions.setUseCleanSession(true);
-	 * desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
+	 * System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe"); ob= new ChromeDriver(capability); }
+	 * else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")){ DesiredCapabilities desiredCapabilities =
+	 * DesiredCapabilities.safari(); SafariOptions safariOptions = new SafariOptions();
+	 * safariOptions.setUseCleanSession(true); desiredCapabilities.setCapability(SafariOptions.CAPABILITY,
 	 * safariOptions); ob = new SafariDriver(desiredCapabilities); } String
-	 * waitTime=CONFIG.getProperty("defaultImplicitWait"); String
-	 * pageWait=CONFIG.getProperty("defaultPageWait");
-	 * ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime),
-	 * TimeUnit.SECONDS); try{
-	 * ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait),
-	 * TimeUnit.SECONDS); } catch(Throwable t){ System.out.println(
-	 * "Page Load Timeout not supported in safari driver"); } }
+	 * waitTime=CONFIG.getProperty("defaultImplicitWait"); String pageWait=CONFIG.getProperty("defaultPageWait");
+	 * ob.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS); try{
+	 * ob.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS); } catch(Throwable t){
+	 * System.out.println( "Page Load Timeout not supported in safari driver"); } }
 	 */
 
-	public void runOnSauceLabsFromLocal(String os, String browser) throws Exception {
+	public void runOnSauceLabsFromLocal(String os,
+			String browser) throws Exception {
 
 		String username = "amneetsingh";
 		String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
@@ -350,7 +341,8 @@ public class TestBase {
 	}
 
 	// compareStrings
-	public boolean compareStrings(String expectedString, String actualString) {
+	public boolean compareStrings(String expectedString,
+			String actualString) {
 		try {
 			Assert.assertEquals(actualString, expectedString);
 			test.log(LogStatus.PASS, "Strings matching");
@@ -363,7 +355,8 @@ public class TestBase {
 	}
 
 	// compareStrings by ignoring case
-	public boolean compareStringsIgnoringCase(String expectedString, String actualString) {
+	public boolean compareStringsIgnoringCase(String expectedString,
+			String actualString) {
 
 		try {
 			Assert.assertEquals(actualString.toLowerCase(), expectedString.toLowerCase());
@@ -377,7 +370,8 @@ public class TestBase {
 	}
 
 	// compare numbers
-	public boolean compareNumbers(int expectedVal, int actualValue) {
+	public boolean compareNumbers(int expectedVal,
+			int actualValue) {
 		try {
 			Assert.assertEquals(actualValue, expectedVal);
 			test.log(LogStatus.PASS, "Numbers are matching");
@@ -429,14 +423,14 @@ public class TestBase {
 		int count = ob.findElements(By.cssSelector(OR.getProperty(id))).size();
 		logger.info("Count is " + count);
 		try {
-			if(count==0){
-				List<WebElement> element=ob.findElements(By.cssSelector(OR.getProperty("login_error1")));
-				if(element.size()==2||element.size()==1){
+			if (count == 0) {
+				List<WebElement> element = ob.findElements(By.cssSelector(OR.getProperty("login_error1")));
+				if (element.size() == 2 || element.size() == 1) {
 					test.log(LogStatus.PASS, "Particular element is present");
 				}
-			}else{
-			Assert.assertEquals(count, 1);
-			test.log(LogStatus.PASS, "Particular element is present");
+			} else {
+				Assert.assertEquals(count, 1);
+				test.log(LogStatus.PASS, "Particular element is present");
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Error--->" + t);
@@ -543,41 +537,33 @@ public class TestBase {
 	}
 
 	// Creates a new TR user
-	public String createNewUser(String first_name, String last_name) throws Exception {
+	public String createNewUser(String first_name,
+			String last_name) throws Exception {
 
 		String password = "Neon@123";
 
 		ob.get("https://www.guerrillamail.com");
 		BrowserWaits.waitTime(2);
-		if(CONFIG.getProperty("browserType").equals("IE")){
+		if (CONFIG.getProperty("browserType").equals("IE")) {
 			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-		    Thread.sleep(5000);
+			Thread.sleep(5000);
 		}
 		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		ob.navigate().to(host);
 		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 		/*
-		 * waitForElementTobeVisible(ob,
-		 * By.xpath(OR.getProperty("TR_login_button")), 30);
-		 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-		 * waitForElementTobeVisible(ob,
+		 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+		 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click(); waitForElementTobeVisible(ob,
 		 * By.linkText(OR.getProperty("TR_register_link")), 30);
-		 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click
-		 * (); waitForElementTobeVisible(ob,
+		 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click (); waitForElementTobeVisible(ob,
 		 * By.id(OR.getProperty("reg_email_textBox")), 30);
-		 * ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(
-		 * email);
-		 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).
-		 * sendKeys(first_name);
-		 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).
-		 * sendKeys(last_name);
-		 * ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).
-		 * sendKeys(password);
-		 * ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).
-		 * sendKeys(password);
+		 * ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys( email);
+		 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))). sendKeys(first_name);
+		 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))). sendKeys(last_name);
+		 * ob.findElement(By.id(OR.getProperty("reg_password_textBox"))). sendKeys(password);
+		 * ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))). sendKeys(password);
 		 * ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
-		 * ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click
-		 * (); waitForElementTobeVisible(ob,
+		 * ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click (); waitForElementTobeVisible(ob,
 		 * By.xpath("//div[@class='userprofile']"), 30);
 		 */
 
@@ -610,9 +596,9 @@ public class TestBase {
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		BrowserWaits.waitTime(2);
 		ob.get("https://www.guerrillamail.com");
-		if(CONFIG.getProperty("browserType").equals("IE")){
+		if (CONFIG.getProperty("browserType").equals("IE")) {
 			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-		    Thread.sleep(5000);
+			Thread.sleep(5000);
 		}
 		BrowserWaits.waitTime(14);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
@@ -635,13 +621,14 @@ public class TestBase {
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 		BrowserWaits.waitTime(10);
-		//logout();
+		// logout();
 		return email;
 
 	}
 
 	// verifies whether a particular string contains another string or not
-	public boolean StringContains(String MainString, String ToBeCheckedString) {
+	public boolean StringContains(String MainString,
+			String ToBeCheckedString) {
 		try {
 			Assert.assertTrue(MainString.contains(ToBeCheckedString), "MainString doesn't contain ToBeCheckedString");
 			if (test != null)
@@ -656,7 +643,9 @@ public class TestBase {
 	}
 
 	// To verify that a date falls between 2 particular dates
-	public boolean checkDate(String date, String minDate, String maxDate) {
+	public boolean checkDate(String date,
+			String minDate,
+			String maxDate) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, yyyy");
 
@@ -728,7 +717,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobeVisible(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
@@ -742,8 +733,10 @@ public class TestBase {
 	 * @return
 	 * @throws Exception
 	 */
-	public WebElement waitForElementTobeVisible(WebDriver driver, By locator, int time, String Errormsg)
-			throws Exception {
+	public WebElement waitForElementTobeVisible(WebDriver driver,
+			By locator,
+			int time,
+			String Errormsg) throws Exception {
 		WebElement element = null;
 		try {
 			element = waitForElementTobeVisible(driver, locator, time);
@@ -762,7 +755,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobePresent(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobePresent(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
@@ -773,7 +768,8 @@ public class TestBase {
 	 * @param driver
 	 * @param element
 	 */
-	public static void jsClick(WebDriver driver, WebElement element) {
+	public static void jsClick(WebDriver driver,
+			WebElement element) {
 
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 	}
@@ -784,7 +780,8 @@ public class TestBase {
 	 * @param driver
 	 * @param element
 	 */
-	public void scrollElementIntoView(WebDriver driver, WebElement element) {
+	public void scrollElementIntoView(WebDriver driver,
+			WebElement element) {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
@@ -798,7 +795,9 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public static List<WebElement> waitForAllElementsToBePresent(WebDriver driver, By locator, int time) {
+	public static List<WebElement> waitForAllElementsToBePresent(WebDriver driver,
+			By locator,
+			int time) {
 		return new WebDriverWait(driver, time).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 	}
 
@@ -846,7 +845,8 @@ public class TestBase {
 		// waitForAjax(driver);
 	}
 
-	public Alert waitForAlertToBePresent(WebDriver driver, int time) {
+	public Alert waitForAlertToBePresent(WebDriver driver,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.alertIsPresent());
 	}
@@ -859,12 +859,15 @@ public class TestBase {
 	 * @param time
 	 * @return
 	 */
-	public WebElement waitForElementTobeClickable(WebDriver driver, By locator, int time) {
+	public WebElement waitForElementTobeClickable(WebDriver driver,
+			By locator,
+			int time) {
 
 		return new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
 	}
 
-	public boolean checkElementIsDisplayed(WebDriver driver, By locator) {
+	public boolean checkElementIsDisplayed(WebDriver driver,
+			By locator) {
 		boolean result = false;
 		try {
 
@@ -883,7 +886,8 @@ public class TestBase {
 	 * @param numberOfWindows
 	 * @return
 	 */
-	public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver, final int numberOfWindows) {
+	public ExpectedCondition<Boolean> numberOfWindowsToBe(WebDriver driver,
+			final int numberOfWindows) {
 		return new ExpectedCondition<Boolean>() {
 
 			@Override
@@ -900,7 +904,8 @@ public class TestBase {
 	 * @param driver
 	 * @param numberOfWindows
 	 */
-	public void waitForNumberOfWindowsToEqual(WebDriver driver, final int numberOfWindows) {
+	public void waitForNumberOfWindowsToEqual(WebDriver driver,
+			final int numberOfWindows) {
 		new WebDriverWait(driver, 60).until(numberOfWindowsToBe(driver, numberOfWindows));
 	}
 
@@ -925,7 +930,8 @@ public class TestBase {
 	 * @param driver
 	 * @param mainWindowHandle
 	 */
-	public void switchToMainWindow(WebDriver driver, String mainWindowHandle) {
+	public void switchToMainWindow(WebDriver driver,
+			String mainWindowHandle) {
 
 		driver.switchTo().window(mainWindowHandle);
 
@@ -954,7 +960,9 @@ public class TestBase {
 	}
 
 	// Method to read excel worksheet
-	public String xlRead(String sPath, int r, int c) throws Exception {
+	public String xlRead(String sPath,
+			int r,
+			int c) throws Exception {
 		int xRows, xCols;
 		File myxl = new File(sPath);
 		FileInputStream myStream = new FileInputStream(myxl);
@@ -978,7 +986,9 @@ public class TestBase {
 		return xData[r][c];
 	}
 
-	public String xlRead2(String sPath, String cellValue, int c) throws Exception {
+	public String xlRead2(String sPath,
+			String cellValue,
+			int c) throws Exception {
 		int xRows, xCols;
 		int r = 0;
 		File myxl = new File(sPath);
@@ -1010,37 +1020,36 @@ public class TestBase {
 		int type = cell.getCellType();
 		Object result;
 		switch (type) {
-		case XSSFCell.CELL_TYPE_NUMERIC: // 0
-			result = cell.getNumericCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_STRING: // 1
-			result = cell.getStringCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_FORMULA: // 2
-			throw new RuntimeException("We can't evaluate formulas in Java");
-		case XSSFCell.CELL_TYPE_BLANK: // 3
-			result = "-";
-			break;
-		case XSSFCell.CELL_TYPE_BOOLEAN: // 4
-			result = cell.getBooleanCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_ERROR: // 5
-			throw new RuntimeException("This cell has an error");
-		default:
-			throw new RuntimeException("We don't support this cell type: " + type);
+			case XSSFCell.CELL_TYPE_NUMERIC: // 0
+				result = cell.getNumericCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_STRING: // 1
+				result = cell.getStringCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_FORMULA: // 2
+				throw new RuntimeException("We can't evaluate formulas in Java");
+			case XSSFCell.CELL_TYPE_BLANK: // 3
+				result = "-";
+				break;
+			case XSSFCell.CELL_TYPE_BOOLEAN: // 4
+				result = cell.getBooleanCellValue();
+				break;
+			case XSSFCell.CELL_TYPE_ERROR: // 5
+				throw new RuntimeException("This cell has an error");
+			default:
+				throw new RuntimeException("We don't support this cell type: " + type);
 		}
 		return result.toString();
 	}
 
 	/**
 	 * 
-	 * @param username
-	 *            -USERNAME Field from the login.properties file
-	 * @param pwd
-	 *            - PASSWORD Field from the login.properties file
+	 * @param username -USERNAME Field from the login.properties file
+	 * @param pwd - PASSWORD Field from the login.properties file
 	 * @throws Exception
 	 */
-	public void loginAs(String usernameKey, String pwdKey) throws Exception {
+	public void loginAs(String usernameKey,
+			String pwdKey) throws Exception {
 		// waitForElementTobeVisible(ob,
 		// By.xpath(OR.getProperty("TR_login_button")), 180);
 		// jsClick(ob,
@@ -1056,8 +1065,7 @@ public class TestBase {
 	/**
 	 * Method to navigate to a particular watch list details page
 	 * 
-	 * @param selectedWatchlistName
-	 *            watch list name
+	 * @param selectedWatchlistName watch list name
 	 * @throws InterruptedException
 	 */
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
@@ -1086,17 +1094,14 @@ public class TestBase {
 	}
 
 	/**
-	 * Method for watch or unwatch item for particular watchlist from Search
-	 * Results or Article Record page
+	 * Method for watch or unwatch item for particular watchlist from Search Results or Article Record page
 	 * 
 	 * @param watchButton
 	 * @param watchListName
 	 * @throws InterruptedException
 	 */
-	public void watchOrUnwatchItemToAParticularWatchlist( String watchListName)
-			throws InterruptedException {
+	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throws InterruptedException {
 
-		
 		ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
 		waitForElementTobeVisible(ob, By.xpath("//button[@class='wui-mini-btn wui-mini-btn--primary']"), 60);
 		Thread.sleep(2000);
@@ -1105,13 +1110,12 @@ public class TestBase {
 		ob.findElement(By.linkText(watchListName)).click();
 		Thread.sleep(3000);
 		ob.findElement(By.xpath("//input[@type='text']")).click();
-		
-		
+
 	}
+
 	/**
 	 * 
-	 * @param type
-	 *            search type from dropdown
+	 * @param type search type from dropdown
 	 * @throws InterruptedException
 	 */
 	public void selectSearchTypeFromDropDown(String type) throws InterruptedException {
@@ -1129,8 +1133,9 @@ public class TestBase {
 	 * @param watchListDescription
 	 * @throws Exception
 	 */
-	public void createWatchList(String typeOfWatchList, String watchListName, String watchListDescription)
-			throws Exception {
+	public void createWatchList(String typeOfWatchList,
+			String watchListName,
+			String watchListDescription) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
@@ -1182,24 +1187,19 @@ public class TestBase {
 
 	/**
 	 * 
-	 * @param emailId
-	 *            -Login as the specified email id user
-	 * @param password
-	 *            - The user password
+	 * @param emailId -Login as the specified email id user
+	 * @param password - The user password
 	 * @throws Exception
 	 */
-	public void loginAsSpecifiedUser(String emailId, String password) throws Exception {
+	public void loginAsSpecifiedUser(String emailId,
+			String password) throws Exception {
 		/*
-		 * waitForElementTobeVisible(ob,
-		 * By.xpath(OR.getProperty("TR_login_button")), 180); jsClick(ob,
-		 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
-		 * waitForElementTobeVisible(ob,
+		 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 180); jsClick(ob,
+		 * ob.findElement(By.xpath(OR.getProperty("TR_login_button")))); waitForElementTobeVisible(ob,
 		 * By.name(OR.getProperty("TR_email_textBox")), 180);
 		 * ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-		 * ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(
-		 * emailId);
-		 * ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).
-		 * sendKeys(password); jsClick(ob,
+		 * ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys( emailId);
+		 * ob.findElement(By.name(OR.getProperty("TR_password_textBox"))). sendKeys(password); jsClick(ob,
 		 * ob.findElement(By.cssSelector(OR.getProperty("login_button"))));
 		 */
 
