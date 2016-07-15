@@ -50,7 +50,7 @@ public class NotificationsTestBase extends TestBase {
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
 				&& !(suiteName.equals("Sanity suite"))) {
 			try {
-				// createNewUsers();
+				 createNewUsers();
 			} catch (Exception e) {
 
 			}
