@@ -540,7 +540,7 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		jsClick(ob,ob.findElement(By.cssSelector(
 				OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 60);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
 		
 		waitForNumberOfWindowsToEqual(ob, 2);

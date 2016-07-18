@@ -64,7 +64,7 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		BrowserWaits.waitTime(5);
+		BrowserWaits.waitTime(15);
 		
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
