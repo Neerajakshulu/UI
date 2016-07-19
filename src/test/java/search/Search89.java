@@ -91,7 +91,7 @@ public class Search89 extends TestBase {
 
 				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).size() != 0;
 				titleName = ob.findElement(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).getText();
-				if (titlePresent) {
+             	if (titlePresent) {
 					test.log(LogStatus.PASS, "Title is present in patent record view page");
 				} else {
 					status = 2;
@@ -133,7 +133,7 @@ public class Search89 extends TestBase {
 					status = 2;
 					test.log(LogStatus.FAIL, "Original title name is not displayed");
 				}
-
+               BrowserWaits.waitTime(7);
 				String titleNameOriginal = ob.findElement(By.xpath("//div[@id='PAT.TIOR0']")).getText();
 				if (titleNameOriginal.equalsIgnoreCase(titleName)) {
 					test.log(LogStatus.PASS, "Original title name is same as the title displayed in NEON");
