@@ -36,7 +36,7 @@ public class Search55 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that only patents get displayed in the summary page when user searches using PATENTS content type in search drop down")
+						"Verify that only patents get displayed in the summary page when user searches using PATENTS  as content type in Left Navigation pane")
 				.assignCategory("Search suite");
 
 	}

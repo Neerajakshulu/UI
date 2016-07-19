@@ -37,7 +37,7 @@ public class Search56 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that only posts get displayed in the summary page when user searches using POSTS content type in search drop down")
+						"Verify that only posts get displayed in the summary page when user selects post content type in left navigation pane")
 				.assignCategory("Search suite");
 
 	}

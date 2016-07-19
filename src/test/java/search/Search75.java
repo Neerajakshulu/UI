@@ -87,7 +87,7 @@ public class Search75 extends TestBase {
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("i");
 			Thread.sleep(1000);
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("o");
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("patentsTile")), 30);
 
 			BrowserWaits.waitTime(2);

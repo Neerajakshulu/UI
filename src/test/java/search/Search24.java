@@ -15,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -71,12 +72,14 @@ public class Search24 extends TestBase {
 		
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
+			
 			// Type into the search box and get search results
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			BrowserWaits.waitTime(5);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
@@ -93,15 +96,17 @@ public class Search24 extends TestBase {
 			for (int i = 0; i < urls.size(); i++) {
 
 				ob.navigate().to(urls.get(i));
-				Thread.sleep(5000);
+				BrowserWaits.waitTime(6);
 				// String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
 				// ob.get(link55);
 				WebElement myE = ob.findElement(By.xpath(OR.getProperty("details_link")));
+				BrowserWaits.waitTime(5);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-
+				BrowserWaits.waitTime(4);
 				Set<String> myset = ob.getWindowHandles();
 				Iterator<String> myIT = myset.iterator();
+				BrowserWaits.waitTime(3);
 				ArrayList<String> mylist55 = new ArrayList<String>();
 
 				for (int k = 0; k < myset.size(); k++) {
@@ -109,10 +114,9 @@ public class Search24 extends TestBase {
 					mylist55.add(myIT.next());
 
 				}
-
+            
 				ob.switchTo().window(mylist55.get(1));
-				Thread.sleep(15000);
-
+				BrowserWaits.waitTime(3);
 				pageText = ob.getPageSource().toLowerCase();
 				condition1 = pageText.contains("ed") && pageText.contains("cat");
 				System.out.println(condition1);

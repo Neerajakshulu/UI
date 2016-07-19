@@ -39,7 +39,7 @@ public class Search71 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that record view of an patent gets displayed when user clicks on any patent option in the search type ahead while ALL option is selected in the search drop down")
+						"Verify that record view of an patent gets displayed when user clicks on any patent option in the search type ahead")
 				.assignCategory("Search suite");
 
 	}

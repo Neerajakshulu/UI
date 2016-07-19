@@ -34,7 +34,7 @@ public class Search49 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that search results related to all content types get displayed in the summary page when user searches using ALL option in search drop down")
+						"Verify that search results related to all content types get displayed in the summary page when user searches using ALL option in Left navigation pane")
 				.assignCategory("Search suite");
 
 	}

@@ -105,6 +105,7 @@ public class Search10 extends TestBase {
 			filterValues.get(1).click();
 			waitForAjax(ob);
         			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+        			BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -112,6 +113,7 @@ public class Search10 extends TestBase {
 				
 			}
 			System.out.println("al1-->" + al1.size());
+			System.out.println(al1);
 			jsClick(ob, searchResults.get(8));
 			BrowserWaits.waitTime(4);
 
@@ -129,6 +131,7 @@ public class Search10 extends TestBase {
 			}
 			
 			System.out.println("al2--->" + al2.size());
+			System.out.println(al2);
 				try {
 						Assert.assertTrue(al1.equals(al2));
 				

@@ -36,7 +36,7 @@ public class Search69 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that the following changes take place when user switches over to any other content type in the left navigation pane:a)Search results related to the switched content type get displayed in the summary pageb)Search drop down option gets changed automatically to the switched content type")
+						"Verify that the following changes take place when user switches over to any other content type in the left navigation pane:a)Search results related to the switched content type get displayed in the summary page")
 				.assignCategory("Search suite");
 
 	}

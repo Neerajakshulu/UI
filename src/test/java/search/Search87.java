@@ -37,7 +37,7 @@ public class Search87 extends TestBase {
 		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a patent gets displayed when user clicks on article title in ALL search results page")
+						"Verify that record view page of a artcle gets displayed when user clicks on article title in ALL search results page")
 				.assignCategory("Search suite");
 
 	}

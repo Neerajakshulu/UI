@@ -39,7 +39,7 @@ public class Search72 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that record view of an post gets displayed when user clicks on any post option in the search type ahead while ALL option is selected in the search drop down")
+						"Verify that record view of an post gets displayed when user clicks on any post option in the search type ahead")
 				.assignCategory("Search suite");
 
 	}
@@ -84,13 +84,10 @@ public class Search72 extends TestBase {
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("t");
 			Thread.sleep(1000);
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("postsTile")), 30);
 			Thread.sleep(1000);
-
-			
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("postsTile")));
-			 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("arguments[0].scrollIntoView(true);",myE2);
 			Thread.sleep(1000);
