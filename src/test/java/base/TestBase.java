@@ -2,6 +2,7 @@ package base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.impl.ThrowableFormatOptions;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -535,45 +537,49 @@ public class TestBase {
 		}
 
 	}
-
+	protected static String email=null;
+	boolean status=false;
+	String mail=null;
+	boolean activationStatus=false;
 	// Creates a new TR user
 	public String createNewUser(String first_name,
 			String last_name) throws Exception {
 
-		String password = "Neon@123";
+		
 
+		status=registrationForm(first_name,last_name);
+		BrowserWaits.waitTime(2);
+		if(status){
+			activationStatus=userActivation();
+			
+		}
+		if(activationStatus){
+			mail=loginActivationMail();	
+		}
+		
+		return mail;
+
+	}
+	
+	public boolean registrationForm(String first_name,
+			String last_name) throws Exception{
+		try{
 		ob.get("https://www.guerrillamail.com");
 		BrowserWaits.waitTime(2);
 		if (CONFIG.getProperty("browserType").equals("IE")) {
 			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(4);
 		}
-		String email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+	
+		email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 		ob.navigate().to(host);
-		// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		/*
-		 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-		 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click(); waitForElementTobeVisible(ob,
-		 * By.linkText(OR.getProperty("TR_register_link")), 30);
-		 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click (); waitForElementTobeVisible(ob,
-		 * By.id(OR.getProperty("reg_email_textBox")), 30);
-		 * ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys( email);
-		 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))). sendKeys(first_name);
-		 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))). sendKeys(last_name);
-		 * ob.findElement(By.id(OR.getProperty("reg_password_textBox"))). sendKeys(password);
-		 * ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))). sendKeys(password);
-		 * ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
-		 * ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click (); waitForElementTobeVisible(ob,
-		 * By.xpath("//div[@class='userprofile']"), 30);
-		 */
-
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
+		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
 		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
@@ -594,19 +600,35 @@ public class TestBase {
 		}
 
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-		BrowserWaits.waitTime(2);
+		}catch(Throwable t){
+			t.printStackTrace();
+			test.log(LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+
+		}
+		return true;
+	}
+	
+	
+	public boolean userActivation() throws Exception{
+		try{
+		BrowserWaits.waitTime(3);
 		ob.get("https://www.guerrillamail.com");
 		if (CONFIG.getProperty("browserType").equals("IE")) {
 			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(4);
 		}
 		BrowserWaits.waitTime(14);
 		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
+		BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
-
 		WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 		List<WebElement> links = email_body.findElements(By.tagName("a"));
 
@@ -614,18 +636,36 @@ public class TestBase {
 		BrowserWaits.waitTime(3);
 		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		BrowserWaits.waitTime(4);
-
+		}catch(Throwable t){
+			t.printStackTrace();
+			test.log(LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+		}
+		return true;
+	}
+	
+	public String loginActivationMail() throws Exception{
+		try{
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 		BrowserWaits.waitTime(10);
-		// logout();
+		}catch(Throwable t){
+			t.printStackTrace();
+			test.log(LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
+			closeBrowser();
+		}
 		return email;
-
 	}
-
 	// verifies whether a particular string contains another string or not
 	public boolean StringContains(String MainString,
 			String ToBeCheckedString) {
