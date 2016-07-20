@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -38,8 +39,8 @@ public class IAM025 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -61,56 +62,62 @@ public class IAM025 extends TestBase {
 			ob.navigate().to(host);
 			login();
 			//
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("TR_email_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(
-					CONFIG.getProperty("defaultUsername").toUpperCase());
-			ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
+			/*
+			 * waitForElementTobeVisible(ob,
+			 * By.xpath(OR.getProperty("TR_login_button")), 30);
+			 * 
+			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click
+			 * (); // waitForElementTobeVisible(ob,
+			 * By.id(OR.getProperty("TR_email_textBox")), 30);
+			 * ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear()
+			 * ; ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).
+			 * sendKeys( CONFIG.getProperty("defaultUsername").toUpperCase());
+			 * ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
+			 * .sendKeys(CONFIG.getProperty("defaultPassword"));
+			 * ob.findElement(By.id(OR.getProperty("login_button"))).click();
+			 */
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
+			ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
+			BrowserWaits.waitTime(3);
+			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
+			logger.info("Title : " + str);
+			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
+			logger.info("Emai Text : " + feedBack);
+			
+
 			try {
-				ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_text_in_helpPage")), 10);
-				Assert.assertEquals(checkElementPresence("help_text_in_helpPage")
-						&& checkElementPresence("feedback_text_in_helpPage"), true);
+
+				Assert.assertTrue(str.contains("Send feedback to the Project Neon team")
+						&& feedBack.contains("Report a problem or submit a support request"));
 				test.log(LogStatus.INFO, " Help link is working as expected");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, " Help Link is not working");// extent reports
+				test.log(LogStatus.FAIL, " Help Link is not working");// extent
+																		// reports
 				// next 3 lines to print whole testng error in report
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_unexpected_happened")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 				closeBrowser();
 			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		closeBrowser();
@@ -122,10 +129,10 @@ public class IAM025 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
+		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
+		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

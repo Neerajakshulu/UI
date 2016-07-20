@@ -69,13 +69,13 @@ public class IAM027 extends TestBase {
 			// Navigate to deep link account page
 			ob.navigate().to(CONFIG.getProperty("helpLink"));
 			login();
-			String str = ob.findElement(By.xpath("(//h2[@class='wui-title'])[1]")).getText();
+			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : "+str);
-			String feedBack = ob.findElement(By.xpath("(//h2[@class='wui-title'])[2]")).getText();
+			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
 			logger.info("Emai Text : "+feedBack);
 			BrowserWaits.waitTime(2);
 			try {
-				Assert.assertTrue(str.contains("Help") && feedBack.contains("Feedback"));
+				Assert.assertTrue(str.contains("Send feedback to the Project Neon team") && feedBack.contains("Report a problem or submit a support request"));
 				test.log(LogStatus.PASS, "Deep link is working correctly for help page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Deep link is not working correctly for help page" + t);// extent
