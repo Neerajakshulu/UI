@@ -68,7 +68,7 @@ public class IAM003 extends TestBase {
 			clearCookies();
 
 			String email = "linkedinloginid@gmail.com";
-			String password = "Neon@123";
+			String password = "Neon@1234";
 
 			// Navigate to LI login page
 			ob.navigate().to(host);
