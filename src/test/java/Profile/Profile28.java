@@ -39,7 +39,7 @@ public class Profile28 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to add 'country' using typeahead").assignCategory(
+		test = extent.startTest(var, "Verify that 'country' using type ahead options should display while enter min 2 characters").assignCategory(
 				"Profile");
 	}
 
