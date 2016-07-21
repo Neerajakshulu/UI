@@ -76,7 +76,8 @@ public class IAM010 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 3);
-			int i = Integer.parseInt(characterLength.trim());
+			Double d=new Double(Double.parseDouble(characterLength));
+			int i=d.intValue();
 			logger.info("Char Length : " + characterLength);
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
