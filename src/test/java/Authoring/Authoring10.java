@@ -110,7 +110,7 @@ public class Authoring10 extends TestBase {
 			//waitForTRHomePage();
 			loginAs(username, password);
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

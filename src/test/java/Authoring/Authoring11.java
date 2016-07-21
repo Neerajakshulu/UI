@@ -108,7 +108,7 @@ public class Authoring11 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

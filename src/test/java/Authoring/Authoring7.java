@@ -111,7 +111,7 @@ public class Authoring7 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 
 			enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();

@@ -101,7 +101,7 @@ public class Authoring25 extends TestBase {
 			//waitForTRHomePage();
 			loginAs("USERNAME12", "PASSWORD12");
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getAuthoringInstance(ob).enterArticleComments("test");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 		} catch (Exception e) {
@@ -129,7 +129,7 @@ public class Authoring25 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			BrowserWaits.waitTime(10);
-			pf.getAuthoringInstance(ob).updateComment(htmlTags);
+			pf.getAuthoringInstance(ob).updateComment(test,htmlTags);
 			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
