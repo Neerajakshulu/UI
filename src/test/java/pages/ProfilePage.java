@@ -44,6 +44,7 @@ public class ProfilePage extends TestBase {
 	static String watchTextBefore;
 	static List<WebElement> topicTypeahead;
 	static List<WebElement> profileTabsRecords;
+	static boolean profileIncomplete;
 
 	/**
 	 * Method for Validate Profile Search with last name
@@ -172,8 +173,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickProfileLink() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Interests and Skills", "Posts", "Comments", "Followers",
 				"Following");
 	}
@@ -186,7 +187,7 @@ public class ProfilePage extends TestBase {
 	public void getProfileTitle() throws Exception {
 		profileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
-		System.out.println("profile title-->" + profileTitle);
+		logger.info("profile title-->" + profileTitle);
 	}
 
 	/**
@@ -197,7 +198,7 @@ public class ProfilePage extends TestBase {
 	public void getProfileMetadata() throws Exception {
 		profileMetadata = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
-		System.out.println("profile metadata-->" + profileMetadata);
+		logger.info("profile metadata-->" + profileMetadata);
 	}
 
 	/**
@@ -209,7 +210,8 @@ public class ProfilePage extends TestBase {
 		getProfileTitle();
 		getProfileMetadata();
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 120);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 120);
 		// waitForElementTobeVisible(ob,
 		// By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ROLE_METADATA_CSS.toString()), 90);
 		// waitForElementTobeVisible(ob,
@@ -285,11 +287,18 @@ public class ProfilePage extends TestBase {
 	public void validateOwnrProfile() throws Exception {
 		boolean otherProfileEdit = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
-		logger.info("profile edit-->"+otherProfileEdit);
-		if (!otherProfileEdit) {
+		
+		profileIncomplete = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		
+		if (!(otherProfileEdit ||profileIncomplete)) {
 			throw new Exception("Edit option should be available for own profile");
 		}
-
+		
+		if(profileIncomplete) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		}
+		
 		String profileName = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
 		logger.info("profile name-->"+profileName);
@@ -307,12 +316,16 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When user not able to click cancel
 	 */
 	public void clickEditCancel() throws Exception {
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		profileIncomplete = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		if(!profileIncomplete) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		}
 	}
 
 	/**
@@ -326,12 +339,15 @@ public class ProfilePage extends TestBase {
 		metadata = profileMetadata.split("\\|");
 		boolean otherProfileEdit = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
-		// System.out.println("profile edit-->"+otherProfileEdit);
-		if (!otherProfileEdit) {
+		logger.info("profile edit-->"+otherProfileEdit);
+		if (!(otherProfileEdit || profileIncomplete)) {
 			throw new Exception("Edit option should be available for own profile");
 		}
-
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		
+		if(!profileIncomplete) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		}
+		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,
 				metadata[0]);
@@ -1420,9 +1436,16 @@ public class ProfilePage extends TestBase {
 		List<String> errorMsgList=Arrays.asList(errorMessages);
 		
 		List<String> namesInfo=new ArrayList<String>();
+		
+		profileIncomplete=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+	
+		logger.info("is Profile incomplete -->"+profileIncomplete);
+		if(!profileIncomplete) {
+		
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
 		
@@ -1436,6 +1459,22 @@ public class ProfilePage extends TestBase {
 		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS).getText());
 		
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		
+		}
+		
+		else {
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+		
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS).getAttribute("placeholder"));
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS).getAttribute("placeholder"));
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS).getText());
+		namesInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS).getText());
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
 		logger.info("list data-->"+errorMsgList);
 		logger.info("list data2-->"+namesInfo);
 		if(!namesInfo.containsAll(errorMsgList)) {
