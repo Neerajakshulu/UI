@@ -878,8 +878,8 @@ public class PostRecordViewPage extends TestBase {
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString())));
 		}	
 		
-	public void clickFlagButtonInFlagModal(){
-			
+	public void clickFlagButtonInFlagModal() throws InterruptedException{
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString()), 180);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
@@ -892,5 +892,8 @@ public class PostRecordViewPage extends TestBase {
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
 	}
 		
-		
+	public String getRecordType(){
+		waitForElementTobeVisible(ob, By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']"), 80);
+		return ob.findElement(By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']")).getText();
+	}
 }

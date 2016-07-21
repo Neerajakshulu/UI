@@ -106,7 +106,7 @@ public class Authoring22 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			Thread.sleep(6000);// wait for new comment to get added and displayed.

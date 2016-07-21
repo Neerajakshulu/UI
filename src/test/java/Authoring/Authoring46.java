@@ -113,7 +113,7 @@ public class Authoring46 extends TestBase {
 			loginAs("USERNAME4", "PASSWORD4");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getAuthoringInstance(ob).enterArticleComments("test");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 

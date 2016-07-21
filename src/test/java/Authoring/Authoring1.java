@@ -25,12 +25,6 @@ import base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring1 extends TestBase {
-
-	String runmodes[] = null;
-	static int count = -1;
-
-	static boolean fail = false;
-	static boolean skip = false;
 	static int status = 1;
 
 	static int time = 15;
@@ -45,8 +39,6 @@ public class Authoring1 extends TestBase {
 				.startTest(var,
 						"Verify that user Is able to comment on any article and validate the comment count increment")
 				.assignCategory("Authoring");
-		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
-		System.out.println("Run modes-->" + runmodes.length);
 	}
 
 	@Test
@@ -62,7 +54,7 @@ public class Authoring1 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts");
 
 		// selenium code
 		try {
@@ -70,36 +62,15 @@ public class Authoring1 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
-			// ob.get(CONFIG.getProperty("testSiteName"));
-		} catch (Throwable e) {
-			test.log(LogStatus.FAIL, "Error: Something went wrong");
-			// print full stack trace
-			StringWriter errors = new StringWriter();
-			e.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());
-			ErrorUtil.addVerificationFailure(e);
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
-			closeBrowser();
-
-		}
-	}
-
-	@Test(dependsOnMethods = "testLoginTRAccount", dataProvider = "getTestData")
-	public void performAuthoringCommentOperations(String username, String password, String article,
-			String completeArticle, String addComments) throws Exception {
-		try {
-			//waitForTRHomePage();
 			loginAs("USERNAME15", "PASSWORD15");
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getAuthoringInstance(ob).chooseArticle();
 			int count = pf.getAuthoringInstance(ob).getCommentCount();
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).enterArticleComment(CONFIG.getProperty("commentText"));
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			pf.getAuthoringInstance(ob).validateCommentAdd(test, count);
-			pf.getAuthoringInstance(ob).validateViewComment(addComments);
-			pf.getAuthoringInstance(ob).updateComment("comment updated");
+			pf.getAuthoringInstance(ob).validateViewComment(test,CONFIG.getProperty("commentText"));
+			pf.getAuthoringInstance(ob).updateComment(test,"comment updated");
 			validateUpdatedComment("comment updated");
 			closeBrowser();
 		} catch (Throwable e) {
@@ -113,26 +84,10 @@ public class Authoring1 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
+
 		}
 	}
-
-	@AfterMethod
-	public void reportDataSetResult() {
-		if (skip)
-			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "SKIP");
-
-		else if (fail) {
-
-			status = 2;
-			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "FAIL");
-		} else
-			TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count + 2, "PASS");
-
-		skip = false;
-		fail = false;
-
-	}
-
+	
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
@@ -150,14 +105,10 @@ public class Authoring1 extends TestBase {
 		// closeBrowser();
 	}
 
-	@DataProvider
-	public Object[][] getTestData() {
-		return TestUtil.getData(authoringxls, this.getClass().getSimpleName());
-	}
-
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
-		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
+		String commentText = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
@@ -166,6 +117,9 @@ public class Authoring1 extends TestBase {
 			// comment not added")));
 			status = 2;
 			throw new Exception("Updated " + updatedComments + " not present");
+		}else{
+			
+			test.log(LogStatus.PASS, "Updated comment validation passed");
 		}
 	}
 

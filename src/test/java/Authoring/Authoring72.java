@@ -68,7 +68,7 @@ public class Authoring72 extends TestBase {
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getAuthoringInstance(ob).searchArticle("Biology");
-			pf.getAuthoringInstance(ob).chooseArticle("");
+			pf.getAuthoringInstance(ob).chooseArticle();
 			
 			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
 			test.log(LogStatus.INFO, "Added internal link to the comment");
