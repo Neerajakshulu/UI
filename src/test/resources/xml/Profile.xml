@@ -319,7 +319,7 @@
 		<parameter name="password" value="Neon@123" />
 		<parameter name="firstLastNames" value="+ First Name|+ Last Name|Please enter your first name.|Please enter your last name." />
 		<parameter name="firstName" value="Chinna" />
-		<parameter name="lastName" value="Putha" />
+		<parameter name="lastName" value="Putha"  />
 		<classes>
 			<class name="Profile.Profile42"></class>
 		</classes>
