@@ -86,6 +86,7 @@ public class Search123 extends TestBase {
 			boolean condition11 = false;
 			
 			if(!host.contains("stable")){
+				System.out.println("In if");
 			ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
 			BrowserWaits.waitTime(3);
 			
@@ -102,21 +103,32 @@ public class Search123 extends TestBase {
 			else{
 				
 				System.out.println("In else");
-				BrowserWaits.waitTime(6);
-				waitForElementTobePresent(ob,By.cssSelector("span[class='wui-checkbox__visible']"), 50);
-				jsClick(ob,ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")));
 				
+				waitForAllElementsToBePresent(ob,By.xpath("//span[@class='wui-checkbox__visible']"), 50);
+				List<WebElement> list=ob.findElements(By.cssSelector("span[class='wui-checkbox__visible']"));
+				for(WebElement we:list)
+				{
+					if(we.isDisplayed())
+					{
+						jsClick(ob,we);
+				     break;
+					}
+							
+				}
+			
+			
+				BrowserWaits.waitTime(5);
 				waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 50);
 				ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
 				Thread.sleep(3000);
 				
 				ob.navigate().back();
 				Thread.sleep(2000);
-				waitForElementTobeVisible(ob, By.cssSelector("span[class='wui-checkbox__visible']"), 50);
-				String backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background");
-				//condition11=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).isSelected();
+	
+				waitForAllElementsToBePresent(ob,By.xpath("//span[@class='wui-checkbox__visible']"), 50);
 				
-				if (!backgrundValue.contains("rgb(255, 255, 255)")) {
+				boolean	backgrundValue=ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("color").contains("rgba(42, 45, 53, 1)");
+				if (backgrundValue) {
 					test.log(LogStatus.INFO, "check box is selected");
 					condition11=true;
 				} else {
