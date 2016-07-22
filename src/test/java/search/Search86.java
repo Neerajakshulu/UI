@@ -83,7 +83,7 @@ public class Search86 extends TestBase {
 				waitForAjax(ob);
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-				BrowserWaits.waitTime(4);
+				BrowserWaits.waitTime(10);
 				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
 				waitForAjax(ob);
 							

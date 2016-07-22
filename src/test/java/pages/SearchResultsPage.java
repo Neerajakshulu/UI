@@ -266,5 +266,15 @@ public class SearchResultsPage extends TestBase {
 		}
 	}
 
+	public boolean isSearchPageDisplayed()
+
+	{ 
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
+		List<WebElement> itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+		if(itemList.size()>0)
+		return true;
+		else
+			return false;
+	}
 
 }
