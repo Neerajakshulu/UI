@@ -991,11 +991,15 @@ public class ProfilePage extends TestBase {
 	 */
 	public void primaryInstitutionTypeaheadOptions(String oneChar,
 			String twoChar) throws Exception {
+		profileIncomplete = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS).isDisplayed();
+		if(!profileIncomplete) {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
 		// enter single character check typeahead options should not display
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS, oneChar);
@@ -1021,11 +1025,16 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When Typeahead options not occured
 	 */
 	public void selectProfilePITypeAhead(String typeAheadOption) throws Exception {
+		profileIncomplete = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		if(!profileIncomplete) {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,
 				typeAheadOption);
@@ -1058,11 +1067,16 @@ public class ProfilePage extends TestBase {
 	 */
 	public void selectProfileCountryTypeAhead(String countyTypeahead,
 			String fullCountry) throws Exception {
+		profileIncomplete = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		if(!profileIncomplete) {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,
 				countyTypeahead);
@@ -1100,13 +1114,17 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws Exception, When Typeahead options not occurred
 	 */
-	public void countryTypeaheadOptionsMinChars(String oneChar,
-			String twoChar) throws Exception {
+	public void countryTypeaheadOptionsMinChars(String oneChar,	String twoChar) throws Exception {
+		profileIncomplete = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		if(!profileIncomplete) {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
 		// enter single character check typeahead options should not display
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,
