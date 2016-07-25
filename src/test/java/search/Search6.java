@@ -76,9 +76,7 @@ public class Search6 extends TestBase {
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
+	
 			// System.out.println(ob.findElement(By.xpath(OR.getProperty("typeAhead_dropDown"))).getText());
 
 			List<WebElement> myList = ob.findElements(By.xpath(OR.getProperty("typeAhead_dropDown")));

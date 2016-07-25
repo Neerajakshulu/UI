@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite A" parallel="tests" thread-count="10">
+<suite name="IAM" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -70,11 +70,11 @@
 	</test>
 
 
-	<test name="IAM011">
+<!-- 	<test name="IAM011">
 		<classes>
 			<class name="iam.IAM011"></class>
 		</classes>
-	</test>
+	</test> -->
 
 
 	<test name="IAM012">
@@ -132,11 +132,11 @@
 		</classes>
 	</test>
 
-	<test name="IAM020">
+	<!-- <test name="IAM020">
 		<classes>
 			<class name="iam.IAM020"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="IAM021">
 		<classes>
@@ -167,5 +167,24 @@
 			<class name="iam.IAM025"></class>
 		</classes>
 	</test>
+	
+	<test name="IAM026">
+		<classes>
+			<class name="iam.IAM026"></class>
+		</classes>
+	</test>
+	
+	<test name="IAM027">
+		<classes>
+			<class name="iam.IAM027"></class>
+		</classes>
+	</test>
+	
+	<!-- <test name="IAM028">
+		<classes>
+			<class name="iam.IAM028"></class>
+		</classes>
+	</test> -->
+	
 </suite>
 

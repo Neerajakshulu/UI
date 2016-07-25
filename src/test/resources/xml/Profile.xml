@@ -35,7 +35,7 @@
 		<classes>
 			<class name="Profile.Profile4"></class>
 		</classes>
-	</test>
+	</test> 
 
 
 	<test name="Validate_View_Profile">
@@ -265,9 +265,9 @@
 		<classes>
 			<class name="Profile.Profile35"></class>
 		</classes>
-	</test>
+	</test>  
 
-	<test name="Publish_post_timestamp_validation">
+	 <test name="Publish_post_timestamp_validation">
 		<parameter name="username" value="projectneon.test@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -317,13 +317,13 @@
 	<test name="Validate_Profile_First_Last_Names">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
-		<parameter name="firstLastNames" value="Add your first name|Add your last name|Please enter your first name.|Please enter your last name." />
+		<parameter name="firstLastNames" value="+ First Name|+ Last Name|Please enter your first name.|Please enter your last name." />
 		<parameter name="firstName" value="Chinna" />
-		<parameter name="lastName" value="Putha" />
+		<parameter name="lastName" value="Putha"  />
 		<classes>
 			<class name="Profile.Profile42"></class>
 		</classes>
-	</test>
+	</test> 
 
 </suite>
 

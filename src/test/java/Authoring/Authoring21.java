@@ -68,7 +68,7 @@ public class Authoring21 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME16","PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Biology");
+			pf.getHFPageInstance(ob).searchForText("The language instinct of Steven Pinker");
 			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
 			pf.getpostRVPageInstance(ob).loadComments();
 

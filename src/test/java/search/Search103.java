@@ -100,6 +100,7 @@ public class Search103 extends TestBase {
 			waitForAjax(ob);
 
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			BrowserWaits.waitTime(4);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -115,7 +116,7 @@ public class Search103 extends TestBase {
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(4);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {

@@ -36,7 +36,7 @@ public class Search54 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that only articles get displayed in the summary page when user searches using ARTICLES content type in search drop down")
+						"Verify that only articles get displayed in the summary page when user searches using ARTICLES as content type in Left navigation pane")
 				.assignCategory("Search suite");
 
 	}

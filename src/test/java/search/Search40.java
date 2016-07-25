@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -85,7 +86,7 @@ public class Search40 extends TestBase {
 
 			// Clicking on Articles content result set
 			ob.findElement(By.partialLinkText("Articles")).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(3);
             System.out.println("before refine");
 			// Finding out the types filer in refine panel
 			List<WebElement> content_types = ob.findElements(By.cssSelector("div[class='panel-heading']"));
@@ -94,6 +95,7 @@ public class Search40 extends TestBase {
 			String filter3 = content_types.get(2).getText();
 			String filter4 = content_types.get(3).getText();
 			System.out.println("first value"+filter1+"sec value"+filter2);
+			BrowserWaits.waitTime(3);
 
 			// Comparing the the label of the type of sort item
 			if (!filter1.equalsIgnoreCase("Document Type") || !filter2.equalsIgnoreCase("Authors")

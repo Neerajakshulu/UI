@@ -95,16 +95,17 @@ public class Search10 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
-			waitForAjax(ob);
+			BrowserWaits.waitTime(5);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-		     waitForAjax(ob);
+		 BrowserWaits.waitTime(5);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			waitForAjax(ob);
+			      BrowserWaits.waitTime(8);
         			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+        			BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {

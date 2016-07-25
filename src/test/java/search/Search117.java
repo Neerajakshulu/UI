@@ -38,7 +38,7 @@ public class Search117 extends TestBase {
 				.startTest(
 						var,
 						"Verify that sorting is retained when user navigates back to POSTS search results page from record view page||"
-								+ "Verify that search drop down content type is retained when user navigates back to POSTS search results page from record view page")
+								+ "Verify that Left Navigation content type is retained when user navigates back to POSTS search results page from record view page")
 				.assignCategory("Search suite");
 
 	}

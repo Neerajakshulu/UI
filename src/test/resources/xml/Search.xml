@@ -54,25 +54,13 @@
 		</classes>
 	</test>
 
-	<test name="Test B9">
-		<classes>
-			<class name="search.Search9"></class>
-		</classes>
-	</test>
-
 	<test name="Test B10">
 		<classes>
 			<class name="search.Search10"></class>
 		</classes>
 	</test>
 
-	<test name="Test B11">
-		<classes>
-			<class name="search.Search11"></class>
-		</classes>
-	</test>
-
-	<test name="Test B12">
+		<test name="Test B12">
 		<classes>
 			<class name="search.Search12"></class>
 		</classes>
@@ -647,6 +635,12 @@
 	<test name="TestCase_B126">
 		<classes>
 			<class name="search.Search126"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B127">
+		<classes>
+			<class name="search.Search127"></class>
 		</classes>
 	</test>
 

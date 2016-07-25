@@ -174,6 +174,7 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void validatePostTitleAndProfileMetadata(String post,
 			List<String> profileInfo) throws Exception {
+		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
@@ -186,8 +187,12 @@ public class PostRecordViewPage extends TestBase {
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
+		logger.info("profile title-->"+postRVProfileTitle);
 		String profileData = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
+		
+		logger.info("profileData-->"+profileData);
+		logger.info("profileInfo-->"+profileInfo);
 
 		if (!(profileInfo.toString().contains(profileData) && profileInfo.toString().contains(postRVProfileTitle))) {
 			throw new Exception("Profile info mismatching in Record view page of a Post");
@@ -540,7 +545,7 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		jsClick(ob,ob.findElement(By.cssSelector(
 				OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 40);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 60);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
 		
 		waitForNumberOfWindowsToEqual(ob, 2);
@@ -878,8 +883,8 @@ public class PostRecordViewPage extends TestBase {
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS.toString())));
 		}	
 		
-	public void clickFlagButtonInFlagModal(){
-			
+	public void clickFlagButtonInFlagModal() throws InterruptedException{
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString()), 180);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
@@ -892,5 +897,8 @@ public class PostRecordViewPage extends TestBase {
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
 	}
 		
-		
+	public String getRecordType(){
+		waitForElementTobeVisible(ob, By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']"), 80);
+		return ob.findElement(By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']")).getText();
+	}
 }

@@ -37,7 +37,7 @@ public class Search70 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down")
+						"Verify that record view of an article gets displayed when user clicks on any article option in the search type ahead")
 				.assignCategory("Search suite");
 
 	}

@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -75,7 +76,9 @@ public class Search93 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
+			BrowserWaits.waitTime(3);
 			pf.getProfilePageInstance(ob).clickProfile();
 			boolean isPresent = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString())).isDisplayed();
 			if (!isPresent) {

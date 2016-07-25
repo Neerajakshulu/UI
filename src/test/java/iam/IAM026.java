@@ -4,22 +4,21 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class IAM003 extends TestBase {
-
+public class IAM026 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,17 +28,17 @@ public class IAM003 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-
 		extent = ExtentManager.getReporter(filePath);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
+		test = extent
+				.startTest(var,
+						"Verify that deep linking is working correctly for account page using STeAM account")
 				.assignCategory("IAM");
+
 	}
 
 	@Test
-	public void testcaseA3() throws Exception {
+	public void testcaseA26() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
@@ -67,31 +66,41 @@ public class IAM003 extends TestBase {
 			}
 			clearCookies();
 
-			String email = "linkedinloginid@gmail.com";
-			String password = "Neon@1234";
+			// Navigate to deep link account page
+			ob.navigate().to(CONFIG.getProperty("accountLink"));
+			login();
+			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
+			logger.info("Title : "+str);
+			String emailName = ob.findElement(By.cssSelector("span[class='ng-binding']")).getText();
+			logger.info("Emai Text : "+emailName);
+			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
+			logger.info("Additional Email Link Text : "+additionalMail);
+			BrowserWaits.waitTime(2);
+			try {
+				Assert.assertTrue(str.contains("Account") && emailName.contains(CONFIG.getProperty("defaultUsername"))
+						&& additionalMail.contains("View additional email preferences"));
+				test.log(LogStatus.PASS, "Deep link is working correctly for account page");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Deep link is not working correctly for account page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString()); // reports
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_ account_page")));// screenshot
+			}
 
-			// Navigate to LI login page
-			ob.navigate().to(host);
-			
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-
-			// Verify that existing LI user credentials are working fine
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			// BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
-				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
+				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
 																								// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_LI_User_credentials_not_working_fine")));// screenshot
+						this.getClass().getSimpleName() + "_existing_Neon_User_credentials_not_working_fine")));// screenshot
 				closeBrowser();
 
 			}
@@ -128,8 +137,6 @@ public class IAM003 extends TestBase {
 		catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
-			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -156,5 +163,4 @@ public class IAM003 extends TestBase {
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-
 }

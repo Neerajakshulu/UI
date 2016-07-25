@@ -157,11 +157,12 @@ public class IAM023 extends TestBase {
 										+ "_password_change_email_not_sent")));// screenshot
 
 			}
-			BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(3);
 			//ob.close();
 			//ob.switchTo().window(al.get(0));
 			//Thread.sleep(2000);
 			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(12);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -171,7 +172,7 @@ public class IAM023 extends TestBase {
 
 			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 			logger.info("Email Subject Text : "+email_subject);
-			if (!StringContains(email_subject, "EndNote&trade; password change request")) {
+			if (!StringContains(email_subject, "EndNote&trade;_password_change_request")) {
 
 				test.log(LogStatus.FAIL, "Email for changing password not received");// extent reports
 				status = 2;// excel

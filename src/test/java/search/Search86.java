@@ -83,14 +83,14 @@ public class Search86 extends TestBase {
 				waitForAjax(ob);
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-				BrowserWaits.waitTime(4);
+				BrowserWaits.waitTime(10);
 				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
 				waitForAjax(ob);
 							
 				ob.findElement(By.xpath("//a[@class='ng-binding']")).click();
-				Thread.sleep(5000);
-				
+				BrowserWaits.waitTime(5);
 				String text1=ob.findElement(By.xpath("//*[@class='ne-publication__header']")).getText();
+				BrowserWaits.waitTime(5);
 //				System.out.println(text1);
 				String expectedText1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
 				

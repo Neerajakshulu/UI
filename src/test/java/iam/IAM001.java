@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -64,7 +65,7 @@ public class IAM001 extends TestBase {
 			}
 			clearCookies();
 
-			String password = "Transaction@2";
+			String password = "Neon@123";
 			String first_name = "duster";
 			String last_name = "man";
 			
@@ -171,6 +172,28 @@ public class IAM001 extends TestBase {
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 
 			}
+			logout();
+			BrowserWaits.waitTime(3);
+			ob.get("https://www.guerrillamail.com");	
+			BrowserWaits.waitTime(14);
+			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+			WebElement myE = email_list.get(0);
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", myE);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
+
+			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
+			List<WebElement> links = email_body.findElements(By.tagName("a"));
+
+			ob.get(links.get(1).getAttribute("href"));
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			BrowserWaits.waitTime(6);
+			
 			logout();
 			closeBrowser();
 

@@ -74,12 +74,14 @@ public class IAM006 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 2);
+			Double d=new Double(Double.parseDouble(characterLength));
+			int i=d.intValue();
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			logger.info("Character Length : "+characterLength);
-			String last_name = generateRandomName(Integer.parseInt(characterLength));
+			logger.info("Character Length : "+i);
+			String last_name = generateRandomName(i);
 			logger.info("Last Name : "+last_name);
 
 			// selenium code

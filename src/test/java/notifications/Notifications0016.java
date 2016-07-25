@@ -73,7 +73,7 @@ public class Notifications0016 extends NotificationsTestBase {
 			logger.info("Size : "+element.size());
 			String actual = null;
 			for(int i=0;i<element.size();i++){
-				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+				//pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
 				String str=element.get(i).getText();
 				if(str.contains("Recommended people to follow")){
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS);

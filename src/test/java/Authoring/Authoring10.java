@@ -71,7 +71,7 @@ public class Authoring10 extends TestBase {
 
 		// test the runmode of current dataset
 		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
+		if (runmodes[count].equalsIgnoreCase("N")) {
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
 			skip = true;
 			throw new SkipException("Runmode for test set data set to no " + count);
@@ -110,7 +110,7 @@ public class Authoring10 extends TestBase {
 			//waitForTRHomePage();
 			loginAs(username, password);
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

@@ -64,7 +64,7 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		BrowserWaits.waitTime(5);
+		BrowserWaits.waitTime(15);
 		
 		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
@@ -113,14 +113,16 @@ public class Authoring extends TestBase {
 		int commentCount = getCommentCount();
 		
 		System.out.println("After-->" + commentSizeAfterAdd);
+		test.log(LogStatus.INFO, "before-->" + expCommentCount);
+		test.log(LogStatus.INFO, "After-->" + commentCount);
 		if (!(commentCount > expCommentCount)) {
-			test.log(LogStatus.INFO, "before-->" + commentCount);
-			test.log(LogStatus.INFO, "After-->" + expCommentCount);
 			throw new Exception("Entered Comment not updated");
+		}else{
+			test.log(LogStatus.PASS, "Comment count validation passed");
 		}
 	}
 
-	public void updateComment(String steComment) throws Exception {
+	public void updateComment(ExtentTest test,String steComment) throws Exception {
 		BrowserWaits.waitTime(10);
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(
@@ -149,6 +151,7 @@ public class Authoring extends TestBase {
 				break;
 			}
 		}
+		test.log(LogStatus.INFO, "Comment is updated");
 	}
 
 	public void validateUpdatedComment(String updatedComments) throws Exception {
@@ -242,12 +245,14 @@ public class Authoring extends TestBase {
 		}
 	
 
-	public void validateViewComment(String addComments) throws Exception {
+	public void validateViewComment(ExtentTest test,String addComments) throws Exception {
 		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
-		System.out.println("Commentary Text-->" + commentText);
 		if (!commentText.contains(addComments)) {
 			throw new Exception("Entered " + addComments + " not present");
+		}else{
+			
+			test.log(LogStatus.PASS, "Comment Text validation passed");
 		}
 	}
 
@@ -312,6 +317,8 @@ public class Authoring extends TestBase {
 	}
 
 	public void searchArticle(String article) throws InterruptedException {
+		
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 90);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(article);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
@@ -320,7 +327,7 @@ public class Authoring extends TestBase {
 		BrowserWaits.waitTime(3);
 	}
 
-	public void chooseArticle(String linkName) throws InterruptedException {
+	public void chooseArticle() throws InterruptedException {
 		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
 		waitForPageLoad(ob);

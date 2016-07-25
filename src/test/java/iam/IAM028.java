@@ -10,15 +10,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class IAM003 extends TestBase {
+public class IAM028 extends TestBase {
 
 	static int status = 1;
 
@@ -29,18 +29,18 @@ public class IAM003 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-
 		extent = ExtentManager.getReporter(filePath);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
+		test = extent
+				.startTest(var,
+						"Verify that system able to resend activation mail when user doesn't activated mail and already registered with Neon.")
 				.assignCategory("IAM");
+
 	}
 
 	@Test
-	public void testcaseA3() throws Exception {
-
+	public void testcaseA1() throws Exception {
+		WebElement element = null;
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -55,9 +55,7 @@ public class IAM003 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
-
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -67,66 +65,74 @@ public class IAM003 extends TestBase {
 			}
 			clearCookies();
 
-			String email = "linkedinloginid@gmail.com";
-			String password = "Neon@1234";
+			String first_name = "duster";
+			String last_name = "man";
 
-			// Navigate to LI login page
-			ob.navigate().to(host);
-			
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
+			boolean registationStatus = registrationForm(first_name, last_name);
+			if (registationStatus) {
+				BrowserWaits.waitTime(2);
+				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
+				BrowserWaits.waitTime(2);
+				ob.findElement(
+						By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']"))
+						.click();
+			}
 
-			// Verify that existing LI user credentials are working fine
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			// BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+			BrowserWaits.waitTime(3);
+			String textMessage = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
+			logger.info("Text Message : " + textMessage);
+			if (!textMessage.contains("Please activate your account")) {
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_your_account_not_display_activate_page")));// screenshot
+				closeBrowser();
+			}
+
+			ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+
+			boolean userAction = userActivation();
+			if (userAction) {
+				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
+			}
+
 			if (!checkElementPresence("ul_name")) {
 
-				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
-																								// reports
+				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
+																									// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_LI_User_credentials_not_working_fine")));// screenshot
+						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
 				closeBrowser();
 
 			}
 
-			// Verify that profile name gets displayed correctly
-			if (!checkElementPresence("header_label")) {
+			if (!checkElementPresence("help_link")) {
+
+				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
+																									// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
+
+			}
+			// Verify that profile image using below xpath is present or not
+			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
+			element = ob.findElement(By.xpath(profile_name_xpath));
+			if (element == null) {
 
 				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
 																						// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
-				closeBrowser();
 
 			}
-
 			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
-																					// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-				closeBrowser();
-
-			}
-
 			closeBrowser();
 
-		}
-
-		catch (Throwable t) {
-
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -138,8 +144,8 @@ public class IAM003 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
-
 		}
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
@@ -156,5 +162,4 @@ public class IAM003 extends TestBase {
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-
 }

@@ -22,10 +22,6 @@ import base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring2 extends TestBase {
-
-	String runmodes[] = null;
-	static int count = -1;
-
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
@@ -39,10 +35,6 @@ public class Authoring2 extends TestBase {
 				.startTest(var,
 						"Verfiy that user can appreciate comments made by other neon users and validate appreciation count")
 				.assignCategory("Authoring");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
-		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
-		System.out.println("Run modes-->" + runmodes.length);
 	}
 
 	/**
@@ -65,52 +57,22 @@ public class Authoring2 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		// test the runmode of current dataset
-		count++;
-		if (!runmodes[count].equalsIgnoreCase("Y")) {
-			test.log(LogStatus.INFO, "Runmode for test set data set to no " + count);
-			skip = true;
-			throw new SkipException("Runmode for test set data set to no " + count);
-		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts");
 		try {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			ob.navigate().to(System.getProperty("host"));
-			// ob.get(CONFIG.getProperty("testSiteName"));
-			//pf.getAuthoringInstance(ob).waitForTRHomePage();
-			// authoringAppreciation(username, password, article,
-			// completeArticle, addComments);
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Something UnExpected");
-			// print full stack trace
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());
-			ErrorUtil.addVerificationFailure(t);
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
-			closeBrowser();
-		}
-	}
-
-	@Test(dependsOnMethods = "testAuthoringTestAccount")
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void authoringAppreciation(String username, String password, String article, String completeArticle)
-			throws Exception {
-		try {
-
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("LOGINUSERNAME1"),
+					LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
 			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			closeBrowser();
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
 			// print full stack trace
@@ -143,6 +105,5 @@ public class Authoring2 extends TestBase {
 		// closeBrowser();
 
 	}
-	
 
 }

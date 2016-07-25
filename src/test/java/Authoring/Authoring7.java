@@ -111,9 +111,9 @@ public class Authoring7 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle(completeArticle);
+			pf.getAuthoringInstance(ob).chooseArticle();
 
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
 			pf.getAuthoringInstance(ob).searchArticle("micro biology");
@@ -123,7 +123,7 @@ public class Authoring7 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).click();
 
 			// ob.navigate().refresh();
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			enterArticleComment(addComments);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			pf.getAuthoringInstance(ob).validatePreventBotComment();
 
@@ -159,6 +159,28 @@ public class Authoring7 extends TestBase {
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
+	}
+	public void enterArticleComment(String addComments) throws InterruptedException {
+		BrowserWaits.waitTime(5);
+		
+		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		//jsClick(ob,commentArea);
+
+        //Used points class to get x and y coordinates of element.
+        Point point = commentArea.getLocation();
+        //int xcord = point.getX();
+        int ycord = point.getY();
+        ycord=ycord+200;
+        JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0,"+ ycord+");");
+		BrowserWaits.waitTime(2);
+		jsClick(ob,commentArea);
+		commentArea.clear();
+		String comment=addComments + RandomStringUtils.randomNumeric(3);
+		commentArea.sendKeys(comment);
+		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(3000);// after entering the comments wait for submit button to get enabled or disabled
 	}
 
 	

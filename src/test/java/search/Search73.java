@@ -39,7 +39,7 @@ public class Search73 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that profile page of a person gets displayed when user clicks on any PEOPLE option in the search type ahead while ALL option is selected in the search drop down")
+						"Verify that profile page of a person gets displayed when user clicks on any PEOPLE option in the search type ahead")
 				.assignCategory("Search suite");
 
 	}

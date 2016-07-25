@@ -2,7 +2,7 @@
 <Configuration status="warn" name="1pAutomation" packages="">
 	<Appenders>
 		<Console name="STDOUT" target="SYSTEM_OUT">
-			<PatternLayout pattern="%m%n" />
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
 		</Console>
 		<File name="MyFile" fileName="logs/1p-ui-automation.log">
 			<PatternLayout>
