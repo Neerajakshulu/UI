@@ -323,7 +323,16 @@
 		<classes>
 			<class name="Profile.Profile42"></class>
 		</classes>
-	</test> 
+	</test>  
+	
+	<test name="Validate_Profile_First_Last_Names_fields_max_length">
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="Project@123" />
+		<parameter name="firstLastNameMaxLength" value="10-20-30|60-50-100|10-100-60" />
+		<classes>
+			<class name="Profile.Profile43"></class>
+		</classes>
+	</test>
 
 </suite>
 

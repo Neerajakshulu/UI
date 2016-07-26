@@ -892,6 +892,7 @@ public class ProfilePage extends TestBase {
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS)
 				.findElement(By.tagName("span")).getText();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		waitForAjax(ob);
 		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
@@ -1536,26 +1537,41 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws Exception, When Validation not done
 	 */
-	public void validateFirstNameAndLastNameFieldsMaxLength(int firstNameLength,int LastNameLength) throws Exception {
+	public void validateFirstNameAndLastNameFieldsMaxLength(int firstNameLength,int LastNameLength, int totCount) throws Exception {
 		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		
-		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,RandomStringUtils.random(firstNameLength));
-		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,RandomStringUtils.random(LastNameLength));
-		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		
-		String firstLastName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
-		int nameLength=firstLastName.trim().replace(" ", "").length();
-		logger.info("First name and Last name length-->"+nameLength);
-		if(!(nameLength==100)){
-			throw new Exception("First name and last name length should not exceed morethan 100 characters");
+		if(!isProfileIncomplete()) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
 		}
 		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+		BrowserWaits.waitTime(3);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,RandomStringUtils.randomAlphabetic(firstNameLength));
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+		BrowserWaits.waitTime(3);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,RandomStringUtils.randomAlphabetic(LastNameLength));
 		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		BrowserWaits.waitTime(3);
+		String firstLastName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		logger.info("title-->"+firstLastName+"provided count-->"+totCount);
+		int nameLength=firstLastName.trim().replace(" ", "").length();
+		logger.info("First name and Last name length-->"+nameLength);
+		if(!(nameLength==totCount)){
+			throw new Exception("First name and last name length should not exceed morethan 100 characters");
+		}
 	}
+	
+	
+	/**
+	 * Method for Verify user profile is complete or incomplete
+	 * 
+	 * @throws Exception, When profile page not displayed
+	 */
+	public boolean isProfileIncomplete() throws Exception {
+		profileIncomplete=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		return profileIncomplete;
+	}
+		
 }
