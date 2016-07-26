@@ -40,8 +40,14 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS("input#session_key-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS("input#session_password-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS("input[name='authorize']"),
-
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS("input[class='btn-primary'][value='Share']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_GOOGLE_CSS("i[class='fa fa-google-plus share-menu-icon']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS("input#Email"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_NEXT_CSS("input#next"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS("input#Passwd"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS("input#signIn"),
+	
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Share') and @role='button']"),
 
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS("i[class='fa fa-facebook share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
@@ -72,11 +78,17 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS("input[name='lastName']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='Add your country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click*='cancelEditing()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click*='saveUserData()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.firstName.$error']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.lastName.$error']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS("button[ng-click='changePicture()']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CSS("div[modal-window='modal-window']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS("button[id='browser-file']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS("button[class='wui-modal__close-btn']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
 
 	HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS("a[data-event-category='profileposts']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
@@ -92,7 +104,6 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("span[class^='wui-textarea__error']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("div[class='modal-content'] button[data-event-action='cancel'][class^='wui-btn wui-btn']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("div[class='modal-content'] button[data-event-action='publish']"),
-	// HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
 	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[class^='wui-content-title']"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(1) span[class='wui-side-menu__badge ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(2) span[class='wui-side-menu__badge ng-binding']"),
@@ -147,10 +158,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("div[class='wui-card__content']"),
 
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
-	//HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[@class='ne-publication-sidebar__metrics']/button/i"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
-	//HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
 	HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS("div[ng-hide='vm.shouldShowSummaryInput()'] p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),
@@ -159,7 +168,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
 	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-user-profile-object-name']"),
-	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-action-dropdown__add-button']"),
+	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-watchlist-dropdown__add-button']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
@@ -265,6 +274,15 @@ public enum OnePObjectMap {
 	DOCUMENT_URL_IN_SEARCHPAGE_XPATH("//ne-post-results[@class='ng-scope ng-isolate-scope']/a"),
 	DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
 	ADD_COMMENT_BUTTON_XPATH("//button[contains(text(),'Add Comment')]"),
+	LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS("button[class='wui-btn unauth-login-btn li-btn']"),
+	LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS("button[class='wui-btn unauth-login-btn fb-btn']"),
+	LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID("session_key"),
+	LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID("session_password"),
+	LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID("authorize"),
+	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID("email"),
+	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),
+	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("login"),
+	
 	;
 
 	

@@ -892,6 +892,7 @@ public class ProfilePage extends TestBase {
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS)
 				.findElement(By.tagName("span")).getText();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		waitForAjax(ob);
 		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
@@ -1536,26 +1537,101 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws Exception, When Validation not done
 	 */
-	public void validateFirstNameAndLastNameFieldsMaxLength(int firstNameLength,int LastNameLength) throws Exception {
+	public void validateFirstNameAndLastNameFieldsMaxLength(int firstNameLength,int LastNameLength, int totCount) throws Exception {
 		
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		if(!isProfileIncomplete()) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
 		
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,RandomStringUtils.random(firstNameLength));
+		BrowserWaits.waitTime(3);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS,RandomStringUtils.randomAlphabetic(firstNameLength));
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,RandomStringUtils.random(LastNameLength));
+		BrowserWaits.waitTime(3);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,RandomStringUtils.randomAlphabetic(LastNameLength));
 		
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-		
+		BrowserWaits.waitTime(3);
 		String firstLastName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
+		logger.info("title-->"+firstLastName+"provided count-->"+totCount);
 		int nameLength=firstLastName.trim().replace(" ", "").length();
 		logger.info("First name and Last name length-->"+nameLength);
-		if(!(nameLength==100)){
+		if(!(nameLength==totCount)){
 			throw new Exception("First name and last name length should not exceed morethan 100 characters");
 		}
+	}
+	
+	
+	/**
+	 * Method for Verify user profile is complete or incomplete
+	 * 
+	 * @throws Exception, When profile page not displayed
+	 */
+	public boolean isProfileIncomplete() throws Exception {
+		profileIncomplete=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+		return profileIncomplete;
+	}
+	
+	/**
+	 * Method for Click Profile picture Edit button
+	 * 
+	 * @throws Exception, When Profile picture Edit button not able to click
+	 */
+	public void profilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+	}
+	
+	/**
+	 * Method for get profile pic update button status
+	 * 
+	 * @throws Exception, When update button not available
+	 */
+	public boolean getProfilePicModalWindowUpdateButtonStatus() throws Exception {
+		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS).isEnabled();
 		
 		
 	}
+	
+	/**
+	 * Method for Verify profile pic update button status, button should be in disabled state 
+	 * 
+	 * @throws Exception, When update button is Enabled
+	 */
+	public void validateProfilePicUpdateButtonStatus() throws Exception {
+		profilePicModalWindow();
+		boolean proiflePicUpdateButton=getProfilePicModalWindowUpdateButtonStatus();
+		logger.info("profile pic update button status-->"+proiflePicUpdateButton);
+		if(proiflePicUpdateButton) {
+			throw new Exception("profile pic update button should be disabled by default");
+		}
+	}
+	
+	/**
+	 * Method for close profile picture modal window
+	 * 
+	 * @throws Exception, When profile pic modal window not closed
+	 */
+	public void closeProfilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+	}
+	
+	/**
+	 * Method for cancel profile picture modal window
+	 * 
+	 * @throws Exception, When profile pic modal window not cancel
+	 */
+	public void cancelProfilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+	}
+	
+		
 }

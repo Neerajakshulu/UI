@@ -79,8 +79,16 @@ public class Profile13 extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 
 			} catch (Exception e1) {
-				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_edit_button_css")), 90);
-				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_edit_button_css"))).click();
+				boolean profileIncomplete = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
+				if(!profileIncomplete) {
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+				}
+				
 				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 90);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))).click();

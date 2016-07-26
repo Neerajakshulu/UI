@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.apache.http.auth.Credentials;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -13,20 +14,22 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 import base.TestBase;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * Verify that deep linking is working correctly for watchlist page when user logs in using Steam account
+ * Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account
  * 
  * @author Amneet Singh
  *
  */
-public class Watchlist030 extends TestBase {
+public class Watchlist032 extends TestBase {
 
 	static int status = 1;
 
@@ -41,13 +44,13 @@ public class Watchlist030 extends TestBase {
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that deep linking is working correctly for watchlist page when user logs in using Steam account")
+						"Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account")
 				.assignCategory("Watchlist");
 
 	}
 
 	@Test
-	public void watchlist030() throws Exception {
+	public void watchlist031() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
@@ -76,31 +79,52 @@ public class Watchlist030 extends TestBase {
 			}
 			clearCookies();
 			
-//			1)Open browser,enter WATCHLIST URL in the address bar and hit return key
-			String tempURL=host+"/#/watchlist";
+//			1)Open Project Neon app. 
+			ob.navigate().to(host);
+			
+			
+//			2)Login with valid user credentials.
+			login();
+			
+			
+//			3)Create a new watchlist.
+			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+			createWatchList("private", newWatchlistName, "This is my test watchlist.");
+			
+			
+//			4)Capture URL of the new watchlist page.
+			String temp_xpath="//a[contains(text(),'" + newWatchlistName +"')]";
+			ob.findElement(By.xpath(temp_xpath)).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_watchlist_page")), 60);
+			Thread.sleep(2000);
+			String tempURL=ob.getCurrentUrl();
+			System.out.println(tempURL);
+			
+
+//			5)Logout of the app.
+			logout();
+			
+			
+//			6)Put the captured URL in the address bar of the browser and hit the return key.
 			ob.navigate().to(tempURL);
 			
 			
-//			2)Login with Steam login
+//			7)Login with same user credentials again.
 			login();
-			Thread.sleep(20000);
 			
 			
-//			3)Verify that user lands to WATCHLIST page
-			if(!checkElementPresence("createWatchlistButton")){
+//			8)Verify that app lands to the particular watchlist page.
+			if(!checkElementPresence("delete_button_watchlist_page")){
 				
 				test.log(LogStatus.FAIL, "Deep linking feature not working correctly");// extent
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 				captureScreenshot(this.getClass().getSimpleName() + "_deep_linking_not_working")));// screenshot
 				
-				
 			}
-			
-//			4)Close the browser
-			closeBrowser();
-					
 
+//			9)Close the browser.
+			closeBrowser();
 			
 
 		} catch (Throwable t) {

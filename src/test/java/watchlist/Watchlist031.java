@@ -22,7 +22,7 @@ import base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account
+ * Verify that deep linking is working correctly for watchlist page when user logs in using Social(FB or LI) account
  * 
  * @author Amneet Singh
  *
@@ -42,7 +42,7 @@ public class Watchlist031 extends TestBase {
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account")
+						"Verify that deep linking is working correctly for watchlist page when user logs in using Social(FB or LI) account")
 				.assignCategory("Watchlist");
 
 	}
