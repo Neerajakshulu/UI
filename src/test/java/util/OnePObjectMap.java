@@ -104,7 +104,6 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("span[class^='wui-textarea__error']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("div[class='modal-content'] button[data-event-action='cancel'][class^='wui-btn wui-btn']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("div[class='modal-content'] button[data-event-action='publish']"),
-	// HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[ng-show='vm.hasPosts'] div[class='ng-scope'] h2 a"),
 	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[class^='wui-content-title']"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(1) span[class='wui-side-menu__badge ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(2) span[class='wui-side-menu__badge ng-binding']"),
@@ -159,10 +158,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS("div[class='wui-card__content']"),
 
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
-	//HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[contains(@class,'post-stat')]/descendant::button[contains(@tooltip,'Post')]"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[@class='ne-publication-sidebar__metrics']/button/i"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
-	//HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//h2[@class='profile-tab-heading']/following::p"),
 	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
 	HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS("div[ng-hide='vm.shouldShowSummaryInput()'] p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[class='ng-binding'][ng-click*='titleClicked']"),

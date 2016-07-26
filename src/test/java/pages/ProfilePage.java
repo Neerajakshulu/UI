@@ -1632,5 +1632,6 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
+	
 		
 }
