@@ -174,7 +174,6 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void validatePostTitleAndProfileMetadata(String post,
 			List<String> profileInfo) throws Exception {
-		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
@@ -187,12 +186,8 @@ public class PostRecordViewPage extends TestBase {
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
-		logger.info("profile title-->"+postRVProfileTitle);
 		String profileData = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
-		
-		logger.info("profileData-->"+profileData);
-		logger.info("profileInfo-->"+profileInfo);
 
 		if (!(profileInfo.toString().contains(profileData) && profileInfo.toString().contains(postRVProfileTitle))) {
 			throw new Exception("Profile info mismatching in Record view page of a Post");
@@ -524,6 +519,44 @@ public class PostRecordViewPage extends TestBase {
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
 				pf.getBrowserActionInstance(ob).click(
 						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
+				ob.switchTo().window(PARENT_WINDOW);
+			}
+		}
+	}
+	
+	public void shareRecordOnGoogle(String fbusername, String fbpassword) throws Exception {
+		/*
+		 * waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.
+		 * HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
+		 * jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.
+		 * HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS .toString())));
+		 */
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_GOOGLE_CSS.toString()), 40);
+		String PARENT_WINDOW = ob.getWindowHandle();
+		jsClick(ob, ob.findElement(
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_GOOGLE_CSS.toString())));
+		waitForNumberOfWindowsToEqual(ob, 2);
+		Set<String> child_window_handles = ob.getWindowHandles();
+		for (String child_window_handle : child_window_handles) {
+			if (!child_window_handle.equals(PARENT_WINDOW)) {
+				ob.switchTo().window(child_window_handle);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS);
+				pf.getBrowserActionInstance(ob).enterFieldValue(
+						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS, fbusername);
+				pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_NEXT_CSS);
+				pf.getBrowserActionInstance(ob).enterFieldValue(
+						OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS, fbpassword);
+				pf.getBrowserActionInstance(ob)
+						.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS);
+				waitForElementTobeClickable(ob,
+						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH.toString()),
+						90);
+
+				pf.getBrowserActionInstance(ob)
+						.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH);
 				ob.switchTo().window(PARENT_WINDOW);
 			}
 		}
