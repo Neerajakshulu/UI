@@ -77,6 +77,12 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click*='saveUserData()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.firstName.$error']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.lastName.$error']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS("button[ng-click='changePicture()']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CSS("div[modal-window='modal-window']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS("button[id='browser-file']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS("button[class='wui-modal__close-btn']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
 
 	HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS("a[data-event-category='profileposts']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),

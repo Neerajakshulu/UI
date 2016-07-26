@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	 <test name="Follow_Other_Profile" preserve-order="true">
+	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -331,6 +331,22 @@
 		<parameter name="firstLastNameMaxLength" value="10-20-30|60-50-100|10-100-60" />
 		<classes>
 			<class name="Profile.Profile43"></class>
+		</classes>
+	</test> 
+	
+	<test name="Validate_Profile_Pic_modal_window_update_and_close">
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="Project@123" />
+		<classes>
+			<class name="Profile.Profile44"></class>
+		</classes>
+	</test> 
+	
+	<test name="Validate_Profile_Pic_modal_window_cancel">
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="Project@123" />
+		<classes>
+			<class name="Profile.Profile45"></class>
 		</classes>
 	</test>
 

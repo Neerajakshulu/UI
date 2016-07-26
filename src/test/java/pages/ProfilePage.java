@@ -1573,5 +1573,64 @@ public class ProfilePage extends TestBase {
 		profileIncomplete=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS).isDisplayed();
 		return profileIncomplete;
 	}
+	
+	/**
+	 * Method for Click Profile picture Edit button
+	 * 
+	 * @throws Exception, When Profile picture Edit button not able to click
+	 */
+	public void profilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+	}
+	
+	/**
+	 * Method for get profile pic update button status
+	 * 
+	 * @throws Exception, When update button not available
+	 */
+	public boolean getProfilePicModalWindowUpdateButtonStatus() throws Exception {
+		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS).isEnabled();
+		
+		
+	}
+	
+	/**
+	 * Method for Verify profile pic update button status, button should be in disabled state 
+	 * 
+	 * @throws Exception, When update button is Enabled
+	 */
+	public void validateProfilePicUpdateButtonStatus() throws Exception {
+		profilePicModalWindow();
+		boolean proiflePicUpdateButton=getProfilePicModalWindowUpdateButtonStatus();
+		logger.info("profile pic update button status-->"+proiflePicUpdateButton);
+		if(proiflePicUpdateButton) {
+			throw new Exception("profile pic update button should be disabled by default");
+		}
+	}
+	
+	/**
+	 * Method for close profile picture modal window
+	 * 
+	 * @throws Exception, When profile pic modal window not closed
+	 */
+	public void closeProfilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+	}
+	
+	/**
+	 * Method for cancel profile picture modal window
+	 * 
+	 * @throws Exception, When profile pic modal window not cancel
+	 */
+	public void cancelProfilePicModalWindow() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+	}
 		
 }
