@@ -40,8 +40,14 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_USERNAME_CSS("input#session_key-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_PASSWORD_CSS("input#session_password-oauthAuthorizeForm"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_LOGIN_CSS("input[name='authorize']"),
-
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_LI_SHARE_CSS("input[class='btn-primary'][value='Share']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_GOOGLE_CSS("i[class='fa fa-google-plus share-menu-icon']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS("input#Email"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_NEXT_CSS("input#next"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS("input#Passwd"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS("input#signIn"),
+	
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Share') and @role='button']"),
 
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS("i[class='fa fa-facebook share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
@@ -72,7 +78,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS("input[name='lastName']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='Add your country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click*='cancelEditing()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click*='saveUserData()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.firstName.$error']"),
@@ -165,7 +171,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_VIEW_POST_DELETE_CONFIRMATION_BUTTON_CSS("div[class='modal-content'] button[ng-click='close()']"),
 	HOME_PROJECT_NEON_PROFILE_COMMENT_TIMESTAMP_CSS("span[class*='time-stamp']"),
 	HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS("div[class*='ne-user-profile-object-name']"),
-	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-action-dropdown__add-button']"),
+	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-watchlist-dropdown__add-button']"),
 
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
@@ -271,6 +277,15 @@ public enum OnePObjectMap {
 	DOCUMENT_URL_IN_SEARCHPAGE_XPATH("//ne-post-results[@class='ng-scope ng-isolate-scope']/a"),
 	DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
 	ADD_COMMENT_BUTTON_XPATH("//button[contains(text(),'Add Comment')]"),
+	LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS("button[class='wui-btn unauth-login-btn li-btn']"),
+	LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS("button[class='wui-btn unauth-login-btn fb-btn']"),
+	LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID("session_key"),
+	LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID("session_password"),
+	LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID("authorize"),
+	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID("email"),
+	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),
+	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("login"),
+	
 	;
 
 	
