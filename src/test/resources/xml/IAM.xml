@@ -180,11 +180,18 @@
 		</classes>
 	</test>
 	
-	<!-- <test name="IAM028">
+	<test name="IAM028">
 		<classes>
 			<class name="iam.IAM028"></class>
 		</classes>
-	</test> -->
+	</test>
+	
+		<test name="IAM029">
+		<classes>
+			<class name="iam.IAM029"></class>
+		</classes>
+	</test>
+	
 	
 </suite>
 
