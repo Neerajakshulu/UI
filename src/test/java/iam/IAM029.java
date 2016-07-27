@@ -35,7 +35,7 @@ public class IAM029 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify LAST NAME field in new TR user registration page").assignCategory("IAM");
+		test = extent.startTest(var, "Verify that to validate PASSWORD field in new Neon user registration page with maximum length.").assignCategory("IAM");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
@@ -90,7 +90,7 @@ public class IAM029 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
