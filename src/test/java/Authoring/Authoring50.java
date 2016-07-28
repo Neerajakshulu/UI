@@ -19,7 +19,6 @@ import base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring50 extends TestBase {
-
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 

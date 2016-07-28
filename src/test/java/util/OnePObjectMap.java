@@ -290,6 +290,7 @@ public enum OnePObjectMap {
 	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']")
+	
 	;
 
 	

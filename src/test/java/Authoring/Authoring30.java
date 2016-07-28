@@ -20,7 +20,6 @@ import base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring30 extends TestBase {
-
 	String runmodes[] = null;
 	static int count = -1;
 

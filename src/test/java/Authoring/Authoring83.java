@@ -62,7 +62,6 @@ public class Authoring83 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
 			openBrowser();
 			maximizeWindow();

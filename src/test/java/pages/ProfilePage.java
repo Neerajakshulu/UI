@@ -1660,6 +1660,7 @@ public class ProfilePage extends TestBase {
 		}catch(Exception e){
 			cond2=false;
 		}
+		
 		boolean cond3 = ob
 				.findElement(
 						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH.toString()))

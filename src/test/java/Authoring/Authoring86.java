@@ -59,7 +59,6 @@ public class Authoring86 extends TestBase {
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
 		// test the runmode of current dataset
 		count++;
 		if (!runmodes[count].equalsIgnoreCase("Y")) {

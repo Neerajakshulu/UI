@@ -110,7 +110,6 @@ public class Authoring29 extends TestBase {
 										+ "Post_creation_validation_failed")));// screenshot
 
 			}
-
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();

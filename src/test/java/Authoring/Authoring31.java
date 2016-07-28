@@ -27,7 +27,6 @@ public class Authoring31 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-
 	static int time = 30;
 	PageFactory pf = new PageFactory();
 
