@@ -86,7 +86,7 @@ public class Search30 extends TestBase {
 
 			String[] arr = text.split("\n");
 			ArrayList<String> al = new ArrayList<String>();
-			for (int i = 1; i < arr.length; i++) {
+			for (int i =0; i < arr.length; i++) {
 
 				al.add(arr[i]);
 			}

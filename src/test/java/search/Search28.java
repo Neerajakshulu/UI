@@ -82,18 +82,18 @@ public class Search28 extends TestBase {
 			String text = myE.getText();
 
 			String[] arr = text.split("\n");
-			// for(int i=0;i<arr.length;i++){
-			//
-			// System.out.println(arr[i]);
-			// }
+//			 for(int i=0;i<arr.length;i++){
+//			
+//			 System.out.println(arr[i]);
+//			 }
 
 			ArrayList<String> al = new ArrayList<String>();
-			for (int i = 1; i < arr.length; i++) {
+			for (int i =0; i <arr.length; i++) {
 
 				al.add(arr[i]);
 			}
-
-			if (!compareNumbers(4, al.size())) {
+		
+			if (!compareNumbers(4,al.size())) {
 
 				test.log(LogStatus.FAIL, "More or less than 4 article suggestions are getting displayed");// extent
 																											// reports
