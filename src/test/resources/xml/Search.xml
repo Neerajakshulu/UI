@@ -643,6 +643,12 @@
 			<class name="search.Search127"></class>
 		</classes>
 	</test>
+	
+	<test name="TestCase_B128">
+		<classes>
+			<class name="search.Search128"></class>
+		</classes>
+	</test>
 
 
 </suite>
