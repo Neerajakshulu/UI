@@ -17,6 +17,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -80,14 +81,14 @@ public class Search85 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 				waitForAjax(ob);
-				
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-				BrowserWaits.waitTime(10);
-				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
-						
+							
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+			    waitForAjax(ob);
+					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);	
 				List<WebElement> searchTiles=ob.findElements(By.xpath("//*[@class='wui-card__content']"));
-				BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(5);
 				String tileText=searchTiles.get(0).getText();
+				System.out.println(tileText);
 				String text1="Color-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
 				
 				try{

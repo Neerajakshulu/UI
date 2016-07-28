@@ -101,5 +101,24 @@
 			<class name="notifications.Notifications0020"></class>
 		</classes>
 	</test>
+	
+	<test name="Test F22">
+		<classes>
+			<class name="notifications.Notifications0022"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F23">
+		<classes>
+			<class name="notifications.Notifications0023"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F24">
+		<classes>
+			<class name="notifications.Notifications0024"></class>
+		</classes>
+	</test>
+	
 </suite>
 

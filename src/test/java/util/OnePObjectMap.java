@@ -268,7 +268,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH("//div[@class='wui-card ng-scope']"),
 	PROFILE_PAGE_AUTOR_NAME_CSS("h2[class='wui-title wui-title--user-profile-name ng-binding']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS("div[class='wui-card ng-scope']"),
-	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--inactive']"),
+	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--inactive']"),
 	WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS("button[class='wui-icon-btn dropdown-toggle']"),
 	DOCUMENT_TITILE_IN_SEARCHPAGE_XPATH("//div[@class='wui-content-title wui-content-title--medium ng-binding']"),
 	DOCUMENT_URL_IN_SEARCHPAGE_XPATH("//ne-post-results[@class='ng-scope ng-isolate-scope']/a"),
@@ -282,7 +282,10 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID("email"),
 	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),
 	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("login"),
-	
+	FUTUREPOST_AUTHOR_NAME_CSS("div[class='wui-subtitle ne-user-profile-object-title-wrapper'] a"),
+	FUTUREPOST_POST_NAME_CSS("div[class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']"),
+	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card__footer'] button[class='wui-icon-btn dropdown-toggle']"),
+	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	;
 
 	

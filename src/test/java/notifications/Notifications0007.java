@@ -62,7 +62,8 @@ public class Notifications0007 extends NotificationsTestBase {
 			}
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		// test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		// test.log(LogStatus.INFO, this.getClass().getSimpleName() + "
+		// execution starts--->");
 		try {
 			if (user1 != null && user2 != null && user3 != null) {
 				openBrowser();
@@ -82,8 +83,9 @@ public class Notifications0007 extends NotificationsTestBase {
 				document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 				logger.info("Article URL - " + document_url);
 				logger.info("Article Title -" + document_title);
-				boolean watchstatus = watchDocument();//need to change
+				boolean watchstatus = watchDocument();// need to change
 				boolean commentStatus = addcommentOnArticle();
+				boolean verifyStatus = false;
 				try {
 					extent = ExtentManager.getReporter(filePath);
 					test = extent
@@ -95,7 +97,7 @@ public class Notifications0007 extends NotificationsTestBase {
 						test.log(LogStatus.INFO, "Added article into watchlist");
 						if (commentStatus) {
 							test.log(LogStatus.INFO, "Added Comment into Article");
-							verifyWatchArticleNotification();//need to change
+							verifyStatus = verifyWatchArticleNotification();
 						} else {
 							test.log(LogStatus.FAIL, "Facing issue while adding comment into article");
 							throw new Exception("Facing issue while adding comment into article");
@@ -106,6 +108,25 @@ public class Notifications0007 extends NotificationsTestBase {
 					}
 
 				} catch (Throwable t) {
+				} finally {
+					extent.endTest(test);
+				}
+				try {
+					extent = ExtentManager.getReporter(filePath);
+					test = extent
+							.startTest("OPQA-1012",
+									"Verify that follower of the article is able to start conversation from home page when some one commented on the article he is following.")
+							.assignCategory("Notifications");
+					test.log(LogStatus.INFO, this.getClass().getSimpleName());
+
+					if (verifyStatus) {
+						test.log(LogStatus.INFO, "Notification getting with Correct Content");
+						startConversation();
+					} else {
+						test.log(LogStatus.INFO, "Notification not getting with Correct Content");
+					}
+				} catch (Throwable t) {
+					t.printStackTrace();
 				} finally {
 					extent.endTest(test);
 				}
@@ -135,13 +156,14 @@ public class Notifications0007 extends NotificationsTestBase {
 							.startTest("OPQA-209",
 									"Verify that user receives a notification if someone likes his comment an article")
 							.assignCategory("Notifications");
-					notification3();//need to change
+					notification3();// need to change
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL, "Something unexpected happened" + t);// extent
 					// next 3 lines to print whole testng error in report
 					StringWriter errors = new StringWriter();
 					t.printStackTrace(new PrintWriter(errors));
-					test.log(LogStatus.INFO, errors.toString());// extent reports
+					test.log(LogStatus.INFO, errors.toString());// extent
+																// reports
 					ErrorUtil.addVerificationFailure(t);// testng
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
@@ -169,12 +191,53 @@ public class Notifications0007 extends NotificationsTestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
+	private void startConversation() throws Exception {
+		pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+		pf.getLoginTRInstance(ob).clickLogin();
+		BrowserWaits.waitTime(4);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+		pf.getHFPageInstance(ob).clickOnHomeLink();
+		BrowserWaits.waitTime(4);
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		for (int i = 1; i <= 3; i++) {
+			// jse.executeScript("window.scrollTo(0,
+			// document.body.scrollHeight)", "");
+			BrowserWaits.waitTime(3);
+			String text = ob.findElement(By.xpath(OR.getProperty("comment_event_section"))).getText();
+			if (text.length() > 0) {
+				break;
+			}
+		}
+		String text1 = ob.findElement(By.xpath(OR.getProperty("comment_event_section"))).getText();
+		logger.info("Notification Text: " + text1);
+		String expected_text = fn3 + " " + ln3;
+		try {
+			Assert.assertTrue(text1.contains(expected_text) && text1.contains(expected_text)
+							&& text1.contains(document_title) && text1.contains(OR.getProperty("COMMENT_TEXT1")));
+			test.log(LogStatus.PASS, "User receiving notification with correct content");
+		} catch (Throwable t) {
+			/*test.log(LogStatus.FAIL, "User receiving notification with incorrect content" + t);// extent
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString()); // reports
+			test.log(LogStatus.INFO, "Error--->" + t);
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));*/// screenshot
+		} finally {
+			pf.getLoginTRInstance(ob).logOutApp();
+		}
+
+	}
+
 	private void notification3() throws Exception {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			logger.info(this.getClass().getSimpleName() + " execution starts--->");
 			// 2)Login with user1,like the comment and logout
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("TR_login_button")), 20);
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
@@ -190,8 +253,9 @@ public class Notifications0007 extends NotificationsTestBase {
 
 			// 3)Login with user2 again and verify that he receives a correct
 			// notification
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
-			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("TR_login_button")), 20);
+			pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
@@ -208,8 +272,8 @@ public class Notifications0007 extends NotificationsTestBase {
 			String text = ob.findElement(By.xpath(OR.getProperty("notificationForLike1"))).getText();
 			logger.info("Notification Text: " + text);
 			try {
-				Assert.assertTrue(/* text.contains("TODAY") && */text.contains("Liked your comment")
-						&& text.contains(OR.getProperty("COMMENT_TEXT")) && text.contains(fn1 + " " + ln1));
+				Assert.assertTrue(text.contains("Liked your comment")
+						&& text.contains(OR.getProperty("COMMENT_TEXT1")) && text.contains(fn1 + " " + ln1));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
@@ -217,7 +281,8 @@ public class Notifications0007 extends NotificationsTestBase {
 				Assert.assertTrue(false);
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// extent reports // reports
+				test.log(LogStatus.INFO, errors.toString());// extent reports //
+															// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
@@ -232,29 +297,39 @@ public class Notifications0007 extends NotificationsTestBase {
 
 	private void verifycommentNotification() throws Exception {
 		try {
-			clearCookies();
-			pf.getLoginTRInstance(ob).waitForTRHomePage();
+//			clearCookies();
+			//pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
 					"Home page is not loaded successfully");
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(6);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			String notification_text = null;
 			for (int i = 1; i <= 3; i++) {
-				notification_text = ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_CSS.toString())).getText();
+				logger.info("in home page");
+				notification_text = ob
+						.findElement(
+								By.xpath(OR.getProperty("comment_event_section")))
+						.getText();
 				if (notification_text.length() > 0) {
 					break;
 				}
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 				BrowserWaits.waitTime(3);
 			}
-			String notification_text_author = ob.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_NOTIFICATION_FOLLOWUSER_COMMENT_CSS.toString())).getText();;
-			logger.info("Notification Text: " + notification_text +"\n Author-Name -"+notification_text_author);
+			String notification_text_author = ob
+					.findElement(By.xpath(OR.getProperty("comment_event_section")))
+					.getText();
+			logger.info("Notification Text: " + notification_text + "\n Author-Name -" + notification_text_author);
 			try {
-				Assert.assertTrue(notification_text_author.contains(fn2 + " " + ln2)
-						&& notification_text.contains("New Comment") && notification_text.contains(document_title));
+				Assert.assertTrue(
+						notification_text_author.contains(fn3 + " " + ln3)/* && notification_text.contains("New Comment")*/
+								&& notification_text_author.contains(document_title)
+								&& notification_text_author.contains(OR.getProperty("COMMENT_TEXT1")));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 				test.log(LogStatus.PASS, "PASS");
 			} catch (Throwable t) {
@@ -263,37 +338,40 @@ public class Notifications0007 extends NotificationsTestBase {
 				ErrorUtil.addVerificationFailure(t);
 				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_OPQA_207")));
+				test.log(LogStatus.INFO, "Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA_207")));
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
 			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_OPQA_207")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_OPQA_207")));
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}
 	}
 
-	private void verifyWatchArticleNotification() throws Exception {
-
+		boolean commentStatus = false;
+		private boolean verifyWatchArticleNotification() throws Exception {
 		try {
 			// 3)Login with user1 again and verify that he receives a correct
 			// notification
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("TR_login_button")), 20);
 			pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("notificationDocumentComment")), 100);
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("notificationDocumentComment")), 100);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
-				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
+				// jse.executeScript("window.scrollTo(0,
+				// document.body.scrollHeight)", "");
 				BrowserWaits.waitTime(3);
 				String text = ob.findElement(By.xpath(OR.getProperty("comment_section"))).getText();
 				if (text.length() > 0) {
@@ -305,9 +383,19 @@ public class Notifications0007 extends NotificationsTestBase {
 			String expected_text = fn2 + " " + ln2;
 			try {
 				Assert.assertTrue(text.contains("New comments") && text.contains(expected_text)
-						&& /*
-							 * text.contains("TODAY") &&
-							 */text.contains(document_title) && text.contains(OR.getProperty("COMMENT_TEXT")));
+						&& text.contains(document_title) && text.contains(OR.getProperty("COMMENT_TEXT")));
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.cssSelector("button[class='wui-label']")).click();
+				ob.findElement(
+						By.cssSelector("div[class='ng-pristine ng-untouched ng-valid ta-bind placeholder-text']"))
+						.sendKeys(OR.getProperty("COMMENT_TEXT1"));
+				ob.findElement(
+						By.cssSelector("button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']"))
+						.click();
+				BrowserWaits.waitTime(3);
+				pf.getHFPageInstance(ob).clickOnHomeLink();
+				BrowserWaits.waitTime(4);
+				commentStatus = true;
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content" + t);// extent
@@ -327,6 +415,7 @@ public class Notifications0007 extends NotificationsTestBase {
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}
+		return commentStatus;
 	}
 
 	private boolean addcommentOnArticle() throws Exception {
@@ -356,45 +445,62 @@ public class Notifications0007 extends NotificationsTestBase {
 		try {
 			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Biotechnology");
 			// ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
-			// document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			// document_url = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
+			// waitForElementTobeVisible(ob,
+			// By.xpath(OR.getProperty("searchResults_links")), 120);
+			// document_title =
+			// ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			// document_url =
+			// ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getAttribute("href");
 			// logger.info(document_url);
-			/*ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
-			ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
-			ob.findElement(By.xpath(OR.getProperty("closeWatchListBucketDisplay"))).click();
-			BrowserWaits.waitTime(1);*/
+			/*
+			 * ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))
+			 * ).click(); waitForElementTobeVisible(ob,
+			 * By.xpath(OR.getProperty("selectWatchListInBucket")), 30);
+			 * ob.findElement(By.xpath(OR.getProperty("selectWatchListInBucket")
+			 * )).click(); waitForElementTobeVisible(ob,
+			 * By.xpath(OR.getProperty("closeWatchListBucketDisplay")), 30);
+			 * ob.findElement(By.xpath(OR.getProperty(
+			 * "closeWatchListBucketDisplay"))).click();
+			 * BrowserWaits.waitTime(1);
+			 */
 			BrowserWaits.waitTime(2);
-			//ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
-			String watchStatus = ob.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString())).getText();
-			logger.info("Watch Button Status : "+watchStatus);
+			// ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1"))).click();
+			String watchStatus = ob
+					.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()))
+					.getText();
+			logger.info("Watch Button Status : " + watchStatus);
 			if (watchStatus.contains("Watching")) {
-				List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+				List<WebElement> element = ob
+						.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
 				element.get(0).click();
 				BrowserWaits.waitTime(2);
-				List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--active']"));
+				List<WebElement> listOfWatchListButton = ob.findElements(
+						By.cssSelector("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"));
 				listOfWatchListButton.get(0).click();
 				BrowserWaits.waitTime(2);
 				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
 				BrowserWaits.waitTime(2);
 			}
-			
-			List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
+
+			List<WebElement> element = ob
+					.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
 			element.get(0).click();
 			BrowserWaits.waitTime(2);
-			List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
+			List<WebElement> listOfWatchListButton = ob
+					.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
 			listOfWatchListButton.get(0).click();
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
 			BrowserWaits.waitTime(3);
-			
-			/*List<WebElement> listOfWatchListButton = ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1")));
-			listOfWatchListButton.get(0).click();
-			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button1"))).click();*/
-			
+
+			/*
+			 * List<WebElement> listOfWatchListButton =
+			 * ob.findElements(By.xpath(OR.getProperty("watchlist_watch_button1"
+			 * ))); listOfWatchListButton.get(0).click();
+			 * BrowserWaits.waitTime(4); ob.findElement(By.xpath(OR.getProperty(
+			 * "watchlist_model_close_button1"))).click();
+			 */
+
 			status = true;
 		} catch (Exception e) {
 			// TODO: handle exception

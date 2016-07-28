@@ -141,6 +141,7 @@ public class Notifications0008 extends NotificationsTestBase {
 					extent.endTest(test);
 				}
 				boolean commentstatus = false;
+				boolean conversationStatu=false;
 				if (poststatus) {
 					commentstatus = addCommentOnPost();
 				}
@@ -161,17 +162,41 @@ public class Notifications0008 extends NotificationsTestBase {
 							test.log(LogStatus.INFO, "User logged in successfully");
 							test.log(LogStatus.INFO, "Published comment on a post -" + postString);
 							test.log(LogStatus.INFO, "User logged out successfully");
-							verifyCommentOnOwnPost();
+							conversationStatu=verifyCommentOnOwnPost();
 						} else
 							throw new Exception("Facing issue while publishing comment");
 					} else
 						throw new Exception("Post creation Exception");
+					
 				} catch (Exception e) {
 					test.log(LogStatus.FAIL, e.getMessage());
 					e.printStackTrace();
 				} finally {
 					extent.endTest(test);
 				}
+				
+				try{
+					extent = ExtentManager.getReporter(filePath);
+					test = extent
+							.startTest("OPQA-1010",
+									"Verify that author of the post is able to start conversation from home page when some one commented on his post.")
+							.assignCategory("Notifications");
+					test.log(LogStatus.INFO, this.getClass().getSimpleName());
+					if(conversationStatu){
+						test.log(LogStatus.INFO, "User Starts Conversation from home page.");
+					}else{
+						test.log(LogStatus.INFO, "User not Starts Conversation from home page.");
+					}
+					
+				}catch (Exception e) {
+					test.log(LogStatus.FAIL, e.getMessage());
+					e.printStackTrace();
+				} finally {
+					extent.endTest(test);
+				}
+
+				
+				
 				closeBrowser();
 			} else {
 				test.log(LogStatus.INFO, "User creation problem hence Failing this test case");
@@ -228,7 +253,8 @@ public class Notifications0008 extends NotificationsTestBase {
 		return status;
 	}
 
-	private void verifyCommentOnOwnPost() throws Exception {
+	private boolean verifyCommentOnOwnPost() throws Exception {
+		boolean conversationStatu=false;
 		try {
 			// LOGIN WITH USER3 AND CHECK FOR THE NOTIFICATION
 			clearCookies();
@@ -246,6 +272,19 @@ public class Notifications0008 extends NotificationsTestBase {
 				Assert.assertTrue(text.contains("New comments on your post") /* && text.contains("TODAY") */
 						&& text.contains(postString)/* && text.contains(fn1 + " " + ln1) */
 						&& text.contains(OR.getProperty("COMMENT_TEXT")));
+				
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.cssSelector("button[class='wui-label']")).click();
+				ob.findElement(
+						By.cssSelector("div[class='ng-pristine ng-valid ta-bind placeholder-text ng-touched']"))
+						.sendKeys(OR.getProperty("COMMENT_TEXT1"));
+				ob.findElement(
+						By.cssSelector("button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']"))
+						.click();
+				BrowserWaits.waitTime(2);
+				pf.getHFPageInstance(ob).clickOnHomeLink();
+				BrowserWaits.waitTime(4);
+				conversationStatu=true;
 				test.log(LogStatus.PASS, "User receivied notification with correct content");
 			} catch (Throwable t) {
 
@@ -266,6 +305,7 @@ public class Notifications0008 extends NotificationsTestBase {
 		} finally {
 			pf.getLoginTRInstance(ob).logOutApp();
 		}
+		return conversationStatu;
 	}
 
 	/**
