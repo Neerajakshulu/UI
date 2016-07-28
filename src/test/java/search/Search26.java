@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -73,9 +74,11 @@ public class Search26 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-		    BrowserWaits.waitTime(2);
+		    BrowserWaits.waitTime(3);
 
-			List<WebElement> headings = ob.findElements(By.xpath(OR.getProperty("sectionHeading_label")));
+			List<WebElement> headings = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_TYPE_AHEAD_ELEMENTS_HEADING_CSS.toString()));
+			List<WebElement> el=ob.findElements(By.cssSelector(OnePObjectMap.TYPE_AHEAD_SHOWALL_ELEMENTS_CSS.toString()));
+       
 			// if(!compareNumbers(4,headings.size())){
 			//
 			// test.log(LogStatus.FAIL, "More than 4 sections getting displayed in the typeahead");//extent reports
@@ -89,18 +92,23 @@ public class Search26 extends TestBase {
 			// System.out.println(headings.get(i).getText());
 			// }
 
-			boolean condition1 = headings.get(0).getText().equals("Categories");
-			boolean condition2 = headings.get(1).getText().equals("Articles");
-			boolean condition3 = headings.get(2).getText().equals("Patents");
-			boolean condition4 = headings.get(3).getText().equals("People");
-
-			boolean final_condition = condition1 && condition2 && condition3 && condition4;
-			// System.out.println(final_condition);
+			boolean condition1 = headings.get(0).getText().equalsIgnoreCase("Categories");
+			boolean condition2 = headings.get(1).getText().equalsIgnoreCase("Articles");
+			boolean condition3 = headings.get(2).getText().equalsIgnoreCase("Patents");
+			boolean condition4 = headings.get(3).getText().equalsIgnoreCase("People");
+			boolean condition5 = headings.get(4).getText().equalsIgnoreCase("Posts");
+			
+			boolean final_condition = condition1 && condition2 && condition3 && condition4&& condition5;
+			//System.out.println(final_condition);
 
 			try {
-
+				if(el.size()==4){
+					test.log(LogStatus.PASS, "Show all elements are dispalying in type ahead");	
+				}
 				Assert.assertTrue(final_condition, "Typeahead sections not getting displayed correctly");
 				test.log(LogStatus.PASS, "Typeahead sections getting displayed correctly");// extent reports
+
+			
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Typeahead sections not getting displayed correctly");// extent reports
 				// next 3 lines to print whole testng error in report
