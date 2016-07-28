@@ -42,7 +42,7 @@ public class Authoring30 extends TestBase {
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"CREATE POST: Verfiy that proper error messages are displyed for min max length validation of post title")
+						"CREATE POST:Verfiy that publish button is disabled when min and max length requirement for post title is not met.")
 				.assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}

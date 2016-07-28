@@ -286,6 +286,8 @@ public enum OnePObjectMap {
 	FUTUREPOST_POST_NAME_CSS("div[class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']"),
 	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card__footer'] button[class='wui-icon-btn dropdown-toggle']"),
 	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']")
 	;
 
 	

@@ -493,6 +493,31 @@
 			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
+	
+	<test name="Authoring83">
+		<classes>
+			<class name="Authoring.Authoring83"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring84">
+		<classes>
+			<class name="Authoring.Authoring84"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring85">
+		<classes>
+			<class name="Authoring.Authoring85"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring86">
+		<classes>
+			<class name="Authoring.Authoring86"></class>
+		</classes>
+	</test>
+	
 </suite>
 
 

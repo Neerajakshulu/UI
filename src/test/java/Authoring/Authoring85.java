@@ -8,9 +8,11 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -18,9 +20,16 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Authoring50 extends TestBase {
+public class Authoring85 extends TestBase {
 
+	String runmodes[] = null;
+	static int count = -1;
+
+	static boolean fail = false;
+	static boolean skip = false;
 	static int status = 1;
+
+	static int time = 30;
 	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
@@ -32,24 +41,24 @@ public class Authoring50 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that the user is able to comment on the post and appreciate/unappreciate a comment a user authored themselves")
+		test = extent
+				.startTest(var,
+						"Verfiy that preferred action is diplayed in a cancel modal [ Discard draft,Keep Draft, Publish post] for new posts")
 				.assignCategory("Authoring");
-
+		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
-	public void testPostComments() throws Exception {
+	public void testPostCreation() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
-
-			status = 3;// excel
+			status = 3;
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
@@ -66,29 +75,17 @@ public class Authoring50 extends TestBase {
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			if (pf.getProfilePageInstance(ob).getPostsCount() == 0) {
-				String tilte = "PostAppreciationTest" + RandomStringUtils.randomNumeric(10);
-				pf.getProfilePageInstance(ob).clickOnPublishPostButton();
-				pf.getProfilePageInstance(ob).enterPostTitle(tilte);
-				pf.getProfilePageInstance(ob).enterPostContent(tilte);
-				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-			}
-
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			int countBefore = pf.getpostRVPageInstance(ob).getCommentCount();
-
-			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
-
-			int countAfter = pf.getpostRVPageInstance(ob).getCommentCount();
-
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			
+			
 			try {
-				Assert.assertEquals(countBefore + 1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
-				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post", test);
-
+				pf.getProfilePageInstance(ob).validateCancelModalControls(test);
+			test.log(LogStatus.PASS,
+					"All the controls are displayed in post cancel modal");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Adding Comments to the users own post not working as expected ");
+				test.log(LogStatus.FAIL,
+						"All the controls are not displayed in post cancel modal");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
@@ -96,15 +93,13 @@ public class Authoring50 extends TestBase {
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+										+ "Post_title_validation_failed")));// screenshot
 
 			}
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+			pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
-			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -123,6 +118,7 @@ public class Authoring50 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+
 
 	@AfterTest
 	public void reportTestResult() {

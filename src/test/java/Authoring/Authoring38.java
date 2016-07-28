@@ -156,6 +156,7 @@ public class Authoring38 extends TestBase {
 
 		}
 		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 	}

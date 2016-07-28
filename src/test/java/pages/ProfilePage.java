@@ -17,6 +17,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
@@ -1633,5 +1636,70 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
 	
+
+	public void clickOnPostModalCloseButton() {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS);
+		ob.findElement(
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS.toString()))
+				.click();
+	}
+	
+	public boolean validateCancelModalControlsEditPost(ExtentTest test) {
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH.toString()), 60);
+		boolean cond1 = ob
+				.findElement(
+						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH.toString()))
+				.isDisplayed();
+		boolean cond2;
+		try{
+		cond2= ob
+				.findElement(By
+						.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString()))
+				.isDisplayed();
+		}catch(Exception e){
+			cond2=false;
+		}
+		boolean cond3 = ob
+				.findElement(
+						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH.toString()))
+				.isDisplayed();
+
+		if (!cond1)
+			test.log(LogStatus.INFO, "Discard button not present");
+		if (cond2)
+			test.log(LogStatus.INFO, "Keep draft button is present");
+		if (!cond3)
+			test.log(LogStatus.INFO, "Publish button not present");
+
+		return cond1 && !cond2 && cond3;
+
+	}
+	public boolean validateCancelModalControls(ExtentTest test) {
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH.toString()), 60);
 		
+		boolean cond1 = ob
+				.findElement(
+						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH.toString()))
+				.isDisplayed();
+		boolean cond2 = ob
+				.findElement(By
+						.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString()))
+				.isDisplayed();
+		boolean cond3 = ob
+				.findElement(
+						By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH.toString()))
+				.isDisplayed();
+
+		if (!cond1)
+			test.log(LogStatus.INFO, "Discard button not present");
+		if (!cond1)
+			test.log(LogStatus.INFO, "Keep draft button not present");
+		if (!cond1)
+			test.log(LogStatus.INFO, "Publish button not present");
+
+		return cond1 && cond2 && cond3;
+
+	}
+
 }
