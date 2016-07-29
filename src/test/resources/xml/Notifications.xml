@@ -102,6 +102,12 @@
 		</classes>
 	</test>
 	
+	<test name="Test F21">
+		<classes>
+			<class name="notifications.Notifications0021"></class>
+		</classes>
+	</test>
+	
 	<test name="Test F22">
 		<classes>
 			<class name="notifications.Notifications0022"></class>
