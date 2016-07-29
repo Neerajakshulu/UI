@@ -10,14 +10,15 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	<test name="Follow_Other_Profile" preserve-order="true">
+	 <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
 		</classes>
-	</test>
+	</test> 
 
-	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	 <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	 	<parameter name="searchPeople" value="Ivy"></parameter>
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
@@ -349,7 +350,7 @@
 		<classes>
 			<class name="Profile.Profile45"></class>
 		</classes>
-	</test>
+	</test> 
 
 </suite>
 

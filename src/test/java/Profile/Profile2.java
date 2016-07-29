@@ -91,10 +91,11 @@ public class Profile2 extends TestBase {
 	 * @throws Exception
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
-	public void getOtherProfileDetails() throws Exception {
+	@Parameters("searchPeople")
+	public void getOtherProfileDetails(String searchPeople) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "get other profile details and validate");
-			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("Hao");
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(searchPeople);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getProfilePageInstance(ob).clickProfile();
 			pf.getProfilePageInstance(ob).validateProfileTitleAndMetadata();
