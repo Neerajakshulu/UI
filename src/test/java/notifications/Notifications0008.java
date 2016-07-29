@@ -276,7 +276,7 @@ public class Notifications0008 extends NotificationsTestBase {
 				BrowserWaits.waitTime(3);
 				ob.findElement(By.cssSelector("button[class='wui-label']")).click();
 				ob.findElement(
-						By.cssSelector("div[class='ng-pristine ng-valid ta-bind placeholder-text ng-touched']"))
+						By.cssSelector("div[class='ng-pristine ng-untouched ng-valid ta-bind placeholder-text']"))
 						.sendKeys(OR.getProperty("COMMENT_TEXT1"));
 				ob.findElement(
 						By.cssSelector("button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']"))

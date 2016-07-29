@@ -81,15 +81,19 @@ public class Notifications0024 extends NotificationsTestBase {
 			logger.info("Author Name : "+watchlistStatus);
 			if(watchlistStatus.contains("Watching")){
 				element1.click();
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.FUTUREPOST_WATCHLIST_WATCHING_CSS.toString()), 30);
 				ob.findElement(By.cssSelector(OnePObjectMap.FUTUREPOST_WATCHLIST_WATCHING_CSS.toString())).click();
+				BrowserWaits.waitTime(2);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH);
-				BrowserWaits.waitTime(4);
+				BrowserWaits.waitTime(2);
 			}
 			element1.click();
 			BrowserWaits.waitTime(4);
 			ob.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString())).click();
+			BrowserWaits.waitTime(2);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH);
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(2);
 			String watchlistStatus1=element1.getText();
 			logger.info("Watch list status : "+watchlistStatus1);
 			try{
