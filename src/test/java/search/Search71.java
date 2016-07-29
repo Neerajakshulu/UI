@@ -110,7 +110,7 @@ public class Search71 extends TestBase {
 			String[] arr2 = text2.split("\n");
 
 			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i = 1; i < arr2.length; i++) {
+			for (int i =0; i < arr2.length; i++) {
 
 				System.out.println("text-->" + arr2[i]);
 				al2.add(arr2[i]);

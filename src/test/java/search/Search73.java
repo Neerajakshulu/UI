@@ -107,7 +107,7 @@ public class Search73 extends TestBase {
 				al2.add(arr2[i]);
 			}
 
-			String expected_text = al2.get(1);
+			String expected_text = al2.get(2);
 			System.out.println(expected_text);
 
 			for (int i = 1; i <= 15; i++) {
