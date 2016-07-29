@@ -518,6 +518,17 @@
 		</classes>
 	</test>
 	
+	<test name="Authoring87">
+		<classes>
+			<class name="Authoring.Authoring87"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring88">
+		<classes>
+			<class name="Authoring.Authoring88"></class>
+		</classes>
+	</test>
 	
 </suite>
 
