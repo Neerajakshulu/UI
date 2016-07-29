@@ -88,7 +88,7 @@ public class Search95 extends TestBase {
 		
 			String postCreationDate = ob.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
 			String profileMetaData = ob.findElement(By.cssSelector("div[class*='wui-descriptor wui-descriptor__profile']")).getText();
-			String statsXpath="div[class^='wui-card__footer-right'] span";
+			String statsXpath="div[class='wui-card__footer-content'] results-metrics span";
 			String postLikeCount = ob
 					.findElements(By.cssSelector(statsXpath)).get(4)
 					.getText();

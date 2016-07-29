@@ -116,6 +116,7 @@ public class Search58 extends TestBase {
 
 				al1.add(arr1[i]);
 			}
+			
 			// for(int i=0;i<al1.size();i++){
 			//
 			// System.out.println(al1.get(i));
@@ -158,7 +159,7 @@ public class Search58 extends TestBase {
 			String[] arr2 = text2.split("\n");
 
 			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i = 1; i < arr2.length; i++) {
+			for (int i =0; i < arr2.length; i++) {
 
 				al2.add(arr2[i]);
 			}
@@ -167,7 +168,7 @@ public class Search58 extends TestBase {
 
 				System.out.println(al2.get(i));
 			}
-
+			
 			if (!compareNumbers(4, al2.size())) {
 
 				test.log(LogStatus.FAIL, "More or less than 4 article suggestions are getting displayed");// extent
@@ -204,7 +205,7 @@ public class Search58 extends TestBase {
 
 			String[] arr3 = text.split("\n");
 			ArrayList<String> al3 = new ArrayList<String>();
-			for (int i = 1; i < arr3.length; i++) {
+			for (int i = 0; i < arr3.length; i++) {
 
 				al3.add(arr3[i]);
 			}
@@ -245,7 +246,7 @@ public class Search58 extends TestBase {
 
 			String[] arr4 = text.split("\n");
 			ArrayList<String> al4 = new ArrayList<String>();
-			for (int i = 1; i < arr4.length; i++) {
+			for (int i = 0; i < arr4.length; i++) {
 
 				al4.add(arr4[i]);
 			}
@@ -296,7 +297,7 @@ public class Search58 extends TestBase {
 
 			String[] arr5 = text5.split("\n");
 			ArrayList<String> al5 = new ArrayList<String>();
-			for (int i = 1; i < arr5.length; i++) {
+			for (int i =0; i < arr5.length; i++) {
 
 				al5.add(arr5[i]);
 			}

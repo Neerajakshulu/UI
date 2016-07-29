@@ -135,6 +135,7 @@ public class Search89 extends TestBase {
 				}
                BrowserWaits.waitTime(7);
 				String titleNameOriginal = ob.findElement(By.xpath("//div[@id='PAT.TIOR0']")).getText();
+				BrowserWaits.waitTime(4);
 				if (titleNameOriginal.equalsIgnoreCase(titleName)) {
 					test.log(LogStatus.PASS, "Original title name is same as the title displayed in NEON");
 				} else {

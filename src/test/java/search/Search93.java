@@ -78,7 +78,7 @@ public class Search93 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
-			BrowserWaits.waitTime(3);
+		waitForAjax(ob);
 			pf.getProfilePageInstance(ob).clickProfile();
 			boolean isPresent = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString())).isDisplayed();
 			if (!isPresent) {

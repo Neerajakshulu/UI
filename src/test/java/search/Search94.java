@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -75,7 +76,9 @@ public class Search94 extends TestBase {
 			//Thread.sleep(1000);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(userName);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
+			waitForAjax(ob);
 			pf.getProfilePageInstance(ob).clickProfile();
+			BrowserWaits.waitTime(2);
 			boolean isPresent = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");

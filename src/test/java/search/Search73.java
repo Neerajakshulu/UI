@@ -102,12 +102,12 @@ public class Search73 extends TestBase {
 			String[] arr2 = text2.split("\n");
 
 			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i = 1; i < arr2.length; i++) {
+			for (int i = 0; i < arr2.length; i++) {
 
 				al2.add(arr2[i]);
 			}
 
-			String expected_text = al2.get(2);
+			String expected_text = al2.get(1);
 			System.out.println(expected_text);
 
 			for (int i = 1; i <= 15; i++) {
