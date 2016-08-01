@@ -638,11 +638,12 @@
 		</classes>
 	</test>
 	
-	<test name="TestCase_B127">
+	<!--<test name="TestCase_B127">
 		<classes>
 			<class name="search.Search127"></class>
 		</classes>
 	</test>
+	-->
 	
 	<test name="TestCase_B128">
 		<classes>
