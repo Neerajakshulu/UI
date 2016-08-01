@@ -60,12 +60,6 @@
 		</classes>
 	</test>
 
-		<test name="Test B12">
-		<classes>
-			<class name="search.Search12"></class>
-		</classes>
-	</test>
-
 	<test name="Test B13">
 		<classes>
 			<class name="search.Search13"></class>
@@ -310,6 +304,12 @@
 	<test name="Test B66">
 		<classes>
 			<class name="search.Search66"></class>
+		</classes>
+	</test>
+
+<test name="Test B67">
+		<classes>
+			<class name="search.Search67"></class>
 		</classes>
 	</test>
 
