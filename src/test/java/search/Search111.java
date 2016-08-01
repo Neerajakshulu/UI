@@ -71,7 +71,7 @@ public class Search111 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			// Searching for people
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Amneet");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForPageLoad(ob);
 			BrowserWaits.waitTime(5);

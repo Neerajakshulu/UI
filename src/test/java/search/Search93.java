@@ -62,7 +62,7 @@ public class Search93 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String userName = "user automation";
+			String userName = "user";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
