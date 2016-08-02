@@ -77,11 +77,11 @@ public class Search58 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
-			BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
-			BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(3);
 
 			String autocompleted_keyword = ob.findElement(By.xpath(OR.getProperty("autocompleteTile"))).getText();
 

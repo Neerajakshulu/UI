@@ -13,8 +13,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -75,9 +77,10 @@ public class Search44 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"), 30);
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			Thread.sleep(2000);
-			ob.findElement(By.cssSelector("a[class='wui-side-menu__link'][ng-click*='ARTICLES']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"), 30);
 			Thread.sleep(2000);
 			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();

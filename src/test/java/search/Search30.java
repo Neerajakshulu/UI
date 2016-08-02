@@ -109,7 +109,7 @@ public class Search30 extends TestBase {
 				if (!al.get(i).toLowerCase().contains(search_query))
 					count++;
 			}
-
+		
 			if (!compareNumbers(0, count)) {
 
 				test.log(LogStatus.FAIL, "People suggestion does not contain the typed keyword");// extent reports

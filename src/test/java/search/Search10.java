@@ -72,7 +72,7 @@ public class Search10 extends TestBase {
 			maximizeWindow();
 
 			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 			
 			// login using TR credentials
 			login();

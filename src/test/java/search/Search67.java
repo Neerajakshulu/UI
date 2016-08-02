@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -62,9 +63,8 @@ public class Search67 extends TestBase {
 
 			// Navigating to the NEON login page
 			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
+			ob.navigate().to(host);
+			
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -73,12 +73,10 @@ public class Search67 extends TestBase {
 			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob,
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			Thread.sleep(3000);
 
-			String all_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"))
-					.getText();
+			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).getText();
 			String all_temp = all_text.substring(3);
 			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
 			System.out.println(all_text);
@@ -86,31 +84,26 @@ public class Search67 extends TestBase {
 			int all_num = convertStringToInt(all_temp);
 			System.out.println(all_num);
 
-			String articles_text = ob
-					.findElement(
-							By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Articles')]"))
-					.getText();
+			String articles_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()))
+			.getText();
 			String articles_temp = articles_text.substring(8);
 			int articles_num = convertStringToInt(articles_temp);
 			System.out.println(articles_num);
 
 			String patents_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Patents')]"))
-					.getText();
+		By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
 			String patents_temp = patents_text.substring(7);
 			int patents_num = convertStringToInt(patents_temp);
 			System.out.println(patents_num);
 
 			String people_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'People')]"))
-					.getText();
+			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).getText();
 			String people_temp = people_text.substring(6);
 			int people_num = convertStringToInt(people_temp);
 			System.out.println(people_num);
 
 			String posts_text = ob.findElement(
-					By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'Posts')]"))
-					.getText();
+			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).getText();
 			String posts_temp = posts_text.substring(5);
 			int posts_num = convertStringToInt(posts_temp);
 			System.out.println(posts_num);

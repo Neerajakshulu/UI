@@ -12,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -76,6 +77,7 @@ public class Search6 extends TestBase {
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			BrowserWaits.waitTime(8);
 	
 			// System.out.println(ob.findElement(By.xpath(OR.getProperty("typeAhead_dropDown"))).getText());
 

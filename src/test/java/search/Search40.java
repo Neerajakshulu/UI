@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByCssSelector;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -81,12 +83,11 @@ public class Search40 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.partialLinkText("Articles"), 30);
-			Thread.sleep(2000);
-
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
-			ob.findElement(By.partialLinkText("Articles")).click();
-			BrowserWaits.waitTime(3);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			waitForAjax(ob);
             System.out.println("before refine");
 			// Finding out the types filer in refine panel
 			List<WebElement> content_types = ob.findElements(By.cssSelector("div[class='panel-heading']"));
@@ -94,7 +95,7 @@ public class Search40 extends TestBase {
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();
 			String filter4 = content_types.get(3).getText();
-			System.out.println("first value"+filter1+"sec value"+filter2);
+		
 			BrowserWaits.waitTime(3);
 
 			// Comparing the the label of the type of sort item

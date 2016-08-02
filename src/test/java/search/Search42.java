@@ -74,12 +74,11 @@ public class Search42 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
-			Thread.sleep(2000);
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			Thread.sleep(3000);
-
+		       BrowserWaits.waitTime(4);
 			// Check the filter is collapsed by default
 			collapseFilter();
 			BrowserWaits.waitTime(2);
@@ -120,10 +119,10 @@ public class Search42 extends TestBase {
 		// Capturing panel heading after expanding document type filter
 		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		documentTypePanelHeading = filterPanelHeadingList.get(1);
-		WebElement upArrow = documentTypePanelHeading.findElement(By
+		WebElement downArrow = documentTypePanelHeading.findElement(By
 				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
-		if (upArrow != null) {
+		if (downArrow != null) {
 			test.log(LogStatus.PASS, "Down arrow is visible for Authors filter");
 		}
 
@@ -143,10 +142,10 @@ public class Search42 extends TestBase {
 		// Finding out the types filer in refine panel
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(1);
-		WebElement downArrow = documentTypePanelHeading.findElement(By
+		WebElement upArrow = documentTypePanelHeading.findElement(By
 				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
-		if (downArrow != null) {
+		if (upArrow != null) {
 			test.log(LogStatus.PASS, "UP arrow is visible for Authors filter");
 		}
 		List<WebElement> filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse collapse']"));

@@ -90,9 +90,11 @@ public class Search84 extends TestBase {
 				System.out.println("-----"+tileText);
 		          BrowserWaits.waitTime(5);
 				String text1="Color-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
+				System.out.println("text value"+text1);
 				
 				try{
-					
+					test.log(LogStatus.INFO, tileText);
+					test.log(LogStatus.INFO, text1);
 					Assert.assertTrue(tileText.contains(text1));
 					test.log(LogStatus.PASS, "Following fields are getting displayed correctly for a patent: a)Title b)Patent number c)Assignees d)Inventors e)Publication date");// extent reports
 				}

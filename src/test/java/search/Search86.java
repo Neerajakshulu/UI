@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByCssSelector;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
@@ -18,6 +19,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -81,13 +83,12 @@ public class Search86 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 				waitForAjax(ob);
-				
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
-				BrowserWaits.waitTime(10);
-				ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'Patents')]")).click();
+				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 				waitForAjax(ob);
-							
-				ob.findElement(By.xpath("//a[@class='ng-binding']")).click();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
+				BrowserWaits.waitTime(5);		
+				List<WebElement> searchTiles=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				searchTiles.get(0).click();;
 				BrowserWaits.waitTime(5);
 				String text1=ob.findElement(By.xpath("//*[@class='ne-publication__header']")).getText();
 				BrowserWaits.waitTime(5);
@@ -96,7 +97,8 @@ public class Search86 extends TestBase {
 				
 				if(!compareStrings(expectedText1,text1)){
 					
-					
+					test.log(LogStatus.INFO, expectedText1);
+					test.log(LogStatus.INFO, text1);
 					test.log(LogStatus.FAIL, "Some or all of the following fields are not getting displayed correctly for a patent: a)Title b)Patent number c)Assignees d)Inventors e)Publication date");// extent
 					// reports
 					status = 2;// excel
