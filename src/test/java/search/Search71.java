@@ -77,9 +77,9 @@ public class Search71 extends TestBase {
 
 			// login using TR credentials
 			login();
-			//waitForElementTobeVisible(ob, By.cssSelector("input[class='wui-search-bar__input wui-search-bar__input--ne ng-pristine ng-valid ng-valid-required ng-touched']"), 120);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-
+			
+			//waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("c");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");

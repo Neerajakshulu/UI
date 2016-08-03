@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -74,10 +75,10 @@ public class Search54 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			Thread.sleep(2000);
-			ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
-
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+                waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card__header-left ng-binding']"), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;

@@ -74,17 +74,15 @@ public class Search113 extends TestBase {
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
+             BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-			Thread.sleep(2000);
-
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+             ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();;
+			//ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='panel panel-default ng-isolate-scope']"), 30);
 			List<WebElement> filter_list=ob.findElements(By.cssSelector("div[class='panel panel-default ng-isolate-scope']"));
 //			System.out.println(filter_list.size());
@@ -94,14 +92,14 @@ public class Search113 extends TestBase {
 	//	System.out.println(ob.findElement(By.xpath("/button[@class='search-result-refine-menu__load-button ng-scope']")).getText());
 			waitForElementTobeVisible(ob,By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);	
 				jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			
 //			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
 			
 			String temp1=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
 			if(!compareStrings("Less",temp1)){
 				
-				test.log(LogStatus.FAIL, "MORE link not working");// extent
+				test.log(LogStatus.FAIL, "Less link not working");// extent
 				// reports
 				status = 2;// excel
 				test.log(
@@ -116,9 +114,10 @@ public class Search113 extends TestBase {
 			jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
 			BrowserWaits.waitTime(2);
 			String temp2=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
+			
 			if(!compareStrings("More",temp2)){
 				
-				test.log(LogStatus.FAIL, "LESS link not working");// extent
+				test.log(LogStatus.FAIL, "More link not working");// extent
 				// reports
 				status = 2;// excel
 				test.log(
