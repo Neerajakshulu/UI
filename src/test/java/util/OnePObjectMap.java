@@ -89,7 +89,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS("button[class='wui-modal__close-btn']"),
 	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
 	HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
-
+	HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS("div[class='source-sans popover-content']"),
+	
 	HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS("a[data-event-category='profileposts']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS("a[data-event-category='profilecomments']"),
 	HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS("a[data-event-category='profilefollowers']"),
@@ -289,7 +290,10 @@ public enum OnePObjectMap {
 	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card__footer'] button[class='wui-icon-btn dropdown-toggle']"),
 	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
-	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']")
+	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']"),
+	HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS("div[class='modal-content']"),
+	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS("button[ng-click='$close()']"),
+	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS("button[ng-click='UserOnboardingProfile.close()']"),
 	
 	;
 
