@@ -36,7 +36,7 @@ public class Search95 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that following fields get displayed correctly for a post in POSTS search results page: a)Title b)Creation date and time c)Author d)Author details e)Likes count f)Comments count")
+						"Verify that following fields get displayed correctly for a post in POSTS search results page: a)Title b)Creation date and time c)Author d)Author details e)Likes count f)Comments countg)Abstarct of snippet")
 				.assignCategory("Search suite");
 
 	}
@@ -118,6 +118,17 @@ public class Search95 extends TestBase {
 					&& (!ispostAuthorMetadataAvailable) && isPostLikeCountAvailable && isPostCommentCountAvailable)) {
 				throw new Exception("Post all fiedls are not getting displayed in search results ALL page");
 			}
+			
+			waitForElementTobeVisible(ob,By.cssSelector("p[class*='wui-descriptor--snippet ng-binding']"),30);
+			String abst=ob.findElement(By.cssSelector("p[class*='wui-descriptor--snippet ng-binding']")).getText();
+			System.out.println("lenght"+abst.length());
+			if(abst.length()<=302)
+				test.log(LogStatus.PASS,
+						"Snippet of post is dispalying for posts in search page");// extent
+			else
+				test.log(LogStatus.FAIL,
+						"Snippet of post is  not dispalying properly for posts in search page");
+                System.out.println(abst);
 
 			closeBrowser();
 

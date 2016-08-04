@@ -40,7 +40,7 @@ public class Search85 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that following fields get displayed correctly for a patent in PATENTS  search results page:a)Title b)Inventors c)Assignees d)Patent number e)Publication date f)Times cited count g)Comments count")
+						"Verify that following fields get displayed correctly for a patent in PATENTS  search results page:a)Title b)Inventors c)Assignees d)Patent number e)Publication date f)Times cited count g)Comments counth)Abstarct of snippet")
 				.assignCategory("Search suite");
 
 	}
@@ -164,7 +164,16 @@ public class Search85 extends TestBase {
 					+ "_times_cited_count_not_getting_displayed")));// screenshot
 				}
 				
-				
+				waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ABSTRACTS_CSS.toString()),30);
+				String abst=ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).getText();
+				System.out.println("lenght"+abst.length());
+				if(abst.length()<=302)
+					test.log(LogStatus.PASS,
+							"Snippet of abstract is dispalying for patents search result page");// extent
+				else
+					test.log(LogStatus.FAIL,
+							"Snippet of abstract is  not displaying properly for patents search result page");
+	               
 				
 				
 				

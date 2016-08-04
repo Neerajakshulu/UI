@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -32,7 +33,7 @@ public class Search121 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that following fields get displayed correctly for an article in ARTICLES search results page:a)Titleb)Authorsc)Publication named)Publication date)Times cited countf)Comments count")
+						"Verify that following fields get displayed correctly for an article in ARTICLES search results page:a)Titleb)Authorsc)Publication named)Publication datee)Times cited countf)Comments countg)Abstarct of snippet")
 				.assignCategory("Search suite");
 
 	}
@@ -71,8 +72,9 @@ public class Search121 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_term + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-	  waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Articles')]"), 30);
-	   ob.findElement(By.xpath("//a[contains(text(),'Articles')]")).click();
+	  waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
+	   ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+	       waitForAjax(ob);
 			 waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(15000);
 			String title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -171,7 +173,14 @@ public class Search121 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_comments_information_not_getting_displayed_correctly")));// screenshot
 			}
-
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ABSTRACTS_CSS.toString()),30);
+			String abst=ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ABSTRACTS_CSS.toString())).getText();
+			if(abst.length()<=302)
+				test.log(LogStatus.PASS,
+						"Snippet of abstract is displaying for article search result page");// extent
+			else
+				test.log(LogStatus.FAIL,
+						"Snippet of abstract is  not displaying properly for article search result page");
 			closeBrowser();
 
 		}

@@ -80,19 +80,19 @@ public class Search86 extends TestBase {
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 				// Type into the search box and get search results
-				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_query + "\"");
 				ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 				waitForAjax(ob);
 				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 				waitForAjax(ob);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 180);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")),90);
 				BrowserWaits.waitTime(5);		
 				List<WebElement> searchTiles=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 				searchTiles.get(0).click();;
 				BrowserWaits.waitTime(5);
 				String text1=ob.findElement(By.xpath("//*[@class='ne-publication__header']")).getText();
 				BrowserWaits.waitTime(5);
-//				System.out.println(text1);
+			System.out.println(text1);
 				String expectedText1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
 				
 				if(!compareStrings(expectedText1,text1)){
@@ -229,7 +229,7 @@ public class Search86 extends TestBase {
 					
 				}
 				
-				closeBrowser();
+            closeBrowser();
 
 
 		}

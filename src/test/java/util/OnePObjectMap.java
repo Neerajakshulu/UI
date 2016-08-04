@@ -224,6 +224,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_PATENTS_CSS("a[class='wui-side-menu__link'][ng-click*='PATENTS']"),
 	SEARCH_TYPE_AHEAD_ELEMENTS_HEADING_CSS("h4[class='wui-super-header wui-super-header--divider wui-super-header--autocomplete-results'] span"),
 	TYPE_AHEAD_SHOWALL_ELEMENTS_CSS("a[class='wui-mini-btn wui-mini-btn--secondary wui-mini-btn--autocomplete-results']"),
+	SEARCH_RESULTS_PAGE_ABSTRACTS_CSS("div[class='wui-card__content'] p"),
 	
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
