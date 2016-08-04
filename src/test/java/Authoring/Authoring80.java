@@ -38,9 +38,9 @@ public class Authoring80 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"gusername1", "gpassword1","gusername2", "gpassword2" })
-	public void testPostComments(String gusername1,
-			String gpassword1,String gusername2,String gpassword2) throws Exception {
+	@Parameters({"gusername", "gpassword"})
+	public void testPostComments(String gusername,
+			String gpassword) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -71,13 +71,8 @@ public class Authoring80 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			//pf.getpostRVPageInstance(ob).clickOnFacebookUnderShareMenu();
-			if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
-				pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername1, gpassword1);
-			}else{
-				pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername2, gpassword2);
-			}
+			pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername, gpassword);
 			
-
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
