@@ -3,6 +3,7 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -37,9 +38,9 @@ public class Authoring80 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"gusername", "gpassword"})
-	public void testPostComments(String gusername,
-			String gpassword) throws Exception {
+	@Parameters({"gusername1", "gpassword1","gusername2", "gpassword2" })
+	public void testPostComments(String gusername1,
+			String gpassword1,String gusername2,String gpassword2) throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -70,7 +71,12 @@ public class Authoring80 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			//pf.getpostRVPageInstance(ob).clickOnFacebookUnderShareMenu();
-			pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername, gpassword);
+			if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
+				pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername1, gpassword1);
+			}else{
+				pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername2, gpassword2);
+			}
+			
 
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
