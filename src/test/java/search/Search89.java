@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -75,16 +76,17 @@ public class Search89 extends TestBase {
 			//selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.partialLinkText("Patents"), 4);
-			Thread.sleep(7000);
-			ob.findElement(By.partialLinkText("Patents")).click();
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 4);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 
 			// Navigating to record view page
 			
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(8000);
+			BrowserWaits.waitTime(7);
 
 			String titleName = "";
 			try {

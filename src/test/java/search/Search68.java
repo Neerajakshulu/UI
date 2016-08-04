@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -71,9 +72,10 @@ public class Search68 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
-			Thread.sleep(3000);
+			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
+             BrowserWaits.waitTime(2);		
 
 			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.getText();
@@ -108,31 +110,31 @@ public class Search68 extends TestBase {
 
 			ob.findElement(
 					By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			Thread.sleep(2000);
+		       BrowserWaits.waitTime(3);
 			boolean cond1 = getHeadingCount() == articles_num;
 			System.out.println(cond1);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-			Thread.sleep(2000);
+			  BrowserWaits.waitTime(3);
 			boolean cond2 = getHeadingCount() == patents_num;
 			System.out.println(cond2);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()))
 					.click();
-			Thread.sleep(2000);
+			  BrowserWaits.waitTime(3);
 			boolean cond3 = getHeadingCount() == people_num;
 			System.out.println(cond3);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()))
 					.click();
-			Thread.sleep(2000);
+			  BrowserWaits.waitTime(3);
 			boolean cond4 = getHeadingCount() == posts_num;
 			System.out.println(cond4);
 
 			ob.findElement(
 				 By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.click();
-			Thread.sleep(2000);
+			  BrowserWaits.waitTime(3);
 			boolean cond5 = getHeadingCount() == all_num;
 			System.out.println(cond5);
 

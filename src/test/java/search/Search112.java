@@ -113,10 +113,12 @@ public class Search112 extends TestBase {
 
 			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By.xpath(OR
 					.getProperty("tr_search_people_profilename_link_xpath")));
+			BrowserWaits.waitTime(2);
 			Iterator<WebElement> itr = webElementOrderAfterNavigation.iterator();
 			while (itr.hasNext()) {
 				profileOrderAfterNavigation.add(itr.next().getText());
 			}
+			
 
 			try {
 				Assert.assertTrue(sortOptionSelected.equals("Registration Date")

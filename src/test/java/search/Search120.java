@@ -2,8 +2,10 @@ package search;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -32,7 +34,7 @@ public class Search120 extends TestBase {
 		test = extent
 				.startTest(
 						var,
-						"Verify that following fields get displayed correctly for an article in ALL search results page:a)Titleb)Authorsc)Publication named)Publication date)Times cited countf)Comments count")
+						"Verify that following fields get displayed correctly for an article in ALL search results page:a)Titleb)Authorsc)Publication named)Publication date)Times cited countf)Comments countg)Authors count")
 				.assignCategory("Search suite");
 
 	}
@@ -170,7 +172,19 @@ public class Search120 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_comments_information_not_getting_displayed_correctly")));// screenshot
 			}
-
+			
+			waitForElementTobeVisible(ob, By.cssSelector("span[class='ng-scope']"),30);
+			List<WebElement> mylist=ob.findElements(By.cssSelector("span[class='ng-scope']"));
+		System.out.println(mylist.get(3).getText());
+			System.out.println(mylist.size());
+			if(mylist.size()<=3)
+				test.log(LogStatus.PASS," count of authors for articles are displaying properly");
+			else if(mylist.get(3).getText().equals("et al.") && mylist.size()==4)
+			test.log(LogStatus.PASS,"count of authors for articles are displaying properly");
+			else if(mylist.size()>4)
+				test.log(LogStatus.FAIL,"count of authors for articles are more than 3");
+			
+			
 			closeBrowser();
 
 		}
