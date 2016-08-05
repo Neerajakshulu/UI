@@ -172,7 +172,7 @@ public class IAM023 extends TestBase {
 
 			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 			logger.info("Email Subject Text : "+email_subject);
-			if (!StringContains(email_subject, "EndNote&trade;_password_change_request")) {
+			if (!StringContains(email_subject, "Project Neon password change request")) {
 
 				test.log(LogStatus.FAIL, "Email for changing password not received");// extent reports
 				status = 2;// excel
@@ -194,7 +194,7 @@ public class IAM023 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.id(OR.getProperty("update_password"))).click();
 			//
-			
+			BrowserWaits.waitTime(3);
 			String checkEmail2 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
 			logger.info("Email Address : "+checkEmail2);
 			
