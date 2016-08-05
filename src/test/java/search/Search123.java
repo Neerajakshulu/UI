@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -73,36 +74,18 @@ public class Search123 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
 			// Searching for people
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("kavya");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]"), 50);
-			ob.findElement(By.xpath("//a[@class='wui-side-menu__link' and contains(text(),'People')]")).click();
-			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
+	        waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//span[contains(text(),'Institutions')]"), 50);
 			ob.findElement(By.xpath("//span[contains(text(),'Institutions')]")).click();
 			BrowserWaits.waitTime(2);
 			
 			boolean condition11 = false;
-			
-			if(!host.contains("stable")){
-				System.out.println("In if");
-			ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
-			BrowserWaits.waitTime(3);
-			
-			ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
-			BrowserWaits.waitTime(3);
-			
-			ob.navigate().back();
-			BrowserWaits.waitTime(6);
-			
-			condition11=ob.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected();
-			System.out.println(condition11);
-			}
-			
-			else{
-				
-				System.out.println("In else");
+
 				
 				waitForAllElementsToBePresent(ob,By.xpath("//span[@class='wui-checkbox__visible']"), 50);
 				List<WebElement> list=ob.findElements(By.cssSelector("span[class='wui-checkbox__visible']"));
@@ -139,7 +122,7 @@ public class Search123 extends TestBase {
 				
 				logger.info(condition11);
 				
-			}
+			
 			
 			
 			

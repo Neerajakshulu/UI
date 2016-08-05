@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -75,12 +76,12 @@ public class Search106 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
 //			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
-			String post = "sample post";
+			String post = "posts";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
-			ob.findElement(By.partialLinkText("Posts")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			waitForAjax(ob);
 			Thread.sleep(2000);
 			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);

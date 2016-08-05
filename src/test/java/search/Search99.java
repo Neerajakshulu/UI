@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -70,15 +71,14 @@ public class Search99 extends TestBase {
 			login();
 	      waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
 			
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("S");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.partialLinkText("People"), 50);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
 			Thread.sleep(2000);
-			ob.findElement(By.partialLinkText("People")).click();
-			Thread.sleep(5000);
-
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
+			waitForAjax(ob);
 			// checking for Default sort option
 //			String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
 //					.getText();
