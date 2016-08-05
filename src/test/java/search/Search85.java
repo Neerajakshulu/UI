@@ -86,10 +86,11 @@ public class Search85 extends TestBase {
 			    waitForAjax(ob);
 					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);	
 				List<WebElement> searchTiles=ob.findElements(By.xpath("//*[@class='wui-card__content']"));
-				BrowserWaits.waitTime(5);
+				BrowserWaits.waitTime(7);
 				String tileText=searchTiles.get(0).getText();
 				System.out.println(tileText);
-				String text1="Color-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
+				String text1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
+				System.out.println(text1);
 				
 				try{
 					test.log(LogStatus.INFO, tileText);

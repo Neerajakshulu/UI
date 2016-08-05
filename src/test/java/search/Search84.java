@@ -89,7 +89,7 @@ public class Search84 extends TestBase {
 				String tileText=searchTiles.get(0).getText();
 				System.out.println("-----"+tileText);
 		          BrowserWaits.waitTime(5);
-				String text1="Color-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
+				String text1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC\nUS5071206A PUBLISHED: 1991-12-10\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL";
 				System.out.println("text value"+text1);
 				
 				try{
