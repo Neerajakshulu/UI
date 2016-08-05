@@ -1703,5 +1703,40 @@ public class ProfilePage extends TestBase {
 		return cond1 && cond2 && cond3;
 
 	}
+	
+	
+	/**
+	 * Method for Verify profile CTA in a whitebox displayed for country field if profile first/last name, title/role, country is showing empty
+	 * 
+	 * @throws Exception, country whitebox not getting displayed
+	 */
+	public void validateProfileCTACountryField() throws Exception {
+		profileIncomplete=isProfileIncomplete();
+		
+		if(!profileIncomplete) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS);
+		BrowserWaits.waitTime(2);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+		BrowserWaits.waitTime(2);
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+		BrowserWaits.waitTime(2);
+		String ctaCountryText=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(1).getText();
+		logger.info("CTA in whitebox Country field-->"+ctaCountryText);
+		pf.getBrowserWaitsInstance(ob).waitUntilText(ctaCountryText);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		String ctaTextAfterSave=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(0).getText();
+		logger.info("CTA in whitebox Country field after updated-->"+ctaTextAfterSave);
+		
+		if(ctaCountryText.equalsIgnoreCase(ctaTextAfterSave)) {
+			throw new Exception("Profile CTA country fied White box not gettign updated");
+		}
+		
+	}
 
 }

@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	 <test name="Follow_Other_Profile" preserve-order="true">
+	   <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -43,7 +43,7 @@
 		<classes>
 			<class name="Profile.Profile5"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Update_User_Own_Profile">
 		<parameter name="profileInfo" value="user|automation|Testing|Thomson reuters|india" />
@@ -53,7 +53,7 @@
 	</test>
 
 
-	<test name="Validate_Application_Links">
+    <test name="Validate_Application_Links">
 		<parameter name="appLinks"
 			value="Web of Science|EndNote|InCites|ScholarOne Abstracts|ScholarOne Manuscripts" />
 		<classes>
@@ -350,7 +350,15 @@
 		<classes>
 			<class name="Profile.Profile45"></class>
 		</classes>
-	</test> 
+	</test>  
+	
+	 <test name="Profile_call_to_action">
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="Project@123" />
+		<classes>
+			<class name="Profile.Profile46"></class>
+		</classes>
+	</test>  
 
 </suite>
 
