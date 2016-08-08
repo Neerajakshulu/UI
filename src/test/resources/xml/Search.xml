@@ -42,12 +42,7 @@
 		</classes>
 	</test>
 
-	<test name="Test B7">
-		<classes>
-			<class name="search.Search7"></class>
-		</classes>
-	</test>
-
+	
 	<test name="Test B8">
 		<classes>
 			<class name="search.Search8"></class>

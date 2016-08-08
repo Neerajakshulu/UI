@@ -59,7 +59,8 @@ public class Search63 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try {
+		try { 
+			
 
 			String search_query = "tyitutyigtiugiuuioyrfuy";
 
@@ -77,12 +78,32 @@ public class Search63 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
+			
+			// Put the urls of all the search results documents in a list and test whether documents contain searched
+			// keyword or not
+			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			System.out.println(searchResults.size());
+
+			if (!compareNumbers(0, searchResults.size())) {
+
+				test.log(LogStatus.FAIL,
+						"Search resuls getting displayed even when user searches for an absurd keyword");// extent
+																											// reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_search_results_getting_displayed_even_when_user_searches_absurd_keyword")));// screenshot
+
+			}
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()), 30);
 			
 
 			List<WebElement> mylist = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 
 			mylist.get(0).click();
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 
 			String actual_text1 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
@@ -101,7 +122,7 @@ public class Search63 extends TestBase {
 			}
 
 			mylist.get(1).click();
-
+			BrowserWaits.waitTime(2);
 			String actual_text2 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text2 = "Your search for tyitutyigtiugiuuioyrfuy found no matches in Articles.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
 
@@ -118,7 +139,7 @@ public class Search63 extends TestBase {
 			}
 
 			mylist.get(2).click();
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 			String actual_text3 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();
 			String expected_text3 = "Your search for tyitutyigtiugiuuioyrfuy found no matches in Patents.\nSuggestions:\nMake sure all words are spelled correctly.\nTry different keywords.\nTry more general keywords.";
