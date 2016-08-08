@@ -21,6 +21,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
@@ -825,6 +826,13 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When unable to get info
 	 */
 	public List<String> getProfileTitleAndMetadata() throws Exception {
+		profileIncomplete=isProfileIncomplete();
+		logger.info("is profile in incomple mode-->"+profileIncomplete);
+		if(profileIncomplete){
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			BrowserWaits.waitTime(2);
+		}
+		
 		List<String> profileInfo = new ArrayList<String>();
 		try{
 		profileInfo.add(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS)
