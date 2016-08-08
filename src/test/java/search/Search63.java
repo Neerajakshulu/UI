@@ -244,7 +244,7 @@ public class Search63 extends TestBase {
 
 	@AfterTest
 	public void reportTestResult() {
-		// extent.endTest(test);
+	extent.endTest(test);
 		//
 		// if (status == 1)
 		// TestUtil.reportDataSetResult(searchxls, "Test Cases",

@@ -93,7 +93,7 @@ public class Search86 extends TestBase {
 				String text1=ob.findElement(By.xpath("//*[@class='ne-publication__header']")).getText();
 				BrowserWaits.waitTime(5);
 			System.out.println(text1);
-				String expectedText1="PATENT\nColor-corrected heat-reflecting composite films and glazing products containing the same\nHOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL\nASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
+				String expectedText1="PATENT Color-corrected heat-reflecting composite films and glazing products containing the same HOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL ASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
 				System.out.println(expectedText1);
 				if(!compareStrings(expectedText1,text1)){
 					
