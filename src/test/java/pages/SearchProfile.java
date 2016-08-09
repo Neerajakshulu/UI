@@ -80,15 +80,17 @@ public class SearchProfile extends TestBase {
 	 * @throws Exception
 	 */
 	public void followProfileFromSeach() throws Exception {
+		BrowserWaits.waitTime(2);
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
 				OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
-		followUnFollowCheck.click();
+		//followUnFollowCheck.click();
+		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(4);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
