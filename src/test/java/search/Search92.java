@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -79,13 +80,13 @@ public class Search92 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 180);
-			String profileName = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")))
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 180);
+			String profileName = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()))
 					.getText();
 			BrowserWaits.waitTime(5);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profile_description_xpath")), 50);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()), 50);
 			String profileDescription = ob.findElement(
-					By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString())).getText();
 
 			if (profileName.equals(userName) && profileDescription.equals(description)) {
 				test.log(LogStatus.PASS, "Person name and description are displayed as expected");

@@ -76,7 +76,6 @@ public class Search68 extends TestBase {
 			waitForElementTobeVisible(ob,
 			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
              BrowserWaits.waitTime(2);		
-
 			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.getText();
 			String all_temp = all_text.substring(3);

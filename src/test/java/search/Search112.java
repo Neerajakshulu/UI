@@ -90,16 +90,15 @@ public class Search112 extends TestBase {
 			BrowserWaits.waitTime(4);
 			test.log(LogStatus.PASS, "Selected Registration Date as sort option");
 
-			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By.xpath(OR
-					.getProperty("tr_search_people_profilename_link_xpath")));
+			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
 			Iterator<WebElement> iterator = webElementOrderBeforeNavigation.iterator();
 			while (iterator.hasNext()) {
 				profileOrderBeforeNavigation.add(iterator.next().getText());
 			}
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")), 30);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath("//h3[contains(text(),'Interests')]"), 15);
 			test.log(LogStatus.PASS, "Record view page is opened");
 			ob.navigate().back();
@@ -111,8 +110,7 @@ public class Search112 extends TestBase {
 			System.out.println(sortOptionSelected);
 			Thread.sleep(6000);
 
-			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By.xpath(OR
-					.getProperty("tr_search_people_profilename_link_xpath")));
+			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
 			BrowserWaits.waitTime(2);
 			Iterator<WebElement> itr = webElementOrderAfterNavigation.iterator();
 			while (itr.hasNext()) {

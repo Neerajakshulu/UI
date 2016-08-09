@@ -127,12 +127,12 @@ public class Search42 extends TestBase {
 		}
 
 		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
+	
 		documentTypePanelBody = filterPanelBodyList.get(0);
-
 		if (!documentTypePanelBody.isDisplayed()) {
 			test.log(LogStatus.PASS, "Authors filter values are displayed");
 		}
-
+         
 		// Collapse the document type filter by clicking it again
 		documentTypePanelHeading.click();
 

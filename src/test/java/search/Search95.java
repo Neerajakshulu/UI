@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -83,11 +84,11 @@ public class Search95 extends TestBase {
 
 			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
 					.getText();
-			String postAuthor = ob.findElement(By.cssSelector("a[class='ng-binding ng-scope']"))
+			BrowserWaits.waitTime(2);
+			String postAuthor = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()))
 					.getText();
-		
 			String postCreationDate = ob.findElement(By.cssSelector("div[class='wui-descriptor wui-descriptor--uppercase']")).getText();
-			String profileMetaData = ob.findElement(By.cssSelector("div[class*='wui-descriptor wui-descriptor__profile']")).getText();
+			String profileMetaData = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString())).getText();
 			String statsXpath="div[class='wui-card__footer-content'] results-metrics span";
 			String postLikeCount = ob
 					.findElements(By.cssSelector(statsXpath)).get(4)

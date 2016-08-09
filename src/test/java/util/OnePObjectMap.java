@@ -225,6 +225,8 @@ public enum OnePObjectMap {
 	SEARCH_TYPE_AHEAD_ELEMENTS_HEADING_CSS("h4[class='wui-super-header wui-super-header--divider wui-super-header--autocomplete-results'] span"),
 	TYPE_AHEAD_SHOWALL_ELEMENTS_CSS("a[class='wui-mini-btn wui-mini-btn--secondary wui-mini-btn--autocomplete-results']"),
 	SEARCH_RESULTS_PAGE_ABSTRACTS_CSS("div[class='wui-card__content'] p"),
+	SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS("a[class='ng-binding ng-scope'][event-category='searchresult-ck-profile']"),
+	SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS("div[class='wui-card__body-content'] div[class*='wui-descriptor wui-descriptor__profile']"),
 	
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),

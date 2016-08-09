@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -77,9 +78,9 @@ public class Search122 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
 			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
             waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 30);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 30);
 
-			ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString())).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//h3[contains(text(),'Interests')]"), 15);
 			test.log(LogStatus.PASS, "Record view page is opened");

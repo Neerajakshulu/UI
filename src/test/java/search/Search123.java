@@ -101,8 +101,8 @@ public class Search123 extends TestBase {
 			
 			
 				BrowserWaits.waitTime(5);
-				waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding ng-scope']"), 50);
-				ob.findElement(By.xpath("//a[@class='ng-binding ng-scope']")).click();
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 50);
+				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString())).click();
 				Thread.sleep(3000);
 				
 				ob.navigate().back();
