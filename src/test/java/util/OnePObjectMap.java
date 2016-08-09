@@ -65,7 +65,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
 	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help"),
-	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("ne-user-follow-unfollow button span"),
+	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("div[class='wui-card__body-content'] ne-user-follow-unfollow button span"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-user-follow-unfollow button"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS("div[class*='ne-user-profile-object-name ng-scope'] a"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS("div[class='wui-descriptor wui-descriptor__profile--medium ng-binding']"),
@@ -128,10 +128,10 @@ public enum OnePObjectMap {
 
 	HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS("button[id='posting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("h2[class^='wui-content-title']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='wui-subtitle ne-user-profile-object-name ng-scope'] a"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='ne-publication__header'] div[class='wui-subtitle ne-user-profile-object-name ng-scope'] a"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-publication__header'] div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='body ne-publication__body--post']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[ng-if*='PUBLISHED'] span[class^='ne-publication__metadata']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='ne-publication__header'] span[class^='ne-publication__metadata']"),
 
 	//HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
