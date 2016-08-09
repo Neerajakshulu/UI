@@ -170,7 +170,7 @@ public class Authoring4 extends TestBase {
 		waitForAjax(ob);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		waitUntilText("Profile");
-		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
 		waitUntilText("Comments");
 		scrollingToElementofAPage();
 		String commentsCount = ob.findElement(

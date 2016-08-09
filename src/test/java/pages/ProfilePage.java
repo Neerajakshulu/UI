@@ -176,7 +176,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When profile link not present
 	 */
 	public void clickProfileLink() throws Exception {
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Interests and Skills", "Posts", "Comments", "Followers",

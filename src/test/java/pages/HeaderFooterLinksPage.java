@@ -144,8 +144,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	public void clickOnProfileLink() throws Exception {
 		waitForPageLoad(ob);
 		clickProfileImage();
-		waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString()), 180);
-		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_LINK.toString())));
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString()), 180);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
 		// pf.waitTime(4);
 		waitForPageLoad(ob);
 	}
