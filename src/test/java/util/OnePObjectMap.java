@@ -259,6 +259,7 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
+	SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
 	WTCHLISH_LINK_XPATH("//span[contains(text(),'Watchlist')]"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_CSS("div[class='wui-card__line-item ng-scope']"), 
 	NEWSFEED_RECOMMENDED_ARTICLE_TITLE_CSS("div[class='wui-content-title ng-binding wui-content-title--small']"),

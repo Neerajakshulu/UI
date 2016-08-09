@@ -121,7 +121,7 @@ public class SearchResultsPage extends TestBase {
 							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS.toString()))
 							.getText().trim();
 					profileDetails = records.get(i)
-							.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()))
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS.toString()))
 							.getText().trim();
 
 					authorDetails.add(title);
