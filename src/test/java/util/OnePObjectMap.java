@@ -66,6 +66,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
 	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("div[class='wui-card__body-content'] ne-user-follow-unfollow button span"),
+	HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS("button[class='btn btn-link fadeinout ne-user-follow-unfollow ne-user-follow-unfollow--large'] span"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-user-follow-unfollow button"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS("div[class*='ne-user-profile-object-name ng-scope'] a"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS("div[class='wui-descriptor wui-descriptor__profile--medium ng-binding']"),

@@ -214,7 +214,7 @@ public class ProfilePage extends TestBase {
 		getProfileTitle();
 		getProfileMetadata();
 		//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS.toString());
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS.toString())).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).get(1).click();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
 		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()), 120);
 		// waitForElementTobeVisible(ob,
@@ -267,15 +267,17 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When user not able to follow
 	 */
 	public void followOtherProfileFromProfilePage() throws Exception {
+		BrowserWaits.waitTime(2);
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
-				OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
+				OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
-		followUnFollowCheck.click();
+		//followUnFollowCheck.click();
+		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
 		System.out.println("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
