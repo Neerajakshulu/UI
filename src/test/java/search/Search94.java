@@ -78,7 +78,7 @@ public class Search94 extends TestBase {
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			waitForAjax(ob);
 			pf.getProfilePageInstance(ob).clickProfile();
-			BrowserWaits.waitTime(2);
+			waitForAjax(ob);
 			boolean isPresent = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).isDisplayed();
 			if (isPresent) {
 				test.log(LogStatus.PASS, "Profile page of a person is displayed as expected");
@@ -91,6 +91,7 @@ public class Search94 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_profle_page_not_displayed")));// screenshot
 			}
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
@@ -110,6 +111,8 @@ public class Search94 extends TestBase {
 					"Snapshot below: "
 							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 									+ "__profle_page_not_displayed")));// screenshot
+			
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		}
 
