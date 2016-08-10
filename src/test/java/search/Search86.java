@@ -94,11 +94,12 @@ public class Search86 extends TestBase {
 				BrowserWaits.waitTime(5);
 			System.out.println(text1);
 				String expectedText1="PATENT Color-corrected heat-reflecting composite films and glazing products containing the same HOOD THOMAS G • MEYER STEPHEN F • BRAZIL MICHAEL ASSIGNEE: SOUTHWALL TECHNOLOGIES INC PUBLICATION DATE: 1991-12-10 PUBLICATION NUMBER: US5071206A";
-				System.out.println(expectedText1);
-				if(!compareStrings(expectedText1,text1)){
+				
+				test.log(LogStatus.INFO, expectedText1);
+				test.log(LogStatus.INFO, text1);
+				if(!compareStrings(expectedText1.trim(),text1.trim())){
 					
-					test.log(LogStatus.INFO, expectedText1);
-					test.log(LogStatus.INFO, text1);
+					
 					test.log(LogStatus.FAIL, "Some or all of the following fields are not getting displayed correctly for a patent: a)Title b)Patent number c)Assignees d)Inventors e)Publication date");// extent
 					// reports
 					status = 2;// excel
