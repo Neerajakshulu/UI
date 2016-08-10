@@ -116,7 +116,7 @@ public class Authoring63 extends TestBase {
 				
 				pf.getHFPageInstance(ob).searchForText("Sachin Traveller");
 				pf.getSearchProfilePageInstance(ob).clickPeople();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString()), 40);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString()), 90);
 				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_PEOPLE_LINK.toString())).click();
 				try{
 					waitForAjax(ob);
