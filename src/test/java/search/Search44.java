@@ -82,9 +82,9 @@ public class Search44 extends TestBase {
 			Thread.sleep(2000);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"), 30);
-			Thread.sleep(2000);
+		   BrowserWaits.waitTime(4);
 			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(3);
 			
 			if(!checkElementPresence("filter_up_icon")){
 				

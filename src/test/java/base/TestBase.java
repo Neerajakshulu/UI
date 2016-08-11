@@ -1182,11 +1182,14 @@ public class TestBase {
 			String watchListDescription) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
-		BrowserWaits.waitTime(4);
+		ob.navigate().refresh();
+		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
+		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
+		BrowserWaits.waitTime(5);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
