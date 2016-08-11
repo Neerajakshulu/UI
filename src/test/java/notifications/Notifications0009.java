@@ -59,8 +59,9 @@ public class Notifications0009 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 
@@ -87,6 +88,7 @@ public class Notifications0009 extends NotificationsTestBase {
 						.findElement(By.xpath(OnePObjectMap.NEWSFEED_TRENDINDING_TOPICS_LINKS_XPATH.toString()));
 				String specialCharacterRemovedoutput = element.getText().replaceAll("[^\\dA-Za-z ]", "");
 				String expectedTitle = specialCharacterRemovedoutput.replaceAll("( )+", " ");
+				logger.info("Expectged Title : "+expectedTitle);
 				element.click();
 				BrowserWaits.waitTime(5);
 				//
@@ -97,7 +99,7 @@ public class Notifications0009 extends NotificationsTestBase {
 						.getAttribute("value");
 				logger.info(searchText);
 				try {
-					Assert.assertTrue(searchText.equals(expectedTitle));
+					Assert.assertTrue(searchText.contains(expectedTitle));
 					test.log(LogStatus.PASS, "selected topic is presented in users type ahead");
 					test.log(LogStatus.PASS, "Pass");
 					closeBrowser();

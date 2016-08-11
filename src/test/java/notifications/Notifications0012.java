@@ -54,11 +54,12 @@ public class Notifications0012 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
-			for (int i = 0; i < 3; i++) {
+			/*for (int i = 0; i < 3; i++) {
 				List<WebElement> mylist = ob
 						.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_XPATH.toString()));
 				if (mylist.size() > 0) {
@@ -75,10 +76,12 @@ public class Notifications0012 extends NotificationsTestBase {
 				if (text.contains("Recommended people to follow")) {
 					logger.info(text);
 					myE = mylist.get(i);
+					logger.info("MyList : "+myE);
 					break;
 				}
-			}
-			List<WebElement> people = myE.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
+			}*/
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH);
+			List<WebElement> people = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
 			logger.info("No of people=" + people.size());
 			if (people.size()==6) {
 				test.log(LogStatus.INFO, "Six people suggesstions are getting displayed");// extent reports
