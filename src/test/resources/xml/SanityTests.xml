@@ -258,6 +258,7 @@
 	</test>
 
 	<test name="Follow_UnFollow_Other_Profile_from_ProfilePage">
+		<parameter name="searchPeople" value="Ivy"/>
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
