@@ -113,6 +113,6 @@ public class SearchProfile extends TestBase {
 		if (!hcrAttr.contains("Highly Cited Researcher")) {
 			throw new Exception("HCR Profile should display with Badge");
 		}
-	}
+	}  
 
 }
