@@ -75,6 +75,17 @@ public class Authoring61 extends TestBase {
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
+			int postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
+			test.log(LogStatus.INFO, "Post count:" + postCountBefore);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
+			test.log(LogStatus.INFO, "Entered Post Title");
+			pf.getProfilePageInstance(ob).enterPostContent(postString);
+			test.log(LogStatus.INFO, "Entered Post Content");
+			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
+			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
+			test.log(LogStatus.INFO, "Saved the Post as a draft");
+			pf.getHFPageInstance(ob).clickOnProfileLink();
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitleBeforeEditing = ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))

@@ -176,7 +176,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
 	HOME_PROJECT_SEARCH_TEXTBOX_XPATH("//input[@placeholder='Search Articles, Patents, People and Posts']"),
 	HOME_PROJECT_SEARCH_BUTTON_XPATH("//div[@class='ne-main-nav']/descendant:: button[@title='Search']/descendant::i[@class='fa fa-search']"),
-	HOME_PROJECT_PEOPLE_LINK("//a[@class='ng-binding ng-scope']"),
+	HOME_PROJECT_PEOPLE_LINK("//div[@class='wui-card__body-content']/descendant::a[@class='ng-binding ng-scope']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_XPATH("//div[contains(@class,'user-drafts-display')]/descendant::div[@class='row ng-scope' and contains(.,'TITLE')]/descendant::button[@id='deleting']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_EDIT_XPATH("//div[contains(@class,'user-drafts-display')]/descendant::div[@class='row ng-scope' and contains(.,'TITLE')]/descendant::button[@id='editing']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_DRAFT_POST_DELETE_CONFIRMATION_CSS("div[class='modal-content'] button[ng-click='close()']"),
