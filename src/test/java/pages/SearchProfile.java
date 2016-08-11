@@ -107,7 +107,7 @@ public class SearchProfile extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS);
 		String hcrAttr = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS).findElement(By.cssSelector("span[class*='wui-icon--hcr']"))
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS).get(1).findElement(By.cssSelector("span[class*='wui-icon--hcr']"))
 				.getAttribute("data-tooltip");
 		logger.info("hcr profile badge-->"+hcrAttr);
 		if (!hcrAttr.contains("Highly Cited Researcher")) {
