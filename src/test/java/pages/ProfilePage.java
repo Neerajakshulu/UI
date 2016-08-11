@@ -190,7 +190,7 @@ public class ProfilePage extends TestBase {
 	 */
 	public void getProfileTitle() throws Exception {
 		profileTitle = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).getText();
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TITLE_CSS).get(1).getText();
 		logger.info("profile title-->" + profileTitle);
 	}
 
@@ -201,7 +201,7 @@ public class ProfilePage extends TestBase {
 	 */
 	public void getProfileMetadata() throws Exception {
 		profileMetadata = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).getText();
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_METADATA_CSS).get(1).getText();
 		logger.info("profile metadata-->" + profileMetadata);
 	}
 
