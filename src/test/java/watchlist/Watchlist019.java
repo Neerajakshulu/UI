@@ -80,6 +80,7 @@ public class Watchlist019 extends TestBase {
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 30);
 			// Creating 2 public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_";

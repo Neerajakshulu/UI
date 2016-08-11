@@ -37,7 +37,7 @@ public class Search87 extends TestBase {
 		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
 		test = extent
 				.startTest(var,
-						"Verify that record view page of a artcle gets displayed when user clicks on article title in ALL search results page")
+						"Verify that record view page of a article gets displayed when user clicks on article title in ALL search results page")
 				.assignCategory("Search suite");
 
 	}
@@ -74,25 +74,25 @@ public class Search87 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 
-			String patent = "Projection exposure apparatus and method which uses multiple diffraction gratings in order to produce a solid state device with fine patterns";
+			String patent = "Systems Biology of Cell Behavior";
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
 			
 			//click on Patents tab
-			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
+			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
 			BrowserWaits.waitTime(4);
 			
-			//validate page is navigating to patent record view page from search results page
+			//validate page is navigating to Article record view page from search results page
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			boolean patentRVTitleWatchLabel = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
 
 			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
 
 			if (!patentRVStatus)
-				throw new Exception("Page is not Navigating to Patent Record View Page");
+				throw new Exception("Page is not Navigating to Article Record View Page");
 			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

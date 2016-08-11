@@ -104,7 +104,7 @@ public class LoginTR extends TestBase {
 	}
 
 	public void logOutApp() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(20);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		browserWait.waitUntilText("Sign out");
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
