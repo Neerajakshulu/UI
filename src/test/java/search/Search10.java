@@ -99,11 +99,11 @@ public class Search10 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-		 BrowserWaits.waitTime(5);
+		     waitForAjax(ob);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			      BrowserWaits.waitTime(8);
+			     waitForAjax(ob);
         			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
         			BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
@@ -113,6 +113,7 @@ public class Search10 extends TestBase {
 				
 			}
 			System.out.println("al1-->" + al1.size());
+			System.out.println("al1-->" + al1);
 			jsClick(ob, searchResults.get(8));
 			BrowserWaits.waitTime(4);
 
@@ -130,6 +131,7 @@ public class Search10 extends TestBase {
 			}
 			
 			System.out.println("al2--->" + al2.size());
+			System.out.println("al2--->" +al2);
 				try {
 						Assert.assertTrue(al1.equals(al2));
 				

@@ -1182,7 +1182,7 @@ public class TestBase {
 			String watchListDescription) throws Exception {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
 		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("watchlist_link"))));
-		waitForPageLoad(ob);
+		BrowserWaits.waitTime(4);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
