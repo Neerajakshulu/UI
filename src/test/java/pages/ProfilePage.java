@@ -162,7 +162,7 @@ public class ProfilePage extends TestBase {
 					ob.switchTo().window(child_window_handle);
 					logger.info("page info"+ob.getTitle());
 					if(!StringUtils.containsIgnoreCase(totalAppLinks[i], ob.getTitle())){
-						throw new Exception(totalAppLinks[i]+"  page is not opened");
+						throw new Exception(totalAppLinks[i]+"  page is not opened"); 
 					}
 					ob.close();
 					ob.switchTo().window(PARENT_WINDOW_HANDLE);

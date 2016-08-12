@@ -9,7 +9,7 @@ package util;
 public enum OnePObjectMap {
 
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
-	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"),
+	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"), 
 	HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK("Cookie Policy"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy Statement"),
 	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
