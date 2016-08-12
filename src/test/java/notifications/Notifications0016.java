@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -63,12 +62,34 @@ public class Notifications0016 extends NotificationsTestBase {
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 20);
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"), CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 			BrowserWaits.waitTime(4);
-
+			
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH);
+			WebElement element=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
+			String actual=element.getText();
+			String userName=null;
+			if(actual.contains("Recommended people to follow")){
+				List<WebElement> people = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
+				logger.info("No of people=" + people.size());
+				if (people.size()==6) {
+					test.log(LogStatus.INFO, "Six people suggesstions are getting displayed");// extent reports
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH);
+					WebElement ele=ob.findElement(By.xpath(OnePObjectMap.RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH.toString()));
+					userName=ele.getText();
+					test.log(LogStatus.PASS, "Pass");
+				}else{
+					throw new Exception("Six people suggesstions are not getting displayed");
+				}
+			}
+			logger.info("User Name : "+userName);
+			
+			
+/*
 			List<WebElement> element=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
 			logger.info("Size : "+element.size());
 			String actual = null;
@@ -86,7 +107,10 @@ public class Notifications0016 extends NotificationsTestBase {
 						}
 					break;
 				}
-			}
+			}*/
+			
+			
+			
 			//((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);",ele.get(1));
 			
 			//pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
@@ -128,7 +152,7 @@ public class Notifications0016 extends NotificationsTestBase {
 			logger.info("Result " + result);
 
 			try {
-				Assert.assertEquals(actual, result);
+				Assert.assertEquals(userName, result);
 				test.log(LogStatus.PASS, "Recommended people to follow section user displaying on following section");
 				closeBrowser();
 			} catch (Throwable t) {

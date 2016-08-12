@@ -60,12 +60,32 @@ public class Notifications0015 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(4);
 			
-			List<WebElement> element=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH);
+			WebElement element=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
+			String actual=element.getText();
+			String userName=null;
+			if(actual.contains("Recommended people to follow")){
+				List<WebElement> people = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
+				logger.info("No of people=" + people.size());
+				if (people.size()==6) {
+					test.log(LogStatus.INFO, "Six people suggesstions are getting displayed");// extent reports
+					WebElement ele=ob.findElement(By.xpath(OnePObjectMap.RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH.toString()));
+					userName=ele.getText();
+					ele.click();
+					test.log(LogStatus.PASS, "Pass");
+				}else{
+					throw new Exception("Six people suggesstions are not getting displayed");
+				}
+			}
+			logger.info("User Name : "+userName);
+			
+			/*List<WebElement> element=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS);
 			logger.info("Size : "+element.size());
 			String actual = null;
 			for(int i=0;i<element.size();i++){
@@ -84,7 +104,7 @@ public class Notifications0015 extends NotificationsTestBase {
 						}
 					break;
 				}
-			}
+			}*/
 			
 		/*	WebElement elment=ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH.toString()));
 			String text=elment.getText();
@@ -129,7 +149,7 @@ public class Notifications0015 extends NotificationsTestBase {
 			logger.info("Profile Page User Name :  " + profilePageUserName);
 
 			try {
-				Assert.assertEquals(actual, profilePageUserName);
+				Assert.assertEquals(userName, profilePageUserName);
 				test.log(LogStatus.PASS,
 						"User is displaying profile page by clicking author name in Recommended people to follow section on home page");
 				closeBrowser();

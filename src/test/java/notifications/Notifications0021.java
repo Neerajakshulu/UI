@@ -72,8 +72,9 @@ public class Notifications0021 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+						"Home page is not loaded successfully");*/
 				pf.getHFPageInstance(ob).searchForText("Biotechnology");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 120,
 						"Search Results not loaded successfully");
@@ -182,6 +183,7 @@ public class Notifications0021 extends NotificationsTestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.navigate().to(document_url);
 			logger.info(document_url);
+			BrowserWaits.waitTime(1);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_commentLike_button1")), 30);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button1")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_commentLike_button1"))));
@@ -237,8 +239,9 @@ public class Notifications0021 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
@@ -334,8 +337,9 @@ public class Notifications0021 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			ob.navigate().to(document_url);
 			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
@@ -359,7 +363,7 @@ public class Notifications0021 extends NotificationsTestBase {
 				List<WebElement> element=ob.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
 				element.get(0).click();
 				BrowserWaits.waitTime(2);
-				List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector("button[class='wui-icon-only-btn ne-watchlist-dropdown__add-button--active']"));
+				List<WebElement> listOfWatchListButton = ob.findElements(By.cssSelector("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"));
 				listOfWatchListButton.get(0).click();
 				BrowserWaits.waitTime(2);
 				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();

@@ -407,7 +407,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			// By.xpath(OR.getProperty("comment_section")), 100);
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			//JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
 				// jse.executeScript("window.scrollTo(0,
 				// document.body.scrollHeight)", "");
@@ -548,7 +548,7 @@ public class Notifications0020 extends NotificationsTestBase {
 			String watchStatus = ob
 					.findElement(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()))
 					.getText();
-			logger.info("Watch Button Status :" + watchStatus);
+			logger.info("Watch Button Statuss :" + watchStatus);
 			if (watchStatus.contains("Watching")) {
 				List<WebElement> element = ob
 						.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
@@ -559,6 +559,7 @@ public class Notifications0020 extends NotificationsTestBase {
 				listOfWatchListButton.get(0).click();
 				BrowserWaits.waitTime(3);
 				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+				BrowserWaits.waitTime(1);
 			}
 			List<WebElement> element = ob
 					.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS.toString()));
@@ -567,8 +568,9 @@ public class Notifications0020 extends NotificationsTestBase {
 			List<WebElement> listOfWatchListButton = ob
 					.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
 			listOfWatchListButton.get(0).click();
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
 			BrowserWaits.waitTime(3);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+			BrowserWaits.waitTime(1);
 			status = true;
 		} catch (Exception e) {
 			logger.error("Watch post problem" + e.getMessage());

@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-import javax.net.ssl.HostnameVerifier;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -61,8 +59,9 @@ public class Notifications0018 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("defaultUsername"),
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			BrowserWaits.waitTime(6);
 			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH);

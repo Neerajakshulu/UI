@@ -211,7 +211,7 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 	//Search Page Elements
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
-	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
+	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='col-xs-12 col-sm-7 col-md-9']"),
 	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
@@ -272,7 +272,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_XPATH("//div[@class='wui-card wui-card--recommended-articles']"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_NAME_XPATH("//div[@class='wui-content-title ng-binding wui-content-title--small']"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_WATCHLIST_BUTTON_XPATH("//div[@class='wui-card wui-card--recommended-articles']//button"),
-	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH("//div[@class='wui-card ng-scope']"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div"),
 	PROFILE_PAGE_AUTOR_NAME_CSS("h2[class='wui-title wui-title--user-profile-name ng-binding']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS("div[class='wui-card ng-scope']"),
 	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--inactive']"),
@@ -298,7 +298,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS("div[class='modal-content']"),
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS("button[ng-click='$close()']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS("button[ng-click='UserOnboardingProfile.close()']"),
-	
+	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']")
 	;
 
 	

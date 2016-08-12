@@ -70,8 +70,8 @@ public class Notifications0001 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			}
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			//waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,"Home page is not loaded successfully");
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			logger.info("Home Page loaded success fully");
 			test.log(LogStatus.INFO, " Scrolling down to find most viewed documents");

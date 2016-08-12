@@ -73,8 +73,9 @@ public class Notifications0007 extends NotificationsTestBase {
 				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+						"Home page is not loaded successfully");*/
 				pf.getHFPageInstance(ob).searchForText("Biotechnology");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 120,
 						"Search Results not loaded successfully");
@@ -198,7 +199,7 @@ public class Notifications0007 extends NotificationsTestBase {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 		pf.getHFPageInstance(ob).clickOnHomeLink();
 		BrowserWaits.waitTime(4);
-		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		//JavascriptExecutor jse = (JavascriptExecutor) ob;
 		for (int i = 1; i <= 3; i++) {
 			// jse.executeScript("window.scrollTo(0,
 			// document.body.scrollHeight)", "");
@@ -244,6 +245,7 @@ public class Notifications0007 extends NotificationsTestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.navigate().to(document_url);
 			logger.info(document_url);
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_commentLike_button1")), 30);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_commentLike_button1")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("document_commentLike_button1"))));
@@ -301,8 +303,9 @@ public class Notifications0007 extends NotificationsTestBase {
 			//pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+		/*	waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
 			ob.navigate().refresh();
@@ -368,7 +371,7 @@ public class Notifications0007 extends NotificationsTestBase {
 			BrowserWaits.waitTime(4);
 			// waitForElementTobeVisible(ob,
 			// By.xpath(OR.getProperty("notificationDocumentComment")), 100);
-			JavascriptExecutor jse = (JavascriptExecutor) ob;
+			//JavascriptExecutor jse = (JavascriptExecutor) ob;
 			for (int i = 1; i <= 3; i++) {
 				// jse.executeScript("window.scrollTo(0,
 				// document.body.scrollHeight)", "");
@@ -426,8 +429,9 @@ public class Notifications0007 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			ob.navigate().to(document_url);
 			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
 			pf.getAuthoringInstance(ob).clickAddCommentButton();

@@ -69,8 +69,9 @@ public class Notifications0008 extends NotificationsTestBase {
 				ob.navigate().to(host);
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");*/
 				boolean poststatus = publishPost();
 
 				// Verify that user receives a notification when someone he is following user publishes a post
@@ -237,8 +238,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			ob.navigate().to(document_url);
 			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
@@ -261,8 +263,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+		/*	waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for verifying comment on post");
 			String text = ob
 					.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH.toString()))
@@ -320,8 +323,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for liking post");
 			logger.info("User Loggedin successfully for liking post - " + postString);
 
@@ -343,8 +347,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for verifiying notification");
 			String text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_LIKE_POST_XPATH.toString()))
 					.getText();
@@ -388,8 +393,9 @@ public class Notifications0008 extends NotificationsTestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getHFPageInstance(ob).clickOnHomeLink();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for verifying notification");
 			// String text = ob.findElement(By.xpath(OR.getProperty("notificationForNewPost"))).getText();
 			String text = null;
@@ -444,8 +450,9 @@ public class Notifications0008 extends NotificationsTestBase {
 					CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getHFPageInstance(ob).clickOnHomeLink();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
-					"Home page is not loaded successfully");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
+					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for verifying notification");
 			String text = null;
 			List<WebElement> listOfNotifications = ob
@@ -491,7 +498,8 @@ public class Notifications0008 extends NotificationsTestBase {
 			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
 			logger.info("Entered Post Title");
-			pf.getProfilePageInstance(ob).enterPostContent(postString);
+			String content = RandomStringUtils.randomAlphanumeric(510);
+			pf.getProfilePageInstance(ob).enterPostContent(content);
 			logger.info("Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			logger.info("Published the post");

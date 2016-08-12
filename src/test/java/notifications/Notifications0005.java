@@ -59,11 +59,13 @@ public class Notifications0005 extends NotificationsTestBase {
 				// Logging in with User1
 				pf.getLoginTRInstance(ob).enterTRCredentials(user3, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");*/
 				test.log(LogStatus.INFO, "User Logged in  successfully");
 				logger.info("Home Page loaded success fully");
 				watchListName = "Creating WatchList for notification testing" + new Random().nextInt(1000);
+				logger.info("Watch List Name : "+watchListName);
 				watchListDescription = "Creating Public WatchList for UI notification testing" + RandomStringUtils.randomNumeric(15);
 				try {
 					createWatchList("public", watchListName, watchListDescription);
@@ -75,8 +77,9 @@ public class Notifications0005 extends NotificationsTestBase {
 				test.log(LogStatus.INFO, "User logged out successfully");
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");*/
 				pf.getHFPageInstance(ob).clickOnHomeLink();
 				BrowserWaits.waitTime(4);
 				test.log(LogStatus.INFO, "User Logged in successfully for verifying notification");

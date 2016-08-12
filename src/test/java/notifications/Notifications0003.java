@@ -63,8 +63,9 @@ public class Notifications0003 extends NotificationsTestBase {
 				// Login with user2 for verify that to receives a notification with correct data
 				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
-						"Home page is not loaded successfully");
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
+						"Home page is not loaded successfully");*/
 				logger.info("Home Page loaded success fully");
 				test.log(LogStatus.INFO, "User Logged in  successfully");
 				pf.getHFPageInstance(ob).clickOnHomeLink();
