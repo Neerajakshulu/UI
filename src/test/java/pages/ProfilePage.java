@@ -152,7 +152,7 @@ public class ProfilePage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			BrowserWaits.waitTime(4);
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
-			ob.findElement(By.linkText(totalAppLinks[i])).click();
+			ob.findElement(By.partialLinkText(totalAppLinks[i])).click();
 			ob.manage().window().maximize();
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
@@ -160,9 +160,10 @@ public class ProfilePage extends TestBase {
 			for (String child_window_handle : child_window_handles) {
 				if (!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 					ob.switchTo().window(child_window_handle);
-					String appLinkText = pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.HOME_ONEP_APPS_PAGE_TITLE_HEADER_CSS).getText();
-					Assert.assertEquals(totalAppLinks[i], appLinkText);
+					logger.info("page info"+ob.getTitle());
+					if(!StringUtils.containsIgnoreCase(totalAppLinks[i], ob.getTitle())){
+						throw new Exception(totalAppLinks[i]+"  page is not opened");
+					}
 					ob.close();
 					ob.switchTo().window(PARENT_WINDOW_HANDLE);
 				} // if
