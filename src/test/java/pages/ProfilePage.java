@@ -153,7 +153,7 @@ public class ProfilePage extends TestBase {
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 			ob.findElement(By.partialLinkText(totalAppLinks[i])).click();
 			ob.manage().window().maximize();
-			waitForNumberOfWindowsToEqual(ob, 2);
+			waitForNumberOfWindowsToEqual(ob, 2); 
 			Set<String> child_window_handles = ob.getWindowHandles();
 			logger.info("child windows count-->" + child_window_handles.size());
 			for (String child_window_handle : child_window_handles) {
