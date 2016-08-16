@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	   <test name="Follow_Other_Profile" preserve-order="true">
+     <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -60,10 +60,10 @@
 			<class name="Profile.Profile7"></class>
 		</classes>
 	</test>
-
+ 
 	<test name="Validate_Application_Header_and_Footer_Links">
 		<parameter name="appHeadFooterLinks"
-			value="Cookie Policy|Privacy Statement|Terms of Use" />
+			value="Privacy|Terms of Use|Help &amp; Feedback|Account" />
 		<classes>
 			<class name="Profile.Profile8"></class>
 		</classes>
@@ -358,7 +358,7 @@
 		<classes>
 			<class name="Profile.Profile46"></class>
 		</classes>
-	</test>  
+	</test> 
 
 </suite>
 

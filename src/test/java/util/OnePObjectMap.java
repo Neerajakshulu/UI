@@ -10,8 +10,7 @@ public enum OnePObjectMap {
 
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	HOME_PROJECT_NEON_LOGIN_BUTTON_CSS("button[class='wui-btn wui-btn--primary login-button button-color-primary']"), 
-	HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK("Cookie Policy"),
-	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy Statement"),
+	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),
 	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'View in Web of Science')]"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_BACKTOPN_CSS("a[title='Back to Project Neon']"),
@@ -63,7 +62,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CSS("div[class='dropdown-menu ne-profile-flyout__menu'] a[href^='#/profile']"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
-	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help"),
+	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help & Feedback"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS("div[class='wui-card__body-content'] ne-user-follow-unfollow button span"),
 	HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS("button[class='btn btn-link fadeinout ne-user-follow-unfollow ne-user-follow-unfollow--large'] span"),
 	HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS("ne-user-follow-unfollow button"),

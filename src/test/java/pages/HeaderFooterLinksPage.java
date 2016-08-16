@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -34,34 +35,25 @@ public class HeaderFooterLinksPage extends TestBase {
 
 			clickProfileImage();
 
-			if (headerFooterLinks[i].equalsIgnoreCase("Cookie Policy")) {
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COOKIE_POLICY_LINK);
-				waitForElementTobePresent(ob, By.tagName("h3"), 90);
-				pf.getBrowserWaitsInstance(ob).waitUntilText("Cookie Policy", "Cookies", "Cookie name", "Description",
-						"Additional information");
-				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
-				String cookieText = ob.findElement(By.tagName("h2")).getText();
-				// System.out.println("cookie text-->"+cookieText);
-				Assert.assertEquals(headerFooterLinks[i], cookieText);
-			}
-
-			else if (headerFooterLinks[i].equalsIgnoreCase("Privacy Statement")) {
+			if (headerFooterLinks[i].equalsIgnoreCase("Privacy")) {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
-				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement",
-						"Cookies", "Third Party Services");
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "July 2016 (version 1.1)");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String psText = ob.findElement(By.tagName("h2")).getText();
-				// System.out.println("ps text-->"+psText);
-				Assert.assertEquals(headerFooterLinks[i], psText);
+				logger.info("ps text-->"+psText);
+				if(!StringUtils.containsIgnoreCase(psText, headerFooterLinks[i])) {
+					throw new Exception(psText+" page not opened");
+				}
 			}
 
-			else {
+			else if (headerFooterLinks[i].equalsIgnoreCase("Terms of Use")){ 
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
 				pf.getBrowserWaitsInstance(ob).waitUntilText(
-						"These Terms of Use shall govern your use of the online service known as");
+						"These Terms of Use shall govern your use of the online service known as","July 2016 (version 1.1)");
+				
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String tcText = ob.findElement(By.tagName("h2")).getText();
-				// System.out.println("TC text-->"+tcText);
+				logger.info("Terms of Use text-->"+tcText);
 				Assert.assertEquals(headerFooterLinks[i], tcText);
 			}
 		}
@@ -77,8 +69,9 @@ public class HeaderFooterLinksPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
 		waitForPageLoad(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Help", "Feedback");
-		pf.getBrowserWaitsInstance(ob).waitUntilText("We welcome your feedback.");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Feedback or questions about Project Neon?");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Send feedback to the Project Neon team");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Report a problem or submit a support request");
 
 	}
 
@@ -91,9 +84,8 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickProfileImage();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
-		// pf.waitTime(4);
 		waitForPageLoad(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "Settings", "Email", "Password");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "Manage accounts", "Communications");
 	}
 
 	/**

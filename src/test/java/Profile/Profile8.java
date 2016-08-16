@@ -99,9 +99,9 @@ public class Profile8 extends TestBase {
 	@Parameters("appHeadFooterLinks")
 	public void validateAppHeaderFooterLinks(String appHeadFooterLinks) throws Exception {
 		try {
-			test.log(LogStatus.INFO, "Cookie Policy,Privacy Statement and Terms of Use Links Validation");
+			test.log(LogStatus.INFO, "Privacy Statement and Terms of Use Links Validation");
 			pf.getHFPageInstance(ob).validateLinks(appHeadFooterLinks);
-			test.log(LogStatus.INFO, "Help Link Validation");
+			test.log(LogStatus.INFO, "Help and Feedback Link Validation");
 			pf.getHFPageInstance(ob).helpLinkValidation();
 			test.log(LogStatus.INFO, "Account Link Validation");
 			pf.getHFPageInstance(ob).accountLinkValidation();
