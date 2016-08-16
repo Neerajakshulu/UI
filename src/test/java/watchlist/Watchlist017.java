@@ -82,19 +82,20 @@ public class Watchlist017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='modal-dialog modal-md']"), 5);
+			waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
 			// Select the first watch list from the model
 			waitForElementTobeClickable(ob,
-					By.xpath("//a[@class='ne-action-modal__item-content']"), 5);
+					By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
 
 			try {
 				// Finding the no of watch lists
 				List<WebElement> watchLists = ob.findElements(
-						By.xpath("//a[@class='ne-action-modal__item-content']"));
+						By.xpath("//a[@class='ne-action-dropdown__item-content']"));
+				
 				// Closing the select a model
-				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+//				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 				BrowserWaits.waitTime(3);
-				Assert.assertEquals(watchLists.size(), 1);
+				Assert.assertEquals(watchLists.size(),1);
 				test.log(LogStatus.PASS, "User has 1 watchlist by default once we try to watch an item");
 			} catch (Throwable t) {
 				status = 2;
