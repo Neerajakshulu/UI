@@ -153,14 +153,14 @@ public class ProfilePage extends TestBase {
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
 			ob.findElement(By.partialLinkText(totalAppLinks[i])).click();
 			ob.manage().window().maximize();
-			waitForNumberOfWindowsToEqual(ob, 2);
+			waitForNumberOfWindowsToEqual(ob, 2); 
 			Set<String> child_window_handles = ob.getWindowHandles();
 			logger.info("child windows count-->" + child_window_handles.size());
 			for (String child_window_handle : child_window_handles) {
 				if (!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 					ob.switchTo().window(child_window_handle);
 					logger.info("page info"+ob.getTitle());
-					if(!StringUtils.containsIgnoreCase(totalAppLinks[i], ob.getTitle())){
+					if(!StringUtils.containsIgnoreCase(ob.getTitle(),totalAppLinks[i])){
 						throw new Exception(totalAppLinks[i]+"  page is not opened"); 
 					}
 					ob.close();
@@ -1244,7 +1244,7 @@ public class ProfilePage extends TestBase {
 	public void profileTabInfiniteScroll(String tabName) throws Exception {
 		if (tabName.contains("Followers") || tabName.contains("Following")) {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		} else {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
@@ -1256,7 +1256,7 @@ public class ProfilePage extends TestBase {
 
 		if (tabName.contains("Followers") || tabName.contains("Following")) {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		} else {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);

@@ -211,7 +211,7 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 	//Search Page Elements
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
-	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='col-xs-12 col-sm-7 col-md-9']"),
+	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
 	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
