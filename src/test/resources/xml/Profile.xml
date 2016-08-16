@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Profile" parallel="tests" thread-count="10">
+<suite name="Profile" parallel="tests" thread-count="1o">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-     <test name="Follow_Other_Profile" preserve-order="true">
+    <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -50,12 +50,12 @@
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
-	</test>
+	</test> 
 
 
     <test name="Validate_Application_Links">
 		<parameter name="appLinks"
-			value="Web of Science|EndNote|InCites|ScholarOne Abstracts|ScholarOne Manuscripts" />
+			value="Web of Science|EndNote|InCites|ResearcherID" />
 		<classes>
 			<class name="Profile.Profile7"></class>
 		</classes>
@@ -244,13 +244,13 @@
 		<classes>
 			<class name="Profile.Profile32"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Followers_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile33"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Following_tab_infinite_Scroll">
 		<classes>
@@ -258,7 +258,7 @@
 		</classes>
 	</test>
 
-	<test name="Post_like_count">
+	 <test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -289,7 +289,7 @@
 		<classes>
 			<class name="Profile.Profile38"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="tridlogin@gmail.com" />
@@ -366,7 +366,7 @@
 		<classes>
 			<class name="Profile.Profile47"></class>
 		</classes>
-	</test> 
+	</test>   
 
 </suite>
 

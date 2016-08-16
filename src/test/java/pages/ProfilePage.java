@@ -160,7 +160,7 @@ public class ProfilePage extends TestBase {
 				if (!child_window_handle.equals(PARENT_WINDOW_HANDLE)) {
 					ob.switchTo().window(child_window_handle);
 					logger.info("page info"+ob.getTitle());
-					if(!StringUtils.containsIgnoreCase(totalAppLinks[i], ob.getTitle())){
+					if(!StringUtils.containsIgnoreCase(ob.getTitle(),totalAppLinks[i])){
 						throw new Exception(totalAppLinks[i]+"  page is not opened"); 
 					}
 					ob.close();
@@ -1244,7 +1244,7 @@ public class ProfilePage extends TestBase {
 	public void profileTabInfiniteScroll(String tabName) throws Exception {
 		if (tabName.contains("Followers") || tabName.contains("Following")) {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		} else {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
@@ -1256,7 +1256,7 @@ public class ProfilePage extends TestBase {
 
 		if (tabName.contains("Followers") || tabName.contains("Following")) {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS);
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 		} else {
 			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
