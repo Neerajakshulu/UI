@@ -1749,5 +1749,36 @@ public class ProfilePage extends TestBase {
 		}
 		
 	}
+	
+	/**
+	 * Method for Verify profile CTA in a whitebox displayed for country field if profile Summary is showing empty
+	 * 
+	 * @throws Exception, Summary whitebox not getting displayed
+	 */
+	public void validateProfileCTASummaryField() throws Exception {
+		profileIncomplete=isProfileIncomplete();
+		
+		if(!profileIncomplete) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		}
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_SUMMARY_CSS);
+		BrowserWaits.waitTime(2);
+		String ctaCountryText=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(2).getText();
+		logger.info("CTA in whitebox Summary field-->"+ctaCountryText);
+		pf.getBrowserWaitsInstance(ob).waitUntilText(ctaCountryText);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitTime(2);
+		String ctaTextAfterSave=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(3).getText();
+		logger.info("CTA in whitebox Summary field after updated-->"+ctaTextAfterSave);
+		
+		if(!ctaCountryText.equalsIgnoreCase(ctaTextAfterSave)) {
+			throw new Exception("Profile CTA Summary fied White box not getting updated");
+		}
+		
+	}
 
 }

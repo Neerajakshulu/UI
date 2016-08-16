@@ -78,6 +78,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_SUMMARY_CSS("textarea[placeholder='Add a summary']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[ng-click*='cancelEditing()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS("button[ng-click*='saveUserData()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_ERROR_MESSAGE_CSS("div[ng-messages='userForm.firstName.$error']"),
