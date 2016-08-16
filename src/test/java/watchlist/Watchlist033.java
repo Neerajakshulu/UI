@@ -2,26 +2,20 @@ package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.apache.http.auth.Credentials;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.gargoylesoftware.htmlunit.Page;
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Verify that deep linking is working correctly for particular watchlist page when user logs in using Social(FB or LI) account

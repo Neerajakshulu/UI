@@ -40,7 +40,7 @@ public class Watchlist017 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verify that a user has 1 watchlist by default once we try to watch an item")
-				.assignCategory("Watchlist");
+				.assignCategory("Watchlist"); 
 
 	}
 
