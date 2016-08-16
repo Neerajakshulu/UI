@@ -46,7 +46,6 @@ public class Watchlist013 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testItemsCountInWatchlist() throws Exception {
 

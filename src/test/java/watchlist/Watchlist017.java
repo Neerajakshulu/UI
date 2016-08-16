@@ -82,16 +82,21 @@ public class Watchlist017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
+			//waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
 			// Select the first watch list from the model
+//			waitForElementTobeClickable(ob,
+//					By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
 			waitForElementTobeClickable(ob,
-					By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
+					By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"), 5);
+
 
 			try {
 				// Finding the no of watch lists
+//				List<WebElement> watchLists = ob.findElements(
+//						By.xpath("//a[@class='ne-action-dropdown__item-content']"));
 				List<WebElement> watchLists = ob.findElements(
-						By.xpath("//a[@class='ne-action-dropdown__item-content']"));
-				
+						By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"));
 				// Closing the select a model
 //				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 				BrowserWaits.waitTime(3);

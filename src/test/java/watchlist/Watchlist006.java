@@ -31,7 +31,6 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 public class Watchlist006 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:
@@ -49,7 +48,6 @@ public class Watchlist006 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	@Parameters({"patentName"})
 	public void testWatchPatentFromPatentContentSearchResult(String patentName) throws Exception {
@@ -59,7 +57,6 @@ public class Watchlist006 extends TestBase {
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
-
 			status = 3;// excel
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");

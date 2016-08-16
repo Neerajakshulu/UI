@@ -46,11 +46,9 @@ public class Watchlist033 extends TestBase {
 				.startTest(var,
 						"Verify that deep linking is working correctly for particular watchlist page when user logs in using Social(FB or LI) account")
 				.assignCategory("Watchlist");
-
 	}
-
 	@Test
-	public void watchlist031() throws Exception {
+	public void watchlist033() throws Exception {
 
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
@@ -107,14 +105,13 @@ public class Watchlist033 extends TestBase {
 			String tempURL=ob.getCurrentUrl();
 			System.out.println(tempURL);
 			
-
 //			5)Logout of the app.
 			logout();
 			
 			
 //			6)Put the captured URL in the address bar of the browser and hit the return key.
 			ob.navigate().to(tempURL);
-			
+			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click(); // Newly Added 
 			
 //			7)Login with same user credentials again.
 			//The app will automatically login with FB credentials.
@@ -150,7 +147,6 @@ public class Watchlist033 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

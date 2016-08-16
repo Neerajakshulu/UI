@@ -1113,6 +1113,8 @@ public class TestBase {
 	 * @throws InterruptedException
 	 */
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
+		
+		
 		// Navigate to the watch list landing page
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
