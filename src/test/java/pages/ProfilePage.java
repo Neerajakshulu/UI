@@ -21,7 +21,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 
@@ -1741,11 +1740,12 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilText(ctaCountryText);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		BrowserWaits.waitTime(2);
 		String ctaTextAfterSave=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(0).getText();
 		logger.info("CTA in whitebox Country field after updated-->"+ctaTextAfterSave);
 		
-		if(ctaCountryText.equalsIgnoreCase(ctaTextAfterSave)) {
-			throw new Exception("Profile CTA country fied White box not gettign updated");
+		if(!ctaCountryText.equalsIgnoreCase(ctaTextAfterSave)) {
+			throw new Exception("Profile CTA country fied White box not getting updated");
 		}
 		
 	}
