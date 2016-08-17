@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Profile" parallel="tests" thread-count="1o">
+<suite name="Profile" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -367,6 +367,14 @@
 			<class name="Profile.Profile47"></class>
 		</classes>
 	</test>   
+
+	<test name="Profile_call_to_action_Add_a_Topic">
+		<parameter name="username" value="chinnareddy.putha@gmail.com" />
+		<parameter name="password" value="Neon@123" />
+		<classes>
+			<class name="Profile.Profile47"></class>
+		</classes>
+	</test> 
 
 </suite>
 
