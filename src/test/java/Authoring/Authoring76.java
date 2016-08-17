@@ -109,6 +109,7 @@ public class Authoring76 extends TestBase {
 			
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Open Post Modal by clicking on Publish a post ");
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()), 60);
 			ob.findElement(
 					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()))
 					.click();
