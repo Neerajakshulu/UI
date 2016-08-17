@@ -497,8 +497,8 @@ public class TestBase {
 		Thread.sleep(3000);
 		ob.findElement(By.name("loginEmail")).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.name("loginPassword")).sendKeys(CONFIG.getProperty("defaultPassword"));
-		ob.findElement(By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']"))
-				.click();
+		ob.findElement(By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
+		.click();
 		Thread.sleep(5000);
 
 	}
