@@ -54,6 +54,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
+import util.OnePObjectMap;
 import util.Xls_Reader;
 
 public class TestBase {
@@ -497,8 +498,7 @@ public class TestBase {
 		Thread.sleep(3000);
 		ob.findElement(By.name("loginEmail")).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.name("loginPassword")).sendKeys(CONFIG.getProperty("defaultPassword"));
-		ob.findElement(By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
-		.click();
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		Thread.sleep(5000);
 
 	}
@@ -1257,8 +1257,7 @@ public class TestBase {
 		Thread.sleep(3000);
 		ob.findElement(By.name("loginEmail")).sendKeys(emailId);
 		ob.findElement(By.name("loginPassword")).sendKeys(password);
-		ob.findElement(By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']"))
-				.click();
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		Thread.sleep(5000);
 
 	}
