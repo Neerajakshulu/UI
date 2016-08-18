@@ -258,7 +258,7 @@
 	</test>
 
 	<test name="Follow_UnFollow_Other_Profile_from_ProfilePage">
-		<parameter name="searchPeople" value="IT"/>
+		<parameter name="searchPeople" value="test"/>
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
