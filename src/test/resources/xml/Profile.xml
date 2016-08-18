@@ -10,14 +10,14 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-    <test name="Follow_Other_Profile" preserve-order="true"> 
+   <test name="Follow_Other_Profile" preserve-order="true"> 
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
 		</classes>
 	</test> 
 
-	 <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	  <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 	 	<parameter name="searchPeople" value="Ivy"/>
 		<classes>
 			<class name="Profile.Profile2"></class>
@@ -46,7 +46,7 @@
 	</test> 
 
 	<test name="Update_User_Own_Profile">
-		<parameter name="profileInfo" value="user|automation|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo" value="testuser|automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
@@ -333,7 +333,7 @@
 		<classes>
 			<class name="Profile.Profile43"></class>
 		</classes>
-	</test> 
+	</test>
 	
 	<test name="Validate_Profile_Pic_modal_window_update_and_close">
 		<parameter name="username" value="tridlogin@gmail.com" />
@@ -352,7 +352,7 @@
 		</classes>
 	</test>  
 	
-	 <test name="Profile_call_to_action_country">
+	<test name="Profile_call_to_action_country">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
 		<classes>
@@ -375,6 +375,6 @@
 			<class name="Profile.Profile47"></class>
 		</classes>
 	</test> 
-
+ 
 </suite>
 
