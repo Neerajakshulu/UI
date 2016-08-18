@@ -257,7 +257,7 @@ public enum OnePObjectMap {
 	// login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
-	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class='wui-btn login-button button-color-primary wui-btn--primary']"),
+	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
