@@ -2,31 +2,24 @@ package search;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
+
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
+
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Search127 extends TestBase {
+public class Search129 extends TestBase {
 
 	String runmodes[] = null;
     static int count = -1;
@@ -43,7 +36,7 @@ public class Search127 extends TestBase {
     public void beforeTest() throws Exception {
                     extent = ExtentManager.getReporter(filePath);
                     String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-                    test = extent.startTest(var, "Verify that Deeplinking is working for Search result page using steam account")
+                    test = extent.startTest(var, "Verify that Deeplinking is working for Search result page using Linkedin Account")
                                                     .assignCategory("Search suite");
                     runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
     }
@@ -126,17 +119,16 @@ try{
                                     + "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
                     clearCookies();
                     String Beforeurl=System.getProperty("host")+url;
-//              System.out.println(Beforeurl);
+             System.out.println(Beforeurl);
          ob.navigate().to(Beforeurl);
-        login();
+    pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("SOCIALLOGINEMAIL"), LOGIN.getProperty("SOCIALLOGINPASSWORD"));
     
     try{
     Assert.assertEquals(ob.getCurrentUrl(), Beforeurl);
     test.log(LogStatus.PASS, "Deep linking url is matching after login " +recordtype);
     Assert.assertTrue(pf.getSearchResultsPageInstance(ob).isSearchPageDisplayed());
     test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page "+recordtype);
-    pf.getLoginTRInstance(ob).logOutApp();
-    
+   
     }catch(Throwable t)
     {
                     t.printStackTrace();
@@ -159,6 +151,7 @@ try{
     }finally {
                     reportDataSetResult();
                     ++count;
+                    pf.getLoginTRInstance(ob).logOutApp();
     }
     }
     @DataProvider

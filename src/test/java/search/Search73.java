@@ -86,8 +86,8 @@ public class Search73 extends TestBase {
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
 			Thread.sleep(1000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
-			Thread.sleep(1000);
+		   ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("n");
+		    Thread.sleep(1000);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("peopleTile")), 30);
 			
 			BrowserWaits.waitTime(2);
