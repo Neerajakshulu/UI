@@ -1257,7 +1257,8 @@ public class TestBase {
 		Thread.sleep(3000);
 		ob.findElement(By.name("loginEmail")).sendKeys(emailId);
 		ob.findElement(By.name("loginPassword")).sendKeys(password);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString())).click();
+		//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		Thread.sleep(5000);
 
 	}
