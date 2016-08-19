@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -70,7 +71,8 @@ public class Profile13 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			// ob.findElement(By.cssSelector(OR.getProperty("tr_profile_dropdown_css"))).click();
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile");
-			ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
+			//ob.findElement(By.linkText(OR.getProperty("tr_profile_link"))).click();
+			pf.getProfilePageInstance(ob).clickProfileLink();
 			// Thread.sleep(4000);
 			pf.getBrowserActionInstance(ob).scrollingPageUp();
 
@@ -91,17 +93,16 @@ public class Profile13 extends TestBase {
 				
 				waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 90);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).clear();
-				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))).click();
-				Thread.sleep(4000);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+				
+				BrowserWaits.waitTime(4);
 				ob.findElement(By.cssSelector(OR.getProperty("tr_profile_add_summary_css"))).click();
 			}
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_profile_summary_textarea_css"))).sendKeys(str);
-			scrollElementIntoView(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))));
-			jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("tr_profile_update_button_css"))));
-			ob.navigate().refresh();
-			Thread.sleep(8000);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString()), 30);
 			String str3 = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS.toString())).getText();
 			try {
