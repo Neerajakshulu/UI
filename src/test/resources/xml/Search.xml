@@ -638,6 +638,16 @@
 			<class name="search.Search127"></class>
 		</classes>
 	</test>
+	<test name="TestCase_B129">
+		<classes>
+			<class name="search.Search129"></class>
+		</classes>
+	</test>
+	<test name="TestCase_B130">
+		<classes>
+			<class name="search.Search130"></class>
+		</classes>
+	</test>
 	-->
 	
 	<test name="TestCase_B128">
