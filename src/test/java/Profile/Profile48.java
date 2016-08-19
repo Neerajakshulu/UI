@@ -42,7 +42,7 @@ public class Profile48 extends TestBase {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed
+	 * @throws Exception, When TR Login screen not displayed 
 	 */
 	@Test
 	@Parameters({"username", "password"})

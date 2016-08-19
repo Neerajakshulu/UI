@@ -1793,7 +1793,7 @@ public class ProfilePage extends TestBase {
 				addedTopic.click();
 				BrowserWaits.waitTime(2);
 			}
-		}
+		} 
 		
 		String ctaTopicText=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(4).getText();
 		logger.info("CTA in whitebox Topic field if no Interests and Skills-->"+ctaTopicText);

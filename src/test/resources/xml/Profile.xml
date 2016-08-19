@@ -11,7 +11,7 @@
 	<parameter name="password" value="Neon@123" />
 
     <test name="Follow_Other_Profile" preserve-order="true"> 
-		<parameter name="profileName" value="reddy" />
+		<parameter name="profileName" value="reddy" /> 
 		<classes>
 			<class name="Profile.Profile1"></class>
 		</classes>
