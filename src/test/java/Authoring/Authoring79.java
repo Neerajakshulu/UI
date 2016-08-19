@@ -4,8 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -13,18 +12,17 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for Performing Authoring Comments Validation with Unsupported HTML tags
@@ -52,7 +50,8 @@ public class Authoring79 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that deep linking works fine for ARTICLES,POSTS,PATENTS with Social login").assignCategory("Authoring");
+		test = extent.startTest(var, "Verify that deep linking works fine for ARTICLES,POSTS,PATENTS with Social login")
+				.assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, "deek_linking");
 	}
 
@@ -79,10 +78,6 @@ public class Authoring79 extends TestBase {
 				throw new SkipException("Runmode for test set data set to no " + count);
 			}
 
-			// selenium code
-			openBrowser();
-			clearCookies();
-			maximizeWindow();
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
@@ -127,36 +122,47 @@ public class Authoring79 extends TestBase {
 		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
 		 * "SKIP");
 		 */
-		closeBrowser();
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication", dataProvider = "getTestData")
 	public void test(String url, String recordType) throws Exception {
+		WebDriver driver = null;
 		try {
-			
+
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
-			
-			ob.get(host+url);
-			clearCookies();
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("SOCIALLOGINEMAIL"),
+
+			driver = LoginTR.launchBrowser();
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+			driver.get(host + url);
+
+			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, LOGIN.getProperty("SOCIALLOGINEMAIL"),
 					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			BrowserWaits.waitTime(10);
-			waitForPageLoad(ob);
+			waitForPageLoad(driver);
 
 			try {
-				Assert.assertEquals(ob.getCurrentUrl(), host+url);
+				Assert.assertEquals(driver.getCurrentUrl(), host + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
+				Assert.assertEquals(getRecordType(driver), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
-				BrowserWaits.waitTime(10);
-				pf.getLoginTRInstance(ob).logOutApp();
+				BrowserWaits.waitTime(20);
+				jsClick(driver, driver
+						.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+				new WebDriverWait(driver, time)
+						.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Sign out")));
+				jsClick(driver, driver
+						.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
+
+				BrowserWaits.waitTime(3);
 
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Deep linking not working for" + recordType);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
@@ -168,10 +174,18 @@ public class Authoring79 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_Article_Search_not_happening")));
 			// closeBrowser();
 		} finally {
-			pf.getLoginTRInstance(ob).logOutApp();
+			if (driver != null)
+				driver.quit();
 			reportDataSetResult();
 			++count;
 		}
+	}
+
+	public String getRecordType(WebDriver driver) {
+		waitForElementTobeVisible(driver,
+				By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']"), 80);
+		return driver.findElement(By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']"))
+				.getText();
 	}
 
 	@DataProvider

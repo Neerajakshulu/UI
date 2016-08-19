@@ -1,11 +1,22 @@
 package Authoring;
 
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -137,5 +148,78 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())).click();
+	}
+	
+	
+	public void loginWithFBCredentials(WebDriver driver,String username, String pwd) {
+
+		waitForElementTobeVisible(driver, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
+		driver.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+
+		waitForElementTobeVisible(driver, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
+
+		// Verify that existing LI user credentials are working fine
+		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
+		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
+		// BrowserWaits.waitTime(2);
+		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())).click();
+	}
+	
+	public static WebDriver launchBrowser() throws Exception {
+		WebDriver driver=null;
+		logger.info("Env status-->" + StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
+		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
+			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+			logger.info("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
+			desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
+			logger.info("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
+			logger.info("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
+			desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
+			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
+			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+			driver = new RemoteWebDriver(
+					new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+					desiredCapabilities);
+			String waitTime = CONFIG.getProperty("defaultImplicitWait");
+			String pageWait = CONFIG.getProperty("defaultPageWait");
+			driver.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+			try {
+				driver.manage().timeouts().implicitlyWait(Long.parseLong(pageWait), TimeUnit.SECONDS);
+			} catch (Throwable t) {
+				logger.info("Page Load Timeout not supported in safari driver");
+			}
+			// else part having local machine configuration
+		} else {
+			if (CONFIG.getProperty("browserType").equals("FF")) {
+				driver = new FirefoxDriver();
+			} else if (CONFIG.getProperty("browserType").equals("IE")) {
+				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+				System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
+				driver = new InternetExplorerDriver(capabilities);
+			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
+				DesiredCapabilities capability = DesiredCapabilities.chrome();
+				capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+				driver = new ChromeDriver(capability);
+			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) {
+				DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
+				SafariOptions safariOptions = new SafariOptions();
+				safariOptions.setUseCleanSession(true);
+				desiredCapabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);
+				driver = new SafariDriver(desiredCapabilities);
+			}
+			String waitTime = CONFIG.getProperty("defaultImplicitWait");
+			String pageWait = CONFIG.getProperty("defaultPageWait");
+			driver.manage().timeouts().implicitlyWait(Long.parseLong(waitTime), TimeUnit.SECONDS);
+			try {
+				driver.manage().timeouts().pageLoadTimeout(Long.parseLong(pageWait), TimeUnit.SECONDS);
+			} catch (Throwable t) {
+				logger.info("Page Load Timeout not supported in safari driver");
+			}
+		}
+		
+		return driver;
 	}
 }
