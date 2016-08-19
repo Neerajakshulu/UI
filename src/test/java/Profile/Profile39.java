@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -132,6 +133,7 @@ public class Profile39 extends TestBase {
 			//int postCommentcount = pf.getProfilePageInstance(ob).getPostCommentCount();
 			int postCommentcount=0;
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
+			BrowserWaits.waitTime(6);
 			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
 
 			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
