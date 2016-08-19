@@ -142,7 +142,7 @@ public class Profile39 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			int postCommentAftercount = pf.getProfilePageInstance(ob).getPostCommentCount();
-
+  
 			System.out.println("before count-->" + postCommentcount);
 			System.out.println("after count-->" + postCommentAftercount);
 			if (postCommentAftercount == postCommentcount) {
