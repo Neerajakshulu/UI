@@ -1780,5 +1780,27 @@ public class ProfilePage extends TestBase {
 		}
 		
 	}
+	
+	/**
+	 * Method for Verify profile CTA in a whitebox displayed for Add a Topic field if profile Topics are showing empty
+	 * 
+	 * @throws Exception, Add a Topic whitebox not getting displayed
+	 */
+	public void validateProfileCTATopicField() throws Exception {
+		List<WebElement> addedTopics = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+		if (addedTopics.size() > 0) {
+			for (WebElement addedTopic : addedTopics) {
+				addedTopic.click();
+				BrowserWaits.waitTime(2);
+			}
+		}
+		
+		String ctaTopicText=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CTA_WHITE_BOX_CSS).get(4).getText();
+		logger.info("CTA in whitebox Topic field if no Interests and Skills-->"+ctaTopicText);
+		if(!ctaTopicText.equalsIgnoreCase("Add your skills and interests to help connect you with others.")){
+			throw new Exception("Profile CTA 'Add a Topic' field White box not getting updated");
+		}
+		
+	}
 
 }
