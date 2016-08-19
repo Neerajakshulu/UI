@@ -47,7 +47,6 @@ public class Watchlist011 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	@Parameters({"patentName"})
 	public void testDisplayedFieldsForPatentsInWatchlist(String patentName) throws Exception {

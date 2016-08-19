@@ -130,9 +130,8 @@ public class Watchlist018 extends TestBase {
 				test.log(LogStatus.PASS, "Others can see the public watchlists of a user on user's profile page");
 			} catch (Error e) {
 				status = 2;
-				ErrorUtil.addVerificationFailure(e);// testng
+				ErrorUtil.addVerificationFailure(e);
 				test.log(LogStatus.FAIL, "Others unable to see the public watchlists of a user on user's profile page");
-				
 			}
 
 			closeBrowser();

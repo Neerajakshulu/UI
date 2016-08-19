@@ -39,7 +39,6 @@ public class Watchlist020 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testChangeStatusPublicToPrivate() throws Exception {
 

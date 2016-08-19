@@ -47,6 +47,7 @@ public class Watchlist002 extends TestBase {
 
 	}
 
+	
 	@Test
 	@Parameters({"patentName"})
 	public void testWatchPatentFromAllContentSearchResult(String patentName) throws Exception {

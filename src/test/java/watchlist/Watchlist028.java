@@ -50,7 +50,6 @@ public class Watchlist028 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testWatchUnwatchPatentFromHomePage() throws Exception {
 

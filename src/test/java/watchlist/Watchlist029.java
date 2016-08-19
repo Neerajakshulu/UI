@@ -53,7 +53,6 @@ public class Watchlist029 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testWatchUnwatchPostFromHomePage() throws Exception {
 

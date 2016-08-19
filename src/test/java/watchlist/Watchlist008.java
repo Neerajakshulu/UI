@@ -33,7 +33,6 @@ import util.TestUtil;
 public class Watchlist008 extends TestBase {
 
 	static int status = 1;
-
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL

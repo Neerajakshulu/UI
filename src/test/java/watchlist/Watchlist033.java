@@ -24,7 +24,6 @@ import util.TestUtil;
  *
  */
 public class Watchlist033 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:

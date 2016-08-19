@@ -48,7 +48,6 @@ public class Watchlist005 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	@Parameters({"articleName"})
 	public void testWatchArticleFromArticleRecordViewPage(String articleName) throws Exception {

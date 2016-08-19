@@ -43,7 +43,6 @@ public class Watchlist015 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testEditWatchList() throws Exception {
 

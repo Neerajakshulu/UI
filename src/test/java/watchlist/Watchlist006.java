@@ -186,7 +186,6 @@ public class Watchlist006 extends TestBase {
 						BrowserWaits.waitTime(4);
 //						// Unwatching an article to a particular watch list
 						watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
-
 //						// Selecting the document name
 						String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).getText();
 

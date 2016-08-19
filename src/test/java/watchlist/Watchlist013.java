@@ -28,7 +28,6 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 public class Watchlist013 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:

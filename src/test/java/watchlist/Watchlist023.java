@@ -98,7 +98,6 @@ public class Watchlist023 extends TestBase {
 				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
 						30);
 			}
-
 			// Deleting the first watch list
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			closeBrowser();

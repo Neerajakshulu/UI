@@ -47,7 +47,6 @@ public class Watchlist012 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	@Parameters({"postName"})
 	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {

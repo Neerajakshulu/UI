@@ -42,7 +42,6 @@ public class Watchlist025 extends TestBase {
 				.assignCategory("Watchlist");
 
 	}
-
 	@Test
 	public void testWatchPatentToMultipleWatchlist() throws Exception {
 
