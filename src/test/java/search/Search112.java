@@ -83,11 +83,11 @@ public class Search112 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
 					  waitForAjax(ob);
 			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
-			
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Registration Date')]"), 30);
 			ob.findElement(By.xpath("//a[contains(text(),'Registration Date')]")).click();
-			BrowserWaits.waitTime(4);
+			waitForAjax(ob);
 			test.log(LogStatus.PASS, "Selected Registration Date as sort option");
 
 			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
@@ -95,29 +95,29 @@ public class Search112 extends TestBase {
 			while (iterator.hasNext()) {
 				profileOrderBeforeNavigation.add(iterator.next().getText());
 			}
-
+            
 			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 30);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString())).click();
+			
 			waitForElementTobeVisible(ob, By.xpath("//h3[contains(text(),'Interests')]"), 15);
 			test.log(LogStatus.PASS, "Record view page is opened");
 			ob.navigate().back();
+			  BrowserWaits.waitTime(4);
 			// checking for Sort option
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(4);
 			String sortOptionSelected = ob.findElement(
 					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(9);
 			System.out.println(sortOptionSelected);
-			Thread.sleep(6000);
-
+			BrowserWaits.waitTime(3);
 			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			Iterator<WebElement> itr = webElementOrderAfterNavigation.iterator();
 			while (itr.hasNext()) {
 				profileOrderAfterNavigation.add(itr.next().getText());
 			}
 			
-
 			try {
 				Assert.assertTrue(sortOptionSelected.equals("Registration Date")
 						&& profileOrderBeforeNavigation.equals(profileOrderAfterNavigation));
