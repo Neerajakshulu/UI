@@ -374,6 +374,15 @@
 		<classes>
 			<class name="Profile.Profile48"></class>
 		</classes>
+	</test>  
+	
+	<test name="Deep_linking_own_profile">
+		<parameter name="username" value="projectneon.test2@gmail.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="deepLinkUrl" value="/#/profile/"/>
+		<classes>
+			<class name="Profile.Profile49"></class>
+		</classes>
 	</test> 
  
 </suite>
