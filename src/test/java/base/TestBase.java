@@ -523,7 +523,7 @@ public class TestBase {
 	// Cleaning up watchlist
 	public void cleanWatchlist() throws Exception {
 
-		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		Thread.sleep(4000);
 
 		List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -1112,12 +1112,12 @@ public class TestBase {
 	 * @param selectedWatchlistName watch list name
 	 * @throws InterruptedException
 	 */
-	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
+public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
 		
 		
 		// Navigate to the watch list landing page
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
-		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 30);
 
 		// Getting all the watch lists
@@ -1146,18 +1146,45 @@ public class TestBase {
 	 * @param watchListName
 	 * @throws InterruptedException
 	 */
-	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throws InterruptedException {
+public void watchOrUnwatchItemToAParticularWatchlist(String watchListName, WebElement watchbutton) throws InterruptedException {
 
-		ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
-		waitForElementTobeVisible(ob, By.xpath("//button[@class='wui-mini-btn wui-mini-btn--primary']"), 60);
-		Thread.sleep(2000);
-		waitForElementTobeVisible(ob, By.linkText(watchListName), 60);
-		Thread.sleep(3000);
-		ob.findElement(By.linkText(watchListName)).click();
-		Thread.sleep(3000);
-		ob.findElement(By.xpath("//input[@type='text']")).click();
-
+	watchbutton.click();
+	//ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).
+	waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+	Thread.sleep(2000);
+	waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+	Thread.sleep(3000);
+	List<WebElement> list=ob.findElements(By.linkText(watchListName));
+	for(WebElement element:list){
+		
+		if(element.isDisplayed()){
+			element.click();
+			break;
+		}
 	}
+	Thread.sleep(3000);
+	ob.findElement(By.xpath("//input[@type='text']")).click();
+
+}
+
+public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throws InterruptedException {
+	ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
+	waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+	Thread.sleep(2000);
+	waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+	Thread.sleep(3000);
+	List<WebElement> list=ob.findElements(By.linkText(watchListName));
+	for(WebElement element:list){
+		
+		if(element.isDisplayed()){
+			element.click();
+			break;
+		}
+	}
+	Thread.sleep(3000);
+	ob.findElement(By.xpath("//input[@type='text']")).click();
+
+}
 
 	/**
 	 * 
@@ -1182,9 +1209,10 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
-		jsClick(ob,ob.findElement(By.xpath(OR.getProperty("watchlist_link"))));
-		BrowserWaits.waitTime(4);
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		
+		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+		BrowserWaits.waitTime(10);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
@@ -1203,6 +1231,7 @@ public class TestBase {
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
 	}
+
 
 	/**
 	 * Method for Delete watchlist from watchlist page

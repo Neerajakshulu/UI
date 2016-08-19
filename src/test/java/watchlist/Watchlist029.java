@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -79,6 +80,8 @@ public class Watchlist029 extends TestBase {
 			
 			//login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
@@ -94,7 +97,7 @@ public class Watchlist029 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			pf.getProfilePageInstance(ob).enterPostTitle("My Post");
 			test.log(LogStatus.INFO, "Entered Post Title");
-			pf.getProfilePageInstance(ob).enterPostContent("This is my post description");
+			pf.getProfilePageInstance(ob).enterPostContent("This is my post description" +RandomStringUtils.randomNumeric(500));
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			Thread.sleep(4000);
@@ -137,7 +140,7 @@ public class Watchlist029 extends TestBase {
 			for(WebElement newComment:newComments){
 				docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 				if(StringUtils.containsIgnoreCase("My Post", docTitle)) {
-					watchButton =newComment.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+					watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
@@ -149,7 +152,7 @@ public class Watchlist029 extends TestBase {
 			// Watching the post to a particular watch list
 			//WebElement watchButton = ob
 				//	.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 			
 			// Navigate to a particular watch list page
@@ -187,14 +190,14 @@ public class Watchlist029 extends TestBase {
 			for(WebElement newPost:newPosts){
 				docTitle=newPost.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 				if(StringUtils.containsIgnoreCase("My Post", docTitle)) {
-					watchButton =newPost.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+					watchButton =newPost.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
 
 			// Unwatching the post to a particular watch list
 			//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 
 			// Navigate to a particular watch list page

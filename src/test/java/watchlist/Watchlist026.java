@@ -77,8 +77,8 @@ public class Watchlist026 extends TestBase {
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);
 
 			for (int i = 1; i <= 2; i++) {
@@ -112,7 +112,7 @@ public class Watchlist026 extends TestBase {
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the post to multiple watch list
 			for (int i = 1; i <= 2; i++) {
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i,watchButton);
 			}
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);

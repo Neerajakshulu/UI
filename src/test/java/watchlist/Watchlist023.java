@@ -76,8 +76,8 @@ public class Watchlist023 extends TestBase {
 			fn2 = LOGIN.getProperty("FN2");
 			ln2 = LOGIN.getProperty("LN2");
 			// Navigate to the watch list landing page
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
 			// Creating two public watch list

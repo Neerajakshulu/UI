@@ -77,6 +77,8 @@ public class Watchlist028 extends TestBase {
 			
 			//login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
@@ -88,7 +90,7 @@ public class Watchlist028 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("patent");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
+			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -114,7 +116,8 @@ public class Watchlist028 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Navigating to the home page
-			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
 
 			// Check if user gets the notification
 				waitForElementTobeVisible(ob, By.cssSelector("div[class$='-event']"), 60);
@@ -137,7 +140,7 @@ public class Watchlist028 extends TestBase {
 				for(WebElement newComment:newComments){
 					docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 					if(StringUtils.containsIgnoreCase(document_title, docTitle)) {
-						watchButton =newComment.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+						watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 						break;
 					}
 				}
@@ -145,9 +148,9 @@ public class Watchlist028 extends TestBase {
 				logger.info("document title in watchlist page-->"+docTitle);
 				BrowserWaits.waitTime(10);
 				// Watching the article to a particular watch list
-				/*WebElement watchButton = ob
-						.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));*/
-				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+//				 watchButton = ob
+//						.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 				// Selecting the document name
 				/*String documentName = ob
@@ -156,9 +159,7 @@ public class Watchlist028 extends TestBase {
 
 				// Navigate to a particular watch list page
 				navigateToParticularWatchlistPage(newWatchlistName);
-
 				List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
 				int count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 
@@ -168,20 +169,21 @@ public class Watchlist028 extends TestBase {
 				}
 
 				if (compareNumbers(1, count)) {
-					test.log(LogStatus.PASS, "User is able to add an article into watchlist from home page");
+					test.log(LogStatus.PASS, "User is able to add an patent into watchlist from home page");
 
 				} else {
-					test.log(LogStatus.FAIL, "User not able to add an article into watchlist from home page");// extent
+					test.log(LogStatus.FAIL, "User not able to add an patent into watchlist from home page");// extent
 					// reports
 					status = 2;// excel
 					test.log(LogStatus.INFO,
 							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_add_article_into_watchlist_from_home_page")));// screenshot
+									+ "_user_unable_to_add_patent_into_watchlist_from_home_page")));// screenshot
 					return;
 				}
 
 				// Navigating to the home page
-				ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+				//ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
 //						waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
 //								30);
 				
@@ -192,14 +194,14 @@ public class Watchlist028 extends TestBase {
 				for(WebElement newComment:newComments2){
 					docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 					if(StringUtils.containsIgnoreCase(document_title, docTitle)) {
-						watchButton =newComment.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+						watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 						break;
 					}
 				}
 
-				// Unwatching the article to a particular watch list
+				// Unwatching the patent to a particular watch list
 				//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 
 				// Selecting the document name
 				//documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
@@ -214,18 +216,18 @@ public class Watchlist028 extends TestBase {
 
 					if (defaultMessage.isDisplayed()) {
 
-						test.log(LogStatus.PASS, "User is able to remove an article from watchlist in home page");// extent
+						test.log(LogStatus.PASS, "User is able to remove an patent from watchlist in home page");// extent
 					} else {
-						test.log(LogStatus.FAIL, "User not able to remove an article from watchlist in home page");// extent
+						test.log(LogStatus.FAIL, "User not able to remove an patent from watchlist in home page");// extent
 						// reports
 						status = 2;// excel
 						test.log(LogStatus.INFO,
 								"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_unable_to_remove_article_from_watchlist_in_home_page")));// screenshot
+										+ "_user_unable_to_remove_patent_from_watchlist_in_home_page")));// screenshot
 					}
 				} catch (NoSuchElementException e) {
 
-					watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+					watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 					count = 0;
 					for (int i = 0; i < watchedItems.size(); i++) {
 

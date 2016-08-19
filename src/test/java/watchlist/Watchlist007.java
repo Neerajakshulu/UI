@@ -109,7 +109,7 @@ public class Watchlist007 extends TestBase {
 			BrowserWaits.waitTime(3);
 			// Watching the patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 			// Selecting the patent name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
@@ -161,7 +161,7 @@ public class Watchlist007 extends TestBase {
 			// Unwatching the patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			BrowserWaits.waitTime(2);
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 			// Selecting the patent name
 			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();

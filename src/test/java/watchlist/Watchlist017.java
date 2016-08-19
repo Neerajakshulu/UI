@@ -108,9 +108,9 @@ public class Watchlist017 extends TestBase {
 			}
 
 			// Step2: Verify that every user watch list is private by default
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);
 			// Check if watch list is private by default
 			ob.findElement(By.cssSelector("button[event-action='edit watchlist']")).click();

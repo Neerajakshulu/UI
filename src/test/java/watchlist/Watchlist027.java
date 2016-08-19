@@ -78,6 +78,8 @@ public class Watchlist027 extends TestBase {
 			ob.navigate().to(host);
 			
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
@@ -100,25 +102,36 @@ public class Watchlist027 extends TestBase {
 					.sendKeys("Automation Script Comment: Watchlist027");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()), 30);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString())));
-
 			BrowserWaits.waitTime(2);
-			logout();
-
+			pf.getLoginTRInstance(ob).logOutApp();
+		
 			// 2)Login with user2 and and try to watch the article from
 			// notification panel
+			
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-
+			waitForAjax(ob);
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
+//			BrowserWaits.waitTime(30);
+//			pf.getHFPageInstance(ob).searchForText("test");
+//			waitForAjax(ob);
+//			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+//			waitForAjax(ob);
+			
+		//	jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+			//BrowserWaits.waitTime(4);
+			//jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
+			
+			
 			// Navigating to the home page
-			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("home_link"))));
 
 			// Check if user gets the notification
 			waitForElementTobeVisible(ob, By.cssSelector("div[class$='-event']"), 60);
 
 			logger.info("new comment size-->"+ob.findElements(By.cssSelector("div[class$='-event']")).size());
-			if (!(ob.findElements(By.cssSelector("div[class$='-event']")).size() == 1)) {
+			if (!(ob.findElements(By.cssSelector("div[class$='-event']")).size() >= 1)) {
 
 				test.log(LogStatus.FAIL, "User not receiving notification");// extent
 																			// reports
@@ -135,7 +148,7 @@ public class Watchlist027 extends TestBase {
 			for(WebElement newComment:newComments){
 				docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 				if(StringUtils.containsIgnoreCase(document_title, docTitle)) {
-					watchButton =newComment.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+					watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
@@ -145,7 +158,7 @@ public class Watchlist027 extends TestBase {
 			// Watching the article to a particular watch list
 			/*WebElement watchButton = ob
 					.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));*/
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 
 			// Selecting the document name
 			/*String documentName = ob
@@ -153,7 +166,7 @@ public class Watchlist027 extends TestBase {
 					.getText();*/
 
 			// Navigate to a particular watch list page
-			navigateToParticularWatchlistPage(newWatchlistName);
+			navigateToParticularWatchlistPage(newWatchlistName); 
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
@@ -190,14 +203,14 @@ public class Watchlist027 extends TestBase {
 			for(WebElement newComment:newComments2){
 				docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
 				if(StringUtils.containsIgnoreCase(document_title, docTitle)) {
-					watchButton =newComment.findElement(By.cssSelector("div[class='wui-card__footer'] button[data-ng-click='WatchButton.openSelectModal()']"));
+					watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
 
 			// Unwatching the article to a particular watch list
 			//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 			// Selecting the document name
 			//documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 + "]"))
@@ -223,7 +236,7 @@ public class Watchlist027 extends TestBase {
 				}
 			} catch (NoSuchElementException e) {
 
-				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links1")));
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 
@@ -255,6 +268,8 @@ public class Watchlist027 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+
+	
 
 	@AfterTest
 	public void reportTestResult() {
