@@ -81,12 +81,13 @@ public class Search43 extends TestBase {
 
 			// Check the filter is collapsed by default
 			collapseFilter();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			// Check if the filter expanded
 			expandFilter();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			// Check if filter is collapsible
 			collapseFilter();
+			BrowserWaits.waitTime(4);
 			test.log(LogStatus.PASS, "Categories filter is collapsible");
 
 			closeBrowser();
@@ -149,8 +150,10 @@ public class Search43 extends TestBase {
 		WebElement documentTypePanelBody = filterPanelBodyList.get(2);
 
 		if (documentTypePanelBody.isDisplayed()) {
+		
 			test.log(LogStatus.FAIL, "Categories filter values are not displayed");
 		}
+
 		// Expanding the document type filter by clicking it
 		documentTypePanelHeading.click();
 	}

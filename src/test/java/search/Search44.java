@@ -77,14 +77,15 @@ public class Search44 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(4);
+		waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
-			Thread.sleep(2000);
+		BrowserWaits.waitTime(3);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"), 30);
-		   BrowserWaits.waitTime(4);
+		   BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(5);
 			
 			if(!checkElementPresence("filter_up_icon")){
 				
@@ -129,8 +130,8 @@ public class Search44 extends TestBase {
 				
 				
 			}
-
-			closeBrowser();
+						closeBrowser();
+		
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -161,7 +162,7 @@ public class Search44 extends TestBase {
 		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		documentTypePanelHeading = filterPanelHeadingList.get(3);
 		WebElement upArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-up']"));
+				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
 		if (upArrow != null) {
 			test.log(LogStatus.PASS, "Up arrow is visible for Institutions filter");
@@ -185,7 +186,7 @@ public class Search44 extends TestBase {
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(3);
 		WebElement downArrow = documentTypePanelHeading.findElement(By
-				.cssSelector("i[class='webui-icon pull-right droparrow webui-icon-arrow-down']"));
+				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
 		if (downArrow != null) {
 			test.log(LogStatus.PASS, "Down arrow is visible for Institutions filter");

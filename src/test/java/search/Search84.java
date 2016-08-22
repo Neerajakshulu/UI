@@ -82,7 +82,7 @@ public class Search84 extends TestBase {
 				waitForAjax(ob);
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-				BrowserWaits.waitTime(10);
+				BrowserWaits.waitTime(5);
 				
 				List<WebElement> searchTiles=ob.findElements(By.xpath("//*[@class='wui-card__content']"));
 				
