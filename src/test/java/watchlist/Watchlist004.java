@@ -168,9 +168,7 @@ public class Watchlist004 extends TestBase {
 			// Steps3: Unwatching an article from article content result page
 			// Searching for article
 			//selectSearchTypeFromDropDown("Articles");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			pf.getHFPageInstance(ob).searchForText("hello");
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 60);
 			// Watching an article to a particular watch list
