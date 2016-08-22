@@ -71,6 +71,9 @@ public class IAM028 extends TestBase {
 			boolean registationStatus = registrationForm(first_name, last_name);
 			if (registationStatus) {
 				BrowserWaits.waitTime(2);
+				ob.get("https://www.guerrillamail.com");
+				BrowserWaits.waitTime(12);
+				ob.navigate().to(host);
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 				BrowserWaits.waitTime(2);
 				ob.findElement(
