@@ -298,7 +298,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS("button[ng-click='$close()']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS("button[ng-click='UserOnboardingProfile.close()']"),
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
-	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']")
+	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),
+	SEARCH_RESULTS_PAGE_CSS("h2[class='wui-title']"),
 	;
 
 	

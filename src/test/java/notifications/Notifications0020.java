@@ -558,7 +558,7 @@ public class Notifications0020 extends NotificationsTestBase {
 						By.cssSelector("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"));
 				listOfWatchListButton.get(0).click();
 				BrowserWaits.waitTime(3);
-				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+				ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS.toString())).click();
 				BrowserWaits.waitTime(1);
 			}
 			List<WebElement> element = ob
@@ -569,7 +569,7 @@ public class Notifications0020 extends NotificationsTestBase {
 					.findElements(By.cssSelector(OnePObjectMap.WATCHLIST_WATCH_BUTTON_CSS.toString()));
 			listOfWatchListButton.get(0).click();
 			BrowserWaits.waitTime(3);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString())).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS.toString())).click();
 			BrowserWaits.waitTime(1);
 			status = true;
 		} catch (Exception e) {
