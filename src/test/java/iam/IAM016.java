@@ -234,9 +234,10 @@ public class IAM016 extends TestBase {
 										+ "_password_not_changed_successfully")));// screenshot
 
 			}
-
+			BrowserWaits.waitTime(2);
 			// 4)login with changed password
-			ob.navigate().to(host);
+			ob.findElement(By.cssSelector("input[class='button']")).click();
+			//ob.navigate().to(host);
 			BrowserWaits.waitTime(4);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);

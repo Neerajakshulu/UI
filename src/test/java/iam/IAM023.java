@@ -218,10 +218,11 @@ public class IAM023 extends TestBase {
 
 			}
 
+			BrowserWaits.waitTime(2);
 			// 4)login with changed password
-			ob.navigate().to(host);
-			logout();
+			ob.findElement(By.cssSelector("input[class='button']")).click();
 			BrowserWaits.waitTime(4);
+			logout();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
