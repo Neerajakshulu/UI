@@ -140,8 +140,8 @@ public class Watchlist004 extends TestBase {
 			// Unwatching the first document from results
 			watchButton=ob.findElement(By.xpath("//button[contains(.,'Watching')]"));
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
-			
-			BrowserWaits.waitTime(2);
+			waitForPageLoad(ob);
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			// Checking if first document still exists in the watch list
 			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -158,6 +158,10 @@ public class Watchlist004 extends TestBase {
 				test.log(LogStatus.PASS, "User is able to unwatch an Article from watchlist page");
 			} catch (Error e) {
 				status = 2;
+				ErrorUtil.addVerificationFailure(e);// testng
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_remove_article_from_watchlist_in_Article_content_searchResults_page")));// screenshot
 				test.log(LogStatus.FAIL, "User is unable to unwatch an Article from watchlist page");
 			}
 
@@ -203,6 +207,7 @@ public class Watchlist004 extends TestBase {
 						"User not able to remove an article from watchlist in Article content search results page");// extent
 				// reports
 				status = 2;// excel
+				ErrorUtil.addVerificationFailure(t);// testng
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
 						.getSimpleName()
 						+ "_user_unable_to_remove_article_from_watchlist_in_Article_content_searchResults_page")));// screenshot

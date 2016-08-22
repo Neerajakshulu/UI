@@ -77,13 +77,13 @@ public class Watchlist027 extends TestBase {
 			ob.navigate().to(host);
 			
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
-			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
+			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE9"));
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE9"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
 			// 1)Login as user1 and comment on some article
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME9"), LOGIN.getProperty("PASSWORD9"));
 
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			//selectSearchTypeFromDropDown("Patents");

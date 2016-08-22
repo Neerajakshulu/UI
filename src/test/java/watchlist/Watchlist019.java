@@ -86,7 +86,7 @@ public class Watchlist019 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_";
 			String watchListDescription = "This is newly created watchlist.";
 			createWatchList("public", newWatchlistName + 1, watchListDescription);
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			createWatchList("public", newWatchlistName + 2, watchListDescription);
 			// Making the last watch list as private
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();

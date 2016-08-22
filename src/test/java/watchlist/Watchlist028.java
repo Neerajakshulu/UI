@@ -76,13 +76,13 @@ public class Watchlist028 extends TestBase {
 			
 			//login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
-			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
+			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE8"));
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE8"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
 			
 			// 1)Login as user1 and comment on some patent
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
 
 			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 90);
 			//selectSearchTypeFromDropDown("Patents");

@@ -1214,6 +1214,8 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 		
 		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 		BrowserWaits.waitTime(10);
+		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+		BrowserWaits.waitTime(10);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
@@ -1242,8 +1244,8 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 	 */
 	public void deleteParticularWatchlist(String watchListName) throws Exception {
 		// Deleting the first watch list
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_link")), 60);
-		ob.findElement(By.xpath(OR.getProperty("watchlist_link"))).click();
+		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
 		List<WebElement> listOfWatchlist = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));

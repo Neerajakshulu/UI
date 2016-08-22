@@ -77,7 +77,7 @@ public class Watchlist021 extends TestBase {
 
 			// ob.get(host);
 			ob.navigate().to(host);
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME10"), LOGIN.getProperty("PASSWORD10"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
@@ -97,16 +97,16 @@ public class Watchlist021 extends TestBase {
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 			// Watching a patents to a particular watch list
-			ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))).click();
-			BrowserWaits.waitTime(2);
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))));
+			waitForAjax(ob);
 			waitForPageLoad(ob);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 			// Watching a posts to a particular watch list
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			BrowserWaits.waitTime(2);
+			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))));
+			waitForAjax(ob);
 			waitForPageLoad(ob);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
