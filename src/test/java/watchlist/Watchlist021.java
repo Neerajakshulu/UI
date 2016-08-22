@@ -86,28 +86,24 @@ public class Watchlist021 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tab_articles_result")), 30);
 
 			// Watching an article to a particular watch list
-			ob.findElement(By.xpath(OR.getProperty("tab_articles_result"))).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);;
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 			// Watching a patents to a particular watch list
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tab_patents_result"))));
-			waitForAjax(ob);
-			waitForPageLoad(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 			// Watching a posts to a particular watch list
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
-			jsClick(ob,ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))));
-			waitForAjax(ob);
-			waitForPageLoad(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
