@@ -106,10 +106,9 @@ public class TestBase {
 	public void beforeSuite(ITestContext ctx) throws Exception {
 		suiteName = ctx.getSuite().getName();
 		logger.info(suiteName + " ui automation start time - " + new Date());
-		logger.info(suiteName + " suit runmode is - " + suiteRunmode);
-
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, suiteName);
+		logger.info(suiteName + " suit runmode is - " + suiteRunmode);
 		logger.info(suiteName + " ui automation Running environment - " + host);
 		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
 				&& !(suiteName.equals("Sanity suite"))) {
