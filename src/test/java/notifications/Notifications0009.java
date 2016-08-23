@@ -12,13 +12,14 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Notifications0009 extends NotificationsTestBase {
+public class Notifications0009 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();

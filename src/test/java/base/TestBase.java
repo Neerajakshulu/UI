@@ -8,7 +8,9 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
@@ -18,7 +20,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.impl.ThrowableFormatOptions;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -45,6 +48,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -55,6 +59,8 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
+import util.RowData;
+import util.TestUtil;
 import util.Xls_Reader;
 
 public class TestBase {
@@ -85,6 +91,14 @@ public class TestBase {
 	public static int count = 0;
 	public static int flag = 0;
 
+	protected static final String TOKENIZER_DOUBLE_PIPE = "||";
+	protected static boolean suiteRunmode = false;
+	protected static Map<String, RowData> testcase = null;
+	private static final int TESTDATA_COLUMN_COUNT = 4;
+	private static final Object EMPTY_STRING = "";
+	protected RowData rowData = null;
+	protected String module = null;
+
 	public PageFactory pf = new PageFactory();
 	public String suiteName;
 
@@ -92,9 +106,47 @@ public class TestBase {
 	public void beforeSuite(ITestContext ctx) throws Exception {
 		suiteName = ctx.getSuite().getName();
 		logger.info(suiteName + " ui automation start time - " + new Date());
+		logger.info(suiteName +" suit runmode is - " + suiteRunmode);
+		
 		initialize();
+		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, suiteName);
+		logger.info(suiteName +" ui automation Running environment - " + host);
+		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")
+				&& !(suiteName.equals("Sanity suite"))) {
+			try {
+				createNewUsers();
+			} catch (Exception e) {
+
+			}
+			if (StringUtils.containsIgnoreCase(host, "https://dev-stable.1p.thomsonreuters.com")) {
+				if (user1 == null) {
+					user1 = "41zbbp+5s285rol6idz4@sharklasers.com";
+					fn1 = "ynowdhms";
+					ln1 = "ynowdhmsbi";
+					count++;
+				}
+				if (user2 == null) {
+					user2 = "41zbhb+2hb552i1rsv3w@sharklasers.com";
+					fn2 = "iuybquao";
+					ln2 = "iuybquaoek";
+					count++;
+				}
+				if (user3 == null) {
+					user3 = "41zbn1+3qz12vzogmfcg@sharklasers.com";
+					fn3 = "xouoygfm";
+					ln3 = "xouoygfmyk";
+					count++;
+				}
+			}
+			if (count < 3)
+				followUsers();
+		}
 	}
 
+	@BeforeClass
+	public void beforeClass() {
+		logger = LogManager.getLogger(this.getClass().getSimpleName());
+	}
 	// @BeforeClass
 	// public void beforeClass() {
 	// extent = ExtentManager.getReporter(filePath);
@@ -141,7 +193,28 @@ public class TestBase {
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
-
+		testcase = new HashMap<String, RowData>();
+		if (suiteName.equals("Notifications")) {
+			loadModuleData(notificationxls.path);
+		} else if (suiteName.equals("Profile")) {
+			loadModuleData(profilexls.path);
+		} else if (suiteName.equals("IAM")) {
+			loadModuleData(iamxls.path);
+		} else if (suiteName.equals("Authoring")) {
+			loadModuleData(authoringxls.path);
+		} else if (suiteName.equals("Search")) {
+			loadModuleData(searchxls.path);
+		} else if (suiteName.equals("Watchlist")) {
+			loadModuleData(watchlistXls.path);
+		} else if (suiteName.equals("Sanity suite")) {
+			loadModuleData(iamxls.path);
+			loadModuleData(searchxls.path);
+			loadModuleData(authoringxls.path);
+			loadModuleData(profilexls.path);
+			loadModuleData(watchlistXls.path);
+			loadModuleData(notificationxls.path);
+		}
+		logger.info(suiteName + "---" + testcase.size());
 	}
 
 	// public static ExtentReports getInstance() {
@@ -159,10 +232,95 @@ public class TestBase {
 	// return extent;
 	// }
 
+	protected void loadModuleData(String module) throws IOException {
+		XSSFWorkbook workBook = null;
+		FileInputStream inputStream = null;
+		try {
+			int sheetRowCount;
+			XSSFSheet sheet = null;
+			XSSFRow row = null;
+			// String sheetName = null;
+
+			// Read Excel file
+			File myxl = new File(module);
+			inputStream = new FileInputStream(myxl);
+			workBook = new XSSFWorkbook(inputStream);
+			sheet = workBook.getSheet("Test Cases");
+			sheetRowCount = sheet.getLastRowNum();
+			// Loop through all test case records of current sheet, start
+			// with 1 to leave header.
+			for (int i = 1; i <= sheetRowCount; i++) {
+				// Get current row information
+				row = sheet.getRow(i);
+				rowData = getRowData(row);
+				// logger.info(rowData);
+				testcase.put(rowData.getTestclassName(), rowData);
+			}
+		} catch (
+
+		Exception e) {
+			logger.error("Exception while executing the tests:" + e);
+			e.printStackTrace();
+		} finally {
+			inputStream.close();
+		}
+	}
+
+	protected RowData getRowData(XSSFRow row) throws Exception {
+
+		RowData rowData = new RowData();
+		String currentCellData = null;
+
+		for (int currentCell = 0; currentCell < TESTDATA_COLUMN_COUNT; currentCell++) {
+
+			currentCellData = getCellData(row.getCell(currentCell, Row.CREATE_NULL_AS_BLANK));
+
+			switch (currentCell) {
+				case 0:
+					rowData.setTestclassName(currentCellData);
+				case 1:
+					rowData.setTestcaseId(currentCellData);
+				case 2:
+					rowData.setTestcaseDescription(currentCellData);
+				case 3:
+					rowData.setTestcaseRunmode(currentCellData);
+				case 4:
+					rowData.setTestResults(currentCellData);
+			}
+		}
+		return rowData;
+	}
+
+	protected String getCellData(XSSFCell cell) {
+		int type = cell.getCellType();
+		Object result;
+		switch (type) {
+			case Cell.CELL_TYPE_STRING:
+				result = cell.getStringCellValue();
+				break;
+			case Cell.CELL_TYPE_NUMERIC:
+				result = cell.getNumericCellValue();
+				break;
+			case Cell.CELL_TYPE_FORMULA:
+				throw new RuntimeException("We can't evaluate formulas in Java");
+			case Cell.CELL_TYPE_BLANK:
+				result = EMPTY_STRING;
+				break;
+			case Cell.CELL_TYPE_BOOLEAN:
+				result = cell.getBooleanCellValue();
+				break;
+			case Cell.CELL_TYPE_ERROR:
+				throw new RuntimeException("This cell has an error");
+			default:
+				throw new RuntimeException("We don't support this cell type: " + type);
+		}
+		return result.toString();
+	}
+
 	// Env Status returns true scripts will run on Sauce labs otherwise run on
 	// local machine configurations
 	public void openBrowser() throws Exception {
-		logger.info("Env status-->" + StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
+		// logger.info("Env status-->" + StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
 		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
@@ -537,139 +695,135 @@ public class TestBase {
 		}
 
 	}
-	protected static String email=null;
-	boolean status=false;
-	String mail=null;
-	boolean activationStatus=false;
+
+	protected static String email = null;
+	boolean status = false;
+	String mail = null;
+	boolean activationStatus = false;
+
 	// Creates a new TR user
 	public String createNewUser(String first_name,
 			String last_name) throws Exception {
 
-		
-
-		status=registrationForm(first_name,last_name);
+		status = registrationForm(first_name, last_name);
 		BrowserWaits.waitTime(2);
-		if(status){
-			activationStatus=userActivation();
-			
+		if (status) {
+			activationStatus = userActivation();
+
 		}
-		if(activationStatus){
-			mail=loginActivationMail();	
+		if (activationStatus) {
+			mail = loginActivationMail();
 		}
-		
+
 		return mail;
 
 	}
-	
+
 	public boolean registrationForm(String first_name,
-			String last_name) throws Exception{
-		try{
-		ob.get("https://www.guerrillamail.com");
-		BrowserWaits.waitTime(2);
-		if (CONFIG.getProperty("browserType").equals("IE")) {
-			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-			BrowserWaits.waitTime(4);
-		}
-	
-		email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-		ob.navigate().to(host);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
-		ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-		waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
-		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
-		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
-		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
-		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
-		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
-		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
-		ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
-
-		String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
-
-		if (!StringContains(text, email)) {
-			if (test != null) {
-				test.log(LogStatus.FAIL, "Account activation email not sent");// extent
-																				// reports
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+			String last_name) throws Exception {
+		try {
+			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(2);
+			if (CONFIG.getProperty("browserType").equals("IE")) {
+				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+				BrowserWaits.waitTime(4);
 			}
-		}
 
-		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-		}catch(Throwable t){
-			t.printStackTrace();
-			test.log(LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_not_registered")));// screenshot
-			closeBrowser();
-			return false;
-
-		}
-		return true;
-	}
-	
-	
-	public boolean userActivation() throws Exception{
-		try{
-		BrowserWaits.waitTime(3);
-		ob.get("https://www.guerrillamail.com");
-		if (CONFIG.getProperty("browserType").equals("IE")) {
-			Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+			email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+			ob.navigate().to(host);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 			BrowserWaits.waitTime(4);
-		}
-		BrowserWaits.waitTime(14);
-		List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
-		WebElement myE = email_list.get(0);
-		JavascriptExecutor executor = (JavascriptExecutor) ob;
-		executor.executeScript("arguments[0].click();", myE);
-		BrowserWaits.waitTime(3);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
-		WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
-		List<WebElement> links = email_body.findElements(By.tagName("a"));
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
-		ob.get(links.get(0).getAttribute("href"));
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-		BrowserWaits.waitTime(4);
-		}catch(Throwable t){
+			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
+
+			if (!StringContains(text, email)) {
+				if (test != null) {
+					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
+																					// reports
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+				}
+			}
+
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_not_registered")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+
+		}
+		return true;
+	}
+
+	public boolean userActivation() throws Exception {
+		try {
+			BrowserWaits.waitTime(3);
+			ob.get("https://www.guerrillamail.com");
+			if (CONFIG.getProperty("browserType").equals("IE")) {
+				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+				BrowserWaits.waitTime(4);
+			}
+			BrowserWaits.waitTime(14);
+			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
+			WebElement myE = email_list.get(0);
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", myE);
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
+			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
+			List<WebElement> links = email_body.findElements(By.tagName("a"));
+
+			ob.get(links.get(0).getAttribute("href"));
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			BrowserWaits.waitTime(4);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 		}
 		return true;
 	}
-	
-	public String loginActivationMail() throws Exception{
-		try{
-		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(CONFIG.getProperty("defaultPassword"));
-		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-		BrowserWaits.waitTime(6);
-		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-		BrowserWaits.waitTime(3);
-		}catch(Throwable t){
+
+	public String loginActivationMail() throws Exception {
+		try {
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			BrowserWaits.waitTime(6);
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+			BrowserWaits.waitTime(3);
+		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_not_registered")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 			closeBrowser();
 		}
 		return email;
 	}
+
 	// verifies whether a particular string contains another string or not
 	public boolean StringContains(String MainString,
 			String ToBeCheckedString) {
@@ -1086,7 +1240,6 @@ public class TestBase {
 		return result.toString();
 	}
 
-	
 	/**
 	 * 
 	 * @param username -USERNAME Field from the login.properties file
@@ -1113,9 +1266,8 @@ public class TestBase {
 	 * @param selectedWatchlistName watch list name
 	 * @throws InterruptedException
 	 */
-public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
-		
-		
+	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
+
 		// Navigate to the watch list landing page
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
@@ -1147,45 +1299,46 @@ public void navigateToParticularWatchlistPage(String selectedWatchlistName) thro
 	 * @param watchListName
 	 * @throws InterruptedException
 	 */
-public void watchOrUnwatchItemToAParticularWatchlist(String watchListName, WebElement watchbutton) throws InterruptedException {
+	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName,
+			WebElement watchbutton) throws InterruptedException {
 
-	watchbutton.click();
-	//ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).
-	waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
-	Thread.sleep(2000);
-	waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
-	Thread.sleep(3000);
-	List<WebElement> list=ob.findElements(By.linkText(watchListName));
-	for(WebElement element:list){
-		
-		if(element.isDisplayed()){
-			element.click();
-			break;
+		watchbutton.click();
+		// ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).
+		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+		Thread.sleep(2000);
+		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+		Thread.sleep(3000);
+		List<WebElement> list = ob.findElements(By.linkText(watchListName));
+		for (WebElement element : list) {
+
+			if (element.isDisplayed()) {
+				element.click();
+				break;
+			}
 		}
+		Thread.sleep(3000);
+		ob.findElement(By.xpath("//input[@type='text']")).click();
+
 	}
-	Thread.sleep(3000);
-	ob.findElement(By.xpath("//input[@type='text']")).click();
 
-}
+	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throws InterruptedException {
+		ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
+		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+		Thread.sleep(2000);
+		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+		Thread.sleep(3000);
+		List<WebElement> list = ob.findElements(By.linkText(watchListName));
+		for (WebElement element : list) {
 
-public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throws InterruptedException {
-	ob.findElement(By.xpath("//button[@class='wui-icon-btn dropdown-toggle']")).click();
-	waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
-	Thread.sleep(2000);
-	waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
-	Thread.sleep(3000);
-	List<WebElement> list=ob.findElements(By.linkText(watchListName));
-	for(WebElement element:list){
-		
-		if(element.isDisplayed()){
-			element.click();
-			break;
+			if (element.isDisplayed()) {
+				element.click();
+				break;
+			}
 		}
-	}
-	Thread.sleep(3000);
-	ob.findElement(By.xpath("//input[@type='text']")).click();
+		Thread.sleep(3000);
+		ob.findElement(By.xpath("//input[@type='text']")).click();
 
-}
+	}
 
 	/**
 	 * 
@@ -1211,10 +1364,10 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 			String watchListName,
 			String watchListDescription) throws Exception {
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
-		
-		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+
+		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 		BrowserWaits.waitTime(10);
-		jsClick(ob,ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 		BrowserWaits.waitTime(10);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
@@ -1234,7 +1387,6 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
 	}
-
 
 	/**
 	 * Method for Delete watchlist from watchlist page
@@ -1290,7 +1442,7 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 		ob.findElement(By.name("loginEmail")).sendKeys(emailId);
 		ob.findElement(By.name("loginPassword")).sendKeys(password);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString())).click();
-		//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		// pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		Thread.sleep(5000);
 
 	}
@@ -1311,7 +1463,149 @@ public void watchOrUnwatchItemToAParticularWatchlist(String watchListName) throw
 	}
 
 	public Timestamp getCurrentTimeStamp() {
-
 		return new Timestamp(new Date().getTime());
+	}
+
+	protected boolean getTestRunMode(String testRunmode) {
+		// String testRunmode = testcase.get(simpleName).getTestcaseRunmode();
+		if ("Y".equals(testRunmode)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void createNewUsers() {
+		if (!StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
+			if (TestUtil.isSuiteRunnable(suiteXls, "Notifications")) {
+				while (flag < 3) {
+					try {
+						if (user1 != null && user2 != null && user2 != null) {
+							flag = 3;
+						}
+						// 1)Creating User1
+						if (user1 == null) {
+							logger.info("Started user1 creation");
+							openBrowser();
+							maximizeWindow();
+							clearCookies();
+							fn1 = generateRandomName(8);
+							ln1 = generateRandomName(10);
+							user1 = createNewUser(fn1, ln1);
+							logger.info("User1 Mail id:" + user1);
+							logger.info("User1 Name:" + fn1 + " " + ln1);
+							BrowserWaits.waitTime(3);
+							logout();
+							closeBrowser();
+							logger.info("user1 created successfully");
+						}
+						// Creating User2
+						if (user2 == null) {
+							logger.info("Started user2 creation");
+							openBrowser();
+							maximizeWindow();
+							clearCookies();
+							fn2 = generateRandomName(8);
+							ln2 = generateRandomName(10);
+							user2 = createNewUser(fn2, ln2);
+							logger.info("User2 Mail id:" + user2);
+							logger.info("User2 Name:" + fn2 + " " + ln2);
+							BrowserWaits.waitTime(3);
+							logout();
+							closeBrowser();
+							logger.info("user2 created successfully");
+						}
+						// Creating User3
+						if (user3 == null) {
+							logger.info("Started user3 creation");
+							openBrowser();
+							maximizeWindow();
+							clearCookies();
+							fn3 = generateRandomName(8);
+							ln3 = generateRandomName(10);
+							user3 = createNewUser(fn3, ln3);
+							logger.info("User3 Mail id:" + user3);
+							logger.info("User3 Name:" + fn3 + " " + ln3);
+							BrowserWaits.waitTime(3);
+							logout();
+							closeBrowser();
+							logger.info("user3 created successfully");
+						}
+					} catch (Throwable t) {
+						logger.error("There is some problem in the creation of users");
+						logger.error(t);
+						t.printStackTrace();
+						// StringWriter errors = new StringWriter();
+						// t.printStackTrace(new PrintWriter(errors));
+						try {
+							test.addScreenCapture(captureScreenshot("UserCreationError"
+									+ this.getClass().getSimpleName() + "_user_creation_error_screenshot"));// screenshot
+						} catch (Throwable t1) {
+							logger.error("There is some problem in the taking sereenshoot");
+							logger.error(t);
+							t.printStackTrace();
+						}
+						closeBrowser();
+					}
+					flag++;
+				}
+
+			}
+		}
+
+	}
+
+	public void followUsers() {
+		// user1 following user2
+		try {
+			if (user1 != null && user2 != null) {
+				openBrowser();
+				maximizeWindow();
+				clearCookies();
+				ob.navigate().to(host);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
+				// login with user1
+				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
+				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
+				// + " " + ln2);
+				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				}
+				pf.getLoginTRInstance(ob).logOutApp();
+				// closeBrowser();
+			} else {
+				throw new Exception("User creation problem hence throwing exception");
+			}
+		} catch (Throwable t) {
+			logger.info(t.getMessage());
+		}
+
+		try {
+			if (user2 != null && user3 != null) {
+				// openBrowser();
+				// maximizeWindow();
+				// clearCookies();
+				// ob.navigate().to(host);
+				pf.getLoginTRInstance(ob).waitForTRHomePage();
+				pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
+				pf.getLoginTRInstance(ob).clickLogin();
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn3 + " " + ln3);
+				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+					pf.getSearchProfilePageInstance(ob).clickPeople();
+					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				}
+				pf.getLoginTRInstance(ob).logOutApp();
+				closeBrowser();
+			} else {
+				throw new Exception("User creation problem hence throwing exception");
+			}
+		} catch (Throwable t) {
+			logger.info(t.getMessage());
+		}
 	}
 }

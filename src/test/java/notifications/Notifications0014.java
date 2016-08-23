@@ -17,12 +17,13 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class Notifications0014 extends NotificationsTestBase {
+public class Notifications0014 extends TestBase {
 
 	static int status = 1;
 	PageFactory pf = new PageFactory();

@@ -13,13 +13,14 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
 import pages.ProfilePage;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class Notifications0019 extends NotificationsTestBase {
+public class Notifications0019 extends TestBase {
 
 	static int status = 1;
 
