@@ -111,9 +111,10 @@ public class Watchlist018 extends TestBase {
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1")), 30);
-			BrowserWaits.waitTime(2);
+			waitForAjax(ob);
 			// Navigating to the watch list tab
 			ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1"))).click();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 30);
 			List<WebElement> watchlists = ob
 					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
@@ -128,7 +129,8 @@ public class Watchlist018 extends TestBase {
 			try {
 				Assert.assertEquals(count, 1);
 				test.log(LogStatus.PASS, "Others can see the public watchlists of a user on user's profile page");
-			} catch (Error e) {
+			} catch (Throwable e) {
+				e.printStackTrace();
 				status = 2;
 				ErrorUtil.addVerificationFailure(e);
 				test.log(LogStatus.FAIL, "Others unable to see the public watchlists of a user on user's profile page");
