@@ -70,11 +70,8 @@
 	</test>
 
 
-<!-- 	<test name="IAM011">
-		<classes>
-			<class name="iam.IAM011"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="IAM011"> <classes> <class name="iam.IAM011"></class> </classes> 
+		</test> -->
 
 
 	<test name="IAM012">
@@ -132,11 +129,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="IAM020">
-		<classes>
-			<class name="iam.IAM020"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="IAM020"> <classes> <class name="iam.IAM020"></class> </classes> 
+		</test> -->
 
 	<test name="IAM021">
 		<classes>
@@ -167,31 +161,41 @@
 			<class name="iam.IAM025"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IAM026">
 		<classes>
 			<class name="iam.IAM026"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IAM027">
 		<classes>
 			<class name="iam.IAM027"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IAM028">
 		<classes>
 			<class name="iam.IAM028"></class>
 		</classes>
 	</test>
-	
-		<test name="IAM029">
+
+	<test name="IAM029">
 		<classes>
 			<class name="iam.IAM029"></class>
 		</classes>
 	</test>
-	
-	
+
+	<test name="IAM030">
+		<classes>
+			<class name="iam.IAM030"></class>
+		</classes>
+	</test>
+	<test name="IAM031">
+		<classes>
+			<class name="iam.IAM031"></class>
+		</classes>
+	</test>
+
 </suite>
 
