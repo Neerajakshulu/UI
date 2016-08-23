@@ -684,7 +684,7 @@ public class ProfilePage extends TestBase {
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS).getText();
 		String followerCount[] = followerCountBefore.split(" ");
 		followersBefore = Integer.parseInt(followerCount[1]);
-		System.out.println("FOLLOWERSBEFORE-->" + followersBefore);
+		logger.info("FOLLOWERS BEFORE-->" + followersBefore);
 		return followersBefore;
 	}
 
@@ -693,9 +693,12 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws Exception, validation fails
 	 */
-	public void validateFollowersCount() throws Exception {
+	public void validateFollowersCount(int beforeFollowCount) throws Exception {
+		logger.info("before count-->"+beforeFollowCount);
+		
 		int followerAfter = getFollowersCount();
-		if ((followingBefore == followerAfter)) {
+		logger.info("after count-->"+followerAfter);
+		if ((beforeFollowCount == followerAfter)) {
 			throw new Exception("Followers count should increase or decrease while other follow/unfollow");
 		}
 	}

@@ -21,6 +21,7 @@ public class Profile14 extends TestBase {
 
 	
 	static int status = 1;
+	static int followersCount;
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -85,7 +86,7 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, "get users who are following me-My Followers");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
-			pf.getProfilePageInstance(ob).getFollowersCount();
+			followersCount=pf.getProfilePageInstance(ob).getFollowersCount();
 			test.log(LogStatus.INFO, "Logout from the application");
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
@@ -136,7 +137,7 @@ public class Profile14 extends TestBase {
 	public void followUserAndLogout() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow/unfollow other user");
-			ob.navigate().to("http://dev-stable.1p.thomsonreuters.com/#/profile/59f15292-a2d0-4555-bfc8-4fe37b95fa60");
+			ob.navigate().to("http://dev-stable.1p.thomsonreuters.com/#/profile/0a69807f-0715-4760-b902-055719b0b11c");
 			BrowserWaits.waitTime(10);
 			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
@@ -172,7 +173,7 @@ public class Profile14 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			test.log(LogStatus.INFO, "validate profile followers count, should increase or decrease");
-			pf.getProfilePageInstance(ob).validateFollowersCount();
+			pf.getProfilePageInstance(ob).validateFollowersCount(followersCount);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends");
