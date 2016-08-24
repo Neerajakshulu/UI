@@ -309,8 +309,8 @@ public class Notifications0007 extends TestBase {
 					"Home page is not loaded successfully");*/
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			BrowserWaits.waitTime(4);
-			ob.navigate().refresh();
-			BrowserWaits.waitTime(6);
+			//ob.navigate().refresh();
+			//BrowserWaits.waitTime(6);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			String notification_text = null;
 			for (int i = 1; i <= 3; i++) {
