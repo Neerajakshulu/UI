@@ -334,18 +334,18 @@ public class TestBase {
 		return result.toString();
 	}
 
-	// Env Status returns true scripts will run on Sauce labs otherwise run on
+	// Environment Status returns true scripts will run on Sauce labs otherwise run on
 	// local machine configurations
 	public void openBrowser() throws Exception {
-		// logger.info("Env status-->" +
-		// StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
+		logger.info("Environment Status-->" +StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
 		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
+			logger.info("Running Environment is Saucelabs");
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-			logger.info("Selenium Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
+			logger.info("Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
 			desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-			logger.info("Selenium Version-->" + System.getenv("SELENIUM_VERSION"));
-			logger.info("Selenium Plaform-->" + System.getenv("SELENIUM_PLATFORM"));
+			logger.info("Browser Version-->" + System.getenv("SELENIUM_VERSION"));
+			logger.info("Platform Version-->" + System.getenv("SELENIUM_PLATFORM"));
 			desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
@@ -362,6 +362,7 @@ public class TestBase {
 			}
 			// else part having local machine configuration
 		} else {
+			logger.info("Running Environment is Local Machine");
 			if (CONFIG.getProperty("browserType").equals("FF")) {
 				ob = new FirefoxDriver();
 			} else if (CONFIG.getProperty("browserType").equals("IE")) {
