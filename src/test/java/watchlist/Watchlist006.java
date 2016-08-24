@@ -180,7 +180,7 @@ public class Watchlist006 extends TestBase {
 			BrowserWaits.waitTime(4);
 			// Unwatching a patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
 
 			// Selecting the patent name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

@@ -89,7 +89,7 @@ public class Watchlist003 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			waitForAjax(ob);
 			Thread.sleep(3000);
 
 			// Watching a post to a particular watch list
