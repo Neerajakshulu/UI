@@ -81,7 +81,7 @@ public class Search68 extends TestBase {
 			String all_temp = all_text.substring(3);
 			int all_num = convertStringToInt(all_temp);
 			System.out.println(all_num);
-
+           
 			String articles_text = ob
 					.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).getText();
 			String articles_temp = articles_text.substring(8);
@@ -112,23 +112,29 @@ public class Search68 extends TestBase {
 		       BrowserWaits.waitTime(3);
 			boolean cond1 = getHeadingCount() == articles_num;
 			System.out.println(cond1);
+			Assert.assertTrue(cond1);
+			test.log(LogStatus.PASS, "Count of Articles content type gets displayed at the top");// extent report
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 			  BrowserWaits.waitTime(3);
 			boolean cond2 = getHeadingCount() == patents_num;
 			System.out.println(cond2);
-
+			Assert.assertTrue(cond2);
+			test.log(LogStatus.PASS, "Count of patents content type gets displayed at the top");// extent report
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()))
 					.click();
 			  BrowserWaits.waitTime(3);
 			boolean cond3 = getHeadingCount() == people_num;
 			System.out.println(cond3);
-
+			Assert.assertTrue(cond3);
+			test.log(LogStatus.PASS, "Count of People content type gets displayed at the top");// extent report
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()))
 					.click();
 			  BrowserWaits.waitTime(3);
 			boolean cond4 = getHeadingCount() == posts_num;
 			System.out.println(cond4);
+			Assert.assertTrue(cond4);
+			test.log(LogStatus.PASS, "Count of post content type gets displayed at the top");// extent report
 
 			ob.findElement(
 				 By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
@@ -136,7 +142,7 @@ public class Search68 extends TestBase {
 			  BrowserWaits.waitTime(3);
 			boolean cond5 = getHeadingCount() == all_num;
 			System.out.println(cond5);
-
+             
 			boolean master_cond = cond1 && cond2 && cond3 && cond4 && cond5;
 			System.out.println(master_cond);
 
