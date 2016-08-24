@@ -106,6 +106,22 @@ public class TestBase {
 	public void beforeSuite(ITestContext ctx) throws Exception {
 		suiteName = ctx.getSuite().getName();
 		logger.info(suiteName + " ui automation start time - " + new Date());
+		if (suiteName.equals("Default suite")) {
+			String className = this.getClass().toString();
+			if (className.contains("notifications")) {
+				suiteName = "Notifications";
+			} else if (className.contains("Profile")) {
+				suiteName = "Profile";
+			} else if (className.contains("Authoring")) {
+				suiteName = "Authoring";
+			} else if (className.contains("iam")) {
+				suiteName = "IAM";
+			} else if (className.contains("search")) {
+				suiteName = "Search";
+			} else if (className.contains("watchlist")) {
+				suiteName = "Watchlist";
+			}
+		}
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, suiteName);
 		logger.info(suiteName + " suit runmode is - " + suiteRunmode);
