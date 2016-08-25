@@ -81,7 +81,6 @@ public class Notifications0012 extends TestBase {
 					break;
 				}
 			}*/
-			
 			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH);
 			BrowserWaits.waitTime(5);
 			List<WebElement> people = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
