@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -80,7 +81,9 @@ public class Notifications0012 extends TestBase {
 					break;
 				}
 			}*/
+			
 			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH);
+			BrowserWaits.waitTime(5);
 			List<WebElement> people = ob.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH.toString()));
 			logger.info("No of people=" + people.size());
 			if (people.size()==6) {
