@@ -64,6 +64,8 @@ public class Notifications0011 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 120,
 					"Home page is not loaded successfully");*/
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(6);
 			test.log(LogStatus.INFO, "User Logged in  successfully");
 			List<WebElement> listOfNotifications = null;
 			for (int i = 0; i < 3; i++) {
