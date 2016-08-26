@@ -93,9 +93,9 @@ public class Search85 extends TestBase {
 				System.out.println(text1);
 				
 				try{
-					test.log(LogStatus.INFO, tileText);
-					test.log(LogStatus.INFO, text1);
-					Assert.assertTrue(tileText.contains(text1));
+					test.log(LogStatus.INFO, tileText.replaceAll("[^a-zA-Z0-9_-]", ""));
+					test.log(LogStatus.INFO, text1.replaceAll("[^a-zA-Z0-9_-]", ""));
+					Assert.assertTrue(tileText. replaceAll("[^a-zA-Z0-9_-]", "").contains(text1. replaceAll("[^a-zA-Z0-9_-]", "")));
 					test.log(LogStatus.PASS, "Following fields are getting displayed correctly for a patent: a)Title b)Patent number c)Assignees d)Inventors e)Publication date");// extent reports
 				}
 				catch(Throwable t){
