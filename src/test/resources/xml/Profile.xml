@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-    <test name="Follow_Other_Profile" preserve-order="true"> 
+    <!-- <test name="Follow_Other_Profile" preserve-order="true"> 
 		<parameter name="profileName" value="reddy" /> 
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -383,7 +383,17 @@
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
+	</test>  -->
+	
+	<test name="onboarding_modals" preserve-order="true">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9"></parameter>
+		<classes>
+			<class name="Profile.Profile50"></class>
+		</classes>
 	</test> 
+	
  
 </suite>
 
