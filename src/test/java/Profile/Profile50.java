@@ -57,6 +57,7 @@ public class Profile50 extends OnboardingModalsTest {
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			test.log(LogStatus.INFO, "Login to Neon Application");
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getOnboardingModalsPageInstance(ob).clickLogin();
 		} catch (Throwable t) {
