@@ -19,6 +19,7 @@ public class PageFactory {
 	private BrowserWaits browserWaits = null;
 	private LoginTR loginTR = null;
 	private Authoring authoring = null;
+	private OnboardingModalsPage onboarding=null;
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -107,6 +108,15 @@ public class PageFactory {
 		}
 
 		return loginTR;
+
+	}
+	
+	public OnboardingModalsPage getOnboardingModalsPageInstance(WebDriver ob) {
+		if (onboarding == null) {
+			onboarding = new OnboardingModalsPage(ob);
+		}
+
+		return onboarding;
 
 	}
 
