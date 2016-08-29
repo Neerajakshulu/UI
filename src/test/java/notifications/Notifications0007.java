@@ -276,7 +276,7 @@ public class Notifications0007 extends TestBase {
 			logger.info("Notification Text: " + text);
 			try {
 				Assert.assertTrue(text.contains("Liked your comment")
-						&& text.contains(OR.getProperty("COMMENT_TEXT1")) && text.contains(fn1 + " " + ln1));
+						&& text.contains(OR.getProperty("COMMENT_TEXT1")) && text.contains(fn1 + " " + ln1)&&text.contains(document_title));
 				test.log(LogStatus.PASS, "User receiving notification with correct content");
 			} catch (Throwable t) {
 
