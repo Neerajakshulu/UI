@@ -78,11 +78,7 @@ public class Search110 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-        
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 
 			ob.findElement(By.id("single-button")).click();

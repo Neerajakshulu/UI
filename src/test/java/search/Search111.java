@@ -73,14 +73,8 @@ public class Search111 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForPageLoad(ob);
-			BrowserWaits.waitTime(5);
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_search_people_tab_xpath")), 50);
-//			ob.findElement(By.xpath(OR.getProperty("tr_search_people_tab_xpath"))).click();
-//			waitForPageLoad(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-			BrowserWaits.waitTime(5);
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
+
 			// checking for Default sort option
 			List<WebElement> beforeScrollSize = ob.findElements(By.xpath(OR
 					.getProperty("tr_search_people_profilename_link_xpath")));

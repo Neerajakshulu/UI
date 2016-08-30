@@ -78,10 +78,7 @@ public class Search112 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-              waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
-					ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-					  waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(3);

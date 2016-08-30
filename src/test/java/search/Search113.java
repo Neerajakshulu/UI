@@ -76,11 +76,7 @@ public class Search113 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-             BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-             ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();;
-			//ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='panel panel-default ng-isolate-scope']"), 30);
