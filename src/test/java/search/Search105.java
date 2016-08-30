@@ -79,8 +79,7 @@ public class Search105 extends TestBase {
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
-
-			Thread.sleep(5000);
+            
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),

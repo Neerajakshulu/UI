@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -79,13 +80,10 @@ public class Search106 extends TestBase {
 			String post = "posts";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			Thread.sleep(2000);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
-			waitForAjax(ob);
-			Thread.sleep(2000);
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
 			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(
 					ob,
 					By.xpath("//div[@class='search-sort-dropdown dropdown open']/ul[@class='dropdown-menu search-sort-dropdown__menu']"),

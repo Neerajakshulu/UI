@@ -32,9 +32,8 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnPostTab() throws Exception {
-		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(4).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(4).click();
 		waitForAjax(ob);
 	}
 	/**
@@ -42,9 +41,8 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnArticleTab() throws Exception {
-		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(1).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(1).click();
 		waitForAjax(ob);
 	}
 	
@@ -54,10 +52,20 @@ public class SearchResultsPage extends TestBase {
 	 */
 	public void clickOnPatentsTab() throws Exception {
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(2).click();
 		waitForAjax(ob);
 	}
-
+	/**
+	 * Method to click on Patents tab in search results page
+	 * @throws Exception
+	 */
+	public void clickOnPeopleTab() throws Exception {
+		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(3).click();
+		waitForAjax(ob);
+	}
+	
+	
 	/**
 	 * Method to click on posts of other users than the current user in search results page 
 	 * @param currentUserName

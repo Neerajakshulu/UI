@@ -73,10 +73,7 @@ public class Search107 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-		BrowserWaits.waitTime(3);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+           pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();

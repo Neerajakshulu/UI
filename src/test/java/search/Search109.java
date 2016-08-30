@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -73,16 +74,11 @@ public class Search109 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			Thread.sleep(2000);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'wui-side-menu__list')]"));
-			content_type_tiles.get(3).click();
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			// Finding out the types filer in refine panel
-			waitForAjax(ob);
-			Thread.sleep(4000);
 			List<WebElement> content_types = ob.findElements(By
 					.cssSelector("div[class='panel-heading']"));
+			BrowserWaits.waitTime(4);
 			String filter1 = content_types.get(0).getText();
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();

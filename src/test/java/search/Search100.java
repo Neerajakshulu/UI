@@ -72,10 +72,7 @@ public class Search100 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
-			content_type_tiles.get(2).click();
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 

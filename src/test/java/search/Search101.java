@@ -77,10 +77,7 @@ public class Search101 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//
-			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//*[contains(@class,'wui-side-menu__list-item ng-scope')]"));
-			content_type_tiles.get(2).click();
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
 
 			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();

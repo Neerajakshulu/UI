@@ -82,11 +82,7 @@ public class Search10 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-		   waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()),60);
-        	ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-		   waitForAjax(ob);
-			
+		    pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
