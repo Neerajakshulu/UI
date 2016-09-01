@@ -79,10 +79,7 @@ public class Search118 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
-			content_type_tiles.get(2).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
 
 			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();

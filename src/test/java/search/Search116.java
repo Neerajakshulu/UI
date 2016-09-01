@@ -71,9 +71,7 @@ public class Search116 extends TestBase {
 			String post = "post";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 120);
 

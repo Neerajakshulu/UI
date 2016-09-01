@@ -71,10 +71,7 @@ public class Search121 extends TestBase {
 			String search_term = "Systems Biology of Cell Behavior";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_term + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-	  waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
-	   ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-	       waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			 waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(15000);
 			String title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
