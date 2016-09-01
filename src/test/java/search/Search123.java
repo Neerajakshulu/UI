@@ -76,10 +76,7 @@ public class Search123 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 50);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-	        waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			waitForElementTobeVisible(ob, By.xpath("//span[contains(text(),'Institutions')]"), 50);
 			ob.findElement(By.xpath("//span[contains(text(),'Institutions')]")).click();
 			BrowserWaits.waitTime(2);

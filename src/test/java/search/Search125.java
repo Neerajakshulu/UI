@@ -73,9 +73,7 @@ public class Search125 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			Thread.sleep(5000);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			List<WebElement> content_type_tiles = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
-			content_type_tiles.get(1).click();
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			String title1 = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
