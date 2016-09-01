@@ -399,6 +399,26 @@
 		<classes>
 			<class name="Profile.Profile51"></class>
 		</classes>
+	</test>   
+	
+	<test name="Deep_linking_own_profile_Using_Facebook and LI">
+		<parameter name="socialLogin" value="FB|LI" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" />
+		<parameter name="password" value="likhithreddy@123" />
+		<parameter name="deepLinkUrl" value="/#/profile/"/>
+		<classes>
+			<class name="Profile.Profile52"></class>
+		</classes>
+	</test>  
+	
+	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
+		<parameter name="socialLogin" value="FB|LI" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" />
+		<parameter name="password" value="likhithreddy@123" />
+		<parameter name="deepLinkUrl" value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e"/>
+		<classes>
+			<class name="Profile.Profile53"></class>
+		</classes>
 	</test>  
  
 </suite>
