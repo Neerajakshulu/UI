@@ -77,8 +77,7 @@ public class Search90 extends TestBase {
 			//selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			Thread.sleep(8000);
-			ob.findElement(By.partialLinkText("Article")).click();
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
 			ob.findElement(By.xpath("//button[@id='single-button']")).click();
 			
