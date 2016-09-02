@@ -78,12 +78,7 @@ public class Search17 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-side-menu__link']"), 30);
-			waitForAjax(ob);
-     			List<WebElement> content_type_tiles = ob.findElements(By
-					.xpath("//a[@class='wui-side-menu__link']"));
-			content_type_tiles.get(1).click();
-			
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 			ob.findElement(By.id("single-button")).click();
 			BrowserWaits.waitTime(4);

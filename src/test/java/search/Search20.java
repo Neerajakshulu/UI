@@ -76,10 +76,7 @@ public class Search20 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 20);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			// waitForAllElementsToBePresent(ob,
 			// By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);
 

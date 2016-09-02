@@ -1,14 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Search"  parallel="tests" thread-count="10">
+<suite name="Search"  parallel="tests" thread-count="5">
 
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Test B1">
+	<test name="Test B1" preserve-order="true">
 		<classes>
-			<class name="search.Search1"></class>
+				<class name="search.Search127"></class>
+				<class name="search.Search129"></class>
+			   <class name="search.Search130"></class>
+		</classes>
+	</test>
+	
+	<test name="Test C1">
+		<classes>
+				<class name="search.Search1"></class>
+				
 		</classes>
 	</test>
 
@@ -607,7 +616,7 @@
 		<classes>
 			<class name="search.Search122"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="TestCase_B123">
 		<classes>
