@@ -109,13 +109,9 @@ public class LoginTR extends TestBase {
 		}
 	}
 
-	public void waitUntilElementClickable(String linkName) {
-		WebDriverWait wait = new WebDriverWait(ob, 10);
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(linkName)));
-	}
-
+	
 	public void logOutApp() throws Exception {
-		BrowserWaits.waitTime(20);
+		BrowserWaits.waitTime(10);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		browserWait.waitUntilText("Sign out");
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
