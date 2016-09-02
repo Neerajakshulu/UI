@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -76,10 +77,10 @@ public class Search34 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 
 			// Clicking on All content result set
-			ob.findElement(By.cssSelector("a[class='wui-side-menu__link']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.cssSelector("button[id='single-button']"), 30);
 
 			// Clicking on the sort by drop down

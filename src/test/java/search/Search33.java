@@ -9,8 +9,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 
@@ -73,9 +75,8 @@ public class Search33 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css")), 30);
 
 			// Clicking on All content result set
-			ob.findElement(By.cssSelector("a[class='wui-side-menu__link']")).click();
-			Thread.sleep(3000);
-
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString())).click();
+			BrowserWaits.waitTime(3);
 			// Finding out the default sort by value for All content set
 			String defaultSortBy = ob
 					.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).getText().substring(9);
