@@ -5,9 +5,14 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="IAM001">
+	<test name="IAM001" preserve-order="true">
 		<classes>
 			<class name="iam.IAM001"></class>
+			<class name="iam.IAM016"></class>
+			<class name="iam.IAM017"></class>
+			<class name="iam.IAM023"></class>
+			<class name="iam.IAM024"></class>
+			<class name="iam.IAM028"></class>
 		</classes>
 	</test>
 
@@ -101,7 +106,7 @@
 	</test>
 
 
-
+<!-- 
 	<test name="IAM016">
 		<classes>
 			<class name="iam.IAM016"></class>
@@ -114,7 +119,7 @@
 			<class name="iam.IAM017"></class>
 		</classes>
 	</test>
-
+ -->
 
 	<test name="IAM018">
 		<classes>
@@ -143,7 +148,7 @@
 			<class name="iam.IAM022"></class>
 		</classes>
 	</test>
-
+<!-- 
 	<test name="IAM023">
 		<classes>
 			<class name="iam.IAM023"></class>
@@ -155,7 +160,7 @@
 			<class name="iam.IAM024"></class>
 		</classes>
 	</test>
-
+ -->
 	<test name="IAM025">
 		<classes>
 			<class name="iam.IAM025"></class>
@@ -174,11 +179,11 @@
 		</classes>
 	</test>
 
-	<test name="IAM028">
+	<!-- <test name="IAM028">
 		<classes>
 			<class name="iam.IAM028"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="IAM029">
 		<classes>
