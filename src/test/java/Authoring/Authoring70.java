@@ -20,7 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring70 extends TestBase {
 
-	private static final String URL = "https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
+	private static final String URL = "/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -70,14 +70,14 @@ public class Authoring70 extends TestBase {
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
-			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
+			pf.getpostRVPageInstance(ob).addExternalLinkComments(host+URL);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 			test.log(LogStatus.INFO, "Added internal link to the comment");
 			try {
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForExternalLink(URL));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForExternalLink(host+URL));
 				test.log(LogStatus.PASS, "Comment is published with internal link");
-				pf.getpostRVPageInstance(ob).clickExternalLinkInComments(URL);
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(URL));
+				pf.getpostRVPageInstance(ob).clickExternalLinkInComments(host+URL);
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(host+URL));
 				test.log(LogStatus.PASS, "Internal links added to comment are working fine");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Internal links added to comment are not working fine");
