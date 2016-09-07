@@ -97,6 +97,7 @@ public class Authoring70 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {
+			
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports

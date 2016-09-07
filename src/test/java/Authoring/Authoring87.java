@@ -54,7 +54,6 @@ public class Authoring87 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
 			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
 			openBrowser();
