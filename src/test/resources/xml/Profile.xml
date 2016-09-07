@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-     <test name="Follow_Other_Profile" preserve-order="true"> 
+<!--      <test name="Follow_Other_Profile" preserve-order="true"> 
 		<parameter name="profileName" value="reddy" /> 
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -383,7 +383,7 @@
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
-	</test>  
+	</test> -->  
 	
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -396,7 +396,7 @@
 		</classes>
 	</test>  
 	
-	<test name="Deep_linking_other_profile">
+	<!-- <test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl" value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e"/>
 		<classes>
 			<class name="Profile.Profile51"></class>
@@ -421,7 +421,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test>  
+	</test> -->  
  
 </suite>
 
