@@ -21,7 +21,6 @@ public class Profile56 extends OnboardingModalsTest {
 	static int status = 1;
 	String[] tests;
 	String[] tests_dec;
-	//static int test_count=0;
 	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -29,15 +28,14 @@ public class Profile56 extends OnboardingModalsTest {
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		rowData = testcase.get(this.getClass().getSimpleName());
 		String var = rowData.getTestcaseId();
 		String dec = rowData.getTestcaseDescription();
 		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
-		extent = ExtentManager.getReporter(filePath);
-		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("Profile");
 		test.log(LogStatus.INFO, tests[0]);
-		//test_count++;
 	}
 
 	/**
