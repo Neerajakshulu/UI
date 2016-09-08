@@ -424,7 +424,7 @@
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
 			<class name="Profile.Profile53"></class>
-		</classes>
+		</classes> 
 	</test>
 
 </suite>
