@@ -296,6 +296,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS("div[class^='modal-dialog'] button[title='Close']"),
 	HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS("div[class='modal-content']"),
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS("button[ng-click='$close()']"),
+	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_FEATURE_IMAGES_CSS("div[class*='user-onboarding-modal__feature']"),
+	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_RECOMMENDED_PEOPLE_CSS("div[class='wui-card__content wui-card--borderless__content']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS("button[ng-click='UserOnboardingProfile.close()']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS("button[ng-click='$dismiss()']"),
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),

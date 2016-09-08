@@ -385,7 +385,7 @@
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
-	</test>
+	</test> 
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -395,6 +395,7 @@
 			<class name="Profile.Profile50"></class>
 			<class name="Profile.Profile54"></class>
 			<class name="Profile.Profile55"></class>
+			<class name="Profile.Profile56"></class>
 		</classes>
 	</test>
 
@@ -424,7 +425,7 @@
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
 			<class name="Profile.Profile53"></class>
-		</classes> 
+		</classes>
 	</test>
 
 </suite>
