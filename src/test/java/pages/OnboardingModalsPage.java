@@ -62,6 +62,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user");
