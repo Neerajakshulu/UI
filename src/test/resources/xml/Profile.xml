@@ -10,15 +10,15 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-<!--      <test name="Follow_Other_Profile" preserve-order="true"> 
-		<parameter name="profileName" value="reddy" /> 
+	<test name="Follow_Other_Profile" preserve-order="true">
+		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
 		</classes>
-	</test> 
+	</test>
 
-	  <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
-	 	<parameter name="searchPeople" value="Ivy"/>
+	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+		<parameter name="searchPeople" value="Ivy" />
 		<classes>
 			<class name="Profile.Profile2"></class>
 		</classes>
@@ -36,31 +36,32 @@
 		<classes>
 			<class name="Profile.Profile4"></class>
 		</classes>
-	</test> 
+	</test>
 
 
 	<test name="Validate_View_Profile">
 		<classes>
 			<class name="Profile.Profile5"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="Update_User_Own_Profile">
-		<parameter name="profileInfo" value="testuser|automation|Testing|Thomson reuters|india" />
+		<parameter name="profileInfo"
+			value="testuser|automation|Testing|Thomson reuters|india" />
 		<classes>
 			<class name="Profile.Profile6"></class>
 		</classes>
-	</test> 
+	</test>
 
 
-    <test name="Validate_Application_Links">
+	<test name="Validate_Application_Links">
 		<parameter name="appLinks"
 			value="Web of Science|EndNote|InCites|ResearcherID" />
 		<classes>
 			<class name="Profile.Profile7"></class>
 		</classes>
 	</test>
- 
+
 	<test name="Validate_Application_Header_and_Footer_Links">
 		<parameter name="appHeadFooterLinks"
 			value="Privacy|Terms of Use|Help &amp; Feedback|Account" />
@@ -244,13 +245,13 @@
 		<classes>
 			<class name="Profile.Profile32"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="Followers_tab_infinite_Scroll">
 		<classes>
 			<class name="Profile.Profile33"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="Following_tab_infinite_Scroll">
 		<classes>
@@ -258,7 +259,7 @@
 		</classes>
 	</test>
 
-	 <test name="Post_like_count">
+	<test name="Post_like_count">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -266,9 +267,9 @@
 		<classes>
 			<class name="Profile.Profile35"></class>
 		</classes>
-	</test>  
+	</test>
 
-	 <test name="Publish_post_timestamp_validation">
+	<test name="Publish_post_timestamp_validation">
 		<parameter name="username" value="projectneon.test@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
@@ -289,7 +290,7 @@
 		<classes>
 			<class name="Profile.Profile38"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="Post_comment_count">
 		<parameter name="username" value="tridlogin@gmail.com" />
@@ -313,19 +314,20 @@
 		<classes>
 			<class name="Profile.Profile41"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="Validate_Profile_First_Last_Names">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
-		<parameter name="firstLastNames" value="+ First Name|+ Last Name|Please enter your first name.|Please enter your last name." />
+		<parameter name="firstLastNames"
+			value="+ First Name|+ Last Name|Please enter your first name.|Please enter your last name." />
 		<parameter name="firstName" value="Chinna" />
-		<parameter name="lastName" value="Putha"  />
+		<parameter name="lastName" value="Putha" />
 		<classes>
 			<class name="Profile.Profile42"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="Validate_Profile_First_Last_Names_fields_max_length">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
@@ -334,39 +336,39 @@
 			<class name="Profile.Profile43"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Validate_Profile_Pic_modal_window_update_and_close">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
 		<classes>
 			<class name="Profile.Profile44"></class>
 		</classes>
-	</test> 
-	
-	
+	</test>
+
+
 	<test name="Validate_Profile_Pic_modal_window_cancel">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
 		<classes>
 			<class name="Profile.Profile45"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="Profile_call_to_action_country">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
 		<classes>
 			<class name="Profile.Profile46"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="Profile_call_to_action_summary">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="Profile.Profile47"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="Profile_call_to_action_Add_a_Topic">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
@@ -374,54 +376,56 @@
 		<classes>
 			<class name="Profile.Profile48"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="Deep_linking_own_profile">
 		<parameter name="username" value="projectneon.test2@gmail.com" />
 		<parameter name="password" value="Neon@123" />
-		<parameter name="deepLinkUrl" value="/#/profile/"/>
+		<parameter name="deepLinkUrl" value="/#/profile/" />
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
-	</test> -->  
-	
+	</test>
+
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
 		<parameter name="password" value="Neon@123" />
-		<parameter name="truid" value="e95006e0-70e0-11e6-be2c-7129e85cb017"/>
+		<parameter name="truid" value="e95006e0-70e0-11e6-be2c-7129e85cb017" />
 		<classes>
 			<class name="Profile.Profile50"></class>
 			<class name="Profile.Profile54"></class>
 			<class name="Profile.Profile55"></class>
 		</classes>
-	</test>  
-	
-	<!-- <test name="Deep_linking_other_profile">
-		<parameter name="deepLinkUrl" value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e"/>
+	</test>
+
+	<test name="Deep_linking_other_profile">
+		<parameter name="deepLinkUrl"
+			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
 			<class name="Profile.Profile51"></class>
 		</classes>
-	</test>   
-	
+	</test>
+
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
 		<parameter name="username" value="testing.prasadreddy@gmail.com" />
 		<parameter name="password" value="likhithreddy@123" />
-		<parameter name="deepLinkUrl" value="/#/profile/"/>
+		<parameter name="deepLinkUrl" value="/#/profile/" />
 		<classes>
 			<class name="Profile.Profile52"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
 		<parameter name="username" value="testing.prasadreddy@gmail.com" />
 		<parameter name="password" value="likhithreddy@123" />
-		<parameter name="deepLinkUrl" value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e"/>
+		<parameter name="deepLinkUrl"
+			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test> -->  
- 
+	</test>
+
 </suite>
 
