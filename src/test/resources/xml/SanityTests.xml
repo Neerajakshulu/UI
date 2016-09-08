@@ -95,13 +95,13 @@
 		</classes>
 	</test>
 
-	<!-- Duplicated
+
 	 <test name="Search36">
 		<classes>
 			<class name="search.Search36"></class>
 		</classes>
 	</test>
-	 -->
+
 
 	<test name="Search91">
 		<classes>

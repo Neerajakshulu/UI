@@ -20,7 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring87 extends TestBase {
 
-	private static final String URL = "https://dev-stable.1p.thomsonreuters.com/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
+	private static final String URL = "/#/profile/f8606cb6-8765-4ad4-878b-baf1175b9a52";
 	static int status = 1;
 	PageFactory pf = new PageFactory();
 
@@ -54,7 +54,6 @@ public class Authoring87 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
 		try {
 			String postString = "PostCreationTest" + RandomStringUtils.randomNumeric(10);
 			openBrowser();
@@ -75,18 +74,18 @@ public class Authoring87 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Title");
 			pf.getProfilePageInstance(ob).enterPostContent(postString);
 			test.log(LogStatus.INFO, "Entered Post Content");
-			pf.getProfilePageInstance(ob).addExternalLinkToPostContent(URL);
+			pf.getProfilePageInstance(ob).addExternalLinkToPostContent(host+URL);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
 			try {
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(URL));
-				test.log(LogStatus.PASS, "Post is published with external link");
-				pf.getpostRVPageInstance(ob).clickExternalLinkInPostContent(URL);
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(URL));
-				test.log(LogStatus.PASS, "External links added to post are working fine");
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(host+URL));
+				test.log(LogStatus.PASS, "Post is published with internal link");
+				pf.getpostRVPageInstance(ob).clickExternalLinkInPostContent(host+URL);
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(host+URL));
+				test.log(LogStatus.PASS, "internal links added to post are working fine");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "External links added to post are not working fine");
+				test.log(LogStatus.FAIL, "internal links added to post are not working fine");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;

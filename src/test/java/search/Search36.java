@@ -67,8 +67,6 @@ public class Search36 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -76,26 +74,22 @@ public class Search36 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']"), 30);
-			Thread.sleep(2000);
-
+		
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector("li[ng-click='vm.updateSearchType(\"ARTICLES\")']")).click();
-			Thread.sleep(3000);
-
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
+			ob.findElement(By.cssSelector("button[id='single-button']")).click();
 			Thread.sleep(2000);
 
 			// Finding out the types by which we can sort the Article content
 			// results
 			List<WebElement> content_types = ob
-					.findElements(By.cssSelector("a[event-category='searchresult-ck-sort']"));
+					.findElements(By.cssSelector("li[class='search-sort-dropdown__menu-item ng-scope']"));
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();
 			String text4 = content_types.get(3).getText();
-
+        
 			// Comparing the the label of the type of sort item
 			if (!text1.equalsIgnoreCase("Relevance") || !text2.equalsIgnoreCase("Times Cited")
 					|| !text3.equalsIgnoreCase("Publication Date (Newest)")
