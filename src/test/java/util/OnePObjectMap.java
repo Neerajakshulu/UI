@@ -300,6 +300,10 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_RECOMMENDED_PEOPLE_CSS("div[class='wui-card__content wui-card--borderless__content']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS("button[ng-click='UserOnboardingProfile.close()']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS("button[ng-click='$dismiss()']"),
+	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS("ne-user-profile-image[has-image='UserOnboardingProfile.profile.hasImage'] img"),
+	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS("button[ng-click='UserImageEditButtons.update()']"),
+	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS("button[ng-click='UserImageEditButtons.delete()']"),
+	
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),
 	SEARCH_RESULTS_PAGE_CSS("h2[class='wui-title']"),
