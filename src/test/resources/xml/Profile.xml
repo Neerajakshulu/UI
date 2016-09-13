@@ -404,8 +404,10 @@
 		<parameter name="username" value="4aehgq+9snc49cwqlvzc@sharklasers.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="truid" value="16c824e0-78e8-11e6-8fe8-05c6039ea6ae" />
+		<parameter name="placeholderValues" value="+ First Name|+ Last Name|+ Title or Role|+ Institution|+ Country" />
 		<classes>
 			<class name="Profile.Profile57"></class>
+			<class name="Profile.Profile58"></class>
 		</classes>
 	</test>
 
@@ -416,7 +418,7 @@
 			<class name="Profile.Profile51"></class>
 		</classes>
 	</test>
-
+ 
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
 		<parameter name="username" value="testing.prasadreddy@gmail.com" />
