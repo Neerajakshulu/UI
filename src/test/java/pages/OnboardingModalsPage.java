@@ -25,6 +25,12 @@ import util.OnePObjectMap;
  */
 public class OnboardingModalsPage extends TestBase {
 	
+	static String firstName;
+	static String lastName;
+	static String role;
+	static String metaData[];
+	static String topicLists[];
+	
 	public OnboardingModalsPage(WebDriver ob) {
 		this.ob = ob;
 		pf = new PageFactory();
@@ -294,8 +300,8 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Profile info/metadata fields doesn't have any placeholder values");
 			}
 			
-			String firstName=RandomStringUtils.randomAlphabetic(10);
-			String lastName=RandomStringUtils.randomAlphabetic(20);
+			 firstName=RandomStringUtils.randomAlphabetic(10);
+			 lastName=RandomStringUtils.randomAlphabetic(20);
 			
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS, firstName);
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,lastName);
@@ -332,6 +338,156 @@ public class OnboardingModalsPage extends TestBase {
 
 	}
 	
+	
+	
+	/**
+	 * Method for Validate profile name profile onboarding modal ,
+	 * @throws Exception, When profile name is not updated 
+	 */
+	public void updateMetadataOnProfileOnboardingModal(String profileMetaData,String topics) throws Exception {
+
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+		metaData=profileMetaData.split("\\|");
+		
+		try {
+			profileOnboardingModal();
+			
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS);
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS);
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS);
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+			
+			
+			firstName=RandomStringUtils.randomAlphabetic(10);
+			lastName=RandomStringUtils.randomAlphabetic(20);
+			role=RandomStringUtils.randomAlphabetic(5);
+			
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS, firstName);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS,lastName);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS,role);
+			
+			////select primary institution
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS,
+					metaData[0]);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS);
+			BrowserWaits.waitTime(4);
+			List<WebElement> piTypeaheads = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).findElements(By.tagName("li"));
+			for (WebElement typeAhead : piTypeaheads) {
+				if (StringUtils.containsIgnoreCase(typeAhead.getText(), metaData[0].trim())) {
+					typeAhead.click();
+					BrowserWaits.waitTime(2);
+					break;
+				}
+			}
+			
+			//select country
+			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS,
+					metaData[1]);
+			BrowserWaits.waitTime(4);
+			List<WebElement> countyTypeaheads = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PI_TYPEAHEAD_CSS).get(1)
+					.findElements(By.tagName("li"));
+			for (WebElement typeAhead : countyTypeaheads) {
+				if (typeAhead.getText().equalsIgnoreCase(metaData[1])) {
+					//typeAhead.click();
+					jsClick(ob, typeAhead);
+					BrowserWaits.waitTime(2);
+					break;
+				}
+			}
+			
+			//Add a Topic
+			List<WebElement> addedTopics = pf.getBrowserActionInstance(ob).getElements(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+			if (addedTopics.size() > 0) {
+				for (WebElement addedTopic : addedTopics) {
+					addedTopic.click();
+					BrowserWaits.waitTime(2);
+				}
+			}
+			topicLists = topics.split("\\|");
+			for (String topicList : topicLists) {
+				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS,
+						topicList);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+				List<WebElement> topicTypeahead = pf.getBrowserActionInstance(ob).getElements(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+				BrowserWaits.waitTime(2);
+				pf.getBrowserActionInstance(ob).jsClick(
+						topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))));
+				// topicTypeahead.get(Integer.parseInt(RandomStringUtils.randomNumeric(1))).click();
+				BrowserWaits.waitTime(2);
+			}
+
+			List<WebElement> newlyAddedTopics = pf.getBrowserActionInstance(ob).getElements(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+			if (!(newlyAddedTopics.size() == topicLists.length)) {
+				throw new Exception("Topics not added for Interests and Skills");
+			}
+			
+			
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			BrowserWaits.waitTime(2);
+			
+			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			logger.info("onboarding_modals size-->"+onboarding_modals.size());
+			if(!(onboarding_modals.size()==0)) {
+				throw new Exception("Onboarding Modals are not closed");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			
+		} catch (Exception e) {
+			throw new Exception("Profile Onboarding Modals are not displayed for First time user");
+		}
+
+	}
+	
+	
+	/**
+	 * Method for Validate profile onboarding modal ,
+	 * @throws Exception, When profile onboarding modal not having profile info
+	 */
+	public void validateProfileOnboardingModalDataOnProfilePage() throws Exception {
+		try{
+			
+			pf.getHFPageInstance(ob).clickOnProfileLink();
+		
+			boolean isProfileEditable=pf.getProfilePageInstance(ob).isProfileIncomplete();
+			logger.info("is Profile editable-->"+isProfileEditable);
+			
+			if(isProfileEditable) {
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
+				BrowserWaits.waitTime(3);
+			}
+			
+			List<String> profileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();
+			
+			logger.info("profile metadata"+profileData);
+			
+			boolean isMetadataUpdated=(profileData.contains(firstName+" "+lastName) && profileData.contains(role)
+						&& profileData.contains(metaData[0]) && profileData.contains(metaData[1]));
+			
+			logger.info("is profile data updated -->"+isMetadataUpdated);
+			List<WebElement> newlyAddedTopics = pf.getBrowserActionInstance(ob).getElements(
+					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS);
+			logger.info("Topics size-->"+newlyAddedTopics.size());
+			if (!((newlyAddedTopics.size() == topicLists.length) && isMetadataUpdated)) {
+				throw new Exception("Profile info/metadat and Topics are not updated");
+			}
+		
+		  } catch (Exception e) {
+			throw new Exception("Profile Onboarding Modals are not displayed for First time user");
+		  }
+	}
 	
 	/**
 	 * Method for Validate profile onboarding modal ,
