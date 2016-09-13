@@ -95,6 +95,30 @@ public class OnboardingModalsPage extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for Close[X] Welcome onboarding modal ,
+	 * @throws Exception, When Welcome onboarding modal not closed
+	 */
+	public void welcomeOnboardingModalClose() throws Exception {
+
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
+					"Discover articles, patents, and community contributions");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+		} catch (Exception e) {
+			throw new Exception("welcome onboarding modal not closed");
+		}
+
+	}
 	
 	/**
 	 * Method for Close[X] profile onboarding modal ,
