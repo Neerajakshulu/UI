@@ -20,6 +20,7 @@ public class PageFactory {
 	private LoginTR loginTR = null;
 	private Authoring authoring = null;
 	private OnboardingModalsPage onboarding=null;
+	private AccountPage accountPage=null;
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -75,6 +76,10 @@ public class PageFactory {
 
 	}
 
+	public void setHFPageInstance(HeaderFooterLinksPage obj) {
+		hfPage =obj;
+			}
+
 	public BrowserAction getBrowserActionInstance(WebDriver ob) {
 		if (browserAction == null) {
 			browserAction = new BrowserAction(ob);
@@ -111,6 +116,11 @@ public class PageFactory {
 
 	}
 	
+	public void setLoginTRInstance(LoginTR obj) {
+		loginTR =obj;
+		}
+
+	
 	public OnboardingModalsPage getOnboardingModalsPageInstance(WebDriver ob) {
 		if (onboarding == null) {
 			onboarding = new OnboardingModalsPage(ob);
@@ -119,5 +129,31 @@ public class PageFactory {
 		return onboarding;
 
 	}
+	
+	public AccountPage getAccountPageInstance(WebDriver ob) {
+		if (accountPage == null) {
+			accountPage = new AccountPage(ob);
+		}
 
+		return accountPage;
+
+	}
+	public void setAccountPageInstance(AccountPage obj) {
+		accountPage =obj;
+		}
+
+	
+	public void clearAllPageObjects(){
+		accountPage=null;
+		loginTR=null;
+		onboarding=null;
+		authoring=null;
+		browserWaits=null;
+		browserAction=null;
+		hfPage=null;
+		searchProfilePage=null;
+		profilePage=null;
+		postRVPage=null;
+		WatchlistPage=null;
+	}
 }
