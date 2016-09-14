@@ -119,7 +119,7 @@ static int status = 1;
 			test.log(LogStatus.INFO, "Navigate to Neon application from EndNoteWeb using Feedback link");
 			pf.getOnboardingModalsPageInstance(ob).validateENWToNeonUsingFlyoutLinks(enwProfileFlyout, link);
 			test.log(LogStatus.INFO, "logout from the Application");
-			closeBrowser();
+			closeBrowser(); 
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "ENW to Neon navigation using Feedback link not done");

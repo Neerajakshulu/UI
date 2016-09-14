@@ -463,7 +463,7 @@
 		<classes>
 			<class name="Profile.Profile51"></class>
 		</classes>
-	</test>
+	</test> 
  
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />

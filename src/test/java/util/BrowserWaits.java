@@ -132,7 +132,7 @@ public class BrowserWaits extends TestBase {
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
-				public Boolean apply(WebDriver d) {
+				public Boolean apply(WebDriver d) { 
 					try {
 						return Boolean.valueOf(element == null || !element.isDisplayed());
 					} catch (Exception e) {

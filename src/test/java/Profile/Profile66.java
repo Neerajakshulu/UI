@@ -128,7 +128,7 @@ static int status = 1;
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
-			ErrorUtil.addVerificationFailure(t);
+			ErrorUtil.addVerificationFailure(t); 
 			test.log(
 					LogStatus.INFO,
 					"Snapshot below: "

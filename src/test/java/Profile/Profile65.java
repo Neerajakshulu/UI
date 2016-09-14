@@ -138,7 +138,7 @@ static int status = 1;
 		}
 	}
 	
-	
+	 
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 * @throws Exception 

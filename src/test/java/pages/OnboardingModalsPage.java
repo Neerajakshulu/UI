@@ -748,7 +748,7 @@ public class OnboardingModalsPage extends TestBase {
 		Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
 		if(link.equalsIgnoreCase("Feedback")) {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Feedback or questions about EndNote?", "Send feedback to the EndNote team", "Report a problem or submit a support request");
-		}
+		} 
 		
 		if(link.equalsIgnoreCase("Privacy")) {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement", "Scope", "Highlights", "Third party services");
