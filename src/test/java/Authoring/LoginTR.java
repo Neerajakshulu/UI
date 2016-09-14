@@ -74,6 +74,10 @@ public class LoginTR extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 		
+		closeOnBoardingModal();
+	}
+
+	private void closeOnBoardingModal() throws Exception, InterruptedException {
 		List<WebElement> onboardingStatus=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->"+onboardingStatus.size());
 		
@@ -119,11 +123,16 @@ public class LoginTR extends TestBase {
 
 	}
 	
-	public void loginWithLinkedInCredentials(String username, String pwd) {
+	public void loginWithLinkedInCredentials(String username, String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString())).click();
 
+		signInToLinkedIn(username, pwd);
+		closeOnBoardingModal();
+	}
+
+	public void signInToLinkedIn(String username, String pwd) {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -132,11 +141,16 @@ public class LoginTR extends TestBase {
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
 	}
-	public void loginWithFBCredentials(String username, String pwd) {
+	public void loginWithFBCredentials(String username, String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
 
+		signInToFacebook(username, pwd);
+		closeOnBoardingModal();
+	}
+
+	public void signInToFacebook(String username, String pwd) {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -217,5 +231,17 @@ public class LoginTR extends TestBase {
 		}
 		
 		return driver;
+	}
+	
+	public String clickOnLinkButtonInLoginPage(){
+	
+		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 60);
+		WebElement linkButton=ob.findElement(By.cssSelector("button[ng-click='vm.idpLogin()']"));
+		String linkName=linkButton.getText();
+		linkButton.click();
+		
+		if(linkName.contains("Facebook"))return "Facebook";
+		else if (linkName.contains("LinkedIn")) return "LinkedIn";
+		else return null;
 	}
 }
