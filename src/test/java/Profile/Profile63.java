@@ -55,7 +55,7 @@ static int status = 1;
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			ob.navigate().to(System.getProperty("host"));
+			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to ENW Application");
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(username, password);
