@@ -81,12 +81,13 @@ static int status = 1;
 	 * @throws Exception, 
 	 */
 	@Test(dependsOnMethods = "testLoginEndNoteApplication")
-	public void validateENWProfileFlyout() throws Exception {
+	@Parameters("enwProfileFlyout")
+	public void validateENWProfileFlyout(String enwProfileFlyout) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Validate ENW page for Market Test user");
 			pf.getOnboardingModalsPageInstance(ob).ENWToNeonNavigationScreenForMarketTestUser();
 			test.log(LogStatus.INFO, "Validate ENW Profile flyout");
-			pf.getOnboardingModalsPageInstance(ob).validateENWProfileFlyout();
+			pf.getOnboardingModalsPageInstance(ob).validateENWProfileFlyout(enwProfileFlyout);
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "ENW to Neon navigation using Project Neon link not done");
@@ -111,7 +112,7 @@ static int status = 1;
 	 * @throws Exception, 
 	 */
 	@Test(dependsOnMethods = "validateENWProfileFlyout")
-	public void validateENWToNeonUsingProfileLink() throws Exception {
+	public void validateENWToNeonUsingAccountLink() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Navigate to Neon application from EndNoteWeb using Account link for First time users");
 			test.log(LogStatus.INFO, "Verify onboarding modals are dispalyed first time users");

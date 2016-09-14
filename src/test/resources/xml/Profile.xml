@@ -419,6 +419,7 @@
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
 		<classes>
 			<class name="Profile.Profile61"></class>
 			<class name="Profile.Profile62"></class>

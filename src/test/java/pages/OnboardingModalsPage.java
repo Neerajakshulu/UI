@@ -622,11 +622,26 @@ public class OnboardingModalsPage extends TestBase {
 	 * Method 
 	 * @throws Exception, 
 	 */
-	public void validateENWProfileFlyout() throws Exception {
+	public void validateENWProfileFlyout(String enwProfileFlyout) throws Exception {
+		String enwProfile[]=enwProfileFlyout.split("\\|");
+		List<String> enwFlyout=Arrays.asList(enwProfile);
+		List<String> profileFlyout= new ArrayList<String>();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_IMAGE_XPATH);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_HEADER_CSS);
+		String profileMetadata=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_HEADER_CSS).findElement(By.tagName("span")).getText();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_LINKS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Privacy","Terms of use","Feedback","Sign out");
+		List<WebElement> enwProfileFlyoutLinks=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_LINKS_CSS).findElements(By.tagName("a"));
+		for(WebElement flyout:enwProfileFlyoutLinks) {
+			profileFlyout.add(flyout.getText());
+		}
+		logger.info("profile status-->"+profileMetadata.isEmpty());
+		logger.info("profile flyout1 input-->"+enwFlyout);
+		logger.info("profile flyout2-->"+profileFlyout);
+		
+		if(!(!profileMetadata.isEmpty() && profileFlyout.containsAll(enwFlyout))) {
+			throw new Exception("Profile Flyout info not displayed in ENW");
+		}
 	}
 	
 	

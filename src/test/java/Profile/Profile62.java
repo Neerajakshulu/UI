@@ -81,12 +81,13 @@ static int status = 1;
 	 * @throws Exception, 
 	 */
 	@Test(dependsOnMethods = "testLoginEndNoteApplication")
-	public void validateENWProfileFlyout() throws Exception {
+	@Parameters("enwProfileFlyout")
+	public void validateENWProfileFlyout(String enwProfileFlyout) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Validate ENW page for Market Test user");
 			pf.getOnboardingModalsPageInstance(ob).ENWToNeonNavigationScreenForMarketTestUser();
 			test.log(LogStatus.INFO, "Validate ENW Profile flyout");
-			pf.getOnboardingModalsPageInstance(ob).validateENWProfileFlyout();
+			pf.getOnboardingModalsPageInstance(ob).validateENWProfileFlyout(enwProfileFlyout);
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "ENW to Neon navigation using Project Neon link not done");
