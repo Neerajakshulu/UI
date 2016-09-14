@@ -314,10 +314,11 @@ public enum OnePObjectMap {
 	ENW_HOME_PROFILE_FLYOUT_HEADER_CSS("li[class='dropdown-header'] a"),
 	ENW_HOME_PROFILE_FLYOUT_LINKS_CSS("li[class='profilelinks']"),
 	ENW_HOME_PROFILE_FLYOUT_ACCOUNT_LINK("Account"),
+	ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK("Feedback"),
+	ENW_HOME_PROFILE_FLYOUT_SIGNOUT_LINK("Sign out"),
 	NEON_TO_ENW_BACKTOENDNOTE_LINK("< Back to EndNote"),
+	NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS("div[class='wui-spinner__circle wui-spinner__circle--delayed']")
 	;
-
-	
 	
 	private String locator;
 

@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
- 	<!-- <test name="Follow_Other_Profile" preserve-order="true">
+ 	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -385,7 +385,7 @@
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
-	</test>   -->
+	</test>  
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -426,8 +426,38 @@
 			<class name="Profile.Profile63"></class>
 		</classes>
 	</test>
+	
+	<test name="ENW_to_Neon_with_market_test_groups_using_feedback_link" >
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Feedback"/>
+		<classes>
+			<class name="Profile.Profile64"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW_to_Neon_with_market_test_groups_using_privacy_link" >
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Privacy"/>
+		<classes>
+			<class name="Profile.Profile65"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW_to_Neon_with_market_test_groups_using_TersofUse_link">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Terms of use"/>
+		<classes>
+			<class name="Profile.Profile66"></class>
+		</classes>
+	</test>
 
-	<!--  <test name="Deep_linking_other_profile">
+	 <test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
@@ -454,7 +484,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test>  -->
+	</test> 
 
 </suite>
 

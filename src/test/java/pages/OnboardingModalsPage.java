@@ -727,5 +727,43 @@ public class OnboardingModalsPage extends TestBase {
 		}
 
 	}
+	
+	
+	/**
+	 * Method ,
+	 * @throws Exception, 
+	 */
+	public void validateENWToNeonUsingFlyoutLinks(String enwProfileFlyout,String link) throws Exception {
+		List<WebElement> enwProfileFlyoutLinks=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_LINKS_CSS).findElements(By.tagName("a"));
+			for(WebElement flyout:enwProfileFlyoutLinks) {
+				if(flyout.getText().equalsIgnoreCase(link)){
+					flyout.click();
+					break;
+				}
+			}
+		BrowserWaits.waitTime(2);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK);
+		logger.info("Navigate to ENW-->"+pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+		Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+		if(link.equalsIgnoreCase("Feedback")) {
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Feedback or questions about EndNote?", "Send feedback to the EndNote team", "Report a problem or submit a support request");
+		}
+		
+		if(link.equalsIgnoreCase("Privacy")) {
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement", "Scope", "Highlights", "Third party services");
+		}
+		
+		if(link.equalsIgnoreCase("Terms of Use")) {
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Terms of Use", "These Terms of Use shall govern your use of the online service known as");
+		}
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+		validateENWProfileFlyout(enwProfileFlyout);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_SIGNOUT_LINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+	}
 
 }

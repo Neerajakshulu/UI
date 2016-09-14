@@ -134,9 +134,9 @@ public class BrowserWaits extends TestBase {
 
 				public Boolean apply(WebDriver d) {
 					try {
-						return Boolean.valueOf(element != null && !element.isDisplayed());
+						return Boolean.valueOf(element == null || !element.isDisplayed());
 					} catch (Exception e) {
-						return Boolean.valueOf(false);
+						return Boolean.valueOf(true);
 					}
 				}
 			});
