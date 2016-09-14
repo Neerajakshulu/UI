@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,11 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -79,7 +85,7 @@ public class TestBase {
 
 	public static boolean isInitalized = false;
 
-	public WebDriver ob = null;
+	public  WebDriver ob = null;
 	protected ExtentReports extent;
 	protected final String filePath = "testReports/test_report.html";
 	protected ExtentTest test;
@@ -101,6 +107,16 @@ public class TestBase {
 
 	public PageFactory pf = new PageFactory();
 	public String suiteName;
+	
+	protected static final String COLON = ":";
+	protected static final String HTTP = "http://";
+	protected static final String EUREKA_APP_NAME = "name";
+	protected static final String EUREKA_HOST_NAME = "hostName";
+	protected static final String EUREKA_IP_ADDRESS = "ipAddr";
+	protected static final String EUREKA_HOST_PORT = "port";
+	protected static final String EUREKA_VIP_ADDRESS = "vipAddress";
+	protected static final String EUREKA_DC_NAME = "Amazon";
+	protected Map<String, String> appHosts = new HashMap<String, String>();	
 
 	@BeforeSuite
 	public void beforeSuite(ITestContext ctx) throws Exception {
@@ -1619,4 +1635,71 @@ public class TestBase {
 			logger.info(t.getMessage());
 		}
 	}
+	
+	
+	//Rest Assured configuratoin
+	/**
+	 * Read host names across all applications for the given environment and load them to map.
+	 * 
+	 * @param env environment for which the tests connect
+	 * @throws Exception
+	 */
+	protected void getAllAppHostsForGivenEnv(String eurekaURL,
+			String env,
+			String local) throws Exception {
+		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
+		String appName = null;
+		String hostName = null;
+		String port = null;
+
+		URL url = new URL(eurekaURL);
+		URLConnection conn = url.openConnection();
+
+		XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
+
+		while (eventReader.hasNext()) {
+			XMLEvent event = eventReader.nextEvent();
+
+			// reach the start of an item
+			if (event.isStartElement()) {
+
+				StartElement startElement = event.asStartElement();
+
+				// Get app name
+				if (startElement.getName().getLocalPart().equals(EUREKA_APP_NAME)) {
+					event = eventReader.nextEvent();
+					if (!event.asCharacters().getData().equalsIgnoreCase(EUREKA_DC_NAME))
+						appName = event.asCharacters().getData();
+				}
+
+				// Get IP Address
+				if (startElement.getName().getLocalPart().equals(EUREKA_HOST_NAME) && local.equalsIgnoreCase("Y")) {
+					event = eventReader.nextEvent();
+					hostName = event.asCharacters().getData();
+				}
+
+				if (startElement.getName().getLocalPart().equals(EUREKA_IP_ADDRESS) && local.equalsIgnoreCase("N")) {
+					event = eventReader.nextEvent();
+					hostName = event.asCharacters().getData();
+				}
+
+				// Get port
+				if (startElement.getName().getLocalPart().equals(EUREKA_HOST_PORT)) {
+					event = eventReader.nextEvent();
+					port = event.asCharacters().getData();
+				}
+
+				// Get vip address
+				if (startElement.getName().getLocalPart().equals(EUREKA_VIP_ADDRESS)) {
+					event = eventReader.nextEvent();
+					if (event.asCharacters().getData().endsWith(env))
+						appHosts.put(appName, HTTP + hostName + COLON + port);
+				}
+
+			}
+		}
+	}
+
+	
 }

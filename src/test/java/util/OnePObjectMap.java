@@ -307,6 +307,14 @@ public enum OnePObjectMap {
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),
 	SEARCH_RESULTS_PAGE_CSS("h2[class='wui-title']"),
+	ENW_HOME_AGREE_CSS("input[title='I Agree']"),
+	ENW_HOME_CONTINUE_XPATH("//div[@id='continue']"),
+	ENW_HOME_PROFILE_IMAGE_XPATH("//img[@id='proSmallImg']"),
+	ENW_HOME_HEADER_NEON_PLINK("Project Neon"),
+	ENW_HOME_PROFILE_FLYOUT_HEADER_CSS("li[class='dropdown-header'] a"),
+	ENW_HOME_PROFILE_FLYOUT_LINKS_CSS("li[class='profilelinks']"),
+	ENW_HOME_PROFILE_FLYOUT_ACCOUNT_LINK("Account"),
+	NEON_TO_ENW_BACKTOENDNOTE_LINK("< Back to EndNote"),
 	;
 
 	

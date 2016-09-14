@@ -11,6 +11,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import base.TestBase;
 import util.BrowserWaits;
@@ -45,6 +46,33 @@ public class OnboardingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 	}
 
+	
+	/**
+	 * Method 
+	 * @throws Exception, 
+	 */
+	public void ENWSTeamLogin(String userName,String password) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
+		
+		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,userName);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS,password);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		} catch (Exception e) {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		}
+		BrowserWaits.waitTime(4);
+	}
+	
 	/**
 	 * Method for Validate Onboarding modals,
 	 * @throws Exception, When Onboarding modals are not present for first time users
@@ -538,6 +566,151 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Let’s learn about you","Interests and Skills","Done");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Add a Topic","You can always complete your profile later from  your Profile page.");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:","Information you add to your profile will be seen by others.");
+	}
+	
+	
+	/**
+	 * Method for Validate Onboarding modals,
+	 * @throws Exception, When Onboarding modals are not present for first time users
+	 */
+	public void validateENWToNeonOnboardingModals() throws Exception {
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_HEADER_NEON_PLINK);
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
+					"Discover articles, patents, and community contributions");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			BrowserWaits.waitTime(2);
+			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			logger.info("onboarding_modals size-->"+onboarding_modals.size());
+			if(!(onboarding_modals.size()==0)) {
+				throw new Exception("Onboarding Modals are not closed");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			
+		} catch (Exception e) {
+			throw new Exception("Onboarding Modals are not displayed for First time user");
+		}
+
+	}
+	
+	
+	/**
+	 * Method 
+	 * @throws Exception, 
+	 */
+	public void ENWToNeonNavigationScreenForMarketTestUser() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_PROFILE_IMAGE_XPATH);
+		
+	}
+	
+	/**
+	 * Method 
+	 * @throws Exception, 
+	 */
+	public void validateENWProfileFlyout() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_IMAGE_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_HEADER_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_LINKS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Privacy","Terms of use","Feedback","Sign out");
+	}
+	
+	
+	/**
+	 * Method ,
+	 * @throws Exception, 
+	 */
+	public void validateENWToNeonOnboardingModalsUsingProfileLink() throws Exception {
+
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_HEADER_CSS).findElement(By.tagName("img")).click();
+		BrowserWaits.waitTime(2);
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
+					"Discover articles, patents, and community contributions");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			BrowserWaits.waitTime(6);
+			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			logger.info("onboarding_modals size-->"+onboarding_modals.size());
+			if(!(onboarding_modals.size()==0)) {
+				throw new Exception("Onboarding Modals are not closed");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Activity", "Interests and Skills", "Posts", "Comments",
+					"Followers", "Following", "Watchlists", "Add a Topic");
+			logger.info("Navigate to ENW-->"+pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+			Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+		} catch (Exception e) {
+			throw new Exception("Onboarding Modals are not displayed for First time user using Account link for Market Test group");
+		}
+
+	}
+	
+	
+	/**
+	 * Method ,
+	 * @throws Exception, 
+	 */
+	public void validateENWToNeonOnboardingModalsUsingAccountLink() throws Exception {
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_ACCOUNT_LINK);
+		BrowserWaits.waitTime(2);
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
+					"Discover articles, patents, and community contributions");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			BrowserWaits.waitTime(2);
+			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			logger.info("onboarding_modals size-->"+onboarding_modals.size());
+			if(!(onboarding_modals.size()==0)) {
+				throw new Exception("Onboarding Modals are not closed");
+			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK);
+			logger.info("Navigate to ENW-->"+pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+			Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Account", "Manage accounts", "Communications", "View additional email preferences");
+			
+		} catch (Exception e) {
+			throw new Exception("Onboarding Modals are not displayed for First time user login with Account link for Market test group");
+		}
+
 	}
 
 }

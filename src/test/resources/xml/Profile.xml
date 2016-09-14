@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	<test name="Follow_Other_Profile" preserve-order="true">
+ 	<test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -407,16 +407,26 @@
 		<parameter name="placeholderValues" value="+ First Name|+ Last Name|+ Title or Role|+ Institution|+ Country" />
 		<parameter name="profileMetaData" value="Jawaharlal Nehru University|India" />
 		<parameter name="topics" value="tes|aut|dru" />
-		
 		<classes>
 			<class name="Profile.Profile57"></class>
 			<class name="Profile.Profile58"></class>
 			<class name="Profile.Profile59"></class>
 			<class name="Profile.Profile60"></class>
 		</classes>
+	</test> 
+	
+	<test name="ENW_to_Neon_Onboarding_with_market_test_groups" preserve-order="true" parallel="false">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
+		<classes>
+			<class name="Profile.Profile61"></class>
+			<class name="Profile.Profile62"></class>
+			<class name="Profile.Profile63"></class>
+		</classes>
 	</test>
 
-	<test name="Deep_linking_other_profile">
+	 <test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
@@ -443,7 +453,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test>
+	</test> 
 
 </suite>
 
