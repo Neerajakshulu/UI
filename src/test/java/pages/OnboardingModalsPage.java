@@ -657,7 +657,7 @@ public class OnboardingModalsPage extends TestBase {
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
 
-		/*try {*/
+		try {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
@@ -680,9 +680,9 @@ public class OnboardingModalsPage extends TestBase {
 					"Followers", "Following", "Watchlists", "Add a Topic");
 			logger.info("Navigate to ENW-->"+pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
 			Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user using Account link for Market Test group");
-		}*/
+		}
 
 	}
 	
