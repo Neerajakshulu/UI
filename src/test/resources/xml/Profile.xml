@@ -55,8 +55,7 @@
 
 
 	<test name="Validate_Application_Links">
-		<parameter name="appLinks"
-			value="Web of Science|EndNote|InCites|ResearcherID" />
+		<parameter name="appLinks" value="Web of Science|InCites|ResearcherID" />
 		<classes>
 			<class name="Profile.Profile7"></class>
 		</classes>
@@ -427,7 +426,7 @@
 		</classes>
 	</test>
 	
-	<test name="ENW_to_Neon_with_market_test_groups_using_feedback_link" >
+	 <test name="ENW_to_Neon_with_market_test_groups_using_feedback_link" >
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
@@ -457,7 +456,7 @@
 		</classes>
 	</test>
 
-	 <test name="Deep_linking_other_profile">
+	<test name="Deep_linking_other_profile">
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>

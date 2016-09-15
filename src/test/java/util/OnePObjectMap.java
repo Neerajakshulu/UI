@@ -317,6 +317,7 @@ public enum OnePObjectMap {
 	ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK("Feedback"),
 	ENW_HOME_PROFILE_FLYOUT_SIGNOUT_LINK("Sign out"),
 	NEON_TO_ENW_BACKTOENDNOTE_LINK("< Back to EndNote"),
+	NEON_TO_ENW_PLINK("EndNote"),
 	NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS("div[class='wui-spinner__circle wui-spinner__circle--delayed']"), 
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_TEXT_CSS("div[class^='modal-header wui-modal__header']"),
 	;
