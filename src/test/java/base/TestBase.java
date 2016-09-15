@@ -137,7 +137,9 @@ public class TestBase {
 				suiteName = "Watchlist";
 			}
 			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM") ) {
-				if(className.startsWith("ENW")){
+				logger.info("Test - "+className.startsWith("ENW"));
+				
+				if(className.contains("ENW")){
 					if (className.contains("IAM")) {
 						suiteName = "ENWIAM";
 					} else{
