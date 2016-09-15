@@ -303,6 +303,9 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS("ne-user-profile-image[has-image='UserOnboardingProfile.profile.hasImage'] img"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS("button[ng-click='UserImageEditButtons.update()']"),
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS("button[ng-click='UserImageEditButtons.delete()']"),
+	HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS("div[class='modal-content ng-scope'] div[class='wui-input-with-label']"),
+	HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+	
 	
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),

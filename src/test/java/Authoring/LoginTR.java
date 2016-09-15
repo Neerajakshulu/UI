@@ -253,4 +253,22 @@ public class LoginTR extends TestBase {
 		else if (linkName.contains("LinkedIn")) return "LinkedIn";
 		else return null;
 	}
+	
+public void socialLinking() throws Exception{
+		
+		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()),30);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString())).click();
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.cssSelector("div[class='modal-content ng-scope'] div[class='wui-input-with-label'] input")).sendKeys("Happy@123");
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
+		
+	}
+	
+	public void checkLinking() throws Exception{
+		waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),20);
+		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+		browserWait.waitUntilText("Account");
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString())));
+		
+	}
 }
