@@ -53,7 +53,9 @@ public class ENW001 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			
-			ob.get(host+CONFIG.getProperty("enw_url"));
+			logger.info("enw url-->"+host+CONFIG.getProperty("appendENWAppUrl"));
+			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			
 			
 			
 			
