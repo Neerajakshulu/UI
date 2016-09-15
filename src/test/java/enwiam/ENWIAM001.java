@@ -1,4 +1,4 @@
-package enw;
+package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,7 +15,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class ENW001 extends TestBase {
+public class ENWIAM001 extends TestBase {
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -25,14 +25,14 @@ public class ENW001 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 
 	}
 
 	@Test
 	public void testLogin() throws Exception {
 		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -52,7 +52,7 @@ public class ENW001 extends TestBase {
 			clearCookies();
 			
 			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-			
+			//Need to add script code
 			
 			
 			

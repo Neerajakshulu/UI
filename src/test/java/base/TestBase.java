@@ -83,6 +83,7 @@ public class TestBase {
 	public static Xls_Reader watchlistXls = null;
 	public static Xls_Reader notificationxls = null;
 	public static Xls_Reader enwxls = null;
+	public static Xls_Reader enwiamxls = null;
 	public static boolean isInitalized = false;
 
 	public  WebDriver ob = null;
@@ -124,22 +125,28 @@ public class TestBase {
 		logger.info(suiteName + " ui automation start time - " + new Date());
 		if (suiteName.equals("Default suite")) {
 			String className = this.getClass().toString();
-			if (className.contains("notifications")) {
+			if (className.contains("Notifications")) {
 				suiteName = "Notifications";
 			} else if (className.contains("Profile")) {
 				suiteName = "Profile";
 			} else if (className.contains("Authoring")) {
 				suiteName = "Authoring";
-			} else if (className.contains("iam")) {
-				suiteName = "IAM";
-			} else if (className.contains("search")) {
+			} else if (className.contains("Search")) {
 				suiteName = "Search";
-			} else if (className.contains("watchlist")) {
+			} else if (className.contains("Watchlist")) {
 				suiteName = "Watchlist";
 			}
-			else if (className.contains("ENW")) {
-				suiteName = "ENW";
-			}
+			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM") ) {
+				if(className.startsWith("ENW")){
+					if (className.contains("IAM")) {
+						suiteName = "ENWIAM";
+					} else{
+						suiteName = "ENW";
+					}
+				}else{
+					suiteName = "IAM";
+				}
+			} 
 		}
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, suiteName);
@@ -227,6 +234,7 @@ public class TestBase {
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			enwxls = new Xls_Reader("src/test/resources/xls/ENW.xlsx");
+			enwiamxls= new Xls_Reader("src/test/resources/xls/ENWIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -245,6 +253,8 @@ public class TestBase {
 			loadModuleData(watchlistXls.path);
 		}else if(suiteName.equals("ENW")){
 			loadModuleData(enwxls.path);
+		}else if(suiteName.equals("ENWIAM")){
+			loadModuleData(enwiamxls.path);
 		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
@@ -253,6 +263,7 @@ public class TestBase {
 			loadModuleData(watchlistXls.path);
 			loadModuleData(notificationxls.path);
 			loadModuleData(enwxls.path);
+			loadModuleData(enwiamxls.path);
 		}
 		logger.info(suiteName + "---" + testcase.size());
 	}

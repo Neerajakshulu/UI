@@ -35,7 +35,7 @@ public class IAM032 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(var, "Verfiy that user is able to link the social accounts with neon account")
-				.assignCategory("Authoring");
+				.assignCategory("IAM");
 
 	}
 
