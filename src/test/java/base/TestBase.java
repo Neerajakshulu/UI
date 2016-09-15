@@ -82,7 +82,7 @@ public class TestBase {
 	public static Xls_Reader profilexls = null;
 	public static Xls_Reader watchlistXls = null;
 	public static Xls_Reader notificationxls = null;
-
+	public static Xls_Reader enwxls = null;
 	public static boolean isInitalized = false;
 
 	public  WebDriver ob = null;
@@ -223,6 +223,7 @@ public class TestBase {
 			profilexls = new Xls_Reader("src/test/resources/xls/Profile.xlsx");
 			watchlistXls = new Xls_Reader("src/test/resources/xls/Watchlist.xlsx");
 			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
+			enwxls = new Xls_Reader("src/test/resources/xls/ENW.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -239,13 +240,16 @@ public class TestBase {
 			loadModuleData(searchxls.path);
 		} else if (suiteName.equals("Watchlist")) {
 			loadModuleData(watchlistXls.path);
-		} else if (suiteName.equals("Sanity suite")) {
+		}else if(suiteName.equals("ENW")){
+			loadModuleData(enwxls.path);
+		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
 			loadModuleData(profilexls.path);
 			loadModuleData(watchlistXls.path);
 			loadModuleData(notificationxls.path);
+			loadModuleData(enwxls.path);
 		}
 		logger.info(suiteName + "---" + testcase.size());
 	}
@@ -1174,6 +1178,8 @@ public class TestBase {
 			return "src/test/resources/xls/Watchlist.xlsx";
 		else if (ch == 'F')
 			return "src/test/resources/xls/Notifications.xlsx";
+		else if (ch == 'G')
+			return "src/test/resources/xls/ENW.xlsx";
 		else
 			return "No such excel file present";
 

@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IAM" parallel="tests" thread-count="10">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+	
+	<test name="ENW001">
+		<classes>
+			<class name="enw.ENW001"></class>
+		</classes>
+	</test>
+
+	
+
+</suite>
+
