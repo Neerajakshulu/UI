@@ -78,16 +78,25 @@ public class LoginTR extends TestBase {
 	}
 
 	private void closeOnBoardingModal() throws Exception, InterruptedException {
-		List<WebElement> onboardingStatus=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
-		logger.info("onboarding status-->"+onboardingStatus.size());
-		
-		if(onboardingStatus.size() == 1) {
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			BrowserWaits.waitTime(4);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		if (onboardingStatus.size() == 1) {
+
+			String header = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_TEXT_CSS).getText();
+			if (header.contains("Hello")) {
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				BrowserWaits.waitTime(4);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			}
 		}
 	}
 

@@ -56,7 +56,9 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-
+import static com.jayway.restassured.RestAssured.given;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -1724,5 +1726,22 @@ public class TestBase {
 		}
 	}
 
-	
+
+	public String deleteUserAccounts(String emailId) throws Exception {
+
+		String local = null;
+		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
+			local = "N";
+		} else {
+			local = "Y";
+		}
+		getAllAppHostsForGivenEnv("http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.stable.dev", local);
+
+		RequestSpecification reqSpec = given();
+		Response resp;
+		logger.info("host name-->" + appHosts.get("1PAUTH"));
+		resp = reqSpec.when().delete(appHosts.get("1PAUTH") + "/admin/auth/link/accounts/" + emailId);
+		return String.valueOf(resp.getStatusCode());
+
+	}
 }

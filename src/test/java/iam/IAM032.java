@@ -42,7 +42,7 @@ public class IAM032 extends TestBase {
 	@Test
 	public void testInitiatePostCreation() throws Exception {
 		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -53,15 +53,29 @@ public class IAM032 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-
-		loginTofb();
-		linkAccounts("Facebook");
-
-		liginToLinkedIn();
-		linkAccounts("LinkedIn");
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERNAME17"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			loginTofb();
+			linkAccounts("Facebook");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERNAME17"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			loginToLinkedIn();
+			linkAccounts("LinkedIn");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void liginToLinkedIn() throws Exception {
+	private void loginToLinkedIn() throws Exception {
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
@@ -92,7 +106,7 @@ public class IAM032 extends TestBase {
 	}
 
 	private void linkAccounts(String accountType) throws Exception {
-		
+
 		try {
 			openBrowser();
 			maximizeWindow();
@@ -104,17 +118,17 @@ public class IAM032 extends TestBase {
 
 			loginAs("USERNAME17", "PASSWORD17");
 
-			String linkName=pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
-			
+			String linkName = pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
+
 			if (linkName == null) {
-				test.log(LogStatus.FAIL,"Issue with link modal: Neither Facebook nor LinkedIn button is dispalyed");
+				test.log(LogStatus.FAIL, "Issue with link modal: Neither Facebook nor LinkedIn button is dispalyed");
 				ErrorUtil.addVerificationFailure(new Exception("Link Modal is not dispalyed properly"));// testng
-			} else if(!linkName.equalsIgnoreCase(accountType)) {
+			} else if (!linkName.equalsIgnoreCase(accountType)) {
 				test.log(LogStatus.FAIL, "User is asked to link the account again when user has already linked them");
 				ErrorUtil.addVerificationFailure(new Exception("Wrong Link button is dispalyed"));// testng
-				
+
 			}
-			 if (accountType.equalsIgnoreCase("Facebook")) {
+			if (accountType.equalsIgnoreCase("Facebook")) {
 				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("USERNAME17"),
 						LOGIN.getProperty("PASSWORD17"));
 				test.log(LogStatus.PASS, "User is able to link " + accountType + " account to Neon account");
