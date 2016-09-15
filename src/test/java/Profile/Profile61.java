@@ -55,7 +55,8 @@ public class Profile61 extends OnboardingModalsTest {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
+			//Appednd ENW url to neon stable
+			ob.navigate().to(System.getProperty("host")+CONFIG.getProperty("appendENWAppUrl"));
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to ENW Application");
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(username, password);

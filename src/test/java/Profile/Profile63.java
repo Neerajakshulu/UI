@@ -43,7 +43,7 @@ static int status = 1;
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
-			status = 3;
+			status = 3; 
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -55,7 +55,8 @@ static int status = 1;
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
+			//Appednd ENW url to neon stable
+			ob.navigate().to(System.getProperty("host")+CONFIG.getProperty("appendENWAppUrl"));
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to ENW Application");
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(username, password);
