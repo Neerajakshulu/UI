@@ -137,6 +137,9 @@ public class TestBase {
 			} else if (className.contains("watchlist")) {
 				suiteName = "Watchlist";
 			}
+			else if (className.contains("ENW")) {
+				suiteName = "ENW";
+			}
 		}
 		initialize();
 		suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, suiteName);
