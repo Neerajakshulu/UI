@@ -198,6 +198,15 @@ public class SearchResultsPage extends TestBase {
 		}
 	}
 
+	public void clickOnFirstPostTitle() {
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
+		WebElement record = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+
+		jsClick(ob, record.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString())));
+
+	}
+
 	/**
 	 * Method to click on people name in search results page.
 	 * @param title
@@ -283,6 +292,24 @@ public class SearchResultsPage extends TestBase {
 		return true;
 		else
 			return false;
+	}
+	
+	public String clickSendToEndnoteSearchPage() throws InterruptedException {
+		WebElement button = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
+		button.click();
+
+		BrowserWaits.waitTime(5);
+
+		List<WebElement> list = button.findElements(By.cssSelector("span"));
+
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				return we.getText();
+
+			}
+		}
+		return "";
 	}
 
 }

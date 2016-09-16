@@ -12,6 +12,11 @@
 		</classes>
 	</test>
 
+   <test name="ENW002">
+		<classes>
+			<class name="enw.ENW002"></class>
+		</classes>
+	</test>
 
 	
 

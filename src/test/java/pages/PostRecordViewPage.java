@@ -934,4 +934,23 @@ public class PostRecordViewPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']"), 80);
 		return ob.findElement(By.cssSelector("div[class='ne-publication__header'] h3[class*='wui-super-header']")).getText();
 	}
+	
+	public String clickSendToEndnoteRecordViewPage() throws InterruptedException {
+		WebElement button = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
+		button.click();
+
+		BrowserWaits.waitTime(5);
+
+		List<WebElement> list = button.findElements(By.cssSelector("span"));
+
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				return we.getText();
+
+			}
+		}
+		return "";
+	}
+	
 }

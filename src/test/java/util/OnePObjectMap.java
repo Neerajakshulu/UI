@@ -226,7 +226,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_ABSTRACTS_CSS("div[class='wui-card__content'] p"),
 	SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS("a[class='ng-binding ng-scope'][event-category='searchresult-ck-profile']"),
 	SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS("div[class='wui-card__body-content'] div[class*='wui-descriptor wui-descriptor__profile']"),
-	
+	SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
@@ -253,7 +253,8 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS("button[ng-click^='cancelEdit']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS("div[class=ne-comment-list__comment-content] div[class='wui-textarea__error']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
-	
+	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
+	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
 	// login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),

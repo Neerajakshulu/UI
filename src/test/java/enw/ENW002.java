@@ -20,7 +20,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class ENW001 extends TestBase {
+public class ENW002 extends TestBase {
 	
 	static int status = 1;
 	// Following is the list of status:
@@ -37,7 +37,7 @@ public class ENW001 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW001() throws Exception {
+	public void testcaseENW002() throws Exception {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -53,7 +53,7 @@ public class ENW001 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			List<String> list =Arrays.asList(new String[]{"Articles","Patents","Posts"});
+		
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -66,41 +66,20 @@ public class ENW001 extends TestBase {
 			
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
 			
-			for(int i=0; i<list.size();i++)
-			{
-				String recordType=list.get(i);
-				
-				if (recordType.equalsIgnoreCase("Articles"))
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-					pf.getAuthoringInstance(ob).chooseArticle();
-					
-				}else if(recordType.equalsIgnoreCase("Patents"))
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-					pf.getAuthoringInstance(ob).chooseArticle();
-				}else
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-					pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
-				}
-					
-			
-			
 			waitForAjax(ob);
 			
 		
 			try
 			{
-			Assert.assertEquals(expectedSuccessMessage,pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage());
+			Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage());
 			test.log(LogStatus.PASS,
-					recordType+" record sent successfully");
+					" Record sent successfully from Search Results Page");
 			}
 			
 			catch (Throwable t) {
 
 				test.log(LogStatus.FAIL,
-						recordType+	" record is not sent to Endnote");// extent
+						" Record is not sent to Endnote from Search Results Page");// extent
 																															// reports
 				status = 2;// excel
 				test.log(
@@ -111,12 +90,11 @@ public class ENW001 extends TestBase {
 
 			}
         
-			ob.navigate().back();
+		
 			//clearing the record from Endnote
 			//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
 			
-			}
-			
+	
 			closeBrowser();
 			
 			

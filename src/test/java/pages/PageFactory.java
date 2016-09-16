@@ -21,6 +21,7 @@ public class PageFactory {
 	private Authoring authoring = null;
 	private OnboardingModalsPage onboarding=null;
 	private AccountPage accountPage=null;
+	private ENWReferencePage enwReferencePage=null;
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -136,6 +137,15 @@ public class PageFactory {
 		}
 
 		return accountPage;
+
+	}
+	
+	public ENWReferencePage getENWReferencePageInstance(WebDriver ob) {
+		if (enwReferencePage == null) {
+			enwReferencePage = new ENWReferencePage(ob);
+		}
+
+		return enwReferencePage;
 
 	}
 	public void setAccountPageInstance(AccountPage obj) {
