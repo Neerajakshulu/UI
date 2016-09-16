@@ -69,11 +69,7 @@ public class ENWIAM0001 extends TestBase {
 			
 			ob.findElement(By.className("btn-common")).click();
 			
-			
-			
-		
-			
-			
+			logout();
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
