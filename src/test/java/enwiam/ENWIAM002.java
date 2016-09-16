@@ -3,8 +3,6 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,21 +11,16 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-
-public class ENWIAM001 extends TestBase {
+public class ENWIAM002 extends TestBase {
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
-        PageFactory pf=new PageFactory();
-        
-       
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -57,21 +50,11 @@ public class ENWIAM001 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			String userName="arvindkandaswamy@gmail.com";
-			String password="Kanda@123";
 			
 			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 			//Need to add script code
 			
-			
-			pf.getLoginTRInstance(ob).enterTRCredentials(userName, password);
-			pf.getLoginTRInstance(ob).clickLogin();
-			
-			ob.findElement(By.className("btn-common")).click();
-			
-			
-			
-		
+			test.log(LogStatus.INFO, "Printing logs");
 			
 			
 			
