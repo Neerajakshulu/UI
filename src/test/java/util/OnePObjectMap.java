@@ -323,6 +323,15 @@ public enum OnePObjectMap {
 	NEON_TO_ENW_PLINK("EndNote"),
 	NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS("div[class='wui-spinner__circle wui-spinner__circle--delayed']"), 
 	HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_TEXT_CSS("div[class^='modal-header wui-modal__header']"),
+	ENDNOTE_LOGIN_AGREE_BUTTON_CSS("input[class='button-form btn-common']"),
+	ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS("div[class='btn-common']"),
+	ENDNOTE_LOGOUT_HEADER_LABLE_XPATH("(//a[@class='dropdown-toggle'])[2]"),
+	ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH("(//a[contains(text(),'Sign out')]"),
+	ENDNOTE_ACCOUNT_LINK_XPATH("//span[@class='fa fa-cog profile_account_link']"),
+	ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH("//div[@class='elqHeading']"),
+	ENDNOTE_ACCESS_CENTER_EMAIL_FIELD_CSS("input[class='elqField']"),
+	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
+	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
 	;
 	
 	private String locator;

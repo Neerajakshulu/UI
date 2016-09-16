@@ -11,6 +11,51 @@
 			<class name="enwiam.ENWIAM001"></class>
 		</classes>
 	</test>
+	<test name="ENWIAM002">
+		<classes>
+			<class name="enwiam.ENWIAM002"></class>
+		</classes>
+	</test>
+	
+	<test name="ENWIAM003">
+		<classes>
+			<class name="enwiam.ENWIAM003"></class>
+		</classes>
+	</test>
+	
+	<test name="ENWIAM004">
+		<classes>
+			<class name="enwiam.ENWIAM004"></class>
+		</classes>
+	</test>
+	<test name="ENWIAM005">
+		<classes>
+			<class name="enwiam.ENWIAM005"></class>
+		</classes>
+	</test>
+	
+	<test name="ENWIAM006">
+		<classes>
+			<class name="enwiam.ENWIAM006"></class>
+		</classes>
+	</test>
+	
+	<test name="ENWIAM007">
+		<classes>
+			<class name="enwiam.ENWIAM007"></class>
+		</classes>
+	</test>
+	
+	<!-- <test name="ENWIAM008">
+		<classes>
+			<class name="enwiam.ENWIAM008"></class>
+		</classes>
+	</test> -->
+	<test name="ENWIAM009">
+		<classes>
+			<class name="enwiam.ENWIAM009"></class>
+		</classes>
+	</test>
 
 
 	

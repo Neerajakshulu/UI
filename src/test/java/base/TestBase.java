@@ -734,6 +734,16 @@ public class TestBase {
 		Thread.sleep(5000);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
+	
+	//logging out enw
+		public void logoutEnw() throws InterruptedException{
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
+			Thread.sleep(5000);
+			//waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString()), 30);
+			//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString())));
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
+		}
 
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
