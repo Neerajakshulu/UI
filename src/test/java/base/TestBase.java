@@ -1754,4 +1754,90 @@ public class TestBase {
 		return String.valueOf(resp.getStatusCode());
 
 	}
+	
+	public String createENWNewUser(String first_name, String last_name) throws Exception {
+
+		status = registrationEnwForm(first_name, last_name);
+		BrowserWaits.waitTime(2);
+		if (status) {
+			activationStatus = userActivation();
+
+		}
+		if (activationStatus) {
+			mail = loginActivatedENWUser();
+		}
+
+		return mail;
+
+	}
+	
+	public boolean registrationEnwForm(String first_name, String last_name) throws Exception {
+		try {
+			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(2);
+			if (CONFIG.getProperty("browserType").equals("IE")) {
+				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+				BrowserWaits.waitTime(4);
+			}
+
+			email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
+			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
+
+			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
+
+			if (!StringContains(text, email)) {
+				if (test != null) {
+					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
+																					// reports
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+				}
+			}
+
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+
+		}
+		return true;
+	}
+	
+	public String loginActivatedENWUser() throws Exception {
+		try {
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+			BrowserWaits.waitTime(10);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			closeBrowser();
+		}
+		return email;
+	}
+	
 }

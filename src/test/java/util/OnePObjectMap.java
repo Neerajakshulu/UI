@@ -333,6 +333,7 @@ public enum OnePObjectMap {
 	ENDNOTE_ACCESS_CENTER_EMAIL_FIELD_CSS("input[class='elqField']"),
 	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
+	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[id='pageTitle'] h3"),
 	;
 	
 	private String locator;

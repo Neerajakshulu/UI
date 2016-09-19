@@ -5,10 +5,14 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	
-	<test name="ENWIAM001">
+
+	<test name="ENWIAM001" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM001"></class>
+			<class name="enwiam.ENWIAM010"></class>
+			<class name="enwiam.ENWIAM013"></class>
+			<class name="enwiam.ENWIAM015"></class>
+			<class name="enwiam.ENWIAM017"></class>
 		</classes>
 	</test>
 	<test name="ENWIAM002">
@@ -16,13 +20,13 @@
 			<class name="enwiam.ENWIAM002"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM003">
 		<classes>
 			<class name="enwiam.ENWIAM003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM004">
 		<classes>
 			<class name="enwiam.ENWIAM004"></class>
@@ -33,32 +37,67 @@
 			<class name="enwiam.ENWIAM005"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM006">
 		<classes>
 			<class name="enwiam.ENWIAM006"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM007">
 		<classes>
 			<class name="enwiam.ENWIAM007"></class>
 		</classes>
 	</test>
-	
-	<!-- <test name="ENWIAM008">
-		<classes>
-			<class name="enwiam.ENWIAM008"></class>
-		</classes>
-	</test> -->
+
+	<!-- <test name="ENWIAM008"> <classes> <class name="enwiam.ENWIAM008"></class> 
+		</classes> </test> -->
 	<test name="ENWIAM009">
 		<classes>
 			<class name="enwiam.ENWIAM009"></class>
 		</classes>
 	</test>
 
+	<!-- <test name="ENWIAM010"> <classes> <class name="enwiam.ENWIAM010"></class> 
+		</classes> </test> -->
 
+	<test name="ENWIAM011">
+		<classes>
+			<class name="enwiam.ENWIAM011"></class>
+		</classes>
+	</test>
+
+	<test name="ENWIAM012">
+		<classes>
+			<class name="enwiam.ENWIAM012"></class>
+		</classes>
+	</test>
+	<!-- <test name="ENWIAM013">
+		<classes>
+			<class name="enwiam.ENWIAM013"></class>
+		</classes>
+	</test> -->
 	
+	<test name="ENWIAM014">
+		<classes>
+			<class name="enwiam.ENWIAM014"></class>
+		</classes>
+	</test>
+	
+	<!-- <test name="ENWIAM015">
+		<classes>
+			<class name="enwiam.ENWIAM015"></class>
+		</classes>
+	</test> -->
+	
+	<test name="ENWIAM016">
+		<classes>
+			<class name="enwiam.ENWIAM016"></class>
+		</classes>
+	</test>
 
+	<!-- <test name="ENWIAM017"> <classes> <class name="enwiam.ENWIAM017"></class> 
+		</classes> </test> -->
+	
 </suite>
 
