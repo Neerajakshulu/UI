@@ -77,7 +77,7 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	private void closeOnBoardingModal() throws Exception, InterruptedException {
+	public void closeOnBoardingModal() throws Exception, InterruptedException {
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
@@ -271,4 +271,18 @@ public void socialLinking() throws Exception{
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString())));
 		
 	}
+	
+	public void clickNotnowButtonLinkingModal() throws Exception{
+		
+		//waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"), 60);
+	   //boolean Modal= ob.findElement(By.cssSelector("div[class='modal-content ng-scope']")).isDisplayed();
+	    
+	  // if (Modal)
+	  
+	    	ob.findElement(By.cssSelector("a[ng-click='vm.callSkipLinking()']")).click();
+	   
+		
+		
+	}
+	
 }

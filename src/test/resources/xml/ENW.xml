@@ -17,8 +17,30 @@
 			<class name="enw.ENW002"></class>
 		</classes>
 	</test>
-
 	
+	 <test name="ENW003">
+		<classes>
+			<class name="enw.ENW003"></class>
+		</classes>
+	</test>
+
+   <test name="ENW004">
+		<classes>
+			<class name="enw.ENW004"></class>
+		</classes>
+	</test>	
+	
+	 <test name="ENW005">
+		<classes>
+			<class name="enw.ENW005"></class>
+		</classes>
+	</test>
+
+   <test name="ENW006">
+		<classes>
+			<class name="enw.ENW006"></class>
+		</classes>
+	</test>	
 
 </suite>
 

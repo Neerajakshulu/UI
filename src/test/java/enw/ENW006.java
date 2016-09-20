@@ -15,12 +15,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class ENW002 extends TestBase {
+public class ENW006 extends TestBase {
 	
 	static int status = 1;
 	// Following is the list of status:
@@ -37,7 +38,7 @@ public class ENW002 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW002() throws Exception {
+	public void testcaseENW005() throws Exception {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -53,47 +54,55 @@ public class ENW002 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-		
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			
 			ob.get(host);
+			
 			String expectedSuccessMessage="Sent To EndNote";
-			
-		//	ob.navigate().to(System.getProperty("host"));
-			loginAs("MARKETUSEREMAIL1", "MARKETUSERPASSWORD2");
-			
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			
-			waitForAjax(ob);
-			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 		
-			try
-			{
-			Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
-			test.log(LogStatus.PASS,
-					" Record sent successfully from Search Results Page");
-			}
+			  pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("FBonlyusernameenw006"),CONFIG.getProperty("FBonlypwrdenw006"));
+				  
+			   
+			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			   
+			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			   
+			   pf.getSearchResultsPageInstance(ob).linkDiffSteamAcctWhileSendToEndnoteSearchPage(test);
+			   				     
+	    		   try
+						{
+						Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+						test.log(LogStatus.PASS,
+								" Record sent successfully from Search Results Page after linking with steam account with different emailid");
+						}
+						
+						catch (Throwable t) {
+
+							test.log(LogStatus.FAIL,
+									" Record is not sent to Endnote from Search Results Page after  linking with steam account with different emailid");// extent
+																																		// reports
+							status = 2;// excel
+							test.log(
+									LogStatus.INFO,
+									"Snapshot below: "
+											+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+													+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+
+						}
 			
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL,
-						" Record is not sent to Endnote from Search Results Page");// extent
-																															// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
-			}
-        
+	    		   
+			   pf.getLoginTRInstance(ob).logOutApp();
 		
-			//clearing the record from Endnote
-			//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
-			
 	
 			closeBrowser();
 			

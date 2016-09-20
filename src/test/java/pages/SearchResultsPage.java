@@ -9,6 +9,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
@@ -294,10 +297,19 @@ public class SearchResultsPage extends TestBase {
 			return false;
 	}
 	
-	public String clickSendToEndnoteSearchPage() throws InterruptedException {
+	public void clickSendToEndnoteSearchPage() throws InterruptedException {
 		WebElement button = ob
 				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
 		button.click();
+
+		BrowserWaits.waitTime(5);
+
+	}
+	
+	
+	public String ValidateSendToEndnoteSearchPage() throws InterruptedException {
+		WebElement button = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
 
 		BrowserWaits.waitTime(5);
 
@@ -310,6 +322,28 @@ public class SearchResultsPage extends TestBase {
 			}
 		}
 		return "";
+	}
+	
+	public void linkSteamAcctWhileSendToEndnoteSearchPage() throws InterruptedException {
+		 ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys(CONFIG.getProperty("sfbpwrd"));
+		   
+		 ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
+		   
+
+	}
+	
+	public void linkDiffSteamAcctWhileSendToEndnoteSearchPage(ExtentTest test) throws InterruptedException {
+		
+		 waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"),30);
+			ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--secondary button-color-secondary']")).click();
+			waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"),30);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys("falak.guddu@gmail.com");
+			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys("9595far7202#");
+			   
+			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
+							   
+			test.log(LogStatus.PASS,"User linked with steam account");
+
 	}
 
 }

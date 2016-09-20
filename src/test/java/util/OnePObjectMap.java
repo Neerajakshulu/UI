@@ -227,6 +227,9 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS("a[class='ng-binding ng-scope'][event-category='searchresult-ck-profile']"),
 	SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS("div[class='wui-card__body-content'] div[class*='wui-descriptor wui-descriptor__profile']"),
 	SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
+	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
+	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS("div[class='modal-content ng-scope']"),
+	
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
@@ -306,8 +309,13 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS("button[ng-click='UserImageEditButtons.delete()']"),
 	HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS("div[class='modal-content ng-scope'] div[class='wui-input-with-label']"),
 	HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+	HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS("input[type='password']"),
+	HOME_PROJECT_NEON_DIFFSTEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS("button[class='wui-btn wui-btn--secondary button-color-secondary']"),
+	HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS("input[type='email']"),
+	HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS("input[type='password']"),
+
 	
-	
+			
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),
 	SEARCH_RESULTS_PAGE_CSS("h2[class='wui-title']"),

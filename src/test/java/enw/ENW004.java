@@ -15,12 +15,13 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class ENW002 extends TestBase {
+public class ENW004 extends TestBase {
 	
 	static int status = 1;
 	// Following is the list of status:
@@ -37,7 +38,7 @@ public class ENW002 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW002() throws Exception {
+	public void testcaseENW004() throws Exception {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -59,43 +60,55 @@ public class ENW002 extends TestBase {
 			clearCookies();
 			
 			ob.get(host);
+			
 			String expectedSuccessMessage="Sent To EndNote";
-			
-		//	ob.navigate().to(System.getProperty("host"));
-			loginAs("MARKETUSEREMAIL1", "MARKETUSERPASSWORD2");
-			
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			
-			waitForAjax(ob);
-			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 		
-			try
-			{
-			Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
-			test.log(LogStatus.PASS,
-					" Record sent successfully from Search Results Page");
-			}
-			
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL,
-						" Record is not sent to Endnote from Search Results Page");// extent
-																															// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
-			}
-        
 		
-			//clearing the record from Endnote
-			//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
+			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbLIusername"),CONFIG.getProperty("fbLIpwrd"));
+				  
+			//   pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
+			   
+			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			   
+			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			   
+			   ob.findElement(By.cssSelector("input[type='password']")).sendKeys(CONFIG.getProperty("fbLIsteampwrd"));
+			   
+			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
+			   
+			   
+			  /* pf.getLoginTRInstance(ob).socialLinking();
+			   test.log(LogStatus.PASS,"User has logged in with facebook credentials");
+			   pf.getLoginTRInstance(ob).checkLinking();
+			   pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
+			   test.log(LogStatus.PASS, "Facebook account is linked with steam account");
+			   pf.getLoginTRInstance(ob).logOutApp();
+			*/
 			
+
+		   
+			   try
+				{
+				Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+				test.log(LogStatus.PASS,
+						" Record sent successfully from Search Results Page after linking with steam account");
+				}
+				
+				catch (Throwable t) {
+
+					test.log(LogStatus.FAIL,
+							" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
+																																// reports
+					status = 2;// excel
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+
+				}
 	
-			closeBrowser();
+			//closeBrowser();
 			
 			
 			
