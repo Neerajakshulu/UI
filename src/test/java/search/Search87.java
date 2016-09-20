@@ -74,8 +74,9 @@ public class Search87 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
 
-			String patent = "Systems Biology of Cell Behavior";
+			String patent ="\"Systems Biology of Cell Behavior\"";
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
+			System.out.println(patent);
 			
 			//click on Patents tab
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
@@ -88,10 +89,8 @@ public class Search87 extends TestBase {
 			//validate page is navigating to Article record view page from search results page
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
 			boolean patentRVTitleWatchLabel = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
-
-			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
-
-			if (!patentRVStatus)
+			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent.substring(1,32)) && patentRVTitleWatchLabel);
+     			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Article Record View Page");
 			
 			pf.getLoginTRInstance(ob).logOutApp();
