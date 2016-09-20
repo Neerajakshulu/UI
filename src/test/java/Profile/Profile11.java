@@ -32,10 +32,8 @@ public class Profile11 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verity that user is able to edit  info like Interests and Skills from his own profile")
-				.assignCategory("Profile");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
 	}
 
 	/**
@@ -47,7 +45,7 @@ public class Profile11 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);

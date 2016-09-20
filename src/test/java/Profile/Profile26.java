@@ -38,10 +38,8 @@ public class Profile26 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that  'primary institution' type ahead options should display while enter min 2 characters")
-				.assignCategory("Profile");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
 	}
 
 	/**
@@ -54,7 +52,7 @@ public class Profile26 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);

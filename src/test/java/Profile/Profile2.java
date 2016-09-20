@@ -35,12 +35,8 @@ public class Profile2 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"1.Verify that user is able to Start/Stop following a user from profile page 2. Verify that user is able to search for profiles with first name")
-				.assignCategory("Profile");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
 	}
 
 	@Test
@@ -48,7 +44,7 @@ public class Profile2 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);

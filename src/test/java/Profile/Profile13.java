@@ -32,18 +32,15 @@ public class Profile13 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('D'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verity that user is able to edit Summary field from his own profile and validate max length condition")
-				.assignCategory("Profile");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
 	}
 
 	@Test
 	public void testprofileSummary() throws Exception {
 		String str = RandomStringUtils.randomAlphabetic(1600);
 		int maxLength = 1500;
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Profile");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;System.out.println("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
