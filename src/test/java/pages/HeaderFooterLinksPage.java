@@ -200,5 +200,24 @@ public class HeaderFooterLinksPage extends TestBase {
 		clickOnSearchIcon();
 
 	}
-
+     
+	public void clickOnEndNoteLink() throws Exception{
+   waitForElementTobeVisible(ob, By.cssSelector("i[class='wui-icon wui-icon--app']"),30);
+   ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")).click();
+   ob.findElement(By.xpath("(//li[@class='ne-app-switcher-flyout__list-item'])[1]")).click();
+ 		
+	}
+	
+	public void linkToEndnote(String username,String Password) throws Exception{
+		waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"),30);
+		ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--secondary button-color-secondary']")).click();
+		 ob.findElement(By.cssSelector("div[class='wui-input-with-label'] input[name='email']")).sendKeys(username);
+		ob.findElement(By.cssSelector("div[class='wui-input-with-label'] input[name='password']")).sendKeys(Password);
+		waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-footer wui-modal__footer']"),20);
+		ob.findElement(By.xpath("//button[contains(text(),'Done')]")).click();;
+	}
+	
+	
+	
+	
 }
