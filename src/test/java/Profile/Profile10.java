@@ -35,7 +35,7 @@ public class Profile10 extends TestBase {
 	 */
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	public void beforeTest() throws Exception { 
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
@@ -51,7 +51,7 @@ public class Profile10 extends TestBase {
 			String password) throws Exception {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
+		boolean master_condition = suiteRunmode && testRunmode; 
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {

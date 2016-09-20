@@ -50,12 +50,12 @@ public class Profile1 extends TestBase {
 	 * @throws Exception, When TR Login is not done
 	 */
 	@Test
-	@Parameters({"username", "password"})
+	@Parameters({"username", "password"}) 
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
+		boolean master_condition = suiteRunmode && testRunmode; 
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 
 		if (!master_condition) {

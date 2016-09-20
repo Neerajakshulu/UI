@@ -48,7 +48,7 @@ public class Profile43 extends TestBase {
 
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode;
+		boolean master_condition = suiteRunmode && testRunmode; 
 		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
 		logger.info("checking master condition status-->"+master_condition);
 

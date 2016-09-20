@@ -47,7 +47,7 @@ public class Profile51 extends TestBase {
 			String password, String deepLinkUrl) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode;
+		boolean master_condition = suiteRunmode && testRunmode; 
 
 		if (!master_condition) {
 			status = 3;

@@ -40,7 +40,7 @@ public class Profile61 extends OnboardingModalsTest {
 	public void testLoginEndNoteApplication(String username,String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode;
+		boolean master_condition = suiteRunmode && testRunmode; 
 
 		if (!master_condition) {
 			status = 3;
