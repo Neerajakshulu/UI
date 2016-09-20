@@ -30,20 +30,28 @@ public class IAM028 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that system able to resend activation mail when user doesn't activated mail and already registered with Neon.")
-				.assignCategory("IAM");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+
+//		extent = ExtentManager.getReporter(filePath);
+//		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
+//		test = extent
+//				.startTest(var,
+//						"Verify that system able to resend activation mail when user doesn't activated mail and already registered with Neon.")
+//				.assignCategory("IAM");
 
 	}
 
 	@Test
 	public void testcaseA1() throws Exception {
 		WebElement element = null;
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
+		
+//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+//		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
@@ -77,7 +85,7 @@ public class IAM028 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 				BrowserWaits.waitTime(2);
 				ob.findElement(
-						By.xpath("//button[@class='wui-btn wui-btn--primary login-button button-color-primary']"))
+						By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
 						.click();
 			}
 

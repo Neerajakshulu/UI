@@ -75,7 +75,7 @@ public class IAM013 extends TestBase {
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(4);
 			termofUserAndPrivacyStatement();
 
 		} catch (Throwable t) {
@@ -91,6 +91,32 @@ public class IAM013 extends TestBase {
 			closeBrowser();
 		}
 
+		ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+		BrowserWaits.waitTime(6);
+		termofUserAndPrivacyStatement();
+		
+		try {
+			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			BrowserWaits.waitTime(4);
+			termofUserAndPrivacyStatement();
+
+		} catch (Throwable t) {
+
+			test.log(LogStatus.FAIL, "Sign Up Button is not Clickable");// extent reports
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_signup_button_not_clickable")));// screenshot
+			closeBrowser();
+		}
+
+		
 		closeBrowser();
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -144,6 +170,7 @@ public class IAM013 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			// closeBrowser();
+			BrowserWaits.waitTime(2);
 
 		} catch (Throwable t) {
 

@@ -13,6 +13,7 @@
 			<class name="iam.IAM023"></class>
 			<class name="iam.IAM024"></class>
 			<class name="iam.IAM028"></class>
+			<class name="iam.IAM034"></class>
 		</classes>
 	</test>
 
