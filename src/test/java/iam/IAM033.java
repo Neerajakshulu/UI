@@ -85,8 +85,10 @@ public class IAM033 extends TestBase {
 		   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
 		   pf.getLoginTRInstance(ob).socialLinking();
 		   test.log(LogStatus.PASS,"User has logged in with facebook credentials");
-		   pf.getLoginTRInstance(ob).checkLinking();
-		   pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
+//		   pf.getLoginTRInstance(ob).checkLinking();
+//		   Assert.assertTrue(
+//					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername")));
+//		  // pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
 		   test.log(LogStatus.PASS, "Facebook account is linked with steam account");
 		   pf.getLoginTRInstance(ob).logOutApp();
 		   
@@ -107,7 +109,6 @@ public class IAM033 extends TestBase {
 			   pf.getLoginTRInstance(ob).socialLinking();
 			   test.log(LogStatus.PASS,"User has logged in with Linkedin credentials");
 			   pf.getLoginTRInstance(ob).checkLinking();
-			   pf.getAccountPageInstance(ob).verifyLinkedAccount("Linkedin",CONFIG.getProperty("fbusername"));
 			   test.log(LogStatus.PASS, "Linkedin account is linked with steam account");
 			   pf.getLoginTRInstance(ob).logOutApp();  
 			   
@@ -126,8 +127,8 @@ public class IAM033 extends TestBase {
 		   ob.navigate().to(host);
 		   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
 		   pf.getLoginTRInstance(ob).checkLinking();
-		   pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
-		   test.log(LogStatus.PASS, "Facebook account is already linked with steam account");
+		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername")));
+		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
 		     	  pf.getLoginTRInstance(ob).logOutApp();
 		}
 		catch(Throwable t)
@@ -144,8 +145,8 @@ public class IAM033 extends TestBase {
 		   ob.navigate().to(host);
 		   pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
 		   pf.getLoginTRInstance(ob).checkLinking();
-		   pf.getAccountPageInstance(ob).verifyLinkedAccount("Linkedin",CONFIG.getProperty("fbusername"));
-		   test.log(LogStatus.PASS, "Linkedin account is already linked with steam account");
+		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Linkedin",CONFIG.getProperty("fbusername")));
+		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
 		     	  pf.getLoginTRInstance(ob).logOutApp();
 		     	 closeBrowser();
 		}
