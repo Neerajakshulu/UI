@@ -177,5 +177,6 @@ public class PageFactory {
 		postRVPage=null;
 		WatchlistPage=null;
 		enwReference=null;
+		enwReferencePage=null;
 	}
 }

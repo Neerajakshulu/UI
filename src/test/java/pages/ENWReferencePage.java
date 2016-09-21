@@ -90,11 +90,11 @@ public class ENWReferencePage extends TestBase {
 	//Arvind- Yes,I have an account module
 	public void yesAccount(String userName,String passWord) throws InterruptedException
 	{
-		BrowserWaits.waitTime(3);
+		BrowserWaits.waitTime(2);
 		// Clicking Yes,I have an account button
-		
+		waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS.toString()),30);
 		ob.findElement(By.cssSelector(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS.toString())).click();
-		BrowserWaits.waitTime(3);
+		BrowserWaits.waitTime(2);
 		//Enter arvindkandaswamy STeAM credentials
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).click();
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).sendKeys(userName);

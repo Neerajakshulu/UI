@@ -58,14 +58,14 @@ public class ENWIAM100 extends TestBase {
 
 		}
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("enwsoclogin"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			String statuCode2 = deleteUserAccounts(CONFIG.getProperty("myacc"));
+			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("myacc"));
 			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
 			
 			
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 
@@ -74,19 +74,18 @@ public class ENWIAM100 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			 ob.navigate().to(host);
-			 pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("enwsoclogin"),CONFIG.getProperty("enwsocpwd"));
+			 pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),LOGIN.getProperty("enwsocpwd"));
 			 test.log(LogStatus.PASS,"user has logged in with social account");
 			 pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			 test.log(LogStatus.PASS,"User navigate to End note"); 
-			 pf.getHFPageInstance(ob).linkToEndnote(CONFIG.getProperty("myacc"),CONFIG.getProperty("mypwd"));
+			 BrowserWaits.waitTime(2);
+			 pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("myacc"),LOGIN.getProperty("mypwd"));
 			 test.log(LogStatus.PASS,"User linked with steam account");
-		    //ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),30);
 				String text = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
-				if (text.equalsIgnoreCase("Continue")) {
+				if (text.equalsIgnoreCase("Continue")) 
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-						
-		
+					
 				logoutEnw();
 					closeBrowser();
 					 pf.clearAllPageObjects();
@@ -94,13 +93,17 @@ public class ENWIAM100 extends TestBase {
 					 openBrowser();
 						maximizeWindow();
 						 ob.navigate().to(host);
-						 pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("enwsoclogin"),CONFIG.getProperty("enwsocpwd"));
+						 pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),LOGIN.getProperty("enwsocpwd"));
 						 test.log(LogStatus.PASS,"user has logged in with social account");
 						 pf.getLoginTRInstance(ob).checkLinking();
 						 Assert.assertTrue(
-									pf.getAccountPageInstance(ob).verifyLinkedAccount("FaceBook", CONFIG.getProperty("myacc")));
+									pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("enwsoclogin")));
+						 Assert.assertTrue(
+									pf.getAccountPageInstance(ob).verifyLinkedAccount("neon", LOGIN.getProperty("myacc")));
+
 						 test.log(LogStatus.PASS,"Linked accounts are available in accounts page: Neon");
 						 pf.getHFPageInstance(ob).clickOnEndNoteLink();
+						 BrowserWaits.waitTime(2);
 						 test.log(LogStatus.PASS,"User navigate to End note"); 
 					 
 						 waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),30);
@@ -113,7 +116,7 @@ public class ENWIAM100 extends TestBase {
 							closeBrowser();
 							 pf.clearAllPageObjects();
 					 
-		}
+		
 		}
 		
 		catch(Throwable t)
@@ -132,14 +135,14 @@ public class ENWIAM100 extends TestBase {
 		}
 		
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("enwsoclogin"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			String statuCode2 = deleteUserAccounts(CONFIG.getProperty("myacc"));
+			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("myacc"));
 			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
 			
 			
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 		
@@ -148,19 +151,15 @@ public class ENWIAM100 extends TestBase {
 		openBrowser();
 		maximizeWindow();
 		 ob.navigate().to(host);
-		 pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("enwsoclogin"),CONFIG.getProperty("enwsocpwd"));
+		 pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("enwsoclogin"),LOGIN.getProperty("enwsocpwd"));
 		 test.log(LogStatus.PASS,"user  logged in with Linkedin account");
 		 pf.getHFPageInstance(ob).clickOnEndNoteLink();
 		 test.log(LogStatus.PASS,"User navigate to End note"); 
-		BrowserWaits.waitTime(5);
-		 pf.getHFPageInstance(ob).linkToEndnote(CONFIG.getProperty("myacc"),CONFIG.getProperty("mypwd"));
+		 pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("myacc"),LOGIN.getProperty("mypwd"));
 		 test.log(LogStatus.PASS,"User linked with steam account");
 		 BrowserWaits.waitTime(2);
-		// ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),
-			30);
-			String text = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()))
-			.getText();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),30);
+			String text = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
 			if (text.equalsIgnoreCase("Continue")) {
 			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			
@@ -176,7 +175,9 @@ public class ENWIAM100 extends TestBase {
 				 pf.getLoginTRInstance(ob).checkLinking();
 				 BrowserWaits.waitTime(5);
 				 Assert.assertTrue(
-							pf.getAccountPageInstance(ob).verifyLinkedAccount("Linkedin", CONFIG.getProperty("enwsoclogin")));
+							pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("enwsoclogin")));
+				 Assert.assertTrue(
+							pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("myacc")));
 				 test.log(LogStatus.PASS,"Linked accounts are available in accounts page: Neon");
 				 BrowserWaits.waitTime(5);
 				 pf.getHFPageInstance(ob).clickOnEndNoteLink();
@@ -190,8 +191,8 @@ public class ENWIAM100 extends TestBase {
 			}
 					logoutEnw();
 					closeBrowser();
-			 
-			
+					 pf.clearAllPageObjects();
+					
 	
 	}
 	
