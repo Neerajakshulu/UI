@@ -53,13 +53,6 @@
 
 	<!-- <test name="ENWIAM008"> <classes> <class name="enwiam.ENWIAM008"></class> 
 		</classes> </test> -->
-	<test name="ENWIAM009">
-		<classes>
-			<class name="enwiam.ENWIAM009"></class>
-		</classes>
-	</test>
-
-
 	<test name="ENWIAM011">
 		<classes>
 			<class name="enwiam.ENWIAM011"></class>
