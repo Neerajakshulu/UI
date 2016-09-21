@@ -7,6 +7,26 @@ package util;
  *
  */
 public enum OnePObjectMap {
+	
+	//ENW
+
+ENW_CONTINUE_BUTTON_CLASSNAME("btn-common"),
+FB_PAGE_LOGIN_NAME("button[name='login']"),
+DID_YOU_KNOW_LETS_GO_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+ENW_FB_PROFILE_FLYOUT_CIRCLE_XPATH("//img[@id='proSmallImg']"),
+ENW_FB_SIGNOUT_XPATH("//li[@class='pull-right']"),
+ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS("button[class='wui-btn wui-btn--secondary button-color-secondary']"),
+ENW_LINK_ACCOUNTS_EMAIL_XPATH("//input[@name='email']"),
+ENW_LINK_ACCOUNTS_PASSWORD_XPATH("//input[@name='password']"),
+ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+
+ENW_FB_LOGIN_BUTTON_XPATH("//button[@id='loginbutton']"),
+ENW_CONTINUE_BUTTON_XPATH("//div[@id='continue']"),
+ENW_FB_PROFILE_IMGCIRCLE_XPATH("//img[@id='proSmallImg']"),
+ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH("//a[contains(.,'Account')]"),
+ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH("//a[contains(.,'Sign out')]"),
+ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
+
 
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),

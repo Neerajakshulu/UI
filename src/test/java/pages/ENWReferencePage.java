@@ -64,11 +64,48 @@ public class ENWReferencePage extends TestBase {
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
 		BrowserWaits.waitTime(2);
-		ob.findElement(By.xpath(OR.getProperty("ENW_FB_LOGIN_BUTTON"))).click();
+		   //ob.findElement(By.xpath(OR.getProperty("ENW_FB_LOGIN_BUTTON"))).click();
+		ob.findElement(By.xpath(OnePObjectMap.ENW_FB_LOGIN_BUTTON_XPATH.toString())).click();
 		BrowserWaits.waitTime(2);
-		ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+		  //ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+		ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON_XPATH.toString())).click();
 	}
 	
+	// Did you know link modal
+	
+	public void didYouKnow() throws InterruptedException{
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.xpath("//input[@name='steamPassword']")).click();
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.xpath("//input[@name='steamPassword']")).sendKeys(LOGIN.getProperty("Password19"));
+		//ob.findElement(By.xpath("//input[@class='wui-input-with-label__input ng-pristine ng-untouched ng-invalid ng-invalid-required']")).sendKeys("Kanda@123");
+		BrowserWaits.waitTime(3);
+		    //ob.findElement(By.xpath(OR.getProperty("DID_YOU_KNOW_LETS_GO_BUTTON"))).click();
+		ob.findElement(By.xpath(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH.toString())).click();
+	//DID_YOU_KNOW_LETS_GO_BUTTON
+		BrowserWaits.waitTime(3);
+		//Clicking Continuous button
+		
+	}
+	
+	//Arvind- Yes,I have an account module
+	public void yesAccount() throws InterruptedException
+	{
+		BrowserWaits.waitTime(3);
+		// Clicking Yes,I have an account button
+		
+		ob.findElement(By.cssSelector(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS.toString())).click();
+		BrowserWaits.waitTime(3);
+		//Enter arvindkandaswamy STeAM credentials
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).click();
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).sendKeys(LOGIN.getProperty("UserName19"));
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).click();
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).sendKeys(LOGIN.getProperty("Password19"));
+		//Clicking the "Done" button
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())).click();
+		}
+	
+	//Arvind- Clicking the Accounts button on ENW Profile-Flyout 
 		public void clickAccount() throws InterruptedException
 		{
 			try {
@@ -77,18 +114,24 @@ public class ENWReferencePage extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ob.findElement(By.xpath(OR.getProperty("ENW_FB_PROFILE_IMGCIRCLE"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_XPATH.toString())).click();
 			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH.toString())).click();
 			BrowserWaits.waitTime(3);
+			try {
+				closeOnBoardingModal();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//validateLinkedAccounts(2, accountType);
 		}
 		
 		
 		// ENW LinkedIn Login
-		public void loginWithENWLinkedInCredentials(String username, String pwd) throws InterruptedException, Exception {
+		public void loginWithENWLnCredentials(String username, String pwd) throws InterruptedException, Exception {
 
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString()), 30);
+			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString())).click();
 
 			signInToENWLinkedIn(username, pwd);
@@ -104,25 +147,19 @@ public class ENWReferencePage extends TestBase {
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+			//ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 		}
 		
 		
-		// ENW Back to Endnot button +  Logout
-		public void logout1() throws InterruptedException
+		// ENW Back to Endnote button +  Logout
+		//modified
+		public void logout() throws InterruptedException
 		{
+			ob.findElement(By.xpath(OnePObjectMap.ENW_BACK_TO_ENDNOTE_BUTTON_XPATH.toString())).click();
 			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("ENW_BACK_TO_ENDNOTE_BUTTON"))).click();
-			try {
-				closeOnBoardingModal();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_XPATH.toString())).click();
 			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("ENW_FB_PROFILE_IMGCIRCLE"))).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("ENW_FB_PROFILE_FLYOUT_SIGNOUT"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		}
 		
 	//Closing the onboarding modal 

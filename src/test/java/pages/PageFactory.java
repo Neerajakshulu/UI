@@ -22,6 +22,8 @@ public class PageFactory {
 	private OnboardingModalsPage onboarding=null;
 	private AccountPage accountPage=null;
 	private ENWReferencePage enwReferencePage=null;
+	private EnwReference enwReference=null;
+
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -117,6 +119,7 @@ public class PageFactory {
 
 	}
 	
+	
 	public void setLoginTRInstance(LoginTR obj) {
 		loginTR =obj;
 		}
@@ -148,6 +151,14 @@ public class PageFactory {
 		return enwReferencePage;
 
 	}
+	//Arvind ENWReference method
+		public EnwReference getEnwReferenceInstance(WebDriver ob) {
+			if (enwReference == null) {
+				enwReference = new EnwReference(ob);
+			}
+
+			return enwReference;
+		}
 	public void setAccountPageInstance(AccountPage obj) {
 		accountPage =obj;
 		}
@@ -165,5 +176,6 @@ public class PageFactory {
 		profilePage=null;
 		postRVPage=null;
 		WatchlistPage=null;
+		enwReference=null;
 	}
 }

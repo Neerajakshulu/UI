@@ -98,6 +98,19 @@
 
 	<!-- <test name="ENWIAM017"> <classes> <class name="enwiam.ENWIAM017"></class> 
 		</classes> </test> -->
+		
+		<test name="ENWIAM0001">
+		<classes>
+			<class name="enwiam.ENWIAM0001"></class>
+		</classes>
+	</test>
+	
+		<test name="ENWIAM0002">
+		<classes>
+			<class name="enwiam.ENWIAM0002"></class>
+		</classes>
+	</test>
+		
 	
 </suite>
 
