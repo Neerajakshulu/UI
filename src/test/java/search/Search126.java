@@ -2,10 +2,8 @@ package search;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,7 +11,6 @@ import org.testng.annotations.Test;
 
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 

@@ -3,24 +3,16 @@ package search;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
 

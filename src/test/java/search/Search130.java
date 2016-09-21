@@ -25,15 +25,6 @@ import util.TestUtil;
 import Authoring.LoginTR;
 import base.TestBase;
 
-
-
-
-
-
-
-
-
-
 import com.relevantcodes.extentreports.LogStatus;
 
 public class Search130 extends TestBase {

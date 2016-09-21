@@ -22,7 +22,6 @@ import util.TestUtil;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 public class Search13 extends TestBase {
 
