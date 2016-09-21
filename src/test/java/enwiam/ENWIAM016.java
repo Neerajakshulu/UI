@@ -2,10 +2,8 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -35,7 +33,7 @@ public class ENWIAM016 extends TestBase {
 	public void beforeTest() throws Exception {
 		
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
+		xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
 		

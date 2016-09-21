@@ -21,7 +21,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class IAM034 extends TestBase {

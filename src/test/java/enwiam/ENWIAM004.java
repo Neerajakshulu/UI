@@ -34,7 +34,7 @@ public class ENWIAM004 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
+		xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
 		//test = extent.startTest(var, "Verify FIRST NAME field in new TR user registration page").assignCategory("ENWIAM");
 		// test.log(LogStatus.INFO, "****************************");
 		// load the runmodes of the tests

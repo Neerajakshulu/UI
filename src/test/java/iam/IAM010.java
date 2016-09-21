@@ -2,10 +2,8 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -119,6 +117,7 @@ public class IAM010 extends TestBase {
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 
 				String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
+				logger.info("Text : "+text);
 
 				if (validity.equalsIgnoreCase("YES")) {
 

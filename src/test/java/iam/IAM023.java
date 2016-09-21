@@ -2,10 +2,7 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -54,10 +51,6 @@ public class IAM023 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String password = "Neon@123";
-			String first_name = "disco";
-			String last_name = "dancer";
-
 			// 1)Create a new user
 			// 2)Login with new user and logout
 			openBrowser();

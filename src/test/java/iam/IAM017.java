@@ -2,14 +2,8 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -61,7 +55,6 @@ public class IAM017 extends TestBase {
 
 		try {
 
-			String password = "Transaction@2";
 			String first_name = "firstfirstfirstfirstfiirstfiirstfirstfirst";
 			String last_name = "lastlastlastlastlast";
 
