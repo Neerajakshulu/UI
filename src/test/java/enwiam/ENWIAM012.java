@@ -94,13 +94,12 @@ public class ENWIAM012 extends TestBase {
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),
-					30);
-			String agreeButton = ob
+			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),30);
+			/*String agreeButton = ob
 					.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).getAttribute("title");
 			if(agreeButton.equals("I Agree")){
 				ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
-			}
+			}*/
 
 			String text=ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).getText();
 			if(text.equalsIgnoreCase("Continue")){

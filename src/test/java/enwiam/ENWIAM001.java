@@ -128,9 +128,9 @@ public class ENWIAM001 extends TestBase {
 				String signupStatus = ob
 						.findElement(By.cssSelector(
 								"button[class='wui-btn wui-btn--primary login-button button-color-primary']"))
-						.getAttribute("disabled");
+						.getAttribute("ng-disabled");
 				logger.info("SingUp Status : " + signupStatus);
-				Assert.assertNotEquals(signupStatus, "disabled");
+				Assert.assertTrue(signupStatus.contains("userRegister.$invalid"));
 				test.log(LogStatus.PASS, "Sign up linke is enabled");
 
 			} catch (Throwable t) {
@@ -153,10 +153,10 @@ public class ENWIAM001 extends TestBase {
 								"Verify that the user should be able click on 'Sign up' button after filling the above fields correctly.")
 						.assignCategory("ENWIAM");
 
-				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				//ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+				ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--primary login-button button-color-primary']")).click();
 				BrowserWaits.waitTime(4);
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
-
 				String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
 
 				

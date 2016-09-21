@@ -85,7 +85,7 @@ public class ENWIAM0003 extends TestBase{
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
 		validateLinkedAccounts(2,accountType);
-		pf.getENWReferencePageInstance(ob).logout1();
+		pf.getENWReferencePageInstance(ob).logout();
 		closeBrowser();
 		pf.clearAllPageObjects();
 

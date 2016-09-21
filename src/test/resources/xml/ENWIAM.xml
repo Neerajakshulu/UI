@@ -8,11 +8,12 @@
 
 	<test name="ENWIAM001" preserve-order="true">
 		<classes>
-			<class name="enwiam.ENWIAM001"></class>
+			<class name="enwiam.ENWIAM009"></class>
 			<class name="enwiam.ENWIAM010"></class>
 			<class name="enwiam.ENWIAM013"></class>
 			<class name="enwiam.ENWIAM015"></class>
 			<class name="enwiam.ENWIAM017"></class>
+			<class name="enwiam.ENWIAM001"></class>
 		</classes>
 	</test>
 	<test name="ENWIAM002">
@@ -58,8 +59,6 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ENWIAM010"> <classes> <class name="enwiam.ENWIAM010"></class> 
-		</classes> </test> -->
 
 	<test name="ENWIAM011">
 		<classes>
@@ -72,11 +71,6 @@
 			<class name="enwiam.ENWIAM012"></class>
 		</classes>
 	</test>
-	<!-- <test name="ENWIAM013">
-		<classes>
-			<class name="enwiam.ENWIAM013"></class>
-		</classes>
-	</test> -->
 	
 	<test name="ENWIAM014">
 		<classes>
@@ -84,20 +78,11 @@
 		</classes>
 	</test>
 	
-	<!-- <test name="ENWIAM015">
-		<classes>
-			<class name="enwiam.ENWIAM015"></class>
-		</classes>
-	</test> -->
-	
 	<test name="ENWIAM016">
 		<classes>
 			<class name="enwiam.ENWIAM016"></class>
 		</classes>
 	</test>
-
-	<!-- <test name="ENWIAM017"> <classes> <class name="enwiam.ENWIAM017"></class> 
-		</classes> </test> -->
 		
 		<test name="ENWIAM0001">
 		<classes>

@@ -92,14 +92,14 @@ public class ENWIAM011 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			
 			BrowserWaits.waitTime(8);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),
+			/*waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),
 					30);
 			String agreeButton = ob
 					.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).getAttribute("title");
 			if(agreeButton.equals("I Agree")){
 				ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
 			}
-			
+			*/
 			String text=ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).getText();
 			if(text.equalsIgnoreCase("Continue")){
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();

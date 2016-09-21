@@ -233,7 +233,7 @@ public class ENWIAM013 extends TestBase {
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 				// email_list.get(0).click();
-				Thread.sleep(2000);
+				Thread.sleep(4000);
 
 				String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 				logger.info("Email Subject Text : " + email_subject);
@@ -291,11 +291,12 @@ public class ENWIAM013 extends TestBase {
 								"Verify Password must have at least one special character from !@#$%^*()~`{}[]|")
 						.assignCategory("ENWIAM");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-
+				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("!");
-				String specialChar = ob.findElement(By.cssSelector("span[id='hasChar']")).getCssValue("background");
-				Assert.assertEquals(specialChar, "rgb(30, 86, 21)");
-
+				BrowserWaits.waitTime(2);
+				String specialChar = ob.findElement(By.cssSelector("span[id='hasSym']")).getAttribute("style");
+				logger.info("Color : "+specialChar);
+				Assert.assertTrue(specialChar.contains("rgb(30, 86, 21)"));
 				test.log(LogStatus.PASS, "Password field allow one special character from !@#$%^*()~`{}[]|");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Password field not allow one special character from !@#$%^*()~`{}[]|" + t);// extent
@@ -316,11 +317,12 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1951", "Verify Password must contain at least one number is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-
+				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("1");
-				String specialChar = ob.findElement(By.cssSelector("span[id='hasNum']")).getCssValue("background");
-				Assert.assertEquals(specialChar, "rgb(30, 86, 21)");
-
+				BrowserWaits.waitTime(2);
+				String number = ob.findElement(By.cssSelector("span[id='hasNum']")).getAttribute("style");
+				logger.info("Color : "+number);
+				Assert.assertTrue(number.contains("rgb(30, 86, 21)"));
 				test.log(LogStatus.PASS, "Password field allowed one number");
 
 			} catch (Throwable t) {
@@ -343,14 +345,18 @@ public class ENWIAM013 extends TestBase {
 								"Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-
+				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("P");
-				String alphaCahr = ob.findElement(By.cssSelector("span[id='hasChar']")).getCssValue("background");
-				Assert.assertEquals(alphaCahr, "rgb(30, 86, 21)");
-
+				BrowserWaits.waitTime(2);
+				String alphaCahr = ob.findElement(By.cssSelector("span[id='hasChar']")).getAttribute("style");
+				logger.info("Color : "+alphaCahr);
+				Assert.assertTrue(alphaCahr.contains("rgb(30, 86, 21)"));
+				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("p");
-				String alphaCahr1 = ob.findElement(By.cssSelector("span[id='hasChar']")).getCssValue("background");
-				Assert.assertEquals(alphaCahr1, "rgb(30, 86, 21)");
+				BrowserWaits.waitTime(2);
+				String alphaCahr1 = ob.findElement(By.cssSelector("span[id='hasChar']")).getAttribute("style");
+				logger.info("Color : "+alphaCahr1);
+				Assert.assertTrue(alphaCahr1.contains("rgb(30, 86, 21)"));
 
 				test.log(LogStatus.PASS, "Password field allowed one alphabet character");
 
@@ -374,12 +380,14 @@ public class ENWIAM013 extends TestBase {
 								"Verify that the Password minimum length of 8 characters is ALWAYS enforced")
 						.assignCategory("ENWIAM");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-
+				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
-				String alphaCahr = ob.findElement(By.cssSelector("span[id='minLength']")).getCssValue("background");
+				BrowserWaits.waitTime(2);
+				String eightChar = ob.findElement(By.cssSelector("span[id='minLength']")).getAttribute("style");
+				logger.info("Color : "+eightChar);
+				Assert.assertTrue(eightChar.contains("rgb(30, 86, 21)"));
 				ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
 				ob.findElement(By.id(OR.getProperty("update_password"))).click();
-				Assert.assertEquals(alphaCahr, "rgb(30, 86, 21)");
 				test.log(LogStatus.PASS, "Password field allowed 8 or more characters");
 
 			} catch (Throwable t) {
@@ -442,22 +450,26 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1937",
 								"Verify that As a Neon or ENW user, I want to be able to reset my STeAM Password from the EndNote Web landing page.")
 						.assignCategory("ENWIAM");
-				BrowserWaits.waitTime(2);
-				ob.findElement(By.cssSelector("input[class='button']")).click();
+				//BrowserWaits.waitTime(2);
+				//ob.findElement(By.cssSelector("input[class='button']")).click();
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				Thread.sleep(10000);
+				String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+				logger.info("Text Continue : "+text1);
+				if (text1.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
 
-				if (!checkElementPresence("header_label")) {
-
-					test.log(LogStatus.FAIL, "User unable to login with changed password");// extent
-																							// reports
+				if (!checkElementPresence("ul_name")) {
+					test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_user_unable_to_login_with_changed_password")));// screenshot
+							this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
+					closeBrowser();
 
 				}
 

@@ -81,12 +81,12 @@ public class ENWIAM0004 extends TestBase {
 		// Navigate to TR login page and login with valid TR credentials
 		//ob.navigate().to(host);
         		 ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-		pf.getENWReferencePageInstance(ob).loginWithENWLinkedInCredentials(userName,passWord);
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials(userName,passWord);
 		//(LOGIN.getProperty("USERNAME17"),	LOGIN.getProperty("PASSWORD17"));
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
 		validateLinkedAccounts(2,accountType);
-		pf.getENWReferencePageInstance(ob).logout1();
+		pf.getENWReferencePageInstance(ob).logout();
 		closeBrowser();
 		pf.clearAllPageObjects();
 

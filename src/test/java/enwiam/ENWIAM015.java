@@ -103,7 +103,6 @@ public class ENWIAM015 extends TestBase {
 			ob.findElement(By.cssSelector("input[id='oldpw']")).sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector("input[id='newpw']")).sendKeys(newPass);
 			ob.findElement(By.cssSelector("input[id='confirmpw']")).sendKeys(newPass);
-			;
 			ob.findElement(By.cssSelector("input[class='blue_btn']")).click();
 			BrowserWaits.waitTime(2);
 			String str = ob.findElement(By.cssSelector("td[class='errtext2']")).getText();
@@ -125,12 +124,14 @@ public class ENWIAM015 extends TestBase {
 			}
 
 			logoutEnw();
+			BrowserWaits.waitTime(4);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(newPass);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			BrowserWaits.waitTime(6);
 			String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+			logger.info("Text : "+text1);
 			if (text1.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
