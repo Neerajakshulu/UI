@@ -73,15 +73,14 @@ public class ENWReferencePage extends TestBase {
 	
 	// Did you know link modal
 	
-	public void didYouKnow() throws InterruptedException{
+	public void didYouKnow(String passWord ) throws InterruptedException{
 		BrowserWaits.waitTime(3);
 		ob.findElement(By.xpath("//input[@name='steamPassword']")).click();
 		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath("//input[@name='steamPassword']")).sendKeys(LOGIN.getProperty("Password19"));
-		//ob.findElement(By.xpath("//input[@class='wui-input-with-label__input ng-pristine ng-untouched ng-invalid ng-invalid-required']")).sendKeys("Kanda@123");
+		ob.findElement(By.xpath("//input[@name='steamPassword']")).sendKeys(passWord);
+		//LOGIN.getProperty("Password19")
 		BrowserWaits.waitTime(3);
-		    //ob.findElement(By.xpath(OR.getProperty("DID_YOU_KNOW_LETS_GO_BUTTON"))).click();
-		ob.findElement(By.xpath(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH.toString())).click();
+    	ob.findElement(By.xpath(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH.toString())).click();
 	//DID_YOU_KNOW_LETS_GO_BUTTON
 		BrowserWaits.waitTime(3);
 		//Clicking Continuous button
@@ -89,7 +88,7 @@ public class ENWReferencePage extends TestBase {
 	}
 	
 	//Arvind- Yes,I have an account module
-	public void yesAccount() throws InterruptedException
+	public void yesAccount(String userName,String passWord) throws InterruptedException
 	{
 		BrowserWaits.waitTime(3);
 		// Clicking Yes,I have an account button
@@ -98,13 +97,13 @@ public class ENWReferencePage extends TestBase {
 		BrowserWaits.waitTime(3);
 		//Enter arvindkandaswamy STeAM credentials
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).click();
-		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).sendKeys(LOGIN.getProperty("UserName19"));
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).sendKeys(userName);
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).click();
-		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).sendKeys(LOGIN.getProperty("Password19"));
+		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).sendKeys(passWord);
 		//Clicking the "Done" button
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())).click();
 		}
-	
+	//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
 	//Arvind- Clicking the Accounts button on ENW Profile-Flyout 
 		public void clickAccount() throws InterruptedException
 		{

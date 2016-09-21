@@ -125,7 +125,9 @@ public class ENWIAM0002 extends TestBase {
 		ob.navigate().to(host);
 		String accountType="Facebook";
 		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"aravind.attur@thomsonreuters.com","Facebook@123");
-		pf.getENWReferencePageInstance(ob).yesAccount();
+		//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
+
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19"));
 		try {
 			ob.findElement(By.className("btn-common")).click();
 		} catch (Exception e) {
@@ -146,7 +148,7 @@ public class ENWIAM0002 extends TestBase {
 		ob.navigate().to(host);
 		String accountType="LinkedIn";
 		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com","Linked@123");		
-		pf.getENWReferencePageInstance(ob).yesAccount();
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19"));
 		try {
 			ob.findElement(By.className("btn-common")).click();
 		} catch (Exception e) {

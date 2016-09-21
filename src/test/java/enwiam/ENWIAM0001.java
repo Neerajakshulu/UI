@@ -93,7 +93,8 @@ public class ENWIAM0001 extends TestBase {
 		String accountType="Facebook";
 		
 		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"arvindkandaswamy@gmail.com","darshiniyogi@123");
-		pf.getENWReferencePageInstance(ob).didYouKnow();
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
+		//LOGIN.getProperty("Password19")
 		ob.findElement(By.className("btn-common")).click();
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
@@ -125,7 +126,7 @@ private void loginToLn() throws Exception {
 		String accountType="LinkedIn";
 		
 		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("arvindkandaswamy@gmail.com", "darshiniyogi");
-		pf.getENWReferencePageInstance(ob).didYouKnow();
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
