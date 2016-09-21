@@ -88,23 +88,14 @@ public class ENWIAM011 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			BrowserWaits.waitTime(4);
-		//	waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
 			
 			BrowserWaits.waitTime(8);
-			/*waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),
-					30);
-			String agreeButton = ob
-					.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).getAttribute("title");
-			if(agreeButton.equals("I Agree")){
-				ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
-			}
-			*/
+		
 			String text=ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).getText();
 			if(text.equalsIgnoreCase("Continue")){
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports

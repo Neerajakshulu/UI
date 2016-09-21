@@ -87,25 +87,18 @@ public class ENWIAM012 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(10);
-			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),30);
-			/*String agreeButton = ob
-					.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).getAttribute("title");
-			if(agreeButton.equals("I Agree")){
-				ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
-			}*/
+			
 
 			String text=ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).getText();
 			if(text.equalsIgnoreCase("Continue")){
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent

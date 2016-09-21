@@ -122,6 +122,7 @@ public class ENWIAM009 extends TestBase {
 						.startTest("OPQA-1963",
 								"Verify that 'View additional email preferences' should be displayed in the account setting page.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				Assert.assertEquals(str, emaiText);
 				test.log(LogStatus.PASS,
 						"View additional email preferences link displayed in the account setting page.");
@@ -136,6 +137,7 @@ public class ENWIAM009 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -145,6 +147,7 @@ public class ENWIAM009 extends TestBase {
 						.startTest("OPQA-1964",
 								"Verify that after clicking 'View additional email preferences' user should be redirected to 'Intelectual property and Science Page' and should be able to enter email id in email Address field to access your preference center.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
 
 				// Assert.assertEquals(str, emaiText);
@@ -177,17 +180,7 @@ public class ENWIAM009 extends TestBase {
 				String verificationEmail = ob.findElement(By.cssSelector("strong font[color='#ff9100']")).getText();
 				Assert.assertEquals(verification.contains("PLEASE CHECK YOUR INBOX/SPAM FOLDER"),
 						verificationEmail.contains(email1));
-				// test.log(LogStatus.INFO, "Preference link is present and
-				// clicked");
-				// new
-				// PageFactory().getBrowserWaitsInstance(ob).waitUntilText("ACCESS
-				// YOUR PREFERENCE CENTER");
-				// test.log(LogStatus.INFO, "Preference page is opened
-				// successfully");
-				// ob.close();
-				// ob.switchTo().window(al.get(0));
-				// ob.navigate().back();
-
+				
 				test.log(LogStatus.PASS,
 						"After clicking 'View additional email preferences' user redirected to 'Intelectual property and Science Page' and successfylly enterd email id in textbox.");
 			} catch (Throwable t) {
@@ -202,6 +195,7 @@ public class ENWIAM009 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -211,6 +205,7 @@ public class ENWIAM009 extends TestBase {
 						.startTest("OPQA-1965",
 								"Verify that user should receive an email verification mail containing a direct link to 'Preference Center' Page, where user can update email preferences for the 'Intellectual Property & Science business of Thomson Reuters.'")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
 				BrowserWaits.waitTime(14);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
@@ -240,6 +235,7 @@ public class ENWIAM009 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -249,7 +245,7 @@ public class ENWIAM009 extends TestBase {
 						.startTest("OPQA-1966",
 								"Verify that after updating the preferences ,the system should update the URL that supports the 'View additional email preferences' link .")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath("//font[contains(text(),'ENGLISH')]")).click();
 				BrowserWaits.waitTime(2);
 
@@ -303,6 +299,7 @@ public class ENWIAM009 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				extent.endTest(test);
 			}
 

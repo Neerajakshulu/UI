@@ -71,12 +71,13 @@ public class ENWIAM001 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			try {
-
+				
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1719",
 								"Verify that ENW registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				//boolean status = addRequriFields("duster", "man");
 				
 				//Assert.assertTrue(status);
@@ -115,16 +116,18 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
 			try {
+				
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1676",
 								"Verify that 'Sign up' link should be displayed on ENW registration page .")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				String signupStatus = ob
 						.findElement(By.cssSelector(
 								"button[class='wui-btn wui-btn--primary login-button button-color-primary']"))
@@ -132,7 +135,6 @@ public class ENWIAM001 extends TestBase {
 				logger.info("SingUp Status : " + signupStatus);
 				Assert.assertTrue(signupStatus.contains("userRegister.$invalid"));
 				test.log(LogStatus.PASS, "Sign up linke is enabled");
-
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Sign up linke is not  enabled" + t);// extent
 				StringWriter errors = new StringWriter();
@@ -143,6 +145,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -152,7 +155,7 @@ public class ENWIAM001 extends TestBase {
 						.startTest("OPQA-1744",
 								"Verify that the user should be able click on 'Sign up' button after filling the above fields correctly.")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				//ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 				ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--primary login-button button-color-primary']")).click();
 				BrowserWaits.waitTime(4);
@@ -171,7 +174,6 @@ public class ENWIAM001 extends TestBase {
 
 				
 				test.log(LogStatus.PASS, "Able to click on 'Sign up' button after filling the required fields");
-				
 			}catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Not Able to click on 'Sign up' button after filling the required fields" + t);// extent
 				StringWriter errors = new StringWriter();
@@ -182,16 +184,16 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
 			try{
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1760",
 								"Verify that user should get an Email verification Link on the registered Email Id .")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				BrowserWaits.waitTime(3);
 				ob.get("https://www.guerrillamail.com");
@@ -227,6 +229,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -237,7 +240,7 @@ public class ENWIAM001 extends TestBase {
 						.startTest("OPQA-1763",
 								"Verify that after clicking verification link user should get the message as' Success!You have successfully activated your account. Please sign in.'")
 						.assignCategory("ENWIAM");
-				
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 				WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
@@ -260,6 +263,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -270,6 +274,7 @@ public class ENWIAM001 extends TestBase {
 						.startTest("OPQA-1766",
 								"Verify that after completion of verification process,user should be able to sign into ENW")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				BrowserWaits.waitTime(4);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
@@ -298,6 +303,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			

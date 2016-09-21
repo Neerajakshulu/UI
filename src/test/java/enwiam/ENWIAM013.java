@@ -125,6 +125,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1934",
 								"Verify that Forgot your password? Link is clickable on NEON Landing page and End note landing page")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				String forgotPassText = ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).getText();
 				logger.info("Fogot Password Text : " + forgotPassText);
 				Assert.assertEquals(forgotPassText, "Forgot password?");
@@ -142,6 +143,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -151,6 +153,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1935",
 								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				String resertPassPage = ob
 						.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
 						.getText();
@@ -170,6 +173,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -179,6 +183,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1945",
 								"Verify that Upon initiation, the Neon and ENW reset password workflow shall bring the user to the send email verification page where a verification email can be sent to an email address entered by the user.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				// String
 				// emailVeficationPage=ob.findElement(By.cssSelector("input[class='button']")).getText();
 				// Assert.assertEquals(emailVeficationPage, "Send verification
@@ -213,6 +218,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -222,6 +228,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1946",
 								"Verify that the Neon and ENW reset password workflow shall be able to send a verification email to the user")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				// ob.close();
 				// ob.switchTo().window(al.get(0));
@@ -251,6 +258,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -260,7 +268,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1947",
 								"Verify that Upon clicking the link to reset password in the Neon and ENW reset verification email, the user shall be sent to the password reset page to reset the applicable STeAM user")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				WebElement reset_link_element = ob
 						.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
 				String reset_link_url = reset_link_element.getAttribute("href");
@@ -280,6 +288,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -290,6 +299,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1950",
 								"Verify Password must have at least one special character from !@#$%^*()~`{}[]|")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("!");
@@ -308,6 +318,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -316,6 +327,7 @@ public class ENWIAM013 extends TestBase {
 				test = extent
 						.startTest("OPQA-1951", "Verify Password must contain at least one number is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("1");
@@ -335,6 +347,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -344,6 +357,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1953",
 								"Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("P");
@@ -370,6 +384,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -379,6 +394,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1948",
 								"Verify that the Password minimum length of 8 characters is ALWAYS enforced")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
@@ -400,6 +416,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -409,6 +426,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1954",
 								"Verify Upon completion of establishing a new password, a user who wants to go to ENW shall be presented a confirmation page with an optional link back to ENW Landing page")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				String checkEmail2 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
 				logger.info("Email Address : " + checkEmail2);
@@ -439,6 +457,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -450,6 +469,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1937",
 								"Verify that As a Neon or ENW user, I want to be able to reset my STeAM Password from the EndNote Web landing page.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				//BrowserWaits.waitTime(2);
 				//ob.findElement(By.cssSelector("input[class='button']")).click();
 				BrowserWaits.waitTime(4);
@@ -488,142 +508,10 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
-			
-			
-			
-			// ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
-			//
-			// BrowserWaits.waitTime(4);
-			// waitForElementTobeVisible(ob,
-			// By.id(OR.getProperty("email_Address")), 30);
-			// ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);
-			// ob.findElement(By.xpath(OR.getProperty("verification_email_button"))).click();
-			//
-			// BrowserWaits.waitTime(3);
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("confomr_message")), 30);
-			//
-			// String text =
-			// ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText();
-			// logger.info("Email Address : "+text);
-			//
-			// String expected_text = "An email with password reset instructions
-			// has been sent to "+email;
-			// logger.info("Expected Email : "+expected_text);
-			//
-			// String checkEmail1 =
-			// ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
-			// logger.info("Email Address : "+checkEmail1);
-			// String checkEmail="Please check your email";
-			// if (!StringContains(text,
-			// expected_text)&&!StringContains(checkEmail, checkEmail1)) {
-			//
-			// test.log(LogStatus.FAIL, "Email for password change not sent");//
-			// extent reports
-			// status = 2;// excel
-			// test.log(
-			// LogStatus.INFO,
-			// "Snapshot below: "
-			// +
-			// test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-			// + "_password_change_email_not_sent")));// screenshot
-			//
-			// }
-			// BrowserWaits.waitTime(3);
-			// //ob.close();
-			// //ob.switchTo().window(al.get(0));
-			// //Thread.sleep(2000);
-			// ob.get("https://www.guerrillamail.com");
-			// BrowserWaits.waitTime(12);
-			// List<WebElement> email_list =
-			// ob.findElements(By.xpath(OR.getProperty("email_list")));
-			// WebElement myE = email_list.get(0);
-			// JavascriptExecutor executor = (JavascriptExecutor) ob;
-			// executor.executeScript("arguments[0].click();", myE);
-			// // email_list.get(0).click();
-			// Thread.sleep(2000);
-			//
-			// String email_subject =
-			// ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
-			// logger.info("Email Subject Text : "+email_subject);
-			// if (!StringContains(email_subject,
-			// "EndNote&trade;_password_change_request")) {
-			//
-			// test.log(LogStatus.FAIL, "Email for changing password not
-			// received");// extent reports
-			// status = 2;// excel
-			// test.log(
-			// LogStatus.INFO,
-			// "Snapshot below: "
-			// +
-			// test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-			// + "_password_change_email_not_received")));// screenshot
-			//
-			// }
-
-			// WebElement reset_link_element =
-			// ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
-			// String reset_link_url = reset_link_element.getAttribute("href");
-			// ob.get(reset_link_url);
-			//
-			// waitForElementTobeVisible(ob,
-			// By.id(OR.getProperty("newPassword_textBox")), 30);
-			//
-			// ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
-			// ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
-			// ob.findElement(By.id(OR.getProperty("update_password"))).click();
-			//
-
-			// String checkEmail2 =
-			// ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
-			// logger.info("Email Address : "+checkEmail2);
-			//
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("confomr_message")), 30);
-			//
-			// text =
-			// ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText();
-			// logger.info("Expected Text : "+text);
-			//
-			// expected_text = "Your password has been updated";
-			// String expectedText="Your password has been successfully updated.
-			// A confirmation has been sent to your email address.";
-			//
-			// if (!StringContains(checkEmail2,
-			// expected_text)&&!StringContains(text, expectedText)) {
-			//
-			// test.log(LogStatus.FAIL, "Password not changed successfully");//
-			// extent reports
-			// status = 2;// excel
-			// test.log(
-			// LogStatus.INFO,
-			// "Snapshot below: "
-			// +
-			// test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-			// + "_password_not_changed_successfully")));// screenshot
-			//
-			// }
-//			BrowserWaits.waitTime(2);
-//			ob.findElement(By.cssSelector("input[class='button']")).click();
-//			BrowserWaits.waitTime(4);
-//			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-//			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-//			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
-//			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-//			Thread.sleep(10000);
-//
-//			if (!checkElementPresence("header_label")) {
-//
-//				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent
-//																						// reports
-//				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//						this.getClass().getSimpleName() + "_user_unable_to_login_with_changed_password")));// screenshot
-//
-//			}
 			logoutEnw();
 			ob.quit();
 		}

@@ -94,7 +94,7 @@ public class ENWIAM014 extends TestBase {
 						.startTest("OPQA-1848",
 								"Verify that,an error message should display as 'email activation',when User did'nt activate the link in that respective mail after completing the registration process in ENW.")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				boolean registationStatus = registrationEnwForm(first_name, last_name);
 				if (registationStatus) {
 					BrowserWaits.waitTime(2);
@@ -126,6 +126,7 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -135,6 +136,7 @@ public class ENWIAM014 extends TestBase {
 						.startTest("OPQA-3666",
 								"Verify that,the system should send an email verification to the correct email address after clicking the button 'Resend Activation' on resend email verification page.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
 				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
@@ -150,6 +152,7 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -162,6 +165,7 @@ public class ENWIAM014 extends TestBase {
 						.startTest("OPQA-3667",
 								"Verify that,after clicking the button on resend email verification,the Neon or ENW login page should display a message that informs the user as the email has been sent.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 				if (!checkElementPresence("login_banner")) {
 
@@ -184,6 +188,7 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -194,6 +199,7 @@ public class ENWIAM014 extends TestBase {
 						.startTest("OPQA-1849",
 								"Verify that,user should sent to ENW home page after clicking the link in the ENW verification email.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				userAction = userActivation();
 				test.log(LogStatus.PASS, "User sent to ENW home page after clicking the link in the ENW verification email.");
 			}catch (Throwable t) {
@@ -206,6 +212,7 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -215,6 +222,7 @@ public class ENWIAM014 extends TestBase {
 						.startTest("OPQA-3665",
 								"Verify that system should force the users to verify their email address upon sign in to Neon or ENW with STeAM and provide a way for the user to send another email verification to the user's email address.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				if (userAction) {
 					//ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 					pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
@@ -234,16 +242,9 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-
-//			String userAction = loginActivatedENWUser();
-//			if (userAction.equals(email)) {
-//				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
-//				pf.getLoginTRInstance(ob).clickLogin();
-//			}
 			
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
@@ -269,16 +270,7 @@ public class ENWIAM014 extends TestBase {
 
 			}
 
-//			if (!checkElementPresence("help_link")) {
-//
-//				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
-//																									// reports
-//				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
-//
-//			}
-			// Verify that profile image using below xpath is present or not
+
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));
 			if (element == null) {

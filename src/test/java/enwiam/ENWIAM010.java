@@ -101,7 +101,7 @@ public class ENWIAM010 extends TestBase {
 						.startTest("OPQA-2007",
 								"Verify that STeAM user is able to submit an email address and password on the ENW Landing screen.")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 			String email = createENWNewUser(first_name, last_name);
 			logger.info("Email Address : " + email);
 			
@@ -119,6 +119,7 @@ public class ENWIAM010 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -128,6 +129,7 @@ public class ENWIAM010 extends TestBase {
 						.startTest("OPQA-3652",
 								"Verify that,user should receive the ENW EULA acceptance after signed into ENW for the first time.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString()),
 						30);
 				String agreeButton = ob
@@ -149,6 +151,7 @@ public class ENWIAM010 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			
@@ -158,6 +161,7 @@ public class ENWIAM010 extends TestBase {
 						.startTest("OPQA-2008",
 								"Verify that a user shall successfully authenticate by supplying correct STeAM credentials (email address + password), on the ENW landing screen.")
 						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.cssSelector(OnePObjectMap.ENW_HOME_AGREE_CSS.toString())).click();
 				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),
 						30);
@@ -203,6 +207,7 @@ public class ENWIAM010 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -219,7 +224,7 @@ public class ENWIAM010 extends TestBase {
 						.startTest("OPQA-2009",
 								"Verify that A user should not be allowed to sign-in to ENW if an incorrect email address and password combination is provided on the ENW landing screen")
 						.assignCategory("ENWIAM");
-
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
@@ -244,6 +249,7 @@ public class ENWIAM010 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
+				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 			closeBrowser();
