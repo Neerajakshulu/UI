@@ -127,7 +127,7 @@ public class IAM033 extends TestBase {
 		   ob.navigate().to(host);
 		   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
 		   pf.getLoginTRInstance(ob).checkLinking();
-		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername")));
+		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername"))); 
 		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
 		     	  pf.getLoginTRInstance(ob).logOutApp();
 		}
@@ -145,7 +145,7 @@ public class IAM033 extends TestBase {
 		   ob.navigate().to(host);
 		   pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
 		   pf.getLoginTRInstance(ob).checkLinking();
-		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Linkedin",CONFIG.getProperty("fbusername")));
+		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn",CONFIG.getProperty("fbusername"))); 
 		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
 		     	  pf.getLoginTRInstance(ob).logOutApp();
 		     	 closeBrowser();
