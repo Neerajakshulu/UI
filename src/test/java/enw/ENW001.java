@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -17,7 +16,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ENW001 extends TestBase {
@@ -75,14 +73,17 @@ public class ENW001 extends TestBase {
 					pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 					pf.getAuthoringInstance(ob).chooseArticle();
 					
+					
 				}else if(recordType.equalsIgnoreCase("Patents"))
 				{
 					pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 					pf.getAuthoringInstance(ob).chooseArticle();
+				
 				}else
 				{
 					pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 					pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
+					
 				}
 					
 			
@@ -108,7 +109,7 @@ public class ENW001 extends TestBase {
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 										+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
+				ErrorUtil.addVerificationFailure(t);
 			}
         
 			ob.navigate().back();

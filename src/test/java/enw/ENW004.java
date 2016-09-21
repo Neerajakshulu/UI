@@ -2,10 +2,7 @@ package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.List;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -18,7 +15,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ENW004 extends TestBase {
@@ -54,6 +50,15 @@ public class ENW004 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		
+		try {
 		
 			openBrowser();
 			maximizeWindow();
@@ -64,7 +69,7 @@ public class ENW004 extends TestBase {
 			String expectedSuccessMessage="Sent To EndNote";
 		
 		
-			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbLIusername"),CONFIG.getProperty("fbLIpwrd"));
+			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername"),CONFIG.getProperty("sLIpwrd"));
 				  
 			//   pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 			   
@@ -72,21 +77,12 @@ public class ENW004 extends TestBase {
 			   
 			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 			   
-			   ob.findElement(By.cssSelector("input[type='password']")).sendKeys(CONFIG.getProperty("fbLIsteampwrd"));
+			  
+			   pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
 			   
-			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
-			   
-			   
-			  /* pf.getLoginTRInstance(ob).socialLinking();
-			   test.log(LogStatus.PASS,"User has logged in with facebook credentials");
-			   pf.getLoginTRInstance(ob).checkLinking();
-			   pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
-			   test.log(LogStatus.PASS, "Facebook account is linked with steam account");
+			   BrowserWaits.waitTime(4);
 			   pf.getLoginTRInstance(ob).logOutApp();
-			*/
-			
-
-		   
+					   
 			   try
 				{
 				Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
@@ -105,10 +101,10 @@ public class ENW004 extends TestBase {
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
+					ErrorUtil.addVerificationFailure(t);
 				}
 	
-			//closeBrowser();
+			closeBrowser();
 			
 			
 			

@@ -2,10 +2,7 @@ package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.List;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,10 +12,8 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ENW006 extends TestBase {
@@ -38,7 +33,7 @@ public class ENW006 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW005() throws Exception {
+	public void testcaseENW006() throws Exception {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -54,7 +49,7 @@ public class ENW006 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername"));
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("FBonlyusernameenw006"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			
 		} catch (Throwable t) {
@@ -97,7 +92,7 @@ public class ENW006 extends TestBase {
 									"Snapshot below: "
 											+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 													+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
+							ErrorUtil.addVerificationFailure(t);
 						}
 			
 	    		   

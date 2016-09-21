@@ -2,11 +2,8 @@ package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -89,8 +86,8 @@ public class ENW003 extends TestBase {
 			   
 			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 			   
-             ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
-			   BrowserWaits.waitTime(5);
+              ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
+			  BrowserWaits.waitTime(5);
               pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			   
@@ -122,7 +119,7 @@ public class ENW003 extends TestBase {
 							"Snapshot below: "
 									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-
+					ErrorUtil.addVerificationFailure(t);
 				}
 	
 			closeBrowser();
