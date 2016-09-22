@@ -31,14 +31,6 @@ public class ENWIAM006 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-		
-//		extent = ExtentManager.getReporter(filePath);
-//		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
-//		test = extent
-//				.startTest(var,
-//						"Verify that app doesn't allow the user to create a new account with an email id that has already been used")
-//				.assignCategory("ENWIAM");
-
 	}
 
 	@Test
@@ -46,10 +38,6 @@ public class ENWIAM006 extends TestBase {
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
-//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 

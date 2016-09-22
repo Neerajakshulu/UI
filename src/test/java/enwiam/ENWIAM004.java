@@ -34,10 +34,7 @@ public class ENWIAM004 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
-		//test = extent.startTest(var, "Verify FIRST NAME field in new TR user registration page").assignCategory("ENWIAM");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
+		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
 	}
@@ -46,15 +43,12 @@ public class ENWIAM004 extends TestBase {
 	public void testcaseA5(String charLength,
 			String validity) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports

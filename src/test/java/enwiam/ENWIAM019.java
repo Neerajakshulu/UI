@@ -2,41 +2,40 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
+import base.TestBase;
 
-public class ENWIAM012 extends TestBase {
+import com.relevantcodes.extentreports.LogStatus;
+
+public class ENWIAM019 extends TestBase {
 
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+
 	}
 
 	@Test
-	public void testcaseA3() throws Exception {
+	public void testCaseA23() throws Exception {
 
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -53,7 +52,8 @@ public class ENWIAM012 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-
+			// 1)Create a new user
+			// 2)Login with new user and logout
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -63,61 +63,40 @@ public class ENWIAM012 extends TestBase {
 			}
 			clearCookies();
 
-			String email = "linkedinloginid@gmail.com";
-			String password = "Neon@1234";
-
-			// Navigate to LI login page
-			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-			// Verify that existing LI user credentials are working fine
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			// BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(10);
-
+			waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+			Thread.sleep(3000);
+			ob.findElement(By.name("loginEmail")).sendKeys("userendnote@gmail.com");
+			ob.findElement(By.name("loginPassword")).sendKeys("Neon@123");
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			Thread.sleep(8000);
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			if (!checkElementPresence("ul_name")) {
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
+			BrowserWaits.waitTime(6);
 
-				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
-																								// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_LI_User_credentials_not_working_fine")));// screenshot
-				closeBrowser();
-
-			}
-
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
+			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
+			String resertPassPage = ob
+					.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
+					.getText();
+			BrowserWaits.waitTime(3);
+			Assert.assertEquals(resertPassPage, "Reset your password");
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			logoutEnw();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
-																					// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-				closeBrowser();
-
-			}
-
-			closeBrowser();
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
+			ob.quit();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -127,9 +106,8 @@ public class ENWIAM012 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
-
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		closeBrowser();
 	}
 
 	@AfterTest

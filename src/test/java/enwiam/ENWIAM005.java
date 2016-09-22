@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM005 extends TestBase {
 
@@ -34,27 +34,21 @@ public class ENWIAM005 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
+		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-		//test = extent.startTest(var, "Verify LAST NAME field in new TR user registration page").assignCategory("ENWIAM");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA6(String charLength, String validity) throws Exception {
+	public void testcaseA6(String charLength,
+			String validity) throws Exception {
 
-		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()),
-			// "SKIP");
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -75,15 +69,15 @@ public class ENWIAM005 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 2);
-			Double d=new Double(Double.parseDouble(characterLength));
-			int i=d.intValue();
+			Double d = new Double(Double.parseDouble(characterLength));
+			int i = d.intValue();
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			logger.info("Character Length : "+i);
+			logger.info("Character Length : " + i);
 			String last_name = generateRandomName(i);
-			logger.info("Last Name : "+last_name);
+			logger.info("Last Name : " + last_name);
 
 			// selenium code
 			openBrowser();
@@ -98,26 +92,18 @@ public class ENWIAM005 extends TestBase {
 
 			// Navigate to TR login page
 			// ob.get(CONFIG.getProperty("testSiteName"));
-//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 
 			//
 			/*
-			 * waitForElementTobeVisible(ob,
-			 * By.xpath(OR.getProperty("TR_login_button")), 30);
-			 * 
-			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click
-			 * (); waitForElementTobeVisible(ob,
-			 * By.linkText(OR.getProperty("TR_register_link")), 30);
-			 * 
-			 * // Create new TR account
-			 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).
-			 * click(); // waitForElementTobeVisible(ob,
-			 * By.id(OR.getProperty("reg_lastName_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).
-			 * sendKeys(last_name);
-			 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).
-			 * click();
+			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click (); waitForElementTobeVisible(ob,
+			 * By.linkText(OR.getProperty("TR_register_link")), 30); // Create new TR account
+			 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))). click(); //
+			 * waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_lastName_textBox")), 30);
+			 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))). sendKeys(last_name);
+			 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))). click();
 			 */
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
@@ -128,10 +114,10 @@ public class ENWIAM005 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-			
+
 			BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
-			logger.info("Error List Size : "+errorList.size());
+			logger.info("Error List Size : " + errorList.size());
 			if (validity.equalsIgnoreCase("YES")) {
 
 				// verifying that error message is not getting displayed
@@ -153,32 +139,28 @@ public class ENWIAM005 extends TestBase {
 			}
 
 			else {
-				for(WebElement text : errorList){
-				if (!text.getText().equals("Last name is too long.")) {
+				for (WebElement text : errorList) {
+					if (!text.getText().equals("Last name is too long.")) {
 
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
-																					// report
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
-					closeBrowser();
-					return;
+						fail = true;// excel
+						test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
+																						// report
+						test.log(LogStatus.INFO,
+								"Snapshot below: "
+										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+												+ "_error_message_not_getting_displayed_" + (count + 1))));
+						closeBrowser();
+						return;
+					}
 				}
-			}
-				/*BrowserWaits.waitTime(3);
-				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
-				logger.info("Error Message : "+errorText);
-				if (!compareStrings("Last name is too long.", errorText)) {
-
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error text is incorrect");// extent
-																		// report
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_incorrect_error_text_" + (count + 1))));
-					closeBrowser();
-					return;
-
-				}*/
+				/*
+				 * BrowserWaits.waitTime(3); String errorText =
+				 * ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText(); logger.info("Error Message : "
+				 * +errorText); if (!compareStrings("Last name is too long.", errorText)) { fail = true;// excel
+				 * test.log(LogStatus.FAIL, "Error text is incorrect");// extent // report test.log(LogStatus.INFO,
+				 * "Snapshot below: " + test.addScreenCapture(captureScreenshot( this.getClass().getSimpleName() +
+				 * "_incorrect_error_text_" + (count + 1)))); closeBrowser(); return; }
+				 */
 
 			}
 
@@ -230,10 +212,10 @@ public class ENWIAM005 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 

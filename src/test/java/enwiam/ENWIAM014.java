@@ -32,18 +32,10 @@ public class ENWIAM014 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		
+
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-		
-//		extent = ExtentManager.getReporter(filePath);
-//		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-//		test = extent
-//				.startTest(var,
-//						"Verify that system able to resend activation mail when user doesn't activated mail and already registered with Neon.")
-//				.assignCategory("IAM");
-
 	}
 
 	@Test
@@ -51,10 +43,6 @@ public class ENWIAM014 extends TestBase {
 		WebElement element = null;
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		
-//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;// excel
@@ -87,20 +75,20 @@ public class ENWIAM014 extends TestBase {
 
 			String first_name = "duster";
 			String last_name = "man";
-			
-			try{
+
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1848",
 								"Verify that,an error message should display as 'email activation',when User did'nt activate the link in that respective mail after completing the registration process in ENW.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				boolean registationStatus = registrationEnwForm(first_name, last_name);
 				if (registationStatus) {
 					BrowserWaits.waitTime(2);
 					ob.get("https://www.guerrillamail.com");
 					BrowserWaits.waitTime(12);
-					ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+					ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 					pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 					BrowserWaits.waitTime(2);
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
@@ -110,13 +98,13 @@ public class ENWIAM014 extends TestBase {
 				String textMessage = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 				logger.info("Text Message : " + textMessage);
 				Assert.assertTrue(textMessage.contains("Please activate your account"));
-//				if (!textMessage.contains("Please activate your account")) {
-//					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-//							this.getClass().getSimpleName() + "_your_account_not_display_activate_page")));// screenshot
-//					closeBrowser();
-//				}
+				// if (!textMessage.contains("Please activate your account")) {
+				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				// this.getClass().getSimpleName() + "_your_account_not_display_activate_page")));// screenshot
+				// closeBrowser();
+				// }
 				test.log(LogStatus.PASS, "Error message displayed 'Please activate your account'");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Error message not displayed 'Please activate your account'");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
@@ -126,24 +114,26 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
-			try{
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-3666",
 								"Verify that,the system should send an email verification to the correct email address after clicking the button 'Resend Activation' on resend email verification page.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
 				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				test.log(LogStatus.PASS, "System send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
-				
-			}catch (Throwable t) {
-				test.log(LogStatus.FAIL, "System not send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
+				test.log(LogStatus.PASS,
+						"System send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"System not send an email verification to the correct email address after clicking the 'Resend Activation' button on resend email verification page.");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -152,34 +142,31 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
-			
-			
-			boolean userAction=false;
-			try{
+			boolean userAction = false;
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-3667",
 								"Verify that,after clicking the button on resend email verification,the Neon or ENW login page should display a message that informs the user as the email has been sent.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 				if (!checkElementPresence("login_banner")) {
 
 					test.log(LogStatus.FAIL, "User not get login page successfully");// extent reports
 					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_logout_successfully")));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 				}
-				test.log(LogStatus.PASS, "After clicking the 'Resend Activation' button on email verification,the ENW login page displayed");	
-			}catch (Throwable t) {
-				test.log(LogStatus.FAIL, "After clicking the 'Resend Activation' button on email verification,the ENW login page not displayed");
+				test.log(LogStatus.PASS,
+						"After clicking the 'Resend Activation' button on email verification,the ENW login page displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"After clicking the 'Resend Activation' button on email verification,the ENW login page not displayed");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -188,22 +175,23 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
-			
-			try{
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1849",
 								"Verify that,user should sent to ENW home page after clicking the link in the ENW verification email.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				userAction = userActivation();
-				test.log(LogStatus.PASS, "User sent to ENW home page after clicking the link in the ENW verification email.");
-			}catch (Throwable t) {
-				test.log(LogStatus.FAIL, "User not sent to ENW home page after clicking the link in the ENW verification email.");
+				test.log(LogStatus.PASS,
+						"User sent to ENW home page after clicking the link in the ENW verification email.");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"User not sent to ENW home page after clicking the link in the ENW verification email.");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -212,27 +200,27 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			try{
+
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-3665",
 								"Verify that system should force the users to verify their email address upon sign in to Neon or ENW with STeAM and provide a way for the user to send another email verification to the user's email address.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				if (userAction) {
-					//ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+					// ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 					pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 					BrowserWaits.waitTime(6);
-					//pf.getLoginTRInstance(ob).clickLogin();
+					// pf.getLoginTRInstance(ob).clickLogin();
 				}
 				test.log(LogStatus.PASS, "User successfylly login ENW application");
-				
-			}catch (Throwable t) {
+
+			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "User successfylly not login ENW application");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
@@ -242,10 +230,10 @@ public class ENWIAM014 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
+
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
 
@@ -256,8 +244,6 @@ public class ENWIAM014 extends TestBase {
 			if (continueText.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			
-			
 
 			if (!checkElementPresence("ul_name")) {
 
@@ -269,7 +255,6 @@ public class ENWIAM014 extends TestBase {
 				closeBrowser();
 
 			}
-
 
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));
@@ -304,14 +289,14 @@ public class ENWIAM014 extends TestBase {
 
 	@AfterTest
 	public void reportTestResult() {
-		//extent.endTest(test);
+		// extent.endTest(test);
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
