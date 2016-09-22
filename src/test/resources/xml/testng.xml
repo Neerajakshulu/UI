@@ -10,5 +10,7 @@
 		<suite-file path="./Profile.xml" />
 		<suite-file path="./Watchlist.xml" />
 		<suite-file path="./Notifications.xml" />
+		<suite-file path="./ENW.xml" />
+		<suite-file path="./ENWIAM.xml" />
 	</suite-files>
 </suite>
