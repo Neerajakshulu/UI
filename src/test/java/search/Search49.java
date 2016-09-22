@@ -30,19 +30,13 @@ public class Search49 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that search results related to all content types get displayed in the summary page when user searches using ALL option in Left navigation pane")
-				.assignCategory("Search suite");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 
 	}
 
 	@Test
-	public void testcaseB49() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+	public void testcaseB49() throws Exception {  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

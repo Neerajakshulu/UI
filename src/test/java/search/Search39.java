@@ -31,17 +31,15 @@ public class Search39 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that all articles are sorted by RELEVANCE by default in ARTICLES content type").assignCategory(
-				"Search suite");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB8() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

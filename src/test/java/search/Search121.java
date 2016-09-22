@@ -29,19 +29,13 @@ public class Search121 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that following fields get displayed correctly for an article in ARTICLES search results page:a)Titleb)Authorsc)Publication named)Publication datee)Times cited countf)Comments countg)Abstarct of snippet")
-				.assignCategory("Search suite");
-
-	}
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		}
 
 	@Test
 	public void testcaseB111() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

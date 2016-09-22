@@ -32,20 +32,14 @@ public class Search40 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that following filters are present for ARTICLES content type: a)Document Type b)Authors c)Categories d)Institutions")
-				.assignCategory("Search suite");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB8() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

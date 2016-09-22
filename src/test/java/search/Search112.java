@@ -35,18 +35,13 @@ public class Search112 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that sorting is retained when user navigates back to PEOPLE search results page from record view page")
-				.assignCategory("Search suite");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB112() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		List<String> profileOrderBeforeNavigation = new ArrayList<String>();

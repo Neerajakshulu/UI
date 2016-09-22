@@ -31,19 +31,14 @@ public class Search36 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that the following fields get displayed in the SORT BY drop down when ARTICLES is selected as content type in the left navigation pane: a)Relevance b)Times cited c)Publication Date(Newest) d)Publication Date(Oldest)")
-				.assignCategory("Search suite");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB8() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

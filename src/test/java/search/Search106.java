@@ -33,20 +33,14 @@ public class Search106 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that following options get displayed in SORT BY drop down in POSTS search results page: a)Relevance b)Create Date(Newest) c)Create Date(Oldest)"
-								+ "Verify that search results are sorted by CREATE DATE(NEWEST) by default in POSTS search results page")
-				.assignCategory("Search suite");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB106() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

@@ -34,16 +34,14 @@ public class Search127 extends TestBase {
     @BeforeTest
     public void beforeTest() throws Exception {
                     extent = ExtentManager.getReporter(filePath);
-                    String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-                    test = extent.startTest(var, "Verify that Deeplinking is working for Search result page using steam account")
-                                                    .assignCategory("Search suite");
-                    runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
+                    rowData = testcase.get(this.getClass().getSimpleName());
+                    test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
     }
 
     @Test
     public void testOpenApplication() throws Exception {
                     try {
-                    boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+                      
                     boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
                     master_condition = suiteRunmode && testRunmode;
 

@@ -31,18 +31,12 @@ public class Search94 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that record view page of a person gets displayed when user clicks on any PEOPLE in PEOPLE search results page.")
-				.assignCategory("Search suite");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
 
 	@Test
-	public void testcaseB94() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+	public void testcaseB94() throws Exception { 
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

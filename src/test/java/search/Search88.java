@@ -34,19 +34,13 @@ public class Search88 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that record view page of a patent gets displayed when user clicks on patent title in PATENT search results page")
-				.assignCategory("Search suite");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB88() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
