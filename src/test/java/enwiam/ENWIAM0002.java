@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ENWIAM0002 extends TestBase {
@@ -52,23 +53,24 @@ public class ENWIAM0002 extends TestBase {
 
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		// Deleting the links for arvindkandaswamy@gmail.com 
+		//Deleting the links for aravind.attur@thomsonreuters.com
+		
 		
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 						
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 		
-		//Deleting the links for aravind.attur@thomsonreuters.com
+		// Deleting the links for enwyogi3@yahoo.com 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));	
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 		
@@ -79,36 +81,41 @@ public class ENWIAM0002 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			loginToFb();			
+			loginToFb();	
+			//closeBrowser();
+			//pf.clearAllPageObjects();
+			
 		} 
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Unexpected error");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 		
-		// Deleting the links for arvindkandaswamy@gmail.com 
-				try {
-					String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
-					Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-					
-				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-					ErrorUtil.addVerificationFailure(t);
-				}
-				//Deleting the links for aravind.attur@thomsonreuters.com
+		// Deleting the links for aravind.attur@thomsonreuters.com
 				try {
 					String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
 					Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 					
 				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-					ErrorUtil.addVerificationFailure(t);
+					test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+					//ErrorUtil.addVerificationFailure(t);
+				}
+				// Deleting the links for enwyogi3@yahoo.com 
+				try {
+					String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
+					Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+					
+				} catch (Throwable t) {
+					test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+					//ErrorUtil.addVerificationFailure(t);
 				}
 				
 				
 				
 				try {
-					
+					/*openBrowser();
+					maximizeWindow();
+					clearCookies();*/
 					loginToLn();
 					closeBrowser();
 					pf.clearAllPageObjects();
@@ -123,22 +130,20 @@ public class ENWIAM0002 extends TestBase {
 	
 	private void loginToFb() throws Exception{
 		ob.navigate().to(host);
-		String accountType="Facebook";
+		//String accountType="Facebook";
 		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"aravind.attur@thomsonreuters.com","Facebook@123");
 		//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
 
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19"));
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"),LOGIN.getProperty("Password21"));
 		try {
 			ob.findElement(By.className("btn-common")).click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			test.log(LogStatus.FAIL, "Continue button is not working");// extent
-			//ErrorUtil.addVerificationFailure(t);
-		}
+			}
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		
-			validateLinkedAccounts(2, accountType);
+			validateLinkedAccounts(2,"Facebook");
 			
 		
 		pf.getENWReferencePageInstance(ob).logout();
@@ -146,18 +151,23 @@ public class ENWIAM0002 extends TestBase {
 	}
 	private void loginToLn() throws Exception{
 		ob.navigate().to(host);
-		String accountType="LinkedIn";
+		//String accountType="LinkedIn";
 		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com","Linked@123");		
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19"));
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"),LOGIN.getProperty("Password21"));
 		try {
-			ob.findElement(By.className("btn-common")).click();
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+					.getText();
+			if (text.equalsIgnoreCase("Continue")) {
+				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		
-			validateLinkedAccounts(2, accountType);
+		validateLinkedAccounts(2,"LinkedIn");
 			
 		
 		pf.getENWReferencePageInstance(ob).logout();
@@ -167,7 +177,7 @@ public class ENWIAM0002 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName21")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName20")));
 			test.log(LogStatus.PASS , "The account are matching");
@@ -177,6 +187,7 @@ public class ENWIAM0002 extends TestBase {
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
 
 		} catch (Throwable t) {
+			t.printStackTrace();
 			test.log(LogStatus.FAIL,
 					"Linked accounts are not available in accounts page : Neon and " + linkName + " accounts");
 			ErrorUtil.addVerificationFailure(t);// testng
