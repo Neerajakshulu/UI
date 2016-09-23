@@ -95,6 +95,14 @@
 		</classes>
 	</test>
 
+<test name="ENW_Linking from NEON" preserve-order="true">
+   <classes>
+			<class name="enwiam.ENWIAM100"></class>
+		</classes>
+		<classes>
+			<class name="enwiam.ENWIAM101"></class>
+		</classes>
+</test>
 
 </suite>
 
