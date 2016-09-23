@@ -44,6 +44,7 @@ public class Search129 extends TestBase {
                       
                     boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
                     master_condition = suiteRunmode && testRunmode;
+                    runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
 
                     if (!master_condition) {
                                     status = 3;
@@ -75,9 +76,9 @@ public class Search129 extends TestBase {
                                     test.log(
                                                                     LogStatus.INFO,
                                                                     "Snapshot below: "
-                                                                                                    + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-                                                                                                                                    + "_Article_Search_not_happening")));
-                                    // closeBrowser();
+                                                 + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+                                                              + "_Article_Search_not_happening")));
+                                    closeBrowser();
                     }              
     } 
 
@@ -107,7 +108,7 @@ public class Search129 extends TestBase {
                     * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
                     * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
                     */
-                    closeBrowser();
+
     }
     @Test(dependsOnMethods = "testOpenApplication" ,dataProvider = "getTestData")
     public void test(String url,String recordtype) throws Exception {
@@ -153,7 +154,7 @@ try{
     }
     @DataProvider
     public Object[][] getTestData() {
-                    return TestUtil.getData(searchxls, "deep_linking");
+                    return TestUtil.getData(searchxls,"deep_linking");
     }
 
 }

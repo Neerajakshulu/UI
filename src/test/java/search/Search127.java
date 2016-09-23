@@ -30,7 +30,7 @@ public class Search127 extends TestBase {
 
     static int time = 30;
     PageFactory pf = new PageFactory();
-
+   
     @BeforeTest
     public void beforeTest() throws Exception {
                     extent = ExtentManager.getReporter(filePath);
@@ -44,6 +44,7 @@ public class Search127 extends TestBase {
                       
                     boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
                     master_condition = suiteRunmode && testRunmode;
+                    runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
 
                     if (!master_condition) {
                                     status = 3;
@@ -72,11 +73,8 @@ public class Search127 extends TestBase {
                                     test.log(LogStatus.INFO, errors.toString());
                                     ErrorUtil.addVerificationFailure(e);
                                     status = 2;// excel
-                                    test.log(
-                                                                    LogStatus.INFO,
-                                                                    "Snapshot below: "
-                                                                                                    + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-                                                                                                                                    + "_Article_Search_not_happening")));
+                                    test.log(LogStatus.INFO,"Snapshot below: "+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+                                         + "_Article_Search_not_happening")));
                                     // closeBrowser();
                     }              
     } 
@@ -109,6 +107,7 @@ public class Search127 extends TestBase {
                     */
                     closeBrowser();
     }
+    
     @Test(dependsOnMethods = "testOpenApplication" ,dataProvider = "getTestData")
     public void test(String url,String recordtype) throws Exception {
 try{

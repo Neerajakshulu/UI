@@ -53,7 +53,8 @@ public class Search130 extends TestBase {
                     
                   boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
                   master_condition = suiteRunmode && testRunmode;
-
+                  runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
+                  
                   if (!master_condition) {
                         status = 3;
                         test.log(LogStatus.SKIP,
