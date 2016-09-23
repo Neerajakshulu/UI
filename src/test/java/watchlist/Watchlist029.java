@@ -46,17 +46,14 @@ public class Watchlist029 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to watch a post(user generated content) to a particular watchlist from notification in home page||Verify that user is able to unwatch a post from watchlist from notification in home page")
-				.assignCategory("Watchlist");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
 	@Test
 	public void testWatchUnwatchPostFromHomePage() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

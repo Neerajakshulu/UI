@@ -13,16 +13,17 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * Verify that user is able to add an Article from ALL content search results page to a particular watchlist||Verify
- * that user is able to unwatch an Article from ALL content search results page
+ * Verify that user is able to add an Article from ALL content search results
+ * page to a particular watchlist||Verify that user is able to unwatch an
+ * Article from ALL content search results page
  * 
  * @author Prasenjit Patra
  *
@@ -36,23 +37,18 @@ public class Watchlist001 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
-	
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add an Article from ALL content search results page to a particular watchlist||Verify that user is able to unwatch an Article from ALL content search results page")
-				.assignCategory("Watchlist");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 	}
 
 	@Test
-	@Parameters({"articleName"})
+	@Parameters({ "articleName" })
 	public void testWatchArticleFromAllContentSearchResult(String articleName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -70,7 +66,7 @@ public class Watchlist001 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {
@@ -80,26 +76,26 @@ public class Watchlist001 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-//			System.out.println("After opening site");
+			// System.out.println("After opening site");
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-		// Searching for article
+			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			Thread.sleep(3000);
 
-//			// Watching an article to a particular watch list
+			// // Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
-//			// Selecting the document name
+			// // Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			
-//			// Navigate to a particular watch list page
+
+			// // Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -131,19 +127,18 @@ public class Watchlist001 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			Thread.sleep(3000);
 
-//			// Watching an article to a particular watch list
+			// // Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
-			
-//			// Unwatching an article to a particular watch list
-			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
-			
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
-//			// Selecting the document name
+			// // Unwatching an article to a particular watch list
+			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+
+			// // Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 
-//			// Navigate to a particular watch list page
+			// // Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
@@ -165,7 +160,7 @@ public class Watchlist001 extends TestBase {
 						"User is unable to remove an article from watchlist in ALL content search results page");// extent
 			}
 
-//			// Deleting the watch list
+			// // Deleting the watch list
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
@@ -191,11 +186,14 @@ public class Watchlist001 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
-		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */}
 
 }

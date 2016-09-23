@@ -14,13 +14,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Verify that user is able to add an Article from Articles content search results page to a particular
@@ -42,11 +42,8 @@ public class Watchlist004 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that user is able to add an Article from Articles content search results page to a particular watchlist||Verify that user is able to unwatch an Article from watchlist page||Verify that user is able to unwatch an Article from Articles content search results page")
-				.assignCategory("Watchlist");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
 
@@ -54,7 +51,7 @@ public class Watchlist004 extends TestBase {
 	@Parameters({"articleName"})
 	public void testWatchArticleFromArticleContentSearchResult(String articleName) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
