@@ -21,7 +21,7 @@ public class ENW004 extends TestBase {
 	
 	static int status = 1;
 	// Following is the list of status:
-	// 1--->PASS
+	// 1--->PASS 
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not

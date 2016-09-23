@@ -93,7 +93,6 @@ public class ENW003 extends TestBase {
 			   
 			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 			   new Actions(ob).moveByOffset(200, 200).click().build().perform();
-			   
 			   BrowserWaits.waitTime(8);
 			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 			   pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();

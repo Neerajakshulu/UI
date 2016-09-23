@@ -33,7 +33,7 @@ public class ENW006 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW006() throws Exception {
+	public void testcaseENW006() throws Exception { 
 		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;

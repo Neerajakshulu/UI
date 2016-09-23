@@ -18,7 +18,7 @@ import util.TestUtil;
 
 public class ENW002 extends TestBase {
 	
-	static int status = 1;
+	static int status = 1; 
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
