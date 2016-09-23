@@ -60,7 +60,7 @@ public class ENW001 extends TestBase {
 			String expectedSuccessMessage="Sent To EndNote";
 			
 		//	ob.navigate().to(System.getProperty("host"));
-			loginAs("MARKETUSEREMAIL1", "MARKETUSERPASSWORD2");
+			loginAs("MARKETUSEREMAIL1", "MARKETUSERPASSWORD1");
 			
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
 			

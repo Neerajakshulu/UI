@@ -53,7 +53,7 @@ public class ENW003 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername"));
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername003"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			
 		} catch (Throwable t) {
@@ -70,13 +70,13 @@ public class ENW003 extends TestBase {
 			
 			String expectedSuccessMessage="Sent To EndNote";
 			  
-			   pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("sfbLIusername"),CONFIG.getProperty("sfbpwrd"));
+			   pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("sfbLIusername003"),CONFIG.getProperty("sfbpwrd003"));
 			   pf.getLoginTRInstance(ob).clickLogin();
-			   BrowserWaits.waitTime(6);
+			   BrowserWaits.waitTime(8);
 	         	test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			   pf.getLoginTRInstance(ob).logOutApp();
 		
-			   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername"),CONFIG.getProperty("sfbpwrd"));
+			   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),CONFIG.getProperty("sfbpwrd003"));
 			   
 			   pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 			   BrowserWaits.waitTime(5);

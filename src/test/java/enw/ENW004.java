@@ -69,7 +69,7 @@ public class ENW004 extends TestBase {
 			String expectedSuccessMessage="Sent To EndNote";
 		
 		
-			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername"),CONFIG.getProperty("sLIpwrd"));
+			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername004"),CONFIG.getProperty("sfbpwrd004"));
 				  
 			//   pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 			   

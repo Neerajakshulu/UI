@@ -52,6 +52,9 @@ public class ENW006 extends TestBase {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("FBonlyusernameenw006"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			
+			String statuCode1 = deleteUserAccounts(CONFIG.getProperty("Steamonlyuser"));
+			Assert.assertTrue(statuCode1.equalsIgnoreCase("200"));
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
