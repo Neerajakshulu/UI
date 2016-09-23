@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM012 extends TestBase {
 
@@ -34,28 +34,23 @@ public class IAM012 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that PASSWORD field in new TR user registration page")
-				.assignCategory("IAM");
-				// test.log(LogStatus.INFO, "****************************");
-
-		// load the runmodes of the tests
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA12(String password, String strength, String checks, String validity) throws Exception {
+	public void testcaseA12(String password,
+			String strength,
+			String checks,
+			String validity) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()),
-			// "SKIP");
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -68,8 +63,6 @@ public class IAM012 extends TestBase {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(iamxls,
-			// this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
@@ -84,9 +77,7 @@ public class IAM012 extends TestBase {
 			logger.info("TickMarks : " + tickMarks);
 			String email = generateRandomName(5) + "@abc.com";
 
-			// selenium code
 			openBrowser();
-			//
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {
@@ -95,23 +86,7 @@ public class IAM012 extends TestBase {
 			}
 			clearCookies();
 
-			// Navigate to TR login page
-			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			//
-			/*
-			 * waitForElementTobeVisible(ob,
-			 * By.xpath(OR.getProperty("TR_login_button")), 30);
-			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click
-			 * (); waitForElementTobeVisible(ob,
-			 * By.linkText(OR.getProperty("TR_register_link")), 30);
-			 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).
-			 * click(); waitForElementTobeVisible(ob,
-			 * By.id(OR.getProperty("reg_password_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).
-			 * sendKeys(password);
-			 */
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
@@ -138,82 +113,6 @@ public class IAM012 extends TestBase {
 					BrowserWaits.waitTime(4);
 				}
 			}
-			// System.out.println(tm_list.size());
-			/*
-			 * if (!compareNumbers(tm_list.size(), tm_list.size())) {
-			 * 
-			 * fail = true;// excel test.log(LogStatus.FAIL,
-			 * "Password strength checking functionality not working correctly"
-			 * );// extent // report test.log( LogStatus.INFO,
-			 * "Snapshot below: " +
-			 * test.addScreenCapture(captureScreenshot(this.getClass().
-			 * getSimpleName() +
-			 * "_password_strength_checking_functionality_not_working_correctly_"
-			 * + (count + 1))));
-			 * 
-			 * }
-			 */
-
-			/*
-			 * String password_strength =
-			 * ob.findElement(By.id(OR.getProperty("reg_passwordStrength_label")
-			 * )).getText(); if (!compareStrings(strength, password_strength)) {
-			 * 
-			 * fail = true;// excel test.log(LogStatus.FAIL,
-			 * "Password strength not displayed correctly");// extent report
-			 * test.log( LogStatus.INFO, "Snapshot below: " +
-			 * test.addScreenCapture(captureScreenshot(this.getClass().
-			 * getSimpleName() + "_password_strength_not_displayed_correctly_" +
-			 * (count + 1))));
-			 * 
-			 * }
-			 */
-
-			/*ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).sendKeys("ricky");
-			ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))).sendKeys("behl");
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).clear();
-			ob.findElement(By.id(OR.getProperty("reg_password_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("reg_confirmPassword_textBox"))).sendKeys(password);
-			ob.findElement(By.id(OR.getProperty("reg_terms_checkBox"))).click();
-			ob.findElement(By.xpath(OR.getProperty("reg_register_button"))).click();
-			Thread.sleep(5000);*/
-
-			/*if (validity.equalsIgnoreCase("YES")) {
-
-				// Verifying that confirmation email is sent
-
-				if (!checkElementPresence("reg_accountConfirmationMessage_label")) {
-
-					fail = true;// excel
-					test.log(LogStatus.FAIL,
-							"User not able to register himself even when the password strength is strong");// extent
-																											// report
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_user_unable_to_register_himself_even_when_password_strength_is_strong_"
-									+ (count + 1))));
-
-				}
-
-			}
-
-			else {
-
-				if (!checkElementPresence("reg_passwordStrengthMessageOnSubmit_label")) {
-
-					fail = true;// excel
-					test.log(LogStatus.FAIL,
-							"Either password strength message getting displayed is incorrect or unexpected login happened");// extent
-																															// report
-					test.log(LogStatus.INFO,
-							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_password_strength_message_incorrect_or_unexpected_login_" + (count + 1))));
-
-				}
-
-			}*/
-
 			closeBrowser();
 
 		}
@@ -262,10 +161,10 @@ public class IAM012 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

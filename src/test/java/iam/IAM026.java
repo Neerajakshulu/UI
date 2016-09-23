@@ -19,6 +19,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 public class IAM026 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,18 +30,13 @@ public class IAM026 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that deep linking is working correctly for account page using STeAM account")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA26() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -70,11 +66,11 @@ public class IAM026 extends TestBase {
 			ob.navigate().to(CONFIG.getProperty("accountLink"));
 			login();
 			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
-			logger.info("Title : "+str);
+			logger.info("Title : " + str);
 			String emailName = ob.findElement(By.cssSelector("span[class='ng-binding']")).getText();
-			logger.info("Emai Text : "+emailName);
+			logger.info("Emai Text : " + emailName);
 			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
-			logger.info("Additional Email Link Text : "+additionalMail);
+			logger.info("Additional Email Link Text : " + additionalMail);
 			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(CONFIG.getProperty("defaultUsername"))
@@ -92,8 +88,6 @@ public class IAM026 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_ account_page")));// screenshot
 			}
 
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
@@ -105,7 +99,6 @@ public class IAM026 extends TestBase {
 
 			}
 
-			// Verify that profile name gets displayed correctly
 			if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
@@ -156,10 +149,10 @@ public class IAM026 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

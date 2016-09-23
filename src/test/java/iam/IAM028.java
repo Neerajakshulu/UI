@@ -32,26 +32,14 @@ public class IAM028 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
-
-//		extent = ExtentManager.getReporter(filePath);
-//		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-//		test = extent
-//				.startTest(var,
-//						"Verify that system able to resend activation mail when user doesn't activated mail and already registered with Neon.")
-//				.assignCategory("IAM");
-
 	}
 
 	@Test
 	public void testcaseA1() throws Exception {
 		WebElement element = null;
-		
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		
-//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
@@ -166,10 +154,10 @@ public class IAM028 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

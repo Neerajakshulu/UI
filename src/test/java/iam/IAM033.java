@@ -3,27 +3,22 @@ package iam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-
-
-
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
-
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
 
 public class IAM033 extends TestBase {
-	
+
 	static int status = 1;
 	static boolean fail = false;
 	static boolean skip = false;
@@ -33,21 +28,19 @@ public class IAM033 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
-	
-	 PageFactory pf = new PageFactory();
-	 
-	 @BeforeTest
-		public void beforeTest() throws Exception {
-			extent = ExtentManager.getReporter(filePath);
-			String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-			test = extent.startTest(var, " Sign-in with Social and link existing steam  account with matching email, Sign-in with Social account which already has linked Staem account")
-					.assignCategory("IAM");
 
-		}
+	PageFactory pf = new PageFactory();
+
+	@BeforeTest
+	public void beforeTest() throws Exception {
+		extent = ExtentManager.getReporter(filePath);
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+	}
+
 	@Test
 	public void testcaseA13() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -62,95 +55,90 @@ public class IAM033 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
-		
+
 		try {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
-				
+
 		try {
 			openBrowser();
 			maximizeWindow();
-		   ob.navigate().to(host);
-		   pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
-		   pf.getLoginTRInstance(ob).clickLogin();
-         	test.log(LogStatus.PASS, "User is able to log in with steam credentials");
-		   pf.getLoginTRInstance(ob).logOutApp();
-	
-		   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
-		   pf.getLoginTRInstance(ob).socialLinking();
-		   test.log(LogStatus.PASS,"User has logged in with facebook credentials");
-//		   pf.getLoginTRInstance(ob).checkLinking();
-//		   Assert.assertTrue(
-//					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername")));
-//		  // pf.getAccountPageInstance(ob).verifyLinkedAccount("Face Book",CONFIG.getProperty("fbusername"));
-		   test.log(LogStatus.PASS, "Facebook account is linked with steam account");
-		   pf.getLoginTRInstance(ob).logOutApp();
-		   
-	}
-		catch(Throwable t) {
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername"),
+					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
+			pf.getLoginTRInstance(ob).logOutApp();
+
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),
+					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).socialLinking();
+			test.log(LogStatus.PASS, "User has logged in with facebook credentials");
+			test.log(LogStatus.PASS, "Facebook account is linked with steam account");
+			pf.getLoginTRInstance(ob).logOutApp();
+
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Linking with face book  is not performed properly");// extent
-																	
-			
-		}finally{
-				closeBrowser();
-			   pf.clearAllPageObjects();
+
+		} finally {
+			closeBrowser();
+			pf.clearAllPageObjects();
 		}
-		try{
+		try {
 			openBrowser();
 			maximizeWindow();
-		   ob.navigate().to(host);
-			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
-			   pf.getLoginTRInstance(ob).socialLinking();
-			   test.log(LogStatus.PASS,"User has logged in with Linkedin credentials");
-			   pf.getLoginTRInstance(ob).checkLinking();
-			   test.log(LogStatus.PASS, "Linkedin account is linked with steam account");
-			   pf.getLoginTRInstance(ob).logOutApp();  
-			   
-		}
-		catch(Throwable t)
-		{
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),
+					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).socialLinking();
+			test.log(LogStatus.PASS, "User has logged in with Linkedin credentials");
+			pf.getLoginTRInstance(ob).checkLinking();
+			test.log(LogStatus.PASS, "Linkedin account is linked with steam account");
+			pf.getLoginTRInstance(ob).logOutApp();
+
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Linking with face book  is not performed properly");// extent
 			closeBrowser();
-		}finally{
+		} finally {
 			closeBrowser();
-			   pf.clearAllPageObjects();
+			pf.clearAllPageObjects();
 		}
-		try{
+		try {
 			openBrowser();
 			maximizeWindow();
-		   ob.navigate().to(host);
-		   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
-		   pf.getLoginTRInstance(ob).checkLinking();
-		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",CONFIG.getProperty("fbusername"))); 
-		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
-		     	  pf.getLoginTRInstance(ob).logOutApp();
-		}
-		catch(Throwable t)
-		{
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),
+					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).checkLinking();
+			Assert.assertTrue(
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", CONFIG.getProperty("fbusername")));
+			test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
+			pf.getLoginTRInstance(ob).logOutApp();
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Linking with face book  is not performed properly for second time");// extent
-			
-		}finally{
+
+		} finally {
 			closeBrowser();
-			   pf.clearAllPageObjects();
+			pf.clearAllPageObjects();
 		}
-		try{
+		try {
 			openBrowser();
 			maximizeWindow();
-		   ob.navigate().to(host);
-		   pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),CONFIG.getProperty("fbpwrd"));
-		   pf.getLoginTRInstance(ob).checkLinking();
-		   Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn",CONFIG.getProperty("fbusername"))); 
-		   test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
-		     	  pf.getLoginTRInstance(ob).logOutApp();
-		     	 closeBrowser();
-		}
-	catch(Throwable t) {
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),
+					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).checkLinking();
+			Assert.assertTrue(
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", CONFIG.getProperty("fbusername")));
+			test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+		} catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -165,21 +153,19 @@ public class IAM033 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
-	
-		@AfterTest
-		public void reportTestResult() {
-			extent.endTest(test);
 
-			/*
-			 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-			 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-			 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-			 */
-		}
+	@AfterTest
+	public void reportTestResult() {
+		extent.endTest(test);
 
+		/*
+		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
+		 */
+	}
 
 }

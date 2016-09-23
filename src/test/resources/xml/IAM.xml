@@ -5,7 +5,7 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="IAM001" preserve-order="true">
+	<test name="Neon_registraiton_and_reset_password" preserve-order="true">
 		<classes>
 			<class name="iam.IAM001"></class>
 			<class name="iam.IAM016"></class>
@@ -14,122 +14,107 @@
 			<class name="iam.IAM024"></class>
 			<class name="iam.IAM028"></class>
 			<class name="iam.IAM034"></class>
+			<class name="iam.IAM035"></class>
 		</classes>
 	</test>
 
-	<test name="IAM002">
+	<test name="Login_and_logout_neon_application_using_existing_neon_account">
 		<classes>
 			<class name="iam.IAM002"></class>
 		</classes>
 	</test>
 
-	<test name="IAM003">
+	<test name="Login_and_logout_neon_application_using_LI_account">
 		<classes>
 			<class name="iam.IAM003"></class>
 		</classes>
 	</test>
 
-	<test name="IAM004">
+	<test name="Login_and_logout_neon_application_using_facebook_account">
 		<classes>
 			<class name="iam.IAM004"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM005">
+	<test name="Validate_firstname_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM005"></class>
 		</classes>
 	</test>
 
-	<test name="IAM006">
+	<test name="Validate_lastname_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM006"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM007">
+	<test name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM007"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM008">
+	<test name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM008"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM009">
+	<test name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM009"></class>
 		</classes>
 	</test>
 
-	<test name="IAM010">
+	<test name="Validate_email_address_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM010"></class>
 		</classes>
 	</test>
 
-
-	<!-- <test name="IAM011"> <classes> <class name="iam.IAM011"></class> </classes> 
-		</test> -->
-
-
-	<test name="IAM012">
+	<test name="Validate_password_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM012"></class>
 		</classes>
 	</test>
 
-	<test name="IAM013">
+	<test name="Termofuse_and_privacystatements_links">
 		<classes>
 			<class name="iam.IAM013"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM014">
+	<test name="Singup_button_disable_without_filling_required_fields">
 		<classes>
 			<class name="iam.IAM014"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM015">
+	<test name="Neon_not_allow_existing_account_to_create_account">
 		<classes>
 			<class name="iam.IAM015"></class>
 		</classes>
 	</test>
 
 
-<!-- 
-	<test name="IAM016">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test>
+	<!-- <test name="IAM016"> <classes> <class name="iam.IAM016"></class> </classes> 
+		</test> <test name="IAM017"> <classes> <class name="iam.IAM017"></class> 
+		</classes> </test> -->
 
-
-	<test name="IAM017">
-		<classes>
-			<class name="iam.IAM017"></class>
-		</classes>
-	</test>
- -->
-
-	<test name="IAM018">
+	<test name="Linkedin_cancle_button">
 		<classes>
 			<class name="iam.IAM018"></class>
 		</classes>
 	</test>
 
 
-	<test name="IAM019">
+	<test name="Email_address_special_characters_not_allow">
 		<classes>
 			<class name="iam.IAM019"></class>
 		</classes>
@@ -138,66 +123,53 @@
 	<!-- <test name="IAM020"> <classes> <class name="iam.IAM020"></class> </classes> 
 		</test> -->
 
-	<test name="IAM021">
+	<test name="View_additional_preference_link_in_account_page">
 		<classes>
 			<class name="iam.IAM021"></class>
 		</classes>
 	</test>
 
-	<test name="IAM022">
+	<test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
 		<classes>
 			<class name="iam.IAM022"></class>
 		</classes>
 	</test>
-<!-- 
-	<test name="IAM023">
-		<classes>
-			<class name="iam.IAM023"></class>
-		</classes>
-	</test>
-
-	<test name="IAM024">
-		<classes>
-			<class name="iam.IAM024"></class>
-		</classes>
-	</test>
- -->
-	<test name="IAM025">
+	<!-- <test name="IAM023"> <classes> <class name="iam.IAM023"></class> </classes> 
+		</test> <test name="IAM024"> <classes> <class name="iam.IAM024"></class> 
+		</classes> </test> -->
+	<test name="Help_link_in_profile_flyout">
 		<classes>
 			<class name="iam.IAM025"></class>
 		</classes>
 	</test>
 
-	<test name="IAM026">
+	<test name="Deep_linking_account_page_Using_STeAM">
 		<classes>
 			<class name="iam.IAM026"></class>
 		</classes>
 	</test>
 
-	<test name="IAM027">
+	<test name="Deep_linking_help_page_Using_STeAM">
 		<classes>
 			<class name="iam.IAM027"></class>
 		</classes>
 	</test>
 
-	<!-- <test name="IAM028">
-		<classes>
-			<class name="iam.IAM028"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="IAM028"> <classes> <class name="iam.IAM028"></class> </classes> 
+		</test> -->
 
-	<test name="IAM029">
+	<test name="Validate_password_max_length_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM029"></class>
 		</classes>
 	</test>
 
-	<test name="IAM030">
+	<test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM030"></class>
 		</classes>
 	</test>
-	<test name="IAM031">
+	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
 		</classes>

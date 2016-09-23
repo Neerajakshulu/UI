@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 
-public class IAM004 extends TestBase {
+public class IAM035 extends TestBase {
 
 	static int status = 1;
 
@@ -50,76 +50,37 @@ public class IAM004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		String email = "neonfbook@gmail.com";
-		String password = "1Pproject";
+		openBrowser1();
 
 		try {
-			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
+			ob.get("https://www.guerrillamail.com");
+			BrowserWaits.waitTime(2);
+			if (CONFIG.getProperty("browserType").equals("IE")) {
+				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+				BrowserWaits.waitTime(4);
 			}
-			clearCookies();
+			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
+			logger.info("Email Id:" + email1);
+			String traillingSpaceEmail = " " + email1;
+			logger.info("After Trailling space :" + traillingSpaceEmail);
 
-			// Navigate to FB login page
-			ob.navigate().to(host);
+			String str = createTraillingSpaceNeonUser("duster", "man", traillingSpaceEmail);
+			logger.info("After Trailling user :" + str);
+			continueToLandingNeonPage();
 			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
-			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-			//
-			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
-			// Verify that existing FB credentials are working fine
-			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			BrowserWaits.waitTime(4);
-			// waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
-
-			BrowserWaits.waitTime(4);
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
-			if (!checkElementPresence("ul_name")) {
-
-				test.log(LogStatus.FAIL, "Existing FB user credentials are not working fine");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_FB_User_credentials_not_working_fine")));// screenshot
-				closeBrowser();
-
-			}
-			// Verify that profile name gets displayed correctly
-			if (!checkElementPresence("header_label")) {
-
-				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
-				closeBrowser();
-
-			}
-
-			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-				closeBrowser();
-
-			}
-
-			closeBrowser();
-
+			/*
+			 * openBrowser1(); ob.get("https://www.guerrillamail.com"); BrowserWaits.waitTime(2); if
+			 * (CONFIG.getProperty("browserType").equals("IE")) {
+			 * Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe"); BrowserWaits.waitTime(4); } String
+			 * email2 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText(); logger.info("Email Id:" +
+			 * email2); String traillingSpaceEmail1 = email2 + " "; logger.info("Trailing space1 :" +
+			 * traillingSpaceEmail1); String str1 = createTraillingSpaceNeonUser("duster", "man", traillingSpaceEmail1);
+			 * logger.info("After Trailling user :" + str1); continueToLandingNeonPage();
+			 */
 		} catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
-			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -132,6 +93,47 @@ public class IAM004 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	}
+
+	private void continueToLandingNeonPage() throws Exception {
+		BrowserWaits.waitTime(10);
+
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+		if (!checkElementPresence("ul_name")) {
+
+			test.log(LogStatus.FAIL, "New user credentials are not working fine");// extent reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_existing_FB_User_credentials_not_working_fine")));// screenshot
+			closeBrowser();
+
+		}
+		logout();
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+
+		if (!checkElementPresence("login_banner")) {
+
+			test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
+			closeBrowser();
+
+		}
+		closeBrowser();
+
+	}
+
+	private void openBrowser1() throws Exception {
+		openBrowser();
+		try {
+			maximizeWindow();
+		} catch (Throwable t) {
+
+			System.out.println("maximize() command not supported in Selendroid");
+		}
+		clearCookies();
+
 	}
 
 	@AfterTest

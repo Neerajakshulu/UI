@@ -12,14 +12,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM021 extends TestBase {
 
@@ -28,49 +28,41 @@ public class IAM021 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify View additional email preferences link is working").assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA21() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
-		/*
-		 * fn1 = generateRandomName(8); ln1 = generateRandomName(10); String email=createNewUserAndLogin(fn1,ln1);
-		 */
 		openBrowser();
 		try {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			
-			//
-			//BrowserWaits.waitTime(3);
+
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			login();
 			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			//
-			//BrowserWaits.waitTime(3);
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_email_preference_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
 
 			Set<String> myset = ob.getWindowHandles();
@@ -80,7 +72,7 @@ public class IAM021 extends TestBase {
 
 				al.add(myIT.next());
 			}
-			
+
 			ob.switchTo().window(al.get(1));
 
 			test.log(LogStatus.INFO, "Preference link is present and clicked");
@@ -95,11 +87,8 @@ public class IAM021 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Preference page not opened");// extent reports
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "unable_to_open_preference_page")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "unable_to_open_preference_page")));// screenshot
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports

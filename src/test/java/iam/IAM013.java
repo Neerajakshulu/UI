@@ -10,13 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM013 extends TestBase {
 
@@ -30,16 +30,13 @@ public class IAM013 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA13() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -66,7 +63,7 @@ public class IAM013 extends TestBase {
 		ob.navigate().to(host);
 		BrowserWaits.waitTime(6);
 		termofUserAndPrivacyStatement();
-		
+
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
 			BrowserWaits.waitTime(2);
@@ -88,10 +85,10 @@ public class IAM013 extends TestBase {
 			closeBrowser();
 		}
 
-		ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		BrowserWaits.waitTime(6);
 		termofUserAndPrivacyStatement();
-		
+
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
 			BrowserWaits.waitTime(2);
@@ -113,7 +110,6 @@ public class IAM013 extends TestBase {
 			closeBrowser();
 		}
 
-		
 		closeBrowser();
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -143,10 +139,8 @@ public class IAM013 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_termsOfUse_link")));// screenshot
 
 			}
-			//BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			BrowserWaits.waitTime(2);
-			//waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_PricayStatement_link")), 30);
 			WebElement myE = ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
 			myE.click();
 
@@ -191,10 +185,10 @@ public class IAM013 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

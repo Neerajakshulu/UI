@@ -6,11 +6,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM022 extends TestBase {
 
@@ -19,24 +19,20 @@ public class IAM022 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify the checkbox for \"Receive email notifications for likes,comments and other activity\" is working correctly")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testCaseA22() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -48,20 +44,19 @@ public class IAM022 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			
+
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")),
+					30);
 			test.log(LogStatus.INFO, "The Check box for changing email preferences is visible");
-			//
+			String cssValue = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+					.getCssValue("background");
 
-			String cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
-
-			
 			if (cssValue.contains("rgb(69, 183, 231)")) {
 				test.log(LogStatus.INFO, "check box is selected");
 			} else {
@@ -70,7 +65,8 @@ public class IAM022 extends TestBase {
 			}
 			// unchecking the check box n checking if it is working
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();
-			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
+			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+					.getCssValue("background");
 
 			Thread.sleep(5000);
 			if (cssValue.contains("rgb(255, 255, 255)")) {
@@ -85,11 +81,8 @@ public class IAM022 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "unexpected_something happpened");// extent reports
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "unable_to_open_preference_page")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "unable_to_open_preference_page")));// screenshot
 
 			System.out.println("maximize() command not supported in Selendroid");
 			closeBrowser();

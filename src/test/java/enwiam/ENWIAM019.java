@@ -2,25 +2,22 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM019 extends TestBase {
 
@@ -84,12 +81,10 @@ public class ENWIAM019 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
 			BrowserWaits.waitTime(6);
 
-			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 			String resertPassPage = ob
-					.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
-					.getText();
+					.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).getText();
 			BrowserWaits.waitTime(3);
 			Assert.assertEquals(resertPassPage, "Reset your password");
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));

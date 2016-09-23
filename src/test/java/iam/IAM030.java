@@ -24,10 +24,12 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 public class IAM030 extends TestBase {
+
 	static int status = 1;
 	static boolean fail = false;
 	static boolean skip = false;
 	static int time = 30;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -36,18 +38,13 @@ public class IAM030 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that deep linking is working correctly for account page using FB and LI accounts")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA26() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -60,18 +57,18 @@ public class IAM030 extends TestBase {
 
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		
-		try{
-		facebookLogin();
+
+		try {
+			facebookLogin();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.FAIL, "Deep linking not working for Facebook login" );
+			test.log(LogStatus.FAIL, "Deep linking not working for Facebook login");
 		}
-		try{
-		linkedinLogin();
-		}catch (Throwable t) {
+		try {
+			linkedinLogin();
+		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.FAIL, "Deep linking not working for linkedin login" );
+			test.log(LogStatus.FAIL, "Deep linking not working for linkedin login");
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
@@ -94,7 +91,7 @@ public class IAM030 extends TestBase {
 			ob.navigate().to(CONFIG.getProperty("accountLink"));
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			
+
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
 			// Verify that existing LI user credentials are working fine
@@ -103,11 +100,11 @@ public class IAM030 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
 			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
-			logger.info("Title : "+str);
+			logger.info("Title : " + str);
 			String emailName = ob.findElement(By.cssSelector("span[class='ng-binding']")).getText();
-			logger.info("Emai Text : "+emailName);
+			logger.info("Emai Text : " + emailName);
 			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
-			logger.info("Additional Email Link Text : "+additionalMail);
+			logger.info("Additional Email Link Text : " + additionalMail);
 			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(email)
@@ -178,7 +175,7 @@ public class IAM030 extends TestBase {
 			closeBrowser();
 
 		}
-		
+
 	}
 
 	private void facebookLogin() throws Exception {
@@ -196,17 +193,17 @@ public class IAM030 extends TestBase {
 			driver.manage().deleteAllCookies();
 			driver.navigate().to(CONFIG.getProperty("accountLink"));
 
-			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, email,
-					password);
+			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, email, password);
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
-			
+
 			String str = driver.findElement(By.cssSelector("h2[class='wui-title']")).getText();
-			logger.info("Title : "+str);
+			logger.info("Title : " + str);
 			String emailName = driver.findElement(By.cssSelector("span[class='ng-binding']")).getText();
-			logger.info("Emai Text : "+emailName);
-			String additionalMail = driver.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
-			logger.info("Additional Email Link Text : "+additionalMail);
+			logger.info("Emai Text : " + emailName);
+			String additionalMail = driver.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']"))
+					.getText();
+			logger.info("Additional Email Link Text : " + additionalMail);
 			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(email)
@@ -229,8 +226,9 @@ public class IAM030 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_ account_page_using_FB")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "Deep_link_is_not_working_correctly_ for_ account_page_using_FB")));// screenshot
 				closeBrowser();
 			}
 		} catch (Exception e) {
@@ -251,35 +249,32 @@ public class IAM030 extends TestBase {
 			reportDataSetResult();
 			++count;
 		}
-	
 
-		
 	}
 
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) { TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "SKIP"); } else if(fail) {
-		 * status=2; TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else {
-		 * TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "PASS"); }
+		 * if(skip) { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); }
+		 * else if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "FAIL"); } else { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "PASS"); }
 		 */
 
 		skip = false;
 		fail = false;
 
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

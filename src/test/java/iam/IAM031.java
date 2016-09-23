@@ -21,6 +21,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 public class IAM031 extends TestBase {
+
 	static int status = 1;
 	static boolean fail = false;
 	static boolean skip = false;
@@ -34,17 +35,13 @@ public class IAM031 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var, "Verify that deep linking is working correctly for help page using FB and LI accounts")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA26() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -65,13 +62,13 @@ public class IAM031 extends TestBase {
 			test.log(LogStatus.FAIL, "Deep linking not working for Facebook login");
 		}
 
-		try{
-		linkedinLogin();
+		try {
+			linkedinLogin();
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.FAIL, "Deep linking not working for linkedin login");
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
@@ -91,7 +88,7 @@ public class IAM031 extends TestBase {
 
 			// Navigate to deep link account page using linkedin
 			ob.navigate().to(CONFIG.getProperty("helpLink"));
-			
+
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
@@ -99,7 +96,7 @@ public class IAM031 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
-			
+
 			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
@@ -174,7 +171,7 @@ public class IAM031 extends TestBase {
 			closeBrowser();
 
 		}
-		
+
 	}
 
 	private void facebookLogin() throws Exception {
@@ -196,7 +193,7 @@ public class IAM031 extends TestBase {
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 
-			//login();
+			// login();
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = driver.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
@@ -240,12 +237,10 @@ public class IAM031 extends TestBase {
 
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) { TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "SKIP"); } else if(fail) {
-		 * status=2; TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else {
-		 * TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "PASS"); }
+		 * if(skip) { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); }
+		 * else if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "FAIL"); } else { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "PASS"); }
 		 */
 
 		skip = false;
@@ -259,10 +254,10 @@ public class IAM031 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

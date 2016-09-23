@@ -10,13 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM024 extends TestBase {
 
@@ -25,24 +25,21 @@ public class IAM024 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that TR account gets locked after 10 consecutive unsuccessful login attempts").assignCategory(
-				"IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testCaseA24() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -67,17 +64,8 @@ public class IAM024 extends TestBase {
 			String email = createNewUser(firstName, lastName);
 			test.log(LogStatus.INFO, " New User created");
 			logout();
-			//new PageFactory().getLoginTRInstance(ob).logOutApp();
 			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
-			//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
 			for (int i = 0; i < 10; i++) {
-				/*Thread.sleep(3000);
-				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear();
-				ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).clear();
-				ob.findElement(By.id(OR.getProperty("TR_password_textBox"))).sendKeys("password@2");
-				ob.findElement(By.id(OR.getProperty("login_button"))).click();*/
-				
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
@@ -102,14 +90,11 @@ public class IAM024 extends TestBase {
 				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_unexpected_happened")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 				closeBrowser();
 			}
-			
+
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
@@ -131,11 +116,8 @@ public class IAM024 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		closeBrowser();

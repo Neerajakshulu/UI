@@ -9,12 +9,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM020 extends TestBase {
 
@@ -28,24 +28,21 @@ public class IAM020 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that CREATE A NEW PROJECT NEON ACCOUNT button is working correctly")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA20() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -65,11 +62,6 @@ public class IAM020 extends TestBase {
 
 			// Navigate to LI login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("new_TR_User_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("new_TR_User_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("reg_register_button")), 15);*/
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 
@@ -78,11 +70,8 @@ public class IAM020 extends TestBase {
 				test.log(LogStatus.FAIL, "CREATE A NEW PROJECT NEON ACCOUNT button not working correctly");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_CREATE_A_NEW_PROJECT_NEON_ACCOUNT_button_not_working")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_CREATE_A_NEW_PROJECT_NEON_ACCOUNT_button_not_working")));// screenshot
 
 			}
 
@@ -93,17 +82,13 @@ public class IAM020 extends TestBase {
 		catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
-			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 
 		}

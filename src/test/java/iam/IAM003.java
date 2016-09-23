@@ -9,13 +9,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM003 extends TestBase {
 
@@ -30,17 +30,13 @@ public class IAM003 extends TestBase {
 	public void beforeTest() throws Exception {
 
 		extent = ExtentManager.getReporter(filePath);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
-				.assignCategory("IAM");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA3() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -71,10 +67,10 @@ public class IAM003 extends TestBase {
 
 			// Navigate to LI login page
 			ob.navigate().to(host);
-			
+
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			
+
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 
 			// Verify that existing LI user credentials are working fine
@@ -83,7 +79,7 @@ public class IAM003 extends TestBase {
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
@@ -148,10 +144,10 @@ public class IAM003 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

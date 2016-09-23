@@ -18,6 +18,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 public class IAM032 extends TestBase {
+
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
@@ -33,15 +34,13 @@ public class IAM032 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verfiy that user is able to link the social accounts with neon account")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testInitiatePostCreation() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -62,7 +61,7 @@ public class IAM032 extends TestBase {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
+
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERNAME17"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
@@ -177,7 +176,8 @@ public class IAM032 extends TestBase {
 		}
 	}
 
-	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
+	private void validateLinkedAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
@@ -202,14 +202,11 @@ public class IAM032 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" , TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}
