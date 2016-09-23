@@ -10,13 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM025 extends TestBase {
 
@@ -25,14 +25,13 @@ public class IAM025 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that Help link is working properly").assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testCaseA25() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -61,22 +60,6 @@ public class IAM025 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 			login();
-			//
-			/*
-			 * waitForElementTobeVisible(ob,
-			 * By.xpath(OR.getProperty("TR_login_button")), 30);
-			 * 
-			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click
-			 * (); // waitForElementTobeVisible(ob,
-			 * By.id(OR.getProperty("TR_email_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).clear()
-			 * ; ob.findElement(By.id(OR.getProperty("TR_email_textBox"))).
-			 * sendKeys( CONFIG.getProperty("defaultUsername").toUpperCase());
-			 * ob.findElement(By.id(OR.getProperty("TR_password_textBox")))
-			 * .sendKeys(CONFIG.getProperty("defaultPassword"));
-			 * ob.findElement(By.id(OR.getProperty("login_button"))).click();
-			 */
-			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
@@ -86,7 +69,6 @@ public class IAM025 extends TestBase {
 			logger.info("Title : " + str);
 			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
 			logger.info("Emai Text : " + feedBack);
-			
 
 			try {
 
@@ -129,10 +111,10 @@ public class IAM025 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

@@ -19,6 +19,7 @@ import util.ExtentManager;
 import util.TestUtil;
 
 public class IAM027 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -29,18 +30,13 @@ public class IAM027 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that deep linking is working correctly for help page using STeAM account")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA27() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -70,12 +66,13 @@ public class IAM027 extends TestBase {
 			ob.navigate().to(CONFIG.getProperty("helpLink"));
 			login();
 			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
-			logger.info("Title : "+str);
+			logger.info("Title : " + str);
 			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
-			logger.info("Emai Text : "+feedBack);
+			logger.info("Emai Text : " + feedBack);
 			BrowserWaits.waitTime(2);
 			try {
-				Assert.assertTrue(str.contains("Send feedback to the Project Neon team") && feedBack.contains("Report a problem or submit a support request"));
+				Assert.assertTrue(str.contains("Send feedback to the Project Neon team")
+						&& feedBack.contains("Report a problem or submit a support request"));
 				test.log(LogStatus.PASS, "Deep link is working correctly for help page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Deep link is not working correctly for help page" + t);// extent
@@ -89,8 +86,6 @@ public class IAM027 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_help_page")));// screenshot
 			}
 
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("ul_name")), 30);
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
@@ -153,10 +148,10 @@ public class IAM027 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

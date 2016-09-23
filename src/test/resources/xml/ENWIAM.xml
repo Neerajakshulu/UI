@@ -6,89 +6,95 @@
 	</listeners>
 
 
-	<test name="ENWIAM001" preserve-order="true">
+	<test name="ENW_registraiton_and_reset_password" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM009"></class>
 			<class name="enwiam.ENWIAM010"></class>
 			<class name="enwiam.ENWIAM013"></class>
+			<class name="enwiam.ENWIAM014"></class>
 			<class name="enwiam.ENWIAM015"></class>
 			<class name="enwiam.ENWIAM017"></class>
 			<class name="enwiam.ENWIAM001"></class>
+			<class name="enwiam.ENWIAM008"></class>
 		</classes>
 	</test>
-	<test name="ENWIAM002">
+	<test name="Validate_email_address_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM002"></class>
 		</classes>
 	</test>
 
-	<test name="ENWIAM003">
+	<test name="Validate_password_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM003"></class>
 		</classes>
 	</test>
 
-	<test name="ENWIAM004">
+	<test name="Validate_firstname_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM004"></class>
 		</classes>
 	</test>
-	<test name="ENWIAM005">
+	<test name="Validate_lastname_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM005"></class>
 		</classes>
 	</test>
 
-	<test name="ENWIAM006">
+	<test name="Enw_not_allow_existing_neon_account_to_create_account">
 		<classes>
 			<class name="enwiam.ENWIAM006"></class>
 		</classes>
 	</test>
 
-	<test name="ENWIAM007">
+	<test name="Enw_not_allow_existing_steam_account_to_create_account">
 		<classes>
 			<class name="enwiam.ENWIAM007"></class>
 		</classes>
 	</test>
 
-	<!-- <test name="ENWIAM008"> <classes> <class name="enwiam.ENWIAM008"></class> 
-		</classes> </test> -->
-	<test name="ENWIAM011">
+	<test name="Login_and_logout_enw_application_using_facebook_account">
 		<classes>
 			<class name="enwiam.ENWIAM011"></class>
 		</classes>
 	</test>
 
-	<test name="ENWIAM012">
+	<test name="Login_and_logout_enw_application_using_LI_account">
 		<classes>
 			<class name="enwiam.ENWIAM012"></class>
 		</classes>
 	</test>
-	
-	<test name="ENWIAM014">
-		<classes>
-			<class name="enwiam.ENWIAM014"></class>
-		</classes>
-	</test>
-	
-	<test name="ENWIAM016">
+
+	<test name="Validate_password_max_length_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM016"></class>
 		</classes>
 	</test>
-		
-		<test name="ENWIAM0001">
+
+	<test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
+		<classes>
+			<class name="enwiam.ENWIAM018"></class>
+		</classes>
+	</test>
+
+	<test name="Change_password_link_in_account_page">
+		<classes>
+			<class name="enwiam.ENWIAM019"></class>
+		</classes>
+	</test>
+
+	<test name="ENWIAM0001">
 		<classes>
 			<class name="enwiam.ENWIAM0001"></class>
 		</classes>
 	</test>
-	
-		<test name="ENWIAM0002">
+
+	<test name="ENWIAM0002">
 		<classes>
 			<class name="enwiam.ENWIAM0002"></class>
 		</classes>
 	</test>
-		
-	
+
+
 </suite>
 

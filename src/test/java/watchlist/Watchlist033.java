@@ -34,16 +34,14 @@ public class Watchlist033 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that deep linking is working correctly for particular watchlist page when user logs in using Social(FB or LI) account")
-				.assignCategory("Watchlist");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 	}
+	
 	@Test
 	public void watchlist033() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

@@ -2,10 +2,8 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -33,29 +31,20 @@ public class ENWIAM016 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		
+
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
+		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
-		
-//		extent = ExtentManager.getReporter(filePath);
-//		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-//		test = extent.startTest(var, "Verify that to validate PASSWORD field in new Neon user registration page with maximum length.").assignCategory("IAM");
-//		// test.log(LogStatus.INFO, "****************************");
-//		// load the runmodes of the tests
-//		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
+
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA6(String charLength, String validity) throws Exception {
-		
+	public void testcaseA6(String charLength,
+			String validity) throws Exception {
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
-//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
@@ -79,15 +68,15 @@ public class ENWIAM016 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 2);
-			Double d=new Double(Double.parseDouble(characterLength));
-			int i=d.intValue();
+			Double d = new Double(Double.parseDouble(characterLength));
+			int i = d.intValue();
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
 			logger.info("Character Length : " + characterLength);
-			String name="N@1";
-			String password = name+generateRandomName(i);
+			String name = "N@1";
+			String password = name + generateRandomName(i);
 			logger.info("Last Name : " + password);
 			openBrowser();
 			try {
@@ -122,11 +111,11 @@ public class ENWIAM016 extends TestBase {
 			}
 
 			else {
-			
+
 				passLength = ob.findElement(By.xpath("(//h6[@class='col-xs-11 password-validator__text'])[14]"))
 						.getText();
-				logger.info("PassWord : "+passLength);
-				if(!passLength.contains("Password is too long")){
+				logger.info("PassWord : " + passLength);
+				if (!passLength.contains("Password is too long")) {
 					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 							this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
@@ -135,7 +124,7 @@ public class ENWIAM016 extends TestBase {
 				ob.findElement(By.xpath(
 						"(//div[@class='col-xs-12 password-validator__container'])[2]/div//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"));
 				BrowserWaits.waitTime(3);
-				
+
 			}
 
 			closeBrowser();
@@ -186,10 +175,10 @@ public class ENWIAM016 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 

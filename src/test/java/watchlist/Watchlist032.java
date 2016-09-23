@@ -2,26 +2,19 @@ package watchlist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.apache.http.auth.Credentials;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.gargoylesoftware.htmlunit.Page;
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account
@@ -41,17 +34,14 @@ public class Watchlist032 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('E'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account")
-				.assignCategory("Watchlist");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
 	@Test
 	public void watchlist031() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Watchlist");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

@@ -34,36 +34,21 @@ public class ENWIAM003 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		
-//		extent = ExtentManager.getReporter(filePath);
-//		rowData = testcase.get(this.getClass().getSimpleName());
-//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-		
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that PASSWORD field in new TR user registration page")
-				.assignCategory("ENWIAM");
-				// test.log(LogStatus.INFO, "****************************");
-
-		// load the runmodes of the tests
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
 	public void testcaseA12(String password, String strength, String checks, String validity) throws Exception {
 
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
-		
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()),
-			// "SKIP");
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -76,8 +61,6 @@ public class ENWIAM003 extends TestBase {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(iamxls,
-			// this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
@@ -103,7 +86,6 @@ public class ENWIAM003 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);

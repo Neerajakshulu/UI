@@ -32,19 +32,15 @@ public class Search32 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 
-		String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that the following fields get displayed in the SORT BY drop down when ALL is selected as content type in the left navigation pane: a)Relevance b)Times cited c)Date")
-				.assignCategory("Search suite");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB32() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+		  
 		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -65,12 +61,8 @@ public class Search32 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-         	ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			 //ob.navigate().to(host);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+			 ob.navigate().to(host);
+			 // login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 

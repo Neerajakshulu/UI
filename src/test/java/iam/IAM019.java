@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM019 extends TestBase {
 
@@ -34,29 +34,22 @@ public class IAM019 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that following special characters are not allowed in EMAIL ADDRESS field in new TR user registration page:1--->*2--->(3--->)4--->&5)--->!")
-				.assignCategory("IAM");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 		runmodes = TestUtil.getDataSetRunmodes(iamxls, this.getClass().getSimpleName());
 	}
 
 	@Test(dataProvider = "getTestData")
 	public void testcaseA19(String special_char) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -67,21 +60,18 @@ public class IAM019 extends TestBase {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(iamxls, this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
 		try {
 
-			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
-					+ "--->");
+			test.log(LogStatus.INFO,
+					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, special_char);
 
 			System.out.println(special_char);
 			String email = generateRandomName(10) + special_char + "@abc.com";
-			System.out.println(email);
-
-			// selenium code
+			logger.info(email);
 			openBrowser();
 			try {
 				maximizeWindow();
@@ -90,22 +80,7 @@ public class IAM019 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
-			// Navigate to TR login page
-			// ob.get(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			//
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-			//
-			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("TR_register_link")), 30);
-
-			// Create new TR account
-			ob.findElement(By.linkText(OR.getProperty("TR_register_link"))).click();
-			//
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_email_textBox")), 30);
-			ob.findElement(By.id(OR.getProperty("reg_email_textBox"))).sendKeys(email);
-			ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))).click();*/
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
@@ -113,55 +88,28 @@ public class IAM019 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_error_label")), 10);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("email_error_label")));
-			logger.info("Error List Size : "+errorList.size());
+			logger.info("Error List Size : " + errorList.size());
 
 			if (runmodes[count].equalsIgnoreCase("Y")) {
-			for (WebElement text : errorList) {
-				if (!text.getText().equals("Please enter a valid email address.")) {
+				for (WebElement text : errorList) {
+					if (!text.getText().equals("Please enter a valid email address.")) {
 
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent
-																								// report
-					test.log(LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
-					closeBrowser();
-					return;
+						fail = true;// excel
+						test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent
+																									// report
+						test.log(LogStatus.INFO,
+								"Snapshot below: "
+										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+												+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
+						closeBrowser();
+						return;
+					}
+
 				}
-
 			}
-		}
-			
-			/*if (!compareNumbers(1, errorList.size())) {
-
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_error_message_not_getting_displayed_" + (count + 1))));
-				closeBrowser();
-				return;
-			}*/
-
-			/*String error = "Please enter a valid Email Address.";
-			String errorText = ob.findElement(By.id(OR.getProperty("reg_error_label"))).getText();
-			if (!compareStrings(error, errorText)) {
-
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Error text is incorrect");// extent report
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_error_text_" + (count + 1))));
-
-			}*/
 
 			closeBrowser();
 
@@ -177,16 +125,13 @@ public class IAM019 extends TestBase {
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends for data set #" + (count + 1)
-				+ "--->");
+		test.log(LogStatus.INFO,
+				this.getClass().getSimpleName() + " execution ends for data set #" + (count + 1) + "--->");
 	}
 
 	@AfterMethod

@@ -2,28 +2,22 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM015 extends TestBase {
 
@@ -36,25 +30,12 @@ public class ENWIAM015 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 
-		// extent = ExtentManager.getReporter(filePath);
-		// String var = xlRead2(returnExcelPath('A'),
-		// this.getClass().getSimpleName(), 1);
-		// test = extent.startTest(var, "Verify change password link in the
-		// account page is working correctly.")
-		// .assignCategory("IAM");
-
 	}
 
 	@Test
 	public void testCaseA23() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
-		// boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
-		// boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls,
-		// this.getClass().getSimpleName());
-		// boolean master_condition = suiteRunmode && testRunmode;
-
 		if (!master_condition) {
 
 			status = 3;// excel
@@ -67,7 +48,6 @@ public class ENWIAM015 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String password = "Neon@123";
 			String first_name = "disco";
 			String last_name = "dancer";
 
@@ -130,9 +110,9 @@ public class ENWIAM015 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(newPass);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			BrowserWaits.waitTime(6);
-			String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
-			logger.info("Text : "+text1);
-			if (text1.equalsIgnoreCase("Continue")) {
+			//String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+			//logger.info("Text : " + text1);
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText().equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
 
@@ -147,7 +127,7 @@ public class ENWIAM015 extends TestBase {
 				closeBrowser();
 
 			}
-			
+
 			logoutEnw();
 			ob.quit();
 		} catch (Throwable t) {
@@ -172,10 +152,10 @@ public class ENWIAM015 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

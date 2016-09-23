@@ -164,10 +164,10 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
 					"Discover articles, patents, and community contributions");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
 			BrowserWaits.waitTime(2);
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
@@ -206,17 +206,51 @@ public class OnboardingModalsPage extends TestBase {
 			logger.info("Height : "+dimesions.height);
 			int x=dimesions.width;
 			int y=dimesions.height;
-			
 			Actions builder = new Actions(ob);  
-			//builder.moveByOffset(1074, 794).click().build().perform();
-			//builder.moveToElement(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS), 1074, 794).click().build().perform();
-			
-			builder.doubleClick(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_ONEP_APPS_CSS));
+			builder.moveToElement(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS), x+150, y).build().perform();
+			builder.click().build().perform();
 			BrowserWaits.waitTime(4);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			
 		} catch (Exception e) {
-			throw new Exception("Onboarding Modals are not displayed for First time user");
+			throw new Exception("Onboarding Profile modal outside click not happend");
+		}
+
+	}
+	
+	/**
+	 * Method for click Welcome onboarding modal outside,
+	 * @throws Exception, When profile onboarding modal not closed
+	 */
+	public void clickWelcomeOnboardingModalOutside() throws Exception {
+
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
+					"Discover articles, patents, and community contributions");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			
+			Dimension dimesions=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS).getSize();
+			logger.info("Width : "+dimesions.width);
+			logger.info("Height : "+dimesions.height);
+			int x=dimesions.width;
+			int y=dimesions.height;
+			Actions builder = new Actions(ob);  
+			builder.moveToElement(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS), x+150, y).build().perform();
+			builder.click().build().perform();
+			BrowserWaits.waitTime(4);
+			
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			
+		} catch (Exception e) {
+			throw new Exception("Onboarding Welcome modal outside click not happend");
 		}
 
 	}
@@ -486,7 +520,7 @@ public class OnboardingModalsPage extends TestBase {
 			}
 			
 			
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			BrowserWaits.waitTime(2);
 			
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);

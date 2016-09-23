@@ -4,20 +4,19 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM012 extends TestBase {
 
@@ -30,29 +29,17 @@ public class ENWIAM012 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		
-		
+
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-
-//		extent = ExtentManager.getReporter(filePath);
-//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-//		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
-//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-//		test = extent.startTest(var, "Verify that user is able to login with existing LI id and logout successfully")
-//				.assignCategory("ENWIAM");
 	}
 
 	@Test
 	public void testcaseA3() throws Exception {
-		
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
-//		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
-//		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
-//		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
@@ -80,12 +67,12 @@ public class ENWIAM012 extends TestBase {
 			String password = "Neon@1234";
 
 			// Navigate to LI login page
-//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-			
+			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			
+
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
@@ -93,10 +80,10 @@ public class ENWIAM012 extends TestBase {
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(10);
-			
 
-			String text=ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).getText();
-			if(text.equalsIgnoreCase("Continue")){
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+					.getText();
+			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
 			if (!checkElementPresence("ul_name")) {
@@ -110,7 +97,6 @@ public class ENWIAM012 extends TestBase {
 
 			}
 
-			
 			logoutEnw();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
@@ -152,10 +138,10 @@ public class ENWIAM012 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

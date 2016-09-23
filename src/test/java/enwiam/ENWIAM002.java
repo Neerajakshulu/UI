@@ -2,10 +2,8 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -35,41 +33,32 @@ public class ENWIAM002 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('G'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify EMAIL ADDRESS field in new TR user registration page")
-				.assignCategory("ENWIAM");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
+		
 	}
 
 	@Test(dataProvider = "getTestData")
 	public void testcaseA10(String charLength, String suffix, String error, String validity) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			// TestUtil.reportDataSetResult(iamxls, "Test Cases",
-			// TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()),
-			// "SKIP");
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
 
-		// test the runmode of current dataset
 		count++;
 		if (!runmodes[count].equalsIgnoreCase("Y")) {
 
 			test.log(LogStatus.INFO, "Runmode for test set data set to no " + (count + 1));
 			skip = true;
-			// TestUtil.reportDataSetResult(iamxls,
-			// this.getClass().getSimpleName(), count+2, "SKIP");
 			throw new SkipException("Runmode for test set data set to no " + (count + 1));
 		}
 
@@ -84,11 +73,8 @@ public class ENWIAM002 extends TestBase {
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
 			logger.info("Length : "+characterLength);
-//			System.out.println(Integer.parseInt(characterLength));
 			String email = generateRandomName(i) + suffix;
 			logger.info(email);
-
-			// selenium code
 			openBrowser();
 
 			try {
@@ -131,7 +117,6 @@ public class ENWIAM002 extends TestBase {
 						test.log(LogStatus.FAIL, "Sign up button is not enabled in Singn up page" + t);// extent
 						StringWriter errors = new StringWriter();
 						t.printStackTrace(new PrintWriter(errors));
-						// test.log(LogStatus.INFO, errors.toString()); // reports
 						test.log(LogStatus.INFO, "Error--->" + t);
 						ErrorUtil.addVerificationFailure(t);
 						status = 2;// excel

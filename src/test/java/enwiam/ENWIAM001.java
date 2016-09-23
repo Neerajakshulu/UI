@@ -46,8 +46,6 @@ public class ENWIAM001 extends TestBase {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 		
-//		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-//		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 		if (!master_condition) {
 			status = 3;// excel
@@ -78,9 +76,6 @@ public class ENWIAM001 extends TestBase {
 								"Verify that ENW registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
-				//boolean status = addRequriFields("duster", "man");
-				
-				//Assert.assertTrue(status);
 			
 					ob.get("https://www.guerrillamail.com");
 					BrowserWaits.waitTime(2);
@@ -89,7 +84,6 @@ public class ENWIAM001 extends TestBase {
 						BrowserWaits.waitTime(4);
 					}
 					email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
-					//ob.navigate().to(CONFIG.getProperty("enwUrl"));
 					ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 					ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();

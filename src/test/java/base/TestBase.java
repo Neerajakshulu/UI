@@ -1840,4 +1840,111 @@ public class TestBase {
 		return email;
 	}
 	
+	public String createTraillingSpaceUser(String first_name,
+			String last_name,
+			String email1) throws Exception {
+
+		status = traillingRegistrationEnwForm(first_name, last_name, email1);
+		BrowserWaits.waitTime(2);
+		if (status) {
+			activationStatus = userActivation();
+
+		}
+		if (activationStatus) {
+			mail = loginActivatedENWUser();
+		}
+
+		return mail;
+
+	}
+
+	private boolean traillingRegistrationEnwForm(String first_name,
+			String last_name,
+			String email1) throws Exception {
+		email=email1;
+		try {
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
+
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+
+		}
+		return true;
+	}
+	
+	
+	
+	public String createTraillingSpaceNeonUser(String first_name,
+			String last_name,
+			String email1) throws Exception {
+
+		status = traillingRegistrationNeonForm(first_name, last_name, email1);
+		BrowserWaits.waitTime(2);
+		if (status) {
+			activationStatus = userActivation();
+
+		}
+		if (activationStatus) {
+			mail = loginActivationMail();
+		}
+
+		return mail;
+
+	}
+
+	private boolean traillingRegistrationNeonForm(String first_name,
+			String last_name,
+			String email1) throws Exception {
+		email=email1;
+		try {
+			ob.get(host);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
+					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
+			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		} catch (Throwable t) {
+			t.printStackTrace();
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			closeBrowser();
+			return false;
+
+		}
+		return true;
+	}
+	
+	
+	
 }

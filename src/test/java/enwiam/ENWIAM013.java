@@ -14,14 +14,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM013 extends TestBase {
 
@@ -38,18 +38,6 @@ public class ENWIAM013 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
-
-		// extent = ExtentManager.getReporter(filePath);
-		// String var = xlRead2(returnExcelPath('G'),
-		// this.getClass().getSimpleName(), 1);
-		// test = extent
-		// .startTest(
-		// var,
-		// "Verify that user is able to change his TR password by using FORGOT
-		// YOUR PASSWORD link and that he is able to login with his new
-		// password")
-		// .assignCategory("ENWIAM");
-
 	}
 
 	@Test
@@ -57,11 +45,6 @@ public class ENWIAM013 extends TestBase {
 
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
-		// boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "ENWIAM");
-		// boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls,
-		// this.getClass().getSimpleName());
-		// boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;// excel
@@ -125,7 +108,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1934",
 								"Verify that Forgot your password? Link is clickable on NEON Landing page and End note landing page")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				String forgotPassText = ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).getText();
 				logger.info("Fogot Password Text : " + forgotPassText);
 				Assert.assertEquals(forgotPassText, "Forgot password?");
@@ -143,17 +126,17 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-1935",
-								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link")
+						.startTest("OPQA-1935||OPQA-3687",
+								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link||Verify that,the system should support a ENW password reset workflow with the following configurations")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				String resertPassPage = ob
 						.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
 						.getText();
@@ -173,7 +156,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -183,7 +166,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1945",
 								"Verify that Upon initiation, the Neon and ENW reset password workflow shall bring the user to the send email verification page where a verification email can be sent to an email address entered by the user.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				// String
 				// emailVeficationPage=ob.findElement(By.cssSelector("input[class='button']")).getText();
 				// Assert.assertEquals(emailVeficationPage, "Send verification
@@ -218,7 +201,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -228,7 +211,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1946",
 								"Verify that the Neon and ENW reset password workflow shall be able to send a verification email to the user")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				// ob.close();
 				// ob.switchTo().window(al.get(0));
@@ -258,7 +241,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -268,7 +251,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1947",
 								"Verify that Upon clicking the link to reset password in the Neon and ENW reset verification email, the user shall be sent to the password reset page to reset the applicable STeAM user")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				WebElement reset_link_element = ob
 						.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
 				String reset_link_url = reset_link_element.getAttribute("href");
@@ -288,10 +271,9 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -299,13 +281,13 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1950",
 								"Verify Password must have at least one special character from !@#$%^*()~`{}[]|")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("!");
 				BrowserWaits.waitTime(2);
 				String specialChar = ob.findElement(By.cssSelector("span[id='hasSym']")).getAttribute("style");
-				logger.info("Color : "+specialChar);
+				logger.info("Color : " + specialChar);
 				Assert.assertTrue(specialChar.contains("rgb(30, 86, 21)"));
 				test.log(LogStatus.PASS, "Password field allow one special character from !@#$%^*()~`{}[]|");
 			} catch (Throwable t) {
@@ -318,7 +300,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -327,13 +309,13 @@ public class ENWIAM013 extends TestBase {
 				test = extent
 						.startTest("OPQA-1951", "Verify Password must contain at least one number is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("1");
 				BrowserWaits.waitTime(2);
 				String number = ob.findElement(By.cssSelector("span[id='hasNum']")).getAttribute("style");
-				logger.info("Color : "+number);
+				logger.info("Color : " + number);
 				Assert.assertTrue(number.contains("rgb(30, 86, 21)"));
 				test.log(LogStatus.PASS, "Password field allowed one number");
 
@@ -347,7 +329,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -357,19 +339,19 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1953",
 								"Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("P");
 				BrowserWaits.waitTime(2);
 				String alphaCahr = ob.findElement(By.cssSelector("span[id='hasChar']")).getAttribute("style");
-				logger.info("Color : "+alphaCahr);
+				logger.info("Color : " + alphaCahr);
 				Assert.assertTrue(alphaCahr.contains("rgb(30, 86, 21)"));
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("p");
 				BrowserWaits.waitTime(2);
 				String alphaCahr1 = ob.findElement(By.cssSelector("span[id='hasChar']")).getAttribute("style");
-				logger.info("Color : "+alphaCahr1);
+				logger.info("Color : " + alphaCahr1);
 				Assert.assertTrue(alphaCahr1.contains("rgb(30, 86, 21)"));
 
 				test.log(LogStatus.PASS, "Password field allowed one alphabet character");
@@ -384,7 +366,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -394,13 +376,13 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1948",
 								"Verify that the Password minimum length of 8 characters is ALWAYS enforced")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).clear();
 				ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
 				BrowserWaits.waitTime(2);
 				String eightChar = ob.findElement(By.cssSelector("span[id='minLength']")).getAttribute("style");
-				logger.info("Color : "+eightChar);
+				logger.info("Color : " + eightChar);
 				Assert.assertTrue(eightChar.contains("rgb(30, 86, 21)"));
 				ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
 				ob.findElement(By.id(OR.getProperty("update_password"))).click();
@@ -416,7 +398,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -426,7 +408,7 @@ public class ENWIAM013 extends TestBase {
 						.startTest("OPQA-1954",
 								"Verify Upon completion of establishing a new password, a user who wants to go to ENW shall be presented a confirmation page with an optional link back to ENW Landing page")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				String checkEmail2 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
 				logger.info("Email Address : " + checkEmail2);
@@ -457,49 +439,45 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
-			
-			
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
 						.startTest("OPQA-1937",
 								"Verify that As a Neon or ENW user, I want to be able to reset my STeAM Password from the EndNote Web landing page.")
 						.assignCategory("ENWIAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
-				//BrowserWaits.waitTime(2);
-				//ob.findElement(By.cssSelector("input[class='button']")).click();
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				// BrowserWaits.waitTime(2);
+				// ob.findElement(By.cssSelector("input[class='button']")).click();
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				Thread.sleep(10000);
-				String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
-				logger.info("Text Continue : "+text1);
-				if (text1.equalsIgnoreCase("Continue")) {
+				//String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+				//logger.info("Text Continue : " + text1);
+				if (ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText().equalsIgnoreCase("Continue")) {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 				}
 
 				if (!checkElementPresence("ul_name")) {
 					test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
+					test.log(LogStatus.INFO,
+							"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
 					closeBrowser();
 
 				}
 
-				test.log(LogStatus.PASS,
-						"User successfylly login ENW after resetting password");
+				test.log(LogStatus.PASS, "User successfylly login ENW after resetting password");
 
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"User not successfylly login ENW after resetting password"
-								+ t);// extent
+				test.log(LogStatus.FAIL, "User not successfylly login ENW after resetting password" + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -508,7 +486,7 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -540,10 +518,10 @@ public class ENWIAM013 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

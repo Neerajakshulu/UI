@@ -11,13 +11,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IAM002 extends TestBase {
 
@@ -31,29 +31,23 @@ public class IAM002 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('A'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(
-						var,
-						"Verify that existing TR user is able to login successfully and that case-sensitivity of email id doesn't have any effect on login process")
-				.assignCategory("IAM");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
 	public void testcaseA2() throws Exception {
-
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "IAM");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
+
 		ArrayList<String> cases = new ArrayList<String>();
 		cases.add("smallCase");
 		cases.add("upperCase");
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -73,46 +67,34 @@ public class IAM002 extends TestBase {
 				clearCookies();
 
 				// Navigate to TR login page and login with valid TR credentials
-				 ob.navigate().to(host);
-				//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+				ob.navigate().to(host);
+				// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 				//
 
 				// if :checking if user can login with uppercase email address
 				if (iterator.next().equals("upperCase")) {
-					//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-					//ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click();
-					//
 					waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(
-							CONFIG.getProperty("defaultUsername").toUpperCase());
-					ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
-							CONFIG.getProperty("defaultPassword"));
+					ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
+							.sendKeys(CONFIG.getProperty("defaultUsername").toUpperCase());
+					ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
+							.sendKeys(CONFIG.getProperty("defaultPassword"));
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				} else {// else: checking if user can login successfully using smallcase email address
 
 					login();
 				}
 				BrowserWaits.waitTime(4);
-//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 				// Verify that login is successful
 				if (!checkElementPresence("ul_name")) {
 
 					test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");// extent reports
 					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_existing_TR_credentials_not_working_fine")));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_existing_TR_credentials_not_working_fine")));// screenshot
 					closeBrowser();
 
 				}
-
-				// String
-				// name=ob.findElement(By.xpath("//div[@class='pull-right ng-isolate-scope']//a[@class='dropdown-toggle']//ne-profile-image[@class='data-alt']"));
-				// System.out.println(name);
-				//
 
 				// Verify that profile name gets displayed correctly
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
@@ -120,11 +102,8 @@ public class IAM002 extends TestBase {
 
 					test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports
 					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_incorrect_profile_name_getting_displayed")));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 					closeBrowser();
 
 				}
@@ -135,11 +114,8 @@ public class IAM002 extends TestBase {
 
 					test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
 					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_user_unable_to_logout_successfully")));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 					closeBrowser();
 
 				}
@@ -155,11 +131,8 @@ public class IAM002 extends TestBase {
 				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_something_unexpected_happened")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 				closeBrowser();
 			}
 		}

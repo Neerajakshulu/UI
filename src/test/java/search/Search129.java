@@ -2,12 +2,12 @@ package search;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-
 import org.testng.annotations.Test;
 
 import pages.PageFactory;
@@ -15,7 +15,6 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
 import base.TestBase;
-
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -35,16 +34,14 @@ public class Search129 extends TestBase {
     @BeforeTest
     public void beforeTest() throws Exception {
                     extent = ExtentManager.getReporter(filePath);
-                    String var = xlRead2(returnExcelPath('B'), this.getClass().getSimpleName(), 1);
-                    test = extent.startTest(var, "Verify that Deeplinking is working for Search result page using Linkedin Account")
-                                                    .assignCategory("Search suite");
-                    runmodes = TestUtil.getDataSetRunmodes(searchxls, "deep_linking");
+                    rowData = testcase.get(this.getClass().getSimpleName());
+                    test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
     }
 
     @Test
     public void testOpenApplication() throws Exception {
                     try {
-                    boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Search");
+                      
                     boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
                     master_condition = suiteRunmode && testRunmode;
 

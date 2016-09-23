@@ -21,7 +21,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class IAM034 extends TestBase {
@@ -46,8 +45,6 @@ public class IAM034 extends TestBase {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
-		// boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		// boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 		if (!master_condition) {
 			status = 3;// excel
@@ -77,9 +74,6 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1838",
 								"Verify that Neon registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
 						.assignCategory("IAM");
-						// boolean status = addRequriFields("duster", "man");
-
-				// Assert.assertTrue(status);
 
 				ob.get("https://www.guerrillamail.com");
 				BrowserWaits.waitTime(2);
@@ -117,7 +111,6 @@ public class IAM034 extends TestBase {
 				extent.endTest(test);
 			}
 
-
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -144,9 +137,7 @@ public class IAM034 extends TestBase {
 			} finally {
 				extent.endTest(test);
 			}
-			
-			
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -331,14 +322,11 @@ public class IAM034 extends TestBase {
 		// extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases",
-		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(notificationxls,
-		 * "Test Cases", TestUtil.getRowNum(notificationxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(notificationxls, "Test Cases", TestUtil.getRowNum(notificationxls,
+		 * this.getClass().getSimpleName()), "FAIL"); else TestUtil.reportDataSetResult(notificationxls, "Test Cases",
+		 * TestUtil.getRowNum(notificationxls, this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 
