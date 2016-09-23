@@ -61,12 +61,8 @@ public class Search32 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-         	ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			 //ob.navigate().to(host);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+			 ob.navigate().to(host);
+			 // login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
