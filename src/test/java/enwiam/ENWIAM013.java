@@ -458,12 +458,15 @@ public class ENWIAM013 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				Thread.sleep(10000);
-				//String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
-				//logger.info("Text Continue : " + text1);
-				if (ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText().equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				try {
+					String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+					logger.info("Text : " + text1);
+					if (text1.equalsIgnoreCase("Continue")) {
+						ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+					}
+				} catch (Exception e) {
+					
 				}
-
 				if (!checkElementPresence("ul_name")) {
 					test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 					status = 2;// excel

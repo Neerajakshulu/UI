@@ -2,8 +2,10 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -110,10 +112,14 @@ public class ENWIAM015 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(newPass);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			BrowserWaits.waitTime(6);
-			//String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
-			//logger.info("Text : " + text1);
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText().equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+			try {
+				String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
+				logger.info("Text : " + text1);
+				if (text1.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
+			} catch (Exception e) {
+				
 			}
 
 			BrowserWaits.waitTime(6);
