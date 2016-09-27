@@ -90,6 +90,14 @@ public class EnwReference extends TestBase {
 			//BrowserWaits.waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 		}
+
+		public void clickOnProjectNeonLink() {
+			// TODO Auto-generated method stub
+			WebElement navigate_to_header = ob.findElement(By.partialLinkText((OnePObjectMap.ENW_HOME_HEADER_NEON_PLINK.toString())));
+            jsClick(ob, navigate_to_header);
+			
+			
+		}
 		
 
 }
