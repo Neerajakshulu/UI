@@ -2,8 +2,11 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -101,6 +104,33 @@ public class IAM004 extends TestBase {
 
 			}
 
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
+			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
+			BrowserWaits.waitTime(3);
+
+			try{
+			List<WebElement> list = ob.findElements(By.xpath(
+					"//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span"));
+			if (list.size() == 1) {
+				String str = list.get(0).getText();
+				Assert.assertEquals(str, email);
+				test.log(LogStatus.PASS, "Both Email ids are same");
+			}else{
+				logger.info("Accounts are linked");
+			}
+			}catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Both Email ids are not same");// extent reports
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			}
+			
 			logout();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 

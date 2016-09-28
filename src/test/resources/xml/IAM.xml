@@ -50,21 +50,24 @@
 	</test>
 
 
-	<test name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM007"></class>
 		</classes>
 	</test>
 
 
-	<test name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM008"></class>
 		</classes>
 	</test>
 
 
-	<test name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM009"></class>
 		</classes>
@@ -172,6 +175,12 @@
 	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
+		</classes>
+	</test>
+
+	<test name="LinkedIn_and_facebook_linking">
+		<classes>
+			<class name="iam.IAM036"></class>
 		</classes>
 	</test>
 

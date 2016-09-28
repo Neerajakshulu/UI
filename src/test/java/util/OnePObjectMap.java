@@ -365,6 +365,10 @@ ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
 	NEON_ENW_INTEGRATION_TEXT_XPATH("//p[@class='sign-in-options-text text-center']"),
 	NEON_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
 	NEON_MARKETING_COPY_XPATH("//h2[.='Project Neon']"),
+	SINGIN_USING_LINKEDIN_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary ng-binding']"),
+	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
+	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
+	LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
 	;
 	
 	private String locator;
