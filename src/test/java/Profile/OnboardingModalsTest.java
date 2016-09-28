@@ -46,7 +46,7 @@ public class OnboardingModalsTest extends TestBase {
 			logger.info("host name-->"+appHosts.get("1PPROFILE"));
 			resp = reqSpec.when().put(appHosts.get("1PPROFILE")+"/users/user/"+truid+"/status/onboarded");
 			String jsonResponse = resp.asString();
-			logger.info("response-->"+jsonResponse);
+			logger.info("response-->"+jsonResponse); 
 			JsonPath jsonPath = new JsonPath(jsonResponse);
 			String onboarding=jsonPath.getString("onboarded");
 			logger.info("onboarding status-->"+onboarding);
