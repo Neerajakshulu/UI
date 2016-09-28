@@ -101,6 +101,18 @@
 			<class name="enwiam.ENWIAM101"></class>
 		</classes>
 	</test>
+	
+		<test name="Navigation" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM40"></class>
+		</classes>
+	</test>
+	
+	<test name="NeonLandingpage" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM50"></class>
+		</classes>
+	</test>
 
 </suite>
 

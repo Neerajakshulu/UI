@@ -362,6 +362,9 @@ ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
 	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
 	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[id='pageTitle'] h3"),
+	NEON_ENW_INTEGRATION_TEXT_XPATH("//p[@class='sign-in-options-text text-center']"),
+	NEON_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
+	NEON_MARKETING_COPY_XPATH("//h2[.='Project Neon']"),
 	;
 	
 	private String locator;
