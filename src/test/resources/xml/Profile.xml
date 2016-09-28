@@ -76,7 +76,7 @@
 	</test>
 
 	<test name="Validate_Other_User_Profile_Comments_Like">
-		<parameter name="otherProfileName" value="kavya" />
+		<parameter name="otherProfileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile10"></class>
 		</classes>
