@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ENW" parallel="tests" thread-count="10">
+<suite name="ENW" parallel="tests" thread-count="1">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -41,6 +41,67 @@
 			<class name="enw.ENW006"></class>
 		</classes>
 	</test>	
+	 <test name="ENW009">
+		<classes>
+			<class name="enw.ENW009"></class>
+		</classes>
+	</test>	
+	 <test name="ENW010">
+		<classes>
+			<class name="enw.ENW010"></class>
+		</classes>
+	</test>	
+	 <test name="ENW011">
+		<classes>
+			<class name="enw.ENW011"></class>
+		</classes>
+	</test>	
+	 <test name="ENW012">
+		<classes>
+			<class name="enw.ENW012"></class>
+		</classes>
+	</test>	
+	 <test name="ENW013">
+		<classes>
+			<class name="enw.ENW013"></class>
+		</classes>
+	</test>	
+	 <test name="ENW014">
+		<classes>
+			<class name="enw.ENW014"></class>
+		</classes>
+	</test>	
+	<test name="ENW015">
+		<classes>
+			<class name="enw.ENW015"></class>
+		</classes>
+	</test>	
+	<test name="ENW016">
+		<classes>
+			<class name="enw.ENW016"></class>
+		</classes>
+	</test>	
+	<test name="ENW017">
+		<classes>
+			<class name="enw.ENW017"></class>
+		</classes>
+	</test>	
+	<test name="ENW018">
+		<classes>
+			<class name="enw.ENW018"></class>
+		</classes>
+	</test>	
+	<test name="ENW019">
+		<classes>
+			<class name="enw.ENW019"></class>
+		</classes>
+	</test>	
+	<test name="ENW020">
+		<classes>
+			<class name="enw.ENW020"></class>
+		</classes>
+	</test>	
+	
 
 </suite>
 

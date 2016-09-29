@@ -1,7 +1,5 @@
 package base;
 
-import static com.jayway.restassured.RestAssured.given;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,7 +56,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-
+import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -122,7 +120,8 @@ public class TestBase {
 	protected static final String EUREKA_VIP_ADDRESS = "vipAddress";
 	protected static final String EUREKA_DC_NAME = "Amazon";
 	protected Map<String, String> appHosts = new HashMap<String, String>();	
-
+	
+	public static String mainWindow="";
 	@BeforeSuite
 	public void beforeSuite(ITestContext ctx) throws Exception {
 		suiteName = ctx.getSuite().getName();
@@ -749,13 +748,10 @@ public class TestBase {
 
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
-		//screenshot in base64 format
-		String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
-		//screenshot in File format
 		File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
-		String myP1 = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
-		FileUtils.copyFile(myImg, new File(myP1));
-		return "data:image/jpeg;base64,"+myP;
+		String myP = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
+		FileUtils.copyFile(myImg, new File(myP));
+		return myP;
 
 	}
 
@@ -1174,12 +1170,22 @@ public class TestBase {
 	 * @return
 	 */
 	public String switchToNewWindow(WebDriver driver) {
-		String mainWindow = driver.getWindowHandle();
+		mainWindow = driver.getWindowHandle();
+		String newWindow="";
 		Set<String> windows = driver.getWindowHandles();
-		windows.remove(mainWindow);
-		driver.switchTo().window(windows.iterator().next());
-		return mainWindow;
+		//windows.remove(mainWindow);
+		if(!windows.iterator().next().contains(mainWindow))
+		newWindow = windows.iterator().next();
+		driver.switchTo().window(newWindow);
+		return newWindow;
 
+	}
+	
+	public String switchToMainWindow(WebDriver driver) {
+		System.out.println("Closing the current browser");
+		driver.getWindowHandles().remove(driver.getWindowHandle());
+		driver.switchTo().window(mainWindow);
+		return mainWindow;
 	}
 
 	/**
@@ -1316,6 +1322,14 @@ public class TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
 		jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
 
+	}
+	public void loginToWOS(String usernameKey, String pwdKey) throws Exception {
+		waitForElementTobeVisible(ob, By.name("username"), 180);
+		ob.findElement(By.name("username")).clear();
+		ob.findElement(By.name("username")).sendKeys(LOGIN.getProperty(usernameKey));
+		ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty(pwdKey));
+		jsClick(ob, ob.findElement(By.xpath(".//*[@name='image']")));
+	
 	}
 
 	/**
@@ -1897,57 +1911,4 @@ public class TestBase {
 		return true;
 	}
 	
-	
-	
-	public String createTraillingSpaceNeonUser(String first_name,
-			String last_name,
-			String email1) throws Exception {
-
-		status = traillingRegistrationNeonForm(first_name, last_name, email1);
-		BrowserWaits.waitTime(2);
-		if (status) {
-			activationStatus = userActivation();
-
-		}
-		if (activationStatus) {
-			mail = loginActivationMail();
-		}
-
-		return mail;
-
-	}
-
-	private boolean traillingRegistrationNeonForm(String first_name,
-			String last_name,
-			String email1) throws Exception {
-		email=email1;
-		try {
-			ob.get(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
-			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
-			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-		} catch (Throwable t) {
-			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
-			closeBrowser();
-			return false;
-
-		}
-		return true;
-	}
-
 }
