@@ -64,11 +64,6 @@
 		</classes>
 	</test>
 
-	<test name="Search90">
-		<classes>
-			<class name="search.Search90"></class>
-		</classes>
-	</test>
 
 	<test name="Search39">
 		<classes>

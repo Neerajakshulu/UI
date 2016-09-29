@@ -70,6 +70,7 @@ public class Search109 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(3);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			// Finding out the types filer in refine panel
 			List<WebElement> content_types = ob.findElements(By
