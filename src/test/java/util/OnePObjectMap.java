@@ -75,7 +75,7 @@ ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
 
 	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG("h6"),
 	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("li[class='interest-or-skill ng-binding ng-scope']"),
-	HOME_PROJECT_NEON_SEARCH_BOX_CSS("div[class='ne-main-nav'] input[class^='wui-search-bar__input']"),
+	HOME_PROJECT_NEON_SEARCH_BOX_CSS("div[class='ne-main-nav'] input[class^='wui-search-bar__inputdvdDZDczxcdzxczs']"),
 	HOME_PROJECT_NEON_SEARCH_CLICK_CSS("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']"),
 	HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS("li[class^='wui-side-menu__list-item']"),
 	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("div[class^='dropdown ne-profile-flyout'] a[data-toggle='dropdown']"),

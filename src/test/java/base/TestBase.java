@@ -1,5 +1,7 @@
 package base;
 
+import static com.jayway.restassured.RestAssured.given;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -56,7 +58,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import static com.jayway.restassured.RestAssured.given;
+
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -747,10 +749,13 @@ public class TestBase {
 
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
+		//screenshot in base64 format
+		String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
+		//screenshot in File format
 		File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
-		String myP = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
-		FileUtils.copyFile(myImg, new File(myP));
-		return myP;
+		String myP1 = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
+		FileUtils.copyFile(myImg, new File(myP1));
+		return "data:image/jpeg;base64,"+myP;
 
 	}
 
@@ -1944,7 +1949,5 @@ public class TestBase {
 		}
 		return true;
 	}
-	
-	
-	
+
 }

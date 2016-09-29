@@ -17,7 +17,7 @@
 		</classes>
 	</test>
 
-	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	<!-- <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 		<parameter name="searchPeople" value="Ivy" />
 		<classes>
 			<class name="Profile.Profile2"></class>
@@ -485,7 +485,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test> 
+	</test>  -->
 
 </suite>
 
