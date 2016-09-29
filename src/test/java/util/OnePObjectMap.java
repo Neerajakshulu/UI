@@ -19,6 +19,7 @@ ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS("button[class='wui-btn wui-btn--secondary b
 ENW_LINK_ACCOUNTS_EMAIL_XPATH("//input[@name='email']"),
 ENW_LINK_ACCOUNTS_PASSWORD_XPATH("//input[@name='password']"),
 ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+ENW_LINK_ACCOUNTS_DONE_BUTTON_CSS("form#linkAccounts button"),
 
 ENW_FB_LOGIN_BUTTON_XPATH("//button[@id='loginbutton']"),
 ENW_CONTINUE_BUTTON_XPATH("//div[@id='continue']"),
