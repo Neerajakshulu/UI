@@ -7,28 +7,26 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * Class for Performing Authoring prevent comment flooding by bots with different article
+ * Class for Performing Authoring prevent comment flooding by bots with
+ * different article
  * 
  * @author UC202376
  *
@@ -48,23 +46,21 @@ public class Authoring7 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that prevention of comment flooding by bots with different articles works as expected")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -78,10 +74,10 @@ public class Authoring7 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
 		try {
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
@@ -90,24 +86,18 @@ public class Authoring7 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
 			closeBrowser();
 		}
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({"username", "password", "article", "completeArticle", "addComments"})
-	public void validateDiffArticlePreventBotsComments(String username,
-			String password,
-			String article,
-			String completeArticle,
-			String addComments) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle", "addComments" })
+	public void validateDiffArticlePreventBotsComments(String username, String password, String article,
+			String completeArticle, String addComments) throws Exception {
 		try {
-			//waitForTRHomePage();
+			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
@@ -117,7 +107,8 @@ public class Authoring7 extends TestBase {
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
 			pf.getAuthoringInstance(ob).searchArticle("micro biology");
-			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 40);
+			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()),
+					40);
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).click();
@@ -137,11 +128,8 @@ public class Authoring7 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_Prevent_Bots_functionaliy_not_giving_expected_Result")));
 			closeBrowser();
 		}
 	}
@@ -152,36 +140,41 @@ public class Authoring7 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
+
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		BrowserWaits.waitTime(5);
-		
-		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
-		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		//jsClick(ob,commentArea);
 
-        //Used points class to get x and y coordinates of element.
-        Point point = commentArea.getLocation();
-        //int xcord = point.getX();
-        int ycord = point.getY();
-        ycord=ycord+200;
-        JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0,"+ ycord+");");
+		WebElement commentArea = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		// jsClick(ob,commentArea);
+
+		// Used points class to get x and y coordinates of element.
+		Point point = commentArea.getLocation();
+		// int xcord = point.getX();
+		int ycord = point.getY();
+		ycord = ycord + 200;
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0," + ycord + ");");
 		BrowserWaits.waitTime(2);
-		jsClick(ob,commentArea);
+		jsClick(ob, commentArea);
 		commentArea.clear();
-		String comment=addComments + RandomStringUtils.randomNumeric(3);
+		String comment = addComments + RandomStringUtils.randomNumeric(3);
 		commentArea.sendKeys(comment);
-		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(3000);// after entering the comments wait for submit button to get enabled or disabled
+		// new
+		// Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(3000);// after entering the comments wait for submit button
+							// to get enabled or disabled
 	}
 
-	
 }

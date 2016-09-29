@@ -15,14 +15,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring4 extends TestBase {
 
@@ -41,30 +41,24 @@ public class Authoring4 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that comments added by the neon user are listed in profile page of the user").assignCategory(
-				"Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		// load the run modes of the tests
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
-	@Parameters({"username", "password", "article", "completeArticle", "addComments"})
-	public void testLoginTRAccount(String username,
-			String password,
-			String article,
-			String completeArticle,
+	@Parameters({ "username", "password", "article", "completeArticle", "addComments" })
+	public void testLoginTRAccount(String username, String password, String article, String completeArticle,
 			String addComments) throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -78,12 +72,12 @@ public class Authoring4 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
 		try {
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
-		
-			//pf.getAuthoringInstance(ob).waitForTRHomePage();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
+
+			// pf.getAuthoringInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle, addComments);
 			closeBrowser();
 		} catch (Throwable t) {
@@ -94,46 +88,37 @@ public class Authoring4 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
 
-	public void performAuthoringCommentOperations(String username,
-			String password,
-			String article,
-			String completeArticle,
-			String addComments) throws Exception {
+	public void performAuthoringCommentOperations(String username, String password, String article,
+			String completeArticle, String addComments) throws Exception {
 		loginAs("USERNAME3", "PASSWORD3");
-	try{
-		// Get Total No.of comments
-		totalProfileCommentsBeforeAdd = getProfleComments();
-		System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
-		System.out.println();
-		pf.getAuthoringInstance(ob).searchArticle(article);
-		pf.getAuthoringInstance(ob).chooseArticle();
-		// Enter Article Comments
-		int expCount=pf.getAuthoringInstance(ob).getCommentCount();
-		pf.getAuthoringInstance(ob).enterArticleComment(addComments);
-		pf.getAuthoringInstance(ob).clickAddCommentButton();
-		pf.getAuthoringInstance(ob).validateCommentAdd(test,expCount);
-		pf.getAuthoringInstance(ob).validateViewComment(test,addComments);
-		totalProfileCommentsAfterAdd = getProfleComments();
-		System.out.println("comments After-->" + totalProfileCommentsAfterAdd);
-		// Validate Comments count increased or not
-		if (!(totalProfileCommentsAfterAdd > totalProfileCommentsBeforeAdd)) {
-			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Comments count not updated in My Profile Screen")));
-			throw new Exception("Comments count is not updated in My Profile Screen");
-		}
+		try {
+			// Get Total No.of comments
+			totalProfileCommentsBeforeAdd = getProfleComments();
+			System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
+			System.out.println();
+			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getAuthoringInstance(ob).chooseArticle();
+			// Enter Article Comments
+			int expCount = pf.getAuthoringInstance(ob).getCommentCount();
+			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getAuthoringInstance(ob).validateCommentAdd(test, expCount);
+			pf.getAuthoringInstance(ob).validateViewComment(test, addComments);
+			totalProfileCommentsAfterAdd = getProfleComments();
+			System.out.println("comments After-->" + totalProfileCommentsAfterAdd);
+			// Validate Comments count increased or not
+			if (!(totalProfileCommentsAfterAdd > totalProfileCommentsBeforeAdd)) {
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_Comments count not updated in My Profile Screen")));
+				throw new Exception("Comments count is not updated in My Profile Screen");
+			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
 			// print full stack trace
@@ -142,11 +127,8 @@ public class Authoring4 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -157,12 +139,14 @@ public class Authoring4 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 
@@ -173,8 +157,8 @@ public class Authoring4 extends TestBase {
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
 		waitUntilText("Comments");
 		scrollingToElementofAPage();
-		String commentsCount = ob.findElement(
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS.toString()))
+		String commentsCount = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_COMMENTS_COUNT_CSS.toString()))
 				.getText();
 		int totalComments = Integer.parseInt(commentsCount.replace(",", "").trim());
 		return totalComments;
@@ -206,7 +190,8 @@ public class Authoring4 extends TestBase {
 	 * Method for wait until Element is Present
 	 * 
 	 * @param locator
-	 * @throws Exception, When NoSuchElement Present
+	 * @throws Exception,
+	 *             When NoSuchElement Present
 	 */
 	public void IsElementPresent(String locator) throws Exception {
 		try {

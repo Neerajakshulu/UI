@@ -93,7 +93,7 @@ public class Search15 extends TestBase {
 
 			try {
 				Assert.assertTrue(resultList.size() >= timeCiteList.size() && timeCiteCount == 0);
-				test.log(LogStatus.PASS, "Time cite field is displayed for all articles");
+				test.log(LogStatus.PASS, "Time cite field are displayed for  articles which are time cited");
 			} catch (Throwable t) {
 				if (timeCiteCount == -1)
 					test.log(LogStatus.FAIL, "Time cite field is not displayed for any articles");
@@ -146,7 +146,7 @@ public class Search15 extends TestBase {
 
 			try {
 				Assert.assertTrue(resultList.size() == commentsList.size() && commentsCount == 0);
-				test.log(LogStatus.PASS, "Comments field is displayed for all documents");
+				test.log(LogStatus.PASS, "Comments field is displayed for documents ");
 			} catch (Throwable t) {
 				if (commentsCount == -1)
 					test.log(LogStatus.FAIL, "Comments field is not displayed for any articles");

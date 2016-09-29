@@ -12,7 +12,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -71,9 +70,7 @@ public class Search56 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
-			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			Thread.sleep(2000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();

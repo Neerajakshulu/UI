@@ -3,28 +3,21 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * Class for Performing Authoring Comments Validation with Unsupported HTML tags
@@ -51,15 +44,15 @@ public class Authoring77 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that deep linking works fine for ARTICLES,POSTS,PATENTS with Neon login").assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, "deek_linking");
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
 		try {
-			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 			boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 			master_condition = suiteRunmode && testRunmode;
 
@@ -136,13 +129,13 @@ public class Authoring77 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 			clearCookies();
-			ob.get(host+url);
+			ob.get(host + url);
 			loginAs("USERNAME4", "PASSWORD4");
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(ob);
 
 			try {
-				Assert.assertEquals(ob.getCurrentUrl(), host+url);
+				Assert.assertEquals(ob.getCurrentUrl(), host + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getRecordType(), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);

@@ -49,16 +49,15 @@ public class Authoring79 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that deep linking works fine for ARTICLES,POSTS,PATENTS with Social login")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, "deek_linking");
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
 		try {
-			boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 			boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 			master_condition = suiteRunmode && testRunmode;
 

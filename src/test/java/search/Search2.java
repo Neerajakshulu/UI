@@ -15,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -37,7 +38,8 @@ public class Search2 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
-
+	
+	
 	@Test
 	public void testcaseB2() throws Exception {
 
@@ -64,19 +66,15 @@ public class Search2 extends TestBase {
 			maximizeWindow();
 
 			 ob.navigate().to(host);
-	//	ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			BrowserWaits.waitTime(5);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 

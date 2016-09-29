@@ -37,7 +37,9 @@ public class Search4 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
 	}
-
+	/**
+	 * Verify that NESTING WITH PARENTHESIS rule is working correctly
+	 */
 	@Test
 	public void testcaseB4() throws Exception {
 

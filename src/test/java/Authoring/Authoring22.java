@@ -2,24 +2,20 @@ package Authoring;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring22 extends TestBase {
 
@@ -34,11 +30,8 @@ public class Authoring22 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verfiy that user can appreciate their own comment validate appreciation count")
-				.assignCategory("Authoring");
-		// test.log(LogStatus.INFO, "****************************");
-		// load the runmodes of the tests
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 		System.out.println("Run modes-->" + runmodes.length);
 	}
@@ -46,19 +39,19 @@ public class Authoring22 extends TestBase {
 	/**
 	 * Method for validating TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login Home screen not displaying
+	 * @throws Exception,
+	 *             When TR Login Home screen not displaying
 	 */
 	@Test
 	public void testAuthoringTestAccount() throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -71,12 +64,13 @@ public class Authoring22 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		try {
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
-		//pf.getAuthoringInstance(ob).waitForTRHomePage();
-		// authoringAppreciation(username, password, article, completeArticle, addComments);
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
+			// pf.getAuthoringInstance(ob).waitForTRHomePage();
+			// authoringAppreciation(username, password, article,
+			// completeArticle, addComments);
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something UnExpected");
 			// print full stack trace
@@ -85,21 +79,16 @@ public class Authoring22 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
 
 	@Test(dependsOnMethods = "testAuthoringTestAccount")
-	@Parameters({"username", "password", "article", "completeArticle"})
-	public void authoringAppreciation(String username,
-			String password,
-			String article,
-			String completeArticle) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle" })
+	public void authoringAppreciation(String username, String password, String article, String completeArticle)
+			throws Exception {
 
 		try {
 
@@ -109,7 +98,8 @@ public class Authoring22 extends TestBase {
 			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			Thread.sleep(6000);// wait for new comment to get added and displayed.
+			Thread.sleep(6000);// wait for new comment to get added and
+								// displayed.
 			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
@@ -122,11 +112,8 @@ public class Authoring22 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -137,18 +124,18 @@ public class Authoring22 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 
 		// closeBrowser();
 
 	}
-
-
 
 }

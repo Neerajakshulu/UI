@@ -35,6 +35,7 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnPostTab() throws Exception {
+		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(4).click();
 		waitForAjax(ob);
