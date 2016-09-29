@@ -30,6 +30,7 @@ public class SearchProfile extends TestBase {
 		BrowserWaits.waitTime(2);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
 		waitForAjax(ob);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 	}
 
