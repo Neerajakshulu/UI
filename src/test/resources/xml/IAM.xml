@@ -15,6 +15,7 @@
 			<class name="iam.IAM028"></class>
 			<class name="iam.IAM034"></class>
 			<class name="iam.IAM035"></class>
+			<class name="iam.IAM037"></class>
 		</classes>
 	</test>
 
@@ -175,6 +176,18 @@
 	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
+		</classes>
+	</test>
+	
+	<test name="Linking_Steam_to_Social">
+		<classes>
+			<class name="iam.IAM032"></class>
+		</classes>
+	</test>
+	
+	<test name="Liking_Social_to_Steam">
+		<classes>
+			<class name="iam.IAM033"></class>
 		</classes>
 	</test>
 

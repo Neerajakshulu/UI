@@ -99,7 +99,7 @@ public class ENWIAM016 extends TestBase {
 			String passLength = null;
 
 			if (validity.equalsIgnoreCase("YES")) {
-				passLength = ob.findElement(By.xpath("(//h6[@class='col-xs-11 password-validator__text'])[14]"))
+				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6"))
 						.getText();
 				if (passLength.contains("Password is too long")) {
 					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
@@ -112,7 +112,7 @@ public class ENWIAM016 extends TestBase {
 
 			else {
 
-				passLength = ob.findElement(By.xpath("(//h6[@class='col-xs-11 password-validator__text'])[14]"))
+				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6"))
 						.getText();
 				logger.info("PassWord : " + passLength);
 				if (!passLength.contains("Password is too long")) {
@@ -122,7 +122,7 @@ public class ENWIAM016 extends TestBase {
 					closeBrowser();
 				}
 				ob.findElement(By.xpath(
-						"(//div[@class='col-xs-12 password-validator__container'])[2]/div//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"));
+						"(//div[@class='row password-validator__item'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"));
 				BrowserWaits.waitTime(3);
 
 			}

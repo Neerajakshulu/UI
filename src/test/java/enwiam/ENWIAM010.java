@@ -215,7 +215,7 @@ public class ENWIAM010 extends TestBase {
 
 				String status = ob
 						.findElement(
-								By.cssSelector("label[class='wui-input-with-label__error above-form-error-message']"))
+								By.cssSelector("label[class='wui-input-with-label__error above-form-error-message ng-scope']"))
 						.getText();
 				Assert.assertEquals(status, "Invalid email/password. Please try again.");
 				test.log(LogStatus.PASS,
