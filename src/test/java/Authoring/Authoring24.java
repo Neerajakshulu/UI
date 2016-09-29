@@ -13,14 +13,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring24 extends TestBase {
 
@@ -35,15 +35,14 @@ public class Authoring24 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is not able to edit and delete the comment added by other users")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 
 	}
 
 	@Test
 	public void testEditOtherUserComments() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

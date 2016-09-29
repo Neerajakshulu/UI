@@ -17,14 +17,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring3 extends TestBase {
 
@@ -43,28 +43,23 @@ public class Authoring3 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var,
-				"Verify that user can delete the comments user authored themselves and validate the comment count")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test()
-	@Parameters({"username", "password", "article", "completeArticle"})
-	public void testLoginTRAccount(String username,
-			String password,
-			String article,
-			String completeArticle) throws Exception {
+	@Parameters({ "username", "password", "article", "completeArticle" })
+	public void testLoginTRAccount(String username, String password, String article, String completeArticle)
+			throws Exception {
 
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -84,7 +79,7 @@ public class Authoring3 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			//pf.getLoginTRInstance(ob).waitForTRHomePage();
+			// pf.getLoginTRInstance(ob).waitForTRHomePage();
 			performAuthoringCommentOperations(username, password, article, completeArticle);
 			closeBrowser();
 
@@ -96,23 +91,18 @@ public class Authoring3 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 	}
 
 	// @Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
-	public void performAuthoringCommentOperations(String username,
-			String password,
-			String article,
+	public void performAuthoringCommentOperations(String username, String password, String article,
 			String completeArticle) throws Exception {
 		try {
 
-			//pf.getAuthoringInstance(ob).waitForTRHomePage();
+			// pf.getAuthoringInstance(ob).waitForTRHomePage();
 			loginAs("USERNAME6", "PASSWORD6");
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).selectArtcleWithComments();
@@ -122,14 +112,12 @@ public class Authoring3 extends TestBase {
 			closeBrowser();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.FAIL, "Error: Delete Comments not done" + t);// extent reports
+			test.log(LogStatus.FAIL, "Error: Delete Comments not done" + t);// extent
+																			// reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_profile_data_updation_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_profile_data_updation_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
@@ -140,12 +128,14 @@ public class Authoring3 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 		// closeBrowser();
 	}
@@ -161,9 +151,9 @@ public class Authoring3 extends TestBase {
 			totalCommentsBeforeDeletion = pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("Before Deletion count --->" + totalCommentsBeforeDeletion);
 			WebElement deleteCommentButton = ob
-					.findElement(By  
-							.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS.toString()));
-			// System.out.println("is Delete displayed-->"+deleteCommentButton.isDisplayed());
+					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS.toString()));
+			// System.out.println("is Delete
+			// displayed-->"+deleteCommentButton.isDisplayed());
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", deleteCommentButton);
 
@@ -171,30 +161,26 @@ public class Authoring3 extends TestBase {
 			waitUntilText("Are you sure you wish to delete this comment?");
 
 			IsElementPresent(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString());
-			jsClick(ob,
-					ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString())));
+			jsClick(ob, ob.findElement(By
+					.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString())));
 			waitForAjax(ob);
 			totalCommentsAfterDeletion = pf.getAuthoringInstance(ob).getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->" + totalCommentsAfterDeletion);
 
 			if (!(totalCommentsBeforeDeletion > totalCommentsAfterDeletion)) {
-				test.log(LogStatus.FAIL, "Error: Delete Comments not done");// extent reports
+				test.log(LogStatus.FAIL, "Error: Delete Comments not done");// extent
+																			// reports
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_DeletComments_not_done")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
 			}
 		} catch (Throwable e) {
-			test.log(LogStatus.FAIL, "Error: Delete Comments not done" + e);// extent reports
+			test.log(LogStatus.FAIL, "Error: Delete Comments not done" + e);// extent
+																			// reports
 			ErrorUtil.addVerificationFailure(e);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_DeletComments_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
 			closeBrowser();
 		}
 
@@ -226,7 +212,8 @@ public class Authoring3 extends TestBase {
 	 * Method for wait until Element is Present
 	 * 
 	 * @param locator
-	 * @throws Exception, When NoSuchElement Present
+	 * @throws Exception,
+	 *             When NoSuchElement Present
 	 */
 	public void IsElementPresent(String locator) throws Exception {
 		try {

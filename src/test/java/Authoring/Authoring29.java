@@ -10,13 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring29 extends TestBase {
 
@@ -31,23 +31,22 @@ public class Authoring29 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that user is able to create a post and publish it and verify prevent bot functionality for post creation").assignCategory(
-				"Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 
 	}
 
 	@Test
 	public void testCreateAndPublishPost() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -87,11 +86,8 @@ public class Authoring29 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
 			String postTitle = pf.getProfilePageInstance(ob).getFirstPostTitle();
@@ -103,11 +99,8 @@ public class Authoring29 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_creation_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
 
 			}
 			pf.getHFPageInstance(ob).clickOnProfileLink();
@@ -119,7 +112,7 @@ public class Authoring29 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			String errorMessage="We are still processing your previous post. Please try again.";
+			String errorMessage = "We are still processing your previous post. Please try again.";
 			try {
 				Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
 				test.log(LogStatus.PASS, "Proper error message for preventing bot is displayed for posts");
@@ -128,11 +121,8 @@ public class Authoring29 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_title_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 			}
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
@@ -150,11 +140,8 @@ public class Authoring29 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -165,11 +152,14 @@ public class Authoring29 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

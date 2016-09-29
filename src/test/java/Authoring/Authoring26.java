@@ -14,14 +14,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring26 extends TestBase {
 
@@ -36,23 +36,21 @@ public class Authoring26 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that more button is not displayed for comments less than 10 ")
-				.assignCategory("Authoring");
-
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 	}
 
 	@Test
 	public void testMoreButtonForLessThanTenComments() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -68,14 +66,17 @@ public class Authoring26 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			// ob.navigate().to(host);
 			ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME16","PASSWORD16");
+			loginAs("USERNAME16", "PASSWORD16");
 			selectAnArticle();
 			/*
-			 * String comment = "testFlag"; pf.getAuthoringInstance(ob).enterArticleComment(comment);
+			 * String comment = "testFlag";
+			 * pf.getAuthoringInstance(ob).enterArticleComment(comment);
 			 * pf.getAuthoringInstance(ob).clickAddCommentButton();
 			 */
-			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
-			List<WebElement> commentsList = ob.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
+			waitForAllElementsToBePresent(ob,
+					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
+			List<WebElement> commentsList = ob
+					.findElements(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()));
 			try {
 
 				Assert.assertTrue(commentsList.size() < 10);
@@ -87,24 +88,19 @@ public class Authoring26 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
 			}
 
 			try {
 				ob.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-				WebElement more = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
+				WebElement more = ob.findElement(
+						By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS.toString()));
 				Assert.assertTrue(more.isDisplayed());
 				test.log(LogStatus.FAIL, "More button is displayed for comments less than 10");
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Cancel_Flag_validation_for_comments_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Cancel_Flag_validation_for_comments_failed")));// screenshot
 
 			} catch (Throwable t) {
 				test.log(LogStatus.PASS, "More button is not displayed for comments less than 10");
@@ -124,11 +120,8 @@ public class Authoring26 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -141,19 +134,19 @@ public class Authoring26 extends TestBase {
 		itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 
 		while (true) {
-			itemList =ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
 			int commentsCount, itr = 1;
 			String strCmntCt;
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+						.findElement(
+								By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount < 5) {
-					jsClick(ob,
-							itemList.get(i).findElement(
-									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+					jsClick(ob, itemList.get(i)
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
 
 					isFound = true;
 					break;
@@ -168,16 +161,20 @@ public class Authoring26 extends TestBase {
 			waitForAjax(ob);
 		}
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

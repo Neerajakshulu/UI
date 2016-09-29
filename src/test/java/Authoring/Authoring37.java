@@ -39,17 +39,14 @@ public class Authoring37 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent
-				.startTest(var,
-						"EDIT POST: Verfiy that proper error messages are displyed for min max length validation of post title")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testInitiatePostCreation() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+		
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 

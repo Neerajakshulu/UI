@@ -9,18 +9,17 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring76 extends TestBase {
 
@@ -35,23 +34,22 @@ public class Authoring76 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify draft post title,access and edit draft post from post modal, delete post from post modal").assignCategory(
-				"Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 
 	}
 
 	@Test
 	public void testSaveDrafts() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -67,7 +65,7 @@ public class Authoring76 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			loginAs("USERNAME16" ,"PASSWORD16");
+			loginAs("USERNAME16", "PASSWORD16");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(10);
@@ -87,42 +85,44 @@ public class Authoring76 extends TestBase {
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle = ob
-					.findElement(
-							By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
+					.findElement(By
+							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText().trim();
 			try {
 				Assert.assertTrue(postCountAfter == (postCountBefore + 1) && postString.equals(postTitle));
-				test.log(LogStatus.PASS, "Draft Post count is  incremented and post is present in saved drafts section");
+				test.log(LogStatus.PASS,
+						"Draft Post count is  incremented and post is present in saved drafts section");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Draft Post count is not incremented and post is not present after clicking keep draft button");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			
+
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Open Post Modal by clicking on Publish a post ");
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()), 60);
+			waitForElementTobeVisible(ob,
+					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()),
+					60);
 			ob.findElement(
 					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()))
 					.click();
 			test.log(LogStatus.INFO, "Click on link for drafts");
 
-			String postTitleBeforeEditing = ob.findElement(
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
+			String postTitleBeforeEditing = ob
+					.findElement(By
+							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleBeforeEditing);
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()), 40);
-			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.click();
 
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
@@ -135,8 +135,9 @@ public class Authoring76 extends TestBase {
 			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			waitForPageLoad(ob);
 			waitForAjax(ob);
-			String postTitleAfterEditing = ob.findElement(
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
+			String postTitleAfterEditing = ob
+					.findElement(By
+							.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
 					.getText();
 			System.out.println(postTitleAfterEditing);
 			System.out.println(postString);
@@ -148,14 +149,11 @@ public class Authoring76 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			 postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
+			postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
 
 			pf.getProfilePageInstance(ob).deleteDraftPostFromPostModal(postString);
@@ -184,11 +182,8 @@ public class Authoring76 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
 			if (postCountBefore != 1) {
@@ -200,11 +195,8 @@ public class Authoring76 extends TestBase {
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "Post_creation_validation_failed")));// screenshot
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "Post_creation_validation_failed")));// screenshot
 
 				}
 			}
@@ -221,11 +213,8 @@ public class Authoring76 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -236,11 +225,14 @@ public class Authoring76 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
+		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

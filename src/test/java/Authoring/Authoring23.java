@@ -4,9 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,15 +12,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring23 extends TestBase {
 
@@ -41,15 +38,14 @@ public class Authoring23 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
-		String var = xlRead2(returnExcelPath('C'), this.getClass().getSimpleName(), 1);
-		test = extent.startTest(var, "Verify that profanity words are not allowed while editing the comments.")
-				.assignCategory("Authoring");
+		rowData = testcase.get(this.getClass().getSimpleName());
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		boolean suiteRunmode = TestUtil.isSuiteRunnable(suiteXls, "Authoring");
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
 		master_condition = suiteRunmode && testRunmode;
 
@@ -123,7 +119,7 @@ public class Authoring23 extends TestBase {
 					+ "  Profanity Words execution starts for data set #" + (count + 1) + "--->");
 			BrowserWaits.waitTime(10);
 			waitForAjax(ob);
-			pf.getAuthoringInstance(ob).updateComment(test,profanityWord);
+			pf.getAuthoringInstance(ob).updateComment(test, profanityWord);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
 			String profanityErrorMessage = pf.getBrowserActionInstance(ob)

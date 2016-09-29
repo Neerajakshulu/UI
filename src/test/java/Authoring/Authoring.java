@@ -9,7 +9,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,10 +16,10 @@ import org.testng.Assert;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 /**
  * 
@@ -41,6 +40,7 @@ public class Authoring extends TestBase {
 
 	/**
 	 * Method to return comment count from article record view
+	 * 
 	 * @return
 	 * @throws InterruptedException
 	 */
@@ -49,7 +49,8 @@ public class Authoring extends TestBase {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		scrollingToElementofAPage();
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()), 180);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()),
+				180);
 		String commentSizeBeforeAdd = ob
 				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString())).getText()
 				.replaceAll(",", "").trim();
@@ -57,7 +58,8 @@ public class Authoring extends TestBase {
 	}
 
 	/**
-	 * Method to enter the text into comment text area 
+	 * Method to enter the text into comment text area
+	 * 
 	 * @param addComments
 	 * @throws InterruptedException
 	 */
@@ -65,25 +67,28 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		BrowserWaits.waitTime(15);
-		
-		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
-		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		//jsClick(ob,commentArea);
 
-        //Used points class to get x and y coordinates of element.
-        Point point = commentArea.getLocation();
-        //int xcord = point.getX();
-        int ycord = point.getY();
-        ycord=ycord+200;
-        JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0,"+ ycord+");");
+		WebElement commentArea = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+		// jsClick(ob,commentArea);
+
+		// Used points class to get x and y coordinates of element.
+		Point point = commentArea.getLocation();
+		// int xcord = point.getX();
+		int ycord = point.getY();
+		ycord = ycord + 200;
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0," + ycord + ");");
 		BrowserWaits.waitTime(2);
-		jsClick(ob,commentArea);
+		jsClick(ob, commentArea);
 		commentArea.clear();
-		String comment=addComments + RandomStringUtils.randomNumeric(3);
+		String comment = addComments + RandomStringUtils.randomNumeric(3);
 		commentArea.sendKeys(comment);
-		//new Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(3000);// after entering the comments wait for submit button to get enabled or disabled
+		// new
+		// Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
+		Thread.sleep(3000);// after entering the comments wait for submit button
+							// to get enabled or disabled
 	}
 
 	public void enterArticleComments(String addComments) throws InterruptedException {
@@ -91,56 +96,58 @@ public class Authoring extends TestBase {
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
 		BrowserWaits.waitTime(5);
-		WebElement commentArea = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+		WebElement commentArea = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
 		commentArea.click();
 		commentArea.clear();
 		commentArea.sendKeys(addComments);
-		Thread.sleep(2000);// after entering the comments wait for submit button to get enabled or disabled
+		Thread.sleep(2000);// after entering the comments wait for submit button
+							// to get enabled or disabled
 	}
 
 	public void clickAddCommentButton() throws InterruptedException {
 		scrollingToElementofAPage();
-		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()), 60);
-		WebElement addCommentElement = ob.findElement(By
-				.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()));
+		waitForElementTobeClickable(ob,
+				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()), 60);
+		WebElement addCommentElement = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString()));
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", addCommentElement);
 		waitForAjax(ob);
 	}
 
-	public void validateCommentAdd(ExtentTest test,int expCommentCount) throws Exception {
+	public void validateCommentAdd(ExtentTest test, int expCommentCount) throws Exception {
 		int commentCount = getCommentCount();
-		
+
 		System.out.println("After-->" + commentSizeAfterAdd);
 		test.log(LogStatus.INFO, "before-->" + expCommentCount);
 		test.log(LogStatus.INFO, "After-->" + commentCount);
 		if (!(commentCount > expCommentCount)) {
 			throw new Exception("Entered Comment not updated");
-		}else{
+		} else {
 			test.log(LogStatus.PASS, "Comment count validation passed");
 		}
 	}
 
-	public void updateComment(ExtentTest test,String steComment) throws Exception {
+	public void updateComment(ExtentTest test, String steComment) throws Exception {
 		BrowserWaits.waitTime(10);
 		scrollingToElementofAPage();
-		waitForElementTobeVisible(
-				ob,
-				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()),
-				40);
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()), 40);
 		WebElement editCommentElement = ob
-				.findElement(By
-						.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
 		JavascriptExecutor exe = (JavascriptExecutor) ob;
 		exe.executeScript("arguments[0].click();", editCommentElement);
 
-		List<WebElement> commentArea = ob.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+		List<WebElement> commentArea = ob
+				.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("no of comment areas enabled-->" + commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
 		BrowserWaits.waitTime(5);
-		List<WebElement> subButtons = ob.findElements(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()));
+		List<WebElement> subButtons = ob.findElements(
+				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()));
 		System.out.println("Buttons available---2--->" + subButtons);
 		for (WebElement subButton : subButtons) {
 			System.out.println("Button Text-->" + subButton.getText());
@@ -156,7 +163,9 @@ public class Authoring extends TestBase {
 
 	public void validateUpdatedComment(String updatedComments) throws Exception {
 		scrollingToElementofAPage();
-		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0).getText();
+		String commentText = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
+				.getText();
 		System.out.println("Commentary Text-->" + commentText);
 		if (!(commentText.contains(updatedComments) && commentText.contains("EDITED"))) {
 			new Authoring1().status = 2;
@@ -172,86 +181,97 @@ public class Authoring extends TestBase {
 	 */
 	public void validateAppreciationComment(ExtentTest test) throws Exception {
 		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 120);
-		List<WebElement> apprDivs = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()));
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()), 120);
+		List<WebElement> apprDivs = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString()));
 		System.out.println("size of total elemntes-->" + apprDivs.size());
 		WebElement apprSubDivs;
 		for (int i = 0; i < apprDivs.size(); i++) {
-		try{
-			
-		
-			apprSubDivs = apprDivs.get(i).findElement(By.cssSelector("div[class='ne-comment-list__comment-footer']"))
-					.findElement(By.cssSelector("div[class^='ne-comment-list__comment-footer-item']"));
+			try {
 
-			// List<WebElement>
-			// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
-			String count = apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString())).getText();
-			System.out.println("app sub divs-->" + count);
-			scrollingToElementofAPage();
-			
-		}catch(Exception e){
-			continue;
-		}
-		
-				int apprEarCount = Integer
-						.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString())).getText()
-								.replaceAll(",", "").trim());
-				System.out.println("Before count-->" + apprEarCount);
+				apprSubDivs = apprDivs.get(i)
+						.findElement(By.cssSelector("div[class='ne-comment-list__comment-footer']"))
+						.findElement(By.cssSelector("div[class^='ne-comment-list__comment-footer-item']"));
 
-				String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
-				System.out.println("Attribute Status-->" + attrStatus);
+				// List<WebElement>
+				// apprSubDivs=apprDivs.get(0).findElements(By.cssSelector("div.row")).get(0).findElements(By.cssSelector("div[class^='col-xs-']"));
+				String count = apprSubDivs
+						.findElement(
+								By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+						.getText();
+				System.out.println("app sub divs-->" + count);
+				scrollingToElementofAPage();
 
-				if (attrStatus.contains("DOWN")) {
-					scrollingToElementofAPage();
-					// apprSubDivs.findElement(By.tagName("button")).click();
-					JavascriptExecutor exe = (JavascriptExecutor) ob;
-					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-					Thread.sleep(4000);// After clicking on like button wait for
-										// status to change and count update
-					int apprAftCount = Integer
-							.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
-									.getText().replaceAll(",", "").trim());
-					System.out.println("Already liked  After count-->" + apprAftCount);
-					if (!(apprAftCount < apprEarCount)) {
-						// status=2;
-						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
-						throw new Exception("Comment Appreciation not happended");
-					} else {
-						test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
-					}
-				} else if (attrStatus.contains("UP")) {
-					scrollingToElementofAPage();
-					// apprSubDivs.findElement(By.tagName("button")).click();
-					JavascriptExecutor exe = (JavascriptExecutor) ob;
-					exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
-
-					Thread.sleep(4000);// After clicking on unlike button wait
-										// for status to change and count update
-					int apprAftCount = Integer
-							.parseInt(apprSubDivs.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
-									.getText().replaceAll(",", "").trim());
-					System.out.println("Not liked --After count-->" + apprAftCount);
-					if (!(apprAftCount > apprEarCount)) {
-						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-								this.getClass().getSimpleName() + "Comment Appreciation not happended")));
-						throw new Exception("Comment Appreciation not happended");
-					} else {
-						test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
-					}
-				}
-				break;
+			} catch (Exception e) {
+				continue;
 			}
-		}
-	
 
-	public void validateViewComment(ExtentTest test,String addComments) throws Exception {
-		String commentText = ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
+			int apprEarCount = Integer
+					.parseInt(apprSubDivs
+							.findElement(By
+									.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+							.getText().replaceAll(",", "").trim());
+			System.out.println("Before count-->" + apprEarCount);
+
+			String attrStatus = apprSubDivs.findElement(By.tagName("button")).getAttribute("ng-click");
+			System.out.println("Attribute Status-->" + attrStatus);
+
+			if (attrStatus.contains("DOWN")) {
+				scrollingToElementofAPage();
+				// apprSubDivs.findElement(By.tagName("button")).click();
+				JavascriptExecutor exe = (JavascriptExecutor) ob;
+				exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+				Thread.sleep(4000);// After clicking on like button wait for
+									// status to change and count update
+				int apprAftCount = Integer
+						.parseInt(apprSubDivs
+								.findElement(By.cssSelector(
+										OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+								.getText().replaceAll(",", "").trim());
+				System.out.println("Already liked  After count-->" + apprAftCount);
+				if (!(apprAftCount < apprEarCount)) {
+					// status=2;
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+					throw new Exception("Comment Appreciation not happended");
+				} else {
+					test.log(LogStatus.PASS, "Apreciate functionality working fine for comments");
+				}
+			} else if (attrStatus.contains("UP")) {
+				scrollingToElementofAPage();
+				// apprSubDivs.findElement(By.tagName("button")).click();
+				JavascriptExecutor exe = (JavascriptExecutor) ob;
+				exe.executeScript("arguments[0].click();", apprSubDivs.findElement(By.tagName("button")));
+
+				Thread.sleep(4000);// After clicking on unlike button wait
+									// for status to change and count update
+				int apprAftCount = Integer
+						.parseInt(apprSubDivs
+								.findElement(By.cssSelector(
+										OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_MATRICS_COUNT_CSS.toString()))
+								.getText().replaceAll(",", "").trim());
+				System.out.println("Not liked --After count-->" + apprAftCount);
+				if (!(apprAftCount > apprEarCount)) {
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "Comment Appreciation not happended")));
+					throw new Exception("Comment Appreciation not happended");
+				} else {
+					test.log(LogStatus.PASS, "Un- apreciate functionality working fine for comments");
+				}
+			}
+			break;
+		}
+	}
+
+	public void validateViewComment(ExtentTest test, String addComments) throws Exception {
+		String commentText = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
 		if (!commentText.contains(addComments)) {
 			throw new Exception("Entered " + addComments + " not present");
-		}else{
-			
+		} else {
+
 			test.log(LogStatus.PASS, "Comment Text validation passed");
 		}
 	}
@@ -272,8 +292,8 @@ public class Authoring extends TestBase {
 	 */
 	public void validatePreventBotComment() throws Exception {
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS);
 		String preventBotText = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 		pf.getBrowserWaitsInstance(ob).waitUntilText(preventBotText);
@@ -291,13 +311,13 @@ public class Authoring extends TestBase {
 			boolean isFound = false;
 			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
 				strCmntCt = itemList.get(i)
-						.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+						.findElement(
+								By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
 						.getText().replaceAll(",", "").trim();
 				commentsCount = Integer.parseInt(strCmntCt);
 				if (commentsCount != 0) {
-					jsClick(ob,
-							itemList.get(i).findElement(
-									By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+					jsClick(ob, itemList.get(i)
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
 					isFound = true;
 					break;
 				}
@@ -317,7 +337,7 @@ public class Authoring extends TestBase {
 	}
 
 	public void searchArticle(String article) throws InterruptedException {
-		
+
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 90);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(article);
@@ -328,13 +348,13 @@ public class Authoring extends TestBase {
 	}
 
 	public void chooseArticle() throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+		BrowserWaits.waitForAllElementsToBePresent(ob,
+				By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
 		waitForPageLoad(ob);
 	}
 
-	public void waitUntilTextPresent(String locator,
-			String text) {
+	public void waitUntilTextPresent(String locator, String text) {
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
