@@ -50,7 +50,7 @@ public class ENW004 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername"));
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername004"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			
 		} catch (Throwable t) {
