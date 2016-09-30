@@ -393,6 +393,27 @@ public enum OnePObjectMap {
 	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
 	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
 	LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
+	
+	//AccountSettingPage
+	Radiobutton1("(//label[contains(text(),'Make primary')])[1]"),
+	Radiobutton2("(//label[contains(text(),'Make primary')])[2]"),
+	header_label("(//div[@class='ne-user-profile-image-wrapper'])[1]"),
+	account_link("//a[@data-ui-sref='account.settings']"),
+	actualEmail("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
+	actualEmail1("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
+	accountlink("//button[@class='wui-btn wui-btn--secondary']"),
+	Link_login("email"),
+	DoneButtonClick("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
+	Done("//button[contains(text(),'Done')]"),
+	Text_compare("//p[@ng-show='Account.showEmailNotifications()']"),
+	Text_compareAfterLink("//p[@ng-show='Account.isSteamProvider() && Account.hasMultipleAccounts']"),
+	Text_compare_SelectPrimary("//p[@ng-show='Account.hasMultipleAccounts']"), 
+	Text_compare_password("//div[@class='account-option-item__text-container']/h6[2]"), 
+	LinkedIn_icon("//i[@class='fa fa-linkedin-square account-option-item__icon--linkedin']"),
+	Facebook_icon("//i[@class='fa fa-facebook-square account-option-item__icon--facebook']"),
+	Steam_icon("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
+	Text_changePWd("//a[contains(text(),'Change')]"),
+	Text_accountpage_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 
 	// #######RCC#############
 
