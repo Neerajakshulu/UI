@@ -415,6 +415,14 @@ public enum OnePObjectMap {
 	Text_changePWd("//a[contains(text(),'Change')]"),
 	Text_accountpage_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 
+	NEON_ENW_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
+	ENW_MARKETING_COPY_XPATH("//h2[.='EndNote']"),
+	NEON_NEW_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
+	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
+	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
+	ENW_DESKTOP_DLINK_XPATH("//a[text()='Download']"),
+	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
+	
 	// #######RCC#############
 
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS(""),

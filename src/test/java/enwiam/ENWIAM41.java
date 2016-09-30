@@ -2,6 +2,7 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,15 +10,17 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 import base.TestBase;
+
 import com.relevantcodes.extentreports.LogStatus;
 
-public class ENWIAM40 extends TestBase {
+public class ENWIAM41 extends TestBase {
 
 	static int count = -1;
 
@@ -50,7 +53,7 @@ public class ENWIAM40 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh1() throws Exception {
+	public void testcaseh2() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this
 				.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -66,6 +69,19 @@ public class ENWIAM40 extends TestBase {
 					+ this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
+		try {
+			String statuCode = deleteUserAccounts(LOGIN
+					.getProperty("sru_fbusername"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			String statuCode2 = deleteUserAccounts(LOGIN
+					.getProperty("sru_fbpwd"));
+			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName()
 				+ " execution starts ");
 
@@ -77,66 +93,41 @@ public class ENWIAM40 extends TestBase {
 
 			ob.navigate().to(host);
 
-			// login using TR credentials
-			pf.getLoginTRInstance(ob).enterTRCredentials(
-					CONFIG.getProperty("sru_steamusername"),
-					CONFIG.getProperty("sru_steampwd"));
-			pf.getLoginTRInstance(ob).clickLogin();
-
-			// Click on the app switcher
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(
+					LOGIN.getProperty("sru_fbusername"),
+					LOGIN.getProperty("sru_fbpwd"));
+			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-
-			// Navigation from Neon to Enw
-			waitForElementTobeVisible(ob,
-					By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),
-					30);
-			String actualTitle = ob.getTitle();
-			String expectedTitle = "EndNote";
-
 			try {
 
-				Assert.assertEquals(actualTitle, expectedTitle);
+				pf.getENWReferencePageInstance(ob).didYouKnow(
+						LOGIN.getProperty("sru_steampwd"));
+				test.log(LogStatus.PASS, "user is able to link");
+
+				waitForElementTobeVisible(ob,
+						By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH
+								.toString()), 30);
+
+				boolean continue_button = checkElementIsDisplayed(
+						ob,
+						By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS
+								.toString()));
+				Assert.assertEquals(continue_button, true);
 				test.log(LogStatus.PASS,
-						"User is able to navigate from Neon to EndNote");
-				WebElement click_continue = ob
-						.findElement(By
-								.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH
-										.toString()));
-				jsClick(ob, click_continue);
-				// waitForElementTobeVisible(ob,
-				// By.xpath(OnePObjectMap.ENDNOTE_HEADER_LOGO_XPATH.toString()),
-				// 30);
-				// Navigation from ENW to Neon
-				pf.getEnwReferenceInstance(ob).clickOnProjectNeonLink();
-				BrowserWaits.waitTime(4);
-				String actual_Neon_Title = ob.getTitle();
-				String expected_Neon_Title = "Thomson Reuters - Project Neon";
+						"user is able navigate to EndNote after linking");
 
-				try {
-					Assert.assertEquals(actual_Neon_Title, expected_Neon_Title);
-					test.log(LogStatus.PASS,
-							"User is able to navigate from EndNote to Neon");
-
-				} catch (Throwable t) {
-					t.printStackTrace();
-					test.log(LogStatus.FAIL,
-							"User is not able to navigate from Endnote to Neon");
-					ErrorUtil.addVerificationFailure(t);
-				}
-			}
-
-			catch (Throwable t) {
+				ob.findElement(
+						By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS
+								.toString())).click();
+			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,
-						"User is not able to navigate from Neon to EndNote");
-				test.log(LogStatus.INFO, "Error--->" + t);
+						"user is not able to link and navigate to EndNote");
 				ErrorUtil.addVerificationFailure(t);
 
 			}
 
-			logout();
-			BrowserWaits.waitTime(4);
-			closeBrowser();
+			logoutEnw();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -165,4 +156,5 @@ public class ENWIAM40 extends TestBase {
 		extent.endTest(test);
 
 	}
+
 }

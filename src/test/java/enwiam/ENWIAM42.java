@@ -2,6 +2,7 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,15 +10,18 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
-import base.TestBase;
+
 import com.relevantcodes.extentreports.LogStatus;
 
-public class ENWIAM40 extends TestBase {
+import base.TestBase;
+
+public class ENWIAM42 extends TestBase {
 
 	static int count = -1;
 
@@ -50,7 +54,7 @@ public class ENWIAM40 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh1() throws Exception {
+	public void testcaseh2() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this
 				.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -66,6 +70,19 @@ public class ENWIAM40 extends TestBase {
 					+ this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
+		try {
+			String statuCode = deleteUserAccounts(LOGIN
+					.getProperty("sru_fbusername"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			String statuCode2 = deleteUserAccounts(LOGIN
+					.getProperty("sru_fbpwd"));
+			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName()
 				+ " execution starts ");
 
@@ -77,65 +94,73 @@ public class ENWIAM40 extends TestBase {
 
 			ob.navigate().to(host);
 
-			// login using TR credentials
-			pf.getLoginTRInstance(ob).enterTRCredentials(
-					CONFIG.getProperty("sru_steamusername"),
-					CONFIG.getProperty("sru_steampwd"));
-			pf.getLoginTRInstance(ob).clickLogin();
-
-			// Click on the app switcher
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(
+					LOGIN.getProperty("sru_fbusername"),
+					LOGIN.getProperty("sru_fbpwd"));
+			test.log(LogStatus.PASS,
+					"user has logged in with social account which has Matching Steam");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 
-			// Navigation from Neon to Enw
+			WebElement text_on_modal = ob.findElement(By
+					.cssSelector(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS
+							.toString()));
 			waitForElementTobeVisible(ob,
-					By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()),
-					30);
-			String actualTitle = ob.getTitle();
-			String expectedTitle = "EndNote";
+					By.cssSelector(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS
+							.toString()), 90);
+
+			String expected_text_onmodal = "Did you know?";
+			String actual_text_onmodal = text_on_modal.getText();
+
+			// verifying that did you know modal is displaying or not.
 
 			try {
+				Assert.assertEquals(actual_text_onmodal, expected_text_onmodal);
+				test.log(
+						LogStatus.PASS,
+						"User is able to see 'Did you know? ...' Modal when user has email same as existing steam acount ");
+				waitForElementTobeVisible(
+						ob,
+						By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS
+								.toString()), 30);
 
-				Assert.assertEquals(actualTitle, expectedTitle);
-				test.log(LogStatus.PASS,
-						"User is able to navigate from Neon to EndNote");
-				WebElement click_continue = ob
-						.findElement(By
-								.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH
-										.toString()));
-				jsClick(ob, click_continue);
-				// waitForElementTobeVisible(ob,
-				// By.xpath(OnePObjectMap.ENDNOTE_HEADER_LOGO_XPATH.toString()),
-				// 30);
-				// Navigation from ENW to Neon
-				pf.getEnwReferenceInstance(ob).clickOnProjectNeonLink();
-				BrowserWaits.waitTime(4);
-				String actual_Neon_Title = ob.getTitle();
-				String expected_Neon_Title = "Thomson Reuters - Project Neon";
+				try{
+					ob.findElement(
+							By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS
+									.toString())).click();
+					
+					
+					if (!checkElementPresence("ul_name")) {
 
-				try {
-					Assert.assertEquals(actual_Neon_Title, expected_Neon_Title);
-					test.log(LogStatus.PASS,
-							"User is able to navigate from EndNote to Neon");
+						test.log(LogStatus.FAIL,
+								"User is to not taken back to the Neon Home page ");// extent reports
+						status = 2;// excel
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+								this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
+						closeBrowser();
+
+					}
+					
+					
+						test.log(LogStatus.PASS,
+								"User is to taken back to the Neon Home page ");
 
 				} catch (Throwable t) {
 					t.printStackTrace();
 					test.log(LogStatus.FAIL,
-							"User is not able to navigate from Endnote to Neon");
+							"User is not able to close the linking modal");
 					ErrorUtil.addVerificationFailure(t);
-				}
-			}
 
-			catch (Throwable t) {
+				}
+			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,
-						"User is not able to navigate from Neon to EndNote");
-				test.log(LogStatus.INFO, "Error--->" + t);
+						"User is not able to see 'Did you know? ...' Modal");
 				ErrorUtil.addVerificationFailure(t);
 
 			}
 
+			BrowserWaits.waitTime(2);
 			logout();
-			BrowserWaits.waitTime(4);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -165,4 +190,5 @@ public class ENWIAM40 extends TestBase {
 		extent.endTest(test);
 
 	}
+
 }

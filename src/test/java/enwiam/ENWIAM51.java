@@ -4,7 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -21,7 +24,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 
-public class ENWIAM50 extends TestBase {
+public class ENWIAM51 extends TestBase {
 
 	static int count = -1;
 
@@ -54,7 +57,7 @@ public class ENWIAM50 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh10() throws Exception {
+	public void testcaseh11() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this
 				.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -78,17 +81,18 @@ public class ENWIAM50 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 
-			ob.navigate().to(host);
+			// Verify EndNote landing page displays EndNote branding and
+			// marketing copy
 
-			// Verify Neon landing page displays Branding and Marketing copy
 			try {
 				WebElement b_element = ob
 						.findElement(By
 								.xpath(OnePObjectMap.NEON_ENW_COMPANY_XPATH
 										.toString()));
 				WebElement m_element = ob.findElement(By
-						.xpath(OnePObjectMap.NEON_MARKETING_COPY_XPATH
+						.xpath(OnePObjectMap.ENW_MARKETING_COPY_XPATH
 								.toString()));
 
 				String branding_name = b_element.getText();
@@ -96,20 +100,20 @@ public class ENWIAM50 extends TestBase {
 
 				if (b_element.isDisplayed() && m_element.isDisplayed()) {
 					Assert.assertEquals(branding_name, "Thomson Reuters");
-					Assert.assertEquals(marketing_Copy, "Project Neon");
+					Assert.assertEquals(marketing_Copy, "EndNote");
 					test.log(LogStatus.PASS,
-							"Neon Landing page displays Neon branding and marketing copy");
+							"EndNote Landing page displays EndNote branding and marketing copy");
 				}
 
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,
-						"Neon Landing page doesn't displays Neon branding and marketing copy");
+						"EndNote Landing page doesn't displays EndNote branding and marketing copy");
 				ErrorUtil.addVerificationFailure(t);
 
 			}
 
-			// Verify Neon landing page displays Integration with EndNote
+			// Verify EndNote landing page displays Integration with EndNote
 			WebElement integrationmsg = ob.findElement(By
 					.xpath(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH
 							.toString()));
@@ -120,37 +124,51 @@ public class ENWIAM50 extends TestBase {
 				if (integrationmsg.isDisplayed()) {
 					Assert.assertEquals(actual_text, expected_text);
 					test.log(LogStatus.PASS,
-							"Neon Landing page displays integration with Endnote");
+							"EndNote Landing page displays integration with Neon");
 				}
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,
-						"Neon Landing page doesn't display integration with Endnote");
+						"EndNote Landing page doesn't display integration with Neon");
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			// verify Neon Icon is displayed on Neon sign in page
-
+			// Verifying that on ENW landing page, link to login with Shibboleth
+			// is displayed.
 			try {
-
-				// WebElement icon_element =
-				// ob.findElement(By.cssSelector(OnePObjectMap.NEON_NEW_ICON_CSS.toString()));
-				WebElement icon_element = ob
-						.findElement(By
-								.cssSelector(OnePObjectMap.NEON_NEW_ICON_CSS
-										.toString()));
-				if (icon_element.isDisplayed())
-					test.log(LogStatus.PASS,
-							"Neon Icon is displayed on Neon Landing Page");
-
+				boolean shibbLink = checkElementIsDisplayed(ob,
+						By.cssSelector(OnePObjectMap.ENW_SHIBB_LINK_CSS
+								.toString()));
+				Assert.assertEquals(shibbLink, true);
+				test.log(LogStatus.PASS,
+						"EndNote Landing page displays link to login with Shibboleth");
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,
-						"Neon Icon is not displayed on Neon Landing Page");
+						"EndNote Landing page doesn't display link to login with Shibboleth");
 				ErrorUtil.addVerificationFailure(t);
-
 			}
 
+			// verifying that on ENW landing page displays, informational text
+			// that explains the trial link for Endnote desktop.
+
+			try {
+				boolean endnote_desktop_text = checkElementIsDisplayed(ob,
+						By.cssSelector(OnePObjectMap.ENW_DESKTOP_TEXT_CSS
+								.toString()));
+				Assert.assertEquals(endnote_desktop_text, true);
+				test.log(
+						LogStatus.PASS,
+						"EndNote Landing page displays text that explains the trial link for Endnote desktop");
+				
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL,
+						"EndNote Landing page doesn't display text that explains the trial link for Endnote desktop");
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
