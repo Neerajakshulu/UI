@@ -13,15 +13,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search75 extends TestBase {
 
@@ -37,20 +36,21 @@ public class Search75 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB75() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -58,7 +58,7 @@ public class Search75 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -68,12 +68,16 @@ public class Search75 extends TestBase {
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()),
+					120);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()),
+					120);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
-			jsClick(ob, ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
+			jsClick(ob, ob.findElement(
+					By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")));
 			waitForAjax(ob);
-			new PageFactory().getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
+			new PageFactory().getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(2).click();
 			waitForAjax(ob);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).clear();
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys("b");
@@ -89,9 +93,9 @@ public class Search75 extends TestBase {
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("arguments[0].scrollIntoView(true);",myE);
+			jse.executeScript("arguments[0].scrollIntoView(true);", myE);
 			Thread.sleep(1000);
-			
+
 			String text = myE.getText();
 
 			String[] arr = text.split("\n");
@@ -121,16 +125,12 @@ public class Search75 extends TestBase {
 
 			if (!compareStrings(expected_text, actual_text)) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Record view page of a patent does not get displayed when user clicks on any patent option in the search type ahead while PATENTS option is selected in the search drop down");// extent
 																																																		// report
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_record_view_page_of_a_patent_not_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_record_view_page_of_a_patent_not_getting_displayed")));// screenshot
 
 			}
 
@@ -147,11 +147,8 @@ public class Search75 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

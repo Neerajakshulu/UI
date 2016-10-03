@@ -13,13 +13,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search70 extends TestBase {
 
@@ -34,19 +33,20 @@ public class Search70 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
-	public void testcaseB70() throws Exception {	  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+	public void testcaseB70() throws Exception {
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -54,51 +54,51 @@ public class Search70 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			 ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("c");
-		      BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("h");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("e");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("m");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("s");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("t");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("r");
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("y");
-			 BrowserWaits.waitTime(1);
-			
+			BrowserWaits.waitTime(1);
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			 BrowserWaits.waitTime(1);
+			BrowserWaits.waitTime(1);
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("arguments[0].scrollIntoView(true);",myE2);
+			jse.executeScript("arguments[0].scrollIntoView(true);", myE2);
 			Thread.sleep(1000);
 			String text2 = myE2.getText();
 
 			String[] arr2 = text2.split("\n");
 
 			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i =0; i<arr2.length; i++) {
+			for (int i = 0; i < arr2.length; i++) {
 
 				al2.add(arr2[i]);
 			}
@@ -120,16 +120,12 @@ public class Search70 extends TestBase {
 
 			if (!compareStrings(expected_text, actual_text)) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Record view of an article does not get displayed when user clicks on any article option in the search type ahead while ALL option is selected in the search drop down");// extent
 																																																	// report
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_record_view_of_an_article_not_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_record_view_of_an_article_not_getting_displayed")));// screenshot
 
 			}
 
@@ -146,11 +142,8 @@ public class Search70 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

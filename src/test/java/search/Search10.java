@@ -14,18 +14,17 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search10 extends TestBase {
 
-	PageFactory pf= new PageFactory();
+	PageFactory pf = new PageFactory();
 	static int status = 1;
 
 	// Following is the list of status:
@@ -38,20 +37,21 @@ public class Search10 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB10() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -67,7 +67,7 @@ public class Search10 extends TestBase {
 
 			// ob.navigate().to(host);
 			ob.navigate().to(host);
-			
+
 			// login using TR credentials
 			login();
 			//
@@ -76,7 +76,7 @@ public class Search10 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		    pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
@@ -89,18 +89,18 @@ public class Search10 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-		     waitForAjax(ob);
+			waitForAjax(ob);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
-			     waitForAjax(ob);
-        			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-        			BrowserWaits.waitTime(5);
+			waitForAjax(ob);
+			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 				al1.add(searchResults.get(i).getText());
-				
+
 			}
 			System.out.println("al1-->" + al1.size());
 			System.out.println("al1-->" + al1);
@@ -119,19 +119,17 @@ public class Search10 extends TestBase {
 				al2.add(searchResults2.get(i).getText());
 
 			}
-			
-			System.out.println("al2--->" + al2.size());
-			System.out.println("al2--->" +al2);
-				try {
-						Assert.assertTrue(al1.equals(al2));
-				
-				test.log(
-						LogStatus.PASS,
-						"Correct filtered search results getting displayed when user navigates back to Articles search results page from record view page");
-			}catch (Throwable t) {
 
-				test.log(
-						LogStatus.FAIL,
+			System.out.println("al2--->" + al2.size());
+			System.out.println("al2--->" + al2);
+			try {
+				Assert.assertTrue(al1.equals(al2));
+
+				test.log(LogStatus.PASS,
+						"Correct filtered search results getting displayed when user navigates back to Articles search results page from record view page");
+			} catch (Throwable t) {
+
+				test.log(LogStatus.FAIL,
 						"Incorrect filtered search results getting displayed when user navigates back to Articles search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -140,13 +138,14 @@ public class Search10 extends TestBase {
 				// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 				// this.getClass().getSimpleName() + "_incorrect_filtered_search_results_getting_displayed")));//
 				// screenshot
-			
+
 			}
-            waitForElementTobeVisible(ob,By.xpath(OR.getProperty("filter_checkbox")), 40);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("filter_checkbox")), 40);
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			BrowserWaits.waitTime(4);
-			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")&&filterValues.get(1).getCssValue("color") .contains("rgba(42, 45, 53, 1)");
-			
+			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")
+					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");
+
 			try {
 				Assert.assertTrue(filtering_condition);
 				test.log(LogStatus.PASS,

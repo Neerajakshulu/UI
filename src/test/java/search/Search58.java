@@ -12,13 +12,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search58 extends TestBase {
 
@@ -34,20 +33,21 @@ public class Search58 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB58() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -66,8 +66,8 @@ public class Search58 extends TestBase {
 			// login using TR credentials
 			login();
 
-			//waitForElementTobeVisible(ob,
-					//By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
+			// waitForElementTobeVisible(ob,
+			// By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
@@ -93,11 +93,8 @@ public class Search58 extends TestBase {
 
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_autocompleted_keyword_does_not_contain_searched_keyword")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_autocompleted_keyword_does_not_contain_searched_keyword")));// screenshot
 
 			}
 
@@ -110,7 +107,7 @@ public class Search58 extends TestBase {
 
 				al1.add(arr1[i]);
 			}
-			
+
 			// for(int i=0;i<al1.size();i++){
 			//
 			// System.out.println(al1.get(i));
@@ -121,11 +118,9 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "More or less than 4 category suggestions are getting displayed");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_or_less_than_four_category_suggestions_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_four_category_suggestions_getting_displayed")));// screenshot
 			}
 
 			int count1 = 0;
@@ -140,11 +135,8 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "Category suggestion does not contain the typed keyword");// extent
 																									// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_category_suggestion_does_not_contain_typed_keyword")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_category_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
@@ -153,7 +145,7 @@ public class Search58 extends TestBase {
 			String[] arr2 = text2.split("\n");
 
 			ArrayList<String> al2 = new ArrayList<String>();
-			for (int i =0; i < arr2.length; i++) {
+			for (int i = 0; i < arr2.length; i++) {
 
 				al2.add(arr2[i]);
 			}
@@ -162,17 +154,15 @@ public class Search58 extends TestBase {
 
 				System.out.println(al2.get(i));
 			}
-			
+
 			if (!compareNumbers(4, al2.size())) {
 
 				test.log(LogStatus.FAIL, "More or less than 4 article suggestions are getting displayed");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_or_less_than_four_article_suggestions_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_four_article_suggestions_getting_displayed")));// screenshot
 			}
 
 			int count2 = 0;
@@ -182,17 +172,17 @@ public class Search58 extends TestBase {
 					count2++;
 			}
 
-//			if (!compareNumbers(0, count2)) {
-//
-//				test.log(LogStatus.FAIL, "Article suggestion does not contain the typed keyword");// extent
-//																									// reports
-//				status = 2;// excel
-//				test.log(
-//						LogStatus.INFO,
-//						"Snapshot below: "
-//								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-//										+ "_article_suggestion_does_not_contain_typed_keyword")));// screenshot
-//			}
+			// if (!compareNumbers(0, count2)) {
+			//
+			// test.log(LogStatus.FAIL, "Article suggestion does not contain the typed keyword");// extent
+			// // reports
+			// status = 2;// excel
+			// test.log(
+			// LogStatus.INFO,
+			// "Snapshot below: "
+			// + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+			// + "_article_suggestion_does_not_contain_typed_keyword")));// screenshot
+			// }
 
 			WebElement myE3 = ob.findElement(By.xpath(OR.getProperty("patentsTile")));
 			String text = myE3.getText();
@@ -209,11 +199,9 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "More or less than 4 patent suggestions are getting displayed");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_or_less_than_four_patent_suggestions_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_four_patent_suggestions_getting_displayed")));// screenshot
 			}
 
 			int count3 = 0;
@@ -228,11 +216,8 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "Patent suggestion does not contain the typed keyword");// extent
 																									// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_patent_suggestion_does_not_contain_typed_keyword")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_patent_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 
 			WebElement myE4 = ob.findElement(By.xpath(OR.getProperty("peopleTile")));
@@ -250,11 +235,9 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "More or less than 4 people suggestions are getting displayed");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_or_less_than_four_people_suggestions_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_four_people_suggestions_getting_displayed")));// screenshot
 			}
 
 			int count4 = 0;
@@ -269,11 +252,8 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "People suggestion does not contain the typed keyword");// extent
 																									// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_people_suggestion_does_not_contain_typed_keyword")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_people_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
@@ -291,7 +271,7 @@ public class Search58 extends TestBase {
 
 			String[] arr5 = text5.split("\n");
 			ArrayList<String> al5 = new ArrayList<String>();
-			for (int i =0; i < arr5.length; i++) {
+			for (int i = 0; i < arr5.length; i++) {
 
 				al5.add(arr5[i]);
 			}
@@ -306,11 +286,9 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "More or less than 4 post suggestions are getting displayed");// extent
 																										// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_or_less_than_four_post_suggestions_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_more_or_less_than_four_post_suggestions_getting_displayed")));// screenshot
 			}
 
 			int count5 = 0;
@@ -325,11 +303,8 @@ public class Search58 extends TestBase {
 				test.log(LogStatus.FAIL, "Post suggestion does not contain the typed keyword");// extent
 																								// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_post_suggestion_does_not_contain_typed_keyword")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_post_suggestion_does_not_contain_typed_keyword")));// screenshot
 			}
 
 			closeBrowser();
@@ -345,11 +320,8 @@ public class Search58 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			// closeBrowser();
 		}
 

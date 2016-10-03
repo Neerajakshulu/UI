@@ -14,13 +14,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search11 extends TestBase {
 
@@ -35,21 +34,21 @@ public class Search11 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB11() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -65,10 +64,10 @@ public class Search11 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-		
+
 			// login using TR credentials
 			login();
-			
+
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -98,18 +97,18 @@ public class Search11 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("a[event-action='citingsrcslocalcount:desc']"), 30);
 			// ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
 			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
-             waitForAjax(ob);
+			waitForAjax(ob);
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 
 				al1.add(searchResults.get(i).getText());
-		
+
 			}
 			for (int i = 0; i < searchResults.size(); i++) {
 
 				System.out.println(searchResults.get(i).getText());
-		
+
 			}
 			jsClick(ob, searchResults.get(5));
 
@@ -126,8 +125,7 @@ public class Search11 extends TestBase {
 
 			try {
 				Assert.assertTrue(al1.equals(al2));
-				test.log(
-						LogStatus.PASS,
+				test.log(LogStatus.PASS,
 						"Search page maintains the sorting order state when user navigates back to articles search results page from record view page");
 			} catch (Throwable t) {
 
@@ -145,9 +143,8 @@ public class Search11 extends TestBase {
 
 			// String option =
 			// ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
-			String option = ob.findElement(By.cssSelector("button[id='single-button']"))
-					.getText().substring(9);
-			
+			String option = ob.findElement(By.cssSelector("button[id='single-button']")).getText().substring(9);
+
 			if (!compareStrings("Times Cited", option)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent
@@ -161,13 +158,14 @@ public class Search11 extends TestBase {
 			// Finding the filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			BrowserWaits.waitTime(3);
-		boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");
+			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")
+					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");
 
 			try {
 				Assert.assertTrue(filtering_condition);
 				test.log(LogStatus.PASS,
 						"Filters are retained when user navigates back to articles search results page from record view page");
-				
+
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL,

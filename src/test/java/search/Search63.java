@@ -12,14 +12,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search63 extends TestBase {
 
@@ -34,27 +33,27 @@ public class Search63 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB63() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try { 
-			
+		try {
 
 			String search_query = "tyitutyigtiugiuuioyrfuy";
 
@@ -72,7 +71,7 @@ public class Search63 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			
+
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -84,17 +83,16 @@ public class Search63 extends TestBase {
 						"Search resuls getting displayed even when user searches for an absurd keyword");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_search_results_getting_displayed_even_when_user_searches_absurd_keyword")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_search_results_getting_displayed_even_when_user_searches_absurd_keyword")));// screenshot
 
 			}
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()), 30);
-			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()), 30);
 
-			List<WebElement> mylist = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
+			List<WebElement> mylist = ob
+					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 
 			mylist.get(0).click();
 			BrowserWaits.waitTime(2);
@@ -107,11 +105,8 @@ public class Search63 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Proper message not getting displayed for ALL option");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_proper_message_not_getting_displayed_for_ALL_option")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_proper_message_not_getting_displayed_for_ALL_option")));// screenshot
 
 			}
 
@@ -124,11 +119,9 @@ public class Search63 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Proper message not getting displayed for ARTICLES option");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_proper_message_not_getting_displayed_for_ARTICLES_option")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_proper_message_not_getting_displayed_for_ARTICLES_option")));// screenshot
 
 			}
 
@@ -142,11 +135,8 @@ public class Search63 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Proper message not getting displayed for PATENTS option");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_proper_message_not_getting_displayed_for_PATENTS_option")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_proper_message_not_getting_displayed_for_PATENTS_option")));// screenshot
 
 			}
 
@@ -160,11 +150,8 @@ public class Search63 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Proper message not getting displayed for PEOPLE option");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_proper_message_not_getting_displayed_for_PEOPLE_option")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_proper_message_not_getting_displayed_for_PEOPLE_option")));// screenshot
 
 			}
 
@@ -178,11 +165,8 @@ public class Search63 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Proper message not getting displayed for POSTS option");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_proper_message_not_getting_displayed_for_POSTS_option")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_proper_message_not_getting_displayed_for_POSTS_option")));// screenshot
 
 			}
 
@@ -210,26 +194,22 @@ public class Search63 extends TestBase {
 			try {
 
 				Assert.assertTrue(masterCond);
-				test.log(
-						LogStatus.PASS,
+				test.log(LogStatus.PASS,
 						"Result count getting displayed correctly in the left navigation pane for all the content types when search query is not properly interpreted by the system");// extent
 																																														// report
 			}
 
 			catch (Throwable t) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Result count not getting displayed correctly in the left navigation pane for all the content types when search query is not properly interpreted by the system");// extent
 																																															// report
 
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_result_count_not_getting_displayed_correctly_in_the_left_navigation_pane")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_result_count_not_getting_displayed_correctly_in_the_left_navigation_pane")));// screenshot
 
 			}
 
@@ -246,11 +226,8 @@ public class Search63 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -259,7 +236,7 @@ public class Search63 extends TestBase {
 
 	@AfterTest
 	public void reportTestResult() {
-	extent.endTest(test);
+		extent.endTest(test);
 		//
 		// if (status == 1)
 		// TestUtil.reportDataSetResult(searchxls, "Test Cases",

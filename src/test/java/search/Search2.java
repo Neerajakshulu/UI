@@ -15,13 +15,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search2 extends TestBase {
 
@@ -36,22 +35,21 @@ public class Search2 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
-	
-	
+
 	@Test
 	public void testcaseB2() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -65,7 +63,7 @@ public class Search2 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			 ob.navigate().to(host);
+			ob.navigate().to(host);
 
 			// login using TR credentials
 			login();
@@ -73,7 +71,7 @@ public class Search2 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			BrowserWaits.waitTime(5);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
@@ -150,11 +148,8 @@ public class Search2 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

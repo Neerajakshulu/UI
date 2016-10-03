@@ -13,12 +13,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search108 extends TestBase {
 
@@ -33,22 +32,22 @@ public class Search108 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB108() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -70,11 +69,16 @@ public class Search108 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-            waitForAjax(ob);
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.id("single-button"), 30);
 			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"), 30);
-			ob.findElement(By.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]")).click();
+			waitForElementTobeVisible(ob,
+					By.xpath(
+							"//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"),
+					30);
+			ob.findElement(By
+					.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"))
+					.click();
 			Thread.sleep(5000);
 
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -114,25 +118,19 @@ public class Search108 extends TestBase {
 						"Sorting is not retained when user navigates back to ALL search results page from record view page");// extent
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_sorting_not_retained")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_sorting_not_retained")));// screenshot
 			}
 
 			String text = ob.findElement(By.id("single-button")).getText().substring(9);
-			//System.out.println(text);
+			// System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {
 
 				test.log(LogStatus.FAIL, "Incorrect attribute present in SORT BY drop down");// extent
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_attribute_present_in_SORT_BY__drop_down")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_incorrect_attribute_present_in_SORT_BY__drop_down")));// screenshot
 
 			}
 
@@ -148,11 +146,8 @@ public class Search108 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

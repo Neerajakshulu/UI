@@ -12,14 +12,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search26 extends TestBase {
 
@@ -34,21 +33,21 @@ public class Search26 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB26() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,7 +61,7 @@ public class Search26 extends TestBase {
 
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			
+
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -71,11 +70,13 @@ public class Search26 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
 			Thread.sleep(1000);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-		    BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(3);
 
-			List<WebElement> headings = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_TYPE_AHEAD_ELEMENTS_HEADING_CSS.toString()));
-			List<WebElement> el=ob.findElements(By.cssSelector(OnePObjectMap.TYPE_AHEAD_SHOWALL_ELEMENTS_CSS.toString()));
-       
+			List<WebElement> headings = ob
+					.findElements(By.cssSelector(OnePObjectMap.SEARCH_TYPE_AHEAD_ELEMENTS_HEADING_CSS.toString()));
+			List<WebElement> el = ob
+					.findElements(By.cssSelector(OnePObjectMap.TYPE_AHEAD_SHOWALL_ELEMENTS_CSS.toString()));
+
 			// if(!compareNumbers(4,headings.size())){
 			//
 			// test.log(LogStatus.FAIL, "More than 4 sections getting displayed in the typeahead");//extent reports
@@ -94,18 +95,17 @@ public class Search26 extends TestBase {
 			boolean condition3 = headings.get(2).getText().equalsIgnoreCase("Patents");
 			boolean condition4 = headings.get(3).getText().equalsIgnoreCase("People");
 			boolean condition5 = headings.get(4).getText().equalsIgnoreCase("Posts");
-			
-			boolean final_condition = condition1 && condition2 && condition3 && condition4&& condition5;
-			//System.out.println(final_condition);
+
+			boolean final_condition = condition1 && condition2 && condition3 && condition4 && condition5;
+			// System.out.println(final_condition);
 
 			try {
-				if(el.size()==4){
-					test.log(LogStatus.PASS, "Show all elements are dispalying in type ahead");	
+				if (el.size() == 4) {
+					test.log(LogStatus.PASS, "Show all elements are dispalying in type ahead");
 				}
 				Assert.assertTrue(final_condition, "Typeahead sections not getting displayed correctly");
 				test.log(LogStatus.PASS, "Typeahead sections getting displayed correctly");// extent reports
 
-			
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Typeahead sections not getting displayed correctly");// extent reports
 				// next 3 lines to print whole testng error in report
@@ -114,11 +114,8 @@ public class Search26 extends TestBase {
 				test.log(LogStatus.INFO, errors.toString());// extent reports
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_typeahead_sections_not_getting_displayed_correctly")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_typeahead_sections_not_getting_displayed_correctly")));// screenshot
 
 			}
 
@@ -131,11 +128,8 @@ public class Search26 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

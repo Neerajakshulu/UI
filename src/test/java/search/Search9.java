@@ -14,12 +14,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search9 extends TestBase {
 
@@ -35,19 +34,20 @@ public class Search9 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB9() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,7 +63,7 @@ public class Search9 extends TestBase {
 
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// ob.navigate().to(host);
-			
+
 			// login using TR credentials
 			login();
 			//
@@ -114,13 +114,13 @@ public class Search9 extends TestBase {
 
 				System.out.println(al1.get(i));
 			}
-			
+
 			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 			for (int i = 0; i < al2.size(); i++) {
 
 				System.out.println(al2.get(i));
 			}
-						
+
 			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
 			try {
@@ -132,24 +132,18 @@ public class Search9 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_documents_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_incorrect_documents_getting_displayed")));// screenshot
 
 			}
 
 			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText().substring(9);
-				if (!compareStrings("Times Cited",option)) {
+			if (!compareStrings("Times Cited", option)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_sorting_option_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_incorrect_sorting_option_getting_displayed")));// screenshot
 
 			}
 
@@ -162,11 +156,8 @@ public class Search9 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

@@ -13,14 +13,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search89 extends TestBase {
 
@@ -36,19 +35,20 @@ public class Search89 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
-	public void testcaseB89() throws Exception {  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+	public void testcaseB89() throws Exception {
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,33 +63,39 @@ public class Search89 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			//selectSearchTypeFromDropDown("Patents");
+			// selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()),30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 
 			// Navigating to record view page
-			
+
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			BrowserWaits.waitTime(7);
 
 			String titleName = "";
 			try {
 
-				boolean titlePresent = ob.findElements(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).size() != 0;
-				titleName = ob.findElement(By.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']")).getText();
-             	if (titlePresent) {
+				boolean titlePresent = ob
+						.findElements(By
+								.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"))
+						.size() != 0;
+				titleName = ob
+						.findElement(By
+								.xpath("//div/h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"))
+						.getText();
+				if (titlePresent) {
 					test.log(LogStatus.PASS, "Title is present in patent record view page");
 				} else {
 					status = 2;
@@ -101,16 +107,19 @@ public class Search89 extends TestBase {
 			}
 
 			try {
-                  waitForAjax(ob);
-				List<WebElement> detailsLink = ob.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
+				waitForAjax(ob);
+				List<WebElement> detailsLink = ob
+						.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
-				jsClick(ob,ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
-				  BrowserWaits.waitTime(4);
-					if (detailsLink.size() != 0) {
+				jsClick(ob,
+						ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
+				BrowserWaits.waitTime(4);
+				if (detailsLink.size() != 0) {
 
 					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
 				} else {
-					test.log(LogStatus.FAIL, "View in Thomson Innovation is displayed multiple times in the record view page");
+					test.log(LogStatus.FAIL,
+							"View in Thomson Innovation is displayed multiple times in the record view page");
 				}
 			} catch (NoSuchElementException e) {
 
@@ -131,7 +140,7 @@ public class Search89 extends TestBase {
 					status = 2;
 					test.log(LogStatus.FAIL, "Original title name is not displayed");
 				}
-               BrowserWaits.waitTime(7);
+				BrowserWaits.waitTime(7);
 				String titleNameOriginal = ob.findElement(By.xpath("//div[@id='PAT.TIOR0']")).getText();
 				BrowserWaits.waitTime(4);
 				if (titleNameOriginal.equalsIgnoreCase(titleName)) {
@@ -159,11 +168,8 @@ public class Search89 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

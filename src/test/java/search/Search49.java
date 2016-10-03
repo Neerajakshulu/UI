@@ -10,13 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search49 extends TestBase {
 
@@ -31,20 +30,21 @@ public class Search49 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
-	public void testcaseB49() throws Exception {  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+	public void testcaseB49() throws Exception {
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -58,8 +58,8 @@ public class Search49 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			 //ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -67,8 +67,8 @@ public class Search49 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
 			Thread.sleep(2000);
-			String all_text = ob.findElement(
-					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
+			String all_text = ob
+					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
 					.getText();
 			int all_num = Integer.parseInt(all_text.substring(3, 4));
 			System.out.println(all_num);
@@ -84,24 +84,24 @@ public class Search49 extends TestBase {
 			boolean cond2 = articles_num != 0;
 			System.out.println(cond2);
 
-			String patents_text = ob.findElement(
-					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Patents')]"))
+			String patents_text = ob
+					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Patents')]"))
 					.getText();
 			int patents_num = Integer.parseInt(patents_text.substring(7, 8));
 			System.out.println(patents_num);
 			boolean cond3 = patents_num != 0;
 			System.out.println(cond3);
 
-			String people_text = ob.findElement(
-					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'People')]"))
+			String people_text = ob
+					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'People')]"))
 					.getText();
 			int people_num = Integer.parseInt(people_text.substring(6, 7));
 			System.out.println(people_num);
 			boolean cond4 = people_num != 0;
 			System.out.println(cond4);
 
-			String posts_text = ob.findElement(
-					By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Posts')]"))
+			String posts_text = ob
+					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'Posts')]"))
 					.getText();
 			int posts_num = Integer.parseInt(posts_text.substring(5, 6));
 			System.out.println(posts_num);
@@ -114,26 +114,22 @@ public class Search49 extends TestBase {
 			try {
 
 				Assert.assertTrue(master_cond);
-				test.log(
-						LogStatus.PASS,
+				test.log(LogStatus.PASS,
 						"Search results related to all content types getting displayed in the summary page when user searches using ALL option in search drop down");// extent
 																																										// report
 			}
 
 			catch (Throwable t) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Search results related to all content types not getting displayed in the summary page when user searches using ALL option in search drop down");// extent
 																																											// report
 
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_search_results_related_to_all_content_types_not_getting_displayed_in_the_summary_page_when_user_searches_using_ALL_option_in_search_drop_down")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_search_results_related_to_all_content_types_not_getting_displayed_in_the_summary_page_when_user_searches_using_ALL_option_in_search_drop_down")));// screenshot
 
 			}
 
@@ -150,11 +146,8 @@ public class Search49 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

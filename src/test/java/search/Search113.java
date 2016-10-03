@@ -11,13 +11,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search113 extends TestBase {
 
@@ -32,21 +31,21 @@ public class Search113 extends TestBase {
 	public void beforeTest113() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
-	
 
 	@Test
 	public void testcaseB() throws Exception {
-		 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -75,50 +74,50 @@ public class Search113 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='panel panel-default ng-isolate-scope']"), 30);
-			List<WebElement> filter_list=ob.findElements(By.cssSelector("div[class='panel panel-default ng-isolate-scope']"));
-//			System.out.println(filter_list.size());
+			List<WebElement> filter_list = ob
+					.findElements(By.cssSelector("div[class='panel panel-default ng-isolate-scope']"));
+			// System.out.println(filter_list.size());
 			filter_list.get(0).click();
 			BrowserWaits.waitTime(4);
-		 
-	//	System.out.println(ob.findElement(By.xpath("/button[@class='search-result-refine-menu__load-button ng-scope']")).getText());
-			waitForElementTobeVisible(ob,By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);	
-				jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
+
+			// System.out.println(ob.findElement(By.xpath("/button[@class='search-result-refine-menu__load-button
+			// ng-scope']")).getText());
+			waitForElementTobeVisible(ob,
+					By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);
+			jsClick(ob, ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
 			BrowserWaits.waitTime(2);
-			
-//			System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
-			
-			String temp1=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
-			if(!compareStrings("Less",temp1)){
-				
+
+			// System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
+
+			String temp1 = ob
+					.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"))
+					.getText();
+			if (!compareStrings("Less", temp1)) {
+
 				test.log(LogStatus.FAIL, "Less link not working");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-				LogStatus.INFO,
-				"Snapshot below: "
-				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-				+ "_more_link_not_working")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_more_link_not_working")));// screenshot
 
 			}
-			
-		
-			jsClick(ob,ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
+
+			jsClick(ob, ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
 			BrowserWaits.waitTime(2);
-			String temp2=ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
-			
-			if(!compareStrings("More",temp2)){
-				
+			String temp2 = ob
+					.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"))
+					.getText();
+
+			if (!compareStrings("More", temp2)) {
+
 				test.log(LogStatus.FAIL, "More link not working");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-				LogStatus.INFO,
-				"Snapshot below: "
-				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-				+ "_less_link_not_working")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_less_link_not_working")));// screenshot
 
 			}
-			
+
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -130,11 +129,8 @@ public class Search113 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

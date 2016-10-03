@@ -10,21 +10,20 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search88 extends TestBase {
 
 	static int status = 1;
-	PageFactory pf= new PageFactory();
-	
+	PageFactory pf = new PageFactory();
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -35,20 +34,21 @@ public class Search88 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB88() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -61,36 +61,41 @@ public class Search88 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			 ob.navigate().to(host);
-//			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 120);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()),
+					120);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()),
+					120);
 
 			String patent = "ice cream";
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
-			
-			//click on Patents tab
+
+			// click on Patents tab
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			
-			//click on first patent search result
+
+			// click on first patent search result
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 120);
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")), 120);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
+					120);
 			BrowserWaits.waitTime(4);
-			//waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
-			
-			//validate page is navigating to patent record view page from search results page
-			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css"))).getText();
-			boolean patentRVTitleWatchLabel = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
-			
+			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
+
+			// validate page is navigating to patent record view page from search results page
+			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
+					.getText();
+			boolean patentRVTitleWatchLabel = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
+
 			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
-			
+
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
@@ -105,11 +110,8 @@ public class Search88 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_patent_recordview_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 

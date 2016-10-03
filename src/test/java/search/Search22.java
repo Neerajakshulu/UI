@@ -15,12 +15,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search22 extends TestBase {
 
@@ -35,21 +34,21 @@ public class Search22 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB22() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,9 +62,9 @@ public class Search22 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -84,7 +83,7 @@ public class Search22 extends TestBase {
 
 				urls.add(searchResults.get(i).getAttribute("href"));
 			}
-			boolean condition1, condition2, condition3, condition4, condition5,condition6, masterSearchCondition;
+			boolean condition1, condition2, condition3, condition4, condition5, condition6, masterSearchCondition;
 			String pageText;
 			ArrayList<Integer> error_list = new ArrayList<Integer>();
 			int count = 0;
@@ -118,7 +117,8 @@ public class Search22 extends TestBase {
 				condition4 = pageText.contains("educating");
 				condition5 = pageText.contains("educational");
 				condition6 = pageText.contains("educat");
-				masterSearchCondition = condition1 || condition2 || condition3 || condition4 || condition5 || condition6 ;
+				masterSearchCondition = condition1 || condition2 || condition3 || condition4 || condition5
+						|| condition6;
 				System.out.println(masterSearchCondition);
 				if (masterSearchCondition) {
 
@@ -154,11 +154,8 @@ public class Search22 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

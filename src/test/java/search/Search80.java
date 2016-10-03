@@ -12,14 +12,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search80 extends TestBase {
 
@@ -34,20 +33,21 @@ public class Search80 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB80() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -69,27 +69,27 @@ public class Search80 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()),30);
-           ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
-         BrowserWaits.waitTime(4);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
+			BrowserWaits.waitTime(4);
 			ob.findElement(By.id("single-button")).click();
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(@ng-click,'vm.sortElements')]"), 120);
 
 			List<WebElement> mylist = ob.findElements(By.xpath("//a[contains(@ng-click,'vm.sortElements')]"));
-//			System.out.println(mylist.size());
-//			
-//			 for(int i=0;i<mylist.size();i++){
-//		
-//			System.out.println(mylist.get(i).getText());
-//		}
-//      
+			// System.out.println(mylist.size());
+			//
+			// for(int i=0;i<mylist.size();i++){
+			//
+			// System.out.println(mylist.get(i).getText());
+			// }
+			//
 			boolean cond1 = mylist.get(0).getText().equals("Relevance");
 			boolean cond2 = mylist.get(1).getText().equals("Times Cited");
 			boolean cond3 = mylist.get(2).getText().equals("Date (Newest)");
 			boolean cond4 = mylist.get(3).getText().equals("Date (Oldest)");
 
 			boolean master_cond = cond1 && cond2 && cond3 && cond4;
-//			System.out.println(master_cond);
+			// System.out.println(master_cond);
 
 			try {
 
@@ -105,11 +105,9 @@ public class Search80 extends TestBase {
 						"Correct sorting options not present in SORT BY drop down in ALL search results page");// extent
 																												// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_correct_sorting_options_not_present_in_SORT_BY_drop_down_in_ALL_search_results_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_correct_sorting_options_not_present_in_SORT_BY_drop_down_in_ALL_search_results_page")));// screenshot
 
 			}
 
@@ -123,11 +121,8 @@ public class Search80 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

@@ -13,14 +13,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search76 extends TestBase {
 
@@ -36,19 +35,20 @@ public class Search76 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
-	public void testcaseB76() throws Exception {  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+	public void testcaseB76() throws Exception {
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,7 +56,7 @@ public class Search76 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -93,7 +93,7 @@ public class Search76 extends TestBase {
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("postsTile")));
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
-			jse.executeScript("arguments[0].scrollIntoView(true);",myE);
+			jse.executeScript("arguments[0].scrollIntoView(true);", myE);
 			Thread.sleep(1000);
 			String text = myE.getText();
 
@@ -123,16 +123,12 @@ public class Search76 extends TestBase {
 
 			if (!compareStrings(expected_text, actual_text)) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Record view page of a post does not get displayed when user clicks on any post option in the search type ahead while POSTS option is selected in the search drop down");// extent
 																																																	// report
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
 
 			}
 
@@ -149,11 +145,8 @@ public class Search76 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

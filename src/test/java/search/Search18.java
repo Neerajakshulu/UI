@@ -12,13 +12,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search18 extends TestBase {
 
@@ -33,20 +32,21 @@ public class Search18 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB18() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -64,26 +64,27 @@ public class Search18 extends TestBase {
 			}
 			clearCookies();
 			// Navigate to TR login page and login with valid TR credentials
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+
 			login();
-			//waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("")), 20);
-			//ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
+			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("")), 20);
+			// ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")), 40);
+			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")),
+					40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
 			BrowserWaits.waitTime(5);
 
 			int checkboxesSelected = 0;
 			List<WebElement> checkboxList;
 			for (int i = 0; i < 2; i++) {
-				checkboxList = ob.findElements(By.cssSelector(OR
-						.getProperty("tr_search_results_all_refine_checkboxes_css")));
+				checkboxList = ob
+						.findElements(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")));
 				BrowserWaits.waitTime(1);
 				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
 					jsClick(ob, checkboxList.get(i));

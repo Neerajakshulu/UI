@@ -14,13 +14,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search103 extends TestBase {
 
@@ -35,19 +34,20 @@ public class Search103 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB10() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -82,7 +82,7 @@ public class Search103 extends TestBase {
 			BrowserWaits.waitTime(5);
 			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(0).click();
-		BrowserWaits.waitTime(8);
+			BrowserWaits.waitTime(8);
 			// Re-capturing filter values
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 			filterValues.get(1).click();
@@ -118,13 +118,11 @@ public class Search103 extends TestBase {
 
 			try {
 				Assert.assertTrue(al1.equals(al2));
-				test.log(
-						LogStatus.PASS,
+				test.log(LogStatus.PASS,
 						"Correct filtered search results getting displayed when user navigates back to patent search results page from record view page");
 			} catch (Throwable t) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Incorrect filtered search results getting displayed when user navigates back to patent search results page from record view page");// extent
 				// reports
 				test.log(LogStatus.INFO, "Error--->" + t);
@@ -138,7 +136,7 @@ public class Search103 extends TestBase {
 
 			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
 
-			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)") 
+			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")
 					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");
 
 			try {

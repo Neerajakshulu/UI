@@ -11,14 +11,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search40 extends TestBase {
 
@@ -33,21 +32,22 @@ public class Search40 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB8() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -56,7 +56,7 @@ public class Search40 extends TestBase {
 		try {
 
 			String search_query = "biology";
-			
+
 			String email = "neonfbook@gmail.com";
 			String password = "1Pproject";
 
@@ -66,7 +66,7 @@ public class Search40 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
@@ -77,18 +77,18 @@ public class Search40 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForAjax(ob);
-            System.out.println("before refine");
+			System.out.println("before refine");
 			// Finding out the types filer in refine panel
 			List<WebElement> content_types = ob.findElements(By.cssSelector("div[class='panel-heading']"));
 			String filter1 = content_types.get(0).getText();
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();
 			String filter4 = content_types.get(3).getText();
-		
+
 			BrowserWaits.waitTime(3);
 
 			// Comparing the the label of the type of sort item
@@ -98,11 +98,9 @@ public class Search40 extends TestBase {
 				test.log(LogStatus.FAIL, "All filters are not displayed in the refine panel for article content set");// extent
 				// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "All_filters_are_not_displayed_in_the_refine_panel_for_article_content_set")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "All_filters_are_not_displayed_in_the_refine_panel_for_article_content_set")));// screenshot
 
 			} else {
 				test.log(LogStatus.PASS, "Filters are properly displayed in refine panel for article content set");
@@ -119,11 +117,8 @@ public class Search40 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

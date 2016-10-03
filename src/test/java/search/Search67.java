@@ -9,13 +9,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search67 extends TestBase {
 
@@ -30,20 +29,21 @@ public class Search67 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB67() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -58,7 +58,7 @@ public class Search67 extends TestBase {
 			// Navigating to the NEON login page
 			// ob.navigate().to(host);
 			ob.navigate().to(host);
-			
+
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -66,11 +66,11 @@ public class Search67 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			Thread.sleep(3000);
 
-			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).getText();
+			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
+					.getText();
 			String all_temp = all_text.substring(3);
 			System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
 			System.out.println(all_text);
@@ -79,25 +79,25 @@ public class Search67 extends TestBase {
 			System.out.println(all_num);
 
 			String articles_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()))
-			.getText();
+					.getText();
 			String articles_temp = articles_text.substring(8);
 			int articles_num = convertStringToInt(articles_temp);
 			System.out.println(articles_num);
 
-			String patents_text = ob.findElement(
-		By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
+			String patents_text = ob
+					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
 			String patents_temp = patents_text.substring(7);
 			int patents_num = convertStringToInt(patents_temp);
 			System.out.println(patents_num);
 
-			String people_text = ob.findElement(
-			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).getText();
+			String people_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()))
+					.getText();
 			String people_temp = people_text.substring(6);
 			int people_num = convertStringToInt(people_temp);
 			System.out.println(people_num);
 
-			String posts_text = ob.findElement(
-			By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).getText();
+			String posts_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()))
+					.getText();
 			String posts_temp = posts_text.substring(5);
 			int posts_num = convertStringToInt(posts_temp);
 			System.out.println(posts_num);
@@ -107,16 +107,13 @@ public class Search67 extends TestBase {
 
 			if (!compareNumbers(all_num, total)) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"ALL search results count is not equal to the count of search results of other content types(ARTICLES+PATENTS+POSTS+PEOPLE)");// extent
 																																						// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_ALL_search_results_count_is_not_equal_to_the_count_of_search_results_of_other_content_types")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_ALL_search_results_count_is_not_equal_to_the_count_of_search_results_of_other_content_types")));// screenshot
 
 			}
 
@@ -133,11 +130,8 @@ public class Search67 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

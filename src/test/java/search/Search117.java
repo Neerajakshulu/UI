@@ -12,13 +12,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search117 extends TestBase {
 
@@ -33,21 +32,22 @@ public class Search117 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 
 	}
 
 	@Test
 	public void testcaseB117() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,7 +62,7 @@ public class Search117 extends TestBase {
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			
+
 			// login using TR credentials
 			login();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
@@ -75,8 +75,9 @@ public class Search117 extends TestBase {
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_button_css"))).click();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")), 120);
-			List<WebElement> postDropdownmenus = ob.findElement(
-					By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css"))).findElements(By.tagName("li"));
+			List<WebElement> postDropdownmenus = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_sortby_menu_css")))
+					.findElements(By.tagName("li"));
 			for (WebElement postDropdownmenu : postDropdownmenus) {
 				if (postDropdownmenu.getText().trim().equalsIgnoreCase(sortBy)) {
 					postDropdownmenu.click();
@@ -89,8 +90,8 @@ public class Search117 extends TestBase {
 
 			List<String> postTitlesdata = new ArrayList<String>();
 			List<String> postTitlesFromRVdata = new ArrayList<String>();
-			List<WebElement> postTitles = ob.findElements(By.cssSelector(OR
-					.getProperty("tr_search_results_post_title_css")));
+			List<WebElement> postTitles = ob
+					.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
 			for (WebElement postTitle : postTitles) {
 				postTitlesdata.add(postTitle.getText().trim());
 			}
@@ -112,8 +113,8 @@ public class Search117 extends TestBase {
 						"sorting is not retained when user navigates back to POSTS search results page from record view page");
 			}
 
-			List<WebElement> postTitlesRV = ob.findElements(By.cssSelector(OR
-					.getProperty("tr_search_results_post_title_css")));
+			List<WebElement> postTitlesRV = ob
+					.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
 			for (WebElement postTitleRV : postTitlesRV) {
 				postTitlesFromRVdata.add(postTitleRV.getText().trim());
 			}
@@ -136,11 +137,8 @@ public class Search117 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_sortby_retain_post_search_results_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_sortby_retain_post_search_results_failed")));// screenshot
 			closeBrowser();
 		}
 

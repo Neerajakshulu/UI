@@ -12,12 +12,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search105 extends TestBase {
 
@@ -32,20 +31,21 @@ public class Search105 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB105() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -57,8 +57,8 @@ public class Search105 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			// Navigating to the NEON login page
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
@@ -70,7 +70,7 @@ public class Search105 extends TestBase {
 			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("tab_posts_result"))).click();
 			waitForAjax(ob);
-            
+
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
@@ -78,20 +78,19 @@ public class Search105 extends TestBase {
 
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			//System.out.println(patentRVTitle);
-			String patentRVTitleWatchLabel = ob.findElement(
-					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
-			//System.out.println(patentRVTitleWatchLabel);
+			// System.out.println(patentRVTitle);
+			String patentRVTitleWatchLabel = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).getText();
+			// System.out.println(patentRVTitleWatchLabel);
 
-			boolean  googleShare= ob
+			boolean googleShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(0)
 					.getAttribute("tooltip").contains("Share on Google");
-			
+
 			boolean twitterShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(2)
 					.getAttribute("tooltip").contains("Share on Twitter");
-			
-			
+
 			boolean fbShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(0)
 					.getAttribute("tooltip").contains("Share on Facebook");
@@ -99,9 +98,9 @@ public class Search105 extends TestBase {
 			boolean liShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(1)
 					.getAttribute("tooltip").contains("Share on LinkedIn");
-			
-			List<WebElement> postCreationAndEdit = ob.findElements(By
-					.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
+
+			List<WebElement> postCreationAndEdit = ob
+					.findElements(By.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
 			boolean postEditCreateDate;
 			if (postCreationAndEdit.size() >= 2) {
 				postEditCreateDate = postCreationAndEdit.get(0).getText().equalsIgnoreCase("EDITED")
@@ -114,15 +113,15 @@ public class Search105 extends TestBase {
 
 			String postAuthor = ob.findElement(By.xpath(OR.getProperty("tr_search_people_profilename_link_xpath")))
 					.getText();
-			
-			String postAuthorMetaData = ob.findElement(
-					By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
 
-			//System.out.println("post author-->"+postAuthor);
-		// System.out.println("post author metadata-->"+postAuthorMetaData);
+			String postAuthorMetaData = ob
+					.findElement(By.xpath(OR.getProperty("tr_search_people_profile_description_xpath"))).getText();
 
-			List<WebElement> postSocialShare = ob.findElements(By
-					.cssSelector(("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
+			// System.out.println("post author-->"+postAuthor);
+			// System.out.println("post author metadata-->"+postAuthorMetaData);
+
+			List<WebElement> postSocialShare = ob.findElements(By.cssSelector(
+					("div[class='ne-publication-sidebar'] span[class='wui-icon-metric__value ng-binding']")));
 
 			int postCommentCount = Integer.parseInt(postSocialShare.get(0).getText());
 			int postLikeCount = Integer.parseInt(postSocialShare.get(1).getText());
@@ -133,30 +132,23 @@ public class Search105 extends TestBase {
 			// System.out.println("post like count-->"+postLikeCount);
 
 			boolean patentRVStatus = StringUtils.containsIgnoreCase(patentRVTitle, post)
-					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "Watching")
-					&& googleShare && twitterShare && fbShare && liShare;
+					&& StringUtils.containsIgnoreCase(patentRVTitleWatchLabel, "Watching") && googleShare
+					&& twitterShare && fbShare && liShare;
 
 			// if(!patentRVStatus)
 			// throw new Exception("Page is not Navigating to Post Record View Page");
 
 			boolean postFieldsStatus = postEditCreateDate && (!postAuthor.isEmpty()) && (!postAuthorMetaData.isEmpty())
-					&& socialShareStatus &&patentRVStatus;
+					&& socialShareStatus && patentRVStatus;
 			System.out.println("post fields status-->" + postFieldsStatus);
-			
-			if(!checkElementPresence("watchlist_button_record_view_page")){
-				
-				
 
-				test.log(
-						LogStatus.FAIL,
-						"Record view page of a post not getting displayed");// extent
-																																																// report
+			if (!checkElementPresence("watchlist_button_record_view_page")) {
+
+				test.log(LogStatus.FAIL, "Record view page of a post not getting displayed");// extent
+																								// report
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_record_view_page_of_a_post_not_getting_displayed")));// screenshot
 			}
 
 			closeBrowser();
@@ -172,11 +164,8 @@ public class Search105 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_patent_recordview_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 

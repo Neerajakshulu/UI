@@ -9,12 +9,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search91 extends TestBase {
 
@@ -30,20 +29,21 @@ public class Search91 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB91() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -57,19 +57,19 @@ public class Search91 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			//selectSearchTypeFromDropDown("Patents");
+			// selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.partialLinkText("Patents"), 4);
 			Thread.sleep(7000);
 			ob.findElement(By.partialLinkText("Patents")).click();
-			
+
 			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 4);
 			Thread.sleep(8000);
 			String defaultSortByValue = ob.findElement(By.xpath("//button[@id='single-button']")).getText();
@@ -78,11 +78,8 @@ public class Search91 extends TestBase {
 			} else {
 				status = 2;
 				test.log(LogStatus.FAIL, "Patents results are not sorted by RELEVANCE by default");
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_default_sort_by_patents_search_results")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_default_sort_by_patents_search_results")));// screenshot
 			}
 
 			closeBrowser();
@@ -98,11 +95,8 @@ public class Search91 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

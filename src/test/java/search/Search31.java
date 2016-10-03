@@ -11,12 +11,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search31 extends TestBase {
 
@@ -32,21 +31,21 @@ public class Search31 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB8() throws Exception {
 
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,7 +61,7 @@ public class Search31 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-		
+
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -73,8 +72,7 @@ public class Search31 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector("a[class='wui-side-menu__link']"), 30);
 
 			// Finding out the name of all types of content set in result page
-			List<WebElement> content_types = ob.findElements(By
-					.cssSelector("a[class='wui-side-menu__link']"));
+			List<WebElement> content_types = ob.findElements(By.cssSelector("a[class='wui-side-menu__link']"));
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();
@@ -88,11 +86,8 @@ public class Search31 extends TestBase {
 				test.log(LogStatus.FAIL, "Some of the content types are missing in result page");// extent
 																									// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "some_content_types_are_missing_in_result_page")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "some_content_types_are_missing_in_result_page")));// screenshot
 
 			} else {
 				test.log(LogStatus.PASS, "All content sets are available in result page");
@@ -109,11 +104,8 @@ public class Search31 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

@@ -9,14 +9,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search92 extends TestBase {
 
@@ -32,19 +31,20 @@ public class Search92 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB92() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,8 +62,8 @@ public class Search92 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			 ob.navigate().to(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			Thread.sleep(3000);
 
 			// login using TR credentials
@@ -73,24 +73,25 @@ public class Search92 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(userName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 180);
-			String profileName = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()))
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()), 180);
+			String profileName = ob
+					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()))
 					.getText();
 			BrowserWaits.waitTime(5);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()), 50);
-			String profileDescription = ob.findElement(
-					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString())).getText();
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()), 50);
+			String profileDescription = ob
+					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_DESC_LINK_CSS.toString()))
+					.getText();
 
 			if (profileName.equals(userName) && profileDescription.equals(description)) {
 				test.log(LogStatus.PASS, "Person name and description are displayed as expected");
 			} else {
 				status = 2;
 				test.log(LogStatus.FAIL, "Person name and description are not displayed as expected");
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_Person_name_and_description_not_displayed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_Person_name_and_description_not_displayed")));// screenshot
 			}
 
 			closeBrowser();
@@ -106,11 +107,8 @@ public class Search92 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

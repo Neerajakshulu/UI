@@ -13,13 +13,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Search119 extends TestBase {
 
@@ -34,20 +33,21 @@ public class Search119 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("Search suite");
 	}
 
 	@Test
 	public void testcaseB109() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(searchxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -62,7 +62,7 @@ public class Search119 extends TestBase {
 			// Navigating to the NEON login page
 			// ob.navigate().to(host);
 			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-		
+
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -115,11 +115,8 @@ public class Search119 extends TestBase {
 						"Sorting is not retained when user navigates back to ALL search results page from record view page");// extent
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_sorting_not_retained")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_sorting_not_retained")));// screenshot
 			}
 
 			String text = ob.findElement(By.id("single-button")).getText().substring(9);
@@ -129,35 +126,29 @@ public class Search119 extends TestBase {
 
 				test.log(LogStatus.FAIL, "Incorrect attribute present in SORT BY drop down");// extent
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_attribute_present_in_SORT_BY__drop_down")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "_incorrect_attribute_present_in_SORT_BY__drop_down")));// screenshot
 
 			}
 
-			String text3 = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).getText().substring(0,3);
-			//System.out.println(text3);
+			String text3 = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).getText()
+					.substring(0, 3);
+			// System.out.println(text3);
 
 			try {
 
 				Assert.assertTrue(text3.contains("All"));
-				test.log(
-						LogStatus.PASS,
+				test.log(LogStatus.PASS,
 						"Content type in the left navigation pane getting retained correctly when user navigates back to search results page from record view page");// extent
 			} catch (Throwable t) {
 
-				test.log(
-						LogStatus.FAIL,
+				test.log(LogStatus.FAIL,
 						"Content type in the left navigation pane not getting retained when user navigates back to search results page from record view page");// extent
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_content_type_in_left_navigation_pane_not_getting_retained")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_content_type_in_left_navigation_pane_not_getting_retained")));// screenshot
 
 			}
 
@@ -174,11 +165,8 @@ public class Search119 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
