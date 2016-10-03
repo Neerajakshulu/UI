@@ -19,7 +19,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 /**
  * Class for Performing Article Sharing on Twitter
@@ -49,7 +48,7 @@ public class Authoring11 extends TestBase {
 	@Test
 	public void testOpenApplication() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -83,9 +82,11 @@ public class Authoring11 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void chooseArtilce(String username, String password, String article, String completeArticle)
-			throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle"})
+	public void chooseArtilce(String username,
+			String password,
+			String article,
+			String completeArticle) throws Exception {
 		try {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -108,13 +109,14 @@ public class Authoring11 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "chooseArtilce", timeOut = 300000)
-	@Parameters({ "tusername", "tpassword" })
-	public void shareOnTwitter(String tusername, String tpassword) throws Exception {
+	@Parameters({"tusername", "tpassword"})
+	public void shareOnTwitter(String tusername,
+			String tpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on Twitter");
 
 			String PARENT_WINDOW = ob.getWindowHandle();
-			//String rvPageurl = ob.getCurrentUrl();
+			// String rvPageurl = ob.getCurrentUrl();
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_TWITTER_CSS.toString()),
 					80);
@@ -173,14 +175,12 @@ public class Authoring11 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

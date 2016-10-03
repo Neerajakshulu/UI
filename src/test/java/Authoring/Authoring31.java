@@ -46,7 +46,7 @@ public class Authoring31 extends TestBase {
 	@Test
 	public void testInitiatePostCreation() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -97,7 +97,9 @@ public class Authoring31 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testInitiatePostCreation", dataProvider = "getTestData")
-	public void testMinMaxLengthValidation(String contentMinError, String contentMaxError, String minCharCount,
+	public void testMinMaxLengthValidation(String contentMinError,
+			String contentMaxError,
+			String minCharCount,
 			String maxCharCount) throws Exception {
 
 		pf.getProfilePageInstance(ob)
@@ -121,8 +123,7 @@ public class Authoring31 extends TestBase {
 				.enterPostContent(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 5))));
 		test.log(LogStatus.INFO, "Entered Post Title of length:" + maxCharCount);
 		try {
-			Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());
-			;
+			Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());;
 			test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
@@ -143,12 +144,9 @@ public class Authoring31 extends TestBase {
 	@Test(dependsOnMethods = "testMinMaxLengthValidation")
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "SKIP"); else if(fail) {
-		 * status=2; TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else
-		 * TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
+		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
+		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 		skip = false;
 		fail = false;
@@ -160,14 +158,11 @@ public class Authoring31 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" , TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}

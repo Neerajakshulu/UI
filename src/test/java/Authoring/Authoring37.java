@@ -11,13 +11,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Authoring37 extends TestBase {
 
@@ -46,14 +46,14 @@ public class Authoring37 extends TestBase {
 
 	@Test
 	public void testInitiatePostCreation() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -98,11 +98,8 @@ public class Authoring37 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -113,8 +110,8 @@ public class Authoring37 extends TestBase {
 			String minCharCount,
 			String maxCharCount) throws Exception {
 
-		pf.getProfilePageInstance(ob).enterPostTitle(
-				RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
+		pf.getProfilePageInstance(ob)
+				.enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
 		test.log(LogStatus.INFO, "Entered Post Title of length:" + minCharCount);
 
 		try {
@@ -125,15 +122,12 @@ public class Authoring37 extends TestBase {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "Post_title_validation_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 		}
-		pf.getProfilePageInstance(ob).enterPostTitle(
-				RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 3))));
+		pf.getProfilePageInstance(ob)
+				.enterPostTitle(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 3))));
 		test.log(LogStatus.INFO, "Entered Post Title of length:" + maxCharCount);
 		try {
 			Assert.assertTrue(pf.getProfilePageInstance(ob).getLengthOfTitleFromPostCreationModal() == 200);
@@ -143,11 +137,8 @@ public class Authoring37 extends TestBase {
 			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "Post_title_validation_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 		}
 		pf.getProfilePageInstance(ob).clickOnPostCancelButton();

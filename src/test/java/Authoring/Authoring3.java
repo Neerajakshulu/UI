@@ -49,11 +49,13 @@ public class Authoring3 extends TestBase {
 	}
 
 	@Test()
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void testLoginTRAccount(String username, String password, String article, String completeArticle)
-			throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle"})
+	public void testLoginTRAccount(String username,
+			String password,
+			String article,
+			String completeArticle) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -98,7 +100,9 @@ public class Authoring3 extends TestBase {
 	}
 
 	// @Test(dependsOnMethods="testLoginTRAccount",dataProvider="getTestData")
-	public void performAuthoringCommentOperations(String username, String password, String article,
+	public void performAuthoringCommentOperations(String username,
+			String password,
+			String article,
 			String completeArticle) throws Exception {
 		try {
 
@@ -128,14 +132,12 @@ public class Authoring3 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 		// closeBrowser();
 	}
@@ -212,8 +214,7 @@ public class Authoring3 extends TestBase {
 	 * Method for wait until Element is Present
 	 * 
 	 * @param locator
-	 * @throws Exception,
-	 *             When NoSuchElement Present
+	 * @throws Exception, When NoSuchElement Present
 	 */
 	public void IsElementPresent(String locator) throws Exception {
 		try {

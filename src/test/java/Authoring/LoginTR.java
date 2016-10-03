@@ -20,10 +20,10 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import base.TestBase;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 /**
  * class for Project Neon Login with TR Credentials
@@ -51,19 +51,20 @@ public class LoginTR extends TestBase {
 	public void waitForTRHomePage() throws InterruptedException {
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
-		browserWait.waitUntilText("Thomson Reuters","Project Neon");
+		browserWait.waitUntilText("Thomson Reuters", "Project Neon");
 		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
 
 	}
 
 	/**
 	 * Method for enter Application Url and enter Credentials
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void enterTRCredentials(String userName,
 			String password) throws InterruptedException {
-		//ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		//waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
+		// ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
+		// waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
 		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(userName);
@@ -73,7 +74,7 @@ public class LoginTR extends TestBase {
 	public void clickLogin() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-		
+
 		closeOnBoardingModal();
 	}
 
@@ -102,7 +103,8 @@ public class LoginTR extends TestBase {
 
 	public void searchArticle(String article) throws InterruptedException {
 		ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys(article);
-		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']")).click();
+		ob.findElement(By.cssSelector("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']"))
+				.click();
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
 	}
@@ -122,7 +124,6 @@ public class LoginTR extends TestBase {
 		}
 	}
 
-	
 	public void logOutApp() throws Exception {
 		BrowserWaits.waitTime(10);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
@@ -131,8 +132,9 @@ public class LoginTR extends TestBase {
 		browserWait.waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 	}
-	
-	public void loginWithLinkedInCredentials(String username, String pwd) throws InterruptedException, Exception {
+
+	public void loginWithLinkedInCredentials(String username,
+			String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString())).click();
@@ -141,7 +143,8 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	public void signInToLinkedIn(String username, String pwd) {
+	public void signInToLinkedIn(String username,
+			String pwd) {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -150,7 +153,9 @@ public class LoginTR extends TestBase {
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
 	}
-	public void loginWithFBCredentials(String username, String pwd) throws InterruptedException, Exception {
+
+	public void loginWithFBCredentials(String username,
+			String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
@@ -158,20 +163,23 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	public void signInToFacebook(String username, String pwd) {
+	public void signInToFacebook(String username,
+			String pwd) {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
-		jsClick(ob,ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())));
+		jsClick(ob, ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())));
 	}
-	
-	
-	public void loginWithFBCredentials(WebDriver driver,String username, String pwd) {
 
-		waitForElementTobeVisible(driver, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
+	public void loginWithFBCredentials(WebDriver driver,
+			String username,
+			String pwd) {
+
+		waitForElementTobeVisible(driver, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()),
+				30);
 		driver.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
 
 		waitForElementTobeVisible(driver, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
@@ -182,9 +190,9 @@ public class LoginTR extends TestBase {
 		// BrowserWaits.waitTime(2);
 		driver.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())).click();
 	}
-	
+
 	public static WebDriver launchBrowser() throws Exception {
-		WebDriver driver=null;
+		WebDriver driver = null;
 		logger.info("Env status-->" + StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER")));
 		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -237,51 +245,58 @@ public class LoginTR extends TestBase {
 				logger.info("Page Load Timeout not supported in safari driver");
 			}
 		}
-		
+
 		return driver;
 	}
-	
-	public String clickOnLinkButtonInLoginPage(){
-	
+
+	public String clickOnLinkButtonInLoginPage() {
+
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 60);
-		WebElement linkButton=ob.findElement(By.cssSelector("button[ng-click='vm.idpLogin()']"));
-		String linkName=linkButton.getText();
+		WebElement linkButton = ob.findElement(By.cssSelector("button[ng-click='vm.idpLogin()']"));
+		String linkName = linkButton.getText();
 		linkButton.click();
-		
-		if(linkName.contains("Facebook"))return "Facebook";
-		else if (linkName.contains("LinkedIn")) return "LinkedIn";
-		else return null;
+
+		if (linkName.contains("Facebook"))
+			return "Facebook";
+		else if (linkName.contains("LinkedIn"))
+			return "LinkedIn";
+		else
+			return null;
 	}
-	
-public void socialLinking() throws Exception{
-		
-		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()),30);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString())).click();
+
+	public void socialLinking() throws Exception {
+
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_CSS.toString()))
+				.click();
 		BrowserWaits.waitTime(3);
-		ob.findElement(By.cssSelector("div[class='modal-content ng-scope'] div[class='wui-input-with-label'] input")).sendKeys("Happy@123");
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
-		
+		ob.findElement(By.cssSelector("div[class='modal-content ng-scope'] div[class='wui-input-with-label'] input"))
+				.sendKeys("Happy@123");
+		ob.findElement(
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
+				.click();
+
 	}
-	
-	public void checkLinking() throws Exception{
-		waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),20);
-		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+
+	public void checkLinking() throws Exception {
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()),
+				20);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		browserWait.waitUntilText("Account");
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK.toString())));
-		
+
 	}
-	
-	public void clickNotnowButtonLinkingModal() throws Exception{
-		
-		//waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"), 60);
-	   //boolean Modal= ob.findElement(By.cssSelector("div[class='modal-content ng-scope']")).isDisplayed();
-	    
-	  // if (Modal)
-	  
-	    	ob.findElement(By.cssSelector("a[ng-click='vm.callSkipLinking()']")).click();
-	   
-		
-		
+
+	public void clickNotnowButtonLinkingModal() throws Exception {
+
+		// waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"), 60);
+		// boolean Modal= ob.findElement(By.cssSelector("div[class='modal-content ng-scope']")).isDisplayed();
+
+		// if (Modal)
+
+		ob.findElement(By.cssSelector("a[ng-click='vm.callSkipLinking()']")).click();
+
 	}
-	
+
 }

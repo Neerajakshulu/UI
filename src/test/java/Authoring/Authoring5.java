@@ -40,13 +40,12 @@ public class Authoring5 extends TestBase {
 	/**
 	 * Method for validating TR Login Screen
 	 * 
-	 * @throws Exception,
-	 *             When TR Login Home screen not displaying
+	 * @throws Exception, When TR Login Home screen not displaying
 	 */
 	@Test
 	public void testAuthoringTestAccount() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -86,9 +85,11 @@ public class Authoring5 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testAuthoringTestAccount")
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void backToProjectNeonValiation(String username, String password, String article, String completeArticle)
-			throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle"})
+	public void backToProjectNeonValiation(String username,
+			String password,
+			String article,
+			String completeArticle) throws Exception {
 
 		try {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -116,8 +117,7 @@ public class Authoring5 extends TestBase {
 	/**
 	 * Method for Click Details link in Article Record View Page
 	 * 
-	 * @throws Exception,
-	 *             When Details link Not Working
+	 * @throws Exception, When Details link Not Working
 	 */
 	public void recordViewDetailsLinkValidation() throws Exception {
 		waitForElementTobeVisible(ob,
@@ -139,14 +139,12 @@ public class Authoring5 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

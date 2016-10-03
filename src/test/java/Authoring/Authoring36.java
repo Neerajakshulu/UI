@@ -47,7 +47,7 @@ public class Authoring36 extends TestBase {
 	@Test
 	public void testInitiatePostCreation() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -106,7 +106,8 @@ public class Authoring36 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testInitiatePostCreation", dataProvider = "getTestData")
-	public void testMinMaxLengthValidation(String profanityWord, String errorMessage) throws Exception {
+	public void testMinMaxLengthValidation(String profanityWord,
+			String errorMessage) throws Exception {
 		pf.getProfilePageInstance(ob).enterPostContent("Test");
 		test.log(LogStatus.INFO, "Entered Post content");
 		pf.getProfilePageInstance(ob).enterPostTitle(profanityWord);
@@ -150,12 +151,9 @@ public class Authoring36 extends TestBase {
 	@Test(dependsOnMethods = "logOut")
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "SKIP"); else if(fail) {
-		 * status=2; TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else
-		 * TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "PASS");
+		 * if(skip) TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); else
+		 * if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2,
+		 * "FAIL"); } else TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "PASS");
 		 */
 
 		skip = false;
@@ -168,14 +166,11 @@ public class Authoring36 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" , TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 
 	}

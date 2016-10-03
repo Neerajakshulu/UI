@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -36,7 +35,6 @@ public class Authoring12 extends TestBase {
 	static int status = 1;
 
 	static int time = 30;
-	PageFactory pf = new PageFactory();
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -49,7 +47,7 @@ public class Authoring12 extends TestBase {
 	@Test
 	public void testOpenApplication() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -58,7 +56,7 @@ public class Authoring12 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
 		try {
@@ -81,9 +79,11 @@ public class Authoring12 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void chooseArtilce(String username, String password, String article, String completeArticle)
-			throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle"})
+	public void chooseArtilce(String username,
+			String password,
+			String article,
+			String completeArticle) throws Exception {
 		try {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -106,8 +106,9 @@ public class Authoring12 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "chooseArtilce")
-	@Parameters({ "liusername", "lipassword" })
-	public void shareOnTwitter(String liusername, String lipassword) throws Exception {
+	@Parameters({"liusername", "lipassword"})
+	public void shareOnTwitter(String liusername,
+			String lipassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on LinkedIn");
 			String PARENT_WINDOW = ob.getWindowHandle();
@@ -172,14 +173,12 @@ public class Authoring12 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

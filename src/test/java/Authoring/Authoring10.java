@@ -20,8 +20,7 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 /**
- * Class for Performing Authoring Comments Validation with Unsupported HTML tags
- * except <br>
+ * Class for Performing Authoring Comments Validation with Unsupported HTML tags except <br>
  * ,<b>,<i> and
  * <p>
  * 
@@ -53,7 +52,7 @@ public class Authoring10 extends TestBase {
 	public void testOpenApplication() throws Exception {
 		try {
 
-			boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+			boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 			master_condition = suiteRunmode && testRunmode;
 
 			if (!master_condition) {
@@ -93,9 +92,11 @@ public class Authoring10 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({ "username", "password", "article", "completeArticle" })
-	public void chooseArtilce(String username, String password, String article, String completeArticle)
-			throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle"})
+	public void chooseArtilce(String username,
+			String password,
+			String article,
+			String completeArticle) throws Exception {
 		try {
 			// waitForTRHomePage();
 			loginAs(username, password);
@@ -117,7 +118,8 @@ public class Authoring10 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "chooseArtilce", dataProvider = "getTestData")
-	public void unSupportedTagsCommentsCheck(String htmlTags, String errorMessage) throws Exception {
+	public void unSupportedTagsCommentsCheck(String htmlTags,
+			String errorMessage) throws Exception {
 		try {
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
@@ -158,12 +160,10 @@ public class Authoring10 extends TestBase {
 
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) { TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "SKIP"); } else if(fail) {
-		 * status=2; TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else {
-		 * TestUtil.reportDataSetResult(authoringxls,
-		 * this.getClass().getSimpleName(), count+2, "PASS"); }
+		 * if(skip) { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); }
+		 * else if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "FAIL"); } else { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
+		 * count+2, "PASS"); }
 		 */
 
 		skip = false;
@@ -177,14 +177,12 @@ public class Authoring10 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 		if (master_condition)
 			closeBrowser();

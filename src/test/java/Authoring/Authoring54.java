@@ -15,7 +15,6 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Authoring54 extends TestBase {
 
@@ -35,10 +34,11 @@ public class Authoring54 extends TestBase {
 	}
 
 	@Test(timeOut = 300000)
-	@Parameters({ "tusername", "tpassword" })
-	public void testPostComments(String tusername, String tpassword) throws Exception {
+	@Parameters({"tusername", "tpassword"})
+	public void testPostComments(String tusername,
+			String tpassword) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -95,14 +95,11 @@ public class Authoring54 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls, "Test Cases", TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(authoringxls,
+		 * "Test Cases", TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" , TestUtil.getRowNum(authoringxls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 

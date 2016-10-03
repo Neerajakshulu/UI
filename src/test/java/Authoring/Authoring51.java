@@ -15,7 +15,6 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Authoring51 extends TestBase {
 
@@ -37,15 +36,15 @@ public class Authoring51 extends TestBase {
 
 	@Test
 	public void testPostComments() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -59,7 +58,7 @@ public class Authoring51 extends TestBase {
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
-			String profileName=LOGIN.getProperty("PROFILE9");
+			String profileName = LOGIN.getProperty("PROFILE9");
 			loginAs("USERNAME9", "PASSWORD9");
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).searchForText("test");
@@ -74,7 +73,8 @@ public class Authoring51 extends TestBase {
 
 			try {
 				Assert.assertEquals(countBefore + 1, countAfter);
-				test.log(LogStatus.PASS, "Comment count is increased in view post record page after adding the comment");
+				test.log(LogStatus.PASS,
+						"Comment count is increased in view post record page after adding the comment");
 				pf.getpostRVPageInstance(ob).validateCommentNewlyAdded("test comments added on post", test);
 
 			} catch (Throwable t) {
@@ -82,11 +82,8 @@ public class Authoring51 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
 
@@ -100,11 +97,8 @@ public class Authoring51 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Post_count_validation_failed")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
 
@@ -121,11 +115,8 @@ public class Authoring51 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

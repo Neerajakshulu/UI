@@ -18,7 +18,6 @@ import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 /**
  * Class for Performing Article Sharing using Facebook
@@ -47,24 +46,24 @@ public class Authoring13 extends TestBase {
 
 	@Test
 	public void testOpenApplication() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
 		// selenium code
 		try {
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(System.getProperty("host"));
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(System.getProperty("host"));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
@@ -73,11 +72,8 @@ public class Authoring13 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_share_the_Article")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
 		}
 	}
@@ -89,7 +85,7 @@ public class Authoring13 extends TestBase {
 			String article,
 			String completeArticle) throws Exception {
 		try {
-			//waitForTRHomePage();
+			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(article);
@@ -103,11 +99,8 @@ public class Authoring13 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_share_the_Article")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
 		}
 	}
@@ -118,16 +111,20 @@ public class Authoring13 extends TestBase {
 			String fbpassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Sharing Article on Facebook");
-			/*waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80);
-			new Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS
-					.toString()))).click().build().perform();*/
-			
+			/*
+			 * waitForElementTobeVisible(ob,
+			 * By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS.toString()), 80); new
+			 * Actions(ob).moveToElement(ob.findElement(By.cssSelector(OnePObjectMap.
+			 * HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_CSS .toString()))).click().build().perform();
+			 */
+
 			String PARENT_WINDOW = ob.getWindowHandle();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
-			jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString())));
-			//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
-			
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString()), 40);
+			jsClick(ob, ob.findElement(
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS.toString())));
+			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_LINK);
+
 			waitForNumberOfWindowsToEqual(ob, 2);
 			Set<String> child_window_handles = ob.getWindowHandles();
 			for (String child_window_handle : child_window_handles) {
@@ -139,11 +136,12 @@ public class Authoring13 extends TestBase {
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS, fbusername);
 					pf.getBrowserActionInstance(ob).enterFieldValue(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_PASSWORD_CSS, fbpassword);
-					pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
+					pf.getBrowserActionInstance(ob)
+							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_LOGIN_CSS);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
-					pf.getBrowserActionInstance(ob).click(
-							OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
+					pf.getBrowserActionInstance(ob)
+							.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_SHARE_LINK_CSS);
 					ob.switchTo().window(PARENT_WINDOW);
 				}
 			}
@@ -159,11 +157,8 @@ public class Authoring13 extends TestBase {
 			e.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(e);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Unable_to_Tweet_Article_On_Twitter")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_Tweet_Article_On_Twitter")));
 			closeBrowser();
 		}
 
@@ -182,5 +177,5 @@ public class Authoring13 extends TestBase {
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
 		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */}
-	
+
 }

@@ -25,8 +25,7 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 /**
- * Class for Performing Authoring prevent comment flooding by bots with
- * different article
+ * Class for Performing Authoring prevent comment flooding by bots with different article
  * 
  * @author UC202376
  *
@@ -54,7 +53,7 @@ public class Authoring7 extends TestBase {
 	@Test
 	public void testOpenApplication() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(authoringxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -93,9 +92,12 @@ public class Authoring7 extends TestBase {
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication")
-	@Parameters({ "username", "password", "article", "completeArticle", "addComments" })
-	public void validateDiffArticlePreventBotsComments(String username, String password, String article,
-			String completeArticle, String addComments) throws Exception {
+	@Parameters({"username", "password", "article", "completeArticle", "addComments"})
+	public void validateDiffArticlePreventBotsComments(String username,
+			String password,
+			String article,
+			String completeArticle,
+			String addComments) throws Exception {
 		try {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -140,14 +142,12 @@ public class Authoring7 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
 
