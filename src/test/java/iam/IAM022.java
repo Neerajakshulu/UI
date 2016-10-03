@@ -10,7 +10,6 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class IAM022 extends TestBase {
 
@@ -26,7 +25,7 @@ public class IAM022 extends TestBase {
 	@Test
 	public void testCaseA22() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 

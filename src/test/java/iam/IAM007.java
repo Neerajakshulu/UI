@@ -41,7 +41,7 @@ public class IAM007 extends TestBase {
 	public void testcaseA7(String email,
 			String password) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {

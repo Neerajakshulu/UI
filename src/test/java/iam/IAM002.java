@@ -17,7 +17,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class IAM002 extends TestBase {
 
@@ -37,7 +36,7 @@ public class IAM002 extends TestBase {
 
 	@Test
 	public void testcaseA2() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		ArrayList<String> cases = new ArrayList<String>();

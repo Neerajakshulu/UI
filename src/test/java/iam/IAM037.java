@@ -20,7 +20,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class IAM037 extends TestBase {
 
@@ -37,7 +36,7 @@ public class IAM037 extends TestBase {
 	@Test
 	public void testcaseENW000012() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -50,7 +49,7 @@ public class IAM037 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			
+
 			String password = "Neon@123";
 			String first_name = "duster";
 			String last_name = "man";
@@ -60,8 +59,6 @@ public class IAM037 extends TestBase {
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
 			}
-			
-			
 
 			openBrowser();
 			clearCookies();
@@ -70,7 +67,7 @@ public class IAM037 extends TestBase {
 			logger.info("Email Address : " + email);
 			logout();
 			BrowserWaits.waitTime(3);
-			
+
 			ob.navigate().to(host);
 
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
@@ -92,7 +89,7 @@ public class IAM037 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			BrowserWaits.waitTime(3);
-			//logout();
+			// logout();
 			BrowserWaits.waitTime(3);
 			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH.toString()))
 					.getText();
@@ -139,8 +136,7 @@ public class IAM037 extends TestBase {
 					30);
 			ob.findElement(By.xpath(OnePObjectMap.LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH.toString())).click();
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString()))
-					.sendKeys(email);
+			ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_EMAIL_XPATH.toString())).sendKeys(email);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).sendKeys(password);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())).click();
 
@@ -189,7 +185,7 @@ public class IAM037 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_password_change_email_not_sent")));// screenshot
 
 			}
-			
+
 			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			BrowserWaits.waitTime(12);

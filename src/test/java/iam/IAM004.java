@@ -18,7 +18,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class IAM004 extends TestBase {
 
@@ -39,7 +38,7 @@ public class IAM004 extends TestBase {
 	@Test
 	public void testcaseA4() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -110,17 +109,17 @@ public class IAM004 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			BrowserWaits.waitTime(3);
 
-			try{
-			List<WebElement> list = ob.findElements(By.xpath(
-					"//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span"));
-			if (list.size() == 1) {
-				String str = list.get(0).getText();
-				Assert.assertEquals(str, email);
-				test.log(LogStatus.PASS, "Both Email ids are same");
-			}else{
-				logger.info("Accounts are linked");
-			}
-			}catch (Throwable t) {
+			try {
+				List<WebElement> list = ob.findElements(By.xpath(
+						"//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span"));
+				if (list.size() == 1) {
+					String str = list.get(0).getText();
+					Assert.assertEquals(str, email);
+					test.log(LogStatus.PASS, "Both Email ids are same");
+				} else {
+					logger.info("Accounts are linked");
+				}
+			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Both Email ids are not same");// extent reports
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
@@ -130,7 +129,7 @@ public class IAM004 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			}
-			
+
 			logout();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 

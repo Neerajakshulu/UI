@@ -41,7 +41,7 @@ public class IAM029 extends TestBase {
 	public void testcaseA6(String charLength,
 			String validity) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -97,7 +97,8 @@ public class IAM029 extends TestBase {
 			String passLength = null;
 
 			if (validity.equalsIgnoreCase("YES")) {
-				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6")).getText();
+				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6"))
+						.getText();
 				if (passLength.contains("Password is too long")) {
 					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(

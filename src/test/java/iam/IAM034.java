@@ -21,7 +21,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class IAM034 extends TestBase {
 
@@ -42,7 +41,7 @@ public class IAM034 extends TestBase {
 
 	@Test
 	public void testcaseF20() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
@@ -74,7 +73,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1838",
 								"Verify that Neon registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
 				BrowserWaits.waitTime(2);
 				if (CONFIG.getProperty("browserType").equals("IE")) {
@@ -108,7 +107,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -118,7 +117,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1837",
 								"Verify that 'Sign up' link should be displayed on Neon registration page .")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				String signupStatus = ob
 						.findElement(By.cssSelector(
 								"button[class='wui-btn wui-btn--primary login-button button-color-primary']"))
@@ -137,7 +136,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -147,7 +146,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1844",
 								"Verify that the user should be able click on 'sign up' button after filling the above fields correctly.")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 				BrowserWaits.waitTime(4);
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
@@ -175,7 +174,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -185,7 +184,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1854",
 								"Verify that user should get an Email verification Link on the registered Email Id .")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				BrowserWaits.waitTime(3);
 				ob.get("https://www.guerrillamail.com");
@@ -222,7 +221,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -233,7 +232,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1856",
 								"Verify that after clicking verification link user should get the message as' Success!You have successfully activated your account. Please sign in.'")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 				WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 				List<WebElement> links = email_body.findElements(By.tagName("a"));
@@ -256,7 +255,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -266,7 +265,7 @@ public class IAM034 extends TestBase {
 						.startTest("OPQA-1857",
 								"Verify that After completion of verification process,Neon Identity should be created with steam account.")
 						.assignCategory("IAM");
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution start");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				BrowserWaits.waitTime(4);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
@@ -293,7 +292,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
 			} finally {
-				test.log(LogStatus.INFO,this.getClass().getSimpleName() + " execution end");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
 
@@ -321,7 +320,7 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			}
-		} finally{
+		} finally {
 			closeBrowser();
 		}
 	}

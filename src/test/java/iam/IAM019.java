@@ -42,7 +42,7 @@ public class IAM019 extends TestBase {
 	@Test(dataProvider = "getTestData")
 	public void testcaseA19(String special_char) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(iamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
