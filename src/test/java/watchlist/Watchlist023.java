@@ -18,7 +18,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that a user's public watchlist is not visible to another user once that particular watchlist is deleted.
@@ -46,8 +45,7 @@ public class Watchlist023 extends TestBase {
 	@Test
 	public void testDeletedWatchlistNotVisibleFromOthersProfile() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -106,9 +104,9 @@ public class Watchlist023 extends TestBase {
 			ob.navigate().to(host);
 			// loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
-			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
-			//selectSearchTypeFromDropDown("People");
+			// selectSearchTypeFromDropDown("People");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();

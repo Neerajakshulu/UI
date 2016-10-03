@@ -19,7 +19,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add a Post from ALL content search results page to a particular watchlist||Verify that
@@ -44,12 +43,12 @@ public class Watchlist003 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	@Parameters({"postName"})
 	public void testWatchPostFromAllContentSearchResult(String postName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -66,7 +65,7 @@ public class Watchlist003 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 
 			try {
 				maximizeWindow();
@@ -91,7 +90,7 @@ public class Watchlist003 extends TestBase {
 
 			// Watching a post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -126,15 +125,16 @@ public class Watchlist003 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + 2 + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			waitForElementTobeVisible(ob,
+					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
 			Thread.sleep(3000);
 			// Watching a post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
- 
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+
 			// Unwatching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

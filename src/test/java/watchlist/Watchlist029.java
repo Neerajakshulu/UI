@@ -23,7 +23,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 /**
  * Verify that user is able to watch a post(user generated content) to a particular watchlist from notification in home
@@ -50,11 +49,11 @@ public class Watchlist029 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testWatchUnwatchPostFromHomePage() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -73,14 +72,14 @@ public class Watchlist029 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			
-			//login with user 2 and follow user1 to get the notifications
+
+			// login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
 			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE1"));
 			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE1"));
 			pf.getProfilePageInstance(ob).followOtherProfile();
 			pf.getLoginTRInstance(ob).logOutApp();
-			
+
 			// 1)Login as user1 and publish a post
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
@@ -93,7 +92,8 @@ public class Watchlist029 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			pf.getProfilePageInstance(ob).enterPostTitle("My Post");
 			test.log(LogStatus.INFO, "Entered Post Title");
-			pf.getProfilePageInstance(ob).enterPostContent("This is my post description" +RandomStringUtils.randomNumeric(500));
+			pf.getProfilePageInstance(ob)
+					.enterPostContent("This is my post description" + RandomStringUtils.randomNumeric(500));
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			Thread.sleep(4000);
@@ -127,30 +127,28 @@ public class Watchlist029 extends TestBase {
 				closeBrowser();
 				return;
 			}
-			
-			
-			
+
 			WebElement watchButton = null;
-			String docTitle=null;
-			List<WebElement> newComments=ob.findElements(By.cssSelector("div[class='wui-card wui-card--new-post'] div[class='wui-card__content']"));
-			for(WebElement newComment:newComments){
-				docTitle=newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
-				if(StringUtils.containsIgnoreCase("My Post", docTitle)) {
-					watchButton =newComment.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
+			String docTitle = null;
+			List<WebElement> newComments = ob.findElements(
+					By.cssSelector("div[class='wui-card wui-card--new-post'] div[class='wui-card__content']"));
+			for (WebElement newComment : newComments) {
+				docTitle = newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
+				if (StringUtils.containsIgnoreCase("My Post", docTitle)) {
+					watchButton = newComment
+							.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
-			
-			logger.info("post title in watchlist page-->"+docTitle);
+
+			logger.info("post title in watchlist page-->" + docTitle);
 			BrowserWaits.waitTime(10);
-			
 
 			// Watching the post to a particular watch list
-			//WebElement watchButton = ob
-				//	.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			// WebElement watchButton = ob
+			// .findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
-			
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
@@ -179,22 +177,21 @@ public class Watchlist029 extends TestBase {
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card wui-card--new-post']"), 60);
-			
-			
-			
-			List<WebElement> newPosts=ob.findElements(By.cssSelector("div[class='wui-card wui-card--new-post'] div[class='wui-card__content']"));
-			for(WebElement newPost:newPosts){
-				docTitle=newPost.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
-				if(StringUtils.containsIgnoreCase("My Post", docTitle)) {
-					watchButton =newPost.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
+
+			List<WebElement> newPosts = ob.findElements(
+					By.cssSelector("div[class='wui-card wui-card--new-post'] div[class='wui-card__content']"));
+			for (WebElement newPost : newPosts) {
+				docTitle = newPost.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
+				if (StringUtils.containsIgnoreCase("My Post", docTitle)) {
+					watchButton = newPost
+							.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
 					break;
 				}
 			}
 
 			// Unwatching the post to a particular watch list
-			//watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
-
+			// watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

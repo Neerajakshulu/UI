@@ -19,7 +19,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add an Article from Record View page to a particular watchlist||Verify that user is able
@@ -45,11 +44,10 @@ public class Watchlist005 extends TestBase {
 
 	}
 
-		@Test
-		public void testWatchArticleFromArticleRecordViewPage() throws Exception {
+	@Test
+	public void testWatchArticleFromArticleRecordViewPage() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -62,7 +60,7 @@ public class Watchlist005 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		
+
 		try {
 
 			// Opening browser
@@ -76,16 +74,16 @@ public class Watchlist005 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			
+
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
-			logger.info("New WatchList Name : "+newWatchlistName);
+			logger.info("New WatchList Name : " + newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			pf.getHFPageInstance(ob).searchForText("hello");
-			
+
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
@@ -96,11 +94,12 @@ public class Watchlist005 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the article name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
-			logger.info("Article Document Name : "+documentName);
+			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page")))
+					.getText();
+			logger.info("Article Document Name : " + documentName);
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
@@ -127,26 +126,26 @@ public class Watchlist005 extends TestBase {
 			}
 			// Step2: Unwatching the document from record view page
 			// Searching for article
-//			selectSearchTypeFromDropDown("Articles");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		
+			// selectSearchTypeFromDropDown("Articles");
+			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("hello");
+			// ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+
 			pf.getHFPageInstance(ob).searchForText(documentName);
-			
+
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-		
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Navigating to record view page
-			//ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			// ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			BrowserWaits.waitTime(4);
 			ob.findElement(By.linkText(documentName)).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 
 			// Unwatching the article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the article name
 			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();

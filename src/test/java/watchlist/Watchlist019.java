@@ -19,7 +19,6 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that no one can see the private watchlists of a user on user's profile page||Verify that user1 is not able to
@@ -48,8 +47,7 @@ public class Watchlist019 extends TestBase {
 	@Test
 	public void testPrivateWatchlistNotVisibleFromOthersProfile() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -77,7 +75,7 @@ public class Watchlist019 extends TestBase {
 			// Navigate to the watch list landing page
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 30);
 			// Creating 2 public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_";
@@ -105,7 +103,7 @@ public class Watchlist019 extends TestBase {
 			fn2 = LOGIN.getProperty("FN2");
 			ln2 = LOGIN.getProperty("LN2");
 			// Searching for article
-			//selectSearchTypeFromDropDown("People");
+			// selectSearchTypeFromDropDown("People");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();

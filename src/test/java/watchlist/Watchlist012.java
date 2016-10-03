@@ -20,7 +20,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that following fields are getting displayed for each patents in the watchlist page: a)Times cited b)Comments
@@ -44,12 +43,12 @@ public class Watchlist012 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	@Parameters({"postName"})
 	public void testDisplayedFieldsForPostsInWatchlist(String postName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -95,7 +94,7 @@ public class Watchlist012 extends TestBase {
 			// Watching 10 posts to a particular watch list
 			for (WebElement watchButton : watchButtonList) {
 
-				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}

@@ -17,7 +17,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that same patent can be added to multiple watchlists
@@ -41,11 +40,11 @@ public class Watchlist025 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testWatchPatentToMultipleWatchlist() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -98,20 +97,20 @@ public class Watchlist025 extends TestBase {
 
 			// Searching for patent
 			String patentName = "biology";
-			
+
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
-			//click on Patent tab
+
+			// click on Patent tab
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Watching an patent to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the patent to multiple watch list
 			for (int i = 1; i <= 2; i++) {
-				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName + "_" + i,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i, watchButton);
 			}
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
@@ -146,7 +145,7 @@ public class Watchlist025 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			BrowserWaits.waitTime(2);
 			deleteParticularWatchlist(newWatchlistName + "_2");
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 

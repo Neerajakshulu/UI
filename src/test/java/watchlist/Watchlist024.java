@@ -17,7 +17,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that same article can be added to multiple watchlists||Verify that user is able to add an item to a particular
@@ -42,11 +41,11 @@ public class Watchlist024 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testWatchArticleToMultipleWatchlist() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -100,23 +99,23 @@ public class Watchlist024 extends TestBase {
 			String articleName = "drug";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//click on Article tab
+			// click on Article tab
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
-			
+
 			// Watching an article to a multiple watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the article to multiple watch list
 			for (int i = 1; i <= 2; i++) {
-				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName + "_" + i,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i, watchButton);
 			}
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
-			logger.info("document name-->"+documentName);
+			logger.info("document name-->" + documentName);
 			BrowserWaits.waitTime(4);
 			int count;
 			List<WebElement> watchedItems;
@@ -147,7 +146,7 @@ public class Watchlist024 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName + "_1");
 			BrowserWaits.waitTime(2);
 			deleteParticularWatchlist(newWatchlistName + "_2");
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 

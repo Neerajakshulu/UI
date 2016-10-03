@@ -18,7 +18,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that a user has 1 watchlist by default once we try to watch an item
@@ -42,11 +41,11 @@ public class Watchlist017 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testDefaultWatchListPresent() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -81,24 +80,22 @@ public class Watchlist017 extends TestBase {
 
 			// Wait until select a watch list model loads
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
-			//waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
+			// waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
 			// Select the first watch list from the model
-//			waitForElementTobeClickable(ob,
-//					By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
-			waitForElementTobeClickable(ob,
-					By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"), 5);
-
+			// waitForElementTobeClickable(ob,
+			// By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
+			waitForElementTobeClickable(ob, By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"), 5);
 
 			try {
 				// Finding the no of watch lists
-//				List<WebElement> watchLists = ob.findElements(
-//						By.xpath("//a[@class='ne-action-dropdown__item-content']"));
-				List<WebElement> watchLists = ob.findElements(
-						By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"));
+				// List<WebElement> watchLists = ob.findElements(
+				// By.xpath("//a[@class='ne-action-dropdown__item-content']"));
+				List<WebElement> watchLists = ob
+						.findElements(By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"));
 				// Closing the select a model
-//				ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
+				// ob.findElement(By.xpath(OR.getProperty("watchlist_model_close_button"))).click();
 				BrowserWaits.waitTime(3);
-				Assert.assertEquals(watchLists.size(),1);
+				Assert.assertEquals(watchLists.size(), 1);
 				test.log(LogStatus.PASS, "User has 1 watchlist by default once we try to watch an item");
 			} catch (Throwable t) {
 				status = 2;
@@ -112,9 +109,10 @@ public class Watchlist017 extends TestBase {
 			BrowserWaits.waitTime(4);
 			// Check if watch list is private by default
 			ob.findElement(By.cssSelector("button[event-action='edit watchlist']")).click();
-			//BrowserWaits.waitTime(5);
+			// BrowserWaits.waitTime(5);
 			waitForElementTobePresent(ob, By.cssSelector("span[class='wui-checkbox__visible']"), 60);
-			boolean watchListStatus = ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']")).getCssValue("background").contains("rgb(rgb(69, 183, 231)");
+			boolean watchListStatus = ob.findElement(By.cssSelector("span[class='wui-checkbox__visible']"))
+					.getCssValue("background").contains("rgb(rgb(69, 183, 231)");
 			if (!watchListStatus) {
 				test.log(LogStatus.PASS, "User watchlist is private by default");
 			} else {

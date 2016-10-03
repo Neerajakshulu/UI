@@ -17,7 +17,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that same post can be added to multiple watchlists
@@ -41,11 +40,11 @@ public class Watchlist026 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testWatchPostToMultipleWatchlist() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -82,7 +81,7 @@ public class Watchlist026 extends TestBase {
 			for (int i = 1; i <= 2; i++) {
 				Thread.sleep(4000);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
-				
+
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 30);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
@@ -101,8 +100,8 @@ public class Watchlist026 extends TestBase {
 			String postName = "hello";
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
-			//Click on Post tab
+
+			// Click on Post tab
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
@@ -110,7 +109,7 @@ public class Watchlist026 extends TestBase {
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watch the post to multiple watch list
 			for (int i = 1; i <= 2; i++) {
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName + "_" + i, watchButton);
 			}
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);

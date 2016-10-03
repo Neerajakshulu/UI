@@ -15,7 +15,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to name the watchlists||Verify that a user can add description to his watchlist||Verify that
@@ -40,11 +39,11 @@ public class Watchlist015 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testEditWatchList() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -70,7 +69,7 @@ public class Watchlist015 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			//ob.get(CONFIG.getProperty("testSiteName"));
+			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
@@ -80,7 +79,8 @@ public class Watchlist015 extends TestBase {
 			String watchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_Updated";
 			String watchlistDescription = "This is my watchlist";
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
-			//waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"), 30);
+			// waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"),
+			// 30);
 			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-card__content']"), 30);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchlistName);
@@ -90,11 +90,12 @@ public class Watchlist015 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
-			//waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
-			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']"), 60);
+			// waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
+			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']"),
+					60);
 			String updatedWatchlistDescription = ob
 					.findElement(By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']")).getText();
-			logger.info("Updated WatchList Description : "+updatedWatchlistDescription);
+			logger.info("Updated WatchList Description : " + updatedWatchlistDescription);
 
 			// Compare watch list name
 			try {

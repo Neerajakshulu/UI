@@ -18,7 +18,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add a Patent from ALL content search results page to a particular watchlist||Verify that
@@ -44,13 +43,11 @@ public class Watchlist002 extends TestBase {
 
 	}
 
-	
 	@Test
 	@Parameters({"patentName"})
 	public void testWatchPatentFromAllContentSearchResult(String patentName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -67,7 +64,7 @@ public class Watchlist002 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 
 			try {
 				maximizeWindow();
@@ -91,7 +88,7 @@ public class Watchlist002 extends TestBase {
 
 			// Watching a patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -129,11 +126,11 @@ public class Watchlist002 extends TestBase {
 			Thread.sleep(3000);
 			// Watching a patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Unwatching a patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the document name
 			documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

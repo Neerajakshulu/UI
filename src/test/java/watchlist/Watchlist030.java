@@ -13,7 +13,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that deep linking is working correctly for watchlist page when user logs in using Steam account
@@ -37,11 +36,11 @@ public class Watchlist030 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void watchlist030() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -58,7 +57,7 @@ public class Watchlist030 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {
@@ -66,33 +65,27 @@ public class Watchlist030 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			
-//			1)Open browser,enter WATCHLIST URL in the address bar and hit return key
-			String tempURL=host+"/#/watchlist";
+
+			// 1)Open browser,enter WATCHLIST URL in the address bar and hit return key
+			String tempURL = host + "/#/watchlist";
 			ob.navigate().to(tempURL);
-			
-			
-//			2)Login with Steam login
+
+			// 2)Login with Steam login
 			login();
 			Thread.sleep(20000);
-			
-			
-//			3)Verify that user lands to WATCHLIST page
-			if(!checkElementPresence("createWatchlistButton")){
-				
+
+			// 3)Verify that user lands to WATCHLIST page
+			if (!checkElementPresence("createWatchlistButton")) {
+
 				test.log(LogStatus.FAIL, "Deep linking feature not working correctly");// extent
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-				captureScreenshot(this.getClass().getSimpleName() + "_deep_linking_not_working")));// screenshot
-				
-				
-			}
-			
-//			4)Close the browser
-			closeBrowser();
-					
+						captureScreenshot(this.getClass().getSimpleName() + "_deep_linking_not_working")));// screenshot
 
-			
+			}
+
+			// 4)Close the browser
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

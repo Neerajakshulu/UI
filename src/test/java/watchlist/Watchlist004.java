@@ -20,7 +20,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add an Article from Articles content search results page to a particular
@@ -51,8 +50,7 @@ public class Watchlist004 extends TestBase {
 	@Parameters({"articleName"})
 	public void testWatchArticleFromArticleContentSearchResult(String articleName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -76,19 +74,19 @@ public class Watchlist004 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			WebElement watchButton ;
-			 ob.get(host);
-			//ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			 loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			WebElement watchButton;
+			ob.get(host);
+			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			// loginAsSpecifiedUser("Prasenjit.Patra@Thomsonreuters.com",
 			// "Techm@2015");
 
 			// Create watch list
-			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName()+ "_" + getCurrentTimeStamp();;
+			String newWatchlistName = "Watchlist_" + this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();;
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			//selectSearchTypeFromDropDown("Articles");
+			// selectSearchTypeFromDropDown("Articles");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 
@@ -98,7 +96,7 @@ public class Watchlist004 extends TestBase {
 			// Watching 2 articles to a particular watch list
 			for (int i = 0; i < 2; i++) {
 				watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}
@@ -135,8 +133,8 @@ public class Watchlist004 extends TestBase {
 			// Steps2: Removing the first item from watch list page
 			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			// Unwatching the first document from results
-			watchButton=ob.findElement(By.xpath("//button[contains(.,'Watching')]"));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchButton = ob.findElement(By.xpath("//button[contains(.,'Watching')]"));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
@@ -164,17 +162,17 @@ public class Watchlist004 extends TestBase {
 
 			// Steps3: Unwatching an article from article content result page
 			// Searching for article
-			//selectSearchTypeFromDropDown("Articles");
+			// selectSearchTypeFromDropDown("Articles");
 			pf.getHFPageInstance(ob).searchForText("hello");
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 60);
 			// Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Unwatching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the document name
 			String documentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();

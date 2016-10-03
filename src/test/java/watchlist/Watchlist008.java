@@ -17,7 +17,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add a Post from Posts content search results page to a particular watchlist||Verify that
@@ -30,6 +29,7 @@ import util.TestUtil;
 public class Watchlist008 extends TestBase {
 
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -47,8 +47,7 @@ public class Watchlist008 extends TestBase {
 	@Parameters({"postName"})
 	public void testWatchPostFromPostsContentSearchResult(String postName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -65,7 +64,7 @@ public class Watchlist008 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 
 			try {
 				maximizeWindow();
@@ -76,32 +75,32 @@ public class Watchlist008 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			
-//			login();
-			
+
+			// login();
+
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
-			logger.info("New WatchList Name : "+newWatchlistName);
+			logger.info("New WatchList Name : " + newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for article
-			
+
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			waitForElementTobeVisible(ob,
+					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
 			Thread.sleep(3000);
 			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			waitForElementTobeVisible(ob,
+					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
 			Thread.sleep(3000);
-			
-			
-			
+
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watching 2 articles to a particular watch list
 			for (int i = 0; i < 1; i++) {
-				
+
 				WebElement watchButton = watchButtonList.get(i);
 				watchButton.click();
 				Thread.sleep(5000);
@@ -111,14 +110,17 @@ public class Watchlist008 extends TestBase {
 			}
 
 			// Selecting the document name
-			String firstdocumentName = ob.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']")).getText();
-			logger.info("First Document Name : "+firstdocumentName);
+			String firstdocumentName = ob
+					.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"))
+					.getText();
+			logger.info("First Document Name : " + firstdocumentName);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 
-			List<WebElement> watchedItems = ob.findElements(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"));
+			List<WebElement> watchedItems = ob
+					.findElements(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -134,13 +136,12 @@ public class Watchlist008 extends TestBase {
 						"User not able to add a patent into watchlist from Patent content search results page");// extent
 				// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
 
 			}
 
-		
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 

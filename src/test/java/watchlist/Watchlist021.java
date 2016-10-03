@@ -18,7 +18,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to see the watchlist items by content type
@@ -42,11 +41,11 @@ public class Watchlist021 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testWatchlistItemsDisplayedByContentType() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -90,35 +89,37 @@ public class Watchlist021 extends TestBase {
 			// Watching an article to a particular watch list
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);;
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			// Watching a patents to a particular watch list
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			// Watching a posts to a particular watch list
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 
-			List<WebElement> watchedItems = ob.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
-			List<String> actualWatchedItems=new ArrayList<String>();
-			for(WebElement we:watchedItems){
-				
+			List<WebElement> watchedItems = ob
+					.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
+			List<String> actualWatchedItems = new ArrayList<String>();
+			for (WebElement we : watchedItems) {
+
 				actualWatchedItems.add(we.getText());
 			}
-			List<String> expectedWatchedItems=Arrays.asList(new String[]{"PATENT","PATENT","POST","POST","ARTICLE","ARTICLE"});
-			
+			List<String> expectedWatchedItems = Arrays
+					.asList(new String[] {"PATENT", "PATENT", "POST", "POST", "ARTICLE", "ARTICLE"});
+
 			if (!actualWatchedItems.equals(expectedWatchedItems)) {
 
 				test.log(LogStatus.FAIL, "Watchlist items are not displayed by content type");// extent

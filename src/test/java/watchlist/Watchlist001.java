@@ -18,12 +18,10 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
- * Verify that user is able to add an Article from ALL content search results
- * page to a particular watchlist||Verify that user is able to unwatch an
- * Article from ALL content search results page
+ * Verify that user is able to add an Article from ALL content search results page to a particular watchlist||Verify
+ * that user is able to unwatch an Article from ALL content search results page
  * 
  * @author Prasenjit Patra
  *
@@ -46,10 +44,10 @@ public class Watchlist001 extends TestBase {
 	}
 
 	@Test
-	@Parameters({ "articleName" })
+	@Parameters({"articleName"})
 	public void testWatchArticleFromAllContentSearchResult(String articleName) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -186,14 +184,11 @@ public class Watchlist001 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
-		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
-		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
+		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
+		 * this.getClass().getSimpleName()), "SKIP");
 		 */}
 
 }

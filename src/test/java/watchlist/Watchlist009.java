@@ -19,7 +19,6 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add an Post from Record View page to a particular watchlist
@@ -47,8 +46,7 @@ public class Watchlist009 extends TestBase {
 	@Test
 	public void testWatchPostFromPostRecordViewPage() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -65,7 +63,7 @@ public class Watchlist009 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 
 			try {
 				maximizeWindow();
@@ -88,13 +86,13 @@ public class Watchlist009 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
-		// Navigating to record view page
+			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			Thread.sleep(5000);
 
 			// Watching the post to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the post name
 			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 60);
@@ -103,7 +101,8 @@ public class Watchlist009 extends TestBase {
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
-			List<WebElement> watchedItems = ob.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
+			List<WebElement> watchedItems = ob
+					.findElements(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")));
 
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
@@ -138,7 +137,7 @@ public class Watchlist009 extends TestBase {
 			Thread.sleep(5000);
 			// Unwatching the post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the post name
 			documentName = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();

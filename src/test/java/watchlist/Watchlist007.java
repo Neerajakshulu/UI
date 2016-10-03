@@ -20,7 +20,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that user is able to add a Patent from Record View page to a particular watchlist||Verify that user is able to
@@ -30,6 +29,7 @@ import util.TestUtil;
  *
  */
 public class Watchlist007 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -49,8 +49,7 @@ public class Watchlist007 extends TestBase {
 	@Parameters({"patentName"})
 	public void testWatchPatentFromPatentsRecordViewPage(String patentName) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -67,7 +66,7 @@ public class Watchlist007 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 
 			try {
 				maximizeWindow();
@@ -85,18 +84,17 @@ public class Watchlist007 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Searching for patents
-			//selectSearchTypeFromDropDown("Patents");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-			
-			
+			// selectSearchTypeFromDropDown("Patents");
+			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			// ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
 
 			// Navigating to record view page
@@ -105,10 +103,11 @@ public class Watchlist007 extends TestBase {
 			BrowserWaits.waitTime(3);
 			// Watching the patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the patent name
-			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();
+			String documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page")))
+					.getText();
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
@@ -135,19 +134,17 @@ public class Watchlist007 extends TestBase {
 
 			// Step2: Unwatching the document from record view page
 			// Searching for patents
-//			selectSearchTypeFromDropDown("Patents");
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
-//			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
-//			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			
-			
+			// selectSearchTypeFromDropDown("Patents");
+			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
+			// ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
-			
-			
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
 
 			// Navigating to record view page
@@ -157,7 +154,7 @@ public class Watchlist007 extends TestBase {
 			// Unwatching the patent to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
 			BrowserWaits.waitTime(2);
-			watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the patent name
 			documentName = ob.findElement(By.xpath(OR.getProperty("article_documentName_in_record_page"))).getText();

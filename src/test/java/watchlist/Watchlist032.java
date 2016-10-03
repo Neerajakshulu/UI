@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that deep linking is working correctly for particular watchlist page when user logs in using Steam account
@@ -38,11 +37,11 @@ public class Watchlist032 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void watchlist031() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -59,7 +58,7 @@ public class Watchlist032 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-//			runOnSauceLabsFromLocal("Windows","Chrome");
+			// runOnSauceLabsFromLocal("Windows","Chrome");
 			try {
 				maximizeWindow();
 			} catch (Throwable t) {
@@ -67,54 +66,46 @@ public class Watchlist032 extends TestBase {
 				System.out.println("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-			
-//			1)Open Project Neon app. 
+
+			// 1)Open Project Neon app.
 			ob.navigate().to(host);
-			
-			
-//			2)Login with valid user credentials.
+
+			// 2)Login with valid user credentials.
 			login();
-			
-			
-//			3)Create a new watchlist.
+
+			// 3)Create a new watchlist.
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-			
-			
-//			4)Capture URL of the new watchlist page.
-			String temp_xpath="//a[contains(text(),'" + newWatchlistName +"')]";
+
+			// 4)Capture URL of the new watchlist page.
+			String temp_xpath = "//a[contains(text(),'" + newWatchlistName + "')]";
 			ob.findElement(By.xpath(temp_xpath)).click();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("delete_button_watchlist_page")), 60);
 			Thread.sleep(2000);
-			String tempURL=ob.getCurrentUrl();
+			String tempURL = ob.getCurrentUrl();
 			System.out.println(tempURL);
-			
 
-//			5)Logout of the app.
+			// 5)Logout of the app.
 			logout();
-			
-			
-//			6)Put the captured URL in the address bar of the browser and hit the return key.
+
+			// 6)Put the captured URL in the address bar of the browser and hit the return key.
 			ob.navigate().to(tempURL);
-			
-			
-//			7)Login with same user credentials again.
+
+			// 7)Login with same user credentials again.
 			login();
-			
-			
-//			8)Verify that app lands to the particular watchlist page.
-			if(!checkElementPresence("delete_button_watchlist_page")){
-				
+
+			// 8)Verify that app lands to the particular watchlist page.
+			if (!checkElementPresence("delete_button_watchlist_page")) {
+
 				test.log(LogStatus.FAIL, "Deep linking feature not working correctly");// extent
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-				captureScreenshot(this.getClass().getSimpleName() + "_deep_linking_not_working")));// screenshot
-				
+						captureScreenshot(this.getClass().getSimpleName() + "_deep_linking_not_working")));// screenshot
+
 			}
 
-//			9)Close the browser.
+			// 9)Close the browser.
 			closeBrowser();
-			
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

@@ -19,7 +19,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Verify that document count gets decreased in the watchlist page when a item is deleted from watchlist
@@ -28,6 +27,7 @@ import util.TestUtil;
  *
  */
 public class Watchlist013 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -42,11 +42,11 @@ public class Watchlist013 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Watchlist");
 
 	}
+
 	@Test
 	public void testItemsCountInWatchlist() throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(watchlistXls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -91,7 +91,7 @@ public class Watchlist013 extends TestBase {
 			for (int i = 0; i < 2; i++) {
 				watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 				WebElement watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist( newWatchlistName,watchButton);
+				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
 				BrowserWaits.waitTime(2);
 			}
@@ -133,7 +133,6 @@ public class Watchlist013 extends TestBase {
 			deleteParticularWatchlist(newWatchlistName);
 
 			closeBrowser();
-			
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
