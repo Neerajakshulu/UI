@@ -742,13 +742,13 @@ public class TestBase {
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
 		// screenshot in base64 format
-		//String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
+		String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
 		// screenshot in File format
-		File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
-		String myP1 = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
-		FileUtils.copyFile(myImg, new File(myP1));
-		//return "data:image/jpeg;base64," + myP;
-		return myP1;
+		//File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
+		//String myP1 = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
+		//FileUtils.copyFile(myImg, new File(myP1));
+		return "data:image/jpeg;base64," + myP;
+		//return myP1;
 
 	}
 
