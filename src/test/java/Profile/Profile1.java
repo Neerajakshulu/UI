@@ -84,11 +84,8 @@ public class Profile1 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			
-			for(int i=0;i<=600;i++) {
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
-			}
 			
 			closeBrowser();
 		}

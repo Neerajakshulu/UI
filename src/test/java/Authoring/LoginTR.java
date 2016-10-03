@@ -49,7 +49,7 @@ public class LoginTR extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void waitForTRHomePage() throws InterruptedException {
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 1);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		browserWait.waitUntilText("Thomson Reuters","Project Neon");
 		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
