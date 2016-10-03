@@ -4,12 +4,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 
 import util.BrowserWaits;
 import util.ErrorUtil;
@@ -76,8 +77,21 @@ public class ENWIAM101 extends TestBase {
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			test.log(LogStatus.PASS, "User click on endnote app");
+			Dimension dimesions=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS).getSize();
+			logger.info("Width : "+dimesions.width);
+			logger.info("Height : "+dimesions.height);
+				int y=dimesions.height;
+				pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS); 
+				Actions builder = new Actions(ob);  
+				builder.moveToElement(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS),800, y).build().perform();
+				builder.click().build().perform();
+				test.log(LogStatus.PASS, "Linking model has been disappered");
+				BrowserWaits.waitTime(4);
+			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
-			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()),40);
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("MARKETUSER"),LOGIN.getProperty("MARKETPWD"));
 			test.log(LogStatus.PASS, "User linked with steam account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()), 30);

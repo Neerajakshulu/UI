@@ -72,8 +72,13 @@ public class ENWIAM100 extends TestBase {
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()),30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
+			test.log(LogStatus.PASS, "Linking modal has been closed");
+			BrowserWaits.waitTime(3);
+			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
-			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()),40);
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("myacc"), LOGIN.getProperty("mypwd"));
 			test.log(LogStatus.PASS, "User linked with steam account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()), 30);
