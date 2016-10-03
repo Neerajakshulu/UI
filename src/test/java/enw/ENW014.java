@@ -16,10 +16,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
-public class ENW014 extends TestBase{
+public class ENW014 extends TestBase {
+
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -31,10 +32,10 @@ public class ENW014 extends TestBase{
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-	
+
 	@Test
 	public void testcaseENW014() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -44,54 +45,45 @@ public class ENW014 extends TestBase{
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-		
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
-				//ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.ENW_help_XPATH.toString())).click();
-			
-			String newWindow = switchToNewWindow(ob);			
-			if(newWindow!=null){
-				if(ob.getCurrentUrl().contains("help")){
+
+			String newWindow = switchToNewWindow(ob);
+			if (newWindow != null) {
+				if (ob.getCurrentUrl().contains("help")) {
 					logger.info("help is opened in the new browser and Content Available");
 				}
-			}else{
-				test.log(LogStatus.FAIL,
-						"New browser is not displayed and content is not matching");
+			} else {
+				test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");
 				Assert.assertEquals(true, false);
 			}
-			
-			try
-			{
-			
-			//Assert.assertTrue();
-			test.log(LogStatus.PASS,
-					" help is opened in the new browser and Content Available");
-			}
-			catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"New browser is not displayed and content is not matching");// extent
-				ErrorUtil.addVerificationFailure(t);// testng																											// reports
+
+			try {
+
+				// Assert.assertTrue();
+				test.log(LogStatus.PASS, " help is opened in the new browser and Content Available");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");// extent
+				ErrorUtil.addVerificationFailure(t);// testng // reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "ew browser is not displayed and content is not matching")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "ew browser is not displayed and content is not matching")));// screenshot
 			}
-    }
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -105,10 +97,11 @@ public class ENW014 extends TestBase{
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}	
+	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 		closeBrowser();
-	}	
+	}
 }

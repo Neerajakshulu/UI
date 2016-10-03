@@ -1,10 +1,7 @@
 package enw;
 
-import static com.jayway.restassured.RestAssured.given;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -13,7 +10,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -21,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW000012 extends TestBase {
 
@@ -38,7 +33,7 @@ public class ENW000012 extends TestBase {
 	@Test
 	public void testcaseENW000012() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -52,60 +47,55 @@ public class ENW000012 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			
+
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
-		logger.info("User Status : "+statuCode);
-		if(statuCode.equalsIgnoreCase("200")){
-			logger.info("User Deleted Successfully");
-		}
-			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			
-
-
-	
-			String statuCode1 = deleteUserAccounts(LOGIN.getProperty("UserENWsteam000010"));
-			logger.info("User Status : "+statuCode1);
-			if(statuCode1.equalsIgnoreCase("200")){
+			logger.info("User Status : " + statuCode);
+			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
 			}
-			
-			
-		
-		openBrowser();
-		clearCookies();
-		maximizeWindow();
-		ob.navigate().to(host);
-		
-		
+			// Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
-		try {
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
-			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-					.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
-			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			ob.navigate().refresh();
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
-			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-					.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
-			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(6);
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-			BrowserWaits.waitTime(3);
-		} catch (Throwable t) {
-			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
-			closeBrowser();
-		}
-		
-		logout();
-		BrowserWaits.waitTime(4);
-		//ob.navigate().to(host);
+			String statuCode1 = deleteUserAccounts(LOGIN.getProperty("UserENWsteam000010"));
+			logger.info("User Status : " + statuCode1);
+			if (statuCode1.equalsIgnoreCase("200")) {
+				logger.info("User Deleted Successfully");
+			}
+
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+
+			try {
+				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
+						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
+				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
+						.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
+				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+				ob.navigate().refresh();
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
+						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
+				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
+						.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
+				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+				BrowserWaits.waitTime(6);
+				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+				BrowserWaits.waitTime(3);
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.INFO, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+				closeBrowser();
+			}
+
+			logout();
+			BrowserWaits.waitTime(4);
+			// ob.navigate().to(host);
 			// login();
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("UserENW000012"),
 					LOGIN.getProperty("PWDuserENW000012"));
@@ -184,18 +174,17 @@ public class ENW000012 extends TestBase {
 			}
 
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.accountlink.toString()),30);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.accountlink.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.accountlink.toString())).click();
-			
 
 			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.name(OnePObjectMap.Link_login.toString()),30);
+			waitForElementTobeVisible(ob, By.name(OnePObjectMap.Link_login.toString()), 30);
 			Thread.sleep(4);
 			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.DoneButtonClick.toString()),30);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.DoneButtonClick.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.DoneButtonClick.toString())).click();
-		
+
 			BrowserWaits.waitTime(5);
 			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.actualEmail1.toString())).getText();
 
@@ -215,7 +204,7 @@ public class ENW000012 extends TestBase {
 			// OPQA-1912
 			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.LinkedIn_icon.toString()), 8);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Steam_icon.toString()),8);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Steam_icon.toString()), 8);
 			try {
 				if (checkElementPresence("LinkedIn_icon") && checkElementPresence("Steam_icon")) {
 					test.log(LogStatus.PASS, "LinkedIn authentication account is linked to the Neon account");
@@ -233,9 +222,8 @@ public class ENW000012 extends TestBase {
 			}
 
 			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Radiobutton2.toString()),30);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Radiobutton2.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.Radiobutton2.toString())).click();
-
 
 			BrowserWaits.waitTime(3);
 			String TextcompareAfterLink = ob.findElement(By.xpath(OnePObjectMap.Text_compareAfterLink.toString()))
@@ -278,8 +266,6 @@ public class ENW000012 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
-	
 
 	@AfterTest
 	public void reportTestResult() {

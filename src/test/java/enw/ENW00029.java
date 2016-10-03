@@ -1,7 +1,5 @@
 package enw;
 
-
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -19,9 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-
-
 
 public class ENW00029 extends TestBase {
 
@@ -38,7 +33,7 @@ public class ENW00029 extends TestBase {
 	@Test
 	public void testcaseENW00029() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -50,27 +45,21 @@ public class ENW00029 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		//String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
-		//logger.info(statuCode);
+		// String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
+		// logger.info(statuCode);
 		try {
-			
-			
-				
-			
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			
-			
 
 			try {
-				
-			
+
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
 						LOGIN.getProperty("PWDUserFBENW00029"));
 				BrowserWaits.waitTime(3);
-			
+
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 				//
@@ -90,13 +79,13 @@ public class ENW00029 extends TestBase {
 					test.log(LogStatus.FAIL, "Email id getting displayed in Account Setting page is incorrect");// extent
 					// reports
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-							.getSimpleName()
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 
 				}
-				
-				String accountType="Facebook";
+
+				String accountType = "Facebook";
 				validateSocialAccounts(2, accountType);
 				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.actualEmail1.toString())).getText();
 				System.out.println(actualEmail);
@@ -110,23 +99,24 @@ public class ENW00029 extends TestBase {
 					test.log(LogStatus.FAIL, "alternate Email id is not displayed in Account Setting page.");// extent
 					// reports
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-							.getSimpleName()
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 
 				}
-				
-				
+
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 				closeBrowser();
 			}
-			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.Text_accountpage_XPATH.toString())).getText();
+			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.Text_accountpage_XPATH.toString()))
+					.getText();
 			System.out.println(accountpageText);
 			try {
-				Assert.assertEquals(accountpageText, "Project Neon supports linking your accounts - accounts you have for other Thomson Reuters products and social media accounts - so that you can sign in with any of the accounts you already use.");
+				Assert.assertEquals(accountpageText,
+						"Project Neon supports linking your accounts - accounts you have for other Thomson Reuters products and social media accounts - so that you can sign in with any of the accounts you already use.");
 				test.log(LogStatus.PASS,
 						"Message 'Project Neon supports linking your accounts - ' is dispalyed correctly in account setting page");
 			}
@@ -163,11 +153,9 @@ public class ENW00029 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
 
-	
-	
-	public void validateSocialAccounts(int accountCount,String linkName) throws Exception {
+	public void validateSocialAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 
 			Assert.assertFalse(
@@ -177,22 +165,19 @@ public class ENW00029 extends TestBase {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS,
-					"Multiple accounts are present in account setting page");
+			test.log(LogStatus.PASS, "Multiple accounts are present in account setting page");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Multiple accounts are present in account setting page");
+			test.log(LogStatus.FAIL, "Multiple accounts are present in account setting page");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
 	}
 }
-
-		

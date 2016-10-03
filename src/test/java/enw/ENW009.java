@@ -16,10 +16,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW009 extends TestBase {
+
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -29,14 +30,14 @@ public class ENW009 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		
+
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-	
+
 	@Test
 	public void testcaseENW009() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -46,52 +47,44 @@ public class ENW009 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-		
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String header_Expected = "Thomson Reuters";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled())
-			{
-				//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_CONTINUE_BUTTON);				
+
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+				// pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_CONTINUE_BUTTON);
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			String actual_result= ob.findElement(By.xpath(OnePObjectMap.ENW_Header_XPATH.toString())).getText();
-			logger.info("Header Text displayed as:"+actual_result);
-			
-			if (ob.findElement(By.className("inactiveLink"))==null){
+			String actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_Header_XPATH.toString())).getText();
+			logger.info("Header Text displayed as:" + actual_result);
+
+			if (ob.findElement(By.className("inactiveLink")) == null) {
 				logger.info("Header text is enabled and it's HyperLinked");
-				logger.info("Header Text displayed as:"+actual_result);
-				actual_result="test case is failed";
+				logger.info("Header Text displayed as:" + actual_result);
+				actual_result = "test case is failed";
 			}
-			logger.info("Actual result displayed as :"+actual_result+" text without the hot link and not allow user to Navigate to Neon");
-			try
-			{
-			Assert.assertEquals(header_Expected,actual_result);
-			test.log(LogStatus.PASS,
-					" Header Logo text is displayed properly for Non-Market users");
-			}
-			catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						" Header Logo text is not displayed properly for Non-Market users");// extent
+			logger.info("Actual result displayed as :" + actual_result
+					+ " text without the hot link and not allow user to Navigate to Neon");
+			try {
+				Assert.assertEquals(header_Expected, actual_result);
+				test.log(LogStatus.PASS, " Header Logo text is displayed properly for Non-Market users");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, " Header Logo text is not displayed properly for Non-Market users");// extent
 				ErrorUtil.addVerificationFailure(t);// testng
-																															// reports
+													// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 			}
-    }
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -106,10 +99,11 @@ public class ENW009 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 		closeBrowser();
 	}
-	
+
 }

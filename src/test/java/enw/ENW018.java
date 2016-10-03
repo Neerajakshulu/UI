@@ -2,13 +2,9 @@ package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -23,11 +19,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW018 extends TestBase {
 
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -39,13 +35,14 @@ public class ENW018 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-	
+
 	@Test
 	@Parameters({"username", "password"})
-	public void testcaseENW018(String username,String password) throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+	public void testcaseENW018(String username,
+			String password) throws Exception {
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL="Thank you";
+		String expected_URL = "Thank you";
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -53,14 +50,14 @@ public class ENW018 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-		
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
+
 			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -71,29 +68,23 @@ public class ENW018 extends TestBase {
 			ob.findElement(By.partialLinkText("Send feedback")).click();
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS.toString())).sendKeys("Feedback sending");
 			ob.findElement(By.xpath(OR.getProperty("FeedBackSubmitBtn"))).click();
-			WebDriverWait wait = new WebDriverWait(ob,10);
-			wait.until(ExpectedConditions.textToBePresentInElement(ob.findElement(By.xpath("html/body/div[6]/div/div/div[1]/h3")), "Thank you"));
+			WebDriverWait wait = new WebDriverWait(ob, 10);
+			wait.until(ExpectedConditions.textToBePresentInElement(
+					ob.findElement(By.xpath("html/body/div[6]/div/div/div[1]/h3")), "Thank you"));
 			String str = ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED1.toString())).getText();
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
-			try
-			{
-				Assert.assertEquals(expected_URL,str);
-				test.log(LogStatus.PASS,
-						" Feedback has  been sent successfully.");
-			}
-			catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Feedback not sent successfully..");// extent
-				ErrorUtil.addVerificationFailure(t);																										// reports
+			try {
+				Assert.assertEquals(expected_URL, str);
+				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Feedback not sent successfully..");// extent
+				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Feedback New window is not displayed and content is not matching")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-    }
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -107,7 +98,8 @@ public class ENW018 extends TestBase {
 		}
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}	
+	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

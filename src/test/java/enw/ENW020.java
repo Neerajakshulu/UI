@@ -16,9 +16,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW020 extends TestBase {
+
 	static int status = 1;
 
 	@BeforeTest
@@ -30,7 +30,7 @@ public class ENW020 extends TestBase {
 
 	@Test
 	public void testcaseENW013() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,

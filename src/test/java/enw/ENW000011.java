@@ -1,7 +1,5 @@
 package enw;
 
-
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -19,9 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-
-
 
 public class ENW000011 extends TestBase {
 
@@ -38,7 +33,7 @@ public class ENW000011 extends TestBase {
 	@Test
 	public void testcaseENW000011() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -50,29 +45,24 @@ public class ENW000011 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		//String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
-		//logger.info(statuCode);
+		// String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
+		// logger.info(statuCode);
 		try {
-			
-			
-				
-			
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			
-			
 
 			try {
-				
-			
+
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
+				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
+						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			
+
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
 				//
@@ -92,23 +82,22 @@ public class ENW000011 extends TestBase {
 					test.log(LogStatus.FAIL, "Email id getting displayed in Account Setting page is incorrect");// extent
 					// reports
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-							.getSimpleName()
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 
 				}
-				
-				String accountType="Neon";
+
+				String accountType = "Neon";
 				validateLinkedAccounts(1, accountType);
-				
-				
+
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 				closeBrowser();
 			}
-			
+
 			logout();
 			ob.close();
 
@@ -129,36 +118,32 @@ public class ENW000011 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
 
-
-	
-	public void validateLinkedAccounts(int accountCount,String linkName) throws Exception {
+	public void validateLinkedAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserENWsteam000010")));
-			Assert.assertFalse(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("UserENWsteam000010")));
-			Assert.assertFalse(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("UserENWsteam000010")));
+			Assert.assertFalse(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
+					LOGIN.getProperty("UserENWsteam000010")));
+			Assert.assertFalse(pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn",
+					LOGIN.getProperty("UserENWsteam000010")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Only one account is present in account setting page and primary account text is not displayed");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Multiple accounts are present");
+			test.log(LogStatus.FAIL, "Multiple accounts are present");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
 	}
 }
-
-		

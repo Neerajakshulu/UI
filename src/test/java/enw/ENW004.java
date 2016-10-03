@@ -15,13 +15,13 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class ENW004 extends TestBase {
-	
+
 	static int status = 1;
+
 	// Following is the list of status:
-	// 1--->PASS 
+	// 1--->PASS
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
@@ -35,8 +35,8 @@ public class ENW004 extends TestBase {
 
 	@Test
 	public void testcaseENW004() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -47,67 +47,61 @@ public class ENW004 extends TestBase {
 
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername004"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
+
 		try {
-		
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
+
 			ob.get(host);
-			
-			String expectedSuccessMessage="Sent To EndNote";
-		
-		
-			  pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername004"),CONFIG.getProperty("sfbpwrd004"));
-				  
-			//   pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
-			   
-			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			   
-			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			   
-			  
-			   pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
-			   
-			   BrowserWaits.waitTime(4);
-			   pf.getLoginTRInstance(ob).logOutApp();
-					   
-			   try
-				{
-				Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+
+			String expectedSuccessMessage = "Sent To EndNote";
+
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername004"),
+					CONFIG.getProperty("sfbpwrd004"));
+
+			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
+
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+
+			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+
+			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
+
+			BrowserWaits.waitTime(4);
+			pf.getLoginTRInstance(ob).logOutApp();
+
+			try {
+				Assert.assertEquals(expectedSuccessMessage,
+						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
 				test.log(LogStatus.PASS,
 						" Record sent successfully from Search Results Page after linking with steam account");
-				}
-				
-				catch (Throwable t) {
+			}
 
-					test.log(LogStatus.FAIL,
-							" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
-																																// reports
-					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-					ErrorUtil.addVerificationFailure(t);
-				}
-	
+			catch (Throwable t) {
+
+				test.log(LogStatus.FAIL,
+						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
+																													// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+
 			closeBrowser();
-			
-			
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -130,10 +124,10 @@ public class ENW004 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

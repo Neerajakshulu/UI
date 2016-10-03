@@ -14,11 +14,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class ENW006 extends TestBase {
-	
+
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -33,9 +33,9 @@ public class ENW006 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW006() throws Exception { 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+	public void testcaseENW006() throws Exception {
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -46,15 +46,14 @@ public class ENW006 extends TestBase {
 
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("FBonlyusernameenw006"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			
+
 			String statuCode1 = deleteUserAccounts(CONFIG.getProperty("Steamonlyuser"));
 			Assert.assertTrue(statuCode1.equalsIgnoreCase("200"));
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
@@ -63,49 +62,43 @@ public class ENW006 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
-			ob.get(host);
-			
-			String expectedSuccessMessage="Sent To EndNote";
-		
-			  pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("FBonlyusernameenw006"),CONFIG.getProperty("FBonlypwrdenw006"));
-				  
-			   
-			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			   
-			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			   
-			   pf.getSearchResultsPageInstance(ob).linkDiffSteamAcctWhileSendToEndnoteSearchPage(test);
-			   				     
-	    		   try
-						{
-						Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
-						test.log(LogStatus.PASS,
-								" Record sent successfully from Search Results Page after linking with steam account with different emailid");
-						}
-						
-						catch (Throwable t) {
 
-							test.log(LogStatus.FAIL,
-									" Record is not sent to Endnote from Search Results Page after  linking with steam account with different emailid");// extent
-																																		// reports
-							status = 2;// excel
-							test.log(
-									LogStatus.INFO,
-									"Snapshot below: "
-											+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-													+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-							ErrorUtil.addVerificationFailure(t);
-						}
-			
-	    		   
-			   pf.getLoginTRInstance(ob).logOutApp();
-		
-	
+			ob.get(host);
+
+			String expectedSuccessMessage = "Sent To EndNote";
+
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("FBonlyusernameenw006"),
+					CONFIG.getProperty("FBonlypwrdenw006"));
+
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+
+			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+
+			pf.getSearchResultsPageInstance(ob).linkDiffSteamAcctWhileSendToEndnoteSearchPage(test);
+
+			try {
+				Assert.assertEquals(expectedSuccessMessage,
+						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+				test.log(LogStatus.PASS,
+						" Record sent successfully from Search Results Page after linking with steam account with different emailid");
+			}
+
+			catch (Throwable t) {
+
+				test.log(LogStatus.FAIL,
+						" Record is not sent to Endnote from Search Results Page after  linking with steam account with different emailid");// extent
+				// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+
+			pf.getLoginTRInstance(ob).logOutApp();
+
 			closeBrowser();
-			
-			
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -128,10 +121,10 @@ public class ENW006 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

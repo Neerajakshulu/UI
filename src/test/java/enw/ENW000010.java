@@ -17,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW000010 extends TestBase {
 
@@ -34,7 +33,7 @@ public class ENW000010 extends TestBase {
 	@Test
 	public void testcaseENW000010() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -273,21 +272,12 @@ public class ENW000010 extends TestBase {
 	}
 
 	/*
-	 * public String deleteUserAccounts(String emailId) throws Exception {
-	 * 
-	 * String local = null; if
-	 * (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) { local =
-	 * "N"; } else { local = "Y"; } getAllAppHostsForGivenEnv(
-	 * "http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps",
-	 * "1p.stable.dev", local);
-	 * 
-	 * RequestSpecification reqSpec = given(); Response resp; logger.info(
-	 * "host name-->" + appHosts.get("1PAUTH")); resp =
-	 * reqSpec.when().delete(appHosts.get("1PAUTH") +
-	 * "/admin/auth/link/accounts/" + emailId); return
-	 * String.valueOf(resp.getStatusCode());
-	 * 
-	 * }
+	 * public String deleteUserAccounts(String emailId) throws Exception { String local = null; if
+	 * (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) { local = "N"; } else { local = "Y"; }
+	 * getAllAppHostsForGivenEnv( "http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.stable.dev", local);
+	 * RequestSpecification reqSpec = given(); Response resp; logger.info( "host name-->" + appHosts.get("1PAUTH"));
+	 * resp = reqSpec.when().delete(appHosts.get("1PAUTH") + "/admin/auth/link/accounts/" + emailId); return
+	 * String.valueOf(resp.getStatusCode()); }
 	 */
 	@AfterTest
 	public void reportTestResult() {

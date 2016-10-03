@@ -16,9 +16,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW013 extends TestBase {
+
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,7 +35,7 @@ public class ENW013 extends TestBase {
 
 	@Test
 	public void testcaseENW013() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -56,12 +56,12 @@ public class ENW013 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
-				//ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.ENW_terms_of_use_XPATH.toString())).click();
-			//ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
+			// ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
 			String newWindow = switchToNewWindow(ob);
 			if (newWindow != null) {
 				if (ob.getCurrentUrl().contains("terms-of-use")) {

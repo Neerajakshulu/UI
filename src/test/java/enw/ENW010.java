@@ -18,7 +18,6 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW010 extends TestBase {
 
@@ -35,9 +34,10 @@ public class ENW010 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
+
 	@Test
 	public void testcaseENW010() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -58,7 +58,7 @@ public class ENW010 extends TestBase {
 			String actual_result = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
-				//ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
@@ -70,7 +70,7 @@ public class ENW010 extends TestBase {
 				actual_result = "test case is failed";
 				Assert.assertEquals(true, false);
 			}
-			logger.info("Actual result displayed as :" + actual_result); //Image_User_XPATH
+			logger.info("Actual result displayed as :" + actual_result); // Image_User_XPATH
 			WebElement ImageFile = ob.findElement(By.xpath(OnePObjectMap.Image_User_XPATH.toString()));
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
@@ -87,7 +87,7 @@ public class ENW010 extends TestBase {
 				test.log(LogStatus.PASS, " Image is present and User name is not hyper linked");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, " Image is not present and User is hyperlinked");// extent
-				ErrorUtil.addVerificationFailure(t);																	// reports
+				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "mage is not present and User is hyperlinked")));// screenshot

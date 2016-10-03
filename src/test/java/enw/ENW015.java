@@ -16,11 +16,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
-public class ENW015 extends TestBase{
+public class ENW015 extends TestBase {
 
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -32,10 +32,10 @@ public class ENW015 extends TestBase{
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-	
+
 	@Test
 	public void testcaseENW015() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -45,57 +45,51 @@ public class ENW015 extends TestBase{
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-		
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
-				//ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.ENW_Feedback_XPATH.toString())).click();
-			//ob.findElement(By.xpath(OR.getProperty("ENW_Feedback"))).click();
-			
-			String newWindow = switchToNewWindow(ob);			
-			if(newWindow!=null){
-				if(ob.getCurrentUrl().contains("app.qc.endnote.com/EndNoteWeb.html?func=feedBack")){
-					
-					logger.info("feedBack is opened in the new Window and it takes user to the existing (BAU) version of "
-							+ "the Endnote Feedback");
+			// ob.findElement(By.xpath(OR.getProperty("ENW_Feedback"))).click();
+
+			String newWindow = switchToNewWindow(ob);
+			if (newWindow != null) {
+				if (ob.getCurrentUrl().contains("app.qc.endnote.com/EndNoteWeb.html?func=feedBack")) {
+
+					logger.info(
+							"feedBack is opened in the new Window and it takes user to the existing (BAU) version of "
+									+ "the Endnote Feedback");
 				}
-			}else{
-				test.log(LogStatus.FAIL,
-						"New window is not displayed and content is not matching");
+			} else {
+				test.log(LogStatus.FAIL, "New window is not displayed and content is not matching");
 				Assert.assertEquals(true, false);
 			}
-			try
-			{
-			
-			//Assert.assertTrue();
-			test.log(LogStatus.PASS,
-					"feedBack is opened in the new Window it takes user to the existing (BAU) version of "
-							+ "the Endnote Feedback");
-			}
-			catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Feedback New window is not displayed and content is not matching");// extent
-				ErrorUtil.addVerificationFailure(t);																										// reports
+			try {
+
+				// Assert.assertTrue();
+				test.log(LogStatus.PASS,
+						"feedBack is opened in the new Window it takes user to the existing (BAU) version of "
+								+ "the Endnote Feedback");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Feedback New window is not displayed and content is not matching");// extent
+				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "Feedback New window is not displayed and content is not matching")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-    }
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -109,10 +103,11 @@ public class ENW015 extends TestBase{
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}	
+	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 		closeBrowser();
-	}	
+	}
 }
