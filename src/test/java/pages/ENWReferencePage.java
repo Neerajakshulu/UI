@@ -5,14 +5,10 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
-import util.ErrorUtil;
 import util.OnePObjectMap;
+import base.TestBase;
 
 /**
  * This class contains all the method related to account page
@@ -101,7 +97,9 @@ public class ENWReferencePage extends TestBase {
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).click();
 		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_PASSWORD_XPATH.toString())).sendKeys(passWord);
 		//Clicking the "Done" button
-		ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())).click();
+		//ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())).click();
+		
+		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_LINK_ACCOUNTS_DONE_BUTTON_XPATH.toString())));
 		}
 	//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
 	//Arvind- Clicking the Accounts button on ENW Profile-Flyout 
