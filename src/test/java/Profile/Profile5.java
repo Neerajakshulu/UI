@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Profile5 extends TestBase {
 
@@ -27,6 +26,7 @@ public class Profile5 extends TestBase {
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -46,18 +46,17 @@ public class Profile5 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -77,11 +76,8 @@ public class Profile5 extends TestBase {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));
 			closeBrowser();
 		}
 	}
@@ -109,11 +105,8 @@ public class Profile5 extends TestBase {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);// testng
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Validation_own_profile_incorrect")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_Validation_own_profile_incorrect")));
 			closeBrowser();
 		}
 	}

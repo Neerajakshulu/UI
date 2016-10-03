@@ -16,11 +16,11 @@ import util.ExtentManager;
 
 public class Profile60 extends OnboardingModalsTest {
 
+	static int status = 1;
 
-static int status = 1;
-	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -33,22 +33,23 @@ static int status = 1;
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed 
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
 	@Parameters({"username", "password"})
-	public void testLoginTRAccount(String username,String password) throws Exception {
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode; 
+		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -68,17 +69,15 @@ static int status = 1;
 			test.log(LogStatus.FAIL, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * Method for validate Onboarding Modals displayed for first time users
+	 * 
 	 * @throws Exception, When Onboarding Modals are not displayed for first time users
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
@@ -96,25 +95,24 @@ static int status = 1;
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "onboarding_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
-	
-	
+
 	/**
 	 * Method for validate Onboarding Modals not displayed for second time logged users
+	 * 
 	 * @throws Exception, When Onboarding Modals are displayed for second time users
 	 */
 	@Test(dependsOnMethods = "closeWelcomeOnboardingModalsForFirstTimeUser")
 	@Parameters({"username", "password"})
-	public void validateOnboardingModalsForSecondTimeUser(String username, String password) throws Exception {
+	public void validateOnboardingModalsForSecondTimeUser(String username,
+			String password) throws Exception {
 		try {
-			test.log(LogStatus.INFO, "Validate Onboarding modals for Second time users and verify onboarding modals should not display");
+			test.log(LogStatus.INFO,
+					"Validate Onboarding modals for Second time users and verify onboarding modals should not display");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to Neon Application Same user with second time");
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
@@ -123,7 +121,7 @@ static int status = 1;
 			pf.getOnboardingModalsPageInstance(ob).validateOnboardingModalsForSecondTimeUser();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "onboarding modals are present for second time logged user");
 			status = 2;// excel
@@ -132,19 +130,16 @@ static int status = 1;
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_for_second_time_user")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "onboarding_for_second_time_user")));// screenshot
 			closeBrowser();
 		}
 	}
-	
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
@@ -158,5 +153,5 @@ static int status = 1;
 		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-	
+
 }

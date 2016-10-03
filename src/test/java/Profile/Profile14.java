@@ -15,16 +15,15 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Profile14 extends TestBase {
 
-	
 	static int status = 1;
 	static int followersCount;
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -39,15 +38,14 @@ public class Profile14 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -70,11 +68,8 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Login is not done")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Login is not done")));
 			closeBrowser();
 		}
 	}
@@ -85,7 +80,7 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, "get users who are following me-My Followers");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
-			followersCount=pf.getProfilePageInstance(ob).getFollowersCount();
+			followersCount = pf.getProfilePageInstance(ob).getFollowersCount();
 			test.log(LogStatus.INFO, "Logout from the application");
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
@@ -96,19 +91,17 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_followers_count")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_followers_count")));
 			closeBrowser();
 		}
 
 	}
 
 	@Test(dependsOnMethods = "getFollowers")
-	@Parameters({"otherUsername","otherUserPassword"})
-	public void loginwithOtherUser(String otherUsername,String otherUserPassword) throws Exception {
+	@Parameters({"otherUsername", "otherUserPassword"})
+	public void loginwithOtherUser(String otherUsername,
+			String otherUserPassword) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "login with different user");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
@@ -122,11 +115,8 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));
 			closeBrowser();
 		}
 
@@ -136,7 +126,7 @@ public class Profile14 extends TestBase {
 	public void followUserAndLogout() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow/unfollow other user");
-			ob.navigate().to(host+"/#/profile/0a69807f-0715-4760-b902-055719b0b11c"); 
+			ob.navigate().to(host + "/#/profile/0a69807f-0715-4760-b902-055719b0b11c");
 			BrowserWaits.waitTime(10);
 			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
@@ -149,11 +139,8 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_followers_logout")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_followers_logout")));
 			closeBrowser();
 		}
 
@@ -184,16 +171,13 @@ public class Profile14 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_followers_validation_count")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_followers_validation_count")));
 			closeBrowser();
 		}
 
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */

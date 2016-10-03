@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Profile8 extends TestBase {
 
@@ -26,6 +25,7 @@ public class Profile8 extends TestBase {
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -45,18 +45,17 @@ public class Profile8 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set ");
 
 		try {
@@ -76,11 +75,8 @@ public class Profile8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_Login is not done")));
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Login is not done")));
 			closeBrowser();
 		}
 	}
@@ -111,16 +107,13 @@ public class Profile8 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_HeaderFooters_links_are_not_working")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_HeaderFooters_links_are_not_working")));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */

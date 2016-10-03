@@ -17,13 +17,13 @@ import util.ExtentManager;
 
 public class Profile56 extends OnboardingModalsTest {
 
-
 	static int status = 1;
 	String[] tests;
 	String[] tests_dec;
-	
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -41,22 +41,23 @@ public class Profile56 extends OnboardingModalsTest {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed 
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
 	@Parameters({"username", "password"})
-	public void testLoginTRAccount(String username,String password) throws Exception {
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		
+		boolean master_condition = suiteRunmode && testRunmode;
+
 		if (!master_condition) {
 			status = 3;
 			logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 			if (!master_condition) {
 				status = 3;// excel
 				extent = ExtentManager.getReporter(filePath);
-				
+
 				logger.info(rowData.getTestcaseId());
 				for (int i = 0; i < tests.length; i++) {
 					logger.info(tests_dec[i]);
@@ -65,7 +66,8 @@ public class Profile56 extends OnboardingModalsTest {
 							"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 					extent.endTest(test);
 				}
-				throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+				throw new SkipException(
+						"Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 			}
 		}
 
@@ -86,20 +88,18 @@ public class Profile56 extends OnboardingModalsTest {
 			test.log(LogStatus.FAIL, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * Method for Validate Welcome Modal Features
+	 * 
 	 * @throws Exception, When Welcome modal doesnot exist
 	 */
-	@Test(dependsOnMethods="testLoginTRAccount")
+	@Test(dependsOnMethods = "testLoginTRAccount")
 	public void validateWelcomeOnboardingModal() throws Exception {
 		try {
 			test = extent.startTest(tests[0], tests_dec[0]).assignCategory("Profile");
@@ -114,16 +114,13 @@ public class Profile56 extends OnboardingModalsTest {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_not_done")));// screenshot
-			//closeBrowser();
-		} finally{
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "onboarding_not_done")));// screenshot
+			// closeBrowser();
+		} finally {
 			extent.endTest(test);
 		}
-		
+
 		try {
 			test = extent.startTest(tests[1], tests_dec[1]).assignCategory("Profile");
 			test.log(LogStatus.INFO, tests_dec[1]);
@@ -137,16 +134,13 @@ public class Profile56 extends OnboardingModalsTest {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_not_done")));// screenshot
-			//closeBrowser();
-		} finally{
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "onboarding_not_done")));// screenshot
+			// closeBrowser();
+		} finally {
 			extent.endTest(test);
 		}
-		
+
 		try {
 			test = extent.startTest(tests[2], tests_dec[2]).assignCategory("Profile");
 			test.log(LogStatus.INFO, tests_dec[2]);
@@ -160,25 +154,23 @@ public class Profile56 extends OnboardingModalsTest {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "onboarding_not_done")));// screenshot
 			closeBrowser();
-		} finally{
+		} finally {
 			extent.endTest(test);
 		}
-		
+
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
-		//extent.endTest(test);
+		// extent.endTest(test);
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(profilexls, "Test Cases",
 		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
@@ -188,5 +180,5 @@ public class Profile56 extends OnboardingModalsTest {
 		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-	
+
 }

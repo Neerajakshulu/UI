@@ -22,11 +22,10 @@ public class Profile53 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	
-	
-	
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -39,47 +38,48 @@ public class Profile53 extends TestBase {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed 
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
-	@Parameters({"socialLogin","username", "password","deepLinkUrl"})
-	public void deepLinkValidation(String socialLogin,String username,
-			String pwd, String deepLinkUrl) throws Exception {
+	@Parameters({"socialLogin", "username", "password", "deepLinkUrl"})
+	public void deepLinkValidation(String socialLogin,
+			String username,
+			String pwd,
+			String deepLinkUrl) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode; 
+		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-			
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			String fbLILogins[]=socialLogin.split("\\|");
-			for(String fbLILogin:fbLILogins) {
-			String deepLink= System.getProperty("host")+deepLinkUrl;
-			logger.info("Profile deep link URL-->"+deepLink);
-			ob.navigate().to(deepLink);
-			
-			if(fbLILogin.equalsIgnoreCase("FB")) {
-				test.log(LogStatus.INFO, "Validate Other Profile Deep link using FB");
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(username, pwd);
-				validateProfileDeepLink();
+			String fbLILogins[] = socialLogin.split("\\|");
+			for (String fbLILogin : fbLILogins) {
+				String deepLink = System.getProperty("host") + deepLinkUrl;
+				logger.info("Profile deep link URL-->" + deepLink);
+				ob.navigate().to(deepLink);
+
+				if (fbLILogin.equalsIgnoreCase("FB")) {
+					test.log(LogStatus.INFO, "Validate Other Profile Deep link using FB");
+					pf.getLoginTRInstance(ob).loginWithFBCredentials(username, pwd);
+					validateProfileDeepLink();
+				} else if (fbLILogin.equalsIgnoreCase("LI")) {
+					test.log(LogStatus.INFO, "Validate Other Profile Deep link using LI");
+					pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(username, pwd);
+					validateProfileDeepLink();
+				}
 			}
-			else if(fbLILogin.equalsIgnoreCase("LI")) {
-				test.log(LogStatus.INFO, "Validate Other Profile Deep link using LI");
-				pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(username, pwd);
-				validateProfileDeepLink();
-			}
-		 }
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something Unexpected");
@@ -89,26 +89,24 @@ public class Profile53 extends TestBase {
 			test.log(LogStatus.FAIL, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
 
 	/**
 	 * Method for validate profile Deep link functionality
+	 * 
 	 * @throws Exception, When Profile deep linking not working
 	 */
 	public void validateProfileDeepLink() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Profile page is opened and Validate profile fields");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Posts","Comments","Followers","Following","Watchlists");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Activity","Interests and Skills");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Posts", "Comments", "Followers", "Following", "Watchlists");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Activity", "Interests and Skills");
 			pf.getLoginTRInstance(ob).logOutApp();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Own Profile Deeplink not working");
 			status = 2;// excel
@@ -117,19 +115,16 @@ public class Profile53 extends TestBase {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "Own Profile Deeplink not working")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "Own Profile Deeplink not working")));// screenshot
 			closeBrowser();
 		}
 	}
-	
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {

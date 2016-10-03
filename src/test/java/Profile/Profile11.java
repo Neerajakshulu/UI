@@ -15,7 +15,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Profile11 extends TestBase {
 
@@ -24,13 +23,14 @@ public class Profile11 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
-	public void beforeTest() throws Exception { 
+	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
@@ -38,6 +38,7 @@ public class Profile11 extends TestBase {
 
 	/**
 	 * Method for login into Neon application using TR ID
+	 * 
 	 * @throws Exception, When TR Login is not done
 	 */
 	@Test
@@ -45,15 +46,14 @@ public class Profile11 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -76,17 +76,15 @@ public class Profile11 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_TR_Login_Not_happended")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_TR_Login_Not_happended")));
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * Method for Updating Topics in Profile page
+	 * 
 	 * @param topics
 	 * @throws Exception, When Topics not getting updated
 	 */
@@ -111,15 +109,12 @@ public class Profile11 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_add_topic_not_done")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_add_topic_not_done")));
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */

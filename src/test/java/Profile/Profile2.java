@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Class for find and follow others profile
@@ -30,6 +29,7 @@ public class Profile2 extends TestBase {
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -44,18 +44,17 @@ public class Profile2 extends TestBase {
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -71,11 +70,8 @@ public class Profile2 extends TestBase {
 			test.log(LogStatus.FAIL, "Error:" + e);
 			ErrorUtil.addVerificationFailure(e);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_unable_to_find_others_profile")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_unable_to_find_others_profile")));
 			closeBrowser();
 		}
 
@@ -91,7 +87,7 @@ public class Profile2 extends TestBase {
 	public void getOtherProfileDetails(String searchPeople) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "get other profile details and validate");
-			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(searchPeople); 
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(searchPeople);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getProfilePageInstance(ob).clickProfile();
 			pf.getProfilePageInstance(ob).validateProfileTitleAndMetadata();
@@ -107,15 +103,12 @@ public class Profile2 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_unable_get_others_profile_details")));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_unable_get_others_profile_details")));
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */

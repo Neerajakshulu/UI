@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 /**
  * Class for follow/unfollow profile from search page itself
@@ -31,11 +30,10 @@ public class Profile1 extends TestBase {
 	static int status = 1;
 	static String followBefore = null;
 	static String followAfter = null;
-	
-	
-	
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -47,25 +45,25 @@ public class Profile1 extends TestBase {
 
 	/**
 	 * Method for login into Neon application using TR ID
+	 * 
 	 * @throws Exception, When TR Login is not done
 	 */
 	@Test
-	@Parameters({"username", "password"}) 
+	@Parameters({"username", "password"})
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -86,11 +84,8 @@ public class Profile1 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 
@@ -98,6 +93,7 @@ public class Profile1 extends TestBase {
 
 	/**
 	 * Method for find and follow others profile
+	 * 
 	 * @throws Exception, When user is not able to follow others
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
@@ -110,7 +106,7 @@ public class Profile1 extends TestBase {
 				pf.getSearchProfilePageInstance(ob).clickPeople();
 				pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
 			}
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
@@ -122,11 +118,8 @@ public class Profile1 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_unable_to_follow")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_unable_to_follow")));// screenshot
 			closeBrowser();
 		}
 	}

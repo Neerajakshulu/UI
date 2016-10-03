@@ -17,7 +17,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 public class Profile39 extends TestBase {
 
@@ -27,6 +26,7 @@ public class Profile39 extends TestBase {
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -41,16 +41,16 @@ public class Profile39 extends TestBase {
 	@Parameters({"username", "password"})
 	public void testLoginTRAccount(String username,
 			String password) throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(profilexls, this.getClass().getSimpleName());
-		boolean master_condition = suiteRunmode && testRunmode; 
-		logger.info("checking master condition status-->"+this.getClass().getSimpleName()+"-->"+master_condition);
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean master_condition = suiteRunmode && testRunmode;
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -77,10 +77,8 @@ public class Profile39 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_loginNotDone")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_loginNotDone")));// screenshot
 			closeBrowser();
 		}
 
@@ -114,11 +112,8 @@ public class Profile39 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(e);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "post_not_increased")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "post_not_increased")));// screenshot
 			closeBrowser();
 		}
 
@@ -127,8 +122,8 @@ public class Profile39 extends TestBase {
 	@Test(dependsOnMethods = "testPublishPost")
 	public void testPostCommentCount() throws Exception {
 		try {
-			//int postCommentcount = pf.getProfilePageInstance(ob).getPostCommentCount();
-			int postCommentcount=0;
+			// int postCommentcount = pf.getProfilePageInstance(ob).getPostCommentCount();
+			int postCommentcount = 0;
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
 			BrowserWaits.waitTime(2);
 			ob.navigate().refresh();
@@ -141,9 +136,9 @@ public class Profile39 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			int postCommentAftercount = pf.getProfilePageInstance(ob).getPostCommentCount();
-  
-			System.out.println("before count-->" + postCommentcount);
-			System.out.println("after count-->" + postCommentAftercount);
+
+			logger.info("before count-->" + postCommentcount);
+			logger.info("after count-->" + postCommentAftercount);
 			if (postCommentAftercount == postCommentcount) {
 				throw new Exception("post comment count failed");
 			}
@@ -159,16 +154,13 @@ public class Profile39 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(e);// testng
 
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "post_comment_count_failed")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "post_comment_count_failed")));// screenshot
 			closeBrowser();
 		}
 
 	}
-	
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */

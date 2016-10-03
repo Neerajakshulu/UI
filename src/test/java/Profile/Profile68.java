@@ -16,11 +16,11 @@ import util.ExtentManager;
 
 public class Profile68 extends OnboardingModalsTest {
 
+	static int status = 1;
 
-static int status = 1;
-	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
@@ -33,22 +33,23 @@ static int status = 1;
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed 
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
 	@Parameters({"username", "password"})
-	public void testLoginTRAccount(String username,String password) throws Exception {
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
-		boolean master_condition = suiteRunmode && testRunmode; 
+		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -68,17 +69,15 @@ static int status = 1;
 			test.log(LogStatus.FAIL, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
-	
+
 	/**
 	 * Method for close welcome onboarding modal outside
+	 * 
 	 * @throws Exception, When not able to click outside of the modal
 	 */
 	@Test(dependsOnMethods = "testLoginTRAccount")
@@ -97,19 +96,16 @@ static int status = 1;
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "onboarding_not_done")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "onboarding_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
 
-	
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
@@ -123,5 +119,5 @@ static int status = 1;
 		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-	
+
 }
