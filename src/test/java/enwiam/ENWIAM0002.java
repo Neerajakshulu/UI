@@ -1,6 +1,5 @@
 package enwiam;
 
-
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -8,17 +7,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM0002 extends TestBase {
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -29,7 +27,8 @@ public class ENWIAM0002 extends TestBase {
 	static int status = 1;
 
 	static int time = 30;
-	PageFactory pf=new PageFactory();
+	PageFactory pf = new PageFactory();
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -37,10 +36,11 @@ public class ENWIAM0002 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 
 	}
+
 	@Test
 	public void testLogin() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -51,136 +51,129 @@ public class ENWIAM0002 extends TestBase {
 
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		//Deleting the links for aravind.attur@thomsonreuters.com
-		
-		
+		// Deleting the links for aravind.attur@thomsonreuters.com
+
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-						
+
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
-		// Deleting the links for enwyogi3@yahoo.com 
+
+		// Deleting the links for enwyogi3@yahoo.com
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));	
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 		} catch (Throwable t) {
 			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
-		
-		
+
 		try {
-			
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			loginToFb();	
-			//closeBrowser();
-			//pf.clearAllPageObjects();
-			
-		} 
-		catch (Throwable t) {
+			loginToFb();
+			// closeBrowser();
+			// pf.clearAllPageObjects();
+
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Unexpected error");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
+
 		// Deleting the links for aravind.attur@thomsonreuters.com
-				try {
-					String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
-					Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-					
-				} catch (Throwable t) {
-					test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
-					//ErrorUtil.addVerificationFailure(t);
-				}
-				// Deleting the links for enwyogi3@yahoo.com 
-				try {
-					String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
-					Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-					
-				} catch (Throwable t) {
-					test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
-					//ErrorUtil.addVerificationFailure(t);
-				}
-				
-				
-				
-				try {
-					/*openBrowser();
-					maximizeWindow();
-					clearCookies();*/
-					loginToLn();
-					closeBrowser();
-					pf.clearAllPageObjects();
-				} 
-				catch (Throwable t) {
-					test.log(LogStatus.FAIL, "Unexpected error");// extent
-					ErrorUtil.addVerificationFailure(t);
-				}
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			// ErrorUtil.addVerificationFailure(t);
+		}
+		// Deleting the links for enwyogi3@yahoo.com
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			// ErrorUtil.addVerificationFailure(t);
+		}
+
+		try {
+			/*
+			 * openBrowser(); maximizeWindow(); clearCookies();
+			 */
+			loginToLn();
+			closeBrowser();
+			pf.clearAllPageObjects();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Unexpected error");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
-	
-	private void loginToFb() throws Exception{
-		ob.navigate().to(host);
-		//String accountType="Facebook";
-		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"aravind.attur@thomsonreuters.com","Facebook@123");
-		//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
 
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"),LOGIN.getProperty("Password21"));
+	private void loginToFb() throws Exception {
+		ob.navigate().to(host);
+		// String accountType="Facebook";
+		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob, "aravind.attur@thomsonreuters.com",
+				"Facebook@123");
+		// LOGIN.getProperty("UserName19"), LOGIN.getProperty("Password19")
+
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
 		try {
 			ob.findElement(By.className("btn-common")).click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			}
+		}
 		pf.getENWReferencePageInstance(ob).clickAccount();
-		
-			validateLinkedAccounts(2,"Facebook");
-			
-		
+
+		validateLinkedAccounts(2, "Facebook");
+
 		pf.getENWReferencePageInstance(ob).logout();
-		
+
 	}
-	private void loginToLn() throws Exception{
+
+	private void loginToLn() throws Exception {
 		ob.navigate().to(host);
-		//String accountType="LinkedIn";
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com","Linked@123");		
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"),LOGIN.getProperty("Password21"));
+		// String accountType="LinkedIn";
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
+		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
 			if (text.equalsIgnoreCase("Continue")) {
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		pf.getENWReferencePageInstance(ob).clickAccount();
-		
-		validateLinkedAccounts(2,"LinkedIn");
-			
-		
+
+		validateLinkedAccounts(2, "LinkedIn");
+
 		pf.getENWReferencePageInstance(ob).logout();
-		
+
 	}
-	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
+
+	private void validateLinkedAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName21")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName20")));
-			test.log(LogStatus.PASS , "The account are matching");
+			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);
 			test.log(LogStatus.PASS,
@@ -202,10 +195,10 @@ public class ENWIAM0002 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

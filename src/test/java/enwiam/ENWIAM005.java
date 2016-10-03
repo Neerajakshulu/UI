@@ -43,7 +43,7 @@ public class ENWIAM005 extends TestBase {
 	public void testcaseA6(String charLength,
 			String validity) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {

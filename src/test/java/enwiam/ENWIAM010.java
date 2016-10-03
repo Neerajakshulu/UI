@@ -19,7 +19,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM010 extends TestBase {
 
@@ -41,7 +40,7 @@ public class ENWIAM010 extends TestBase {
 	@Test
 	public void testcaseA1() throws Exception {
 		WebElement element = null;
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -214,8 +213,8 @@ public class ENWIAM010 extends TestBase {
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 
 				String status = ob
-						.findElement(
-								By.cssSelector("label[class='wui-input-with-label__error above-form-error-message ng-scope']"))
+						.findElement(By.cssSelector(
+								"label[class='wui-input-with-label__error above-form-error-message ng-scope']"))
 						.getText();
 				Assert.assertEquals(status, "Invalid email/password. Please try again.");
 				test.log(LogStatus.PASS,

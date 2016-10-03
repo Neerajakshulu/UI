@@ -12,13 +12,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM002 extends TestBase {
 
@@ -36,13 +36,16 @@ public class ENWIAM002 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 		runmodes = TestUtil.getDataSetRunmodes(enwiamxls, this.getClass().getSimpleName());
-		
+
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA10(String charLength, String suffix, String error, String validity) throws Exception {
+	public void testcaseA10(String charLength,
+			String suffix,
+			String error,
+			String validity) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -65,14 +68,14 @@ public class ENWIAM002 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 3);
-			Double d=new Double(Double.parseDouble(characterLength));
-			int i=d.intValue();
+			Double d = new Double(Double.parseDouble(characterLength));
+			int i = d.intValue();
 			logger.info("Char Length : " + characterLength);
 			test.log(LogStatus.INFO,
 					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			logger.info("Length : "+characterLength);
+			logger.info("Length : " + characterLength);
 			String email = generateRandomName(i) + suffix;
 			logger.info(email);
 			openBrowser();
@@ -85,7 +88,7 @@ public class ENWIAM002 extends TestBase {
 			}
 			clearCookies();
 
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
@@ -97,7 +100,7 @@ public class ENWIAM002 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("duster");
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-			//ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
+			// ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 			BrowserWaits.waitTime(4);
 
 			if (email.contains(".com")) {
@@ -105,11 +108,11 @@ public class ENWIAM002 extends TestBase {
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 
 				String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
-				logger.info("Text : "+text);
+				logger.info("Text : " + text);
 
 				if (validity.equalsIgnoreCase("YES")) {
 
-					String textSignup=ob.findElement(By.xpath(OR.getProperty("signup_button"))).getText();
+					String textSignup = ob.findElement(By.xpath(OR.getProperty("signup_button"))).getText();
 					try {
 						Assert.assertTrue(textSignup.contains("Sign up"));
 						test.log(LogStatus.PASS, "Sign up button is enabled in Singn up page");
@@ -120,8 +123,8 @@ public class ENWIAM002 extends TestBase {
 						test.log(LogStatus.INFO, "Error--->" + t);
 						ErrorUtil.addVerificationFailure(t);
 						status = 2;// excel
-						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-								this.getClass().getSimpleName())));// screenshot
+						test.log(LogStatus.INFO, "Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
 					}
 
 				}
@@ -139,8 +142,8 @@ public class ENWIAM002 extends TestBase {
 						test.log(LogStatus.INFO, "Error--->" + t);
 						ErrorUtil.addVerificationFailure(t);
 						status = 2;// excel
-						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-								this.getClass().getSimpleName())));// screenshot
+						test.log(LogStatus.INFO, "Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
 					}
 				}
 			}
@@ -192,10 +195,10 @@ public class ENWIAM002 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 

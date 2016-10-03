@@ -17,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM015 extends TestBase {
 
@@ -34,7 +33,7 @@ public class ENWIAM015 extends TestBase {
 
 	@Test
 	public void testCaseA23() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 
@@ -117,7 +116,7 @@ public class ENWIAM015 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 				}
 			} catch (Exception e) {
-				
+
 			}
 
 			BrowserWaits.waitTime(6);

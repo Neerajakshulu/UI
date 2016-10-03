@@ -16,7 +16,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM012 extends TestBase {
 
@@ -38,7 +37,7 @@ public class ENWIAM012 extends TestBase {
 	@Test
 	public void testcaseA3() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {

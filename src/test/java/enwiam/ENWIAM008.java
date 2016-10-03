@@ -16,7 +16,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM008 extends TestBase {
 
@@ -37,7 +36,7 @@ public class ENWIAM008 extends TestBase {
 	@Test
 	public void testcaseA4() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -62,11 +61,11 @@ public class ENWIAM008 extends TestBase {
 			}
 			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			logger.info("Email Id:" + email1);
-			String traillingSpaceEmail = " " +email1;
+			String traillingSpaceEmail = " " + email1;
 			logger.info("After Trailling space :" + traillingSpaceEmail);
 
 			String str = createTraillingSpaceUser("duster", "man", traillingSpaceEmail);
-			logger.info("After Trailling user :"+str);
+			logger.info("After Trailling user :" + str);
 			continueToLandingENWPage();
 			BrowserWaits.waitTime(3);
 
@@ -81,7 +80,7 @@ public class ENWIAM008 extends TestBase {
 			String email2 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			logger.info("Email Id:" + email2);
 			String traillingSpaceEmail1 = email2 + " ";
-			logger.info("Trailing space1 :" +traillingSpaceEmail1);
+			logger.info("Trailing space1 :" + traillingSpaceEmail1);
 
 			String str1 = createTraillingSpaceUser("duster", "man", traillingSpaceEmail1);
 			logger.info("After Trailling user :" + str1);

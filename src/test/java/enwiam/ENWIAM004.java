@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM004 extends TestBase {
 
@@ -43,14 +43,14 @@ public class ENWIAM004 extends TestBase {
 	public void testcaseA5(String charLength,
 			String validity) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -68,16 +68,16 @@ public class ENWIAM004 extends TestBase {
 		try {
 
 			String characterLength = charLength.substring(0, 2);
-			Double d=new Double(Double.parseDouble(characterLength));
-			int i=d.intValue();
-			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1)
-					+ "--->");
+			Double d = new Double(Double.parseDouble(characterLength));
+			int i = d.intValue();
+			test.log(LogStatus.INFO,
+					this.getClass().getSimpleName() + " execution starts for data set #" + (count + 1) + "--->");
 			test.log(LogStatus.INFO, characterLength + " -- " + validity);
 
-			logger.info("Char length : "+characterLength);
-			//System.out.println(Integer.parseInt(characterLength));
+			logger.info("Char length : " + characterLength);
+			// System.out.println(Integer.parseInt(characterLength));
 			String first_name = generateRandomName(i);
-			logger.info("First Name : "+first_name);
+			logger.info("First Name : " + first_name);
 
 			// selenium code
 			openBrowser();
@@ -91,8 +91,8 @@ public class ENWIAM004 extends TestBase {
 			clearCookies();
 
 			// Navigate to TR login page
-//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			BrowserWaits.waitTime(3);
@@ -104,61 +104,51 @@ public class ENWIAM004 extends TestBase {
 
 			BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
-			logger.info("Errors Count : "+errorList.size());
+			logger.info("Errors Count : " + errorList.size());
 
 			if (validity.equalsIgnoreCase("YES")) {
 
-				for(WebElement text : errorList){
-					
-				// verifying that error message is not getting displayed
-				if (text.getText().equals("First name is too long.")) {
+				for (WebElement text : errorList) {
 
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent report
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
-					closeBrowser();
-					return;
+					// verifying that error message is not getting displayed
+					if (text.getText().equals("First name is too long.")) {
+
+						fail = true;// excel
+						test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent report
+						test.log(LogStatus.INFO,
+								"Snapshot below: "
+										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+												+ "_error_message_getting_displayed_unnecessarily_" + (count + 1))));
+						closeBrowser();
+						return;
+					}
 				}
-			}
 
 			}
 
 			else {
-				for(WebElement text : errorList){
-				if (!text.getText().equals("First name is too long.")) {
+				for (WebElement text : errorList) {
+					if (!text.getText().equals("First name is too long.")) {
 
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_error_message_not_getting_displayed_" + (count + 1))));
-					closeBrowser();
-					return;
+						fail = true;// excel
+						test.log(LogStatus.FAIL, "Error message not getting displayed");// extent report
+						test.log(LogStatus.INFO,
+								"Snapshot below: "
+										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+												+ "_error_message_not_getting_displayed_" + (count + 1))));
+						closeBrowser();
+						return;
+					}
+
 				}
-
-			}
-				/*BrowserWaits.waitTime(3);
-				String errorText = ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText();
-				logger.info("Error Text  : "+errorText);
-				if (!compareStrings("First name is too long.", errorText)) {
-
-					fail = true;// excel
-					test.log(LogStatus.FAIL, "Error text is incorrect");// extent report
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_incorrect_error_text_" + (count + 1))));
-					closeBrowser();
-					return;
-
-				}*/
+				/*
+				 * BrowserWaits.waitTime(3); String errorText =
+				 * ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText(); logger.info("Error Text  : "
+				 * +errorText); if (!compareStrings("First name is too long.", errorText)) { fail = true;// excel
+				 * test.log(LogStatus.FAIL, "Error text is incorrect");// extent report test.log( LogStatus.INFO,
+				 * "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() +
+				 * "_incorrect_error_text_" + (count + 1)))); closeBrowser(); return; }
+				 */
 
 			}
 
@@ -176,16 +166,13 @@ public class ENWIAM004 extends TestBase {
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends for data set #" + (count + 1)
-				+ "--->");
+		test.log(LogStatus.INFO,
+				this.getClass().getSimpleName() + " execution ends for data set #" + (count + 1) + "--->");
 	}
 
 	@AfterMethod

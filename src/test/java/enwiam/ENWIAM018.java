@@ -6,13 +6,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM018 extends TestBase {
 
@@ -27,14 +26,14 @@ public class ENWIAM018 extends TestBase {
 
 	@Test
 	public void testCaseA22() throws Exception {
-		  
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -45,8 +44,8 @@ public class ENWIAM018 extends TestBase {
 		try {
 			maximizeWindow();
 			clearCookies();
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-			
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+
 			waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
 			Thread.sleep(3000);
 			ob.findElement(By.name("loginEmail")).sendKeys("userendnote@gmail.com");
@@ -65,9 +64,10 @@ public class ENWIAM018 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
 			BrowserWaits.waitTime(6);
-			String cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
+			String cssValue = ob
+					.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+					.getCssValue("background");
 
-			
 			if (cssValue.contains("rgb(69, 183, 231)")) {
 				test.log(LogStatus.INFO, "check box is selected");
 			} else {
@@ -76,7 +76,8 @@ public class ENWIAM018 extends TestBase {
 			}
 			// unchecking the check box n checking if it is working
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();
-			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).getCssValue("background");
+			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+					.getCssValue("background");
 
 			Thread.sleep(5000);
 			if (cssValue.contains("rgb(255, 255, 255)")) {
@@ -90,11 +91,8 @@ public class ENWIAM018 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "unexpected_something happpened");// extent reports
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "unable_to_open_preference_page")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "unable_to_open_preference_page")));// screenshot
 
 			System.out.println("maximize() command not supported in Selendroid");
 			closeBrowser();

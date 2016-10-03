@@ -9,13 +9,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM006 extends TestBase {
 
@@ -35,15 +34,15 @@ public class ENWIAM006 extends TestBase {
 
 	@Test
 	public void testcaseA15() throws Exception {
-		
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -61,9 +60,9 @@ public class ENWIAM006 extends TestBase {
 			}
 			clearCookies();
 
-//			ob.navigate().to(CONFIG.getProperty("enwUrl"));
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-						
+			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
@@ -73,9 +72,9 @@ public class ENWIAM006 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
 			BrowserWaits.waitTime(2);
-			
+
 			String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
-			if(error_message1.contains("Sign up")){
+			if (error_message1.contains("Sign up")) {
 				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Neon12");
@@ -84,44 +83,38 @@ public class ENWIAM006 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 				BrowserWaits.waitTime(3);
 			}
-			
-		
-			
-			/*//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			//jsClick(ob, ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
-			//ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
-			BrowserWaits.waitTime(6);*/
+
+			/*
+			 * //ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+			 * ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click(); //jsClick(ob,
+			 * ob.findElement(By.name(OR.getProperty("signup_password_textbox"))));
+			 * //ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
+			 * BrowserWaits.waitTime(6);
+			 */
 			if (!checkElementPresence_id("reg_errorMessage")) {
 
 				test.log(LogStatus.FAIL,
 						"User able to create a new TR account with an email id that has already been used");// extent
 																											// reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));// screenshot
 
 			}
 
 			String error_message = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
-			logger.info("Error Message : "+error_message);
+			logger.info("Error Message : " + error_message);
 			BrowserWaits.waitTime(4);
-			//String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
-			//logger.info("Email Address : "+emailAddress);
+			// String emailAddress=ob.findElement(By.xpath(OR.getProperty("existing_email_address"))).getText();
+			// logger.info("Email Address : "+emailAddress);
 
 			if (!compareStrings("Already have an account?", error_message)) {
 
 				test.log(LogStatus.FAIL, "Error text is incorrect");// extent reports
 				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_incorrect_error_text")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_incorrect_error_text")));// screenshot
 
 			}
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tryAgain"))));
@@ -139,11 +132,8 @@ public class ENWIAM006 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

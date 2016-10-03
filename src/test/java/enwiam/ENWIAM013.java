@@ -21,7 +21,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENWIAM013 extends TestBase {
 
@@ -43,7 +42,7 @@ public class ENWIAM013 extends TestBase {
 	@Test
 	public void testcaseA16() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -462,10 +461,11 @@ public class ENWIAM013 extends TestBase {
 					String text1 = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();
 					logger.info("Text : " + text1);
 					if (text1.equalsIgnoreCase("Continue")) {
-						ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+						ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+								.click();
 					}
 				} catch (Exception e) {
-					
+
 				}
 				if (!checkElementPresence("ul_name")) {
 					test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent

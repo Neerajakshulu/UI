@@ -13,13 +13,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM003 extends TestBase {
 
@@ -33,7 +33,7 @@ public class ENWIAM003 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		
+
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
@@ -41,9 +41,12 @@ public class ENWIAM003 extends TestBase {
 	}
 
 	@Test(dataProvider = "getTestData")
-	public void testcaseA12(String password, String strength, String checks, String validity) throws Exception {
+	public void testcaseA12(String password,
+			String strength,
+			String checks,
+			String validity) throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -86,7 +89,7 @@ public class ENWIAM003 extends TestBase {
 			}
 			clearCookies();
 
-			ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
@@ -115,7 +118,7 @@ public class ENWIAM003 extends TestBase {
 					BrowserWaits.waitTime(4);
 				}
 			}
-		
+
 			closeBrowser();
 
 		}
@@ -164,10 +167,10 @@ public class ENWIAM003 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

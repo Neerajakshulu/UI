@@ -9,14 +9,14 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM100 extends TestBase {
 
@@ -41,14 +41,14 @@ public class ENWIAM100 extends TestBase {
 	@Test
 	public void testcaseG100() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwiamxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -72,13 +72,16 @@ public class ENWIAM100 extends TestBase {
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()),30);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString()))
+					.click();
 			test.log(LogStatus.PASS, "Linking modal has been closed");
 			BrowserWaits.waitTime(3);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()),40);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()), 40);
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("myacc"), LOGIN.getProperty("mypwd"));
 			test.log(LogStatus.PASS, "User linked with steam account");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()), 30);
@@ -97,8 +100,8 @@ public class ENWIAM100 extends TestBase {
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getLoginTRInstance(ob).checkLinking();
-			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("enwsoclogin")));
+			Assert.assertTrue(
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("enwsoclogin")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("neon", LOGIN.getProperty("myacc")));
 
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: Neon");
@@ -126,11 +129,8 @@ public class ENWIAM100 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 
 		}
@@ -175,8 +175,8 @@ public class ENWIAM100 extends TestBase {
 			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
 			pf.getLoginTRInstance(ob).checkLinking();
 			BrowserWaits.waitTime(5);
-			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn",
-					LOGIN.getProperty("enwsoclogin")));
+			Assert.assertTrue(
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("enwsoclogin")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("myacc")));
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: Neon");
 			BrowserWaits.waitTime(5);
@@ -203,11 +203,8 @@ public class ENWIAM100 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 
 		}
