@@ -164,14 +164,14 @@ public class LoginTR extends TestBase {
 	}
 
 	public void signInToFacebook(String username,
-			String pwd) {
+			String pwd) throws InterruptedException {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
-		// BrowserWaits.waitTime(2);
 		jsClick(ob, ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())));
+		BrowserWaits.waitTime(4);
 	}
 
 	public void loginWithFBCredentials(WebDriver driver,

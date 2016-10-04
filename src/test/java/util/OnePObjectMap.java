@@ -386,15 +386,27 @@ public enum OnePObjectMap {
 	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
 	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[id='pageTitle'] h3"),
-	NEON_ENW_INTEGRATION_TEXT_XPATH("//p[@class='sign-in-options-text text-center']"),
-	NEON_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
-	NEON_MARKETING_COPY_XPATH("//h2[.='Project Neon']"),
 	SINGIN_USING_LINKEDIN_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary ng-binding']"),
 	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
 	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
 	LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
 	
-
+	//Navigation and Landing page
+	NEON_ENW_INTEGRATION_TEXT_XPATH("//p[@class='sign-in-options-text text-center']"),
+	NEON_ENW_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
+	NEON_MARKETING_COPY_XPATH("//h2[.='Project Neon']"),
+	ENW_MARKETING_COPY_XPATH("//h2[.='EndNote']"),
+	NEON_CONNECT_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
+	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
+	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
+	ENW_DESKTOP_DLINK_XPATH("//a[text()='Download']"),
+	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
+	ENWLANDINGPAGE_FIND_ICON_CSS("i[class='fa fa-search login-splash-icon-first']"),
+	ENWLANDINGPAGE_CREATE_ICON_CSS("i[class='fa fa-file-text login-splash-icon']"),
+	ENWLANDINGPAGE_ORGANIZE_ICON_CSS("i[class='fa fa-cloud login-splash-icon']"),
+	ACCOUNT_NOTACTIVATED_MSG_XPATH("//h3[@class='wui-modal__title' and contains(.,'Your account registration')]"),
+	OK_BUTTON_ACCOUNT_NOTACTIVATED_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary' and contains(.,'OK')]"),
+	
 	//AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
 	ACCOUNT_RADIOBUTTON2_XPATH("(//label[contains(text(),'Make primary')])[2]"),
@@ -415,14 +427,6 @@ public enum OnePObjectMap {
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 	
 	
-	NEON_ENW_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
-	ENW_MARKETING_COPY_XPATH("//h2[.='EndNote']"),
-	NEON_NEW_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
-	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
-	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
-	ENW_DESKTOP_DLINK_XPATH("//a[text()='Download']"),
-	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
-
 	// #######RCC#############
 
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS(""),

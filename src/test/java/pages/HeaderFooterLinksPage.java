@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
 
@@ -203,10 +202,10 @@ public class HeaderFooterLinksPage extends TestBase {
 	}
      
 	public void clickOnEndNoteLink() throws Exception{
-   waitForElementTobeVisible(ob, By.cssSelector("i[class='wui-icon wui-icon--app']"),30);
-   ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")).click();
-   BrowserWaits.waitTime(2);
-   ob.findElement(By.xpath("(//li[@class='ne-app-switcher-flyout__list-item'])[1]")).click();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_PLINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_TO_ENW_PLINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
  		
 	}	
 	

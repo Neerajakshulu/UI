@@ -102,9 +102,25 @@
 		</classes>
 	</test>
 	
-		<test name="Navigation" preserve-order="true">
+	<test name="Navigation1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM40"></class>
+		</classes>
+	</test>
+	<test name="Navigation2" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM41"></class>
+		</classes>
+	</test>
+		<test name="Navigation3" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM42"></class>
+		</classes>
+	</test>
+	
+	<test name="Navigation4" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM43"></class>
 		</classes>
 	</test>
 	
@@ -113,6 +129,12 @@
 			<class name="enwiam.ENWIAM50"></class>
 		</classes>
 	</test>
+	
+	<test name="ENWLandingpage" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM51"></class>
+		</classes>
+	</test>
+	
 
 </suite>
-
