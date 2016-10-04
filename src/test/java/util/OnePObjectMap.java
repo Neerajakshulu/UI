@@ -413,6 +413,15 @@ public enum OnePObjectMap {
 	ACCOUNT_fACEBOOK_ICON_XPATH("//i[@class='fa fa-facebook-square account-option-item__icon--facebook']"),
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
+	
+	
+	NEON_ENW_COMPANY_XPATH("//h5[.='Thomson Reuters']"),
+	ENW_MARKETING_COPY_XPATH("//h2[.='EndNote']"),
+	NEON_NEW_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
+	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
+	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
+	ENW_DESKTOP_DLINK_XPATH("//a[text()='Download']"),
+	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
 
 	// #######RCC#############
 
