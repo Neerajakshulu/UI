@@ -64,7 +64,7 @@ public class ENWReferencePage extends TestBase {
 		ob.findElement(By.xpath(OnePObjectMap.ENW_FB_LOGIN_BUTTON_XPATH.toString())).click();
 		BrowserWaits.waitTime(2);
 		  //ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
-		ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON_XPATH.toString())).click();
+		//ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON_XPATH.toString())).click();
 	}
 	
 	// Did you know link modal

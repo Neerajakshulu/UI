@@ -1,14 +1,12 @@
 package pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 
 public class EnwReference extends TestBase {
@@ -36,29 +34,24 @@ public class EnwReference extends TestBase {
 	
 	public void loginWithFBCredentialsENW(WebDriver ob, String username, String pwd) throws InterruptedException, Exception {
 
-		//waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.SIGN_IN_WITH_FACEBOOK_BUTTON_ENW.toString()), 30);
-		//ob.findElement(By.xpath(OnePObjectMap.SIGN_IN_WITH_FACEBOOK_BUTTON_ENW.toString())).click();
 		BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 		ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 		
 		signInToFacebookENW(ob,username, pwd);
-		//Clicking the "continue" button while signing into ENW
-		BrowserWaits.waitTime(3);
-		
-		
+		BrowserWaits.waitTime(3);	
 		}
 	public void signInToFacebookENW(WebDriver ob, String username, String pwd) throws InterruptedException {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
 
-		// Verify that existing LI user credentials are working fine
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
-		// BrowserWaits.waitTime(2);
-		//ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID_ENW.toString())).click();
-		BrowserWaits.waitTime(3);
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_Page_Login")), 30);
-		ob.findElement(By.cssSelector(OR.getProperty("FB_Page_Login"))).click();
+		//ob.findElement(By.name(OnePObjectMap.ENW_FB_LOGIN_BUTTON_XPATH.toString())).click();
+		//BrowserWaits.waitTime(2);
+		
+		jsClick(ob, ob.findElement(By.cssSelector("label#loginbutton")));
+		BrowserWaits.waitTime(2);
+		//Thread.sleep(3000);
 		
 	}
 	

@@ -81,13 +81,18 @@ public class ENWIAM0001 extends TestBase {
 
 	private void loginTofb() throws Exception {
 
-		// Navigate to TR login page and login with valid TR credentials
-		ob.navigate().to(host);
+		// On ENW, Navigate to TR login page and login with valid TR credentials
+		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 		String accountType = "Facebook";
 
-		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob, "arvindkandaswamy@gmail.com", "darshiniyogi@123");
+		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
 		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
-		// LOGIN.getProperty("Password19")
+		try {
+			ob.findElement(By.className("button-form btn-common")).click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 		ob.findElement(By.className("btn-common")).click();
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
@@ -95,11 +100,6 @@ public class ENWIAM0001 extends TestBase {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 		ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-		/*
-		 * try { ob.findElement(By.className("btn-common")).click(); } catch (Exception e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); test.log(LogStatus.FAIL, "Continue button is not working");// extent
-		 * //ErrorUtil.addVerificationFailure(t); }
-		 */
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
@@ -122,11 +122,14 @@ public class ENWIAM0001 extends TestBase {
 	private void loginToLn() throws Exception {
 
 		// Navigate to TR login page and login with valid TR credentials
-
-		// String accountType="LinkedIn";
-
 		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("arvindkandaswamy@gmail.com", "darshiniyogi");
 		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
+		try {
+			ob.findElement(By.className("button-form btn-common")).click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
@@ -140,7 +143,6 @@ public class ENWIAM0001 extends TestBase {
 		}
 
 		pf.getENWReferencePageInstance(ob).clickAccount();
-		// validateLinkedAccounts(3,accountType);
 		pf.getENWReferencePageInstance(ob).logout();
 
 	}
@@ -148,8 +150,6 @@ public class ENWIAM0001 extends TestBase {
 	// Signing into Facebook account again to ensure that linking modal is not displaying
 
 	private void loginToFacebook() throws Exception {
-		// String accountType="Facebook";
-
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 		ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 		try {
@@ -163,8 +163,7 @@ public class ENWIAM0001 extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
-		// validateLinkedAccounts(3,accountType);
+		//pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).logout();
 
 	}
@@ -186,7 +185,7 @@ public class ENWIAM0001 extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
+		//pf.getENWReferencePageInstance(ob).clickAccount();
 
 		pf.getENWReferencePageInstance(ob).logout();
 		closeBrowser();

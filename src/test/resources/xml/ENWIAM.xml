@@ -83,18 +83,6 @@
 		</classes>
 	</test>
 
-	<test name="ENWIAM0001">
-		<classes>
-			<class name="enwiam.ENWIAM0001"></class>
-		</classes>
-	</test>
-
-	<test name="ENWIAM0002">
-		<classes>
-			<class name="enwiam.ENWIAM0002"></class>
-		</classes>
-	</test>
-
 	<test name="ENW_Linking_from_NEON" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM100"></class>
@@ -136,5 +124,21 @@
 		</classes>
 	</test>
 	
-
+ <test name="ENW Linking from ENW" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM0001"></class>
+			<class name="enwiam.ENWIAM0005"></class>
+			<class name="enwiam.ENWIAM0006"></class>
+		</classes>
+	</test>
+ 	<test name="ENWIAM0002">
+		<classes>
+			<class name="enwiam.ENWIAM0002"></class>
+		</classes>
+	</test>
+		<test name="ENWIAM0004">
+		<classes>
+			<class name="enwiam.ENWIAM0004"></class>
+		</classes>
+	</test>
 </suite>

@@ -1,6 +1,7 @@
 package enwiam;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,6 +15,19 @@ import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+
+//OPQA-2399 = Verify that,the user should not be able to exit the STeAM account linking process 
+//through clicking anywhere on the page.
+
+//OPQA-2382= "Verify that,user should go back to ENW login page after clicking the [X] button on top right corner(close symbol) 
+//in ""Endnote Online lets you sign in with LinkedIn "" overlay (Yes,I have an account) button"
+
+//OPQA-2374 = "Verify that,user should go back to ENW login page after clicking the [X] button on top right corner(close symbol)
+//in ""Endnote Online lets you sign in with Facebook "" overlay (Yes,I have an account) button"
+
+//OPQA-2373 || OPQA-2375 || OPQA-2377 || OPQA-2379 || OPQA-2381 || OPQA-2383 || OPQA-2385 || OPQA-2404 || OPQA-2405
+//Sign-in with social with-out a linked steam account and link with non-matching email.
+
 
 public class ENWIAM0002 extends TestBase {
 
@@ -77,7 +91,39 @@ public class ENWIAM0002 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			loginToFb();
+			
+			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+			// String accountType="Facebook";
+			//pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob, "aravind.attur@thomsonreuters.com", "Facebook@123");
+			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials("aravind.attur@thomsonreuters.com", "Facebook@123");
+			new Actions(ob).moveByOffset(200, 200).click().build().perform();
+			//BrowserWaits.waitTime(2);
+			ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
+			Thread.sleep(3000);
+			//pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials("aravind.attur@thomsonreuters.com", "Facebook@123");
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+
+			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
+			try {
+				ob.findElement(By.className("button-form btn-common")).click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+			try {
+				ob.findElement(By.className("btn-common")).click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			pf.getENWReferencePageInstance(ob).clickAccount();
+
+			validateLinkedAccounts(2, "Facebook");
+
+			pf.getENWReferencePageInstance(ob).logout();
+
+			//loginToFb();
 			// closeBrowser();
 			// pf.clearAllPageObjects();
 
@@ -119,33 +165,26 @@ public class ENWIAM0002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void loginToFb() throws Exception {
-		ob.navigate().to(host);
-		// String accountType="Facebook";
-		pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob, "aravind.attur@thomsonreuters.com",
-				"Facebook@123");
-		// LOGIN.getProperty("UserName19"), LOGIN.getProperty("Password19")
+	/*private void loginToFb() throws Exception {
+		
+	}*/
 
+	private void loginToLn() throws Exception {
+		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+		// String accountType="LinkedIn";
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
+		new Actions(ob).moveByOffset(200, 200).click().build().perform();
+		//BrowserWaits.waitTime(2);
+		ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
+		Thread.sleep(3000);
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
 		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
 		try {
-			ob.findElement(By.className("btn-common")).click();
+			ob.findElement(By.className("button-form btn-common")).click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
-
-		validateLinkedAccounts(2, "Facebook");
-
-		pf.getENWReferencePageInstance(ob).logout();
-
-	}
-
-	private void loginToLn() throws Exception {
-		ob.navigate().to(host);
-		// String accountType="LinkedIn";
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
+			}
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
