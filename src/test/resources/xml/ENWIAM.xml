@@ -6,18 +6,55 @@
 	</listeners>
 
 
-	<test name="ENW_registraiton_and_reset_password" preserve-order="true">
+	<test name="ENW_registraiton_and_reset_password1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM009"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password2" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM010"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password3" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM013"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password4" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM014"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password5" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM015"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password6" preserve-order="true">
+		<classes>
+
 			<class name="enwiam.ENWIAM017"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM001"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password8" preserve-order="true">
+		<classes>
 			<class name="enwiam.ENWIAM008"></class>
 		</classes>
 	</test>
+
 	<test name="Validate_email_address_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM002"></class>
@@ -89,7 +126,7 @@
 			<class name="enwiam.ENWIAM101"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Navigation1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM40"></class>
@@ -100,43 +137,43 @@
 			<class name="enwiam.ENWIAM41"></class>
 		</classes>
 	</test>
-		<test name="Navigation3" preserve-order="true">
+	<test name="Navigation3" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM42"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Navigation4" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM43"></class>
 		</classes>
 	</test>
-	
+
 	<test name="NeonLandingpage" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM50"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWLandingpage" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM51"></class>
 		</classes>
 	</test>
-	
- <test name="ENW Linking from ENW" preserve-order="true">
+
+	<test name="ENW Linking from ENW" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM0001"></class>
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enwiam.ENWIAM0006"></class>
 		</classes>
 	</test>
- 	<test name="ENWIAM0002">
+	<test name="ENWIAM0002">
 		<classes>
 			<class name="enwiam.ENWIAM0002"></class>
 		</classes>
 	</test>
-		<test name="ENWIAM0004">
+	<test name="ENWIAM0004">
 		<classes>
 			<class name="enwiam.ENWIAM0004"></class>
 		</classes>

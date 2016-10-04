@@ -5,16 +5,60 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Neon_registraiton_and_reset_password" preserve-order="true">
+	<test name="Neon_registraiton_and_reset_password1" preserve-order="true">
 		<classes>
 			<class name="iam.IAM001"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password2" preserve-order="true">
+		<classes>
 			<class name="iam.IAM016"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password3" preserve-order="true">
+		<classes>
 			<class name="iam.IAM017"></class>
+		</classes>
+	</test>
+	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
+		<classes>
 			<class name="iam.IAM023"></class>
+
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password5" preserve-order="true">
+		<classes>
 			<class name="iam.IAM024"></class>
+
+		</classes>
+	</test>
+	<test name="Neon_registraiton_and_reset_password6" preserve-order="true">
+		<classes>
+
 			<class name="iam.IAM028"></class>
+
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password7" preserve-order="true">
+		<classes>
+
 			<class name="iam.IAM034"></class>
+
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password8" preserve-order="true">
+		<classes>
+
 			<class name="iam.IAM035"></class>
+		</classes>
+	</test>
+	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
+		<classes>
 			<class name="iam.IAM037"></class>
 		</classes>
 	</test>
@@ -178,13 +222,13 @@
 			<class name="iam.IAM031"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Linking_Steam_to_Social">
 		<classes>
 			<class name="iam.IAM032"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Liking_Social_to_Steam">
 		<classes>
 			<class name="iam.IAM033"></class>
@@ -196,6 +240,5 @@
 			<class name="iam.IAM036"></class>
 		</classes>
 	</test>
-
 </suite>
 

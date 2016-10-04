@@ -770,7 +770,7 @@ public class TestBase {
 
 	}
 
-	protected static String email = null;
+	protected String email = null;
 	boolean status = false;
 	String mail = null;
 	boolean activationStatus = false;

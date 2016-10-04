@@ -58,6 +58,10 @@ public class IAM037 extends TestBase {
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
+			} else if (statuCode.equalsIgnoreCase("400")) {
+				logger.info("User Already Deleted Successfully");
+			} else {
+				test.log(LogStatus.FAIL, "Bad request Error..Server down");
 			}
 
 			openBrowser();
