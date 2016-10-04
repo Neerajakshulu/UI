@@ -48,12 +48,11 @@ public class ENW000012 extends TestBase {
 
 		try {
 
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000012"));
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
 			}
-			// Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 			String statuCode1 = deleteUserAccounts(LOGIN.getProperty("UserENWsteam000010"));
 			logger.info("User Status : " + statuCode1);
@@ -72,18 +71,18 @@ public class ENW000012 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
 						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-						.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
+						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				ob.navigate().refresh();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
 						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-						.sendKeys(LOGIN.getProperty("PWDuserENW000012"));
+						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				BrowserWaits.waitTime(6);
+
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(3);
+
 				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 				BrowserWaits.waitTime(3);
 			} catch (Throwable t) {
@@ -94,25 +93,19 @@ public class ENW000012 extends TestBase {
 			}
 
 			logout();
-			BrowserWaits.waitTime(4);
-			// ob.navigate().to(host);
-			// login();
+
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("UserENW000012"),
 					LOGIN.getProperty("PWDuserENW000012"));
-			BrowserWaits.waitTime(3);
 
-			// login();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.header_label.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.header_label.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString())).click();
 
-			//
-			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.account_link.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.account_link.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString())).click();
 
-			BrowserWaits.waitTime(2);
 			// OPQA-1905
-			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.actualEmail.toString())).getText();
+			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
+					.getText();
 			System.out.println(actualEmail);
 
 			try {
@@ -132,8 +125,8 @@ public class ENW000012 extends TestBase {
 
 			}
 			// OPQA-1910
-			BrowserWaits.waitTime(2);
-			String passwordText = ob.findElement(By.xpath(OnePObjectMap.Text_compare_password.toString())).getText();
+			String passwordText = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_TEXT_COMPARE_PASSWORD_XPATH.toString()))
+					.getText();
 			System.out.println(passwordText);
 			try {
 				Assert.assertEquals(passwordText, "Password is associated with your LinkedIn account.");
@@ -154,7 +147,7 @@ public class ENW000012 extends TestBase {
 
 			}
 
-			String LInkText = ob.findElement(By.xpath(OnePObjectMap.accountlink.toString())).getText();
+			String LInkText = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).getText();
 			System.out.println(LInkText);
 			try {
 				Assert.assertEquals(LInkText, "Link accounts");
@@ -173,20 +166,18 @@ public class ENW000012 extends TestBase {
 
 			}
 
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.accountlink.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.accountlink.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
 
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.name(OnePObjectMap.Link_login.toString()), 30);
+			waitForElementTobeVisible(ob, By.name(OnePObjectMap.LINK_LOGIN_XPATH.toString()), 30);
 			Thread.sleep(4);
 			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.DoneButtonClick.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.DoneButtonClick.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
 
-			BrowserWaits.waitTime(5);
-			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.actualEmail1.toString())).getText();
+			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
+					.getText();
 
 			System.out.println(actualEmail1);
 			try {
@@ -202,32 +193,33 @@ public class ENW000012 extends TestBase {
 
 			}
 			// OPQA-1912
-			BrowserWaits.waitTime(5);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.LinkedIn_icon.toString()), 8);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Steam_icon.toString()), 8);
-			try {
-				if (checkElementPresence("LinkedIn_icon") && checkElementPresence("Steam_icon")) {
-					test.log(LogStatus.PASS, "LinkedIn authentication account is linked to the Neon account");
-					System.out.println("pass");
-				}
-
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "LinkedIn authentication account is not linked to the Neon account");
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-				System.out.println("fail");
-
-			}
-
-			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Radiobutton2.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.Radiobutton2.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINKEDIN_ICON_XPATH.toString()), 8);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_STEAM_ICON_XPATH.toString()), 8);
+			/*
+			 * try { if (checkElementPresence("LinkedIn_icon") &&
+			 * checkElementPresence("Steam_icon")) { test.log(LogStatus.PASS,
+			 * "LinkedIn authentication account is linked to the Neon account");
+			 * System.out.println("pass"); }
+			 * 
+			 * } catch (Throwable t) { test.log(LogStatus.FAIL,
+			 * "LinkedIn authentication account is not linked to the Neon account"
+			 * ); test.log(LogStatus.INFO, "Snapshot below: " +
+			 * test.addScreenCapture(captureScreenshot(this.getClass()
+			 * .getSimpleName() +
+			 * "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page"
+			 * )));// screenshot ErrorUtil.addVerificationFailure(t);
+			 * System.out.println("fail");
+			 * 
+			 * }
+			 */
 
 			BrowserWaits.waitTime(3);
-			String TextcompareAfterLink = ob.findElement(By.xpath(OnePObjectMap.Text_compareAfterLink.toString()))
-					.getText();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString())).click();
+
+			// BrowserWaits.waitTime(3);
+			String TextcompareAfterLink = ob
+					.findElement(By.xpath(OnePObjectMap.ACCOUNT_TEXT_COMPARE_AFTERLINK_XPATH.toString())).getText();
 
 			System.out.println(TextcompareAfterLink);
 			try {

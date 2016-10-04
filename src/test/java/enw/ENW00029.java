@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -45,8 +44,7 @@ public class ENW00029 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		// String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
-		// logger.info(statuCode);
+
 		try {
 
 			openBrowser();
@@ -58,16 +56,15 @@ public class ENW00029 extends TestBase {
 
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
 						LOGIN.getProperty("PWDUserFBENW00029"));
-				BrowserWaits.waitTime(3);
 
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-				//
-				BrowserWaits.waitTime(5);
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString()), 30);
+				ob.findElement(By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString())).click();
+
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 50);
 				ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-				BrowserWaits.waitTime(10);
-				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.actualEmail.toString())).getText();
+
+				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
+						.getText();
 				System.out.println(actualEmail);
 				try {
 					Assert.assertEquals(LOGIN.getProperty("UserFBENW00029"), actualEmail);
@@ -87,7 +84,8 @@ public class ENW00029 extends TestBase {
 
 				String accountType = "Facebook";
 				validateSocialAccounts(2, accountType);
-				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.actualEmail1.toString())).getText();
+				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
+						.getText();
 				System.out.println(actualEmail);
 				try {
 					Assert.assertEquals(LOGIN.getProperty("UserFBENW00029"), actualEmail1);
@@ -111,7 +109,7 @@ public class ENW00029 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
 				closeBrowser();
 			}
-			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.Text_accountpage_XPATH.toString()))
+			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.TEXT_ACCOUNTPAGE_XPATH.toString()))
 					.getText();
 			System.out.println(accountpageText);
 			try {
@@ -154,8 +152,7 @@ public class ENW00029 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	public void validateSocialAccounts(int accountCount,
-			String linkName) throws Exception {
+	public void validateSocialAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
 			Assert.assertFalse(

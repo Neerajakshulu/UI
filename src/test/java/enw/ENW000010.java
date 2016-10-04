@@ -45,9 +45,7 @@ public class ENW000010 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		// String statuCode =
-		// deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
-		// logger.info(statuCode);
+
 		try {
 
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
@@ -55,7 +53,6 @@ public class ENW000010 extends TestBase {
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
 			}
-			// Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 			String statuCode1 = deleteUserAccounts(LOGIN.getProperty("UserENWsteam000010"));
 			logger.info("User Status : " + statuCode1);
@@ -83,11 +80,11 @@ public class ENW000010 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				BrowserWaits.waitTime(6);
+				
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(3);
+				
 				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-				BrowserWaits.waitTime(3);
+			
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.INFO, "Snapshot below: " + test
@@ -96,25 +93,19 @@ public class ENW000010 extends TestBase {
 			}
 
 			logout();
-			BrowserWaits.waitTime(4);
-			// ob.navigate().to(host);
 
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserENW000010"),
 					LOGIN.getProperty("PWDuserENW000010"));
-			BrowserWaits.waitTime(3);
 
-			// login();
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.header_label.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.header_label.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString())).click();
 
-			//
-			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.account_link.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.account_link.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString())).click();
 
-			BrowserWaits.waitTime(2);
 			// OPQA-1905
-			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.actualEmail.toString())).getText();
+			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
+					.getText();
 			System.out.println(actualEmail);
 
 			try {
@@ -134,8 +125,9 @@ public class ENW000010 extends TestBase {
 
 			}
 			// OPQA-1906
-			BrowserWaits.waitTime(2);
-			String passwordText = ob.findElement(By.xpath(OnePObjectMap.Text_compare_password.toString())).getText();
+
+			String passwordText = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_TEXT_COMPARE_PASSWORD_XPATH.toString()))
+					.getText();
 			System.out.println(passwordText);
 			try {
 				Assert.assertEquals(passwordText, "Password is associated with your Facebook account.");
@@ -155,8 +147,7 @@ public class ENW000010 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 
 			}
-			BrowserWaits.waitTime(2);
-			String LInkText = ob.findElement(By.xpath(OnePObjectMap.accountlink.toString())).getText();
+			String LInkText = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).getText();
 			System.out.println(LInkText);
 			try {
 				Assert.assertEquals(LInkText, "Link accounts");
@@ -174,22 +165,18 @@ public class ENW000010 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 
 			}
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OnePObjectMap.accountlink.toString()),30);
-			ob.findElement(By.xpath(OnePObjectMap.accountlink.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
 
-			waitForElementTobeVisible(ob, By.name(OnePObjectMap.Link_login.toString()), 30);
+			waitForElementTobeVisible(ob, By.name(OnePObjectMap.LINK_LOGIN_XPATH.toString()), 30);
 			Thread.sleep(30);
 			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 
-			BrowserWaits.waitTime(4);
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OnePObjectMap.DoneButtonClick.toString()),30);
-			ob.findElement(By.xpath(OnePObjectMap.DoneButtonClick.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
 
-			BrowserWaits.waitTime(3);
-			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.actualEmail1.toString())).getText();
+			
+			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
+					.getText();
 
 			System.out.println(actualEmail1);
 			try {
@@ -205,10 +192,10 @@ public class ENW000010 extends TestBase {
 
 			}
 
-			BrowserWaits.waitTime(5);
+			
 			// OPQA-1904
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Facebook_icon.toString()), 8);
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Steam_icon.toString()), 8);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_fACEBOOK_ICON_XPATH.toString()), 8);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_STEAM_ICON_XPATH.toString()), 8);
 
 			try {
 				if (checkElementPresence("Facebook_icon") && checkElementPresence("Steam_icon")) {
@@ -225,14 +212,14 @@ public class ENW000010 extends TestBase {
 				System.out.println("fail");
 
 			}
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_RADIOBUTTON1_XPATH.toString())).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Radiobutton1.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.Radiobutton1.toString())).click();
+			
 
-			BrowserWaits.waitTime(5);
-
-			String TextcompareAfterLink = ob.findElement(By.xpath(OnePObjectMap.Text_compareAfterLink.toString()))
-					.getText();
+			String TextcompareAfterLink = ob
+					.findElement(By.xpath(OnePObjectMap.ACCOUNT_TEXT_COMPARE_AFTERLINK_XPATH.toString())).getText();
 
 			System.out.println(TextcompareAfterLink);
 			try {
@@ -271,14 +258,6 @@ public class ENW000010 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	/*
-	 * public String deleteUserAccounts(String emailId) throws Exception { String local = null; if
-	 * (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) { local = "N"; } else { local = "Y"; }
-	 * getAllAppHostsForGivenEnv( "http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.stable.dev", local);
-	 * RequestSpecification reqSpec = given(); Response resp; logger.info( "host name-->" + appHosts.get("1PAUTH"));
-	 * resp = reqSpec.when().delete(appHosts.get("1PAUTH") + "/admin/auth/link/accounts/" + emailId); return
-	 * String.valueOf(resp.getStatusCode()); }
-	 */
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

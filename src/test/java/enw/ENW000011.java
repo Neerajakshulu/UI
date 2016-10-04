@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -45,7 +44,8 @@ public class ENW000011 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		// String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
+		// String statuCode =
+		// deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
 		// logger.info(statuCode);
 		try {
 
@@ -58,22 +58,22 @@ public class ENW000011 extends TestBase {
 
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
-						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
+						.sendKeys(LOGIN.getProperty("UsersteamENW000011"));
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
+						.sendKeys(LOGIN.getProperty("PWDuserENW000011"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 				ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-				//
-				BrowserWaits.waitTime(5);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 50);
+
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-				BrowserWaits.waitTime(20);
-				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.actualEmail.toString())).getText();
+
+				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
+						.getText();
 				System.out.println(actualEmail);
 				try {
-					Assert.assertEquals(LOGIN.getProperty("UserENWsteam000010"), actualEmail);
+					Assert.assertEquals(LOGIN.getProperty("UsersteamENW000011"), actualEmail);
 					test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 				}
 
@@ -119,16 +119,15 @@ public class ENW000011 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	public void validateLinkedAccounts(int accountCount,
-			String linkName) throws Exception {
+	public void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserENWsteam000010")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UsersteamENW000011")));
 			Assert.assertFalse(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("UserENWsteam000010")));
+					LOGIN.getProperty("UsersteamENW000011")));
 			Assert.assertFalse(pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn",
-					LOGIN.getProperty("UserENWsteam000010")));
+					LOGIN.getProperty("UsersteamENW000011")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Only one account is present in account setting page and primary account text is not displayed");
