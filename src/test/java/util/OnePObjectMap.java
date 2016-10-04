@@ -403,7 +403,7 @@ public enum OnePObjectMap {
 	ACCOUNT_ACTUAL_EMAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
 	ACCOUNT_ACTUAL_EMAIL1_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
 	ACCOUNT_LINK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
-	LINK_LOGIN_XPATH("email"),
+	LINK_LOGIN_NAME("email"),
 	DONE_BUTTON_CLICK_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
 	ACCOUNT_TEXT_COMPARE_XPATH("//p[@ng-show='Account.showEmailNotifications()']"),
 	ACCOUNT_TEXT_COMPARE_AFTERLINK_XPATH("//p[@ng-show='Account.isSteamProvider() && Account.hasMultipleAccounts']"),
@@ -412,7 +412,6 @@ public enum OnePObjectMap {
 	ACCOUNT_LINKEDIN_ICON_XPATH("//i[@class='fa fa-linkedin-square account-option-item__icon--linkedin']"),
 	ACCOUNT_fACEBOOK_ICON_XPATH("//i[@class='fa fa-facebook-square account-option-item__icon--facebook']"),
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
-	ACCOUNT_TEXT_CHANGEPWD("//a[contains(text(),'Change')]"),
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 
 	// #######RCC#############
