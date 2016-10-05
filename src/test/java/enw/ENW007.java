@@ -5,9 +5,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -23,7 +21,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW007 extends TestBase {
 
@@ -45,7 +42,7 @@ public class ENW007 extends TestBase {
 	@Test
 	public void testcaseENW007() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -58,8 +55,8 @@ public class ENW007 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			List<String> list = Arrays.asList(new String[] { "Reference Type:", "Author:", "Title:", "Journal:",
-					"Volume:", "Issue:", "Abstract:", "Accession Number:", "Notes:", "URL:" });
+			List<String> list = Arrays.asList(new String[] {"Reference Type:", "Author:", "Title:", "Journal:",
+					"Volume:", "Issue:", "Abstract:", "Accession Number:", "Notes:", "URL:"});
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -77,13 +74,11 @@ public class ENW007 extends TestBase {
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 
-			
-
 			String expectedNotes1 = ob.findElement(By.xpath("//span[text()='Times Cited']//preceding::span[1]"))
 					.getText();
 			String expectedNotes2 = ob.findElement(By.xpath("//span[text()='Cited References']//preceding::span[1]"))
 					.getText();
-		
+
 			HashMap<String, String> neonValues = new HashMap<String, String>();
 			neonValues.put("expectedReferenceType", "Journal Article");
 			neonValues.put("expectedURL", "https://dev-stable.1p.thomsonreuters.com");
@@ -124,7 +119,6 @@ public class ENW007 extends TestBase {
 			}
 			BrowserWaits.waitTime(4);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-			
 
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("ReferenceType",
@@ -179,18 +173,15 @@ public class ENW007 extends TestBase {
 					&& neonValues.get("expectedVolume").equals(endNoteDetails.get("VolumeValue"))
 					&& neonValues.get("expectedIssue").equals(endNoteDetails.get("IssueValue"))
 					&& neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue")))) {
-				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+				test.log(LogStatus.FAIL,
+						"Values are not matching \n" + neonValues + " Endnote Values " + endNoteDetails);
 				Assert.assertEquals(true, false);
 			}
 
-			
 			closeBrowser();
 			/*
-			 * public void deleteRecord() {
-			 * ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
-			 * ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();
-			 * 
-			 * }
+			 * public void deleteRecord() { ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
+			 * ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click(); }
 			 */
 
 		} catch (Throwable t) {
@@ -215,10 +206,10 @@ public class ENW007 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

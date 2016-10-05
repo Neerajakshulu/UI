@@ -59,11 +59,11 @@ public class ENW009 extends TestBase {
 			String header_Expected = "Thomson Reuters";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_CONTINUE_BUTTON);
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			String actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_Header_XPATH.toString())).getText();
+			String actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_HEADER_XPATH.toString())).getText();
 			logger.info("Header Text displayed as:" + actual_result);
 
 			if (ob.findElement(By.className("inactiveLink")) == null) {

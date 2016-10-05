@@ -54,13 +54,13 @@ public class ENW017 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			// ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
 			pf.getHFPageInstance(ob).clickProfileImage();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Feedback_XPATH.toString())).click();
+			ob.findElement(By.linkText(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK.toString())).click();
 			Thread.sleep(1000);
 			// ob.findElement(By.xpath(OnePObjectMap.COMMON_SEND_fEEDBACK_ENDNOTE_TEAM.toString())).click();
 			ob.findElement(By.partialLinkText("Send feedback")).click();

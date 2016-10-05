@@ -55,12 +55,12 @@ public class ENW012 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Privacy_Link_XPATH.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
+			ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK.toString())).click();
 			// ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
 			String newWindow = switchToNewWindow(ob);
 			if (newWindow != null) {

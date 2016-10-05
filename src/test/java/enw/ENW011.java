@@ -60,22 +60,22 @@ public class ENW011 extends TestBase {
 			String user_Last_Name = "";
 			String user_Full_name = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			// ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Options_Tab_XPATH.toString())).click();
+			ob.findElement(By.linkText(OnePObjectMap.ENW_OPTIONS_TAB_LINK.toString())).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_TAB_LINK);
+			ob.findElement(By.linkText(OnePObjectMap.ENW_PROFILE_TAB_LINK.toString())).click();
 			BrowserWaits.waitTime(1);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_Tab_XPATH.toString())).click();
-			BrowserWaits.waitTime(1);
-			user_First_Name = ob.findElement(By.xpath(".//*[@id='firstname']")).getAttribute("value");
-			user_Last_Name = ob.findElement(By.xpath(".//*[@id='lastname']")).getAttribute("value");
+			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString())).getAttribute("value");
+			user_Last_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_LAST_NAME_XPATH.toString())).getAttribute("value");
 
 			logger.info("User name Saved as:" + user_Full_name);
 			BrowserWaits.waitTime(1);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Name_XPATH.toString())).getText();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
+			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_NAME_XPATH.toString())).getText();
 			if (ob.findElement(By.className("inactiveLink")) == null) {
 				logger.info("User name NOT hyperlinked to Profile page");
 				logger.info("NOT hyperlinked:" + actual_result);

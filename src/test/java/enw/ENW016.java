@@ -55,14 +55,14 @@ public class ENW016 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 			// ob.findElement(By.cssSelector("button[class*='login-button']"));
-			if (!ob.findElement(By.cssSelector(OnePObjectMap.ENW_SignIn_BTN_CSS.toString())).isDisplayed()) {
+			if (!ob.findElement(By.cssSelector(OnePObjectMap.ENW_SIGNIN_BTN_CSS.toString())).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Log out is not functional");
 				Assert.assertEquals(true, false);
 			} else {

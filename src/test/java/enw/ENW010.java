@@ -57,13 +57,13 @@ public class ENW010 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String actual_result = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
 
-			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Name_XPATH.toString())).getText();
+			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_NAME_XPATH.toString())).getText();
 			if (ob.findElement(By.className("inactiveLink")) == null) {
 				logger.info("User name NOT hyperlinked to Profile page");
 				logger.info("NOT hyperlinked:" + actual_result);
@@ -71,7 +71,7 @@ public class ENW010 extends TestBase {
 				Assert.assertEquals(true, false);
 			}
 			logger.info("Actual result displayed as :" + actual_result); // Image_User_XPATH
-			WebElement ImageFile = ob.findElement(By.xpath(OnePObjectMap.Image_User_XPATH.toString()));
+			WebElement ImageFile = ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString()));
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
 					ImageFile);
