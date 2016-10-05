@@ -36,11 +36,18 @@
 		</classes>
 	</test>
 
+	<test name="ENW007">
+		<classes>
+			<class name="enw.ENW007"></class>
+		</classes>
+	</test>
+	
 	<test name="ENW006">
 		<classes>
 			<class name="enw.ENW006"></class>
 		</classes>
 	</test>
+	
 	<test name="ENW009">
 		<classes>
 			<class name="enw.ENW009"></class>

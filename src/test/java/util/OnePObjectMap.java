@@ -53,6 +53,36 @@ public enum OnePObjectMap {
 	ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH("//a[contains(.,'Account')]"),
 	ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH("//a[contains(.,'Sign out')]"),
 	ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
+	
+	//sendtoendnote locators
+			ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
+			//ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell biology')]"),
+			ENW_RECORD_LINK_XPATH(".//*[@id='ref_main']/tr[6]/td[4]/a"),
+			
+			ENW_RECORD_REFERENCETYPE_XPATH("//tr[@id='showRefName']/td[1]"),
+			ENW_RECORD_REFERENCETYPE_VALUE_XPATH("//tr[@id='showRefName']/td[2]"),
+			
+			ENW_RECORD_URL_XPATH("//tr[@id='url_tr']/td[1]/span"),
+			ENW_RECORD_URL_VALUE_XPATH("//tr[@id='url_tr']/td[2]//span[contains(text(), 'stable')]"),
+			ENW_RECORD_AUTHOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
+			
+			ENW_RECORD_TITLE_XPATH("//tr[@id='title_tr']/td[1]/span"),
+			ENW_RECORD_TITLE_VALUE_XPATH("//tr[@id='title_tr']/td[2]/div"),
+			
+			ENW_RECORD_JOURNAL_XPATH("//tr[@id='secondary_title_tr']/td[1]/span"),
+			ENW_RECORD_JOURNAL_VALUE_XPATH("//tr[@id='secondary_title_tr']/td[2]/div"),
+			
+			ENW_RECORD_VOLUME_XPATH("//tr[@id='volume_tr']/td[1]/span"),
+			ENW_RECORD_VOLUME_VALUE_XPATH("//tr[@id='volume_tr']/td[2]/div"),
+			
+			ENW_RECORD_ISSUE_XPATH("//tr[@id='number_tr']/td[1]/span"),
+			ENW_RECORD_ISSUE_VALUE_XPATH("//tr[@id='number_tr']/td[2]/div"),
+			
+			ENW_RECORD_ABSTRACT_XPATH("//tr[@id='abstract_tr']/td[1]/span"),
+			ENW_RECORD_ACCESSIONNUMBER_XPATH("//tr[@id='accession_number_tr']/td[1]/span"),
+			
+			ENW_RECORD_NOTES_XPATH("//tr[@id='notes_tr']/td[1]/span"),
+			ENW_RECORD_NOTES_VALUE_XPATH("//tr[@id='notes_tr']/td[2]/div"),
 
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),
