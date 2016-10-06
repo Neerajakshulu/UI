@@ -58,25 +58,28 @@ public class ENW017 extends TestBase {
 				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			// ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy", "Account", "Help", "Sign out");
 			ob.findElement(By.linkText(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK.toString())).click();
 			Thread.sleep(1000);
 			// ob.findElement(By.xpath(OnePObjectMap.COMMON_SEND_fEEDBACK_ENDNOTE_TEAM.toString())).click();
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS.toString())).sendKeys("testing");
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN.toString())).click();
-			if (!ob.findElement(By.xpath(OnePObjectMap.COMMON_FeedBack_sent_confirmation.toString())).isDisplayed()) {
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_CSS);
+			if (!ob.findElement(By.cssSelector(OnePObjectMap.COMMON_FEEDBACK_SENT_CONFIRMATION_CSS.toString())).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Feedback not sent");
 				logger.info("Sorry, but we couldn't deliver your submission. Please fix these issues and try again:");
 				Assert.assertEquals(true, false);
 			} else {
 
 				test.log(LogStatus.PASS, "Feedback has been sent successfully.");
-				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
+				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM.toString())).click();
-
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())).click();
+			
+			logger.info("current page url-->"+ob.getCurrentUrl());
+			
 			if (ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED.toString())).isDisplayed()) {
 				Assert.assertEquals(expected_URL, ob.getCurrentUrl());
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");

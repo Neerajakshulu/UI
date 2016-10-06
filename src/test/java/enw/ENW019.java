@@ -55,7 +55,7 @@ public class ENW019 extends TestBase {
 			clearCookies();
 
 			// ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login?app=neon");
+			ob.navigate().to(host);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			// if (!ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
 			// //ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
@@ -70,8 +70,8 @@ public class ENW019 extends TestBase {
 			Thread.sleep(1000);
 			ob.findElement(By.partialLinkText("Send feedback")).click();
 			// ob.findElement(By.xpath(OnePObjectMap.COMMON_SEND_fEEDBACK_ENDNOTE_TEAM.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS.toString())).sendKeys("testing");
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
+			ob.findElement(By.cssSelector(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_CSS.toString())).click();
 			Thread.sleep(5000);
 			WebDriverWait wait = new WebDriverWait(ob, 10);
 			wait.until(ExpectedConditions.textToBePresentInElement(
@@ -82,7 +82,7 @@ public class ENW019 extends TestBase {
 
 			if (ob.findElement(By.partialLinkText("Your feedback has")).isDisplayed()) {
 				test.log(LogStatus.PASS, "Feedback has been sent successfully.");
-				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
+				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 
 				// Assert.assertEquals(true, false);
 			}

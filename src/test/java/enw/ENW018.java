@@ -66,13 +66,13 @@ public class ENW018 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			ob.findElement(By.partialLinkText("Help & Feedback")).click();
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS.toString())).sendKeys("Feedback sending");
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("Feedback sending");
 			ob.findElement(By.xpath(OR.getProperty("FeedBackSubmitBtn"))).click();
 			WebDriverWait wait = new WebDriverWait(ob, 10);
 			wait.until(ExpectedConditions.textToBePresentInElement(
 					ob.findElement(By.xpath("html/body/div[6]/div/div/div[1]/h3")), "Thank you"));
 			String str = ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED1.toString())).getText();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 			try {
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
