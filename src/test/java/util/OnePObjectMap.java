@@ -50,6 +50,14 @@ public enum OnePObjectMap {
 	ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
 	
 	//sendtoendnote locators
+	NEON_RECORDVIEW_NOTES1_XPATH("//span[text()='Times Cited']//preceding::span[1]"),
+	NEON_RECORDVIEW_NOTES2_XPATH("//span[text()='Cited References']//preceding::span[1]"),
+	NEON_RECORDVIEW_TITLE_XPATH("//div[@class='ne-publication__header']//h2"),
+	NEON_RECORDVIEW_JOURNAL_XPATH("//div[@class='ne-publication__metadata ng-binding']"),
+	NEON_RECORDVIEW_VOLUME_XPATH("//div[@ng-show='record.volume != null']/span[2]"),
+	NEON_RECORDVIEW_ISSUE_XPATH("//div[@ng-show='record.issue != null']/span[2]"),
+	NEON_RECORDVIEW_PAGES_XPATH("//div[@ng-show='record.pages != null']/span[2]"),
+	
 			ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
 			//ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell biology')]"),
 			ENW_RECORD_LINK_XPATH(".//*[@id='ref_main']/tr[6]/td[4]/a"),

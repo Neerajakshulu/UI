@@ -18,11 +18,11 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW003 extends TestBase {
-
+	
 	static int status = 1;
-
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -38,8 +38,8 @@ public class ENW003 extends TestBase {
 
 	@Test
 	public void testcaseENW003() throws Exception {
-
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -50,70 +50,75 @@ public class ENW003 extends TestBase {
 
 		}
 
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername003"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-
+		
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
+			
 			ob.get(host);
-
-			String expectedSuccessMessage = "Sent To EndNote";
-
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),
-					CONFIG.getProperty("sfbpwrd003"));
-
-			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
-			BrowserWaits.waitTime(5);
-			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-
-			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString()))
-					.click();
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-
-			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			new Actions(ob).moveByOffset(200, 200).click().build().perform();
-			BrowserWaits.waitTime(8);
-			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
-
-			pf.getLoginTRInstance(ob).logOutApp();
-
-			try {
-				Assert.assertEquals(expectedSuccessMessage,
-						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+			
+			String expectedSuccessMessage="Sent To EndNote";
+			  
+			   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),CONFIG.getProperty("sfbpwrd003"));
+			   
+			   //pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
+			   BrowserWaits.waitTime(5);
+			   pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			   BrowserWaits.waitTime(5);
+			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			   
+			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			   
+              ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
+			  BrowserWaits.waitTime(5);
+              pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			   
+			 pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			  new Actions(ob).moveByOffset(200, 200).click().build().perform();
+			   BrowserWaits.waitTime(8);
+			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			   pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
+			   
+		
+			  
+			
+			   try
+				{
+				Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
 				test.log(LogStatus.PASS,
 						" Record sent successfully from Search Results Page after linking with steam account");
-			}
-
-			catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
-																													// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-			}
-
+				}
+				
+				catch (Throwable t) {
+					t.printStackTrace();
+					test.log(LogStatus.FAIL,
+							" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
+																																// reports
+					status = 2;// excel
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+					ErrorUtil.addVerificationFailure(t);
+				}
+			   pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-
+			
+			
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -136,10 +141,10 @@ public class ENW003 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
+		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
+		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

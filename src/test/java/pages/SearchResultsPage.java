@@ -342,7 +342,7 @@ public class SearchResultsPage extends TestBase {
 			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys("9595far7202#");
 			   
 			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
-							   
+			   waitForElementTobeVisible(ob,By.cssSelector("button[class='wui-icon-btn ng-isolate-scope']"),30);		   
 			test.log(LogStatus.PASS,"User linked with steam account");
 
 	}
