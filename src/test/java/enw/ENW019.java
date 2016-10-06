@@ -4,8 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,9 +17,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW019 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,10 +35,10 @@ public class ENW019 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW018() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+	public void testcaseENW019() throws Exception {
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "Thank you";
+		String expected_URL = "Thank You";
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -53,72 +53,34 @@ public class ENW019 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
-			// ob.get(host+CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().to(host);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			// if (!ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX.toString())).isEnabled()) {
-			// //ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
-			// ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
-			// }
-			Thread.sleep(5000);
 			pf.getHFPageInstance(ob).clickProfileImage();
-			Thread.sleep(3000);
-			// ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())).click();
-			// ob.findElement(By.xpath(OnePObjectMap.NEON_SIDE_FEEDBACKHELP_XPATH.toString())).click();
 			ob.findElement(By.partialLinkText("Help & Feedback")).click();
 			Thread.sleep(1000);
-			ob.findElement(By.partialLinkText("Send feedback")).click();
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_SEND_fEEDBACK_ENDNOTE_TEAM.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
-			ob.findElement(By.cssSelector(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_CSS.toString())).click();
-			Thread.sleep(5000);
-			WebDriverWait wait = new WebDriverWait(ob, 10);
-			wait.until(ExpectedConditions.textToBePresentInElement(
-					ob.findElement(By.xpath("html/body/div[6]/div/div/div[1]/h3")), "Thank you"));
-			// test.log(LogStatus.PASS,
-			// "Feedback has been sent successfully.");
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
-
-			if (ob.findElement(By.partialLinkText("Your feedback has")).isDisplayed()) {
-				test.log(LogStatus.PASS, "Feedback has been sent successfully.");
-				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-
-				// Assert.assertEquals(true, false);
+			ob.findElement(By.xpath("//a[@class='feedback-link__anchor']")).click();
+			Thread.sleep(1000);
+			if (ob.findElement(By.xpath("//div[@class='modal-header wui-modal__header ng-scope']")).isDisplayed()) {
+				Select Country = new Select(ob.findElement(By.xpath(".//*[@id='countrySelect']")));
+				Country.selectByVisibleText("India");
+				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
+				Thread.sleep(2000);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+				Thread.sleep(2000);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+				Thread.sleep(3000);
+				String str = ob.findElement(By.xpath("//h3[contains(text(),'Thank You')]")).getText();
+				Assert.assertEquals(expected_URL, str);
+				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
+			} else {
+				test.log(LogStatus.FAIL, "Feedback has not sent .");
+				Assert.assertEquals(true, false);
 			}
-			// else{
-			// test.log(LogStatus.FAIL,
-			// "Feedback not sent");
-			// }
-			// Thread.sleep(3000);
-			//
-			// ob.findElement(By.partialLinkText("Report a problem")).click();
-			// //*[@id='countrySelect']
-			//
-			// Select Country = new Select(ob.findElement(By.xpath(".//*[@id='countrySelect']")));
-			// Country.selectByVisibleText("India");
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS.toString())).sendKeys("testing");
-			//
-			//
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN.toString())).click();
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE.toString())).click();
-			//
-			// // ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM.toString())).click();
-			//
-			// if(ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED1.toString())).isDisplayed()){
-			// test.log(LogStatus.PASS,
-			// "Expected page is displayed and Navigating to the proper URL.");
-			// Assert.assertEquals(true,false);
-			// }
-			// else{
-			// test.log(LogStatus.FAIL,
-			// "Expected page is not displayed and URL is wrong.");
-			//
-			// }
+
 			try {
-				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
+				test.log(LogStatus.PASS, "Feedback has  been sent successfully");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");// extent
+				test.log(LogStatus.FAIL, "Feedback has not sent.");// extent
 				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,

@@ -16,9 +16,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW009 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:
@@ -36,10 +36,8 @@ public class ENW009 extends TestBase {
 
 	@Test
 	public void testcaseENW009() throws Exception {
-
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -54,13 +52,12 @@ public class ENW009 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String header_Expected = "Thomson Reuters";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_CONTINUE_BUTTON);
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			String actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_HEADER_XPATH.toString())).getText();

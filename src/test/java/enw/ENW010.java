@@ -18,6 +18,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW010 extends TestBase {
 
@@ -37,7 +38,7 @@ public class ENW010 extends TestBase {
 
 	@Test
 	public void testcaseENW010() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -57,8 +58,8 @@ public class ENW010 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String actual_result = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();

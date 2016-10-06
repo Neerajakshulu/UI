@@ -16,6 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW015 extends TestBase {
 
@@ -35,7 +36,7 @@ public class ENW015 extends TestBase {
 
 	@Test
 	public void testcaseENW015() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -55,12 +56,12 @@ public class ENW015 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-			ob.findElement(By.linkText(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
 			// ob.findElement(By.xpath(OR.getProperty("ENW_Feedback"))).click();
 
 			String newWindow = switchToNewWindow(ob);

@@ -6,48 +6,15 @@
 	</listeners>
 
 
-	<test name="ENW001">
-		<classes>
-			<class name="enw.ENW001"></class>
-		</classes>
-	</test>
+	<!-- <test name="ENW001"> <classes> <class name="enw.ENW001"></class> </classes> 
+		</test> <test name="ENW002"> <classes> <class name="enw.ENW002"></class> 
+		</classes> </test> <test name="ENW003"> <classes> <class name="enw.ENW003"></class> 
+		</classes> </test> <test name="ENW004"> <classes> <class name="enw.ENW004"></class> 
+		</classes> </test> <test name="ENW005"> <classes> <class name="enw.ENW005"></class> 
+		</classes> </test> <test name="ENW007"> <classes> <class name="enw.ENW007"></class> 
+		</classes> </test> <test name="ENW006"> <classes> <class name="enw.ENW006"></class> 
+		</classes> </test> -->
 
-	<test name="ENW002">
-		<classes>
-			<class name="enw.ENW002"></class>
-		</classes>
-	</test>
-
-	<test name="ENW003">
-		<classes>
-			<class name="enw.ENW003"></class>
-		</classes>
-	</test>
-
-	<test name="ENW004">
-		<classes>
-			<class name="enw.ENW004"></class>
-		</classes>
-	</test>
-
-	<test name="ENW005">
-		<classes>
-			<class name="enw.ENW005"></class>
-		</classes>
-	</test>
-
-	<test name="ENW007">
-		<classes>
-			<class name="enw.ENW007"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW006">
-		<classes>
-			<class name="enw.ENW006"></class>
-		</classes>
-	</test>
-	
 	<test name="ENW009">
 		<classes>
 			<class name="enw.ENW009"></class>
@@ -93,6 +60,11 @@
 			<class name="enw.ENW017"></class>
 		</classes>
 	</test>
+	<test name="ENW022">
+		<classes>
+			<class name="enw.ENW022"></class>
+		</classes>
+	</test>
 	<test name="ENW018">
 		<classes>
 			<class name="enw.ENW018"></class>
@@ -108,7 +80,11 @@
 			<class name="enw.ENW020"></class>
 		</classes>
 	</test>
-
+	<test name="ENW021">
+		<classes>
+			<class name="enw.ENW021"></class>
+		</classes>
+	</test>
 	<test name="ENW000010">
 		<classes>
 			<class name="enw.ENW000010"></class>
@@ -129,6 +105,6 @@
 			<class name="enw.ENW00029"></class>
 		</classes>
 	</test>
-	
+
 </suite>
 

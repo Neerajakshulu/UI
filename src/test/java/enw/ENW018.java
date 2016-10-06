@@ -4,13 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -19,6 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW018 extends TestBase {
 
@@ -37,12 +35,12 @@ public class ENW018 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"username", "password"})
-	public void testcaseENW018(String username,
-			String password) throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+	public void testcaseENW018() throws Exception {
+
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "Thank you";
+		String expected_URL = "Thank You";
+
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -57,22 +55,22 @@ public class ENW018 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/#/login");
+			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
-			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
-			pf.getLoginTRInstance(ob).clickLogin();
-			Thread.sleep(3000);
+			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			ob.findElement(By.partialLinkText("Help & Feedback")).click();
+			Thread.sleep(1000);
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("Feedback sending");
-			ob.findElement(By.xpath(OR.getProperty("FeedBackSubmitBtn"))).click();
-			WebDriverWait wait = new WebDriverWait(ob, 10);
-			wait.until(ExpectedConditions.textToBePresentInElement(
-					ob.findElement(By.xpath("html/body/div[6]/div/div/div[1]/h3")), "Thank you"));
-			String str = ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED1.toString())).getText();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
+					.sendKeys("Feedback sending");
+			Thread.sleep(2000);
+			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
+			Thread.sleep(2000);
+			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
+			Thread.sleep(3000);
+			String str = ob.findElement(By.xpath("//h3[contains(text(),'Thank You')]")).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");

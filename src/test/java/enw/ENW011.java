@@ -17,6 +17,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW011 extends TestBase {
 
@@ -36,7 +37,7 @@ public class ENW011 extends TestBase {
 
 	@Test
 	public void testcaseENW011() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -60,17 +61,19 @@ public class ENW011 extends TestBase {
 			String user_Last_Name = "";
 			String user_Full_name = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			// ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			ob.findElement(By.linkText(OnePObjectMap.ENW_OPTIONS_TAB_LINK.toString())).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_TAB_LINK);
-			ob.findElement(By.linkText(OnePObjectMap.ENW_PROFILE_TAB_LINK.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())).click();
 			BrowserWaits.waitTime(1);
-			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString())).getAttribute("value");
-			user_Last_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_LAST_NAME_XPATH.toString())).getAttribute("value");
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())).click();
+			BrowserWaits.waitTime(1);
+			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString()))
+					.getAttribute("value");
+			user_Last_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_LAST_NAME_XPATH.toString()))
+					.getAttribute("value");
 
 			logger.info("User name Saved as:" + user_Full_name);
 			BrowserWaits.waitTime(1);

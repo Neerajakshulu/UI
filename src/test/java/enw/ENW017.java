@@ -16,16 +16,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW017 extends TestBase {
-
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -35,9 +30,8 @@ public class ENW017 extends TestBase {
 
 	@Test
 	public void testcaseENW017() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "http://ip-science.thomsonreuters.com/support/";
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -54,38 +48,29 @@ public class ENW017 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy", "Account", "Help", "Sign out");
-			ob.findElement(By.linkText(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_FEEDBACK_LINK.toString())).click();
-			Thread.sleep(1000);
-			// ob.findElement(By.xpath(OnePObjectMap.COMMON_SEND_fEEDBACK_ENDNOTE_TEAM.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_CSS);
-			if (!ob.findElement(By.cssSelector(OnePObjectMap.COMMON_FEEDBACK_SENT_CONFIRMATION_CSS.toString())).isDisplayed()) {
+			Thread.sleep(2000);
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
+					.sendKeys("Feedback sending");
+			Thread.sleep(2000);
+			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
+			Thread.sleep(2000);
+			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
+			Thread.sleep(3000);
+			if (!ob.findElement(By.xpath("//h4[contains(text(),'Your feedback has been sent')]")).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Feedback not sent");
 				logger.info("Sorry, but we couldn't deliver your submission. Please fix these issues and try again:");
 				Assert.assertEquals(true, false);
 			} else {
-
 				test.log(LogStatus.PASS, "Feedback has been sent successfully.");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-			}
-			ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())).click();
-			
-			logger.info("current page url-->"+ob.getCurrentUrl());
-			
-			if (ob.findElement(By.xpath(OnePObjectMap.EXPECTED_PAGE_DISPLAYED.toString())).isDisplayed()) {
-				Assert.assertEquals(expected_URL, ob.getCurrentUrl());
-				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
-			} else {
-				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");
-
+				Thread.sleep(2000);
 			}
 			try {
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");

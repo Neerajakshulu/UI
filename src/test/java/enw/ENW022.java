@@ -18,7 +18,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class ENW013 extends TestBase {
+public class ENW022 extends TestBase {
 	static int status = 1;
 
 	// Following is the list of status:
@@ -34,54 +34,48 @@ public class ENW013 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW013() throws Exception {
+	public void testcaseENW017() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		String expected_URL = "http://ip-science.thomsonreuters.com/support/";
 		if (!master_condition) {
-
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
+			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
-
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_TERMS_OF_USE_XPATH.toString())).click();
-			// ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())).click();
 			String newWindow = switchToNewWindow(ob);
 			if (newWindow != null) {
-				if (ob.getCurrentUrl().contains("terms-of-use")) {
-					logger.info("terms-of-use is opened in the new browser and Content Available");
+				if (ob.getCurrentUrl().contains(expected_URL)) {
+					logger.info("Expected page is displayed and  Navigating to the proper URL");
 				}
 			} else {
-				test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");
+				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");
 				Assert.assertEquals(true, false);
+
 			}
-
 			try {
-
-				// Assert.assertTrue();
-				test.log(LogStatus.PASS, " terms-of-use is opened in the new browser and Content Available");
+				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");// extent
-				ErrorUtil.addVerificationFailure(t);// testng // reports
+				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");// extent
+				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "ew browser is not displayed and content is not matching")));// screenshot
+				test.log(LogStatus.INFO,
+						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

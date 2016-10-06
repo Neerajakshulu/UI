@@ -16,9 +16,9 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW012 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:
@@ -35,7 +35,7 @@ public class ENW012 extends TestBase {
 
 	@Test
 	public void testcaseENW013() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -55,12 +55,12 @@ public class ENW012 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-			ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK.toString())).click();
+			ob.findElement(By.xpath(OnePObjectMap.ENW_PRIVACY_LINK_XPATH.toString())).click();
 			// ob.findElement(By.xpath(OR.getProperty("ENW_termsof_use"))).click();
 			String newWindow = switchToNewWindow(ob);
 			if (newWindow != null) {
@@ -71,7 +71,6 @@ public class ENW012 extends TestBase {
 				test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");
 				Assert.assertEquals(true, false);
 			}
-
 			try {
 
 				// Assert.assertTrue();

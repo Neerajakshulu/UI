@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.stream.XMLEventReader;
@@ -1187,16 +1186,25 @@ public class TestBase {
 	 * @param driver
 	 * @return
 	 */
+//	public String switchToNewWindow(WebDriver driver) {
+//		mainWindow = driver.getWindowHandle();
+//		String newWindow = "";
+//		Set<String> windows = driver.getWindowHandles();
+//		// windows.remove(mainWindow);
+//		if (!windows.iterator().next().contains(mainWindow))
+//			newWindow = windows.iterator().next();
+//		driver.switchTo().window(newWindow);
+//		return newWindow;
+//
+//	}
 	public String switchToNewWindow(WebDriver driver) {
 		mainWindow = driver.getWindowHandle();
 		String newWindow = "";
-		Set<String> windows = driver.getWindowHandles();
-		// windows.remove(mainWindow);
-		if (!windows.iterator().next().contains(mainWindow))
-			newWindow = windows.iterator().next();
-		driver.switchTo().window(newWindow);
-		return newWindow;
-
+		for(String windowhandle : driver.getWindowHandles()){
+			newWindow=windowhandle;
+		    driver.switchTo().window(windowhandle);
+		}
+		return newWindow;		
 	}
 
 	public String switchToMainWindow(WebDriver driver) {
@@ -1353,7 +1361,24 @@ public class TestBase {
 		ob.findElement(By.name("username")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty(pwdKey));
 		jsClick(ob, ob.findElement(By.xpath(".//*[@name='image']")));
-
+		try {
+			if(ob.findElements(By.xpath(".//h1[contains(text(),'Thank you for using Web of Science')]")).size()>0){
+				jsClick(ob, ob.findElement(By.xpath(".//a[contains(text(),'continue and establish a new session')]")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loginToRID(String usernameKey,
+			String pwdKey) throws Exception {
+		jsClick(ob,ob.findElement(By.xpath("//a[@id='header_link_login']")));
+		waitForElementTobeVisible(ob, By.xpath("//input[@id='email']"), 180);
+		ob.findElement(By.xpath("//input[@id='email']")).clear();
+		ob.findElement(By.xpath("//input[@id='email']")).sendKeys(LOGIN.getProperty(usernameKey));
+		ob.findElement(By.xpath("//input[@id='password']")).sendKeys(LOGIN.getProperty(pwdKey));
+		jsClick(ob, ob.findElement(By.xpath("//*[@id='submitImage']/img")));
+		
 	}
 
 	/**

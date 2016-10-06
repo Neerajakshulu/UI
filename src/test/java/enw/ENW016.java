@@ -16,6 +16,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 public class ENW016 extends TestBase {
 
@@ -35,9 +36,9 @@ public class ENW016 extends TestBase {
 
 	@Test
 	public void testcaseENW016() throws Exception {
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		String expected = "https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote";
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -55,23 +56,22 @@ public class ENW016 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIALOG_BOX_XPATH.toString())).isEnabled()) {
-				// ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_BUTTON.toString())).click();
+			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+
 				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 			// ob.findElement(By.cssSelector("button[class*='login-button']"));
-			if (!ob.findElement(By.cssSelector(OnePObjectMap.ENW_SIGNIN_BTN_CSS.toString())).isDisplayed()) {
+			if (!ob.getCurrentUrl().contains(expected)) {
 				test.log(LogStatus.FAIL, "Log out is not functional");
 				Assert.assertEquals(true, false);
 			} else {
+				logger.info("Current URL displayed is:" + ob.getCurrentUrl().toString());
 				test.log(LogStatus.PASS,
 						"Log out is functioning and the alternate Endnote profile fly out provide the ability for a user to log out of Endnote.");
-
 			}
 			try {
-
 				// Assert.assertTrue();
 				test.log(LogStatus.PASS, "feedBack is opened in the new Window and Content Available");
 			} catch (Throwable t) {
