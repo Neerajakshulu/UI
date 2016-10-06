@@ -6,14 +6,41 @@
 	</listeners>
 
 
-	<!-- <test name="ENW001"> <classes> <class name="enw.ENW001"></class> </classes> 
-		</test> <test name="ENW002"> <classes> <class name="enw.ENW002"></class> 
-		</classes> </test> <test name="ENW003"> <classes> <class name="enw.ENW003"></class> 
-		</classes> </test> <test name="ENW004"> <classes> <class name="enw.ENW004"></class> 
-		</classes> </test> <test name="ENW005"> <classes> <class name="enw.ENW005"></class> 
-		</classes> </test> <test name="ENW007"> <classes> <class name="enw.ENW007"></class> 
-		</classes> </test> <test name="ENW006"> <classes> <class name="enw.ENW006"></class> 
-		</classes> </test> -->
+	<test name="ENW001">
+		<classes>
+			<class name="enw.ENW001"></class>
+		</classes>
+	</test>
+	<test name="ENW002">
+		<classes>
+			<class name="enw.ENW002"></class>
+		</classes>
+	</test>
+	<test name="ENW003">
+		<classes>
+			<class name="enw.ENW003"></class>
+		</classes>
+	</test>
+	<test name="ENW004">
+		<classes>
+			<class name="enw.ENW004"></class>
+		</classes>
+	</test>
+	<test name="ENW005">
+		<classes>
+			<class name="enw.ENW005"></class>
+		</classes>
+	</test>
+	<test name="ENW007">
+		<classes>
+			<class name="enw.ENW007"></class>
+		</classes>
+	</test>
+	<test name="ENW006">
+		<classes>
+			<class name="enw.ENW006"></class>
+		</classes>
+	</test>
 
 	<test name="ENW009">
 		<classes>
