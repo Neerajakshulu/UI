@@ -3,7 +3,6 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -11,13 +10,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM50 extends TestBase {
 
@@ -41,8 +40,7 @@ public class ENWIAM50 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(),
-				rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	/**
@@ -55,20 +53,16 @@ public class ENWIAM50 extends TestBase {
 	public void testcaseh10() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		logger.info("checking master condition status-->"
-				+ this.getClass().getSimpleName() + "-->" + master_condition);
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case "
-					+ this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case"
-					+ this.getClass().getSimpleName() + " as runmode set to NO");// reports
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName()
-				+ " execution starts ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
 
@@ -80,13 +74,12 @@ public class ENWIAM50 extends TestBase {
 
 			// Verify Neon landing page displays Branding and Marketing copy
 			try {
-				WebElement b_element = ob
-						.findElement(By
-								.xpath(OnePObjectMap.NEON_ENW_COMPANY_XPATH
-										.toString()));
-				WebElement m_element = ob.findElement(By
-						.xpath(OnePObjectMap.NEON_MARKETING_COPY_XPATH
-								.toString()));
+
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_XPATH);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
+				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_XPATH);
+				WebElement m_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
 
 				String branding_name = b_element.getText();
 				String marketing_Copy = m_element.getText();
@@ -94,54 +87,54 @@ public class ENWIAM50 extends TestBase {
 				if (b_element.isDisplayed() && m_element.isDisplayed()) {
 					Assert.assertEquals(branding_name, "Thomson Reuters");
 					Assert.assertEquals(marketing_Copy, "Project Neon");
-					test.log(LogStatus.PASS,
-							"Neon Landing page displays Neon branding and marketing copy");
+					test.log(LogStatus.PASS, "Neon Landing page displays Neon branding and marketing copy");
 				}
 
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						"Neon Landing page doesn't displays Neon branding and marketing copy");
+				test.log(LogStatus.FAIL, "Neon Landing page doesn't displays Neon branding and marketing copy");
 				ErrorUtil.addVerificationFailure(t);
 
 			}
 
 			// Verify Neon landing page displays Integration with EndNote
-			WebElement integrationmsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH);
-			String actual_text=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH).getText();
+
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH);
+
+			WebElement integrationmsg = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH);
+			String actual_text = integrationmsg.getText();
 			String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
-			
+
 			try {
-				if (integrationmsg.isDisplayed()) {
-					Assert.assertEquals(actual_text, expected_text);
-					test.log(LogStatus.PASS,
-							"Neon Landing page displays integration with Endnote");
+				if (actual_text.contains(expected_text)) {
+					// Assert.assertEquals(actual_text, expected_text);
+					test.log(LogStatus.PASS, "Neon Landing page displays integration with Endnote");
+				} else {
+					throw new Exception("Neon Landing page displays integration with Endnote Not hapeened");
 				}
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						"Neon Landing page doesn't display integration with Endnote");
+				test.log(LogStatus.FAIL, "Neon Landing page doesn't display integration with Endnote");
+				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
 			}
 
 			// verify Neon Icon is displayed on Neon sign in page
 
 			try {
-
-				// WebElement icon_element =
-				// ob.findElement(By.cssSelector(OnePObjectMap.NEON_NEW_ICON_CSS.toString()));
-				WebElement icon_element = ob
-						.findElement(By
-								.cssSelector(OnePObjectMap.NEON_CONNECT_ICON_CSS
-										.toString()));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_CONNECT_ICON_CSS);
+				WebElement icon_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_CONNECT_ICON_CSS);
 				if (icon_element.isDisplayed())
-					test.log(LogStatus.PASS,
-							"Neon Icon is displayed on Neon Landing Page");
+					test.log(LogStatus.PASS, "Neon Icon is displayed on Neon Landing Page");
 
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						"Neon Icon is not displayed on Neon Landing Page");
+				test.log(LogStatus.FAIL, "Neon Icon is not displayed on Neon Landing Page");
 				ErrorUtil.addVerificationFailure(t);
 
 			}
@@ -156,17 +149,12 @@ public class ENWIAM50 extends TestBase {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this
-									.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName()
-				+ " execution ends--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
 

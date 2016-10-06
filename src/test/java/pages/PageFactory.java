@@ -23,6 +23,7 @@ public class PageFactory {
 	private AccountPage accountPage=null;
 	private ENWReferencePage enwReferencePage=null;
 	private EnwReference enwReference=null;
+	private LinkingModalsPage linkingModalsPage=null;
 
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
@@ -159,6 +160,16 @@ public class PageFactory {
 
 			return enwReference;
 		}
+		
+	public LinkingModalsPage getLinkingModalsInstance(WebDriver ob){
+		
+		if (linkingModalsPage == null) {
+			linkingModalsPage = new LinkingModalsPage(ob);
+		}
+		return linkingModalsPage;
+	}
+		
+		
 	public void setAccountPageInstance(AccountPage obj) {
 		accountPage =obj;
 		}
@@ -178,5 +189,6 @@ public class PageFactory {
 		WatchlistPage=null;
 		enwReference=null;
 		enwReferencePage=null;
+		linkingModalsPage=null;
 	}
 }

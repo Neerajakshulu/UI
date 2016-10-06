@@ -3,9 +3,13 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 
 
@@ -19,9 +23,10 @@ public class EnwReference extends TestBase {
 	
 	public void enwContinue() throws Exception {
 
-		jsClick(ob, ob.findElement(By.className(OR.getProperty("Enw_continue_button"))));
-		Thread.sleep(5000);
-		//jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		//jsClick(ob, ob.findElement(By.className(OR.getProperty("Enw_continue_button"))));
+		BrowserWaits.waitTime(5);
 	}
 	
 	public void logout() throws Exception {
@@ -91,6 +96,17 @@ public class EnwReference extends TestBase {
 			
 			
 		}
+		
+		public boolean validateNavigationToEnw() throws Exception{
+			boolean continue_button = checkElementIsDisplayed(
+					ob,
+					By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS
+							.toString()));
+			return continue_button;
+
+		}
+		
+		
 		
 
 }

@@ -3,19 +3,18 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM41 extends TestBase {
 
@@ -39,8 +38,7 @@ public class ENWIAM41 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(),
-				rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	/**
@@ -53,25 +51,19 @@ public class ENWIAM41 extends TestBase {
 	public void testcaseh2() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		logger.info("checking master condition status-->"
-				+ this.getClass().getSimpleName() + "-->" + master_condition);
+		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case "
-					+ this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
-			throw new SkipException("Skipping Test Case"
-					+ this.getClass().getSimpleName() + " as runmode set to NO");// reports
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN
-					.getProperty("sru_fbusername01"));
-			// Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername01"));
 
-			if (!(statuCode.equalsIgnoreCase("200") || statuCode
-					.equalsIgnoreCase("400"))) {
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
@@ -81,8 +73,7 @@ public class ENWIAM41 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName()
-				+ " execution starts ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
 
@@ -92,37 +83,30 @@ public class ENWIAM41 extends TestBase {
 
 			ob.navigate().to(host);
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(
-					LOGIN.getProperty("sru_fbusername01"),
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername01"),
 					LOGIN.getProperty("sru_fbpwd01"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+
 			try {
 
-				pf.getENWReferencePageInstance(ob).didYouKnow(
-						LOGIN.getProperty("sru_steampw01"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw01"));
 				test.log(LogStatus.PASS, "user is able to link");
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 
-				waitForElementTobeVisible(ob,
-						By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH
-								.toString()), 30);
+				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
+				test.log(LogStatus.PASS, "user is able navigate to EndNote after linking");
 
-				boolean continue_button = checkElementIsDisplayed(
-						ob,
-						By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS
-								.toString()));
-				Assert.assertEquals(continue_button, true);
-				test.log(LogStatus.PASS,
-						"user is able navigate to EndNote after linking");
+				pf.getEnwReferenceInstance(ob).enwContinue();
 
-				ob.findElement(
-						By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS
-								.toString())).click();
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						"user is not able to link and navigate to EndNote");
+				test.log(LogStatus.FAIL, "user is not able to link and navigate to EndNote");
+				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link_and_navigate_to_enw")));
 
 			}
 
@@ -137,17 +121,12 @@ public class ENWIAM41 extends TestBase {
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
-			test.log(
-					LogStatus.INFO,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this
-									.getClass().getSimpleName()
-									+ "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName()
-				+ " execution ends--->");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
 
