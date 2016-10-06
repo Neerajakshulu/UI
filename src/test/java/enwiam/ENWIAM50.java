@@ -75,9 +75,9 @@ public class ENWIAM50 extends TestBase {
 			// Verify Neon landing page displays Branding and Marketing copy
 			try {
 
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_XPATH);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
-				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_XPATH);
+				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
 				WebElement m_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
 
@@ -99,10 +99,10 @@ public class ENWIAM50 extends TestBase {
 
 			// Verify Neon landing page displays Integration with EndNote
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
 
 			WebElement integrationmsg = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_XPATH);
+					.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
 			String actual_text = integrationmsg.getText();
 			String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
 
