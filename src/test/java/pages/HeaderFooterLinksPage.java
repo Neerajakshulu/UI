@@ -202,7 +202,8 @@ public class HeaderFooterLinksPage extends TestBase {
 	}
      
 	public void clickOnEndNoteLink() throws Exception{
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_ONEP_APPS_CSS.toString())));
+		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_PLINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_TO_ENW_PLINK);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);

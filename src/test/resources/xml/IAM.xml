@@ -59,6 +59,7 @@
 	</test>
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
+			<class name="iam.IAM036"></class>
 			<class name="iam.IAM037"></class>
 		</classes>
 	</test>
@@ -235,10 +236,10 @@
 		</classes>
 	</test>
 
-	<test name="LinkedIn_and_facebook_linking">
+	<!-- <test name="LinkedIn_and_facebook_linking">
 		<classes>
 			<class name="iam.IAM036"></class>
 		</classes>
-	</test>
+	</test> -->
 </suite>
 
