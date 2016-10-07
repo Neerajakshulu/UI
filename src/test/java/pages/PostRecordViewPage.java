@@ -183,13 +183,14 @@ public class PostRecordViewPage extends TestBase {
 		waitForPageLoad(ob);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
+		logger.info("post -->"+post+"post title-->"+postTitle);
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
 		String profileData = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
-
-		if (!(profileInfo.toString().contains(profileData) && profileInfo.toString().contains(postRVProfileTitle))) {
+		
+		if (!(/*profileInfo.contains(profileData) &&*/ profileInfo.contains(postRVProfileTitle))) {
 			throw new Exception("Profile info mismatching in Record view page of a Post");
 		}
 
