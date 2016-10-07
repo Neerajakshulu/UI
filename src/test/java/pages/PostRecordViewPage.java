@@ -187,7 +187,7 @@ public class PostRecordViewPage extends TestBase {
 		Assert.assertEquals(post, postTitle);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
-		String profileData = pf.getBrowserActionInstance(ob) 
+		String profileData = pf.getBrowserActionInstance(ob)  
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
 		
 		if (!(/*profileInfo.contains(profileData) &&*/ profileInfo.contains(postRVProfileTitle))) {
