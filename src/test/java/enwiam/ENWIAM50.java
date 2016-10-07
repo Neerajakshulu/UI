@@ -98,7 +98,8 @@ public class ENWIAM50 extends TestBase {
 			}
 
 			// Verify Neon landing page displays Integration with EndNote
-
+			
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
 
 			WebElement integrationmsg = pf.getBrowserActionInstance(ob)

@@ -103,29 +103,6 @@ public class ENWIAM51 extends TestBase {
 
 			}
 
-			// Verify EndNote landing page displays Integration with EndNote
-			try {
-
-				WebElement integrationmsg = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-				String actual_text = integrationmsg.getText();
-				String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
-
-				if (actual_text.contains(expected_text)) {
-					// Assert.assertEquals(actual_text, expected_text);
-					test.log(LogStatus.PASS, "EndNote Landing page displays integration with Neon");
-				} else {
-					throw new Exception("EndNote Landing page did not display integration with Neon");
-				}
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "EndNote Landing page doesn't display integration with Neon");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
-			}
 
 			// Verifying that on ENW landing page, link to login with Shibboleth
 			// is displayed.
@@ -191,6 +168,31 @@ public class ENWIAM51 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"user is not taken to the Endnote desktop X7 free trial download form by clicking Download link on the Endnote sign");
 				ErrorUtil.addVerificationFailure(t);
+			}
+
+			// Verify EndNote landing page displays Integration with EndNote
+			try {
+				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
+				WebElement integrationmsg = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
+				String actual_text = integrationmsg.getText();
+				String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
+
+				if (actual_text.contains(expected_text)) {
+					// Assert.assertEquals(actual_text, expected_text);
+					test.log(LogStatus.PASS, "EndNote Landing page displays integration with Neon");
+				} else {
+					throw new Exception("EndNote Landing page did not display integration with Neon");
+				}
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL, "EndNote Landing page doesn't display integration with Neon");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
 			}
 
 			// Verifying links to EndNote marketing pages are displayed.
