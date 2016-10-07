@@ -81,6 +81,7 @@ public class Profile14 extends TestBase {
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();
 			followersCount = pf.getProfilePageInstance(ob).getFollowersCount();
+			logger.info("Before followers count-->"+followersCount);
 			test.log(LogStatus.INFO, "Logout from the application");
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
@@ -126,7 +127,7 @@ public class Profile14 extends TestBase {
 	public void followUserAndLogout() throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow/unfollow other user");
-			ob.navigate().to(host + "/#/profile/0a69807f-0715-4760-b902-055719b0b11c");
+			ob.navigate().to(host + "/#/profile/59ddd666-fc1c-4e22-a26b-952bfe11bb96");
 			BrowserWaits.waitTime(10);
 			pf.getProfilePageInstance(ob).followOtherProfileFromProfilePage();
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
