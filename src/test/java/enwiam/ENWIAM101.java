@@ -88,7 +88,7 @@ public class ENWIAM101 extends TestBase {
 					y).build().perform();
 			builder.click().build().perform();
 			test.log(LogStatus.PASS, "Linking model has been disappered");
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(8);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			waitForElementTobeVisible(ob,
