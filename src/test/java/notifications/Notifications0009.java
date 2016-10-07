@@ -89,7 +89,8 @@ public class Notifications0009 extends TestBase {
 			if (listOfPostsLinks.size() > 0) {
 				WebElement element = ob
 						.findElement(By.xpath(OnePObjectMap.NEWSFEED_TRENDINDING_TOPICS_LINKS_XPATH.toString()));
-				String specialCharacterRemovedoutput = element.getText().replaceAll("[^\\dA-Za-z ]", "");
+				String specialCharacterRemovedoutput = element.getText().replaceAll("[^\\dA-Za-z ]", " ");
+				logger.info(specialCharacterRemovedoutput);
 				String expectedTitle = specialCharacterRemovedoutput.replaceAll("( )+", " ");
 				logger.info("Expectged Title : "+expectedTitle);
 				element.click();
