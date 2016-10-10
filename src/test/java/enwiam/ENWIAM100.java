@@ -54,12 +54,12 @@ public class ENWIAM100 extends TestBase {
 		}
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("myacc"));
-			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
+			Assert.assertTrue(statuCode2.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 
@@ -137,12 +137,12 @@ public class ENWIAM100 extends TestBase {
 
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("myacc"));
-			Assert.assertTrue(statuCode2.equalsIgnoreCase("200"));
+			Assert.assertTrue(statuCode2.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 

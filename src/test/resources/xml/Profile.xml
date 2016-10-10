@@ -386,7 +386,7 @@
 		</classes>
 	</test>  
 
-	<test name="onboarding_modals" preserve-order="true" parallel="false">
+	<!-- <test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="truid" value="e95006e0-70e0-11e6-be2c-7129e85cb017" />
@@ -485,7 +485,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test> 
+	</test> --> 
 
 </suite>
 

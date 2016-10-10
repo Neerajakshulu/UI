@@ -6,7 +6,7 @@
 	</listeners>
 
 
-	<test name="ENW_registraiton_and_reset_password1" preserve-order="true">
+	<!-- <test name="ENW_registraiton_and_reset_password1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM009"></class>
 		</classes>
@@ -16,9 +16,9 @@
 		<classes>
 			<class name="enwiam.ENWIAM010"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="ENW_registraiton_and_reset_password3" preserve-order="true">
+	<!-- <test name="ENW_registraiton_and_reset_password3" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM013"></class>
 		</classes>
@@ -41,19 +41,19 @@
 
 			<class name="enwiam.ENWIAM017"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
+	<!-- <test name="ENW_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM001"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="ENW_registraiton_and_reset_password8" preserve-order="true">
+	<!-- <test name="ENW_registraiton_and_reset_password8" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM008"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Validate_email_address_in_enw_registration_page">
 		<classes>
@@ -90,17 +90,17 @@
 		</classes>
 	</test>
 
-	<test name="Login_and_logout_enw_application_using_facebook_account">
+	<!-- <test name="Login_and_logout_enw_application_using_facebook_account">
 		<classes>
 			<class name="enwiam.ENWIAM011"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Login_and_logout_enw_application_using_LI_account">
+	<!-- <test name="Login_and_logout_enw_application_using_LI_account">
 		<classes>
 			<class name="enwiam.ENWIAM012"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Validate_password_max_length_in_enw_registration_page">
 		<classes>
@@ -108,7 +108,7 @@
 		</classes>
 	</test>
 
-	<test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
+	<!-- <test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
 		<classes>
 			<class name="enwiam.ENWIAM018"></class>
 		</classes>
@@ -118,16 +118,16 @@
 		<classes>
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="ENW_Linking_from_NEON" preserve-order="true">
+	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM100"></class>
 			<class name="enwiam.ENWIAM101"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Navigation1" preserve-order="true">
+	<!-- <test name="Navigation1" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM40"></class>
 		</classes>
@@ -136,7 +136,7 @@
 		<classes>
 			<class name="enwiam.ENWIAM41"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="Navigation3" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM42"></class>
@@ -161,18 +161,19 @@
 		</classes>
 	</test>
 
-	<test name="ENW Linking from ENW" preserve-order="true">
+	<!-- <test name="ENW Linking from ENW" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM0001"></class>
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enwiam.ENWIAM0006"></class>
 		</classes>
-	</test>
-	<test name="ENWIAM0002">
+	</test> -->
+	<!-- <test name="ENWIAM0002">
 		<classes>
 			<class name="enwiam.ENWIAM0002"></class>
 		</classes>
-	</test>
+	</test> -->
+	
 	<test name="ENWIAM0004">
 		<classes>
 			<class name="enwiam.ENWIAM0004"></class>

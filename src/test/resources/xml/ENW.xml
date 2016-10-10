@@ -16,7 +16,7 @@
 			<class name="enw.ENW002"></class>
 		</classes>
 	</test>
-	<test name="ENW003">
+	<!-- <test name="ENW003">
 		<classes>
 			<class name="enw.ENW003"></class>
 		</classes>
@@ -30,17 +30,17 @@
 		<classes>
 			<class name="enw.ENW005"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW007">
 		<classes>
 			<class name="enw.ENW007"></class>
 		</classes>
 	</test>
-	<test name="ENW006">
+	<!-- <test name="ENW006">
 		<classes>
 			<class name="enw.ENW006"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="ENW009">
 		<classes>
@@ -112,21 +112,21 @@
 			<class name="enw.ENW021"></class>
 		</classes>
 	</test>
-	<test name="ENW000010">
+	<!-- <test name="ENW000010">
 		<classes>
 			<class name="enw.ENW000010"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW000011">
 		<classes>
 			<class name="enw.ENW000011"></class>
 		</classes>
 	</test>
-	<test name="ENW000012">
+	<!-- <test name="ENW000012">
 		<classes>
 			<class name="enw.ENW000012"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW00029">
 		<classes>
 			<class name="enw.ENW00029"></class>

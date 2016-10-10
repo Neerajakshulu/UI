@@ -1,0 +1,302 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="LocalRun" parallel="tests" thread-count="10">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+<!--  This suite is related to all API ,ENW and LI related scripts to run on local due to saucelabs issue -->
+
+<!-- IAM -->
+
+	<test name="ENW003">
+		<classes>
+			<class name="enw.ENW003"></class>
+		</classes>
+	</test>
+	<test name="ENW004">
+		<classes>
+			<class name="enw.ENW004"></class>
+		</classes>
+	</test>
+	<test name="ENW005">
+		<classes>
+			<class name="enw.ENW005"></class>
+		</classes>
+	</test>
+
+	<test name="ENW006">
+		<classes>
+			<class name="enw.ENW006"></class>
+		</classes>
+	</test>
+
+	<test name="ENW000010">
+		<classes>
+			<class name="enw.ENW000010"></class>
+		</classes>
+	</test>
+
+	<test name="ENW000012">
+		<classes>
+			<class name="enw.ENW000012"></class>
+		</classes>
+	</test>
+
+	<!-- IAM -->
+
+	<test name="LinkedIn_and_facebook_linking">
+		<classes>
+			<class name="iam.IAM036"></class>
+		</classes>
+	</test>
+
+	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
+		<classes>
+			<class name="iam.IAM036"></class>
+			<class name="iam.IAM037"></class>
+		</classes>
+	</test>
+
+
+	<test name="Login_and_logout_neon_application_using_LI_account">
+		<classes>
+			<class name="iam.IAM003"></class>
+		</classes>
+	</test>
+
+	<test name="Deep_linking_account_page_Using_LI_and_facebook">
+		<classes>
+			<class name="iam.IAM030"></class>
+		</classes>
+	</test>
+	<test name="Deep_linking_help_page_Using_LI_and_facebook">
+		<classes>
+			<class name="iam.IAM031"></class>
+		</classes>
+	</test>
+
+	<test name="Linking_Steam_to_Social">
+		<classes>
+			<class name="iam.IAM032"></class>
+		</classes>
+	</test>
+
+	<test name="Liking_Social_to_Steam">
+		<classes>
+			<class name="iam.IAM033"></class>
+		</classes>
+	</test>
+
+	<!-- ENW IAM -->
+
+	<test name="Login_and_logout_enw_application_using_LI_account">
+		<classes>
+			<class name="enwiam.ENWIAM012"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_Linking_from_NEON" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM100"></class>
+			<class name="enwiam.ENWIAM101"></class>
+		</classes>
+	</test>
+
+	<test name="Navigation1" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM40"></class>
+		</classes>
+	</test>
+	<test name="Navigation2" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM41"></class>
+		</classes>
+	</test>
+
+	<test name="ENWIAM0002">
+		<classes>
+			<class name="enwiam.ENWIAM0002"></class>
+		</classes>
+	</test>
+
+	<test name="ENW Linking from ENW" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM0001"></class>
+			<class name="enwiam.ENWIAM0005"></class>
+			<class name="enwiam.ENWIAM0006"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM001"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password8" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM008"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password1" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM009"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password2" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM010"></class>
+		</classes>
+	</test>
+
+	<test name="Login_and_logout_enw_application_using_facebook_account">
+		<classes>
+			<class name="enwiam.ENWIAM011"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password3" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM013"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password4" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM014"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password5" preserve-order="true">
+		<classes>
+			<class name="enwiam.ENWIAM015"></class>
+		</classes>
+	</test>
+
+	<test name="ENW_registraiton_and_reset_password6" preserve-order="true">
+		<classes>
+
+			<class name="enwiam.ENWIAM017"></class>
+		</classes>
+	</test>
+
+	<test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
+		<classes>
+			<class name="enwiam.ENWIAM018"></class>
+		</classes>
+	</test>
+
+	<test name="Change_password_link_in_account_page">
+		<classes>
+			<class name="enwiam.ENWIAM019"></class>
+		</classes>
+	</test>
+	
+<!-- Profile -->
+
+<test name="onboarding_modals" preserve-order="true" parallel="false">
+		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="truid" value="e95006e0-70e0-11e6-be2c-7129e85cb017" />
+		<classes>
+			<class name="Profile.Profile50"></class>
+			<class name="Profile.Profile54"></class>
+			<class name="Profile.Profile55"></class>
+			<class name="Profile.Profile56"></class>
+			<class name="Profile.Profile67"></class>
+			<class name="Profile.Profile68"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="profile_onboarding_modals" preserve-order="true" parallel="false">
+		<parameter name="username" value="4aehgq+9snc49cwqlvzc@sharklasers.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="truid" value="16c824e0-78e8-11e6-8fe8-05c6039ea6ae" />
+		<parameter name="placeholderValues" value="+ First Name|+ Last Name|+ Title or Role|+ Institution|+ Country" />
+		<parameter name="profileMetaData" value="Jawaharlal Nehru University|India" />
+		<parameter name="topics" value="tes|aut|dru" />
+		<classes>
+			<class name="Profile.Profile57"></class>
+			<class name="Profile.Profile58"></class>
+			<class name="Profile.Profile59"></class>
+			<class name="Profile.Profile60"></class>
+		</classes>
+	</test> 
+	
+	<test name="ENW_to_Neon_Onboarding_with_market_test_groups" preserve-order="true" parallel="false">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<classes>
+			<class name="Profile.Profile61"></class>
+			<class name="Profile.Profile62"></class>
+			<class name="Profile.Profile63"></class>
+		</classes>
+	</test>
+	
+	 <test name="ENW_to_Neon_with_market_test_groups_using_feedback_link" >
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Feedback"/>
+		<classes>
+			<class name="Profile.Profile64"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW_to_Neon_with_market_test_groups_using_privacy_link" >
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Privacy"/>
+		<classes>
+			<class name="Profile.Profile65"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW_to_Neon_with_market_test_groups_using_TersofUse_link">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="enwProfileFlyout" value="Account|Sign out|Privacy|Terms of use|Help|Feedback"/>
+		<parameter name="link" value="Terms of use"/>
+		<classes>
+			<class name="Profile.Profile66"></class>
+		</classes>
+	</test>
+
+	<test name="Deep_linking_other_profile">
+		<parameter name="deepLinkUrl"
+			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
+		<classes>
+			<class name="Profile.Profile51"></class>
+		</classes>
+	</test> 
+ 
+	<test name="Deep_linking_own_profile_Using_Facebook and LI">
+		<parameter name="socialLogin" value="FB|LI" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" />
+		<parameter name="password" value="likhithreddy@123" />
+		<parameter name="deepLinkUrl" value="/#/profile/" />
+		<classes>
+			<class name="Profile.Profile52"></class>
+		</classes>
+	</test>
+
+	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
+		<parameter name="socialLogin" value="FB|LI" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" />
+		<parameter name="password" value="likhithreddy@123" />
+		<parameter name="deepLinkUrl"
+			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
+		<classes>
+			<class name="Profile.Profile53"></class>
+		</classes>
+	</test>
+
+</suite>
+

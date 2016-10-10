@@ -57,12 +57,12 @@
 			<class name="iam.IAM035"></class>
 		</classes>
 	</test>
-	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
+	<!-- <test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
 			<class name="iam.IAM037"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Login_and_logout_neon_application_using_existing_neon_account">
 		<classes>
@@ -70,11 +70,11 @@
 		</classes>
 	</test>
 
-	<test name="Login_and_logout_neon_application_using_LI_account">
+	<!-- <test name="Login_and_logout_neon_application_using_LI_account">
 		<classes>
 			<class name="iam.IAM003"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Login_and_logout_neon_application_using_facebook_account">
 		<classes>
@@ -213,7 +213,7 @@
 		</classes>
 	</test>
 
-	<test name="Deep_linking_account_page_Using_LI_and_facebook">
+	<!-- <test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM030"></class>
 		</classes>
@@ -222,9 +222,9 @@
 		<classes>
 			<class name="iam.IAM031"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Linking_Steam_to_Social">
+	<!-- <test name="Linking_Steam_to_Social">
 		<classes>
 			<class name="iam.IAM032"></class>
 		</classes>
@@ -234,7 +234,7 @@
 		<classes>
 			<class name="iam.IAM033"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- <test name="LinkedIn_and_facebook_linking">
 		<classes>

@@ -270,7 +270,13 @@ public class TestBase {
 			loadModuleData(notificationxls.path);
 			loadModuleData(enwxls.path);
 			loadModuleData(enwiamxls.path);
+		} else if(suiteName.equals("LocalRun")){
+			loadModuleData(iamxls.path);
+			loadModuleData(profilexls.path);
+			loadModuleData(enwxls.path);
+			loadModuleData(enwiamxls.path);
 		}
+		
 		logger.info(suiteName + "---" + testcase.size());
 	}
 
