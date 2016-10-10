@@ -97,7 +97,7 @@ public class OnboardingModalsPage extends TestBase {
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
 			if(!(onboarding_modals.size()==0)) {
-				throw new Exception("Onboarding Modals are not closed");
+				throw new Exception("Onboarding Modals are not closed"); 
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
