@@ -31,22 +31,22 @@
 			<class name="enw.ENW005"></class>
 		</classes>
 	</test> -->
-	<test name="ENW007">
+	<!-- <test name="ENW007">
 		<classes>
 			<class name="enw.ENW007"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!-- <test name="ENW006">
 		<classes>
 			<class name="enw.ENW006"></class>
 		</classes>
 	</test> -->
 
-	<test name="ENW009">
+	<!-- <test name="ENW009">
 		<classes>
 			<class name="enw.ENW009"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW010">
 		<classes>
 			<class name="enw.ENW010"></class>
@@ -87,11 +87,11 @@
 			<class name="enw.ENW017"></class>
 		</classes>
 	</test>
-	<test name="ENW022">
+	<!-- <test name="ENW022">
 		<classes>
 			<class name="enw.ENW022"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="ENW018">
 		<classes>
 			<class name="enw.ENW018"></class>

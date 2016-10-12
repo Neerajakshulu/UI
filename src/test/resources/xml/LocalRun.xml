@@ -198,6 +198,24 @@
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
 	</test>
+	
+	<test name="ENW007">
+		<classes>
+			<class name="enw.ENW007"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW009">
+		<classes>
+			<class name="enw.ENW009"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW022">
+		<classes>
+			<class name="enw.ENW022"></class>
+		</classes>
+	</test>
 
 	<!-- Profile -->
 
