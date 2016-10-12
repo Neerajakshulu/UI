@@ -22,6 +22,13 @@ public class GroupsPage extends TestBase {
 		pf = new PageFactory();
 	}
 
+	public void clickOnGroupsTab() {
+
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS.toString()),
+				30);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS.toString())).click();
+	}
+	
 	public void clickOnCreateNewGroupButton() {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS.toString()),

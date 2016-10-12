@@ -104,7 +104,7 @@ public class GroupDetailsPage extends TestBase {
 		waitForAjax(ob);
 	}
 
-	public void clickLinkedItemsTab() {
+	public void clickAttachedFilesTab() {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS.toString()),
 				30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS.toString())).click();

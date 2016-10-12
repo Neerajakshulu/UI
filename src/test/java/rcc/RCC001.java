@@ -55,7 +55,8 @@ static int status = 1;
 			clearCookies();
 			maximizeWindow();
 			loginAs("", "");
-			//click on groups tab
+			
+			
 			
 			
 		} catch (Throwable t) {

@@ -478,15 +478,16 @@ public enum OnePObjectMap {
 	
 	
 	// #######RCC#############
-
-	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS(""),
-	RCC_GROUP_GROUPS_COUNT_CSS(""),
-	RCC_GROUP_INVITATIONS_COUNT_CSS(""),
-	RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS(""),
-	RCC_GROUPSLIST_ENTER_GROUP_DESCRIPTION_CSS(""),
-	RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS(""),
-	RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS(""),
-	RCC_GROUPSLIST_GROUP_TITLE_CSS(""),
+	RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
+	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS("button[class*='wui-icon-btn--add-group']"),
+	RCC_GROUP_GROUPS_COUNT_CSS("a[href*='groups'] span[class*='wui-side-menu__badge']"),
+	RCC_GROUP_INVITATIONS_COUNT_CSS("a[href*='invites'] span[class*='wui-side-menu__badge']"),
+	RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS("div[class='research-group-card__content'] input[name='name']"),
+	RCC_GROUPSLIST_ENTER_GROUP_DESCRIPTION_CSS("div[class='research-group-card__content'] textarea[placeholder*='Give your group a description']"),
+	RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS("div[class='research-group-card__content'] button[type='submit']"),
+	RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS("div[class='research-group-card__content'] button[ng-click='vm.revert()'"),
+	RCC_GROUPSLIST_GROUP_CARD_CSS("div[class='wui-card__content']"),
+	RCC_GROUPSLIST_GROUP_TITLE_CSS("a[class='research-group-card__text']"),
 	RCC_GROUPDETAILS_ARTICLES_COUNT_CSS(""),
 	RCC_GROUPDETAILS_PATENTS_COUNT_CSS(""),
 	RCC_GROUPDETAILS_POSTS_COUNT_CSS(""),

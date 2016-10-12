@@ -50,6 +50,17 @@ public class GroupsListPage extends TestBase {
 					30);
 			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString())).click();
 		}
+	
+	public void createGroup(String title,String desc){
+		enterGroupTitle(title);
+		enterGroupDescription(desc);
+		clickOnSaveGroupButton();
+	}
+	
+	public void createGroup(String title){
+		enterGroupTitle(title);
+		clickOnSaveGroupButton();
+	}
 
 	public void clickOnCancelGroupButton(){
 
@@ -110,7 +121,8 @@ public class GroupsListPage extends TestBase {
 		return groupDesc.equals(desc);
 	}
 	
-	public void verifyGroupOwnerDetails(String groupOwnerDetails,String grouptitle){
+	public void getGroupOwnerDetails(){
+	
 		
 		
 	}
