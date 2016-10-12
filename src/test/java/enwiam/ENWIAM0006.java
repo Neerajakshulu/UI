@@ -78,7 +78,7 @@ public class ENWIAM0006 extends TestBase {
 				Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 							
 			} catch (Throwable t) {
-				test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+				test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
@@ -95,7 +95,7 @@ public class ENWIAM0006 extends TestBase {
 				
 			} 
 			catch (Throwable t) {
-				test.log(LogStatus.INFO, "Unexpected error");// extent
+				test.log(LogStatus.FAIL, "Unexpected error");// extent
 				ErrorUtil.addVerificationFailure(t);
 			}
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

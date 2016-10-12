@@ -73,7 +73,7 @@ public class ENWIAM0002 extends TestBase {
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 
@@ -82,7 +82,7 @@ public class ENWIAM0002 extends TestBase {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 
@@ -93,14 +93,10 @@ public class ENWIAM0002 extends TestBase {
 			clearCookies();
 			
 			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-			// String accountType="Facebook";
-			//pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob, "aravind.attur@thomsonreuters.com", "Facebook@123");
 			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials("aravind.attur@thomsonreuters.com", "Facebook@123");
 			new Actions(ob).moveByOffset(200, 200).click().build().perform();
-			//BrowserWaits.waitTime(2);
 			ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
 			Thread.sleep(3000);
-			//pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials("aravind.attur@thomsonreuters.com", "Facebook@123");
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
 
@@ -123,9 +119,6 @@ public class ENWIAM0002 extends TestBase {
 
 			pf.getENWReferencePageInstance(ob).logout();
 
-			//loginToFb();
-			// closeBrowser();
-			// pf.clearAllPageObjects();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Unexpected error");// extent
@@ -138,7 +131,7 @@ public class ENWIAM0002 extends TestBase {
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			// ErrorUtil.addVerificationFailure(t);
 		}
 		// Deleting the links for enwyogi3@yahoo.com
@@ -147,7 +140,7 @@ public class ENWIAM0002 extends TestBase {
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
-			test.log(LogStatus.INFO, "Delete accounts api call failed");// extent
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			// ErrorUtil.addVerificationFailure(t);
 		}
 
