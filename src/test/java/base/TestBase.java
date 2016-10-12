@@ -87,6 +87,7 @@ public class TestBase {
 	public static Xls_Reader notificationxls = null;
 	public static Xls_Reader enwxls = null;
 	public static Xls_Reader enwiamxls = null;
+	public static Xls_Reader rccxls = null;
 	public static boolean isInitalized = false;
 
 	public WebDriver ob = null;
@@ -140,7 +141,10 @@ public class TestBase {
 				suiteName = "Search";
 			} else if (className.contains("Watchlist")) {
 				suiteName = "Watchlist";
-			} else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")) {
+			} else if (className.contains("RCC")) {
+				suiteName = "RCC";
+			}
+			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
 				if (className.contains("ENW")) {
@@ -241,6 +245,7 @@ public class TestBase {
 			notificationxls = new Xls_Reader("src/test/resources/xls/Notifications.xlsx");
 			enwxls = new Xls_Reader("src/test/resources/xls/ENW.xlsx");
 			enwiamxls = new Xls_Reader("src/test/resources/xls/ENWIAM.xlsx");
+			rccxls = new Xls_Reader("src/test/resources/xls/RCC.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -261,7 +266,9 @@ public class TestBase {
 			loadModuleData(enwxls.path);
 		} else if (suiteName.equals("ENWIAM")) {
 			loadModuleData(enwiamxls.path);
-		} else if (suiteName.equals("Sanity suite")) {
+		}else if (suiteName.equals("RCC")) {
+			loadModuleData(rccxls.path);
+		}  else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
@@ -270,6 +277,7 @@ public class TestBase {
 			loadModuleData(notificationxls.path);
 			loadModuleData(enwxls.path);
 			loadModuleData(enwiamxls.path);
+			loadModuleData(rccxls.path);
 		} else if(suiteName.equals("LocalRun")){
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
