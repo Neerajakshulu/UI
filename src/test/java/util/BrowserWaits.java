@@ -76,8 +76,9 @@ public class BrowserWaits extends TestBase {
 	 * wait until desired element is displayed
 	 * 
 	 * @param locator
+	 * @throws Exception 
 	 */
-	public void waitUntilElementIsDisplayed(Object elementName) {
+	public void waitUntilElementIsDisplayed(Object elementName) throws Exception {
 		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
@@ -102,8 +103,9 @@ public class BrowserWaits extends TestBase {
 	 * wait until desired element is Clickable
 	 * 
 	 * @param locator
+	 * @throws Exception 
 	 */
-	public void waitUntilElementIsClickable(Object elementName) {
+	public void waitUntilElementIsClickable(Object elementName) throws Exception {
 		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
 			try {
 				(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
@@ -126,8 +128,9 @@ public class BrowserWaits extends TestBase {
 	 * wait until desired element is not displayed
 	 * 
 	 * @param locator
+	 * @throws Exception 
 	 */
-	public void waitUntilElementIsNotDisplayed(Object elementName) {
+	public void waitUntilElementIsNotDisplayed(Object elementName) throws Exception {
 		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
@@ -235,36 +238,34 @@ public class BrowserWaits extends TestBase {
 	}
 	
 	public WebElement getLocator(String locatorType,
-			String locatorText) {
+			String locatorText) throws Exception {
 		WebElement ele = null;
-		// System.out.println("Locator Type-->"+locatorType);
-		// System.out.println("Locator Text-->"+locatorText);
-
-		try {
-			if (locatorType.endsWith("_CSS")) {
-				ele = ob.findElement(By.cssSelector(locatorText));
-			} else if (locatorType.endsWith("_XPATH")) {
-				ele = ob.findElement(By.xpath(locatorText));
-			} else if (locatorType.endsWith("_LINK")) {
-				ele = ob.findElement(By.linkText(locatorText));
-			} else if (locatorType.endsWith("_PLINK")) {
-				ele = ob.findElement(By.partialLinkText(locatorText));
-			} else if (locatorType.endsWith("_ID")) {
-				ele = ob.findElement(By.id(locatorText));
-			} else if (locatorType.endsWith("_CLASS")) {
-				ele = ob.findElement(By.className(locatorText));
-			} else if (locatorType.endsWith("_TAG")) {
-				ele = ob.findElement(By.tagName(locatorText));
-			} else {
-				ele = ob.findElement(By.name(locatorText));
+		
+			try {
+				if (locatorType.endsWith("_CSS")) {
+					ele = ob.findElement(By.cssSelector(locatorText));
+				} else if (locatorType.endsWith("_XPATH")) {
+					ele = ob.findElement(By.xpath(locatorText));
+				} else if (locatorType.endsWith("_LINK")) {
+					ele = ob.findElement(By.linkText(locatorText));
+				} else if (locatorType.endsWith("_PLINK")) {
+					ele = ob.findElement(By.partialLinkText(locatorText));
+				} else if (locatorType.endsWith("_ID")) {
+					ele = ob.findElement(By.id(locatorText));
+				} else if (locatorType.endsWith("_CLASS")) {
+					ele = ob.findElement(By.className(locatorText));
+				} else if (locatorType.endsWith("_TAG")) {
+					ele = ob.findElement(By.tagName(locatorText));
+				} else if (locatorType.endsWith("_NAME")) {
+					ele = ob.findElement(By.name(locatorText));
+				}else{
+					throw new Exception("Unable to handle the locator type: " + locatorType
+	                        + ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+				} 
+				}catch (NoSuchElementException nse) {
+						throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
 			}
-
-		} catch (NoSuchElementException nse) {
-			throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
-					+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
-		}
-		return ele;
+			return ele;
 
 	}
-
 }

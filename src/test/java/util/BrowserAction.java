@@ -149,10 +149,8 @@ public class BrowserAction extends TestBase {
 	}
 
 	public WebElement getLocator(String locatorType,
-			String locatorText) {
+			String locatorText) throws Exception {
 		WebElement ele = null;
-		// System.out.println("Locator Type-->"+locatorType);
-		// System.out.println("Locator Text-->"+locatorText);
 
 		try {
 			if (locatorType.endsWith("_CSS")) {
@@ -169,13 +167,14 @@ public class BrowserAction extends TestBase {
 				ele = ob.findElement(By.className(locatorText));
 			} else if (locatorType.endsWith("_TAG")) {
 				ele = ob.findElement(By.tagName(locatorText));
-			} else {
+			} else if (locatorType.endsWith("_NAME")) {
 				ele = ob.findElement(By.name(locatorText));
-			}
-
-		} catch (NoSuchElementException nse) {
-			throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
-					+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+			}else{
+				throw new Exception("Unable to handle the locator type: " + locatorType
+                        + ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+			} 
+			}catch (NoSuchElementException nse) {
+					throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
 		}
 		return ele;
 
@@ -200,13 +199,15 @@ public class BrowserAction extends TestBase {
 				ele = ob.findElements(By.className(locatorText));
 			} else if (locatorType.endsWith("_TAG")) {
 				ele = ob.findElements(By.tagName(locatorText));
-			} else {
+			} else if(locatorType.endsWith("_NAME")) {
 				ele = ob.findElements(By.name(locatorText));
+			} else {
+				throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
+						+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
 			}
 
 		} catch (NoSuchElementException nse) {
-			throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
-					+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+			throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
 		}
 		return ele;
 
