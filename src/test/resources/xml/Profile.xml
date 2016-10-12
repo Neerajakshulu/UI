@@ -165,8 +165,8 @@
 	</test>
 
 	<test name="Profile_Publish_A_Post_Record_View_Page">
-		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="Project@123" />
+		<parameter name="username" value="testingpottigaru@gmail.com" />
+		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView"></parameter>
 		<parameter name="postContent" value="my post content for RecordView page "></parameter>
 		<classes>
@@ -292,8 +292,8 @@
 	</test>
 
 	<test name="Post_comment_count">
-		<parameter name="username" value="tridlogin@gmail.com" />
-		<parameter name="password" value="Project@123" />
+		<parameter name="username" value="testing.reddygaru@gmail.com" />
+		<parameter name="password" value="Neon@123" />
 		<parameter name="myPost" value="Post for Testing RecordView" />
 		<parameter name="postContent" value="my post content for RecordView page " />
 		<classes>
