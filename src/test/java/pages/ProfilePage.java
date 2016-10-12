@@ -525,8 +525,9 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @param expErrorMsg
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean validatePostErrorMessage(String expErrorMsg) {
+	public boolean validatePostErrorMessage(String expErrorMsg) throws Exception {
 		boolean result = false;
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
@@ -544,7 +545,7 @@ public class ProfilePage extends TestBase {
 	 * @param tilte
 	 * @throws InterruptedException
 	 */
-	public void enterPostTitle(String tilte) throws InterruptedException {
+	public void enterPostTitle(String tilte) throws Exception {
 		BrowserWaits.waitTime(5);
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString()), 90);
@@ -605,7 +606,7 @@ public class ProfilePage extends TestBase {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public int getPostsCount() throws InterruptedException {
+	public int getPostsCount() throws Exception {
 		BrowserWaits.waitTime(20);
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
@@ -747,7 +748,7 @@ public class ProfilePage extends TestBase {
 		return count;
 	}
 
-	public void clickOnFirstPost() {
+	public void clickOnFirstPost() throws Exception {
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
@@ -969,14 +970,14 @@ public class ProfilePage extends TestBase {
 	/*
 	 * Method to click on cancel button in post creation modal
 	 */
-	public void clickOnPostCancelDiscardButton() {
+	public void clickOnPostCancelDiscardButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH);
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_DISCARD_XPATH.toString()))
 				.click();
 	}
 
-	public void clickOnPostCancelKeepDraftButton() {
+	public void clickOnPostCancelKeepDraftButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
 		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString())));
@@ -992,7 +993,7 @@ public class ProfilePage extends TestBase {
 		waitForAjax(ob);
 	}
 
-	public boolean validatePublishButton() throws InterruptedException {
+	public boolean validatePublishButton() throws Exception {
 		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
@@ -1377,7 +1378,7 @@ public class ProfilePage extends TestBase {
 		return Integer.parseInt(commentCount);
 	}
 
-	public void deleteDraftPostFromPostModal(String postString) throws InterruptedException {
+	public void deleteDraftPostFromPostModal(String postString) throws Exception {
 		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
 		waitForElementTobeVisible(
@@ -1651,7 +1652,7 @@ public class ProfilePage extends TestBase {
 	}
 	
 
-	public void clickOnPostModalCloseButton() {
+	public void clickOnPostModalCloseButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS);
 		ob.findElement(

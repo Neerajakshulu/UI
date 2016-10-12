@@ -35,8 +35,8 @@ public class Search112 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class Search112 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -74,8 +74,8 @@ public class Search112 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),
-					30);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Registration Date')]"), 30);
@@ -83,8 +83,8 @@ public class Search112 extends TestBase {
 			waitForAjax(ob);
 			test.log(LogStatus.PASS, "Selected Registration Date as sort option");
 
-			List<WebElement> webElementOrderBeforeNavigation = ob
-					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
+			List<WebElement> webElementOrderBeforeNavigation = ob.findElements(By
+					.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
 			Iterator<WebElement> iterator = webElementOrderBeforeNavigation.iterator();
 			while (iterator.hasNext()) {
 				profileOrderBeforeNavigation.add(iterator.next().getText());
@@ -100,16 +100,16 @@ public class Search112 extends TestBase {
 			ob.navigate().back();
 			BrowserWaits.waitTime(4);
 			// checking for Sort option
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),
-					30);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			BrowserWaits.waitTime(4);
 			String sortOptionSelected = ob
 					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()))
 					.getText().substring(9);
 			System.out.println(sortOptionSelected);
 			BrowserWaits.waitTime(3);
-			List<WebElement> webElementOrderAfterNavigation = ob
-					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
+			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By
+					.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_PROFILE_NAME_LINK_CSS.toString()));
 			BrowserWaits.waitTime(5);
 			Iterator<WebElement> itr = webElementOrderAfterNavigation.iterator();
 			while (itr.hasNext()) {
