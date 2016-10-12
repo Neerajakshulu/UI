@@ -523,6 +523,8 @@ public enum OnePObjectMap {
 	RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS(""),
 	RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS(""),
 	RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS(""),
+	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
+	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 
 	;
 

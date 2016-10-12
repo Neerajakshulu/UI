@@ -17,6 +17,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class IAM029 extends TestBase {
@@ -97,7 +98,7 @@ public class IAM029 extends TestBase {
 			String passLength = null;
 
 			if (validity.equalsIgnoreCase("YES")) {
-				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6"))
+				passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
 						.getText();
 				if (passLength.contains("Password is too long")) {
 					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
@@ -110,7 +111,7 @@ public class IAM029 extends TestBase {
 
 			else {
 
-				passLength = ob.findElement(By.xpath("(//div[@class='row password-validator__item'])[12]/h6"))
+				passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
 						.getText();
 				logger.info("PassWord : " + passLength);
 				if (!passLength.contains("Password is too long")) {
@@ -120,7 +121,7 @@ public class IAM029 extends TestBase {
 					closeBrowser();
 				}
 				ob.findElement(By.xpath(
-						"(//div[@class='row password-validator__item'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"));
+						OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString()));
 				BrowserWaits.waitTime(3);
 
 			}
