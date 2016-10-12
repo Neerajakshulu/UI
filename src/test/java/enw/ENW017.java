@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -48,21 +49,30 @@ public class ENW017 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+			try {
+				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+						.getText();
+				if (text.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
 
-				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
+			BrowserWaits.waitTime(2);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())));
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(3000);
+			BrowserWaits.waitTime(2);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			BrowserWaits.waitTime(2);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			BrowserWaits.waitTime(3);
 			if (!ob.findElement(By.xpath("//h4[contains(text(),'Your feedback has been sent')]")).isDisplayed()) {
 				test.log(LogStatus.FAIL, "Feedback not sent");
 				logger.info("Sorry, but we couldn't deliver your submission. Please fix these issues and try again:");

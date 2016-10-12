@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -60,17 +61,16 @@ public class ENW018 extends TestBase {
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			ob.findElement(By.partialLinkText("Help & Feedback")).click();
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(3000);
-			String str = ob.findElement(By.xpath("//h3[contains(text(),'Thank You')]")).getText();
+			BrowserWaits.waitTime(2);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
