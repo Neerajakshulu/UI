@@ -19,12 +19,15 @@ public class PageFactory {
 	private BrowserWaits browserWaits = null;
 	private LoginTR loginTR = null;
 	private Authoring authoring = null;
-	private OnboardingModalsPage onboarding=null;
-	private AccountPage accountPage=null;
-	private ENWReferencePage enwReferencePage=null;
-	private EnwReference enwReference=null;
-	private LinkingModalsPage linkingModalsPage=null;
-
+	private OnboardingModalsPage onboarding = null;
+	private AccountPage accountPage = null;
+	private ENWReferencePage enwReferencePage = null;
+	private EnwReference enwReference = null;
+	private LinkingModalsPage linkingModalsPage = null;
+	private GroupDetailsPage groupDetailsPage = null;
+	private GroupsListPage groupsListPage = null;
+	private GroupInvitationPage groupInvitationPage = null;
+	private GroupsPage groupsPage = null;
 
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -81,8 +84,8 @@ public class PageFactory {
 	}
 
 	public void setHFPageInstance(HeaderFooterLinksPage obj) {
-		hfPage =obj;
-			}
+		hfPage = obj;
+	}
 
 	public BrowserAction getBrowserActionInstance(WebDriver ob) {
 		if (browserAction == null) {
@@ -119,13 +122,11 @@ public class PageFactory {
 		return loginTR;
 
 	}
-	
-	
-	public void setLoginTRInstance(LoginTR obj) {
-		loginTR =obj;
-		}
 
-	
+	public void setLoginTRInstance(LoginTR obj) {
+		loginTR = obj;
+	}
+
 	public OnboardingModalsPage getOnboardingModalsPageInstance(WebDriver ob) {
 		if (onboarding == null) {
 			onboarding = new OnboardingModalsPage(ob);
@@ -134,7 +135,7 @@ public class PageFactory {
 		return onboarding;
 
 	}
-	
+
 	public AccountPage getAccountPageInstance(WebDriver ob) {
 		if (accountPage == null) {
 			accountPage = new AccountPage(ob);
@@ -143,7 +144,7 @@ public class PageFactory {
 		return accountPage;
 
 	}
-	
+
 	public ENWReferencePage getENWReferencePageInstance(WebDriver ob) {
 		if (enwReferencePage == null) {
 			enwReferencePage = new ENWReferencePage(ob);
@@ -152,43 +153,79 @@ public class PageFactory {
 		return enwReferencePage;
 
 	}
-	//Arvind ENWReference method
-		public EnwReference getEnwReferenceInstance(WebDriver ob) {
-			if (enwReference == null) {
-				enwReference = new EnwReference(ob);
-			}
 
-			return enwReference;
+	// Arvind ENWReference method
+	public EnwReference getEnwReferenceInstance(WebDriver ob) {
+		if (enwReference == null) {
+			enwReference = new EnwReference(ob);
 		}
-		
-	public LinkingModalsPage getLinkingModalsInstance(WebDriver ob){
-		
+
+		return enwReference;
+	}
+
+	public LinkingModalsPage getLinkingModalsInstance(WebDriver ob) {
+
 		if (linkingModalsPage == null) {
 			linkingModalsPage = new LinkingModalsPage(ob);
 		}
 		return linkingModalsPage;
 	}
-		
-		
-	public void setAccountPageInstance(AccountPage obj) {
-		accountPage =obj;
-		}
 
-	
-	public void clearAllPageObjects(){
-		accountPage=null;
-		loginTR=null;
-		onboarding=null;
-		authoring=null;
-		browserWaits=null;
-		browserAction=null;
-		hfPage=null;
-		searchProfilePage=null;
-		profilePage=null;
-		postRVPage=null;
-		WatchlistPage=null;
-		enwReference=null;
-		enwReferencePage=null;
-		linkingModalsPage=null;
+	public void setAccountPageInstance(AccountPage obj) {
+		accountPage = obj;
+	}
+
+	public GroupDetailsPage getGroupDetailsPage(WebDriver ob) {
+
+		if (groupDetailsPage == null) {
+			groupDetailsPage = new GroupDetailsPage(ob);
+		}
+		return groupDetailsPage;
+	}
+
+	public GroupsListPage getGroupsListPage(WebDriver ob) {
+
+		if (groupsListPage == null) {
+			groupsListPage = new GroupsListPage(ob);
+		}
+		return groupsListPage;
+	}
+
+	public GroupInvitationPage getGroupInvitationPage(WebDriver ob) {
+
+		if (groupInvitationPage == null) {
+			groupInvitationPage = new GroupInvitationPage(ob);
+		}
+		return groupInvitationPage;
+	}
+
+	public GroupsPage getGroupsPage(WebDriver ob) {
+
+		if (groupsPage == null) {
+			groupsPage = new GroupsPage(ob);
+		}
+		return groupsPage;
+	}
+
+	public void clearAllPageObjects() {
+		accountPage = null;
+		loginTR = null;
+		onboarding = null;
+		authoring = null;
+		browserWaits = null;
+		browserAction = null;
+		hfPage = null;
+		searchProfilePage = null;
+		profilePage = null;
+		postRVPage = null;
+		WatchlistPage = null;
+		enwReference = null;
+		enwReferencePage = null;
+		linkingModalsPage = null;
+		groupDetailsPage = null;
+		groupsPage = null;
+		groupInvitationPage = null;
+		groupsListPage = null;
+
 	}
 }

@@ -12,11 +12,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search15 extends TestBase {
 
@@ -31,8 +31,8 @@ public class Search15 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -44,8 +44,8 @@ public class Search15 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -72,6 +72,7 @@ public class Search15 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("tr_search_results_item_xpath")), 60);
 			List<WebElement> resultList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_item_xpath")));
 			System.out.println("result size" + resultList.size());
@@ -80,6 +81,7 @@ public class Search15 extends TestBase {
 			List<WebElement> commentsList;
 			int timeCiteCount = 0, viewsCount = 0, commentsCount = 0;
 			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_timecited_search_results_xpath")), 40);
 			timeCiteList = ob.findElements(By.xpath(OR.getProperty("tr_timecited_search_results_xpath")));
 			System.out.println("time cite list" + timeCiteList.size());
 			if (timeCiteList.size() != 0) {
@@ -102,35 +104,43 @@ public class Search15 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "TimeCite for search results validation failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "TimeCite for search results validation failed")));// screenshot
 
 			}
-			// viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
-			// if (viewsList.size() != 0) {
-			// for (WebElement views : viewsList) {
-			// if (!views.isDisplayed())
-			// viewsCount++;
-			// }
-			// } else {
-			// viewsCount = -1;
-			// }
-			//
-			// try {
-			// Assert.assertTrue(resultList.size() == viewsList.size() && viewsCount == 0);
-			// test.log(LogStatus.PASS, "views field is displayed for all articles");
-			// } catch (Throwable t) {
-			// if (viewsCount == -1)
-			// test.log(LogStatus.FAIL, "views field is not displayed for any articles");
-			// else
-			// test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
-			// test.log(LogStatus.INFO, "Error--->" + t);
-			// ErrorUtil.addVerificationFailure(t);
-			// status = 2;
-			// test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-			// this.getClass().getSimpleName() + "Viewsfor search results validation failed")));// screenshot
-			//
-			// }
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_views_search_results_xpath")), 40);
+			viewsList = ob.findElements(By.xpath(OR.getProperty("tr_views_search_results_xpath")));
+			if (viewsList.size() != 0) {
+				for (WebElement views : viewsList) {
+					if (!views.isDisplayed())
+						viewsCount++;
+				}
+			} else {
+				viewsCount = -1;
+			}
+
+			try {
+				Assert.assertTrue(resultList.size() >= viewsList.size() && viewsCount == 0);
+				test.log(LogStatus.PASS, "views field is displayed for articles");
+			} catch (Throwable t) {
+				if (viewsCount == -1)
+					test.log(LogStatus.FAIL, "views field is not displayed for articles");
+				else
+					test.log(LogStatus.FAIL, String.format("views field is not displayed %d documents", viewsCount));
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Viewsfor search results validation failed")));// screenshot
+
+			}
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_comments_search_results_xpath")), 40);
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
 			if (commentsList.size() != 0) {
 				for (WebElement comments : commentsList) {
@@ -142,19 +152,22 @@ public class Search15 extends TestBase {
 			}
 
 			try {
-				Assert.assertTrue(resultList.size() == commentsList.size() && commentsCount == 0);
+				Assert.assertTrue(resultList.size() >= commentsList.size() && commentsCount == 0);
 				test.log(LogStatus.PASS, "Comments field is displayed for documents ");
 			} catch (Throwable t) {
 				if (commentsCount == -1)
-					test.log(LogStatus.FAIL, "Comments field is not displayed for any articles");
+					test.log(LogStatus.FAIL, "Comments field is not displayed for articles");
 				else
 					test.log(LogStatus.FAIL,
 							String.format("Comments field is not displayed for %d articles", commentsCount));
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "Comments for search results validation failed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Comments for search results validation failed")));// screenshot
 
 			}
 			// logout();
@@ -170,8 +183,11 @@ public class Search15 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
