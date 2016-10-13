@@ -47,12 +47,12 @@
 			<class name="enw.ENW009"></class>
 		</classes>
 	</test> -->
-	<test name="ENW010">
+	<!-- <test name="ENW010">
 		<classes>
 			<class name="enw.ENW010"></class>
 		</classes>
-	</test>
-	<test name="ENW011">
+	</test> -->
+	<!-- <test name="ENW011">
 		<classes>
 			<class name="enw.ENW011"></class>
 		</classes>
@@ -86,7 +86,7 @@
 		<classes>
 			<class name="enw.ENW017"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!-- <test name="ENW022">
 		<classes>
 			<class name="enw.ENW022"></class>
