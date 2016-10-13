@@ -80,20 +80,23 @@ public class ENWIAM101 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User click on endnote app");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH);
+
 			Dimension dimesions = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS).getSize();
+					.getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH).getSize();
 			logger.info("Width : " + dimesions.width);
 			logger.info("Height : " + dimesions.height);
+			int x = dimesions.width;
 			int y = dimesions.height;
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS);
+
 			Actions builder = new Actions(ob);
 			builder.moveToElement(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_YES_I_HAVE_AN_ACCOUNT_BUTTON_CSS), 800,
-					y).build().perform();
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH), x + 150, y)
+					.build().perform();
 			builder.click().build().perform();
+			
 			test.log(LogStatus.PASS, "Linking model has been disappered");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			waitForElementTobeVisible(ob,

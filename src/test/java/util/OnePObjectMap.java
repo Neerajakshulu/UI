@@ -460,6 +460,7 @@ public enum OnePObjectMap {
 	ENWLANDINGPAGE_ORGANIZE_ICON_CSS("i[class='fa fa-cloud login-splash-icon']"),
 	ACCOUNT_NOTACTIVATED_MSG_XPATH("//h3[@class='wui-modal__title' and contains(.,'Your account registration')]"),
 	OK_BUTTON_ACCOUNT_NOTACTIVATED_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary' and contains(.,'OK')]"),
+	NO_LETS_CONTINUE_BUTTON_XPATH("//button[contains(text(),'continue')]"),
 	
 	//AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
