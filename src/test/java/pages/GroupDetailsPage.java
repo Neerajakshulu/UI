@@ -11,6 +11,7 @@ import util.OnePObjectMap;
 
 /**
  * This class contains all the method related to account page
+ * 
  * @author uc205521
  *
  */
@@ -23,111 +24,107 @@ public class GroupDetailsPage extends TestBase {
 		pf = new PageFactory();
 	}
 
-
-	public int getArticlesCounts(){
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS.toString()), 30);
-			WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS.toString()));
-			int articlesCount = Integer.parseInt(count.getText());
-			return articlesCount;
+	public int getArticlesCounts() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS);
+		int articlesCount = Integer.parseInt(count.getText());
+		return articlesCount;
 	}
 
-	public int getPatentsCounts(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS.toString()));
+	public int getPatentsCounts() throws Exception {
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS);
 		int patentCount = Integer.parseInt(count.getText());
 		return patentCount;
-}
-	
-	public int getPostsCounts(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_POSTS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_POSTS_COUNT_CSS.toString()));
+	}
+
+	public int getPostsCounts() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_POSTS_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_POSTS_COUNT_CSS);
 		int postsCount = Integer.parseInt(count.getText());
 		return postsCount;
-}
-	
-	public int getLinkedItemsCounts(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_COUNT_CSS.toString()));
-		int linkedItemsCount = Integer.parseInt(count.getText());
-		return linkedItemsCount;
-}
-	
-	
-	public int getMembersCounts(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS.toString()));
+	}
+
+	public int getAttachedFilesCounts() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		int attachedFilesCount = Integer.parseInt(count.getText());
+		return attachedFilesCount;
+	}
+
+	public int getMembersCounts() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		int membersCount = Integer.parseInt(count.getText());
 		return membersCount;
-}
-	
-	
-	public void clickOnDeleteButton(){
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS.toString()),
-					30);
-			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS.toString())).click();
-		}
-	
-	public void clickOnEditButton(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS.toString())).click();
-	}
-	
-	public void clickOnLinkItemsButton(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS.toString())).click();
-	}
-	
-	public void clickOnInviteOthersButton(){
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS.toString())).click();
-	}
-	
-	
-	public void clickArticlesTab() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS.toString())).click();;
-		waitForAjax(ob);
 	}
 
-	public void clickPatentstab() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS.toString())).click();
-		waitForAjax(ob);
-	}
-
-	public void clickPostsTab() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_CSS.toString())).click();
-		waitForAjax(ob);
-	}
-
-	public void clickAttachedFilesTab() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS.toString())).click();
-		waitForAjax(ob);
-	}
-
-	public void clickMembersTab() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_TAB_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_TAB_CSS.toString())).click();
-		waitForAjax(ob);
-	}
-	
-	private WebElement getRecordCard(String recordTitle) throws Exception{
+	public void clickOnDeleteButton() throws Exception {
 		
-		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()), 60);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
+		
+	}
+
+	public void clickOnEditButton() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
+		
+	}
+
+	public void clickOnAttachFileButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
+	}
+
+	public void clickOnInviteOthersButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+		
+	}
+
+	public void clickArticlesTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
+		waitForAjax(ob);
+	}
+
+	public void clickPatentstab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_CSS);
+		waitForAjax(ob);
+	}
+
+	public void clickPostsTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_CSS);
+		waitForAjax(ob);
+	}
+
+	public void clickAttachedFilesTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS);
+		waitForAjax(ob);
+	}
+
+	public void clickMembersTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_TAB_CSS);
+		waitForAjax(ob);
+	}
+
+	private WebElement getRecordCard(String recordTitle) throws Exception {
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()),
+				60);
 		List<WebElement> invitationList = ob
 				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()));
 		String actTitle;
 		for (WebElement we : invitationList) {
 			actTitle = we
-					.findElement(
-							By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString()))
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString()))
 					.getText();
 			if (actTitle.equalsIgnoreCase(recordTitle)) {
 				return we;
@@ -135,7 +132,7 @@ public class GroupDetailsPage extends TestBase {
 		}
 		throw new Exception("Record not found in the group list");
 	}
-	
+
 	public String getGroupTitle() {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()), 30);
@@ -144,14 +141,13 @@ public class GroupDetailsPage extends TestBase {
 		return title;
 
 	}
-	
-	public void inviteMembers(List<String> membersList){
-		
-		
+
+	public void inviteMembers(List<String> membersList) {
+
 	}
-	
+
 	public boolean inviteMembers(String membersName) {
-		boolean isFound=false;
+		boolean isFound = false;
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
@@ -163,27 +159,26 @@ public class GroupDetailsPage extends TestBase {
 
 			if (we.getText().equals(membersName)) {
 				we.click();
-				isFound=true;
+				isFound = true;
 				break;
 			}
 		}
 		clickOnSendInvitation();
 		return isFound;
 	}
-	
+
 	public void clickOnSendInvitation() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()))
 				.click();
 	}
-	
+
 	public void clickOnCancelInvitation() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()))
 				.click();
 	}
-	
-	
+
 }

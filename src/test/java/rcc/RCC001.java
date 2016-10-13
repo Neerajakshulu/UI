@@ -2,7 +2,12 @@ package rcc;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -51,12 +56,22 @@ static int status = 1;
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
+			
+			String title= this.getClass().getSimpleName()+"_Group_"+ "_" + getCurrentTimeStamp();
+			String desc= this.getClass().getSimpleName()+"_Group_"+ RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			loginAs("", "");
-			
-			
+			ob.navigate().to(host);
+			loginAs("USERNAME1", "PASSWORD1");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsListPage(ob).createGroup(title, desc);
+			Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupTitle(),title);
+			pf.getGroupsPage(ob).clickOnGroupsLink();
+			pf.getGroupsListPage(ob).verifyGroupDescription(desc, title);
+			pf.getGroupsListPage(ob).verifyItemsCount(0, title);
+		
 			
 			
 		} catch (Throwable t) {
