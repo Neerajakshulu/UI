@@ -350,7 +350,7 @@ public class TestBase {
 				case 0:
 					rowData.setTestclassName(currentCellData);
 				case 1:
-					rowData.setTestcaseId(currentCellData);
+					rowData.setTestcaseId(getJiraId(currentCellData));
 				case 2:
 					rowData.setTestcaseDescription(currentCellData);
 				case 3:
@@ -2016,5 +2016,19 @@ public class TestBase {
 		}
 		return true;
 	}
-
+	
+	protected String getJiraId(String currentCellData) {
+		String jiraid = "";
+		if (StringUtils.isNotBlank(currentCellData)) {
+			String[] ids = StringUtils.split(currentCellData, TOKENIZER_DOUBLE_PIPE);
+			for (int i = 0; i < ids.length; i++) {
+				if (i > 0) {
+					jiraid += TOKENIZER_DOUBLE_PIPE;
+				}
+				jiraid += "<a href=\"http://jira.bjz.apac.ime.reuters.com/browse/" + ids[i] + "\" target=\"_blank\">"
+						+ ids[i] + "</a>";
+			}
+		}
+		return jiraid;
+	}
 }
