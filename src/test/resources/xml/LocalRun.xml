@@ -117,13 +117,6 @@
 	
 
 	<!-- IAM -->
-
-	<test name="LinkedIn_and_facebook_linking">
-		<classes>
-			<class name="iam.IAM036"></class>
-		</classes>
-	</test>
-
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
