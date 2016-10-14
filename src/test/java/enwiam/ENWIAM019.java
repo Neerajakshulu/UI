@@ -82,12 +82,18 @@ public class ENWIAM019 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-			String resertPassPage = ob
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@1234");
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString())).click();
+			BrowserWaits.waitTime(2);
+			/*String resertPassPage = ob
 					.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).getText();
 			BrowserWaits.waitTime(3);
 			Assert.assertEquals(resertPassPage, "Reset your password");
-			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			logoutEnw();
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));*/
+			logout();
 			ob.quit();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports

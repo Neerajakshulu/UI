@@ -1707,10 +1707,10 @@ public class TestBase {
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
 				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
 				// + " " + ln2);
-				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
 					pf.getSearchProfilePageInstance(ob).clickPeople();
 					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				}
+				//}
 				pf.getLoginTRInstance(ob).logOutApp();
 				// closeBrowser();
 			} else {
@@ -1731,10 +1731,10 @@ public class TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn3 + " " + ln3);
-				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
 					pf.getSearchProfilePageInstance(ob).clickPeople();
 					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				}
+				//}
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} else {
