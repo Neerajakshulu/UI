@@ -17,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW018 extends TestBase {
 
@@ -38,7 +37,7 @@ public class ENW018 extends TestBase {
 	@Test
 	public void testcaseENW018() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		String expected_URL = "Thank You";
 
@@ -56,7 +55,7 @@ public class ENW018 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/");
+			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
@@ -68,8 +67,7 @@ public class ENW018 extends TestBase {
 					.sendKeys("Feedback sending");
 			BrowserWaits.waitTime(2);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-			BrowserWaits.waitTime(3);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			BrowserWaits.waitTime(7);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);
@@ -82,6 +80,8 @@ public class ENW018 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
+			closeBrowser();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -94,13 +94,11 @@ public class ENW018 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		closeBrowser();
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
 	}
 
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		closeBrowser();
 	}
 }

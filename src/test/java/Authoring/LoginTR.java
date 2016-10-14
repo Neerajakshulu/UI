@@ -272,7 +272,7 @@ public class LoginTR extends TestBase {
 				.click();
 		BrowserWaits.waitTime(3);
 		ob.findElement(By.cssSelector("div[class='modal-content ng-scope'] div[class='wui-input-with-label'] input"))
-				.sendKeys("Happy@123");
+				.sendKeys("Neon@123");
 		ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
 				.click();

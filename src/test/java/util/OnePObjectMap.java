@@ -530,6 +530,10 @@ public enum OnePObjectMap {
 		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
+		ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
+		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS("input[name='oldPassword']"),
+		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS("input[name='newPassword']"),
+		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH("//span[contains(text(),'Submit')]"),
 
 	;
 
