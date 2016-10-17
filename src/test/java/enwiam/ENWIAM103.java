@@ -2,26 +2,23 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import base.TestBase;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-public class ENWIAM101 extends TestBase {
+public class ENWIAM103 extends TestBase {
 
 	static boolean fail = false;
 	static boolean skip = false;
@@ -42,7 +39,7 @@ public class ENWIAM101 extends TestBase {
 	}
 
 	@Test
-	public void testcaseG101() throws Exception {
+	public void testcaseG102() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -57,9 +54,7 @@ public class ENWIAM101 extends TestBase {
 		}
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
-
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
-
 			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("MARKETUSER"));
 			Assert.assertTrue(statuCode2.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
@@ -68,42 +63,20 @@ public class ENWIAM101 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
-			test.log(LogStatus.PASS, "user has logged in with social account");
-
+			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			test.log(LogStatus.PASS, "User click on endnote app");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH);
-
-			Dimension dimesions = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH).getSize();
-			logger.info("Width : " + dimesions.width);
-			logger.info("Height : " + dimesions.height);
-			int x = dimesions.width;
-			int y = dimesions.height;
-
-			Actions builder = new Actions(ob);
-			builder.moveToElement(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH), x + 150, y)
-					.build().perform();
-			builder.click().build().perform();
-
-			test.log(LogStatus.PASS, "Linking model has been disappered");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()), 40);
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("MARKETUSER"),
 					LOGIN.getProperty("MARKETPWD"));
 			test.log(LogStatus.PASS, "User linked with steam account");
+			BrowserWaits.waitTime(2);
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
@@ -116,16 +89,14 @@ public class ENWIAM101 extends TestBase {
 			logoutEnw();
 			closeBrowser();
 			pf.clearAllPageObjects();
-
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),
-					LOGIN.getProperty("enwsocpwd"));
-			test.log(LogStatus.PASS, "user has logged in with social account");
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("enwsoclogin"),
+					CONFIG.getProperty("enwsocpwd"));
+			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
@@ -140,11 +111,12 @@ public class ENWIAM101 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH.toString())).click();
 			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(2);
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("enwsoclogin")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("enwsoclogin")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("neon", LOGIN.getProperty("MARKETUSER")));
-			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: End Note");
+			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: Endnote");
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -154,7 +126,7 @@ public class ENWIAM101 extends TestBase {
 
 		catch (Throwable t) {
 
-			test.log(LogStatus.FAIL, "Facebook is not linked with ENW ");// extent
+			test.log(LogStatus.FAIL, "Linkedin account is not linked with ENW ");// extent
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -165,23 +137,11 @@ public class ENWIAM101 extends TestBase {
 			closeBrowser();
 
 		}
-
 	}
 
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(authoringxls,
-		 * "Test Cases", TestUtil.getRowNum(authoringxls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
-		 * , TestUtil.getRowNum(authoringxls, this.getClass().getSimpleName()),
-		 * "SKIP");
-		 */
 
 	}
 

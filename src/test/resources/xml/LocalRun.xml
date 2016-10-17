@@ -180,6 +180,8 @@
 		<classes>
 			<class name="enwiam.ENWIAM100"></class>
 			<class name="enwiam.ENWIAM101"></class>
+	   <!-- <class name="enwiam.ENWIAM102"></class>
+			<class name="enwiam.ENWIAM103"></class>-->
 		</classes>
 	</test>
 
