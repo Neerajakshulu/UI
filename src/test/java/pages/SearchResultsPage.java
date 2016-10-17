@@ -307,14 +307,16 @@ public class SearchResultsPage extends TestBase {
 
 	}
 	
-	
-	public String ValidateSendToEndnoteSearchPage() throws InterruptedException {
-		WebElement button = ob
-				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS.toString()));
+	/**
+	 * Method for get the Send to EndNote label text
+	 * @return String
+	 * @throws Exception, When label not getting fetched
+	 */
+	public String ValidateSendToEndnoteSearchPage() throws Exception {
 
-		BrowserWaits.waitTime(5);
-
-		List<WebElement> list = button.findElements(By.cssSelector("span"));
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS)
+				.findElements(By.tagName("span"));
 
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
@@ -322,9 +324,10 @@ public class SearchResultsPage extends TestBase {
 
 			}
 		}
+
 		return "";
 	}
-	
+
 	public void linkSteamAcctWhileSendToEndnoteSearchPage() throws InterruptedException {
 		 ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys(CONFIG.getProperty("sfbpwrd003"));
 		   
@@ -335,15 +338,21 @@ public class SearchResultsPage extends TestBase {
 	
 	public void linkDiffSteamAcctWhileSendToEndnoteSearchPage(ExtentTest test) throws InterruptedException {
 		
-		 waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"),30);
-			ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--secondary button-color-secondary']")).click();
-			waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"),30);
-			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys("falak.guddu@gmail.com");
-			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys("9595far7202#");
-			   
-			   ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
-			   waitForElementTobeVisible(ob,By.cssSelector("button[class='wui-icon-btn ng-isolate-scope']"),30);		   
-			test.log(LogStatus.PASS,"User linked with steam account");
+		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-content ng-scope']"), 30);
+		ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--secondary button-color-secondary']")).click();
+		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-content ng-scope']"), 30);
+		ob.findElement(By.cssSelector(
+				OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS.toString()))
+				.sendKeys("falak.guddu@gmail.com");
+		ob.findElement(By.cssSelector(
+				OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS.toString()))
+				.sendKeys("9595far7202#");
+
+		ob.findElement(
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
+				.click();
+		waitForElementTobeVisible(ob, By.cssSelector("button[class='wui-icon-btn ng-isolate-scope']"), 30);
+		test.log(LogStatus.PASS, "User linked with steam account");
 
 	}
 
