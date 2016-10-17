@@ -1,5 +1,8 @@
 package enwiam;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -54,7 +57,7 @@ public class ENWIAM0001 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -71,8 +74,17 @@ public class ENWIAM0001 extends TestBase {
 			loginToFacebook();
 			loginToLinkedIn();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
+			logger.info("field");
+			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																		// reports
+			// next 3 lines to print whole testng error in report
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
@@ -122,7 +134,7 @@ public class ENWIAM0001 extends TestBase {
 	private void loginToLn() throws Exception {
 
 		// Navigate to TR login page and login with valid TR credentials
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("arvindkandaswamy@gmail.com", "darshiniyogi");
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
 		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
 		try {
 			ob.findElement(By.className("button-form btn-common")).click();
@@ -143,6 +155,7 @@ public class ENWIAM0001 extends TestBase {
 		}
 
 		pf.getENWReferencePageInstance(ob).clickAccount();
+	validateLinkedAccounts(3, "LinkedIn");
 		pf.getENWReferencePageInstance(ob).logout();
 
 	}
@@ -163,7 +176,7 @@ public class ENWIAM0001 extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//pf.getENWReferencePageInstance(ob).clickAccount();
+		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).logout();
 
 	}
@@ -171,7 +184,7 @@ public class ENWIAM0001 extends TestBase {
 	// Checking whether the linking modals are displaying or not while signing into LinkedIn
 	private void loginToLinkedIn() throws Exception {
 
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("arvindkandaswamy@gmail.com", "darshiniyogi");
+		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
 		//
 		try {
 
@@ -185,7 +198,7 @@ public class ENWIAM0001 extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//pf.getENWReferencePageInstance(ob).clickAccount();
+		pf.getENWReferencePageInstance(ob).clickAccount();
 
 		pf.getENWReferencePageInstance(ob).logout();
 		closeBrowser();
@@ -199,9 +212,9 @@ public class ENWIAM0001 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName40")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName40")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName18")));
 			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);
@@ -221,13 +234,5 @@ public class ENWIAM0001 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }
