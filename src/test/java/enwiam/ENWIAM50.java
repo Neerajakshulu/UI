@@ -76,10 +76,10 @@ public class ENWIAM50 extends TestBase {
 			try {
 
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_CSS);
 				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
 				WebElement m_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.NEON_MARKETING_COPY_XPATH);
+						.getElement(OnePObjectMap.NEON_MARKETING_COPY_CSS);
 
 				String branding_name = b_element.getText();
 				String marketing_Copy = m_element.getText();

@@ -81,7 +81,7 @@ public class ENWIAM51 extends TestBase {
 			try {
 
 				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				WebElement m_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_MARKETING_COPY_CSS);
+				WebElement m_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_MARKETING_COPY_CSS);
 
 				String branding_name = b_element.getText();
 				String marketing_Copy = m_element.getText();
