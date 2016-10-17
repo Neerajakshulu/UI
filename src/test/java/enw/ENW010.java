@@ -3,6 +3,7 @@ package enw;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -15,11 +16,9 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW010 extends TestBase {
 
@@ -39,7 +38,7 @@ public class ENW010 extends TestBase {
 
 	@Test
 	public void testcaseENW010() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
 		if (!master_condition) {
@@ -49,6 +48,7 @@ public class ENW010 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
@@ -58,41 +58,26 @@ public class ENW010 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String actual_result = "";
-			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			BrowserWaits.waitTime(2);
+			
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"), LOGIN.getProperty("NONMARKETUSERPASSWORD"));
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Downloads","Options");
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			
 			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_NAME_XPATH.toString())).getText();
-			if (ob.findElement(By.className("inactiveLink")) == null) {
-				logger.info("User name NOT hyperlinked to Profile page");
-				logger.info("NOT hyperlinked:" + actual_result);
-				actual_result = "test case is failed";
-				Assert.assertEquals(true, false);
-			}
-			logger.info("Actual result displayed as :" + actual_result); // Image_User_XPATH
-			WebElement ImageFile = ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString()));
+			//need to move to object map
+			String profileLink=ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
+			logger.info("is profile image linked -->"+profileLink);
+			WebElement ImageFile=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IMAGE_USER_XPATH);
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
 					ImageFile);
-			if (!ImagePresent) {
-				logger.info("Image not displayed.");
-			} else {
-				logger.info("Image is displayed.");
-			}
+			
 			try {
 
 				Assert.assertTrue(ImagePresent);
+				if(!(StringUtils.isNotEmpty(actual_result) && profileLink.equalsIgnoreCase("inactiveLink"))) {
+					throw new Exception("Profile Title and Image and flyout is Hyper linked");
+				}
 
 				test.log(LogStatus.PASS, " Image is present and User name is not hyper linked");
 			} catch (Throwable t) {
@@ -101,11 +86,12 @@ public class ENW010 extends TestBase {
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "mage is not present and User is hyperlinked")));// screenshot
+				closeBrowser();
 			}
+			closeBrowser();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-			// reports
-			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -120,6 +106,5 @@ public class ENW010 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		closeBrowser();
 	}
 }
