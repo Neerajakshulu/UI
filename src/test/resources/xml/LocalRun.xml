@@ -5,13 +5,13 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-<!-- 	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
-	This suite is related to all API ,ENW and LI related scripts to run 
-		on local due to saucelabs issue
+	<!-- This suite is related to all API ,ENW and LI related scripts to run 
+		on local due to saucelabs issue -->
 
-	ENW
+	<!-- ENW -->
 
 	<test name="ENW003">
 		<classes>
@@ -116,7 +116,7 @@
 	</test>
 	
 
-	IAM
+	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
@@ -155,7 +155,7 @@
 		</classes>
 	</test>
 
-	ENW IAM
+	<!-- ENW IAM -->
 
 	<test name="Login_and_logout_enw_application_using_LI_account">
 		<classes>
@@ -261,10 +261,31 @@
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
 	</test>
+	
+	<test name="ContactCustomerSupportScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM52">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ForwardMergeScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM53">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ForwardMergeScenario002">
+		<classes>
+			<class name="enwiam.ENWIAM54">
+			</class>
+		</classes>	
+	</test>
 
 	
 
-	Profile
+	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -372,29 +393,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test> -->
-	
-	<test name="ContactCustomerSupportScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM52">
-			</class>
-		</classes>
 	</test>
-	
-	<test name="ForwardMergeScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM53">
-			</class>
-		</classes>
-	</test>
-	
-	<test name="ForwardMergeScenario002">
-		<classes>
-			<class name="enwiam.ENWIAM54">
-			</class>
-		</classes>	
-	</test>
-	
 
 </suite>
 
