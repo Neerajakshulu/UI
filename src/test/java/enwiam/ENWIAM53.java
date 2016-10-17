@@ -3,7 +3,6 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -29,11 +28,9 @@ public class ENWIAM53 extends TestBase {
 	static String followAfter = null;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception
-	 *             , When Something unexpected
+	 * @throws Exception , When Something unexpected
 	 */
 
 	@BeforeTest
@@ -46,8 +43,7 @@ public class ENWIAM53 extends TestBase {
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
-	 * @throws Exception
-	 *             , When TR Login is not done
+	 * @throws Exception , When TR Login is not done
 	 */
 	@Test
 	public void testcaseh13() throws Exception {
@@ -94,15 +90,15 @@ public class ENWIAM53 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername07"),
 					LOGIN.getProperty("sru_fbpwd07"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
-			
-			String firstAccountProfileName=pf.getLinkingModalsInstance(ob).getProfileName();
-			test.log(LogStatus.INFO, "Social account profile name: "+firstAccountProfileName);
+
+			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			String accountType = "Facebook";
-			
-			validateAccounts(1,accountType);	
-			
+
+			validateAccounts(1, accountType);
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
@@ -116,12 +112,12 @@ public class ENWIAM53 extends TestBase {
 				test.log(LogStatus.PASS, "user is able to click the link button");
 
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				//String accountType = "Facebook";
-				
+				// String accountType = "Facebook";
+
 				try {
 					validateLinkedAccounts(2, accountType);
-					String secondAccountProfileName=pf.getLinkingModalsInstance(ob).getProfileName();
-					test.log(LogStatus.INFO, "After merging Steam account profile name: "+secondAccountProfileName);
+					String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+					test.log(LogStatus.INFO, "After merging Steam account profile name: " + secondAccountProfileName);
 					Assert.assertEquals(firstAccountProfileName, secondAccountProfileName);
 					test.log(LogStatus.PASS, "Forward Merge is happened");
 				}
@@ -162,7 +158,7 @@ public class ENWIAM53 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 
 		}
-		
+
 		logout();
 		closeBrowser();
 	}
@@ -187,7 +183,7 @@ public class ENWIAM53 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
-	
+
 	private void validateAccounts(int accountCount,
 			String linkName) throws Exception {
 		try {
@@ -195,8 +191,7 @@ public class ENWIAM53 extends TestBase {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername07")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS,
-					"Single Social account is available and is not linked to Steam account");
+			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,

@@ -2,11 +2,7 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -32,11 +28,9 @@ public class ENWIAM54 extends TestBase {
 	static String followAfter = null;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception
-	 *             , When Something unexpected
+	 * @throws Exception , When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -48,8 +42,7 @@ public class ENWIAM54 extends TestBase {
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
-	 * @throws Exception
-	 *             , When TR Login is not done
+	 * @throws Exception , When TR Login is not done
 	 */
 	@Test
 	public void testcaseh14() throws Exception {
@@ -106,7 +99,7 @@ public class ENWIAM54 extends TestBase {
 			validateAccounts(1, accountType);
 
 			for (int j = 1; j <= 10; j++) {
-				logger.info("Creating "+j+" Watchlist");
+				logger.info("Creating " + j + " Watchlist");
 				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 			}
 
@@ -114,21 +107,22 @@ public class ENWIAM54 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
-			//Login to New social account and merge
+			// Login to New social account and merge
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername08"),
 						LOGIN.getProperty("sru_fbpwd08"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw08"));
 				test.log(LogStatus.PASS, "user is able to link");
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
 				pf.getHFPageInstance(ob).clickOnAccountLink();
 				accountType = "Neon";
-				
+
 				try {
 					validateLinkedAccounts(2, accountType);
-					String secondAccountProfileName=pf.getLinkingModalsInstance(ob).getProfileName();
-					test.log(LogStatus.INFO, "After merging Social account profile name: "+secondAccountProfileName);
+					String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+					test.log(LogStatus.INFO, "After merging Social account profile name: " + secondAccountProfileName);
 					Assert.assertEquals(firstAccountProfileName, secondAccountProfileName);
 					test.log(LogStatus.PASS, "Forward Merge is happened");
 				}
@@ -144,8 +138,6 @@ public class ENWIAM54 extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 
 				}
-				
-				
 
 			} catch (Throwable t) {
 				closeBrowser();
@@ -180,8 +172,8 @@ public class ENWIAM54 extends TestBase {
 			String linkName) throws Exception {
 		try {
 
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("sru_fbusername08")));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
+					LOGIN.getProperty("sru_fbusername08")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam08")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
@@ -196,9 +188,9 @@ public class ENWIAM54 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
-	
-	
-	private void validateAccounts(int accountCount, String linkName) throws Exception {
+
+	private void validateAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(

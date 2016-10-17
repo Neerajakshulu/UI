@@ -179,4 +179,27 @@
 			<class name="enwiam.ENWIAM0004"></class>
 		</classes>
 	</test>
+	
+	<!-- <test name="ContactCustomerSupportScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM52">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ForwardMergeScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM53">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ForwardMergeScenario002">
+		<classes>
+			<class name="enwiam.ENWIAM54">
+			</class>
+		</classes>	
+	</test> -->
+	
+	
 </suite>

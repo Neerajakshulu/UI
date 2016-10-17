@@ -28,11 +28,9 @@ public class ENWIAM52 extends TestBase {
 	static String followAfter = null;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
 	 * 
-	 * @throws Exception
-	 *             , When Something unexpected
+	 * @throws Exception , When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -44,8 +42,7 @@ public class ENWIAM52 extends TestBase {
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
-	 * @throws Exception
-	 *             , When TR Login is not done
+	 * @throws Exception , When TR Login is not done
 	 */
 	@Test
 	public void testcaseh14() throws Exception {
@@ -102,7 +99,7 @@ public class ENWIAM52 extends TestBase {
 			validateNeonAccount(1, accountType);
 
 			for (int j = 1; j <= 10; j++) {
-				logger.info("Creating "+j+" Watchlist");
+				logger.info("Creating " + j + " Watchlist");
 				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 			}
 
@@ -110,45 +107,47 @@ public class ENWIAM52 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
-
-			//Making the Social account Neon Active
+			// Making the Social account Neon Active
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername09"),
 						LOGIN.getProperty("sru_fbpwd09"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
 				BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);
-				
+
 				for (int j = 1; j <= 10; j++) {
-					logger.info("Creating "+j+" Watchlist");
+					logger.info("Creating " + j + " Watchlist");
 					pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 				}
-				
+
 				test.log(LogStatus.INFO, "Social account is made Neon active ");
 				pf.getLoginTRInstance(ob).logOutApp();
 				BrowserWaits.waitTime(5);
-			//Trying to Link the accounts	
+				// Trying to Link the accounts
 				try {
 					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam09"),
 							LOGIN.getProperty("sru_steampw09"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 					pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
-					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_TITLE_CSS);
-					String actual_msg=pf.getLinkingModalsInstance(ob).getCustomerSupportMsg();
-					if(actual_msg.contains("We're sorry. We are unable to link your accounts."))
-						test.log(LogStatus.PASS, "Accounts cannot be merged and contact customer support message is displayed");	
+					pf.getBrowserWaitsInstance(ob)
+							.waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_TITLE_CSS);
+					String actual_msg = pf.getLinkingModalsInstance(ob).getCustomerSupportMsg();
+					if (actual_msg.contains("We're sorry. We are unable to link your accounts."))
+						test.log(LogStatus.PASS,
+								"Accounts cannot be merged and contact customer support message is displayed");
 					pf.getLinkingModalsInstance(ob).clickOnOkButton();
 				}
 
 				catch (Throwable t) {
-					
+
 					test.log(LogStatus.FAIL, "contact customer support message is not displayed");// extent
 					// reports
 					status = 2;// excel
@@ -158,8 +157,6 @@ public class ENWIAM52 extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 
 				}
-				
-				
 
 			} catch (Throwable t) {
 				closeBrowser();
@@ -168,8 +165,8 @@ public class ENWIAM52 extends TestBase {
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_skip_link")));
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_skip_link")));
 
 			}
 
@@ -189,8 +186,8 @@ public class ENWIAM52 extends TestBase {
 		closeBrowser();
 	}
 
-	
-	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
+	private void validateNeonAccount(int accountCount,
+			String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam09")));
@@ -198,28 +195,29 @@ public class ENWIAM52 extends TestBase {
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Linked accounts are available in accounts page");
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
-	private void validateAccounts(int accountCount, String linkName) throws Exception {
+
+	private void validateAccounts(int accountCount,
+			String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername09")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Single "+linkName+" account is available and is not linked");
+			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Linked accounts are available in accounts page");
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
