@@ -102,16 +102,19 @@
 			<class name="enw.ENW019"></class>
 		</classes>
 	</test>
-	<test name="ENW020">
+	
+	<!-- <test name="ENW020">
 		<classes>
 			<class name="enw.ENW020"></class>
 		</classes>
 	</test>
+	
 	<test name="ENW021">
 		<classes>
 			<class name="enw.ENW021"></class>
 		</classes>
-	</test>
+	</test> -->
+	
 	<!-- <test name="ENW000010">
 		<classes>
 			<class name="enw.ENW000010"></class>

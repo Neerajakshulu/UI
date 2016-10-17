@@ -86,10 +86,11 @@ public class ENW010 extends TestBase {
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "mage is not present and User is hyperlinked")));// screenshot
-				closeBrowser();
 			}
+			
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			StringWriter errors = new StringWriter();
@@ -100,7 +101,6 @@ public class ENW010 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

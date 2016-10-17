@@ -75,7 +75,6 @@ public class ENW009 extends TestBase {
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
-				closeBrowser();
 			}
 
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -91,7 +90,6 @@ public class ENW009 extends TestBase {
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

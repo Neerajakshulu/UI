@@ -115,6 +115,19 @@
 		</classes>
 	</test>
 	
+	<test name="ENW020">
+		<classes>
+			<class name="enw.ENW020"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="ENW021">
+		<classes>
+			<class name="enw.ENW021"></class>
+		</classes>
+	</test>
+	
 
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
