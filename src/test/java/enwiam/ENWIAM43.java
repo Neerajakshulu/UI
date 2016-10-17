@@ -78,7 +78,9 @@ public class ENWIAM43 extends TestBase {
 						"User is able to see message - Your account registration has not yet been confirmed.");
 
 				try {
-					pf.getLinkingModalsInstance(ob).clickOnOkButton();
+					pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.OK_BUTTON_ACCOUNT_NOTACTIVATED_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.OK_BUTTON_ACCOUNT_NOTACTIVATED_XPATH);
 
 				} catch (Throwable t) {
 					t.printStackTrace();
