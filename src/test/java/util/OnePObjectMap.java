@@ -458,6 +458,7 @@ public enum OnePObjectMap {
 	ENWLANDINGPAGE_CREATE_ICON_CSS("i[class='fa fa-file-text login-splash-icon']"),
 	ENWLANDINGPAGE_ORGANIZE_ICON_CSS("i[class='fa fa-cloud login-splash-icon']"),
 	ACCOUNT_NOTACTIVATED_MSG_XPATH("//h3[@class='wui-modal__title' and contains(.,'Your account registration')]"),
+	OK_BUTTON_ACCOUNT_NOTACTIVATED_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary' and contains(.,'OK')]"),
 	OK_BUTTON_CSS("button[class^='wui-btn wui-btn--secondary']"),
 	NO_LETS_CONTINUE_BUTTON_XPATH("//button[contains(text(),'continue')]"),
 	SIGNIN_USING_FB_BUTTON_CSS("button[ng-click='vm.callSocialLogin()']"),
