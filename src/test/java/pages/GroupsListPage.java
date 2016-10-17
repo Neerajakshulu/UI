@@ -73,7 +73,7 @@ public class GroupsListPage extends TestBase {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()),
 				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString())).click();
+		ob.findElement(By.linkText(title)).click();
 	}
 	
 	public void addCoverPhoto(){
@@ -83,7 +83,7 @@ public class GroupsListPage extends TestBase {
 	}
 	
 	
-	private WebElement getRecordCard(String groupTitle) throws Exception {
+	private WebElement getGroupCard(String groupTitle) throws Exception {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()),
 				60);
@@ -104,27 +104,35 @@ public class GroupsListPage extends TestBase {
 	
 	
 	public boolean verifyItemsCount(int count, String grouptitle) throws Exception{
-		WebElement groupRecord=getRecordCard(grouptitle);
+		WebElement groupRecord=getGroupCard(grouptitle);
 		String itemsCount=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS.toString())).getText();
 		return Integer.parseInt(itemsCount)==count;
 	}
 	
 	public boolean verifyMembersCount(int count, String grouptitle) throws Exception{
-		WebElement groupRecord=getRecordCard(grouptitle);
+		WebElement groupRecord=getGroupCard(grouptitle);
 		String itemsCount=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS.toString())).getText();
 		return Integer.parseInt(itemsCount)==count;
 	}
 	
-	public boolean verifyGroupDescription(int desc, String grouptitle) throws Exception{
-		WebElement groupRecord=getRecordCard(grouptitle);
+	public boolean verifyGroupDescription(String desc, String grouptitle) throws Exception{
+		WebElement groupRecord=getGroupCard(grouptitle);
 		String groupDesc=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText();
 		return groupDesc.equals(desc);
 	}
 	
-	public void getGroupOwnerDetails(){
+	public String getGroupOwnerDetails(String grouptitle) throws Exception{
+		WebElement groupRecord=getGroupCard(grouptitle);
+		
+		String name=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).getText();
+		String role=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS.toString())).getText();
+		return name.trim()+","+role.trim();
+	}
 	
+	public void clickOnGroupOwnerName(String grouptitle) throws Exception{
 		
-		
+		WebElement groupRecord=getGroupCard(grouptitle);
+		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).click();
 	}
 	
 }

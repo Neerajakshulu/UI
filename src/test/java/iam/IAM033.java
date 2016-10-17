@@ -76,7 +76,7 @@ public class IAM033 extends TestBase {
 
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),
 					CONFIG.getProperty("fbpwrd"));
-			pf.getLoginTRInstance(ob).socialLinking();
+						pf.getLoginTRInstance(ob).socialLinking();
 			test.log(LogStatus.PASS, "User has logged in with facebook credentials");
 			test.log(LogStatus.PASS, "Facebook account is linked with steam account");
 			pf.getLoginTRInstance(ob).logOutApp();

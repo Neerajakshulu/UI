@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -51,10 +52,20 @@ public class ENW022 extends TestBase {
 			clearCookies();
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
-				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+			try {
+				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+						.getText();
+				if (text.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())).click();
+			BrowserWaits.waitTime(2);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())).click();
 			String newWindow = switchToNewWindow(ob);

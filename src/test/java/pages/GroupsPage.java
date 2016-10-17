@@ -19,35 +19,39 @@ public class GroupsPage extends TestBase {
 
 	public GroupsPage(WebDriver ob) {
 		this.ob = ob;
-		pf = new PageFactory();
+		pf = new PageFactory();//
 	}
 
-	public void clickOnGroupsTab() {
-
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS.toString())).click();
+	public void clickOnGroupsLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPS_LINK__CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_GROUPS_LINK__CSS);
+		waitForAjax(ob);
 	}
 	
-	public void clickOnCreateNewGroupButton() {
+	public void clickOnGroupsTab() throws Exception {
 
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS.toString())).click();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
+		
+	}
+	
+	public void clickOnCreateNewGroupButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS);
+		
 	}
 
-	public int getGroupsCount() {
+	public int getGroupsCount() throws Exception {
 
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_GROUPS_COUNT_CSS.toString()));
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPS_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUP_GROUPS_COUNT_CSS);
 		int groupsCount = Integer.parseInt(count.getText());
 		return groupsCount;
 	}
 
-	public int getInvitationsCount() {
-
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_INVITATIONS_COUNT_CSS.toString()), 30);
-		WebElement count = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_INVITATIONS_COUNT_CSS.toString()));
+	public int getInvitationsCount() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_INVITATIONS_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUP_INVITATIONS_COUNT_CSS);
 		int invitationsCount = Integer.parseInt(count.getText());
 		return invitationsCount;
 	}

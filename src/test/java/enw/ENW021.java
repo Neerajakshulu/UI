@@ -2,6 +2,7 @@ package enw;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.Inet4Address;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,7 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.relevantcodes.extentreports.LogStatus;
-
 import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
@@ -20,7 +19,9 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 public class ENW021 extends TestBase {
+
 	static int status = 1;
+	String expectedUrl = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -33,6 +34,7 @@ public class ENW021 extends TestBase {
 	public void testcaseENW021() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
+
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
@@ -43,27 +45,25 @@ public class ENW021 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to("http://www.researcherid.com/");
-
+			ob.navigate().to("https://rid-qa.researcherid.com/");
+			logger.info(Inet4Address.getLocalHost().getHostAddress());
 			loginToRID("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
 			EndNoteSeesion(ob);
-			logger.info("Refreshing the browser");
-			ob.navigate().refresh();
-			logger.info("CLicking the profile");
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
-			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			BrowserWaits.waitTime(8);
-			if (ob.getCurrentUrl().contains("https://dev-stable.1p.thomsonreuters.com/#/profile/")) {
-				if (ob.findElements(By.xpath("//div/button/img[@class='ne-user-profile-image']")).size() > 0)
-					test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
+			try {
+				if (!Inet4Address.getLocalHost().getHostAddress().startsWith("10.29")) {
+					CessarEntiteled();
+				} else {
+					CessarNotEntitled();
 
-			} else {
-				test.log(LogStatus.FAIL, "Expected page is not displayed");
-				Assert.assertEquals(true, false);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -75,10 +75,51 @@ public class ENW021 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
 	}
 
-	private void EndNoteSeesion(WebDriver ob) throws Exception{
+	private void CessarNotEntitled() throws Exception {
+		logger.info("CLicking the profile");
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+		loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+		BrowserWaits.waitTime(8);
+		if (ob.getCurrentUrl().contains(expectedUrl)) {
+			if (ob.findElements(By.xpath(OnePObjectMap.IMAGE_ICON_PROFILE_IN_NEON_XPATH.toString())).size() > 0)
+				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
+
+		} else {
+			test.log(LogStatus.FAIL, "Expected page is not displayed");
+			Assert.assertEquals(true, false);
+		}
+
+	}
+
+	private void CessarEntiteled() throws Exception {
+		loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+		try {
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+					.getText();
+			if (text.equalsIgnoreCase("Continue")) {
+				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		BrowserWaits.waitTime(2);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+		BrowserWaits.waitTime(8);
+		if (ob.findElements(By.xpath(OnePObjectMap.IMAGE_ICON_PROFILE_IN_NEON_XPATH.toString())).size() > 0) {
+			test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
+		} else {
+			test.log(LogStatus.FAIL, "Expected page is not displayed");
+			Assert.assertEquals(true, false);
+		}
+	}
+
+	private void EndNoteSeesion(WebDriver ob) throws Exception {
 		String newWindow = switchToNewWindow(ob);
 		logger.info("Before Success1");
 		if (newWindow != null) {
@@ -97,7 +138,7 @@ public class ENW021 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		closeBrowser();
+		
 	}
 
 }

@@ -7,22 +7,24 @@
 
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
-	
+
 	<!-- This suite is related to all API ,ENW and LI related scripts to run 
 		on local due to saucelabs issue -->
 
-	<!-- IAM -->
+	<!-- ENW -->
 
 	<test name="ENW003">
 		<classes>
 			<class name="enw.ENW003"></class>
 		</classes>
 	</test>
+	
 	<test name="ENW004">
 		<classes>
 			<class name="enw.ENW004"></class>
 		</classes>
 	</test>
+	
 	<test name="ENW005">
 		<classes>
 			<class name="enw.ENW005"></class>
@@ -46,15 +48,75 @@
 			<class name="enw.ENW000012"></class>
 		</classes>
 	</test>
-
-	<!-- IAM -->
-
-	<test name="LinkedIn_and_facebook_linking">
+	
+	<test name="ENW007">
 		<classes>
-			<class name="iam.IAM036"></class>
+			<class name="enw.ENW007"></class>
 		</classes>
 	</test>
 
+	<test name="ENW009">
+		<classes>
+			<class name="enw.ENW009"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW010">
+		<classes>
+			<class name="enw.ENW010"></class>
+		</classes>
+	</test>
+
+	<test name="ENW011">
+		<classes>
+			<class name="enw.ENW011"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW012">
+		<classes>
+			<class name="enw.ENW012"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW013">
+		<classes>
+			<class name="enw.ENW013"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW014">
+		<classes>
+			<class name="enw.ENW014"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW015">
+		<classes>
+			<class name="enw.ENW015"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW016">
+		<classes>
+			<class name="enw.ENW016"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW017">
+		<classes>
+			<class name="enw.ENW017"></class>
+		</classes>
+	</test>
+	
+	<test name="ENW022">
+		<classes>
+			<class name="enw.ENW022"></class>
+		</classes>
+	</test>
+	
+
+	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
@@ -74,6 +136,7 @@
 			<class name="iam.IAM030"></class>
 		</classes>
 	</test>
+	
 	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
@@ -198,6 +261,8 @@
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
 	</test>
+
+	
 
 	<!-- Profile -->
 

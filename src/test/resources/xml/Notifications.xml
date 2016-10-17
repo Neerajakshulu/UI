@@ -14,7 +14,7 @@
 			<class name="notifications.Notifications0002"></class>
 		</classes>
 	</test>
-	 <test name="Test F3">
+	<test name="Test F3">
 		<classes>
 			<class name="notifications.Notifications0003"></class>
 		</classes>
@@ -59,6 +59,13 @@
 			<class name="notifications.Notifications0011"></class>
 		</classes>
 	</test>
+
+	<test name="Test F21">
+		<classes>
+			<class name="notifications.Notifications0021"></class>
+		</classes>
+	</test>
+
 	<test name="Test F12">
 		<classes>
 			<class name="notifications.Notifications0012"></class>
@@ -69,11 +76,8 @@
 			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
-	<!-- <test name="Test F14">
-		<classes>
-			<class name="notifications.Notifications0014"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="Test F14"> <classes> <class name="notifications.Notifications0014"></class> 
+		</classes> </test> -->
 	<test name="Test F15">
 		<classes>
 			<class name="notifications.Notifications0015"></class>
@@ -101,30 +105,26 @@
 			<class name="notifications.Notifications0020"></class>
 		</classes>
 	</test>
-	
-	<test name="Test F21">
-		<classes>
-			<class name="notifications.Notifications0021"></class>
-		</classes>
-	</test>
-	
+
+
+
 	<test name="Test F22">
 		<classes>
 			<class name="notifications.Notifications0022"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F23">
 		<classes>
 			<class name="notifications.Notifications0023"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test F24">
 		<classes>
 			<class name="notifications.Notifications0024"></class>
 		</classes>
 	</test>
-	
+
 </suite>
 

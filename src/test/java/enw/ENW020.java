@@ -34,6 +34,7 @@ public class ENW020 extends TestBase {
 	public void testcaseENW020() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
+		String url="https://dev-stable.1p.thomsonreuters.com/#/profile/";
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
@@ -53,13 +54,10 @@ public class ENW020 extends TestBase {
 			System.out.println("CLicking the profile");
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
-			// ob.findElement(By.xpath(".//*[@class='fa fa-cog
-			// profile_account_link']")).click();
-			// NeonSessionBreaks(ob);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			BrowserWaits.waitTime(5);
-			if (ob.getCurrentUrl().contains("https://dev-stable.1p.thomsonreuters.com/#/profile/")) {
-				if (ob.findElements(By.xpath("//div/button/img[@class='ne-user-profile-image']")).size() > 0)
+			BrowserWaits.waitTime(6);
+			if (ob.getCurrentUrl().contains(url)) {
+				if (ob.findElements(By.xpath(OnePObjectMap.IMAGE_ICON_PROFILE_IN_NEON_XPATH.toString())).size() > 0)
 					test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
 
 			} else {

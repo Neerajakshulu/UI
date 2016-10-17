@@ -13,10 +13,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW018 extends TestBase {
 
@@ -37,7 +37,7 @@ public class ENW018 extends TestBase {
 	@Test
 	public void testcaseENW018() throws Exception {
 
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		String expected_URL = "Thank You";
 
@@ -55,22 +55,20 @@ public class ENW018 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/");
+			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			ob.findElement(By.partialLinkText("Help & Feedback")).click();
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.partialLinkText("Send feedback")).click();
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(2000);
-			jsClick(ob, ob.findElement(By.xpath("//button[contains(text(),'Submit')]")));
-			Thread.sleep(3000);
-			String str = ob.findElement(By.xpath("//h3[contains(text(),'Thank You')]")).getText();
+			BrowserWaits.waitTime(2);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
+			BrowserWaits.waitTime(7);
+			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
@@ -82,6 +80,8 @@ public class ENW018 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
+			closeBrowser();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -94,13 +94,11 @@ public class ENW018 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		closeBrowser();
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
 	}
 
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-		closeBrowser();
 	}
 }

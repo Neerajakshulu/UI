@@ -2,6 +2,7 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -12,13 +13,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class ENWIAM101 extends TestBase {
 
@@ -56,7 +57,9 @@ public class ENWIAM101 extends TestBase {
 		}
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("enwsoclogin"));
+		
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200") ||statuCode.equalsIgnoreCase("400"));
+		   
 			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("MARKETUSER"));
 			Assert.assertTrue(statuCode2.equalsIgnoreCase("200") ||statuCode.equalsIgnoreCase("400"));
 
@@ -73,6 +76,8 @@ public class ENWIAM101 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
+			
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User click on endnote app");
 			Dimension dimesions = pf.getBrowserActionInstance(ob)
@@ -88,7 +93,7 @@ public class ENWIAM101 extends TestBase {
 					y).build().perform();
 			builder.click().build().perform();
 			test.log(LogStatus.PASS, "Linking model has been disappered");
-			BrowserWaits.waitTime(8);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			waitForElementTobeVisible(ob,
@@ -110,6 +115,7 @@ public class ENWIAM101 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
@@ -167,6 +173,7 @@ public class ENWIAM101 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("MARKETUSER"),
@@ -188,8 +195,8 @@ public class ENWIAM101 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("enwsoclogin"),
 					CONFIG.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
-			BrowserWaits.waitTime(3);
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
+						pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString()), 30);
 			text = ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).getText();

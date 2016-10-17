@@ -71,13 +71,14 @@ public class ENWIAM100 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString()))
 					.click();
 			test.log(LogStatus.PASS, "Linking modal has been closed");
-			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			waitForElementTobeVisible(ob,
@@ -105,6 +106,7 @@ public class ENWIAM100 extends TestBase {
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("neon", LOGIN.getProperty("myacc")));
 
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: Neon");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
@@ -153,6 +155,7 @@ public class ENWIAM100 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("enwsoclogin"),
 					LOGIN.getProperty("enwsocpwd"));
 			test.log(LogStatus.PASS, "user  logged in with Linkedin account");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("myacc"), LOGIN.getProperty("mypwd"));
@@ -179,7 +182,7 @@ public class ENWIAM100 extends TestBase {
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("enwsoclogin")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("myacc")));
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page: Neon");
-			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
 

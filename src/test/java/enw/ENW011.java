@@ -61,14 +61,21 @@ public class ENW011 extends TestBase {
 			String user_Last_Name = "";
 			String user_Full_name = "";
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			if (ob.findElement(By.xpath(OnePObjectMap.ENW_CONTINUE_DIOLOG_BOX_XPATH.toString())).isDisplayed()) {
+			try {
+				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+						.getText();
+				if (text.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
 
-				ob.findElement(By.xpath(OR.getProperty("ENW_CONTINUE_BUTTON"))).click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			// ob.findElement(By.xpath(OnePObjectMap.ENW_Profile_User_Icon_XPATH.toString())).click();
-			ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())).click();
-			BrowserWaits.waitTime(1);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())).click();
+			BrowserWaits.waitTime(3);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())));
 			BrowserWaits.waitTime(1);
 			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString()))
 					.getAttribute("value");

@@ -37,8 +37,8 @@ public class ProfilePage extends TestBase {
 	 */
 	static int peopleCount = 0;
 	static String PARENT_WINDOW_HANDLE = null;
-	static String profileTitle;
-	static String profileMetadata;
+	String profileTitle;
+	String profileMetadata;
 	static String followUnfollowLableBefore;
 	static String followUnfollowLableAfter;
 	static String metadata[];

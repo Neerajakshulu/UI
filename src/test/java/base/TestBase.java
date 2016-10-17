@@ -350,7 +350,7 @@ public class TestBase {
 				case 0:
 					rowData.setTestclassName(currentCellData);
 				case 1:
-					rowData.setTestcaseId(currentCellData);
+					rowData.setTestcaseId(getJiraId(currentCellData));
 				case 2:
 					rowData.setTestcaseDescription(currentCellData);
 				case 3:
@@ -1707,10 +1707,10 @@ public class TestBase {
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
 				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
 				// + " " + ln2);
-				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
 					pf.getSearchProfilePageInstance(ob).clickPeople();
 					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				}
+				//}
 				pf.getLoginTRInstance(ob).logOutApp();
 				// closeBrowser();
 			} else {
@@ -1731,10 +1731,10 @@ public class TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn3 + " " + ln3);
-				if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
 					pf.getSearchProfilePageInstance(ob).clickPeople();
 					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				}
+				//}
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} else {
@@ -2016,5 +2016,19 @@ public class TestBase {
 		}
 		return true;
 	}
-
+	
+	protected String getJiraId(String currentCellData) {
+		String jiraid = "";
+		if (StringUtils.isNotBlank(currentCellData)) {
+			String[] ids = StringUtils.split(currentCellData, TOKENIZER_DOUBLE_PIPE);
+			for (int i = 0; i < ids.length; i++) {
+				if (i > 0) {
+					jiraid += TOKENIZER_DOUBLE_PIPE;
+				}
+				jiraid += "<a href=\"http://jira.bjz.apac.ime.reuters.com/browse/" + ids[i] + "\" target=\"_blank\">"
+						+ ids[i] + "</a>";
+			}
+		}
+		return jiraid;
+	}
 }
