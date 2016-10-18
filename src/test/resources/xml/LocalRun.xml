@@ -128,6 +128,11 @@
 		</classes>
 	</test>
 	
+	<test name="ENW023">
+		<classes>
+			<class name="enw.ENW023"></class>
+		</classes>
+	</test>
 
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
