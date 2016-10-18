@@ -90,13 +90,20 @@ public class ENWIAM40 extends TestBase {
 			// Navigation from Neon to Enw
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			} catch (Exception e) {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			}
 
 			try {
-
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
 				test.log(LogStatus.PASS, "User is able to navigate from Neon to EndNote");
-				pf.getEnwReferenceInstance(ob).enwContinue();
 
 				// Navigation from ENW to Neon
 				pf.getEnwReferenceInstance(ob).clickOnProjectNeonLink();

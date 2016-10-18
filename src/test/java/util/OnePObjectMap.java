@@ -466,6 +466,7 @@ public enum OnePObjectMap {
 	NOT_NOW_BUTTON_CSS("a[event-action='skip-linking-neon']"),
 	CONTACT_CUSTOMER_SUPPORT_TITLE_CSS("h2[class='login-title']"),
 	CONTACT_CUSTOMER_SUPPORT_MSG_XPATH("//div[@class='col-xs-10 col-xs-offset-1 text-center']/p"),
+	ENDNOTE_LOGO_CSS("a[title='EndNote logo']"),
 	
 	//AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),

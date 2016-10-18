@@ -1,25 +1,17 @@
 package pages;
 
-import java.util.List;
-
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
-import util.ErrorUtil;
 import util.OnePObjectMap;
 
 public class LinkingModalsPage extends TestBase {
-static int i=0;
+	static int i = 0;
+
 	/**
 	 * This class contains methods related to Linking modal
 	 * 
@@ -67,7 +59,7 @@ static int i=0;
 	}
 
 	/**
-	 * Mehthod for clicking outside linking modal
+	 * Method for clicking outside Did you know linking modal
 	 * 
 	 * @throws Exception,
 	 *             When not clicked
@@ -90,44 +82,74 @@ static int i=0;
 				.build().perform();
 		builder.click().build().perform();
 	}
-	
-	public void clickOnSignInUsingFB() throws Exception{
-		
+
+	/**
+	 * Method for clicking on sign in using fb button
+	 * 
+	 * @throws Exception,
+	 *             When not clicked
+	 */
+	public void clickOnSignInUsingFB() throws Exception {
+
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SIGNIN_USING_FB_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SIGNIN_USING_FB_BUTTON_CSS);
-		
+
 	}
-	
-	public String getProfileName() throws Exception{
+
+	/**
+	 * Method for getting profile Name from the flyout
+	 * 
+	 * @throws Exception,
+	 *             When we don't get profile name
+	 */
+	public String getProfileName() throws Exception {
 		pf.getHFPageInstance(ob).clickProfileImage();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PROFILENAME_CSS);
-		String ProfileName=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.PROFILENAME_CSS).getText();
+		String ProfileName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.PROFILENAME_CSS).getText();
 		return ProfileName;
 	}
-	
 
+	/**
+	 * Method to create watchlist to make neon active
+	 * 
+	 * @throws Exception,
+	 *             When not clicked
+	 */
 	public void toMakeAccountNeonActive() throws Exception {
-		
+
 		String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
-		createWatchList("public", newWatchlistName, "This is my test watchlist.");				
+		createWatchList("public", newWatchlistName, "This is my test watchlist.");
 	}
 	
-	
+	/**
+	 * Method to click on Not now button
+	 * 
+	 * @throws Exception,
+	 *             When not clicked
+	 */
+
 	public void clickOnNotNowButton() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 	}
 	
-	public String getCustomerSupportMsg() throws Exception{
+
+	public String getCustomerSupportMsg() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_MSG_XPATH);
-		String actual=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_MSG_XPATH).getText();
+		String actual = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_MSG_XPATH)
+				.getText();
 		return actual;
-		
-		
+
 	}
-	
+
+	/**
+	 * Method to click on OK button
+	 * 
+	 * @throws Exception,
+	 *             When not clicked
+	 */
+
 	public void clickOnOkButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.OK_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.OK_BUTTON_CSS);

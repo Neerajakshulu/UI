@@ -105,7 +105,7 @@ public class ENWIAM43 extends TestBase {
 
 		catch (Throwable t) {
 
-			test.log(LogStatus.FAIL, "Facebook is not linked with ENW ");// extent
+			test.log(LogStatus.FAIL, "Something Unexpected ");// extent
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports

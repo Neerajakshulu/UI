@@ -92,12 +92,19 @@ public class ENWIAM41 extends TestBase {
 
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw01"));
 				test.log(LogStatus.PASS, "user is able to link");
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-
+				try {
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					} catch (Exception e) {
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					}
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
 				test.log(LogStatus.PASS, "user is able navigate to EndNote after linking");
 
-				pf.getEnwReferenceInstance(ob).enwContinue();
 
 			} catch (Throwable t) {
 				t.printStackTrace();
