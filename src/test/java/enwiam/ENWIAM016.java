@@ -2,8 +2,10 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -97,34 +99,48 @@ public class ENWIAM016 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
 			BrowserWaits.waitTime(3);
 
-			String passLength = null;
-
+			List<WebElement> errMsg = null;
 			if (validity.equalsIgnoreCase("YES")) {
-				passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
-						.getText();
-				if (passLength.contains("Password is too long")) {
-					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
-					closeBrowser();
+
+				errMsg = ob.findElements(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()));
+				if (!(errMsg.size() == 0)) {
+					test.log(LogStatus.FAIL, "Error message getting displayed");// extent
+					throw new Exception("Error message should not display");
 				}
+
+				/*
+				 * passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
+				 * .getText(); if (passLength.contains("Password is too long")) { test.log(LogStatus.FAIL,
+				 * "Error message not getting displayed");// extent test.log(LogStatus.INFO, "Snapshot below: " +
+				 * test.addScreenCapture(captureScreenshot( this.getClass().getSimpleName() +
+				 * "_error_message_not_getting_displayed_" + (count + 1)))); closeBrowser(); }
+				 */
 
 			}
 
 			else {
 
-				passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
-						.getText();
-				logger.info("PassWord : " + passLength);
-				if (!passLength.contains("Password is too long")) {
-					test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
-					closeBrowser();
+				errMsg = ob.findElements(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()));
+				if (errMsg.size() == 1) {
+
+					if (!errMsg.get(0).getText().contains("Password is too long")) {
+						test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
+						throw new Exception("Error message should not display");
+					}
 				}
-				ob.findElement(By.xpath(
-						OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString()));
+
+				ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString()));
 				BrowserWaits.waitTime(3);
+
+				/*
+				 * passLength = ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()))
+				 * .getText(); logger.info("PassWord : " + passLength); if (!passLength.contains("Password is too long"
+				 * )) { test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
+				 * test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+				 * this.getClass().getSimpleName() + "_error_message_not_getting_displayed_" + (count + 1))));
+				 * closeBrowser(); } ob.findElement(By.xpath(
+				 * OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString())); BrowserWaits.waitTime(3);
+				 */
 
 			}
 

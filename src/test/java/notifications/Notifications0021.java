@@ -94,17 +94,17 @@ public class Notifications0021 extends TestBase {
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, this.getClass().getSimpleName());
 					if (watchstatus) {
-						test.log(LogStatus.INFO, "Added article into watchlist");
+						test.log(LogStatus.INFO, "Added patent into watchlist");
 						if (commentStatus) {
-							test.log(LogStatus.INFO, "Added Comment into Article");
+							test.log(LogStatus.INFO, "Added Comment into patent");
 							verifyWatchArticleNotification();//need to change
 						} else {
-							test.log(LogStatus.FAIL, "Facing issue while adding comment into article");
-							throw new Exception("Facing issue while adding comment into article");
+							test.log(LogStatus.FAIL, "Facing issue while adding comment into patent");
+							throw new Exception("Facing issue while adding comment into patent");
 						}
 					} else {
-						test.log(LogStatus.FAIL, "Facing issue while adding article into watchlist");
-						throw new Exception("Facing issue while adding article into watchlist");
+						test.log(LogStatus.FAIL, "Facing issue while adding patent into watchlist");
+						throw new Exception("Facing issue while adding patent into watchlist");
 					}
 
 				} catch (Throwable t) {
@@ -120,11 +120,11 @@ public class Notifications0021 extends TestBase {
 					test.log(LogStatus.INFO, this.getClass().getSimpleName());
 
 					if (commentStatus) {
-						test.log(LogStatus.INFO, "Added Comment into Article");
+						test.log(LogStatus.INFO, "Added Comment into patent");
 						verifycommentNotification();
 					} else {
-						test.log(LogStatus.FAIL, "Facing issue while adding comment into article");
-						throw new Exception("Facing issue while adding comment into article");
+						test.log(LogStatus.FAIL, "Facing issue while adding comment into patent");
+						throw new Exception("Facing issue while adding comment into patent");
 					}
 
 				} catch (Throwable t) {
@@ -134,8 +134,8 @@ public class Notifications0021 extends TestBase {
 				try {
 					extent = ExtentManager.getReporter(filePath);
 					test = extent
-							.startTest("OPQA_209",
-									"Verify that user receives a notification if someone likes his comment an article")
+							.startTest("OPQA-3951",
+									"Verify that user receives a notification if someone likes his comment an patent")
 							.assignCategory("Notifications");
 					test.log(LogStatus.INFO, this.getClass().getSimpleName());
 					notification3();//need to change

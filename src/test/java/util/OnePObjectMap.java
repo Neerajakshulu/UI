@@ -379,7 +379,7 @@ public enum OnePObjectMap {
 	PROFILE_PAGE_AUTOR_NAME_CSS("h2[class='wui-title wui-title--user-profile-name ng-binding']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_CSS("div[class='wui-card ng-scope']"),
 	WATCHLIST_WATCH_BUTTON_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--inactive']"),
-	WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS("button[class='wui-icon-btn wui-icon-btn--horizontal-spacing dropdown-toggle']"),
+	WATCHLIST_WATCH_BUTTON_IN_SEACHPAGE_CSS("span[data-ng-bind='WatchButton.label']"),
 	DOCUMENT_TITILE_IN_SEARCHPAGE_XPATH("//div[@class='wui-content-title wui-content-title--medium ng-binding']"),
 	DOCUMENT_URL_IN_SEARCHPAGE_XPATH("//ne-post-results[@class='ng-scope ng-isolate-scope']/a"),
 	DOCUMENT_TITLE_IN_RECORDVIEW_PAGE_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),

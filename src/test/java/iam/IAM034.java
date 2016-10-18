@@ -274,7 +274,7 @@ public class IAM034 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 						.sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				BrowserWaits.waitTime(10);
+				BrowserWaits.waitTime(4);
 				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 				BrowserWaits.waitTime(3);
 				ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
@@ -306,7 +306,7 @@ public class IAM034 extends TestBase {
 				String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 				for (int i = 0; i < tests.length; i++) {
-					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("Notifications");
+					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
 					test.log(LogStatus.FAIL, "FAIL - " + t.getMessage());
 					extent.endTest(test);
 				}

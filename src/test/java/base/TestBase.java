@@ -737,7 +737,8 @@ public class TestBase {
 	// logging out
 	public void logout() throws Exception {
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("header_label"))));
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+		BrowserWaits.waitTime(3);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
 

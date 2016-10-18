@@ -97,7 +97,6 @@ public class IAM029 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
 			BrowserWaits.waitTime(3);
 
-			String passLength = null;
 			List<WebElement> errMsg=null;
 			if (validity.equalsIgnoreCase("YES")) {
 				
