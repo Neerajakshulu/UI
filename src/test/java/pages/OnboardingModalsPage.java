@@ -589,7 +589,7 @@ public class OnboardingModalsPage extends TestBase {
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
 					"Discover articles, patents, and community contributions");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow","OK");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow","Next");
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			
@@ -597,9 +597,9 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS);
 			
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Let’s learn about you","Interests and Skills","Done");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Let’s learn about you","Interests and Skills","Join");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Add a Topic","You can always complete your profile later from  your Profile page.");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:","Information you add to your profile will be seen by others.");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:", "Your name and any additional information you add will", "be visible to others.");
 	}
 	
 	
