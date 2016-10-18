@@ -91,7 +91,14 @@
 		<classes>
 			<class name="enw.ENW022"></class>
 		</classes>
-	</test> -->
+	</test>
+	
+	<test name="ENW023">
+		<classes>
+			<class name="enw.ENW023"></class>
+		</classes>
+	</test>
+	 -->
 	<test name="ENW018">
 		<classes>
 			<class name="enw.ENW018"></class>
