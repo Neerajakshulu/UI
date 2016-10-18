@@ -50,14 +50,13 @@ public class ENW019 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to("https://dev-stable.1p.thomsonreuters.com/");
+			ob.navigate().to(host);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			ob.findElement(By.partialLinkText("Help & Feedback")).click();
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
 			BrowserWaits.waitTime(2);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
 			BrowserWaits.waitTime(3);
@@ -68,9 +67,6 @@ public class ENW019 extends TestBase {
 				BrowserWaits.waitTime(2);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
 				BrowserWaits.waitTime(3);
-				//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-//				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-//				Thread.sleep(3000);
 				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");

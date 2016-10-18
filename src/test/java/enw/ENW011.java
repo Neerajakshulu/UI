@@ -60,18 +60,7 @@ public class ENW011 extends TestBase {
 			String user_First_Name = "";
 			String user_Last_Name = "";
 			String user_Full_name = "";
-			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty( "NONMARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())));
 			BrowserWaits.waitTime(3);
@@ -94,7 +83,6 @@ public class ENW011 extends TestBase {
 			}
 			logger.info("Actual result displayed as :" + actual_result);
 			try {
-
 				Assert.assertTrue(actual_result.contains(user_First_Name));
 				Assert.assertTrue(actual_result.contains(user_Last_Name));
 				test.log(LogStatus.PASS, " User first and last name are displayed correctly");

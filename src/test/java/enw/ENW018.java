@@ -46,26 +46,22 @@ public class ENW018 extends TestBase {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			ob.navigate().to(host);			
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			ob.findElement(By.partialLinkText("Help & Feedback")).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.partialLinkText("Send feedback")).click();
 			BrowserWaits.waitTime(2);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM.toString())));
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
 			BrowserWaits.waitTime(7);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();

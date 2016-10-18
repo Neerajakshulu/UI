@@ -19,13 +19,16 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 import util.TestUtil;
 
-public class ENW022 extends TestBase {
+//Call Delete API method  
+//Login to Neon Application using Steam account 
+//Logout from application 
+// Login with social with same Steam account.
+//1)Clicking[x] on Neon side Linking Modals-OPQA-2329  - ENWIAM011
+//2)Clicking 'not now' from Neon side Linking Modals-OPQA-2331
+// 3)Clicking outside the Modal from Neon side Linking Modals-OPQA-2292
+public class ENW023 extends TestBase {
 	static int status = 1;
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -34,10 +37,12 @@ public class ENW022 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW022() throws Exception {
+	public void testcaseENW023() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "http://ip-science.thomsonreuters.com/support/";
+		//String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon";
+		String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
+		//String Expected_Result = "Sign in";
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
@@ -46,36 +51,42 @@ public class ENW022 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("STEAMUSEREMAIL"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),
-					(LOGIN.getProperty("NONMARKETUSERPASSWORD")));
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
+					LOGIN.getProperty("STEAMUSERPASSWORD"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(3);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials1(LOGIN.getProperty("STEAMUSEREMAIL"),
+					LOGIN.getProperty("STEAMUSERPASSWORD"));
+			ob.findElement(By.xpath("//div[@class='modal fade ng-isolate-scope wui-modal in']")).click();
 			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())));
-			String newWindow = switchToNewWindow(ob);
-			if (newWindow != null) {
-				if (ob.getCurrentUrl().contains(expected_URL)) {
-					logger.info("Expected page is displayed and  Navigating to the proper URL");
-				}
-			} else {
-				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");
-				Assert.assertEquals(true, false);
-
-			}
+			ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
+			ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']")).click();
+			BrowserWaits.waitTime(5);
+			String uRl=ob.getCurrentUrl().toString();
+			logger.info(uRl);
+			loginToFacebook();			
+			
 			try {
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");// extent
 				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "Feedback New window is not displayed and content is not matching")));// screenshot
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Neon is not displayed and content is not matching")));// screenshot
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -89,9 +100,16 @@ public class ENW022 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+	private void loginToFacebook() throws Exception {
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+		ob.findElement(By.xpath("//a[contains(text(),'Not now')]")).click();
+		Thread.sleep(3000);
+		pf.getLoginTRInstance(ob).checkLinking();
+		pf.getLoginTRInstance(ob).logOutApp();
+		}
 
 	@AfterTest
 	public void reportTestResult() {

@@ -33,7 +33,6 @@ public class ENW012 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW013() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
@@ -55,18 +54,8 @@ public class ENW012 extends TestBase {
 			clearCookies();
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
-			try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			BrowserWaits.waitTime(2);
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty( "NONMARKETUSERPASSWORD")));
+			BrowserWaits.waitTime(3);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PRIVACY_LINK_XPATH.toString())));

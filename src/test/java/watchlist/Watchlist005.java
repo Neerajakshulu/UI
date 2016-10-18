@@ -82,15 +82,15 @@ public class Watchlist005 extends TestBase {
 			logger.info("New WatchList Name : " + newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			pf.getHFPageInstance(ob).searchForText("hello");
-
+		//	pf.getHFPageInstance(ob).searchForText("hello");
+			pf.getHFPageInstance(ob).searchForText("Technology");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));
@@ -122,7 +122,6 @@ public class Watchlist005 extends TestBase {
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "_user_unable_to_add_article_into_watchlist_Record_view_page")));// screenshot
-
 			}
 			// Step2: Unwatching the document from record view page
 			// Searching for article
@@ -139,9 +138,9 @@ public class Watchlist005 extends TestBase {
 
 			// Navigating to record view page
 			// ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(6);
 			ob.findElement(By.linkText(documentName)).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 60);
 
 			// Unwatching the article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));

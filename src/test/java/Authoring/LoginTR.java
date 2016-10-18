@@ -52,7 +52,8 @@ public class LoginTR extends TestBase {
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
 		browserWait.waitUntilText("Thomson Reuters", "Project Neon");
-		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with Project Neon");
+		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with
+		// Project Neon");
 
 	}
 
@@ -61,11 +62,12 @@ public class LoginTR extends TestBase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public void enterTRCredentials(String userName,
-			String password) throws InterruptedException {
+	public void enterTRCredentials(String userName, String password) throws InterruptedException {
 		// ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		// waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson Reuters ID");
-		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign in");
+		// waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson
+		// Reuters ID");
+		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign
+		// in");
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(userName);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString())).sendKeys(password);
@@ -90,10 +92,10 @@ public class LoginTR extends TestBase {
 			if (header.contains("Hello")) {
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
@@ -114,8 +116,7 @@ public class LoginTR extends TestBase {
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("searchResults_links"))));
 	}
 
-	public void waitUntilTextPresent(String locator,
-			String text) {
+	public void waitUntilTextPresent(String locator, String text) {
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
@@ -133,8 +134,7 @@ public class LoginTR extends TestBase {
 
 	}
 
-	public void loginWithLinkedInCredentials(String username,
-			String pwd) throws InterruptedException, Exception {
+	public void loginWithLinkedInCredentials(String username, String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_LI_SIGN_IN_BUTTON_CSS.toString())).click();
@@ -143,8 +143,7 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	public void signInToLinkedIn(String username,
-			String pwd) {
+	public void signInToLinkedIn(String username, String pwd) {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -154,8 +153,7 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
 	}
 
-	public void loginWithFBCredentials(String username,
-			String pwd) throws InterruptedException, Exception {
+	public void loginWithFBCredentials(String username, String pwd) throws InterruptedException, Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
@@ -163,8 +161,15 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	public void signInToFacebook(String username,
-			String pwd) throws InterruptedException {
+	public void loginWithFBCredentials1(String username, String pwd) throws InterruptedException, Exception {
+
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+		signInToFacebook(username, pwd);
+		closeOnBoardingModal();
+	}
+
+	public void signInToFacebook(String username, String pwd) throws InterruptedException {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -174,9 +179,7 @@ public class LoginTR extends TestBase {
 		BrowserWaits.waitTime(4);
 	}
 
-	public void loginWithFBCredentials(WebDriver driver,
-			String username,
-			String pwd) {
+	public void loginWithFBCredentials(WebDriver driver, String username, String pwd) {
 
 		waitForElementTobeVisible(driver, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()),
 				30);
@@ -290,8 +293,11 @@ public class LoginTR extends TestBase {
 
 	public void clickNotnowButtonLinkingModal() throws Exception {
 
-		// waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content ng-scope']"), 60);
-		// boolean Modal= ob.findElement(By.cssSelector("div[class='modal-content ng-scope']")).isDisplayed();
+		// waitForElementTobeVisible(ob,By.cssSelector("div[class='modal-content
+		// ng-scope']"), 60);
+		// boolean Modal=
+		// ob.findElement(By.cssSelector("div[class='modal-content
+		// ng-scope']")).isDisplayed();
 
 		// if (Modal)
 
