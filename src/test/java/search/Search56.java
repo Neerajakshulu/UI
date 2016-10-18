@@ -66,18 +66,11 @@ public class Search56 extends TestBase {
 			login();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bi");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Posts')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			Thread.sleep(2000);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
 			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card__header-left ng-binding']"), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
@@ -101,7 +94,7 @@ public class Search56 extends TestBase {
 			if (!compareNumbers(tileTags.size(), count)) {
 
 				test.log(LogStatus.FAIL,
-						"Items other than posts also getting displayed in the summary page when user searches using POSTS content type in search drop down");// extent
+						"Items other than posts are getting displayed in the summary page when user searches selects  POSTS as content type in Left Navigation pane");// extent
 																																								// report
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
