@@ -56,10 +56,6 @@ public class Search40 extends TestBase {
 		try {
 
 			String search_query = "biology";
-
-			String email = "neonfbook@gmail.com";
-			String password = "1Pproject";
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();

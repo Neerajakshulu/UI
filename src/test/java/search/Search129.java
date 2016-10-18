@@ -132,6 +132,7 @@ public class Search129 extends TestBase {
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Deep linking not working");
+				ErrorUtil.addVerificationFailure(t);
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
