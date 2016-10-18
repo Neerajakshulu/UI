@@ -736,9 +736,8 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("header_label"))));
-		Thread.sleep(5000);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
 
@@ -897,10 +896,12 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(6);
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			//BrowserWaits.waitTime(6);
+			//ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
 			BrowserWaits.waitTime(3);
 		} catch (Throwable t) {
 			t.printStackTrace();

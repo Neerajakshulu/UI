@@ -275,9 +275,9 @@ public class IAM034 extends TestBase {
 						.sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 				BrowserWaits.waitTime(10);
-				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(3);
 				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
 				BrowserWaits.waitTime(3);
 				test.log(LogStatus.PASS,
 						"After completion of verification process,user successfylly login to Neon application");
