@@ -69,16 +69,21 @@ public class ENWReferencePage extends TestBase {
 	
 	// Did you know link modal
 	
-	public void didYouKnow(String passWord ) throws InterruptedException{
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath("//input[@name='steamPassword']")).click();
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath("//input[@name='steamPassword']")).sendKeys(passWord);
+	public void didYouKnow(String passWord ) throws Exception{
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DID_YOU_KNOW_MODAL_STEAMPW_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DID_YOU_KNOW_MODAL_STEAMPW_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DID_YOU_KNOW_MODAL_STEAMPW_CSS, passWord);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH);
+		
+		//ob.findElement(By.xpath("//input[@name='steamPassword']")).click();	
+		//BrowserWaits.waitTime(3);
+		//ob.findElement(By.xpath("//input[@name='steamPassword']")).sendKeys(passWord);
 		//LOGIN.getProperty("Password19")
-		BrowserWaits.waitTime(3);
-    	ob.findElement(By.xpath(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH.toString())).click();
+		//BrowserWaits.waitTime(3);
+    	//ob.findElement(By.xpath(OnePObjectMap.DID_YOU_KNOW_LETS_GO_BUTTON_XPATH.toString())).click();
 	//DID_YOU_KNOW_LETS_GO_BUTTON
-		BrowserWaits.waitTime(3);
+		//BrowserWaits.waitTime(3);
 		//Clicking Continuous button
 		
 	}

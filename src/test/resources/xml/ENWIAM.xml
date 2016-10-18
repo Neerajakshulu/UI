@@ -199,6 +199,13 @@
 			<class name="enwiam.ENWIAM54">
 			</class>
 		</classes>	
+	</test>
+	
+	<test name="RandomMergeScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM55">
+			</class>
+		</classes>	
 	</test> -->
 	
 	

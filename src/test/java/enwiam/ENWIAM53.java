@@ -112,7 +112,7 @@ public class ENWIAM53 extends TestBase {
 				test.log(LogStatus.PASS, "user is able to click the link button");
 
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				// String accountType = "Facebook";
+				accountType = "Facebook";
 
 				try {
 					validateLinkedAccounts(2, accountType);
@@ -120,6 +120,8 @@ public class ENWIAM53 extends TestBase {
 					test.log(LogStatus.INFO, "After merging Steam account profile name: " + secondAccountProfileName);
 					Assert.assertEquals(firstAccountProfileName, secondAccountProfileName);
 					test.log(LogStatus.PASS, "Forward Merge is happened");
+					pf.getHFPageInstance(ob).clickProfileImage();
+					
 				}
 
 				catch (Throwable t) {
