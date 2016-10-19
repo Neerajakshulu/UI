@@ -108,24 +108,25 @@ public class ENWReferencePage extends TestBase {
 		}
 	//LOGIN.getProperty("UserName19"),  LOGIN.getProperty("Password19")
 	//Arvind- Clicking the Accounts button on ENW Profile-Flyout 
-		public void clickAccount() throws InterruptedException
-		{
-			try {
+		public void clickAccount() throws Exception	{
+			/*try {
 				BrowserWaits.waitTime(3);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_XPATH.toString())).click();
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH.toString())).click();
-			BrowserWaits.waitTime(3);
-			try {
-				closeOnBoardingModal();
-			} catch (Exception e) {
+			//BrowserWaits.waitTime(3)
+			closeOnBoardingModal();
+			
+			/*} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			//validateLinkedAccounts(2, accountType);
 		}
 		

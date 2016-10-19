@@ -1,6 +1,7 @@
 package enwiam;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -69,8 +70,12 @@ public class ENWIAM0002 extends TestBase {
 		// Deleting the links for aravind.attur@thomsonreuters.com
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName21"));
+			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -80,7 +85,11 @@ public class ENWIAM0002 extends TestBase {
 		// Deleting the links for enwyogi3@yahoo.com
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
@@ -93,15 +102,40 @@ public class ENWIAM0002 extends TestBase {
 			clearCookies();
 			
 			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials("aravind.attur@thomsonreuters.com", "Facebook@123");
-			new Actions(ob).moveByOffset(200, 200).click().build().perform();
+			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("fbUserName21"), LOGIN.getProperty("fbPassword21"));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH);
+
+			Dimension dimesions = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH).getSize();
+			logger.info("Width : " + dimesions.width);
+			logger.info("Height : " + dimesions.height);
+			int x = dimesions.width;
+			int y = dimesions.height;
+
+			Actions builder = new Actions(ob);
+			builder.moveToElement(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH), x + 150, y)
+					.build().perform();
+			builder.click().build().perform();
+			test.log(LogStatus.PASS, "Linking modal has been disappered");
+			/*new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
 			Thread.sleep(3000);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();*/
 
 			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
+			
 			try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			} catch (Exception e) {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			}
+			/*try {
 				ob.findElement(By.className("button-form btn-common")).click();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -112,7 +146,7 @@ public class ENWIAM0002 extends TestBase {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			pf.getENWReferencePageInstance(ob).clickAccount();
 
 			validateLinkedAccounts(2, "Facebook");
@@ -125,30 +159,12 @@ public class ENWIAM0002 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 		}
 
-		// Deleting the links for aravind.attur@thomsonreuters.com
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName20"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			// ErrorUtil.addVerificationFailure(t);
-		}
-		// Deleting the links for enwyogi3@yahoo.com
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			// ErrorUtil.addVerificationFailure(t);
-		}
 
 		try {
 			/*
 			 * openBrowser(); maximizeWindow(); clearCookies();
 			 */
-			loginToLn();
+			//loginToLn();
 			closeBrowser();
 			pf.clearAllPageObjects();
 		} catch (Throwable t) {
@@ -158,44 +174,6 @@ public class ENWIAM0002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	/*private void loginToFb() throws Exception {
-		
-	}*/
-
-	private void loginToLn() throws Exception {
-		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-		// String accountType="LinkedIn";
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
-		new Actions(ob).moveByOffset(200, 200).click().build().perform();
-		//BrowserWaits.waitTime(2);
-		ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
-		Thread.sleep(3000);
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials("aravind.attur@thomsonreuters.com", "Linked@123");
-		pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
-		try {
-			ob.findElement(By.className("button-form btn-common")).click();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-		try {
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
-
-		validateLinkedAccounts(2, "LinkedIn");
-
-		pf.getENWReferencePageInstance(ob).logout();
-
-	}
 
 	private void validateLinkedAccounts(int accountCount,
 			String linkName) throws Exception {
@@ -204,7 +182,7 @@ public class ENWIAM0002 extends TestBase {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName21")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName20")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbUserName21")));
 			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);
