@@ -81,10 +81,12 @@ public class ENW000012 extends TestBase {
 			.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 
-		ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+		//ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 
-		ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-		BrowserWaits.waitTime(3);
+		//ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+		pf.getLoginTRInstance(ob).closeOnBoardingModal();
+		
+		
 	    } catch (Throwable t) {
 		t.printStackTrace();
 		test.log(LogStatus.INFO, "Snapshot below: " + test

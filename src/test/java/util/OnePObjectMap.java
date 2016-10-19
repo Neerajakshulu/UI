@@ -473,10 +473,10 @@ public enum OnePObjectMap {
 	//AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
 	ACCOUNT_RADIOBUTTON2_XPATH("(//label[contains(text(),'Make primary')])[2]"),
-	HEADER_LABEL_XPATH("(//div[@class='ne-user-profile-image-wrapper'])[1]"),
+	HEADER_LABEL_XPATH("(//div[@class='ne-user-profile-image-main-wrapper'])[1]"),
 	ACCOUNT_LINK_XPATH("//a[@data-ui-sref='account.settings']"),
-	ACCOUNT_ACTUAL_EMAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
-	ACCOUNT_ACTUAL_EMAIL1_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
+	ACCOUNT_ACTUAL_EMAIL_XPATH("//div[@class='account-content']/div[2]/div/span"),
+	ACCOUNT_ACTUAL_EMAIL1_XPATH("//div[@class='account-content']/div[3]/div/span"),
 	ACCOUNT_LINK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
 	LINK_LOGIN_NAME("email"),
 	DONE_BUTTON_CLICK_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
