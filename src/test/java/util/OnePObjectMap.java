@@ -463,7 +463,7 @@ public enum OnePObjectMap {
 	NO_LETS_CONTINUE_BUTTON_XPATH("//button[contains(text(),'continue')]"),
 	SIGNIN_USING_FB_BUTTON_CSS("button[ng-click='vm.callSocialLogin()']"),
 	PROFILENAME_CSS("a[class='ng-binding ng-scope']"),
-	NOT_NOW_BUTTON_CSS("a[event-action='skip-linking-neon']"),
+	NOT_NOW_BUTTON_CSS("a[event-action*='skip-linking']"),
 	CONTACT_CUSTOMER_SUPPORT_TITLE_CSS("h2[class='login-title']"),
 	CONTACT_CUSTOMER_SUPPORT_MSG_XPATH("//div[@class='col-xs-10 col-xs-offset-1 text-center']/p"),
 	ENDNOTE_LOGO_CSS("a[title='EndNote logo']"),

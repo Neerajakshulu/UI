@@ -77,6 +77,7 @@ public class Profile53 extends TestBase {
 				} else if (fbLILogin.equalsIgnoreCase("LI")) {
 					test.log(LogStatus.INFO, "Validate Other Profile Deep link using LI");
 					pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(username, pwd);
+					pf.getLoginTRInstance(ob).clickNotnowLink();
 					validateProfileDeepLink();
 				}
 			}

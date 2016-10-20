@@ -1599,9 +1599,9 @@ public class ProfilePage extends TestBase {
 	 */
 	public void profilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 	}
 	
 	/**
@@ -1636,7 +1636,7 @@ public class ProfilePage extends TestBase {
 	 */
 	public void closeProfilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
 	
@@ -1647,11 +1647,22 @@ public class ProfilePage extends TestBase {
 	 */
 	public void cancelProfilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
 	
-
+	/**
+	 * Method for upload new profile image
+	 * 
+	 * @throws Exception, When profile image not able to upload	
+	 */
+	public void uploadProfileImage() throws Exception {
+		profilePicModalWindow();
+	//	pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_PLINK, "C:/Users/UC202376/Desktop/Profile Images/myimage.jpg");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
+		
+	}
+	
 	public void clickOnPostModalCloseButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS);

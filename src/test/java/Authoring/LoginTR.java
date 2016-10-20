@@ -81,6 +81,7 @@ public class LoginTR extends TestBase {
 	}
 
 	public void closeOnBoardingModal() throws Exception, InterruptedException {
+		
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
@@ -95,6 +96,7 @@ public class LoginTR extends TestBase {
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserWaitsInstance(ob)
@@ -143,7 +145,7 @@ public class LoginTR extends TestBase {
 		closeOnBoardingModal();
 	}
 
-	public void signInToLinkedIn(String username, String pwd) {
+	public void signInToLinkedIn(String username, String pwd) throws Exception {
 		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_LI_EMAIL_TEXT_BOX_ID.toString()), 30);
 
 		// Verify that existing LI user credentials are working fine
@@ -312,6 +314,19 @@ public class LoginTR extends TestBase {
 
 		ob.findElement(By.cssSelector("a[ng-click='vm.callSkipLinking()']")).click();
 
+	}
+	
+	/**
+	 * Method for click Not now link if its present
+	 * @throws Exception, When not ablet to click link
+	 */
+	public void clickNotnowLink() throws Exception {
+		List<WebElement> alreadyHaveAccount=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+		if(alreadyHaveAccount.size() == 1) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+		}
+		
 	}
 
 }
