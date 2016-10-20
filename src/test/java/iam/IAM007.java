@@ -2,8 +2,11 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
+import org.apache.logging.log4j.core.util.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -79,16 +82,29 @@ public class IAM007 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
-			BrowserWaits.waitTime(5);
-
+			BrowserWaits.waitTime(2);
+			
+			ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).click();
+			BrowserWaits.waitTime(1);
+//			List<WebElement> list=ob.findElements(By.cssSelector("i[class='fb_logo img sp_O7TpWD6wqPl sx_cd36fd']"));
+			String str=ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).getText();
+			logger.info("Text : "+str);
+			if(str.equals("Log in to Facebook")){
+				test.log(LogStatus.INFO,"Invalid UserName and Password");
+			}else{
+				test.log(LogStatus.FAIL,"Valid UserName and Password");
+			}
+			
+			
+/*
 			if (!checkElementPresence_name("FB_page_login_button")) {
 
 				fail = true;// excel
@@ -96,7 +112,7 @@ public class IAM007 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_unexpected_login_happened_" + (count + 1))));
 
-			}
+			}*/
 
 			closeBrowser();
 
