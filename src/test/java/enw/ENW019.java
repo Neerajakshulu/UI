@@ -56,7 +56,7 @@ public class ENW019 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
 			BrowserWaits.waitTime(2);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
 			BrowserWaits.waitTime(3);

@@ -543,6 +543,9 @@ public enum OnePObjectMap {
 		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS("input[name='newPassword']"),
 		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH("//span[contains(text(),'Submit')]"),
 		ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH("//a[contains(text(),'Cancel')]"),
+		
+		NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
+		NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
 	;
 
 	private String locator;

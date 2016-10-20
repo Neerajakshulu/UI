@@ -56,8 +56,8 @@ public class ENW018 extends TestBase {
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			BrowserWaits.waitTime(2);
-			//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
-			//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM.toString())));
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString()))
 					.sendKeys("Feedback sending");
