@@ -77,7 +77,7 @@ public class ENWIAM011 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			BrowserWaits.waitTime(4);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 
 			BrowserWaits.waitTime(8);
 

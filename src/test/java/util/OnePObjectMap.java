@@ -441,8 +441,8 @@ public enum OnePObjectMap {
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
 	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[id='pageTitle'] h3"),
 	SINGIN_USING_LINKEDIN_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary ng-binding']"),
-	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[1]"),
-	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span)[2]"),
+	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[1]"),
+	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[2]"),
 	LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
 	
 	//Navigation and Landing page

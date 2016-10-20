@@ -86,7 +86,7 @@ public class IAM007 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			BrowserWaits.waitTime(5);
 
 			if (!checkElementPresence_name("FB_page_login_button")) {

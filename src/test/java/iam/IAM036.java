@@ -48,7 +48,7 @@ public class IAM036 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
@@ -57,7 +57,7 @@ public class IAM036 extends TestBase {
 			} else {
 				test.log(LogStatus.FAIL, "Bad request Error..Server down");
 			}
-			
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -66,37 +66,37 @@ public class IAM036 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONFSOCIALSERNAME"));
+					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 			BrowserWaits.waitTime(3);
-
+			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
+			BrowserWaits.waitTime(3);
+			/*
+			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click(); BrowserWaits.waitTime(3);
+			 * ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click(); BrowserWaits.waitTime(3);
+			 */
 			logout();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("FB_email_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONFSOCIALSERNAME"));
+					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			BrowserWaits.waitTime(2);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SINGIN_USING_LINKEDIN_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SINGIN_USING_LINKEDIN_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONFSOCIALSERNAME"));
+					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
 
@@ -106,7 +106,7 @@ public class IAM036 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			BrowserWaits.waitTime(3);
 			List<WebElement> list = ob.findElements(By.xpath(
-					"//div[@class='account-option-item ng-scope']/div/div[@class='account-option-item__text-container']/span"));
+					"//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span"));
 			Assert.assertEquals(list.get(0).getText(), list.get(1).getText());
 			String str = ob.findElement(By.cssSelector("label[for='radio-1']")).getText();
 			logger.info("Account Status : " + str);

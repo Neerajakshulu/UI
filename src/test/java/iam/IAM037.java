@@ -54,7 +54,7 @@ public class IAM037 extends TestBase {
 			String first_name = "duster";
 			String last_name = "man";
 
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
@@ -77,16 +77,19 @@ public class IAM037 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("LI_email_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONSOCIALUSERNAME"));
+			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(LOGIN.getProperty("SOCIALLOGINEMAIL"));
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox")))
-					.sendKeys(LOGIN.getProperty("NEONFSOCIALSERNAME"));
+					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
+			BrowserWaits.waitTime(3);
+			/*
+			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click(); BrowserWaits.waitTime(3);
+			 * ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click(); BrowserWaits.waitTime(3);
+			 */
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
@@ -100,7 +103,7 @@ public class IAM037 extends TestBase {
 			System.out.println(actualEmail);
 
 			try {
-				Assert.assertEquals(LOGIN.getProperty("NEONSOCIALUSERNAME"), actualEmail);
+				Assert.assertEquals(LOGIN.getProperty("SOCIALLOGINEMAIL"), actualEmail);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 			}
 

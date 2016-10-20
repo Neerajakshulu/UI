@@ -79,7 +79,7 @@ public class IAM004 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			BrowserWaits.waitTime(4);
 			// waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 
 			BrowserWaits.waitTime(4);
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
