@@ -92,10 +92,10 @@ public class LoginTR extends TestBase {
 			if (header.contains("Hello")) {
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
@@ -152,11 +152,17 @@ public class LoginTR extends TestBase {
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
 	}
-
-	public void loginWithFBCredentials(String username, String pwd) throws InterruptedException, Exception {
-
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
+	
+	/**
+	 * Method for Login Neon application using FB valid login credentials
+	 * @param username
+	 * @param pwd
+	 * @throws InterruptedException
+	 * @throws Exception, When user is not able to login using FB
+	 */
+	public void loginWithFBCredentials(String username, String pwd) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 		signInToFacebook(username, pwd);
 		closeOnBoardingModal();
 	}
@@ -168,14 +174,17 @@ public class LoginTR extends TestBase {
 		signInToFacebook(username, pwd);
 		closeOnBoardingModal();
 	}
-
-	public void signInToFacebook(String username, String pwd) throws InterruptedException {
-		waitForElementTobeVisible(ob, By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString()), 30);
-
-		// Verify that existing LI user credentials are working fine
-		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID.toString())).sendKeys(username);
-		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
-		jsClick(ob, ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID.toString())));
+	/**
+	 * Method for Login with FB login credentials
+	 * @param username
+	 * @param pwd
+	 * @throws Exception, not able to login FB account
+	 */
+	public void signInToFacebook(String username, String pwd) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID, pwd);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_FB_LOGIN_BUTTON_ID);
 		BrowserWaits.waitTime(4);
 	}
 

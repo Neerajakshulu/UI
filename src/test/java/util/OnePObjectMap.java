@@ -391,7 +391,7 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID("authorize"),
 	LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID("email"),
 	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),
-	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("login"),
+	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("loginbutton"),
 	FUTUREPOST_AUTHOR_NAME_CSS("div[class='wui-subtitle ne-user-profile-object-title-wrapper'] a"),
 	FUTUREPOST_POST_NAME_CSS("div[class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']"),
 	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card wui-card--featured-post'] button[class='wui-icon-btn wui-icon-btn--horizontal-spacing dropdown-toggle']"),
