@@ -112,18 +112,18 @@ public class Profile55 extends OnboardingModalsTest {
 			String password) throws Exception {
 		try {
 			test.log(LogStatus.INFO,
-					"Validate Onboarding modals Status if user click on Profile onboarding close[x] button");
+					"Validate Onboarding modals Status, if user click on Profile onboarding close[x] button");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to Neon Application ");
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getOnboardingModalsPageInstance(ob).clickLogin();
-			test.log(LogStatus.INFO, "Onboarding status should be true");
+			test.log(LogStatus.INFO, "Onboarding status should be false");
 			pf.getOnboardingModalsPageInstance(ob).validateOnboardingModalsForSecondTimeUser();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "user should be onboarded even click on Profile onboarding close[x] button");
+			test.log(LogStatus.FAIL, "user should not be onboarded even click on Profile onboarding close[x] button");
 			status = 2;// excel
 			// print full stack trace
 			StringWriter errors = new StringWriter();

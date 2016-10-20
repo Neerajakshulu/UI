@@ -112,12 +112,12 @@ public class Profile60 extends OnboardingModalsTest {
 			String password) throws Exception {
 		try {
 			test.log(LogStatus.INFO,
-					"Validate Onboarding modals for Second time users and verify onboarding modals should not display");
+					"Validate Onboarding modals for Second time users and verify onboarding modals should display if not onboarded successfully first time");
 			pf.getLoginTRInstance(ob).waitForTRHomePage();
 			test.log(LogStatus.INFO, "Login to Neon Application Same user with second time");
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getOnboardingModalsPageInstance(ob).clickLogin();
-			test.log(LogStatus.INFO, "Onboarding modals should not present for second time logged user");
+			test.log(LogStatus.INFO, "Onboarding modals should be present for second time logged user since he is not onboarded succesfully");
 			pf.getOnboardingModalsPageInstance(ob).validateOnboardingModalsForSecondTimeUser();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

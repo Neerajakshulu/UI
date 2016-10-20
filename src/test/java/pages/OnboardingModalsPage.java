@@ -117,10 +117,10 @@ public class OnboardingModalsPage extends TestBase {
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
-		if(!(onboardingStatus.size()==0)){
-			throw new Exception("Onboarding modal are displaying for second time logged user also");
+		if(!(onboardingStatus.size()==1)){
+			throw new Exception("Onboarding modal are displaying for second time logged user also if user not onboarded successfully first time");
 		}
-		
+			
 	}
 	
 	/**
