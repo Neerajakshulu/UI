@@ -24,7 +24,7 @@ public class GroupInvitationPage extends TestBase {
 	}
 
 
-	private WebElement getRecordCard(String recordTitle) throws Exception {
+	private  WebElement getRecordCard(String recordTitle) throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_CSS.toString()), 60);
 		List<WebElement> invitationList = ob
@@ -77,6 +77,18 @@ public class GroupInvitationPage extends TestBase {
 				.getText();
 		return profileName + profileDetails;
 	}
+	 
+	public boolean verifyingInvitations(String groupTitle) throws Exception{
+		boolean istitle=false;
+		WebElement groupCard = getRecordCard(groupTitle);
+		String Title=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS.toString())).getText();
+		if(Title.equals(groupTitle))
+		{
+		   istitle=true;
+		}
+		return istitle;
+		
 	
+	}
 	
 }
