@@ -94,7 +94,7 @@ public class Watchlist006 extends TestBase {
 				watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
+				BrowserWaits.waitTime(5);
 			}
 
 			// Selecting the patent name

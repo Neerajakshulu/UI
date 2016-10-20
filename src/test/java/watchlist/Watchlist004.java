@@ -98,7 +98,7 @@ public class Watchlist004 extends TestBase {
 				watchButton = watchButtonList.get(i);
 				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(2);
+				BrowserWaits.waitTime(4);
 			}
 
 			// Selecting the document name

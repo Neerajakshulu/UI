@@ -83,10 +83,8 @@ public class Watchlist001 extends TestBase {
 			// Searching for article
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(articleName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
-			Thread.sleep(3000);
-
-			// // Watching an article to a particular watch list
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 65);
+			// Watching an article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
