@@ -23,6 +23,8 @@ import util.OnePObjectMap;
 public class ENWIAM014 extends TestBase {
 
 	static int status = 1;
+	String[] tests;
+	String[] tests_dec;
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -31,10 +33,19 @@ public class ENWIAM014 extends TestBase {
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
 	public void beforeTest() throws Exception {
-
+		
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+		String var = rowData.getTestcaseId();
+		String dec = rowData.getTestcaseDescription();
+		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("ENWIAM");
+		test.log(LogStatus.INFO, tests[0]);
+
+//		extent = ExtentManager.getReporter(filePath);
+//		rowData = testcase.get(this.getClass().getSimpleName());
+//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	@Test

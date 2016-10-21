@@ -32,12 +32,25 @@ public class ENWIAM001 extends TestBase {
 	PageFactory pf = new PageFactory();
 	String postString = null;
 	public int screen = 0;
+	String[] tests;
+	String[] tests_dec;
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		extent = ExtentManager.getReporter(filePath);
+		
+		
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
+		String var = rowData.getTestcaseId();
+		String dec = rowData.getTestcaseDescription();
+		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("ENWIAM");
+		test.log(LogStatus.INFO, tests[0]);
+		
+		
+//		extent = ExtentManager.getReporter(filePath);
+//		rowData = testcase.get(this.getClass().getSimpleName());
+//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	@Test
