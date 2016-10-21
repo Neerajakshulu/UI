@@ -38,7 +38,7 @@ public class ENWIAM001 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		
-		
+		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		String var = rowData.getTestcaseId();
 		String dec = rowData.getTestcaseDescription();
