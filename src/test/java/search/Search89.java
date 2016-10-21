@@ -62,14 +62,10 @@ public class Search89 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			// selectSearchTypeFromDropDown("Patents");
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
@@ -104,6 +100,7 @@ public class Search89 extends TestBase {
 			} catch (NoSuchElementException e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "Title is not displayed present in patent record view page");
+				ErrorUtil.addVerificationFailure(e);
 			}
 
 			try {
@@ -125,6 +122,7 @@ public class Search89 extends TestBase {
 
 				status = 2;
 				test.log(LogStatus.FAIL, "View in Thomson Innovation link is not displayed");// extent
+				ErrorUtil.addVerificationFailure(e);
 				return;
 			}
 
@@ -153,6 +151,7 @@ public class Search89 extends TestBase {
 
 				status = 2;
 				test.log(LogStatus.FAIL, "View in Thomson Innovation link is not working properly");// extent
+				ErrorUtil.addVerificationFailure(e);
 			}
 
 			closeBrowser();
