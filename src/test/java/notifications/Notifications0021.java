@@ -218,7 +218,7 @@ public class Notifications0021 extends TestBase {
 			} catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "User receiving notification with incorrect content");// extent
-				Assert.assertTrue(false);
+//				Assert.assertTrue(false);
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports // reports
