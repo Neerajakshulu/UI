@@ -69,6 +69,9 @@ public enum OnePObjectMap {
 	ENW_FB_PROFILE_IMGCIRCLE_ACCOUNT_XPATH("//a[contains(.,'Account')]"),
 	ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH("//a[contains(.,'Sign out')]"),
 	ENW_BACK_TO_ENDNOTE_BUTTON_XPATH("//span[contains(.,'Back to EndNote')]"),
+	ENW_RESEND_ACTIVATION_BUTTON_CSS("button[event-action='resend-activation']"),
+	ENW_RESEND_ACTIVATION_DONE_BUTTON_CSS("button[event-action='resend-activation-done']"),
+	ENW_UNVERIFIED_MESSAGE_BUTTON_CSS("h2[class='login-title']"),
 	
 	//sendtoendnote locators
 	NEON_RECORDVIEW_NOTES1_XPATH("//span[text()='Times Cited']//preceding::span[1]"),
