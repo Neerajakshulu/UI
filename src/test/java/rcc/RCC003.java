@@ -117,6 +117,7 @@ public class RCC003 extends TestBase {
 			//ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
 			pf.getGroupInvitationPage(ob).validateFollowOrUnfollow(groupTitle,test);
 			pf.getGroupInvitationPage(ob).validateFollowOrUnfollow(groupTitle,test);
+			pf.getUtility(ob).deleteGroup(groupTitle);
 			closeBrowser();
 			
 			
