@@ -115,7 +115,7 @@ public class ENWIAM0003 extends TestBase {
 
 			// Navigate to TR login page and login with valid TR credentials
 			
-			String accountType="Facebook";
+//			String accountType="Facebook";
 			
 			pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"falak.guddu@gmail.com","9595far7202");
 			pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));

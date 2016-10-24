@@ -1,6 +1,5 @@
 package enwiam;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;

@@ -115,6 +115,7 @@ public class IAM032 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
 			loginAs("USERNAME17", "PASSWORD17");
+			
 
 			String linkName = pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
 
