@@ -114,10 +114,25 @@ public class RCC003 extends TestBase {
 				throw new Exception("Grouplink verification failed");
 			}
 			
-			//ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+			
 			pf.getGroupInvitationPage(ob).validateFollowOrUnfollow(groupTitle,test);
 			pf.getGroupInvitationPage(ob).validateFollowOrUnfollow(groupTitle,test);
+			logout();
+			closeBrowser();
+			
+
+			/**
+			 * 
+			 * deleting the group.
+			 *
+			 */
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("USERNAME010","USERPASSWORD010");
 			pf.getUtility(ob).deleteGroup(groupTitle);
+			test.log(LogStatus.PASS, "Created groups have been deleted successfully");
 			closeBrowser();
 			
 			

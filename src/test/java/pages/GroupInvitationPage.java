@@ -134,7 +134,6 @@ public class GroupInvitationPage extends TestBase {
 			test.log(LogStatus.PASS, "UnFollow functionality is working fine in view post record page");
 
 		}
-		//ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
 
 		
 	}
