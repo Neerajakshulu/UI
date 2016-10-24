@@ -56,7 +56,6 @@ public class ENW022 extends TestBase {
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())).click();
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_ENW_REPORT_PROBLEM_XPATH.toString())));
 			String newWindow = switchToNewWindow(ob);
 			if (newWindow != null) {
 				if (ob.getCurrentUrl().contains(expected_URL)) {
