@@ -486,6 +486,14 @@
 			<class name="Profile.Profile53"></class>
 		</classes>
 	</test> --> 
+	
+	<test name="Validate_Profile_image_upload">
+		<parameter name="username" value="tridlogin@gmail.com" />
+		<parameter name="password" value="Project@123" />
+		<classes>
+			<class name="Profile.Profile69"></class>
+		</classes>
+	</test>
 
 </suite>
 

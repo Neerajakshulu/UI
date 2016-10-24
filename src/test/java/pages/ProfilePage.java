@@ -1,5 +1,9 @@
 package pages;
 
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1599,9 +1603,10 @@ public class ProfilePage extends TestBase {
 	 */
 	public void profilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS);
-		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		//pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 	}
 	
 	/**
@@ -1636,7 +1641,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void closeProfilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		//pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
 	
@@ -1647,7 +1653,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void cancelProfilePicModalWindow() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
+		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+		//pf.getBrowserWaitsInstance(ob).waitUntilNotText("Profile image","(at least 120 px by 120 px and less than 8 MB).");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 	}
 	
@@ -1657,11 +1664,30 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When profile image not able to upload	
 	 */
 	public void uploadProfileImage() throws Exception {
-		profilePicModalWindow();
-	//	pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_PLINK, "C:/Users/UC202376/Desktop/Profile Images/myimage.jpg");
+		String profileImageTimeStamp = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS).findElement(By.tagName("img"))
+				.getAttribute("src");
+		logger.info("image timestamp before upload-->"+profileImageTimeStamp);
+		String imgPath = System.getProperty("user.dir") + "\\images\\" + "myimage" + ".jpg";
+		logger.info("image path-->"+imgPath);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		BrowserWaits.waitTime(4);
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imgPath);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
+		BrowserWaits.waitTime(8);
 		
+		String profileImageTimeStampAfterUpload = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_BUTTON_CSS).findElement(By.tagName("img"))
+				.getAttribute("src");
+		logger.info("image timestamp After upload-->"+profileImageTimeStampAfterUpload);
+		
+		if(profileImageTimeStamp.equalsIgnoreCase(profileImageTimeStampAfterUpload)) {
+			throw new Exception("Profile image not uploaded successfully");
+		}
 	}
+		
+		
 	
 	public void clickOnPostModalCloseButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
