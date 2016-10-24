@@ -2,11 +2,8 @@ package rcc;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -67,13 +64,54 @@ static int status = 1;
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
+			test.log(LogStatus.INFO, "Group is created successfully: "+ title);
+			try{
 			Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupTitle(),title);
+			test.log(LogStatus.PASS, "Group title displayed in Group details page correctly");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Group title mismatch in Group details page");
+				test.log(
+						LogStatus.FAIL,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
 			pf.getGroupsPage(ob).clickOnGroupsLink();
-			pf.getGroupsListPage(ob).verifyGroupDescription(desc, title);
+			try{
+			Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(desc, title));
+			test.log(LogStatus.PASS, "Group description in Group list page is displayed correctly");
 			pf.getGroupsListPage(ob).verifyItemsCount(0, title);
-		
+			test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Items count in Group list page in Group list page is not displayed correctly");
+				test.log(
+						LogStatus.FAIL,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
 			
-			
+			String expectedStr=pf.getGroupsListPage(ob).getGroupOwnerDetails(title);
+			pf.getGroupsListPage(ob).clickOnGroupOwnerName(title);
+			String actProfileData=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
+			actProfileData=actProfileData.substring(1,actProfileData.length()-1);
+			try{
+			Assert.assertEquals(actProfileData, expectedStr);
+			test.log(LogStatus.PASS, "Group owner profile details are displayed correctly in Groups list page");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Group owner profile details mismatch");
+				test.log(
+						LogStatus.FAIL,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			pf.getUtility(ob).deleteGroup(title);
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -89,6 +127,7 @@ static int status = 1;
 									+ "_login_not_done")));// screenshot
 			closeBrowser();
 		}
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 	}
 	
 

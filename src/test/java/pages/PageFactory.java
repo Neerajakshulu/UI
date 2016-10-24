@@ -6,6 +6,7 @@ import Authoring.Authoring;
 import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
+import util.Utility;
 
 public class PageFactory {
 
@@ -28,7 +29,7 @@ public class PageFactory {
 	private GroupsListPage groupsListPage = null;
 	private GroupInvitationPage groupInvitationPage = null;
 	private GroupsPage groupsPage = null;
-
+	private Utility utility=null;
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
 			searchProfilePage = new SearchProfile(ob);
@@ -206,7 +207,15 @@ public class PageFactory {
 		}
 		return groupsPage;
 	}
+	
+	
+	public Utility getUtility(WebDriver ob) {
 
+		if (utility == null) {
+			utility = new Utility(ob);
+		}
+		return utility;
+	}
 	public void clearAllPageObjects() {
 		accountPage = null;
 		loginTR = null;
@@ -226,6 +235,6 @@ public class PageFactory {
 		groupsPage = null;
 		groupInvitationPage = null;
 		groupsListPage = null;
-
+		utility=null;
 	}
 }

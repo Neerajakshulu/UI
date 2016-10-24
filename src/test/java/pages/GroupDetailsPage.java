@@ -27,14 +27,13 @@ public class GroupDetailsPage extends TestBase {
 
 	public int getArticlesCounts() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS);
-		WebElement count = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_COUNT_CSS);
 		int articlesCount = Integer.parseInt(count.getText());
 		return articlesCount;
 	}
 
 	public int getPatentsCounts() throws Exception {
-
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS);
 		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_COUNT_CSS);
 		int patentCount = Integer.parseInt(count.getText());
@@ -49,10 +48,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public int getAttachedFilesCounts() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
-		WebElement count = pf.getBrowserActionInstance(ob).getElement(
-				OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
 		int attachedFilesCount = Integer.parseInt(count.getText());
 		return attachedFilesCount;
 	}
@@ -65,32 +62,34 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnDeleteButton() throws Exception {
-
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
-
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS.toString()), 60);
+		List<WebElement>list=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
+		for(WebElement we: list){
+			if(we.isDisplayed()){
+				we.click();
+				return;
+			}
+		}
+	 throw new Exception("Delete button is not displaye in group details page");
 	}
 
 	public void clickOnEditButton() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
-
+		
 	}
 
 	public void clickOnAttachFileButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
 	}
 
 	public void clickOnInviteOthersButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
-
+		
 	}
 
 	public void clickArticlesTab() throws Exception {
@@ -125,13 +124,15 @@ public class GroupDetailsPage extends TestBase {
 
 	private WebElement getRecordCard(String recordTitle) throws Exception {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()), 60);
-		List<WebElement> invitationList = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS
-				.toString()));
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()),
+				60);
+		List<WebElement> invitationList = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()));
 		String actTitle;
 		for (WebElement we : invitationList) {
-			actTitle = we.findElement(
-					By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString())).getText();
+			actTitle = we
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString()))
+					.getText();
 			if (actTitle.equalsIgnoreCase(recordTitle)) {
 				return we;
 			}
@@ -140,10 +141,18 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public String getGroupTitle() {
-
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()), 30);
-		String title = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()))
-				.getText();
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()), 30);
+		List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()));
+		String title="";
+		for(WebElement we:list){
+			
+			if(we.isDisplayed()){
+				title=we.getText();
+				break;
+			}
+		}
+		
+				
 		return title;
 
 	}
@@ -190,7 +199,7 @@ public class GroupDetailsPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()))
 				.click();
 	}
-
+	
 	public void cancelPendingInvitations(String username) throws Exception {
 		WebElement groupCard = getPendingRecords(username);
 		groupCard.findElement(
@@ -213,5 +222,12 @@ public class GroupDetailsPage extends TestBase {
 		}
 		throw new Exception("Record not found in the group list");
 	}
+	public void clickOnDeleteButtonInConfirmationMoadl() throws Exception{
+		
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
+			
+		}
+	
 
 }

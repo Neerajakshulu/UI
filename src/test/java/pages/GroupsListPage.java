@@ -69,11 +69,18 @@ public class GroupsListPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS.toString())).click();
 	}
 	
-	public void clickOnGroupTitle(String title){
-
+	public void clickOnGroupTitle(String title) throws Exception{
+		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()),
 				30);
-		ob.findElement(By.linkText(title)).click();
+		List<WebElement> list=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS);
+		for(WebElement we: list){
+			if(we.getText().contains(title)){
+				we.click();
+				return;
+			}
+		}
+		 throw new Exception("Group name not found in Group list");
 	}
 	
 	public void addCoverPhoto(){
@@ -85,16 +92,16 @@ public class GroupsListPage extends TestBase {
 	
 	private WebElement getGroupCard(String groupTitle) throws Exception {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()),
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS.toString()),
 				60);
 		List<WebElement> invitationList = ob
-				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()));
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS.toString()));
 		String actTitle;
 		for (WebElement we : invitationList) {
 			actTitle = we
-					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString()))
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()))
 					.getText();
-			if (actTitle.equalsIgnoreCase(groupTitle)) {
+			if (actTitle.contains(groupTitle)) {
 				return we;
 			}
 		}
@@ -106,6 +113,7 @@ public class GroupsListPage extends TestBase {
 	public boolean verifyItemsCount(int count, String grouptitle) throws Exception{
 		WebElement groupRecord=getGroupCard(grouptitle);
 		String itemsCount=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS.toString())).getText();
+		itemsCount=itemsCount.substring(0, itemsCount.indexOf("Item")).trim();
 		return Integer.parseInt(itemsCount)==count;
 	}
 	
@@ -123,10 +131,10 @@ public class GroupsListPage extends TestBase {
 	
 	public String getGroupOwnerDetails(String grouptitle) throws Exception{
 		WebElement groupRecord=getGroupCard(grouptitle);
-		
+		System.out.println("");
 		String name=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).getText();
 		String role=groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS.toString())).getText();
-		return name.trim()+","+role.trim();
+		return name.trim()+", "+role.trim();
 	}
 	
 	public void clickOnGroupOwnerName(String grouptitle) throws Exception{
