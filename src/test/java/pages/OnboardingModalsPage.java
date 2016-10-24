@@ -117,7 +117,7 @@ public class OnboardingModalsPage extends TestBase {
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
-		if(!(onboardingStatus.size()==1)){
+		if(!(onboardingStatus.size()==0)){
 			throw new Exception("Onboarding modal are displaying for second time logged user also if user not onboarded successfully first time");
 		}
 			
@@ -624,6 +624,7 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			BrowserWaits.waitTime(4);
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
@@ -701,8 +702,9 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(4);
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
 			if(!(onboarding_modals.size()==0)) {
@@ -743,7 +745,8 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			BrowserWaits.waitTime(4);
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
