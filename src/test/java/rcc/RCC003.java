@@ -153,7 +153,6 @@ public class RCC003 extends TestBase {
 		}
 	}
 
-
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 * 
