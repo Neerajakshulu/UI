@@ -228,6 +228,15 @@ public class GroupDetailsPage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 			
 		}
-	
+	public void typeCustomMessage(String Message) {
+
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()))
+				.sendKeys(Message);
+
+	}
+
 
 }

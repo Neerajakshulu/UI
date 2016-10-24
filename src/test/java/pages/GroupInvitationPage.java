@@ -5,8 +5,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 /**
@@ -91,4 +96,62 @@ public class GroupInvitationPage extends TestBase {
 	
 	}
 	
+	public boolean verifyCustomMessage(String groupTitle,String custommsg) throws Exception {
+		WebElement groupCard = getRecordCard(groupTitle);
+		String cumsg=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS.toString())).getText();
+		if(cumsg.equals(custommsg))
+		return true;
+		else
+			return false;
+	}
+
+	
+	public void validateFollowOrUnfollow(String groupTitle,ExtentTest test) throws Exception {
+		waitForPageLoad(ob);
+		waitForAjax(ob);
+		WebElement groupCard = getRecordCard(groupTitle);
+		String attribute = groupCard
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+				.getAttribute("data-tooltip");
+
+		if (attribute.equalsIgnoreCase("Follow this person")) {
+			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+
+			BrowserWaits.waitTime(10);
+			attribute = groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+					.getAttribute("data-tooltip");
+
+			Assert.assertTrue(attribute.equalsIgnoreCase("Unfollow this person"));
+			test.log(LogStatus.PASS, "Follow functionality is working fine in view post record page");
+
+		} else {
+			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+			BrowserWaits.waitTime(10);
+			attribute = groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+					.getAttribute("data-tooltip");
+
+			Assert.assertTrue(attribute.equalsIgnoreCase("Follow this person"));
+			test.log(LogStatus.PASS, "UnFollow functionality is working fine in view post record page");
+
+		}
+		//ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+
+		
+	}
+	
+	public boolean VerifyGroupDetailsLinkOfInvitation(String groupTitle,String groupDisc) throws Exception{
+		WebElement groupCard = getRecordCard(groupTitle);
+		groupCard
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS.toString()))
+				.click();
+	
+		
+		String groupDetailsDisc=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS.toString())).getText();
+		if(groupDisc.equals(groupDetailsDisc))
+		return true;
+		else
+			return false;
+		
+		
+	}
 }

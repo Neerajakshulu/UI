@@ -526,7 +526,7 @@ public enum OnePObjectMap {
 		RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding']"),
 		RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS("button[class='wui-btn wui-btn--secondary']"),
 		RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
-		RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS(""),
+		RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS("div[class='wui-card__body-content group-card-item ng-scope']"),
 		RCC_GROUPINVITATIONS_PROFILE_NAME_CSS(""),
 		RCC_GROUPINVITATIONS_PROFILE_DETAILS_CSS(""),
 		RCC_GROUPDETAILS_RECORD_CARD_CSS(""),
@@ -538,7 +538,10 @@ public enum OnePObjectMap {
 		RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 		RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
 		RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS("div[class='modal-dialog ng-scope'] button[event-action='delete']"),
-		
+		RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS("textarea[name='inviteMessage']"),
+		RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS("div[class='wui-card__body-content'] span[class='ng-binding']"),
+		RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS("button[class*='ne-user-follow-unfollow']"),
+		RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS("div[class='project-invite-description ng-binding ng-scope']"),
 		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
