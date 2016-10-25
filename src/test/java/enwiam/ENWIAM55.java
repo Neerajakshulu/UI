@@ -48,7 +48,7 @@ public class ENWIAM55 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh14() throws Exception {
+	public void testcaseh15() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -116,7 +116,6 @@ public class ENWIAM55 extends TestBase {
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);

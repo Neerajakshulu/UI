@@ -154,4 +154,14 @@ public class LinkingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.OK_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.OK_BUTTON_CSS);
 	}
+	
+	public int getWatchlistCount() throws Exception {
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH);
+		String watchlistcount = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH).getText();
+		
+		int WC=Integer.parseInt(watchlistcount);
+		return WC;
+		
+	}
 }

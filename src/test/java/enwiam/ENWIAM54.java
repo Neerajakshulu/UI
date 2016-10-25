@@ -28,9 +28,11 @@ public class ENWIAM54 extends TestBase {
 	static String followAfter = null;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent
+	 * Reports
 	 * 
-	 * @throws Exception , When Something unexpected
+	 * @throws Exception
+	 *             , When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -42,7 +44,8 @@ public class ENWIAM54 extends TestBase {
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
-	 * @throws Exception , When TR Login is not done
+	 * @throws Exception
+	 *             , When TR Login is not done
 	 */
 	@Test
 	public void testcaseh14() throws Exception {
@@ -97,8 +100,8 @@ public class ENWIAM54 extends TestBase {
 			String accountType = "Neon";
 
 			validateAccounts(1, accountType);
-
-			for (int j = 1; j <= 10; j++) {
+			int watchlistCount = 10;
+			for (int j = 1; j <= watchlistCount; j++) {
 				logger.info("Creating " + j + " Watchlist");
 				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 			}
@@ -123,8 +126,28 @@ public class ENWIAM54 extends TestBase {
 					validateLinkedAccounts(2, accountType);
 					String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 					test.log(LogStatus.INFO, "After merging Social account profile name: " + secondAccountProfileName);
-					Assert.assertEquals(firstAccountProfileName, secondAccountProfileName);
+					Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 					test.log(LogStatus.PASS, "Forward Merge is happened");
+					if (secondAccountProfileName.contains(firstAccountProfileName)) {
+						test.log(LogStatus.PASS, "Winning account is Steam");
+					}
+					pf.getHFPageInstance(ob).clickProfileImage();
+					pf.getHFPageInstance(ob).clickProfileImage();
+					pf.getProfilePageInstance(ob).clickProfileLink();
+					pf.getBrowserActionInstance(ob)
+							.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+					int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
+					System.out.println(WinningAccount_WatclistCount);
+					if (WinningAccount_WatclistCount == watchlistCount) {
+						test.log(LogStatus.PASS,
+								"User is able to see the same watchlist count in profile page in Social account as in Neon");
+					}
+
+					else {
+
+						test.log(LogStatus.FAIL, "User is not able to see the same watchlist count in Social account");
+					}
+
 				}
 
 				catch (Throwable t) {
@@ -168,8 +191,7 @@ public class ENWIAM54 extends TestBase {
 		closeBrowser();
 	}
 
-	private void validateLinkedAccounts(int accountCount,
-			String linkName) throws Exception {
+	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
