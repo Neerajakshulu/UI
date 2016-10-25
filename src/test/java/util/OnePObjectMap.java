@@ -332,6 +332,12 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS("div[class='modal-content ng-scope']"),
+	//Added by Chinna on 25th-Oct-2016
+	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button"),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] "),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] ul"),
+	
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
@@ -519,7 +525,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS(""),
 		RCC_GROUPDETAILS_POSTS_TAB_CSS(""),
 		RCC_GROUPDETAILS_PATENTS_TAB_CSS(""),
-		RCC_GROUPDETAILS_ARTICLES_TAB_CSS(""),
+		RCC_GROUPDETAILS_ARTICLES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.articles']"),
 		RCC_GROUPDETAILS_GROUP_TITLE_CSS("div[class='research-group-card__text'] div[class*='research-card-title']"),
 		RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS("div[class='wui-card__content'] input"),
 		RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS("ul[class='suggestion-list'] li span[class='ng-binding ng-scope']"),
@@ -563,6 +569,8 @@ public enum OnePObjectMap {
 		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary']"),
 		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
 		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS("button[class='wui-btn wui-btn--primary ng-binding']"),
+		
+		RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
 		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

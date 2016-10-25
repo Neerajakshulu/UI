@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -48,6 +49,7 @@ public class SearchResultsPage extends TestBase {
 		waitForAjax(ob);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(1).click();
 		waitForAjax(ob);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 	}
 	
 	/**
@@ -355,5 +357,50 @@ public class SearchResultsPage extends TestBase {
 		test.log(LogStatus.PASS, "User linked with steam account");
 
 	}
+	
+	public void addArticleToGroup(String groupTitle) throws Exception {
+		addDocumentToGroup(groupTitle);
+	}
+	
+	public String getArticleTitle() throws Exception {
+		clickOnArticleTab();
+		String article = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS).getText();
+		logger.info("Article Title-->"+article);
+		return article;
+	}
+	
+	
+	
+	public void addDocumentToGroup(String groupTitle) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS);
+		List<WebElement> groupDropdownListItems=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS);
+		for(WebElement groupDropdownListItem: groupDropdownListItems) {
+			logger.info("Group Title-->"+groupDropdownListItem.findElement(By.tagName("span")).getText());
+			if(groupDropdownListItem.findElement(By.tagName("span")).getText().equalsIgnoreCase(groupTitle)) {
+				//checking it's already added to group or not, if added no need to add 
+				String addedToGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+				logger.info("Document is already added to group");
+				if(!(StringUtils.contains(addedToGroup, "--active"))) {
+					groupDropdownListItem.findElement(By.tagName("button")).click();
+					BrowserWaits.waitTime(4);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+					String addedGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+					logger.info("Added to group or not-->"+addedGroup);
+					if(!(StringUtils.contains(addedGroup, "--active"))) {
+						throw new Exception("Document not added to Group from Search results page");
+					}
+					break;
+				} else {
+					throw new Exception("no group availble from Add to Group dropdown with "+groupTitle);
+				}
+			}
+				
+		}
+	}
+	
 
 }

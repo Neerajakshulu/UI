@@ -28,10 +28,9 @@ public class GroupsPage extends TestBase {
 	}
 	
 	public void clickOnGroupsTab() throws Exception {
-
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
-		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 	}
 	
 	public void clickOnCreateNewGroupButton() throws Exception {
