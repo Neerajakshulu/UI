@@ -2,9 +2,7 @@ package pages;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,10 +11,10 @@ import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.sun.jna.platform.win32.Sspi.TimeStamp;
 
 import base.TestBase;
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 
 /**
@@ -174,5 +172,26 @@ public class GroupInvitationPage extends TestBase {
 			return false;
 
 	}
+	public void verifyInvitationTabDefaultMessage(ExtentTest test) throws Exception{
+		  String expectedInvitationMessage1="You have not received any invitations";
+		  String expectedInvitationMessage2="Invitations sent to you will appear here. You can also send invitations for Groups that you have created.";
+		  String actualInvitationMessage1=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_INVITATION_MESSAGE1_CSS).getText();
+		  String actualInvitationMessage2=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_INVITATION_MESSAGE2_CSS).getText();
+		  
+		  try
+		  {
+			  Assert.assertEquals(actualInvitationMessage1, expectedInvitationMessage1);
+			  Assert.assertEquals(actualInvitationMessage2, expectedInvitationMessage2);
+		  test.log(LogStatus.PASS, "Invitaion default message is displayed correctly");
+		}catch(Throwable t){
+			test.log(LogStatus.FAIL, "Invitaion default message is not displayed correctly");
+			test.log(
+					LogStatus.FAIL,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Invitation_Message_mismatch")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+		}
+}
 
 }

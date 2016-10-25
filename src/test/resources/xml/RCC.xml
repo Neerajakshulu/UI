@@ -11,6 +11,12 @@
 		</classes>
 	</test>
 	
+	<test name="RCC004">
+		<classes>
+			<class name="rcc.RCC004"></class>
+		</classes>
+	</test>
+	
 	
 </suite>
 

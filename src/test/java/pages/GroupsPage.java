@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -56,6 +55,15 @@ public class GroupsPage extends TestBase {
 		return invitationsCount;
 	}
 	
-	
-
+	public void switchToInvitationTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_INVITATIONLINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_INVITATIONLINK_CSS);
+		waitForAjax(ob);
+	}
+   
+	public void switchToGroupTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPLINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPLINK_CSS);
+		waitForAjax(ob);
+	}
 }

@@ -5,8 +5,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 
 /**
@@ -141,6 +146,41 @@ public class GroupsListPage extends TestBase {
 		
 		WebElement groupRecord=getGroupCard(grouptitle);
 		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).click();
+	}
+	
+  public boolean verifyGroupsortIsDisplayed() throws Exception{
+	  
+	  
+			int count = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_SORT_CSS.toString())).size();
+			//logger.info("Count is " + count);
+			if(count==1)
+			{
+				return true;
+			}
+			return false;
+		}
+  
+  public void verifyGroupsTabDefaultMessage(ExtentTest test) throws Exception{
+	  String expectedGroupMessage1="You do not have any groups";
+	  String expectedGroupMessage2="Get started by creating a new group. Groups can be shared with others. You can also join groups by accepting invitations sent to you by other Project Neon users.";
+	  String actualGroupMessage1=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPS_MESSAGE1_CSS).getText();
+	  String actualGroupMessage2=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPS_MESSAGE2_CSS).getText();
+	  
+	  try
+	  {
+		  Assert.assertEquals(actualGroupMessage1, expectedGroupMessage1);
+		  Assert.assertEquals(actualGroupMessage2, expectedGroupMessage2);
+	  test.log(LogStatus.PASS, "Group default message is displayed correctly");
+	}catch(Throwable t){
+		test.log(LogStatus.FAIL, "Group default message is not displayed correctly");
+		test.log(
+				LogStatus.FAIL,
+				"Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+								+ "_Group_Message_mismatch")));// screenshot
+		ErrorUtil.addVerificationFailure(t);
+	}
+		
 	}
 	
 }

@@ -551,6 +551,15 @@ public enum OnePObjectMap {
 		RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS("div[class='project-invite-description ng-binding ng-scope']"),
 		RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH("preceding-sibling::div[@class='wui-card__label-header']"),
 		
+		RCC_GROUP_SORT_CSS("button[id='rcc-sort-groups'] span:nth-child(1)"),
+		RCC_INVITATION_MESSAGE1_CSS("groups-invites-directive div[class='ng-scope'] span[class^='wui-title wui-emphasis']"),
+		RCC_INVITATION_MESSAGE2_CSS("groups-invites-directive div[class='ng-scope'] span[class='rcc-no-items-text']"),
+		
+		RCC_GROUPS_MESSAGE1_CSS("groups-list-directive div[class='ng-scope'] span[class^='wui-title wui-emphasis']"),
+		RCC_GROUPS_MESSAGE2_CSS("groups-list-directive div[class='ng-scope'] span[class='rcc-no-items-text']"),
+		RCC_INVITATIONLINK_CSS("li[class='wui-side-menu__list-item'] a"),
+		RCC_GROUPLINK_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
+		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 		ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
