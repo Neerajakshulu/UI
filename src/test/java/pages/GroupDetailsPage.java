@@ -201,6 +201,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 	
 	public void cancelPendingInvitations(String username) throws Exception {
+		waitForAjax(ob);
 		WebElement groupCard = getPendingRecords(username);
 		groupCard.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString()))

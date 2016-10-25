@@ -193,5 +193,37 @@ public class GroupInvitationPage extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 		}
 }
+	private  WebElement checkingInvitation(String recordTitle) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_CSS.toString()), 60);
+		List<WebElement> invitationList = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_CSS.toString()));
+		
+		String actTitle;
+		for (WebElement we : invitationList) {
+			actTitle = we
+					.findElement(
+							By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS.toString()))
+					.getText();
+			if (actTitle.equalsIgnoreCase(recordTitle)) {
+				return we;
+			}
+			
+		}
+		return null;
+		
+	}
+	
+	public boolean isInvitationRemoved(String groupTitle) throws Exception{
+		boolean istitle=false;
+		WebElement groupCard = checkingInvitation(groupTitle);
+				if(groupCard == null) {
+			istitle = true;
+		}
+		return istitle;
+		
+	
+	}
+	
 
 }

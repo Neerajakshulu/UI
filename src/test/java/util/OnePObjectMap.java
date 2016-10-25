@@ -559,6 +559,10 @@ public enum OnePObjectMap {
 		RCC_GROUPS_MESSAGE2_CSS("groups-list-directive div[class='ng-scope'] span[class='rcc-no-items-text']"),
 		RCC_INVITATIONLINK_CSS("li[class='wui-side-menu__list-item'] a"),
 		RCC_GROUPLINK_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
+		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS("div[class='modal-dialog ng-scope']"),
+		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary']"),
+		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
+		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS("button[class='wui-btn wui-btn--primary ng-binding']"),
 		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
