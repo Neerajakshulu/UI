@@ -165,10 +165,10 @@ public class GroupInvitationPage extends TestBase {
 		String Timecard = groupcard
 				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
 				.getText();
-		
+
 		Calendar cal = Calendar.getInstance();
 		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
-		if (Timecard.contains(OriginaltimeStamp.toUpperCase())&&(Timecard.contains("PM")||Timecard.contains("AM")))
+		if (Timecard.contains(OriginaltimeStamp.toUpperCase()) && (Timecard.contains("PM") || Timecard.contains("AM")))
 			return true;
 		else
 			return false;
