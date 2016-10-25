@@ -1,6 +1,7 @@
 package pages;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -164,10 +165,10 @@ public class GroupInvitationPage extends TestBase {
 		String Timecard = groupcard
 				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
 				.getText();
-		System.out.println("Printing the Current time of the invitation"+Timecard.trim());
-		String OriginaltimeStamp = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-
-		if (Timecard.contains(OriginaltimeStamp)||(Timecard.contains("PM")||Timecard.contains("AM")))
+		
+		Calendar cal = Calendar.getInstance();
+		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
+		if (Timecard.contains(OriginaltimeStamp.toUpperCase())&&(Timecard.contains("PM")||Timecard.contains("AM")))
 			return true;
 		else
 			return false;
