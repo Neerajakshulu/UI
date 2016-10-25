@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class ENWIAM56 extends TestBase {
+public class ENWIAM57 extends TestBase {
 
 	static int count = -1;
 
@@ -48,7 +48,7 @@ public class ENWIAM56 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh16() throws Exception {
+	public void testcaseh17() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -61,12 +61,12 @@ public class ENWIAM56 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername11"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername13"));
+		
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
-
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -83,47 +83,50 @@ public class ENWIAM56 extends TestBase {
 
 			ob.navigate().to(host);
 
-			// Activating the Steam account
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam11"),
-					LOGIN.getProperty("sru_steampw11"));
-			pf.getLoginTRInstance(ob).clickLogin();
+			// Activating the facebook account
 
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername13"),
+					LOGIN.getProperty("sru_fbpwd13"));
+			test.log(LogStatus.PASS, "user has logged in with social account");
+			pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
+			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
-			String accountType = "Neon";
 
-			validateNeonAccount(1, accountType);
+			String accountType = "Facebook";
+
+			validateAccounts(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
 			try {
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername11"),
-						LOGIN.getProperty("sru_fbpwd11"));
-				test.log(LogStatus.PASS, "user has logged in with social account");
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam13"),
+						LOGIN.getProperty("sru_steampw13"));
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
-				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-				test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
+				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
-				accountType = "Facebook";
+				accountType = "Neon";
 
-				validateAccounts(1, accountType);
+				validateNeonAccount(1, accountType);
+
 				int watchlistCount = 10;
 				try {
 
 					for (int j = 1; j <= watchlistCount; j++) {
 						logger.info("Creating " + j + " Watchlist");
-						pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();			
+						pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 					}
-					test.log(LogStatus.PASS, "Social account is made Neon Active");
-					
+					test.log(LogStatus.PASS, "Made Steam account Neon Active");
+
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL, "Unable to create 10 watchlists");// extent
 					ErrorUtil.addVerificationFailure(t);
@@ -133,11 +136,12 @@ public class ENWIAM56 extends TestBase {
 				BrowserWaits.waitTime(5);
 				// Trying to Link the accounts
 				try {
-					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam11"),
-							LOGIN.getProperty("sru_steampw11"));
-					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-					pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
+
+					pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
+					pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw13"));
+
 					test.log(LogStatus.PASS, "Linking is happened");
+					pf.getLoginTRInstance(ob).closeOnBoardingModal();
 					pf.getBrowserWaitsInstance(ob)
 							.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 					pf.getHFPageInstance(ob).clickOnAccountLink();
@@ -155,27 +159,22 @@ public class ENWIAM56 extends TestBase {
 						test.log(LogStatus.PASS, "Automated Merge is happened");
 						
 						if (winingAccountProfileName.contains(secondAccountProfileName)) {
-							test.log(LogStatus.PASS, "Winning account is facebook account");
+							test.log(LogStatus.PASS, "Winning account is Steam account");
 						} else
 							throw new Exception("Winning account is cannot be determined");
 
-						pf.getHFPageInstance(ob).clickProfileImage();
-						pf.getHFPageInstance(ob).clickProfileImage();
-						pf.getProfilePageInstance(ob).clickProfileLink();
-						pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+						pf.getLinkingModalsInstance(ob).clickProfileToViewWatchList();
 						int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
 						System.out.println(WinningAccount_WatclistCount);
 						if (WinningAccount_WatclistCount == watchlistCount) {
 							test.log(LogStatus.PASS,
-									"User is able to see the same watchlist count in profile page in Social account as in Neon");
+									"User is able to see the same watchlist count in profile page in Steam account as in Neon");
 						}
 
 						else {
 
-							test.log(LogStatus.FAIL, "User is not able to see the same watchlist count in Social account");
+							test.log(LogStatus.FAIL, "User is not able to see the same watchlist count in Steam account");
 						}
-						
-						
 					}
 
 					catch (Throwable t) {
@@ -228,7 +227,7 @@ public class ENWIAM56 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
@@ -236,7 +235,7 @@ public class ENWIAM56 extends TestBase {
 	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam11")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam13")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
@@ -252,7 +251,7 @@ public class ENWIAM56 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername11")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername13")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
@@ -269,9 +268,9 @@ public class ENWIAM56 extends TestBase {
 		try {
 
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("sru_fbusername11")));
+					LOGIN.getProperty("sru_fbusername13")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam11")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam13")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");

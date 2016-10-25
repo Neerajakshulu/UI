@@ -161,10 +161,7 @@ public class ENWIAM58 extends TestBase {
 			// Trying to Link the accounts
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
-
+				pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw12"));
 				test.log(LogStatus.INFO, "Trying to link two Neon active accounts ");
 				pf.getBrowserWaitsInstance(ob)
@@ -201,6 +198,8 @@ public class ENWIAM58 extends TestBase {
 
 		}
 
+		BrowserWaits.waitTime(2);
+		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}

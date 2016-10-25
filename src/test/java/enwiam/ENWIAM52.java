@@ -182,6 +182,7 @@ public class ENWIAM52 extends TestBase {
 		}
 		BrowserWaits.waitTime(2);
 		closeBrowser();
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
