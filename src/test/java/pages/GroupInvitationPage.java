@@ -1,6 +1,9 @@
 package pages;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +12,7 @@ import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.sun.jna.platform.win32.Sspi.TimeStamp;
 
 import base.TestBase;
 import util.BrowserWaits;
@@ -16,6 +20,7 @@ import util.OnePObjectMap;
 
 /**
  * This class contains all the method related to account page
+ * 
  * @author uc205521
  *
  */
@@ -28,8 +33,7 @@ public class GroupInvitationPage extends TestBase {
 		pf = new PageFactory();
 	}
 
-
-	private  WebElement getRecordCard(String recordTitle) throws Exception {
+	private WebElement getRecordCard(String recordTitle) throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_CSS.toString()), 60);
 		List<WebElement> invitationList = ob
@@ -47,7 +51,6 @@ public class GroupInvitationPage extends TestBase {
 		throw new Exception("Group record not found in the group list");
 	}
 
-
 	public void acceptInvitation(String groupTitle) throws Exception {
 
 		WebElement groupCard = getRecordCard(groupTitle);
@@ -64,14 +67,13 @@ public class GroupInvitationPage extends TestBase {
 				.click();
 
 	}
-	
-	public void clickOnGroupDetailsLinkOfInvitation(String groupTitle) throws Exception{
+
+	public void clickOnGroupDetailsLinkOfInvitation(String groupTitle) throws Exception {
 		WebElement groupCard = getRecordCard(groupTitle);
-		groupCard
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS.toString()))
+		groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS.toString()))
 				.click();
 	}
-	
+
 	public String getGroupOwnerProfileDetails(String groupTitle) throws Exception {
 
 		WebElement groupCard = getRecordCard(groupTitle);
@@ -82,31 +84,32 @@ public class GroupInvitationPage extends TestBase {
 				.getText();
 		return profileName + profileDetails;
 	}
-	 
-	public boolean verifyingInvitations(String groupTitle) throws Exception{
-		boolean istitle=false;
+
+	public boolean verifyingInvitations(String groupTitle) throws Exception {
+		boolean istitle = false;
 		WebElement groupCard = getRecordCard(groupTitle);
-		String Title=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS.toString())).getText();
-		if(Title.equals(groupTitle))
-		{
-		   istitle=true;
+		String Title = groupCard
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS.toString()))
+				.getText();
+		if (Title.equals(groupTitle)) {
+			istitle = true;
 		}
 		return istitle;
-		
-	
+
 	}
-	
-	public boolean verifyCustomMessage(String groupTitle,String custommsg) throws Exception {
+
+	public boolean verifyCustomMessage(String groupTitle, String custommsg) throws Exception {
 		WebElement groupCard = getRecordCard(groupTitle);
-		String cumsg=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS.toString())).getText();
-		if(cumsg.equals(custommsg))
-		return true;
+		String cumsg = groupCard
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS.toString()))
+				.getText();
+		if (cumsg.equals(custommsg))
+			return true;
 		else
 			return false;
 	}
 
-	
-	public void validateFollowOrUnfollow(String groupTitle,ExtentTest test) throws Exception {
+	public void validateFollowOrUnfollow(String groupTitle, ExtentTest test) throws Exception {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		WebElement groupCard = getRecordCard(groupTitle);
@@ -115,19 +118,23 @@ public class GroupInvitationPage extends TestBase {
 				.getAttribute("data-tooltip");
 
 		if (attribute.equalsIgnoreCase("Follow this person")) {
-			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+					.click();
 
 			BrowserWaits.waitTime(10);
-			attribute = groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+			attribute = groupCard
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
 					.getAttribute("data-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Unfollow this person"));
 			test.log(LogStatus.PASS, "Follow functionality is working fine in view post record page");
 
 		} else {
-			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
+			groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+					.click();
 			BrowserWaits.waitTime(10);
-			attribute = groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
+			attribute = groupCard
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
 					.getAttribute("data-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Follow this person"));
@@ -135,22 +142,36 @@ public class GroupInvitationPage extends TestBase {
 
 		}
 
-		
 	}
-	
-	public boolean VerifyGroupDetailsLinkOfInvitation(String groupTitle,String groupDisc) throws Exception{
+
+	public boolean VerifyGroupDetailsLinkOfInvitation(String groupTitle, String groupDisc) throws Exception {
 		WebElement groupCard = getRecordCard(groupTitle);
-		groupCard
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS.toString()))
+		groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS.toString()))
 				.click();
-	
-		
-		String groupDetailsDisc=groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS.toString())).getText();
-		if(groupDisc.equals(groupDetailsDisc))
-		return true;
+
+		String groupDetailsDisc = groupCard
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS.toString())).getText();
+		if (groupDisc.equals(groupDetailsDisc))
+			return true;
 		else
 			return false;
-		
-		
+
 	}
+
+	public boolean VerifytheDateandTimeofIvitation(String grouptitle) throws Exception {
+		WebElement groupcard = getRecordCard(grouptitle);
+
+		String Timecard = groupcard
+				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
+				.getText();
+		System.out.println("Printing the Current time of the invitation"+Timecard.trim());
+		String OriginaltimeStamp = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+
+		if (Timecard.contains(OriginaltimeStamp)||(Timecard.contains("PM")||Timecard.contains("AM")))
+			return true;
+		else
+			return false;
+
+	}
+
 }
