@@ -5,7 +5,7 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<!-- <test name="RCC001">
+	<test name="RCC001">
 		<classes>
 			<class name="rcc.RCC001"></class>
 		</classes>
@@ -15,7 +15,7 @@
 		<classes>
 			<class name="rcc.RCC004"></class>
 		</classes>
-	</test> -->
+	</test>
 	
 	<!-- Added by Chinna -->
 	<test name="article_Add_to_Group">
