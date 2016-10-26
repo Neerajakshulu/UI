@@ -94,9 +94,17 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnInviteOthersButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+		waitForAjax(ob);
+	       waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS.toString()), 60);
+	       List<WebElement>list=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+	       for(WebElement we: list){
+	           if(we.isDisplayed()){
+	               we.click();
+	               return;
+	           }
+	       }
+	    throw new Exception("Invite Others button is not displaye in group details page");
+	               
 
 	}
 
@@ -222,8 +230,8 @@ public class GroupDetailsPage extends TestBase {
 
 	private WebElement getPendingRecords(String username) throws Exception {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='wui-card__content']"), 60);
-		List<WebElement> pendinglist = ob.findElements(By.cssSelector("div[class='wui-card__content']"));
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()), 60);
+		List<WebElement> pendinglist = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()));
 		String username1 = null;
 		for (WebElement we : pendinglist) {
 			username1 = we
