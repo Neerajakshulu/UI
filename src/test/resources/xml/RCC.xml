@@ -16,6 +16,11 @@
 			<class name="rcc.RCC004"></class>
 		</classes>
 	</test>
+	  <test name="RCC010">
+		<classes>
+			<class name="rcc.RCC010"></class>
+		</classes>
+	</test>
 	
 	<!-- Added by Chinna -->
 	<test name="article_Add_to_Group">

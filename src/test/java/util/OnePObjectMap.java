@@ -539,7 +539,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS("ul[class='suggestion-list'] li span[class='ng-binding ng-scope']"),
 		RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS("button[event-action='save']"),
 		RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS(""),
-		RCC_GROUPDETAILS_PENDING_MEMBERS_NAMES_CSS("div[class='group-list'] div[class='ne-user-profile-object-info']"),
+		RCC_GROUPDETAILS_PENDING_MEMBERS_NAMES_CSS("group-pending-invite div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS("button[class='wui-icon-btn']"),
 		RCC_GROUPINVITATIONS_INVITATION_CARD_CSS("div[class='wui-card__content']"),
 		RCC_GROUPINVITATIONSFULL_INVITATION_CARD_CSS("div[class='wui-card']"),
@@ -578,6 +578,7 @@ public enum OnePObjectMap {
 		RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS("button[class='wui-btn wui-btn--primary ng-binding']"),
 		
 		RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
+		RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS("group-pending-invite div[class='wui-card__content']"),
 		
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -597,6 +598,7 @@ public enum OnePObjectMap {
 		RCC_GROUP_TITLE_CSS("div[class='wui-content-title wui-content-title--research-card-title ng-binding']"),
 		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
 		
+		 
 	;
 
 	private String locator;
