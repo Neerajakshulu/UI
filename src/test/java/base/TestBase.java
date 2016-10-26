@@ -736,10 +736,12 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("header_label"))));
-		BrowserWaits.waitTime(3);
-		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
+		
+		
+		BrowserWaits.waitTime(4);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 	}
 
 	// logging out enw

@@ -535,8 +535,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS("button[class='wui-icon-btn']"),
 		RCC_GROUPINVITATIONS_INVITATION_CARD_CSS("div[class='wui-card__content']"),
 		RCC_GROUPINVITATIONSFULL_INVITATION_CARD_CSS("div[class='wui-card']"),
-		
-		RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding']"),
+		RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding ng-scope']"),                                          
 		RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS("button[class='wui-btn wui-btn--secondary']"),
 		RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
 		RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS("div[class='wui-card__body-content group-card-item ng-scope']"),
