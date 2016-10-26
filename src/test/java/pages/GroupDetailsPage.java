@@ -104,7 +104,8 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 	}
 
 	public void clickPatentstab() throws Exception {
@@ -253,8 +254,6 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	
-
 	public void validateArtcileInGroupDetailsPage(String groupTitle) throws Exception {
 		clickArticlesTab();
 		pf.getBrowserWaitsInstance(ob)
@@ -265,6 +264,19 @@ public class GroupDetailsPage extends TestBase {
 		if (!groupTitle.equalsIgnoreCase(groupArticleTitle)) {
 			throw new Exception("Added to Group Article not present in Group Details Article tab");
 		}
+	}
+
+	public String getPendingInvitationMessage() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS);
+
+		String otherMemberJoinGroup = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS.toString()))
+				.getText();
+		return otherMemberJoinGroup;
+
 	}
 
 }

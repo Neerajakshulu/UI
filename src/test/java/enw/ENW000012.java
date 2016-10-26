@@ -102,8 +102,8 @@ public class ENW000012 extends TestBase {
 	    waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString()), 30);
 	    ob.findElement(By.xpath(OnePObjectMap.HEADER_LABEL_XPATH.toString())).click();
 
-	    waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString()), 30);
-	    ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_XPATH.toString())).click();
+	    waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+	    ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
 
 	    // OPQA-1905
 	    String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))

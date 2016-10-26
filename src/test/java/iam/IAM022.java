@@ -10,6 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM022 extends TestBase {
 
@@ -45,15 +46,17 @@ public class IAM022 extends TestBase {
 			ob.navigate().to(host);
 
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS);
+			
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")),
 					30);
 			test.log(LogStatus.INFO, "The Check box for changing email preferences is visible");
 			String cssValue = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString()))
 					.getCssValue("background");
 
 			if (cssValue.contains("rgb(69, 183, 231)")) {
@@ -63,8 +66,8 @@ public class IAM022 extends TestBase {
 				status = 2;
 			}
 			// unchecking the check box n checking if it is working
-			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css"))).click();
-			cssValue = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")))
+			ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())).click();
+			cssValue = ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString()))
 					.getCssValue("background");
 
 			Thread.sleep(5000);

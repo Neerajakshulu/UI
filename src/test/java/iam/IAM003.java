@@ -15,6 +15,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM003 extends TestBase {
 
@@ -77,9 +78,10 @@ public class IAM003 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(4);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
-			if (!checkElementPresence("ul_name")) {
+			/*if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing LI user credentials are not working fine");// extent
 																								// reports
@@ -88,10 +90,10 @@ public class IAM003 extends TestBase {
 						this.getClass().getSimpleName() + "_existing_LI_User_credentials_not_working_fine")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			// Verify that profile name gets displayed correctly
-			if (!checkElementPresence("header_label")) {
+			/*if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
 																						// reports
@@ -100,10 +102,11 @@ public class IAM003 extends TestBase {
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
 
 				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
@@ -113,7 +116,7 @@ public class IAM003 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			closeBrowser();
 

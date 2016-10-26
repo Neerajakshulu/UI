@@ -16,6 +16,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM026 extends TestBase {
 
@@ -64,11 +65,16 @@ public class IAM026 extends TestBase {
 			// Navigate to deep link account page
 			ob.navigate().to(CONFIG.getProperty("accountLink"));
 			login();
-			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS);
+			String str = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS.toString())).getText();
 			logger.info("Title : " + str);
-			String emailName = ob.findElement(By.cssSelector("span[class='ng-binding']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ACCOUNT_PAGE_USER_NAME_CSS);
+			
+			String emailName = ob.findElement(By.cssSelector(OnePObjectMap.NEON_ACCOUNT_PAGE_USER_NAME_CSS.toString())).getText();
 			logger.info("Emai Text : " + emailName);
-			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS);
+			
+			String additionalMail = ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS.toString())).getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
 			BrowserWaits.waitTime(2);
 			try {
@@ -86,8 +92,11 @@ public class IAM026 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_ account_page")));// screenshot
 			}
+			
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 
-			if (!checkElementPresence("ul_name")) {
+			/*if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
 																								// reports
@@ -96,9 +105,11 @@ public class IAM026 extends TestBase {
 						this.getClass().getSimpleName() + "_existing_Neon_User_credentials_not_working_fine")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
-			if (!checkElementPresence("header_label")) {
+			
+			
+			/*if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
 																						// reports
@@ -107,10 +118,11 @@ public class IAM026 extends TestBase {
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
 
 				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
@@ -120,12 +132,12 @@ public class IAM026 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			closeBrowser();
-
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		}
-
+		
 		catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -139,7 +151,7 @@ public class IAM026 extends TestBase {
 			closeBrowser();
 
 		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		
 	}
 
 	@AfterTest

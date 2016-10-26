@@ -18,6 +18,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM031 extends TestBase {
 
@@ -128,8 +129,11 @@ public class IAM031 extends TestBase {
 
 			}
 
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			
 			// Verify that profile name gets displayed correctly
-			if (!checkElementPresence("header_label")) {
+			/*if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
 																						// reports
@@ -138,7 +142,7 @@ public class IAM031 extends TestBase {
 						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			logout();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);

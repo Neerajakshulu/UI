@@ -485,7 +485,7 @@ public enum OnePObjectMap {
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
 	ACCOUNT_RADIOBUTTON2_XPATH("(//label[contains(text(),'Make primary')])[2]"),
 	HEADER_LABEL_XPATH("(//div[@class='ne-user-profile-image-main-wrapper'])[1]"),
-	ACCOUNT_LINK_XPATH("//a[@data-ui-sref='account.settings']"),
+	ACCOUNT_LINK_CSS("a[data-ui-sref='account.settings']"),
 	ACCOUNT_ACTUAL_EMAIL_XPATH("//div[@class='account-content']/div[2]/div/span"),
 	ACCOUNT_ACTUAL_EMAIL1_XPATH("//div[@class='account-content']/div[3]/div/span"),
 	ACCOUNT_LINK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
@@ -499,6 +499,14 @@ public enum OnePObjectMap {
 	ACCOUNT_fACEBOOK_ICON_XPATH("//i[@class='fa fa-facebook-square account-option-item__icon--facebook']"),
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
+	ACCOUNT_CHANGE_PASSWORD_LINK_CSS("h6[class='account-option-item__text--sub ng-scope'] a"),
+	EMAIL_BODY_PASSWORD_RESET_LINK_CSS("[class='email_body'] a"),
+	NEON_LANDING_PAGE_LOGGIN_BANNER_CSS("div[class='login-body']"),
+	ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS("a[class='wui-btn wui-btn--secondary']"),
+	NEON_HELP_AND_FEEDBACK_LINK_CSS("a[data-event-action='help-feedback']"),
+	NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS("a[class='feedback-link__anchor ng-binding']"),
+	NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS("a[class='feedback-link__anchor']"),
+	NEON_ACCOUNT_PAGE_USER_NAME_CSS("span[class='ng-binding']"),
 	
 	
 	// #######RCC#############
@@ -516,7 +524,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_PATENTS_COUNT_CSS(""),
 		RCC_GROUPDETAILS_POSTS_COUNT_CSS(""),
 		RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS(""),
-		RCC_GROUPDETAILS_MEMBERS_COUNT_CSS(""),
+		RCC_GROUPDETAILS_MEMBERS_COUNT_CSS("a[ui-sref='groups.details.members.list'] span"),
 		RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS("div[class='research-group-card__footer'] button[ng-click*='group.delete()']"),
 		RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS(""),
 		RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS(""),
@@ -581,6 +589,14 @@ public enum OnePObjectMap {
 		
 		NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
 		NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
+		
+		RCC_COUNT_GROUP_OVERLAY_CSS("span[class='groups-link-invites ng-binding ng-scope']"),
+		RCC_COUNT_GROUP_AND_INVITATIONS_CSS("span[class='wui-side-menu__badge ng-binding']"),
+		RCC_DEFAULT_SELECTED_INVITATION_TAB_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active']"),
+		RCC_DEFAULT_SELECTED_INVITATION_TAB_TEXT_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
+		RCC_GROUP_TITLE_CSS("div[class='wui-content-title wui-content-title--research-card-title ng-binding']"),
+		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
+		
 	;
 
 	private String locator;
