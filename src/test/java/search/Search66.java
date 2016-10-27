@@ -65,10 +65,7 @@ public class Search66 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			// waitForElementTobeVisible(ob,
-			// By.xpath("//li[contains(@class,'content-type-selector ng-scope') and contains(text(),'All')]"), 30);
-			Thread.sleep(5000);
-
+			waitForAjax(ob);
 			String all_text = ob
 					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
 					.getText();
