@@ -593,7 +593,7 @@ public enum OnePObjectMap {
 		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
 		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
 		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
-		
+		RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS("h3[class='wui-title wui-title--invite-spacing']"),
 		
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),

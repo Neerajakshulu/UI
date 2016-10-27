@@ -70,7 +70,7 @@ public class RCC011 extends TestBase{
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
-			 result = pf.getGroupDetailsPage(ob).inviteMembers("Jyothi Sree");
+			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User");
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
 			else
@@ -85,7 +85,7 @@ public class RCC011 extends TestBase{
 			loginAs("INVITEUSER01", "INVITEUSERPWD");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
-			pf.getGroupsPage(ob).switchToInvitationTab();
+			//pf.getGroupsPage(ob).switchToInvitationTab();
 			try{
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
 				test.log(LogStatus.PASS,"User1 has accepted the invitation");
@@ -104,6 +104,20 @@ public class RCC011 extends TestBase{
 			ob.navigate().to(host);
 			loginAs("GPUSERNAME11","GPUSERPASSWORD11");
 			test.log(LogStatus.PASS,"User2 has login with valid credentials");
+			try{
+				pf.getGroupInvitationPage(ob).acceptInvitation(title);
+				test.log(LogStatus.PASS,"User2 has accepted the invitation");
+				int count=pf.getGroupDetailsPage(ob).getMembersCounts();
+				if(count==2)
+					test.log(LogStatus.PASS,"Members count in incremented ");
+			}
+			
+			catch(Exception e){
+				test.log(LogStatus.FAIL, "Invitation is not present in the invitation tab of user2");
+				ErrorUtil.addVerificationFailure(e);
+			}
+			
+			
 
 }
 		catch (Throwable t) {

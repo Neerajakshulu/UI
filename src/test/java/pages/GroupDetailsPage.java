@@ -375,6 +375,17 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1).click();
 	}
 	
+	public  boolean verifyUserInPendingInvitationList(String username) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS.toString()),30);
+		List<WebElement> invitationList = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()));
+		if(invitationList.size()==0)
+			return true;
+		else
+			return false;
+		
+	}
 	
 
 }

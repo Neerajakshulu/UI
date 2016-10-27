@@ -135,8 +135,13 @@ public class RCC010 extends TestBase {
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
-			test.log(LogStatus.PASS, "Invitation is canceled by the owner of the group");
-
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+			BrowserWaits.waitTime(2);
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList("Jyothi Sree"),
+					"Invitation is canceled by the owner of the group");
+			
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
