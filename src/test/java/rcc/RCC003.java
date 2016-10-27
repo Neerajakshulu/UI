@@ -134,6 +134,23 @@ public class RCC003 extends TestBase {
 				test.log(LogStatus.FAIL, "TimeCard is not working fine");
 				throw new Exception("TimeCard is not working fine");
 			}
+			
+			String expectedStr=pf.getGroupInvitationPage(ob).getGroupOwnerDetails(groupTitle);
+			pf.getGroupInvitationPage(ob).clickOnGroupOwnerName(groupTitle);
+			String actProfileData=pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
+			actProfileData=actProfileData.substring(1,actProfileData.length()-1);
+			try{
+			Assert.assertEquals(actProfileData, expectedStr);
+			test.log(LogStatus.PASS, "Group owner profile details are displayed correctly in Invitation page");
+			}catch(Throwable t){
+				test.log(LogStatus.FAIL, "Group owner profile details mismatch");
+				test.log(
+						LogStatus.FAIL,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
 			logout();
 			closeBrowser();
 

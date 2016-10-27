@@ -580,6 +580,22 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS("group-pending-invite div[class='wui-card__content']"),
 		
+		RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS("div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
+		RCC_GROUPINVITATIONS_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
+		RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a"),
+		RCC_GROUPDETAILS_GROUP_OWNER_ROLE_CSS("div[class='research-group-card__content'] div[class*='wui-descriptor wui-descriptor__profile']"),
+		RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS("div[class='research-group-card__text'] p[class*='research-group-card__description']"),
+		RCC_COUNT_GROUP_OVERLAY_CSS("span[class='groups-link-invites ng-binding ng-scope']"),
+		RCC_COUNT_GROUP_AND_INVITATIONS_CSS("span[class='wui-side-menu__badge ng-binding']"),
+		RCC_DEFAULT_SELECTED_INVITATION_TAB_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active']"),
+		RCC_DEFAULT_SELECTED_INVITATION_TAB_TEXT_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
+		RCC_GROUP_TITLE_CSS("div[class='wui-content-title wui-content-title--research-card-title ng-binding']"),
+		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
+		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
+		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
+		
+		
+///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 		ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
@@ -591,14 +607,6 @@ public enum OnePObjectMap {
 		NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
 		NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
 		
-		RCC_COUNT_GROUP_OVERLAY_CSS("span[class='groups-link-invites ng-binding ng-scope']"),
-		RCC_COUNT_GROUP_AND_INVITATIONS_CSS("span[class='wui-side-menu__badge ng-binding']"),
-		RCC_DEFAULT_SELECTED_INVITATION_TAB_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active']"),
-		RCC_DEFAULT_SELECTED_INVITATION_TAB_TEXT_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
-		RCC_GROUP_TITLE_CSS("div[class='wui-content-title wui-content-title--research-card-title ng-binding']"),
-		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
-		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
-		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
 		
 		 
 	;

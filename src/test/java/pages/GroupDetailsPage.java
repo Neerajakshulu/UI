@@ -174,23 +174,32 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public void inviteMembers(List<String> membersList) {
-
-	}
-
-	public boolean inviteMembers(String membersName) throws InterruptedException {
+	public boolean inviteMembers(List<String> membersList) throws InterruptedException {
 		boolean isFound = false;
+
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
+
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
+
+		for (String membersName : membersList) {
+			isFound = false;
+			isFound = selectUserFromList(isFound, membersName);
+
+		}
+		clickOnSendInvitation();
+		return isFound;
+	}
+
+	public boolean selectUserFromList(boolean isFound, String membersName) throws InterruptedException {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
 				.sendKeys(membersName);
 
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()), 30);
 		BrowserWaits.waitTime(2);
-		List<WebElement> optionsList = ob.findElements(By
-				.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()));
+		List<WebElement> optionsList = ob.findElements(
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()));
 		for (WebElement we : optionsList) {
 
 			if (we.getText().equals(membersName)) {
@@ -199,10 +208,18 @@ public class GroupDetailsPage extends TestBase {
 				break;
 			}
 		}
-		clickOnSendInvitation();
 		return isFound;
 	}
 
+	public boolean inviteMembers(String membersName) throws InterruptedException {
+		boolean isFound = false;
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
+		isFound = selectUserFromList(isFound, membersName);
+		clickOnSendInvitation();
+		return isFound;
+	}
 	public void clickOnSendInvitation() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()), 30);
@@ -331,5 +348,33 @@ public class GroupDetailsPage extends TestBase {
 	
 		
 	}
+	public String getGroupOwnerDetails() throws Exception {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
+		String name = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1)
+				.getText();
+
+		String role = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_ROLE_CSS).get(1)
+				.getText();
+
+		return name.trim() + ", " + role.trim();
+
+	}
+
+	public boolean verifyGroupDescription(String desc) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS.toString()), 60);
+
+		String groupDesc = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS).get(1).getText();
+		return groupDesc.equals(desc);
+
+	}
+
+	public void clickOnGroupOwnerName() throws Exception {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1).click();
+	}
+	
+	
 
 }

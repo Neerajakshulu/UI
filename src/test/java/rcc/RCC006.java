@@ -16,16 +16,14 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class RCC001 extends TestBase {
+public class RCC006 extends TestBase{
 
-	static int status = 1;
-
+	
+static int status = 1;
+	
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
-	 * 
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * @throws Exception, When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -37,8 +35,7 @@ public class RCC001 extends TestBase {
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception,
-	 *             When TR Login screen not displayed
+	 * @throws Exception, When TR Login screen not displayed 
 	 */
 	@Test
 	public void testGroupCreation() throws Exception {
@@ -78,22 +75,21 @@ public class RCC001 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try {
-				Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(desc, title));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc),"Group decription is not matching in Group details page");
 				test.log(LogStatus.PASS, "Group description in Group list page is displayed correctly");
-				pf.getGroupsListPage(ob).verifyItemsCount(0, title);
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyItemsCount(0, title),"");
 				test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"Items count in Group list page in Group list page is not displayed correctly");
+						t.getMessage());
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			String expectedStr = pf.getGroupsListPage(ob).getGroupOwnerDetails(title);
-			pf.getGroupsListPage(ob).clickOnGroupOwnerName(title);
+			String expectedStr = pf.getGroupDetailsPage(ob).getGroupOwnerDetails();
+			pf.getGroupDetailsPage(ob).clickOnGroupOwnerName();
 			String actProfileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
 			actProfileData = actProfileData.substring(1, actProfileData.length() - 1);
 			try {
@@ -184,26 +180,25 @@ public class RCC001 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 	}
+	
 
+	
+	
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
-	 * 
-	 * @throws Exception
+	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 * @throws Exception 
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
 		extent.endTest(test);
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()),
-		 * "PASS"); else if(status==2) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()),
-		 * "SKIP");
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-
+	
 }
