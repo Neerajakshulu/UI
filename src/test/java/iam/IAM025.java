@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM025 extends TestBase {
 
@@ -59,14 +59,21 @@ public class IAM025 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
-			ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
-			BrowserWaits.waitTime(3);
-			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
+//			ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
+			
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_LINK_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_LINK_CSS.toString())));
+			
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS);
+			String str = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS.toString())).getText();
 			logger.info("Title : " + str);
-			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS);
+			String feedBack = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS.toString())).getText();
 			logger.info("Emai Text : " + feedBack);
 
 			try {

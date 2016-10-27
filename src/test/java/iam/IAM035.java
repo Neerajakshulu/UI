@@ -15,6 +15,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM035 extends TestBase {
 
@@ -108,7 +109,8 @@ public class IAM035 extends TestBase {
 
 		}
 		logout();
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 
 		if (!checkElementPresence("login_banner")) {
 
@@ -118,7 +120,7 @@ public class IAM035 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 			closeBrowser();
 
-		}
+		}*/
 		closeBrowser();
 
 	}

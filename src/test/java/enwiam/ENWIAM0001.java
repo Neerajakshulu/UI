@@ -56,7 +56,7 @@ public class ENWIAM0001 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName22"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
 		} catch (Throwable t) {
@@ -70,9 +70,8 @@ public class ENWIAM0001 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			loginTofb();
-			loginToLn();
 			loginToFacebook();
-			loginToLinkedIn();
+			closeBrowser();
 		} catch (Throwable t) {
 			logger.info("field");
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -97,69 +96,27 @@ public class ENWIAM0001 extends TestBase {
 		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 		String accountType = "Facebook";
 
-		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
+		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("fbUserName22"), LOGIN.getProperty("fbPassword22"));
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("SteamPassword22"));
+
 		try {
-			ob.findElement(By.className("button-form btn-common")).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-		ob.findElement(By.className("btn-common")).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		}
 		pf.getENWReferencePageInstance(ob).clickAccount();
 		pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
-		pf.getENWReferencePageInstance(ob).logout();
-
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
-		ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-		try {
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// BrowserWaits.waitTime(3);
-		pf.getENWReferencePageInstance(ob).clickAccount();
 		validateLinkedAccounts(2, accountType);
 		pf.getENWReferencePageInstance(ob).logout();
 
-	}
-
-	// Linking LinkedIn with the existing STeAM
-	private void loginToLn() throws Exception {
-
-		// Navigate to TR login page and login with valid TR credentials
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("Password19"));
-		try {
-			ob.findElement(By.className("button-form btn-common")).click();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-		try {
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		pf.getENWReferencePageInstance(ob).clickAccount();
-	validateLinkedAccounts(3, "LinkedIn");
-		pf.getENWReferencePageInstance(ob).logout();
 
 	}
 
+	
 	// Signing into Facebook account again to ensure that linking modal is not displaying
 
 	private void loginToFacebook() throws Exception {
@@ -181,29 +138,7 @@ public class ENWIAM0001 extends TestBase {
 
 	}
 
-	// Checking whether the linking modals are displaying or not while signing into LinkedIn
-	private void loginToLinkedIn() throws Exception {
 
-		pf.getENWReferencePageInstance(ob).loginWithENWLnCredentials(LOGIN.getProperty("UserName18"), LOGIN.getProperty("Password18"));
-		//
-		try {
-
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		pf.getENWReferencePageInstance(ob).clickAccount();
-
-		pf.getENWReferencePageInstance(ob).logout();
-		closeBrowser();
-		pf.clearAllPageObjects();
-	}
 
 	// Validating the linked accounts with STeAM
 
@@ -212,9 +147,9 @@ public class ENWIAM0001 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("SteamUserName22")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName18")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbUserName22")));
 			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);

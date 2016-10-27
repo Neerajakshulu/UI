@@ -18,6 +18,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM016 extends TestBase {
 
@@ -86,14 +87,21 @@ public class IAM016 extends TestBase {
 			String checkEmail1 = ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText();
 			logger.info("Email Address : " + checkEmail1);
 			String checkEmail = "Please check your email";
-			if (!StringContains(text, expected_text) && !StringContains(checkEmail, checkEmail1)) {
+			
+			if(text.contains(expected_text)&&checkEmail.contains(checkEmail1)){
+				test.log(LogStatus.PASS, "Email for password change sent");
+			}else{
+				test.log(LogStatus.FAIL, "Email for password change not sent");
+			}
+			
+			/*if (!StringContains(text, expected_text) && !StringContains(checkEmail, checkEmail1)) {
 
 				test.log(LogStatus.FAIL, "Email for password change not sent");// extent reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_password_change_email_not_sent")));// screenshot
 
-			}
+			}*/
 			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			BrowserWaits.waitTime(12);
@@ -105,7 +113,13 @@ public class IAM016 extends TestBase {
 
 			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 			logger.info("Email Subject Text : " + email_subject);
-			if (!StringContains(email_subject, "Project Neon password change request")) {
+			if(email_subject.contains("Project Neon password change request")){
+				test.log(LogStatus.PASS, "Email for changing password received");
+			}else{
+				test.log(LogStatus.FAIL, "Email for changing password not received");
+			}
+			
+			/*if (!StringContains(email_subject, "Project Neon password change request")) {
 
 				test.log(LogStatus.FAIL, "Email for changing password not received");// extent reports
 				status = 2;// excel
@@ -113,12 +127,15 @@ public class IAM016 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_password_change_email_not_received")));// screenshot
 
 			}
-
-			WebElement reset_link_element = ob.findElement(By.xpath(OR.getProperty("email_body_password_reset_link")));
+*/
+			
+			WebElement reset_link_element = ob.findElement(By.cssSelector(OnePObjectMap.EMAIL_BODY_PASSWORD_RESET_LINK_CSS.toString()));
 			String reset_link_url = reset_link_element.getAttribute("href");
 			ob.get(reset_link_url);
+			
+			
+			
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-
 			ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.id(OR.getProperty("update_password"))).click();
@@ -134,6 +151,12 @@ public class IAM016 extends TestBase {
 			expected_text = "Your password has been updated";
 			String expectedText = "Your password has been successfully updated. A confirmation has been sent to your email address.";
 
+			if(checkEmail2.contains(expected_text) && text.contains(expectedText)){
+				test.log(LogStatus.PASS, "Password changed successfully");
+			}else{
+				test.log(LogStatus.FAIL, "Password not changed successfully");
+			}
+			/*
 			if (!StringContains(checkEmail2, expected_text) && !StringContains(text, expectedText)) {
 
 				test.log(LogStatus.FAIL, "Password not changed successfully");// extent reports
@@ -141,7 +164,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_password_not_changed_successfully")));// screenshot
 
-			}
+			}*/
 			BrowserWaits.waitTime(2);
 			// 4)login with changed password
 			ob.findElement(By.cssSelector("input[class='button']")).click();
@@ -151,14 +174,15 @@ public class IAM016 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			Thread.sleep(10000);
-			if (!checkElementPresence("header_label")) {
+			/*if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_user_unable_to_login_with_changed_password")));// screenshot
 
-			}
+			}*/
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			logout();
 			ob.quit();
 		}

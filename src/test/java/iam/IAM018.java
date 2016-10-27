@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM018 extends TestBase {
 
@@ -66,7 +67,9 @@ public class IAM018 extends TestBase {
 			//
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_cancel_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("LI_cancel_link"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
+
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 
 			if (!checkElementPresence("login_banner")) {
 
@@ -75,7 +78,7 @@ public class IAM018 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_LI_CANCEL_button_not_working")));// screenshot
 
-			}
+			}*/
 
 			closeBrowser();
 

@@ -16,6 +16,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM028 extends TestBase {
 
@@ -95,7 +96,9 @@ public class IAM028 extends TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 			}
 
-			if (!checkElementPresence("ul_name")) {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			
+			/*if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 																									// reports
@@ -105,8 +108,8 @@ public class IAM028 extends TestBase {
 				closeBrowser();
 
 			}
-
-			if (!checkElementPresence("help_link")) {
+*/
+			/*if (!checkElementPresence("help_link")) {
 
 				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 																									// reports
@@ -114,7 +117,7 @@ public class IAM028 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
 
-			}
+			}*/
 			// Verify that profile image using below xpath is present or not
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));

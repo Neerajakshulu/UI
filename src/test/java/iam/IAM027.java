@@ -16,6 +16,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM027 extends TestBase {
 
@@ -64,9 +65,11 @@ public class IAM027 extends TestBase {
 			// Navigate to deep link account page
 			ob.navigate().to(CONFIG.getProperty("helpLink"));
 			login();
-			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS);
+			String str = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS.toString())).getText();
 			logger.info("Title : " + str);
-			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS);
+			String feedBack = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS.toString())).getText();
 			logger.info("Emai Text : " + feedBack);
 			BrowserWaits.waitTime(2);
 			try {
@@ -85,6 +88,9 @@ public class IAM027 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_help_page")));// screenshot
 			}
 
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			/*
 			if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
@@ -107,9 +113,10 @@ public class IAM027 extends TestBase {
 				closeBrowser();
 
 			}
-
+*/
 			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
 			if (!checkElementPresence("login_banner")) {
 
 				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
@@ -119,7 +126,7 @@ public class IAM027 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			closeBrowser();
 

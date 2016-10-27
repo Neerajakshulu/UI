@@ -60,16 +60,21 @@ public class IAM023 extends TestBase {
 			}
 			clearCookies();
 			String email = createNewUser("disco", "dancer");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+			
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
 			
 			BrowserWaits.waitTime(3);
 			String beforeChangePass=ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS.toString())).getText();
-			BrowserWaits.waitTime(40);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
+			BrowserWaits.waitTime(20);
+			
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString()), 30);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString())));
 			
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@1234");
@@ -185,7 +190,7 @@ public class IAM023 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			Thread.sleep(10000);
 
-			if (!checkElementPresence("header_label")) {
+			/*if (!checkElementPresence("header_label")) {
 
 				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent reports
 				status = 2;// excel
@@ -193,11 +198,16 @@ public class IAM023 extends TestBase {
 						this.getClass().getSimpleName() + "_user_unable_to_login_with_changed_password")));// screenshot
 
 			}
+			*/
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
 			BrowserWaits.waitTime(4);
 			String beforeChangePass1=ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS.toString())).getText();
 			

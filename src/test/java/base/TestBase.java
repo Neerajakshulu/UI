@@ -736,10 +736,13 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("header_label"))));
+		
+		
+		BrowserWaits.waitTime(4);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
+		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 		BrowserWaits.waitTime(3);
-		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
-		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 	}
 
 	// logging out enw
@@ -835,6 +838,19 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
+			
+			Assert.assertTrue(text.contains(email));
+			//test.log(LogStatus.PASS, "Account activation email sent");
+			/*if(text.contains(email)){
+				test.log(LogStatus.INFO, "Account activation email sent");
+			}else{
+				if (test != null) {
+					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
+																					// reports
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+				}
+			}
 
 			if (!StringContains(text, email)) {
 				if (test != null) {
@@ -843,7 +859,7 @@ public class TestBase {
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
 				}
-			}
+			}*/
 
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {

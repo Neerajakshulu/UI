@@ -18,13 +18,13 @@
 			<class name="enw.ENW003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW004">
 		<classes>
 			<class name="enw.ENW004"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW005">
 		<classes>
 			<class name="enw.ENW005"></class>
@@ -48,7 +48,7 @@
 			<class name="enw.ENW000012"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW007">
 		<classes>
 			<class name="enw.ENW007"></class>
@@ -60,7 +60,7 @@
 			<class name="enw.ENW009"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW010">
 		<classes>
 			<class name="enw.ENW010"></class>
@@ -72,62 +72,62 @@
 			<class name="enw.ENW011"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW012">
 		<classes>
 			<class name="enw.ENW012"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW013">
 		<classes>
 			<class name="enw.ENW013"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW014">
 		<classes>
 			<class name="enw.ENW014"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW015">
 		<classes>
 			<class name="enw.ENW015"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW016">
 		<classes>
 			<class name="enw.ENW016"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW017">
 		<classes>
 			<class name="enw.ENW017"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW022">
 		<classes>
 			<class name="enw.ENW022"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW020">
 		<classes>
 			<class name="enw.ENW020"></class>
 		</classes>
 	</test>
-	
-	
+
+
 	<test name="ENW021">
 		<classes>
 			<class name="enw.ENW021"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW023">
 		<classes>
 			<class name="enw.ENW023"></class>
@@ -154,7 +154,7 @@
 			<class name="iam.IAM030"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
@@ -185,8 +185,7 @@
 		<classes>
 			<class name="enwiam.ENWIAM100"></class>
 			<class name="enwiam.ENWIAM101"></class>
-	   <!-- <class name="enwiam.ENWIAM102"></class>
-			<class name="enwiam.ENWIAM103"></class>-->
+			<!-- <class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class> -->
 		</classes>
 	</test>
 
@@ -281,35 +280,54 @@
 			<class name="enwiam.ENWIAM019"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ContactCustomerSupportScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM52">
 			</class>
 		</classes>
 	</test>
-	
+
 	<test name="ForwardMergeScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM53">
 			</class>
 		</classes>
 	</test>
-	
+
 	<test name="ForwardMergeScenario002">
 		<classes>
 			<class name="enwiam.ENWIAM54">
 			</class>
-		</classes>	
+		</classes>
 	</test>
 
 	<test name="RandomMergeScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM55">
 			</class>
-		</classes>	
+		</classes>
 	</test>
-	
+
+	<test name="AutomatedMergeScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM56">
+			</class>
+		</classes>
+	</test>
+	<test name="AutomatedMergeScenario002">
+		<classes>
+			<class name="enwiam.ENWIAM57">
+			</class>
+		</classes>
+	</test>
+	<test name="ContactCustomerSupportScenarioENW001">
+		<classes>
+			<class name="enwiam.ENWIAM58">
+			</class>
+		</classes>
+	</test>
+
 
 	<!-- Profile -->
 
@@ -420,6 +438,14 @@
 			<class name="Profile.Profile53"></class>
 		</classes>
 	</test>
-
+	
+	<test name="Validate_Profile_image_upload">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<classes>
+			<class name="Profile.Profile69"></class>
+		</classes>
+	</test>
+	
 </suite>
 

@@ -83,9 +83,15 @@ public class ENWIAM0002 extends TestBase {
 
 		// Deleting the links for enwyogi3@yahoo.com
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName21"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName21"));
+			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("UserName21"));
 			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
+			
+			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}

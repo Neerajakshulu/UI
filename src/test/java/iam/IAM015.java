@@ -73,7 +73,7 @@ public class IAM015 extends TestBase {
 
 			String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			if (error_message1.contains("Sign up")) {
-				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
+				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@321");
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Neon12");
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();

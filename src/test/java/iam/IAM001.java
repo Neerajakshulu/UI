@@ -18,6 +18,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM001 extends TestBase {
 
@@ -67,8 +68,10 @@ public class IAM001 extends TestBase {
 
 			String email = createNewUser("duster", "man");
 			logger.info("Email Address : " + email);
-
-			if (!checkElementPresence("ul_name")) {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HELP_LINK);
+			
+			/*if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent reports
 				status = 2;// excel
@@ -76,9 +79,9 @@ public class IAM001 extends TestBase {
 						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
-			if (!checkElementPresence("help_link")) {
+			/*if (!checkElementPresence("help_link")) {
 
 				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
 																									// reports
@@ -86,7 +89,7 @@ public class IAM001 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
 
-			}
+			}*/
 			// Verify that profile image using below xpath is present or not
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));

@@ -4,15 +4,16 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -30,7 +31,7 @@ public class RCC010 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(),rowData.getTestcaseDescription()).assignCategory("RCC");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("RCC");
 	}
 
 	/**
@@ -54,55 +55,126 @@ public class RCC010 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-			String title= this.getClass().getSimpleName()+"_Group_"+ "_" + getCurrentTimeStamp();
-			String desc= this.getClass().getSimpleName()+"_Group_"+ RandomStringUtils.randomAlphanumeric(100);
+			String title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME010","USERPASSWORD010");
+			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			waitForAjax(ob);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
-			pf.getGroupsListPage(ob).createGroup(title,desc);
-			boolean result=pf.getGroupDetailsPage(ob).inviteMembers("Jyothi Sree");
-			if(result)
-		    test.log(LogStatus.PASS,"Invitation has been send to the Neon user");
+			pf.getGroupsListPage(ob).createGroup(title, desc);
+			test.log(LogStatus.PASS, "Group is created by the owner ");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Jyothi Sree");
+			if (result)
+				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
-		    test.log(LogStatus.FAIL,"Sending Invitation is failed due to user does not exist");
+				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
 			pf.getLoginTRInstance(ob).logOutApp();
-		
-			loginAs("INVITEUSER01","INVITEUSERPWD");
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("INVITEUSER01", "INVITEUSERPWD");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
-			result=pf.getGroupInvitationPage(ob).verifyingInvitations(title);
-		    if(result)
-			    test.log(LogStatus.PASS,"Member has recieved the invitation from group owner");
-				else
-			    test.log(LogStatus.FAIL,"Member has not recieved the invitation from group owner");
-		    
-		      pf.getLoginTRInstance(ob).logOutApp();
-		   
-         	    loginAs("USERNAME010","USERPASSWORD010");
-		    pf.getGroupsPage(ob).clickOnGroupsTab();
-		    pf.getGroupsListPage(ob).clickOnGroupTitle(title);
-		    pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-		    pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
-		    test.log(LogStatus.PASS,"Cancelation button is clicked");
-		    waitForElementTobeVisible(ob,By.cssSelector("button[class='wui-modal__close-btn']"),30);
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-            
+			// pf.getGroupsPage(ob).switchToInvitationTab();
+			result = pf.getGroupInvitationPage(ob).verifyingInvitations(title);
+			if (result)
+				test.log(LogStatus.PASS, "Member has recieved the invitation from group owner");
+			else
+				test.log(LogStatus.FAIL, "Member has not recieved the invitation from group owner");
+
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			test.log(LogStatus.PASS, "Owner has logged into appilication");
+			waitForAjax(ob);
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
+			test.log(LogStatus.PASS, "Owner navigate to groups details page");
+
+			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
+
+			pf.getBrowserActionInstance(ob).scrollToElement(
+					OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS);
+
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			BrowserWaits.waitTime(3);
+			test.log(LogStatus.PASS, "Cancelation Invitation  button is clicked");
+
+			// Verify Custom Messages and cancel button for Cancel Invitation Modal
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal(),
+					"Cancel Modal is displaying with Message");
+			pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
+
+			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
+
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+
+			// Checking Cross button is working for Cancel Invitation Modal
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
+			test.log(LogStatus.PASS, "X button is working fine for closing model");
+
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+
+			// Verify thet submitt button is working for Cancel Invitation Modal
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+			BrowserWaits.waitTime(2);
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList("Jyothi Sree"),
+					"Invitation is canceled by the owner of the group");
 			
 			
-			
-			
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("INVITEUSER01", "INVITEUSERPWD");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+
+			boolean isInvitationRemoved = pf.getGroupInvitationPage(ob).isInvitationRemoved(title);
+			try {
+				if (!isInvitationRemoved) {
+					throw new Exception("Invitation is not removed from Invitation tab of Invitee");
+				}
+
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Invitation is not removed from Invitation tab of Invitee");
+				ErrorUtil.addVerificationFailure(e);
+			}
+			test.log(LogStatus.PASS, "Invitation is not dispalying in invitation tab of Invitee");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			pf.getUtility(ob).deleteGroup(title);
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
@@ -120,7 +192,6 @@ public class RCC010 extends TestBase {
 			closeBrowser();
 		}
 	}
-
 
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP

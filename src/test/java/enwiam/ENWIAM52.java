@@ -28,9 +28,11 @@ public class ENWIAM52 extends TestBase {
 	static String followAfter = null;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent
+	 * Reports
 	 * 
-	 * @throws Exception , When Something unexpected
+	 * @throws Exception
+	 *             , When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -42,10 +44,11 @@ public class ENWIAM52 extends TestBase {
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
-	 * @throws Exception , When TR Login is not done
+	 * @throws Exception
+	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh14() throws Exception {
+	public void testcaseh12() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -59,13 +62,8 @@ public class ENWIAM52 extends TestBase {
 
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername09"));
-			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("sru_steam09"));
-			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
-				throw new Exception("Delete API Call failed");
-			}
 
-			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
@@ -89,7 +87,7 @@ public class ENWIAM52 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam09"),
 					LOGIN.getProperty("sru_steampw09"));
 			pf.getLoginTRInstance(ob).clickLogin();
-
+			test.log(LogStatus.PASS, "user has logged in with steam account");
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
 			pf.getHFPageInstance(ob).clickProfileImage();
@@ -105,7 +103,7 @@ public class ENWIAM52 extends TestBase {
 
 			test.log(LogStatus.INFO, "Steam account is made Neon active ");
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(2);
 
 			// Making the Social account Neon Active
 			try {
@@ -130,7 +128,7 @@ public class ENWIAM52 extends TestBase {
 
 				test.log(LogStatus.INFO, "Social account is made Neon active ");
 				pf.getLoginTRInstance(ob).logOutApp();
-				BrowserWaits.waitTime(5);
+				BrowserWaits.waitTime(2);
 				// Trying to Link the accounts
 				try {
 					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam09"),
@@ -184,10 +182,10 @@ public class ENWIAM52 extends TestBase {
 		}
 		BrowserWaits.waitTime(2);
 		closeBrowser();
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void validateNeonAccount(int accountCount,
-			String linkName) throws Exception {
+	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam09")));
@@ -202,8 +200,7 @@ public class ENWIAM52 extends TestBase {
 		}
 	}
 
-	private void validateAccounts(int accountCount,
-			String linkName) throws Exception {
+	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername09")));

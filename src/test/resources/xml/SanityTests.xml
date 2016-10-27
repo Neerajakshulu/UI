@@ -258,14 +258,14 @@
 			<class name="Profile.Profile2"></class>
 		</classes>
 	</test>
-	
-	<test name="Validate_Profile_image_upload">
+<!--  Removing from sanity due to saucelabs doesnot have permission to image from Git -->
+	<!-- <test name="Validate_Profile_image_upload">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<classes>
 			<class name="Profile.Profile69"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	 <!-- IAM test cases -->
 	 <test name="IAM002">

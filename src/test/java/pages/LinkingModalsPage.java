@@ -120,7 +120,7 @@ public class LinkingModalsPage extends TestBase {
 		String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 		createWatchList("public", newWatchlistName, "This is my test watchlist.");
 	}
-	
+
 	/**
 	 * Method to click on Not now button
 	 * 
@@ -133,7 +133,6 @@ public class LinkingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 	}
-	
 
 	public String getCustomerSupportMsg() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_MSG_XPATH);
@@ -153,5 +152,29 @@ public class LinkingModalsPage extends TestBase {
 	public void clickOnOkButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.OK_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.OK_BUTTON_CSS);
+	}
+
+	public int getWatchlistCount() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH);
+		String watchlistcount = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH).getText();
+
+		int WC = Integer.parseInt(watchlistcount);
+		return WC;
+
+	}
+
+	public void clickProfileToViewWatchList() throws Exception {
+
+		pf.getHFPageInstance(ob).clickProfileImage();
+		pf.getHFPageInstance(ob).clickProfileImage();
+		pf.getProfilePageInstance(ob).clickProfileLink();
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+	}
+
+	public void clickOnSignInWithFB() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
 	}
 }

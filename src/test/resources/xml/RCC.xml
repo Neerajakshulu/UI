@@ -11,6 +11,27 @@
 		</classes>
 	</test>
 	
+	<test name="RCC004">
+		<classes>
+			<class name="rcc.RCC004"></class>
+		</classes>
+	</test>
+	  <test name="RCC010">
+		<classes>
+			<class name="rcc.RCC010"></class>
+		</classes>
+	</test>
+	
+	<!-- Added by Chinna -->
+	<test name="article_Add_to_Group">
+		<parameter name="username" value="chinnareddy.putha@gmail.com" />
+		<parameter name="password" value="Neon@123" />
+		<classes>
+			<class name="rcc.RCC111"></class>
+		</classes>
+	</test>
+	
+	
 	
 </suite>
 

@@ -16,9 +16,9 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM021 extends TestBase {
 
@@ -55,14 +55,21 @@ public class IAM021 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			login();
-			BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			BrowserWaits.waitTime(4);
-			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
+//			BrowserWaits.waitTime(3);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+//
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
+//			BrowserWaits.waitTime(4);
+//			ob.findElement(By.xpath(OR.getProperty("account_email_preference_link"))).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS.toString())));
+			
 
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
@@ -80,9 +87,11 @@ public class IAM021 extends TestBase {
 			ob.close();
 			ob.switchTo().window(al.get(0));
 			ob.navigate().back();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
 			logout();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Preference page not opened");// extent reports
 			status = 2;// excel
