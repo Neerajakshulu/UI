@@ -325,5 +325,11 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("Record not found in the group list");
 
 	}
+	public void validateGroupMembersInGroupDetailPage() throws Exception
+	{   
+		  clickMembersTab();
+	
+		
+	}
 
 }
