@@ -839,8 +839,10 @@ public class TestBase {
 
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
 			
-			if(text.contains(email)){
-				test.log(LogStatus.PASS, "Account activation email sent");
+			Assert.assertTrue(text.contains(email));
+			//test.log(LogStatus.PASS, "Account activation email sent");
+			/*if(text.contains(email)){
+				test.log(LogStatus.INFO, "Account activation email sent");
 			}else{
 				if (test != null) {
 					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
@@ -850,7 +852,7 @@ public class TestBase {
 				}
 			}
 
-			/*if (!StringContains(text, email)) {
+			if (!StringContains(text, email)) {
 				if (test != null) {
 					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
 																					// reports

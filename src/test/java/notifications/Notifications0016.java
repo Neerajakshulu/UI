@@ -136,9 +136,11 @@ public class Notifications0016 extends TestBase {
 			// String
 			// actual=elements.findElement(By.cssSelector(OR.getProperty("tr_notification_recommended_people_follow_username_css"))).getText();
 			// System.out.println("Text : "+actual);
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+//			BrowserWaits.waitTime(4);
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
+//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			ProfilePage page = new ProfilePage(ob);
 			BrowserWaits.waitTime(3);
 			page.clickProfileLink();
