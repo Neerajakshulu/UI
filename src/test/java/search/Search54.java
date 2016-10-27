@@ -64,17 +64,23 @@ public class Search54 extends TestBase {
 			ob.navigate().to(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 
-			// login using TR credentials
+			// login using TR credentials  autocompleteTile
 			login();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("autocompleteTile")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("autocompleteTile")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("autocompleteTile")), 30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			Thread.sleep(2000);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card__header-left ng-binding']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
@@ -86,7 +92,7 @@ public class Search54 extends TestBase {
 			}
 
 			List<WebElement> tileTags = ob
-					.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
+					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()));
 			int count = 0;
 			for (int i = 0; i < tileTags.size(); i++) {
 				if (tileTags.get(i).getText().equals("ARTICLE"))

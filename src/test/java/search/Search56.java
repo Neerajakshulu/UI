@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search56 extends TestBase {
 
@@ -71,7 +72,7 @@ public class Search56 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			waitForElementTobeVisible(ob, By.cssSelector("div[class='wui-card__header-left ng-binding']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
@@ -83,7 +84,7 @@ public class Search56 extends TestBase {
 			}
 
 			List<WebElement> tileTags = ob
-					.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
+					.findElements(By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())));
 			int count = 0;
 			for (int i = 0; i < tileTags.size(); i++) {
 
