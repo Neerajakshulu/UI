@@ -112,32 +112,31 @@ public class RCC010 extends TestBase {
 
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			BrowserWaits.waitTime(3);
-			test.log(LogStatus.PASS, "Cancelation button is clicked");
-			//pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
-			
-			//Verify Custom Messages  and cancel button for Cancel Invitation Modal
-			pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal();
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal(),"Cancel Modal is displaying with Message");
+			test.log(LogStatus.PASS, "Cancelation Invitation  button is clicked");
+
+			// Verify Custom Messages and cancel button for Cancel Invitation Modal
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal(),
+					"Cancel Modal is displaying with Message");
 			pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
-			
+
 			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
-			
+
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
 					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
-			
-			//Checking Cross button is working for Cancel Invitation Modal
+
+			// Checking Cross button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
-				test.log(LogStatus.PASS, "X button is working fine for closing model");
-				
+			test.log(LogStatus.PASS, "X button is working fine for closing model");
+
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
 					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
-			
-			//Verify thet submitt button is working for Cancel Invitation Modal
+
+			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
 			test.log(LogStatus.PASS, "Invitation is canceled by the owner of the group");
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();

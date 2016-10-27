@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
+import base.TestBase;
 
 /**
  * This class contains all the method related to account page
@@ -291,14 +291,13 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
 
-
 	}
 
 	public void clickOnCloseButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
 	}
 
 	public void clickOnSubmitButtonINCancelInviTationModal() throws Exception {
@@ -308,21 +307,22 @@ public class GroupDetailsPage extends TestBase {
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
 
 	}
+
 	public boolean verifyingCustomMsgOnCancelModal() throws Exception {
-		String expectedmsg="Are you sure you want to Cancel this invitation?";
-		String msgheader="Cancel invitation";
+		String expectedmsg = "Are you sure you want to Cancel this invitation?";
+		String msgheader = "Cancel invitation";
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
-		String msg=ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS.toString())).getText();
-		String headertext=ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS.toString())).getText();
-		System.out.println("custom msg"+msg);
-		System.out.println("header msg"+headertext);
-		if(expectedmsg.equalsIgnoreCase(msg)&&msgheader.equalsIgnoreCase(headertext))
-		{
-		   return true;
+		String msg = ob.findElement(
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS.toString()))
+				.getText();
+		String headertext = ob.findElement(
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS.toString()))
+				.getText();
+		if (expectedmsg.equalsIgnoreCase(msg) && msgheader.equalsIgnoreCase(headertext)) {
+			return true;
 		}
 		throw new Exception("Record not found in the group list");
-		
 
 	}
 
