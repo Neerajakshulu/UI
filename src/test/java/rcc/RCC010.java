@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -61,6 +62,7 @@ public class RCC010 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			waitForAjax(ob);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -111,32 +113,31 @@ public class RCC010 extends TestBase {
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Cancelation button is clicked");
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
-			pf.getBrowserActionInstance(ob).click(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
-
-			test.log(LogStatus.PASS, "Cancel button is working fine for closing modal");
+			//pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
+			
+			//Verify Custom Messages  and cancel button for Cancel Invitation Modal
+			pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal();
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal(),"Cancel Modal is displaying with Message");
+			pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
+			
+			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
+			
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
 					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+			
+			//Checking Cross button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
-			pf.getBrowserActionInstance(ob).click(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
-
-			test.log(LogStatus.PASS, "X button is working fine for closing model");
+			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
+				test.log(LogStatus.PASS, "X button is working fine for closing model");
+				
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
 					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+			
+			//Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
-			pf.getBrowserActionInstance(ob).click(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
-
+			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
+			test.log(LogStatus.PASS, "Invitation is canceled by the owner of the group");
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();

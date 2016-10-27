@@ -597,6 +597,8 @@ public enum OnePObjectMap {
 		RCC_DEFAULT_SELECTED_INVITATION_TAB_TEXT_CSS("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] a"),
 		RCC_GROUP_TITLE_CSS("div[class='wui-content-title wui-content-title--research-card-title ng-binding']"),
 		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
+		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
+		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
 		
 		 
 	;
