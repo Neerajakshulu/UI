@@ -222,7 +222,35 @@
 			<class name="enwiam.ENWIAM55">
 			</class>
 		</classes>	
-	</test> -->
+	</test> 
+	
+	<test name="AutomatedMergeScenario001">
+		<classes>
+			<class name="enwiam.ENWIAM56">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="AutomatedMergeScenario002">
+		<classes>
+			<class name="enwiam.ENWIAM57">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ContactCustomerSupportScenarioENW001">
+		<classes>
+			<class name="enwiam.ENWIAM58">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="ContactCustomerSupportScenarioENW001">
+		<classes>
+			<class name="enwiam.ENWIAM59">
+			</class>
+		</classes>
+	</test>-->
 	
 	
 </suite>
