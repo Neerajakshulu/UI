@@ -28,7 +28,7 @@ public class Authoring83 extends TestBase {
 	static boolean skip = false;
 	static int status = 1;
 
-	static int time = 30;
+	static int time = 90;
 	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
@@ -74,7 +74,7 @@ public class Authoring83 extends TestBase {
 
 			String title = RandomStringUtils.randomAlphabetic(200);
 			pf.getProfilePageInstance(ob).enterPostTitle(title);
-			String content = RandomStringUtils.randomAlphabetic(10000);
+			String content = RandomStringUtils.randomAlphabetic(20000);
 			pf.getProfilePageInstance(ob).enterPostContent(content);
 			BrowserWaits.waitTime(time);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
