@@ -597,7 +597,11 @@ public enum OnePObjectMap {
 		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
 		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
 		RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS("h3[class='wui-title wui-title--invite-spacing']"),
-		
+		RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary wui-mini-btn--research-card']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_VERIFICATION_TEXT_CSS("div[class='modal-body wui-modal__body']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--primary ng-binding']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS("div[class='modal-header wui-modal__header'] button[class='wui-modal__close-btn']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
