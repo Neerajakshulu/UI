@@ -141,13 +141,11 @@ public class ENWIAM55 extends TestBase {
 
 						// Verifying that Profile name is same as winning
 						// account after merging
-						Assert.assertEquals(firstAccountProfileName, winingAccountProfileName);
+						Assert.assertEquals(winingAccountProfileName,firstAccountProfileName);
 						test.log(LogStatus.PASS, "Random Merge is happened");
 
 						if (winingAccountProfileName.contains(firstAccountProfileName)) {
 							test.log(LogStatus.PASS, "Winning account is steam account");
-						} else if (winingAccountProfileName.contains(secondAccountProfileName)) {
-							test.log(LogStatus.PASS, "Winning account is facebook account");
 						} else throw new Exception("Winning account is cannot be determined");
 						
 						pf.getHFPageInstance(ob).clickProfileImage();
