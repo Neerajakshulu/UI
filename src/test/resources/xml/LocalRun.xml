@@ -337,6 +337,12 @@
 		</classes>
 	</test>
 
+    <test name="ENWAutomatedMerge1">
+		<classes>
+			<class name="enwiam.ENWIAM080">
+			</class>
+		</classes>
+	</test>
 	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
