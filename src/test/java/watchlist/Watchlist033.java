@@ -79,7 +79,7 @@ public class Watchlist033 extends TestBase {
 
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys("neonfbook@gmail.com");
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys("1Pproject");
-			ob.findElement(By.name(OR.getProperty("FB_page_login_button"))).click();
+			ob.findElement(By.xpath(OR.getProperty("FB_page_login_button1"))).click();
 
 			// 3)Create a new watchlist.
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
