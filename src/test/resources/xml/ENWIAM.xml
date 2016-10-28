@@ -251,7 +251,7 @@
 		</classes>
 	</test>
 	
-	<test name="ContactCustomerSupportScenarioENW001">
+	<test name="RandomMergeScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM59">
 			</class>
