@@ -15,6 +15,7 @@ public enum OnePObjectMap {
 	RID_LOGIN_SUBMIT_BTN_XPATH("//*[@id='submitImage']/img"),
 	RID_ENDNOTE_LINK_XPATH("//a[@id='header_link_endnote']"),
 	
+	
 	ENW_CONTINUE_DIOLOG_BOX_XPATH("//*[@id='connect']"),
 	ENW_CONTINUE_DIALOG_BOX_XPATH("//div[@id='noticeDialog']"),
 	ENW_HEADER_XPATH("//h1[@class='ne-nav-logo']"),

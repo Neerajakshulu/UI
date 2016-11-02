@@ -23,6 +23,7 @@ import base.TestBase;
 public class GroupDetailsPage extends TestBase {
 
 	PageFactory pf;
+	
 
 	public GroupDetailsPage(WebDriver ob) {
 		this.ob = ob;
