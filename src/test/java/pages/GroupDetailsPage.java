@@ -53,18 +53,24 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public int getAttachedFilesCounts() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
-		WebElement count = pf.getBrowserActionInstance(ob).getElement(
-				OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
+		WebElement count = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS);
 		int attachedFilesCount = Integer.parseInt(count.getText());
 		return attachedFilesCount;
 	}
 
 	public int getMembersCounts() throws Exception {
+		int membersCount = 0;
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
-		int membersCount = Integer.parseInt(count.getText());
+		logger.info("Members" + count.getText() + "values");
+		if (count.getText().equals("")) {
+			// test.log(LogStatus.PASS, "Memeber count is zero");
+		} else {
+			membersCount = Integer.parseInt(count.getText());
+		}
 		return membersCount;
 	}
 
@@ -72,8 +78,8 @@ public class GroupDetailsPage extends TestBase {
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS.toString()), 60);
-		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
-				OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
 				we.click();
@@ -85,15 +91,15 @@ public class GroupDetailsPage extends TestBase {
 
 	public void clickOnEditButton() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
 
 	}
 
 	public void clickOnAttachFileButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS);
 	}
 
@@ -101,8 +107,8 @@ public class GroupDetailsPage extends TestBase {
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS.toString()), 60);
-		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
-				OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
 				we.click();
@@ -117,8 +123,8 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_CSS);
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
-				OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 	}
 
 	public void clickPatentstab() throws Exception {
@@ -147,13 +153,15 @@ public class GroupDetailsPage extends TestBase {
 
 	private WebElement getRecordCard(String recordTitle) throws Exception {
 
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()), 60);
-		List<WebElement> invitationList = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS
-				.toString()));
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()),
+				60);
+		List<WebElement> invitationList = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_CSS.toString()));
 		String actTitle;
 		for (WebElement we : invitationList) {
-			actTitle = we.findElement(
-					By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString())).getText();
+			actTitle = we
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS.toString()))
+					.getText();
 			if (actTitle.equalsIgnoreCase(recordTitle)) {
 				return we;
 			}
@@ -163,8 +171,8 @@ public class GroupDetailsPage extends TestBase {
 
 	public String getGroupTitle() {
 		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()), 30);
-		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS
-				.toString()));
+		List<WebElement> list = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()));
 		String title = "";
 		for (WebElement we : list) {
 
@@ -195,7 +203,8 @@ public class GroupDetailsPage extends TestBase {
 		return isFound;
 	}
 
-	public boolean selectUserFromList(boolean isFound, String membersName) throws InterruptedException {
+	public boolean selectUserFromList(boolean isFound,
+			String membersName) throws InterruptedException {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
 				.sendKeys(membersName);
 
@@ -224,6 +233,7 @@ public class GroupDetailsPage extends TestBase {
 		clickOnSendInvitation();
 		return isFound;
 	}
+
 	public void clickOnSendInvitation() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS.toString()), 30);
@@ -241,8 +251,9 @@ public class GroupDetailsPage extends TestBase {
 	public void cancelPendingInvitations(String username) throws Exception {
 		waitForAjax(ob);
 		WebElement groupCard = getPendingRecords(username);
-		groupCard.findElement(
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString()))
+		groupCard
+				.findElement(By.cssSelector(
+						OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString()))
 				.click();
 
 	}
@@ -251,12 +262,13 @@ public class GroupDetailsPage extends TestBase {
 
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()), 60);
-		List<WebElement> pendinglist = ob.findElements(By
-				.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()));
+		List<WebElement> pendinglist = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()));
 		String username1 = null;
 		for (WebElement we : pendinglist) {
-			username1 = we.findElement(
-					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_NAMES_CSS.toString())).getText();
+			username1 = we
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_NAMES_CSS.toString()))
+					.getText();
 			if (username.equalsIgnoreCase(username1)) {
 				return we;
 			}
@@ -266,8 +278,8 @@ public class GroupDetailsPage extends TestBase {
 
 	public void clickOnDeleteButtonInConfirmationMoadl() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 
 	}
@@ -277,15 +289,15 @@ public class GroupDetailsPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()),
 				30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString())).clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString())).sendKeys(
-				Message);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()))
+				.sendKeys(Message);
 
 	}
 
 	public void validateArtcileInGroupDetailsPage(String groupTitle) throws Exception {
 		clickArticlesTab();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
-				OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS);
 		String groupArticleTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS).getText();
 		logger.info("Article Title in Group Details page-->" + groupArticleTitle);
@@ -296,11 +308,12 @@ public class GroupDetailsPage extends TestBase {
 
 	public String getPendingInvitationMessage() throws Exception {
 
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS);
 
-		String otherMemberJoinGroup = ob.findElement(
-				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS.toString()))
+		String otherMemberJoinGroup = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS.toString()))
 				.getText();
 		return otherMemberJoinGroup;
 
@@ -309,14 +322,14 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnCancelButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
 
 	}
 
 	public void clickOnCloseButtonINCancelInviTationModal() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
 	}
@@ -324,21 +337,23 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnSubmitButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
 
 	}
 
 	public boolean verifyingCustomMsgOnCancelModal() throws Exception {
 		String expectedmsg = "Are you sure you want to Cancel this invitation?";
 		String msgheader = "Cancel invitation";
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
-		String msg = ob.findElement(
-				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS.toString()))
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+		String msg = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS.toString()))
 				.getText();
-		String headertext = ob.findElement(
-				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS.toString()))
+		String headertext = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS.toString()))
 				.getText();
 		if (expectedmsg.equalsIgnoreCase(msg) && msgheader.equalsIgnoreCase(headertext)) {
 			return true;
@@ -346,19 +361,20 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("Record not found in the group list");
 
 	}
-	public void validateGroupMembersInGroupDetailPage() throws Exception
-	{   
-		  clickMembersTab();
-	
-		
-	}
-	public String getGroupOwnerDetails() throws Exception {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
-		String name = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1)
-				.getText();
 
-		String role = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_ROLE_CSS).get(1)
-				.getText();
+	public void validateGroupMembersInGroupDetailPage() throws Exception {
+		clickMembersTab();
+
+	}
+
+	public String getGroupOwnerDetails() throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
+		String name = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS)
+				.get(1).getText();
+
+		String role = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_ROLE_CSS)
+				.get(1).getText();
 
 		return name.trim() + ", " + role.trim();
 
@@ -375,21 +391,24 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnGroupOwnerName() throws Exception {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1).click();
 	}
-	
-	public  boolean verifyUserInPendingInvitationList(String username) throws Exception {
+
+	public boolean verifyUserInPendingInvitationList(String username) throws Exception {
 		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS.toString()),30);
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS.toString()), 30);
 		List<WebElement> invitationList = ob
 				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()));
-		if(invitationList.size()==0)
+		if (invitationList.size() == 0)
 			return true;
 		else
 			return false;
-		
-	}public void clickonLeaveGroupButton() throws Exception {
+
+	}
+
+	public void clickonLeaveGroupButton() throws Exception {
 
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
@@ -427,7 +446,8 @@ public class GroupDetailsPage extends TestBase {
 		try {
 			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
 					.isDisplayed();
-			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS.toString()))
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS.toString()))
 					.isDisplayed();
 			return true;
 		} catch (NoSuchElementException e) {
@@ -438,7 +458,8 @@ public class GroupDetailsPage extends TestBase {
 
 	public boolean clickonCancelButtononPopup() throws Exception {
 		waitForAjax(ob);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString())).click();
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
+				.click();
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
 				10);
@@ -457,8 +478,9 @@ public class GroupDetailsPage extends TestBase {
 		waitForAjax(ob);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS.toString()), 60);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS.toString())).click();
-		
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS.toString()))
+				.click();
+
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
 				10);
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
@@ -471,15 +493,12 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("leave group button is not displayed in group details page");
 
 	}
+
 	public void clickOnLeaveGroupButtoninPopUp() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
 
 	}
-	
-	
-	
 
 }

@@ -109,4 +109,26 @@ public class GroupsPage extends TestBase {
 		}
 
 	}
+
+	public void declineInvitation() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS);
+	}
+
+	public void clickOnInvitationTab() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS);
+		ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString())).get(1)
+				.click();
+	}
+
+	public void listOfPendingInvitaions() throws Exception {
+		BrowserWaits.waitTime(3);
+		List<WebElement> groupsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
+		for (int i = 0; i < groupsList.size(); i++) {
+			declineInvitation();
+		}
+	}
 }

@@ -201,5 +201,19 @@ public class GroupsListPage extends TestBase {
 		}
 		return false;
 	}
+	
+	public boolean checkAddedUserDetails(String title, String userName) throws Exception {
+		List<WebElement> userDetails=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
+		String actTitle=null;
+		boolean status=false;
+		for (int i=0;i<userDetails.size();i++) {
+			actTitle = userDetails.get(i).getText();
+			if (actTitle.contains(title) && actTitle.contains(userName)) {
+				status=true;
+				break;
+			}
+		}
+		return status;
+	}
 
 }

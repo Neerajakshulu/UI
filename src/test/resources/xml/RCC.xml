@@ -32,7 +32,14 @@
 	</test>
 	
 	
-	
+	 <test name="RCC002">
+		<classes>
+			<class name="rcc.RCC002"></class>
+			<class name="rcc.RCC007"></class>
+			<class name="rcc.RCC008"></class>
+			<class name="rcc.RCC012"></class>
+		</classes>
+	</test>
 </suite>
 
 

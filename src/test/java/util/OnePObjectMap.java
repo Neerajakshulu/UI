@@ -602,6 +602,7 @@ public enum OnePObjectMap {
 		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),
 		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--primary ng-binding']"),
 		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS("div[class='modal-header wui-modal__header'] button[class='wui-modal__close-btn']"),
+		RCC_GROUP_LIST_PAGE_ADDED_USER_DETAILS_CSS("div[class='wui-card__body-content']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
