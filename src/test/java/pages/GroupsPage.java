@@ -19,7 +19,6 @@ import util.OnePObjectMap;
 public class GroupsPage extends TestBase {
 
 	PageFactory pf;
-	
 
 	public GroupsPage(WebDriver ob) {
 		this.ob = ob;

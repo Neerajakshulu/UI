@@ -27,7 +27,6 @@ public class RCC007 extends TestBase {
 	 * @throws Exception, When Something unexpected
 	 */
 
-	
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);

@@ -23,7 +23,6 @@ import util.OnePObjectMap;
 public class GroupsListPage extends TestBase {
 
 	PageFactory pf;
-	
 
 	public GroupsListPage(WebDriver ob) {
 		this.ob = ob;

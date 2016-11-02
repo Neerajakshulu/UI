@@ -5,7 +5,6 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-
 	<test name="RCC001">
 		<classes>
 			<class name="rcc.RCC001"></class>
