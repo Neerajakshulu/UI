@@ -89,8 +89,8 @@ public class IAM007 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			BrowserWaits.waitTime(2);
 			
-			ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).click();
-			BrowserWaits.waitTime(1);
+			//ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).click();
+			//BrowserWaits.waitTime(1);
 //			List<WebElement> list=ob.findElements(By.cssSelector("i[class='fb_logo img sp_O7TpWD6wqPl sx_cd36fd']"));
 			String str=ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).getText();
 			logger.info("Text : "+str);
