@@ -57,6 +57,8 @@ public class RCC010 extends TestBase {
 		try {
 			String title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
+			String expectedInfoText = "Are you sure you want to Cancel this invitation?";
+			String label = "Cancel invitation";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -115,28 +117,20 @@ public class RCC010 extends TestBase {
 			test.log(LogStatus.PASS, "Cancelation Invitation  button is clicked");
 
 			// Verify Custom Messages and cancel button for Cancel Invitation Modal
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyingCustomMsgOnCancelModal(),
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(label,expectedInfoText,"Submit"),
 					"Cancel Modal is displaying with Message");
 			pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
 
 			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
 
 			// Checking Cross button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
-
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
-					OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
 			BrowserWaits.waitTime(2);
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList("Jyothi Sree"),
 					"Invitation is canceled by the owner of the group");

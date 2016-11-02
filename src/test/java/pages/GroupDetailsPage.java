@@ -62,16 +62,15 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public int getMembersCounts() throws Exception {
-		int membersCount = 0;
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		logger.info("Members" + count.getText() + "values");
 		if (count.getText().equals("")) {
-			// test.log(LogStatus.PASS, "Memeber count is zero");
+			return 0;
 		} else {
-			membersCount = Integer.parseInt(count.getText());
+			return Integer.parseInt(count.getText());
 		}
-		return membersCount;
+
 	}
 
 	public void clickOnDeleteButton() throws Exception {
@@ -321,44 +320,50 @@ public class GroupDetailsPage extends TestBase {
 
 	public void clickOnCancelButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
+				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CANCEL_BUTTON_CSS);
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 
 	}
 
 	public void clickOnCloseButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CLOSE_BUTTON_CSS);
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 	}
 
 	public void clickOnSubmitButtonINCancelInviTationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
+				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_SUBMIT_BUTTON_CSS);
+				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 
 	}
 
-	public boolean verifyingCustomMsgOnCancelModal() throws Exception {
-		String expectedmsg = "Are you sure you want to Cancel this invitation?";
-		String msgheader = "Cancel invitation";
+	public boolean verifyConfirmationModalContents(String modalLabel, String modalInfoText, String primaryButton)
+			throws Exception {
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CANCEL_INVITATION_MODAL_CSS);
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 		String msg = ob
-				.findElement(
-						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS.toString()))
+				.findElement(By
+						.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_INFO_TEXT_CONFIRMATION_MODAL_CSS.toString()))
 				.getText();
 		String headertext = ob
-				.findElement(
-						By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS.toString()))
+				.findElement(By
+						.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_LABEL_TEXT_CONFIRMATION_MODAL_CSS.toString()))
 				.getText();
-		if (expectedmsg.equalsIgnoreCase(msg) && msgheader.equalsIgnoreCase(headertext)) {
+
+		String primaryButtonName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS).getText();
+		String secondaryButtonName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS).getText();
+		if (modalLabel.equalsIgnoreCase(msg) && modalInfoText.equalsIgnoreCase(headertext)
+				&& primaryButtonName.equalsIgnoreCase(primaryButton)
+				&& secondaryButtonName.equalsIgnoreCase("Cancel")) {
 			return true;
-		}
-		throw new Exception("Record not found in the group list");
+		} else
+			return false;
 
 	}
 
