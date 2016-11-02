@@ -760,22 +760,7 @@ public class ProfilePage extends TestBase {
 				.get(0));
 	}
 
-	public boolean validateProfanityWordsMaskedForPostTitle(String profanityWord) throws InterruptedException {
-		BrowserWaits.waitTime(4);
-		String title = ob.findElement(
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_TITLE_CSS.toString())).getAttribute(
-				"value");
-
-		return (!title.contains(profanityWord) && title.contains("**"));
-	}
-
-	public boolean validateProfanityWordsMaskedForPostContent(String profanityWord) throws InterruptedException {
-		BrowserWaits.waitTime(4);
-		String title = ob.findElement(
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString())).getText();
-
-		return (!title.contains(profanityWord) && title.contains("**"));
-	}
+	
 
 	/**
 	 * Method to click on publish button in post creation modal

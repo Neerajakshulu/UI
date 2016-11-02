@@ -2,6 +2,8 @@ package Authoring;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -56,6 +58,7 @@ public class Authoring88 extends TestBase {
 
 		try {
 			String postString = "<strong>test</strong> mackprofanity";
+			List<String> profanityWord=Arrays.asList(new String[]{"mackprofanity","<strong>","</strong>"});
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -101,18 +104,17 @@ public class Authoring88 extends TestBase {
 
 			}
 
-			String expErrorMsg = "Masked words, unsupported formatting and tags are not allowed in posts.";
+			
 			jsClick(ob, ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString())));
 			BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-
+			pf.getProfilePageInstance(ob).clickPostsTab();
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			try {
-				Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(expErrorMsg));
-				test.log(LogStatus.PASS, "Spam check is applied on the draft post while publishing it");
-				pf.getProfilePageInstance(ob).clickOnPostCancelButton();
-				pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
-
+				
+				Assert.assertFalse(pf.getpostRVPageInstance(ob).validateProfanityWordsMaskedForPostTitle(profanityWord,test));
+				test.log(LogStatus.PASS, "Profanity words are masked for post title");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Spam check is not applied on the draft post while publishing it");
 				test.log(LogStatus.INFO, "Error--->" + t);

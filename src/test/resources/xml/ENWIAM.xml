@@ -54,6 +54,12 @@
 			<class name="enwiam.ENWIAM008"></class>
 		</classes>
 	</test> -->
+	<!--<test name="ENWAutomatedMerge1">
+		<classes>
+			<class name="enwiam.ENWIAM080">
+			</class>
+		</classes>
+	</test>-->
 
 	<test name="Validate_email_address_in_enw_registration_page">
 		<classes>
@@ -245,7 +251,7 @@
 		</classes>
 	</test>
 	
-	<test name="ContactCustomerSupportScenarioENW001">
+	<test name="RandomMergeScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM59">
 			</class>

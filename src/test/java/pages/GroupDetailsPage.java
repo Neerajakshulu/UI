@@ -1,10 +1,14 @@
 package pages;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import util.BrowserWaits;
 import util.OnePObjectMap;
@@ -385,7 +389,97 @@ public class GroupDetailsPage extends TestBase {
 		else
 			return false;
 		
+	}public void clickonLeaveGroupButton() throws Exception {
+
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
+				60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("leave group button is not displayed in group details page");
+
 	}
+
+	public void verifyLeaveGroupPopupMessage(ExtentTest test) throws Exception {
+		String Originalmessage = "Are you sure you want to leave this group?";
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_VERIFICATION_TEXT_CSS.toString()), 20);
+		String Originaltext = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_VERIFICATION_TEXT_CSS.toString()))
+				.getText();
+		if (Originaltext.equalsIgnoreCase(Originalmessage))
+			test.log(LogStatus.PASS, "Popup message verified successfully");
+		else
+			test.log(LogStatus.FAIL, "Popup message not verified :(");
+	}
+
+	public boolean verifyleavegroupPopupButtons() throws Exception {
+		waitForAjax(ob);
+
+		try {
+			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
+					.isDisplayed();
+			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS.toString()))
+					.isDisplayed();
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+
+	}
+
+	public boolean clickonCancelButtononPopup() throws Exception {
+		waitForAjax(ob);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString())).click();
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
+				10);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				return true;
+			}
+		}
+		throw new Exception("leave group button is not displayed in group details page");
+
+	}
+
+	public boolean clickonCloseButtononPopup() throws Exception {
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS.toString()), 60);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS.toString())).click();
+		
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
+				10);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				return true;
+			}
+		}
+		throw new Exception("leave group button is not displayed in group details page");
+
+	}
+	public void clickOnLeaveGroupButtoninPopUp() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
+
+	}
+	
+	
 	
 
 }

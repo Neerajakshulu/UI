@@ -958,4 +958,43 @@ public class PostRecordViewPage extends TestBase {
 		return "";
 	}
 	
+	public boolean validateProfanityWordsMaskedForPostTitle(List<String> profanityWord, ExtentTest test) throws Exception {
+		boolean result= false;
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		
+		String postTitle = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
+		for(String str:profanityWord){
+			
+			if(postTitle.contains(str)){
+				test.log(LogStatus.INFO, "Profanity filter not working for: "+str);
+				result=true;
+			}
+	
+		}
+
+		return result && postTitle.contains("**");
+	}
+
+	public boolean validateProfanityWordsMaskedForPostContent(List<String> profanityWord, ExtentTest test) throws Exception {
+		boolean result= false;
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS);
+		
+		String postcontent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS).getText();
+
+		for(String str:profanityWord){
+			
+			if(postcontent.contains(str)){
+				test.log(LogStatus.INFO, "Profanity filter not working for: "+str);
+				result=true;
+			}
+	
+		}
+
+		return result && postcontent.contains("**");
+	}
+	
 }

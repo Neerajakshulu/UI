@@ -51,7 +51,7 @@ public class GroupInvitationPage extends TestBase {
 	}
 
 	public void acceptInvitation(String groupTitle) throws Exception {
-
+        waitForAjax(ob);
 		WebElement groupCard = getRecordCard(groupTitle);
 		groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS.toString()))
 				.click();

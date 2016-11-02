@@ -507,7 +507,10 @@ public enum OnePObjectMap {
 	NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS("a[class='feedback-link__anchor ng-binding']"),
 	NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS("a[class='feedback-link__anchor']"),
 	NEON_ACCOUNT_PAGE_USER_NAME_CSS("span[class='ng-binding']"),
-	
+	ENW_NOTNOW_XPATH("//a[@ng-click='vm.callSkipLinking()']"), 
+	ENW_PROFILE_HEADER_XPATH("//span[@class='ne-nav-logo__text ne-nav-logo__text--tr']"),
+	NEON_PROFILE_HEADER_XPATH("//span[@class='ne-logo__text ne-logo__text--tr']"),
+	ENW_STEAM_PASSWORD_XPATH("//input[@class='wui-input-with-label__input ng-pristine ng-untouched ng-invalid ng-invalid-required']"),
 	
 	// #######RCC#############
 		RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
@@ -594,7 +597,11 @@ public enum OnePObjectMap {
 		RCC_GROUP_DETAILS_PAGE_CUSTOM_MSG_OF_CANCEL_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
 		RCC_GROUP_DETAILS_PAGE_HEADER_MSG_OF_CANCEL_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
 		RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS("h3[class='wui-title wui-title--invite-spacing']"),
-		
+		RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary wui-mini-btn--research-card']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_VERIFICATION_TEXT_CSS("div[class='modal-body wui-modal__body']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--primary ng-binding']"),
+		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CLOSE_BUTTON_CSS("div[class='modal-header wui-modal__header'] button[class='wui-modal__close-btn']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

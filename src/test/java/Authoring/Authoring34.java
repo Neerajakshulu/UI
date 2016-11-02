@@ -2,6 +2,8 @@ package Authoring;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -97,29 +99,17 @@ public class Authoring34 extends TestBase {
 
 	}
 
-	@Test(dependsOnMethods = "testInitiatePostCreation", dataProvider = "getTestData")
-	public void testMinMaxLengthValidation(String profanityWord,
-			String errorMessage) throws Exception {
+	@Test(dependsOnMethods = "testInitiatePostCreation")
+	public void testMinMaxLengthValidation() throws Exception {
+		List<String> profanityWord=Arrays.asList(new String[]{"finger fuck","mackprofanity","bastard","doosh fatass","mother fuck","bloody bitch"});
 		pf.getProfilePageInstance(ob).enterPostTitle("Test");
 		test.log(LogStatus.INFO, "Entered Post title");
-		pf.getProfilePageInstance(ob).enterPostContent(profanityWord);
+		pf.getProfilePageInstance(ob).enterPostContent(profanityWord.toString());
 		test.log(LogStatus.INFO, "Entered profanity word in Post Content : " + profanityWord);
 		pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+		pf.getProfilePageInstance(ob).clickFirstPostTitle();
 		try {
-			Assert.assertTrue(pf.getProfilePageInstance(ob).validatePostErrorMessage(errorMessage));
-			test.log(LogStatus.PASS, "Proper error message is displayed for profanity check for post content");
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Proper error message is not displayed for profanity check for post content");
-			test.log(LogStatus.INFO, "Error--->" + t);
-			ErrorUtil.addVerificationFailure(t);
-			status = 2;
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
-
-		}
-
-		try {
-			Assert.assertTrue(pf.getProfilePageInstance(ob).validateProfanityWordsMaskedForPostContent(profanityWord));
+			Assert.assertFalse(pf.getpostRVPageInstance(ob).validateProfanityWordsMaskedForPostTitle(profanityWord,test));
 			test.log(LogStatus.PASS, "Profanity words are masked for post content");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Profanity words are masked for post content");
@@ -134,8 +124,6 @@ public class Authoring34 extends TestBase {
 
 	@Test(dependsOnMethods = "testMinMaxLengthValidation")
 	public void logOut() throws Exception {
-		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
-		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 		pf.getLoginTRInstance(ob).logOutApp();;
 		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
@@ -168,8 +156,4 @@ public class Authoring34 extends TestBase {
 
 	}
 
-	@DataProvider
-	public Object[][] getTestData() {
-		return TestUtil.getData(authoringxls, "PostProfanityWordCheckTest");
-	}
 }
