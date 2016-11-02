@@ -70,7 +70,7 @@ public class RCC011 extends TestBase{
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
-			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User");
+			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User_RCC");
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
 			else
@@ -104,6 +104,9 @@ public class RCC011 extends TestBase{
 			ob.navigate().to(host);
 			loginAs("GPUSERNAME11","GPUSERPASSWORD11");
 			test.log(LogStatus.PASS,"User2 has login with valid credentials");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+			//pf.getGroupsPage(ob).switchToInvitationTab();
 			try{
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
 				test.log(LogStatus.PASS,"User2 has accepted the invitation");
