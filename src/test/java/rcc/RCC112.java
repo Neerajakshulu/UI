@@ -155,7 +155,7 @@ public class RCC112 extends TestBase {
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
 			
-			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
+			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Posts tab");
 			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
 			
 			
