@@ -384,14 +384,12 @@ public class SearchResultsPage extends TestBase {
 	public String getPostsTitle() throws Exception {
 		clickOnPostTab();
 		String post = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS).get(0).findElement(By.cssSelector("div[class^='wui-content-title']")).getText();
+				.getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS).get(0)
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()))
+				.getText();
 		logger.info("Post Title-->"+post);
 		return post;
-		
-		//div[class='wui-card__content'] div[class^='wui-content-title']
 	}
-	
-	
 	
 	public void addDocumentToGroup(String groupTitle) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
