@@ -139,8 +139,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickAttachedFilesTab() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_TAB_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_ATTACHED_FILES_TAB_CSS);
 		waitForAjax(ob);
 	}
 
@@ -302,6 +302,27 @@ public class GroupDetailsPage extends TestBase {
 		logger.info("Article Title in Group Details page-->" + groupArticleTitle);
 		if (!groupTitle.equalsIgnoreCase(groupArticleTitle)) {
 			throw new Exception("Added to Group Article not present in Group Details Article tab");
+		}
+	}
+	
+	public void validatePatentInGroupDetailsPage(String patentTitle) throws Exception {
+		clickPatentstab();
+		boolean isPatentRecordPresent=false;
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS);
+		List<WebElement> patentTabDetails= pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS);
+		
+		for(WebElement patentTabDetail:patentTabDetails) {
+			logger.info("Patent Title in Group Details page-->" + patentTabDetail.getText());
+			if(patentTabDetail.getText().equalsIgnoreCase(patentTitle)) {
+				logger.info("Patent Title Present in Group Details page");
+				isPatentRecordPresent=true;
+				break;
+			  } 
+			}
+		if(!isPatentRecordPresent) {
+			throw new Exception("Patent Record is not present in Group Details Page");
 		}
 	}
 

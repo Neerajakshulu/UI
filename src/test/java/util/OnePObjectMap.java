@@ -334,7 +334,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS("div[class='modal-content ng-scope']"),
 	//Added by Chinna on 25th-Oct-2016
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
-	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button"),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] "),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] ul"),
 	SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS("div[class='wui-card__header--before-text wui-card__header']"),
@@ -533,7 +533,7 @@ public enum OnePObjectMap {
 		RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS(""),
 		RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS("div[class='research-group-card__footer'] a"),
 		RCC_GROUPDETAILS_MEMBERS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.members.list']"),
-		RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.linked-items']"),
+		RCC_GROUPDETAILS_ATTACHED_FILES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.linked-items']"),
 		RCC_GROUPDETAILS_POSTS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.posts']"),
 		RCC_GROUPDETAILS_PATENTS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.patents']"),
 		RCC_GROUPDETAILS_ARTICLES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.articles']"),
@@ -544,7 +544,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS(""),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_NAMES_CSS("group-pending-invite div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS("button[class='wui-icon-btn']"),
-		RCC_GROUPINVITATIONS_INVITATION_CARD_CSS("div[class='wui-card__content']"),
+		RCC_GROUPINVITATIONS_INVITATION_CARD_CSS("div[classRCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS='wui-card__content']"),
 		RCC_GROUPINVITATIONSFULL_INVITATION_CARD_CSS("div[class='wui-card']"),
 		RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding ng-scope']"),                                          
 		RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS("button[class^='wui-btn wui-btn--secondary']"),
@@ -581,6 +581,7 @@ public enum OnePObjectMap {
 		RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS("div[class='modal-content'] button[class='wui-btn wui-btn--primary ng-binding']"),
 		
 		RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
+		RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-patents']"),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS("group-pending-invite div[class='wui-card__content']"),
 		
 		RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS("div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),

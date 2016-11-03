@@ -362,12 +362,22 @@ public class SearchResultsPage extends TestBase {
 		addDocumentToGroup(groupTitle);
 	}
 	
+	//Get first article search results title
 	public String getArticleTitle() throws Exception {
 		clickOnArticleTab();
 		String article = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS).getText();
 		logger.info("Article Title-->"+article);
 		return article;
+	}
+	
+	//Get first Patent search results title
+	public String getPatentsTitle() throws Exception {
+		clickOnPatentsTab();
+		String patent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS).getText();
+		logger.info("Patent Title-->"+patent);
+		return patent;
 	}
 	
 	
