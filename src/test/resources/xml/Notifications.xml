@@ -34,11 +34,11 @@
 			<class name="notifications.Notifications0006"></class>
 		</classes>
 	</test>
-	<test name="Test F7">
+	<!-- <test name="Test F7">
 		<classes>
 			<class name="notifications.Notifications0007"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="Test F8">
 		<classes>
 			<class name="notifications.Notifications0008"></class>
@@ -62,6 +62,8 @@
 
 	<test name="Test F21">
 		<classes>
+			<class name="notifications.Notifications0007"></class>
+			<class name="notifications.Notifications0020"></class>
 			<class name="notifications.Notifications0021"></class>
 		</classes>
 	</test>
@@ -100,11 +102,11 @@
 	</test>
 	<!-- <test name="Test F19"> <classes> <class name="notifications.Notifications0019"></class> 
 		</classes> </test> -->
-	<test name="Test F20">
+	<!-- <test name="Test F20">
 		<classes>
 			<class name="notifications.Notifications0020"></class>
 		</classes>
-	</test>
+	</test> -->
 
 
 

@@ -11,11 +11,11 @@
 		</classes>
 	</test>
 
-	<test name="Neon_registraiton_and_reset_password2" preserve-order="true">
+	<!-- <test name="Neon_registraiton_and_reset_password2" preserve-order="true">
 		<classes>
 			<class name="iam.IAM016"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Neon_registraiton_and_reset_password3" preserve-order="true">
 		<classes>
@@ -213,11 +213,11 @@
 		</classes>
 	</test>
 	
-	<test name="Validate_change_password_account_page">
+	<!-- <test name="Validate_change_password_account_page">
 		<classes>
 			<class name="iam.IAM038"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- <test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
