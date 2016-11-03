@@ -453,6 +453,9 @@ public enum OnePObjectMap {
 	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[1]"),
 	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[2]"),
 	LINK_ACCOUNT_BUTTON_ACCOUNT_PAGE_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
+	LOCKED__XPATH("(//label[contains(text(),'Make primary')])[1]"),
+	LOCKED_MSG_XPATH("//h2[contains(text(),'Your account has been locked.')]"),
+	LOCKED_OK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary']"),
 	
 	//Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
