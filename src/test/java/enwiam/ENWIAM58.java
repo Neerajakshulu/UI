@@ -170,7 +170,8 @@ public class ENWIAM58 extends TestBase {
 				if (actual_msg.contains("We're sorry. We are unable to link your accounts."))
 					test.log(LogStatus.PASS,
 							"Accounts cannot be merged and contact customer support message is displayed");
-				pf.getLinkingModalsInstance(ob).clickOnOkButton();
+				//pf.getLinkingModalsInstance(ob).clickOnOkButton();
+				
 			}
 
 			catch (Throwable t) {

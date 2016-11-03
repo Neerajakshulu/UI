@@ -3,6 +3,7 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -67,7 +68,6 @@ public class ENWIAM56 extends TestBase {
 				throw new Exception("Delete API Call failed");
 			}
 
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
@@ -120,10 +120,10 @@ public class ENWIAM56 extends TestBase {
 
 					for (int j = 1; j <= watchlistCount; j++) {
 						logger.info("Creating " + j + " Watchlist");
-						pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();			
+						pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 					}
 					test.log(LogStatus.PASS, "Social account is made Neon Active");
-					
+
 				} catch (Throwable t) {
 					test.log(LogStatus.FAIL, "Unable to create 10 watchlists");// extent
 					ErrorUtil.addVerificationFailure(t);
@@ -151,9 +151,9 @@ public class ENWIAM56 extends TestBase {
 
 						// Verifying that Profile name is same as winning
 						// account after merging
-						Assert.assertEquals(winingAccountProfileName,secondAccountProfileName);
+						Assert.assertEquals(winingAccountProfileName, secondAccountProfileName);
 						test.log(LogStatus.PASS, "Automated Merge is happened");
-						
+
 						if (winingAccountProfileName.contains(secondAccountProfileName)) {
 							test.log(LogStatus.PASS, "Winning account is facebook account");
 						} else
@@ -161,8 +161,14 @@ public class ENWIAM56 extends TestBase {
 
 						pf.getHFPageInstance(ob).clickProfileImage();
 						pf.getHFPageInstance(ob).clickProfileImage();
-						pf.getProfilePageInstance(ob).clickProfileLink();
-						pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+						// pf.getProfilePageInstance(ob).clickProfileLink();
+						waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
+						ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
+
+						BrowserWaits.waitTime(4);
+
+						pf.getBrowserActionInstance(ob)
+								.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 						int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
 						System.out.println(WinningAccount_WatclistCount);
 						if (WinningAccount_WatclistCount == watchlistCount) {
@@ -172,10 +178,10 @@ public class ENWIAM56 extends TestBase {
 
 						else {
 
-							test.log(LogStatus.FAIL, "User is not able to see the same watchlist count in Social account");
+							test.log(LogStatus.FAIL,
+									"User is not able to see the same watchlist count in Social account");
 						}
-						
-						
+
 					}
 
 					catch (Throwable t) {
@@ -228,7 +234,7 @@ public class ENWIAM56 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}

@@ -169,6 +169,17 @@ public class ENWIAM080 extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 
 				}
+				pf.getHFPageInstance(ob).clickProfileImage();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				// pf.getProfilePageInstance(ob).clickProfileLink();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
+				ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
+
+				BrowserWaits.waitTime(3);
+
+				pf.getBrowserActionInstance(ob)
+						.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+
 				int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
 				System.out.println(WinningAccount_WatclistCount);
 				if (WinningAccount_WatclistCount == watchlistCount) {
