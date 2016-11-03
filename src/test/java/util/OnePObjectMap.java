@@ -612,7 +612,16 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_MEMBERS_NAME_CSS("group-member div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 		RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS("button[class='wui-btn wui-btn--secondary']"),
 		RCC_GROUP_DETAILS_PAGE_MEM_LIST_MSG_CSS("h3[class='wui-title wui-title--rcc-spacing']"),
-		
+		RCC_GROUPDETAILS_PATENT_RECORD_CARD_CSS("group-details-patents div[class='wui-card__content']"),
+		RCC_GROUPDETAILS_POST_RECORD_CARD_CSS("group-details-posts div[class='wui-card__content']"),
+		RCC_GROUPDETAILS_ARTICLE_RECORD_CARD_CSS("group-details-articles div[class='wui-card__content']"),
+		RCC_GROUPDETAILS_RECORD_CARD_TITLE_CSS("div[class*='wui-content-title'] a"),
+		RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS("div[class='wui-card__footer-content'] button[class*='delete-group-item']"),
+		RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS("div[class='wui-card__footer-content'] button[ng-click*='attachDriveDocument']"),
+		RCC_GROUPDETAILS_POST_CONTENT_CSS(""),
+		RCC_GROUPDETAILS_RECORD_PUBLICATION_CSS(""),
+		RCC_GROUPDETAILS_RECORD_AUTHORS_CSS(""),
+		RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS(""),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
