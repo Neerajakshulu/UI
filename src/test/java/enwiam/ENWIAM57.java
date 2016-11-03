@@ -3,6 +3,7 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -62,7 +63,7 @@ public class ENWIAM57 extends TestBase {
 
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername13"));
-		
+
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -163,17 +164,27 @@ public class ENWIAM57 extends TestBase {
 						} else
 							throw new Exception("Winning account is cannot be determined");
 
-						pf.getLinkingModalsInstance(ob).clickProfileToViewWatchList();
+						pf.getHFPageInstance(ob).clickProfileImage();
+						pf.getHFPageInstance(ob).clickProfileImage();
+						// pf.getProfilePageInstance(ob).clickProfileLink();
+						waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Neon_GROUP_BUTTON_XPATH.toString()), 30);
+						ob.findElement(By.xpath(OnePObjectMap.Neon_GROUP_BUTTON_XPATH.toString())).click();
+
+						BrowserWaits.waitTime(4);
+
+						pf.getBrowserActionInstance(ob)
+								.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 						int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
 						System.out.println(WinningAccount_WatclistCount);
 						if (WinningAccount_WatclistCount == watchlistCount) {
 							test.log(LogStatus.PASS,
-									"User is able to see the same watchlist count in profile page in Steam account as in Neon");
+									"User is able to see the same watchlist count in profile page in Social account as in Neon");
 						}
 
 						else {
 
-							test.log(LogStatus.FAIL, "User is not able to see the same watchlist count in Steam account");
+							test.log(LogStatus.FAIL,
+									"User is not able to see the same watchlist count in Social account");
 						}
 					}
 
