@@ -511,6 +511,8 @@ public enum OnePObjectMap {
 	ENW_PROFILE_HEADER_XPATH("//span[@class='ne-nav-logo__text ne-nav-logo__text--tr']"),
 	NEON_PROFILE_HEADER_XPATH("//span[@class='ne-logo__text ne-logo__text--tr']"),
 	ENW_STEAM_PASSWORD_XPATH("//input[@class='wui-input-with-label__input ng-pristine ng-untouched ng-invalid ng-invalid-required']"),
+	NEON_OK_BUTTON_XPATH("//a[@class='ng-binding ng-scope']"),
+	
 	
 	// #######RCC#############
 		RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),

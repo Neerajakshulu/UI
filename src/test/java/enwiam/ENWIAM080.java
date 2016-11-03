@@ -172,8 +172,8 @@ public class ENWIAM080 extends TestBase {
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickProfileImage();
 				// pf.getProfilePageInstance(ob).clickProfileLink();
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.Neon_GROUP_BUTTON_XPATH.toString()), 30);
-				ob.findElement(By.xpath(OnePObjectMap.Neon_GROUP_BUTTON_XPATH.toString())).click();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
+				ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
 
 				BrowserWaits.waitTime(3);
 
