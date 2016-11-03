@@ -622,6 +622,13 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_RECORD_PUBLICATION_CSS(""),
 		RCC_GROUPDETAILS_RECORD_AUTHORS_CSS(""),
 		RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS(""),
+		
+		
+		RCC_GROUP_BUTTON_XPATH("//span[contains(text(),'Groups')]"), 
+		RCC_NEW_GROUP_BUTTON__CLICK_XPATH("//button[@class='wui-icon-btn wui-icon-btn--add-group']"),
+		RCC_ENTER_TEXT_XPATH("//div[@class='research-group-card__content']//input[@name='name']"),
+		RCC_ERROR_MSG_TEXT_XPATH("//label[@class='wui-input__error ng-scope']"),
+		RCC_DESC_MSG_TEXT_XPATH("(//div [@class='wui-content-title wui-content-title--research-card-title ng-binding'])[1]"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

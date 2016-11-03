@@ -2,6 +2,7 @@ package pages;
 
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -214,6 +215,68 @@ public class GroupsListPage extends TestBase {
 			}
 		}
 		return status;
+	}
+	public void ValidateSaveButtonDisabled(ExtentTest test) throws Exception {
+		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
+		String MinLenthMsg = ob.findElement(By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString())).getText();
+		String title2 = RandomStringUtils.randomAlphanumeric(1);
+		if (title2.length() == 1) {
+			if (MinLenthMsg.equalsIgnoreCase(ErrorMsg)) {
+				test.log(LogStatus.PASS,
+						"Error message 'Please provide a title for your group. (Minimum 2 characters)'is displayed correctly");
+				if (!ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()))
+						.isEnabled()) {
+					test.log(LogStatus.PASS, "'Save' button is disabled as minimum group name requirement is not met");
+
+				} else {
+					test.log(LogStatus.FAIL, "Save button is enabled.");
+
+				}
+
+			} else {
+				test.log(LogStatus.FAIL, "Error message is not displayed.");
+
+			}
+
+		}
+
+	}
+
+	public void ValidateDescLessThan500(ExtentTest test) throws Exception {
+		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText()
+				.length();
+		if (GroupLength <= 500) {
+
+			test.log(LogStatus.PASS,
+					" user is able to create a new Group with Group name and description of <= 500 characters.");
+		}
+
+		else {
+
+			test.log(LogStatus.FAIL,
+					"user is able to create a new Group with Group name and description of <= 500 characters.");
+		}
+	}
+
+	public void ValidateDescMoreThan500(int actualLength, int Desc500,ExtentTest test) throws Exception {
+		try {
+			Assert.assertNotEquals(actualLength, Desc500);
+			test.log(LogStatus.PASS,
+					" user is not able to create a new group with more than 500 characters in group description.");
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL,
+					"user is  able to create a new group with more than 500 characters in group description.");// extent
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+					.getSimpleName()
+					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+
+		}
+
 	}
 
 }
