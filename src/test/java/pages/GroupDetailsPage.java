@@ -304,18 +304,38 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public void validateArtcileInGroupDetailsPage(String groupTitle) throws Exception {
+	/**
+	 * Validate Article is present in Article Tab under Group details page
+	 * @param articleTitle
+	 * @throws Exception, When Article not present in Group details page
+	 */
+	public void validateArtcileInGroupDetailsPage(String articleTitle) throws Exception {
 		clickArticlesTab();
+		boolean isArticleRecordPresent=false;
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS);
-		String groupArticleTitle = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS).getText();
-		logger.info("Article Title in Group Details page-->" + groupArticleTitle);
-		if (!groupTitle.equalsIgnoreCase(groupArticleTitle)) {
-			throw new Exception("Added to Group Article not present in Group Details Article tab");
+		List<WebElement> articleTabDetails= pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS);
+		
+		for(WebElement articleTabDetail:articleTabDetails) {
+			pf.getBrowserActionInstance(ob).scrollToElement(articleTabDetail);
+			logger.info("Article Title in Group Details page-->" + articleTabDetail.getText());
+			if(articleTabDetail.getText().equalsIgnoreCase(articleTitle)) {
+				logger.info("Article Present in Group Details page");
+				isArticleRecordPresent=true;
+				break;
+			  } 
+			}
+		if(!isArticleRecordPresent) {
+			throw new Exception("Article Record is not present in Group Details Page");
 		}
 	}
 	
+	/**
+	 * Validate Post is present in Patent Tab under Group details page
+	 * @param articleTitle
+	 * @throws Exception, When Patent not present in Group details page
+	 */
 	public void validatePatentInGroupDetailsPage(String patentTitle) throws Exception {
 		clickPatentstab();
 		boolean isPatentRecordPresent=false;
@@ -325,6 +345,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS);
 		
 		for(WebElement patentTabDetail:patentTabDetails) {
+			pf.getBrowserActionInstance(ob).scrollToElement(patentTabDetail);
 			logger.info("Patent Title in Group Details page-->" + patentTabDetail.getText());
 			if(patentTabDetail.getText().equalsIgnoreCase(patentTitle)) {
 				logger.info("Patent Title Present in Group Details page");
@@ -334,6 +355,33 @@ public class GroupDetailsPage extends TestBase {
 			}
 		if(!isPatentRecordPresent) {
 			throw new Exception("Patent Record is not present in Group Details Page");
+		}
+	}
+	
+	/**
+	 * Validate Post is present in Patent Tab under Group details page
+	 * @param articleTitle
+	 * @throws Exception, When Post not present in Group details page
+	 */
+	public void validatePostInGroupDetailsPage(String postTitle) throws Exception {
+		clickPostsTab();
+		boolean isPostRecordPresent=false;
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_DETAILS_CSS);
+		List<WebElement> postTabDetails= pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPDETAILS_POSTS_TAB_DETAILS_CSS);
+		
+		for(WebElement postTabDetail:postTabDetails) {
+			pf.getBrowserActionInstance(ob).scrollToElement(postTabDetail);
+			logger.info("Post Title in Group Details page-->" + postTabDetail.getText());
+			if(postTabDetail.getText().equalsIgnoreCase(postTitle)) {
+				logger.info("Post Title Present in Group Details page");
+				isPostRecordPresent=true;
+				break;
+			  } 
+			}
+		if(!isPostRecordPresent) {
+			throw new Exception("Post Record is not present in Group Details Page");
 		}
 	}
 

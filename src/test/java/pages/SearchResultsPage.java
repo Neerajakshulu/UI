@@ -380,6 +380,17 @@ public class SearchResultsPage extends TestBase {
 		return patent;
 	}
 	
+	//Get first Post search results title
+	public String getPostsTitle() throws Exception {
+		clickOnPostTab();
+		String post = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS).get(0).findElement(By.cssSelector("div[class^='wui-content-title']")).getText();
+		logger.info("Post Title-->"+post);
+		return post;
+		
+		//div[class='wui-card__content'] div[class^='wui-content-title']
+	}
+	
 	
 	
 	public void addDocumentToGroup(String groupTitle) throws Exception {

@@ -586,6 +586,7 @@ public enum OnePObjectMap {
 		
 		RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
 		RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-patents']"),
+		RCC_GROUPDETAILS_POSTS_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-posts']"),
 		RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS("group-pending-invite div[class='wui-card__content']"),
 		
 		RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS("div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),

@@ -231,6 +231,16 @@ public class BrowserAction extends TestBase {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, -250);");
 	}
+	
+	/**
+	 * Scroll to Element using WebElement
+	 * @param element
+	 */
+	public void scrollToElement(WebElement element) {
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
+	}
 
 	/**
 	 * Method to click on the specified element using java script executor.

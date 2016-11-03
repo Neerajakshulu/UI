@@ -115,18 +115,23 @@ public class RCC111 extends TestBase {
 	 *             When TR Login screen not displayed
 	 */
 	@Test(dependsOnMethods="createGroup")
-	public void addDocumentToGroupFromSearchResultsPage() throws Exception {
+	@Parameters("documentTitle")
+	public void addDocumentToGroupFromSearchResultsPage(String documentTitle) throws Exception {
 
 		test.log(LogStatus.INFO, "Add Article/Patent/Post to the group ");
 		try {
 			test.log(LogStatus.INFO, "Search for Article/Patent/Post");
-			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("test");
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(documentTitle);
 			test.log(LogStatus.INFO, "Add Article into Group");
 			String articleTitle=pf.getSearchResultsPageInstance(ob).getArticleTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
 			
 			test.log(LogStatus.INFO, "Add Patent into Group");
 			String patentTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
+			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			
+			test.log(LogStatus.INFO, "Add Post into Group");
+			String postTitle=pf.getSearchResultsPageInstance(ob).getPostsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
 			
 			
@@ -140,6 +145,9 @@ public class RCC111 extends TestBase {
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
 			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			
+			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
 			
 			
 			test.log(LogStatus.INFO, "Delete Created Group");

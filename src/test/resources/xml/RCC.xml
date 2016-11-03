@@ -36,6 +36,7 @@
 	<test name="article_Add_to_Group">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
 		<parameter name="password" value="Neon@123" />
+		<parameter name="documentTitle" value="test"/>
 		<classes>
 			<class name="rcc.RCC111"></class>
 		</classes>
