@@ -4,13 +4,16 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -56,6 +59,8 @@ public class RCC011 extends TestBase{
 		try {
 			String title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
+			String expectedInfoText = "Are you sure you want to remove this person from the group?";
+			String label = "Remove from the group?";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -70,7 +75,7 @@ public class RCC011 extends TestBase{
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
-			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User");
+			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User_RCC");
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
 			else
@@ -104,6 +109,9 @@ public class RCC011 extends TestBase{
 			ob.navigate().to(host);
 			loginAs("GPUSERNAME11","GPUSERPASSWORD11");
 			test.log(LogStatus.PASS,"User2 has login with valid credentials");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+			//pf.getGroupsPage(ob).switchToInvitationTab();
 			try{
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
 				test.log(LogStatus.PASS,"User2 has accepted the invitation");
@@ -111,14 +119,106 @@ public class RCC011 extends TestBase{
 				if(count==2)
 					test.log(LogStatus.PASS,"Members count in incremented ");
 			}
-			
+					
 			catch(Exception e){
 				test.log(LogStatus.FAIL, "Invitation is not present in the invitation tab of user2");
 				ErrorUtil.addVerificationFailure(e);
 			}
+			 pf.getGroupDetailsPage(ob).clickMembersTab();
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Jyothi Sree"));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
+			test.log(LogStatus.PASS,"2 members are present in the group");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
+			test.log(LogStatus.PASS, "Owner navigate to groups details page");
+			pf.getGroupDetailsPage(ob).clickMembersTab();
+			pf.getBrowserActionInstance(ob).scrollToElement(
+					OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS);
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Jyothi Sree"));
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
+			test.log(LogStatus.PASS,"Same  members are present in the group owner page");
+			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
+			BrowserWaits.waitTime(3);
+			test.log(LogStatus.PASS, "Remove button is clicked for a memeber");
 			
-			
+			// Verify Custom Messages and cancel button for Cancel Invitation Modal
+						Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(label,expectedInfoText,"Remove"),
+								"Cancel Modal is displaying with Message");
+						pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
 
+			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
+			int count=pf.getGroupDetailsPage(ob).getMembersCounts();
+						if(count==2)
+				test.log(LogStatus.PASS,"Members count in dispalaying correctly ");
+			else
+				test.log(LogStatus.PASS,"Members count in notdisplaying correctly ");
+
+			// Checking Cross button is working for Cancel Invitation Modal
+			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
+			BrowserWaits.waitTime(3);
+			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
+			test.log(LogStatus.PASS, "X button is working fine for closing model");
+			pf.getGroupDetailsPage(ob).clickMembersTab();
+			 count=pf.getGroupDetailsPage(ob).getMembersCounts();
+			if(count==2)
+				test.log(LogStatus.PASS,"Members count in displaying correctly ");
+			else
+				test.log(LogStatus.PASS,"Members count in notdisplaying correctly ");
+
+			// Verify thet submitt button is working for Cancel Invitation Modal
+			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
+			BrowserWaits.waitTime(3);
+			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
+			pf.getGroupDetailsPage(ob).clickMembersTab();
+			int aftercount=pf.getGroupDetailsPage(ob).getMembersCounts();
+			if(aftercount==1)
+				test.log(LogStatus.PASS,"Members count in decreased after removing the member from group ");
+			else
+				test.log(LogStatus.PASS,"Members count in not displaying correctly after removing the member from group ");
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
+			test.log(LogStatus.PASS,"Member is removed from the group in owner group details page");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("INVITEUSER01", "INVITEUSERPWD");
+			test.log(LogStatus.PASS,"User has login with valid credentials");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			waitForAjax(ob);
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
+			pf.getGroupDetailsPage(ob).clickMembersTab();
+			 aftercount=pf.getGroupDetailsPage(ob).getMembersCounts();
+			if(aftercount==1)
+				test.log(LogStatus.PASS,"Members count in decreased after removing the member from group ");
+			else
+				test.log(LogStatus.PASS,"Members count in not displaying correctly after removing the member from group ");
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
+			test.log(LogStatus.PASS,"Member is removed from the group in members group details page");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			pf.getUtility(ob).deleteGroup(title);
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			
+          
 }
 		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");

@@ -4,6 +4,12 @@
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
+	
+	  <test name="RCC010">
+		<classes>
+			<class name="rcc.RCC010"></class>
+		</classes>
+	</test>
 
 	<test name="RCC001">
 		<classes>
@@ -16,9 +22,9 @@
 			<class name="rcc.RCC004"></class>
 		</classes>
 	</test>
-	  <test name="RCC010">
+	  <test name="RCC011">
 		<classes>
-			<class name="rcc.RCC010"></class>
+			<class name="rcc.RCC011"></class>
 		</classes>
 	</test>
 	
@@ -32,7 +38,14 @@
 	</test>
 	
 	
-	
+	 <test name="RCC002">
+		<classes>
+			<class name="rcc.RCC002"></class>
+			<class name="rcc.RCC007"></class>
+			<class name="rcc.RCC008"></class>
+			<class name="rcc.RCC012"></class>
+		</classes>
+	</test>
 </suite>
 
 

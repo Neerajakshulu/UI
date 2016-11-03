@@ -124,6 +124,12 @@ public class RCC111 extends TestBase {
 			test.log(LogStatus.INFO, "Add Article into Group");
 			String articleTitle=pf.getSearchResultsPageInstance(ob).getArticleTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			
+			test.log(LogStatus.INFO, "Add Patent into Group");
+			String patentTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
+			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			
+			
 			test.log(LogStatus.INFO, "Go to Group Record Details Page");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsLink();
@@ -131,6 +137,14 @@ public class RCC111 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
 			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			
+			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			
+			
+			test.log(LogStatus.INFO, "Delete Created Group");
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

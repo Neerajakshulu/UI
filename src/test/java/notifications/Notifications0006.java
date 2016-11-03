@@ -116,7 +116,11 @@ public class Notifications0006 extends TestBase {
 				BrowserWaits.waitTime(4);
 				pf.getHFPageInstance(ob).clickOnHomeLink();
 				BrowserWaits.waitTime(4);
-				String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
+				//String text = ob.findElement(By.xpath(OR.getProperty("newPublicWatchListNotification"))).getText();
+				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString()), 30,
+						"user did not recevied notification");
+				String text = ob.findElement(By.xpath(OnePObjectMap.NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH.toString())).getText();
+				logger.info("Notification Text: " + text);
 				logger.info("Notification Text: " + text);
 				//String userName=ob.findElement(By.xpath("//div[@class='wui-card wui-card--watchlist-event']//a[@class='ng-binding ng-scope']")).getText();
 				try {
