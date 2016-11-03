@@ -135,7 +135,7 @@ public class Watchlist006 extends TestBase {
 			watchButton = ob.findElement(By.xpath("//button[contains(.,'Watching')]"));
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			BrowserWaits.waitTime(5);
-			// ob.navigate().refresh();
+			ob.navigate().refresh();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Checking if first document still exists in the watch list

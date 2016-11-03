@@ -7,7 +7,6 @@ package util;
  *
  */
 public enum OnePObjectMap {
-
 	// ENW side Added by srini
 	RID_LOGIN_BUTTON_XPATH("//img[@title='Login']"),
 	RID_LOGIN_EMAIL_XPATH("//input[@id='email']"),
@@ -620,6 +619,7 @@ public enum OnePObjectMap {
 		
 		NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
 		NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
+		NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH("//button[@name='__CONFIRM__']"),
 		
 		
 		 
