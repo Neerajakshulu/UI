@@ -323,6 +323,8 @@ public class GroupDetailsPage extends TestBase {
 				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 
 	}
 
@@ -331,6 +333,8 @@ public class GroupDetailsPage extends TestBase {
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 	}
 
 	public void clickOnSubmitButtonINCancelInviTationModal() throws Exception {
@@ -338,6 +342,8 @@ public class GroupDetailsPage extends TestBase {
 				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
 				.click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(
+				OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 
 	}
 
@@ -358,7 +364,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElement(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS).getText();
 		String secondaryButtonName = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS).getText();
-		if (modalLabel.equalsIgnoreCase(msg) && modalInfoText.equalsIgnoreCase(headertext)
+		if (modalLabel.equalsIgnoreCase(headertext) && modalInfoText.equalsIgnoreCase(msg)
 				&& primaryButtonName.equalsIgnoreCase(primaryButton)
 				&& secondaryButtonName.equalsIgnoreCase("Cancel")) {
 			return true;
@@ -505,5 +511,49 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_LEAVEGROUP_BUTTON_CSS);
 
 	}
+	
+	public WebElement getMembersCard(String username) throws Exception {
+
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_CARD_CSS.toString()), 60);
+		List<WebElement> nameslist = ob.findElements(By
+				.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_CARD_CSS.toString()));
+		String username1 = null;
+		for (WebElement we : nameslist) {
+			username1 = we.findElement(
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_NAME_CSS.toString())).getText();
+			if (username.equalsIgnoreCase(username1)) {
+				return we;
+			}
+		}
+		throw new Exception("User is not found in members list");
+	}
+	
+	public boolean checkMemberInList(String username) throws Exception {
+
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_CARD_CSS.toString()), 60);
+		List<WebElement> nameslist = ob.findElements(By
+				.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_CARD_CSS.toString()));
+		String username1 = null;
+		for (WebElement we : nameslist) {
+			username1 = we.findElement(
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_NAME_CSS.toString())).getText();
+			if (username.equalsIgnoreCase(username1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	 
+	 public void removeMembers(String username) throws Exception {
+			waitForAjax(ob);
+			WebElement groupCard = getMembersCard(username);
+			groupCard.findElement(
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS.toString()))
+					.click();
+
+		}
+	
 
 }
