@@ -997,4 +997,12 @@ public class PostRecordViewPage extends TestBase {
 		return result && postcontent.contains("**");
 	}
 	
+	public void validateDocumentInRecordViewPage(String documentTitle) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS);
+		String docTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
+		pf.getBrowserWaitsInstance(ob).waitUntilText(docTitle);
+		Assert.assertEquals(documentTitle, docTitle);
+	}
+	
 }

@@ -391,6 +391,19 @@ public class SearchResultsPage extends TestBase {
 		return post;
 	}
 	
+	//Click  Article or Patent
+	public void clickOnArticleOrPatentTitle(String articlePatentTitle) throws Exception {
+		List<WebElement> articles=pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS);
+		for(WebElement article:articles) {
+			if(article.getText().equalsIgnoreCase(articlePatentTitle)) {
+				article.click();
+				break;
+			}
+		}
+	}
+		
+		
 	public void addDocumentToGroup(String groupTitle) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);

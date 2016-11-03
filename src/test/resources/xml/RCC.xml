@@ -5,7 +5,7 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 	
-	  <test name="RCC010">
+	<test name="RCC010">
 		<classes>
 			<class name="rcc.RCC010"></class>
 		</classes>
@@ -32,13 +32,23 @@
 			<class name="rcc.RCC0001"></class>
 		</classes>
 	</test>
+	
 	<!-- Added by Chinna -->
-	<test name="article_Add_to_Group">
+	<test name="document_Add_to_Group_Search_Results_page">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="documentTitle" value="test"/>
 		<classes>
 			<class name="rcc.RCC111"></class>
+		</classes>
+	</test>
+	
+	<test name="document_Add_to_Group_from_Record_view_page">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="documentTitle" value="cancer"/>
+		<classes>
+			<class name="rcc.RCC112"></class>
 		</classes>
 	</test>
 	
