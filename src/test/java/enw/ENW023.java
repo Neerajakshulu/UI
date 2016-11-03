@@ -40,24 +40,16 @@ public class ENW023 extends TestBase {
 	public void testcaseENW023() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		//String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon";
-		String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
+		String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon";
+		String uRl="";
+		//String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
 		//String Expected_Result = "Sign in";
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("STEAMUSEREMAIL"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
-		}
 		try {
 			openBrowser();
 			maximizeWindow();
@@ -70,16 +62,26 @@ public class ENW023 extends TestBase {
 			BrowserWaits.waitTime(3);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials1(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-			ob.findElement(By.xpath("//div[@class='modal fade ng-isolate-scope wui-modal in']")).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
-			ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']")).click();
-			BrowserWaits.waitTime(5);
-			String uRl=ob.getCurrentUrl().toString();
-			logger.info(uRl);
-			loginToFacebook();			
-			
 			try {
+				if(ob.findElements(By.xpath(OnePObjectMap.NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH.toString())).size() > 1)
+				{
+					ob.findElement(By.xpath(OnePObjectMap.NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH.toString())).click();
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
+				uRl=ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).getText();
+				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
+				Assert.assertEquals(uRl, "Did you know?");
+				BrowserWaits.waitTime(5);
+				ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']")).click();
+				uRl=ob.getCurrentUrl().toString();
+				logger.info(uRl);
+			try {
+				Assert.assertEquals(uRl, expected_URL);
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");// extent

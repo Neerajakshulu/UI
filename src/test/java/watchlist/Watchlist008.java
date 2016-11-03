@@ -85,9 +85,10 @@ public class Watchlist008 extends TestBase {
 			logger.info("New WatchList Name : " + newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
-			// Searching for article
+			// Searching for Post
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
+			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob,
 					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
