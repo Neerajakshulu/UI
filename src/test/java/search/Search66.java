@@ -61,8 +61,8 @@ public class Search66 extends TestBase {
 
 			// login using TR credentials
 			login();
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("j");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);

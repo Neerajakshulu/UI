@@ -105,12 +105,13 @@ public class Search89 extends TestBase {
 
 			try {
 				waitForAjax(ob);
+				BrowserWaits.waitTime(3);
 				List<WebElement> detailsLink = ob
 						.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
 				jsClick(ob,
 						ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
-				BrowserWaits.waitTime(4);
+				     waitForAjax(ob);
 				if (detailsLink.size() != 0) {
 
 					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
