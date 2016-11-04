@@ -81,7 +81,7 @@ public class Watchlist005 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			logger.info("New WatchList Name : " + newWatchlistName);
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-
+			BrowserWaits.waitTime(4);
 		//	pf.getHFPageInstance(ob).searchForText("hello");
 			pf.getHFPageInstance(ob).searchForText("Technology");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
