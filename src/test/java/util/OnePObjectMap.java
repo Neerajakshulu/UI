@@ -623,6 +623,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_RECORD_PUBLICATION_CSS(""),
 		RCC_GROUPDETAILS_RECORD_AUTHORS_CSS(""),
 		RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS(""),
+		RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS(""),
 		
 		
 		RCC_GROUP_BUTTON_XPATH("//span[contains(text(),'Groups')]"), 
@@ -633,6 +634,12 @@ public enum OnePObjectMap {
 		RCC_GROUP_DETAIL_PAGE_SUPPORT_LINK_CSS("p[ng-show='vm.linkItems']"),
 		RCC_GROUP_DETAILS_PAGE_SHARE_LINK_CSS("div[class='research-group-card__content'] i[class='research-group-card__icon fa fa-users']"),
 		RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS("div[class='wui-descriptor wui-descriptor--user-profile-details']"),
+		
+		RCC_GROUP_DETAILS_PAGE_GROUP_TITLE_TEXT_CSS("div[class='research-group-card__text'] div"),
+		RCC_GROUP_DETAILS_PAGE_GROUP_DESC_TEXT_CSS("div[class='research-group-card__text'] p"),
+		
+		
+		
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

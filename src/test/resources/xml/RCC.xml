@@ -33,6 +33,12 @@
 		</classes>
 	</test>
 	
+	<test name="RCC013">
+		<classes>
+			<class name="rcc.RCC013"></class>
+		</classes>
+	</test>
+	
 	<!-- Added by Chinna -->
 	<test name="document_Add_to_Group_Search_Results_page">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />

@@ -91,13 +91,6 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("Delete button is not displaye in group details page");
 	}
 
-	public void clickOnEditButton() throws Exception {
-
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
-
-	}
 
 	public void clickOnAttachFileButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
@@ -854,5 +847,118 @@ public class GroupDetailsPage extends TestBase {
 		// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).getText();
 		return recordPageOwnerName.trim();
 	}
+	
+	
+	public void clickOnEditButton() throws Exception {
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Edit button is not displaye in group details page");
+	}
+
+
+
+public void updateGroupTitle(String newtitle) throws Exception {
+
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.clear();
+				we.sendKeys(newtitle);
+				return;
+			}
+		}
+		throw new Exception("Group title is not updated in group details page");
+	}
+
+	public void updateGroupDescription(String newdesc) throws Exception {
+		waitForAjax(ob);
+
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_DESCRIPTION_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_DESCRIPTION_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.clear();
+				we.sendKeys(newdesc);
+				return;
+			}
+		}
+		throw new Exception("Group Description is not updtaed in group details page");
+
+	}
+
+	public void clickOnSaveButton() throws Exception {
+		waitForAjax(ob);
+
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Submit button is not displayed in group details page");
+
+	}
+
+	public void updateGroupDetails(String newtitle,
+			String newdesc) throws Exception
+
+	{
+		updateGroupTitle(newtitle);
+		updateGroupDescription(newdesc);
+		clickOnSaveButton();
+
+	}
+
+	public boolean isGroupInfoUpdated(String newtitle,
+			String newdesc) throws Exception {
+		
+		waitForAjax(ob);
+		String uptitle=null,updesc=null;
+
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_GROUP_TITLE_TEXT_CSS.toString()), 60);
+		
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUP_DETAILS_PAGE_GROUP_TITLE_TEXT_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				uptitle=we.getText();
+			}
+		}
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_GROUP_DESC_TEXT_CSS.toString()), 60);
+		List<WebElement> list1 = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.RCC_GROUP_DETAILS_PAGE_GROUP_DESC_TEXT_CSS);
+		for (WebElement we : list1) {
+			if (we.isDisplayed()) {
+				updesc=we.getText();
+			}
+		}
+			if(newtitle.equalsIgnoreCase(uptitle)&&newdesc.equalsIgnoreCase(updesc))
+						return true;
+			else
+				return false;
+			
+		}
+				
 
 }
