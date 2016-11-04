@@ -13,18 +13,20 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
 public class RCC006 extends TestBase{
 
-	
-static int status = 1;
-	
+	static int status = 1;
+
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * 
 	 * @throws Exception, When Something unexpected
 	 */
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -32,11 +34,6 @@ static int status = 1;
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("RCC");
 	}
 
-	/**
-	 * Method for wait TR Login Screen
-	 * 
-	 * @throws Exception, When TR Login screen not displayed 
-	 */
 	@Test
 	public void testGroupCreation() throws Exception {
 
@@ -60,7 +57,7 @@ static int status = 1;
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCGROUPUSER1", "RCCGROUPUSER1PASS");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -76,46 +73,136 @@ static int status = 1;
 			}
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc),"Group decription is not matching in Group details page");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc),
+						"Group decription is not matching in Group details page");
 				test.log(LogStatus.PASS, "Group description in Group list page is displayed correctly");
-				Assert.assertTrue(pf.getGroupsListPage(ob).verifyItemsCount(0, title),"");
-				test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						t.getMessage());
+				test.log(LogStatus.FAIL, t.getMessage());
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			String expectedStr = pf.getGroupDetailsPage(ob).getGroupOwnerDetails();
-			pf.getGroupDetailsPage(ob).clickOnGroupOwnerName();
-			String actProfileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
-			actProfileData = actProfileData.substring(1, actProfileData.length() - 1);
+			boolean deleteButtonStatus = pf.getGroupDetailsPage(ob).checkDeleteButtonIsDisplay();
+			boolean editButtonStatus = pf.getGroupDetailsPage(ob).checkEditButtonIsDisplay();
+			boolean attachFileButtonStatus = pf.getGroupDetailsPage(ob).checkAttachFileButtonIsDisplay();
+			boolean inviteOtherButtonStatus = pf.getGroupDetailsPage(ob).checkInviteOthersButtonIsDisplay();
+			
+			
 			try {
-				Assert.assertEquals(actProfileData, expectedStr);
-				test.log(LogStatus.PASS, "Group owner profile details are displayed correctly in Groups list page");
+				Assert.assertTrue(deleteButtonStatus && editButtonStatus && attachFileButtonStatus && inviteOtherButtonStatus);
+				test.log(LogStatus.PASS, "All Button are Displayed.");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Group owner profile details mismatch");
+				test.log(LogStatus.FAIL, "All Button are not Displayed.");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			pf.getGroupsPage(ob).clickOnGroupsTab();
-			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
-			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers("testuser automation real");
-			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
-			pf.clearAllPageObjects();
+			
 
-			openBrowser();
-			clearCookies();
-			maximizeWindow();
-			ob.navigate().to(host);
-			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
+			/*if (deleteButtonStatus && editButtonStatus && attachFileButtonStatus && inviteOtherButtonStatus) {
+				test.log(LogStatus.PASS, "All Button are Displayed.");
+			} else {
+				test.log(LogStatus.FAIL, "All Button are not Displayed.");
+			}*/
+
+			String actualContent = "Note: You can link Google Drive items to share with others. For details on setting sharing rights visit Google's support center.";
+			String checkContent = pf.getGroupDetailsPage(ob).checkSupportCenter();
+			try {
+				Assert.assertTrue(actualContent.contains(checkContent));
+				test.log(LogStatus.PASS, "Support Center link is displayed successfylly");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Support Center link is not displayed successfylly");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+
+			int articleCount = pf.getGroupDetailsPage(ob).getArticlesCounts();
+			int patentCount = pf.getGroupDetailsPage(ob).getPatentsCounts();
+			int postCount = pf.getGroupDetailsPage(ob).getPostsCounts();
+			int attachFileCount = pf.getGroupDetailsPage(ob).getAttachedFilesCounts();
+			int membercount = pf.getGroupDetailsPage(ob).getMembersCounts();
+			
+			
+			try {
+				Assert.assertTrue(articleCount == 0 && patentCount == 0 && postCount == 0 && attachFileCount == 0 && membercount == 0);
+				test.log(LogStatus.PASS, "All counts are displayed successfylly");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "All counts are not displayed successfylly");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			
+			
+/*
+			if (articleCount == 0 && patentCount == 0 && postCount == 0 && attachFileCount == 0 && membercount == 0) {
+				test.log(LogStatus.PASS, "All counts are displayed successfylly");
+			} else {
+				test.log(LogStatus.FAIL, "All counts are not displayed successfylly");
+			}*/
+
+			
+			
+			boolean checkShareStatus = pf.getGroupDetailsPage(ob).checkShareStatus();
+			
+			try {
+				Assert.assertTrue(checkShareStatus);
+				test.log(LogStatus.PASS, "Shared Group is not displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Shared Group is displayed");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			
+			/*if (!checkShareStatus) {
+				test.log(LogStatus.PASS, "Shared Group is not displayed");
+			} else {
+				test.log(LogStatus.FAIL, "Shared Group is displayed");
+			}*/
+
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("RccGroup User2");
+			if (result) {
+				test.log(LogStatus.INFO, "User Invited sucessfully");
+			} else {
+				test.log(LogStatus.FAIL, "User not Invited");
+			}
+			
+			
+			String ownername = pf.getGroupDetailsPage(ob).getGroupOwnerDetails();
+			pf.getGroupDetailsPage(ob).clickOnGroupOwnerName();
+			String recordPageOwnerName = pf.getGroupDetailsPage(ob).getRecordPageOwnerName();
+			
+			
+			try {
+				Assert.assertTrue(ownername.contains(recordPageOwnerName));
+				test.log(LogStatus.PASS, "Owner name same");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Owner name not same");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			
+			/*
+			if (ownername.equals(recordPageOwnerName)) {
+				test.log(LogStatus.PASS, "Owner name same");
+			} else {
+				test.log(LogStatus.FAIL, "Owner name not same");
+			}*/
+
+			BrowserWaits.waitTime(2);
+			pf.getLoginTRInstance(ob).logOutApp();
+			loginAs("RCCGROUPUSER2", "RCCGROUPUSER2PASS");
+
+			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			pf.getGroupInvitationPage(ob).acceptInvitation(title);
+			pf.getGroupsPage(ob).acceptInvitation();
 
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupTitle(), title);
@@ -127,42 +214,108 @@ static int status = 1;
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try {
-				Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(desc, title));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc),
+						"Group decription is not matching in Group details page");
 				test.log(LogStatus.PASS, "Group description in Group list page is displayed correctly");
-				pf.getGroupsListPage(ob).verifyItemsCount(0, title);
-				test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Items count in Group list page in Group list page is not displayed correctly");
+				test.log(LogStatus.FAIL, t.getMessage());
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			expectedStr = pf.getGroupsListPage(ob).getGroupOwnerDetails(title);
-			pf.getGroupsListPage(ob).clickOnGroupOwnerName(title);
-			actProfileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
-			actProfileData = actProfileData.substring(1, actProfileData.length() - 1);
+			boolean checkLeaveGroupButtonStatus = pf.getGroupDetailsPage(ob).checkLeaveGroupButtonIsDisplay();
+			boolean attachFileButtonStatus1 = pf.getGroupDetailsPage(ob).checkAttachFileButtonIsDisplay();
+
+			if (checkLeaveGroupButtonStatus && attachFileButtonStatus1) {
+				test.log(LogStatus.PASS, "All Button are Displayed.");
+			} else {
+				test.log(LogStatus.FAIL, "All Button are not Displayed.");
+			}
+
+			String actualContent1 = "Note: You can link Google Drive items to share with others. For details on setting sharing rights visit Google's support center.";
+			String checkContent1 = pf.getGroupDetailsPage(ob).checkSupportCenter();
 			try {
-				Assert.assertEquals(actProfileData, expectedStr);
-				test.log(LogStatus.PASS, "Group owner profile details are displayed correctly in Groups list page");
+				Assert.assertTrue(actualContent1.contains(checkContent1));
+				test.log(LogStatus.PASS, "Support Center link is displayed successfylly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Group owner profile details mismatch");
+				test.log(LogStatus.FAIL, "Support Center link is not displayed successfylly");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
-			pf.clearAllPageObjects();
 
-			openBrowser();
-			clearCookies();
-			maximizeWindow();
-			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			int articleCount1 = pf.getGroupDetailsPage(ob).getArticlesCounts();
+			int patentCount1 = pf.getGroupDetailsPage(ob).getPatentsCounts();
+			int postCount1 = pf.getGroupDetailsPage(ob).getPostsCounts();
+			int attachFileCount1 = pf.getGroupDetailsPage(ob).getAttachedFilesCounts();
+			int membercount1 = pf.getGroupDetailsPage(ob).getMembersCounts();
+			
+			try {
+				Assert.assertTrue(articleCount1 == 0 && patentCount1 == 0 && postCount1 == 0 && attachFileCount1 == 0
+						&& membercount1 == 1);
+				test.log(LogStatus.PASS, "All counts are displayed successfylly");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "All counts are not displayed successfylly");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+
+			/*if (articleCount1 == 0 && patentCount1 == 0 && postCount1 == 0 && attachFileCount1 == 0
+					&& membercount1 == 1) {
+				test.log(LogStatus.PASS, "All counts are displayed successfylly");
+			} else {
+				test.log(LogStatus.FAIL, "All counts are not displayed successfylly");
+			}*/
+
+			boolean checkShareStatus1 = pf.getGroupDetailsPage(ob).checkShareStatus();
+			
+			
+			try {
+				Assert.assertFalse(checkShareStatus1);
+				test.log(LogStatus.PASS, "Shared Group is displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Shared Group is not displayed");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			
+			
+			
+			/*if (checkShareStatus1) {
+				test.log(LogStatus.PASS, "Shared Group is not displayed");
+			} else {
+				test.log(LogStatus.FAIL, "Shared Group is displayed");
+			}*/
+
+			String ownername1 = pf.getGroupDetailsPage(ob).getGroupOwnerDetails();
+			pf.getGroupDetailsPage(ob).clickOnGroupOwnerName();
+			String recordPageOwnerName1 = pf.getGroupDetailsPage(ob).getRecordPageOwnerName();
+			
+			try {
+				Assert.assertTrue(ownername1.contains(recordPageOwnerName1));
+				test.log(LogStatus.PASS, "Owner name same");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Owner name not same");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
+			/*if (ownername1.equals(recordPageOwnerName1)) {
+				test.log(LogStatus.PASS, "Owner name same");
+			} else {
+				test.log(LogStatus.FAIL, "Owner name not same");
+			}*/
+
+			BrowserWaits.waitTime(2);
+			pf.getLoginTRInstance(ob).logOutApp();
+			loginAs("RCCGROUPUSER1", "RCCGROUPUSER1PASS");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -179,14 +332,13 @@ static int status = 1;
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
-	}
-	
 
-	
-	
+	}
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
@@ -200,5 +352,4 @@ static int status = 1;
 		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}
-	
 }

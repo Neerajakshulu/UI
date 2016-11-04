@@ -152,9 +152,16 @@
 	</test>
 
 
-	<!-- <test name="IAM016"> <classes> <class name="iam.IAM016"></class> </classes> 
-		</test> <test name="IAM017"> <classes> <class name="iam.IAM017"></class> 
-		</classes> </test> -->
+	<!-- <test name="IAM016">
+	<classes>
+		<class name="iam.IAM016"></class>
+	</classes>
+</test> -->
+	<test name="IAM017">
+		<classes>
+			<class name="iam.IAM017"></class>
+		</classes>
+	</test>
 
 	<test name="Linkedin_cancle_button">
 		<classes>

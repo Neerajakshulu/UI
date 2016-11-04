@@ -149,6 +149,12 @@
 		</classes>
 	</test>
 
+	<test name="IAM016">
+		<classes>
+			<class name="iam.IAM016"></class>
+		</classes>
+	</test>
+
 	<test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM030"></class>
@@ -170,6 +176,12 @@
 	<test name="Liking_Social_to_Steam">
 		<classes>
 			<class name="iam.IAM033"></class>
+		</classes>
+	</test>
+
+	<test name="Validate_change_password_account_page">
+		<classes>
+			<class name="iam.IAM038"></class>
 		</classes>
 	</test>
 
@@ -315,21 +327,21 @@
 			</class>
 		</classes>
 	</test>
-	
+
 	<test name="AutomatedMergeScenario002">
 		<classes>
 			<class name="enwiam.ENWIAM57">
 			</class>
 		</classes>
 	</test>
-	
+
 	<test name="ContactCustomerSupportScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM58">
 			</class>
 		</classes>
 	</test>
-	
+
 	<test name="RandomMergeScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM59">
@@ -337,7 +349,7 @@
 		</classes>
 	</test>
 
-    <test name="ENWAutomatedMerge1">
+	<test name="ENWAutomatedMerge1">
 		<classes>
 			<class name="enwiam.ENWIAM080">
 			</class>
@@ -452,7 +464,7 @@
 			<class name="Profile.Profile53"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Validate_Profile_image_upload">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
@@ -460,6 +472,6 @@
 			<class name="Profile.Profile69"></class>
 		</classes>
 	</test>
-	
+
 </suite>
 
