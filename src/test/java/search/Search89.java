@@ -66,12 +66,14 @@ public class Search89 extends TestBase {
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Searching for patents
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("synthetic biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-			waitForAjax(ob);
+			BrowserWaits.waitTime(4);
+//			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+//			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
+//			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
+//			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 
@@ -104,16 +106,14 @@ public class Search89 extends TestBase {
 			}
 
 			try {
-				waitForAjax(ob);
-				BrowserWaits.waitTime(3);
 				List<WebElement> detailsLink = ob
 						.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
-				jsClick(ob,
-						ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
-				     waitForAjax(ob);
+				
+				BrowserWaits.waitTime(4);
 				if (detailsLink.size() != 0) {
-
+					jsClick(ob,
+							ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
 					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
 				} else {
 					test.log(LogStatus.FAIL,
@@ -128,6 +128,7 @@ public class Search89 extends TestBase {
 			}
 
 			try {
+				BrowserWaits.waitTime(5);
 				// Switching tab
 				List<String> tabs = new ArrayList<String>(ob.getWindowHandles());
 				ob.switchTo().window(tabs.get(1));

@@ -95,16 +95,16 @@ public class Notifications0005 extends TestBase {
 							&& text.contains(watchListDescription));
 					test.log(LogStatus.PASS, "User received notification with correct content");
 					pf.getLoginTRInstance(ob).logOutApp();
-					closeBrowser();
+//					closeBrowser();
 				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
+					//test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
 					test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 					ErrorUtil.addVerificationFailure(t);
 					logger.error(this.getClass().getSimpleName() + "--->" + t);
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
-					closeBrowser();
+//					closeBrowser();
 				}
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
@@ -118,6 +118,7 @@ public class Notifications0005 extends TestBase {
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
 			closeBrowser();
 		}
+		ob.quit();
 	}
 
 	@AfterTest

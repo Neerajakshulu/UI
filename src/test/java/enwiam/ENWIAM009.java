@@ -260,13 +260,21 @@ public class ENWIAM009 extends TestBase {
 
 				String currentUrl1 = null;
 				String currentUrl = ob.getCurrentUrl();
+				BrowserWaits.waitTime(1);
 				ob.findElement(By.cssSelector("input[name='jobtitle']")).sendKeys("Software");
+				BrowserWaits.waitTime(1);
 				Select jobrole = new Select(ob.findElement(By.id("field33")));
 				jobrole.selectByVisibleText("Engineers");
+				BrowserWaits.waitTime(1);
 				Select country = new Select(ob.findElement(By.id("field6")));
 				country.selectByVisibleText("English");
-				ob.findElement(By.cssSelector("input[name='optout']")).click();
-				ob.findElement(By.cssSelector("input[class='button']")).click();
+//				BrowserWaits.waitTime(1);
+//				ob.findElement(By.cssSelector("input[name='optout']")).click();
+//				BrowserWaits.waitTime(1);
+				jsClick(ob, ob.findElement(By.cssSelector("input[name='optout']")));
+				BrowserWaits.waitTime(1);
+				jsClick(ob, ob.findElement(By.cssSelector("input[class='button']")));
+//				ob.findElement(By.cssSelector("input[class='button']")).click();
 				BrowserWaits.waitTime(3);
 				String str1 = ob.findElement(By.xpath("(//span[@class='remove-absolute'])[2]")).getText();
 				if (str1.equalsIgnoreCase("OPTED OUT IN ERROR?")) {
