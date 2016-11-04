@@ -1,6 +1,7 @@
 package pages;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -627,29 +628,25 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public void clickOnRecordTitle(String recordTitle,
-			String recordType) throws Exception {
+	public void clickOnRecordTitle(String recordTitle, String recordType) throws Exception {
 
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_TITLE_CSS.toString())).click();
 	}
 
-	public void clickOnRemoveRecord(String recordTitle,
-			String recordType) throws Exception {
+	public void clickOnRemoveRecord(String recordTitle, String recordType) throws Exception {
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString()))
 				.click();
 	}
 
-	public void clickOnAttachFileForRecord(String recordTitle,
-			String recordType) throws Exception {
+	public void clickOnAttachFileForRecord(String recordTitle, String recordType) throws Exception {
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString()))
 				.click();
 	}
 
-	public boolean verifytheDateandTimeofAttachedRecord(String recordTitle,
-			String recordType) throws Exception {
+	public boolean verifytheDateandTimeofAttachedRecord(String recordTitle, String recordType) throws Exception {
 		WebElement record = getRecordCard(recordTitle, recordType);
 
 		String Timecard = record
@@ -665,9 +662,7 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public void validateFollowOrUnfollow(String recordTitle,
-			String recordType,
-			ExtentTest test) throws Exception {
+	public void validateFollowOrUnfollow(String recordTitle, String recordType, ExtentTest test) throws Exception {
 		waitForPageLoad(ob);
 		waitForAjax(ob);
 		WebElement record = getRecordCard(recordTitle, recordType);
@@ -700,8 +695,7 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public String getPostAuthorDetails(String recordTitle,
-			String recordType) throws Exception {
+	public String getPostAuthorDetails(String recordTitle, String recordType) throws Exception {
 
 		WebElement record = getRecordCard(recordTitle, recordType);
 		System.out.println("");
@@ -714,31 +708,62 @@ public class GroupDetailsPage extends TestBase {
 		return name.trim() + ", " + role.trim();
 
 	}
+	
+	public void clickPostAuthorName(String recordTitle, String recordType) throws Exception {
 
-	public String getRecordContent(String recordTitle,
-			String recordType) throws Exception {
+		WebElement record = getRecordCard(recordTitle, recordType);
+		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS.toString())).click();
+	}
+
+	public String getRecordContent(String recordTitle, String recordType) throws Exception {
 		String details = null;
 		StringBuilder strBldr = new StringBuilder();
 		WebElement record = getRecordCard(recordTitle, recordType);
 		if (recordType.equalsIgnoreCase("post")) {
-			details = record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_POST_CONTENT_CSS.toString()))
+			details = record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS.toString()))
 					.getText();
 			strBldr.append(details);
 		} else {
 
 			details = record
-					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_PUBLICATION_CSS.toString()))
-					.getText();
+					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_PUBLICATION_AUTHORS_CSS.toString()))
+					.getText().trim().replace("\n", "").replace("\r", "");
 			strBldr.append(details);
-			details = record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_AUTHORS_CSS.toString()))
-					.getText();
+			details = record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_SOURCE_CSS.toString()))
+					.getText().trim();
 			strBldr.append(details);
-			details = record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS.toString()))
-					.getText();
-			strBldr.append(details);
+			
+			for(WebElement we:record.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS.toString())))
+			{	if(we.isDisplayed()){
+				details = we.getText().trim();
+				strBldr.append(details.substring(0,details.length()-3));
+				break;
+			}
+			}
 		}
 		return strBldr.toString();
 	}
+
+	public String getNoRecordsInfoText() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_NO_RECORDS_INFO_TEXT_CSS);
+		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPS_DETAILS_NO_RECORDS_INFO_TEXT_CSS)
+				.getText().trim();
+
+	}
+	
+	public List<String> getRecordMetrics(String recordTitle, String recordType) throws Exception{
+		WebElement record = getRecordCard(recordTitle, recordType);
+		List<WebElement> list=record.findElements(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_RECORD_PUBLICATION_METRICS_XPATH.toString()));
+		List<String> metricList =new ArrayList<String>();
+		for(WebElement we:list){
+			
+			metricList.add(we.getText());
+		}
+		return metricList;
+	}
+	
+
 
 	public boolean checkDeleteButtonIsDisplay() throws Exception {
 		boolean status = false;

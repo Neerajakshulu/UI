@@ -366,7 +366,12 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
-	// login page elements
+	HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS("div[class='ne-publication__header'] div[class='wui-descriptor']"),
+	 HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS("div[class='ne-publication__header'] div[class*='wui-descriptor--uppercase']"),
+	 HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS("p[class*='ne-publication__body wui-large-text']"),
+	 HOME_PROJECT_NEON_RECORD_VIEW_METRICS_CSS("div[class='ne-publication-sidebar__metrics'] div[class*='wui-metric']"),
+
+	 // login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
@@ -619,11 +624,11 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_RECORD_CARD_TITLE_CSS("div[class*='wui-content-title'] a"),
 		RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS("div[class='wui-card__footer-content'] button[class*='delete-group-item']"),
 		RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS("div[class='wui-card__footer-content'] button[ng-click*='attachDriveDocument']"),
-		RCC_GROUPDETAILS_POST_CONTENT_CSS(""),
-		RCC_GROUPDETAILS_RECORD_PUBLICATION_CSS(""),
-		RCC_GROUPDETAILS_RECORD_AUTHORS_CSS(""),
-		RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS(""),
-		RCC_GROUPDETAILS_LINKED_ITEMS_TAB_CSS(""),
+		RCC_GROUPDETAILS_RECORD_PUBLICATION_AUTHORS_CSS("div[class*=' ne-publication-authors']>span"),
+		RCC_GROUPDETAILS_RECORD_SOURCE_CSS("div[class*='wui-descriptor--article-source']"),
+		RCC_GROUPDETAILS_RECORD_ABSTRACT_CSS("p[class*='ne-user-comment-text']"),
+		RCC_GROUPS_DETAILS_NO_RECORDS_INFO_TEXT_CSS("div[class='ng-binding ng-scope']"),
+		RCC_GROUPDETAILS_RECORD_PUBLICATION_METRICS_XPATH("//div[contains(@class,'ne-publication-authors')]/descendant::*[@class='wui-metric' or @class='wui-icon-metric'or @class='pull-right wui-icon-metric']"),
 		
 		
 		RCC_GROUP_BUTTON_XPATH("//span[contains(text(),'Groups')]"), 
