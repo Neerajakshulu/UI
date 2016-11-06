@@ -217,6 +217,7 @@ public class PageFactory {
 		return utility;
 	}
 	public void clearAllPageObjects() {
+		searchResultsPage=null;
 		accountPage = null;
 		loginTR = null;
 		onboarding = null;

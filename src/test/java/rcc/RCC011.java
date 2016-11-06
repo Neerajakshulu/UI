@@ -19,15 +19,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 
+public class RCC011 extends TestBase {
 
-public class RCC011 extends TestBase{
-	
 	static int status = 1;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
+	 * Method for displaying JIRA ID's for test case in specified path of Extent
+	 * Reports
 	 * 
-	 * @throws Exception, When Something unexpected
+	 * @throws Exception,
+	 *             When Something unexpected
 	 */
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -39,7 +40,8 @@ public class RCC011 extends TestBase{
 	/**
 	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login screen not displayed
+	 * @throws Exception,
+	 *             When TR Login screen not displayed
 	 */
 	@Test
 	public void testRCC011() throws Exception {
@@ -49,8 +51,8 @@ public class RCC011 extends TestBase{
 
 		if (!master_condition) {
 			status = 3;
-			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
-					+ " as the run mode is set to NO");
+			test.log(LogStatus.SKIP,
+					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
@@ -75,7 +77,7 @@ public class RCC011 extends TestBase{
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
 				test.log(LogStatus.FAIL, "Sending Invitation is failed due to user does not exist");
-			 result = pf.getGroupDetailsPage(ob).inviteMembers("Test User_RCC");
+			result = pf.getGroupDetailsPage(ob).inviteMembers("Test User_RCC");
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the another Neon user");
 			else
@@ -90,13 +92,13 @@ public class RCC011 extends TestBase{
 			loginAs("INVITEUSER01", "INVITEUSERPWD");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
-			//pf.getGroupsPage(ob).switchToInvitationTab();
-			try{
+			// pf.getGroupsPage(ob).switchToInvitationTab();
+			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
-				test.log(LogStatus.PASS,"User1 has accepted the invitation");
+				test.log(LogStatus.PASS, "User1 has accepted the invitation");
 			}
-			
-			catch(Exception e){
+
+			catch (Exception e) {
 				test.log(LogStatus.FAIL, "Invitation is not present in the invitation tab of user1");
 				ErrorUtil.addVerificationFailure(e);
 			}
@@ -107,27 +109,27 @@ public class RCC011 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("GPUSERNAME11","GPUSERPASSWORD11");
-			test.log(LogStatus.PASS,"User2 has login with valid credentials");
+			loginAs("GPUSERNAME11", "GPUSERPASSWORD11");
+			test.log(LogStatus.PASS, "User2 has login with valid credentials");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
-			//pf.getGroupsPage(ob).switchToInvitationTab();
-			try{
+			// pf.getGroupsPage(ob).switchToInvitationTab();
+			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
-				test.log(LogStatus.PASS,"User2 has accepted the invitation");
-				int count=pf.getGroupDetailsPage(ob).getMembersCounts();
-				if(count==2)
-					test.log(LogStatus.PASS,"Members count in incremented ");
+				test.log(LogStatus.PASS, "User2 has accepted the invitation");
+				int count = pf.getGroupDetailsPage(ob).getMembersCounts();
+				if (count == 2)
+					test.log(LogStatus.PASS, "Members count in incremented ");
 			}
-					
-			catch(Exception e){
+
+			catch (Exception e) {
 				test.log(LogStatus.FAIL, "Invitation is not present in the invitation tab of user2");
 				ErrorUtil.addVerificationFailure(e);
 			}
-			 pf.getGroupDetailsPage(ob).clickMembersTab();
+			pf.getGroupDetailsPage(ob).clickMembersTab();
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Jyothi Sree"));
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
-			test.log(LogStatus.PASS,"2 members are present in the group");
+			test.log(LogStatus.PASS, "2 members are present in the group");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -141,51 +143,53 @@ public class RCC011 extends TestBase{
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			test.log(LogStatus.PASS, "Owner navigate to groups details page");
 			pf.getGroupDetailsPage(ob).clickMembersTab();
-			pf.getBrowserActionInstance(ob).scrollToElement(
-					OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_REMOVE_BUTTON_CSS);
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Jyothi Sree"));
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
-			test.log(LogStatus.PASS,"Same  members are present in the group owner page");
+			test.log(LogStatus.PASS, "Same  members are present in the group owner page");
 			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
 			BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Remove button is clicked for a memeber");
-			
-			// Verify Custom Messages and cancel button for Cancel Invitation Modal
-						Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(label,expectedInfoText,"Remove"),
-								"Cancel Modal is displaying with Message");
-						pf.getGroupDetailsPage(ob).clickOnCancelButtonINCancelInviTationModal();
+
+			// Verify Custom Messages and cancel button for Cancel Invitation
+			// Modal
+			Assert.assertTrue(
+					pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(label, expectedInfoText, "Remove"),
+					"Cancel Modal is displaying with Message");
+			pf.getGroupDetailsPage(ob).clickOnCancelButtonINConfirmationModal();
 
 			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
-			int count=pf.getGroupDetailsPage(ob).getMembersCounts();
-						if(count==2)
-				test.log(LogStatus.PASS,"Members count in dispalaying correctly ");
+			int count = pf.getGroupDetailsPage(ob).getMembersCounts();
+			if (count == 2)
+				test.log(LogStatus.PASS, "Members count in dispalaying correctly ");
 			else
-				test.log(LogStatus.PASS,"Members count in notdisplaying correctly ");
+				test.log(LogStatus.PASS, "Members count in notdisplaying correctly ");
 
 			// Checking Cross button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
 			BrowserWaits.waitTime(3);
-			pf.getGroupDetailsPage(ob).clickOnCloseButtonINCancelInviTationModal();
+			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
 			pf.getGroupDetailsPage(ob).clickMembersTab();
-			 count=pf.getGroupDetailsPage(ob).getMembersCounts();
-			if(count==2)
-				test.log(LogStatus.PASS,"Members count in displaying correctly ");
+			count = pf.getGroupDetailsPage(ob).getMembersCounts();
+			if (count == 2)
+				test.log(LogStatus.PASS, "Members count in displaying correctly ");
 			else
-				test.log(LogStatus.PASS,"Members count in notdisplaying correctly ");
+				test.log(LogStatus.PASS, "Members count in notdisplaying correctly ");
 
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).removeMembers("Test User_RCC");
 			BrowserWaits.waitTime(3);
-			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINCancelInviTationModal();
+			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			pf.getGroupDetailsPage(ob).clickMembersTab();
-			int aftercount=pf.getGroupDetailsPage(ob).getMembersCounts();
-			if(aftercount==1)
-				test.log(LogStatus.PASS,"Members count in decreased after removing the member from group ");
+			int aftercount = pf.getGroupDetailsPage(ob).getMembersCounts();
+			if (aftercount == 1)
+				test.log(LogStatus.PASS, "Members count in decreased after removing the member from group ");
 			else
-				test.log(LogStatus.PASS,"Members count in not displaying correctly after removing the member from group ");
+				test.log(LogStatus.PASS,
+						"Members count in not displaying correctly after removing the member from group ");
 			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
-			test.log(LogStatus.PASS,"Member is removed from the group in owner group details page");
+			test.log(LogStatus.PASS, "Member is removed from the group in owner group details page");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -194,18 +198,19 @@ public class RCC011 extends TestBase{
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("INVITEUSER01", "INVITEUSERPWD");
-			test.log(LogStatus.PASS,"User has login with valid credentials");
+			test.log(LogStatus.PASS, "User has login with valid credentials");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickMembersTab();
-			 aftercount=pf.getGroupDetailsPage(ob).getMembersCounts();
-			if(aftercount==1)
-				test.log(LogStatus.PASS,"Members count in decreased after removing the member from group ");
+			aftercount = pf.getGroupDetailsPage(ob).getMembersCounts();
+			if (aftercount == 1)
+				test.log(LogStatus.PASS, "Members count in decreased after removing the member from group ");
 			else
-				test.log(LogStatus.PASS,"Members count in not displaying correctly after removing the member from group ");
+				test.log(LogStatus.PASS,
+						"Members count in not displaying correctly after removing the member from group ");
 			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
-			test.log(LogStatus.PASS,"Member is removed from the group in members group details page");
+			test.log(LogStatus.PASS, "Member is removed from the group in members group details page");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -217,10 +222,8 @@ public class RCC011 extends TestBase{
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			
-          
-}
-		catch (Throwable t) {
+
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
@@ -228,25 +231,22 @@ public class RCC011 extends TestBase{
 			test.log(LogStatus.FAIL, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
-			test.log(
-					LogStatus.FAIL,
-					"Snapshot below: "
-							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-									+ "_login_not_done")));// screenshot
+			test.log(LogStatus.FAIL, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
 	}
 
 	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
+	 * updating Extent Report with test case status whether it is PASS or FAIL
+	 * or SKIP
 	 * 
 	 * @throws Exception
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
 		extent.endTest(test);
-		
-	}
 
 	}
-	
+
+}

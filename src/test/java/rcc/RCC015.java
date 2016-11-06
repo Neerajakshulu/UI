@@ -54,12 +54,12 @@ public class RCC015 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
-
+		String title = null;
 		try {
 
-			String title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
-			String infoText="Add posts to this group by selecting the \"Add to group\" option wherever it is displayed in Project Neon.";
+			String infoText = "Add posts to this group by selecting the \"Add to group\" option wherever it is displayed in Project Neon.";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -70,7 +70,7 @@ public class RCC015 extends TestBase {
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
 			pf.getGroupDetailsPage(ob).clickPostsTab();
-					
+
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getNoRecordsInfoText(), infoText);
 				test.log(LogStatus.PASS, "No records informational text is displayed correcty in Post tab ");
@@ -80,10 +80,10 @@ public class RCC015 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_No_Records_info_missing")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
+
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			String recordTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
+			String recordTitle = pf.getSearchResultsPageInstance(ob).getPostsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
@@ -91,39 +91,38 @@ public class RCC015 extends TestBase {
 				pf.getGroupsListPage(ob).verifyItemsCount(1, title);
 				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Items count in Group list page not displayed correctly");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Items count in Group list page not displayed correctly");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
+
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts()==1);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 1);
 				test.log(LogStatus.PASS, "Post count is updated properly after adding the post from neon to the group");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Post count is not updated properly after adding the post from neon to the group");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-		pf.getGroupDetailsPage(ob).clickPostsTab();
-		
-		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
-		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
-		
+			pf.getGroupDetailsPage(ob).clickPostsTab();
+
+			String recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
+
 			try {
-				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
+				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post details are not displayed correctly in group details page");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_details_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 			ob.navigate().back();
@@ -138,14 +137,14 @@ public class RCC015 extends TestBase {
 				test.log(LogStatus.PASS, "Post author profile details are displayed correctly in Groups details page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post author profile details mismatch");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-	
+
 			ob.navigate().back();
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers("testuser automation real");
+			pf.getGroupDetailsPage(ob).inviteMembers("testing Reddy");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -154,39 +153,39 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
+			loginAs("USERNAME16", "PASSWORD16");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts()==1);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 1);
 				test.log(LogStatus.PASS, "Post count is updated properly after adding the post from neon to the group");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Post count is not updated properly after adding the post from neon to the group");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-		pf.getGroupDetailsPage(ob).clickPostsTab();
-		
-		recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
-		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
-		
+			pf.getGroupDetailsPage(ob).clickPostsTab();
+
+			recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
+
 			try {
-				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
+				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post details are not displayed correctly in group details page");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_details_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 			ob.navigate().back();
-			
+
 			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
 			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
 			expectedStr = pf.getGroupDetailsPage(ob).getPostAuthorDetails(recordTitle, "post");
@@ -199,24 +198,22 @@ public class RCC015 extends TestBase {
 				test.log(LogStatus.PASS, "Post author profile details are displayed correctly in Groups details page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post author profile details mismatch");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 			pf.getGroupsPage(ob).clickOnGroupsLink();
-			
+
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(1, title);
 				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Items count in Group list page not displayed correctly");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Items count in Group list page not displayed correctly");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -239,6 +236,10 @@ public class RCC015 extends TestBase {
 			status = 2;// excel
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
+
+		} finally {
+			pf.getUtility(ob).deleteGroup(title);
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
