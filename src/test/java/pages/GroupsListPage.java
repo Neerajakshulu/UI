@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -286,5 +288,54 @@ public class GroupsListPage extends TestBase {
 			return ButtonStatus;
 		
 		}
+	
+	public boolean verifySortByOptions() throws Exception
+	{
+		String opt1="Most recent activity",opt2="Creation date",opt3="Group name";
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		 String val1= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(0).getText();
+		 String val2= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(1).getText();
+		 String val3= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(2).getText();
+		if(val1.equalsIgnoreCase(opt1)&&val2.equalsIgnoreCase(opt2)&&val3.equalsIgnoreCase(opt3))
+		   return true;
+		else
+			return false;
+		
+		
+	}
+	
+	public void selectSortoptions(String optionvalue) throws Exception 
+	{
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		 List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()));
+		 for(WebElement we:li)
+		 {
+			 if(we.getText().equalsIgnoreCase(optionvalue))
+			 {
+				 we.click();
+			     return;
+			 }
+		 }
+		 throw new Exception("Sortion option is not found");
+	}
+	  
+	 public void sortByGroupName() throws Exception
+	 {
+		 List<String> list=new ArrayList();
+		 
+	     selectSortoptions("Group name");
+	    List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
+	    for(WebElement  we:li)
+	    {
+	    	String val=we.getText();
+	    	System.out.println("date value"+val);
+	    	list.add(val);
+	    	
+	    }
+	    Collections.sort(list);
+	 
+	 }
 
 }

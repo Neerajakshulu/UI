@@ -109,12 +109,26 @@ public class RCC013 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			pf.getGroupDetailsPage(ob).updateGroupDetails(newtitle, newdesc);
 			test.log(LogStatus.PASS, "Group title and description is updated by USER1");
+			try{
+				
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupInfoUpdated(newtitle, newdesc));
 			test.log(LogStatus.PASS, "Group Title and description is updated in Group Details Page of user1");
+			}
+			catch (Throwable t) {
+				logFailureDetails(test, t, "Group Title and description is not updated in Group Details Page of user1",
+						"Group_Info_updated");
+			}
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			pf.getGroupsListPage(ob).verifyGroupDescription(newdesc, newtitle);
+			try
+			{
 			Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(newdesc, newtitle));
 			test.log(LogStatus.PASS, "Group Title and Desc is updated in Group List Page for User1");
+			}
+			catch (Throwable t) {
+				logFailureDetails(test, t, "Group Title and description is not updated in Group List Page of user1",
+						"Group_Info_updated_In_Group_List_page");
+			}
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -126,11 +140,24 @@ public class RCC013 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
+			try{
+			
 			Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(newdesc, newtitle));
 			test.log(LogStatus.PASS, "Group Title and Desc is updated in Group List Page for User2");
+			}
+			catch (Throwable t) {
+				logFailureDetails(test, t, "Group Title and description is not updated in Group List Page of user2",
+						"Group_Info_updated_In_Group_List_Page");
+			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(newtitle);
+			try{
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupInfoUpdated(newtitle, newdesc));
 			test.log(LogStatus.PASS, "Group name and description is updated in Group Details Page for user2");
+			}
+			catch (Throwable t) {
+				logFailureDetails(test, t, "Group Title and description is not updated in Group Details Page of user2",
+						"Group_Info_updated");
+			}
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();

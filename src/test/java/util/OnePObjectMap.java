@@ -665,6 +665,10 @@ public enum OnePObjectMap {
 		RCC_INVITATIONS_STATUS_CSS("div[class='pull-right ng-binding ng-scope']"),
 		RCC_INVITATION_DESCRIPTION_CSS("textarea[placeholder='Add a description']"),
 		
+		RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
+		RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
+		RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
+		
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
