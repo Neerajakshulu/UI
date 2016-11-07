@@ -79,6 +79,14 @@
 		</classes>
 	</test>
 	
+	<test name="document_Add_to_multiple_Groups_Search_Results_page">
+		<parameter name="username" value="RccTestUser2@tr.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="documentTitle" value="sample"/>
+		<classes>
+			<class name="rcc.RCC114"></class>
+		</classes>
+	</test>
 	
 	 <test name="RCC002">
 		<classes>

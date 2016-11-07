@@ -415,7 +415,6 @@ public class SearchResultsPage extends TestBase {
 			if(groupDropdownListItem.findElement(By.tagName("span")).getText().equalsIgnoreCase(groupTitle)) {
 				//checking it's already added to group or not, if added no need to add 
 				String addedToGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
-				logger.info("Document is already added to group");
 				if(!(StringUtils.contains(addedToGroup, "--active"))) {
 					groupDropdownListItem.findElement(By.tagName("button")).click();
 					BrowserWaits.waitTime(4);
@@ -430,9 +429,41 @@ public class SearchResultsPage extends TestBase {
 					throw new Exception("no group availble from Add to Group dropdown with "+groupTitle);
 				}
 			}
-				
 		}
 	}
 	
+	//Add same document to multiple groups
+	public void addDocumentToMultipleGroup(List<String> groupTitles) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS);
+		List<WebElement> groupDropdownListItems=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS);
+		for(String groupTitle:groupTitles) {
+		for(WebElement groupDropdownListItem: groupDropdownListItems) {
+				logger.info("Group Title-->"+groupDropdownListItem.findElement(By.tagName("span")).getText());
+				if(groupDropdownListItem.findElement(By.tagName("span")).getText().equalsIgnoreCase(groupTitle)) {
+					//checking it's already added to group or not, if added no need to add 
+					String addedToGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+					if(!(StringUtils.contains(addedToGroup, "--active"))) {
+						groupDropdownListItem.findElement(By.tagName("button")).click();
+						BrowserWaits.waitTime(4);
+						pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+						String addedGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+						logger.info("Added to group or not-->"+addedGroup);
+						if(!(StringUtils.contains(addedGroup, "--active"))) {
+							throw new Exception("Document not added to Group from Search results page");
+						}
+					} else {
+						throw new Exception("no group availble from Add to Group dropdown with "+groupTitle);
+					}
+				}
+			}
+		}
+		
+		
+	}
+ }
+	
 
-}
+
