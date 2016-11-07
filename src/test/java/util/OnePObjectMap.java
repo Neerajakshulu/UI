@@ -334,9 +334,10 @@ public enum OnePObjectMap {
 	//Added by Chinna on 25th-Oct-2016
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
-	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] "),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown']"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] ul"),
 	SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS("div[class='wui-card__header--before-text wui-card__header']"),
+	SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS("button[ng-click='vm.openProjectSelector()']"),
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),

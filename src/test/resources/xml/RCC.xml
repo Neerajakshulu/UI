@@ -57,6 +57,14 @@
 			<class name="rcc.RCC112"></class>
 		</classes>
 	</test>
+	<test name="document_Add_to_Group_from_Watchlist_page">
+		<parameter name="username" value="RccTestUser1@tr.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="watchlistTitle" value="New Watchlist for RCC testing"/>
+		<classes>
+			<class name="rcc.RCC113"></class>
+		</classes>
+	</test>
 	
 	
 	 <test name="RCC002">
