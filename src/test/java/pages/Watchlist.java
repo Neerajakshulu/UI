@@ -74,7 +74,7 @@ public class Watchlist extends TestBase {
 					if(title.equalsIgnoreCase(documentTitle)) {
 					WebElement groupElement= doc.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
 					addDocumentToGroup(groupTitle, groupElement);
-					break;
+					break; 
 				}
 			}
 		}

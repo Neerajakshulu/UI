@@ -345,7 +345,7 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
-	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
 	RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS("button[ng-click='reportThis()']"),
 	RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS("button[ng-click='grabMore()']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS("button[ng-click='editThis(comment.id)']"),

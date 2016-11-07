@@ -16,6 +16,12 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
+
+/**
+ * The RCC112 program covers Add Article/Patent/Post to Group from Record view page of Article/Patent/Post
+ * @author Chinna
+ * 
+ */
 public class RCC112 extends TestBase {
 
 	static int status = 1;
@@ -113,9 +119,13 @@ public class RCC112 extends TestBase {
 	 * @param documentTitle
 	 * @throws Exception, When not able to add record to group
 	 */
+	/**
+	 * @param documentTitle
+	 * @throws Exception
+	 */
 	@Test(dependsOnMethods="createGroup")
 	@Parameters("documentTitle")
-	public void addDocumentToGroupFromSearchResultsPage(String documentTitle) throws Exception {
+	public void addDocumentToGroupFromRecordViewPage(String documentTitle) throws Exception {
 
 		test.log(LogStatus.INFO, "Add Article/Patent/Post to the group ");
 		try {

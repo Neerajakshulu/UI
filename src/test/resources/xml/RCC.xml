@@ -55,7 +55,7 @@
 		<parameter name="documentTitle" value="cancer"/>
 		<classes>
 			<class name="rcc.RCC112"></class>
-		</classes>
+		</classes> 
 	</test>
 	<test name="document_Add_to_Group_from_Watchlist_page">
 		<parameter name="username" value="RccTestUser1@tr.com" />

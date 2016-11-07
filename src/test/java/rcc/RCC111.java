@@ -16,6 +16,11 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
+/**
+ * The RCC111 program covers Add Article/Patent/Post to Group from Search Results page
+ * @author Chinna
+ * 
+ */
 public class RCC111 extends TestBase {
 
 	static int status = 1;

@@ -124,7 +124,7 @@ public class RCC113 extends TestBase {
 	 * @throws Exception
 	 */
 	@Test(dependsOnMethods="createGroup")
-	@Parameters("watchlistTitle")
+	@Parameters("watchlistTitle") 
 	public void addDocumentToGroupFromWatchlistPage(String watchlistTitle) throws Exception {
 
 		test.log(LogStatus.INFO, "Add Article/Patent/Post into the group from Watchlist page");
