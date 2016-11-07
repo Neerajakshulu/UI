@@ -1274,4 +1274,14 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 	
+	public String getInvitationStatus(String username) throws Exception
+	{
+	 WebElement groupcard = getPendingRecords(username);
+
+     String Timecard = groupcard
+                .findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
+                .getText();
+     return Timecard;
+	}
+	
 }

@@ -22,6 +22,12 @@
 			<class name="rcc.RCC004"></class>
 		</classes>
 	</test>
+	
+	<test name="RCC005">
+		<classes>
+			<class name="rcc.RCC005"></class>
+		</classes>
+	</test>
 	  <test name="RCC011">
 		<classes>
 			<class name="rcc.RCC011"></class>

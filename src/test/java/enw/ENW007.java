@@ -120,8 +120,9 @@ public class ENW007 extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			BrowserWaits.waitTime(6);
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-			pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.ENW_RECORD_LINK_XPATH.toString()),30);
+			//pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.ENW_RECORD_LINK_XPATH.toString()),30);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			
 
@@ -213,14 +214,6 @@ public class ENW007 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 
 }

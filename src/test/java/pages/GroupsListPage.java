@@ -279,5 +279,12 @@ public class GroupsListPage extends TestBase {
 		}
 
 	}
+	
+	public boolean verifyButtonIsEnabled(Object elementName) throws Exception{
+		   
+		  boolean ButtonStatus=pf.getBrowserActionInstance(ob).getElement(elementName).isEnabled();
+			return ButtonStatus;
+		
+		}
 
 }
