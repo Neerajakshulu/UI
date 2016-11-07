@@ -95,6 +95,7 @@ public class ENWIAM001 extends TestBase {
 					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 					BrowserWaits.waitTime(4);
 				}
+				waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 				email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 				ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
@@ -208,6 +209,7 @@ public class ENWIAM001 extends TestBase {
 					BrowserWaits.waitTime(4);
 				}
 				BrowserWaits.waitTime(14);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -217,6 +219,7 @@ public class ENWIAM001 extends TestBase {
 						.equalsIgnoreCase("Welcome to Guerrilla Mail")) {
 					ob.get("https://www.guerrillamail.com");
 					BrowserWaits.waitTime(14);
+					waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 					List<WebElement> email_list1 = ob.findElements(By.xpath(OR.getProperty("email_list")));
 					WebElement myE1 = email_list1.get(0);
 					JavascriptExecutor executor1 = (JavascriptExecutor) ob;

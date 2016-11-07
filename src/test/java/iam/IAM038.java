@@ -512,7 +512,7 @@ public class IAM038 extends TestBase {
 				test = extent.startTest(tests[11], tests_dec[11]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.cssSelector("div[class='account-option-item__forgot-password'] a")).click();
-				BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(6);
 				String resertPassPage = ob
 						.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
 						.getText();

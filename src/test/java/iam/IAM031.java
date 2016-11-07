@@ -118,7 +118,7 @@ public class IAM031 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_help_page")));// screenshot
 			}
 
-			if (!checkElementPresence("ul_name")) {
+			/*if (!checkElementPresence("ul_name")) {
 
 				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
 																								// reports
@@ -127,7 +127,7 @@ public class IAM031 extends TestBase {
 						this.getClass().getSimpleName() + "_existing_Neon_User_credentials_not_working_fine")));// screenshot
 				closeBrowser();
 
-			}
+			}*/
 
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
@@ -197,6 +197,7 @@ public class IAM031 extends TestBase {
 			waitForPageLoad(driver);
 
 			// login();
+			waitForElementTobeVisible(ob, By.cssSelector("a[class='feedback-link__anchor ng-binding']"), 30);
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = driver.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();

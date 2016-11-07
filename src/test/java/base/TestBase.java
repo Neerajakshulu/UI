@@ -818,7 +818,7 @@ public class TestBase {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 				BrowserWaits.waitTime(4);
 			}
-
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 			email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
@@ -882,6 +882,7 @@ public class TestBase {
 				BrowserWaits.waitTime(4);
 			}
 			BrowserWaits.waitTime(14);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
