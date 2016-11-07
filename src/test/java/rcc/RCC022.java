@@ -88,7 +88,7 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
 
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
+			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
 			test.log(LogStatus.INFO, "Attached GC doc the article");
 			String timeBefore=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, "doc12.docx");
@@ -184,7 +184,7 @@ public class RCC022 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
+			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
@@ -237,7 +237,7 @@ public class RCC022 extends TestBase {
 			String gdOld=gdDoctitle;
 			gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			//pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
+			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
 			test.log(LogStatus.INFO, "Attached the GD doc to the article");
 			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, "doc12.docx", gdDoctitle, gdDocDesc);
@@ -322,7 +322,7 @@ public class RCC022 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
+			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
