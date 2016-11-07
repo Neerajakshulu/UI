@@ -18,6 +18,7 @@ import util.ExtentManager;
 
 public class RCC014 extends TestBase {
 
+	private static final String recordType = "article";
 	static int status = 1;
 
 	/**
@@ -96,7 +97,7 @@ public class RCC014 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "article");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(modalLabel, modalInfoText,
@@ -112,26 +113,26 @@ public class RCC014 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getArticlesCounts() == 1);
 				test.log(LogStatus.PASS, "Article count is not decreased when user cancels remove article action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "article"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "Article is not removed when user cancels remove article action");
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Article is removed when user cancels remove article action",
 						"Group_remove_cancel_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "article");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getArticlesCounts() == 1);
 				test.log(LogStatus.PASS, "Article count is not decreased when user closes remove aricle action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "article"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "Article is not removed when user closes remove article action");
 
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Article is removed when user closes remove article action",
 						"Group_remove_close_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "article");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getArticlesCounts() == 0);
@@ -187,7 +188,7 @@ public class RCC014 extends TestBase {
 			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "article");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getArticlesCounts() == 0);

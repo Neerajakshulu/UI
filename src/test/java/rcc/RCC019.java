@@ -18,6 +18,7 @@ import util.ExtentManager;
 
 public class RCC019 extends TestBase {
 
+	private static final String recordType = "patent";
 	static int status = 1;
 
 	/**
@@ -96,7 +97,7 @@ public class RCC019 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			pf.getGroupDetailsPage(ob).clickPatentstab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "patent");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(modalLabel, modalInfoText,
@@ -112,26 +113,26 @@ public class RCC019 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPatentsCounts() == 1);
 				test.log(LogStatus.PASS, "patent count is not decreased when user cancels remove patent action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "patent"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "patent is not removed when user cancels remove patent action");
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "patent is removed when user cancels remove patent action",
 						"Group_remove_cancel_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "patent");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPatentsCounts() == 1);
 				test.log(LogStatus.PASS, "patent count is not decreased when user closes remove patent action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "patent"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "patent is not removed when user closes remove patent action");
 
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "patent is removed when user closes remove patent action",
 						"Group_remove_close_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "patent");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPatentsCounts() == 0);
@@ -187,7 +188,7 @@ public class RCC019 extends TestBase {
 			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickPatentstab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "patent");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPatentsCounts() == 0);

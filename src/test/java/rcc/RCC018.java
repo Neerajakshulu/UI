@@ -18,6 +18,7 @@ import util.ExtentManager;
 
 public class RCC018 extends TestBase {
 
+	private static final String recordType = "post";
 	static int status = 1;
 
 	/**
@@ -96,7 +97,7 @@ public class RCC018 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			pf.getGroupDetailsPage(ob).clickPostsTab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(modalLabel, modalInfoText,
@@ -112,26 +113,26 @@ public class RCC018 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 1);
 				test.log(LogStatus.PASS, "Post count is not decreased when user cancels remove post action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "post"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "Post is not removed when user cancels remove post action");
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Post is removed when user cancels remove post action",
 						"Group_remove_cancel_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 1);
 				test.log(LogStatus.PASS, "Post count is not decreased when user closes remove post action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, "post"));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).IsRecordPresent(recordTitle, recordType));
 				test.log(LogStatus.PASS, "Post is not removed when user closes remove post action");
 
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Post is removed when user closes remove post action",
 						"Group_remove_close_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 0);
@@ -187,7 +188,7 @@ public class RCC018 extends TestBase {
 			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickPostsTab();
-			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getPostsCounts() == 0);

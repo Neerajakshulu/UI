@@ -1081,7 +1081,7 @@ public class GroupDetailsPage extends TestBase {
 	public boolean validateTimeStamp(String timestamp) {
 
 		Calendar cal = Calendar.getInstance();
-		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
+		String OriginaltimeStamp = new SimpleDateFormat("d MMMMMMMMM yyyy").format(cal.getTime());
 		if (timestamp.contains(OriginaltimeStamp) && (timestamp.contains("PM") || timestamp.contains("AM")))
 			return true;
 		else
@@ -1249,9 +1249,9 @@ public class GroupDetailsPage extends TestBase {
 
 	
 	public boolean isItemLevelGDRecordPresent(String recordTitle, String recordType, String docTitle) throws Exception {
-
+		try{
 		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 60);
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
 
 		List<WebElement> gdList = getRecordCard(recordTitle, recordType)
 				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
@@ -1262,12 +1262,16 @@ public class GroupDetailsPage extends TestBase {
 						.findElement(
 								By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
 						.getText();
-				if (actTitle.equalsIgnoreCase(recordTitle)) {
+				if (actTitle.equalsIgnoreCase(docTitle)) {
 					return true;
 				}
 			}
 		}
-		return false;
+		}catch(Exception e){
+			return false;
+		}
+		return false;	
 
 	}
+	
 }

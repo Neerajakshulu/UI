@@ -17,9 +17,9 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class RCC021 extends TestBase {
+public class RCC023 extends TestBase {
 
-	private static final String recordType = "post";
+	private static final String recordType = "patent";
 	static int status = 1;
 
 	/**
@@ -77,20 +77,20 @@ public class RCC021 extends TestBase {
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			pf.getHFPageInstance(ob).searchForText("test");
-			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			String recordTitle = pf.getSearchResultsPageInstance(ob).getPostsTitle();
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+			String recordTitle = pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);
-			test.log(LogStatus.INFO, "Added post to the Group");
+			test.log(LogStatus.INFO, "Added patent to the Group");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
-			pf.getGroupDetailsPage(ob).clickPostsTab();
+			pf.getGroupDetailsPage(ob).clickPatentstab();
 
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
 			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
-			test.log(LogStatus.INFO, "Attached GC doc the post");
+			test.log(LogStatus.INFO, "Attached GC doc the patent");
 			String timeBefore=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, "doc12.docx");
 			BrowserWaits.waitTime(90);
 			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, "doc12.docx", gdDoctitle, gdDocDesc);
@@ -100,10 +100,10 @@ public class RCC021 extends TestBase {
 				Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
 				
 				test.log(LogStatus.PASS,
-						"GD doc desc and title updated date is displayed correctly for post");
+						"GD doc desc and title updated date is displayed correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc desc and title updated date is displayed correctly for post",
+						"GD doc desc and title updated date is displayed correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -111,10 +111,10 @@ public class RCC021 extends TestBase {
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
 				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for post");
+						"GD doc desc and title updated correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for post",
+						"GD doc desc and title is not updated correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -122,10 +122,10 @@ public class RCC021 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
 				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for post");
+						"GD doc timestamp is displayed correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for post",
+						"GD doc timestamp is not displayed correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -134,10 +134,10 @@ public class RCC021 extends TestBase {
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+						"GD doc is opened correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
+						"GD doc is not opened correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -159,15 +159,15 @@ public class RCC021 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			test.log(LogStatus.INFO, "Accepted the invitation");
-			pf.getGroupDetailsPage(ob).clickPostsTab();
+			pf.getGroupDetailsPage(ob).clickPatentstab();
 
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
 				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for post");
+						"GD doc desc and title updated correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for post",
+						"GD doc desc and title is not updated correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -175,10 +175,10 @@ public class RCC021 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
 				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for post");
+						"GD doc timestamp is displayed correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for post",
+						"GD doc timestamp is not displayed correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -188,10 +188,10 @@ public class RCC021 extends TestBase {
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+						"GD doc is opened correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
+						"GD doc is not opened correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -239,16 +239,16 @@ public class RCC021 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			//pf.getGroupDetailsPage(ob).signInToGoogle("kavyahr31", "leela@123");
 			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
-			test.log(LogStatus.INFO, "Attached the GD doc to the post");
+			test.log(LogStatus.INFO, "Attached the GD doc to the patent");
 			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, "doc12.docx", gdDoctitle, gdDocDesc);
 			test.log(LogStatus.INFO, "Updated the GD doc description");
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
 				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for post");
+						"GD doc desc and title updated correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for post",
+						"GD doc desc and title is not updated correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -256,10 +256,10 @@ public class RCC021 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
 				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for post");
+						"GD doc timestamp is displayed correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for post",
+						"GD doc timestamp is not displayed correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -268,10 +268,10 @@ public class RCC021 extends TestBase {
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+						"GD doc is opened correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
+						"GD doc is not opened correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -290,22 +290,22 @@ public class RCC021 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			test.log(LogStatus.INFO, "Access the group");
-			pf.getGroupDetailsPage(ob).clickPostsTab();
+			pf.getGroupDetailsPage(ob).clickPatentstab();
 			
 			try {
 				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdOld));
-				test.log(LogStatus.PASS, "Removed Gd doc is not available in the list for posts");
+				test.log(LogStatus.PASS, "Removed Gd doc is not available in the list for patents");
 			}catch (Throwable t) {
-				logFailureDetails(test, t, "Removed Gd doc is available in the list for posts",
+				logFailureDetails(test, t, "Removed Gd doc is available in the list for patents",
 						"Group_remove_submit_failed");
 			}
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
 				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for post");
+						"GD doc desc and title updated correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for post",
+						"GD doc desc and title is not updated correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -313,10 +313,10 @@ public class RCC021 extends TestBase {
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
 				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for post");
+						"GD doc timestamp is displayed correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for post",
+						"GD doc timestamp is not displayed correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -326,10 +326,10 @@ public class RCC021 extends TestBase {
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+						"GD doc is opened correctly for patent");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
+						"GD doc is not opened correctly for patent",
 						"_GD_title_dec_not_updated");
 
 			}

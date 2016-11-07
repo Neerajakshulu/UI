@@ -19,6 +19,7 @@ import util.ExtentManager;
 
 public class RCC016 extends TestBase {
 
+	private static final String recordType = "article";
 	static int status = 1;
 
 	/**
@@ -112,9 +113,9 @@ public class RCC016 extends TestBase {
 
 		pf.getGroupDetailsPage(ob).clickArticlesTab();
 		
-		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "article");
-		List<String> metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, "article");
-		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "article");
+		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
+		List<String> metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, recordType);
+		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 		
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
@@ -158,9 +159,9 @@ public class RCC016 extends TestBase {
 
 		pf.getGroupDetailsPage(ob).clickArticlesTab();
 		
-		recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "article");
-		 metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, "article");
-		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "article");
+		recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
+		 metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, recordType);
+		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 		
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());

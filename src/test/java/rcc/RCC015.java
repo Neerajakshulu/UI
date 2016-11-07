@@ -18,6 +18,7 @@ import util.ExtentManager;
 
 public class RCC015 extends TestBase {
 
+	private static final String recordType = "post";
 	static int status = 1;
 
 	/**
@@ -111,8 +112,8 @@ public class RCC015 extends TestBase {
 
 			pf.getGroupDetailsPage(ob).clickPostsTab();
 
-			String recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
-			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
+			String recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
@@ -126,10 +127,10 @@ public class RCC015 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			ob.navigate().back();
-			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
-			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
-			String expectedStr = pf.getGroupDetailsPage(ob).getPostAuthorDetails(recordTitle, "post");
-			pf.getGroupDetailsPage(ob).clickPostAuthorName(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, recordType, test);
+			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, recordType, test);
+			String expectedStr = pf.getGroupDetailsPage(ob).getPostAuthorDetails(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).clickPostAuthorName(recordTitle, recordType);
 			String actProfileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
 			actProfileData = actProfileData.substring(1, actProfileData.length() - 1);
 			try {
@@ -170,8 +171,8 @@ public class RCC015 extends TestBase {
 
 			pf.getGroupDetailsPage(ob).clickPostsTab();
 
-			recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "post");
-			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, "post");
+			recordDetals = pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
@@ -186,10 +187,10 @@ public class RCC015 extends TestBase {
 			}
 			ob.navigate().back();
 
-			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
-			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, "post", test);
-			expectedStr = pf.getGroupDetailsPage(ob).getPostAuthorDetails(recordTitle, "post");
-			pf.getGroupDetailsPage(ob).clickPostAuthorName(recordTitle, "post");
+			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, recordType, test);
+			pf.getGroupDetailsPage(ob).validateFollowOrUnfollow(recordTitle, recordType, test);
+			expectedStr = pf.getGroupDetailsPage(ob).getPostAuthorDetails(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).clickPostAuthorName(recordTitle, recordType);
 			actProfileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata().toString();
 			actProfileData = actProfileData.substring(1, actProfileData.length() - 1);
 			ob.navigate().back();
