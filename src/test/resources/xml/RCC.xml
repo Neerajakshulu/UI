@@ -2,7 +2,7 @@
 <suite name="RCC" parallel="tests" thread-count="10">
 
 	<listeners>
-		<listener class-name="listener.TestsListenerAdapter" />
+		<listener class-name="listener.TestsListenerAdapter" /> 
 	</listeners>
 	
 	<test name="RCC010">
@@ -70,21 +70,24 @@
 			<class name="rcc.RCC112"></class>
 		</classes> 
 	</test>
-	<test name="document_Add_to_Group_from_Watchlist_page">
+	<test name="document_Add_to_Single_And_Multiple_Groups_from_Watchlist_page">
 		<parameter name="username" value="RccTestUser1@tr.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="watchlistTitle" value="New Watchlist for RCC testing"/>
 		<classes>
 			<class name="rcc.RCC113"></class>
+			<class name="rcc.RCC116"></class>
 		</classes>
-	</test>
+	</test> 
 	
-	<test name="document_Add_to_multiple_Groups_Search_Results_page">
+	<test name="document_Add_to_multiple_Groups_Search_Results_page_And_RecordViewPage">
 		<parameter name="username" value="RccTestUser2@tr.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="documentTitle" value="sample"/>
+		<parameter name="docTitle" value="testing"/>
 		<classes>
 			<class name="rcc.RCC114"></class>
+			<class name="rcc.RCC115"></class>
 		</classes>
 	</test>
 	

@@ -111,4 +111,59 @@ public class Watchlist extends TestBase {
 		}
 	}
 	
+public void addDoucmentToMutipleGroupsFromWatchlist(List<String> groupTitle,String documentTitle) throws Exception {
+		
+		List<WebElement> docs=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS);
+		for(WebElement doc:docs) {
+			String title;
+				title=doc.findElement(By.tagName("a")).getText();
+				logger.info("title"+title);
+				if(title.equalsIgnoreCase(documentTitle)) {
+					WebElement groupElement= doc.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
+					addDocumentToMultipleGroups(groupTitle, groupElement);
+					break;
+				}
+				else {
+					title=doc.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString())).getText();
+					if(title.equalsIgnoreCase(documentTitle)) {
+					WebElement groupElement= doc.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
+					addDocumentToMultipleGroups(groupTitle, groupElement);
+					break; 
+				}
+			}
+		}
+	}
+	
+	
+	public void addDocumentToMultipleGroups(List<String> groupTitles,WebElement groupWebElement) throws Exception {
+		scrollElementIntoView(ob, groupWebElement);
+		jsClick(ob, groupWebElement);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS);
+		List<WebElement> groupDropdownListItems=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS);
+		for(String groupTitle:groupTitles) {
+		for(WebElement groupDropdownListItem: groupDropdownListItems) {
+			logger.info("Group Title-->"+groupDropdownListItem.findElement(By.tagName("span")).getText());
+			if(groupDropdownListItem.findElement(By.tagName("span")).getText().equalsIgnoreCase(groupTitle)) {
+				//checking it's already added to group or not, if added no need to add 
+				String addedToGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+				if(!(StringUtils.contains(addedToGroup, "--active"))) {
+					//groupDropdownListItem.findElement(By.tagName("button")).click();
+					jsClick(ob, groupDropdownListItem.findElement(By.tagName("button")));
+					BrowserWaits.waitTime(4);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+					String addedGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
+					logger.info("Added to group or not-->"+addedGroup);
+					if(!(StringUtils.contains(addedGroup, "--active"))) {
+						throw new Exception("Document not added to Group from Search results page");
+					}
+				} else {
+					throw new Exception("no group availble from Add to Group dropdown with or Already added to group"+groupTitle);
+				}
+			}
+				
+		}
+	 }
+	}
+	
 }
