@@ -61,6 +61,7 @@ public class GroupsListPage extends TestBase {
 		enterGroupTitle(title);
 		enterGroupDescription(desc);
 		clickOnSaveGroupButton();
+		
 	}
 
 	public void createGroup(String title) {

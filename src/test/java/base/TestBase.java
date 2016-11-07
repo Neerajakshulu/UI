@@ -2049,4 +2049,11 @@ public class TestBase {
 		}
 		return jiraid;
 	}
+	
+	public void logFailureDetails(ExtentTest test,Throwable t,String message,String screenShotName) throws Exception{
+		test.log(LogStatus.FAIL, message);
+		test.log(LogStatus.FAIL, "Snapshot below: " + test
+				.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
+		ErrorUtil.addVerificationFailure(t);
+	}
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -1003,6 +1004,44 @@ public class PostRecordViewPage extends TestBase {
 		String docTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
 		pf.getBrowserWaitsInstance(ob).waitUntilText(docTitle);
 		Assert.assertEquals(documentTitle, docTitle);
+	}
+	
+	public String getRecordDetails() throws Exception {
+		String details = null;
+		StringBuilder strBldr = new StringBuilder();
+		details = ob
+					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS.toString()))
+					.getText().trim();
+		strBldr.append(details);
+		details = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS.toString()))
+					.getText().trim();
+		if(details.contains("PAGES")){
+			strBldr.append(details.substring(0,details.indexOf("PAGES")));
+			strBldr.append(details.substring(details.indexOf("PUBLISHED")));
+			}else{
+				strBldr.append(details);
+			}
+			for(WebElement we:ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString())))
+			{	if(we.isDisplayed()){
+				details = we.getText().trim();
+				strBldr.append(details);
+				break;
+			}
+			}
+			
+			return strBldr.toString();
+	}
+	
+	public List<String> getRecordMetrics() throws Exception {
+		List<WebElement> list = ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_METRICS_CSS.toString()));
+		List<String> metricList = new ArrayList<String>();
+		for (WebElement we : list) {
+			if (!we.getText().contains("Views") && !we.getText().contains("Comments")
+					&& !we.getText().contains("Cited References") && !we.getText().contains("Cited Articles"))
+				metricList.add(we.getText());
+		}
+		return metricList;
 	}
 	
 }
