@@ -143,11 +143,5 @@
 		</classes>
 	</test>
 	
-	<test name="ENW0023">
-		<classes>
-			<class name="enw.ENW023"></class>
-		</classes>
-	</test>
-
 </suite>
 
