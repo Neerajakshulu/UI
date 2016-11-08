@@ -136,4 +136,17 @@ public class GroupsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_BUTTON_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_BUTTON_XPATH);
 	}
+	public void clickOnGroupsTabFirstRecord() throws Exception {
+
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Edit button is not displaye in group details page");
+	}
 }

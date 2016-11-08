@@ -1288,4 +1288,24 @@ public class GroupDetailsPage extends TestBase {
      return Timecard;
 	}
 	
+	public void clickOnCancelGroup() {
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()), 30);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()))
+				.click();
+	}
+	public void ValidateViewMode(ExtentTest test) throws Exception {
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS);
+
+		if (list.size() == 0) {
+			test.log(LogStatus.PASS, "Save button  closed the form ");
+		
+		} else {
+			test.log(LogStatus.FAIL, "Save button  closed the form ");
+		}
+
+	}
+	
 }

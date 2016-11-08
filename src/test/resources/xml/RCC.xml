@@ -38,6 +38,21 @@
 			<class name="rcc.RCC0001"></class>
 		</classes>
 	</test>
+	<test name="RCC0002">
+		<classes>
+			<class name="rcc.RCC0002"></class>
+		</classes>
+	</test>
+	<test name="RCC0003">
+		<classes>
+			<class name="rcc.RCC0003"></class>
+		</classes>
+	</test>
+	<test name="RCC0004">
+		<classes>
+			<class name="rcc.RCC0004"></class>
+		</classes>
+	</test>
 	
 	<test name="RCC013">
 		<classes>

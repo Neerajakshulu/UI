@@ -677,6 +677,12 @@ public enum OnePObjectMap {
 		
 		RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS("div[ui-view='createGroup']"),
 		RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS("div[ui-view='createGroup'] div[class='research-group-card__buttons'] button"),
+		RCC_SAVE_BUTTON_XPATH("//button [@class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--research-card']"),
+		RCC_GROUPDETAILS_DESCRIPTION_XPATH("//p[@class='research-group-card__description ng-binding']"),
+		RCC_GROUP_DESCRIPTION_XPATH("(//p[@class='research-group-card__description ng-binding'])[1]"),	
+		RCC_GROUPSDETAILS_CANCEL_GROUP_BUTTON_CSS("div[class='research-group-card__buttons'] button[ng-click='vm.revert()']"),
+		RCC_VIEW_MODE_CSS("p[ng-show='vm.linkItems']"),
+		RCC_TITLE_MSG_TEXT_XPATH("//div [@class='wui-content-title wui-content-title--research-card-title ng-binding']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

@@ -155,11 +155,11 @@ public class LinkingModalsPage extends TestBase {
 	}
 
 	public int getWatchlistCount() throws Exception {
-
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH);
-		String watchlistcount = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH).getText();
-
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH.toString()),
+				60);
+		String watchlistcount = ob
+				.findElement(By.xpath(OnePObjectMap.PROFILE_PAGE_WATCHLIST_COUNT_XPATH.toString())).getText();
 		int WC = Integer.parseInt(watchlistcount);
 		return WC;
 

@@ -56,12 +56,11 @@ public class GroupsListPage extends TestBase {
 	public void clickOnSaveGroupButton() {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()),
-				30);
+				60);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString())).click();
 	}
 
-	public void createGroup(String title,
-			String desc) {
+	public void createGroup(String title, String desc) {
 		enterGroupTitle(title);
 		enterGroupDescription(desc);
 		clickOnSaveGroupButton();
@@ -73,11 +72,21 @@ public class GroupsListPage extends TestBase {
 		clickOnSaveGroupButton();
 	}
 
-	public void clickOnCancelGroupButton() {
+	public void clickOnCancelGroupButton(ExtentTest test) throws Exception {
 
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS.toString()),
-				30);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS.toString())).click();
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_CANCEL_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				test.log(LogStatus.PASS, "Cancel button is clicked Succesfully");
+				return;
+			}
+		}
+		throw new Exception("Cancel button is not displaye in group details page");
 	}
 
 	public void clickOnGroupTitle(String title) throws Exception {
@@ -115,8 +124,7 @@ public class GroupsListPage extends TestBase {
 		throw new Exception("Group name not found in the group list");
 	}
 
-	public boolean verifyItemsCount(int count,
-			String grouptitle) throws Exception {
+	public boolean verifyItemsCount(int count, String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String itemsCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS.toString())).getText();
@@ -124,16 +132,14 @@ public class GroupsListPage extends TestBase {
 		return Integer.parseInt(itemsCount) == count;
 	}
 
-	public boolean verifyMembersCount(int count,
-			String grouptitle) throws Exception {
+	public boolean verifyMembersCount(int count, String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String itemsCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS.toString())).getText();
 		return Integer.parseInt(itemsCount) == count;
 	}
 
-	public boolean verifyGroupDescription(String desc,
-			String grouptitle) throws Exception {
+	public boolean verifyGroupDescription(String desc, String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String groupDesc = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText();
@@ -211,8 +217,7 @@ public class GroupsListPage extends TestBase {
 		return false;
 	}
 
-	public boolean checkAddedUserDetails(String title,
-			String userName) throws Exception {
+	public boolean checkAddedUserDetails(String title, String userName) throws Exception {
 		List<WebElement> userDetails = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
 		String actTitle = null;
@@ -229,7 +234,8 @@ public class GroupsListPage extends TestBase {
 
 	public void ValidateSaveButtonDisabled(ExtentTest test) throws Exception {
 		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
-		String MinLenthMsg = ob.findElement(By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString())).getText();
+		String MinLenthMsg1=null;
+		String MinLenthMsg=ValidateSave(MinLenthMsg1);
 		String title2 = RandomStringUtils.randomAlphanumeric(1);
 		if (title2.length() == 1) {
 			if (MinLenthMsg.equalsIgnoreCase(ErrorMsg)) {
@@ -253,6 +259,22 @@ public class GroupsListPage extends TestBase {
 
 	}
 
+	public String ValidateSave(String TxtMsg) throws Exception {
+
+		waitForAjax(ob);
+		TxtMsg = null;
+
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString()), 60);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				TxtMsg = we.getText();
+
+			}
+		}
+		return TxtMsg;
+	}
 	public void ValidateDescLessThan500(ExtentTest test) throws Exception {
 		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText().length();
 		if (GroupLength <= 500) {
@@ -268,9 +290,7 @@ public class GroupsListPage extends TestBase {
 		}
 	}
 
-	public void ValidateDescMoreThan500(int actualLength,
-			int Desc500,
-			ExtentTest test) throws Exception {
+	public void ValidateDescMoreThan500(int actualLength, int Desc500, ExtentTest test) throws Exception {
 		try {
 			Assert.assertNotEquals(actualLength, Desc500);
 			test.log(LogStatus.PASS,
@@ -298,41 +318,44 @@ public class GroupsListPage extends TestBase {
 
 	}
 
-	public boolean verifySortByOptions() throws Exception
-	{
-		String opt1="Most recent activity",opt2="Creation date",opt3="Group name";
+	public boolean verifySortByOptions() throws Exception {
+		String opt1 = "Most recent activity", opt2 = "Creation date", opt3 = "Group name";
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
-		 String val1= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(0).getText();
-		 String val2= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(1).getText();
-		 String val3= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(2).getText();
-		 pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
-		if(val1.equalsIgnoreCase(opt1)&&val2.equalsIgnoreCase(opt2)&&val3.equalsIgnoreCase(opt3))
-		   return true;
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		String val1 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(0).getText();
+		String val2 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(1).getText();
+		String val3 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(2).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
+		if (val1.equalsIgnoreCase(opt1) && val2.equalsIgnoreCase(opt2) && val3.equalsIgnoreCase(opt3))
+			return true;
 		else
 			return false;
-		
-		
+
 	}
-	
-	public void selectSortoptions(String optionvalue) throws Exception 
-	{
+
+	public void selectSortoptions(String optionvalue) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
-		 List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()));
-		 for(WebElement we:li)
-		 {
-			 if(we.getText().equalsIgnoreCase(optionvalue))
-			 {
-				 we.click();
-			     return;
-			 }
-		 }
-		 throw new Exception("Sortion option is not found");
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()));
+		for (WebElement we : li) {
+			if (we.getText().equalsIgnoreCase(optionvalue)) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Sortion option is not found");
 	}
-	
 
 	public void sortByGroupName() throws Exception {
 		List<String> list = new ArrayList();
@@ -375,20 +398,151 @@ public class GroupsListPage extends TestBase {
 		return name.trim() + ", " + role.trim();
 	}
 
-	public void sortByCreationDate() throws Exception
-	 {
-		 List<String> list=new ArrayList();
-		 
-	     selectSortoptions("Creation date");
-	    List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
-	    for(WebElement  we:li)
-	    {
-	    	String val=we.getText().substring(7);
-	    	System.out.println("date value"+val);
-	    	list.add(val);
-	    	
-	    }
-	    Collections.sort(list);
-	 
-	 }
+	public void sortByCreationDate() throws Exception {
+		List<String> list = new ArrayList();
+
+		selectSortoptions("Creation date");
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
+		for (WebElement we : li) {
+			String val = we.getText().substring(7);
+			System.out.println("date value" + val);
+			list.add(val);
+
+		}
+		Collections.sort(list);
+
+	}
+	public void ValidateEditDescLessThan500(ExtentTest test) throws Exception {
+		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_GROUP_DESCRIPTION_XPATH.toString())).getText()
+				.length();
+		if (GroupLength <= 500) {
+
+			test.log(LogStatus.PASS,
+					" user is able to edit group description with <= 500 characters from group details page.");
+		}
+
+		else {
+
+			test.log(LogStatus.FAIL,
+					"user is not able to edit group description with <= 500 characters from group details page.");
+		}
+	}
+	public void ValidateEditDescMoreThan500(int actualLength, int Desc500, ExtentTest test) throws Exception {
+		try {
+			Assert.assertNotEquals(actualLength, Desc500);
+
+			if (actualLength < Desc500) {
+				test.log(LogStatus.PASS,
+						" user is not able to edit group with more than 500 characters in group description.");
+			}
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL, "user is  able to edit group with more than 500 characters in group description.");// extent
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+					.getSimpleName()
+					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+
+		}
+
+	}
+
+	public void ValidateEditDescMoreThan50(int actualLength, int Desc500, ExtentTest test) throws Exception {
+		try {
+			Assert.assertNotEquals(actualLength, Desc500);
+
+			if (actualLength < Desc500) {
+				test.log(LogStatus.PASS,
+						" user is not able to edit group with more than 50 characters in group description.");
+			}
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL, "user is  able to edit group with more than 50 characters in group description.");// extent
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+					.getSimpleName()
+					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+
+		}
+
+	}
+
+	public void ValidateUpdatedTitle(String updatedTitleupdatedTitle, ExtentTest test) {
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString()), 60);
+
+		String updatedTitle = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText();
+		try {
+			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
+				test.log(LogStatus.PASS,
+						" user is able to edit the group with group name of 2 character and without any description from group details page.");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is not able to edit the group with group name of 2 character and without any description from group details page.");// extent
+
+			}
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL,
+					"user is not able to edit the group with group name of 2 character and without any description from group details page.");
+
+		}
+	}
+	public void ValidateTitle(String titleUpdate, ExtentTest test) {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString()), 60);
+
+		String updatedTitle = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString())).getText();
+		try {
+			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
+				test.log(LogStatus.PASS,
+						"Save' button closed the form and  updated group details are available in view mode.");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is not able to edit the group with group name of 2 character and without any description from group details page.");// extent
+
+			}
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL,
+					"user is not able to edit the group with group name of 2 character and without any description from group details page.");
+
+		}
+
+	}
+
+	public void ValidateTitleCancel(String titleUpdate, ExtentTest test) {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString()), 60);
+
+		String updatedTitle = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString())).getText();
+		try {
+			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
+				test.log(LogStatus.PASS,
+						"'Cancel' button deletes all modified information and show the group details in view mode.");
+			} else {
+				test.log(LogStatus.FAIL,
+						"'Cancel' button didn't deletes all modified information and show the group details in view mode.");// extent
+
+			}
+
+		}
+
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL, "user is not able to click cancel button");
+
+		}
+	}
+
 }

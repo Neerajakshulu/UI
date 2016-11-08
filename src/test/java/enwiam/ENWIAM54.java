@@ -137,7 +137,7 @@ public class ENWIAM54 extends TestBase {
 					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
 					ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
 
-					BrowserWaits.waitTime(3);
+					BrowserWaits.waitTime(4);
 
 					pf.getBrowserActionInstance(ob)
 							.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
