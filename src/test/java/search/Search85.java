@@ -63,18 +63,14 @@ public class Search85 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_query + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			List<WebElement> searchTiles = ob.findElements(By.xpath("//*[@class='wui-card__content']"));
 			BrowserWaits.waitTime(10);

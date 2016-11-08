@@ -673,6 +673,7 @@ public enum OnePObjectMap {
 		RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
 		RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
 		RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
+		RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS("span[class='ng-binding ng-scope']"),
 		
 		RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS("div[ui-view='createGroup']"),
 		RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS("div[ui-view='createGroup'] div[class='research-group-card__buttons'] button"),

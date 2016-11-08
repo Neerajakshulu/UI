@@ -13,8 +13,10 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search66 extends TestBase {
 
@@ -61,10 +63,14 @@ public class Search66 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("synthetic biology");
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+         // waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+			//BrowserWaits.waitTime(6);
 			waitForAjax(ob);
 			String all_text = ob
 					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))

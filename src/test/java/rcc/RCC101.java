@@ -2,6 +2,7 @@ package rcc;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
@@ -10,14 +11,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
 import util.ErrorUtil;
 import util.ExtentManager;
+
+import com.relevantcodes.extentreports.LogStatus;
+
 import base.TestBase;
 
-public class RCC100 extends TestBase {
 
+public class RCC101  extends TestBase{
 	static int status = 1;
 
 	/**
@@ -33,7 +35,7 @@ public class RCC100 extends TestBase {
 	}
 
 	@Test
-	public void verifyingSortingOptions() throws Exception {
+	public void verifyingSorting() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -54,12 +56,21 @@ public class RCC100 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER003", "RCCTESTUSERPWD003");
+			loginAs("RCCTESTUSER004", "RCCTESTUSERPWD004");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			/*pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			
+			Random rand = new Random(); 
+			int value = rand.nextInt(2); 
+			 
+			
+			
+			
+			
+			
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER");
-			pf.getGroupsPage(ob).clickOnGroupsLink();*/
+			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try
 			{
 			Assert.assertTrue(pf.getGroupsListPage(ob).verifySortByOptions());
