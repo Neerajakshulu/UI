@@ -120,8 +120,8 @@ public class RCC111 extends TestBase {
 	 *             When TR Login screen not displayed
 	 */
 	@Test(dependsOnMethods="createGroup")
-	@Parameters("documentTitle")
-	public void addDocumentToGroupFromSearchResultsPage(String documentTitle) throws Exception {
+	@Parameters({"documentTitle","addedToGroupLabel"})
+	public void addDocumentToGroupFromSearchResultsPage(String documentTitle,String addedToGroupLabel) throws Exception {
 
 		test.log(LogStatus.INFO, "Add Article/Patent/Post to the group ");
 		try {
@@ -130,14 +130,20 @@ public class RCC111 extends TestBase {
 			test.log(LogStatus.INFO, "Add Article into Group");
 			String articleTitle=pf.getSearchResultsPageInstance(ob).getArticleTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			String articleGroupLabel=pf.getSearchResultsPageInstance(ob).getAddToGroupButtonLabel();
+			pf.getSearchResultsPageInstance(ob).validateAddToGroupLabel(articleGroupLabel, addedToGroupLabel);
 			
 			test.log(LogStatus.INFO, "Add Patent into Group");
 			String patentTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			String patentGroupLabel=pf.getSearchResultsPageInstance(ob).getAddToGroupButtonLabel();
+			pf.getSearchResultsPageInstance(ob).validateAddToGroupLabel(patentGroupLabel, addedToGroupLabel);
 			
 			test.log(LogStatus.INFO, "Add Post into Group");
 			String postTitle=pf.getSearchResultsPageInstance(ob).getPostsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
+			String postGroupLabel=pf.getSearchResultsPageInstance(ob).getAddToGroupButtonLabel();
+			pf.getSearchResultsPageInstance(ob).validateAddToGroupLabel(postGroupLabel, addedToGroupLabel);
 			
 			
 			test.log(LogStatus.INFO, "Go to Group Record Details Page");

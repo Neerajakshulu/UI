@@ -460,9 +460,32 @@ public class SearchResultsPage extends TestBase {
 				}
 			}
 		}
-		
-		
 	}
+	
+	/**
+	 * Method for get the Add to Group button label
+	 * @return
+	 * @throws Exception
+	 */
+	public String getAddToGroupButtonLabel() throws Exception {
+		String groupLabel=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS)
+				.findElement(By.tagName("span")).getText();
+		logger.info("Group label-->"+groupLabel);
+		return groupLabel;
+	}
+	
+	/**
+	 * Method for get the Add to Group button label after adding into group
+	 * @param actuallabel
+	 * @param expectedLabel
+	 * @throws Exception
+	 */
+	public void validateAddToGroupLabel(String actuallabel,String expectedLabel) throws Exception {
+		if(!(actuallabel.equalsIgnoreCase(expectedLabel))) {
+			throw new Exception("Add To Group label should be updated to AddedToGroup");
+		}
+	}
+	
  }
 	
 

@@ -4,6 +4,7 @@
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" /> 
 	</listeners>
+	<parameter name="addedToGroupLabel" value="Added to group"/>
 	
 	<test name="RCC010">
 		<classes>
