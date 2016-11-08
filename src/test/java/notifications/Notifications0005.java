@@ -109,6 +109,7 @@ public class Notifications0005 extends TestBase {
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
 			}
+			ob.quit();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
 			ErrorUtil.addVerificationFailure(t);
@@ -118,7 +119,7 @@ public class Notifications0005 extends TestBase {
 					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
 			closeBrowser();
 		}
-		ob.quit();
+		
 	}
 
 	@AfterTest
