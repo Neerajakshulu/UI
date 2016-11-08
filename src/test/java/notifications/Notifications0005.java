@@ -1,5 +1,7 @@
 package notifications;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -97,26 +99,30 @@ public class Notifications0005 extends TestBase {
 					pf.getLoginTRInstance(ob).logOutApp();
 //					closeBrowser();
 				} catch (Throwable t) {
-					//test.log(LogStatus.FAIL, "User received notification with incorrect content");// extent
 					test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+					StringWriter errors = new StringWriter();
+					t.printStackTrace(new PrintWriter(errors));
+					test.log(LogStatus.INFO, errors.toString()); // reports
+					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
-					logger.error(this.getClass().getSimpleName() + "--->" + t);
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
-//					closeBrowser();
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+							this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));
 				}
 			} else {
 				throw new Exception("User creation problem hence throwing exception");
 			}
 			ob.quit();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());
+			test.log(LogStatus.FAIL, "Error--->" + t.getMessage());// extent
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// reports
+			test.log(LogStatus.INFO, "Error--->" + t);
 			ErrorUtil.addVerificationFailure(t);
-			logger.error(this.getClass().getSimpleName() + "--->" + t);
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + rowData.getTestcaseId())));
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "_user_receiving_notification_with_incorrect_content")));// screenshot
 			closeBrowser();
 		}
 		
