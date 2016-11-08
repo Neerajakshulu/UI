@@ -197,7 +197,7 @@ public class IAM031 extends TestBase {
 			waitForPageLoad(driver);
 
 			// login();
-			waitForElementTobeVisible(ob, By.cssSelector("a[class='feedback-link__anchor ng-binding']"), 30);
+			//waitForElementTobeVisible(ob, By.cssSelector("a[class='feedback-link__anchor ng-binding']"), 30);
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = driver.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();

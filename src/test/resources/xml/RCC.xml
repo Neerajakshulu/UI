@@ -98,6 +98,7 @@
 			<class name="rcc.RCC008"></class>
 			<class name="rcc.RCC012"></class>
 			<class name="rcc.RCC006"></class>
+			<class name="rcc.RCC104"></class>
 		</classes>
 	</test>
 </suite>

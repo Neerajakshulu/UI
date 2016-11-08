@@ -867,9 +867,13 @@ public class GroupDetailsPage extends TestBase {
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString()), 60);
 		String recordPageOwnerName = ob
 				.findElement(By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString())).getText();
-		// String role =
-		// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).getText();
-		return recordPageOwnerName.trim();
+		 String role =
+		 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(0).getText();
+		 String institute =
+				 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(1).getText();
+		 String location =
+				 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(2).getText();
+		return recordPageOwnerName.trim()+ ", " +role.trim()+ ", " +institute.trim()+ ", " +location.trim();
 	}
 
 	public void clickOnEditButton() throws Exception {

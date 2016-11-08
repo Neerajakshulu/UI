@@ -651,7 +651,7 @@ public enum OnePObjectMap {
 		RCC_DESC_MSG_TEXT_XPATH("(//div [@class='wui-content-title wui-content-title--research-card-title ng-binding'])[1]"),
 		RCC_GROUP_DETAIL_PAGE_SUPPORT_LINK_CSS("p[ng-show='vm.linkItems']"),
 		RCC_GROUP_DETAILS_PAGE_SHARE_LINK_CSS("div[class='research-group-card__content'] i[class='research-group-card__icon fa fa-users']"),
-		RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS("div[class='wui-descriptor wui-descriptor--user-profile-details']"),
+		RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS("div[class='wui-descriptor wui-descriptor--user-profile-details'] span"),
 		
 		RCC_GROUP_DETAILS_PAGE_GROUP_TITLE_TEXT_CSS("div[class='research-group-card__text'] div"),
 		RCC_GROUP_DETAILS_PAGE_GROUP_DESC_TEXT_CSS("div[class='research-group-card__text'] p"),
@@ -669,6 +669,8 @@ public enum OnePObjectMap {
 		RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
 		RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
 		
+		RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS("div[ui-view='createGroup']"),
+		RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS("div[ui-view='createGroup'] div[class='research-group-card__buttons'] button"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

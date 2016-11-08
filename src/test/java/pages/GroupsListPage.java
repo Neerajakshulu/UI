@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 
@@ -59,11 +60,12 @@ public class GroupsListPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString())).click();
 	}
 
-	public void createGroup(String title, String desc) {
+	public void createGroup(String title,
+			String desc) {
 		enterGroupTitle(title);
 		enterGroupDescription(desc);
 		clickOnSaveGroupButton();
-		
+
 	}
 
 	public void createGroup(String title) {
@@ -113,7 +115,8 @@ public class GroupsListPage extends TestBase {
 		throw new Exception("Group name not found in the group list");
 	}
 
-	public boolean verifyItemsCount(int count, String grouptitle) throws Exception {
+	public boolean verifyItemsCount(int count,
+			String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String itemsCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS.toString())).getText();
@@ -121,14 +124,16 @@ public class GroupsListPage extends TestBase {
 		return Integer.parseInt(itemsCount) == count;
 	}
 
-	public boolean verifyMembersCount(int count, String grouptitle) throws Exception {
+	public boolean verifyMembersCount(int count,
+			String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String itemsCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS.toString())).getText();
 		return Integer.parseInt(itemsCount) == count;
 	}
 
-	public boolean verifyGroupDescription(String desc, String grouptitle) throws Exception {
+	public boolean verifyGroupDescription(String desc,
+			String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String groupDesc = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText();
@@ -205,20 +210,23 @@ public class GroupsListPage extends TestBase {
 		}
 		return false;
 	}
-	
-	public boolean checkAddedUserDetails(String title, String userName) throws Exception {
-		List<WebElement> userDetails=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
-		String actTitle=null;
-		boolean status=false;
-		for (int i=0;i<userDetails.size();i++) {
+
+	public boolean checkAddedUserDetails(String title,
+			String userName) throws Exception {
+		List<WebElement> userDetails = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
+		String actTitle = null;
+		boolean status = false;
+		for (int i = 0; i < userDetails.size(); i++) {
 			actTitle = userDetails.get(i).getText();
 			if (actTitle.contains(title) && actTitle.contains(userName)) {
-				status=true;
+				status = true;
 				break;
 			}
 		}
 		return status;
 	}
+
 	public void ValidateSaveButtonDisabled(ExtentTest test) throws Exception {
 		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
 		String MinLenthMsg = ob.findElement(By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString())).getText();
@@ -246,8 +254,7 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public void ValidateDescLessThan500(ExtentTest test) throws Exception {
-		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText()
-				.length();
+		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText().length();
 		if (GroupLength <= 500) {
 
 			test.log(LogStatus.PASS,
@@ -261,7 +268,9 @@ public class GroupsListPage extends TestBase {
 		}
 	}
 
-	public void ValidateDescMoreThan500(int actualLength, int Desc500,ExtentTest test) throws Exception {
+	public void ValidateDescMoreThan500(int actualLength,
+			int Desc500,
+			ExtentTest test) throws Exception {
 		try {
 			Assert.assertNotEquals(actualLength, Desc500);
 			test.log(LogStatus.PASS,
@@ -281,61 +290,89 @@ public class GroupsListPage extends TestBase {
 		}
 
 	}
-	
-	public boolean verifyButtonIsEnabled(Object elementName) throws Exception{
-		   
-		  boolean ButtonStatus=pf.getBrowserActionInstance(ob).getElement(elementName).isEnabled();
-			return ButtonStatus;
-		
-		}
-	
-	public boolean verifySortByOptions() throws Exception
-	{
-		String opt1="Most recent activity",opt2="Creation date",opt3="Group name";
+
+	public boolean verifyButtonIsEnabled(Object elementName) throws Exception {
+
+		boolean ButtonStatus = pf.getBrowserActionInstance(ob).getElement(elementName).isEnabled();
+		return ButtonStatus;
+
+	}
+
+	public boolean verifySortByOptions() throws Exception {
+		String opt1 = "Most recent activity", opt2 = "Creation date", opt3 = "Group name";
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
-		 String val1= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(0).getText();
-		 String val2= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(1).getText();
-		 String val3= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString())).get(2).getText();
-		if(val1.equalsIgnoreCase(opt1)&&val2.equalsIgnoreCase(opt2)&&val3.equalsIgnoreCase(opt3))
-		   return true;
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		String val1 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(0).getText();
+		String val2 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(1).getText();
+		String val3 = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()))
+				.get(2).getText();
+		if (val1.equalsIgnoreCase(opt1) && val2.equalsIgnoreCase(opt2) && val3.equalsIgnoreCase(opt3))
+			return true;
 		else
 			return false;
-		
-		
+
 	}
-	
-	public void selectSortoptions(String optionvalue) throws Exception 
-	{
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
-		 List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()));
-		 for(WebElement we:li)
-		 {
-			 if(we.getText().equalsIgnoreCase(optionvalue))
-			 {
-				 we.click();
-			     return;
-			 }
-		 }
-		 throw new Exception("Sortion option is not found");
+
+	public void selectSortoptions(String optionvalue) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()), 30);
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS.toString()));
+		for (WebElement we : li) {
+			if (we.getText().equalsIgnoreCase(optionvalue)) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Sortion option is not found");
 	}
-	  
-	 public void sortByGroupName() throws Exception
-	 {
-		 List<String> list=new ArrayList();
-		 
-	     selectSortoptions("Group name");
-	    List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
-	    for(WebElement  we:li)
-	    {
-	    	String val=we.getText();
-	    	System.out.println("date value"+val);
-	    	list.add(val);
-	    	
-	    }
-	    Collections.sort(list);
-	 
-	 }
+
+	public void sortByGroupName() throws Exception {
+		List<String> list = new ArrayList();
+
+		selectSortoptions("Group name");
+		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
+		for (WebElement we : li) {
+			String val = we.getText();
+			System.out.println("date value" + val);
+			list.add(val);
+
+		}
+		Collections.sort(list);
+
+	}
+
+	public boolean getCreateGroupCard() throws Exception {
+		boolean status = false;
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS);
+		if (list.size() == 1) {
+			ob.findElement(By.cssSelector((OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS.toString())))
+					.click();
+			status = true;
+		}
+		return status;
+	}
+
+	public String getGroupOwnerDetailsFromCreateGroupCard() throws InterruptedException {
+		BrowserWaits.waitTime(6);
+		WebElement groupRecord = ob
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS.toString()));
+		String name = groupRecord
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).getText();
+		logger.info("User Name : " + name);
+		String role = groupRecord
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS.toString())).getText();
+		logger.info("User role : " + role);
+		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).click();
+		return name.trim() + ", " + role.trim();
+	}
 
 }

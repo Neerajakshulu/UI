@@ -165,7 +165,7 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Shared Group is displayed");
 			}*/
 
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("RccGroup User2");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("RCCTes02 USER02");
 			if (result) {
 				test.log(LogStatus.INFO, "User Invited sucessfully");
 			} else {
@@ -213,7 +213,23 @@ public class RCC006 extends TestBase{
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-
+			
+			
+			boolean acceptUserDeleteButtonStatus = pf.getGroupDetailsPage(ob).checkDeleteButtonIsDisplay();
+			boolean acceptUserEditButtonStatus = pf.getGroupDetailsPage(ob).checkEditButtonIsDisplay();
+			boolean acceptUserInviteOtherButtonStatus = pf.getGroupDetailsPage(ob).checkInviteOthersButtonIsDisplay();
+			
+			
+			try {
+				Assert.assertFalse(acceptUserDeleteButtonStatus && acceptUserEditButtonStatus && acceptUserInviteOtherButtonStatus);
+				test.log(LogStatus.PASS, "Group Details page Invite Others,edit and delete button are not displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Group Details page Invite Others,edit and delete button are displayed");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc),
 						"Group decription is not matching in Group details page");
@@ -294,8 +310,10 @@ public class RCC006 extends TestBase{
 			}*/
 
 			String ownername1 = pf.getGroupDetailsPage(ob).getGroupOwnerDetails();
+			logger.info("Owner Name : "+ownername1);
 			pf.getGroupDetailsPage(ob).clickOnGroupOwnerName();
 			String recordPageOwnerName1 = pf.getGroupDetailsPage(ob).getRecordPageOwnerName();
+			logger.info("Recore view page Owner Name : "+recordPageOwnerName1);
 			
 			try {
 				Assert.assertTrue(ownername1.contains(recordPageOwnerName1));
