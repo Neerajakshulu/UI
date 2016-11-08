@@ -4,10 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -16,7 +13,7 @@ import org.testng.annotations.Test;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
+
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -69,8 +66,7 @@ public class RCC0002 extends TestBase {
 			// OPQA-1570
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-/*			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);*/
+
 			BrowserWaits.waitTime(2);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			String titleUpdate = RandomStringUtils.randomAlphanumeric(2);
@@ -92,13 +88,12 @@ public class RCC0002 extends TestBase {
 			String title1Char = RandomStringUtils.randomAlphanumeric(1);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-			/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);*/
+
 			BrowserWaits.waitTime(2);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 
 			pf.getGroupDetailsPage(ob).updateGroupTitle(title1Char);
-		
+
 			pf.getGroupsListPage(ob).ValidateSaveButtonDisabled(test);
 			BrowserWaits.waitTime(2);
 			closeBrowser();

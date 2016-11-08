@@ -5,9 +5,7 @@ import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -67,23 +65,23 @@ public class RCC0003 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("RCC_USER_0003", "RCC_PWD_0003");
 
-			//OPQA-1577
+			// OPQA-1577
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			
+
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
 			BrowserWaits.waitTime(2);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			String titleUpdate = RandomStringUtils.randomAlphanumeric(50);
-			
+
 			pf.getGroupDetailsPage(ob).updateGroupTitle(titleUpdate);
 			pf.getGroupsListPage(ob).clickOnCancelGroupButton(test);
-			
+
 			pf.getGroupsListPage(ob).ValidateTitleCancel(titleUpdate, test);
-			
+
 			BrowserWaits.waitTime(2);
-		
-			//OPQA-1571
+
+			// OPQA-1571
 			pf.getGroupsPage(ob).CilckGroupTab();
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
@@ -93,20 +91,16 @@ public class RCC0003 extends TestBase {
 			test.log(LogStatus.PASS,
 					"user is able to edit group with group name of 50 characters and without any description.");
 			BrowserWaits.waitTime(2);
-			//OPQA-1573
+			// OPQA-1573
 			String desc50 = RandomStringUtils.randomAlphanumeric(51);
 
 			pf.getGroupsPage(ob).CilckGroupTab();
-			/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);*/
 			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			pf.getGroupDetailsPage(ob).updateGroupDescription(desc50);
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
 			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).CilckGroupTab();
-		/*	pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);*/
 			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
 			String actualLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText();
 			System.out.println(actualLength.length());
