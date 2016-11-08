@@ -68,7 +68,7 @@ public class ENWIAM0009 extends TestBase {
 				String expectedmessage="Please activate your account";
 				String expectedbuttontext="Resend activation";
 		
-				String expectedOKbuttontext="Sign in ";
+//				String expectedOKbuttontext="Sign in ";
 			
 				ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FBuserENWIAM0009"), LOGIN.getProperty("FBpwdENWIAM0009"));
