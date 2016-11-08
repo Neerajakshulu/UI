@@ -1456,9 +1456,9 @@ public class TestBase {
 	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName,
 			WebElement watchbutton) throws InterruptedException {
 
-		watchbutton.click();
-		// ob.findElement(By.xpath("//button[@class='wui-icon-btn
-		// dropdown-toggle']")).
+		//watchbutton.click();
+		jsClick(ob, watchbutton);
+		
 		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
 		Thread.sleep(2000);
 		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);

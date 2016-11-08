@@ -64,7 +64,7 @@ public class Watchlist023 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			// ob.get(host);
+
 			ob.navigate().to(host);
 			// loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
@@ -95,9 +95,11 @@ public class Watchlist023 extends TestBase {
 			}
 			// Deleting the first watch list
 			deleteParticularWatchlist(newWatchlistName + "_1");
+			BrowserWaits.waitTime(4);
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
+			//runOnSauceLabsFromLocal("Windows", "Chrome");
 			maximizeWindow();
 			clearCookies();
 			// ob.navigate().to(host);

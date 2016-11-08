@@ -64,12 +64,7 @@ public class Watchlist021 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// ob.get(host);
@@ -88,23 +83,26 @@ public class Watchlist021 extends TestBase {
 
 			// Watching an article to a particular watch list
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);;
+			WebElement watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
-			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+//			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
+//			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			
 			// Watching a patents to a particular watch list
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			
+//			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
+//			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			
 			// Watching a posts to a particular watch list
-			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(0);
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
-			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+//			watchButton = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image"))).get(1);
+//			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

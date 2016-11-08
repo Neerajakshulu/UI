@@ -69,13 +69,9 @@ public class Watchlist006 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
+			
 			ob.navigate().to(host);
 
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
@@ -89,13 +85,12 @@ public class Watchlist006 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			WebElement watchButton;
-			// Watching 2 patents to a particular watch list
-			for (int i = 0; i < 2; i++) {
-				watchButton = watchButtonList.get(i);
-				watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
-				((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
-				BrowserWaits.waitTime(5);
-			}
+			
+			// Watching  patents to a particular watch list
+			watchButton = watchButtonList.get(0);
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+			BrowserWaits.waitTime(5);
 
 			// Selecting the patent name
 			String firstDocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
@@ -136,16 +131,23 @@ public class Watchlist006 extends TestBase {
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 			BrowserWaits.waitTime(5);
 			ob.navigate().refresh();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-
-			// Checking if first document still exists in the watch list
-			List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> watchlistPatents=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			if(watchlistPatents.size()>0) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			}else {
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Add articles, patents and posts to your watchlist for easy reference");
+			}
+			
 			count = 0;
-			String documentTitle;
-			for (WebElement document : documentList) {
-				documentTitle = document.getText();
-				if (documentTitle.equals(firstDocumentName))
-					count++;
+			if(watchlistPatents.size()>0) { 
+				// Checking if first document still exists in the watch list
+				List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				String documentTitle;
+				for (WebElement document : documentList) {
+					documentTitle = document.getText();
+					if (documentTitle.equals(firstDocumentName))
+						count++;
+				 }
 			}
 
 			try {
@@ -163,7 +165,6 @@ public class Watchlist006 extends TestBase {
 			// Steps3: Unwatching a patent from patent content result page
 
 			// Searching for patents
-
 			pf.getHFPageInstance(ob).searchForText("hello");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 
@@ -182,17 +183,17 @@ public class Watchlist006 extends TestBase {
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			try {
-
 				watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-				count = 0;
+				if(watchedItems.size() > 0) {
+				
 				for (int i = 0; i < watchedItems.size(); i++) {
 
 					if (watchedItems.get(i).getText().equals(documentName))
 						count++;
 
+					}
 				}
 				Assert.assertEquals(count, 0);
-
 				test.log(LogStatus.PASS,
 						"User is able to remove an patent from watchlist in Patent content search results page");// extent
 

@@ -67,13 +67,9 @@ public class Watchlist004 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
+			
 			WebElement watchButton;
 			ob.get(host);
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
@@ -164,7 +160,6 @@ public class Watchlist004 extends TestBase {
 			// Searching for article
 			// selectSearchTypeFromDropDown("Articles");
 			pf.getHFPageInstance(ob).searchForText("hello");
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 60);
 			// Watching an article to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
