@@ -51,6 +51,14 @@ public class ENW023 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("STEAMUSEREMAIL"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200")||statuCode.equalsIgnoreCase("400"));
+			
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
