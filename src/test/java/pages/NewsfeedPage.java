@@ -29,6 +29,12 @@ public class NewsfeedPage extends TestBase{
 		watchOrUnwatchItemToAParticularWatchlist(watchListName, watchbutton);
 	}
 	
+	public void addFirstArticleToWatclist(String watchListName) throws Exception {
+		WebElement watchbutton=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+		.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+		watchOrUnwatchItemToAParticularWatchlist(watchListName, watchbutton);
+	}
+	
 	public void addFirstArticleToGroup(List<String> groupTitle) throws Exception {
 		WebElement addToGroup=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
 		.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
