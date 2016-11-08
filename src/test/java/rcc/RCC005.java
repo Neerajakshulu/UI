@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -66,13 +67,28 @@ static int status = 1;
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup("group1","This is first group");
+			try {
+				boolean inviteMemberOption = checkElementIsDisplayed(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_MEM_LIST_MSG_CSS.toString()));
+				Assert.assertEquals(inviteMemberOption, true);
+				test.log(LogStatus.PASS,
+				"Send invitation page is displayed as soon as new group is created");
+
+				} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL,
+				"Send invitation page is not displayed as soon as new group is created");
+				ErrorUtil.addVerificationFailure(t);
+				}
 			
 			boolean cancelButtonStatus=pf.getGroupsListPage(ob).verifyButtonIsEnabled(OnePObjectMap.RCC_INVITEMEMBERS_CANCEL_BUTTON_CSS);
 			boolean sendButtonStatus=pf.getGroupsListPage(ob).verifyButtonIsEnabled(OnePObjectMap.RCC_INVITEMEMBERS_SEND_BUTTON_CSS);
 			if(!cancelButtonStatus && !sendButtonStatus)
 		    test.log(LogStatus.PASS, "Cancel and Send Button is disabled soon after creating a group");	
 			else 
-			    test.log(LogStatus.FAIL, "Cancel or Send Button is not disabled soon after creating a group");
+			test.log(LogStatus.FAIL, "Cancel or Send Button is not disabled soon after creating a group");
+			
+			test.log(LogStatus.INFO, "Entering emailid while inviting users");
 			
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RCC_INVITEMEMBERS_TEXTFIELD_CSS, "mubarak2m@gmail.com");
 			
@@ -94,8 +110,11 @@ static int status = 1;
 										+ "_Error_Message_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			 //BrowserWaits.waitTime(4);
+			 
 			pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS);
+			
+			
+			test.log(LogStatus.INFO, "Select valid user from the type ahead and click on cancel button");
 			 pf.getGroupDetailsPage(ob).selectUserFromList(false, "Salma sadia");
 			
 			
@@ -117,6 +136,8 @@ static int status = 1;
 											+ "_Error_Message_mismatch")));// screenshot
 					ErrorUtil.addVerificationFailure(t);
 				}
+				 
+				 test.log(LogStatus.INFO, "Inviting list of users at a time from type ahead search");
 				 List<String> membersList= Arrays.asList("Salma sadia", "sruthi p", "naznina begum");
 				 
 				 pf.getGroupDetailsPage(ob).inviteMembers(membersList);
@@ -124,8 +145,6 @@ static int status = 1;
 				 waitForAjax(ob);
 				 
 				 String invitationStatus= pf.getGroupDetailsPage(ob).getInvitationStatus("Salma sadia");
-				
-			    // String invitationStatus=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_INVITATIONS_STATUS_CSS).getText();
 					
 			     if(invitationStatus.contains("Invited on"))
 			     test.log(LogStatus.PASS, "Invitation Status is shown as 'invited'");
