@@ -310,6 +310,11 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_PUBLIC_WATCHLIST_COMMENT_XPATH("//div[@class='wui-card--watchlist-event wui-card']"),
 	NEWSFEED_NOTIFICATION_LIKE_POST_XPATH("//ne-notification-like[@class='ng-scope']"),
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
+	//Added by Chhinna on 8th Nov 2016
+	NEWSFEED_POST_CARD_SECTION_CSS("div[class*='post wui-card']"),
+	NEWSFEED_POST_CARD_SECTION_TITLE_CSS("div[class='wui-card__label-left'] span[class*='ng-scope']"),
+	NEWSFEED_POST_CARD_POST_TITLE_CSS("div[class*='wui-content-title']"),
+		
 	// Search Page Elements
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
 	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),

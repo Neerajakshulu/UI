@@ -91,6 +91,14 @@
 		</classes>
 	</test>
 	
+	<test name="document_Add_to_multiple_Groups_Newsfeedpage">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<classes>
+			<class name="rcc.RCC117"></class>
+		</classes>
+	</test>
+	
 	 <test name="RCC002">
 		<classes>
 			<class name="rcc.RCC002"></class>

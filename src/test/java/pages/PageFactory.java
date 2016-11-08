@@ -30,6 +30,8 @@ public class PageFactory {
 	private GroupInvitationPage groupInvitationPage = null;
 	private GroupsPage groupsPage = null;
 	private Utility utility=null;
+	private NewsfeedPage newsfeedPage=null;
+	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
 			searchProfilePage = new SearchProfile(ob);
@@ -216,6 +218,14 @@ public class PageFactory {
 		}
 		return utility;
 	}
+	
+	public NewsfeedPage getNewsfeedPageInstance(WebDriver ob) {
+		if (newsfeedPage == null) {
+			newsfeedPage = new NewsfeedPage(ob);
+		}
+		return newsfeedPage;
+	}
+	
 	public void clearAllPageObjects() {
 		searchResultsPage=null;
 		accountPage = null;
