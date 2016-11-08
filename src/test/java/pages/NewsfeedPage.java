@@ -23,6 +23,19 @@ public class NewsfeedPage extends TestBase{
 		pf.getWatchlistPageInstance(ob).addDocumentToMultipleGroups(groupTitle, addToGroup);
 	}
 	
+	public void addFirstPostToWatclist(String watchListName) throws Exception {
+		WebElement watchbutton=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
+		.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+		watchOrUnwatchItemToAParticularWatchlist(watchListName, watchbutton);
+	}
+	
+	public void addFirstArticleToGroup(List<String> groupTitle) throws Exception {
+		WebElement addToGroup=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+		.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
+		
+		pf.getWatchlistPageInstance(ob).addDocumentToMultipleGroups(groupTitle, addToGroup);
+	}
+	
 	public String getPostTitle() throws Exception {
 		String postCategeory=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
 					.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
@@ -30,6 +43,17 @@ public class NewsfeedPage extends TestBase{
 		String postTitle=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
 				.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
 		logger.info("Post Title-->"+postTitle);	
+		
+		return postTitle;
+	}
+	
+	public String getArticleTitle() throws Exception {
+		String postCategeory=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+					.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
+		logger.info("Article Categeory-->"+postCategeory);
+		String postTitle=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+				.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
+		logger.info("Article Title-->"+postTitle);	
 		
 		return postTitle;
 	}

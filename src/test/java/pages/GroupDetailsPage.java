@@ -369,7 +369,7 @@ public class GroupDetailsPage extends TestBase {
 		for (WebElement postTabDetail : postTabDetails) {
 			pf.getBrowserActionInstance(ob).scrollToElement(postTabDetail);
 			logger.info("Post Title in Group Details page-->" + postTabDetail.getText());
-			if (postTabDetail.getText().equalsIgnoreCase(postTitle)) {
+			if (postTabDetail.getText().equalsIgnoreCase(postTitle) || postTabDetail.getText().contains("Post removed by member")) {
 				logger.info("Post Title Present in Group Details page");
 				isPostRecordPresent = true;
 				break;
