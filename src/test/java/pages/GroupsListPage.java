@@ -1,7 +1,9 @@
 package pages;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -543,6 +545,64 @@ public class GroupsListPage extends TestBase {
 			test.log(LogStatus.FAIL, "user is not able to click cancel button");
 
 		}
+	}
+	public void sortByMostRecentActivity() throws Exception
+	 {
+		 List<Date> beforesort=new ArrayList<Date>();
+	    List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
+	    for(WebElement  we:li)
+	    {
+	    	String val=we.getText().substring(7);
+	    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMMMMMM yyyy");
+	    	 Date date = formatter.parse(val);
+	    	 System.out.println("Before sort value"+val);
+	    	 beforesort.add(date);
+	    	
+	    }
+	    Collections.sort(beforesort);
+	    selectSortoptions("Most recent activity");
+	    List<Date> aftersort=new ArrayList<Date>();
+
+	    List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
+	    for(WebElement ww:list)
+	    {
+
+	    	String val=ww.getText().substring(7);
+	    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMMMMMM yyyy");
+	    	 Date date1 = formatter.parse(val);
+	    	 System.out.println("After date value"+val);
+	    	 aftersort.add(date1);
+	    }
+	    if(beforesort.equals(aftersort))
+	    {
+	    	test.log(LogStatus.PASS,"Sorting is done correctly");
+	    }
+	
+	     
+	    throw new Exception("Sorted is not done properly");
+	 
+	 }
+	
+	public boolean compareList(List<Date> l1,List<Date> l2) throws Exception
+	{
+		if(l1.equals(l2))
+			return true;
+		else
+			return false;
+	}
+	
+	public void randomUpdate(int val,String title) throws Exception{
+		 waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()),30);
+		 List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
+		 if(val<=list.size())
+		 {
+			 list.get(val).click();
+			 pf.getGroupDetailsPage(ob).clickOnEditButton();
+			 pf.getGroupDetailsPage(ob).updateGroupTitle(title);
+			 pf.getGroupDetailsPage(ob).clickOnSaveButton();
+		 }
+		 else
+			 throw new Exception("Group title is not updated randomly");
 	}
 
 }

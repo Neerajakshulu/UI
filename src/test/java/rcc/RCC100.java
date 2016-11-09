@@ -56,18 +56,18 @@ public class RCC100 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER003", "RCCTESTUSERPWD003");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			/*pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER");
-			pf.getGroupsPage(ob).clickOnGroupsLink();*/
+			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try
 			{
 			Assert.assertTrue(pf.getGroupsListPage(ob).verifySortByOptions());
 			test.log(
 					LogStatus.PASS,
 					"Member is able to see Sort by UI drop down with options Most Recent Activity,Date created or joined and Group name  in top right corner of groups tab");
-			/*pf.getGroupsListPage(ob).sortByGroupName();
-			test.log(LogStatus.PASS,"Groups are sorting by Group Name");*/
+			pf.getGroupsListPage(ob).sortByGroupName();
+			test.log(LogStatus.PASS,"Groups are sorting by Group Name");
 			pf.getGroupsListPage(ob).sortByCreationDate();
 			test.log(LogStatus.PASS,"Groups are sorting by Creation date");
 			pf.getLoginTRInstance(ob).logOutApp();

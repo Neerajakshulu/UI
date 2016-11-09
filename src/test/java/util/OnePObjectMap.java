@@ -546,7 +546,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_ATTACHED_FILES_COUNT_CSS("a[ui-sref='groups.details.linked-items'] span"),
 		RCC_GROUPDETAILS_MEMBERS_COUNT_CSS("a[ui-sref='groups.details.members.list'] span"),
 		RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS("div[class='research-group-card__footer'] button[ng-click*='group.delete()']"),
-		RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS("div[class='research-group-card__footer'] button[ng-click*='vm.edit()']"),
+		RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS("div[class='research-group-card__buttons'] button[ng-click*='vm.edit()']"),
 		RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS("div[class='research-group-card__footer'] button[ng-click*='Attach.attachDriveDocument()']"),
 		RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS("div[class='research-group-card__footer'] a"),
 		RCC_GROUPDETAILS_MEMBERS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.members.list']"),
@@ -685,6 +685,7 @@ public enum OnePObjectMap {
 		RCC_GROUPSDETAILS_CANCEL_GROUP_BUTTON_CSS("div[class='research-group-card__buttons'] button[ng-click='vm.revert()']"),
 		RCC_VIEW_MODE_CSS("p[ng-show='vm.linkItems']"),
 		RCC_TITLE_MSG_TEXT_XPATH("//div [@class='wui-content-title wui-content-title--research-card-title ng-binding']"),
+
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

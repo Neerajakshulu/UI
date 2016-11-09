@@ -50,7 +50,7 @@ public class RCC101  extends TestBase{
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
 
-			String title = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			String title = this.getClass().getSimpleName() + "_Update_Group_" + "_" + getCurrentTimeStamp();
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
@@ -58,30 +58,22 @@ public class RCC101  extends TestBase{
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER004", "RCCTESTUSERPWD004");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			
-			Random rand = new Random(); 
-			int value = rand.nextInt(2); 
-			 
-			
-			
-			
-			
-			
-			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			/*pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER");
+			pf.getGroupsPage(ob).clickOnGroupsLink();*/
+			
+			Random rand = new Random(); 
+			int value = rand.nextInt(5); 
+			 pf.getGroupsListPage(ob).randomUpdate(value,title);
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try
 			{
-			Assert.assertTrue(pf.getGroupsListPage(ob).verifySortByOptions());
+				pf.getGroupsListPage(ob).sortByMostRecentActivity();
 			test.log(
 					LogStatus.PASS,
-					"Member is able to see Sort by UI drop down with options Most Recent Activity,Date created or joined and Group name  in top right corner of groups tab");
-			/*pf.getGroupsListPage(ob).sortByGroupName();
-			test.log(LogStatus.PASS,"Groups are sorting by Group Name");*/
-			pf.getGroupsListPage(ob).sortByCreationDate();
-			test.log(LogStatus.PASS,"Groups are sorting by Creation date");
-			pf.getLoginTRInstance(ob).logOutApp();
+					"Grops are sorted properly bu Most Recent Activity");
+					pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			}
 			catch(Throwable t)
