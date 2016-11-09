@@ -547,8 +547,8 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_MEMBERS_COUNT_CSS("a[ui-sref='groups.details.members.list'] span"),
 		RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS("div[class^='research-group-card__footer'] button[ng-click*='group.delete()']"),
 		RCC_GROUPSDETAILS_EDIT_GROUP_BUTTON_CSS("div[class^='research-group-card__footer'] button[ng-click*='vm.edit()']"),
-		RCC_GROUPSDETAILS_LINK_ITEMS_BUTTON_CSS("div[class='research-group-card__footer'] button[ng-click*='Attach.attachDriveDocument()']"),
-		RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS("div[class='research-group-card__footer'] a"),
+		RCC_GROUPSDETAILS_ATTACH_FILE_BUTTON_CSS("div[class^='research-group-card__footer'] button[ng-click*='Attach.attachDriveDocument()']"),
+		RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS("div[class^='research-group-card__footer'] a"),
 		RCC_GROUPDETAILS_MEMBERS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.members.list']"),
 		RCC_GROUPDETAILS_ATTACHED_FILES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.linked-items']"),
 		RCC_GROUPDETAILS_POSTS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.posts']"),
@@ -644,7 +644,7 @@ public enum OnePObjectMap {
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS("textarea[class^='edit-form-description-textarea']"),
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_CANCEL_BUTTON_CSS("button[event-action='cancel']"),
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_UPDATE_BUTTON_CSS("button[event-action='save']"),
-		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TIMESTAMP_CSS("div[class='gdrive-doc__header'] span[class*='wui-descriptor']"),
+		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_ITEM_LEVEL_TIMESTAMP_CSS("div[class='gdrive-doc__header'] span[class*='wui-descriptor']"),
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_LINK_CSS("a[class^='open-drive-doc']"),
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_BUTTON_CSS("button[ng-click='Doc.toggleEditForm()']"),
 		RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_REMOVE_BUTTON_CSS("button[ng-click='Doc.removeDocument()']"),
@@ -689,7 +689,7 @@ public enum OnePObjectMap {
 		RCC_GROUP_COVER_PHOTO_CSS("div[class^='responsive-image__placeholder-text']"),
 		RCC_GROUP_COVER_UPDATE_PHOTO_CSS("div >ne-responsive-image > div > div > button[class = 'wui-btn wui-btn--primary']"),
 		RCC_NEWLY_CREATED_GROUP_PHOTO_CSS("div[class='responsive-image__image ng-scope']"),
-
+		RCC_GROUPDETAILS_RECORD_GROUP_LEVEL_GOOGLE_DOC_TIMESTAMP_CSS("div[class='wui-card__label-header']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

@@ -19,9 +19,14 @@ import util.ExtentManager;
 
 public class RCC021 extends TestBase {
 
+	private static final String User2_doc1 = "UI_ISSUES.doc";
+	private static final String User1_doc1 = "DATA.xls";
+	private static final String User1_doc2 = "TEST.pdf";
+	private static final String User2_doc2 = "cuty.jpg";
 	private static final String recordType = "post";
 	static int status = 1;
 
+	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
@@ -44,7 +49,11 @@ public class RCC021 extends TestBase {
 	 */
 	@Test
 	public void testGroupCreation() throws Exception {
-
+		String gUsername1=LOGIN.getProperty("GMAILUSERNAME1");
+		String gPassword1=LOGIN.getProperty("GMAILPASSWORD1");
+		String gUsername2=LOGIN.getProperty("GMAILUSERNAME2");
+		String gPassword2=LOGIN.getProperty("GMAILPASSWORD2");
+		
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -88,12 +97,22 @@ public class RCC021 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickPostsTab();
 
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
-			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
-			test.log(LogStatus.INFO, "Attached GC doc the post");
-			String timeBefore=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, "doc12.docx");
+			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1,0);
+			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2,1);
+			test.log(LogStatus.INFO, "Attached GC docs the post");
+			try {
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc1));
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc2));
+				test.log(LogStatus.PASS, "Owner is able to attach multiple GD doocs to the artile");
+			}catch (Throwable t) {
+				logFailureDetails(test, t, "Owner is able not to attach multiple GD doocs to the artile",
+						"Group_gd_attachment_failed");
+			}
+			String timeBefore=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, User1_doc1);
 			BrowserWaits.waitTime(90);
-			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, "doc12.docx", gdDoctitle, gdDocDesc);
+			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User1_doc1, gdDoctitle, gdDocDesc);
 			String timeAfter=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle);
 			
 			try {
@@ -184,7 +203,7 @@ public class RCC021 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
+			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,
@@ -238,9 +257,19 @@ public class RCC021 extends TestBase {
 			gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
-			pf.getGroupDetailsPage(ob).selectGDdoc("doc12.docx");
-			test.log(LogStatus.INFO, "Attached the GD doc to the post");
-			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, "doc12.docx", gdDoctitle, gdDocDesc);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1,0);
+			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2,1);
+			test.log(LogStatus.INFO, "Attached GC docs the post");
+			try {
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc1));
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc2));
+				test.log(LogStatus.PASS, "Member is able to attach multiple GD doocs to the artile");
+			}catch (Throwable t) {
+				logFailureDetails(test, t, "Member is able not to attach multiple GD doocs to the artile",
+						"Group_Member_gd_attachment_failed");
+			}
+			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User2_doc1, gdDoctitle, gdDocDesc);
 			test.log(LogStatus.INFO, "Updated the GD doc description");
 			try {
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
@@ -322,7 +351,7 @@ public class RCC021 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle("", "");
+			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
 				test.log(LogStatus.PASS,

@@ -14,6 +14,7 @@ public class Utility extends TestBase{
 	public void deleteGroup(String groupTitle) throws Exception{
 		
 		pf.getGroupsPage(ob).clickOnGroupsTab();
+		pf.getGroupsPage(ob).switchToGroupTab();
 		pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 		pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 		pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
