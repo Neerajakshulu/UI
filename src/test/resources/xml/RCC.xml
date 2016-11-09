@@ -6,7 +6,7 @@
 	</listeners>
 	<parameter name="addedToGroupLabel" value="Added to group"/>
 	
-	<test name="RCC010">
+<!-- 	<test name="RCC010">
 		<classes>
 			<class name="rcc.RCC010"></class>
 		</classes>
@@ -73,7 +73,7 @@
 		</classes>
 	</test>
 	
-	<!-- Added by Chinna -->
+	Added by Chinna
 	<test name="document_Add_to_Group_Search_Results_page">
 		<parameter name="username" value="chinnareddy.putha@gmail.com" />
 		<parameter name="password" value="Neon@123" />
@@ -129,7 +129,26 @@
 			<class name="rcc.RCC006"></class>
 			<class name="rcc.RCC104"></class>
 		</classes>
+	</test> -->
+	
+	<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
+	<classes>
+		<class name="rcc.RCC090"></class>
+	</classes>
 	</test>
+	
+	<test name="modify_the_cover photo">
+	<classes>
+		<class name="rcc.RCC091"></class>
+	</classes>
+	</test>
+	
+	<test name="option_to_add_image_ from_group_details_page">
+	<classes>
+		<class name="rcc.RCC092"></class>
+	</classes>
+	</test>
+	
 </suite>
 
 

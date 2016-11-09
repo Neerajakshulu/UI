@@ -105,8 +105,15 @@ public class GroupsListPage extends TestBase {
 		throw new Exception("Group name not found in Group list");
 	}
 
-	public void addCoverPhoto() {
+	public void addCoverPhoto() throws Exception {
+		clickOnAddImage();
+		String imagePath = System.getProperty("user.dir") + "\\images\\" + "images3" + ".jpg";
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe" + " " + imagePath);
+	}
 
+	public void clickOnAddImage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_COVER_PHOTO_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_COVER_PHOTO_CSS);
 	}
 
 	private WebElement getGroupCard(String groupTitle) throws Exception {
@@ -603,6 +610,15 @@ public class GroupsListPage extends TestBase {
 		 }
 		 else
 			 throw new Exception("Group title is not updated randomly");
+	}
+
+	public boolean isCoverPhotoDisplayed() throws Exception{
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_NEWLY_CREATED_GROUP_PHOTO_CSS);
+		WebElement image1 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_NEWLY_CREATED_GROUP_PHOTO_CSS);
+		Boolean ImagePresent = image1.isDisplayed();
+		return ImagePresent; 
+		
 	}
 
 }

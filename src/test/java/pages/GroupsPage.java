@@ -35,8 +35,11 @@ public class GroupsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_CSS);
 		waitForAjax(ob);
-		/*pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);*/
+		/*
+		 * pf.getBrowserWaitsInstance(ob)
+		 * .waitUntilElementIsNotDisplayed(OnePObjectMap.
+		 * NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
+		 */
 	}
 
 	public void clickOnCreateNewGroupButton() throws Exception {
@@ -132,10 +135,12 @@ public class GroupsPage extends TestBase {
 			declineInvitation();
 		}
 	}
+
 	public void CilckGroupTab() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_BUTTON_XPATH);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_BUTTON_XPATH);
 	}
+
 	public void clickOnGroupsTabFirstRecord() throws Exception {
 
 		waitForAjax(ob);

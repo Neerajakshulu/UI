@@ -369,7 +369,8 @@ public class GroupDetailsPage extends TestBase {
 		for (WebElement postTabDetail : postTabDetails) {
 			pf.getBrowserActionInstance(ob).scrollToElement(postTabDetail);
 			logger.info("Post Title in Group Details page-->" + postTabDetail.getText());
-			if (postTabDetail.getText().equalsIgnoreCase(postTitle) || postTabDetail.getText().contains("Post removed by member")) {
+			if (postTabDetail.getText().equalsIgnoreCase(postTitle)
+					|| postTabDetail.getText().contains("Post removed by member")) {
 				logger.info("Post Title Present in Group Details page");
 				isPostRecordPresent = true;
 				break;
@@ -867,13 +868,13 @@ public class GroupDetailsPage extends TestBase {
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString()), 60);
 		String recordPageOwnerName = ob
 				.findElement(By.cssSelector(OnePObjectMap.PROFILE_PAGE_AUTOR_NAME_CSS.toString())).getText();
-		 String role =
-		 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(0).getText();
-		 String institute =
-				 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(1).getText();
-		 String location =
-				 pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(2).getText();
-		return recordPageOwnerName.trim()+ ", " +role.trim()+ ", " +institute.trim()+ ", " +location.trim();
+		String role = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS)
+				.get(0).getText();
+		String institute = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(1).getText();
+		String location = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS).get(2).getText();
+		return recordPageOwnerName.trim() + ", " + role.trim() + ", " + institute.trim() + ", " + location.trim();
 	}
 
 	public void clickOnEditButton() throws Exception {
@@ -1053,31 +1054,27 @@ public class GroupDetailsPage extends TestBase {
 				.getText();
 	}
 
-	public void enterItemLevelGoogleDocTitle(WebElement gdRecord,String newTilte)
-			throws Exception {
+	public void enterItemLevelGoogleDocTitle(WebElement gdRecord, String newTilte) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.sendKeys(newTilte);
 	}
 
-	public void enterItemLevelGoogleDocDesc(WebElement gdRecord,String desc)
-			throws Exception {
+	public void enterItemLevelGoogleDocDesc(WebElement gdRecord, String desc) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.sendKeys(desc);
 	}
 
-	public void clickOnCanelItemLevelGoogleDocEdit(WebElement gdRecord)
-			throws Exception {
+	public void clickOnCanelItemLevelGoogleDocEdit(WebElement gdRecord) throws Exception {
 		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_CANCEL_BUTTON_CSS.toString())).click();
 	}
 
-	public void clickOnUpdateItemLevelGoogleDocEdit(WebElement gdRecord)
-			throws Exception {
-		
+	public void clickOnUpdateItemLevelGoogleDocEdit(WebElement gdRecord) throws Exception {
+
 		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_UPDATE_BUTTON_CSS.toString())).click();
 	}
@@ -1101,7 +1098,8 @@ public class GroupDetailsPage extends TestBase {
 		clickOnUpdateItemLevelGoogleDocEdit(gdRecord);
 	}
 
-	public void clickOnOpenInGoogleDriveLinkItemLevel(String recordTitle, String recordType, String docTitle) throws Exception {
+	public void clickOnOpenInGoogleDriveLinkItemLevel(String recordTitle, String recordType, String docTitle)
+			throws Exception {
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_LINK_CSS.toString()))
 				.click();
@@ -1231,19 +1229,19 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public boolean validateGDUrl() {
-		boolean result=false;
+		boolean result = false;
 		String PARENT_WINDOW = ob.getWindowHandle();
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		for (String child_window_handle : child_window_handles) {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
-				
-				if(ob.getCurrentUrl().contains("drive.google.com")){
-				ob.close();
-				
-				result= true;
-				
+
+				if (ob.getCurrentUrl().contains("drive.google.com")) {
+					ob.close();
+
+					result = true;
+
 				}
 			}
 		}
@@ -1251,49 +1249,48 @@ public class GroupDetailsPage extends TestBase {
 		return result;
 	}
 
-	
 	public boolean isItemLevelGDRecordPresent(String recordTitle, String recordType, String docTitle) throws Exception {
-		try{
-		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
+		try {
+			waitForAllElementsToBePresent(ob,
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
 
-		List<WebElement> gdList = getRecordCard(recordTitle, recordType)
-				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
-		String actTitle;
-		if (gdList.size() != 0) {
-			for (WebElement we : gdList) {
-				actTitle = we
-						.findElement(
-								By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
-						.getText();
-				if (actTitle.equalsIgnoreCase(docTitle)) {
-					return true;
+			List<WebElement> gdList = getRecordCard(recordTitle, recordType)
+					.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
+			String actTitle;
+			if (gdList.size() != 0) {
+				for (WebElement we : gdList) {
+					actTitle = we
+							.findElement(By
+									.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
+							.getText();
+					if (actTitle.equalsIgnoreCase(docTitle)) {
+						return true;
+					}
 				}
 			}
-		}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
-		return false;	
+		return false;
 
 	}
-	
-	public String getInvitationStatus(String username) throws Exception
-	{
-	 WebElement groupcard = getPendingRecords(username);
 
-     String Timecard = groupcard
-                .findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
-                .getText();
-     return Timecard;
+	public String getInvitationStatus(String username) throws Exception {
+		WebElement groupcard = getPendingRecords(username);
+
+		String Timecard = groupcard
+				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
+				.getText();
+		return Timecard;
 	}
-	
+
 	public void clickOnCancelGroup() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()))
 				.click();
 	}
+
 	public void ValidateViewMode(ExtentTest test) throws Exception {
 
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
@@ -1301,11 +1298,37 @@ public class GroupDetailsPage extends TestBase {
 
 		if (list.size() == 0) {
 			test.log(LogStatus.PASS, "Save button  closed the form ");
-		
+
 		} else {
 			test.log(LogStatus.FAIL, "Save button  closed the form ");
 		}
 
 	}
-	
+
+	public void updateGroupPhoto() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.RCC_GROUP_COVER_UPDATE_PHOTO_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_COVER_UPDATE_PHOTO_CSS);
+		String imagePath = System.getProperty("user.dir") + "\\images\\" + "images4" + ".jpg";
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe" + " " + imagePath);
+
+	}
+
+	public boolean isAddImageOptionDisplayed() throws Exception {
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_COVER_PHOTO_CSS.toString()), 60);
+
+		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_COVER_PHOTO_CSS.toString()));
+
+		for (WebElement we : list) {
+
+			if (we.isDisplayed()) {
+
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 }
