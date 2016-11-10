@@ -62,7 +62,7 @@ static int status = 1;
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCC005user", "RCC005password");
+			loginAs("RCCTESTUSER027", "RCCTESTUSERPWD027");
 			
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();

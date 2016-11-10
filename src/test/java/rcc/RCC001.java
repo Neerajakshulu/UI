@@ -63,7 +63,7 @@ public class RCC001 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -106,9 +106,10 @@ public class RCC001 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers("testuser automation real");
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -117,7 +118,7 @@ public class RCC001 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
@@ -166,7 +167,7 @@ public class RCC001 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

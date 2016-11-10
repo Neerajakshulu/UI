@@ -66,13 +66,13 @@ public class RCC010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			waitForAjax(ob);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the owner ");
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Jyothi Sree");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
 			else
@@ -84,7 +84,7 @@ public class RCC010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("INVITEUSER01", "INVITEUSERPWD");
+			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
@@ -102,7 +102,7 @@ public class RCC010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			test.log(LogStatus.PASS, "Owner has logged into appilication");
 			waitForAjax(ob);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -115,7 +115,7 @@ public class RCC010 extends TestBase {
 			pf.getBrowserActionInstance(ob)
 					.scrollToElement(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS);
 
-			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Cancelation Invitation  button is clicked");
 
@@ -147,7 +147,7 @@ public class RCC010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("INVITEUSER01", "INVITEUSERPWD");
+			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 
@@ -169,7 +169,7 @@ public class RCC010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("GROUPUSERNAME010", "GROUPUSERPASSWORD010");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

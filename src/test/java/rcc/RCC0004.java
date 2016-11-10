@@ -64,7 +64,7 @@ public class RCC0004 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCC_USER_0004", "RCC_PWD_0004");
+			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 			// OPQA-1578--start--edit group description with <= 500 characters.
 
 			pf.getGroupsPage(ob).CilckGroupTab();

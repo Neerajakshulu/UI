@@ -67,7 +67,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
 			test.log(LogStatus.INFO, "Login as Group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -83,7 +83,7 @@ public class RCC019 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers("testing Reddy");
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE12"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -92,7 +92,7 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME16", "PASSWORD16");
+			loginAs("RCCTESTUSER012", "RCCTESTUSERPWD012");
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -175,9 +175,10 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
 			test.log(LogStatus.INFO, "Login as group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(1, title);
 				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly");
@@ -222,9 +223,10 @@ public class RCC019 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
+			loginAs("RCCTESTUSER012", "RCCTESTUSERPWD012");
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(0, title);
 				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly");
@@ -235,7 +237,18 @@ public class RCC019 extends TestBase {
 			}
 
 			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
 
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
+			test.log(LogStatus.INFO, "Login as Group owner");
+			pf.getUtility(ob).deleteGroup(title);
+			test.log(LogStatus.INFO, "Deleted the group");
+			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -249,17 +262,7 @@ public class RCC019 extends TestBase {
 
 		} finally {
 			closeBrowser();
-			pf.clearAllPageObjects();
-			openBrowser();
-			clearCookies();
-			maximizeWindow();
-			ob.navigate().to(host);
-			loginAs("USERNAME1", "PASSWORD1");
-			test.log(LogStatus.INFO, "Login as Group owner");
-			pf.getUtility(ob).deleteGroup(title);
-			test.log(LogStatus.INFO, "Deleted the group");
-			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");

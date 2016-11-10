@@ -62,7 +62,7 @@ public class RCC0002 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCC_USER_0002", "RCC_PWD_0002");
+			loginAs("RCCTESTUSER006", "RCCTESTUSERPWD006");
 			// OPQA-1570
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();

@@ -62,12 +62,12 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER001", "RCCTESTUSERPWD001");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Sams G_RC");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the USER2");
 			else
@@ -80,7 +80,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER002", "RCCTESTUSERPWD002");
+			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
@@ -100,7 +100,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER001", "RCCTESTUSERPWD001");
+			loginAs("RCCTESTUSER020", "RCCTESTUSER020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
@@ -136,7 +136,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER002", "RCCTESTUSERPWD002");
+			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
@@ -165,7 +165,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER001", "RCCTESTUSERPWD001");
+			loginAs("RCCTESTUSER020", "RCCTESTUSER020");
 			pf.getUtility(ob).deleteGroup(newtitle);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

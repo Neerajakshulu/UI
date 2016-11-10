@@ -65,11 +65,11 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME010", "USERPASSWORD010");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Mohammed Asif");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).typeCustomMessage(msg);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 
@@ -93,7 +93,7 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("INVITEUSER02", "INVITEUSERPWD02");
+			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			ob.navigate().refresh();
 			if (pf.getGroupInvitationPage(ob).verifyCustomMessage(groupTitle, msg)) {
@@ -163,7 +163,7 @@ public class RCC003 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("USERNAME010", "USERPASSWORD010");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			pf.getUtility(ob).deleteGroup(groupTitle);
 			test.log(LogStatus.PASS, "Created groups have been deleted successfully");
 			closeBrowser();

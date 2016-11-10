@@ -120,14 +120,63 @@
 		</classes>
 	</test>
 	
-	 <test name="RCC002">
+	 <test name="test2">
 		<classes>
 			<class name="rcc.RCC002"></class>
 			<class name="rcc.RCC007"></class>
 			<class name="rcc.RCC008"></class>
 			<class name="rcc.RCC012"></class>
-			<class name="rcc.RCC006"></class>
 			<class name="rcc.RCC104"></class>
+		</classes>
+	</test>
+	
+	 <test name="test3">
+		<classes>
+			<class name="rcc.RCC003"></class>
+			<class name="rcc.RCC009"></class>
+			<class name="rcc.RCC010"></class>
+			<class name="rcc.RCC011"></class>
+			
+		</classes>
+	</test>
+	
+	 <test name="Edit group test">
+		<classes>
+			<class name="rcc.RCC013"></class>
+			
+			
+		</classes>
+	</test>
+	
+	<test name="Validate details the group details in group list and group details page">
+		<classes>
+			<class name="rcc.RCC001"></class>
+			<class name="rcc.RCC006"></class>
+		</classes>
+	</test>
+	
+	 <test name="Validate details of post,article,patent added to the group">
+		<classes>
+			<class name="rcc.RCC015"></class>
+			<class name="rcc.RCC016"></class>
+			<class name="rcc.RCC017"></class>
+		</classes>
+	</test>
+	
+	<test name="Validate removing action for post,article,patent added to the group">
+		<classes>
+			<class name="rcc.RCC018"></class>
+			<class name="rcc.RCC019"></class>
+			<class name="rcc.RCC014"></class>
+		</classes>
+	</test>
+	
+	<test name="Validate adding GD doc action for post,article,patent and to the group">
+		<classes>
+			<class name="rcc.RCC021"></class>
+			<class name="rcc.RCC022"></class>
+			<class name="rcc.RCC023"></class>
+			<class name="rcc.RCC024"></class>
 		</classes>
 	</test>
 	

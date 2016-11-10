@@ -57,7 +57,7 @@ public class RCC006 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCGROUPUSER1", "RCCGROUPUSER1PASS");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -165,7 +165,7 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Shared Group is displayed");
 			}*/
 
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("RCCTes02 USER02");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
 			if (result) {
 				test.log(LogStatus.INFO, "User Invited sucessfully");
 			} else {
@@ -198,7 +198,7 @@ public class RCC006 extends TestBase{
 
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCGROUPUSER2", "RCCGROUPUSER2PASS");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 
 			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -333,7 +333,7 @@ public class RCC006 extends TestBase{
 
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCGROUPUSER1", "RCCGROUPUSER1PASS");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

@@ -62,13 +62,13 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("Owneruser1", "Owneruser1Password");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
 
 			// Inviting user2
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Asif Alberto");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");
@@ -77,7 +77,7 @@ public class RCC009 extends TestBase {
 				throw new Exception("Sending Invitation is failed due to user1 does not exist");
 			}
 			// Inviting user3
-			boolean result1 = pf.getGroupDetailsPage(ob).inviteMembers("Mohammed Asif");
+			boolean result1 = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE19"));
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 
 			if (result1)
@@ -94,7 +94,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("InviteUser2", "InviteUser2password");
+			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
@@ -114,7 +114,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("InviteUser3", "InviteUser3Password");
+			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
 			test.log(LogStatus.INFO, "Invitation has been send to the Neon user3 and accepted");
@@ -150,7 +150,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("InviteUser2", "InviteUser2password");
+			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 			pf.getGroupDetailsPage(ob).clickonLeaveGroupButton();
