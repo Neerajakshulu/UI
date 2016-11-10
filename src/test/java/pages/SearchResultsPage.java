@@ -486,6 +486,79 @@ public class SearchResultsPage extends TestBase {
 		}
 	}
 	
+	
+	
+	public void onlyAddArticleToGroup() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
+
+	}
+
+	public void clickoncreateButton() throws Exception {
+
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Delete button is not displaye in group details page");
+	}
+
+	public void createGroupInSearchResults(String grouptitle) throws Exception {
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS.toString()), 60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.sendKeys(grouptitle);
+				return;
+			}
+		}
+		throw new Exception("Delete button is not displaye in group details page");
+	}
+
+	
+	public boolean checkgroupNameinResultsPage(String grouptitle) throws Exception {
+		String Originalmessage = grouptitle;
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()), 20);
+		String Originaltext = ob.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()))
+				.getText();
+		if (Originaltext.equals(Originalmessage))
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean addArticletoExistingGroup(String grouptitle) throws Exception {
+		waitForAjax(ob);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()),
+				60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME);
+		for (WebElement we : list) {
+			String name = we.getText();
+			if (name.contains(grouptitle))
+				ob.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON.toString()))
+						.click();
+
+		}
+		throw new Exception("created group is not present in the search result page");
+	}
+	
+	
+	
+	
  }
 	
 

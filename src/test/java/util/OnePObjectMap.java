@@ -690,6 +690,18 @@ public enum OnePObjectMap {
 		RCC_GROUP_COVER_UPDATE_PHOTO_CSS("div >ne-responsive-image > div > div > button[class = 'wui-btn wui-btn--primary']"),
 		RCC_NEWLY_CREATED_GROUP_PHOTO_CSS("div[class='responsive-image__image ng-scope']"),
 		RCC_GROUPDETAILS_RECORD_GROUP_LEVEL_GOOGLE_DOC_TIMESTAMP_CSS("div[class='wui-card__label-header']"),
+		
+		
+		RCC_GROUPLIST_DELETE_GROUP_POP_VERIFICATION_TEXT_CSS("div[class='modal-body wui-modal__body']"),
+		RCC_GROUPLIST_DELETE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),
+		RCC_TOTAL_GROUP_COUNT("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] span[class='wui-side-menu__badge ng-binding']"),
+		GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS("button[class='wui-btn wui-btn--primary ng-binding']"),
+		RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--primary ng-binding']"),
+		RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS("input[placeholder='Create a new group']"),
+		RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--primary']"),
+		RCC_SEARCH_LIST_CREATED_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
+		RCC_SEARCH_LIST_VERIFY_GROUPNAME("span[class='ne-action-dropdown__item-text ng-binding']"),
+		RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--inactive']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

@@ -1371,5 +1371,57 @@ public class GroupDetailsPage extends TestBase {
 		return false;
 
 	}
+	public boolean verifyDeleteGroupPopupMessage() throws Exception {
+		String Originalmessage = "Are you sure you want to delete this group? You will remove all group members and pending invitations.";
+		waitForAjax(ob);
+		waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_VERIFICATION_TEXT_CSS.toString()), 20);
+		String Originaltext = ob
+				.findElement(
+						By.cssSelector(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_VERIFICATION_TEXT_CSS.toString()))
+				.getText();
+		if(Originaltext.equals(Originalmessage))
+			return true;
+		else
+			return false;
+	}
+	public boolean verifyDeletegroupPopupButtons() throws Exception {
+		waitForAjax(ob);
+            try {
+			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
+					.isDisplayed();
+			ob.findElement(By.cssSelector(OnePObjectMap.GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS.toString()))
+					.isDisplayed();
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+
+	}
+	
+	public boolean clickonCancelButtononDEleteGroupPopup() throws Exception {
+		waitForAjax(ob);
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString())).click();
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
+				10);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				return true;
+			}
+		}
+		throw new Exception("leave group button is not displayed in group details page");
+
+	}
+	
+	public void clickOnDeleteGroupButtoninPopUp() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
+
+	}
 
 }
