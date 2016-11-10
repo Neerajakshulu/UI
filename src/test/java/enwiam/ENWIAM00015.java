@@ -93,8 +93,8 @@ public class ENWIAM00015 extends TestBase {
 			Thread.sleep(2000);
 		}
 		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.LOCKED_OK_BUTTON_XPATH.toString()), 30);
-		locked = ob.findElement(By.xpath(OnePObjectMap.LOCKED_MSG_XPATH.toString())).getText();
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()), 30);
+		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();	
 		BrowserWaits.waitTime(2);
 		if (locked.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
@@ -114,8 +114,8 @@ public class ENWIAM00015 extends TestBase {
 		String str = "Your account has been locked.";
 		String locked = "";
 		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00015steamUser"),
-				LOGIN.getProperty("PWDLockedENWIAM0003"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("ENWIAM00015steamPWD"));
+				LOGIN.getProperty("ENWIAM00015steamUserPWD"));
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("ENWIAM00015steamUserPWD"));
 		BrowserWaits.waitTime(2);
 		locked = ob.findElement(By.xpath(OnePObjectMap.LOCKED_MSG_XPATH.toString())).getText();
 
