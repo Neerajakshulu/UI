@@ -51,18 +51,13 @@ public class RCC101  extends TestBase{
 		try {
 
 			String title = this.getClass().getSimpleName() + "_Update_Group_" + "_" + getCurrentTimeStamp();
-			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER004", "RCCTESTUSERPWD004");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			/*pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
-			pf.getGroupsListPage(ob).createGroup(title, desc);
-			test.log(LogStatus.PASS, "Group is created by the USER");
-			pf.getGroupsPage(ob).clickOnGroupsLink();*/
-			
+		
 			Random rand = new Random(); 
 			int value = rand.nextInt(5); 
 			 pf.getGroupsListPage(ob).randomUpdate(value,title);
@@ -78,7 +73,7 @@ public class RCC101  extends TestBase{
 			}
 			catch(Throwable t)
 			{
-				logFailureDetails(test, t, "Sort Dropdown menu  is not dispalying correctly",
+				logFailureDetails(test, t, "Gropus are not sort down properly for Most recent activity",
 						"Drop_down_menu");
 				closeBrowser();
 			}

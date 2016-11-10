@@ -68,6 +68,15 @@ public class RCC100 extends TestBase {
 					"Member is able to see Sort by UI drop down with options Most Recent Activity,Date created or joined and Group name  in top right corner of groups tab");
 			pf.getGroupsListPage(ob).sortByGroupName();
 			test.log(LogStatus.PASS,"Groups are sorting by Group Name");
+			}
+			catch(Throwable t)
+			{
+				logFailureDetails(test, t, "Sort Dropdown menu  is not dispalying correctly",
+						"Drop_down_menu");
+				closeBrowser();
+			}
+			try
+			{
 			pf.getGroupsListPage(ob).sortByCreationDate();
 			test.log(LogStatus.PASS,"Groups are sorting by Creation date");
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -75,7 +84,7 @@ public class RCC100 extends TestBase {
 			}
 			catch(Throwable t)
 			{
-				logFailureDetails(test, t, "Sort Dropdown menu  is not dispalying correctly",
+				logFailureDetails(test, t, "Groups are not sorted properly by Cretion Date",
 						"Drop_down_menu");
 				closeBrowser();
 			}

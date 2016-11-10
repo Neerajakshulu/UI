@@ -3,6 +3,7 @@ package pages;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -367,20 +368,43 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public void sortByGroupName() throws Exception {
-		List<String> list = new ArrayList();
-
-		selectSortoptions("Group name");
+		List<String> beforelist = new ArrayList<String>();
 		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
 		for (WebElement we : li) {
 			String val = we.getText();
-			System.out.println("group name" + val);
-			list.add(val);
+			beforelist.add(val);
 
 		}
-		Collections.sort(list);
+		Collections.sort(beforelist, new Comparator<String>() {
+	    
+	    	  public int compare(String s1, String s2) {
+	    		try {
+	    		
+	    			return s1.compareTo(s2);
+	            } catch (Exception e) {
+	                throw new IllegalArgumentException(e);
+	            }
+	    	}
+	    	});
+	
+		selectSortoptions("Group name");
+		List<String> list2 = new ArrayList<String>();
+		List<WebElement> afterli = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()));
+		for (WebElement we : afterli) {
+			String val = we.getText();
+			list2.add(val);
+
+		}
+		 for(int i=0;beforelist.size()==list2.size()&&i<beforelist.size();i++) {
+	    	  if(beforelist.get(i).equals(list2.get(i)))
+	    		  break;
+	    	  else
+	    		  throw new Exception("values are not soerted by names");
+	      }
+	
 
 	}
-
+	
 	public boolean getCreateGroupCard() throws Exception {
 		boolean status = false;
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
@@ -408,20 +432,30 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public void sortByCreationDate() throws Exception {
-		List<String> list = new ArrayList();
-
+		List<String> beforesort =getDate();
+		Collections.sort(beforesort, new Comparator<String>() {
+	    	  SimpleDateFormat f= new SimpleDateFormat("d MMMMMMM yyyy | hh:mma");
+	    
+	    	  public int compare(String o1, String o2) {
+	    		try {
+	                return f.parse(o1).compareTo(f.parse(o2));
+	            } catch (Exception e) {
+	                throw new IllegalArgumentException(e);
+	            }
+	    	}
+	    	});
+		
 		selectSortoptions("Creation date");
-		List<WebElement> li = ob
-				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
-		for (WebElement we : li) {
-			String val = we.getText().substring(7);
-			System.out.println("date value" + val);
-			list.add(val);
-
+		List<String> aftersort=getDate();
+	      for(int i=0;beforesort.size()==aftersort.size()&&i<beforesort.size();i++) {
+	    	  if(beforesort.get(i).equals(aftersort.get(i)))
+	    		  break;
+	    	  else
+	    		  throw new Exception("values are not soerted");
+	      }
 		}
-		Collections.sort(list);
-
-	}
+		
+		
 	public void ValidateEditDescLessThan500(ExtentTest test) throws Exception {
 		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_GROUP_DESCRIPTION_XPATH.toString())).getText()
 				.length();
@@ -553,50 +587,57 @@ public class GroupsListPage extends TestBase {
 
 		}
 	}
-	public void sortByMostRecentActivity() throws Exception
-	 {
-		 List<Date> beforesort=new ArrayList<Date>();
-	    List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
-	    for(WebElement  we:li)
-	    {
-	    	String val=we.getText().substring(7);
-	    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMMMMMM yyyy");
-	    	 Date date = formatter.parse(val);
-	    	 System.out.println("Before sort value"+val);
-	    	 beforesort.add(date);
-	    	
-	    }
-	    Collections.sort(beforesort);
-	    selectSortoptions("Most recent activity");
-	    List<Date> aftersort=new ArrayList<Date>();
 
-	    List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
-	    for(WebElement ww:list)
-	    {
-
-	    	String val=ww.getText().substring(7);
-	    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMMMMMM yyyy");
-	    	 Date date1 = formatter.parse(val);
-	    	 System.out.println("After date value"+val);
-	    	 aftersort.add(date1);
-	    }
-	    if(beforesort.equals(aftersort))
-	    {
-	    	test.log(LogStatus.PASS,"Sorting is done correctly");
-	    }
-	
-	     
-	    throw new Exception("Sorted is not done properly");
+		public void sortByMostRecentActivity() throws Exception
+		 {
+			
+		     List<String> beforesort=getDate();
+		    Collections.sort(beforesort, new Comparator<String>() {
+		    	  SimpleDateFormat f= new SimpleDateFormat("d MMMMMMM yyyy | hh:mma");
+		    
+		    	  public int compare(String o1, String o2) {
+		    		try {
+		                return -f.parse(o1).compareTo(f.parse(o2));
+		            } catch (Exception e) {
+		                throw new IllegalArgumentException(e);
+		            }
+		    	}
+		    	});
+		   
+		      selectSortoptions("Most recent activity");
+		    List<String> aftersort=getDate();
+		      for(int i=0;beforesort.size()==aftersort.size()&&i<beforesort.size();i++) {
+		    	  if(beforesort.get(i).equals(aftersort.get(i)))
+		    		  break;
+		    	  else
+		    		  throw new Exception("values are not soerted");
+		    	  
+		    	  
+		      }
 	 
 	 }
 	
-	public boolean compareList(List<Date> l1,List<Date> l2) throws Exception
-	{
-		if(l1.equals(l2))
-			return true;
-		else
-			return false;
-	}
+		public List<String> getDate() {
+			 Date date=new Date();
+			 List<String> datelist=new ArrayList<String>();
+			 List<WebElement> li= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS.toString()));
+			    for(WebElement  we:li)
+			    {
+			        
+			        SimpleDateFormat formatter = new SimpleDateFormat("d MMMMMMM yyyy | hh:mma");
+			        String dateInString=we.getText().substring(8);
+			       
+					try {
+					date = formatter.parse(dateInString);
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					}
+					datelist.add(formatter.format(date));
+			                
+			    }
+			    return datelist;
+		 }
 	
 	public void randomUpdate(int val,String title) throws Exception{
 		 waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_TITLE_CSS.toString()),30);
