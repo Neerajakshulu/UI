@@ -133,7 +133,11 @@
 			<class name="enw.ENW023"></class>
 		</classes>
 	</test>
-
+    <test name="ENWIAM00016">
+		<classes>
+			<class name="enw.ENWIAM00016"></class>
+		</classes>
+	</test>
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
