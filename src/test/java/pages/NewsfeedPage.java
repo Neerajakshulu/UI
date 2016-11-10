@@ -70,4 +70,20 @@ public class NewsfeedPage extends TestBase{
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS);
 	}
 	
+	public void addPatentToGroup(List<String> groupTitle,String docTitle) throws Exception {
+		List<WebElement> cardSections=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_COMMENT_CARD_SECTION_CSS);
+		for(WebElement cardSection:cardSections) {
+			String cardCategeory=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
+			if(cardCategeory.contains("New Comment")) {
+				String cardTitle=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
+				if(cardTitle.equalsIgnoreCase(docTitle)) {
+					logger.info("cardTitle-->"+cardTitle);
+					WebElement addToGroup=cardSection.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
+					pf.getWatchlistPageInstance(ob).addDocumentToMultipleGroups(groupTitle, addToGroup);
+					break;
+				}
+			}
+		}
+	}
+	
 }

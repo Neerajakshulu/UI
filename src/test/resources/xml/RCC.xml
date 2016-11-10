@@ -120,6 +120,17 @@
 		</classes>
 	</test>
 	
+	<test name="Add_patent_to_multiple_Groups_Newsfeedpage">
+		<parameter name="username" value="test.special@ca.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="otherUsername" value="chinnareddy.putha@gmail.com" />
+		<parameter name="otherPassword" value="Neon@123" />
+		<parameter name="documentTitle" value="Process for restoring patency to body vessels" />
+		<classes>
+			<class name="rcc.RCC118"></class>
+		</classes>
+	</test>
+	
 	 <test name="test2">
 		<classes>
 			<class name="rcc.RCC002"></class>

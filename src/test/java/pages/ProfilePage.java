@@ -288,6 +288,36 @@ public class ProfilePage extends TestBase {
 			throw new Exception("unable to follow other profile from search screen");
 		}
 	}
+	
+	/**
+	 * Method for follow other profile from their profile page
+	 * 
+	 * @throws Exception, When user not able to follow
+	 */
+	public void followOtherUserFromProfilePage() throws Exception {
+		BrowserWaits.waitTime(2);
+		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
+				OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
+		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+		logger.info("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
+		if(followUnfollowLableBefore.contains("Follow")) {
+		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
+		BrowserWaits.waitTime(2);
+		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+		logger.info("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
+
+		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
+			throw new Exception("unable to follow other profile from search screen");
+		 }
+		}
+		else {
+			logger.info("user is already followed");
+		}
+		
+		
+	}
 
 	/**
 	 * Method for Validate user should have edit option to edit profile and profile name should match with profile image
