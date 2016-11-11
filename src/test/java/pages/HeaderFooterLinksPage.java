@@ -183,14 +183,15 @@ public class HeaderFooterLinksPage extends TestBase {
 
 	/**
 	 * Method to click on search icon
+	 * @throws Exception 
 	 */
-	public void clickOnSearchIcon() {
+	public void clickOnSearchIcon() throws Exception {
 
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 180);
+		//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 180);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable((OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS));
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())));
 		
 	}
-
 	/**
 	 * Method to search for the given text.
 	 * 
@@ -198,7 +199,12 @@ public class HeaderFooterLinksPage extends TestBase {
 	 */
 	public void searchForText(String text) {
 		enterSearchText(text);
-		clickOnSearchIcon();
+		try {
+			clickOnSearchIcon();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
      

@@ -28,7 +28,6 @@ public class ENW017 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW017() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
@@ -46,10 +45,27 @@ public class ENW017 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
+			String header_Expected = "Thomson Reuters Project Neon";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+
+			String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
+			logger.info("Header Text displayed as:" + actual_result);
+				logger.info("Actual result displayed as :" + actual_result
+					+ " text without the hot link and not allow user to Navigate to Neon");
+			try {
+				Assert.assertEquals(header_Expected, actual_result);
+				test.log(LogStatus.PASS, "community enabled version of ENDNOTE logo has been displayed for Market users");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "community enabled version of ENDNOTE logo is not displayed for Market users");// extent
+				ErrorUtil.addVerificationFailure(t);// testng reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+			}
+			
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())));

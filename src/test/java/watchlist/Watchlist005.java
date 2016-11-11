@@ -64,7 +64,8 @@ public class Watchlist005 extends TestBase {
 		try {
 
 			// Opening browser
-			openBrowser();
+		openBrowser();
+		//	runOnSauceLabsFromLocal("Windows", "Chrome");
 			maximizeWindow();
 			clearCookies();
 
@@ -79,8 +80,8 @@ public class Watchlist005 extends TestBase {
 			BrowserWaits.waitTime(4);
 		//	pf.getHFPageInstance(ob).searchForText("hello");
 			pf.getHFPageInstance(ob).searchForText("Technology");
+			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
