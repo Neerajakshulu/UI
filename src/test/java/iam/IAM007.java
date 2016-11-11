@@ -92,15 +92,15 @@ public class IAM007 extends TestBase {
 			//ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).click();
 			//BrowserWaits.waitTime(1);
 //			List<WebElement> list=ob.findElements(By.cssSelector("i[class='fb_logo img sp_O7TpWD6wqPl sx_cd36fd']"));
-			String str=ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).getText();
+			/*String str=ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).getText();
 			logger.info("Text : "+str);
 			if(str.equals("Log in to Facebook")){
 				test.log(LogStatus.INFO,"Invalid UserName and Password");
 			}else{
 				test.log(LogStatus.FAIL,"Valid UserName and Password");
 			}
-			
-			
+			*/
+			waitForElementTobeVisible(ob, By.id("loginform"), 30);
 /*
 			if (!checkElementPresence_name("FB_page_login_button")) {
 
