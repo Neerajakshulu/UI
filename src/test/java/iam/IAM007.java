@@ -100,6 +100,7 @@ public class IAM007 extends TestBase {
 				test.log(LogStatus.FAIL,"Valid UserName and Password");
 			}
 			*/
+			
 			waitForElementTobeVisible(ob, By.id("loginform"), 30);
 /*
 			if (!checkElementPresence_name("FB_page_login_button")) {
