@@ -72,9 +72,9 @@
 			<class name="enwiam.ENWIAM003"></class>
 		</classes>
 	</test>
-<test name="ENWIAM00015">
+	<test name="ENWIAM00015">
 		<classes>
-			<class name="enw.ENWIAM00015"></class>
+			<class name="enwiam.ENWIAM00015"></class>
 		</classes>
 	</test>
 	<test name="Validate_firstname_in_enw_registration_page">
