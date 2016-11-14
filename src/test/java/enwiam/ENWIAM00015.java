@@ -62,8 +62,8 @@ public class ENWIAM00015 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			steamLocked();
-			loginTofb();
+			//steamLocked();
+			//loginTofb();
 			steamEnw();
 			loginTofbSuspended();
 			closeBrowser();
