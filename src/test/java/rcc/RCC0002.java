@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -58,44 +58,69 @@ public class RCC0002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
+			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			String desc = RandomStringUtils.randomAlphanumeric(100);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER006", "RCCTESTUSERPWD006");
+			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 			// OPQA-1570
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-
-			BrowserWaits.waitTime(2);
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsListPage(ob).createGroup(groupTitle);
+		
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			String titleUpdate = RandomStringUtils.randomAlphanumeric(2);
-
 			pf.getGroupDetailsPage(ob).updateGroupTitle(titleUpdate);
-
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
-			BrowserWaits.waitTime(5);
 			// OPQA-1576
-			pf.getGroupDetailsPage(ob).ValidateViewMode(test);
-			pf.getGroupsListPage(ob).ValidateTitle(titleUpdate, test);
+			try{
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkIfEditGroupTitleFieldIsDisplayed());
+			test.log(LogStatus.PASS, "Edit mode is closed");
+			Assert.assertEquals(titleUpdate, pf.getGroupDetailsPage(ob).getGroupTitle());
+			test.log(LogStatus.PASS, "Groupd title is updated in group details page");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Groupd title is not updated in group details page",
+						"_Group_creation_with_two_chars_Failed");
+				
+			}
+			
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			BrowserWaits.waitTime(5);
-			pf.getGroupsListPage(ob).ValidateUpdatedTitle(titleUpdate, test);
-
-			BrowserWaits.waitTime(2);
+			pf.getGroupsPage(ob).switchToGroupTab();
+			
+			try {
+				Assert.assertTrue(pf.getGroupsListPage(ob).checkForGroup(titleUpdate));
+				test.log(LogStatus.PASS, "group title is updated in group list page");
+				
+			} catch (Throwable t) {
+				
+				logFailureDetails(test, t, "group title is not updated in group list page", "_Group_title_mismatch");
+			}
+			pf.getGroupsListPage(ob).clickOnGroupTitle(titleUpdate);
 			// OPQA-1572
 
 			String title1Char = RandomStringUtils.randomAlphanumeric(1);
-			pf.getGroupsPage(ob).clickOnGroupsTab();
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-
-			BrowserWaits.waitTime(2);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 
+			
 			pf.getGroupDetailsPage(ob).updateGroupTitle(title1Char);
-
-			pf.getGroupsListPage(ob).ValidateSaveButtonDisabled(test);
-			BrowserWaits.waitTime(2);
+			try{
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).validateCreateGroupCardErrorMessage());
+			test.log(LogStatus.PASS,
+					"Error validation for 1 char is passed for group title");
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).validateSaveButtonDisabled());
+			test.log(LogStatus.PASS,
+					"Save botton is disabled when min requirement for group title is not met");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Error message and save button validation faled for group with 1 char",
+						"_Group_validation_with_1_chars_Failed");
+				
+			}
+			try{
+			pf.getUtility(ob).deleteGroup(titleUpdate);
+			}catch(Exception e){}
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 

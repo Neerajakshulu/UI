@@ -5,7 +5,7 @@ import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -59,52 +59,73 @@ public class RCC0003 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
+			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER007", "RCCTESTUSERPWD007");
+			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 
-			// OPQA-1577
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			BrowserWaits.waitTime(2);
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsListPage(ob).createGroup(groupTitle);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			String titleUpdate = RandomStringUtils.randomAlphanumeric(50);
 
 			pf.getGroupDetailsPage(ob).updateGroupTitle(titleUpdate);
 			pf.getGroupsListPage(ob).clickOnCancelGroupButton(test);
 
-			pf.getGroupsListPage(ob).ValidateTitleCancel(titleUpdate, test);
-
-			BrowserWaits.waitTime(2);
+			try{
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).checkIfEditGroupTitleFieldIsDisplayed());
+				test.log(LogStatus.PASS, "Edit mode is closed");
+				Assert.assertEquals(groupTitle, pf.getGroupDetailsPage(ob).getGroupTitle());
+				test.log(LogStatus.PASS, "Group title is not on cancelling the edit updated in group details page");
+				}catch(Throwable t){
+					logFailureDetails(test, t, "Group title is not on cancelling the edit updated in group details page",
+							"_Group_creation_with_two_chars_Failed");
+					
+				}
 
 			// OPQA-1571
-			pf.getGroupsPage(ob).CilckGroupTab();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
-			pf.getGroupDetailsPage(ob).updateGroupDescription(titleUpdate);
+			pf.getGroupDetailsPage(ob).updateGroupTitle(titleUpdate);
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
-			test.log(LogStatus.PASS,
-					"user is able to edit group with group name of 50 characters and without any description.");
-			BrowserWaits.waitTime(2);
+			
+			try{
+				Assert.assertEquals(titleUpdate, pf.getGroupDetailsPage(ob).getGroupTitle());
+				test.log(LogStatus.PASS,
+						"user is able to edit group with group name of 50 characters and without any description.");
+				}catch(Throwable t){
+					logFailureDetails(test, t, "Groupd title is not updated in group details page",
+							"_Group_creation_with_50_chars_Failed");
+					
+				}
 			// OPQA-1573
 			String desc50 = RandomStringUtils.randomAlphanumeric(51);
 
-			pf.getGroupsPage(ob).CilckGroupTab();
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
-			pf.getGroupDetailsPage(ob).updateGroupDescription(desc50);
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
-			BrowserWaits.waitTime(2);
-			pf.getGroupsPage(ob).CilckGroupTab();
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-			String actualLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText();
-			System.out.println(actualLength.length());
-			pf.getGroupsListPage(ob).ValidateEditDescMoreThan50(actualLength.length(), desc50.length(), test);
+			desc50=pf.getGroupDetailsPage(ob).getGroupTitle().trim();
+			try{
+				Assert.assertTrue(desc50.length()==50);
+				test.log(LogStatus.PASS,
+						"user is not able to create a new group with group name > 50 chars");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is able to create a new group with group name > 50 chars",
+							"_Group_creation_with_500_chars_Failed");
+					
+			}
+			
+			pf.getGroupsPage(ob).clickOnGroupsLink();
+			try {
+				Assert.assertTrue(pf.getGroupsListPage(ob).checkForGroup(desc50));
+				test.log(LogStatus.PASS, "group title is updated in group list page");
+				
+			} catch (Throwable t) {
+				
+				logFailureDetails(test, t, "group title is not updated in group list page", "_Group_title_mismatch");
+			}
+			
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 

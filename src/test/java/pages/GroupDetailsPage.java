@@ -289,7 +289,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnDeleteButtonInConfirmationMoadl() throws Exception {
 
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
+				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 
 	}
@@ -395,7 +395,6 @@ public class GroupDetailsPage extends TestBase {
 			
 		}
 	}
-
 	public String getPendingInvitationMessage() throws Exception {
 
 		pf.getBrowserWaitsInstance(ob)
@@ -487,6 +486,14 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS).get(1).getText();
 		return groupDesc.equals(desc);
 
+	}
+	public String getGroupDescription() throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS.toString()), 60);
+
+		return pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS).get(1).getText().trim();
+		
 	}
 
 	public void clickOnGroupOwnerName() throws Exception {
@@ -941,6 +948,36 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("Group Description is not updtaed in group details page");
 
 	}
+	public boolean validateSaveButtonDisabled() throws Exception {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()),
+				60);
+		List<WebElement> list = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+			return we.isEnabled();
+			
+			}
+		}
+		throw new Exception("Save button is not displayed while editing the group");
+
+	}
+	
+	public boolean validateCreateGroupCardErrorMessage() throws Exception {
+		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
+		waitForAjax(ob);
+		
+		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString()), 60);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void clickOnSaveButton() throws Exception {
 		waitForAjax(ob);
@@ -1336,16 +1373,16 @@ public class GroupDetailsPage extends TestBase {
 				.click();
 	}
 
-	public void ValidateViewMode(ExtentTest test) throws Exception {
+	public boolean checkIfEditGroupTitleFieldIsDisplayed() throws Exception {
 
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS);
 
 		if (list.size() == 0) {
-			test.log(LogStatus.PASS, "Save button  closed the form ");
+			return true;
 
 		} else {
-			test.log(LogStatus.FAIL, "Save button  closed the form ");
+			return false;
 		}
 
 	}

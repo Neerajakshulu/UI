@@ -94,9 +94,9 @@ public class GroupsListPage extends TestBase {
 
 	public void clickOnGroupTitle(String title) throws Exception {
 		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()), 30);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString()), 30);
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS);
+				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS);
 		for (WebElement we : list) {
 			if (we.getText().contains(title)) {
 				we.click();
@@ -127,7 +127,7 @@ public class GroupsListPage extends TestBase {
 		for (WebElement we : groupsList) {
 			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()))
 					.getText();
-			if (actTitle.contains(groupTitle)) {
+			if (actTitle.equalsIgnoreCase(groupTitle)) {
 				return we;
 			}
 		}
@@ -152,8 +152,16 @@ public class GroupsListPage extends TestBase {
 	public boolean verifyGroupDescription(String desc, String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String groupDesc = groupRecord
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText().trim();
+		if(desc.length()>300) groupDesc=groupDesc.substring(0, 300);
+		return desc.contains(groupDesc);
+	}
+	
+	public String getGroupDescription(String grouptitle) throws Exception {
+		WebElement groupRecord = getGroupCard(grouptitle);
+		return groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText();
-		return groupDesc.equals(desc);
+		
 	}
 
 	public String getGroupOwnerDetails(String grouptitle) throws Exception {
@@ -220,7 +228,7 @@ public class GroupsListPage extends TestBase {
 		for (WebElement we : groupsList) {
 			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()))
 					.getText();
-			if (actTitle.contains(groupTitle)) {
+			if (actTitle.equalsIgnoreCase(groupTitle)) {
 				return true;
 			}
 		}
@@ -242,85 +250,31 @@ public class GroupsListPage extends TestBase {
 		return status;
 	}
 
-	public void ValidateSaveButtonDisabled(ExtentTest test) throws Exception {
-		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
-		String MinLenthMsg1=null;
-		String MinLenthMsg=ValidateSave(MinLenthMsg1);
-		String title2 = RandomStringUtils.randomAlphanumeric(1);
-		if (title2.length() == 1) {
-			if (MinLenthMsg.equalsIgnoreCase(ErrorMsg)) {
-				test.log(LogStatus.PASS,
-						"Error message 'Please provide a title for your group. (Minimum 2 characters)'is displayed correctly");
-				if (!ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()))
-						.isEnabled()) {
-					test.log(LogStatus.PASS, "'Save' button is disabled as minimum group name requirement is not met");
-
-				} else {
-					test.log(LogStatus.FAIL, "Save button is enabled.");
-
-				}
-
-			} else {
-				test.log(LogStatus.FAIL, "Error message is not displayed.");
-
-			}
-
-		}
+	public boolean validateSaveButtonDisabled() throws Exception {
+		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()),
+				60);
+		return ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()))
+				.isEnabled();
 
 	}
 
-	public String ValidateSave(String TxtMsg) throws Exception {
-
+	public boolean validateCreateGroupCardErrorMessage() throws Exception {
+		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
 		waitForAjax(ob);
-		TxtMsg = null;
-
+		
 		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString()), 60);
 
 		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
-				TxtMsg = we.getText();
-
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
 			}
 		}
-		return TxtMsg;
+		return false;
 	}
-	public void ValidateDescLessThan500(ExtentTest test) throws Exception {
-		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText().length();
-		if (GroupLength <= 500) {
-
-			test.log(LogStatus.PASS,
-					" user is able to create a new Group with Group name and description of <= 500 characters.");
-		}
-
-		else {
-
-			test.log(LogStatus.FAIL,
-					"user is able to create a new Group with Group name and description of <= 500 characters.");
-		}
-	}
-
-	public void ValidateDescMoreThan500(int actualLength, int Desc500, ExtentTest test) throws Exception {
-		try {
-			Assert.assertNotEquals(actualLength, Desc500);
-			test.log(LogStatus.PASS,
-					" user is not able to create a new group with more than 500 characters in group description.");
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL,
-					"user is  able to create a new group with more than 500 characters in group description.");// extent
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-					.getSimpleName()
-					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-			ErrorUtil.addVerificationFailure(t);
-
-		}
-
-	}
-
+	
+	
 	public boolean verifyButtonIsEnabled(Object elementName) throws Exception {
 
 		boolean ButtonStatus = pf.getBrowserActionInstance(ob).getElement(elementName).isEnabled();
@@ -540,54 +494,7 @@ public class GroupsListPage extends TestBase {
 
 		}
 	}
-	public void ValidateTitle(String titleUpdate, ExtentTest test) {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString()), 60);
-
-		String updatedTitle = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString())).getText();
-		try {
-			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
-				test.log(LogStatus.PASS,
-						"Save' button closed the form and  updated group details are available in view mode.");
-			} else {
-				test.log(LogStatus.FAIL,
-						"user is not able to edit the group with group name of 2 character and without any description from group details page.");// extent
-
-			}
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL,
-					"user is not able to edit the group with group name of 2 character and without any description from group details page.");
-
-		}
-
-	}
-
-	public void ValidateTitleCancel(String titleUpdate, ExtentTest test) {
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString()), 60);
-
-		String updatedTitle = ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString())).getText();
-		try {
-			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
-				test.log(LogStatus.PASS,
-						"'Cancel' button deletes all modified information and show the group details in view mode.");
-			} else {
-				test.log(LogStatus.FAIL,
-						"'Cancel' button didn't deletes all modified information and show the group details in view mode.");// extent
-
-			}
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "user is not able to click cancel button");
-
-		}
-	}
-
+	
 		public void sortByMostRecentActivity() throws Exception
 		 {
 			

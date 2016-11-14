@@ -4,21 +4,18 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class RCC0001 extends TestBase {
 
@@ -63,61 +60,102 @@ public class RCC0001 extends TestBase {
 			String title = RandomStringUtils.randomAlphanumeric(2);
 			// String desc = "GR1";
 			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
-			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
+			String desc = RandomStringUtils.randomAlphanumeric(500);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER005", "RCCTESTUSERPWD005");
+			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title);
+			try{
+				Assert.assertEquals(title, pf.getGroupDetailsPage(ob).getGroupTitle());
 			test.log(LogStatus.PASS,
 					"user is able to create a new group with group name of 2 characters and without any description.");
-			pf.getUtility(ob).deleteGroup(title);
-
+			
+			}catch(Throwable t){
+				logFailureDetails(test, t, "user is not able to create a new group with group name of 2 characters and without any description.",
+						"_Group_creation_with_two_chars_Failed");
+				
+			}
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			BrowserWaits.waitTime(2);
 			String title50 = RandomStringUtils.randomAlphanumeric(50);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title50);
 
-			test.log(LogStatus.PASS,
-					"user is able to create a new group with group name of 50 characters and without any description.");
-			pf.getUtility(ob).deleteGroup(title);
+			
+			try{
+				Assert.assertEquals(title50, pf.getGroupDetailsPage(ob).getGroupTitle());
+				test.log(LogStatus.PASS,
+						"user is able to create a new group with group name of 50 characters and without any description.");
+				
+				}catch(Throwable t){
+					logFailureDetails(test, t, "user is not able to create a new group with group name of 50 characters and without any description.",
+							"_Group_creation_with_50_chars_Failed");
+					
+				}
+			
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
 			BrowserWaits.waitTime(2);
 			String title2 = RandomStringUtils.randomAlphanumeric(1);
 
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
-			pf.getGroupsListPage(ob).createGroup(title2);
-			pf.getGroupsListPage(ob).ValidateSaveButtonDisabled(test);
-
+			pf.getGroupsListPage(ob).enterGroupTitle(title2);
+			try{
+				Assert.assertTrue(pf.getGroupsListPage(ob).validateCreateGroupCardErrorMessage());
+				test.log(LogStatus.PASS,
+						"Error validation for 1 char is passed for group title");
+				Assert.assertTrue(pf.getGroupsListPage(ob).validateSaveButtonDisabled());
+				test.log(LogStatus.PASS,
+						"Save botton is disabled when min requirement for group title is not met");
+				}catch(Throwable t){
+					logFailureDetails(test, t, "Error message and save button validation faled for group with 1 char",
+							"_Group_validation_with_1_chars_Failed");
+					
+				}
+			
 			pf.getGroupsPage(ob).CilckGroupTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
 
-			pf.getGroupsPage(ob).CilckGroupTab();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-
-			pf.getGroupsListPage(ob).ValidateDescLessThan500(test);
-			pf.getUtility(ob).deleteGroup(groupTitle);
+			try{
+				Assert.assertEquals(groupTitle, pf.getGroupDetailsPage(ob).getGroupTitle());
+				Assert.assertEquals(desc, pf.getGroupDetailsPage(ob).getGroupDescription());
+				test.log(LogStatus.PASS,
+						"user is able to create a new group with group name and with description of 500 chars");
+				
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is not able to create a new group with group name and with description of 500 chars",
+							"_Group_creation_with_500_chars_Failed");
+					
+				}
+			
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
 			BrowserWaits.waitTime(2);
-			String Desc500 = RandomStringUtils.randomAlphanumeric(501);
+			String Desc500 = RandomStringUtils.randomAlphanumeric(510);
 			String title500 = RandomStringUtils.randomAlphanumeric(10);
-			pf.getGroupsPage(ob).CilckGroupTab();
-			BrowserWaits.waitTime(3);
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title500, Desc500);
-			pf.getGroupsPage(ob).CilckGroupTab();
-
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
-			int actualLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText()
-					.length();
-
-			pf.getGroupsListPage(ob).ValidateDescMoreThan500(actualLength, Desc500.length(), test);
-			pf.getUtility(ob).deleteGroup(title500);
+			
+			try{
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getGroupDescription().trim().length()==500);
+				test.log(LogStatus.PASS,
+						"user is not able to create a new group with group name and with description > 500 chars");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is able to create a new group with group name and with description > 500 chars",
+							"_Group_creation_with_500_chars_Failed");
+					
+				}
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -132,10 +170,6 @@ public class RCC0001 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
 		}
-	}
-
-	public void Create50CharGroup(String title) {
-
 	}
 
 	/**

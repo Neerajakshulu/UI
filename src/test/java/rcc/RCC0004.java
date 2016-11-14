@@ -5,7 +5,7 @@ import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -59,7 +59,8 @@ public class RCC0004 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-			String desc = RandomStringUtils.randomAlphanumeric(30);
+			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			String desc = RandomStringUtils.randomAlphanumeric(500);
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -67,37 +68,61 @@ public class RCC0004 extends TestBase {
 			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 			// OPQA-1578--start--edit group description with <= 500 characters.
 
-			pf.getGroupsPage(ob).CilckGroupTab();
-
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsListPage(ob).createGroup(groupTitle,"test");
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			pf.getGroupDetailsPage(ob).updateGroupDescription(desc);
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
 
-			pf.getGroupsPage(ob).CilckGroupTab();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH);
+			try{
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getGroupDescription().equals(desc));
+				test.log(LogStatus.PASS,
+						"user is able to edit a group with description == 500 chars");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is not able to edit a group with description > 500 chars",
+							"_Group_edit_with_500_chars_Failed");
+					
+				}
+			pf.getGroupsPage(ob).clickOnGroupsLink();
+			try{
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(desc, groupTitle));
+				test.log(LogStatus.PASS,
+						"Group description of 500 chars is updated in group list page");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "Group description of 500 chars is updated in group list page",
+							"_Group_edit_with_500_chars_Failed");
+					
+				}
+			
+			String desc500 = RandomStringUtils.randomAlphanumeric(510);
 
-			pf.getGroupsListPage(ob).ValidateEditDescLessThan500(test);
-
-			/// OPQA-1578--end---
-			BrowserWaits.waitTime(2);
-			// OPQA-1579--start
-			String desc500 = RandomStringUtils.randomAlphanumeric(501);
-
-			pf.getGroupsPage(ob).CilckGroupTab();
-
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
+			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);	
 			pf.getGroupDetailsPage(ob).clickOnEditButton();
 			pf.getGroupDetailsPage(ob).updateGroupDescription(desc500);
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
-			BrowserWaits.waitTime(2);
-			pf.getGroupsPage(ob).CilckGroupTab();
+			try{
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getGroupDescription().trim().length()==500);
+				test.log(LogStatus.PASS,
+						"user is not able to edit a group with description > 500 chars");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is able to edit a group with description > 500 chars",
+							"_Group_edit_with_510_chars_Failed");
+					
+				}
 
-			pf.getGroupsPage(ob).clickOnGroupsTabFirstRecord();
-			String actualLength = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText();
-			System.out.println(actualLength.length());
-			pf.getGroupsListPage(ob).ValidateEditDescMoreThan500(actualLength.length(), desc500.length(), test);
-
+			pf.getGroupsPage(ob).clickOnGroupsLink();
+			try{
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(desc500, groupTitle));
+				test.log(LogStatus.PASS,
+						"Group description of 500 chars is updated in group list page");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "Group description of 500 chars is updated in group list page",
+							"_Group_edit_with_500_chars_Failed");
+					
+				}
+			pf.getUtility(ob).deleteGroup(groupTitle);
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 		} catch (Throwable t) {
