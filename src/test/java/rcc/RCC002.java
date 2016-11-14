@@ -142,6 +142,8 @@ public class RCC002 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
+			
+			
 			pf.getGroupsPage(ob).clickOnGroupName(title);
 			int memberCount=pf.getGroupDetailsPage(ob).getMembersCounts();
 			logger.info("Member Count : "+memberCount);
