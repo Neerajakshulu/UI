@@ -169,13 +169,13 @@ public class RCC115 extends TestBase {
 			
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			
 			test.log(LogStatus.INFO, "Delete Created Group");
@@ -190,13 +190,13 @@ public class RCC115 extends TestBase {
 			
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);
 			test.log(LogStatus.INFO, "Verify Added Article available in Group Details Artilce tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			
 			test.log(LogStatus.INFO, "Delete Created Group");

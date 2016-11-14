@@ -164,14 +164,14 @@ public class RCC116 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in First Group Details Artilce tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in First Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in First Group Details Posts tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group1");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
@@ -184,14 +184,14 @@ public class RCC116 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in Second Group Details Artilce tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in Second Group Details Patents tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Second Group Details Posts tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group2");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();

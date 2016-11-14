@@ -480,9 +480,9 @@ public class SearchResultsPage extends TestBase {
 	 * @param expectedLabel
 	 * @throws Exception
 	 */
-	public void validateAddToGroupLabel(String actuallabel,String expectedLabel) throws Exception {
+	public void validateAddToGroupLabel(ExtentTest test,String actuallabel,String expectedLabel) throws Exception {
 		if(!(actuallabel.equalsIgnoreCase(expectedLabel))) {
-			throw new Exception("Add To Group label should be updated to AddedToGroup");
+			logFailureDetails(test, "Add To Group label should be updated to AddedToGroup", "addToGroup_Label_not_updated");
 		}
 	}
 	

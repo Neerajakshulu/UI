@@ -148,7 +148,7 @@ public void addDoucmentToMutipleGroupsFromWatchlist(List<String> groupTitle,Stri
 				//checking it's already added to group or not, if added no need to add 
 				String addedToGroup=groupDropdownListItem.findElement(By.tagName("button")).getAttribute("class");
 				if(!(StringUtils.contains(addedToGroup, "--active"))) {
-					//groupDropdownListItem.findElement(By.tagName("button")).click();
+					scrollElementIntoView(ob, groupDropdownListItem.findElement(By.tagName("button")));
 					jsClick(ob, groupDropdownListItem.findElement(By.tagName("button")));
 					BrowserWaits.waitTime(4);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);

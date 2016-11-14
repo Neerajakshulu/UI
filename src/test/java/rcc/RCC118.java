@@ -85,10 +85,10 @@ public class RCC118 extends TestBase {
 	}
 	
 	@Test(dependsOnMethods = "testLoginUser1")
-	public void followUserAndLogout() throws Exception {
+	public void followUserAndLogout(String userTrueId) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow other user");
-			ob.navigate().to(host + "/#/profile/e55fc3bf-c458-4d9d-ae39-571f1c5713d2");
+			ob.navigate().to(host + userTrueId);
 			BrowserWaits.waitTime(6);
 			pf.getProfilePageInstance(ob).followOtherUserFromProfilePage();
 			
@@ -225,7 +225,7 @@ public class RCC118 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group1 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group1");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
@@ -237,7 +237,7 @@ public class RCC118 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);
 			test.log(LogStatus.INFO, "Verify Added Patent available in Group2 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(patentTitle);
+			pf.getGroupDetailsPage(ob).validatePatentInGroupDetailsPage(test,patentTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group2");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();

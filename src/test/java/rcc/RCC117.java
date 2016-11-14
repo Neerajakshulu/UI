@@ -149,10 +149,10 @@ public class RCC117 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group1 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in Group1 Details Article tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group1");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
@@ -165,10 +165,10 @@ public class RCC117 extends TestBase {
 			pf.getGroupsListPage(ob).navigateToGroupRecordPage(groupTitle2);
 			
 			test.log(LogStatus.INFO, "Verify Added Post available in Group2 Details Post tab");
-			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(postTitle);
+			pf.getGroupDetailsPage(ob).validatePostInGroupDetailsPage(test,postTitle);
 			
 			test.log(LogStatus.INFO, "Verify Added Article available in Group2 Details Article tab");
-			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(articleTitle);
+			pf.getGroupDetailsPage(ob).validateArtcileInGroupDetailsPage(test,articleTitle);
 			
 			test.log(LogStatus.INFO, "Delete Created Group2");
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();

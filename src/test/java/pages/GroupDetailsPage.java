@@ -311,7 +311,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Article not present in Group details page
 	 */
-	public void validateArtcileInGroupDetailsPage(String articleTitle) throws Exception {
+	public void validateArtcileInGroupDetailsPage(ExtentTest test,String articleTitle) throws Exception {
 		clickArticlesTab();
 		boolean isArticleRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -329,7 +329,8 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isArticleRecordPresent) {
-			throw new Exception("Article Record is not present in Group Details Page");
+			//throw new Exception("Article Record is not present in Group Details Page");
+			logFailureDetails(test, "Article Record is not present in Group Details Page", "article_not_present_GD_page");
 		}
 	}
 
@@ -340,7 +341,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Patent not present in Group details page
 	 */
-	public void validatePatentInGroupDetailsPage(String patentTitle) throws Exception {
+	public void validatePatentInGroupDetailsPage(ExtentTest test,String patentTitle) throws Exception {
 		clickPatentstab();
 		boolean isPatentRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -358,7 +359,8 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isPatentRecordPresent) {
-			throw new Exception("Patent Record is not present in Group Details Page");
+			//throw new Exception("Patent Record is not present in Group Details Page");
+			logFailureDetails(test, "Patent Record is not present in Group Details Page", "patent_not_present_GD_page");
 		}
 	}
 
@@ -369,7 +371,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Post not present in Group details page
 	 */
-	public void validatePostInGroupDetailsPage(String postTitle) throws Exception {
+	public void validatePostInGroupDetailsPage(ExtentTest test,String postTitle) throws Exception {
 		clickPostsTab();
 		boolean isPostRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -388,7 +390,9 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isPostRecordPresent) {
-			throw new Exception("Post Record is not present in Group Details Page");
+			//throw new Exception("Post Record is not present in Group Details Page");
+			logFailureDetails(test, "Post Record is not present in Group Details Page", "post_not_present_GD_page");
+			
 		}
 	}
 
