@@ -64,6 +64,7 @@ public class Watchlist027 extends TestBase {
 		try {
 			// Open browser
 			openBrowser();
+			//runOnSauceLabsFromLocal("Windows", "Chrome");
 			maximizeWindow();
 
 			clearCookies();
@@ -78,12 +79,12 @@ public class Watchlist027 extends TestBase {
 			// Navigating to the home page
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
 
-			//Add article to watchlist fron Newsfeed page
+			//Add article to watchlist from Newsfeed page
 			String docTitle=pf.getNewsfeedPageInstance(ob).getArticleTitle();
 			pf.getNewsfeedPageInstance(ob).addFirstArticleToWatclist(newWatchlistName);
 
 			logger.info("document title in watchlist page-->" + docTitle);
-			BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(4);
 			
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -111,15 +112,10 @@ public class Watchlist027 extends TestBase {
 				return;
 			}
 
-			// Navigating to the home page
-			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			
-
-			// Unwatching the article to a particular watch list
-			pf.getNewsfeedPageInstance(ob).addFirstArticleToWatclist(newWatchlistName);
-
-			// Navigate to a particular watch list page
+			// unwatchling article from watchlist page itself
 			navigateToParticularWatchlistPage(newWatchlistName);
+			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			try {
 
