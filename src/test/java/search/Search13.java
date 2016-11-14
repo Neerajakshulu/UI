@@ -111,7 +111,7 @@ public class Search13 extends TestBase {
 
 				ob.switchTo().window(mylist55.get(1));
 				waitForPageLoad(ob);
-
+				BrowserWaits.waitTime(3);
 				pageText = ob.getPageSource().toLowerCase();
 				condition1 = pageText.contains("cat");
 				condition2 = pageText.contains("dog");
