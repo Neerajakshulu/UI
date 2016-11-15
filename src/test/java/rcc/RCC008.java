@@ -81,7 +81,7 @@ public class RCC008 extends TestBase{
 			}
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE15"));
 			if (result) {
-				test.log(LogStatus.INFO, "User Invited sucessfully");
+				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
 				test.log(LogStatus.FAIL, "User not Invited");
 			}

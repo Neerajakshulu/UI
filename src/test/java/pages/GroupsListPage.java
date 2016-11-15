@@ -126,7 +126,7 @@ public class GroupsListPage extends TestBase {
 		for (WebElement we : groupsList) {
 			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString()))
 					.getText();
-			if (actTitle.equalsIgnoreCase(groupTitle)) {
+			if (actTitle.contains(groupTitle)) {
 				return we;
 			}
 		}

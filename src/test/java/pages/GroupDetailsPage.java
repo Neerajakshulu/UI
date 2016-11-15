@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -497,6 +498,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnGroupOwnerName() throws Exception {
+		JavascriptExecutor jse = (JavascriptExecutor)ob;
+		jse.executeScript("scroll(0, -250);");
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS).get(1).click();
