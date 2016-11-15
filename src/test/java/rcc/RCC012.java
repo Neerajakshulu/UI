@@ -78,7 +78,7 @@ public class RCC012 extends TestBase{
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_title_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE16"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE15"));
 			if (result) {
 				test.log(LogStatus.INFO, "User Invited sucessfully");
 			} else {
