@@ -154,7 +154,7 @@ public class GroupsListPage extends TestBase {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String groupDesc = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS.toString())).getText().trim();
-		if(desc.length()>300) groupDesc=groupDesc.substring(0, 300);
+		if(desc.length()>300) groupDesc=groupDesc.substring(0,300);
 		return desc.contains(groupDesc);
 	}
 	
