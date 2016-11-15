@@ -584,7 +584,7 @@ public enum OnePObjectMap {
 		RCC_GROUPINVITATIONS_RECORD_CARD_TITLE_CSS(""),
 		RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS("div[class='ng-isolate-scope wui-metric']"),
 		RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS(""),
-		RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("div[class='research-group-card__text'] p"),	
+		RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("a[class='research-group-card__text'] p"),	
 		RCC_GROUP_GROUPS_LINK__CSS("span[class='wui-title'] a"),
 		RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 		RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
