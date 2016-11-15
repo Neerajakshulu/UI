@@ -143,5 +143,10 @@
 		</classes>
 	</test>
 	
+	<test name="ENW008">
+		<classes>
+			<class name="enw.ENW008"></class>
+		</classes>
+	
 </suite>
 

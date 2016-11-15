@@ -109,6 +109,15 @@ public enum OnePObjectMap {
 			
 			ENW_RECORD_NOTES_XPATH("//tr[@id='notes_tr']/td[1]/span"),
 			ENW_RECORD_NOTES_VALUE_XPATH("//tr[@id='notes_tr']/td[2]/div"),
+			
+			//PATENTS RECORDS
+			ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
+			ENW_RECORD_ASSIGNEE_XPATH("//tr[@id='publisher_tr']/td[1]/span"),
+			ENW_RECORD_PATENTNO_XPATH("//tr[@id='isbn_tr']/td[1]/span"),
+			ENW_RECORD_KEYWORDS_XPATH("//tr[@id='keywords_tr']/td[1]/span"),
+			ENW_SHOWALLFILEDS_LINK_XPATH("//a[@title='Show All Fields']/span"),
+			NEON_RECORDVIEW_PATENTS_NOTES1_XPATH("//span[text()='Cited Patents']//preceding::span[1]"),
+			NEON_RECORDVIEW_PATENTS_NOTES2_XPATH("//span[text()='Cited Articles']//preceding::span[1]"),
 
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),
