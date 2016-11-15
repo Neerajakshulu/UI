@@ -85,6 +85,7 @@ public class RCC118 extends TestBase {
 	}
 	
 	@Test(dependsOnMethods = "testLoginUser1")
+	@Parameters("userTrueId")
 	public void followUserAndLogout(String userTrueId) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "Follow other user");
