@@ -109,6 +109,7 @@ public enum OnePObjectMap {
 			
 			ENW_RECORD_NOTES_XPATH("//tr[@id='notes_tr']/td[1]/span"),
 			ENW_RECORD_NOTES_VALUE_XPATH("//tr[@id='notes_tr']/td[2]/div"),
+			ENW_RECORD_LASTUPDATEDNO_XPATH("//tr[@id='date_tr']/td[1]/span"),
 			
 			//PATENTS RECORDS
 			ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
