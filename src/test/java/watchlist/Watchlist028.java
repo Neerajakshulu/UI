@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -72,16 +71,17 @@ public class Watchlist028 extends TestBase {
 
 			// login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			pf.getHFPageInstance(ob).searchForText(LOGIN.getProperty("PROFILE8"));
-			pf.getSearchResultsPageInstance(ob).clickOnPeopleName(LOGIN.getProperty("PROFILE8"));
+			
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
+			pf.getSearchProfilePageInstance(ob).clickPeople();
+			pf.getSearchProfilePageInstance(ob).selectProfile(LOGIN.getProperty("PROFILE8"));
+			
 			pf.getProfilePageInstance(ob).followOtherProfile();
+			
 			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 1)Login as user1 and comment on some patent
 			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
-
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 90);
-			// selectSearchTypeFromDropDown("Patents");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("patent");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -113,49 +113,12 @@ public class Watchlist028 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			// Navigating to the home page
-			// ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
+			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
+			//Add patent to watchlist
+			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
-			// Check if user gets the notification
-			waitForElementTobeVisible(ob, By.cssSelector("div[class$='-event']"), 60);
-
-			logger.info("new comment size-->" + ob.findElements(By.cssSelector("div[class$='-event']")).size());
-			if (!(ob.findElements(By.cssSelector("div[class$='-event']")).size() >= 1)) {
-
-				test.log(LogStatus.FAIL, "User not receiving notification");// extent
-																			// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_not_receiving_notification")));// screenshot
-				closeBrowser();
-				return;
-			}
-
-			WebElement watchButton = null;
-			String docTitle = null;
-			List<WebElement> newComments = ob
-					.findElements(By.cssSelector("div[class$='-event'] div[class='wui-card__content']"));
-			for (WebElement newComment : newComments) {
-				docTitle = newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
-				if (StringUtils.containsIgnoreCase(document_title, docTitle)) {
-					watchButton = newComment
-							.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
-					break;
-				}
-			}
-
-			logger.info("document title in watchlist page-->" + docTitle);
-			BrowserWaits.waitTime(10);
-			// Watching the article to a particular watch list
-			// watchButton = ob
-			// .findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
-
-			// Selecting the document name
-			/*
-			 * String documentName = ob .findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")["
-			 * + 2 + "]")) .getText();
-			 */
+			logger.info("document title in watchlist page-->" + document_title);
+			BrowserWaits.waitTime(4);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -163,7 +126,7 @@ public class Watchlist028 extends TestBase {
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
 
-				if (watchedItems.get(i).getText().equals(docTitle))
+				if (watchedItems.get(i).getText().equals(document_title))
 					count++;
 
 			}
@@ -181,32 +144,10 @@ public class Watchlist028 extends TestBase {
 			}
 
 			// Navigating to the home page
-			// ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
-			// waitForElementTobeVisible(ob, By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"),
-			// 30);
-
-			waitForElementTobeVisible(ob, By.cssSelector("div[class$='-event']"), 60);
-
-			List<WebElement> newComments2 = ob
-					.findElements(By.cssSelector("div[class$='-event'] div[class='wui-card__content']"));
-			for (WebElement newComment : newComments2) {
-				docTitle = newComment.findElement(By.cssSelector("a div[ng-class='vm.titleSizeClass()']")).getText();
-				if (StringUtils.containsIgnoreCase(document_title, docTitle)) {
-					watchButton = newComment
-							.findElement(By.cssSelector("button[ng-click='WatchButton.openWatchlistSelector()']"));
-					break;
-				}
-			}
-
+			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
+			
 			// Unwatching the patent to a particular watch list
-			// watchButton = ob.findElement(By.xpath("(" + OR.getProperty("search_watchlist_image") + ")[" + 2 + "]"));
-			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
-
-			// Selecting the document name
-			// documentName = ob.findElement(By.xpath("(" + OR.getProperty("document_link_in_home_page") + ")[" + 2 +
-			// "]"))
-			// .getText();
+			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
@@ -232,7 +173,7 @@ public class Watchlist028 extends TestBase {
 				count = 0;
 				for (int i = 0; i < watchedItems.size(); i++) {
 
-					if (watchedItems.get(i).getText().equals(docTitle))
+					if (watchedItems.get(i).getText().equals(document_title))
 						count++;
 
 				}

@@ -1,12 +1,14 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import base.TestBase;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
 public class SearchProfile extends TestBase {
 
@@ -116,5 +118,20 @@ public class SearchProfile extends TestBase {
 			throw new Exception("HCR Profile should display with Badge");
 		}
 	}  
+	
+	/**
+	 * Method for Click People after searching an profile
+	 * 
+	 * @throws Exception, When People are not present/Disabled
+	 */
+	public void selectProfile(String profileName) throws Exception {
+		List<WebElement> searchPeoples=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS);
+		for(WebElement searchPeople:searchPeoples){
+			if(searchPeople.getText().trim().equalsIgnoreCase(profileName)) {
+				searchPeople.click();
+				break;
+			}
+		}
+	}
 
 }

@@ -30,8 +30,10 @@ public class NewsfeedPage extends TestBase{
 	}
 	
 	public void addFirstArticleToWatclist(String watchListName) throws Exception {
+		
 		WebElement watchbutton=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
 		.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+		scrollElementIntoView(ob, watchbutton);
 		watchOrUnwatchItemToAParticularWatchlist(watchListName, watchbutton);
 	}
 	
@@ -57,11 +59,15 @@ public class NewsfeedPage extends TestBase{
 		String postCategeory=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
 					.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
 		logger.info("Article Categeory-->"+postCategeory);
-		String postTitle=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
-				.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
-		logger.info("Article Title-->"+postTitle);	
 		
-		return postTitle;
+		WebElement ele=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+		.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString()));
+		scrollElementIntoView(ob, ele);
+		/*String postTitle=	pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_ARTICLE_CARD_SECTION_CSS)
+				.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();*/
+		logger.info("Article Title-->"+ele.getText());	
+		
+		return ele.getText();
 	}
 	
 	public void clickNewsfeedLink() throws Exception {
@@ -80,6 +86,22 @@ public class NewsfeedPage extends TestBase{
 					logger.info("cardTitle-->"+cardTitle);
 					WebElement addToGroup=cardSection.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS.toString()));
 					pf.getWatchlistPageInstance(ob).addDocumentToMultipleGroups(groupTitle, addToGroup);
+					break;
+				}
+			}
+		}
+	}
+	
+	
+	public void addPatentToWatchlist(String watchlist,String patentTitle) throws Exception {
+		List<WebElement> cardSections=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_COMMENT_CARD_SECTION_CSS);
+		for(WebElement cardSection:cardSections) {
+			String cardCategeory=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
+			if(cardCategeory.contains("New comment")||cardCategeory.contains("New comments")) {
+				String cardTitle=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
+				if(cardTitle.equalsIgnoreCase(patentTitle)) {
+					WebElement addToWatchlist=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+					watchOrUnwatchItemToAParticularWatchlist(watchlist, addToWatchlist);
 					break;
 				}
 			}
