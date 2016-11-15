@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,7 +124,7 @@ public class GroupsListPage extends TestBase {
 
 		String actTitle;
 		for (WebElement we : groupsList) {
-			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_CSS.toString()))
+			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString()))
 					.getText();
 			if (actTitle.equalsIgnoreCase(groupTitle)) {
 				return we;
@@ -138,7 +137,9 @@ public class GroupsListPage extends TestBase {
 		WebElement groupRecord = getGroupCard(grouptitle);
 		String itemsCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS.toString())).getText();
+		if(itemsCount.contains("Item")){
 		itemsCount = itemsCount.substring(0, itemsCount.indexOf("Item")).trim();
+		}else itemsCount = itemsCount.substring(0, itemsCount.indexOf("Items")).trim();
 		return Integer.parseInt(itemsCount) == count;
 	}
 
@@ -166,7 +167,6 @@ public class GroupsListPage extends TestBase {
 
 	public String getGroupOwnerDetails(String grouptitle) throws Exception {
 		WebElement groupRecord = getGroupCard(grouptitle);
-		System.out.println("");
 		String name = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).getText();
 		String role = groupRecord
@@ -408,93 +408,8 @@ public class GroupsListPage extends TestBase {
 	    		  throw new Exception("values are not soerted");
 	      }
 		}
-		
-		
-	public void ValidateEditDescLessThan500(ExtentTest test) throws Exception {
-		int GroupLength = ob.findElement(By.xpath(OnePObjectMap.RCC_GROUP_DESCRIPTION_XPATH.toString())).getText()
-				.length();
-		if (GroupLength <= 500) {
 
-			test.log(LogStatus.PASS,
-					" user is able to edit group description with <= 500 characters from group details page.");
-		}
 
-		else {
-
-			test.log(LogStatus.FAIL,
-					"user is not able to edit group description with <= 500 characters from group details page.");
-		}
-	}
-	public void ValidateEditDescMoreThan500(int actualLength, int Desc500, ExtentTest test) throws Exception {
-		try {
-			Assert.assertNotEquals(actualLength, Desc500);
-
-			if (actualLength < Desc500) {
-				test.log(LogStatus.PASS,
-						" user is not able to edit group with more than 500 characters in group description.");
-			}
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "user is  able to edit group with more than 500 characters in group description.");// extent
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-					.getSimpleName()
-					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-			ErrorUtil.addVerificationFailure(t);
-
-		}
-
-	}
-
-	public void ValidateEditDescMoreThan50(int actualLength, int Desc500, ExtentTest test) throws Exception {
-		try {
-			Assert.assertNotEquals(actualLength, Desc500);
-
-			if (actualLength < Desc500) {
-				test.log(LogStatus.PASS,
-						" user is not able to edit group with more than 50 characters in group description.");
-			}
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "user is  able to edit group with more than 50 characters in group description.");// extent
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-					.getSimpleName()
-					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-			ErrorUtil.addVerificationFailure(t);
-
-		}
-
-	}
-
-	public void ValidateUpdatedTitle(String updatedTitleupdatedTitle, ExtentTest test) {
-		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString()), 60);
-
-		String updatedTitle = ob.findElement(By.xpath(OnePObjectMap.RCC_DESC_MSG_TEXT_XPATH.toString())).getText();
-		try {
-			if (updatedTitle.equalsIgnoreCase(updatedTitle)) {
-				test.log(LogStatus.PASS,
-						" user is able to edit the group with group name of 2 character and without any description from group details page.");
-			} else {
-				test.log(LogStatus.FAIL,
-						"user is not able to edit the group with group name of 2 character and without any description from group details page.");// extent
-
-			}
-
-		}
-
-		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL,
-					"user is not able to edit the group with group name of 2 character and without any description from group details page.");
-
-		}
-	}
-	
 		public void sortByMostRecentActivity() throws Exception
 		 {
 			
