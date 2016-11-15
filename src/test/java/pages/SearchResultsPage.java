@@ -9,11 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 import base.TestBase;
 
@@ -338,11 +340,12 @@ public class SearchResultsPage extends TestBase {
 
 	}
 	
-	public void linkDiffSteamAcctWhileSendToEndnoteSearchPage(ExtentTest test) throws InterruptedException {
+	public void linkDiffSteamAcctWhileSendToEndnoteSearchPage(ExtentTest test) throws Exception {
 		
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-content ng-scope']"), 30);
 		ob.findElement(By.cssSelector("button[class='wui-btn wui-btn--secondary button-color-secondary']")).click();
 		waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-content ng-scope']"), 30);
+		verifylinkDiffSteamAcctText(test);
 		ob.findElement(By.cssSelector(
 				OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS.toString()))
 				.sendKeys("falak.guddu@gmail.com");
@@ -357,6 +360,29 @@ public class SearchResultsPage extends TestBase {
 		test.log(LogStatus.PASS, "User linked with steam account");
 
 	}
+public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
+	waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_LINKINGMODALTEXT_CSS.toString()), 120);
+     BrowserWaits.waitTime(4);
+		String expectedText="Enter your existing account credentials (Cortellis™, EndNote™ Online, InCites™, ResearcherID, Thomson Innovation™, Web of Science™) to link your accounts.";
+		String actualText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_LINKINGMODALTEXT_CSS).getText();
+		
+		 try
+		  {
+			  Assert.assertEquals(actualText, expectedText);
+		  test.log(LogStatus.PASS, "Linking Modal text is correct");
+		}catch(Throwable t){
+			test.log(LogStatus.FAIL, "Linking Modal text is incorrect");
+			test.log(
+					LogStatus.FAIL,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Invitation_Message_mismatch")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+		}
+		
+
+	}
+	
 	
 	public void addArticleToGroup(String groupTitle) throws Exception {
 		addDocumentToGroup(groupTitle);
