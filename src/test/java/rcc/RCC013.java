@@ -100,7 +100,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSER020");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
@@ -165,7 +165,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSER020");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getUtility(ob).deleteGroup(newtitle);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

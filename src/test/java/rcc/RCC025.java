@@ -57,13 +57,13 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("Owneruser1", "Owneruser1Password");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
 
 			// Inviting user2
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers("Asif Alberto");
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");
@@ -80,7 +80,7 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow(); 
 			ob.navigate().to(host);
-			loginAs("InviteUser3", "InviteUser3password");
+			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
 			int beforeusergroupcount = -1;
 			try {
 				pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -108,7 +108,7 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("Owneruser1", "Owneruser1Password");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 
 			int beforegroupcount = pf.getGroupsPage(ob).getGroupsCount();
@@ -160,7 +160,7 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("InviteUser3", "InviteUser3password");
+			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();

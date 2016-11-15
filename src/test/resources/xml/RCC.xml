@@ -6,18 +6,7 @@
 	</listeners>
 	<parameter name="addedToGroupLabel" value="Added to group"/>
 	
-	<test name="RCC010">
-		<classes>
-			<class name="rcc.RCC010"></class>
-		</classes>
-	</test>
-
-	<test name="RCC001">
-		<classes>
-			<class name="rcc.RCC001"></class>
-		</classes>
-	</test>
-	
+		
 	<test name="RCC004">
 		<classes>
 			<class name="rcc.RCC004"></class>
@@ -28,11 +17,7 @@
 		<classes>
 			<class name="rcc.RCC005"></class>
 		</classes>
-	</test>
-	  <test name="RCC011">
-		<classes>
-			<class name="rcc.RCC011"></class>
-		</classes>
+	
 	</test>
 	<test name="RCC0001">
 		<classes>
@@ -42,13 +27,6 @@
 			<class name="rcc.RCC0004"></class>
 		</classes>
 	</test>
-	
-	<test name="RCC013">
-		<classes>
-			<class name="rcc.RCC013"></class>
-		</classes>
-	</test>
-	
 	
 	<test name="RCC100">
 		<classes>
@@ -143,8 +121,8 @@
 	 <test name="Edit group test">
 		<classes>
 			<class name="rcc.RCC013"></class>
-			
-			
+			<class name="rcc.RCC020"></class>
+			<class name="rcc.RCC025"></class>
 		</classes>
 	</test>
 	
