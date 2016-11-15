@@ -67,7 +67,7 @@ public class RCC101  extends TestBase{
 				pf.getGroupsListPage(ob).sortByMostRecentActivity();
 			test.log(
 					LogStatus.PASS,
-					"Grops are sorted properly bu Most Recent Activity");
+					"Grops are sorted properly by Most Recent Activity");
 					pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			}

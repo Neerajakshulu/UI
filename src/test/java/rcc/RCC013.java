@@ -119,7 +119,6 @@ public class RCC013 extends TestBase {
 						"Group_Info_updated");
 			}
 			pf.getGroupsPage(ob).clickOnGroupsLink();
-			pf.getGroupsListPage(ob).verifyGroupDescription(newdesc, newtitle);
 			try
 			{
 			Assert.assertTrue(pf.getGroupsListPage(ob).verifyGroupDescription(newdesc, newtitle));
