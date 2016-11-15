@@ -99,11 +99,11 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
 			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
 			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1,0);
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 				pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
 			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2,1);
 			test.log(LogStatus.INFO, "Attached GC docs the group");
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly in owner view after adding the gd docs");
@@ -271,12 +271,12 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
 			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1,0);
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
 			
 			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2,1);
 			test.log(LogStatus.INFO, "Attached GC docs the group");
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==3);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly after adding the GD doc in member view");
@@ -449,7 +449,7 @@ public class RCC024 extends TestBase {
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -461,7 +461,9 @@ public class RCC024 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		} 
+		} finally{
+			closeBrowser();
+		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 	}
 

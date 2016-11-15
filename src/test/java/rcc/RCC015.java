@@ -224,9 +224,11 @@ public class RCC015 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			test.log(LogStatus.INFO, "Login as Owner");
 			pf.getUtility(ob).deleteGroup(title);
+			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -238,9 +240,7 @@ public class RCC015 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		} finally {
-			pf.getUtility(ob).deleteGroup(title);
-			pf.getLoginTRInstance(ob).logOutApp();
+		} finally{
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");

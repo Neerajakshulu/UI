@@ -277,7 +277,6 @@ public class RCC014 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() throws Exception {
-		closeBrowser();
 		extent.endTest(test);
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(profilexls, "Test Cases",

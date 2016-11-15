@@ -785,7 +785,7 @@ public class GroupDetailsPage extends TestBase {
 		List<String> metricList = new ArrayList<String>();
 		for (WebElement we : list) {
 
-			metricList.add(we.getText());
+			metricList.add(we.getText().replaceAll(",", ""));
 		}
 		return metricList;
 	}
@@ -1310,7 +1310,8 @@ public class GroupDetailsPage extends TestBase {
 	
 	public boolean isItemLevelGDRecordPresent(String recordTitle, String recordType, String docTitle) throws Exception {
 		try{
-		waitForAllElementsToBePresent(ob,
+			scrollingToElementofAPage();
+			waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
 
 		List<WebElement> gdList = getRecordCard(recordTitle, recordType)

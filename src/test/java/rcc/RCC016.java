@@ -120,7 +120,7 @@ public class RCC016 extends TestBase {
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Article title in groups deails page is matching with record view page");
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).getRecordDetails().contains(recordDetals));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).getArticleDetails(recordTitle).contains(recordDetals));
 				test.log(LogStatus.PASS, "Article content in groups deails page is matching with record view page");
 				Assert.assertEquals(metrics, pf.getpostRVPageInstance(ob).getRecordMetrics());
 				test.log(LogStatus.PASS, "Article Metrics in groups deails page is matching with record view page");
@@ -131,7 +131,9 @@ public class RCC016 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
-			ob.navigate().back();
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE10"));
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -166,7 +168,7 @@ public class RCC016 extends TestBase {
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Article title in groups deails page is matching with record view page");
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).getRecordDetails().contains(recordDetals));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).getArticleDetails(recordTitle).contains(recordDetals));
 				test.log(LogStatus.PASS, "Article content in groups deails page is matching with record view page");
 				Assert.assertEquals(metrics, pf.getpostRVPageInstance(ob).getRecordMetrics());
 				test.log(LogStatus.PASS, "Article Metrics in groups deails page is matching with record view page");
@@ -176,11 +178,10 @@ public class RCC016 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Post_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-		
-			ob.navigate().back();
-			
-			pf.getGroupsPage(ob).clickOnGroupsLink();
-			
+								
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+					
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(1, title);
 				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly");
@@ -202,9 +203,11 @@ public class RCC016 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
+			test.log(LogStatus.INFO, "Login as Owner");
 			pf.getUtility(ob).deleteGroup(title);
+			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -215,6 +218,8 @@ public class RCC016 extends TestBase {
 			status = 2;// excel
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
+			
+		}finally{
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");

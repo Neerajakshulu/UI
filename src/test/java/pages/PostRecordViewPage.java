@@ -1006,30 +1006,97 @@ public class PostRecordViewPage extends TestBase {
 		Assert.assertEquals(documentTitle, docTitle);
 	}
 	
-	public String getRecordDetails() throws Exception {
+	public String getPatentRecordDetails(String title) throws Exception {
 		String details = null;
 		StringBuilder strBldr = new StringBuilder();
-		details = ob
-					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS.toString()))
-					.getText().trim();
-		strBldr.append(details);
-		details = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS.toString()))
-					.getText().trim();
-		if(details.contains("PAGES")){
-			strBldr.append(details.substring(0,details.indexOf("PAGES")));
-			strBldr.append(details.substring(details.indexOf("PUBLISHED")));
-			}else{
+		pf.getHFPageInstance(ob).searchForText(title);
+		BrowserWaits.waitTime(10);
+		waitForAjax(ob);
+		pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+		waitForAjax(ob);
+		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+		WebElement titleWe;
+		for (WebElement we : list) {
+			titleWe = we.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString()));
+			if (titleWe.getText().equals(title)) {
+				details = we
+						.findElement(
+								By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_SOURCE_CSS.toString()))
+						.getText().trim();
+
 				strBldr.append(details);
+				details = we
+						.findElements(By
+								.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS.toString())).get(0)
+						.getText().trim();
+				
+				strBldr.append(details);
+				strBldr.append(" ");
+				details = we
+						.findElements(By
+								.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS.toString())).get(1)
+						.getText().trim();
+				strBldr.append("PATENT#: ");
+				strBldr.append(details);
+				titleWe.click();
+				break;
+
 			}
-			for(WebElement we:ob.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString())))
-			{	if(we.isDisplayed()){
+		}
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString()), 60);
+		for (WebElement we : ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString()))) {
+			if (we.isDisplayed()) {
 				details = we.getText().trim();
 				strBldr.append(details);
 				break;
 			}
+		}
+		return strBldr.toString();
+	}
+	
+	public String getArticleDetails(String title) throws Exception {
+		String details = null;
+		StringBuilder strBldr = new StringBuilder();
+		pf.getHFPageInstance(ob).searchForText(title);
+		BrowserWaits.waitTime(10);
+		waitForAjax(ob);
+		pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+		waitForAjax(ob);
+		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+		WebElement titleWe;
+		for (WebElement we : list) {
+			titleWe = we.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString()));
+			if (titleWe.getText().equals(title)) {
+				details = we
+						.findElement(
+								By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_RESULT_SOURCE_CSS.toString()))
+						.getText().trim();
+
+				strBldr.append(details);
+				details = we
+						.findElement(By
+								.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_RESULT_PUBLICATION_CSS.toString()))
+						.getText().trim();
+				strBldr.append(details);
+				
+				titleWe.click();
+				break;
+
 			}
-			
-			return strBldr.toString();
+		}
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString()), 60);
+		for (WebElement we : ob
+				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS.toString()))) {
+			if (we.isDisplayed()) {
+				details = we.getText().trim();
+				strBldr.append(details);
+				break;
+			}
+		}
+		return strBldr.toString();
 	}
 	
 	public List<String> getRecordMetrics() throws Exception {

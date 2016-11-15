@@ -83,7 +83,7 @@ public class RCC017 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
-			pf.getHFPageInstance(ob).searchForText("test");
+			pf.getHFPageInstance(ob).searchForText("micro biology");
 			String recordTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -113,14 +113,14 @@ public class RCC017 extends TestBase {
 
 		pf.getGroupDetailsPage(ob).clickPatentstab();
 		
-		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, "patent");
-		List<String> metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, "patent");
+		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
+		List<String> metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, recordType);
 		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 		
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Patent title in groups deails page is matching with record view page");
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).getRecordDetails().contains(recordDetals));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPatentRecordDetails(recordTitle).contains(recordDetals));
 				test.log(LogStatus.PASS, "Patent content in groups deails page is matching with record view page");
 				Assert.assertEquals(metrics, pf.getpostRVPageInstance(ob).getRecordMetrics());
 				test.log(LogStatus.PASS, "Patent Metrics in groups deails page is matching with record view page");
@@ -131,7 +131,9 @@ public class RCC017 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
-			ob.navigate().back();
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE10"));
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -166,7 +168,7 @@ public class RCC017 extends TestBase {
 			try {
 				Assert.assertEquals(recordTitle,pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Patent title in groups deails page is matching with record view page");
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).getRecordDetails().contains(recordDetals));
+				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPatentRecordDetails(recordTitle).contains(recordDetals));
 				test.log(LogStatus.PASS, "Patent content in groups deails page is matching with record view page");
 				Assert.assertEquals(metrics, pf.getpostRVPageInstance(ob).getRecordMetrics());
 				test.log(LogStatus.PASS, "Patent Metrics in groups deails page is matching with record view page");
@@ -177,9 +179,8 @@ public class RCC017 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 		
-			ob.navigate().back();
-			
-			pf.getGroupsPage(ob).clickOnGroupsLink();
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(1, title);
@@ -204,7 +205,7 @@ public class RCC017 extends TestBase {
 			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -215,6 +216,8 @@ public class RCC017 extends TestBase {
 			status = 2;// excel
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
+			
+		}finally{
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");

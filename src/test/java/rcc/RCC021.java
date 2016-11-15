@@ -99,12 +99,14 @@ public class RCC021 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
 			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1,0);
+			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2,1);
+			BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Attached GC docs the post");
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc1));
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc2));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc1));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc2));
 				test.log(LogStatus.PASS, "Owner is able to attach multiple GD doocs to the artile");
 			}catch (Throwable t) {
 				logFailureDetails(test, t, "Owner is able not to attach multiple GD doocs to the artile",
@@ -163,7 +165,7 @@ public class RCC021 extends TestBase {
 			
 
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE13"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE14"));
 			test.log(LogStatus.INFO, "Invited users");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -258,12 +260,14 @@ public class RCC021 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
 			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1,0);
+			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2,1);
+			BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Attached GC docs the post");
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc1));
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc2));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc1));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc2));
 				test.log(LogStatus.PASS, "Member is able to attach multiple GD doocs to the artile");
 			}catch (Throwable t) {
 				logFailureDetails(test, t, "Member is able not to attach multiple GD doocs to the artile",
@@ -378,7 +382,7 @@ public class RCC021 extends TestBase {
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -391,6 +395,9 @@ public class RCC021 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
 		} 
+		finally{
+			closeBrowser();
+		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 	}
 
