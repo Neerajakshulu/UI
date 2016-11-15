@@ -129,15 +129,15 @@ public class RCC010 extends TestBase {
 			test.log(LogStatus.PASS, "Cancel button is working fine for closing model");
 
 			// Checking Cross button is working for Cancel Invitation Modal
-			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
 
 			// Verify thet submitt button is working for Cancel Invitation Modal
-			pf.getGroupDetailsPage(ob).cancelPendingInvitations("Jyothi Sree");
+			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			BrowserWaits.waitTime(2);
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList("Jyothi Sree"),
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList(LOGIN.getProperty("RCCPROFILE18")),
 					"Invitation is canceled by the owner of the group");
 
 			pf.getLoginTRInstance(ob).logOutApp();

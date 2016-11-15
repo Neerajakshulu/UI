@@ -626,7 +626,7 @@ public enum OnePObjectMap {
 		RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
 		RCC_GROUP_DETAILS_PAGE_INFO_TEXT_CONFIRMATION_MODAL_CSS("div[class='modal-body wui-modal__body'] p"),
 		RCC_GROUP_DETAILS_PAGE_LABEL_TEXT_CONFIRMATION_MODAL_CSS("h3[class='wui-modal__title ng-binding']"),
-		RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS("h3[class='wui-title wui-title--invite-spacing']"),
+		RCC_GROUP_DETAILS_PAGE_PENDING_INV_MSG_CSS("h3[class='wui-title wui-title--invite-spacing-large']"),
 		RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary wui-mini-btn--research-card']"),
 		RCC_GROUPLIST_LEAVE_GROUP_POP_VERIFICATION_TEXT_CSS("div[class='modal-body wui-modal__body']"),
 		RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),

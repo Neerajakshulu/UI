@@ -201,6 +201,7 @@ public class RCC011 extends TestBase {
 			test.log(LogStatus.PASS, "User has login with valid credentials");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
+			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickMembersTab();
 			aftercount = pf.getGroupDetailsPage(ob).getMembersCounts();
