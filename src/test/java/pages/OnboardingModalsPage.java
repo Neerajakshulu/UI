@@ -348,7 +348,6 @@ public class OnboardingModalsPage extends TestBase {
 		} catch (Exception e) {
 			throw new Exception("Profile Onboarding Modals are not displayed for First time user");
 		}
-
 	}
 	
 	
@@ -802,5 +801,98 @@ public class OnboardingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 	}
+	
+	/**
+	 * Method for Validate profile image on profile onboarding modal ,
+	 * @throws Exception, When profile image not uploaded succesfully
+	 */
+	public void validateImageUploadOnProfileModal(String imagePath) throws Exception {
 
+		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
+		logger.info("onboarding status-->" + onboardingStatus.size());
+
+		try {
+			profileOnboardingModal();
+			//Profile image modal
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
+			//validate update button status
+			validateProfilePicUpdateButtonStatus();
+			//upload new profile image
+			uploadProfileImage(imagePath);
+			//wait for profile modal 
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Let’s learn about you","Interests and Skills","Join");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Add a Topic","You can always complete your profile later from  your Profile page.");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:", "Your name and any additional information you add will", "be visible to others.");
+			
+		} catch (Exception e) {
+			throw new Exception("Profile Image upload not done in Profile modal");
+		}
+
+	}
+	
+	/**
+	 * Method for Validate profile image Delete on profile onboarding modal ,
+	 * @throws Exception, When profile image not Deleted succesfully
+	 */
+	public void validateImageDeleteOnProfileModal() throws Exception {
+		String profileImageTimeStamp = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS)
+				.getAttribute("src");
+
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_DELETE_CSS);
+		BrowserWaits.waitTime(8);
+		String profileImageTimeStampAfterUpload = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS)
+				.getAttribute("src");
+		
+		if(profileImageTimeStamp.equalsIgnoreCase(profileImageTimeStampAfterUpload)) {
+			throw new Exception("Profile image not Deleted successfully On Profile Modal");
+		}
+		
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+		
+	}
+	
+	public void validateProfilePicUpdateButtonStatus() throws Exception {
+		boolean proiflePicUpdateButton=pf.getProfilePageInstance(ob).getProfilePicModalWindowUpdateButtonStatus();
+		logger.info("profile pic update button status-->"+proiflePicUpdateButton);
+		if(proiflePicUpdateButton) {
+			throw new Exception("profile pic update button should be disabled by default");
+		}
+	}
+	
+	/**
+	 * Method for upload new profile image
+	 * 
+	 * @throws Exception, When profile image not able to upload	
+	 */
+	public void uploadProfileImage(String imagePath) throws Exception {
+		String profileImageTimeStamp = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS)
+				.getAttribute("src");
+		logger.info("image timestamp before upload-->"+profileImageTimeStamp);
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
+		BrowserWaits.waitTime(4);
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imagePath);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
+		//giving more wait to update the profile image
+		BrowserWaits.waitTime(8);
+		
+		String profileImageTimeStampAfterUpload = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_UPLOAD_CSS)
+				.getAttribute("src");
+		logger.info("image timestamp After upload-->"+profileImageTimeStampAfterUpload);
+		
+		if(profileImageTimeStamp.equalsIgnoreCase(profileImageTimeStampAfterUpload)) {
+			throw new Exception("Profile image not uploaded successfully On Profile Modal");
+		}
+	}
+		
 }

@@ -482,6 +482,15 @@
 			<class name="Profile.Profile69"></class>
 		</classes>
 	</test>
-
+	
+	<test name="image_upload_delete_on_profile_modal">
+		<parameter name="username" value="4aehgq+9snc49cwqlvzc@sharklasers.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="truid" value="16c824e0-78e8-11e6-8fe8-05c6039ea6ae" />
+		<classes>
+			<class name="Profile.Profile70"></class>
+		</classes>
+	</test>
+	
 </suite>
 
