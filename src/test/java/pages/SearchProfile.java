@@ -28,13 +28,13 @@ public class SearchProfile extends TestBase {
 	}
 
 	public void enterSearchKeyAndClick(String searchKey) throws Exception {
+		
 		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
 		BrowserWaits.waitTime(2);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS); 
-		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 90);
+		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()),60);
 	}
 
 	/**

@@ -48,11 +48,11 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnArticleTab() throws Exception {
-		waitForAjax(ob);
+		BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob,By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()),30);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(1).click();
 		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-	}
+	}	
 	
 	/**
 	 * Method to click on Patents tab in search results page
@@ -582,10 +582,67 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 		throw new Exception("created group is not present in the search result page");
 	}
 	
+	public void clickOnSortButton() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);	
+		
+	}
 	
-	
-	
- }
+	public void sortValues(String sortvalue) throws Exception
+	{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);	
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS.toString()), 30);
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS.toString()));
+		for (WebElement we : li) {
+			if (we.getText().equalsIgnoreCase(sortvalue)) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Sortion option is not found in search result page");
+	}
+		
+	public List<String> validateSortOptions(String defaultvalue) throws Exception
+	{
+		List<String> sortval=new ArrayList<String>();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);
+	    String val=ob.findElement(By.cssSelector("span[class='wui-emphasis ng-binding']")).getText();
+	    Assert.assertEquals(defaultvalue,val);
+	    
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS);	
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS.toString()), 30);
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS.toString()));
+		for (WebElement we : li) {
+			sortval.add(we.getText());
+			}
+		return sortval;
+		}
+
+	public List<String> validateFilterValues(String category) throws Exception
+	{
+		waitForElementTobePresent(ob,By.cssSelector("li[class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"),30);
+		String text=ob.findElement(By.cssSelector("li[class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']")).getText();
+		List<String> filterval=new ArrayList<String>();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_LIST_CSS);  
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_LIST_CSS.toString()), 30);
+		if(category.equalsIgnoreCase(text))
+		{
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_LIST_CSS.toString()));
+		for (WebElement we : li) {
+			filterval.add(we.getText());
+			}
+	}
+		return filterval;
+	}
+}
+ 
 	
 
 

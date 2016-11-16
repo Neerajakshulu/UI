@@ -360,6 +360,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_SOURCE_CSS("ne-search-result-type div[class='wui-descriptor']"),
 	
+	//Added by bhavya
+	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS"),
+	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),										
+	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"), 
+
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
