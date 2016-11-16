@@ -21,6 +21,7 @@ import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search10 extends TestBase {
 
@@ -70,31 +71,27 @@ public class Search10 extends TestBase {
 
 			// login using TR credentials
 			login();
-			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(search_query);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
-			filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+			filterPanelHeadingList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_LIST_CSS.toString()));
 			documentTypePanelHeading = filterPanelHeadingList.get(0);
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
 			BrowserWaits.waitTime(5);
-			waitForAllElementsToBePresent(ob, By.xpath(OR.getProperty("filter_checkbox")), 60);
-			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()), 60);
+			List<WebElement> filterValues = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()));
 			filterValues.get(0).click();
 			waitForAjax(ob);
 			// Re-capturing filter values
-			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			filterValues = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()));
 			filterValues.get(1).click();
 			waitForAjax(ob);
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();

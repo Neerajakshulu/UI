@@ -364,6 +364,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS"),
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),										
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"), 
+	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
