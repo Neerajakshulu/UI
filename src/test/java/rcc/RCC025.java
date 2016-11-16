@@ -88,30 +88,34 @@ public class RCC025 extends TestBase {
 				
                  test.log(LogStatus.INFO, "Invitation has been send to the Neon user2 and accepted");
 				
-				//pf.getGroupsPage(ob).clickOnGroupsTab();
+                ob.navigate().refresh();
+ 				pf.getGroupsPage(ob).clickOnGroupsTab();
+ 				pf.getGroupsPage(ob).switchToGroupTab();
 				beforeusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 
-				pf.getGroupsPage(ob).clickOnGroupsTab();
 				Assert.assertTrue(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
 				test.log(LogStatus.PASS, "Group is present in the grouplist");
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 				pf.clearAllPageObjects();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Error in accepting invitation");
+				test.log(LogStatus.FAIL, "Error in verifying the group");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 			// Logging in with user1 and verifying the delete group pop up
+			int beforegroupcount=-1;
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			
 
-			int beforegroupcount = pf.getGroupsPage(ob).getGroupsCount();
+			beforegroupcount = pf.getGroupsPage(ob).getGroupsCount();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			test.log(LogStatus.INFO, "Clicked on leave group button Pop Up opened");
@@ -141,7 +145,7 @@ public class RCC025 extends TestBase {
 
 				int aftergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 
-				Assert.assertEquals(beforegroupcount+1, aftergroupcount, "Verifird the group count ");
+				Assert.assertEquals(beforegroupcount+1, aftergroupcount, "Verifird the group count with user1 ");
 				test.log(LogStatus.PASS, "verified the groups count after deleting");
 
 				logout();
@@ -149,7 +153,7 @@ public class RCC025 extends TestBase {
 				pf.clearAllPageObjects();
 
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Error in verifying the group count after deleting");
+				test.log(LogStatus.FAIL, "Error in verifying the group count after deleting ");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
@@ -165,7 +169,7 @@ public class RCC025 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 			
-			Assert.assertEquals(beforeusergroupcount, afterusergroupcount + 1, "Verifird the group count wit user2 ");
+			Assert.assertEquals(beforeusergroupcount+1, afterusergroupcount , "Verifird the group count wit user2 ");
 			test.log(LogStatus.PASS, "verified the groups count with user after deleting");
 
 			logout();

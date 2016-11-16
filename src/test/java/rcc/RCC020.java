@@ -76,6 +76,7 @@ public class RCC020 extends TestBase {
 			
 			
 			//creating the group and adding the article
+			pf.getHFPageInstance(ob).clickOnHomeLink();
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getSearchResultsPageInstance(ob).onlyAddArticleToGroup();
