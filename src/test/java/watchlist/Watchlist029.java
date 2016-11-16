@@ -73,7 +73,7 @@ public class Watchlist029 extends TestBase {
 			
 			// 2)Login with user2 and and try to watch the post from
 			// notification panel
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINSTEAMUSERNAME4"), LOGIN.getProperty("LOGINSTEAMPASSWORD4"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();

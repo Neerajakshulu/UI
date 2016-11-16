@@ -115,17 +115,12 @@ public class Watchlist021 extends TestBase {
 
 				actualWatchedItems.add(we.getText());
 			}
+			logger.info("total watchlists by content type-->"+actualWatchedItems);
 			List<String> expectedWatchedItems = Arrays
 					.asList(new String[] {"PATENT", "PATENT", "POST", "POST", "ARTICLE", "ARTICLE"});
 
 			if (!actualWatchedItems.equals(expectedWatchedItems)) {
-
-				test.log(LogStatus.FAIL, "Watchlist items are not displayed by content type");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_watchlist_items_are_not_displayed_by_content_type")));// screenshot
-
+				logFailureDetails(test, "Watchlist items are not displayed by content type", this.getClass().getSimpleName()+"_watchlist_items_are_not_displayed_by_content_type");
 			} else {
 				test.log(LogStatus.PASS, "Watchlist items are displayed by content type");
 			}
