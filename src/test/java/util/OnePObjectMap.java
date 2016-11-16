@@ -455,6 +455,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_DIFFSTEAMLINKING_EMAIL_WHILE_SENDTOENW_BUTTON_CSS("input[type='email']"),
 	HOME_PROJECT_NEON_DIFFSTEAMLINKING_PWD_WHILE_SENDTOENW_BUTTON_CSS("input[type='password']"),
 	HOME_PROJECT_NEON_DIFFSTEAMLINKING_LINKINGMODALTEXT_CSS("div[class='modal-body wui-modal__body'] p"),
+	HOME_PROJECT_NEON_INCORRECTPWD_ERRORMSG_CSS("label[class='wui-input-with-label__error']"),
 	RECOMMENDED_PEOPLE_SECTION_USER_NAME_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='ne-user-profile-object-title']/a"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//span[@class='fa fa-check unfollow']"),
 	SEARCH_RESULTS_PAGE_CSS("h2[class='wui-title']"),

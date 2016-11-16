@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -21,8 +20,9 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 public class ENW003 extends TestBase {
-	
+
 	static int status = 1;
+
 	// Following is the list of status:
 	// 1--->PASS
 	// 2--->FAIL
@@ -38,7 +38,7 @@ public class ENW003 extends TestBase {
 
 	@Test
 	public void testcaseENW003() throws Exception {
-		
+
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -50,75 +50,90 @@ public class ENW003 extends TestBase {
 
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername003"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
+
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
+
 			ob.get(host);
-			
-			String expectedSuccessMessage="Sent To EndNote";
-			  
-			   pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),CONFIG.getProperty("sfbpwrd003"));
-			   
-			   //pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
-			   BrowserWaits.waitTime(5);
-			   pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			   BrowserWaits.waitTime(5);
-			   pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			   
-			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			   
-              ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString())).click();
-			  BrowserWaits.waitTime(5);
-              pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			   
-			 pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			  new Actions(ob).moveByOffset(200, 200).click().build().perform();
-			   BrowserWaits.waitTime(8);
-			   pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			   pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
-			   
-		
-			  
-			
-			   try
-				{
-				Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+
+			String expectedSuccessMessage = "Sent To EndNote";
+
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),
+					CONFIG.getProperty("sfbpwrd003"));
+
+			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
+			BrowserWaits.waitTime(5);
+			pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+
+			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS.toString()))
+					.click();
+			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+
+			// pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+			// new Actions(ob).moveByOffset(200, 200).click().build().perform();
+			BrowserWaits.waitTime(8);
+			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
+
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString()))
+					.sendKeys("asdfg");
+			ob.findElement(By
+					.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
+					.click();
+
+			try {
+
+				String expectedErrorMsg = "The email and password do not match. Please try again.";
+
+				String actualErrorMsg = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.HOME_PROJECT_NEON_INCORRECTPWD_ERRORMSG_CSS).getText();
+				Assert.assertEquals(actualErrorMsg, expectedErrorMsg);
+				test.log(LogStatus.PASS,
+						"Error message displayed is correct after enting wrong password while linking");
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL,
+						"Error message displayed is incorrect after enting wrong password while linking");
+				ErrorUtil.addVerificationFailure(t);
+			}
+			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
+
+			try {
+				Assert.assertEquals(expectedSuccessMessage,
+						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
 				test.log(LogStatus.PASS,
 						" Record sent successfully from Search Results Page after linking with steam account");
-				}
-				
-				catch (Throwable t) {
-					t.printStackTrace();
-					test.log(LogStatus.FAIL,
-							" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
-																																// reports
-					status = 2;// excel
-					test.log(
-							LogStatus.INFO,
-							"Snapshot below: "
-									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-											+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-					ErrorUtil.addVerificationFailure(t);
-				}
-			   pf.getLoginTRInstance(ob).logOutApp();
+			}
+
+			catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL,
+						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
+																													// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			
-			
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
