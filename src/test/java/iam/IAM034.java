@@ -36,7 +36,7 @@ public class IAM034 extends TestBase {
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
-		
+
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		String var = rowData.getTestcaseId();
@@ -45,9 +45,9 @@ public class IAM034 extends TestBase {
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
 		test.log(LogStatus.INFO, tests[0]);
-//		extent = ExtentManager.getReporter(filePath);
-//		rowData = testcase.get(this.getClass().getSimpleName());
-//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+		// extent = ExtentManager.getReporter(filePath);
+		// rowData = testcase.get(this.getClass().getSimpleName());
+		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
@@ -81,8 +81,8 @@ public class IAM034 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-1838",
-								"Verify that Neon registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
+						.startTest("OPQA-1837",
+								"Verify that 'Sign up' link should be displayed on Neon registration page .")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
@@ -95,21 +95,15 @@ public class IAM034 extends TestBase {
 				ob.navigate().to(host);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-				ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
-				ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
-				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-				ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-						.sendKeys(CONFIG.getProperty("defaultPassword"));
-				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
-				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Duster");
-				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
-				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-				BrowserWaits.waitTime(2);
-				test.log(LogStatus.PASS, "Required fields are enter properly");
+				String signupStatus = ob
+						.findElement(By.xpath(OR.getProperty("signup_button")))
+						.getAttribute("disabled");
+				logger.info("SingUp Status : " + signupStatus);
+				Assert.assertNotEquals(signupStatus, "disabled");
+				test.log(LogStatus.PASS, "Sign up link displayed on Neon registration page .");
 
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Required fields are enter properly");
+				test.log(LogStatus.FAIL, "Sign up link not displayed on Neon registration page ." + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -125,20 +119,25 @@ public class IAM034 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-1837",
-								"Verify that 'Sign up' link should be displayed on Neon registration page .")
+						.startTest("OPQA-1838",
+								"Verify that Neon registration screen should be displayed and User should be able to enter email address (required), name (required), and password (required).")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				String signupStatus = ob
-						.findElement(By.cssSelector(
-								"button[class='wui-btn wui-btn--primary login-button button-color-primary']"))
-						.getAttribute("disabled");
-				logger.info("SingUp Status : " + signupStatus);
-				Assert.assertNotEquals(signupStatus, "disabled");
-				test.log(LogStatus.PASS, "Sign up link displayed on Neon registration page .");
+				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+				ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
+				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
+						.sendKeys(CONFIG.getProperty("defaultPassword"));
+				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Duster");
+				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
+				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
+				BrowserWaits.waitTime(2);
+				test.log(LogStatus.PASS, "Required fields are enter properly");
 
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Sign up link not displayed on Neon registration page ." + t);// extent
+				test.log(LogStatus.FAIL, "Required fields are enter properly");
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports

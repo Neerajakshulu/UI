@@ -72,9 +72,10 @@ public class IAM028 extends TestBase {
 				ob.navigate().to(host);
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 				BrowserWaits.waitTime(2);
-				ob.findElement(
-						By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
-						.click();
+				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+//				ob.findElement(
+//						By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
+//						.click();
 			}
 
 			BrowserWaits.waitTime(3);
