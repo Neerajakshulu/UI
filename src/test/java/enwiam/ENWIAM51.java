@@ -241,6 +241,20 @@ public class ENWIAM51 extends TestBase {
 				test.log(LogStatus.FAIL, "Connect icon is not displayed on EndNote landing page");
 				ErrorUtil.addVerificationFailure(t);
 			}
+			
+          try {
+				
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHIBB_LINK_CSS); 
+				String expectedShibbLink="http://error-qa.newisiknowledge.com/error/Error?Error=ShibbolethAuth&product=ENW&enwreturnurl=https://app.qc.endnote.com/EndNoteWeb.html";
+				
+				String actualShibbLinkurl = ob.getCurrentUrl();
+				Assert.assertEquals(actualShibbLinkurl, expectedShibbLink);
+				test.log(LogStatus.PASS, "Shibboleth link is taking to proper url");
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL, "Shibboleth link is not taking to proper url");
+				ErrorUtil.addVerificationFailure(t);
+			}
 
 			BrowserWaits.waitTime(2);
 			closeBrowser();
