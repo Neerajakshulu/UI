@@ -149,10 +149,10 @@
 		</classes>
 	</test> -->
 	
-	<test name="ENW0008">
+	<!-- <test name="ENW0008">
 		<classes>
 			<class name="enw.ENW0008"></class>
 		</classes>
-	</test>
+	</test> -->
 </suite>
 

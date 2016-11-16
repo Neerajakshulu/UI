@@ -36,10 +36,16 @@
 			<class name="enw.ENW006"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW008">
 		<classes>
 			<class name="enw.ENW008"></class>
+		</classes>
+	</test>
+
+	<test name="ENW0008">
+		<classes>
+			<class name="enw.ENW0008"></class>
 		</classes>
 	</test>
 
@@ -139,8 +145,8 @@
 			<class name="enw.ENW023"></class>
 		</classes>
 	</test>
-	
-    <test name="ENWIAM00016">
+
+	<test name="ENWIAM00016">
 		<classes>
 			<class name="enwiam.ENWIAM00016"></class>
 		</classes>
@@ -482,7 +488,7 @@
 			<class name="Profile.Profile69"></class>
 		</classes>
 	</test>
-	
+
 	<test name="image_upload_delete_on_profile_modal">
 		<parameter name="username" value="4aehgq+9snc49cwqlvzc@sharklasers.com" />
 		<parameter name="password" value="Neon@123" />
@@ -491,6 +497,6 @@
 			<class name="Profile.Profile70"></class>
 		</classes>
 	</test>
-	
+
 </suite>
 
