@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="DeleteGroupsWatchlists" parallel="tests" thread-count="10">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+
+	<test name="delete_all_watchlist_and_groups">
+	<parameter name="truid" value="59ddd666-fc1c-4e22-a26b-952bfe11bb96|be9a57e8-45e4-4c2d-9f2b-c96304ccb9e7"/>
+	<parameter name="containerType" value="watchlist"/>
+	<!-- <parameter name="containerType" value="project"/> -->
+		<classes>
+			<class name="util.DeleteAllWatchlistGroupsTest"></class>
+		</classes>
+	</test>
+	
+</suite>
+
