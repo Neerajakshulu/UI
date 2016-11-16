@@ -59,34 +59,21 @@ public class Search40 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
 			login();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(search_query);
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			waitForAjax(ob);
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			System.out.println("before refine");
 			// Finding out the types filer in refine panel
-			List<WebElement> content_types = ob.findElements(By.cssSelector("div[class='panel-heading']"));
+			List<WebElement> content_types = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_LIST_CSS.toString()));
 			String filter1 = content_types.get(0).getText();
 			String filter2 = content_types.get(1).getText();
 			String filter3 = content_types.get(2).getText();
 			String filter4 = content_types.get(3).getText();
-
-			BrowserWaits.waitTime(3);
-
+			
 			// Comparing the the label of the type of sort item
 			if (!filter1.equalsIgnoreCase("Document Type") || !filter2.equalsIgnoreCase("Authors")
 					|| !filter3.equalsIgnoreCase("Categories") || !filter4.equalsIgnoreCase("Institutions")) {
