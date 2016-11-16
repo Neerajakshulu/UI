@@ -87,7 +87,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
-				we.click();
+				jsClick(ob,we);
 				return;
 			}
 		}
@@ -102,7 +102,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_ATTACH_FILE_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
-				we.click();
+				jsClick(ob,we);
 				return;
 			}
 		}
@@ -119,7 +119,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
-				we.click();
+				jsClick(ob,we);
 				return;
 			}
 		}
@@ -291,7 +291,7 @@ public class GroupDetailsPage extends TestBase {
 
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS);
 
 	}
 
@@ -412,7 +412,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnCancelButtonINConfirmationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 
@@ -421,7 +421,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnCloseButtonINConfirmationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 	}
@@ -429,7 +429,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnSubmitButtonINConfirmationModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 		waitForAjax(ob);
@@ -1084,8 +1084,8 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnItemLevelRemoveGoogleDoc(String recordTitle, String recordType, String docTitle)
 			throws Exception {
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
-		gdRecord.findElement(
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_REMOVE_BUTTON_CSS.toString())).click();
+		jsClick(ob,gdRecord.findElement(
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_REMOVE_BUTTON_CSS.toString())));
 	}
 
 	public void clickOnItemLevelEditGoogleDoc(String recordTitle, String recordType, String docTitle) throws Exception {
@@ -1192,12 +1192,12 @@ public class GroupDetailsPage extends TestBase {
 		ob.switchTo().frame(frames.get(iterationCount));
 		waitForElementTobeVisible(ob, By.xpath(
 				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle)), 90);
-		ob.findElement(By.xpath(
-				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle))).click();
+		jsClick(ob,ob.findElement(By.xpath(
+				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle))));
 				
 		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString()),
 				90);
-		ob.findElement(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString())).click();
+		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString())));
 		ob.switchTo().defaultContent();
 		waitForAjax(ob);
 	}
