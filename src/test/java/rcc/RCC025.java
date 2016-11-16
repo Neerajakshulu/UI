@@ -145,7 +145,7 @@ public class RCC025 extends TestBase {
 
 				int aftergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 
-				Assert.assertEquals(beforegroupcount+1, aftergroupcount, "Verifird the group count with user1 ");
+				Assert.assertEquals(beforegroupcount, aftergroupcount+1, "Verifird the group count with user1 ");
 				test.log(LogStatus.PASS, "verified the groups count after deleting");
 
 				logout();
@@ -169,7 +169,7 @@ public class RCC025 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 			
-			Assert.assertEquals(beforeusergroupcount+1, afterusergroupcount , "Verifird the group count wit user2 ");
+			Assert.assertEquals(beforeusergroupcount, afterusergroupcount+1 , "Verifird the group count wit user2 ");
 			test.log(LogStatus.PASS, "verified the groups count with user after deleting");
 
 			logout();

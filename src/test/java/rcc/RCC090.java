@@ -85,7 +85,7 @@ public class RCC090 extends TestBase {
 			try {
 				Assert.assertEquals(pf.getGroupsListPage(ob).isCoverPhotoDisplayed(), true);
 				test.log(LogStatus.PASS, "User is able to see added cover photo for the newly created group");
-				pf.getGroupsPage(ob).clickOnGroupName("Project Neon001");
+				pf.getGroupsListPage(ob).clickOnGroupTitle("Project Neon001");
 				pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 				pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 

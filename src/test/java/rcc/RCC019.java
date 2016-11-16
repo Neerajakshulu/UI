@@ -73,8 +73,8 @@ public class RCC019 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
 			waitForPageLoad(ob);
-			waitForAjax(ob);
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			String recordTitle = pf.getSearchResultsPageInstance(ob).getPatentsTitle();
@@ -162,7 +162,8 @@ public class RCC019 extends TestBase {
 				logFailureDetails(test, t, "Items count in Group list page not displayed correctly",
 						"_Group_Item_count_mismatch");
 			}
-			
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			waitForPageLoad(ob);
 			pf.getHFPageInstance(ob).searchForText("biology");
 			recordTitle = pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);

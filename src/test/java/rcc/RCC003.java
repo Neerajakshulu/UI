@@ -95,7 +95,6 @@ public class RCC003 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
-			ob.navigate().refresh();
 			if (pf.getGroupInvitationPage(ob).verifyCustomMessage(groupTitle, msg)) {
 				test.log(LogStatus.PASS, "Logstatus has been verified successfully");
 			} else {

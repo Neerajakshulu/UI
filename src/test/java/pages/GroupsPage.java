@@ -105,17 +105,6 @@ public class GroupsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS);
 	}
 
-	public void clickOnGroupName(String group_title) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_TITLE_CSS);
-		List<WebElement> element = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUP_TITLE_CSS.toString()));
-		for (int i = 0; i < element.size(); i++) {
-			if (element.get(i).getText().equals(group_title)) {
-				element.get(i).click();
-			}
-		}
-
-	}
-
 	public void declineInvitation() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS);

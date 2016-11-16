@@ -594,7 +594,7 @@ public enum OnePObjectMap {
 		RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
 		RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS("div[class='modal-dialog ng-scope'] button[event-action='delete']"),
 		RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS("textarea[name='inviteMessage']"),
-		RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS("div[class='wui-card__body-content'] span[class='ng-binding']"),
+		RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS("div[class='wui-card__body-content'] span[class='ng-binding ng-scope']"),
 		RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS("button[class*='ne-user-follow-unfollow']"),
 		RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS("div[class='project-invite-description ng-binding ng-scope']"),
 		RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH("preceding-sibling::div[@class='wui-card__label-header']"),

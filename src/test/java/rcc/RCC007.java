@@ -142,7 +142,7 @@ public class RCC007 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
-			pf.getGroupsPage(ob).clickOnGroupName(title);
+			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			int memberCount=pf.getGroupDetailsPage(ob).getMembersCounts();
 			logger.info("Member Count : "+memberCount);
 			if(memberCount==0){

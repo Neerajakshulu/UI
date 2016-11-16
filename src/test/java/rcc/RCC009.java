@@ -152,6 +152,7 @@ public class RCC009 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 			pf.getGroupDetailsPage(ob).clickonLeaveGroupButton();
 			test.log(LogStatus.INFO, "Clicked on leave group button Pop Up opened");

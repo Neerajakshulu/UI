@@ -87,6 +87,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_DELETE_GROUP_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
+				scrollElementIntoView(ob, we);
 				jsClick(ob,we);
 				return;
 			}
@@ -102,6 +103,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_ATTACH_FILE_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
+				scrollElementIntoView(ob, we);
 				jsClick(ob,we);
 				return;
 			}
@@ -119,6 +121,7 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSDETAILS_INVITE_OTHERS_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
+				scrollElementIntoView(ob, we);
 				jsClick(ob,we);
 				return;
 			}
@@ -252,7 +255,8 @@ public class GroupDetailsPage extends TestBase {
 				.click();
 	}
 
-	public void clickOnCancelInvitation() {
+	public void clickOnCancelInvitation() throws Exception {
+		scrollingToElementofAPage();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()))
@@ -260,6 +264,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void cancelPendingInvitations(String username) throws Exception {
+		scrollingToElementofAPage();
 		waitForAjax(ob);
 		WebElement groupCard = getPendingRecords(username);
 		groupCard
@@ -270,7 +275,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	private WebElement getPendingRecords(String username) throws Exception {
-
+		scrollingToElementofAPage();
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS.toString()), 60);
 		List<WebElement> pendinglist = ob
@@ -467,6 +472,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public String getGroupOwnerDetails() throws Exception {
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0, 0);");
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
 		String name = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS)
@@ -653,24 +660,27 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnRecordTitle(String recordTitle, String recordType) throws Exception {
-
+		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_TITLE_CSS.toString())).click();
 	}
 
 	public void clickOnRemoveRecord(String recordTitle, String recordType) throws Exception {
+		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString()))
 				.click();
 	}
 
 	public void clickOnAttachFileForRecord(String recordTitle, String recordType) throws Exception {
+		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
 		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString()))
 				.click();
 	}
 
 	public boolean verifytheDateandTimeofAttachedRecord(String recordTitle, String recordType) throws Exception {
+		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
 
 		String Timecard = record
@@ -740,6 +750,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public String getRecordContent(String recordTitle, String recordType) throws Exception {
+		scrollingToElementofAPage();
 		String details = null;
 		StringBuilder strBldr = new StringBuilder();
 		WebElement record = getRecordCard(recordTitle, recordType);
@@ -779,6 +790,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public List<String> getRecordMetrics(String recordTitle, String recordType) throws Exception {
+		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
 		List<WebElement> list = record
 				.findElements(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_RECORD_PUBLICATION_METRICS_XPATH.toString()));
@@ -862,6 +874,8 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public boolean checkShareStatus() throws Exception {
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0, 0);");
 		boolean status = false;
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_SHARE_LINK_CSS);
@@ -1095,6 +1109,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public String getItemLevelGoogleDocDesc(String recordTitle, String recordType, String docTitle) throws Exception {
+		scrollingToElementofAPage();
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		return gdRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DESC_CSS.toString()))
@@ -1150,6 +1165,7 @@ public class GroupDetailsPage extends TestBase {
 
 	public void updateItemLevelGoogleDoc(String recordTitle, String recordType, String docTitle, String newTilte,
 			String desc) throws Exception {
+		scrollingToElementofAPage();
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		clickOnItemLevelEditGoogleDoc(recordTitle, recordType, docTitle);
 		enterItemLevelGoogleDocTitle(gdRecord, newTilte);
@@ -1158,6 +1174,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnOpenInGoogleDriveLinkItemLevel(String recordTitle, String recordType, String docTitle) throws Exception {
+		scrollingToElementofAPage();
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_LINK_CSS.toString()))
 				.click();
@@ -1187,7 +1204,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void selectGDdoc(String gddocTitle,int iterationCount) {
-		waitForAllElementsToBePresent(ob, By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"), 60);
+		waitForAllElementsToBePresent(ob, By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"), 90);
 		List<WebElement> frames=ob.findElements(By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"));
 		ob.switchTo().frame(frames.get(iterationCount));
 		waitForElementTobeVisible(ob, By.xpath(
