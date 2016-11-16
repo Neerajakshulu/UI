@@ -53,74 +53,16 @@ public class ENW001 extends TestBase {
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			List<String> list =Arrays.asList(new String[]{"Articles","Patents","Posts"});
+			
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			
 			ob.get(host);
-			String expectedSuccessMessage="Sent To EndNote";
-			
-		//	ob.navigate().to(System.getProperty("host"));
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("MARKETUSEREMAIL1"),
-					LOGIN.getProperty("MARKETUSERPASSWORD2"));
-			pf.getLoginTRInstance(ob).clickLogin();
-			
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			
-			for(int i=0; i<list.size();i++)
-			{
-				String recordType=list.get(i);
-				
-				if (recordType.equalsIgnoreCase("Articles"))
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-					pf.getAuthoringInstance(ob).chooseArticle();
-					BrowserWaits.waitTime(4);
-					
-				}else if(recordType.equalsIgnoreCase("Patents"))
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-					pf.getAuthoringInstance(ob).chooseArticle();
-					BrowserWaits.waitTime(4);
-				}else
-				{
-					pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-					pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
-					BrowserWaits.waitTime(4);
-				}
-					
-			
-			
-			waitForAjax(ob);
-			
-		
-			try
-			{
-			Assert.assertEquals(expectedSuccessMessage,pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage());
-			test.log(LogStatus.PASS,
-					recordType+" record sent successfully");
-			}
-			
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL,
-						recordType+	" record is not sent to Endnote");// extent
-																															// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-			}
-        
-			ob.navigate().back();
-			//clearing the record from Endnote
-			//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
-			
-			}
+			test.log(LogStatus.INFO, "Sending record for Market user");
+			sendRecordTOENW(LOGIN.getProperty("MARKETUSERENW001"),LOGIN.getProperty("MARKETUSERPWDENW001"));
+			test.log(LogStatus.INFO, "Sending record for non Market user");
+			sendRecordTOENW(LOGIN.getProperty("MARKETUSERENW002"),LOGIN.getProperty("MARKETUSERPWDENW002"));
 			
 			closeBrowser();
 			
@@ -142,17 +84,75 @@ public class ENW001 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
+	
+	private void sendRecordTOENW(String username, String password) throws Exception
+	{
+		List<String> list =Arrays.asList(new String[]{"Articles","Patents","Posts"});
+		String expectedSuccessMessage="Sent To EndNote";
+		pf.getLoginTRInstance(ob).enterTRCredentials(username,password);
+		pf.getLoginTRInstance(ob).clickLogin();
+		
+		pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+		
+		for(int i=0; i<list.size();i++)
+		{
+			String recordType=list.get(i);
+			
+			if (recordType.equalsIgnoreCase("Articles"))
+			{
+				pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+				pf.getAuthoringInstance(ob).chooseArticle();
+				BrowserWaits.waitTime(4);
+				
+			}else if(recordType.equalsIgnoreCase("Patents"))
+			{
+				pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+				pf.getAuthoringInstance(ob).chooseArticle();
+				BrowserWaits.waitTime(4);
+			}else
+			{
+				pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+				pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
+				BrowserWaits.waitTime(4);
+			}
+				
+		
+		
+		waitForAjax(ob);
+		
+	
+		try
+		{
+		Assert.assertEquals(expectedSuccessMessage,pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage());
+		test.log(LogStatus.PASS,
+				recordType+" record sent successfully");
+		}
+		
+		catch (Throwable t) {
+
+			test.log(LogStatus.FAIL,
+					recordType+	" record is not sent to Endnote for ");// extent
+																														// reports
+			status = 2;// excel
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_Neonrecord_not_sent")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+		}
+    
+		ob.navigate().back();
+		//clearing the record from Endnote
+		//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
+		
+		}
+		
+		logout();
+		
+	}
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 }
