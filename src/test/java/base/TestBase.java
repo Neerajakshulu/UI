@@ -1090,12 +1090,13 @@ public class TestBase {
 	 * 
 	 * @param driver
 	 * @param element
+	 * @throws Exception 
 	 */
 	public void scrollElementIntoView(WebDriver driver,
-			WebElement element) {
+			WebElement element) throws Exception {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
-
+		Thread.sleep(3000);
 	}
 
 	/**

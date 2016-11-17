@@ -359,11 +359,12 @@ public class GroupsListPage extends TestBase {
 
 	}
 	
-	public boolean getCreateGroupCard() throws Exception {
+	public boolean getCreateGroupCard(String tilte) throws Exception {
 		boolean status = false;
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS);
 		if (list.size() == 1) {
+			ob.findElement(By.cssSelector((OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS.toString()))).sendKeys(tilte);
 			ob.findElement(By.cssSelector((OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS.toString())))
 					.click();
 			status = true;
@@ -372,7 +373,7 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public String getGroupOwnerDetailsFromCreateGroupCard() throws InterruptedException {
-		BrowserWaits.waitTime(6);
+		waitForAjax(ob);
 		WebElement groupRecord = ob
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS.toString()));
 		String name = groupRecord
@@ -381,6 +382,7 @@ public class GroupsListPage extends TestBase {
 		String role = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS.toString())).getText();
 		logger.info("User role : " + role);
+		
 		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).click();
 		return name.trim() + ", " + role.trim();
 	}

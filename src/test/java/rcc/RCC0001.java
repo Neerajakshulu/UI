@@ -111,7 +111,7 @@ public class RCC0001 extends TestBase {
 				Assert.assertTrue(pf.getGroupsListPage(ob).validateCreateGroupCardErrorMessage());
 				test.log(LogStatus.PASS,
 						"Error validation for 1 char is passed for group title");
-				Assert.assertTrue(pf.getGroupsListPage(ob).validateSaveButtonDisabled());
+				Assert.assertFalse(pf.getGroupsListPage(ob).validateSaveButtonDisabled());
 				test.log(LogStatus.PASS,
 						"Save botton is disabled when min requirement for group title is not met");
 				}catch(Throwable t){

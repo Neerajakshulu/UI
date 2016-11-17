@@ -98,7 +98,9 @@ public class GroupInvitationPage extends TestBase {
 	}
 
 	public boolean verifyCustomMessage(String groupTitle, String custommsg) throws Exception {
+		
 		WebElement groupCard = getRecordCard(groupTitle);
+		BrowserWaits.waitTime(10);
 		String cumsg = groupCard
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITATION_CUSTOM_MESSAGE_CSS.toString()))
 				.getText();

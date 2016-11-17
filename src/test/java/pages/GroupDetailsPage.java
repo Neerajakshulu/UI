@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -105,6 +107,7 @@ public class GroupDetailsPage extends TestBase {
 			if (we.isDisplayed()) {
 				scrollElementIntoView(ob, we);
 				jsClick(ob,we);
+				BrowserWaits.waitTime(2);
 				return;
 			}
 		}
@@ -435,8 +438,6 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
 		waitForAjax(ob);
 	}
 
@@ -666,17 +667,18 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnRemoveRecord(String recordTitle, String recordType) throws Exception {
-		scrollingToElementofAPage();
+		
 		WebElement record = getRecordCard(recordTitle, recordType);
-		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString()))
-				.click();
+		scrollElementIntoView(ob, record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+		jsClick(ob,record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+				
 	}
 
 	public void clickOnAttachFileForRecord(String recordTitle, String recordType) throws Exception {
-		scrollingToElementofAPage();
 		WebElement record = getRecordCard(recordTitle, recordType);
-		record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString()))
-				.click();
+		scrollElementIntoView(ob, record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
+		jsClick(ob,record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
+		BrowserWaits.waitTime(2);		
 	}
 
 	public boolean verifytheDateandTimeofAttachedRecord(String recordTitle, String recordType) throws Exception {
@@ -739,7 +741,8 @@ public class GroupDetailsPage extends TestBase {
 		String role = record
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_ROLE_CSS.toString()))
 				.getText();
-		return name.trim() + ", " + role.trim();
+		if(role.equals(""))return name.trim();
+		else return name.trim() + ", " + role.trim();
 
 	}
 
@@ -1206,15 +1209,17 @@ public class GroupDetailsPage extends TestBase {
 	public void selectGDdoc(String gddocTitle,int iterationCount) {
 		waitForAllElementsToBePresent(ob, By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"), 90);
 		List<WebElement> frames=ob.findElements(By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"));
-		ob.switchTo().frame(frames.get(iterationCount));
+			
+		WebDriverWait wait = new WebDriverWait(ob,60);
+		  wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frames.get(iterationCount)));
 		waitForElementTobeVisible(ob, By.xpath(
 				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle)), 90);
-		jsClick(ob,ob.findElement(By.xpath(
-				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle))));
+		ob.findElement(By.xpath(
+				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle))).click();
 				
 		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString()),
 				90);
-		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString())));
+		ob.findElement(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString())).click();
 		ob.switchTo().defaultContent();
 		waitForAjax(ob);
 	}
@@ -1395,7 +1400,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public boolean checkIfEditGroupTitleFieldIsDisplayed() throws Exception {
-
+		waitForAjax(ob);
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_ENTER_GROUP_TILTLE_CSS);
 

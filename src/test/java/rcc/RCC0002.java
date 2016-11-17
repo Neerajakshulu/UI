@@ -76,7 +76,8 @@ public class RCC0002 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnSaveButton();
 			// OPQA-1576
 			try{
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkIfEditGroupTitleFieldIsDisplayed());
+			BrowserWaits.waitTime(4);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).checkIfEditGroupTitleFieldIsDisplayed());
 			test.log(LogStatus.PASS, "Edit mode is closed");
 			Assert.assertEquals(titleUpdate, pf.getGroupDetailsPage(ob).getGroupTitle());
 			test.log(LogStatus.PASS, "Groupd title is updated in group details page");
@@ -109,7 +110,7 @@ public class RCC0002 extends TestBase {
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).validateCreateGroupCardErrorMessage());
 			test.log(LogStatus.PASS,
 					"Error validation for 1 char is passed for group title");
-			Assert.assertTrue(pf.getGroupDetailsPage(ob).validateSaveButtonDisabled());
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).validateSaveButtonDisabled());
 			test.log(LogStatus.PASS,
 					"Save botton is disabled when min requirement for group title is not met");
 			}catch(Throwable t){

@@ -51,8 +51,8 @@ public class RCC021 extends TestBase {
 	public void testGroupCreation() throws Exception {
 		String gUsername1=LOGIN.getProperty("GMAILUSERNAME1");
 		String gPassword1=LOGIN.getProperty("GMAILPASSWORD1");
-		String gUsername2=LOGIN.getProperty("GMAILUSERNAME2");
-		String gPassword2=LOGIN.getProperty("GMAILPASSWORD2");
+		String gUsername2=LOGIN.getProperty("GMAILUSERNAME3");
+		String gPassword2=LOGIN.getProperty("GMAILPASSWORD3");
 		
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;

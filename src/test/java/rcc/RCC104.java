@@ -60,7 +60,7 @@ public class RCC104 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 
-			boolean statusAfterClickCreateButton = pf.getGroupsListPage(ob).getCreateGroupCard();
+			boolean statusAfterClickCreateButton = pf.getGroupsListPage(ob).getCreateGroupCard(title);
 			try {
 				Assert.assertTrue(statusAfterClickCreateButton);
 				test.log(LogStatus.PASS, "Create Group card is displayed and Canceled successfylly");
