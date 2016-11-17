@@ -514,55 +514,49 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 	
 	
 	
-	public void onlyAddArticleToGroup() throws Exception {
+	public void clickAddToGroup() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS);
 
 	}
 
-	public void clickoncreateButton() throws Exception {
-
-		waitForAjax(ob);
+	public void createGroupAddToGroupDropDown(String grouptitle) throws Exception {
 		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS.toString()), 60);
-		List<WebElement> list = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS);
-		for (WebElement we : list) {
-			if (we.isDisplayed()) {
-				we.click();
-				return;
-			}
-		}
-		throw new Exception("Delete button is not displaye in group details page");
-	}
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()), 30);
 
-	public void createGroupInSearchResults(String grouptitle) throws Exception {
-		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS.toString()), 60);
-		List<WebElement> list = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS);
-		for (WebElement we : list) {
-			if (we.isDisplayed()) {
-				we.sendKeys(grouptitle);
-				return;
-			}
-		}
-		throw new Exception("Delete button is not displaye in group details page");
+		WebElement addToGroup = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()));
+				
+		addToGroup
+				.findElement(By.cssSelector(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS.toString())).sendKeys(grouptitle);;
+		BrowserWaits.waitTime(3);
+		
+		addToGroup
+				.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS.toString())).click();;
+
 	}
 
 	
-	public boolean checkgroupNameinResultsPage(String grouptitle) throws Exception {
-		String Originalmessage = grouptitle;
-		waitForAjax(ob);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()), 20);
-		String Originaltext = ob.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()))
-				.getText();
-		if (Originaltext.equals(Originalmessage))
-			return true;
-		else
-			return false;
+	public boolean checkgroupNameIsSelectedResultsPage(String grouptitle) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()), 30);
+
+		WebElement addToGroup = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()));
+
+		List<WebElement> groupList = addToGroup
+				.findElements(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString()));
+		for (WebElement we : groupList) {
+			if (we.getText().trim().equals(grouptitle)) {
+				List<WebElement> list = we.findElements(
+						By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON.toString()));
+				if (list.size() > 0)
+					return true;
+			}
+		}
+
+		return false;
 
 	}
 
@@ -641,8 +635,60 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 	}
 		return filterval;
 	}
-}
- 
 	
+	
+	public boolean validateAddToGroupDropDown() throws Exception {
 
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()), 30);
 
+		WebElement addToGroup = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()));
+
+		WebElement createButton = addToGroup
+				.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS.toString()));
+
+		WebElement createTextField = addToGroup
+				.findElement(By.cssSelector(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS.toString()));
+
+		BrowserWaits.waitTime(5);
+		List<WebElement> spinner = addToGroup
+				.findElements(By.cssSelector(OnePObjectMap.RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS.toString()));
+
+		return createButton.isDisplayed() && createTextField.isDisplayed() && !spinner.get(0).isDisplayed();
+
+	}
+
+	public boolean verifyFirstGroupInList(String groupTitle1) {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()), 30);
+
+		WebElement addToGroup = ob
+				.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS.toString()));
+		waitForAjax(ob);
+		String actGroup=addToGroup
+				.findElement(By.cssSelector(OnePObjectMap.RCC_SEARCH_LIST_VERIFY_GROUPNAME.toString())).getText();
+		
+		return actGroup.trim().equals(groupTitle1);
+	}
+	
+	public void clickAddToGroupForRecord(String recordTitle, String recordType) {
+		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+		WebElement titleWe;
+		for (WebElement we : list) {
+			if (recordType.equalsIgnoreCase("post"))
+				titleWe = we.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()));
+			else
+				titleWe = we.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString()));
+			if (titleWe.getText().equals(recordTitle)) {
+
+				we.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS.toString()))
+						.click();
+				break;
+
+			}
+		}
+
+	}
+
+}

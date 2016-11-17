@@ -359,7 +359,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_SEARCH_RESULT_SOURCE_CSS("ne-search-result-type div[class*='wui-descriptor--authors']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_SOURCE_CSS("ne-search-result-type div[class='wui-descriptor']"),
-	
+	SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS("div[class^='add-to-group-toggle'][class$='dropdown open'] div[class='dropdown-menu ne-action-dropdown']"),
 	//Added by bhavya
 	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS"),
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),										
@@ -720,10 +720,11 @@ public enum OnePObjectMap {
 		GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS("button[class='wui-btn wui-btn--primary ng-binding']"),
 		RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--primary ng-binding']"),
 		RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_CSS("input[placeholder='Create a new group']"),
-		RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--primary']"),
+		RCC_SEARCH_LIST_ARTICLE_CREATE_GROUP_BUTTON_CSS("button[ng-click='vm.createProject()']"),
 		RCC_SEARCH_LIST_CREATED_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
-		RCC_SEARCH_LIST_VERIFY_GROUPNAME("span[class='ne-action-dropdown__item-text ng-binding']"),
-		RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--inactive']"),
+		RCC_SEARCH_LIST_VERIFY_GROUPNAME("a[class='ne-action-dropdown__item-content']"),
+		RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
+		RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
 ///----------------------------------------------------------------------------------------------------------------------------------------------
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

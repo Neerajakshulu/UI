@@ -6,7 +6,7 @@
 	</listeners>
 	<parameter name="addedToGroupLabel" value="Added to group"/>
 	
-		
+ 		
 	<test name="RCC004">
 		<classes>
 			<class name="rcc.RCC004"></class>
@@ -121,19 +121,19 @@
 	 <test name="Edit group test">
 		<classes>
 			<class name="rcc.RCC013"></class>
-			<class name="rcc.RCC020"></class>
+			<class name="rcc.RCC026"></class>
 			<class name="rcc.RCC025"></class>
 		</classes>
 	</test>
 	
-	<test name="Validate details the group details in group list and group details page">
+	<test name="Validate_details_the_group_details_in_group_list_and_group_details_page">
 		<classes>
 			<class name="rcc.RCC001"></class>
 			<class name="rcc.RCC006"></class>
 		</classes>
 	</test>
 	
-	 <test name="Validate details of post,article,patent added to the group">
+	 <test name="Validate_details_of_post_article_patent_added_to_the_group">
 		<classes>
 			<class name="rcc.RCC015"></class>
 			<class name="rcc.RCC016"></class>
@@ -141,24 +141,30 @@
 		</classes>
 	</test>
 	
-	<test name="Validate removing action for post,article,patent added to the group">
+	 <test name="rcc.RCC020">
+		<classes>
+			<class name="rcc.RCC020"></class>
+		</classes>
+	</test>
+	
+	<test name="Validate_removing_action_for_post_article_patent_added_to_the_group">
 		<classes>
 			<class name="rcc.RCC018"></class>
 			<class name="rcc.RCC019"></class>
 			<class name="rcc.RCC014"></class>
 		</classes>
 	</test>
-	
-	<test name="Validate adding GD doc action for post,article,patent and to the group">
+	 
+	<test name="Validate_adding_GD_doc_action_for_post_article_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
 			<class name="rcc.RCC022"></class>
 			<class name="rcc.RCC023"></class>
 			<class name="rcc.RCC024"></class>
 		</classes>
-	</test>
+	</test> -->
 	
-	<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
+<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
 	<classes>
 		<class name="rcc.RCC090"></class>
 	</classes>
@@ -174,7 +180,7 @@
 	<classes>
 		<class name="rcc.RCC092"></class>
 	</classes>
-	</test>
+	</test> 
 	
 </suite>
 

@@ -3,7 +3,6 @@ package rcc;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -50,64 +49,76 @@ public class RCC020 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
 			String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
-			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			// login with Owneruser and search for the article
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER007", "RCCTESTUSERPWD007");
 			BrowserWaits.waitTime(10);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsListPage(ob).deleteAllGroups();
 			int beforecreation = pf.getGroupsPage(ob).getGroupsCount();
+			waitForAjax(ob);
 			System.out.println(beforecreation);
 
 			//searching the specified search
-			pf.getHFPageInstance(ob).searchForText("test");
+			pf.getHFPageInstance(ob).searchForText("micro biology");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getSearchResultsPageInstance(ob).onlyAddArticleToGroup();
+			pf.getSearchResultsPageInstance(ob).clickAddToGroup();
+			try{
+				Assert.assertTrue(pf.getSearchResultsPageInstance(ob).validateAddToGroupDropDown());
+				test.log(LogStatus.PASS, "Add to group drop down validation passed when there no groups");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Add to group drop down validation failed when there no groups", "Addtogroup_validation_failed");
+			}
 			
-			//making sure that before creating the group, group is already not present 
-			Assert.assertFalse(pf.getSearchResultsPageInstance(ob).checkgroupNameinResultsPage(groupTitle));
-			test.log(LogStatus.PASS,"verified and the group is not present in the list" );
-			ob.navigate().refresh();
-			
-			
-			
-			
-			//creating the group and adding the article
-			pf.getHFPageInstance(ob).clickOnHomeLink();
-			pf.getHFPageInstance(ob).searchForText("test");
-			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getSearchResultsPageInstance(ob).onlyAddArticleToGroup();
-			pf.getSearchResultsPageInstance(ob).createGroupInSearchResults(groupTitle);
-			pf.getSearchResultsPageInstance(ob).clickoncreateButton();
+			pf.getSearchResultsPageInstance(ob).createGroupAddToGroupDropDown(groupTitle);
 			test.log(LogStatus.INFO, "Group creation successfull");
-			Assert.assertTrue(pf.getSearchResultsPageInstance(ob).checkgroupNameinResultsPage(groupTitle));
-			test.log(LogStatus.PASS, "verified the group name ");
+			
+			try{
+				Assert.assertTrue(pf.getSearchResultsPageInstance(ob).checkgroupNameIsSelectedResultsPage(groupTitle));
+				test.log(LogStatus.PASS, "Newly creadted group is available in drop down");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Add to group drop down validation failed when there no groups", "Addtogroup_validation_failed");
+			}
+			
 			// pf.getSearchResultsPageInstance(ob).verifyGroupCreationIcon();
 			
 			//verifying the group is present in the group list
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			try{
 			Assert.assertTrue(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
-			test.log(LogStatus.PASS, "Group is present in the grouplist");
-
+			test.log(LogStatus.PASS, "Group created from add to group drop down is present in the grouplist");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Group created from add to group drop down is present in the grouplist", "Add_to_group_validation_failed");
+			}
 			int aftercreation = pf.getGroupsPage(ob).getGroupsCount();
 			System.out.println(aftercreation);
+			try{
 			Assert.assertEquals(beforecreation + 1, aftercreation);
-			test.log(LogStatus.PASS, "Group count is incresed");
-			
-			
-			
-			//creating new group in groups page and adding article
-			/*pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
-			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
-			pf.getHFPageInstance(ob).searchForText("test");
+			test.log(LogStatus.PASS, "Group count is updated when users creates group from add to group drop down");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Group count is not updated when users creates group from add to group drop down", "Add_to_groupCount_validation_failed");
+			}
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			String groupTitle1 = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
+			pf.getGroupsListPage(ob).createGroup(groupTitle1);		
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			waitForPageLoad(ob);
+			pf.getHFPageInstance(ob).searchForText("micro biology");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getSearchResultsPageInstance(ob).onlyAddArticleToGroup();
-			pf.getSearchResultsPageInstance(ob).addArticletoExistingGroup(groupTitle);*/
+			pf.getSearchResultsPageInstance(ob).clickAddToGroup();
+			try{
+			pf.getSearchResultsPageInstance(ob).verifyFirstGroupInList(groupTitle1);
+			test.log(LogStatus.PASS, "Most recent group is listed in the top in add to group list");
+			}catch(Throwable t){
+				logFailureDetails(test, t, "Most recent group is not listed in the top in add to group list", "Add_to_group_order_validation_failed");
+			}
 			
-			
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");

@@ -97,7 +97,7 @@ public class GroupsListPage extends TestBase {
 		List<WebElement> list = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS);
 		for (WebElement we : list) {
-			if (we.getText().contains(title)) {
+			if (we.getText().equalsIgnoreCase(title)) {
 				we.click();
 				return;
 			}
@@ -483,6 +483,21 @@ public class GroupsListPage extends TestBase {
 		WebElement image1 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_NEWLY_CREATED_GROUP_PHOTO_CSS);
 		Boolean ImagePresent = image1.isDisplayed();
 		return ImagePresent; 
+		
+	}
+
+	public void deleteAllGroups() throws Exception {
+		
+		List<WebElement> list= ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString()));
+		
+		for(int i=0;i<list.size();i++){
+			waitForAjax(ob);
+			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString())).click();
+			BrowserWaits.waitTime(3);
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
+			
+		}
 		
 	}
 
