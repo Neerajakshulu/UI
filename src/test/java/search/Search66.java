@@ -62,7 +62,7 @@ public class Search66 extends TestBase {
 			login();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("drugs");
 			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
