@@ -58,19 +58,15 @@ public class Search66 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
-			// login using TR credentials
+						// login using TR credentials
 			login();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-         // waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-			//BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(5);
 			waitForAjax(ob);
 			String all_text = ob
 					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
