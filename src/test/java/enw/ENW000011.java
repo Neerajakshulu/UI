@@ -53,13 +53,10 @@ public class ENW000011 extends TestBase {
 			ob.navigate().to(host);
 
 			try {
-
-				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
-						.sendKeys(LOGIN.getProperty("UsersteamENW000011"));
-				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-						.sendKeys(LOGIN.getProperty("PWDuserENW000011"));
-				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
+                
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UsersteamENW000011"),
+						LOGIN.getProperty("PWDuserENW000011"));
+				pf.getLoginTRInstance(ob).clickLogin();
 
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
