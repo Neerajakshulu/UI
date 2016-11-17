@@ -57,17 +57,15 @@ public class ENW002 extends TestBase {
 			ob.get(host);
 			String expectedSuccessMessage="Sent To EndNote";
 			
-		//	ob.navigate().to(System.getProperty("host"));
-			//loginAs("MARKETUSEREMAIL2", "MARKETUSERPASSWORD2");
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("MARKETUSEREMAIL1"),
-					LOGIN.getProperty("MARKETUSERPASSWORD2"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("MARKETUSERENW001"),
+					LOGIN.getProperty("MARKETUSERPWDENW001"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
 			
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-		
+		    
 			try
 			{
 			Assert.assertEquals(expectedSuccessMessage,pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
@@ -85,20 +83,13 @@ public class ENW002 extends TestBase {
 						LogStatus.INFO,
 						"Snapshot below: "
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+										+ "_Record_not_sent")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
         
-		
-			//clearing the record from Endnote
-			//pf.getENWReferencePageInstance(ob).clearRecordEndnote();
 			
-	
 			closeBrowser();
-			
-			
-			
-			
+					
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -119,14 +110,6 @@ public class ENW002 extends TestBase {
 	public void reportTestResult() {
 		extent.endTest(test);
 
-		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
-		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
-		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 	
 }
