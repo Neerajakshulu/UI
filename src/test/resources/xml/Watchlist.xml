@@ -10,7 +10,7 @@
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="CULTIVATION CONTROLLER" />
 	<parameter name="postName" value="Unique Post for Automation" />
-    <parameter name="postName1" value="test neon post" />
+    <parameter name="postName2" value="test neon post" />
 
 	<test name="Watchlist001">
 		<classes>

@@ -45,8 +45,8 @@ public class Watchlist008 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"postName1"})
-	public void testWatchPostFromPostsContentSearchResult(String postName1) throws Exception {
+	@Parameters({"postName2"})
+	public void testWatchPostFromPostsContentSearchResult(String postName2) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -89,7 +89,7 @@ public class Watchlist008 extends TestBase {
 			// Searching for Post
 
 			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName1);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
