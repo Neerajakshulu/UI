@@ -108,8 +108,10 @@ public class Watchlist021 extends TestBase {
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 
-			List<WebElement> watchedItems = ob
-					.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
+//			List<WebElement> watchedItems = ob
+//					.findElements(By.cssSelector("div[class='wui-card__header-left ng-binding']"));
+			
+			List<WebElement> watchedItems = ob.findElements(By.xpath("//span[@class='ng-binding ng-scope']"));
 			List<String> actualWatchedItems = new ArrayList<String>();
 			for (WebElement we : watchedItems) {
 
@@ -117,7 +119,7 @@ public class Watchlist021 extends TestBase {
 			}
 			logger.info("total watchlists by content type-->"+actualWatchedItems);
 			List<String> expectedWatchedItems = Arrays
-					.asList(new String[] {"PATENT", "PATENT", "POST", "POST", "ARTICLE", "ARTICLE"});
+					.asList(new String[] {"PATENT","ARTICLE","POST",});
 
 			if (!actualWatchedItems.equals(expectedWatchedItems)) {
 				logFailureDetails(test, "Watchlist items are not displayed by content type", this.getClass().getSimpleName()+"_watchlist_items_are_not_displayed_by_content_type");
