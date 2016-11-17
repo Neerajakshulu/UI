@@ -58,12 +58,7 @@ public class IAM004 extends TestBase {
 
 		try {
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to FB login page
@@ -81,6 +76,8 @@ public class IAM004 extends TestBase {
 			BrowserWaits.waitTime(4);
 			// waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
+			pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			
 
 			//BrowserWaits.waitTime(4);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
