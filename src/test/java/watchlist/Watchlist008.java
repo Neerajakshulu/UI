@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * Verify that user is able to add a Post from Posts content search results page to a particular watchlist||Verify that
@@ -44,8 +45,8 @@ public class Watchlist008 extends TestBase {
 	}
 
 	@Test
-	@Parameters({"postName"})
-	public void testWatchPostFromPostsContentSearchResult(String postName) throws Exception {
+	@Parameters({"postName1"})
+	public void testWatchPostFromPostsContentSearchResult(String postName1) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -88,16 +89,12 @@ public class Watchlist008 extends TestBase {
 			// Searching for Post
 
 			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName1);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob,
-					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			Thread.sleep(3000);
-			ob.findElement(By.xpath("//a[contains(text(),'Posts')]")).click();
-			waitForElementTobeVisible(ob,
-					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
-			Thread.sleep(3000);
-
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			// Watching 2 articles to a particular watch list
 			for (int i = 0; i < 1; i++) {
@@ -142,7 +139,6 @@ public class Watchlist008 extends TestBase {
 								+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
 
 			}
-
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();
 
