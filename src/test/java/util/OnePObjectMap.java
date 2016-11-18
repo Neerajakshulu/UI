@@ -348,6 +348,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS("div[class='modal-content ng-scope']"),
+	SEARCH_RESULTS_PAGE_LINKIINGMODAlTEXT_CSS("div[class='modal-body wui-modal__body'] p"),
+	
 	//Added by Chinna on 25th-Oct-2016
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
