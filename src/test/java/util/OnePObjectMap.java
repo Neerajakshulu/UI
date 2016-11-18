@@ -725,7 +725,21 @@ public enum OnePObjectMap {
 		RCC_SEARCH_LIST_VERIFY_GROUPNAME("a[class='ne-action-dropdown__item-content']"),
 		RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 		RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
-///----------------------------------------------------------------------------------------------------------------------------------------------
+		
+	// #################### DRA ##########################
+		
+		DRA_LOGO_CSS("h3[class$='company-name--dra']"),
+		DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),	
+		DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"), 
+		DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
+		DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
+		DRA_LANDINGPAGE_RANK_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
+		DRA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
+		DRA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
+		DRA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos text-center ng-scope']"),
+		DRA_LANDINGPAGE_SUPPORT_MAILID_CSS("p[class='tos text-center ng-scope'] >a[event-action='login-customer-care-dra']"),
+		DRA_LANDINGPAGE_LEARNMORE_LINK_CSS("p[class='splash-announcement-link__text wui-title']"),
+				
 		SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 		SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 		ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
