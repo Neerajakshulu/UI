@@ -31,6 +31,7 @@ public class PageFactory {
 	private GroupsPage groupsPage = null;
 	private Utility utility=null;
 	private NewsfeedPage newsfeedPage=null;
+	private DRAPage draPage=null;
 	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -226,6 +227,15 @@ public class PageFactory {
 		return newsfeedPage;
 	}
 	
+	public DRAPage getDraPageInstance(WebDriver ob) {
+
+		if (draPage == null) {
+			draPage = new DRAPage(ob);
+		}
+		return draPage;
+	}
+
+	
 	public void clearAllPageObjects() {
 		searchResultsPage=null;
 		accountPage = null;
@@ -247,5 +257,6 @@ public class PageFactory {
 		groupInvitationPage = null;
 		groupsListPage = null;
 		utility=null;
+		draPage=null;
 	}
 }
