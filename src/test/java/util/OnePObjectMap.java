@@ -758,7 +758,8 @@ public enum OnePObjectMap {
 		NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
 		NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
 		NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH("//button[@name='__CONFIRM__']"),
-		
+		NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),		
+		NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 		
 		 
 	;

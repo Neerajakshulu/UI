@@ -13,20 +13,16 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class ENW030 extends TestBase {
+public class ENW034 extends TestBase {
 
 	static int status = 1;
 
 	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -35,12 +31,10 @@ public class ENW030 extends TestBase {
 	}
 
 	@Test
-	public void testcaseENW018() throws Exception {
+	public void testcaseENW034() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "+ First Name";
-
 		if (!master_condition) {
 
 			test.log(LogStatus.SKIP,
@@ -49,19 +43,24 @@ public class ENW030 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);			
-			loginAs("STEAMUSERFIRSTNAME", "PASSWORD10");
-			pf.getHFPageInstance(ob).clickProfileImage();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString()), 180);
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
-			waitForPageLoad(ob);
-			BrowserWaits.waitTime(2);
-			String firstName= ob.findElement(By.cssSelector("[name='firstName']")).getAttribute("placeholder");
+			String header_Expected = "Thomson Reuters";
+			ob.navigate().to(host);
+			loginAs("NEONFIRSTUSER", "PASSWORD10");
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_SWITCH_APPS_CSS.toString())));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_SWITCH_APPS_ENDNOTE_LINK_CSS.toString()),
+					180);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_SWITCH_APPS_ENDNOTE_LINK_CSS.toString())));
+			handleContinueAndAgree();
+			waitForElementTobeVisible(ob, By.cssSelector("span[class='ne-nav-logo__text ne-nav-logo__text--tr']"), 180);
+			String actual_result = ob
+					.findElement(By.cssSelector("span[class='ne-nav-logo__text ne-nav-logo__text--tr']")).getText();
+			logger.info("Header Text displayed as:" + actual_result);
 			try {
-				Assert.assertEquals(expected_URL, firstName);	
+				Assert.assertEquals(header_Expected, actual_result);
 				test.log(LogStatus.PASS, " Header Logo text is displayed properly for Non-Market users");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, " Header Logo text is not displayed properly for Non-Market users");// extent
@@ -69,11 +68,12 @@ public class ENW030 extends TestBase {
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
-			}					
+			}
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+																		// //
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
@@ -84,7 +84,22 @@ public class ENW030 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-		
+
+	}
+
+	private void handleContinueAndAgree() {
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		} catch (Exception e) {
+			try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		}
 	}
 
 	@AfterTest
