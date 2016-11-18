@@ -79,15 +79,8 @@ public class IAM010 extends TestBase {
 			String email = generateRandomName(i) + suffix;
 			logger.info(email);
 
-			// selenium code
 			openBrowser();
-
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);

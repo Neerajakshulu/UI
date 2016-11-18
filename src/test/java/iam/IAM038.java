@@ -46,9 +46,7 @@ public class IAM038 extends TestBase {
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
 		test.log(LogStatus.INFO, tests[0]);
-		// extent = ExtentManager.getReporter(filePath);
-		// rowData = testcase.get(this.getClass().getSimpleName());
-		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+
 	}
 
 	@Test
@@ -85,15 +83,8 @@ public class IAM038 extends TestBase {
 
 			String email = createNewUser(first_name, last_name);
 			logger.info("Email Address : " + email);
-			// ob.navigate().to(host);
-			// login();
-
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
@@ -162,9 +153,7 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[2], tests_dec[2]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-				// ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
+
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("1");
@@ -192,9 +181,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[3], tests_dec[3]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-				// ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("a");
@@ -222,8 +208,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[5], tests_dec[5]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString()))
 						.clear();
@@ -264,8 +248,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[6], tests_dec[6]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString()))
 						.clear();
@@ -306,9 +288,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[4], tests_dec[4]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-				// ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString()))
 						.clear();
@@ -387,12 +366,8 @@ public class IAM038 extends TestBase {
 			ob.findElement(By.name("loginEmail")).sendKeys(email);
 			ob.findElement(By.name("loginPassword")).sendKeys(password);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-//			BrowserWaits.waitTime(3);
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
@@ -443,9 +418,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[9], tests_dec[9]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-				// ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("1");
@@ -472,10 +444,6 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[10], tests_dec[10]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				// jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
-				// ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString())).sendKeys("Neon@123");
-
 				String name = "N@1";
 				String maxPassword = name + generateRandomName(93);
 				logger.info("Last Name : " + maxPassword);

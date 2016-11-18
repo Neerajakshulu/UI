@@ -68,16 +68,6 @@ public class IAM035 extends TestBase {
 			logger.info("After Trailling user :" + str);
 			continueToLandingNeonPage();
 			BrowserWaits.waitTime(3);
-
-			/*
-			 * openBrowser1(); ob.get("https://www.guerrillamail.com"); BrowserWaits.waitTime(2); if
-			 * (CONFIG.getProperty("browserType").equals("IE")) {
-			 * Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe"); BrowserWaits.waitTime(4); } String
-			 * email2 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText(); logger.info("Email Id:" +
-			 * email2); String traillingSpaceEmail1 = email2 + " "; logger.info("Trailing space1 :" +
-			 * traillingSpaceEmail1); String str1 = createTraillingSpaceNeonUser("duster", "man", traillingSpaceEmail1);
-			 * logger.info("After Trailling user :" + str1); continueToLandingNeonPage();
-			 */
 		} catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
@@ -91,7 +81,6 @@ public class IAM035 extends TestBase {
 			closeBrowser();
 
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
@@ -110,31 +99,14 @@ public class IAM035 extends TestBase {
 		}
 		logout();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-
-		if (!checkElementPresence("login_banner")) {
-
-			test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-			closeBrowser();
-
-		}*/
 		closeBrowser();
 
 	}
 
 	private void openBrowser1() throws Exception {
 		openBrowser();
-		try {
-			maximizeWindow();
-		} catch (Throwable t) {
-
-			System.out.println("maximize() command not supported in Selendroid");
-		}
+		maximizeWindow();
 		clearCookies();
-
 	}
 
 	@AfterTest

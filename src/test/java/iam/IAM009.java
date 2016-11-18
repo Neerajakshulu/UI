@@ -68,14 +68,8 @@ public class IAM009 extends TestBase {
 
 		try {
 
-			// selenium code
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);
@@ -88,7 +82,7 @@ public class IAM009 extends TestBase {
 			BrowserWaits.waitTime(6);
 			if (!checkElementPresence_id("login_error")) {
 
-				fail = true;// excel
+				fail = true;
 				test.log(LogStatus.FAIL, "Unexpected login happened");// extent report
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_unexpected_login_happened_" + (count + 1))));

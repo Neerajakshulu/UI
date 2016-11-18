@@ -47,33 +47,32 @@ public class IAM025 extends TestBase {
 
 		try {
 
-			// 1)Create a new user
-			// 2)Login with new user and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
+
 			ob.navigate().to(host);
 			login();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("help_link")), 8);
-//			ob.findElement(By.xpath(OR.getProperty("help_link"))).click();
-			
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_LINK_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_LINK_CSS.toString())));
-			
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS);
-			String str = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS.toString())).getText();
+
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS);
+			String str = ob
+					.findElement(
+							By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS.toString()))
+					.getText();
 			logger.info("Title : " + str);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS);
-			String feedBack = ob.findElement(By.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS.toString())).getText();
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS);
+			String feedBack = ob
+					.findElement(By
+							.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS.toString()))
+					.getText();
 			logger.info("Emai Text : " + feedBack);
 
 			try {
@@ -82,8 +81,7 @@ public class IAM025 extends TestBase {
 						&& feedBack.contains("Report a problem or submit a support request"));
 				test.log(LogStatus.INFO, " Help link is working as expected");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, " Help Link is not working");// extent
-																		// reports
+				test.log(LogStatus.FAIL, " Help Link is not working");
 				// next 3 lines to print whole testng error in report
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));

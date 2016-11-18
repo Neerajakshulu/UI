@@ -52,12 +52,7 @@ public class IAM018 extends TestBase {
 		try {
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to LI login page
@@ -68,17 +63,15 @@ public class IAM018 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("LI_cancel_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("LI_cancel_link"))).click();
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
-
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "LI CANCEL button not working correctly");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_LI_CANCEL_button_not_working")));// screenshot
-
-			}*/
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+			/*
+			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10); if
+			 * (!checkElementPresence("login_banner")) { test.log(LogStatus.FAIL,
+			 * "LI CANCEL button not working correctly");// extent reports status = 2;// excel test.log(LogStatus.INFO,
+			 * "Snapshot below: " + test.addScreenCapture( captureScreenshot(this.getClass().getSimpleName() +
+			 * "_LI_CANCEL_button_not_working")));// screenshot }
+			 */
 
 			closeBrowser();
 

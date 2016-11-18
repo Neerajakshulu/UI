@@ -78,15 +78,8 @@ public class IAM005 extends TestBase {
 			String first_name = generateRandomName(i);
 			logger.info("First Name : " + first_name);
 
-			// selenium code
 			openBrowser();
-			//
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to TR login page
@@ -138,15 +131,6 @@ public class IAM005 extends TestBase {
 					}
 
 				}
-				/*
-				 * BrowserWaits.waitTime(3); String errorText =
-				 * ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText(); logger.info("Error Text  : "
-				 * +errorText); if (!compareStrings("First name is too long.", errorText)) { fail = true;// excel
-				 * test.log(LogStatus.FAIL, "Error text is incorrect");// extent report test.log( LogStatus.INFO,
-				 * "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() +
-				 * "_incorrect_error_text_" + (count + 1)))); closeBrowser(); return; }
-				 */
-
 			}
 
 			closeBrowser();

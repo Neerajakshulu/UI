@@ -78,12 +78,7 @@ public class IAM031 extends TestBase {
 		try {
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to deep link account page using linkedin
@@ -118,31 +113,9 @@ public class IAM031 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_help_page")));// screenshot
 			}
 
-			/*if (!checkElementPresence("ul_name")) {
-
-				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
-																								// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_Neon_User_credentials_not_working_fine")));// screenshot
-				closeBrowser();
-
-			}*/
-
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			
-			// Verify that profile name gets displayed correctly
-			/*if (!checkElementPresence("header_label")) {
-
-				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
-																						// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
-				closeBrowser();
-
-			}*/
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 
 			logout();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
@@ -196,8 +169,6 @@ public class IAM031 extends TestBase {
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 
-			// login();
-			//waitForElementTobeVisible(ob, By.cssSelector("a[class='feedback-link__anchor ng-binding']"), 30);
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = driver.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
@@ -221,7 +192,6 @@ public class IAM031 extends TestBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 			test.log(LogStatus.FAIL, "UnExpected Error");
-			// print full stack trace
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());

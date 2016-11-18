@@ -48,16 +48,10 @@ public class IAM024 extends TestBase {
 
 		try {
 
-			// 1)Create a new user
-			// 2)Login with new user and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
+
 			String firstName = generateRandomName(8);
 			String lastName = generateRandomName(10);
 			System.out.println(firstName + " " + lastName);
@@ -96,18 +90,8 @@ public class IAM024 extends TestBase {
 			}
 
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
-																					// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-				closeBrowser();
-
-			}*/
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports

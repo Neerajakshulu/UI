@@ -51,12 +51,7 @@ public class IAM020 extends TestBase {
 		try {
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to LI login page

@@ -52,12 +52,7 @@ public class IAM013 extends TestBase {
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
 
 		openBrowser();
-		try {
-			maximizeWindow();
-		} catch (Throwable t) {
-
-			System.out.println("maximize() command not supported in Selendroid");
-		}
+		maximizeWindow();
 
 		ob.navigate().to(host);
 		BrowserWaits.waitTime(6);

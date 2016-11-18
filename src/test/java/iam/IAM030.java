@@ -78,12 +78,7 @@ public class IAM030 extends TestBase {
 		try {
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			// Navigate to deep link account page using linkedin
@@ -120,47 +115,13 @@ public class IAM030 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_ account_page")));// screenshot
 			}
-			
+
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-
-			/*if (!checkElementPresence("ul_name")) {
-
-				test.log(LogStatus.FAIL, "Existing Neon user credentials are not working fine");// extent
-																								// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_existing_Neon_User_credentials_not_working_fine")));// screenshot
-				closeBrowser();
-
-			}
-
-			// Verify that profile name gets displayed correctly
-			if (!checkElementPresence("header_label")) {
-
-				test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent
-																						// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
-				closeBrowser();
-
-			}*/
-
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			logout();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-			/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 8);
-			if (!checkElementPresence("login_banner")) {
-
-				test.log(LogStatus.FAIL, "User not able to logout successfully");// extent
-																					// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-				closeBrowser();
-
-			}*/
-
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 			closeBrowser();
 
 		}

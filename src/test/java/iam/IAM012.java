@@ -78,12 +78,7 @@ public class IAM012 extends TestBase {
 			String email = generateRandomName(5) + "@abc.com";
 
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);

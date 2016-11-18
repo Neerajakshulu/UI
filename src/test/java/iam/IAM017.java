@@ -54,15 +54,8 @@ public class IAM017 extends TestBase {
 			String first_name = "firstfirstfirstfirstfiirstfiirstfirstfirst";
 			String last_name = "lastlastlastlastlast";
 
-			// 1)Create a new user
-			// 2)Login with new user and logout
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			try {
@@ -87,7 +80,7 @@ public class IAM017 extends TestBase {
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString() + " img"))
 					.getAttribute("title");
 			String expected_name = "firstfirstfirstfirstfiirstfiirstfirstfirst lastlas ...";
-			
+
 			if (expected_name.contains(actual_name)) {
 				test.log(LogStatus.PASS, "Long name is getting ellipsed correctly");
 			} else {
@@ -97,15 +90,6 @@ public class IAM017 extends TestBase {
 						this.getClass().getSimpleName() + "_long_name_not_getting_ellipsed_correctly")));
 			}
 
-			/*if (!compareStrings(expected_name, actual_name)) {
-
-				test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");// extent
-																						// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_long_name_not_getting_ellipsed_correctly")));// screenshot
-
-			}*/
 			logout();
 			closeBrowser();
 		}

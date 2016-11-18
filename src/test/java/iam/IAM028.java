@@ -53,12 +53,7 @@ public class IAM028 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			String first_name = "duster";
@@ -73,9 +68,6 @@ public class IAM028 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
 				BrowserWaits.waitTime(2);
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-//				ob.findElement(
-//						By.xpath("//button[@class='wui-btn login-button button-color-primary wui-btn--primary']"))
-//						.click();
 			}
 
 			BrowserWaits.waitTime(3);
@@ -98,27 +90,7 @@ public class IAM028 extends TestBase {
 			}
 
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-			
-			/*if (!checkElementPresence("ul_name")) {
 
-				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
-																									// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
-				closeBrowser();
-
-			}
-*/
-			/*if (!checkElementPresence("help_link")) {
-
-				test.log(LogStatus.FAIL, "Newly registered user credentials are not working fine");// extent
-																									// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_newly_registered_user_credentials_are_not_working_fine")));// screenshot
-
-			}*/
 			// Verify that profile image using below xpath is present or not
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";
 			element = ob.findElement(By.xpath(profile_name_xpath));

@@ -55,22 +55,11 @@ public class IAM002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		Iterator<String> iterator = cases.iterator();
 		openBrowser();
-		try {
-			maximizeWindow();
-		} catch (Throwable t) {
-
-			System.out.println("maximize() command not supported in Selendroid");
-		}
+		maximizeWindow();
 		clearCookies();
 		ob.navigate().to(host);
 		while (iterator.hasNext()) {
 			try {
-
-				
-
-				// Navigate to TR login page and login with valid TR credentials
-				// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-				//
 
 				// if :checking if user can login with uppercase email address
 				if (iterator.next().equals("upperCase")) {
@@ -82,53 +71,19 @@ public class IAM002 extends TestBase {
 							.sendKeys(CONFIG.getProperty("defaultPassword"));
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 					BrowserWaits.waitTime(4);
-				} else {// else: checking if user can login successfully using smallcase email address
+				} else {
+					// else: checking if user can login successfully using smallcase email address
 
 					login();
 				}
 				BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-				// Verify that login is successful
-				/*if (!checkElementPresence("ul_name")) {
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 
-					test.log(LogStatus.FAIL, "Existing TR user credentials are not working fine");// extent reports
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_existing_TR_credentials_not_working_fine")));// screenshot
-					closeBrowser();
-
-				}*/
-
-				// Verify that profile name gets displayed correctly
-				/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-				
-				if (!checkElementPresence("header_label")) {
-
-					test.log(LogStatus.FAIL, "Incorrect profile name getting displayed");// extent reports
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_incorrect_profile_name_getting_displayed")));// screenshot
-					closeBrowser();
-
-				}
-*/
-				
 				logout();
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-				
-				/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("login_banner")), 10);
-				if (!checkElementPresence("login_banner")) {
-
-					test.log(LogStatus.FAIL, "User not able to logout successfully");// extent reports
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-							this.getClass().getSimpleName() + "_user_unable_to_logout_successfully")));// screenshot
-					closeBrowser();
-
-				}
-*/
-				//closeBrowser();
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 
 			} catch (Throwable t) {
 

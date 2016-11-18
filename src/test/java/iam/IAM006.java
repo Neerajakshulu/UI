@@ -77,18 +77,9 @@ public class IAM006 extends TestBase {
 			String last_name = generateRandomName(i);
 			logger.info("Last Name : " + last_name);
 
-			// selenium code
 			openBrowser();
-			//
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				logger.info("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
-
-			// Navigate to TR login page
 			ob.navigate().to(host);
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
@@ -104,13 +95,12 @@ public class IAM006 extends TestBase {
 			logger.info("Error List Size : " + errorList.size());
 			if (validity.equalsIgnoreCase("YES")) {
 
-				// verifying that error message is not getting displayed
 				for (WebElement text : errorList) {
 					if (text.getText().equals("Last name is too long.")) {
 
-						fail = true;// excel
-						test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");// extent
-																									// report
+						fail = true;
+						test.log(LogStatus.FAIL, "Error message getting displayed unnecessarily");
+
 						test.log(LogStatus.INFO,
 								"Snapshot below: "
 										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
@@ -126,9 +116,9 @@ public class IAM006 extends TestBase {
 				for (WebElement text : errorList) {
 					if (!text.getText().equals("Last name is too long.")) {
 
-						fail = true;// excel
-						test.log(LogStatus.FAIL, "Error message not getting displayed");// extent
-																						// report
+						fail = true;
+						test.log(LogStatus.FAIL, "Error message not getting displayed");
+
 						test.log(LogStatus.INFO,
 								"Snapshot below: "
 										+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()

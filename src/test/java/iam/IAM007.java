@@ -67,15 +67,8 @@ public class IAM007 extends TestBase {
 		test.log(LogStatus.INFO, email + " -- " + password);
 
 		try {
-
-			// selenium code
 			openBrowser();
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);
@@ -88,30 +81,7 @@ public class IAM007 extends TestBase {
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			BrowserWaits.waitTime(2);
-			
-			//ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).click();
-			//BrowserWaits.waitTime(1);
-//			List<WebElement> list=ob.findElements(By.cssSelector("i[class='fb_logo img sp_O7TpWD6wqPl sx_cd36fd']"));
-			/*String str=ob.findElement(By.xpath("//span[contains(text(),'Log in to Facebook')]")).getText();
-			logger.info("Text : "+str);
-			if(str.equals("Log in to Facebook")){
-				test.log(LogStatus.INFO,"Invalid UserName and Password");
-			}else{
-				test.log(LogStatus.FAIL,"Valid UserName and Password");
-			}
-			*/
-			
 			waitForElementTobeVisible(ob, By.id("loginform"), 30);
-/*
-			if (!checkElementPresence_name("FB_page_login_button")) {
-
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Unexpected login happened");// extent report
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_unexpected_login_happened_" + (count + 1))));
-
-			}*/
-
 			closeBrowser();
 
 		}

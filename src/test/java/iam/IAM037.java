@@ -86,21 +86,13 @@ public class IAM037 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
 			BrowserWaits.waitTime(3);
-			/*
-			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click(); BrowserWaits.waitTime(3);
-			 * ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click(); BrowserWaits.waitTime(3);
-			 */
 
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
 			BrowserWaits.waitTime(3);
-			// logout();
 			BrowserWaits.waitTime(3);
 			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH.toString()))
 					.getText();
@@ -114,8 +106,7 @@ public class IAM037 extends TestBase {
 			catch (Throwable t) {
 
 				test.log(LogStatus.FAIL, "Email id getting displayed in Account Setting page is incorrect");// extent
-				// reports
-				status = 2;// excel
+				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
 						.getSimpleName()
 						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
@@ -253,21 +244,9 @@ public class IAM037 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			
-			
-			//Thread.sleep(10000);
-			
-			/*if (!checkElementPresence("header_label")) {
 
-				test.log(LogStatus.FAIL, "User unable to login with changed password");// extent reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_user_unable_to_login_with_changed_password")));// screenshot
-
-			}*/
-
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			ob.close();
 
 		} catch (Throwable t) {

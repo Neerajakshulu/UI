@@ -45,9 +45,6 @@ public class IAM034 extends TestBase {
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
 		test.log(LogStatus.INFO, tests[0]);
-		// extent = ExtentManager.getReporter(filePath);
-		// rowData = testcase.get(this.getClass().getSimpleName());
-		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
@@ -95,8 +92,7 @@ public class IAM034 extends TestBase {
 				ob.navigate().to(host);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-				String signupStatus = ob
-						.findElement(By.xpath(OR.getProperty("signup_button")))
+				String signupStatus = ob.findElement(By.xpath(OR.getProperty("signup_button")))
 						.getAttribute("disabled");
 				logger.info("SingUp Status : " + signupStatus);
 				Assert.assertNotEquals(signupStatus, "disabled");

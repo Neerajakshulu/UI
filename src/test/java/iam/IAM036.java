@@ -75,10 +75,7 @@ public class IAM036 extends TestBase {
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
 			BrowserWaits.waitTime(3);
-			/*
-			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click(); BrowserWaits.waitTime(3);
-			 * ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click(); BrowserWaits.waitTime(3);
-			 */
+
 			logout();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
@@ -100,11 +97,8 @@ public class IAM036 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
 
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("header_label")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("header_label"))).click();
-//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("account_link")), 30);
-//			ob.findElement(By.xpath(OR.getProperty("account_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
