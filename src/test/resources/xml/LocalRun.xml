@@ -497,6 +497,11 @@
 			<class name="Profile.Profile70"></class>
 		</classes>
 	</test>
+	test name="Test B1">
+		<classes>
+				<class name="search.Search129"></class>
+				</classes>
+	</test>
 
 </suite>
 

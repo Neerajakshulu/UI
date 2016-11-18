@@ -9,7 +9,6 @@
 	<test name="Test B1" preserve-order="true">
 		<classes>
 				<class name="search.Search127"></class>
-				<class name="search.Search129"></class>
 			   <class name="search.Search130"></class>
 		</classes>
 	</test>

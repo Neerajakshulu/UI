@@ -116,7 +116,6 @@ public class Search127 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
-			clearCookies();
 			String Beforeurl = System.getProperty("host") + url;
 			// System.out.println(Beforeurl);
 			ob.navigate().to(Beforeurl);
