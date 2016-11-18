@@ -760,7 +760,7 @@ public enum OnePObjectMap {
 		NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH("//button[@name='__CONFIRM__']"),
 		NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),		
 		NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
-		
+		NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
 		 
 	;
 
