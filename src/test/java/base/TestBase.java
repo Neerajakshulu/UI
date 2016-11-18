@@ -481,8 +481,8 @@ public class TestBase {
 	public void runOnSauceLabsFromLocal(String os,
 			String browser) throws Exception {
 
-		String username = "amneetsingh";
-		String access_key = "f48a9e78-a431-4779-9592-1b49b6d406a4";
+		String username = "chinna_putha";
+		String access_key = "e58d38dc-3d93-43e8-af25-5e3a1df25e8b";
 		String url = "http://" + username + ":" + access_key + "@ondemand.saucelabs.com:80/wd/hub";
 
 		DesiredCapabilities caps = null;
@@ -1475,7 +1475,8 @@ public class TestBase {
 		for (WebElement element : list) {
 
 			if (element.isDisplayed()) {
-				element.click();
+				//element.click();
+				jsClick(ob, element);
 				break;
 			}
 		}
