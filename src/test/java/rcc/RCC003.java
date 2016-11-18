@@ -69,8 +69,9 @@ public class RCC003 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).typeCustomMessage(msg);
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
+			
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 
 			if (result)
@@ -152,7 +153,7 @@ public class RCC003 extends TestBase {
 			}
 			logout();
 			closeBrowser();
-
+			pf.clearAllPageObjects();
 			/**
 			 * 
 			 * deleting the group.

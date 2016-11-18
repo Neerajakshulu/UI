@@ -82,7 +82,8 @@ public class RCC017 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_No_Records_info_missing")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			waitForPageLoad(ob);
 			pf.getHFPageInstance(ob).searchForText("micro biology");
 			String recordTitle=pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);

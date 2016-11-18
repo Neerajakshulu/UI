@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="RCC" parallel="tests" thread-count="10">
+<suite name="RCC" parallel="tests" thread-count="5">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" /> 
@@ -155,14 +155,14 @@
 		</classes>
 	</test>
 	 
-	<test name="Validate_adding_GD_doc_action_for_post_article_patent_and_to_the_group">
+	<!-- <test name="Validate_adding_GD_doc_action_for_post_article_patent_and_to_the_group">
 		<classes>
 			<class name="rcc.RCC021"></class>
 			<class name="rcc.RCC022"></class>
 			<class name="rcc.RCC023"></class>
 			<class name="rcc.RCC024"></class>
 		</classes>
-	</test> -->
+	</test>
 	
 <test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
 	<classes>
@@ -180,7 +180,7 @@
 	<classes>
 		<class name="rcc.RCC092"></class>
 	</classes>
-	</test> 
+	</test>  -->
 	
 </suite>
 

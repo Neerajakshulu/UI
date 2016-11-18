@@ -188,6 +188,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public String getGroupTitle() {
+		waitForAjax(ob);
 		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()), 30);
 		List<WebElement> list = ob
 				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_TITLE_CSS.toString()));
@@ -224,7 +225,7 @@ public class GroupDetailsPage extends TestBase {
 	public boolean selectUserFromList(boolean isFound, String membersName) throws InterruptedException {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
 				.sendKeys(membersName);
-
+		BrowserWaits.waitTime(4);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()), 30);
 		BrowserWaits.waitTime(2);
@@ -303,14 +304,14 @@ public class GroupDetailsPage extends TestBase {
 
 	}
 
-	public void typeCustomMessage(String Message) {
+	public void typeCustomMessage(String Message) throws Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()),
 				30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_CUSTOM_MESSAGE_CSS.toString()))
 				.sendKeys(Message);
-
+		BrowserWaits.waitTime(3);
 	}
 
 	/**

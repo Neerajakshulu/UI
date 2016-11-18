@@ -238,6 +238,6 @@ public class GroupInvitationPage extends TestBase {
 	public void clickOnGroupOwnerName(String grouptitle) throws Exception{
 		
 		WebElement groupRecord=getRecordCard(grouptitle);
-		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS.toString())).click();
+		groupRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS.toString())).click();
 	}
 }

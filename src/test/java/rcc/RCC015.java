@@ -81,7 +81,8 @@ public class RCC015 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_No_Records_info_missing")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-
+			pf.getHFPageInstance(ob).clickOnHomeLink();
+			waitForPageLoad(ob);
 			pf.getHFPageInstance(ob).searchForText("test");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			String recordTitle = pf.getSearchResultsPageInstance(ob).getPostsTitle();
