@@ -68,7 +68,8 @@ public class Authoring19 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
-			pf.getHFPageInstance(ob).searchForText("Micro Biology");
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("Micro Biology");
+			//pf.getHFPageInstance(ob).searchForText("Micro Biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()),
 					180);
 			String articleTitle = ob
@@ -81,8 +82,9 @@ public class Authoring19 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME3", "PASSWORD3");
-			BrowserWaits.waitTime(15);
-			pf.getHFPageInstance(ob).searchForText(articleTitle);
+			BrowserWaits.waitTime(10);
+			//pf.getHFPageInstance(ob).searchForText(articleTitle);
+			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick("Micro Biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()),
 					180);
 			jsClick(ob, ob.findElement(By.linkText(articleTitle)));
@@ -187,7 +189,8 @@ public class Authoring19 extends TestBase {
 	}
 
 	private void searchAnArticle(String articleTitle) throws InterruptedException, Exception {
-		pf.getHFPageInstance(ob).searchForText(articleTitle);
+		//pf.getHFPageInstance(ob).searchForText(articleTitle);
+		pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(articleTitle);
 		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 120);
 		int count = 0;
 		boolean found = false;
