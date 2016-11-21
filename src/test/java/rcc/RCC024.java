@@ -76,7 +76,7 @@ public class RCC024 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER013", "RCCTESTUSERPWD013");
+			loginAs("RCCTESTUSER005", "RCCTESTUSERPWD005");
 			test.log(LogStatus.INFO, "Login as Group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
@@ -122,8 +122,9 @@ public class RCC024 extends TestBase {
 			try {
 				//Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
 				
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated date is displayed correctly for group");
+				//test.log(LogStatus.PASS,
+					//	"GD doc desc and title updated date is displayed correctly for group");
+				test.log(LogStatus.INFO, "OPQA-3896 : is logged for Modified date issue");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
 						"GD doc desc and title updated date is not displayed correctly for group",
@@ -167,7 +168,7 @@ public class RCC024 extends TestBase {
 			
 
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE14"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE6"));
 			test.log(LogStatus.INFO, "Invited users");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
@@ -177,7 +178,7 @@ public class RCC024 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER014", "RCCTESTUSERPWD014");
+			loginAs("RCCTESTUSER006", "RCCTESTUSERPWD006");
 			test.log(LogStatus.INFO, "Login as invitee");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -344,7 +345,7 @@ public class RCC024 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER013", "RCCTESTUSERPWD013");
+			loginAs("RCCTESTUSER005", "RCCTESTUSERPWD005");
 			test.log(LogStatus.INFO, "Login as group owner");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();

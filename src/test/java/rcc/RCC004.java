@@ -87,7 +87,7 @@ static int status = 1;
 			
             }else
             {// bug is already logged for this
-				test.log(LogStatus.INFO, "Sort by Group option is present: Bug is already available for this");
+				test.log(LogStatus.INFO, "Sort by Group option is present:OPQA-3903  Bug is already available for this");
 			/*	test.log(
 						LogStatus.FAIL,
 						"Snapshot below: "

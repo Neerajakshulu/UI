@@ -117,8 +117,9 @@ public class RCC023 extends TestBase {
 			try {
 				//Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
 				
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated date is displayed correctly for patent");
+				//test.log(LogStatus.PASS,
+					//	"GD doc desc and title updated date is displayed correctly for patent");
+				test.log(LogStatus.INFO, "OPQA-3896 : is logged for Modified date issue");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
 						"GD doc desc and title updated date is displayed correctly for patent",

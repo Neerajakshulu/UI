@@ -137,6 +137,7 @@ public class RCC013 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToGroupTab();
 			try{

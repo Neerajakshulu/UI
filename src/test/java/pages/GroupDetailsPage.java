@@ -223,9 +223,15 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public boolean selectUserFromList(boolean isFound, String membersName) throws InterruptedException {
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
-				.sendKeys(membersName);
+		
+		waitForAjax(ob);
 		BrowserWaits.waitTime(4);
+		for(int i=0;i<membersName.length();i++){
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
+				.sendKeys(membersName.charAt(i)+"");
+		BrowserWaits.waitTime(1);
+		}
+		
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()), 30);
 		BrowserWaits.waitTime(2);
@@ -424,7 +430,7 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
-
+		BrowserWaits.waitTime(3);
 	}
 
 	public void clickOnCloseButtonINConfirmationModal() throws Exception {
@@ -433,6 +439,7 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
+		BrowserWaits.waitTime(3);
 	}
 
 	public void clickOnSubmitButtonINConfirmationModal() throws Exception {
@@ -440,6 +447,7 @@ public class GroupDetailsPage extends TestBase {
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		waitForAjax(ob);
+		BrowserWaits.waitTime(3);
 	}
 
 	public boolean verifyConfirmationModalContents(String modalLabel, String modalInfoText, String primaryButton)
