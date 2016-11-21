@@ -290,15 +290,15 @@ public class OnboardingModalsPage extends TestBase {
 
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
-		logger.info("onboarding status-->" + onboardingStatus.size());
+		logger.info("onboarding status-->" + onboardingStatus.size()); 
 
 		try {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
 					"Discover articles, patents, and community contributions");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
-			
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow"); 
+			BrowserWaits.waitTime(4);
 			List<WebElement> recommended_people=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_RECOMMENDED_PEOPLE_CSS).findElements(By.tagName("img"));
 			logger.info("Recommended_people length-->"+recommended_people.size());
 			if(!(recommended_people.size() == 8)) {
@@ -317,7 +317,8 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
 			
 		} catch (Exception e) {
-			throw new Exception("Onboarding Welcome Modal is not displayed for First time user");
+			throw new Exception(
+					"Recommended People count should 8 in Welcome Modal|user is not able to follow/unfollw from Recommended people section");
 		}
 
 	}
