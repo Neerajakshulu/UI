@@ -12,5 +12,6 @@
 		<suite-file path="./Notifications.xml" />
 		<suite-file path="./ENW.xml" />
 		<suite-file path="./ENWIAM.xml" />
+		<suite-file path="./RCC.xml" />
 	</suite-files>
 </suite>
