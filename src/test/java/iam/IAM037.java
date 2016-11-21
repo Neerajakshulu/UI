@@ -82,11 +82,12 @@ public class IAM037 extends TestBase {
 					.sendKeys(LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			BrowserWaits.waitTime(4);
+			
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
 			BrowserWaits.waitTime(3);
-
+			pf.getLoginTRInstance(ob).clickNotnowLink();
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
