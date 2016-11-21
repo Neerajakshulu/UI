@@ -290,6 +290,7 @@ public class TestBase {
 			loadModuleData(profilexls.path);
 			loadModuleData(enwxls.path);
 			loadModuleData(enwiamxls.path);
+			loadModuleData(searchxls.path);
 		}
 		
 		logger.info(suiteName + "---" + testcase.size());
