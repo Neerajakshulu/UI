@@ -298,7 +298,7 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
 					"Discover articles, patents, and community contributions");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow"); 
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(8);//giving more wait to load Recommended people section
 			List<WebElement> recommended_people=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_RECOMMENDED_PEOPLE_CSS).findElements(By.tagName("img"));
 			logger.info("Recommended_people length-->"+recommended_people.size());
 			if(!(recommended_people.size() == 8)) {
