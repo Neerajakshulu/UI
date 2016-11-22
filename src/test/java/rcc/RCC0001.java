@@ -156,6 +156,23 @@ public class RCC0001 extends TestBase {
 				}
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
+			
+			
+			String title55 = RandomStringUtils.randomAlphanumeric(55);
+			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
+			pf.getGroupsListPage(ob).createGroup(title55);
+			
+			try{
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getGroupTitle().trim().length()==50);
+				test.log(LogStatus.PASS,
+						"user is not able to create a new group with group name > 50 chars");
+			}catch(Throwable t){
+					logFailureDetails(test, t, "user is able to create a new group with group name > 50 chars",
+							"_Group_creation_with_MOrethan_50_chars_Failed");
+					
+				}
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			closeBrowser();
 
 		} catch (Throwable t) {
