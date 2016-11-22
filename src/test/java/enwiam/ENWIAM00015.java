@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PageFactory;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
@@ -29,7 +28,6 @@ public class ENWIAM00015 extends TestBase {
 	static int status = 1;
 
 	static int time = 30;
-	PageFactory pf = new PageFactory();
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
