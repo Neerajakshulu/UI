@@ -291,6 +291,7 @@ public class TestBase {
 			loadModuleData(enwxls.path);
 			loadModuleData(enwiamxls.path);
 			loadModuleData(searchxls.path);
+			loadModuleData(rccxls.path);
 		}
 		
 		logger.info(suiteName + "---" + testcase.size());

@@ -506,39 +506,39 @@
 				</classes>
 	</test>
 	
+	<!-- RCC Testcases -->
 	<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
-		<classes>
-			<class name="rcc.RCC021"></class>
-			<class name="rcc.RCC023"></class>
-		</classes>
-	</test>
-	
+	<classes>
+		<class name="rcc.RCC021"></class>
+		<class name="rcc.RCC023"></class>
+	</classes>
+</test>
+
 	<test name="Validate_adding_GD_doc_action_for_article_and_to_the_group">
 		<classes>
-			
+
 			<class name="rcc.RCC022"></class>
 			<class name="rcc.RCC024"></class>
 		</classes>
 	</test>
-	
-<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
-	<classes>
-		<class name="rcc.RCC090"></class>
-	</classes>
+
+	<test name="Adding_Cover_Photo_to_Group_and_verifying_cover_photo_displayed">
+		<classes>
+			<class name="rcc.RCC090"></class>
+		</classes>
 	</test>
-	
+
 	<test name="modify_the_cover photo">
-	<classes>
-		<class name="rcc.RCC091"></class>
-	</classes>
+		<classes>
+			<class name="rcc.RCC091"></class>
+		</classes>
 	</test>
-	
+
 	<test name="option_to_add_image_ from_group_details_page">
-	<classes>
-		<class name="rcc.RCC092"></class>
-	</classes>
+		<classes>
+			<class name="rcc.RCC092"></class>
+		</classes>
 	</test>
-	
 
 </suite>
 
