@@ -71,6 +71,7 @@ public class Search128 extends TestBase {
 			for (int i = 0; i <= 3; i++) {
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
+				ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
 				BrowserWaits.waitTime(4);
 				List<WebElement> mylist = ob
 						.findElements(By.cssSelector(OnePObjectMap.TYPE_AHEAD_SHOWALL_ELEMENTS_CSS.toString()));
