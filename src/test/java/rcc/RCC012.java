@@ -115,7 +115,18 @@ public class RCC012 extends TestBase{
 				test.log(LogStatus.FAIL, "GroupTab overlay count and invitation tab count not same");
 			}
 			BrowserWaits.waitTime(2);
-			pf.getGroupsPage(ob).clickOnGroupsLink();
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			
+			str = pf.getGroupsPage(ob).defaultselectedTab();
+			try {
+				Assert.assertTrue(str.contains("Groups"));
+				test.log(LogStatus.PASS, "By default Groups tab is in active state when there no pending invitations");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "By default Groups tab is not in active state when there no pending invitations");
+				test.log(LogStatus.FAIL, "Snapshot below: " + test
+						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
 			int countGroupsTabOverlay1 = pf.getGroupsPage(ob).countGroupsTabOverlay();
 			logger.info("Count Groups Tab Overlay : "+countGroupsTabOverlay1);
 			int countGroups1 = pf.getGroupsPage(ob).getGroupsCount();
