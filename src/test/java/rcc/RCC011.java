@@ -202,6 +202,16 @@ public class RCC011 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			pf.getGroupsPage(ob).switchToGroupTab();
+			try {
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyMembersCount(1,title));
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group list page in member view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group list page in memner view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickMembersTab();
 			aftercount = pf.getGroupDetailsPage(ob).getMembersCounts();
@@ -210,8 +220,28 @@ public class RCC011 extends TestBase {
 			else
 				test.log(LogStatus.PASS,
 						"Members count in not displaying correctly after removing the member from group ");
-			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList("Test User_RCC"));
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE19")));
 			test.log(LogStatus.PASS, "Member is removed from the group in members group details page");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			try {
+				Assert.assertFalse(pf.getGroupsListPage(ob).checkForGroup(title));
+				test.log(LogStatus.PASS,
+						"Group is not available in member view when he is been removed from the group");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Group is available in member view when he is been removed from the group",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();

@@ -84,6 +84,9 @@ public class RCC001 extends TestBase {
 				test.log(LogStatus.PASS, "Group description in Group list page is displayed correctly");
 				pf.getGroupsListPage(ob).verifyItemsCount(0, title);
 				test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifytheDateandTimeofIvitation(title));
+				test.log(LogStatus.PASS, "Creation date is displayed for the group in group list page");
+								
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Items count in Group list page in Group list page is not displayed correctly");

@@ -70,6 +70,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public int getMembersCounts() throws Exception {
+		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		WebElement count = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GROUPDETAILS_MEMBERS_COUNT_CSS);
 		logger.info("Members" + count.getText() + "values");
@@ -535,7 +536,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickonLeaveGroupButton() throws Exception {
-
+		
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
 				60);

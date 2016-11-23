@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -105,7 +106,7 @@ public class RCC009 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-
+		
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -118,33 +119,24 @@ public class RCC009 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
 			test.log(LogStatus.INFO, "Invitation has been send to the Neon user3 and accepted");
+			try {
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getMembersCounts(),2);
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group details page in members view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group details page in members view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
 			// logging in with owneruser1 and check the members count in the
-			// list page and details page
+			// list page and details pag			
 
-			/*openBrowser();
-			clearCookies();
-			maximizeWindow();
-			ob.navigate().to(host);
-			loginAs("Owneruser1", "Owneruser1Password");
-			pf.getGroupsPage(ob).clickOnGroupsTab();
-			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
-			pf.getGroupDetailsPage(ob).getMembersCounts();
-			test.log(LogStatus.INFO, "Member count is fine with owner");
-*/
-			// logging in with User and check the members count in the list page
-			// and details page
-
-			/**
-			 * openBrowser(); clearCookies(); maximizeWindow();
-			 * 
-			 * ob.navigate().to(host); loginAs("InviteUser2",
-			 * "InviteUser2password"); pf.getGroupsPage(ob).clickOnGroupsTab();
-			 * pf.getGroupsListPage(ob).verifyMembersCount2(2, groupTitle);
-			 * test.log(LogStatus.INFO,"Member count is fine with owner");
-			 */
+		
+			
 			// As user 2 leave the group and check the pop up buttons
 			openBrowser();
 			clearCookies();
@@ -166,7 +158,7 @@ public class RCC009 extends TestBase {
 
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).clickonCancelButtononPopup());
 				test.log(LogStatus.PASS, "Cancel button is working fine");
-				ob.navigate().refresh();
+				BrowserWaits.waitTime(5);
 				pf.getGroupDetailsPage(ob).clickonLeaveGroupButton();
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).clickonCloseButtononPopup());
 				test.log(LogStatus.PASS, "Close button is working fine");
@@ -180,20 +172,103 @@ public class RCC009 extends TestBase {
 
 			// leaving the group and verifying the group list
 			try {
-				ob.navigate().refresh();
+				BrowserWaits.waitTime(5);
 				pf.getGroupDetailsPage(ob).clickonLeaveGroupButton();
 				pf.getGroupDetailsPage(ob).clickOnLeaveGroupButtoninPopUp();
 				Assert.assertFalse(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
 				test.log(LogStatus.PASS, "After clicking the on the leave group button, Group is not present");
-				logout();
-				closeBrowser();
+				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Error in verifying the pop up");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
+			
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			
+			
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			
+			try {
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyMembersCount(1,groupTitle));
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group list page in member view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group list page in memner view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
 
+			}
+			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
+			try {
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getMembersCounts(),1);
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group details page in member view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group details page in member view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			
+			openBrowser();
+			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host);
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).switchToGroupTab();
+			
+			try {
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyMembersCount(1,groupTitle));
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group list page in owner view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group list page in owner view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
+			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
+			try {
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getMembersCounts(),1);
+				test.log(LogStatus.PASS,
+						"Members count is updated correctly in group details page in owner view");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Members count is not updated correctly in group details page in owner view",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
+			
+			
+			try {
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE18")));
+				test.log(LogStatus.PASS,
+						"Member is not available in the members tab after leaving the group");
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"Member is available in the members tab after leaving the group",
+						this.getClass().getSimpleName() + "_Group_Member_count_mismatch");
+
+			}
+			
+			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace

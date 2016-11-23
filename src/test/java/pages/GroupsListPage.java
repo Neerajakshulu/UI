@@ -2,6 +2,7 @@ package pages;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -144,10 +145,16 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public boolean verifyMembersCount(int count, String grouptitle) throws Exception {
+		
+		
 		WebElement groupRecord = getGroupCard(grouptitle);
-		String itemsCount = groupRecord
+		String membersCount = groupRecord
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS.toString())).getText();
-		return Integer.parseInt(itemsCount) == count;
+		if(membersCount.contains("Member")){
+			membersCount = membersCount.substring(0, membersCount.indexOf("Member")).trim();
+		}else membersCount = membersCount.substring(0, membersCount.indexOf("Members")).trim();
+		return Integer.parseInt(membersCount) == count;
+		
 	}
 
 	public boolean verifyGroupDescription(String desc, String grouptitle) throws Exception {
@@ -501,6 +508,25 @@ public class GroupsListPage extends TestBase {
 		
 	}
 
-	
+	public boolean verifytheDateandTimeofIvitation(String grouptitle) throws Exception {
+		WebElement groupcard = getRecordCard(grouptitle);
+
+		String Timecard = groupcard
+				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
+				.getText();
+
+		Calendar cal = Calendar.getInstance();
+		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
+		if (Timecard.contains(OriginaltimeStamp.toUpperCase()) && (Timecard.contains("PM") || Timecard.contains("AM")))
+			return true;
+		else
+			return false;
+
+	}
+
+	private WebElement getRecordCard(String grouptitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
