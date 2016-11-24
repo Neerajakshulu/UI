@@ -8,14 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -89,6 +87,8 @@ public class ENW0008 extends TestBase {
 			neonValues.put("expectedURL", "https://dev-stable.1p.thomsonreuters.com");
 			neonValues.put("expectedTitle",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_TITLE_XPATH.toString())).getText());
+			neonValues.put("expectedAuthor",
+					ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_POSTAUTHOR_CSS.toString())).getText());
 			
 			
 
@@ -134,6 +134,8 @@ public class ENW0008 extends TestBase {
 			
 			endNoteDetails.put("Author",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
+			endNoteDetails.put("AuthorValue",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_AUTHOR_VALUE_CSS.toString())).getText());
 			
 			endNoteDetails.put("Title",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
@@ -144,8 +146,6 @@ public class ENW0008 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ABSTRACT_XPATH.toString())).getText());
 			endNoteDetails.put("LastUpdatedNo",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_LASTUPDATEDNO_XPATH.toString())).getText());
-			
-			
 			
 			endNoteDetails.put("Accessionnumber",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ACCESSIONNUMBER_XPATH.toString())).getText());
@@ -167,7 +167,8 @@ public class ENW0008 extends TestBase {
 			System.out.println("Verifying Values  ");
 			if (!(endNoteDetails.get("ReferenceTypeValue").contains(neonValues.get("expectedReferenceType"))
 					&& endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL"))
-					&& neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue")))) {
+					&& neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue"))
+					&& neonValues.get("expectedAuthor").equals(endNoteDetails.get("AuthorValue")))) {
 				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
 				Assert.assertEquals(true, false);
 			}

@@ -123,6 +123,12 @@
 			<class name="enw.ENW033"></class>
 		</classes>
 	</test>
+	
+	<test name="ENW035">
+		<classes>
+			<class name="enw.ENW035"></class>
+		</classes>
+	</test>
 	 -->
 	<test name="ENW018">
 		<classes>

@@ -80,6 +80,7 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_VOLUME_XPATH("//div[@ng-show='record.volume != null']/span[2]"),
 	NEON_RECORDVIEW_ISSUE_XPATH("//div[@ng-show='record.issue != null']/span[2]"),
 	NEON_RECORDVIEW_PAGES_XPATH("//div[@ng-show='record.pages != null']/span[2]"),
+	NEON_RECORDVIEW_POSTAUTHOR_CSS("div[class='ne-publication__header'] div[class='wui-subtitle ne-user-profile-object-name ng-scope'] a"),
 	
 			ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
 			//ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell biology')]"),
@@ -91,6 +92,8 @@ public enum OnePObjectMap {
 			ENW_RECORD_URL_XPATH("//tr[@id='url_tr']/td[1]/span"),
 			ENW_RECORD_URL_VALUE_XPATH("//tr[@id='url_tr']/td[2]//span[contains(text(), 'stable')]"),
 			ENW_RECORD_AUTHOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
+			
+			ENW_RECORD_AUTHOR_VALUE_CSS("span[id='spnau']"),
 			
 			ENW_RECORD_TITLE_XPATH("//tr[@id='title_tr']/td[1]/span"),
 			ENW_RECORD_TITLE_VALUE_XPATH("//tr[@id='title_tr']/td[2]/div"),
