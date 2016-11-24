@@ -504,5 +504,15 @@
 		</classes>
 	</test> --> 
 	
+	<test name="profile_tabs_default_messages">
+		<parameter name="username" value="FirstTime.User@ca.com" />
+		<parameter name="password" value="Neon@123" />
+		<parameter name="defaultMsg"
+	value="Publish a Post – give an update, pose a question, share an interesting find.|Share your opinion – add a comment to posts, articles or patents you find interesting.|You have no followers yet. Go find interesting contributors in Project Neon and follow them.|Follow people to get updates on their Project Neon contributions.|Add articles, patents and posts to your Watchlist to be notified of updates, comments and other activity. You can add items to your Watchlist by selecting the &quot;Watch&quot; option wherever it appears on Project Neon.&#xA;Create and name your Watchlists to keep your watched items organized. Watchlists can be shared with the Project Neon Community, or kept private. Create a watchlist now." />
+		<classes>
+			<class name="Profile.Profile71"></class>
+		</classes>
+	</test> 
+	
 </suite>
 

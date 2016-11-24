@@ -477,6 +477,17 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
+	
+	/**
+	 * Method for Click  tab
+	 * 
+	 * @throws Exception, Watchlists tab is not click able
+	 */
+	public void clickWatchlistTab() throws Exception {
+		BrowserWaits.waitTime(10);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+		waitForAjax(ob);
+	}
 
 	/**
 	 * Method for validate Like own profile comment
@@ -516,6 +527,20 @@ public class ProfilePage extends TestBase {
 		String followingCountBefore = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS).getText();
 		String followingCount[] = followingCountBefore.split(" ");
+		followingBefore = Integer.parseInt(followingCount[1]);
+		return followingBefore;
+	}
+	
+	
+	/**
+	 * Method for Click profile Following tab
+	 * 
+	 * @throws Exception, Following tab is not click able
+	 */
+	public int getWatchlistsCount() throws Exception {
+		String watchlistsCount = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS).getText();
+		String followingCount[] = watchlistsCount.split(" ");
 		followingBefore = Integer.parseInt(followingCount[1]);
 		return followingBefore;
 	}
@@ -1881,6 +1906,66 @@ public class ProfilePage extends TestBase {
 		//Navigate to ENW page using Non-Market user
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_ONEP_APPS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_PROFILE_IMAGE_XPATH);
+	}
+	
+	/**
+	 * Method for Verify profile tabs should contain default messages when tab count is 0
+	 * @param defaultMsg
+	 * @throws Exception, When default message not getting displayed
+	 */
+	public void profileTabsDefaultMessages(ExtentTest test,String tabName,String defaultMsg) throws Exception {
+		
+		if(tabName.equalsIgnoreCase("Posts")) {
+			int totalPosts = getPostsCount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS);
+			String postTabDefaultText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS).findElement(By.tagName("p")).getText();
+			logger.info("post tab default message-->"+postTabDefaultText);
+			if(!(totalPosts==0 && postTabDefaultText.equalsIgnoreCase(defaultMsg))) {
+				logFailureDetails(test, "No default Post Tab messagae", "default_post_tab_msg_fail");
+			}
+		} else if(tabName.equalsIgnoreCase("comments")) {
+			clickCommentsTab();
+			int totalComments = getCommentsCount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS);
+			String commentsTabDefaultText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS).findElement(By.tagName("p")).getText();
+			logger.info("comments tab default message-->"+commentsTabDefaultText);
+			if(!(totalComments==0 && commentsTabDefaultText.equalsIgnoreCase(defaultMsg))) {
+				logFailureDetails(test, "No default Comments Tab messagae", "default_comments_tab_msg_fail");
+			}
+		}else if(tabName.equalsIgnoreCase("Followers")) {
+			clickFollowersTab();
+			int totalFollowers = getFollowersCount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS);
+			String followersTabDefaultText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS).findElement(By.tagName("p")).getText();
+			logger.info("followers tab default message-->"+followersTabDefaultText);
+			if(!(totalFollowers==0 && followersTabDefaultText.equalsIgnoreCase(defaultMsg))) {
+				logFailureDetails(test, "No default Followers Tab messagae", "default_followers_tab_msg_fail");
+			}
+		}else if(tabName.equalsIgnoreCase("Following")) {
+			clickFollowingTab();
+			int totalFollowing = getFollowingCount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS);
+			String followingTabDefaultText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS).findElement(By.tagName("p")).getText();
+			logger.info("following tab default message-->"+followingTabDefaultText);
+			BrowserWaits.waitTime(2);
+			if(!(totalFollowing==0 && followingTabDefaultText.equalsIgnoreCase(defaultMsg))) {
+				logFailureDetails(test, "No default Following Tab messagae", "default_following_tab_msg_fail");
+			}
+		} else if(tabName.equalsIgnoreCase("Watchlists")){
+			clickWatchlistTab();
+			int totalWatchlists=getWatchlistsCount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS);
+			String watchlistTabDefaultText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS).getText();
+			logger.info("watchlist tab default message-->"+watchlistTabDefaultText);
+			logger.info("watchlist tab default message2-->"+defaultMsg);
+			if(!(totalWatchlists==0 && watchlistTabDefaultText.equalsIgnoreCase(defaultMsg))) {
+				logFailureDetails(test, "No default Watchlist Tab messagae", "default_watchlist_tab_msg_fail");
+			}
+		}
+		else {
+			throw new Exception("Invalid Profile Tab details suppllied");
+		}
+		
 	}
 
 }

@@ -2065,14 +2065,14 @@ public class TestBase {
 	public void logFailureDetails(ExtentTest test,Throwable t,String message,String screenShotName) throws Exception{
 		test.log(LogStatus.FAIL, message);
 		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(screenShotName+getCurrentTimeStamp())));// screenshot
+				.addScreenCapture(captureScreenshot(screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(t);
 	}
 	
 	public void logFailureDetails(ExtentTest test,String message,String screenShotName) throws Exception{
 		test.log(LogStatus.FAIL, message);
 		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(screenShotName+getCurrentTimeStamp())));// screenshot
+				.addScreenCapture(captureScreenshot(screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(new Exception("Test case Failed"));
 	}
 }
