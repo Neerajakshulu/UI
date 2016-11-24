@@ -71,6 +71,7 @@ public class ENWIAM00017 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Unexpected error");// extent
 			ErrorUtil.addVerificationFailure(t);
+			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
