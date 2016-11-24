@@ -73,17 +73,6 @@ public class GroupInvitationPage extends TestBase {
 				.click();
 	}
 
-	public String getGroupOwnerProfileDetails(String groupTitle) throws Exception {
-
-		WebElement groupCard = getRecordCard(groupTitle);
-		String profileName = groupCard
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_PROFILE_NAME_CSS.toString())).getText();
-		String profileDetails = groupCard
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_PROFILE_DETAILS_CSS.toString()))
-				.getText();
-		return profileName + profileDetails;
-	}
-
 	public boolean verifyingInvitations(String groupTitle) throws Exception {
 		boolean istitle = false;
 		WebElement groupCard = getRecordCard(groupTitle);
