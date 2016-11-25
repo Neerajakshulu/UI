@@ -278,10 +278,10 @@ public class GroupDetailsPage extends TestBase {
 		scrollingToElementofAPage();
 		waitForAjax(ob);
 		WebElement groupCard = getPendingRecords(username);
-		groupCard
+		jsClick(ob,groupCard
 				.findElement(By.cssSelector(
-						OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString()))
-				.click();
+						OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString())));
+				
 
 	}
 
@@ -429,8 +429,7 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
+		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		BrowserWaits.waitTime(3);
 	}
 
@@ -438,8 +437,7 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsNotDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS);
+		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		BrowserWaits.waitTime(3);
 	}
 
@@ -447,6 +445,7 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
+		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		waitForAjax(ob);
 		BrowserWaits.waitTime(3);
 	}

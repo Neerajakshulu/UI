@@ -132,7 +132,7 @@ public class RCC010 extends TestBase {
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 			test.log(LogStatus.PASS, "X button is working fine for closing model");
-
+			
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
