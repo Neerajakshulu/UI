@@ -147,6 +147,12 @@
 		</classes>
 	</test>
 	
+	<test name="ENW019A">
+		<classes>
+			<class name="enw.ENW019A"></class>
+		</classes>
+	</test>
+	
 	<test name="ENW021">
 		<classes>
 			<class name="enw.ENW021"></class>

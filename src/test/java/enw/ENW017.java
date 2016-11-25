@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -46,6 +47,7 @@ public class ENW017 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			String header_Expected = "Thomson Reuters Project Neon";
+			String expected_URL = "Thank You";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);
@@ -65,7 +67,6 @@ public class ENW017 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 			}
-			
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_FEEDBACK_XPATH.toString())));
@@ -84,6 +85,21 @@ public class ENW017 extends TestBase {
 				test.log(LogStatus.PASS, "Feedback has been sent successfully.");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 				Thread.sleep(2000);
+			}
+			BrowserWaits.waitTime(8);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			String newWindow = switchToNewWindow(ob);
+			if (newWindow != null) {
+				if (ob.getCurrentUrl().contains("http://ip-science.thomsonreuters.com/support/")) {
+
+					logger.info(
+							"feedBack is opened in the new Window and it takes user to the existing (BAU) version of "
+									+ "the Endnote Feedback");
+				}
+			} else {
+				test.log(LogStatus.FAIL, "New window is not displayed and content is not matching");
+				Assert.assertEquals(true, false);
 			}
 			try {
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
