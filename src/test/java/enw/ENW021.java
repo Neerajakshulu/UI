@@ -47,15 +47,15 @@ public class ENW021 extends TestBase {
 			clearCookies();
 			ob.navigate().to("https://rid-qa.researcherid.com/");
 			logger.info(Inet4Address.getLocalHost().getHostAddress());
-			loginToRID("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+     		loginToRID("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
 			EndNoteSeesion(ob);
 			try {
 				if (!Inet4Address.getLocalHost().getHostAddress().startsWith("10.29")) {
-					CessarEntiteled();
-				} else {
-					CessarNotEntitled();
+					CessarNotEntiteledWithIP();
+				} else {					
+					CessarEntiteledWithIP();
 
 				}
 
@@ -78,25 +78,15 @@ public class ENW021 extends TestBase {
 		
 	}
 
-	private void CessarNotEntitled() throws Exception {
-		logger.info("CLicking the profile");
-		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
-		loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-		BrowserWaits.waitTime(8);
-		if (ob.getCurrentUrl().contains(expectedUrl)) {
-			if (ob.findElements(By.xpath(OnePObjectMap.IMAGE_ICON_PROFILE_IN_NEON_XPATH.toString())).size() > 0)
-				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
-
-		} else {
-			test.log(LogStatus.FAIL, "Expected page is not displayed");
-			Assert.assertEquals(true, false);
+	private void CessarNotEntiteledWithIP() throws InterruptedException {
+		
+		try {
+			//EndNoteSeesion(ob);
+			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-
-	}
-
-	private void CessarEntiteled() throws Exception {
-		loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 		try {
 			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 					.getText();
@@ -117,8 +107,31 @@ public class ENW021 extends TestBase {
 			test.log(LogStatus.FAIL, "Expected page is not displayed");
 			Assert.assertEquals(true, false);
 		}
+		
 	}
 
+	private void CessarEntiteledWithIP() throws Exception {
+		logger.info("CLicking the profile");
+		//EndNoteSeesion(ob);
+		BrowserWaits.waitTime(8);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+		try {
+			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BrowserWaits.waitTime(8);
+		if (ob.getCurrentUrl().contains(expectedUrl)) {
+			if (ob.findElements(By.xpath(OnePObjectMap.IMAGE_ICON_PROFILE_IN_NEON_XPATH.toString())).size() > 0)
+				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
+
+		} else {
+			test.log(LogStatus.FAIL, "Expected page is not displayed");
+			Assert.assertEquals(true, false);
+		}
+	}	
 	private void EndNoteSeesion(WebDriver ob) throws Exception {
 		String newWindow = switchToNewWindow(ob);
 		logger.info("Before Success1");
