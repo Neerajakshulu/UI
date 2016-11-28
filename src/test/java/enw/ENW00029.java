@@ -108,12 +108,13 @@ public class ENW00029 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 				closeBrowser();
 			}
-			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.TEXT_ACCOUNTPAGE_XPATH.toString()))
-					.getText();
+		//	String accountpageText=ob.findElement(By.xpath("//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]"));
+			//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]
+			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.TEXT_ACCOUNTPAGE1_XPATH.toString())).getText();
 			System.out.println(accountpageText);
 			try {
 				Assert.assertEquals(accountpageText,
-						"Project Neon supports linking your accounts - accounts you have for other Thomson Reuters products and social media accounts - so that you can sign in with any of the accounts you already use.");
+						"Project Neon has linked your accounts. You can sign in with any of the accounts you already use.");
 				test.log(LogStatus.PASS,
 						"Message 'Project Neon supports linking your accounts - ' is dispalyed correctly in account setting page");
 			}
@@ -154,17 +155,17 @@ public class ENW00029 extends TestBase {
 	public void validateSocialAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
-			Assert.assertFalse(
+			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("UserFBENW00029")));
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("UserFBENW00029")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
+//			Assert.assertTrue(
+//					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Multiple accounts are present in account setting page");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Multiple accounts are present in account setting page");
+			test.log(LogStatus.FAIL, "Multiple accounts are not present in account setting page");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
