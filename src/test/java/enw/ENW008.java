@@ -74,6 +74,7 @@ public class ENW008 extends TestBase {
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+			BrowserWaits.waitTime(8);
 			pf.getAuthoringInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
@@ -99,10 +100,13 @@ public class ENW008 extends TestBase {
 			neonValues.put("expectedTitle",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_TITLE_XPATH.toString())).getText());
 		   neonValues.put("expectedNotes", "Cited Patents:" + expectedNotes1 + " Cited Articles:" + expectedNotes2);
+		  
 			//neonValues.put("expectedIPCcodes", "completeIPCCode");
+		   String expectedAuthor1=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText();
+		   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
 			
 			
-
+		   
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
@@ -146,10 +150,14 @@ public class ENW008 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_XPATH.toString())).getText());
 			endNoteDetails.put("URLValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_VALUE_XPATH.toString())).getText());
-			endNoteDetails.put("Author",
-					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
+			//endNoteDetails.put("Author",
+				//	ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
 			endNoteDetails.put("Inventor",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_INVENTOR_XPATH.toString())).getText());
+			endNoteDetails.put("InventorValue1",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS.toString())).getText());
+			endNoteDetails.put("InventorValue2",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("Assignee",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ASSIGNEE_XPATH.toString())).getText());
 			endNoteDetails.put("Title",
@@ -180,13 +188,34 @@ public class ENW008 extends TestBase {
 				}
 			}
 			
-
+		  /* String Author1=expectedAuthor1.substring(1, expectedAuthor1.length()-1);
+		   String Author2=expectedAuthor2.substring(1, expectedAuthor2.length()-1);
 			System.out.println("Verifying Values  ");
-			if (!(endNoteDetails.get("ReferenceTypeValue").contains(neonValues.get("expectedReferenceType"))
-					&& endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL"))
-					&& neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue"))
-					&& neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue")))) {
-				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+			System.out.println(neonValues.get("Author1"));
+			System.out.println(neonValues.get("expectedAuthor1"));
+			System.out.println(endNoteDetails.get("InventorValue1"));*/
+			if (!(endNoteDetails.get("ReferenceTypeValue").contains(neonValues.get("expectedReferenceType")))) {
+				test.log(LogStatus.FAIL, "ReferenceTypeValue is not matching between Neon and endnote");
+				Assert.assertEquals(true, false);
+			}
+			if (!(endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL")))) {
+						test.log(LogStatus.FAIL, "URLValue is not matching between Neon and endnote");
+						Assert.assertEquals(true, false);
+					}
+			if (!(neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue")))) {
+						test.log(LogStatus.FAIL, "expectedTitleValue is not matching between Neon and endnote");
+						Assert.assertEquals(true, false);
+					}
+			if (!(neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue")))) {
+						test.log(LogStatus.FAIL, "NotesValue is not matching between Neon and endnote");
+						Assert.assertEquals(true, false);
+					}
+			if (!(expectedAuthor1.contains(endNoteDetails.get("InventorValue1")))) {
+						test.log(LogStatus.FAIL, "Author1Value is not matching between Neon and endnote");
+						Assert.assertEquals(true, false);
+					}
+			if (!(expectedAuthor2.contains(endNoteDetails.get("InventorValue2")))) {
+				test.log(LogStatus.FAIL, "Author2Value is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
 			}
 
