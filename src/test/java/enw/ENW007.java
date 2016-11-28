@@ -96,6 +96,12 @@ public class ENW007 extends TestBase {
 			neonValues.put("expectedPages",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PAGES_XPATH.toString())).getText());
 			neonValues.put("expectedNotes", "Times Cited:" + expectedNotes1 + " Cited References:" + expectedNotes2);
+			neonValues.put("expectedAuthor1",
+					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText());
+			neonValues.put("expectedAuthor2",
+					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText());
+			neonValues.put("expectedAuthor3",
+					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH.toString())).getText());
 
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
@@ -137,6 +143,12 @@ public class ENW007 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_VALUE_XPATH.toString())).getText());
 			endNoteDetails.put("Author",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
+			endNoteDetails.put("AuthorValue1",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS.toString())).getText());
+			endNoteDetails.put("AuthorValue2",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
+			endNoteDetails.put("AuthorValue3",
+					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR3_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("Title",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
 			endNoteDetails.put("TitleValue",
@@ -179,7 +191,10 @@ public class ENW007 extends TestBase {
 					&& neonValues.get("expectedJournal").equals(endNoteDetails.get("JournalValue"))
 					&& neonValues.get("expectedVolume").equals(endNoteDetails.get("VolumeValue"))
 					&& neonValues.get("expectedIssue").equals(endNoteDetails.get("IssueValue"))
-					&& neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue")))) {
+					&& neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue"))
+					&& neonValues.get("expectedAuthor1").contains(endNoteDetails.get("AuthorValue1"))
+					&& neonValues.get("expectedAuthor2").contains(endNoteDetails.get("AuthorValue2"))
+					&& neonValues.get("expectedAuthor3").contains(endNoteDetails.get("AuthorValue3")))) {
 				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
 				Assert.assertEquals(true, false);
 			}
