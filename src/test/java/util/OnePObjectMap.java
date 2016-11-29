@@ -84,6 +84,9 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][1]"),
 	NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][2]"),
 	NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][3]"),
+	NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS("span[ng-bind-html='::assign']"),
+	  
+	NEON_RECORDVIEW_PATENT_ABSTRACT_CSS("p[class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
 
 
 	ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
@@ -120,6 +123,8 @@ public enum OnePObjectMap {
 	ENW_RECORD_NOTES_XPATH("//tr[@id='notes_tr']/td[1]/span"),
 	ENW_RECORD_NOTES_VALUE_XPATH("//tr[@id='notes_tr']/td[2]/div"),
 	ENW_RECORD_LASTUPDATEDNO_XPATH("//tr[@id='date_tr']/td[1]/span"),
+	ENW_RECORD_ASSIGNEE_VALUE_CSS("div [id='publisher']"),
+	ENW_RECORD_ABSTRACT_VALUE_CSS("div[id='abstract']"),
 			
 	//PATENTS RECORDS
 	ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
