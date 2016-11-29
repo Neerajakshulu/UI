@@ -211,6 +211,21 @@
 			<class name="enwiam.ENWIAM0009"></class>
 		</classes>
 	</test>
+	 <test name="ENWIAM00018">
+		<classes>
+			<class name="enwiam.ENWIAM00018"></class>
+		</classes>
+	</test>
+	 <test name="ENWIAM00019">
+		<classes>
+			<class name="enwiam.ENWIAM00019"></class>
+		</classes>
+	</test>
+	 <test name="ENWIAM00020">
+		<classes>
+			<class name="enwiam.ENWIAM00020"></class>
+		</classes>
+	</test>
 	<!-- <test name="ContactCustomerSupportScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM52">
