@@ -11,58 +11,41 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Neon_registraiton_and_reset_password2" preserve-order="true">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test> -->
-
 	<test name="Neon_registraiton_and_reset_password3" preserve-order="true">
 		<classes>
 			<class name="iam.IAM017"></class>
 		</classes>
 	</test>
+	
 	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
 		<classes>
 			<class name="iam.IAM023"></class>
-
 		</classes>
 	</test>
 
 	<test name="Neon_registraiton_and_reset_password5" preserve-order="true">
 		<classes>
 			<class name="iam.IAM024"></class>
-
 		</classes>
 	</test>
+	
 	<test name="Neon_registraiton_and_reset_password6" preserve-order="true">
 		<classes>
-
 			<class name="iam.IAM028"></class>
-
 		</classes>
 	</test>
 
 	<test name="Neon_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
-
 			<class name="iam.IAM034"></class>
-
 		</classes>
 	</test>
 
 	<test name="Neon_registraiton_and_reset_password8" preserve-order="true">
 		<classes>
-
 			<class name="iam.IAM035"></class>
 		</classes>
 	</test>
-	<!-- <test name="Neon_registraiton_and_reset_password9" preserve-order="true">
-		<classes>
-			<class name="iam.IAM036"></class>
-			<class name="iam.IAM037"></class>
-		</classes>
-	</test> -->
 
 	<test name="Login_and_logout_neon_application_using_existing_neon_account">
 		<classes>
@@ -70,18 +53,11 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Login_and_logout_neon_application_using_LI_account">
-		<classes>
-			<class name="iam.IAM003"></class>
-		</classes>
-	</test> -->
-
 	<test name="Login_and_logout_neon_application_using_facebook_account">
 		<classes>
 			<class name="iam.IAM004"></class>
 		</classes>
 	</test>
-
 
 	<test name="Validate_firstname_in_neon_registration_page">
 		<classes>
@@ -95,25 +71,19 @@
 		</classes>
 	</test>
 
-
-	<test
-		name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
+	<test name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM007"></class>
 		</classes>
 	</test>
 
-
-	<test
-		name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
+	<test name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM008"></class>
 		</classes>
 	</test>
 
-
-	<test
-		name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
+	<test name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM009"></class>
 		</classes>
@@ -137,13 +107,11 @@
 		</classes>
 	</test>
 
-
 	<test name="Singup_button_disable_without_filling_required_fields">
 		<classes>
 			<class name="iam.IAM014"></class>
 		</classes>
 	</test>
-
 
 	<test name="Neon_not_allow_existing_account_to_create_account">
 		<classes>
@@ -151,33 +119,17 @@
 		</classes>
 	</test>
 
-
-	<!-- <test name="IAM016">
-	<classes>
-		<class name="iam.IAM016"></class>
-	</classes>
-</test> -->
-	<!-- <test name="IAM017">
-		<classes>
-			<class name="iam.IAM017"></class>
-		</classes>
-	</test> -->
-
 	<test name="Linkedin_cancle_button">
 		<classes>
 			<class name="iam.IAM018"></class>
 		</classes>
 	</test>
 
-
 	<test name="Email_address_special_characters_not_allow">
 		<classes>
 			<class name="iam.IAM019"></class>
 		</classes>
 	</test>
-
-	<!-- <test name="IAM020"> <classes> <class name="iam.IAM020"></class> </classes> 
-		</test> -->
 
 	<test name="View_additional_preference_link_in_account_page">
 		<classes>
@@ -190,9 +142,7 @@
 			<class name="iam.IAM022"></class>
 		</classes>
 	</test>
-	<!-- <test name="IAM023"> <classes> <class name="iam.IAM023"></class> </classes> 
-		</test> <test name="IAM024"> <classes> <class name="iam.IAM024"></class> 
-		</classes> </test> -->
+
 	<test name="Help_link_in_profile_flyout">
 		<classes>
 			<class name="iam.IAM025"></class>
@@ -211,48 +161,10 @@
 		</classes>
 	</test>
 
-	<!-- <test name="IAM028"> <classes> <class name="iam.IAM028"></class> </classes> 
-		</test> -->
-
 	<test name="Validate_password_max_length_in_neon_registration_page">
 		<classes>
 			<class name="iam.IAM029"></class>
 		</classes>
 	</test>
-	
-	<!-- <test name="Validate_change_password_account_page">
-		<classes>
-			<class name="iam.IAM038"></class>
-		</classes>
-	</test> -->
-
-	<!-- <test name="Deep_linking_account_page_Using_LI_and_facebook">
-		<classes>
-			<class name="iam.IAM030"></class>
-		</classes>
-	</test>
-	<test name="Deep_linking_help_page_Using_LI_and_facebook">
-		<classes>
-			<class name="iam.IAM031"></class>
-		</classes>
-	</test> -->
-
-	<!-- <test name="Linking_Steam_to_Social">
-		<classes>
-			<class name="iam.IAM032"></class>
-		</classes>
-	</test>
-
-	<test name="Liking_Social_to_Steam">
-		<classes>
-			<class name="iam.IAM033"></class>
-		</classes>
-	</test> -->
-
-	<!-- <test name="LinkedIn_and_facebook_linking">
-		<classes>
-			<class name="iam.IAM036"></class>
-		</classes>
-	</test> -->
 </suite>
 
