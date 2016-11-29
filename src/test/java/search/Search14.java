@@ -61,9 +61,7 @@ public class Search14 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// ob.navigate().to(host);
+			ob.navigate().to(host);
 
 			// login using TR credentials
 			login();

@@ -18,6 +18,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search18 extends TestBase {
 
@@ -74,6 +75,7 @@ public class Search18 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")),
 					40);

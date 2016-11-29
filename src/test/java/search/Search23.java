@@ -61,7 +61,6 @@ public class Search23 extends TestBase {
 			String search_query = "wom?n";
 
 			openBrowser();
-			// runOnSauceLabsFromLocal("Windows","FF");
 			clearCookies();
 			maximizeWindow();
 
@@ -71,11 +70,11 @@ public class Search23 extends TestBase {
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 20);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched

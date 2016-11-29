@@ -79,6 +79,7 @@ public class Search19 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 20);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_box_css"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			// waitForAllElementsToBePresent(ob,
 			// By.cssSelector(OR.getProperty("tr_search_results_all_refine_checkboxes_css")), 40);

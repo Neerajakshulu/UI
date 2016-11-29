@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -63,14 +64,15 @@ public class Search27 extends TestBase {
 			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			Thread.sleep(1000);
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			Thread.sleep(2000);
+			BrowserWaits.waitTime(3);
 
 			WebElement myE = ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
 			String text = myE.getText();
