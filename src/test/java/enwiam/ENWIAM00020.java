@@ -1,8 +1,5 @@
 package enwiam;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -185,7 +182,7 @@ public class ENWIAM00020 extends TestBase {
 		}
 	}
 
-	private void validateAccounts(int accountCount, String linkName) throws Exception {
+	/*private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
@@ -200,7 +197,7 @@ public class ENWIAM00020 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
-	}
+	}*/
 
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
