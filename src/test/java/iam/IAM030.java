@@ -95,7 +95,7 @@ public class IAM030 extends TestBase {
 			BrowserWaits.waitTime(4);
 			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
 			logger.info("Title : " + str);
-			String emailName = ob.findElement(By.cssSelector("span[class='ng-binding']")).getText();
+			String emailName = ob.findElement(By.cssSelector("div[class='account-option-item__text-container'] span")).getText();
 			logger.info("Emai Text : " + emailName);
 			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
@@ -163,8 +163,8 @@ public class IAM030 extends TestBase {
 
 			String str = driver.findElement(By.cssSelector("h2[class='wui-title']")).getText();
 			logger.info("Title : " + str);
-			String emailName = driver.findElement(By.cssSelector("span[class='ng-binding']")).getText();
-			logger.info("Emai Text : " + emailName);
+			String emailName = driver.findElement(By.cssSelector("div[class='account-option-item__text-container'] span")).getText();
+			logger.info("Emai Text: " + emailName);
 			String additionalMail = driver.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']"))
 					.getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
