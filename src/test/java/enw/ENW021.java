@@ -18,6 +18,9 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
+// Verify that user who is navigated to the community enabled version of 
+//Endnote via RID navigation in page, upon clicking Account,Profile, feedback and Project Neon link in Profileflyout user 
+//will be taken to ENW login page and after entering credentials it should take  to correct destination pages.
 public class ENW021 extends TestBase {
 
 	static int status = 1;
@@ -49,14 +52,11 @@ public class ENW021 extends TestBase {
 			logger.info(Inet4Address.getLocalHost().getHostAddress());
      		loginToRID("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			BrowserWaits.waitTime(3);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
-			EndNoteSeesion(ob);
 			try {
 				if (!Inet4Address.getLocalHost().getHostAddress().startsWith("10.29")) {
 					CessarNotEntiteledWithIP();
 				} else {					
 					CessarEntiteledWithIP();
-
 				}
 
 			} catch (Exception e) {
@@ -78,8 +78,10 @@ public class ENW021 extends TestBase {
 		
 	}
 
-	private void CessarNotEntiteledWithIP() throws InterruptedException {
+	private void CessarNotEntiteledWithIP() throws Exception {
 		
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
+		EndNoteSeesion(ob);
 		try {
 			//EndNoteSeesion(ob);
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
@@ -112,6 +114,8 @@ public class ENW021 extends TestBase {
 
 	private void CessarEntiteledWithIP() throws Exception {
 		logger.info("CLicking the profile");
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.RID_ENDNOTE_LINK_XPATH.toString())));
+		EndNoteSeesion(ob);
 		//EndNoteSeesion(ob);
 		BrowserWaits.waitTime(8);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
