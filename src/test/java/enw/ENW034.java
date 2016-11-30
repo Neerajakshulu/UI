@@ -87,16 +87,14 @@ public class ENW034 extends TestBase {
 
 	private void handleContinueAndAgree() {
 		try {
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-		} catch (Exception e) {
-			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+					.getText();
+			if (text.equalsIgnoreCase("Continue")) {
+				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
