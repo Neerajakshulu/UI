@@ -11,6 +11,21 @@
 		<class name="dra.DRA001"></class>
 	</classes>
 	</test>
+	<test name="DRA002">
+	<classes>
+		<class name="dra.DRA002"></class>
+	</classes>
+	</test>
+	<test name="DRA003">
+	<classes>
+		<class name="dra.DRA003"></class>
+	</classes>
+	</test>
+	<test name="DRA004">
+	<classes>
+		<class name="dra.DRA004"></class>
+	</classes>
+	</test>
 	<test name="DRA0010">
 	<classes>
 		<class name="dra.DRA0010"></class>
