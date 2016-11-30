@@ -69,11 +69,11 @@ public class Search79 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			Thread.sleep(2000);
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("b");
-			BrowserWaits.waitTime(1);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("s");
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("c");
+			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
-			BrowserWaits.waitTime(1);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
 			BrowserWaits.waitTime(5);
 
 			WebElement myE1 = ob.findElement(By.xpath(OR.getProperty("categoriesTile")));

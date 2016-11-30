@@ -34,8 +34,8 @@ public class Search88 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 
 	}
 
@@ -47,8 +47,8 @@ public class Search88 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -66,14 +66,13 @@ public class Search88 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()),
-					120);
-			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()),
-					120);
-
-			String patent = "ice cream";
-			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(patent);
-
+			String patent1 = "ice cream";
+			
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patent1);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 20);
+			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(4);
 			// click on Patents tab
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 
@@ -83,15 +82,19 @@ public class Search88 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css")),
 					120);
 			BrowserWaits.waitTime(4);
-			// waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_patent_record_view_css")), 30);
 
 			// validate page is navigating to patent record view page from search results page
 			String patentRVTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_css")))
 					.getText();
-			boolean patentRVTitleWatchLabel = ob
-					.findElement(By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
+			System.out.println("jjjjjjjjjjjj"+patentRVTitle);
+			String patentRVTitle1 = ob.findElement(By.cssSelector("h3[class='wui-super-header']"))
+					.getText();
+			System.out.println("jjjjjjjjjjjj"+patentRVTitle1);
+			boolean patentRVTitleWatchLabel = ob.findElement(
+					By.cssSelector(OR.getProperty("tr_patent_record_view_watch_share_css"))).isDisplayed();
 
-			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle, patent) && patentRVTitleWatchLabel);
+			boolean patentRVStatus = (StringUtils.containsIgnoreCase(patentRVTitle1,"patent") && patentRVTitleWatchLabel);
 
 			if (!patentRVStatus)
 				throw new Exception("Page is not Navigating to Patent Record View Page");
@@ -110,8 +113,11 @@ public class Search88 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 
