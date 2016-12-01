@@ -2074,17 +2074,34 @@ public class TestBase {
 		return jiraid;
 	}
 	
+	/**
+	 * Method for set  status as FAIL and appending screenshot in ExtentReport
+	 * @param test
+	 * @param t
+	 * @param message
+	 * @param screenShotName
+	 * @throws Exception, When Report details not captured 
+	 */
 	public void logFailureDetails(ExtentTest test,Throwable t,String message,String screenShotName) throws Exception{
 		test.log(LogStatus.FAIL, message);
 		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(screenShotName)));// screenshot
+				.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(t);
 	}
 	
+	/**
+	 * Method for set  status as FAIL and appending screenshot in ExtentReport
+	 * @param test
+	 * @param t
+	 * @param message
+	 * @param screenShotName
+	 * @throws Exception,When Report details not captured
+	 */
 	public void logFailureDetails(ExtentTest test,String message,String screenShotName) throws Exception{
 		test.log(LogStatus.FAIL, message);
 		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(screenShotName)));// screenshot
+				.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(new Exception("Test case Failed"));
 	}
 }
+
