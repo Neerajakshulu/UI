@@ -93,7 +93,8 @@ public class ENWIAM00019 extends TestBase {
 				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
 				test.log(LogStatus.PASS, "user is able navigate to EndNote");
 				logoutEnw();
-				String url="https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote";
+				BrowserWaits.waitTime(5);
+				String url="https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote&pageview=";
 				String actualurl = ob.getCurrentUrl();
 				try {
 					Assert.assertEquals(actualurl, url);
