@@ -89,8 +89,6 @@ public class ENWIAM00016 extends TestBase {
 					LOGIN.getProperty("ENWIAM00016UserPWD"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 
-			//String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			String accountType = "Facebook";
 
