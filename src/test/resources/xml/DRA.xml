@@ -6,7 +6,7 @@
 	</listeners>
 	
 	
-	<test name="DRA001">
+	<!-- <test name="DRA001">
 	<classes>
 		<class name="dra.DRA001"></class>
 	</classes>
@@ -45,7 +45,7 @@
 	<classes>
 		<class name="dra.DRA0013"></class>
 	</classes>
-	</test>
+	</test> -->
 </suite>
 
 

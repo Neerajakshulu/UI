@@ -13,6 +13,5 @@
 		<suite-file path="./ENW.xml" />
 		<suite-file path="./ENWIAM.xml" />
 		<suite-file path="./RCC.xml" />
-		<suite-file path="./DRA.xml" />
 	</suite-files>
 </suite>
