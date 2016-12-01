@@ -560,7 +560,7 @@ public enum OnePObjectMap {
 	NEON_HELP_AND_FEEDBACK_LINK_CSS("a[data-event-action='help-feedback']"),
 	NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS("a[class='feedback-link__anchor ng-binding']"),
 	NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS("a[class='feedback-link__anchor']"),
-	NEON_ACCOUNT_PAGE_USER_NAME_CSS("span[class='ng-binding']"),
+	NEON_ACCOUNT_PAGE_USER_NAME_CSS("div[class='account-option-item__text-container'] span"),
 	ENW_NOTNOW_XPATH("//a[@ng-click='vm.callSkipLinking()']"), 
 	ENW_PROFILE_HEADER_XPATH("//span[@class='ne-nav-logo__text ne-nav-logo__text--tr']"),
 	NEON_PROFILE_HEADER_XPATH("//span[@class='ne-logo__text ne-logo__text--tr']"),
