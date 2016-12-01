@@ -532,7 +532,7 @@ public enum OnePObjectMap {
 	DID_YOU_KNOW_MODAL_STEAMPW_CSS("input[name='steamPassword']"),
 	PROFILE_PAGE_WATCHLIST_COUNT_XPATH("//a[@data-event-category='profilewatchlists']/span[@class='wui-side-menu__badge ng-binding']"),
 	ALREADY_HAVE_AN_ACCOUNT_NOTNOW_CSS("div[class='modal-content ng-scope']"),
-	HOME_PROJECT_NEON_HEADER_CSS("a[class='ne-logo__link ng-scope']"),
+	HOME_PROJECT_NEON_HEADER_CSS("a[class='ne-logo__link']"),
 	
 	//AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),

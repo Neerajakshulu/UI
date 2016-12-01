@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class ENWIAM58 extends TestBase {
+public class ENWIAM60 extends TestBase {
 
 	static int count = -1;
 
@@ -48,7 +48,7 @@ public class ENWIAM58 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh18() throws Exception {
+	public void testcaseh20() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -61,13 +61,11 @@ public class ENWIAM58 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername12"));
-			
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername14"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
-
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -82,52 +80,15 @@ public class ENWIAM58 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			// Making the social account Neon Active
+			ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername12"),
-					LOGIN.getProperty("sru_fbpwd12"));
-			test.log(LogStatus.PASS, "user has logged in with social account");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			pf.getHFPageInstance(ob).clickOnAccountLink();
-			BrowserWaits.waitTime(2);
-			String accountType = "Facebook";
+			// Activating the Steam account
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam14"),
 
-			validateAccounts(1, accountType);
-			
-			for (int j = 1; j <= 1; j++) {
-				logger.info("Creating " + j + " Watchlist");
-				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
-			}
+			LOGIN.getProperty("sru_steampw14"));
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			test.log(LogStatus.PASS, "user is able to login to ENW Steam");
 
-			test.log(LogStatus.PASS, "Social account is made Neon active ");
-
-			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(2);
-
-			// Making the Steam account Neon active
-
-			try {
-				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-				ob.navigate().refresh();
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam12"),
-						LOGIN.getProperty("sru_steampw12"));
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.ALREADY_HAVE_AN_ACCOUNT_NOTNOW_CSS);
-				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
-
-			} catch (Throwable t) {
-				closeBrowser();
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "User is not able to skip linking");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_skip_link")));
-			}
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
@@ -138,53 +99,58 @@ public class ENWIAM58 extends TestBase {
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 			}
 
-			pf.getEnwReferenceInstance(ob).clickOnProjectNeonLink();
-			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			pf.getHFPageInstance(ob).clickOnAccountLink();
-			BrowserWaits.waitTime(2);
-			accountType = "Neon";
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
+			pf.getENWReferencePageInstance(ob).clickAccount();
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
+			pf.getHFPageInstance(ob).clickProfileImage();
+			// pf.getHFPageInstance(ob).clickOnAccountLink();
+			String accountType = "Neon";
 
 			validateNeonAccount(1, accountType);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_HEADER_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_CSS);
+			try {
+				for (int j = 1; j <= 1; j++) {
+					logger.info("Creating " + j + " Watchlist");
+					pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
+				}
 
-			for (int j = 1; j <= 1; j++) {
-				logger.info("Creating " + j + " Watchlist");
-				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
+				test.log(LogStatus.INFO, "Steam account is made Neon active ");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Not able to make the account neon active");
 			}
-
-			test.log(LogStatus.PASS, "Steam account is made Neon active ");
-
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 
-			// Trying to Link the accounts
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-				ob.navigate().refresh();
-				pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw12"));
-				test.log(LogStatus.INFO, "Trying to link two Neon active accounts ");
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_TITLE_CSS);
-				String actual_msg = pf.getLinkingModalsInstance(ob).getCustomerSupportMsg();
-				if (actual_msg.contains("We're sorry. We are unable to link your accounts."))
-					test.log(LogStatus.PASS,
-							"Accounts cannot be merged and contact customer support message is displayed");
-				//pf.getLinkingModalsInstance(ob).clickOnOkButton();
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername14"),
+						LOGIN.getProperty("sru_fbpwd14"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw14"));
 				
-			}
+				try {
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				} catch (Exception e) {
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				}
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
+				pf.getENWReferencePageInstance(ob).clickAccount();
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+				String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+				test.log(LogStatus.INFO, "After merging facebook account profile name: " + secondAccountProfileName);
+				validateLinkedAccounts(2, accountType);
+				
+				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
+				test.log(LogStatus.PASS, "Forward Merge is happened");
 
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL, "contact customer support message is not displayed");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Not able to make the account neon active");
 			}
 
 		} catch (Throwable t) {
@@ -200,16 +166,12 @@ public class ENWIAM58 extends TestBase {
 
 		}
 
-		BrowserWaits.waitTime(2);
-		closeBrowser();
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-
 	}
 
 	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam12")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam14")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
@@ -221,18 +183,24 @@ public class ENWIAM58 extends TestBase {
 		}
 	}
 
-	private void validateAccounts(int accountCount, String linkName) throws Exception {
+
+	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
+
+			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
+					LOGIN.getProperty("sru_fbusername14")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername12")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam14")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
+			test.log(LogStatus.PASS,
+					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
+			test.log(LogStatus.FAIL,
+					"Linked accounts are not available in accounts page : Facebook and " + linkName + " accounts");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
 
