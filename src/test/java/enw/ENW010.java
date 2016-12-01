@@ -59,7 +59,7 @@ public class ENW010 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String actual_result = "";
 			
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"), LOGIN.getProperty("NONMARKETUSERPASSWORD"));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"), LOGIN.getProperty("NONMARKETUSERPASSWORD"));
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Downloads","Options");
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			

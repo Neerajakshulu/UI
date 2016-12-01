@@ -73,6 +73,25 @@ public class OnboardingModalsPage extends TestBase {
 		BrowserWaits.waitTime(4);
 	}
 	
+	public void ENWSTeamLogin1(String userName, String password) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,userName);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS,password);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		try {
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+					.getText();
+			if (text.equalsIgnoreCase("Continue")) {
+				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		BrowserWaits.waitTime(4);
+	}
 	/**
 	 * Method for Validate Onboarding modals,
 	 * @throws Exception, When Onboarding modals are not present for first time users

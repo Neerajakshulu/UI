@@ -91,7 +91,7 @@ public class ENW041 extends TestBase {
 		clearCookies();
 		String header_Expected = "Thomson Reuters Project Neon";
 		ob.get("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
-		ENWSTeamLogin1(LOGIN.getProperty("SUTILITYCUSTOMER"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
+		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("SUTILITYCUSTOMER"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
 		BrowserWaits.waitTime(5);
 		//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
 		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();

@@ -64,7 +64,7 @@ public class ENW019A extends TestBase {
 					.sendKeys("Feedback sending");
 			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-			BrowserWaits.waitTime(7);
+			BrowserWaits.waitTime(10);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 			try {
 				Assert.assertEquals(expected_URL, str);

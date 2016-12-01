@@ -40,7 +40,7 @@ public class ENW023 extends TestBase {
 	public void testcaseENW023() throws Exception {
 		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon";
+		String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon&pageview=";
 		String uRl="";
 		//String neonHomePage = "https://dev-stable.1p.thomsonreuters.com/#/home";
 		//String Expected_Result = "Sign in";
@@ -65,31 +65,24 @@ public class ENW023 extends TestBase {
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-			pf.getLoginTRInstance(ob).clickLogin();
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		    pf.getLoginTRInstance(ob).clickLogin();
+			//closeOnBoardingModal();
 			pf.getLoginTRInstance(ob).logOutApp();
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials1(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-			try {
-				if(ob.findElements(By.xpath(OnePObjectMap.NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH.toString())).size() > 1)
-				{
-					ob.findElement(By.xpath(OnePObjectMap.NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH.toString())).click();
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 				BrowserWaits.waitTime(3);
 				ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
 				uRl=ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).getText();
-				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
 				Assert.assertEquals(uRl, "Did you know?");
+				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
 				BrowserWaits.waitTime(5);
 				ob.findElement(By.xpath("//button[@class='wui-modal__close-btn']")).click();
-				uRl=ob.getCurrentUrl().toString();
-				logger.info(uRl);
-			try {
-				Assert.assertEquals(uRl, expected_URL);
+				String exp_uRl=ob.getCurrentUrl().toString();
+				logger.info(exp_uRl);
+				try {
+				Assert.assertEquals(exp_uRl, expected_URL);
 				test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper URL.");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Expected page is not displayed and  URL is wrong.");// extent

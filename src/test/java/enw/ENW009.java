@@ -54,7 +54,7 @@ public class ENW009 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String header_Expected = "Thomson Reuters";
 
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"),
 					LOGIN.getProperty("NONMARKETUSERPASSWORD"));
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
 
