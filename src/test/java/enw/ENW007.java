@@ -68,7 +68,7 @@ public class ENW007 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD007"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getAuthoringInstance(ob).searchArticle("Ligand restricted conformational shuttle: A King-Altman kinetics model for nitric oxide synthase reductase catalysis and control");
 
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getAuthoringInstance(ob).chooseArticle();
@@ -100,8 +100,8 @@ public class ENW007 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText());
 			neonValues.put("expectedAuthor2",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText());
-			neonValues.put("expectedAuthor3",
-					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH.toString())).getText());
+		//	neonValues.put("expectedAuthor3",
+			//		ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH.toString())).getText());
 
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
@@ -131,6 +131,12 @@ public class ENW007 extends TestBase {
 			//pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.ENW_RECORD_LINK_XPATH.toString()),30);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			
+			try {
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHOWALLFILEDS_LINK_XPATH);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("ReferenceType",
@@ -147,8 +153,8 @@ public class ENW007 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("AuthorValue2",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
-			endNoteDetails.put("AuthorValue3",
-					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR3_VALUE_CSS.toString())).getText());
+			//endNoteDetails.put("AuthorValue3",
+				//	ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR3_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("Title",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
 			endNoteDetails.put("TitleValue",
@@ -193,8 +199,7 @@ public class ENW007 extends TestBase {
 					&& neonValues.get("expectedIssue").equals(endNoteDetails.get("IssueValue"))
 					&& neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue"))
 					&& neonValues.get("expectedAuthor1").contains(endNoteDetails.get("AuthorValue1"))
-					&& neonValues.get("expectedAuthor2").contains(endNoteDetails.get("AuthorValue2"))
-					&& neonValues.get("expectedAuthor3").contains(endNoteDetails.get("AuthorValue3")))) {
+					&& neonValues.get("expectedAuthor2").contains(endNoteDetails.get("AuthorValue2")))) {
 				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
 				Assert.assertEquals(true, false);
 			}
