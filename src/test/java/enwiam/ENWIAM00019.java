@@ -94,11 +94,16 @@ public class ENWIAM00019 extends TestBase {
 				test.log(LogStatus.PASS, "user is able navigate to EndNote");
 				logoutEnw();
 				BrowserWaits.waitTime(5);
-				String url="https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote&pageview=";
+				String url="https://dev-stable.1p.thomsonreuters.com";
 				String actualurl = ob.getCurrentUrl();
 				try {
-					Assert.assertEquals(actualurl, url);
+					if(actualurl.contains(url))
 					test.log(LogStatus.PASS, " when  user signs out of ENW, system has referrer URL = endnote");
+					else
+					{
+						test.log(LogStatus.FAIL, "when  user signs out of ENW, system does not has referrer URL = endnote");// extent
+						
+					}
 				}
 
 				catch (Throwable t) {
