@@ -34,11 +34,7 @@
 			<class name="notifications.Notifications0006"></class>
 		</classes>
 	</test>
-	<!-- <test name="Test F7">
-		<classes>
-			<class name="notifications.Notifications0007"></class>
-		</classes>
-	</test> -->
+	
 	<test name="Test F8">
 		<classes>
 			<class name="notifications.Notifications0008"></class>
@@ -78,8 +74,7 @@
 			<class name="notifications.Notifications0013"></class>
 		</classes>
 	</test>
-	<!-- <test name="Test F14"> <classes> <class name="notifications.Notifications0014"></class> 
-		</classes> </test> -->
+
 	<test name="Test F15">
 		<classes>
 			<class name="notifications.Notifications0015"></class>
@@ -100,15 +95,6 @@
 			<class name="notifications.Notifications0018"></class>
 		</classes>
 	</test>
-	<!-- <test name="Test F19"> <classes> <class name="notifications.Notifications0019"></class> 
-		</classes> </test> -->
-	<!-- <test name="Test F20">
-		<classes>
-			<class name="notifications.Notifications0020"></class>
-		</classes>
-	</test> -->
-
-
 
 	<test name="Test F22">
 		<classes>
@@ -125,6 +111,13 @@
 	<test name="Test F24">
 		<classes>
 			<class name="notifications.Notifications0024"></class>
+		</classes>
+	</test>
+	
+	<test name="Test_Trending_Section_Article_And_Post" preserve-order="true">
+		<classes>
+			<class name="notifications.Notifications0025"></class>
+			<class name="notifications.Notifications0026"></class>
 		</classes>
 	</test>
 

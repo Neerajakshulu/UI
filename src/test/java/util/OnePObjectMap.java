@@ -13,7 +13,7 @@ public enum OnePObjectMap {
 	RID_LOGIN_PWD_XPATH("//input[@id='password']"),
 	RID_LOGIN_SUBMIT_BTN_XPATH("//*[@id='submitImage']/img"),
 	RID_ENDNOTE_LINK_XPATH("//a[@id='header_link_endnote']"),
-	
+
 	ENW_CONTINUE_DIOLOG_BOX_XPATH("//*[@id='connect']"),
 	ENW_CONTINUE_DIALOG_BOX_XPATH("//div[@id='noticeDialog']"),
 	ENW_HEADER_XPATH("//h1[@class='ne-nav-logo']"),
@@ -24,7 +24,6 @@ public enum OnePObjectMap {
 	SEND_FEEDBACK_COUNTRY_SELECTION_XPATH("//div[@class='modal-header wui-modal__header ng-scope']"),
 	COUNTRY_SELECT_IN_NEON(".//*[@id='countrySelect']"),
 
-	
 	ENW_PRIVACY_LINK_XPATH("//a[contains(text(),'Privacy')]"),
 	ENW_TERMS_OF_USE_XPATH("//a[contains(text(),'Terms of use')]"),
 	ENW_HELP_LINK("Help"),
@@ -34,7 +33,7 @@ public enum OnePObjectMap {
 	ENW_OPTIONS_TAB_LINK("Options"),
 	ENW_PROFILE_TAB_LINK("Profile Information"),
 	ENW_OPTIONS_TAB_XPATH("//a[contains(text(),'Options')]"),
-	ENW_PROFILE_TAB_XPATH("//a[contains(text(),'Profile Information')]"),	
+	ENW_PROFILE_TAB_XPATH("//a[contains(text(),'Profile Information')]"),
 	FEEDBACK_THANKU_PAGE("//h3[contains(text(),'Thank You')]"),
 	ENW_PROFILE_FIRST_NAME_XPATH("//input[@id='firstname']"),
 	ENW_PROFILE_LAST_NAME_XPATH("//input[@id='lastname']"),
@@ -47,7 +46,7 @@ public enum OnePObjectMap {
 	COMMON_ENW_REPORT_PROBLEM_XPATH("//a[contains(text(),'Report a problem or submit a support request')]"),
 	EXPECTED_PAGE_DISPLAYED_XPATH(".//*[@ID('HEADER']/H1/A[1]"),
 	EXPECTED_PAGE_DISPLAYED1_XPATH("//*[@title='science home']"),
-	
+
 	NEON_SIDE_FEEDBACKHELP_XPATH("//*[@class('ne-profile-flyout__link' and contains(text(),'Feedback')]"),
 	NEON_SIDE_SUBMIT_BUTTON_CSS("//button[class='wui-btn wui-btn--primary wui-btn--hook']"),
 	WOS_HOMEPAGE_ENDNOTE_LINK(".//*[@id='HS_EndNoteLink_signedin']"),
@@ -71,8 +70,8 @@ public enum OnePObjectMap {
 	ENW_RESEND_ACTIVATION_BUTTON_CSS("button[event-action='resend-activation']"),
 	ENW_RESEND_ACTIVATION_DONE_BUTTON_CSS("button[event-action='resend-activation-done']"),
 	ENW_UNVERIFIED_MESSAGE_BUTTON_CSS("h2[class='login-title']"),
-	
-	//sendtoendnote locators
+
+	// sendtoendnote locators
 	NEON_RECORDVIEW_NOTES1_XPATH("//span[text()='Times Cited']//preceding::span[1]"),
 	NEON_RECORDVIEW_NOTES2_XPATH("//span[text()='Cited References']//preceding::span[1]"),
 	NEON_RECORDVIEW_TITLE_XPATH("//div[@class='ne-publication__header']//h2"),
@@ -85,21 +84,21 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][2]"),
 	NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][3]"),
 	NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS("span[ng-bind-html='::assign']"),
-	  
+
 	NEON_RECORDVIEW_PATENT_ABSTRACT_CSS("p[class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
 
-
 	ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
-	//ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell biology')]"),
+	// ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell
+	// biology')]"),
 	ENW_RECORD_LINK_XPATH(".//*[@id='ref_main']/tr[6]/td[4]/a"),
-	
+
 	ENW_RECORD_REFERENCETYPE_XPATH("//tr[@id='showRefName']/td[1]"),
 	ENW_RECORD_REFERENCETYPE_VALUE_XPATH("//tr[@id='showRefName']/td[2]"),
-	
+
 	ENW_RECORD_URL_XPATH("//tr[@id='url_tr']/td[1]/span"),
 	ENW_RECORD_URL_VALUE_XPATH("//tr[@id='url_tr']/td[2]//span[contains(text(), 'stable')]"),
 	ENW_RECORD_AUTHOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
-	
+
 	ENW_RECORD_AUTHOR_VALUE_CSS("span[id='spnau']"),
 	ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS("span[id='author_tdBg'] span:nth-child(1)"),
 	ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS("span[id='author_tdBg'] span:nth-child(3)"),
@@ -107,26 +106,26 @@ public enum OnePObjectMap {
 
 	ENW_RECORD_TITLE_XPATH("//tr[@id='title_tr']/td[1]/span"),
 	ENW_RECORD_TITLE_VALUE_XPATH("//tr[@id='title_tr']/td[2]/div"),
-	
+
 	ENW_RECORD_JOURNAL_XPATH("//tr[@id='secondary_title_tr']/td[1]/span"),
 	ENW_RECORD_JOURNAL_VALUE_XPATH("//tr[@id='secondary_title_tr']/td[2]/div"),
-	
+
 	ENW_RECORD_VOLUME_XPATH("//tr[@id='volume_tr']/td[1]/span"),
 	ENW_RECORD_VOLUME_VALUE_XPATH("//tr[@id='volume_tr']/td[2]/div"),
-	
+
 	ENW_RECORD_ISSUE_XPATH("//tr[@id='number_tr']/td[1]/span"),
 	ENW_RECORD_ISSUE_VALUE_XPATH("//tr[@id='number_tr']/td[2]/div"),
-	
+
 	ENW_RECORD_ABSTRACT_XPATH("//tr[@id='abstract_tr']/td[1]/span"),
 	ENW_RECORD_ACCESSIONNUMBER_XPATH("//tr[@id='accession_number_tr']/td[1]/span"),
-	
+
 	ENW_RECORD_NOTES_XPATH("//tr[@id='notes_tr']/td[1]/span"),
 	ENW_RECORD_NOTES_VALUE_XPATH("//tr[@id='notes_tr']/td[2]/div"),
 	ENW_RECORD_LASTUPDATEDNO_XPATH("//tr[@id='date_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_VALUE_CSS("div [id='publisher']"),
 	ENW_RECORD_ABSTRACT_VALUE_CSS("div[id='abstract']"),
-			
-	//PATENTS RECORDS
+
+	// PATENTS RECORDS
 	ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_XPATH("//tr[@id='publisher_tr']/td[1]/span"),
 	ENW_RECORD_PATENTNO_XPATH("//tr[@id='isbn_tr']/td[1]/span"),
@@ -134,7 +133,7 @@ public enum OnePObjectMap {
 	ENW_SHOWALLFILEDS_LINK_XPATH("//a[@title='Show All Fields']/span"),
 	NEON_RECORDVIEW_PATENTS_NOTES1_XPATH("//span[text()='Cited Patents']//preceding::span[1]"),
 	NEON_RECORDVIEW_PATENTS_NOTES2_XPATH("//span[text()='Cited Articles']//preceding::span[1]"),
-	//Profile page locators
+	// Profile page locators
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),
 	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
@@ -341,10 +340,10 @@ public enum OnePObjectMap {
 	NEWSFEED_POST_CARD_SECTION_CSS("div[class*='post wui-card']"),
 	NEWSFEED_POST_CARD_SECTION_TITLE_CSS("div[class*='wui-card__'] span[class*='ng-scope']"),
 	NEWSFEED_POST_CARD_POST_TITLE_CSS("div[class*='wui-content-title']"),
-	NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS("button[ng-click='WatchButton.openWatchlistSelector()']"),	
+	NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS("button[ng-click='WatchButton.openWatchlistSelector()']"),
 	NEWSFEED_ARTICLE_CARD_SECTION_CSS("div[class*='articles wui-card']"),
-	NEWSFEED_COMMENT_CARD_SECTION_CSS("div[class*='comment-event wui-card']"),	
-	
+	NEWSFEED_COMMENT_CARD_SECTION_CSS("div[class*='comment-event wui-card']"),
+
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
 	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
 	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
@@ -366,8 +365,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CLOSE_BUTTON_CSS("button[class='wui-modal__close-btn']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS("div[class='modal-content ng-scope']"),
 	SEARCH_RESULTS_PAGE_LINKIINGMODAlTEXT_CSS("div[class='modal-body wui-modal__body'] p"),
-	
-	//Added by Chinna on 25th-Oct-2016
+
+	// Added by Chinna on 25th-Oct-2016
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown']"),
@@ -379,10 +378,10 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_SOURCE_CSS("ne-search-result-type div[class='wui-descriptor']"),
 	SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS("div[class^='add-to-group-toggle'][class$='dropdown open'] div[class='dropdown-menu ne-action-dropdown']"),
-	//Added by bhavya
+	// Added by bhavya
 	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS"),
-	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),										
-	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"), 
+	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
+	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
 
 	// record view page
@@ -391,7 +390,7 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
-	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"), 
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
 	RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS("button[ng-click='reportThis()']"),
 	RECORD_VIEW_PAGE_COMMENTS_SHOW_MORE_LINK_CSS("button[ng-click='grabMore()']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS("button[ng-click='editThis(comment.id)']"),
@@ -414,11 +413,12 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS("div[class='ne-publication__header'] div[class='wui-descriptor']"),
-	 HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS("div[class='ne-publication__header'] div[class*='wui-descriptor--uppercase']"),
-	 HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS("p[class*='ne-publication__body wui-large-text']"),
-	 HOME_PROJECT_NEON_RECORD_VIEW_METRICS_CSS("div[class='ne-publication-sidebar__metrics'] div[class*='wui-metric']"),
-
-	 // login page elements
+	HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS("div[class='ne-publication__header'] div[class*='wui-descriptor--uppercase']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_ABSTRACT_CSS("p[class*='ne-publication__body wui-large-text']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_METRICS_CSS("div[class='ne-publication-sidebar__metrics'] div[class*='wui-metric']"),
+	TRENDING_SECTION_ARTICLE_FROM_NEWSFEED_CSS("a[data-ui-sref='articleView({id:document.id})']"),
+	TRENDING_SECTION_POST_FROM_NEWSFEED_CSS("a[data-ui-sref='postsView({id:post.id})']"),
+	// login page elements
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
@@ -508,8 +508,8 @@ public enum OnePObjectMap {
 	LOCKED__XPATH("(//label[contains(text(),'Make primary')])[1]"),
 	LOCKED_MSG_XPATH("//h2[contains(text(),'Your account has been locked.')]"),
 	LOCKED_OK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary']"),
-	
-	//Navigation and Landing page
+
+	// Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
 	NEON_ENW_COMPANY_CSS("h5[class='login-header__company-name']"),
 	NEON_MARKETING_COPY_CSS("h2[class$='app-name ng-binding']"),
@@ -535,8 +535,8 @@ public enum OnePObjectMap {
 	PROFILE_PAGE_WATCHLIST_COUNT_XPATH("//a[@data-event-category='profilewatchlists']/span[@class='wui-side-menu__badge ng-binding']"),
 	ALREADY_HAVE_AN_ACCOUNT_NOTNOW_CSS("div[class='modal-content ng-scope']"),
 	HOME_PROJECT_NEON_HEADER_CSS("a[class='ne-logo__link']"),
-	
-	//AccountSettingPage
+
+	// AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
 	ACCOUNT_RADIOBUTTON2_XPATH("(//label[contains(text(),'Make primary')])[2]"),
 	HEADER_LABEL_XPATH("(//div[@class='ne-user-profile-image-main-wrapper'])[1]"),
@@ -548,8 +548,8 @@ public enum OnePObjectMap {
 	DONE_BUTTON_CLICK_XPATH("//button[@class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary']"),
 	ACCOUNT_TEXT_COMPARE_XPATH("//p[@ng-show='Account.showEmailNotifications()']"),
 	ACCOUNT_TEXT_COMPARE_AFTERLINK_XPATH("//p[@ng-show='Account.isSteamProvider() && Account.hasMultipleAccounts']"),
-	ACCOUNT_TEXT_COMPARE_SELECTPRIMARY_XPATH("//p[@ng-show='Account.hasMultipleAccounts']"), 
-	ACCOUNT_TEXT_COMPARE_PASSWORD_XPATH("//div[@class='account-option-item__text-container']/h6[2]"), 
+	ACCOUNT_TEXT_COMPARE_SELECTPRIMARY_XPATH("//p[@ng-show='Account.hasMultipleAccounts']"),
+	ACCOUNT_TEXT_COMPARE_PASSWORD_XPATH("//div[@class='account-option-item__text-container']/h6[2]"),
 	ACCOUNT_LINKEDIN_ICON_XPATH("//i[@class='fa fa-linkedin-square account-option-item__icon--linkedin']"),
 	ACCOUNT_fACEBOOK_ICON_XPATH("//i[@class='fa fa-facebook-square account-option-item__icon--facebook']"),
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
@@ -563,13 +563,12 @@ public enum OnePObjectMap {
 	NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS("a[class='feedback-link__anchor ng-binding']"),
 	NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS("a[class='feedback-link__anchor']"),
 	NEON_ACCOUNT_PAGE_USER_NAME_CSS("div[class='account-option-item__text-container'] span"),
-	ENW_NOTNOW_XPATH("//a[@ng-click='vm.callSkipLinking()']"), 
+	ENW_NOTNOW_XPATH("//a[@ng-click='vm.callSkipLinking()']"),
 	ENW_PROFILE_HEADER_XPATH("//span[@class='ne-nav-logo__text ne-nav-logo__text--tr']"),
 	NEON_PROFILE_HEADER_XPATH("//span[@class='ne-logo__text ne-logo__text--tr']"),
 	ENW_STEAM_PASSWORD_XPATH("//input[@class='wui-input-with-label__input ng-pristine ng-untouched ng-invalid ng-invalid-required']"),
 	NEON_OK_BUTTON_XPATH("//a[@class='ng-binding ng-scope']"),
-	
-	
+
 	// #######RCC#############
 	RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS("button[class*='wui-icon-btn--add-group']"),
@@ -605,13 +604,13 @@ public enum OnePObjectMap {
 	RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS("button[class='wui-icon-btn']"),
 	RCC_GROUPINVITATIONS_INVITATION_CARD_CSS("div[class='wui-card__content']"),
 	RCC_GROUPINVITATIONSFULL_INVITATION_CARD_CSS("div[class='wui-card']"),
-	RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding ng-scope']"),                                          
+	RCC_GROUPINVITATIONS_INVITATION_CARD_TITLE_CSS("div[class='wui-title wui-content-title--medium ng-binding ng-scope']"),
 	RCC_GROUPINVITATIONS_DECLINE_INVITAION_BUTTON_CSS("button[class^='wui-btn wui-btn--secondary']"),
 	RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS("button[class^='wui-btn wui-btn--primary']"),
 	RCC_GROUPINVITATIONS_GROUP_DETAILS_BUTTON_CSS("div[class='group-card-item wui-card__body-content'] i"),
 	RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Items']"),
 	RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Members']"),
-	RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("a[class='research-group-card__text'] p"),	
+	RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("a[class='research-group-card__text'] p"),
 	RCC_GROUP_GROUPS_LINK__CSS("span[class='wui-title'] a"),
 	RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 	RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
@@ -621,11 +620,11 @@ public enum OnePObjectMap {
 	RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS("button[class*='ne-user-follow-unfollow']"),
 	RCC_GROUP_INIVATIONS_DETAILS_DISC_CSS("div[class='project-invite-description ng-binding ng-scope']"),
 	RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH("preceding-sibling::div[@class='wui-card__label-header']"),
-	
+
 	RCC_GROUP_SORT_CSS("button[id='rcc-sort-groups'] span:nth-child(1)"),
 	RCC_INVITATION_MESSAGE1_CSS("groups-invites-directive div[class='ng-scope'] span[class^='wui-title wui-emphasis']"),
 	RCC_INVITATION_MESSAGE2_CSS("groups-invites-directive div[class='ng-scope'] span[class='rcc-no-items-text']"),
-	
+
 	RCC_GROUPS_MESSAGE1_CSS("groups-list-directive div[class='ng-scope'] span[class^='wui-title wui-emphasis']"),
 	RCC_GROUPS_MESSAGE2_CSS("groups-list-directive div[class='ng-scope'] span[class='rcc-no-items-text']"),
 	RCC_INVITATIONLINK_CSS("li[class*='wui-side-menu__list-item'] a[href*='invites']"),
@@ -634,12 +633,12 @@ public enum OnePObjectMap {
 	RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS("div[class='modal-content'] button[class='wui-btn wui-btn--secondary']"),
 	RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS("div[class='modal-content'] button[class='wui-modal__close-btn']"),
 	RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS("div[class='modal-content'] button[class='wui-btn wui-btn--primary ng-binding']"),
-	
+
 	RCC_GROUPDETAILS_ARTICLES_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-wos']"),
 	RCC_GROUPDETAILS_PATENTS_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-patents']"),
 	RCC_GROUPDETAILS_POSTS_TAB_DETAILS_CSS("div[class='wui-card__content'] a[event-category='rcc-group-ck-posts']"),
 	RCC_GROUPDETAILS_PENDING_MEMBERS_CARD_CSS("group-pending-invite div[class='wui-card__content']"),
-	
+
 	RCC_GROUPINVITATIONS_GROUP_OWNER_NAME_CSS("div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 	RCC_GROUPINVITATIONS_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
 	RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a"),
@@ -688,8 +687,8 @@ public enum OnePObjectMap {
 	RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_REMOVE_BUTTON_CSS("button[ng-click='Doc.removeDocument()']"),
 	RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH("//span[contains(.,'TITLE')]"),
 	RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH("//div[contains(.,'Select') and @role='button']"),
-	
-	RCC_GROUP_BUTTON_XPATH("//span[contains(text(),'Groups')]"), 
+
+	RCC_GROUP_BUTTON_XPATH("//span[contains(text(),'Groups')]"),
 	RCC_NEW_GROUP_BUTTON__CLICK_XPATH("//button[@class='wui-icon-btn wui-icon-btn--add-group']"),
 	RCC_ENTER_TEXT_XPATH("//div[@class='research-group-card__content']//input[@name='name']"),
 	RCC_ERROR_MSG_TEXT_XPATH("//label[@class='wui-input__error ng-scope']"),
@@ -697,10 +696,10 @@ public enum OnePObjectMap {
 	RCC_GROUP_DETAIL_PAGE_SUPPORT_LINK_CSS("p[ng-show='vm.linkItems']"),
 	RCC_GROUP_DETAILS_PAGE_SHARE_LINK_CSS("div[class='research-group-card__content'] i[class='research-group-card__icon fa fa-users']"),
 	RCC_RECORD_VIEW_PAGE_USER_DETAILS_CSS("div[class='wui-descriptor wui-descriptor--user-profile-details'] span"),
-	
+
 	RCC_GROUP_DETAILS_PAGE_GROUP_TITLE_TEXT_CSS("div[class='research-group-card__text'] div"),
 	RCC_GROUP_DETAILS_PAGE_GROUP_DESC_TEXT_CSS("div[class='research-group-card__text'] p"),
-	
+
 	RCC_INVITEMEMBERS_CANCEL_BUTTON_CSS("button[event-action='cancel']"),
 	RCC_INVITEMEMBERS_SEND_BUTTON_CSS("button[event-action='save']"),
 	RCC_INVITEMEMBERS_TEXTFIELD_CSS("div[class='tags'] input"),
@@ -709,27 +708,26 @@ public enum OnePObjectMap {
 	RCC_PENDING_INVITATIONS_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
 	RCC_INVITATIONS_STATUS_CSS("div[class='pull-right ng-binding ng-scope']"),
 	RCC_INVITATION_DESCRIPTION_CSS("textarea[placeholder='Add a description']"),
-	
+
 	RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
 	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
 	RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
 	RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS("span[class='ng-binding ng-scope']"),
-	
+
 	RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS("div[ui-view='createGroup']"),
 	RCC_GROUP_LIST_PAGE_GROUP_CARD_CANCEL_BUTTON_CSS("div[ui-view='createGroup'] div[class='research-group-card__buttons'] button"),
 	RCC_SAVE_BUTTON_XPATH("//button [@class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--research-card']"),
 	RCC_GROUPDETAILS_DESCRIPTION_XPATH("//p[@class='research-group-card__description ng-binding']"),
-	RCC_GROUP_DESCRIPTION_XPATH("(//p[@class='research-group-card__description ng-binding'])[1]"),	
+	RCC_GROUP_DESCRIPTION_XPATH("(//p[@class='research-group-card__description ng-binding'])[1]"),
 	RCC_GROUPSDETAILS_CANCEL_GROUP_BUTTON_CSS("div[class='research-group-card__buttons'] button[ng-click='vm.revert()']"),
 	RCC_VIEW_MODE_CSS("p[ng-show='vm.linkItems']"),
 	RCC_TITLE_MSG_TEXT_XPATH("//div [@class='wui-content-title wui-content-title--research-card-title ng-binding']"),
-	
+
 	RCC_GROUP_COVER_PHOTO_CSS("div[class^='responsive-image__placeholder-text']"),
 	RCC_GROUP_COVER_UPDATE_PHOTO_CSS("div >ne-responsive-image > div > div > button[class = 'wui-btn wui-btn--primary']"),
 	RCC_NEWLY_CREATED_GROUP_PHOTO_CSS("div[class='responsive-image__image ng-scope']"),
 	RCC_GROUPDETAILS_RECORD_GROUP_LEVEL_GOOGLE_DOC_TIMESTAMP_CSS("div[class='wui-card__label-header']"),
-	
-	
+
 	RCC_GROUPLIST_DELETE_GROUP_POP_VERIFICATION_TEXT_CSS("div[class='modal-body wui-modal__body']"),
 	RCC_GROUPLIST_DELETE_GROUP_POP_UP_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer'] button[class='wui-btn wui-btn--secondary']"),
 	RCC_TOTAL_GROUP_COUNT("li[class='wui-side-menu__list-item wui-side-menu__list-item--active'] span[class='wui-side-menu__badge ng-binding']"),
@@ -741,12 +739,12 @@ public enum OnePObjectMap {
 	RCC_SEARCH_LIST_VERIFY_GROUPNAME("a[class='ne-action-dropdown__item-content']"),
 	RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
-		
+
 	// #################### DRA ##########################
-		
+
 	DRA_LOGO_CSS("h3[class$='company-name--dra']"),
-	DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),	
-	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"), 
+	DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),
+	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
 	DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
 	DRA_LANDINGPAGE_RANK_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
@@ -759,13 +757,13 @@ public enum OnePObjectMap {
 	DRA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	DRA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
 	DRA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
-	
+
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
-	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"), 
+	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
 	DRA_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
-    DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
-				
+	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
+
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 	ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
@@ -773,15 +771,15 @@ public enum OnePObjectMap {
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS("input[name='newPassword']"),
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH("//span[contains(text(),'Submit')]"),
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH("//a[contains(text(),'Cancel')]"),
-	
+
 	NEON_HELP_FEEDBACK_XPATH("//a[contains(text(),'Help & Feedback')]"),
 	NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH("//a[contains(text(),'Send feedback to the Project Neon team')]"),
-	
+
 	NEON_FB_LOGIN_CONTINUE_BUTTON_XPATH("//button[@name='__CONFIRM__']"),
-	NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),		
+	NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 	NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
-		 
+
 	;
 
 	private String locator;
