@@ -46,6 +46,18 @@
 		<class name="dra.DRA0013"></class>
 	</classes>
 	</test> -->
+	
+	<test name="DRA_Profile_Flyout_links_Validation">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="proflieFlyoutLinks" value="Privacy|Terms of Use|Help|Feedback"/>
+		<classes>
+			<class name="dra.DRA5"></class>
+		</classes>
+	</test>
+	
+	
+	
 </suite>
 
 

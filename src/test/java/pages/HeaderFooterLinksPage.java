@@ -36,6 +36,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			clickProfileImage();
 
 			if (headerFooterLinks[i].equalsIgnoreCase("Privacy")) {
+				
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "July 2016 (version 1.1)");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
@@ -97,7 +98,6 @@ public class HeaderFooterLinksPage extends TestBase {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile", "Account", "Help", "Sign out");
-
 	}
 
 	/**
@@ -213,7 +213,18 @@ public class HeaderFooterLinksPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_TO_ENW_PLINK);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_TO_ENW_PLINK);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
- 		
 	}	
+	
+	
+	/**
+	 * Method for click profile image
+	 * 
+	 * @throws Exception, When Profile image not available
+	 */
+	public void clickDRAProfileFlyoutImage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile", "Account", "Help", "Sign out");
+	}
 	
 }

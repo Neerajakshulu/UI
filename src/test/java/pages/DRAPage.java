@@ -1,16 +1,11 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.BrowserWaits;
-import util.ErrorUtil;
 import util.OnePObjectMap;
 
 public class DRAPage extends TestBase {
@@ -20,13 +15,16 @@ public class DRAPage extends TestBase {
 		pf = new PageFactory();
 	}
 
+	/**
+	 * Method for logout DRA application
+	 * @throws Exception,When not able to login
+	 */
 	public void logoutDRA() throws Exception {
-
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_CSS);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_PROFILE_CSS.toString())));
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString()), 60);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString())));
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 		BrowserWaits.waitTime(3);
 	}
 
@@ -58,6 +56,37 @@ public class DRAPage extends TestBase {
 				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_LINKINGMODAL_FB_SIGN_IN_BUTTON_CSS), x + 150, y)
 				.build().perform();
 		builder.click().build().perform();
+	}
+	
+	/**
+	 * Method for to check DRA landing screen displayed or not
+	 * @throws Exception,When DRA landing screen not displayed
+	 */
+	public void landingScreenDRA() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Target Druggability","Drug Research Advisor");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+	}
+	
+	/**
+	 * Method for login DRA Application with valid login credentials
+	 * @param userName
+	 * @param password
+	 * @throws Exception, When login not happend
+	 */
+	public void loginToDRAApplication(String userName,String password) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Target Druggability","Drug Research Advisor");
+		
+		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, userName);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS, password);
+		
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+
 	}
 
 	
