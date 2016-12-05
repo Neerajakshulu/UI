@@ -755,7 +755,7 @@ public enum OnePObjectMap {
 	DRA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
 	DRA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos text-center ng-scope']"),
 	DRA_LANDINGPAGE_SUPPORT_MAILID_CSS("p[class='tos text-center ng-scope'] >a[event-action='login-customer-care-dra']"),
-	DRA_LANDINGPAGE_LEARNMORE_LINK_CSS("p[class='splash-announcement-link__text wui-title']"),
+	DRA_LANDINGPAGE_LEARNMORE_LINK_CSS("span[class='splash-announcement-link__text']"),
 	DRA_LINKINGMODAL_FB_SIGN_IN_BUTTON_CSS("button[class^='wui-btn wui-btn--secondary']"),
 	DRA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	DRA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),

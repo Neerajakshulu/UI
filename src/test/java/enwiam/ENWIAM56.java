@@ -115,7 +115,7 @@ public class ENWIAM56 extends TestBase {
 				accountType = "Facebook";
 
 				validateAccounts(1, accountType);
-				int watchlistCount = 10;
+				int watchlistCount = 1;
 				try {
 
 					for (int j = 1; j <= watchlistCount; j++) {
