@@ -109,11 +109,12 @@ public class RCC012 extends TestBase{
 
 			if (countGroupsTabOverlay == countInvitaions) {
 				test.log(LogStatus.PASS, "GroupTab overlay count and invitation tab count same");
-				pf.getGroupsPage(ob).acceptInvitation();
 				
 			} else {
 				test.log(LogStatus.FAIL, "GroupTab overlay count and invitation tab count not same");
 			}
+			pf.getGroupsPage(ob).acceptInvitation();
+			
 			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			

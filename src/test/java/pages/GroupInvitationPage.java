@@ -156,7 +156,7 @@ public class GroupInvitationPage extends TestBase {
 				.getText();
 
 		Calendar cal = Calendar.getInstance();
-		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
+		String OriginaltimeStamp = new SimpleDateFormat("d MMMMMMMMM yyyy").format(cal.getTime());
 		if (Timecard.contains(OriginaltimeStamp.toUpperCase()) && (Timecard.contains("PM") || Timecard.contains("AM")))
 			return true;
 		else

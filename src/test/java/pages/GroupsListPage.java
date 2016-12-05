@@ -357,10 +357,8 @@ public class GroupsListPage extends TestBase {
 
 		}
 		 for(int i=0;beforelist.size()==list2.size()&&i<beforelist.size();i++) {
-	    	  if(beforelist.get(i).equals(list2.get(i)))
-	    		  break;
-	    	  else
-	    		  throw new Exception("values are not soerted by names");
+	    	  if(!beforelist.get(i).equals(list2.get(i)))
+	    	 throw new Exception("values are not soerted by names");
 	      }
 	
 
@@ -411,10 +409,8 @@ public class GroupsListPage extends TestBase {
 		selectSortoptions("Creation date");
 		List<String> aftersort=getDate();
 	      for(int i=0;beforesort.size()==aftersort.size()&&i<beforesort.size();i++) {
-	    	  if(beforesort.get(i).equals(aftersort.get(i)))
-	    		  break;
-	    	  else
-	    		  throw new Exception("values are not soerted");
+	    	  if(!beforesort.get(i).equals(aftersort.get(i)))
+	    	  throw new Exception("values are not soerted");
 	      }
 		}
 
@@ -438,10 +434,8 @@ public class GroupsListPage extends TestBase {
 		      selectSortoptions("Most recent activity");
 		    List<String> aftersort=getDate();
 		      for(int i=0;beforesort.size()==aftersort.size()&&i<beforesort.size();i++) {
-		    	  if(beforesort.get(i).equals(aftersort.get(i)))
-		    		  break;
-		    	  else
-		    		  throw new Exception("values are not soerted");
+		    	  if(!beforesort.get(i).equals(aftersort.get(i)))
+		   		  throw new Exception("values are not soerted");
 		    	  
 		    	  
 		      }
@@ -509,24 +503,21 @@ public class GroupsListPage extends TestBase {
 	}
 
 	public boolean verifytheDateandTimeofIvitation(String grouptitle) throws Exception {
-		WebElement groupcard = getRecordCard(grouptitle);
+		WebElement groupcard = getGroupCard(grouptitle);
 
 		String Timecard = groupcard
 				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
 				.getText();
 
 		Calendar cal = Calendar.getInstance();
-		String OriginaltimeStamp = new SimpleDateFormat("dd MMMMMMMMM yyyy").format(cal.getTime());
-		if (Timecard.contains(OriginaltimeStamp.toUpperCase()) && (Timecard.contains("PM") || Timecard.contains("AM")))
+		String OriginaltimeStamp = new SimpleDateFormat("d MMMMMMMMM yyyy").format(cal.getTime());
+		if (Timecard.contains(OriginaltimeStamp) && (Timecard.contains("PM") || Timecard.contains("AM")))
 			return true;
 		else
 			return false;
 
 	}
 
-	private WebElement getRecordCard(String grouptitle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }

@@ -4,19 +4,16 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Random;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.ErrorUtil;
-import util.ExtentManager;
-
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
+import util.ExtentManager;
 
 
 public class RCC101  extends TestBase{

@@ -89,7 +89,7 @@ public class RCC001 extends TestBase {
 								
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"Items count in Group list page in Group list page is not displayed correctly");
+						"Group details in Group list page is not displayed correctly");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);

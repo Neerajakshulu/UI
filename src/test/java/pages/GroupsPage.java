@@ -82,9 +82,8 @@ public class GroupsPage extends TestBase {
 		BrowserWaits.waitTime(2);
 		List<WebElement> element = ob
 				.findElements(By.cssSelector(OnePObjectMap.RCC_COUNT_GROUP_OVERLAY_CSS.toString()));
-		if (element.size() == 1) {
-			String countGroupsTabOverlay = element.get(0).getText();
-			int countGroupsTabOverlay1 = Integer.parseInt(countGroupsTabOverlay);
+		if (element.size() == 1 && !element.get(0).getText().equalsIgnoreCase("")) {
+			int countGroupsTabOverlay1 = Integer.parseInt(element.get(0).getText());
 			i = countGroupsTabOverlay1;
 		}
 		return i;
@@ -124,6 +123,7 @@ public class GroupsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
 		for (int i = 0; i < groupsList.size(); i++) {
 			declineInvitation();
+			waitForAjax(ob);
 		}
 	}
 

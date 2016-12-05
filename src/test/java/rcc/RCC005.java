@@ -115,7 +115,7 @@ static int status = 1;
 			
 			
 			test.log(LogStatus.INFO, "Select valid user from the type ahead and click on cancel button");
-			 pf.getGroupDetailsPage(ob).selectUserFromList(false, "Salma sadia");
+			Assert.assertTrue(pf.getGroupDetailsPage(ob).selectUserFromList(LOGIN.getProperty("RCCPROFILE13")));
 			
 			
 			 pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_INVITEMEMBERS_CANCEL_BUTTON_CSS);
@@ -138,19 +138,20 @@ static int status = 1;
 				}
 				 
 				 test.log(LogStatus.INFO, "Inviting list of users at a time from type ahead search");
-				 List<String> membersList= Arrays.asList("Salma sadia", "sruthi p", "naznina begum");
+				 List<String> membersList= Arrays.asList(LOGIN.getProperty("RCCPROFILE13"), LOGIN.getProperty("RCCPROFILE14"), LOGIN.getProperty("RCCPROFILE10"));
 				 
 				 pf.getGroupDetailsPage(ob).inviteMembers(membersList);
 				 
 				 waitForAjax(ob);
 				 
-				 String invitationStatus= pf.getGroupDetailsPage(ob).getInvitationStatus("Salma sadia");
+				 String invitationStatus= pf.getGroupDetailsPage(ob).getInvitationStatus(LOGIN.getProperty("RCCPROFILE13"));
 					
 			     if(invitationStatus.contains("Invited on"))
 			     test.log(LogStatus.PASS, "Invitation Status is shown as 'invited'");
 			     else
 			     test.log(LogStatus.FAIL, "Invitation Status is not shown as 'invited'");	 
-			 
+			     pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+			     pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

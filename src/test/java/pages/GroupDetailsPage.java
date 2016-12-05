@@ -215,16 +215,15 @@ public class GroupDetailsPage extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
 
 		for (String membersName : membersList) {
-			isFound = false;
-			isFound = selectUserFromList(isFound, membersName);
+			isFound = selectUserFromList(membersName);
 
 		}
 		clickOnSendInvitation();
 		return isFound;
 	}
 
-	public boolean selectUserFromList(boolean isFound, String membersName) throws InterruptedException {
-		
+	public boolean selectUserFromList(String membersName) throws InterruptedException {
+		boolean isFound=false;
 		waitForAjax(ob);
 		BrowserWaits.waitTime(4);
 		for(int i=0;i<membersName.length();i++){
@@ -242,6 +241,7 @@ public class GroupDetailsPage extends TestBase {
 
 			if (we.getText().equals(membersName)) {
 				we.click();
+				BrowserWaits.waitTime(2);
 				isFound = true;
 				break;
 			}
@@ -254,7 +254,7 @@ public class GroupDetailsPage extends TestBase {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()), 30);
 		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString())).click();
-		isFound = selectUserFromList(isFound, membersName);
+		isFound = selectUserFromList(membersName);
 		clickOnSendInvitation();
 		return isFound;
 	}
@@ -413,7 +413,7 @@ public class GroupDetailsPage extends TestBase {
 		}
 	}
 	public String getPendingInvitationMessage() throws Exception {
-
+		scrollingToElementofAPage();
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_DETAILS_PAGE_PENDING_INVITATION_MESSAGE_CSS);
 
