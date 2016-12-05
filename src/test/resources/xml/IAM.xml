@@ -166,5 +166,11 @@
 			<class name="iam.IAM029"></class>
 		</classes>
 	</test>
+	
+	<test name="Login_page_Clarivate_Analytics_link_clicking">
+		<classes>
+			<class name="iam.IAM039"></class>
+		</classes>
+	</test>
 </suite>
 
