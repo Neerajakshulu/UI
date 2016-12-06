@@ -79,7 +79,7 @@ public class RCC091 extends TestBase {
 
 			try {
 				pf.getGroupDetailsPage(ob).updateGroupPhoto();
-				BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(10);
 				pf.getGroupDetailsPage(ob).clickOnSaveButton();
 				test.log(LogStatus.PASS, "user is not able to update cover photo using Edit option");
 
