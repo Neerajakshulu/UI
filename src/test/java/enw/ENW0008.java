@@ -94,6 +94,8 @@ public class ENW0008 extends TestBase {
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
+			
+			switchToNewWindow(ob);
 
 			try {
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
