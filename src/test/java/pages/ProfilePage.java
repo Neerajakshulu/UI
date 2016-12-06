@@ -2047,8 +2047,87 @@ public class ProfilePage extends TestBase {
 			logFailureDetails(test, "Flyouts links not responded", "DRA-Profile flyouts Fail");
 		}
 	}
+	/**
+	 * Method for check all info should present under profile flyout
+	 * @param draProfileFlyout
+	 * @throws Exception, When flyout not having sufficient info
+	 */
+	public void validateDRAProfileFlyout(String draProfileFlyout) throws Exception {
+		String draProfile[]=draProfileFlyout.split("\\|");
+		List<String> draFlyout=Arrays.asList(draProfile);
+		List<String> profileFlyout= new ArrayList<String>();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		String profileTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).getText();
+		String profileMetadata=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).get(1).getText();
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Privacy","Terms of Use","Feedback","Sign out");
+		
+		List<WebElement> draProfileFlyoutLinks=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS).findElements(By.tagName("a"));
+		for(WebElement flyout:draProfileFlyoutLinks) {
+			profileFlyout.add(flyout.getText());
+		}
+		logger.info("profile status-->"+profileMetadata);
+		logger.info("profile title-->"+profileTitle);
+		logger.info("profile flyout1 input-->"+draFlyout);
+		logger.info("profile flyout2-->"+profileFlyout);
+		
+		boolean isImagePresent = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_HEADER_IMAGE_CSS).isEnabled();
+		
+		if (!((isImagePresent && StringUtils.isNotEmpty(profileTitle) && profileFlyout.containsAll(draFlyout))
+				&& (StringUtils.isEmpty(profileMetadata) || StringUtils.isNotEmpty(profileMetadata)))) {
+			throw new Exception("Profile Flyout info not displayed");
+		}
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+	}
 	
 	
+	/**
+	 * Method for Click proifle title in Profile flyout
+	 * @throws Exception
+	 */
+	public void clickProfileFlyout() throws Exception {
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Privacy","Terms of Use","Feedback","Sign out");
+	}
 	
-
+	/**
+	 * Method for Click proifle title in Profile flyout
+	 * @throws Exception
+	 */
+	public void clickProfileTitleLink() throws Exception {
+		clickProfileFlyout();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile","Update","Cancel");
+	}
+	
+	/**
+	 * Method for Validate DRA Profile page
+	 * @throws Exception,When Profile page not landing properly
+	 */
+	public void validateDRAProfilePageAndClose() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile","Update","Cancel");
+		boolean isFirstNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS).isEnabled();
+		boolean isLastNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS).isEnabled();
+		boolean isRolePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS).isEnabled();
+		boolean isPIPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_PRIINS_CSS).isEnabled();
+		boolean isCountryPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS).isEnabled();
+		boolean isCancelPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_UPDATE_CSS).isEnabled();
+		boolean isUpdatePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_CANCEL_CSS).isEnabled();
+		boolean isImageEditPresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_IMAGE_EDIT_CSS).isEnabled();
+		boolean isImageDeletePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_IMAGE_DELETE_CSS).isDisplayed();
+		
+		if (!(isFirstNamePresent && isLastNamePresent && isRolePresent && isCountryPresent && isCancelPresent && isPIPresent
+				&& isUpdatePresent && isImageEditPresent && isImageDeletePresent)) {
+			throw new Exception("Profile page not landing properly");
+		}
+		
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_CANCEL_CSS);
+	}
+	
+	//#################DRA-Profile flyout#################
 }
