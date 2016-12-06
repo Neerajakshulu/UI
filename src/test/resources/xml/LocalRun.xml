@@ -549,6 +549,16 @@
 			<class name="rcc.RCC092"></class>
 		</classes>
 	</test>
+	
+	<test name="Authoring80">
+		<parameter name="gusername" value="romanreings2016csk" />
+		<parameter name="gpassword" value="India@2020" />
+		<classes>
+			<class name="Authoring.Authoring80"></class>
+			<class name="Authoring.Authoring81"></class>
+			<class name="Authoring.Authoring82"></class>
+		</classes>
+	</test>
 
 </suite>
 

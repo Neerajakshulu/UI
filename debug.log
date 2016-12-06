@@ -181,3 +181,5 @@
 [1020/193122:ERROR:process_info.cc(608)] range at 0xfff97000, size 0xf84 fully unreadable
 [1020/193122:ERROR:process_info.cc(608)] range at 0xfff94000, size 0xf84 fully unreadable
 [1020/193143:ERROR:crash_report_database_win.cc(460)] failed to truncate: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
+[1206/132017:ERROR:file_io_win.cc(227)] SetEndOfFile: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
+[1206/132023:ERROR:file_io_win.cc(227)] SetEndOfFile: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
