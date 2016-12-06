@@ -17,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 //Call Delete API method  
 //Login to Neon Application using Steam account 
@@ -38,7 +37,7 @@ public class ENW023 extends TestBase {
 
 	@Test
 	public void testcaseENW023() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/login?app=neon&pageview=";
 		String uRl="";

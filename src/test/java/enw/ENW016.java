@@ -17,7 +17,6 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
-import util.TestUtil;
 
 public class ENW016 extends TestBase {
 
@@ -37,7 +36,7 @@ public class ENW016 extends TestBase {
 
 	@Test
 	public void testcaseENW016() throws Exception {
-		boolean testRunmode = TestUtil.isTestCaseRunnable(enwxls, this.getClass().getSimpleName());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		String expected = "https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote";
 		if (!master_condition) {
