@@ -3,7 +3,6 @@ package dra;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -38,7 +37,7 @@ public class DRA0010 extends TestBase {
 		// static boolean fail = false;
 
 		if (!master_condition) {
-
+			status = 3;
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -54,37 +53,21 @@ public class DRA0010 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(LOGIN.getProperty("DRAUSER0010"));
-			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
-			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			// BrowserWaits.waitTime(3);
 
-			if (!checkElementPresence_id("login_error")) {
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
+					LOGIN.getProperty("INVALIDDRAPWD10"));
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
-				fail = true;// excel
-				test.log(LogStatus.FAIL, "Unexpected login happened");// extent
-																		// report
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-						this.getClass().getSimpleName() + "_unexpected_login_happened_" + (count + 1))));
-
-			} else {
-				test.log(LogStatus.PASS,
-						" 'Invalid Email/Password. Please try again.' message is displayed correctly ");// extent
-																										// report
-			}
+			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
+			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
 					LOGIN.getProperty("DRAUSERPWD10"));
-			clickLoginDRA();
+			pf.getDraPageInstance(ob).clickLoginDRA();
 			test.log(LogStatus.PASS,
 					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
-			// BrowserWaits.waitTime(3);
-			// pf.getLoginTRInstance(ob).logOutAppDRA();
 
-			logoutDRA();
-			ob.close();
+			pf.getDraPageInstance(ob).logoutDRA();
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -104,21 +87,6 @@ public class DRA0010 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	public void logoutDRA() throws Exception {
-
-		BrowserWaits.waitTime(4);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_PROFILE_CSS.toString())));
-		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString()), 60);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString())));
-		BrowserWaits.waitTime(3);
-	}
-
-	public void clickLoginDRA() throws Exception {
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-
-	}
 
 	@AfterTest
 	public void reportTestResult() {

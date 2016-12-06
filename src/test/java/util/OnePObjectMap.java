@@ -760,13 +760,16 @@ public enum OnePObjectMap {
 	DRA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	DRA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
 	DRA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
+	DRA_SUBSCRIPTION_INACTIVE_CSS("h2[class='login-title']"),
+	DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS("p[class='ng-binding']"),
+	DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH("//div[@class='col-xs-10 col-xs-offset-1 text-center']/p[contains(.,'Questions?')]"),
 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
 	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
 	DRA_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
-	 DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[data-toggle='dropdown']"),
+	DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[data-toggle='dropdown']"),
 
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -783,7 +786,7 @@ public enum OnePObjectMap {
 	NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 	NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
-
+	
 	;
 
 	private String locator;
