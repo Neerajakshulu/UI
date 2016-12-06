@@ -10,7 +10,7 @@
 	<parameter name="username" value="user1testautomation@gmail.com" />
 	<parameter name="password" value="Neon@123" />
 
- 	<!-- <test name="Follow_Other_Profile" preserve-order="true">
+ 	 <test name="Follow_Other_Profile" preserve-order="true">
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
@@ -334,7 +334,7 @@
 		<classes>
 			<class name="Profile.Profile43"></class>
 		</classes>
-	</test> -->
+	</test> 
 
 	<test name="Validate_Profile_Pic_modal_window_update_and_close">
 		<parameter name="username" value="tridlogin@gmail.com" />
@@ -353,7 +353,7 @@
 		</classes>
 	</test>
 
-	<!--  <test name="Profile_call_to_action_country">
+	  <test name="Profile_call_to_action_country">
 		<parameter name="username" value="tridlogin@gmail.com" />
 		<parameter name="password" value="Project@123" />
 		<classes>
@@ -384,7 +384,7 @@
 		<classes>
 			<class name="Profile.Profile49"></class>
 		</classes>
-	</test> -->  
+	</test>   
 
 	<!-- <test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -485,7 +485,7 @@
 		<classes>
 			<class name="Profile.Profile53"></class>
 		</classes>
-	</test> --> 
+	</test>  
 	
 	<test name="Validate_Profile_image_upload">
 		<parameter name="username" value="tridlogin@gmail.com" />
@@ -502,9 +502,9 @@
 		<classes>
 			<class name="Profile.Profile70"></class>
 		</classes>
-	</test> 
+	</test> -->
 	
-	<!-- <test name="profile_tabs_default_messages">
+	 <test name="profile_tabs_default_messages">
 		<parameter name="username" value="FirstTime.User@ca.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="defaultMsg"
@@ -512,7 +512,7 @@
 		<classes>
 			<class name="Profile.Profile71"></class>
 		</classes>
-	</test>  -->
+	</test> 
 	
 </suite>
 
