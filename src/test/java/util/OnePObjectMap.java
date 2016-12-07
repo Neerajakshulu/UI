@@ -764,6 +764,12 @@ public enum OnePObjectMap {
 	DRA_SUBSCRIPTION_INACTIVE_CSS("h2[class='login-title']"),
 	DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS("p[class='ng-binding']"),
 	DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH("//div[@class='col-xs-10 col-xs-offset-1 text-center']/p[contains(.,'Questions?')]"),
+	DRA_PROFILEFLYOUT_ACCOUNTLINK_CSS("div[class='modal-content account-content ng-scope']"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS("a[event-action='change-password']"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS("input[name='oldPassword']"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS("input[name='newPassword']"),
+	DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[type='submit']"),
+	DRA_CHANGEPW_ERROR_MSG_CSS("p[class='wui-input-with-label__error ng-binding ng-scope']"),
 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
 	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),

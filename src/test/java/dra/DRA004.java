@@ -49,7 +49,7 @@ public class DRA004 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh1() throws Exception {
+	public void testcaseDRA4() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -101,7 +101,7 @@ public class DRA004 extends TestBase {
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 				BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "User is able to click on not now on the modal");
+				test.log(LogStatus.PASS, "User is able to click on not now on the modal");		
 				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();

@@ -4,6 +4,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -40,6 +41,29 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
+	}
+	
+	public void clickOnAccountLinkDRA() throws Exception{
+		pf.getProfilePageInstance(ob).clickProfileFlyout();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILEFLYOUT_ACCOUNTLINK_CSS);
+	}
+	
+	public void clickOnChangePwLinkDRA() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
+	}
+	
+	
+	public void changepwd(String currentpw,String newpw) throws Exception{
+		clickOnChangePwLinkDRA();
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS, currentpw);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS, newpw);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS);
+		
 	}
 
 	public void clickOnSignInWithFBOnDRAModal() throws Exception {
@@ -101,7 +125,6 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
-	
 
 	public void validateInactiveaccount(ExtentTest test) throws Exception {
 		try {
@@ -146,29 +169,64 @@ public class DRAPage extends TestBase {
 			closeBrowser();
 		}
 	}
-	
-	public void validateDRAInactiveErrorMsg(ExtentTest test) throws Exception{
+
+	public void validateDRAInactiveErrorMsg(ExtentTest test) throws Exception {
 		try {
 			String errormsg_title = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS).getText();
-			String msg1= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS).getText();
-			String msg2= pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH).getText();
-			
+			String msg1 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS)
+					.getText();
+			String msg2 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH)
+					.getText();
+
 			System.out.println(msg2);
-			if(errormsg_title.contains("Thank you for your interest") && msg1.contains("Target Druggability is a subscription product.") && msg2.contains("Questions? Learn more or contact DRA.support@thomsonreuters.com.")){
-				test.log(LogStatus.PASS,
-						" correct msg displayed ");
+			if (errormsg_title.contains("Thank you for your interest")
+					&& msg1.contains("Target Druggability is a subscription product.")
+					&& msg2.contains("Questions? Learn more or contact DRA.support@thomsonreuters.com.")) {
+				test.log(LogStatus.PASS, " correct msg displayed ");
+			} else {
+				test.log(LogStatus.FAIL, " incorrect msg displayed ");
 			}
-			else
-				{test.log(LogStatus.FAIL,
-						" incorrect msg displayed ");
-				}
-		
-		}catch(Throwable t){
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");
 			ErrorUtil.addVerificationFailure(t);// testng
 			closeBrowser();
 		}
-		
 	}
+	
+	public void validateAccount(int accountCount, String linkName, String accountId,ExtentTest test) throws Exception {
+		try {
+			Assert.assertTrue(
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, accountId));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
+			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
+		}
+	}
+	
+	public void validateIncorrectPwdErrorMsg(ExtentTest test) throws Exception{
+		
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+		WebElement errormsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+		
+		if(!(errormsg.isDisplayed()))
+		{
+			test.log(LogStatus.FAIL, "Incorrect password error message is not displayed");
+		}
+		else
+		{
+			String actualerrortext=errormsg.getText();
+			String expectederrortext="Incorrect password. Please try again.";
+			Assert.assertEquals(actualerrortext, expectederrortext);
+			test.log(LogStatus.PASS, "Incorrect password error message is displayed");
+		}
+	}
+	
+
+
 }
