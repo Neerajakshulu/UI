@@ -63,7 +63,7 @@
 		</classes>
 	</test> 
 	
-	<test name="DRA_Profile_Flyout_Info_And_Profile_Validation">
+	<test name="DRA_Profile_Flyout_Info_And_Profile_and_Account_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="proflieFlyoutLinks" value="Account|Sign out|Privacy|Terms of Use|Help|Feedback"/>
