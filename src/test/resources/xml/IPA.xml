@@ -4,13 +4,12 @@
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
-	
-	<test name="Saved search" >
+
+	<test name="Saved search">
 		<classes>
-				<class name="ipa.Ipa001"></class>
+			<class name="ipa.IPA001"></class>
 		</classes>
 	</test>
-	
-	
-	</suite>
+
+</suite>
 	

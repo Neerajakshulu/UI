@@ -7,14 +7,12 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import pages.PageFactory;
-import util.ErrorUtil;
-import util.ExtentManager;
 import base.TestBase;
+import pages.PageFactory;
+import util.ExtentManager;
 
-public class Ipa001 extends TestBase {
+public class IPA001 extends TestBase {
 
-	PageFactory pf = new PageFactory();
 	static int status = 1;
 
 	// Following is the list of status:
