@@ -32,6 +32,7 @@ public class PageFactory {
 	private Utility utility=null;
 	private NewsfeedPage newsfeedPage=null;
 	private DRAPage draPage=null;
+	private IPApage ipapage=null;
 	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -234,6 +235,15 @@ public class PageFactory {
 		}
 		return draPage;
 	}
+	
+	public IPApage getIpaPage(WebDriver ob) {
+		if (ipapage == null) {
+			ipapage = new IPApage(ob);
+		}
+
+		return ipapage;
+
+	}
 
 	
 	public void clearAllPageObjects() {
@@ -258,5 +268,6 @@ public class PageFactory {
 		groupsListPage = null;
 		utility=null;
 		draPage=null;
+		ipapage=null;
 	}
 }

@@ -795,6 +795,47 @@ public enum OnePObjectMap {
 	NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 	NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
 	
+	
+	//********************IPA Locators*****************************
+    NEON_IPA_USERNAME_CSS("[name='loginEmail']"),
+    NEON_IPA_PASSWORD_CSS("input[name='loginPassword']"),
+    NEON_IPA_SIGNIN_CSS("button[event-action='thomsonreuters']"),
+    
+    NEON_IPA_TR_TITTLE_CSS("[class*='logo-link']"),
+    NEON_IPA_APP_SWITCHER_CSS("a[class='wui-flyout__toggle']"),
+    NEON_IPA_PROFILE_ICON_CSS("a[class*='profile-flyout--trigger']"),
+    NEON_IPA_IPA_LINK_CSS("a[data-ui-sref^='home.search']"),
+    NEON_IPA_NEW_SEARCH_LINK_CSS("span[ng-click='header.newSearch()']"),
+    NEON_IPA_SAVE_SEARCH_LINK_CSS("span[data-ui-sref='savedWork']"),
+    
+    
+    NEON_IPA_EXPLORE_LABEL_CSS(".ipa-home-search--header"),
+    NEON_IPA_TECHNOLOGY_LINK_CSS("li[href*='technology']"),
+    NEON_IPA_COMPANY_LINK_CSS("li[href*='company']"),
+    NEON_IPA_SEARCH_TEXTBOX_CSS("input[ng-model='vm.searchParam']"),
+    NEON_IPA_EXPLORE_BUTTON_CSS("button[title='Search']"),
+    
+    NEON_IPA_SUGGESTION_COINTAINER_CSS("div[suggestion-data]"),
+    NEON_IPA_SHOW_ALL_LINK_XPATH("//a[text()='SHOW ALL']"),
+    
+    NEON_IPA_TECH_SUG_TEXT_VAR_CSS("li[index='$index'] >span[ng-bind-html*='suggestion.value']"),
+    NEON_IPA_TECH_SUG_HITS_VAR_CSS("li[index='$index'] >span[ng-if='suggestion.count']"),
+    NEON_IPA_TECH_SUG_ADD_VAR_CSS("li[index='$index'] >button"),
+    
+    NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS("span[class*='patents-found__value']"),
+    NEON_IPA_DASH_TAB_SEL_CSS("li[class*='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
+    NEON_IPA_DASH_KEYWORDS_LINK_CSS("[popover-template]"),
+    
+    NEON_IPA_DASH_TECH_COM_CSS("svg[class='nvd3-svg']"),
+    NEON_IPA_DASH_TECH_COM_X_CSS("svg.nvd3-svg  g[class='nv-x nv-axis nvd3-svg'] text[class='nv-axislabel']"),
+    NEON_IPA_DASH_TECH_COM_Y_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg'] text[class='nv-axislabel']"),
+    NEOM_IPA_DASH_TECH_COM_Y_VALUES_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg']  g[class^='tick'] text"),
+    NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series'] text"),
+    NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
+    NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
+    NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']")
+
+	
 	;
 
 	private String locator;
