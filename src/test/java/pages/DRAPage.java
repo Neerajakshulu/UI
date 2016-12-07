@@ -228,5 +228,11 @@ public class DRAPage extends TestBase {
 	}
 	
 
+	public void clickProfileLink() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Update", "Cancel", "Profile");
+	}
 
 }

@@ -770,7 +770,11 @@ public enum OnePObjectMap {
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS("input[name='newPassword']"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[type='submit']"),
 	DRA_CHANGEPW_ERROR_MSG_CSS("p[class='wui-input-with-label__error ng-binding ng-scope']"),
-
+    
+	//DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle wui-profile-flyout__name ng-binding']"),
+		 DRA_PROFILE_FLYOUT_NAME_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
+		 DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS("label[class='wui-input__error ng-scope']"),
+		 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
 	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
