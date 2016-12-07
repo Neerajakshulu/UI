@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import pages.PageFactory;
 import util.ExtentManager;
 
 public class IPA001 extends TestBase {
