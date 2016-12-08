@@ -18,6 +18,7 @@ public enum OnePObjectMap {
 	ENW_CONTINUE_DIALOG_BOX_XPATH("//div[@id='noticeDialog']"),
 	ENW_HEADER_XPATH("//h1[@class='ne-nav-logo']"),
 	ENW_PROFILE_USER_ICON_XPATH("//img[@id='proSmallImg']"),
+	ENW_PROFILE_USER_ACCOUNT_LINK_CSS("span[class='fa fa-cog profile_account_link']"),
 	ENW_PROFILE_USER_NAME_XPATH("//span[@class='profile_title']"),
 	IMAGE_USER_XPATH("//img[@id='proImg']"),
 	IMAGE_ICON_PROFILE_IN_NEON_XPATH("//div/button/img[@class='ne-user-profile-image']"),
