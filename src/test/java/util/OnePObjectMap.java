@@ -202,6 +202,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS("input[name='lastName']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_PRIINS_CSS("input[placeholder='+ Institution']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_SUMMARY_CSS("textarea[placeholder='Add a summary']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_CANCEL_CSS("button[class='wui-btn wui-btn--secondary']"),
@@ -760,13 +761,23 @@ public enum OnePObjectMap {
 	DRA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	DRA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
 	DRA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
+	DRA_SUBSCRIPTION_INACTIVE_CSS("h2[class='login-title']"),
+	DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS("p[class='ng-binding']"),
+	DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH("//div[@class='col-xs-10 col-xs-offset-1 text-center']/p[contains(.,'Questions?')]"),
 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
 	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
 	DRA_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
-	 DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[data-toggle='dropdown']"),
+	DRA_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[data-toggle='dropdown']"),
+	DRA_PROFILE_FLYOUT_INFO_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
+	DRA_PROFILE_FLYOUT_FOOTER_LINKS_CSS("div[class='wui-profile-flyout__footer']"),
+	DRA_PROFILE_FLYOUT_HEADER_IMAGE_CSS("img[class='wui-profile-flyout__image wui-circle']"),
+	DRA_PROFILE_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
+	DRA_PROFILE_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+	DRA_PROFILE_IMAGE_EDIT_CSS("button[ng-click='ProfileModal.openImageModal()']"),
+	DRA_PROFILE_IMAGE_DELETE_CSS("button[ng-click='ProfileModal.deleteImage()']"),
 
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -783,7 +794,7 @@ public enum OnePObjectMap {
 	NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 	NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
-
+	
 	;
 
 	private String locator;
