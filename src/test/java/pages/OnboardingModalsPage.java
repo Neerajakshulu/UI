@@ -503,7 +503,7 @@ public class OnboardingModalsPage extends TestBase {
 				if (typeAhead.getText().equalsIgnoreCase(metaData[1])) {
 					//typeAhead.click();
 					jsClick(ob, typeAhead);
-					BrowserWaits.waitTime(2);
+					BrowserWaits.waitTime(2); 
 					break;
 				}
 			}
