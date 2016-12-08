@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -69,10 +70,16 @@ public class DRA005 extends TestBase {
 					LOGIN.getProperty("DRAsteampw3"));
 			test.log(LogStatus.INFO, "User is able to login to DRA");
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
 			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
 			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
 			test.log(LogStatus.INFO, "User is able to see the correct message");
-			pf.getDraPageInstance(ob).logoutDRA();
+			
+			for (int i = 0; i < 9; i++) {
+				pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
+				BrowserWaits.waitTime(2);
+			}
+			
 			closeBrowser();
 			
 		} catch (Throwable t) {

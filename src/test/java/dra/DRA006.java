@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -46,7 +47,7 @@ public class DRA006 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseDRA5() throws Exception {
+	public void testcaseDRA6() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -69,11 +70,12 @@ public class DRA006 extends TestBase {
 					LOGIN.getProperty("DRAsteampw5"));
 			test.log(LogStatus.INFO, "User is able to login to DRA");
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
 			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRAsteampw5"));
 			test.log(LogStatus.PASS, "User is able to click on change password link and enter the current & new password");
 			pf.getDraPageInstance(ob).validateCurrentPwdErrorMsg(test);
 			test.log(LogStatus.INFO, "User is able to see the correct message when user enters current password in new password field");
-			pf.getDraPageInstance(ob).clickCancelOnChangepwd();
+			BrowserWaits.waitTime(2);
 			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRASteam5pw1"));
 			pf.getDraPageInstance(ob).validateNewPwdErrorMsg(test);
 			test.log(LogStatus.INFO, "User is able to see the correct message when user enters password in new password field which is matching with the previous 4 passwords.");

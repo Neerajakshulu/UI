@@ -107,7 +107,8 @@ public class DRA002 extends TestBase {
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.FAIL, "User is able to click the link button");
+				test.log(LogStatus.PASS, "User is able to click the link button");
+				
 				
 			} catch (Throwable t) {
 				closeBrowser();
