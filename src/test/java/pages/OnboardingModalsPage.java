@@ -519,8 +519,13 @@ public class OnboardingModalsPage extends TestBase {
 			}
 			topicLists = topics.split("\\|");
 			for (String topicList : topicLists) {
-				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS,
-						topicList);
+				for(int i=0;i<topicList.length();i++){
+					char topic=topicList.charAt(i);
+					pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS,
+							String.valueOf(topic));
+					BrowserWaits.waitTime(2);
+			}
+				
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 				List<WebElement> topicTypeahead = pf.getBrowserActionInstance(ob).getElements(
