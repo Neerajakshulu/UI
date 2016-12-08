@@ -14,7 +14,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class DRA005 extends TestBase {
+public class DRA006 extends TestBase {
 
 	static int count = -1;
 
@@ -65,13 +65,18 @@ public class DRA005 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			pf.getDraPageInstance(ob).loginToDRAApplication(LOGIN.getProperty("DRASteamuser3"),
-					LOGIN.getProperty("DRAsteampw3"));
+			pf.getDraPageInstance(ob).loginToDRAApplication(LOGIN.getProperty("DRASteamuser5"),
+					LOGIN.getProperty("DRAsteampw5"));
 			test.log(LogStatus.INFO, "User is able to login to DRA");
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
-			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
-			test.log(LogStatus.INFO, "User is able to see the correct message");
+			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRAsteampw5"));
+			test.log(LogStatus.PASS, "User is able to click on change password link and enter the current & new password");
+			pf.getDraPageInstance(ob).validateCurrentPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters current password in new password field");
+			pf.getDraPageInstance(ob).clickCancelOnChangepwd();
+			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRASteam5pw1"));
+			pf.getDraPageInstance(ob).validateNewPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters password in new password field which is matching with the previous 4 passwords.");
 			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 			

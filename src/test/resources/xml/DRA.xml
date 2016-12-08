@@ -30,6 +30,18 @@
 		</classes>
 	</test>
 	
+	<test name="DRA005">
+		<classes>
+			<class name="dra.DRA005"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA006">
+		<classes>
+			<class name="dra.DRA006"></class>
+		</classes>
+	</test>
+	
 	<test name="DRA0010">
 		<classes>
 			<class name="dra.DRA0010"></class>

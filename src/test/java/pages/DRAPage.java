@@ -65,6 +65,12 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS);
 		
 	}
+	
+	public void clickCancelOnChangepwd() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
+	}
 
 	public void clickOnSignInWithFBOnDRAModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
@@ -224,6 +230,32 @@ public class DRAPage extends TestBase {
 			String expectederrortext="Incorrect password. Please try again.";
 			Assert.assertEquals(actualerrortext, expectederrortext);
 			test.log(LogStatus.PASS, "Incorrect password error message is displayed");
+		}
+	}
+	
+	public void validateCurrentPwdErrorMsg(ExtentTest test) throws Exception {
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+			WebElement errormsg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+			String actualerrortext1 = errormsg.getText();
+			String expectederrortext1 = "New password should not match current password";
+			Assert.assertEquals(actualerrortext1, expectederrortext1);
+			test.log(LogStatus.PASS, "'New password should not match current password' error message is displayed");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Current password error message is not displayed");
+		}
+	}
+	
+	public void validateNewPwdErrorMsg(ExtentTest test) throws Exception {
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+			WebElement errormsg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+			String actualerrortext2 = errormsg.getText();
+			String expectederrortext2 = "New password should not match previous 4 passwords";
+			Assert.assertEquals(actualerrortext2, expectederrortext2);
+			test.log(LogStatus.PASS, "'New password should not match previous 4 passwords' error message is displayed");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "New password error message is not displayed");
 		}
 	}
 	
