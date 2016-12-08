@@ -270,34 +270,4 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Update", "Cancel", "Profile");
 	}
 
-	public boolean validateAccountsCount(int accountCount) {
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
-		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
-		
-		return accountCount==list.size();
-	}
-	
-	public boolean verifyLinkedAccount(String accountType, String emailId) {
-		boolean result = false;
-		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
-		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
-
-		for (WebElement element : list) {
-			String type = element.getText();
-			if ((accountType.equalsIgnoreCase("Neon") && type.equalsIgnoreCase("Thomson Reuters | Project Neon"))
-					|| accountType.equalsIgnoreCase(type.trim())) {
-			
-				//String emailid = null;
-				String emailid = ob.findElement(By.cssSelector("div[class='account-option-item__app-details'] span[class='ng-binding']")).getText();
-				//String emailid="cattle6@b9x45v1m.com";
-				if (emailid.equalsIgnoreCase(emailId))
-					result = true;
-				
-				break;
-			}
-
-		}
-		return result;
-		
-	}
 }
