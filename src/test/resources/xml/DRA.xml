@@ -30,6 +30,18 @@
 		</classes>
 	</test>
 	
+	<test name="DRA005">
+		<classes>
+			<class name="dra.DRA005"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA006">
+		<classes>
+			<class name="dra.DRA006"></class>
+		</classes>
+	</test>
+	
 	<test name="DRA0010">
 		<classes>
 			<class name="dra.DRA0010"></class>
@@ -54,6 +66,12 @@
 		</classes>
 	</test>
 	
+	<test name="DRA051">
+		<classes>
+			<class name="dra.DRA051"></class>
+		</classes>
+	</test>
+	
 	<test name="DRA_Profile_Flyout_links_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
@@ -63,7 +81,7 @@
 		</classes>
 	</test> 
 	
-	<test name="DRA_Profile_Flyout_Info_And_Profile_Validation">
+	<test name="DRA_Profile_Flyout_Info_And_Profile_and_Account_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
 		<parameter name="proflieFlyoutLinks" value="Account|Sign out|Privacy|Terms of Use|Help|Feedback"/>

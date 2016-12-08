@@ -54,7 +54,7 @@ public class DRA001 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh1() throws Exception {
+	public void testcaseDRA1() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);

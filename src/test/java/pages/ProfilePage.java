@@ -2052,7 +2052,7 @@ public class ProfilePage extends TestBase {
 	 * @param draProfileFlyout
 	 * @throws Exception, When flyout not having sufficient info
 	 */
-	public void validateDRAProfileFlyout(String draProfileFlyout) throws Exception {
+	public void validateDRAProfileFlyout(String draProfileFlyout,ExtentTest test) throws Exception {
 		String draProfile[]=draProfileFlyout.split("\\|");
 		List<String> draFlyout=Arrays.asList(draProfile);
 		List<String> profileFlyout= new ArrayList<String>();
@@ -2078,7 +2078,8 @@ public class ProfilePage extends TestBase {
 		
 		if (!((isImagePresent && StringUtils.isNotEmpty(profileTitle) && profileFlyout.containsAll(draFlyout))
 				&& (StringUtils.isEmpty(profileMetadata) || StringUtils.isNotEmpty(profileMetadata)))) {
-			throw new Exception("Profile Flyout info not displayed");
+			//throw new Exception("Profile Flyout info not displayed");
+			logFailureDetails(test, "Profile Flyout info not displayed", "Profile_flyout_info_not_displayed");
 		}
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
@@ -2109,7 +2110,7 @@ public class ProfilePage extends TestBase {
 	 * Method for Validate DRA Profile page
 	 * @throws Exception,When Profile page not landing properly
 	 */
-	public void validateDRAProfilePageAndClose() throws Exception {
+	public void validateDRAProfilePageAndClose(ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile","Update","Cancel");
 		boolean isFirstNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS).isEnabled();
 		boolean isLastNamePresent=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS).isEnabled();
@@ -2123,10 +2124,30 @@ public class ProfilePage extends TestBase {
 		
 		if (!(isFirstNamePresent && isLastNamePresent && isRolePresent && isCountryPresent && isCancelPresent && isPIPresent
 				&& isUpdatePresent && isImageEditPresent && isImageDeletePresent)) {
-			throw new Exception("Profile page not landing properly");
+			//throw new Exception("Profile page not landing properly");
+			logFailureDetails(test, "Profile page not landing properly", "profile_info_not_displayed");
 		}
 		
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_CANCEL_CSS);
+		BrowserWaits.waitTime(2);
+	}
+	
+	
+	/**
+	 * Method for Validate Account modal
+	 * @throws Exception
+	 */
+	public void validateAccountLinkModalAndClose() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Connected Accounts","Thomson Reuters | Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Last sign in:","Change password");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS);
+		String accountText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS).getText();
+		if(!(accountText.equals("Account"))) {
+			throw new Exception("Account modal is not displayed");
+		}
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
+		
+		
 	}
 	
 	//#################DRA-Profile flyout#################

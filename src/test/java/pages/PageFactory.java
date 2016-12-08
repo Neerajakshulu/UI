@@ -32,6 +32,19 @@ public class PageFactory {
 	private Utility utility=null;
 	private NewsfeedPage newsfeedPage=null;
 	private DRAPage draPage=null;
+	private IPApage ipapage=null;
+	private IAMPage iamPage=null;
+	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
+	
+	
+	public IAMPage getIamPage(WebDriver ob) {
+
+		if (iamPage == null) {
+			iamPage = new IAMPage(ob);
+		}
+		return iamPage;
+	}
+	
 	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -234,6 +247,22 @@ public class PageFactory {
 		}
 		return draPage;
 	}
+	
+	public IPApage getIpaPage(WebDriver ob) {
+		if (ipapage == null) {
+			ipapage = new IPApage(ob);
+		}
+
+		return ipapage;
+
+	}
+	
+	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob){
+		if(ipasavedsearchpage==null){
+			ipasavedsearchpage=new IpaSavedSearchDetailsPage();
+		}
+		return ipasavedsearchpage;
+	}
 
 	
 	public void clearAllPageObjects() {
@@ -258,5 +287,7 @@ public class PageFactory {
 		groupsListPage = null;
 		utility=null;
 		draPage=null;
+		ipapage=null;
+		ipasavedsearchpage=null;
 	}
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IPA" parallel="tests" thread-count="10">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+	<test name="Saved search">
+		<classes>
+			<class name="ipa.IPA001"></class>
+		</classes>
+	</test>
+
+</suite>
+	

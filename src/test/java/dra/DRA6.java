@@ -89,13 +89,20 @@ public class DRA6 extends TestBase {
 	public void validateAppHeaderFooterLinks(String proflieFlyoutLinks) throws Exception {
 		try {
 			test.log(LogStatus.INFO, "DRA Profile Flyout Info - Header and Footer validation");
-			pf.getProfilePageInstance(ob).validateDRAProfileFlyout(proflieFlyoutLinks);
+			pf.getProfilePageInstance(ob).validateDRAProfileFlyout(proflieFlyoutLinks,test);
 			test.log(LogStatus.PASS, "DRA Profile Flyout Info - Header and Footer validation Successful");
 			
 			test.log(LogStatus.INFO, "Validate DRA Profile page from Profile flyout");
 			pf.getProfilePageInstance(ob).clickProfileTitleLink();
-			pf.getProfilePageInstance(ob).validateDRAProfilePageAndClose();
+			pf.getProfilePageInstance(ob).validateDRAProfilePageAndClose(test);
+			
 			test.log(LogStatus.PASS, "DRA Profile page landing succefully from Profile flyout");
+			
+
+			test.log(LogStatus.INFO, "Validate DRA Account link from Profile flyout");
+			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			pf.getProfilePageInstance(ob).validateAccountLinkModalAndClose();
+			test.log(LogStatus.INFO, "Validate DRA Account link from Profile flyout is Successful");
 			
 			pf.getDraPageInstance(ob).logoutDRA();
 			pf.getDraPageInstance(ob).landingScreenDRA();
