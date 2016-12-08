@@ -33,6 +33,16 @@ public class PageFactory {
 	private NewsfeedPage newsfeedPage=null;
 	private DRAPage draPage=null;
 	private IPApage ipapage=null;
+	private IAMPage iamPage=null;
+	
+	public IAMPage getIamPage(WebDriver ob) {
+
+		if (iamPage == null) {
+			iamPage = new IAMPage(ob);
+		}
+		return iamPage;
+	}
+	
 	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {

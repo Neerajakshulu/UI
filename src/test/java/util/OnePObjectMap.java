@@ -843,7 +843,10 @@ public enum OnePObjectMap {
     NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series'] text"),
     NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
     NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
-    NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']")
+    NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']"),
+    
+ // #################### IAM ##########################
+ 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 
 	
 	;
