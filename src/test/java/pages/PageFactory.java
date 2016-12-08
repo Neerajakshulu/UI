@@ -34,6 +34,8 @@ public class PageFactory {
 	private DRAPage draPage=null;
 	private IPApage ipapage=null;
 	private IAMPage iamPage=null;
+	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
+	
 	
 	public IAMPage getIamPage(WebDriver ob) {
 
@@ -254,6 +256,13 @@ public class PageFactory {
 		return ipapage;
 
 	}
+	
+	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob){
+		if(ipasavedsearchpage==null){
+			ipasavedsearchpage=new IpaSavedSearchDetailsPage();
+		}
+		return ipasavedsearchpage;
+	}
 
 	
 	public void clearAllPageObjects() {
@@ -279,5 +288,6 @@ public class PageFactory {
 		utility=null;
 		draPage=null;
 		ipapage=null;
+		ipasavedsearchpage=null;
 	}
 }

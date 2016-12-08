@@ -846,6 +846,14 @@ public enum OnePObjectMap {
     NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
     NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
     NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']"),
+    NEON_IPA_DASH_BOARD_SAVE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary']"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_CSS("div[class='modal-content']"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_TEXT_CSS("h3[class='wui-modal__title']"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS("div[class='wui-input'] input"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS("div[class='wui-textarea'] textarea"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS("button[type='submit']"),
+    NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+	
     
  // #################### IAM ##########################
  	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
