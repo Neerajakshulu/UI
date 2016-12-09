@@ -259,7 +259,7 @@ public class PageFactory {
 	
 	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob){
 		if(ipasavedsearchpage==null){
-			ipasavedsearchpage=new IpaSavedSearchDetailsPage();
+			ipasavedsearchpage=new IpaSavedSearchDetailsPage(ob);
 		}
 		return ipasavedsearchpage;
 	}

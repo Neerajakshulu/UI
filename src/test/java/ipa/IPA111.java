@@ -15,7 +15,7 @@ import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA001 extends TestBase {
+public class IPA111 extends TestBase {
 
 	static int status = 1;
 
@@ -52,8 +52,8 @@ public class IPA001 extends TestBase {
 		try {
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(100);
-			String searchtype="technology";
-			String searchTerm="android";
+			String searchtype="company";
+			String searchTerm="samsung";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();

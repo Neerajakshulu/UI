@@ -34,7 +34,7 @@ public class IPApage extends TestBase {
 	public void enterSavedatatitle(String datatiltle) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS);
+		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS);
 		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS,
 				datatiltle);
@@ -43,7 +43,6 @@ public class IPApage extends TestBase {
 	public void enterSavedatadesc(String datadesc) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Save as");
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS);
-		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS);
 		pf.getBrowserActionInstance(ob)
 				.enterFieldValue(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS, datadesc);
 	}

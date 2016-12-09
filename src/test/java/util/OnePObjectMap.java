@@ -858,6 +858,12 @@ public enum OnePObjectMap {
     NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS("div[class='wui-textarea'] textarea"),
     NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS("button[type='submit']"),
     NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+    NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS("span[data-ui-sref='savedWork']"),
+    NEON_IPA_SAVED_DATA_PAGE_SEARCH_RECORDS_CSS("div[class='wui-card__content ng-scope']"),
+    NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding']"),
+    NEON_IPA_SAVED_DATA_PAGE_SEARCH_TERM_TYPE_CSS("span[class='wui-super-header__sse-item-text ng-binding']"),
+    NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS(""),
+    NEON_IPA_SAVED_DATA_PAGE_DELETE_BUTTON_CSS(""),
 	
     
  // #################### IAM ##########################

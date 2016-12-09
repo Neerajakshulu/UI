@@ -5,9 +5,15 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Saved search">
+	<test name="technology Saved search">
 		<classes>
 			<class name="ipa.IPA001"></class>
+		</classes>
+	</test>
+	
+	<test name=" company Saved search">
+		<classes>
+			<class name="ipa.IPA111"></class>
 		</classes>
 	</test>
 
