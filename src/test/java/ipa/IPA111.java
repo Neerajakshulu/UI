@@ -34,7 +34,7 @@ public class IPA111 extends TestBase {
 	}
 
 	@Test
-	public void testcaseB10() throws Exception {
+	public void saveCompanySearchData() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
