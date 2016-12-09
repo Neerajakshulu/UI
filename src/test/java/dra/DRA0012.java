@@ -100,9 +100,5 @@ public class DRA0012 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-	}
+	
 }
