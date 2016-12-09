@@ -81,6 +81,7 @@ public class Authoring45 extends TestBase {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(URL));
 				test.log(LogStatus.PASS, "Post is published with external link");
 				pf.getpostRVPageInstance(ob).clickExternalLinkInPostContent(URL);
+				
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateURL(URL));
 				test.log(LogStatus.PASS, "External links added to post are working fine");
 			} catch (Throwable t) {

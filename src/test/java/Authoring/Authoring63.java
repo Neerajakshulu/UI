@@ -128,7 +128,7 @@ public class Authoring63 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

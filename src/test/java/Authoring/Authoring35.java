@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -118,6 +119,7 @@ public class Authoring35 extends TestBase {
 		pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 		
 		try {
+			BrowserWaits.waitTime(10);
 			Assert.assertFalse(pf.getpostRVPageInstance(ob).validateProfanityWordsMaskedForPostTitle(profanityWord,test));
 			test.log(LogStatus.PASS, "Profanity words are masked for post content");
 		} catch (Throwable t) {
