@@ -168,7 +168,7 @@ public class DRAPage extends TestBase {
 	 */
 	public void validateInvalidCredentialsErrorMsg(ExtentTest test) throws Exception {
 		try {
-			if (!checkElementPresence_id("login_error")) {
+			if (!((pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS).isDisplayed()))) {
 				test.log(LogStatus.FAIL, "Unexpected login happened");// extent
 																		// //
 																		// report

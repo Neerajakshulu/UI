@@ -62,7 +62,7 @@ public class DRA004 extends TestBase {
 		}
 		
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser3"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser6"));
 			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -83,8 +83,8 @@ public class DRA004 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser3"),
-					LOGIN.getProperty("DRAfbpw3"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser6"),
+					LOGIN.getProperty("DRAfbpw6"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -94,8 +94,8 @@ public class DRA004 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser3"),
-						LOGIN.getProperty("DRAsteampw3"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser6"),
+						LOGIN.getProperty("DRAsteampw6"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
@@ -115,8 +115,8 @@ public class DRA004 extends TestBase {
 			}
 			try{
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser3"),
-						LOGIN.getProperty("DRAsteampw3"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser6"),
+						LOGIN.getProperty("DRAsteampw6"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				
 				if (!(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
