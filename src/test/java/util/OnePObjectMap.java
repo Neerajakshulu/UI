@@ -791,6 +791,10 @@ public enum OnePObjectMap {
 	DRA_PROFILE_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
 	DRA_PROFILE_IMAGE_EDIT_CSS("button[ng-click='ProfileModal.openImageModal()']"),
 	DRA_PROFILE_IMAGE_DELETE_CSS("button[ng-click='ProfileModal.deleteImage()']"),
+	DRA_FORGOT_PASSWORD_VERIFICATION_BUTTON_CSS("button[class='pull-right wui-btn login-button button-color-primary wui-btn--primary']"),
+	DRA_FORGOT_PASSWORD_TEXT_XPATH("//h3[contains(text(),'Email Sent')]"),
+	DRA_OK_BUTTON_XPATH("//button[contains(text(),'OK')]"),
+	DRA_EVICT_MSG_XPATH("//h2[contains(text(),'Your account has been evicted.')]"),
 
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),

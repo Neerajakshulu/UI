@@ -284,6 +284,30 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
+	public void steamLockedDRA() throws Exception {
+
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
+				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
+
+		for (int i = 0; i <= 9; i++) {
+			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
+					.sendKeys("asdfgh");
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			Thread.sleep(2000);
+		}
+
+	}
+
+	
+	public void loginTofbSuspended() throws Exception {
+
+		pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00015UserSuspended"),
+				LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+
+	}
 
 	public boolean verifyLinkedAccountInDRA(String accountType, String emailId) {
 		boolean result = false;

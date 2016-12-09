@@ -49,35 +49,34 @@ public class DRA0013 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String email = "iliya89@k3663a40w.com";
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
-			String css = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
-					.getCssValue("background-color");
+
 			String cssValue = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()))
 					.getCssValue("background-color");
-			if (cssValue.contains("rgba(177, 205, 67, 1)")) {
+			if (cssValue.contains("rgba(99, 116, 31, 1)")) {
 				test.log(LogStatus.INFO, "Sign in button is  displayed in  application specific green colour");
 			} else {
-				test.log(LogStatus.INFO, "check box is not selected by default");
+				test.log(LogStatus.INFO, "Sign in button is not  displayed in  application specific green colour");
 				status = 2;
 			}
-			String cssValue1 = ob.findElement(By.cssSelector("html[class='unauth-page-dra']"))
+			String cssValue1 = ob.findElement(By.cssSelector("html[class='unauth-page--dra']"))
 					.getCssValue("background");
 			logger.info("Values : " + cssValue);
 
 			if (cssValue1.contains("rgb(99, 116, 31)") && cssValue1.contains("rgb(177, 205, 67)")) {
 				test.log(LogStatus.PASS, " DRA Landing page displayed  in  application specific green colour");
 			} else {
-				test.log(LogStatus.FAIL, "check box is not selected by default");
+				test.log(LogStatus.FAIL, " DRA Landing page is not displayed  in  application specific green colour");
 				status = 2;
 			}
 			try {
 				boolean ForgotPasswordLink = checkElementIsDisplayed(ob,
-						By.xpath(OR.getProperty("forgot_password_link").toString()));
+						By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_LINK_CSS.toString()));
 				Assert.assertEquals(ForgotPasswordLink, true);
 				test.log(LogStatus.PASS, "DRA Landing page displays forgot password link");
 			} catch (Throwable t) {
@@ -85,30 +84,14 @@ public class DRA0013 extends TestBase {
 				test.log(LogStatus.FAIL, "DRA Landing page doesn't display forgot password link");
 				ErrorUtil.addVerificationFailure(t);
 			}
-			ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
 
-			// BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
-			ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);
-			ob.findElement(By.xpath(OR.getProperty("verification_email_button"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_LINK_CSS.toString()))
+					.sendKeys(LOGIN.getProperty("DRASteamuser14"));
+			ob.findElement(By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_VERIFICATION_BUTTON_CSS.toString()))
+					.click();
 			test.log(LogStatus.PASS, "'Send verification button' is clicked");
 			BrowserWaits.waitTime(3);
-
-			// waitForElementTobeVisible(ob,
-			// By.xpath(OR.getProperty("confomr_message")), 30);
-			String Msg = "An email with password reset instructions has been sent to " + email;
-			try {
-
-				String textConfirm = ob.findElement(By.xpath(OR.getProperty("confomr_message").toString())).getText();
-				Assert.assertEquals(textConfirm, Msg);
-				test.log(LogStatus.PASS, "An email with password reset instructions has been sent to the user");
-
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "An email with password reset instructions has not been sent to the user");
-				ErrorUtil.addVerificationFailure(t);
-			}
-
 			ob.close();
 
 		} catch (Throwable t) {
@@ -127,22 +110,6 @@ public class DRA0013 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
-
-	public void logoutDRA() throws Exception {
-
-		BrowserWaits.waitTime(4);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_PROFILE_CSS.toString())));
-		waitForAjax(ob);
-		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString()), 60);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.DRA_SIGNOUT_BUTTON_CSS.toString())));
-		BrowserWaits.waitTime(3);
-	}
-
-	public void clickLoginDRA() throws Exception {
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-
 	}
 
 	@AfterTest

@@ -2,12 +2,9 @@ package dra;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -37,7 +34,6 @@ public class DRA0012 extends TestBase {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		// static boolean fail = false;
 
 		if (!master_condition) {
 
@@ -50,13 +46,42 @@ public class DRA0012 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-		
+			String str = "Your account has been locked.";
+			String evictMsg = "Your account has been evicted.";
+			String locked = "";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			steamLocked();
-			loginTofbSuspended();
-			ob.close();
+			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
+			pf.getDraPageInstance(ob).steamLockedDRA();
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
+					30);
+			locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()))
+					.getText();
+			BrowserWaits.waitTime(2);
+			if (locked.equalsIgnoreCase(str)) {
+				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
+			}
+
+			else {
+				test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on ENW");
+			}
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
+
+			BrowserWaits.waitTime(5);
+			pf.getDraPageInstance(ob).loginTofbSuspended();
+			String evict = ob.findElement(By.xpath(OnePObjectMap.DRA_EVICT_MSG_XPATH.toString())).getText();
+			if (evict.equalsIgnoreCase(evictMsg)) {
+				test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
+
+			} else {
+				test.log(LogStatus.FAIL, "The evicted string is not displayed");
+
+			}
+			BrowserWaits.waitTime(3);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -74,59 +99,6 @@ public class DRA0012 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	private void steamLocked() throws Exception {
-		String str = "Your account has been locked.";
-		String locked = "";
-		ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
-
-		for (int i = 0; i <= 9; i++) {
-			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
-			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
-					.sendKeys("asdfgh");
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(2000);
-		}
-		BrowserWaits.waitTime(2);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()), 30);
-		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();	
-		BrowserWaits.waitTime(2);
-		if (locked.equalsIgnoreCase(str)) {
-			test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
-		}
-
-		else {
-			test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on ENW");
-		}
-		
-		BrowserWaits.waitTime(5);
-
-	}
-	
-	private void loginTofbSuspended() throws Exception {
-
-		ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-
-		String str = "Your account has been evicted.";
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00015UserSuspended"),
-				LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
-		BrowserWaits.waitTime(2);
-		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
-		if (evict.equalsIgnoreCase(str)) {
-			test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
-
-		} else {
-			test.log(LogStatus.FAIL, "The evicted string is not displayed");
-
-		}
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-	}
-
 
 	@AfterTest
 	public void reportTestResult() {
