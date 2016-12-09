@@ -84,7 +84,7 @@ public class RCC016 extends TestBase {
 			}
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			waitForPageLoad(ob);
-			pf.getHFPageInstance(ob).searchForText("biology");
+			pf.getHFPageInstance(ob).searchForText("biology"); 
 			String recordTitle=pf.getSearchResultsPageInstance(ob).getArticleTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
