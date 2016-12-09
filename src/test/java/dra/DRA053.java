@@ -3,7 +3,7 @@ package dra;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA004 extends TestBase {
+public class DRA053 extends TestBase {
 
 	static int count = -1;
 
@@ -62,7 +62,7 @@ public class DRA004 extends TestBase {
 		}
 		
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser6"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERDRA053"));
 			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -82,11 +82,27 @@ public class DRA004 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
+			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA053"),
+					LOGIN.getProperty("USERPWDDRA053"));
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+			test.log(LogStatus.PASS, "user has logged in with Steam account in dra to make it Activated");
+			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
+			BrowserWaits.waitTime(5);
+			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			String accountType = "Facebook";
+			pf.getDraPageInstance(ob).logoutDRA();
+			
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser6"),
-					LOGIN.getProperty("DRAfbpw6"));
-			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
-			pf.getHFPageInstance(ob).clickOnAccountLink();
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA053"),
+					LOGIN.getProperty("USERPWDDRA053"));
+			test.log(LogStatus.PASS, "user has logged in with social account in Neon to make it Activated");
+			pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
@@ -94,50 +110,42 @@ public class DRA004 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser6"),
-						LOGIN.getProperty("DRAsteampw6"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA053"),
+						LOGIN.getProperty("USERPWDDRA053"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
-				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
+				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "User is able to click on not now on the modal");		
+				test.log(LogStatus.PASS, "User is able to link steam account with facebook account");	
+				
+				
+				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+				validateAccounts(2,accountType);
+				String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+				test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
+
+				// Verifying that Profile name is same as winning
+				// account after merging
+				Assert.assertEquals(winingAccountProfileName, firstAccountProfileName);
+				test.log(LogStatus.PASS, "Random Merge is happened");
+
+				if (winingAccountProfileName.contains(firstAccountProfileName)) {
+				test.log(LogStatus.PASS, "Winning account is steam account");
+				} else
+				throw new Exception("Winning account is cannot be determined");
 				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "User is not able to click on notnow on the modal");
+				test.log(LogStatus.FAIL, "User is not able to merge accounts");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
-			try{
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser6"),
-						LOGIN.getProperty("DRAsteampw6"));
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				
-				if (!(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
-						By.cssSelector(OnePObjectMap.NOT_NOW_BUTTON_CSS.toString())))) {
-					test.log(LogStatus.PASS, "User is not able to see linking modal");
-				}
-				else{
-					test.log(LogStatus.FAIL, "User is able to see linking modal");
-				}
-
-				
-			}catch (Throwable t) {
-				closeBrowser();
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "User is not able to login to DRA again");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
-			}
+			
 
 			BrowserWaits.waitTime(2);
 			closeBrowser();
@@ -156,6 +164,23 @@ public class DRA004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+
+	
+	private void validateAccounts(int accountCount, String linkName) throws Exception {
+		try {
+			Assert.assertTrue(pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("USERDRA053")));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
+			//test.log(LogStatus.PASS,  " account is available and is not linked");
+			test.log(LogStatus.PASS, "Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
+		}
+	}
+	
 
 	@AfterTest
 	public void reportTestResult() {

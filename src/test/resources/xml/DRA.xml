@@ -87,6 +87,12 @@
 		</classes>
 	</test>
 	
+	<test name="DRA053">
+		<classes>
+			<class name="dra.DRA053"></class>
+		</classes>
+	</test>
+	
 	<test name="DRA_Profile_Flyout_links_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
