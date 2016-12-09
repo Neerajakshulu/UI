@@ -81,13 +81,11 @@ public class ENW043 extends TestBase {
 		try {
 		EndNoteSeesion(ob);
 		BrowserWaits.waitTime(8);
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
+		if(ob.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).size()>0){
+			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+		}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 

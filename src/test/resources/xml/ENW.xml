@@ -191,6 +191,12 @@
 		<classes>
 			<class name="enw.ENW000012"></class>
 		</classes>
+	</test> 
+	<test name="ENW041">
+		<classes>
+			<class name="enw.ENW041"></class>
+		</classes>
+		
 	</test> -->
 	<test name="ENW00029">
 		<classes>
@@ -202,12 +208,7 @@
 			<class name="enw.ENW030"></class>
 		</classes>
 	</test>
-	 <test name="ENW041">
-		<classes>
-			<class name="enw.ENW041"></class>
-		</classes>
-		
-	</test>
+	 
 	 <test name="ENW042">
 		<classes>
 			<class name="enw.ENW042"></class>

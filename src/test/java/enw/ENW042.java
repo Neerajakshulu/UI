@@ -50,7 +50,7 @@ public class ENW042 extends TestBase {
 			clearCookies();
 			String header_Expected = "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
 					(LOGIN.getProperty("MARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
