@@ -73,13 +73,12 @@ public class DRA051 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		test.log(LogStatus.PASS,
 					"user is able to login to DRA when first name of user is missing.");
-		    pf.getProfilePageInstance(ob).clickProfileFlyout();
-         //  String Profilename=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS).getText();
+		   
+           String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
            
            pf.getDraPageInstance(ob).clickProfileLink();
            String firstnameerrormessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
-          // if(Profilename.equals("sadiya")&& firstnameerrormessage.equals("Please enter your first name.") )
-			if(firstnameerrormessage.equals("Please enter your first name.") )
+           if(Profilename.equals("")&& firstnameerrormessage.equals("Please enter your first name.") )
 			{test.log(LogStatus.PASS,
 					"user is able to see first name as NULL when first name of user is missing.");
 			}
