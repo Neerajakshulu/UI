@@ -18,6 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
+@SuppressWarnings("unused")
 public class DRA0014 extends TestBase {
 
 	static int count = -1;
@@ -81,16 +82,14 @@ public class DRA0014 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			
-
 			// Activating the Steam account
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser14"),
 					LOGIN.getProperty("DRAsteampw14"));
 			pf.getDraPageInstance(ob).clickLoginDRA();
-			
+
 			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
-			
+
 			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
 			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
@@ -98,11 +97,11 @@ public class DRA0014 extends TestBase {
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			String accountType = "Neon";
 
-			//validateNeonAccount(1, accountType);
+			// validateNeonAccount(1, accountType);
 			pf.getDraPageInstance(ob).logoutDRA();
-			//closeBrowser();
+			// closeBrowser();
 			BrowserWaits.waitTime(5);
-            ob.navigate().to(host);
+			ob.navigate().to(host);
 			try {
 
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser14"),
@@ -139,20 +138,19 @@ public class DRA0014 extends TestBase {
 				BrowserWaits.waitTime(5);
 				ob.navigate().to(host);
 				// Trying to Link the accounts
+
 				try {
 					ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser14"),
 							LOGIN.getProperty("DRAfbpw14"));
 					pf.getDraPageInstance(ob).clickLoginDRA();
-					
-					
+
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				    test.log(LogStatus.FAIL, "Linking is happened");
-					
-				    pf.getHFPageInstance(ob).clickOnAccountLink();
+					test.log(LogStatus.FAIL, "Linking is happened");
+
+					pf.getHFPageInstance(ob).clickOnAccountLink();
 					accountType = "Neon";
-					
 
 					try {
 						// validating two accounts are linked or not
@@ -230,8 +228,6 @@ public class DRA0014 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_skip_link")));
 
 			}
-			
-			
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -249,6 +245,7 @@ public class DRA0014 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
+
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
@@ -265,6 +262,7 @@ public class DRA0014 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
+
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
@@ -284,11 +282,5 @@ public class DRA0014 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
-	
 
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-	}
 }
