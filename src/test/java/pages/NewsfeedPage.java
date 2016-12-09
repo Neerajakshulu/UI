@@ -96,8 +96,10 @@ public class NewsfeedPage extends TestBase{
 	public void addPatentToWatchlist(String watchlist,String patentTitle) throws Exception {
 		List<WebElement> cardSections=	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEWSFEED_COMMENT_CARD_SECTION_CSS);
 		for(WebElement cardSection:cardSections) {
+			pf.getBrowserActionInstance(ob).scrollToElement(cardSection);
 			String cardCategeory=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).getText();
-			if(cardCategeory.contains("New comment")||cardCategeory.contains("New comments")) {
+			logger.info("categeory type-->"+cardCategeory);
+			if(cardCategeory.contains("New Comment")||cardCategeory.contains("New Comments")) {
 				String cardTitle=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
 				if(cardTitle.equalsIgnoreCase(patentTitle)) {
 					WebElement addToWatchlist=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
