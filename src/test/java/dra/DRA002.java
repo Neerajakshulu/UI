@@ -3,6 +3,7 @@ package dra;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -60,14 +61,17 @@ public class DRA002 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
+
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser1"));
-			
+			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("DRASteamuser1"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
 
+			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
+				throw new Exception("Delete API Call failed");
+			}
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -108,8 +112,19 @@ public class DRA002 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click the link button");
-				
-				
+				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
+				BrowserWaits.waitTime(2);
+				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+				BrowserWaits.waitTime(2);
+				validateLinkedAccounts(2, accountType);
+				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
+				test.log(LogStatus.PASS, "Forward Merge is happened");
+				if (secondAccountProfileName.contains(firstAccountProfileName)) {
+					test.log(LogStatus.PASS, "Winning account is Steam");
+				}
+
 			} catch (Throwable t) {
 				closeBrowser();
 				t.printStackTrace();
@@ -153,6 +168,26 @@ public class DRA002 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
+		}
+	}
+
+	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
+		try {
+
+			Assert.assertTrue(
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRASteamuser1")));
+			Assert.assertTrue(
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAfbuser1")));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
+			test.log(LogStatus.PASS,
+					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"Linked accounts are not available in accounts page : Neon and " + linkName + " accounts");
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
 

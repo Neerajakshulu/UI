@@ -46,33 +46,40 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
-	
-	public void clickOnAccountLinkDRA() throws Exception{
+
+	public void clickOnAccountLinkDRA() throws Exception {
 		pf.getProfilePageInstance(ob).clickProfileFlyout();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILEFLYOUT_ACCOUNTLINK_CSS);
 	}
-	
-	public void clickOnChangePwLinkDRA() throws Exception{
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
+
+	public void clickOnChangePwLinkDRA() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS);
 	}
-	
-	
-	public void changepwd(String currentpw,String newpw) throws Exception{
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS, currentpw);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS, newpw);
+
+	public void changepwd(String currentpw, String newpw) throws Exception {
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CURRENTPW_FIELD_CSS,
+				currentpw);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_NEWPW_FIELD_CSS,
+				newpw);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS);
-		
+
 	}
-	
+
 	public void clickCancelOnChangepwd() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.DRA_ACCOUNTSETTINGS_CHANGEPWD_LINK_CSS);
 	}
 
 	public void clickOnSignInWithFBOnDRAModal() throws Exception {
@@ -202,11 +209,10 @@ public class DRAPage extends TestBase {
 			closeBrowser();
 		}
 	}
-	
-	public void validateAccount(int accountCount, String linkName, String accountId,ExtentTest test) throws Exception {
+
+	public void validateAccount(int accountCount, String linkName, String accountId, ExtentTest test) throws Exception {
 		try {
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, accountId));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, accountId));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
@@ -217,25 +223,22 @@ public class DRAPage extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
-	
-	public void validateIncorrectPwdErrorMsg(ExtentTest test) throws Exception{
-		
+
+	public void validateIncorrectPwdErrorMsg(ExtentTest test) throws Exception {
+
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
-		WebElement errormsg=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
-		
-		if(!(errormsg.isDisplayed()))
-		{
+		WebElement errormsg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
+
+		if (!(errormsg.isDisplayed())) {
 			test.log(LogStatus.FAIL, "Incorrect password error message is not displayed");
-		}
-		else
-		{
-			String actualerrortext=errormsg.getText();
-			String expectederrortext="Incorrect password. Please try again.";
+		} else {
+			String actualerrortext = errormsg.getText();
+			String expectederrortext = "Incorrect password. Please try again.";
 			Assert.assertEquals(actualerrortext, expectederrortext);
 			test.log(LogStatus.PASS, "Incorrect password error message is displayed");
 		}
 	}
-	
+
 	public void validateCurrentPwdErrorMsg(ExtentTest test) throws Exception {
 		try {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
@@ -248,7 +251,7 @@ public class DRAPage extends TestBase {
 			test.log(LogStatus.FAIL, "Current password error message is not displayed");
 		}
 	}
-	
+
 	public void validateNewPwdErrorMsg(ExtentTest test) throws Exception {
 		try {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CHANGEPW_ERROR_MSG_CSS);
@@ -261,13 +264,58 @@ public class DRAPage extends TestBase {
 			test.log(LogStatus.FAIL, "New password error message is not displayed");
 		}
 	}
-	
 
 	public void clickProfileLink() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_PROFILE_FLYOUT_NAME_CSS);
-		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
-		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
+		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS);
+		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Update", "Cancel", "Profile");
+	}
+
+	public String getProfileNameDRA() throws Exception {
+		clickOnProfileImageDRA();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		String ProfileName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS)
+				.getText();
+		return ProfileName;
+	}
+	
+	public void clickOnProfileImageDRA() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+	}
+
+	public boolean verifyLinkedAccountInDRA(String accountType, String emailId) {
+		boolean result = false;
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item ng-scope']"), 60);
+		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item ng-scope']"));
+
+		for (WebElement element : list) {
+						
+			String type1 = null;
+			List<WebElement> elementList1 = element
+					.findElements(By.cssSelector("span[class='wui-subtitle ng-binding']"));	
+			for (WebElement we1 : elementList1) {
+			
+				if (we1.isDisplayed()) {
+					type1 = we1.getText();
+					break;
+				}
+			
+			}
+			
+			
+			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Thomson Reuters | Project Neon"))
+					|| accountType.equalsIgnoreCase(type1.trim())) {
+				String emailid = null;
+				emailid = element.findElement(By.cssSelector("span[class='ng-binding']")).getText();
+				if (emailid.equalsIgnoreCase(emailId))
+					result = true;
+				break;
+			}
+
+		}
+		return result;
 	}
 
 }
