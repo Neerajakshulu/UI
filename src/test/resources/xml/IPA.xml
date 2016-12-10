@@ -16,6 +16,14 @@
 			<class name="ipa.IPA111"></class>
 		</classes>
 	</test>
+	
+	<test name="IPA_login">
+		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"></parameter>
+		<parameter name="password" value="Neon@123"></parameter>
+		<classes>
+			<class name="ipa.IPA012"></class>
+		</classes>
+	</test>
 
 </suite>
 	

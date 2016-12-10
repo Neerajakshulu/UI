@@ -32,6 +32,7 @@ public class PageFactory {
 	private Utility utility=null;
 	private NewsfeedPage newsfeedPage=null;
 	private DRAPage draPage=null;
+	private IPASearch searchPage = null;
 	private IPApage ipapage=null;
 	private IAMPage iamPage=null;
 	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
@@ -43,6 +44,14 @@ public class PageFactory {
 			iamPage = new IAMPage(ob);
 		}
 		return iamPage;
+	}
+
+	public IPASearch getSearchPageInstance(WebDriver ob) {
+		if (searchPage == null) {
+			searchPage = new IPASearch(ob);
+		}
+		return searchPage;
+
 	}
 	
 	

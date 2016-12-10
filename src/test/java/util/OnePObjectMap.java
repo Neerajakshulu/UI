@@ -817,7 +817,6 @@ public enum OnePObjectMap {
     NEON_IPA_USERNAME_CSS("[name='loginEmail']"),
     NEON_IPA_PASSWORD_CSS("input[name='loginPassword']"),
     NEON_IPA_SIGNIN_CSS("button[event-action='thomsonreuters']"),
-    
     NEON_IPA_TR_TITTLE_CSS("[class*='logo-link']"),
     NEON_IPA_APP_SWITCHER_CSS("a[class='wui-flyout__toggle']"),
     NEON_IPA_PROFILE_ICON_CSS("a[class*='profile-flyout--trigger']"),
@@ -864,6 +863,23 @@ public enum OnePObjectMap {
     NEON_IPA_SAVED_DATA_PAGE_SEARCH_TERM_TYPE_CSS("span[class='wui-super-header__sse-item-text ng-binding']"),
     NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS(""),
     NEON_IPA_SAVED_DATA_PAGE_DELETE_BUTTON_CSS(""),
+    NEON_IPA_PROFILEFLYOUT_CSS("img[class='wui-circle']"),
+	NEON_IPA_ACCOUNT_CSS("a[class='wui-profile-flyout__link wui-profile-flyout__link--icon']"),
+	NEON_IPA_ACCOUNTNAME_CSS("span[class='ng-binding']"),
+	NEON_IPA_TECH_SEARCHBOX_CSS("div[class='ipa-search-input-control__input-group'] input"),
+	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("//button[contains(text(),'Add')]"),
+	NEON_IPA_TECH_CLIPBOARD_CSS("ipa-search-term[class='ng-isolate-scope'] li[ng-repeat='item in vm.items track by $index']"),
+	NEON_IPA_TECH_NEWSEARCH_XPATH("//span[contains(text(),'New Search')]"),
+	NEON_IPA_TECHHIGHLIGHT_XPATH("//li[contains(text(),'Technology')]/hr[@class='ipa-tabs--underline ipa-tabs--underline__active']"),
+	NEON_IPA_COMPANYHIGHLIGHT_XPATH("//li[contains(text(),'Company')]/hr[@class='ipa-tabs--underline ipa-tabs--underline__active']"),
+	NEON_IPA_EXPLOREBUTTON_XPATH("//button[contains(text(),'Explore')]"),
+	NEON_IPA_TECHNOLOGYSEARCH_CSS("li[ui-sref='home.search({type: \\'technology\\'})']"),
+	NEON_IPA_COMPANYSEARCH_CSS("li[ui-sref='home.search({type: \\'company\\'})"),
+	NEON_IPA_HEADER_CSS("span[class='ne-nav-header__text--ne']"),
+	NEON_IPA_TECHPORTFOLIO_CSS("li[class='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
+	NEON_IPA_CHART_CSS("svg[class='nvd3-svg']"),
+	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),
+	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 	
     
  // #################### IAM ##########################
