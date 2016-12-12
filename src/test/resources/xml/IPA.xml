@@ -5,36 +5,31 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="technology Saved search">
+	<test name="technology_Saved_search">
 		<classes>
 			<class name="ipa.IPA001"></class>
 		</classes>
 	</test>
-	
-	<test name=" company Saved search">
+
+	<test name="company_Saved_search">
 		<classes>
 			<class name="ipa.IPA111"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ipa.IPA051">
 		<classes>
 			<class name="ipa.IPA051"></class>
 		</classes>
 	</test>
-	
-	<test name="ipa.IPA052">
-		<classes>
-			<class name="ipa.IPA052"></class>
-		</classes>
-	</test>
+
 	
 	<test name="ipa.IPA053">
 		<classes>
 			<class name="ipa.IPA053"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IPA_login">
 		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"></parameter>
 		<parameter name="password" value="Neon@123"></parameter>
