@@ -892,6 +892,9 @@ public enum OnePObjectMap {
 	IPA_LANDINGPAGE_ANALYZE_ICON_CSS("i[class='fa fa-bar-chart login-splash-icon']"),
 	IPA_LANDINGPAGE_VISUALIZE_ICON_CSS("i[class='fa fa-pie-chart login-splash-icon']"),
 	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon-first']"),
+	IPA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
+	IPA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
+	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
     
 	 IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
 	 NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),

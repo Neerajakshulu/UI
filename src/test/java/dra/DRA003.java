@@ -128,58 +128,43 @@ public class DRA003 extends TestBase {
 
 				}
 
-				// verifying user is able to exit the linking modal by clicking
-				// close button on the modal
+				
+
+				// verifying user is not able to exit the linking modal by clicking
+				// outside the linking modal
 
 				try {
-					pf.getLinkingModalsInstance(ob).clickOnCloseButton();
+					pf.getDraPageInstance(ob).clickOutsideTheDRAModal();
 
-					if (!(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
-							By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString())))) {
+					Assert.assertEquals(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
+							By.cssSelector(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS.toString())), true);
 
-						test.log(LogStatus.FAIL, "User is not able to close the linking modal ");// extent
-																									// reports
-						status = 2;// excel
-
-						closeBrowser();
-
-					} else {
-						test.log(LogStatus.PASS, "User is able to close the modal");
-					}
+					test.log(LogStatus.PASS, "User is able to click outside the modal");
 				} catch (Throwable t) {
 					closeBrowser();
 					t.printStackTrace();
-					test.log(LogStatus.FAIL, "User is not able to close the modal");
+					test.log(LogStatus.FAIL, "User is not able to click outside the modal");
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;// excel
 					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 							captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 				}
-				
-				try{
-				BrowserWaits.waitTime(2);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser2"),
-						LOGIN.getProperty("DRAsteampw2"));
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				pf.getDraPageInstance(ob).clickOutsideTheDRAModal();
 
-				if (!(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
-						By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString())))) {
-
-					test.log(LogStatus.FAIL, "User is able to exit the linking modal ");// extent
-																							// reports
-					status = 2;// excel
-
-					closeBrowser();
-
-				}
-
-				test.log(LogStatus.PASS, "User is able to click outside the modal");
-				}catch (Throwable t) {
+				// verifying user is able to exit the linking modal by clicking
+				// close button on the modal
+				try {
+					pf.getLinkingModalsInstance(ob).clickOnCloseButton();
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS);
+					Assert.assertEquals(pf.getBrowserActionInstance(ob).checkElementIsDisplayed(ob,
+							By.cssSelector(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS.toString())), false);
+					test.log(LogStatus.PASS,
+							"User is able to close the modal ");
+					
+				} catch (Throwable t) {
 					closeBrowser();
 					t.printStackTrace();
-					test.log(LogStatus.FAIL, "User is not able to click outside the modal");
+					test.log(LogStatus.FAIL, "User is not able to close the modal");
 					test.log(LogStatus.INFO, "Error--->" + t);
 					ErrorUtil.addVerificationFailure(t);
 					status = 2;// excel
