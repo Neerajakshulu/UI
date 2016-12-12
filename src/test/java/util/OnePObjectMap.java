@@ -893,6 +893,8 @@ public enum OnePObjectMap {
 	IPA_LANDINGPAGE_VISUALIZE_ICON_CSS("i[class='fa fa-pie-chart login-splash-icon']"),
 	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon-first']"),
     
+	 IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
+	 NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
  // #################### IAM ##########################
  	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 

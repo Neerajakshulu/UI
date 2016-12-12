@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
+import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
 
@@ -65,5 +66,20 @@ public class IPApage extends TestBase {
 				OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS);
 	}
+	//Method to click on App switcher
+	public void clickOnAppswitcher() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_APP_SWITCHER_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_APP_SWITCHER_CSS);
+
+	}
+	
+	//Method to click on Project Neon
+		public void clickOnNeonfromAppswitcher() throws Exception {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_PROJECTNEON_APP_SWITCHER_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_PROJECTNEON_APP_SWITCHER_CSS);
+			BrowserWaits.waitTime(3);
+			
+
+		}
 
 }
