@@ -15,7 +15,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class IPA0004 extends TestBase{
+public class IPA0005 extends TestBase{
 
 	static int count = -1;
 
@@ -47,7 +47,7 @@ public class IPA0004 extends TestBase{
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseIPA4() throws Exception {
+	public void testcaseIPA5() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -66,22 +66,20 @@ public class IPA0004 extends TestBase{
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPASteamuser3"),
-					LOGIN.getProperty("IPAsteampw3"));
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPASteamuser5"),
+					LOGIN.getProperty("IPAsteampw5"));
 			test.log(LogStatus.INFO, "User is able to login to IPA");
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
-			pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAcurrentsteampw4"), LOGIN.getProperty("IPAnewsteampw4"));
-			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
-			test.log(LogStatus.INFO, "User is able to see the correct message");
-			
-			for (int i = 0; i < 9; i++) {
-				pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAcurrentsteampw4"), LOGIN.getProperty("IPAnewsteampw4"));
-				BrowserWaits.waitTime(2);
-				test.log(LogStatus.INFO, "User entered incorrect password 10 times");
-			}
-			
+			pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAsteampw5"), LOGIN.getProperty("IPAsteampw5"));
+			test.log(LogStatus.PASS, "User is able to click on change password link and enter the current & new password");
+			pf.getDraPageInstance(ob).validateCurrentPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters current password in new password field");
 			BrowserWaits.waitTime(2);
+			pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAsteampw5"), LOGIN.getProperty("IPASteam5pw1"));
+			pf.getDraPageInstance(ob).validateNewPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters password in new password field which is matching with the previous 4 passwords.");
+			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 			
 		} catch (Throwable t) {
