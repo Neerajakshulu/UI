@@ -29,6 +29,11 @@
 			<class name="ipa.IPA053"></class>
 		</classes>
 	</test>
+	 <test name="ipa.IPA054">
+		<classes>
+			<class name="ipa.IPA054"></class>
+		</classes>
+	</test>
 
 	<test name="IPA_login">
 		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"></parameter>

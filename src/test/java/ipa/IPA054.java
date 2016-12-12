@@ -1,4 +1,4 @@
-package dra;
+package ipa;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA002 extends TestBase {
+public class IPA054 extends TestBase {
 
 	static int count = -1;
 
@@ -40,7 +40,7 @@ public class DRA002 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
 	}
 
 	/**
@@ -63,15 +63,12 @@ public class DRA002 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser1"));
-			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("DRASteamuser1"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERIPA054"));
+			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				throw new Exception("Delete API Call failed");
 			}
 
-			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
-				throw new Exception("Delete API Call failed");
-			}
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -89,8 +86,8 @@ public class DRA002 extends TestBase {
 			ob.navigate().to(host);
 
 			// Activating the facebook account
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser1"),
-					LOGIN.getProperty("DRAfbpw1"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERIPA054"),
+					LOGIN.getProperty("USERPWDIPA054"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
@@ -103,14 +100,14 @@ public class DRA002 extends TestBase {
 			BrowserWaits.waitTime(5);
 
 			try {
-				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
+				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 				ob.navigate().refresh();
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser1"),
-						LOGIN.getProperty("DRAsteampw1"));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERIPA054"),
+						LOGIN.getProperty("USERPWDIPA054"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click the link button");
 				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
@@ -124,6 +121,7 @@ public class DRA002 extends TestBase {
 				if (secondAccountProfileName.contains(firstAccountProfileName)) {
 					test.log(LogStatus.PASS, "Winning account is Facebook");
 				}
+
 			} catch (Throwable t) {
 				closeBrowser();
 				t.printStackTrace();
@@ -157,7 +155,7 @@ public class DRA002 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAfbuser1")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERIPA054")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
@@ -174,9 +172,9 @@ public class DRA002 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRASteamuser1")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("USERIPA054")));
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAfbuser1")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("USERIPA054")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
