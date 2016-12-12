@@ -243,6 +243,7 @@ public class IAMPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,
 				Keys.chord(Keys.CONTROL, "a"));
 		// BrowserWaits.waitTime(4);
@@ -255,15 +256,11 @@ public class IAMPage extends TestBase {
 
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, populatText);
 		// BrowserWaits.waitTime(4);
-
 		/*
 		 * String populatText=Keys.chord(Keys.CONTROL,"v"); logger.info("-->"+populatText);
 		 */
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).click();
-		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()));
-
 		logger.info("EmailText -->" + populatText);
-		// Assert.assertEquals(email, populatText);
+		Assert.assertEquals(email, populatText);
 	}
 
 	public void clickResendEmailButton() throws Exception {
