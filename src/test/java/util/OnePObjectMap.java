@@ -881,6 +881,17 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 	
+	
+	IPA_BRANDING_NAME_CSS("h5[class='login-header__company-name']"),
+	IPA_LOGO_CSS("h2[class='login-header__app-name']"),
+	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
+	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
+	IPA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos text-center ng-scope']"),
+	IPA_LANDINGPAGE_SUPPORT_MAILID_CSS("p[class='tos text-center ng-scope'] >a[event-action='login-customer-care-ipa']"),
+	IPA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"),
+	IPA_LANDINGPAGE_ANALYZE_ICON_CSS("i[class='fa fa-bar-chart login-splash-icon']"),
+	IPA_LANDINGPAGE_VISUALIZE_ICON_CSS("i[class='fa fa-pie-chart login-splash-icon']"),
+	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon-first']"),
     
  // #################### IAM ##########################
  	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
