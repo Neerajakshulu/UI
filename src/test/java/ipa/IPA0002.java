@@ -41,7 +41,7 @@ public class IPA0002 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class IPA0002 extends TestBase {
 				BrowserWaits.waitTime(2);
 				closeBrowser();
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "User is not able to login to DRA");// extent
+				test.log(LogStatus.FAIL, "User is not able to login to IPA");// extent
 				// reports
 				// next 3 lines to print whole testng error in report
 				StringWriter errors = new StringWriter();
