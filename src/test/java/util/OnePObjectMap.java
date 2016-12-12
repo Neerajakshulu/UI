@@ -421,7 +421,7 @@ public enum OnePObjectMap {
 	TRENDING_SECTION_ARTICLE_FROM_NEWSFEED_CSS("a[data-ui-sref='articleView({id:document.id})']"),
 	TRENDING_SECTION_POST_FROM_NEWSFEED_CSS("a[data-ui-sref='postsView({id:post.id})']"),
 	// login page elements
-	
+
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
@@ -773,11 +773,12 @@ public enum OnePObjectMap {
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	DRA_CHANGEPW_ERROR_MSG_CSS("p[class='wui-input-with-label__error ng-binding ng-scope']"),
 	DRA_INVALIDCREDENTIALS_ERRORMSG_CSS("label[class='wui-input-with-label__error above-form-error-message ng-scope']"),
-    
-	//DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle wui-profile-flyout__name ng-binding']"),
+
+	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
+	// wui-profile-flyout__name ng-binding']"),
 	DRA_PROFILE_FLYOUT_NAME_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
 	DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS("label[class='wui-input__error ng-scope']"),
-		 
+
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
 	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
@@ -811,59 +812,57 @@ public enum OnePObjectMap {
 	NEON_SWITCH_APPS_CSS("i[class='wui-icon wui-icon--app']"),
 	NEON_SWITCH_APPS_ENDNOTE_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--endnote']"),
 	NEON_GOT_IT_DISPLAYED_CSS("button[class='close wui-btn wui-btn--primary pull-right']"),
-	
-	
-	//********************IPA Locators*****************************
-    NEON_IPA_USERNAME_CSS("[name='loginEmail']"),
-    NEON_IPA_PASSWORD_CSS("input[name='loginPassword']"),
-    NEON_IPA_SIGNIN_CSS("button[event-action='thomsonreuters']"),
-    NEON_IPA_TR_TITTLE_CSS("[class*='logo-link']"),
-    NEON_IPA_APP_SWITCHER_CSS("a[class='wui-flyout__toggle']"),
-    NEON_IPA_PROFILE_ICON_CSS("a[class*='profile-flyout--trigger']"),
-    NEON_IPA_IPA_LINK_CSS("a[data-ui-sref^='home.search']"),
-    NEON_IPA_NEW_SEARCH_LINK_CSS("span[ng-click='header.newSearch()']"),
-    NEON_IPA_SAVE_SEARCH_LINK_CSS("span[data-ui-sref='savedWork']"),
-    
-    
-    NEON_IPA_EXPLORE_LABEL_CSS(".ipa-home-search--header"),
-    NEON_IPA_TECHNOLOGY_LINK_CSS("li[href*='technology']"),
-    NEON_IPA_COMPANY_LINK_CSS("li[href*='company']"),
-    NEON_IPA_SEARCH_TEXTBOX_CSS("input[ng-model='vm.searchParam']"),
-    NEON_IPA_EXPLORE_BUTTON_CSS("button[title='Search']"),
-    
-    NEON_IPA_SUGGESTION_COINTAINER_CSS("div[suggestion-data]"),
-    NEON_IPA_SHOW_ALL_LINK_XPATH("//a[text()='SHOW ALL']"),
-    
-    NEON_IPA_TECH_SUG_TEXT_VAR_CSS("li[index='$index'] >span[ng-bind-html*='suggestion.value']"),
-    NEON_IPA_TECH_SUG_HITS_VAR_CSS("li[index='$index'] >span[ng-if='suggestion.count']"),
-    NEON_IPA_TECH_SUG_ADD_VAR_CSS("li[index='$index'] >button"),
-    
-    NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS("span[class*='patents-found__value']"),
-    NEON_IPA_DASH_TAB_SEL_CSS("li[class*='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
-    NEON_IPA_DASH_KEYWORDS_LINK_CSS("[popover-template]"),
-    
-    NEON_IPA_DASH_TECH_COM_CSS("svg[class='nvd3-svg']"),
-    NEON_IPA_DASH_TECH_COM_X_CSS("svg.nvd3-svg  g[class='nv-x nv-axis nvd3-svg'] text[class='nv-axislabel']"),
-    NEON_IPA_DASH_TECH_COM_Y_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg'] text[class='nv-axislabel']"),
-    NEOM_IPA_DASH_TECH_COM_Y_VALUES_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg']  g[class^='tick'] text"),
-    NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series'] text"),
-    NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
-    NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
-    NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']"),
-    NEON_IPA_DASH_BOARD_SAVE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary']"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_CSS("div[class='modal-content']"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_TEXT_CSS("h3[class='wui-modal__title']"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS("div[class='wui-input'] input"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS("div[class='wui-textarea'] textarea"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS("button[type='submit']"),
-    NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
-    NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS("span[data-ui-sref='savedWork']"),
-    NEON_IPA_SAVED_DATA_PAGE_SEARCH_RECORDS_CSS("div[class='wui-card__content ng-scope']"),
-    NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding']"),
-    NEON_IPA_SAVED_DATA_PAGE_SEARCH_TERM_TYPE_CSS("span[class='wui-super-header__sse-item-text ng-binding']"),
-    NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS(""),
-    NEON_IPA_SAVED_DATA_PAGE_DELETE_BUTTON_CSS(""),
-    NEON_IPA_PROFILEFLYOUT_CSS("img[class='wui-circle']"),
+
+	// ********************IPA Locators*****************************
+	NEON_IPA_USERNAME_CSS("[name='loginEmail']"),
+	NEON_IPA_PASSWORD_CSS("input[name='loginPassword']"),
+	NEON_IPA_SIGNIN_CSS("button[event-action='thomsonreuters']"),
+	NEON_IPA_TR_TITTLE_CSS("[class*='logo-link']"),
+	NEON_IPA_APP_SWITCHER_CSS("a[class='wui-flyout__toggle']"),
+	NEON_IPA_PROFILE_ICON_CSS("a[class*='profile-flyout--trigger']"),
+	NEON_IPA_IPA_LINK_CSS("a[data-ui-sref^='home.search']"),
+	NEON_IPA_NEW_SEARCH_LINK_CSS("span[ng-click='header.newSearch()']"),
+	NEON_IPA_SAVE_SEARCH_LINK_CSS("span[data-ui-sref='savedWork']"),
+
+	NEON_IPA_EXPLORE_LABEL_CSS(".ipa-home-search--header"),
+	NEON_IPA_TECHNOLOGY_LINK_CSS("li[href*='technology']"),
+	NEON_IPA_COMPANY_LINK_CSS("li[href*='company']"),
+	NEON_IPA_SEARCH_TEXTBOX_CSS("input[ng-model='vm.searchParam']"),
+	NEON_IPA_EXPLORE_BUTTON_CSS("button[title='Search']"),
+
+	NEON_IPA_SUGGESTION_COINTAINER_CSS("div[suggestion-data]"),
+	NEON_IPA_SHOW_ALL_LINK_XPATH("//a[text()='SHOW ALL']"),
+
+	NEON_IPA_TECH_SUG_TEXT_VAR_CSS("li[index='$index'] >span[ng-bind-html*='suggestion.value']"),
+	NEON_IPA_TECH_SUG_HITS_VAR_CSS("li[index='$index'] >span[ng-if='suggestion.count']"),
+	NEON_IPA_TECH_SUG_ADD_VAR_CSS("li[index='$index'] >button"),
+
+	NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS("span[class*='patents-found__value']"),
+	NEON_IPA_DASH_TAB_SEL_CSS("li[class*='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
+	NEON_IPA_DASH_KEYWORDS_LINK_CSS("[popover-template]"),
+
+	NEON_IPA_DASH_TECH_COM_CSS("svg[class='nvd3-svg']"),
+	NEON_IPA_DASH_TECH_COM_X_CSS("svg.nvd3-svg  g[class='nv-x nv-axis nvd3-svg'] text[class='nv-axislabel']"),
+	NEON_IPA_DASH_TECH_COM_Y_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg'] text[class='nv-axislabel']"),
+	NEOM_IPA_DASH_TECH_COM_Y_VALUES_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg']  g[class^='tick'] text"),
+	NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series'] text"),
+	NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
+	NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
+	NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']"),
+	NEON_IPA_DASH_BOARD_SAVE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary']"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_CSS("div[class='modal-content']"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_TEXT_CSS("h3[class='wui-modal__title']"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS("div[class='wui-input'] input"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS("div[class='wui-textarea'] textarea"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS("button[type='submit']"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_CANCEL_BUTTON_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
+	NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS("span[data-ui-sref='savedWork']"),
+	NEON_IPA_SAVED_DATA_PAGE_SEARCH_RECORDS_CSS("div[class='wui-card__content ng-scope']"),
+	NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding']"),
+	NEON_IPA_SAVED_DATA_PAGE_SEARCH_TERM_TYPE_CSS("span[class='wui-super-header__sse-item-text ng-binding']"),
+	NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS(""),
+	NEON_IPA_SAVED_DATA_PAGE_DELETE_BUTTON_CSS(""),
+	NEON_IPA_PROFILEFLYOUT_CSS("img[class='wui-circle']"),
 	NEON_IPA_ACCOUNT_CSS("a[class='wui-profile-flyout__link wui-profile-flyout__link--icon']"),
 	NEON_IPA_ACCOUNTNAME_CSS("span[class='ng-binding']"),
 	NEON_IPA_TECH_SEARCHBOX_CSS("div[class='ipa-search-input-control__input-group'] input"),
@@ -880,8 +879,7 @@ public enum OnePObjectMap {
 	NEON_IPA_CHART_CSS("svg[class='nvd3-svg']"),
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
-	
-	
+
 	IPA_BRANDING_NAME_CSS("h5[class='login-header__company-name']"),
 	IPA_LOGO_CSS("h2[class='login-header__app-name']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
@@ -897,13 +895,29 @@ public enum OnePObjectMap {
 	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[event-action='change-password-submitted']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
-    
-	 IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
-	 NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
- // #################### IAM ##########################
- 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 
-	
+	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
+	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
+
+	// #################### IAM ##########################
+	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn login-button button-color-primary wui-btn--primary']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS("button[class='pull-right wui-btn login-button button-color-primary'] span"),
+	GURILLA_RECEIVED_MAIL_SUBJECT_CSS("h3[class='email_subject']"),
+	GURILLA_MAIL_BODY_PASSWORD_RESET_LINK_XPATH("//*[@class='email_body']//a"),
+	RESET_PASSWORD_PAGE_CHECK_VALIDATIONS_CSS("div[class='row password-validator__item ng-scope']"),
+	RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_CSS("div[class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+	RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_MESSAGE_CSS("H6[class='col-xs-11 password-validator__text ng-binding']"),
+	LOGIN_PAGE_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
+	GURILLA_LIST_EMAIL_IDS_XPATH("//tr[starts-with(@id,'mr_')]/td[2]"),
+	GURILLA_LIST_EMAIL_PROJECT_TITLE_CSS("span[style='color:#45B7E7;']"),
+	RESET_YOUR_PASSWORD_PAGE_CSS("div[class='row ng-scope'] div"),
+	RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS("div[class='wui-input-with-label'] input"),
+	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
+	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
+
 	;
 
 	private String locator;

@@ -1,12 +1,19 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
-public class IAMPage extends TestBase{
+public class IAMPage extends TestBase {
 
 	public IAMPage(WebDriver ob) {
 		this.ob = ob;
@@ -14,10 +21,272 @@ public class IAMPage extends TestBase{
 	}
 
 	public void sendEamilToTextBox(String email) throws Exception {
-		waitForElementTobePresent(ob, By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS.toString()),
-				60);
-		ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS.toString())).sendKeys(email);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(email);
 	}
 
-	
+	public void validateTextInForgotPasswordPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS);
+		WebElement element = ob
+				.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS.toString()));
+		String forgotPassText = element.findElement(By.tagName("h3")).getText();
+		logger.info("Title : " + forgotPassText);
+		String text = element.findElement(By.tagName("p")).getText();
+		logger.info("Text : " + text);
+		Assert.assertTrue(forgotPassText.contains("Forgot Password") && text.contains(
+				"Please enter your email address. We'll send you an email that will allow you to reset your password."));
+	}
+
+	public void clickSendEmailButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Email Sent");
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
+	}
+
+	public void checkEmailSentText(String email) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS);
+		String emailSentText = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS).getText();
+		logger.info("EMAILSENTTEXT-->" + emailSentText);
+		/*
+		 * String emailSentText = element.findElement(By.tagName("h3")).getText(); logger.info("Title : " +
+		 * emailSentText); List<WebElement> list = element.findElements(By.tagName("p")); logger.info("Size : " +
+		 * list.size()); String messageText = list.get(0).getText(); logger.info("Message Text : " + messageText);
+		 */
+		String messageContent = "An email with password reset instructions has been sent to " + email + ".";
+		logger.info("Text123 : " + messageContent);
+		/*
+		 * String checkFolder = list.get(1).getText(); logger.info("Email verification folder : " + checkFolder);
+		 */
+		Assert.assertTrue(emailSentText.contains("Email Sent"));
+		Assert.assertTrue(emailSentText.contains(messageContent));
+		Assert.assertTrue(emailSentText.contains("You may need to check your spam folder."));
+
+	}
+
+	public void clickOkButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
+		// ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())).click();
+		// BrowserWaits.waitTime(3);
+		// pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon");
+
+	}
+
+	public void checkLoginPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
+		String loginPageAppName = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
+				.getText();
+		Assert.assertTrue(loginPageAppName.contains("Project Neon"));
+
+	}
+
+	public void openGurillaMail() throws InterruptedException {
+		ob.get("https://www.guerrillamail.com");
+		BrowserWaits.waitTime(12);
+	}
+
+	public void clickReceivedMail(String message) throws InterruptedException {
+		List<WebElement> email_list = ob.findElements(By.xpath(OnePObjectMap.GURILLA_LIST_EMAIL_IDS_XPATH.toString()));
+		WebElement myE = email_list.get(0);
+		JavascriptExecutor executor = (JavascriptExecutor) ob;
+		executor.executeScript("arguments[0].click();", myE);
+		Thread.sleep(4000);
+		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
+				.getText();
+		String expectedSubjectTitle = message + " password reset";
+		Assert.assertEquals(subjectTitle, expectedSubjectTitle);
+	}
+
+	public void clickResetPasswordLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_MAIL_BODY_PASSWORD_RESET_LINK_XPATH);
+		WebElement reset_link_element = ob
+				.findElement(By.xpath(OnePObjectMap.GURILLA_MAIL_BODY_PASSWORD_RESET_LINK_XPATH.toString()));
+		String reset_link_url = reset_link_element.getAttribute("href");
+		ob.get(reset_link_url);
+
+	}
+
+	public void checkAllowedCharacters(String string,
+			int i) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_VALIDATIONS_CSS);
+		WebElement element = ob
+				.findElements(By.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_VALIDATIONS_CSS.toString()))
+				.get(i);
+		element.findElement(By.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_CSS.toString()));
+		String message = element
+				.findElement(By
+						.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_MESSAGE_CSS.toString()))
+				.getText();
+	}
+
+	public void clickForgotPasswordLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_FORGOT_PASSWORD_LINK_CSS);
+		String forgotPassText = ob
+				.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FORGOT_PASSWORD_LINK_CSS.toString())).getText();
+		logger.info("Fogot Password Text : " + forgotPassText);
+		Assert.assertEquals(forgotPassText, "Forgot password?");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_FORGOT_PASSWORD_LINK_CSS);
+
+	}
+
+	public void checkApplicationName(String appName) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_LIST_EMAIL_PROJECT_TITLE_CSS);
+		String emailAppName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.GURILLA_LIST_EMAIL_PROJECT_TITLE_CSS).getText();
+		logger.info("EmailAppName--->" + emailAppName);
+		Assert.assertEquals(appName, emailAppName);
+
+	}
+
+	public void clickResetYourPasswordLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.EMAIL_BODY_PASSWORD_RESET_LINK_CSS);
+		WebElement reset_link_element = ob
+				.findElement(By.cssSelector(OnePObjectMap.EMAIL_BODY_PASSWORD_RESET_LINK_CSS.toString()));
+		String reset_link_url = reset_link_element.getAttribute("href");
+		ob.get(reset_link_url);
+
+	}
+
+	public void checkExternalPasswordPageText(String resetPass,
+			String newPass) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS);
+		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS.toString()));
+		String resetPassText = element.findElement(By.tagName("h2")).getText();
+		logger.info("Title : " + resetPassText);
+		String newPassText = element.findElement(By.tagName("p")).getText();
+		logger.info("Title : " + newPassText);
+		Assert.assertTrue(resetPassText.contains(resetPass) && newPassText.contains(newPass));
+	}
+
+	public void checkTextBox(String newPassword) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS.toString()))
+				.sendKeys(newPassword);
+	}
+
+	public void clickResetButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS);
+
+	}
+
+	public void checkChangedPasswordMailSubject(String message) throws InterruptedException {
+		List<WebElement> email_list = ob.findElements(By.xpath(OnePObjectMap.GURILLA_LIST_EMAIL_IDS_XPATH.toString()));
+		WebElement myE = email_list.get(0);
+		JavascriptExecutor executor = (JavascriptExecutor) ob;
+		executor.executeScript("arguments[0].click();", myE);
+		Thread.sleep(4000);
+		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
+				.getText();
+		String expectedSubjectTitle = message + " password changed";
+		Assert.assertEquals(subjectTitle, expectedSubjectTitle);
+	}
+
+	public void login(String email,
+			String newPassword) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
+
+		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, email);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS, newPassword);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		BrowserWaits.waitTime(4);
+	}
+
+	public void checkAlreadyUsedMailSubject(String message) throws InterruptedException {
+		List<WebElement> email_list = ob.findElements(By.xpath(OnePObjectMap.GURILLA_LIST_EMAIL_IDS_XPATH.toString()));
+		logger.info(email_list.size());
+		WebElement myE = email_list.get(1);
+		JavascriptExecutor executor = (JavascriptExecutor) ob;
+		executor.executeScript("arguments[0].click();", myE);
+		Thread.sleep(2000);
+		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
+				.getText();
+		String expectedSubjectTitle = message + " password reset";
+		Assert.assertEquals(subjectTitle, expectedSubjectTitle);
+
+	}
+
+	public void checkInvalidPasswordResetPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS);
+		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS.toString()));
+		String resetPassText = element.findElement(By.tagName("h2")).getText();
+		logger.info("Title : " + resetPassText);
+		List<WebElement> ListOfElements = element.findElements(By.tagName("p"));
+		String expireTimeText = ListOfElements.get(0).getText();
+		logger.info("wxpireTimeText : " + expireTimeText);
+		String resentMailText = ListOfElements.get(1).getText();
+		logger.info("ResentMailText : " + resentMailText);
+		String invalidPassPageTitle = "Password reset link has expired";
+		String expireTime = "To protect your security, the link to reset your Project Neon password expired after 24 hours.";
+		String resentText = "To resend the email" + "," + " please enter your email address.";
+		Assert.assertTrue(invalidPassPageTitle.contains(resetPassText));
+		Assert.assertTrue(expireTimeText.contains(expireTime));
+		Assert.assertTrue(resentMailText.contains(resentText));
+
+	}
+
+	public void checkPrepopulatedText(String email) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,
+				Keys.chord(Keys.CONTROL, "a"));
+		// BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,
+				Keys.chord(Keys.CONTROL, "c"));
+		// BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		// BrowserWaits.waitTime(4);
+		String populatText = Keys.chord(Keys.CONTROL, "v");
+
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, populatText);
+		// BrowserWaits.waitTime(4);
+
+		/*
+		 * String populatText=Keys.chord(Keys.CONTROL,"v"); logger.info("-->"+populatText);
+		 */
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).click();
+		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()));
+
+		logger.info("EmailText -->" + populatText);
+		// Assert.assertEquals(email, populatText);
+	}
+
+	public void clickResendEmailButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+
+	}
+
+	public void clickCancelButton() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS);
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+
+	}
+
+	public void checkErrorMessage(String errorMessage) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS);
+		String errorMessaes=ob.findElement(By.cssSelector(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS.toString())).getText();
+		Assert.assertTrue(errorMessage.contains(errorMessaes));
+	}
+
 }
