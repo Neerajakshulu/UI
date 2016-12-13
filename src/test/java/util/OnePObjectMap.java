@@ -898,6 +898,12 @@ public enum OnePObjectMap {
 
 	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
+	IPA_CANCEL_BUTTON_IN_SAVED_DATA_TILE_CSS("button[ng-click='vm.cancelItemEditMode(item)']"),
+	IPA_DELETE_SAVED_ITEM_BUTTON_POPUP_TEXT_CSS("div[class='modal-body wui-modal__body'] p"),
+	IPA_DELETE_BUTTON_IN_SAVED_CONFIRMATION_MODAL_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
+	IPA_SAVE_BUTTON_IN_SAVED_DATA_TILE_CSS("button[class='wui-mini-btn wui-mini-btn--primary']"),
+
+
 
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
