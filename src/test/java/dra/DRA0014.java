@@ -97,7 +97,7 @@ public class DRA0014 extends TestBase {
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			String accountType = "Neon";
 
-			// validateNeonAccount(1, accountType);
+			validateAccounts(1, accountType);
 			pf.getDraPageInstance(ob).logoutDRA();
 			// closeBrowser();
 			BrowserWaits.waitTime(5);
@@ -168,28 +168,7 @@ public class DRA0014 extends TestBase {
 						} else
 							throw new Exception("Winning account is cannot be determined");
 
-						pf.getDraPageInstance(ob).getProfileNameDRA();
-						pf.getDraPageInstance(ob).getProfileNameDRA();
-						// pf.getProfilePageInstance(ob).clickProfileLink();
-						waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString()), 30);
-						ob.findElement(By.xpath(OnePObjectMap.NEON_OK_BUTTON_XPATH.toString())).click();
-
-						BrowserWaits.waitTime(4);
-
-						pf.getBrowserActionInstance(ob)
-								.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
-						int WinningAccount_WatclistCount = pf.getLinkingModalsInstance(ob).getWatchlistCount();
-						System.out.println(WinningAccount_WatclistCount);
-						if (WinningAccount_WatclistCount == watchlistCount) {
-							test.log(LogStatus.PASS,
-									"User is able to see the same watchlist count in profile page in Social account as in Neon");
-						}
-
-						else {
-
-							test.log(LogStatus.FAIL,
-									"User is not able to see the same watchlist count in Social account");
-						}
+						
 
 					}
 
@@ -250,9 +229,9 @@ public class DRA0014 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername11")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAfbuser14")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
+			test.log(LogStatus.PASS, "Single account is available .");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
@@ -266,21 +245,22 @@ public class DRA0014 extends TestBase {
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
-			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("sru_fbusername11")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam11")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRASteamuser14")));
+			Assert.assertTrue(
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAfbuser14")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
-					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
+					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
-					"Linked accounts are not available in accounts page : Facebook and " + linkName + " accounts");
+					"Linked accounts are not available in accounts page : Neon and " + linkName + " accounts");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
 		}
 	}
+
 
 }

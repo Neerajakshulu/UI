@@ -69,7 +69,41 @@
 			<class name="ipa.IPA054"></class>
 		</classes>
 	</test>
-
+<test name="IPA Sign in">
+		<classes>
+			<class name="ipa.IPA0050"></class>
+		</classes>
+	</test>
+	<test name="IPA Sign in">
+		<classes>
+			<class name="ipa.IPA0051"></class>
+		</classes>
+	</test>
+	<test name="IPA Sign in">
+		<classes>
+			<class name="ipa.IPA0052"></class>
+		</classes>
+	</test>
+	<test name="IPA Sign in">
+		<classes>
+			<class name="ipa.IPA0053"></class>
+		</classes>
+	</test>
+	<test name="IPA Sign in">
+		<classes>
+			<class name="ipa.IPA0054"></class>
+		</classes>
+	</test>
+	<test name="IPA Merging">
+		<classes>
+			<class name="ipa.IPA0055"></class>
+		</classes>
+	</test>
+	<test name="IPA Merging">
+		<classes>
+			<class name="ipa.IPA0056"></class>
+		</classes>
+	</test>
 	<test name="IPA_login">
 		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"/>
 		<parameter name="password" value="Neon@123"/>

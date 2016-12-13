@@ -1,8 +1,12 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import util.BrowserWaits;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import util.ErrorUtil;
 import util.OnePObjectMap;
 import base.TestBase;
 
@@ -104,4 +108,52 @@ public class IPApage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 	}
+	
+	public void steamLockedIPA() throws Exception {
+
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
+				.sendKeys(LOGIN.getProperty("IPAUSER0051Locked"));
+
+		for (int i = 0; i <= 9; i++) {
+			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
+					.sendKeys("asdfgh");
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			Thread.sleep(2000);
+		}
+
+	}
+	public void clickLoginIPA() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
+
+	}
+	
+	public void validateIPAInactiveErrorMsg(ExtentTest test) throws Exception {
+		try {
+			String errormsg_title = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_CSS).getText();
+			String msg1 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG1_CSS)
+					.getText();
+			String msg2 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH)
+					.getText();
+
+			System.out.println(msg2);
+			if (errormsg_title.contains("Thank you for your interest")
+					&& msg1.contains("IP Analytics is currently available to customers in our early access program.")
+					&& msg2.contains("Questions? Contact IPA.support@thomsonreuters.com.")) {
+				test.log(LogStatus.PASS, " correct msg displayed ");
+			} else {
+				test.log(LogStatus.FAIL, " incorrect msg displayed ");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			ErrorUtil.addVerificationFailure(t);// testng
+			closeBrowser();
+		}
+	}
+
+
+}
 }

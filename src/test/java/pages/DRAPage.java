@@ -341,5 +341,32 @@ public class DRAPage extends TestBase {
 		}
 		return result;
 	}
+	
+	public void SearchDRAprofileName(String title) throws Exception {
+
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 30);
+		WebElement titleField = ob
+				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()));
+		titleField.clear();
+		titleField.sendKeys(title);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.DR_SEARCH_CLICK_CSS.toString()), 30);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DR_SEARCH_CLICK_CSS);
+	}
+
+	public void validateSearchResultMsg(ExtentTest test, String DRAProfileName) throws Exception {
+		try {
+			String Result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DR_SEARCH_RESULT_CSS).getText();
+			String ResultExpected = "Your search for sonui das found no matches.";
+					if (ResultExpected.contains(Result))  {
+				test.log(LogStatus.PASS, " User's account is non onboarded and non discoverable ");
+			} else {
+				test.log(LogStatus.FAIL, " User's account  non discoverable ");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			ErrorUtil.addVerificationFailure(t);// testng
+			closeBrowser();
+		}
+	}
 
 }

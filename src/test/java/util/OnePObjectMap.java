@@ -902,7 +902,8 @@ public enum OnePObjectMap {
 	IPA_DELETE_SAVED_ITEM_BUTTON_POPUP_TEXT_CSS("div[class='modal-body wui-modal__body'] p"),
 	IPA_DELETE_BUTTON_IN_SAVED_CONFIRMATION_MODAL_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
 	IPA_SAVE_BUTTON_IN_SAVED_DATA_TILE_CSS("button[class='wui-mini-btn wui-mini-btn--primary']"),
-
+	DR_SEARCH_CLICK_CSS("button[class='wui-search-bar__search-button']"),
+	DR_SEARCH_RESULT_CSS("p[class='wui-title']"),
 
 
 	// #################### IAM ##########################
