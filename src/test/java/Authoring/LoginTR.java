@@ -329,5 +329,22 @@ public class LoginTR extends TestBase {
 		}
 		
 	}
+	
+	public boolean loginToIPA(String username,String password) throws Exception{
+	       WebElement Element=null;
+	       pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
+	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
+	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
+	       pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+	     
+	       try{
+	    	   pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);   
+	    	   Element=      ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()));
+	       }catch(Exception ex){
+	       }
+	       return Element!=null;
+	       
+	}
+
 
 }

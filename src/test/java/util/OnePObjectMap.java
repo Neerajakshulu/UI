@@ -918,6 +918,15 @@ public enum OnePObjectMap {
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 
+		NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
+	    NEON_IPA_SEARCH_TERMS_REMOVE_CSS("div[ng-click^='vm.removeItem']"),
+	    NEON_IPA_SEARCH_TERMS_CSS("li[class^='search-term__item']"),
+	    NEON_IPA_TECH_SUG_DROPDOWN_CSS("div[class^='typeahead-results']"),
+	    NEON_IPA_TECH_NEW_SEARCH_HEADER_LINK_CSS("span[ng-click='header.newSearch()']"), 
+	    NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_CSS("li input[type='checkbox'][checked='checked']"),
+	    NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS("button[id='split-button'] div[class='caret search-term__caret']"),
+	    NEON_IPA_SEARCH_TERM_SYNMS_LIST_CSS("li[class^='search-term__item'] li input[type='checkbox']"),
+	    NEON_IPA_TECH_SHOW_ALL_LINK_CSS("a[class*='typeahead-results__showall']")
 	;
 
 	private String locator;

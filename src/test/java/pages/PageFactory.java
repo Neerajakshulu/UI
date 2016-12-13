@@ -36,7 +36,7 @@ public class PageFactory {
 	private IPApage ipapage=null;
 	private IAMPage iamPage=null;
 	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
-	
+	private DashboardPage dashboardPage=null;
 	
 	public IAMPage getIamPage(WebDriver ob) {
 
@@ -273,7 +273,13 @@ public class PageFactory {
 		return ipasavedsearchpage;
 	}
 
-	
+	public DashboardPage getDashboardPage(WebDriver ob) {
+		if (dashboardPage == null) {
+			dashboardPage = new DashboardPage(ob);
+		}
+
+		return dashboardPage;
+	}
 	public void clearAllPageObjects() {
 		searchResultsPage=null;
 		accountPage = null;
@@ -298,5 +304,6 @@ public class PageFactory {
 		draPage=null;
 		ipapage=null;
 		ipasavedsearchpage=null;
+		dashboardPage=null;
 	}
 }
