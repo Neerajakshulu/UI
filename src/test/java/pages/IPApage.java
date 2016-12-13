@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import base.TestBase;
@@ -155,5 +156,5 @@ public class IPApage extends TestBase {
 	}
 
 
-}
+
 }
