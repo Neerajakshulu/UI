@@ -12,7 +12,7 @@
 		</classes>
 	</test>
 	
-	<test name="DRA002">
+	<!-- <test name="DRA002">
 		<classes>
 			<class name="dra.DRA002"></class>
 		</classes>
@@ -28,7 +28,7 @@
 		<classes>
 			<class name="dra.DRA004"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<test name="DRA005">
 		<classes>
@@ -65,7 +65,7 @@
 			<class name="dra.DRA0013"></class>
 		</classes>
 	</test>
-	<test name="DRA0014">
+	<!-- <test name="DRA0014">
 		<classes>
 			<class name="dra.DRA0014"></class>
 		</classes>
@@ -74,14 +74,14 @@
 		<classes>
 			<class name="dra.DRA0015"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="DRA051">
 		<classes>
 			<class name="dra.DRA051"></class>
 		</classes>
 	</test>
 	
-	<test name="DRA052">
+	<!-- <test name="DRA052">
 		<classes>
 			<class name="dra.DRA052"></class>
 		</classes>
@@ -91,7 +91,7 @@
 		<classes>
 			<class name="dra.DRA053"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<test name="DRA_Profile_Flyout_links_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />

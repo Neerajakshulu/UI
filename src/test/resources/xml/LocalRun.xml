@@ -572,6 +572,59 @@
 			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
+	
+	 <test name="IPA0002">
+		<classes>
+			<class name="ipa.IPA0002"></class>
+		</classes>
+	</test>
+	
+	<test name="IPA0003">
+		<classes>
+			<class name="ipa.IPA0003"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA002">
+		<classes>
+			<class name="dra.DRA002"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA003">
+		<classes>
+			<class name="dra.DRA003"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA004">
+		<classes>
+			<class name="dra.DRA004"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA0014">
+		<classes>
+			<class name="dra.DRA0014"></class>
+		</classes>
+	</test>
+	<test name="DRA0015">
+		<classes>
+			<class name="dra.DRA0015"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA052">
+		<classes>
+			<class name="dra.DRA052"></class>
+		</classes>
+	</test>
+	
+	<test name="DRA053">
+		<classes>
+			<class name="dra.DRA053"></class>
+		</classes>
+	</test>
 
 </suite>
 
