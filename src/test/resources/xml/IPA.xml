@@ -23,6 +23,11 @@
 		</classes>
 	</test>
 
+   <test name="ipa.IPA052">
+		<classes>
+			<class name="ipa.IPA052"></class>
+		</classes>
+	</test>
 	
 	<test name="ipa.IPA053">
 		<classes>
