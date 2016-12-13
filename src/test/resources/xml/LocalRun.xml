@@ -625,6 +625,15 @@
 			<class name="dra.DRA053"></class>
 		</classes>
 	</test>
-
+<test name="IPA Merging">
+		<classes>
+			<class name="ipa.IPA0055"></class>
+		</classes>
+	</test>
+	<test name="IPA Merging">
+		<classes>
+			<class name="ipa.IPA0056"></class>
+		</classes>
+	</test>
 </suite>
 
