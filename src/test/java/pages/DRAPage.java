@@ -195,7 +195,6 @@ public class DRAPage extends TestBase {
 			String msg2 = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SUBSCRIPTION_INACTIVE_MSG2_XPATH)
 					.getText();
 
-			System.out.println(msg2);
 			if (errormsg_title.contains("Thank you for your interest")
 					&& msg1.contains("Target Druggability is a subscription product.")
 					&& msg2.contains("Questions? Learn more or contact DRA.support@thomsonreuters.com.")) {
