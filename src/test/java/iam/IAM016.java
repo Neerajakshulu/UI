@@ -68,12 +68,6 @@ public class IAM016 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		/*
-		 * if (!master_condition) { status = 3;// excel test.log(LogStatus.SKIP, "Skipping test case " +
-		 * this.getClass().getSimpleName() + " as the run mode is set to NO"); throw new SkipException(
-		 * "Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports }
-		 */
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
@@ -116,8 +110,8 @@ public class IAM016 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-1935",
-								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link")
+						.startTest("OPQA-1935&OPQA-3687",
+								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link&Verify that,the system should support a ENW password reset workflow with the following configurations")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
@@ -456,7 +450,7 @@ public class IAM016 extends TestBase {
 								"Verify that when Email address is known from password reset token,error message 'The email address is prepopulated.' should be displayed and email address field should be editable")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				logger.info("5j6b6y+dzzvwq8idhgf4@sharklasers.com");
+				ob.navigate().to(host);
 				pf.getIamPage(ob).sendEamilToTextBox("5j6b6y+dzzvwq8idhgf4@sharklasers.com");
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).checkPrepopulatedText("5j6b6y+dzzvwq8idhgf4@sharklasers.com");
@@ -486,7 +480,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
-				pf.getIamPage(ob).checkPrepopulatedText("ABC");
+				pf.getIamPage(ob).checkPrepopulatedText("");
 				pf.getIamPage(ob).clickCancelButton();
 				pf.getIamPage(ob).checkLoginPage();
 				test.log(LogStatus.PASS, "Email field is prepopulated.");
@@ -531,7 +525,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-
+			ob.quit();
 			// String email = createNewUser("duster", "man");
 
 			/*
@@ -596,7 +590,6 @@ public class IAM016 extends TestBase {
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

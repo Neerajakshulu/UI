@@ -84,7 +84,7 @@ public class IAMPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 		String loginPageAppName = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
 				.getText();
-		Assert.assertTrue(loginPageAppName.contains("Project Neon"));
+		//Assert.assertTrue(loginPageAppName.contains("Project Neon"));
 
 	}
 
@@ -241,26 +241,17 @@ public class IAMPage extends TestBase {
 
 	public void checkPrepopulatedText(String email) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
-
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
+		JavascriptExecutor js=(JavascriptExecutor)ob;
+		String populatText = (String)(js.executeScript("return arguments[0].value", 
+				ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))));
+		logger.info("PopulatText--->"+populatText);
 		
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,
-				Keys.chord(Keys.CONTROL, "a"));
-		// BrowserWaits.waitTime(4);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,
-				Keys.chord(Keys.CONTROL, "c"));
-		// BrowserWaits.waitTime(4);
-		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
-		// BrowserWaits.waitTime(4);
-		String populatText = Keys.chord(Keys.CONTROL, "v");
-
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, populatText);
-		// BrowserWaits.waitTime(4);
-		/*
-		 * String populatText=Keys.chord(Keys.CONTROL,"v"); logger.info("-->"+populatText);
-		 */
-		logger.info("EmailText -->" + populatText);
+		/*String textValues = (String)(js.executeScript("return angular.element(arguments[0]).scope().vm.email",
+				ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))));
+		System.out.println("PopulatText--->"+textValues);*/
+		
 		Assert.assertEquals(email, populatText);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 	}
 
 	public void clickResendEmailButton() throws Exception {
@@ -276,14 +267,42 @@ public class IAMPage extends TestBase {
 				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
-
+		pf.getBrowserWaitsInstance(ob)
+		.waitUntilElementIsClickable(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 	}
 
 	public void checkErrorMessage(String errorMessage) throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS);
-		String errorMessaes=ob.findElement(By.cssSelector(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS.toString())).getText();
+		String errorMessaes = ob
+				.findElement(By.cssSelector(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS.toString())).getText();
 		Assert.assertTrue(errorMessage.contains(errorMessaes));
+	}
+
+	public void checkAgreeAndContinueButton() throws Exception {
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+		} catch (Exception e) {
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			if(onboarding_modals.size()!=0){
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			}
+			
+		}
+		BrowserWaits.waitTime(4);
+	}
+
+	public void checkENWApplicationName(String appName) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS);
+		String emailAppName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS).getText();
+		logger.info("EmailAppName--->" + emailAppName);
+		Assert.assertEquals(appName, emailAppName);
+
 	}
 
 }
