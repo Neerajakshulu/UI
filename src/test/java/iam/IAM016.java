@@ -3,6 +3,7 @@ package iam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,6 +19,8 @@ import util.ExtentManager;
 public class IAM016 extends TestBase {
 
 	static int status = 1;
+	String[] tests;
+	String[] tests_dec;
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -28,7 +31,16 @@ public class IAM016 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+		String var = rowData.getTestcaseId();
+		String dec = rowData.getTestcaseDescription();
+		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
+		test.log(LogStatus.INFO, tests[0]);
+
+		// extent = ExtentManager.getReporter(filePath);
+		// rowData = testcase.get(this.getClass().getSimpleName());
+		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
 
 	@Test
@@ -37,14 +49,30 @@ public class IAM016 extends TestBase {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
+		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 		if (!master_condition) {
-
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			extent = ExtentManager.getReporter(filePath);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
+			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+			logger.info(rowData.getTestcaseId());
+			for (int i = 0; i < tests.length; i++) {
+				logger.info(tests_dec[i]);
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
+				test.log(LogStatus.SKIP,
+						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+				extent.endTest(test);
+			}
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
-
 		}
+
+		/*
+		 * if (!master_condition) { status = 3;// excel test.log(LogStatus.SKIP, "Skipping test case " +
+		 * this.getClass().getSimpleName() + " as the run mode is set to NO"); throw new SkipException(
+		 * "Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports }
+		 */
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
