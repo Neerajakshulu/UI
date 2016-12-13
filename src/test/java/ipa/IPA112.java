@@ -2,20 +2,16 @@ package ipa;
 
 import java.util.Random;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ExtentManager;
-import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class IPA112 extends TestBase {
 
@@ -51,7 +47,7 @@ public class IPA112 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			//String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
+			// String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			// String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" +
 			// RandomStringUtils.randomAlphanumeric(100);
 			String newtitle = this.getClass().getSimpleName() + "_Updated_Save_Title" + "_" + getCurrentTimeStamp();
@@ -65,13 +61,12 @@ public class IPA112 extends TestBase {
 			BrowserWaits.waitTime(3);
 			Random rand = new Random();
 			int value = rand.nextInt(5);
-			pf.getIpaSavedSearchpage(ob).randomUpdate(value);	
+			pf.getIpaSavedSearchpage(ob).randomUpdate(value);
 			pf.getIpaPage(ob).enterSavedatatitle(newtitle);
 			BrowserWaits.waitTime(4);
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
 			test.log(LogStatus.PASS, "Title is updated with new title");
 			BrowserWaits.waitTime(3);
-			
 			closeBrowser();
 
 		} catch (Exception e) {
