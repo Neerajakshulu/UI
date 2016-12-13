@@ -1,5 +1,7 @@
 package pages;
 
+import java.io.BufferedInputStream;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.pdfbox.pdfparser.PDFParser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -1992,10 +1995,10 @@ public class ProfilePage extends TestBase {
 					String psText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("ps text-->"+psText);
 					if(!StringUtils.containsIgnoreCase(psText, flyoutLinks[i])) {
-						logFailureDetails(test, psText+"Page not opened", "DRA-Privacy Fail");
+						logFailureDetails(test, psText+"Page not opened", "DRA/IPA-Privacy Fail");
 					}
 					ob.navigate().back();
-					test.log(LogStatus.PASS, "DRA Proflie flyout  "+flyoutLinks[i]+"Link validation is Successful");
+					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 
 				else if (flyoutLinks[i].equalsIgnoreCase("Terms of Use")){ 
@@ -2010,41 +2013,53 @@ public class ProfilePage extends TestBase {
 						logFailureDetails(test, tcText+"Page not opened", "DRA-Terms of Use Fail");
 					}
 					ob.navigate().back();
-					test.log(LogStatus.PASS, "DRA Proflie flyout  "+flyoutLinks[i]+"Link validation is Successful");
+					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 				else if (flyoutLinks[i].equalsIgnoreCase("Help")){ 
-					test.log(LogStatus.INFO, "DRA Proflie flyout  "+flyoutLinks[i]+"Link validation");
+					test.log(LogStatus.INFO, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+"Link validation");
 					String helpLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HELP_LINK).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HELP_LINK);
-					BrowserWaits.waitTime(4);
+					BrowserWaits.waitTime(6);
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Help page url-->"+currentPageUrl);
 					logger.info("Help link address-->"+helpLinkAddressURL);
-					if(!StringUtils.equalsIgnoreCase(currentPageUrl, "https://dev-stable.1p.thomsonreuters.com/dra/assets/pdf/Help_File-Target_Druggability_Beta.pdf")) {
+					if(!StringUtils.equalsIgnoreCase(currentPageUrl, helpLinkAddressURL)) {
 						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA-Help Fail");
 					}
+					
+					URL TestURL = new URL(helpLinkAddressURL);
+					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+					PDFParser testPDF = new PDFParser(TestFile);
+					testPDF.parse();
+					String pdfText = new org.apache.pdfbox.util.PDFTextStripper().getText(testPDF.getPDDocument());
+					
+					if(StringUtils.isEmpty(pdfText)) {
+						logFailureDetails(test, flyoutLinks[i]+"Page PDF not opened", "Help PDF Fail");
+					}
+					
 					ob.navigate().back();
-					test.log(LogStatus.PASS, "DRA Proflie flyout  "+flyoutLinks[i]+"Link validation is Successful");
+					test.log(LogStatus.PASS, "Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 				else if (flyoutLinks[i].equalsIgnoreCase("Feedback")){ 
-					test.log(LogStatus.INFO, "DRA Proflie flyout  "+flyoutLinks[i]+"Links validation");
+					test.log(LogStatus.INFO, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+"Links validation");
 					String feedbankLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_FEEDBACK_XPATH).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_FEEDBACK_XPATH);
 					BrowserWaits.waitTime(4);
+					pf.getBrowserWaitsInstance(ob).waitUntilText("To provide feedback","Next");
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Feedback page url-->"+currentPageUrl);
 					logger.info("Feedback link address-->"+feedbankLinkAddressURL);
 					if(!StringUtils.containsIgnoreCase(currentPageUrl, feedbankLinkAddressURL)) {
-						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA-Terms of Use Fail");
+						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA/IPA -Feedback Fail");
 					}
 					ob.navigate().back();
-					test.log(LogStatus.PASS, "DRA Proflie flyout  "+flyoutLinks[i]+"Link validation is Successful");
+					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 			} 
 			
 		} catch (Exception e) {
 			ob.navigate().back();
-			logFailureDetails(test, "Flyouts links not responded", "DRA-Profile flyouts Fail");
+			logFailureDetails(test, "Flyouts links not responded", "Profile flyouts Fail");
 		}
 	}
 	/**

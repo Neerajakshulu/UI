@@ -41,10 +41,28 @@
 	</test>
 
 	<test name="IPA_login">
-		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"></parameter>
-		<parameter name="password" value="Neon@123"></parameter>
+		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com"/>
+		<parameter name="password" value="Neon@123"/>
 		<classes>
 			<class name="ipa.IPA012"></class>
+		</classes>
+	</test>
+	
+	<test name="IPA_Profile_Flyout_links_Validation">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com"/>
+		<parameter name="password" value="Thomson@123"/>
+		<parameter name="proflieFlyoutLinks" value="Privacy|Terms of Use|Help|Feedback"/>
+		<classes>
+			<class name="ipa.IPA5"></class>
+		</classes>
+	</test>
+	
+	<test name="IPA_Profile_Flyout_Info_And_Profile_and_Account_Validation">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="proflieFlyoutLinks" value="Account|Sign out|Privacy|Terms of Use|Help|Feedback"/>
+		<classes>
+			<class name="ipa.IPA6"></class>
 		</classes>
 	</test>
 
