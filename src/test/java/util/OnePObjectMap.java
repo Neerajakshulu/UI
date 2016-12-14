@@ -749,7 +749,7 @@ public enum OnePObjectMap {
 
 	DRA_LOGO_CSS("h3[class$='company-name--dra']"),
 	DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),
-	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"),
+	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
 	DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
 	DRA_LANDINGPAGE_RANK_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
