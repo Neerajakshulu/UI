@@ -66,14 +66,10 @@ public class IPA0055 extends TestBase {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-		
-		
-		 
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
@@ -134,12 +130,10 @@ public class IPA0055 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString()))
 							.sendKeys(LOGIN.getProperty("IPAPWD0055"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-					pf.getBrowserWaitsInstance(ob)
-							.waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
-					test.log(LogStatus.FAIL, "Linking is happened");
+					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()),
+							30);
 
 					pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				
 
 					try {
 						// validating two accounts are linked or not
@@ -150,7 +144,7 @@ public class IPA0055 extends TestBase {
 						// Verifying that Profile name is same as winning
 						// account after merging
 						Assert.assertEquals(winingAccountProfileName, secondAccountProfileName);
-						test.log(LogStatus.PASS, "Automated Merge is happened");
+						test.log(LogStatus.PASS, "Forward Merge is happened");
 
 						if (winingAccountProfileName.contains(secondAccountProfileName)) {
 							test.log(LogStatus.PASS, "Winning account is facebook account");
@@ -161,7 +155,7 @@ public class IPA0055 extends TestBase {
 
 					catch (Throwable t) {
 
-						test.log(LogStatus.FAIL, "Automated Merge is not happened");// extent
+						test.log(LogStatus.FAIL, "Forward Merge is not happened");// extent
 						// reports
 						status = 2;// excel
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
@@ -171,6 +165,8 @@ public class IPA0055 extends TestBase {
 						closeBrowser();
 
 					}
+					BrowserWaits.waitTime(2);
+					closeBrowser();
 
 				} catch (Throwable t) {
 
@@ -181,7 +177,7 @@ public class IPA0055 extends TestBase {
 							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 					ErrorUtil.addVerificationFailure(t);
-					
+
 					closeBrowser();
 				}
 
@@ -196,9 +192,7 @@ public class IPA0055 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_skip_link")));
 
 			}
-			
-			pf.getDraPageInstance(ob).logoutDRA();
-			closeBrowser();
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
@@ -209,6 +203,7 @@ public class IPA0055 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			closeBrowser();
 
 		}
 
