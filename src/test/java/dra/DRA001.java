@@ -150,9 +150,9 @@ public class DRA001 extends TestBase {
 
 			// Verifying DRA marketing copy are displayed.
 			try {
-				boolean find_icon = checkElementIsDisplayed(ob,
+				boolean explore_icon = checkElementIsDisplayed(ob,
 						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_EXPLORE_ICON_CSS.toString()));
-				Assert.assertEquals(find_icon, true);
+				Assert.assertEquals(explore_icon, true);
 				test.log(LogStatus.PASS, "Explore icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {
@@ -162,9 +162,9 @@ public class DRA001 extends TestBase {
 			}
 
 			try {
-				boolean organize_icon = checkElementIsDisplayed(ob,
+				boolean identify_icon = checkElementIsDisplayed(ob,
 						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_IDENTIFY_ICON_CSS.toString()));
-				Assert.assertEquals(organize_icon, true);
+				Assert.assertEquals(identify_icon, true);
 				test.log(LogStatus.PASS, "Identify icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {
@@ -174,9 +174,9 @@ public class DRA001 extends TestBase {
 			}
 
 			try {
-				boolean create_icon = checkElementIsDisplayed(ob,
+				boolean validate_icon = checkElementIsDisplayed(ob,
 						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_VALIDATE_ICON_CSS.toString()));
-				Assert.assertEquals(create_icon, true);
+				Assert.assertEquals(validate_icon, true);
 				test.log(LogStatus.PASS, "Validate icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {
@@ -186,9 +186,9 @@ public class DRA001 extends TestBase {
 			}
 
 			try {
-				boolean connect_icon = checkElementIsDisplayed(ob,
+				boolean rank_icon = checkElementIsDisplayed(ob,
 						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_RANK_ICON_CSS.toString()));
-				Assert.assertEquals(connect_icon, true);
+				Assert.assertEquals(rank_icon, true);
 				test.log(LogStatus.PASS, "Rank icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {

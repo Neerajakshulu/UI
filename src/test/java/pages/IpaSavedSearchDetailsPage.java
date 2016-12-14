@@ -122,10 +122,44 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS
 				.toString()));
 		if (val <= list.size()) {
-		list.get(val).click();
-			
+			list.get(val).click();
 
 		} else
 			throw new Exception("Saved Data  edit button in the title is not selected randomly");
 	}
+
+	public boolean verifySortOptions() throws Exception {
+		String opt1 = "Date saved", opt2 = "Date viewed";
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()),
+				30);
+		String val1 = ob.findElements(By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()))
+				.get(0).getText();
+		String val2 = ob.findElements(By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()))
+				.get(1).getText();
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+		if (val1.equalsIgnoreCase(opt1) && val2.equalsIgnoreCase(opt2))
+			return true;
+		else
+			return false;
+
+	}
+
+	public void selectSortoptions(String optionvalue) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()),
+				30);
+		List<WebElement> li = ob
+				.findElements(By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()));
+		for (WebElement we : li) {
+			if (we.getText().equalsIgnoreCase(optionvalue)) {
+				we.click();
+				return;
+			}
+		}
+		throw new Exception("Sortion option is not found");
+	}
+
 }

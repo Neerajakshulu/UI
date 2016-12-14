@@ -523,7 +523,7 @@ public enum OnePObjectMap {
 	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
 	ENW_DESKTOP_DOWNLOAD_LINK("Download"),
 	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
-	ENWLANDINGPAGE_FIND_ICON_CSS("i[class='fa fa-search login-splash-icon-first']"),
+	ENWLANDINGPAGE_FIND_ICON_CSS("i[class='fa fa-search login-splash-icon']"),
 	ENWLANDINGPAGE_CREATE_ICON_CSS("i[class='fa fa-file-text login-splash-icon']"),
 	ENWLANDINGPAGE_ORGANIZE_ICON_CSS("i[class='fa fa-cloud login-splash-icon']"),
 	ACCOUNT_NOTACTIVATED_MSG_XPATH("//h3[@class='wui-modal__title' and contains(.,'Your account registration')]"),
@@ -749,7 +749,7 @@ public enum OnePObjectMap {
 
 	DRA_LOGO_CSS("h3[class$='company-name--dra']"),
 	DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),
-	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"),
+	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
 	DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
 	DRA_LANDINGPAGE_RANK_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
@@ -905,7 +905,6 @@ public enum OnePObjectMap {
 	DR_SEARCH_CLICK_CSS("button[class='wui-search-bar__search-button']"),
 	DR_SEARCH_RESULT_CSS("p[class='wui-title']"),
 
-
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
@@ -924,16 +923,26 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
+	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
 
-		NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
-	    NEON_IPA_SEARCH_TERMS_REMOVE_CSS("div[ng-click^='vm.removeItem']"),
-	    NEON_IPA_SEARCH_TERMS_CSS("li[class^='search-term__item']"),
-	    NEON_IPA_TECH_SUG_DROPDOWN_CSS("div[class^='typeahead-results']"),
-	    NEON_IPA_TECH_NEW_SEARCH_HEADER_LINK_CSS("span[ng-click='header.newSearch()']"), 
-	    NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_CSS("li input[type='checkbox'][checked='checked']"),
-	    NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS("button[id='split-button'] div[class='caret search-term__caret']"),
-	    NEON_IPA_SEARCH_TERM_SYNMS_LIST_CSS("li[class^='search-term__item'] li input[type='checkbox']"),
-	    NEON_IPA_TECH_SHOW_ALL_LINK_CSS("a[class*='typeahead-results__showall']")
+	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
+	NEON_IPA_SEARCH_TERMS_REMOVE_CSS("div[ng-click^='vm.removeItem']"),
+	NEON_IPA_SEARCH_TERMS_CSS("li[class^='search-term__item']"),
+	NEON_IPA_TECH_SUG_DROPDOWN_CSS("div[class^='typeahead-results']"),
+	NEON_IPA_TECH_NEW_SEARCH_HEADER_LINK_CSS("span[ng-click='header.newSearch()']"),
+	NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_CSS("li input[type='checkbox'][checked='checked']"),
+	NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS("button[id='split-button'] div[class='caret search-term__caret']"),
+	NEON_IPA_SEARCH_TERM_SYNMS_LIST_CSS("li[class^='search-term__item'] li input[type='checkbox']"),
+	NEON_IPA_TECH_SHOW_ALL_LINK_CSS("a[class*='typeahead-results__showall']"),
+	IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS("button[id='sort-sse-items']"),
+	IPA_SAVED_DATA_PAGE_SORT_MENU_CSS("ul[class='dropdown-menu sse-dropdown__menu'] li"),
+	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class='wui-content-title ng-binding']"),
+	NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS("div[class='typeahead-results-list__item']"),
+	NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS("i[class*='fa fa-certificate']"),
+	
+	NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS("a[data-event-category='searchresult-ck-patents']"), 
+	NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS("span[class^='patents-found__value']"),
+
 	;
 
 	private String locator;

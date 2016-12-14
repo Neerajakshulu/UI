@@ -89,28 +89,37 @@ import util.TestUtil;
 				catch(Exception e){
 					test.log(LogStatus.FAIL, "Company type ahead for single character is failing" );
 				}
+				//OPQA-4310
 				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
 				pf.getDashboardPage(ob).SearchTermEnter("company", "nokia");
 				List<String> selectedTerm=pf.getDashboardPage(ob).addCompanyTerms("1");
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
 				
-				//
+				//OPQA-4311
 				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
 				pf.getDashboardPage(ob).SearchTermEnter("company", "nokia");
 				selectedTerm=pf.getDashboardPage(ob).addCompanyTerms("1:2");
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
 				
+				//OPQA-4313
 				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("company", "nokia");
-				selectedTerm=pf.getDashboardPage(ob).addCompanyTerms("1:2&&2");
+				pf.getDashboardPage(ob).SearchTermEnter("company", "network");
+				selectedTerm=pf.getDashboardPage(ob).addCompanyTerms("1&&2:1");
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(selectedTerm.get(1)));
 				
+				//OPQA-4309
 				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
 				pf.getDashboardPage(ob).SearchTermEnter("company", "ariba");
 				selectedTerm=pf.getDashboardPage(ob).addCompanyTerms("1");
 				System.out.println(selectedTerm.contains("ariba"));
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
+				
+				//OPQA-4309
+				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
+				pf.getDashboardPage(ob).SearchTermEnter("company", "nokia");
+				pf.getDashboardPage(ob).validatePatentsCountForCompanyInTypeAhead();
+			
 				
 				
 				closeBrowser();
