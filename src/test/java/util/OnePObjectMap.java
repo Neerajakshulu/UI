@@ -523,7 +523,7 @@ public enum OnePObjectMap {
 	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
 	ENW_DESKTOP_DOWNLOAD_LINK("Download"),
 	MATCHING_STEAM_MODALTITLE_CSS("h3[class='wui-modal__title']"),
-	ENWLANDINGPAGE_FIND_ICON_CSS("i[class='fa fa-search login-splash-icon-first']"),
+	ENWLANDINGPAGE_FIND_ICON_CSS("i[class='fa fa-search login-splash-icon']"),
 	ENWLANDINGPAGE_CREATE_ICON_CSS("i[class='fa fa-file-text login-splash-icon']"),
 	ENWLANDINGPAGE_ORGANIZE_ICON_CSS("i[class='fa fa-cloud login-splash-icon']"),
 	ACCOUNT_NOTACTIVATED_MSG_XPATH("//h3[@class='wui-modal__title' and contains(.,'Your account registration')]"),
