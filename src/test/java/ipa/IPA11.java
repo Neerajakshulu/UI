@@ -2,6 +2,7 @@
 
 	import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -77,8 +78,8 @@ import util.TestUtil;
 						throw new Exception("Login not sucess");				
 				//NEON-487
 				test.log(LogStatus.PASS, "Login successfully");
-				
-			/*	pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
+				//OPQA-4336 , OPQA-4338
+				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
 				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
 				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
 				
@@ -89,30 +90,34 @@ import util.TestUtil;
 				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
 				
 				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)>0);
-				
+				//OPQA-4334 , OPQA-4335
 				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
 				
 				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
 				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
 				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
-				List<String> synms=pf.getDashboardPage(ob).selectSearchTermSynms(searchTerm, 1);
+				List<String> synms=pf.getDashboardPage(ob).selectSearchTermSynms(searchTerm, 0);
 				
 				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)==synms.size());
 				
+				//OPQA-4339
 				pf.getDashboardPage(ob).deselectSearchTermSynms(searchTerm, synms);
 				
 				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)==0);
 				
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();*/
+				//OPQA-4340
+				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
 				
 				String freeformText="gggggggg";
 				pf.getDashboardPage(ob).SearchTermEnter("technology", freeformText);
 				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
 				Assert.assertTrue(pf.getDashboardPage(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
 						
+				//OPQA-4341
 				pf.getDashboardPage(ob).removeSearchTerm(freeformText);
 				Assert.assertTrue(pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));
 				
+				//OPQA-4342
 				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
 				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
 				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);

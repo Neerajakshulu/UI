@@ -4,8 +4,10 @@ import java.util.ArrayList;
 	import java.util.HashSet;
 	import java.util.List;
 	import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-	import org.openqa.selenium.By;
+import org.openqa.selenium.By;
 	import org.openqa.selenium.JavascriptExecutor;
 	import org.openqa.selenium.WebDriver;
 	import org.openqa.selenium.WebElement;
@@ -132,8 +134,8 @@ import java.util.ArrayList;
 	public boolean checkForTextInSearchTermList(String text) throws Exception {
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()), 60);
-		List<WebElement> labelsList = pf.getBrowserActionInstance(ob).getElements(
-				OnePObjectMap.NEON_IPA_SEARCH_TERMS_CSS + " " + OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS);
+		List<WebElement> labelsList = ob.findElements(By.cssSelector(
+				OnePObjectMap.NEON_IPA_SEARCH_TERMS_CSS.toString() + " " + OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()));
 		if (text.contains("("))
 			text = text.substring(0, text.indexOf("(")).trim();
 		System.out.println(text);
@@ -264,6 +266,86 @@ import java.util.ArrayList;
 	public void clickOnShowAllLinkInTypeAhead() throws Exception{
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_TECH_SHOW_ALL_LINK_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_TECH_SHOW_ALL_LINK_CSS);
+	}
+	
+	public int validatePatentsCountForCompanyInTypeAhead() throws Exception {
+		int count=0;
+		boolean found=false;
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS.toString()), 60);
+		
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS);
+		Pattern pattern = Pattern.compile("\\([,\\d]+\\)");
+		Matcher matcher;
+		for(int i=0;i<list.size()-1;i++){
+				
+			matcher = pattern.matcher(list.get(i).getText());
+
+			while (matcher.find()) {
+				found=true;
+				break;			
+			}
+			
+			if(!found)count++;
+		}
+		return count;	
+	}
+	
+	public void clickOnPatentFoundIcon() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS);
+
+	}
+	
+	public List<String> getAllPatentRecords() throws Exception {
+		List<String> recordList = new ArrayList<>();
+		loadAllPatentRecords();
+		List<WebElement> patentList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS);
+
+		for (WebElement we : patentList) {
+
+			recordList.add(we.getText().trim());
+		}
+
+		return recordList;
+	}
+	
+	public void loadAllPatentRecords() throws InterruptedException{
+		scrollAndWait();
+		while(isSpinnerDisplayed()){
+			
+			scrollAndWait();
 		}
 		
+	}
+	
+	private void scrollAndWait() throws InterruptedException{
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0, 250);");
+		Thread.sleep(1000);
+		
+	}
+	
+	private boolean isSpinnerDisplayed() {
+		try {
+			return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS)
+					.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+	public int getPatentCount() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS);
+		String count = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS).getText();
+		count = count.replaceAll(",", "");
+		return Integer.parseInt(count);
+
+	}
 }

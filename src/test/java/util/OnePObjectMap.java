@@ -937,6 +937,11 @@ public enum OnePObjectMap {
 	IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS("button[id='sort-sse-items']"),
 	IPA_SAVED_DATA_PAGE_SORT_MENU_CSS("ul[class='dropdown-menu sse-dropdown__menu'] li"),
 	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class='wui-content-title ng-binding']"),
+	NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS("div[class='typeahead-results-list__item']"),
+	NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS("i[class*='fa fa-certificate']"),
+	
+	NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS("a[data-event-category='searchresult-ck-patents']"), 
+	NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS("span[class^='patents-found__value']"),
 
 	;
 
