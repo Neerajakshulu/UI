@@ -444,7 +444,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
-				pf.getIamPage(ob).sendEamilToTextBox(email);
+				pf.getIamPage(ob).checkPrepopulatedText(email);
 				pf.getIamPage(ob).clickResendEmailButton();
 				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
 			} catch (Throwable t) {

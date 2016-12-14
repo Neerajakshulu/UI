@@ -426,7 +426,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
-				pf.getIamPage(ob).sendEamilToTextBox(email);
+				pf.getIamPage(ob).checkPrepopulatedText(email);
 				pf.getIamPage(ob).clickResendEmailButton();
 				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
 			} catch (Throwable t) {

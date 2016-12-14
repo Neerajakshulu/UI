@@ -162,10 +162,10 @@ public class IAMPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS);
 		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS.toString()));
 		
-		List<WebElement> ListOfElements = element.findElements(By.tagName("p"));
-		String resetPassText = ListOfElements.get(0).getText();
+		List<WebElement> listOfElements = element.findElements(By.tagName("p"));
+		String resetPassText = listOfElements.get(0).getText();
 		logger.info("Title : " + resetPassText);
-		String newPassText = ListOfElements.get(1).getText();
+		String newPassText = listOfElements.get(1).getText();
 		logger.info("wxpireTimeText : " + newPassText);
 //		String resetPassText = element.findElement(By.tagName("h2")).getText();
 //		logger.info("Title : " + resetPassText);
@@ -239,7 +239,7 @@ public class IAMPage extends TestBase {
 		String resentMailText = ListOfElements.get(2).getText();
 		logger.info("ResentMailText : " + resentMailText);
 		String invalidPassPageTitle = "Password reset link has expired";
-		String expireTime = "To protect your security, the link to reset your Project Neon password expired after 24 hours.";
+		String expireTime = "To protect your security, the link to reset your password expired after 24 hours.";
 		String resentText = "To resend the email" + "," + " please enter your email address.";
 		Assert.assertTrue(invalidPassPageTitle.contains(resetPassText));
 		Assert.assertTrue(expireTimeText.contains(expireTime));
