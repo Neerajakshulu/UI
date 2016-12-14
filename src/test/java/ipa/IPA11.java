@@ -79,50 +79,50 @@ import util.TestUtil;
 				//NEON-487
 				test.log(LogStatus.PASS, "Login successfully");
 				//OPQA-4336 , OPQA-4338
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
 				
-				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)>0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)>0);
 				
-				pf.getDashboardPage(ob).exploreSearch();
+				pf.getSearchPageInstance(ob).exploreSearch();
 				
-				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
 				
-				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)>0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)>0);
 				//OPQA-4334 , OPQA-4335
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
-				List<String> synms=pf.getDashboardPage(ob).selectSearchTermSynms(searchTerm, 0);
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
+				List<String> synms=pf.getSearchPageInstance(ob).selectSearchTermSynms(searchTerm, 0);
 				
-				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)==synms.size());
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)==synms.size());
 				
 				//OPQA-4339
-				pf.getDashboardPage(ob).deselectSearchTermSynms(searchTerm, synms);
+				pf.getSearchPageInstance(ob).deselectSearchTermSynms(searchTerm, synms);
 				
-				Assert.assertTrue(pf.getDashboardPage(ob).getselectedSynonymsCount(searchTerm)==0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)==0);
 				
 				//OPQA-4340
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				
 				String freeformText="gggggggg";
-				pf.getDashboardPage(ob).SearchTermEnter("technology", freeformText);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				Assert.assertTrue(pf.getDashboardPage(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", freeformText);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
 						
 				//OPQA-4341
-				pf.getDashboardPage(ob).removeSearchTerm(freeformText);
-				Assert.assertTrue(pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));
+				pf.getSearchPageInstance(ob).removeSearchTerm(freeformText);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
 				
 				//OPQA-4342
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				pf.getDashboardPage(ob).clickOnSearchTermDropDown(searchTerm);
-				pf.getDashboardPage(ob).removeSearchTerm(searchTerm);
-				Assert.assertTrue(pf.getDashboardPage(ob).checkForTextInSearchTermList(searchTerm));
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
+				pf.getSearchPageInstance(ob).removeSearchTerm(searchTerm);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
 				
 				closeBrowser();
 			} catch (Throwable t) {

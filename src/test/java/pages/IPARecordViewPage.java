@@ -15,7 +15,7 @@ public class IPARecordViewPage extends TestBase{
 	
 	public String getTitle() throws Exception{
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS);
-		String title=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS).toString();
+		String title=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS).getText();
 		return title;
 		
 	}

@@ -57,8 +57,8 @@ public class IPA001 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
-		    pf.getDashboardPage(ob).SearchTermEnter(searchtype,searchTerm);
-		     pf.getDashboardPage(ob).exploreSearch();
+		    pf.getSearchPageInstance(ob).SearchTermEnter(searchtype,searchTerm);
+		     pf.getSearchPageInstance(ob).exploreSearch();
 		      waitForAjax(ob);
 		     pf.getIpaPage(ob).clickOnSaveButton();
 		     pf.getIpaPage(ob).SaveDataInfo(dtitle,ddesc);

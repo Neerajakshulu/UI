@@ -835,7 +835,7 @@ public enum OnePObjectMap {
 
 	NEON_IPA_TECH_SUG_TEXT_VAR_CSS("li[index='$index'] >span[ng-bind-html*='suggestion.value']"),
 	NEON_IPA_TECH_SUG_HITS_VAR_CSS("li[index='$index'] >span[ng-if='suggestion.count']"),
-	NEON_IPA_TECH_SUG_ADD_VAR_CSS("li[index='$index'] >button"),
+	NEON_IPA_TECH_SUG_ADD_VAR_CSS("li[index='$index'] button"),
 
 	NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS("span[class*='patents-found__value']"),
 	NEON_IPA_DASH_TAB_SEL_CSS("li[class*='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),

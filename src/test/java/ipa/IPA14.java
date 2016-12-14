@@ -1,9 +1,10 @@
 	package ipa;
 
-import java.io.PrintWriter;
+	import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -22,7 +23,7 @@ import util.TestUtil;
 	 * @author UC202376
 	 *
 	 */
-	public class IPA12 extends TestBase {
+	public class IPA14 extends TestBase {
 
 		static int count = -1;	
 
@@ -67,6 +68,7 @@ import util.TestUtil;
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 			try {
+				String searchTerm = "Laser";
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
@@ -74,53 +76,25 @@ import util.TestUtil;
 				ob.navigate().to(host+CONFIG.getProperty("appendIPAAppUrl"));
 				if(!pf.getLoginTRInstance(ob).loginToIPA("kavya.revanna@thomsonreuters.com", "Neon@123"))
 						throw new Exception("Login not sucess");				
-				//NEON-484
+				//NEON-317
 				test.log(LogStatus.PASS, "Login successfully");
 				
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				pf.getSearchPageInstance(ob).clickOnShowAllLinkInTypeAhead();
-				//validate show all page
-				//OPQA-4305
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				try{
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
+				pf.getSearchPageInstance(ob).exploreSearch();
+				pf.getDashboardPage(ob).clickOnPatentFoundIcon();
+				String title=pf.getDashboardPage(ob).clickOnNthPatentRecords(1);
+				Assert.assertEquals(title, pf.getIpaRecordViewPage(ob).getTitle());
 				
-					pf.getSearchPageInstance(ob).SearchTermEnter("company", "n");
-				}
-				catch(Exception e){
-					test.log(LogStatus.FAIL, "Company type ahead for single character is failing" );
-				}
-				//OPQA-4310
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				List<String> selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
-				//OPQA-4311
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1:2");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
-				//OPQA-4313
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "network");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1&&2:1");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(1)));
-				
-				//OPQA-4309
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "ariba");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1");
-				System.out.println(selectedTerm.contains("ariba"));
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
-				//OPQA-4309
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				pf.getSearchPageInstance(ob).validatePatentsCountForCompanyInTypeAhead();
-			
-				
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
+				List<String> companyList=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(companyList.get(0)));
+				pf.getSearchPageInstance(ob).exploreSearch();
+				pf.getDashboardPage(ob).clickOnPatentFoundIcon();
+				title=pf.getDashboardPage(ob).clickOnNthPatentRecords(1);
+				Assert.assertEquals(title, pf.getIpaRecordViewPage(ob).getTitle());
 				
 				closeBrowser();
 			} catch (Throwable t) {

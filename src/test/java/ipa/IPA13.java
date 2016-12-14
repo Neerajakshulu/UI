@@ -83,14 +83,14 @@ import util.TestUtil;
 
 				/*OPQA-4295:Verify that Show All link in type-ahead will show full list of dictionary terms
 				When type some text in search textbox and press Show All link*/
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).clickOnShowAllLinkInTypeAhead();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).clickOnShowAllLinkInTypeAhead();
 				
 				/*OPQA-4302:Verify that User is taken to intermittent page with a message stating no results
 				when search returns 0 results from main landing page*/
 				
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("technology", "jkhsdfkss");
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "jkhsdfkss");
 				Assert.assertTrue(pf.getDashboardPage(ob).getPatentCount()==0);
 				
 				/*OPQA-4293:Verify that terms can be added to clipboard from type-ahead
@@ -98,24 +98,24 @@ import util.TestUtil;
 				/* OPQA-4300:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When Some terms are added to clipboard and term is removed from search text box. Enter key is pressed in search text box*/
 											
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				Assert.assertTrue(pf.getDashboardPage(ob).checkForTextInSearchTermList(searchTerm));
-				pf.getDashboardPage(ob).removeSearchTerm(searchTerm);
-				pf.getDashboardPage(ob).exploreSearch();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
+				pf.getSearchPageInstance(ob).removeSearchTerm(searchTerm);
+				pf.getSearchPageInstance(ob).exploreSearch();
 				
 				/* OPQA-4301:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When no terms are added to clipboard and type some text in search text box press Enter key*/
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).exploreSearch();
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).exploreSearch();
 				
 				/*OPQA-4299:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When Some terms are added to clipboard and Enter key is pressed in search text box*/
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("technology", searchTerm);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				pf.getDashboardPage(ob).exploreSearch();
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				pf.getSearchPageInstance(ob).exploreSearch();
 				
 				/*OPQA-4295 :Verify that User is taken to intermittent page with a message stating no results
 				when search returns 0 results from dashboard*/

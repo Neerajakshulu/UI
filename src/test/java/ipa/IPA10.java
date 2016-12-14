@@ -78,19 +78,19 @@ import util.TestUtil;
 						throw new Exception("Login not sucess");				
 				//NEON-485
 				test.log(LogStatus.PASS, "Login successfully");
-				pf.getDashboardPage(ob).SearchTermEnter("technology", freeformText);
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", freeformText);
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
 				
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("technology", "Laser");
-				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(1);
-				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList("Laser"));
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "Laser");
+				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(1);
+				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList("Laser"));
 				
 				//NEON-492
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("technology", "Laser");
-				pf.getDashboardPage(ob).exploreSearch();
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "Laser");
+				pf.getSearchPageInstance(ob).exploreSearch();
 				
 				//-------------------------------------------------------------
 				
@@ -99,10 +99,10 @@ import util.TestUtil;
 				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));*/
 				
 				//NEON-575
-				pf.getDashboardPage(ob).clickOnNewSearchLinkInHeader();
-				pf.getDashboardPage(ob).SearchTermEnter("company", "Nokia");
-				List<String> list=pf.getDashboardPage(ob).addCompanyTerms("1:1");
-				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(list.get(0)));
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
+				List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("1:1");
+				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0)));
 				
 				closeBrowser();
 			} catch (Throwable t) {
