@@ -904,7 +904,8 @@ public enum OnePObjectMap {
 	IPA_SAVE_BUTTON_IN_SAVED_DATA_TILE_CSS("button[class='wui-mini-btn wui-mini-btn--primary']"),
 	DR_SEARCH_CLICK_CSS("button[class='wui-search-bar__search-button']"),
 	DR_SEARCH_RESULT_CSS("p[class='wui-title']"),
-
+	DRA_ACCOUNT_CROSS_CSS("i[class='fa fa-close']"),
+	
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),

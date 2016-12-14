@@ -62,12 +62,11 @@ public class DRA0015 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRASteamuser14"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUSER0015"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
@@ -80,24 +79,22 @@ public class DRA0015 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 
-			String accountType = "Neon";
-
 			ob.navigate().to(host);
 			try {
 
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser14"),
-						LOGIN.getProperty("DRAfbpw14"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUSER0015"),
+						LOGIN.getProperty("DRAUSERPWD15"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
-				String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-				test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
+				String FirstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+				test.log(LogStatus.INFO, "Social account profile name: " + FirstAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
 				BrowserWaits.waitTime(2);
-				accountType = "Facebook";
+				String accountType = "Facebook";
 
 				validateAccounts(1, accountType);
 				int watchlistCount = 1;
@@ -110,40 +107,44 @@ public class DRA0015 extends TestBase {
 					test.log(LogStatus.PASS, "Social account is made Neon Active");
 
 				} catch (Throwable t) {
-					test.log(LogStatus.FAIL, "Unable to create 10 watchlists");// extent
+					test.log(LogStatus.FAIL, "Unable to create  watchlist");// extent
 					ErrorUtil.addVerificationFailure(t);
 
 				}
 				pf.getLoginTRInstance(ob).logOutApp();
 				BrowserWaits.waitTime(5);
-				ob.navigate().to(host);
+
 				// Trying to Link the accounts
 				try {
 
 					ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser14"),
-							LOGIN.getProperty("DRAsteampw14"));
-					pf.getDraPageInstance(ob).clickLoginDRA();
+					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0015"),
+							LOGIN.getProperty("DRAUSERPWD15"));
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
+					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
+					ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString()))
+							.sendKeys(LOGIN.getProperty("DRAUSERPWD15"));
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-					test.log(LogStatus.FAIL, "Linking is happened");
 
-					pf.getHFPageInstance(ob).clickOnAccountLink();
-					accountType = "Neon";
+					pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 
 					try {
 						// validating two accounts are linked or not
 						validateLinkedAccounts(2, accountType);
-						String winingAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
+						BrowserWaits.waitTime(2);
+						String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 						test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
 						// Verifying that Profile name is same as winning
 						// account after merging
-						Assert.assertEquals(winingAccountProfileName, secondAccountProfileName);
-						test.log(LogStatus.PASS, "Automated Merge is happened");
+						Assert.assertEquals(winingAccountProfileName, FirstAccountProfileName);
+						test.log(LogStatus.PASS, "Forward Merge is happened");
 
-						if (winingAccountProfileName.contains(secondAccountProfileName)) {
+						if (winingAccountProfileName.contains(FirstAccountProfileName)) {
 							test.log(LogStatus.PASS, "Winning account is facebook account");
 						} else
 							throw new Exception("Winning account is cannot be determined");
@@ -152,7 +153,7 @@ public class DRA0015 extends TestBase {
 
 					catch (Throwable t) {
 
-						test.log(LogStatus.FAIL, "Automated Merge is not happened");// extent
+						test.log(LogStatus.FAIL, "Forward Merge is not happened");// extent
 						// reports
 						status = 2;// excel
 						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
@@ -161,6 +162,8 @@ public class DRA0015 extends TestBase {
 						ErrorUtil.addVerificationFailure(t);
 
 					}
+					BrowserWaits.waitTime(2);
+					closeBrowser();
 
 				} catch (Throwable t) {
 
@@ -207,7 +210,7 @@ public class DRA0015 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername11")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
@@ -223,17 +226,17 @@ public class DRA0015 extends TestBase {
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
-			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("sru_fbusername11")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam11")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRAUSER0015")));
+			Assert.assertTrue(
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
-					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
+					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
-					"Linked accounts are not available in accounts page : Facebook and " + linkName + " accounts");
+					"Linked accounts are not available in accounts page : Neon and " + linkName + " accounts");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
