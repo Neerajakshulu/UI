@@ -943,6 +943,11 @@ public enum OnePObjectMap {
 	
 	NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS("a[data-event-category='searchresult-ck-patents']"), 
 	NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS("span[class^='patents-found__value']"),
+	IPA_RECORD_VIE_PAGE_PATENTS_INFO_CSS("div [class='ipa-patent--list-items'] li"),
+    IPA_RECORD_VIEW_PAGE_PANTENTS_RHS_TILE_CSS("h6[class='ipa-patent--legal-status']"),
+    IPA_RECORD_VIEW_PAGE_PATENT_PDF_LINK_CSS("div[class='ipa-patent--legalinfo'] a[target='_blank']"),
+    IPA_RECORD_VIE_PAGE_VALIDATE_TEXT_INFO_CSS("div [class='ipa-patent--description'] strong"),
+    IPA_RECORD_VIEW_MORE_LINK("more..."),
 
 	;
 
