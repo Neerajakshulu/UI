@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -23,6 +24,7 @@ import util.OnePObjectMap;
 public class ENW010 extends TestBase {
 
 	static int status = 1;
+	String header_Expected = "Thomson Reuters";
 
 	// Following is the list of status:
 	// 1--->PASS
@@ -48,7 +50,7 @@ public class ENW010 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 
@@ -58,24 +60,24 @@ public class ENW010 extends TestBase {
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			String actual_result = "";
-			
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"), LOGIN.getProperty("NONMARKETUSERPASSWORD"));
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Downloads","Options");
-			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			
+
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"),
+					LOGIN.getProperty("NONMARKETUSERPASSWORD"));
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+			ValidateAlternativeHeadr();
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+
 			actual_result = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_NAME_XPATH.toString())).getText();
-			//need to move to object map
-			String profileLink=ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
-			logger.info("is profile image linked -->"+profileLink);
-			WebElement ImageFile=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IMAGE_USER_XPATH);
+			// need to move to object map
+			String profileLink = ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
+			logger.info("is profile image linked -->" + profileLink);
+			WebElement ImageFile = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IMAGE_USER_XPATH);
 			Boolean ImagePresent = (Boolean) ((JavascriptExecutor) ob).executeScript(
 					"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
 					ImageFile);
-			
 			try {
-
 				Assert.assertTrue(ImagePresent);
-				if(!(StringUtils.isNotEmpty(actual_result) && profileLink.equalsIgnoreCase("inactiveLink"))) {
+				if (!(StringUtils.isNotEmpty(actual_result) && profileLink.equalsIgnoreCase("inactiveLink"))) {
 					throw new Exception("Profile Title and Image and flyout is Hyper linked");
 				}
 
@@ -87,10 +89,10 @@ public class ENW010 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "mage is not present and User is hyperlinked")));// screenshot
 			}
-			
+
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			StringWriter errors = new StringWriter();
@@ -101,6 +103,29 @@ public class ENW010 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
+	}
+
+	private void ValidateAlternativeHeadr() throws Exception {
+		BrowserWaits.waitTime(4);
+		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
+		logger.info("Header Text displayed as:" + actual_result);
+		String profileLink = ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
+		logger.info("is profile image linked -->" + profileLink);
+
+		logger.info("Actual result displayed as :" + actual_result
+				+ " text without the hot link and not allow user to Navigate to Neon");
+		try {
+			Assert.assertEquals(header_Expected, actual_result);
+			Assert.assertEquals(profileLink, "inactiveLink");
+			test.log(LogStatus.PASS, " Header Logo text is displayed properly for Non-Market users");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, " Header Logo text is not displayed properly for Non-Market users");// extent
+			ErrorUtil.addVerificationFailure(t);// testng reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+		}
+
 	}
 
 	@AfterTest

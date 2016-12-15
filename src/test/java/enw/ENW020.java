@@ -23,18 +23,20 @@ import util.OnePObjectMap;
 public class ENW020 extends TestBase {
 
 	static int status = 1;
-	String url="https://dev-stable.1p.thomsonreuters.com/#/profile/"; 
+	String url = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
+
 	@Test
 	public void testcaseENW020() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		
+
 		if (!master_condition) {
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
@@ -54,7 +56,7 @@ public class ENW020 extends TestBase {
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			BrowserWaits.waitTime(6);
 			if (ob.getCurrentUrl().contains(url)) {
-				System.out.println("URL:"+ob.getCurrentUrl());				
+				System.out.println("URL:" + ob.getCurrentUrl());
 				if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
 					test.log(LogStatus.FAIL, "Expected page is Not displayed ");
 					Assert.assertEquals(true, false);
@@ -81,20 +83,22 @@ public class ENW020 extends TestBase {
 	}
 
 	private void NavigateToENW() {
-		//jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.WOS_HOMEPAGE_ENDNOTE_LINK.toString())));
+		// jsClick(ob,
+		// ob.findElement(By.xpath(OnePObjectMap.WOS_HOMEPAGE_ENDNOTE_LINK.toString())));
 		waitForElementTobeVisible(ob, By.cssSelector("a[id='HS_EndNoteLink_signedin']"), 180);
 		jsClick(ob, ob.findElement(By.cssSelector("a[id='HS_EndNoteLink_signedin']")));
 		try {
-		EndNoteSeesion(ob);
-		BrowserWaits.waitTime(8);
-		if(ob.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).size()>0){
-			ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-		}
+			EndNoteSeesion(ob);
+			BrowserWaits.waitTime(8);
+			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	private void EndNoteSeesion(WebDriver ob) {
 		String newWindow = switchToNewWindow(ob);
 		System.out.println("Before Success1");
