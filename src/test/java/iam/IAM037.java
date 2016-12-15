@@ -162,7 +162,7 @@ public class IAM037 extends TestBase {
 			}
 			BrowserWaits.waitTime(5);
 			logout();
-			BrowserWaits.waitTime(4);
+			/*BrowserWaits.waitTime(4);
 			ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
@@ -247,7 +247,7 @@ public class IAM037 extends TestBase {
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 
 			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);*/
 			ob.close();
 
 		} catch (Throwable t) {
