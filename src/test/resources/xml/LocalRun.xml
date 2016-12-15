@@ -67,12 +67,6 @@
 		</classes>
 	</test>
 
-	<test name="ENW009">
-		<classes>
-			<class name="enw.ENW009"></class>
-		</classes>
-	</test>
-
 	<test name="ENW010">
 		<classes>
 			<class name="enw.ENW010"></class>
