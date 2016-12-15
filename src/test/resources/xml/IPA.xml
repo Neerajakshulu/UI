@@ -124,58 +124,49 @@
 		</classes>
 	</test>
 	<test name="IPA03">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA03"></class>
 		</classes>
 	</test>
 	<test name="IPA04">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA04"></class>
 		</classes>
-		</test>
-		<test name="IPA05">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+	</test>
+	<test name="IPA05">
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA05"></class>
 		</classes>
 	</test>
 	<test name="IPA06">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA06"></class>
 		</classes>
 	</test>
 	<test name="IPA07">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA07"></class>
 		</classes>
-			</test>
-			<test name="IPA08">
-	<parameter name="username" value="kiran.rn@thomsonreuters.com" />
+	</test>
+	<test name="IPA08">
+		<parameter name="username" value="kiran.rn@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
 		<classes>
 			<class name="ipa.IPA08"></class>
 		</classes>
 	</test>
-	<test name="save-company-search">
-		<classes>
-			<class name="ipa.IPA111"></class>
-		</classes>
-	</test>
-	<test name="IPA112">
-		<classes>
-			<class name="ipa.IPA112"></class>
-		</classes>
-	</test>
-	
+
+
 	<test name="IPA113">
 		<classes>
 			<class name="ipa.IPA113"></class>
@@ -192,33 +183,33 @@
 		</classes>
 	</test>
 	<test name="IPA10">
-        <classes>
-            <class name="ipa.IPA10"></class>
-        </classes>
-    </test>
-    
-    <test name="IPA11">
-        <classes>
-            <class name="ipa.IPA11"></class>
-        </classes>
-    </test>
-    
-    <test name="IPA12">
-        <classes>
-            <class name="ipa.IPA12"></class>
-        </classes>
-    </test>
-    
-    <test name="IPA13">
-        <classes>
-            <class name="ipa.IPA13"></class>
-        </classes>
-    </test>
-    
-    <test name="IPA14">
-        <classes>
-            <class name="ipa.IPA14"></class>
-        </classes>
-    </test>
+		<classes>
+			<class name="ipa.IPA10"></class>
+		</classes>
+	</test>
+
+	<test name="IPA11">
+		<classes>
+			<class name="ipa.IPA11"></class>
+		</classes>
+	</test>
+
+	<test name="IPA12">
+		<classes>
+			<class name="ipa.IPA12"></class>
+		</classes>
+	</test>
+
+	<test name="IPA13">
+		<classes>
+			<class name="ipa.IPA13"></class>
+		</classes>
+	</test>
+
+	<test name="IPA14">
+		<classes>
+			<class name="ipa.IPA14"></class>
+		</classes>
+	</test>
 </suite>
 	
