@@ -47,9 +47,6 @@ public class IPA112 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			// String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
-			// String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" +
-			// RandomStringUtils.randomAlphanumeric(100);
 			String newtitle = this.getClass().getSimpleName() + "_Updated_Save_Title" + "_" + getCurrentTimeStamp();
 			openBrowser();
 			maximizeWindow();
@@ -58,10 +55,10 @@ public class IPA112 extends TestBase {
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			test.log(LogStatus.PASS, "navigated to saved data page");
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			Random rand = new Random();
 			int value = rand.nextInt(5);
-			pf.getIpaSavedSearchpage(ob).randomUpdate(value);
+			//pf.getIpaSavedSearchpage(ob).updateTitle(value);
 			pf.getIpaPage(ob).enterSavedatatitle(newtitle);
 			BrowserWaits.waitTime(4);
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
@@ -70,10 +67,10 @@ public class IPA112 extends TestBase {
 			closeBrowser();
 
 		} catch (Exception e) {
-			logFailureDetails(test, "User is not able tpo login", "Screenshot for login");
+			logFailureDetails(test, "User is not able to update title", "Screenshot for login");
 			closeBrowser();
 		}
-
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

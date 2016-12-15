@@ -42,7 +42,7 @@ public class IPARecordViewPage extends TestBase {
 			String str = eleSPan.get(0).getText();
 			String str1 = eleSPan.get(1).getText();
 			if (str.contains(elname[i]) && !str1.equals("null")) {
-				test.log(LogStatus.PASS, "Additional info field" + str + "is dispalying in record view page");
+				test.log(LogStatus.PASS, "Additional info field like " + str + " is dispalying in record view page");
 				i = i + 1;
 			} else
 				i = i + 1;

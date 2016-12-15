@@ -72,7 +72,7 @@ public class IPA113 extends TestBase {
 			logFailureDetails(test, "User is not able tpo login", "Screenshot for login");
 			closeBrowser();
 		}
-
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest

@@ -1,9 +1,8 @@
 package ipa;
 
-import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,7 +14,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IPA111 extends TestBase {
+public class IPA115 extends TestBase {
 
 	static int status = 1;
 
@@ -33,7 +32,7 @@ public class IPA111 extends TestBase {
 	}
 
 	@Test
-	public void saveCompanySearchData() throws Exception {
+	public void validateTitleInfo() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -49,41 +48,36 @@ public class IPA111 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
+
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(170);
-			String searchtype = "company";
-			String searchTerm = "nokia";
+			String newtitle = this.getClass().getSimpleName() + "_Updated_Save_Title" + "_"
+					+ RandomStringUtils.randomAlphanumeric(60) + "-" + getCurrentTimeStamp();
+			String searchtype = "technology";
+			String searchTerm = "android";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
 			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
-			List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
-			pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0));
-			test.log(LogStatus.PASS, "Search term is matching");
 			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
 			pf.getIpaPage(ob).clickOnSaveButton();
-			pf.getIpaPage(ob).SaveDataInfo(dtitle, ddesc);
-			test.log(LogStatus.PASS, "Title and desc has been entered to save data");
+			pf.getIpaPage(ob).enterSavedatatitle(dtitle);
+			test.log(LogStatus.PASS, "Title  has been entered for save data");
 			pf.getIpaPage(ob).clickOnSaveData();
-			test.log(LogStatus.PASS, "Searched data has been saved");
+			test.log(LogStatus.PASS, "Searched data has been saved with title and without Descripton");
+			pf.getIpaSavedSearchpage(ob).updateTitle(dtitle);
+			pf.getIpaPage(ob).SaveDataInfo(newtitle,ddesc);
+			BrowserWaits.waitTime(4);
+			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
+			test.log(LogStatus.PASS, "Title is updated with new title and desc");
 			BrowserWaits.waitTime(3);
-			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
-			test.log(LogStatus.PASS, "navigated to saved data page");
-			Assert.assertTrue(pf.getIpaSavedSearchpage(ob).validateSavedDataInfo(dtitle, searchtype));
-			test.log(LogStatus.PASS, "Save data tile search type and title are Matching");
-
-			pf.getIpaSavedSearchpage(ob).clickOnTitle(dtitle);
-			test.log(LogStatus.PASS, "Explored the saved search");
-		    waitForAjax(ob);
-			pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0));
-			test.log(LogStatus.PASS, "Search term is matching after exploring saved search");
 			closeBrowser();
 
 		} catch (Exception e) {
-			logFailureDetails(test, "User is not able to perform saved search", "Screenshot for login");
+			logFailureDetails(test, "User is not able to update title", "Screenshot for login");
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");

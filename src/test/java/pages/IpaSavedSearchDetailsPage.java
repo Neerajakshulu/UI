@@ -116,16 +116,23 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		throw new Exception("Cancel button is not displayed in Saved tile page");
 	}
 
-	public void randomUpdate(int val) throws Exception {
+	public void updateTitle(String val) throws Exception {
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS.toString()), 30);
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS.toString()), 30);
-		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS
-				.toString()));
-		if (val <= list.size()) {
-			list.get(val).click();
 
-		} else
-			throw new Exception("Saved Data  edit button in the title is not selected randomly");
+		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS
+				.toString()));
+		for (WebElement we : list) {
+			if (we.getText().equalsIgnoreCase(val)) {
+				we.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS.toString()))
+						.click();
+			}
+
+			else
+				throw new Exception("Saved Data  edit button in the title is not able to select");
+		}
 	}
 
 	public boolean verifySortOptions() throws Exception {

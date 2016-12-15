@@ -60,7 +60,7 @@ public class IPA114 extends TestBase {
 			String title1 = pf.getIpaRecordViewPage(ob).clickOnPatentTitle(value);
 			String ptitle = pf.getIpaRecordViewPage(ob).getTitle();
 			if (title1.equalsIgnoreCase(ptitle))
-				test.log(LogStatus.PASS, "Patent in dashboard page and title in record view page are matching");
+				test.log(LogStatus.PASS, "Patent title in dashboard page and title in record view page are matching");
 			pf.getIpaRecordViewPage(ob).validateAdditionalInfoTile(test);
 			/*
 			 * Assert.assertTrue(pf.getIpaRecordViewPage(ob).checkInfo());
@@ -74,6 +74,7 @@ public class IPA114 extends TestBase {
 			logFailureDetails(test, "Fields are not matching in record view page", "Screenshot for login");
 			closeBrowser();
 		}
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
 	}
 
