@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.TestUtil;
@@ -85,38 +86,68 @@ import util.TestUtil;
 				When type some text in search textbox and press Show All link*/
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
 				pf.getSearchPageInstance(ob).clickOnShowAllLinkInTypeAhead();
-				
+				waitForAjax(ob);
 				/*OPQA-4302:Verify that User is taken to intermittent page with a message stating no results
 				when search returns 0 results from main landing page*/
 				
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "jkhsdfkss");
+				pf.getSearchPageInstance(ob).exploreSearch();
+				try{
 				Assert.assertTrue(pf.getDashboardPage(ob).getPatentCount()==0);
-				
+				test.log(LogStatus.PASS,
+						"User is taken to intermittent page with a message stating no results when search returns 0 results from main landing page");
+				} catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not taken to intermittent page with a message stating no results when search returns 0 results from main landing page",
+							"Failed_Screenshot2");
+				}
+				BrowserWaits.waitTime(4);
 				/*OPQA-4293:Verify that terms can be added to clipboard from type-ahead
 				When some text is entered in search textbox and add button is pressed*/
 				/* OPQA-4300:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When Some terms are added to clipboard and term is removed from search text box. Enter key is pressed in search text box*/
-											
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();				
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
+				test.log(LogStatus.PASS, "Search terms are added to the clipboard");
 				pf.getSearchPageInstance(ob).removeSearchTerm(searchTerm);
 				pf.getSearchPageInstance(ob).exploreSearch();
+				test.log(LogStatus.PASS, "User is able to explore search after terms are removed from clipboard");
+			} catch (Throwable e) {
+				logFailureDetails(test,
+						"Adding serach terms and removing them and performing search failed",
+						"Failed_Screenshot3");
+			}		
 				
 				/* OPQA-4301:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When no terms are added to clipboard and type some text in search text box press Enter key*/
+				try{
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
 				pf.getSearchPageInstance(ob).exploreSearch();
-				
+				test.log(LogStatus.PASS, "User is able to explore search without adding any terms to clipboard");
+				} catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not able to explore search without adding any terms to clipboard",
+							"Failed_Screenshot4");
+				}		
 				/*OPQA-4299:Verify that Pressing Enter key on the search text box will navigate to dashboard
 				When Some terms are added to clipboard and Enter key is pressed in search text box*/
-				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
+				
+				try{
+					pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
 				pf.getSearchPageInstance(ob).exploreSearch();
-				
+				test.log(LogStatus.PASS, "User is able to explore search by adding any terms to clipboard");
+				} catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not able to explore search by adding any terms to clipboard",
+							"Failed_Screenshot4");
+				}	
 				/*OPQA-4295 :Verify that User is taken to intermittent page with a message stating no results
 				when search returns 0 results from dashboard*/
 				

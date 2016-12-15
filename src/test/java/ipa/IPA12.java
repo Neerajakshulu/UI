@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -77,49 +78,89 @@ import util.TestUtil;
 				//NEON-484
 				test.log(LogStatus.PASS, "Login successfully");
 				
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				pf.getSearchPageInstance(ob).clickOnShowAllLinkInTypeAhead();
+				/*pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
+				pf.getSearchPageInstance(ob).clickOnShowAllLinkInTypeAhead();*/
 				//validate show all page
 				//OPQA-4305
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				try{
 				
 					pf.getSearchPageInstance(ob).SearchTermEnter("company", "n");
+					test.log(LogStatus.PASS,
+							"type-ahead suggestions is displayed after typing a minimum of 1 character");
 				}
-				catch(Exception e){
-					test.log(LogStatus.FAIL, "Company type ahead for single character is failing" );
+				catch(Throwable e){
+					logFailureDetails(test,
+							"type-ahead suggestions is not displayed after typing a minimum of 1 character",
+							"Failed_Screenshot1");
 				}
 				//OPQA-4310
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				List<String> selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
+				List<String> selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("2");
+				try{
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
+				test.log(LogStatus.PASS,
+						"user is able to add company type-ahead suggestions to the searched query at parent level ");
+				}catch(Throwable e){
+					logFailureDetails(test,
+							"user is able to add company type-ahead suggestions to the searched query at parent level ",
+							"Failed_Screenshot2");
+				}
 				//OPQA-4311
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1:2");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "network");
+				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("3:1");
+				try{
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
+				test.log(LogStatus.PASS,
+						"user is able to add company type-ahead suggestions to the searched query at child level ");
+				}catch(Throwable e){
+					logFailureDetails(test,
+							"user is able to add company type-ahead suggestions to the searched query at child level ",
+							"Failed_Screenshot3");
+				}
 				//OPQA-4313
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "network");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1&&2:1");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(1)));
-				
+				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("2&&3:1");
+				try{
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(1)));
+				test.log(LogStatus.PASS,
+						"user is able to select multiple company  type-ahead suggestions");
+				}catch(Throwable e){
+					logFailureDetails(test,
+							"user is not able to select multiple company  type-ahead suggestions",
+							"Failed_Screenshot4");
+				}
 				//OPQA-4309
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "ariba");
-				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("1");
-				System.out.println(selectedTerm.contains("ariba"));
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
-				
+				selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("2");
+				try{
+				Assert.assertFalse(selectedTerm.contains("ariba"));
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
+				test.log(LogStatus.PASS,
+						"company type ahead suggestions  hierarchy displayed parents for children that match even if the parents does not match");
+				}catch(Throwable e){
+					logFailureDetails(test,
+							"company type ahead suggestions  hierarchy not displayed parents for children that match even if the parents does not match",
+							"Failed_Screenshot5");
+				}
 				//OPQA-4309
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "network");
+				try{
 				pf.getSearchPageInstance(ob).validatePatentsCountForCompanyInTypeAhead();
-			
+				test.log(LogStatus.PASS,
+						"company type-ahead suggestions are displayed with the matching term and number of associated patents");
+				
+				}catch(Throwable e){
+					logFailureDetails(test,
+							"company type-ahead suggestions are not displayed with the matching term and number of associated patents",
+							"Failed_Screenshot5");
+				}
 				
 				
 				closeBrowser();

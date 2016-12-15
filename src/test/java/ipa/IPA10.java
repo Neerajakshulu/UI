@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -68,7 +69,7 @@ import util.TestUtil;
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 			try {
-				String freeformText=RandomStringUtils.randomAlphabetic(5);
+				String freeformText=RandomStringUtils.randomAlphabetic(5).toLowerCase();
 				openBrowser();
 				clearCookies();
 				maximizeWindow();
@@ -77,32 +78,76 @@ import util.TestUtil;
 				if(!pf.getLoginTRInstance(ob).loginToIPA("kavya.revanna@thomsonreuters.com", "Neon@123"))
 						throw new Exception("Login not sucess");				
 				//NEON-485
+				//OPQA-4315
 				test.log(LogStatus.PASS, "Login successfully");
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", freeformText);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
+			try {
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
+				test.log(LogStatus.PASS,
+						"User is able to add search term which is not available in the type ahead suggestion");
+			} catch (Exception e) {
+				logFailureDetails(test,
+						"User is not able to add search term which is not available in the type ahead suggestion",
+						"_FreeFormText_validation_Failed");
+			}
 				
+				
+				//OPQA-4316
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "Laser");
-				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(1);
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList("Laser"));
+				String selectedTerm=pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(1);
+				try{
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm));
+				test.log(LogStatus.PASS,
+						"User is able to add search term which is available in the type ahead suggestion");
+				} catch (Exception e) {
+						logFailureDetails(test,
+								"User is not able to add search term which is available in the type ahead suggestion",
+								"_SerachTerm_validation_Failed");
+					}
 				
 				//NEON-492
+				//OPQA-4329
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", "Laser");
+				try{
 				pf.getSearchPageInstance(ob).exploreSearch();
+				test.log(LogStatus.PASS,
+						"User is able not to submit search from the search box when user enters terms from Technology search box");
+				}catch (Exception e) {
+					logFailureDetails(test,
+							"User is able to submit search from the search box when user enters terms from Technology search box",
+							"_SerachTerm_validation_Failed");
+				}
 				
 				//-------------------------------------------------------------
-				
+				//NEON-485
 				/*pf.getDashboardPage(ob).SearchTermEnter("company", freeformText);
 				pf.getDashboardPage(ob).selectSearchTermFromSuggestion(0);
-				System.out.println(pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));*/
 				
+				try{
+				pf.getDashboardPage(ob).checkForTextInSearchTermList(freeformText));
+				test.log(LogStatus.PASS,
+						"User is able to add search term which is not available in company type ahead suggestion");
+				}catch (Exception e) {
+				logFailureDetails(test,
+						"User is not able to add search term which is not available in company type ahead suggestion",
+						"_FreeFormText_validation_Failed");
+			}*/
 				//NEON-575
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
-				List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("1:1");
-				System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0)));
+				List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
+				try{
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0)));
+				test.log(LogStatus.PASS,
+						"User is able to submit search from the search box when user enters terms from Company search box");
+				}catch (Exception e) {
+					logFailureDetails(test,
+							"User is able to submit search from the search box when user enters terms from Company search box",
+							"_SerachTerm_validation_Failed");
+				}
 				
 				closeBrowser();
 			} catch (Throwable t) {

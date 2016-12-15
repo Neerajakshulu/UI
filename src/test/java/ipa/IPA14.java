@@ -85,8 +85,15 @@ import util.TestUtil;
 				pf.getSearchPageInstance(ob).exploreSearch();
 				pf.getDashboardPage(ob).clickOnPatentFoundIcon();
 				String title=pf.getDashboardPage(ob).clickOnNthPatentRecords(1);
+				try{
 				Assert.assertEquals(title, pf.getIpaRecordViewPage(ob).getTitle());
-				
+				test.log(LogStatus.PASS,
+						"full content of record is displayed in same window  when user selects a record from ResultList from Technology");
+				} catch (Exception e) {
+					logFailureDetails(test,
+							"full content of record is not displayed in same window  when user selects a record from ResultList from Technology",
+							"Failed_Screenshot1");
+				}
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
 				List<String> companyList=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
@@ -94,8 +101,15 @@ import util.TestUtil;
 				pf.getSearchPageInstance(ob).exploreSearch();
 				pf.getDashboardPage(ob).clickOnPatentFoundIcon();
 				title=pf.getDashboardPage(ob).clickOnNthPatentRecords(1);
+				try{
 				Assert.assertEquals(title, pf.getIpaRecordViewPage(ob).getTitle());
-				
+				test.log(LogStatus.PASS,
+						"full content of record is displayed in same window  when user selects a record from ResultList from company");
+				} catch (Exception e) {
+					logFailureDetails(test,
+							"full content of record is not displayed in same window  when user selects a record from ResultList from company",
+							"Failed_Screenshot1");
+				}
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Error: Login not happended");

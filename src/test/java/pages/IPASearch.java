@@ -346,7 +346,7 @@ public class IPASearch extends TestBase {
 	}
 
 	public boolean checkForTextInSearchTermList(String text) throws Exception {
-
+		try{
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()), 60);
 		List<WebElement> labelsList = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_CSS.toString()
 				+ " " + OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()));
@@ -359,14 +359,20 @@ public class IPASearch extends TestBase {
 				return true;
 			}
 		}
+		}catch(Exception e){
+			return false;
+		}
 		return false;
 	}
 
-	public void selectSearchTermFromSuggestion(int index) {
+	public String selectSearchTermFromSuggestion(int index) {
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_TECH_SUG_DROPDOWN_CSS.toString()), 60);
+		String term=ob.findElement(By.cssSelector(
+				OnePObjectMap.NEON_IPA_TECH_SUG_LIST_CSS.toString().replace("$index", String.valueOf(index)))).getText();
 		ob.findElement(By.cssSelector(
 				OnePObjectMap.NEON_IPA_TECH_SUG_ADD_VAR_CSS.toString().replace("$index", String.valueOf(index))))
 				.click();
+		return term;
 	}
 
 	public void clickOnNewSearchLinkInHeader() throws Exception {
@@ -492,7 +498,7 @@ public class IPASearch extends TestBase {
 		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS);
 		Pattern pattern = Pattern.compile("\\([,\\d]+\\)");
 		Matcher matcher;
-		for(int i=0;i<list.size()-1;i++){
+		for(int i=1;i<list.size();i++){
 				
 			matcher = pattern.matcher(list.get(i).getText());
 

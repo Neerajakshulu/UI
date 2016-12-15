@@ -82,14 +82,31 @@ import util.TestUtil;
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
 				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
-				
+				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)>0);
+				test.log(LogStatus.PASS,
+						"User is able to pre select  the Synonyms from technology Search page");
 				
+				} catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not able to pre select  the Synonyms from technology Search page",
+							"_Failed_ScreenShot1");
+				}
 				pf.getSearchPageInstance(ob).exploreSearch();
 				
 				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
 				
-				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)>0);
+				
+			try {
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm) > 0);
+				test.log(LogStatus.PASS,
+						"clicking the term drop down is displayed with the list of Synonyms when the user submits Technology Search");
+			} catch (Throwable e) {
+				logFailureDetails(test,
+						"clicking the term drop down is displayed with the list of Synonyms when the user submits Technology Search",
+						"_Failed_ScreenShot2");
+			}
+				
 				//OPQA-4334 , OPQA-4335
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				
@@ -97,33 +114,69 @@ import util.TestUtil;
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
 				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
 				List<String> synms=pf.getSearchPageInstance(ob).selectSearchTermSynms(searchTerm, 0);
-				
+				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)==synms.size());
-				
+				test.log(LogStatus.PASS,
+						"User is able to add synonym suggestions to the Search Terms List from the technology search page ");
+				} catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not able to add synonym suggestions to the Search Terms List from the technology search page ",
+							"_Failed_ScreenShot3");
+				}
 				//OPQA-4339
 				pf.getSearchPageInstance(ob).deselectSearchTermSynms(searchTerm, synms);
-				
+				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm)==0);
-				
+				test.log(LogStatus.PASS,
+						"User is able to deselect the Synonyms from Technology search");
+				}catch (Throwable e) {
+					logFailureDetails(test,
+							"User is not able to deselect the Synonyms from Technology search",
+							"_Failed_ScreenShot4");
+				}
 				//OPQA-4340
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				
 				String freeformText="gggggggg";
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", freeformText);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
-				Assert.assertTrue(pf.getSearchPageInstance(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
-						
+				try{
+				Assert.assertFalse(pf.getSearchPageInstance(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
+				test.log(LogStatus.PASS,
+						"Search term dropdown is not displayed when there are no synonyms");
+				}catch (Throwable e) {
+					logFailureDetails(test,
+							"Search term dropdown is displayed when there are no synonyms",
+							"_Failed_ScreenShot5");
+				}		
 				//OPQA-4341
 				pf.getSearchPageInstance(ob).removeSearchTerm(freeformText);
-				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
+				try{
+					Assert.assertFalse(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(freeformText));
+					test.log(LogStatus.PASS,
+							"user is able to Delete [x] the search term");
+				}catch (Throwable e) {
+					logFailureDetails(test,
+							"user is not able to Delete [x] the search term",
+							"_Failed_ScreenShot5");
+				}		
+				
 				
 				//OPQA-4342
+				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", searchTerm);
-				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
-				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
-				pf.getSearchPageInstance(ob).removeSearchTerm(searchTerm);
-				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
-				
+				String selectedTerm=	pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(selectedTerm);
+				pf.getSearchPageInstance(ob).removeSearchTerm(selectedTerm);
+				try{
+				Assert.assertFalse(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm));
+				test.log(LogStatus.PASS,
+						"user is not able to Delete [x] all associated searched term Synonyms");
+				}catch (Throwable e) {
+					logFailureDetails(test,
+							"user is not able to Delete [x] all associated searched term Synonyms",
+							"_Failed_ScreenShot5");
+				}	
 				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Error: Login not happended");
