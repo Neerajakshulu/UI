@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import util.BrowserWaits;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -49,7 +50,7 @@ public class IPA001 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
-			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(100);
+			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(250);
 			String searchtype="technology";
 			String searchTerm="oracle";
 			openBrowser();
@@ -58,14 +59,16 @@ public class IPA001 extends TestBase {
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
 		    pf.getSearchPageInstance(ob).SearchTermEnter(searchtype,searchTerm);
+		    pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(1);
 		     pf.getSearchPageInstance(ob).exploreSearch();
-		      waitForAjax(ob);
+		 	System.out.println(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm));
+		    pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_DASHBOARD_PAGE_GRAPH_IMAGE_CSS);
 		     pf.getIpaPage(ob).clickOnSaveButton();
 		     pf.getIpaPage(ob).SaveDataInfo(dtitle,ddesc);
 		     test.log(LogStatus.PASS,"Title and desc has been entered to save data");
 		     pf.getIpaPage(ob).clickOnSaveData();
 		     test.log(LogStatus.PASS,"Searched data has been saved");
-		     BrowserWaits.waitTime(2);
+		     BrowserWaits.waitTime(3);
 		     pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 		     test.log(LogStatus.PASS,"navigated to saved data page");
 		     Assert.assertTrue(pf.getIpaSavedSearchpage(ob).validateSavedDataInfo(dtitle,searchtype));

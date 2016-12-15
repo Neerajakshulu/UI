@@ -2,7 +2,6 @@ package ipa;
 
 import java.util.Random;
 
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -52,31 +51,32 @@ public class IPA114 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
-			pf.getDashboardPage(ob).SearchTermEnter("technology","cancer");
-			pf.getDashboardPage(ob).exploreSearch();
+			pf.getSearchPageInstance(ob).SearchTermEnter("technology", "android");
+			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
 			pf.getDashboardPage(ob).clickOnPatentFoundIcon();
 			Random rand = new Random();
 			int value = rand.nextInt(6);
-			String title1=pf.getIpaRecordViewPage(ob).clickOnPatentTitle(value);
-			String ptitle=pf.getIpaRecordViewPage(ob).getTitle();
-			if(title1.equalsIgnoreCase(ptitle))
-			test.log(LogStatus.PASS,"Patent in dashboard page and title in record view page are matching");
+			String title1 = pf.getIpaRecordViewPage(ob).clickOnPatentTitle(value);
+			String ptitle = pf.getIpaRecordViewPage(ob).getTitle();
+			if (title1.equalsIgnoreCase(ptitle))
+				test.log(LogStatus.PASS, "Patent in dashboard page and title in record view page are matching");
 			pf.getIpaRecordViewPage(ob).validateAdditionalInfoTile(test);
-			/*Assert.assertTrue(pf.getIpaRecordViewPage(ob).checkInfo());
-			test.log(LogStatus.PASS,"Headings like Abstract,claims,Description are present in record view page");*/
+			/*
+			 * Assert.assertTrue(pf.getIpaRecordViewPage(ob).checkInfo());
+			 * test.log(LogStatus.PASS,"Headings like Abstract,claims,Description are present in record view page");
+			 */
 			pf.getIpaRecordViewPage(ob).clickOnOriginalPatent();
-			test.log(LogStatus.PASS,"Pdf file for patent is clicked");
+			test.log(LogStatus.PASS, "Pdf file for patent is clicked");
 			closeBrowser();
-			
-			
-		}
-			 catch (Exception e) {
+
+		} catch (Exception e) {
 			logFailureDetails(test, "Fields are not matching in record view page", "Screenshot for login");
 			closeBrowser();
 		}
 
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

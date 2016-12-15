@@ -948,6 +948,7 @@ public enum OnePObjectMap {
     IPA_RECORD_VIEW_PAGE_PATENT_PDF_LINK_CSS("div[class='ipa-patent--legalinfo'] a[target='_blank']"),
     IPA_RECORD_VIE_PAGE_VALIDATE_TEXT_INFO_CSS("div [class='ipa-patent--description'] strong"),
     IPA_RECORD_VIEW_MORE_LINK("more..."),
+    IPA_DASHBOARD_PAGE_GRAPH_IMAGE_CSS("div[class='col-md-12']"),
 
 	;
 
