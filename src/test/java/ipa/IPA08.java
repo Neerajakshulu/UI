@@ -88,7 +88,7 @@ public class IPA08 extends TestBase {
 				throw new Exception("Login not sucess");
 			test.log(LogStatus.PASS, "Login successfully");
 			pf.getDashboardPage(ob).SearchTermEnter("company", "Apple");
-			pf.getDashboardPage(ob).addCompanyTerms("2:3");
+			pf.getDashboardPage(ob).addCompanyTerms("1");
 			pf.getDashboardPage(ob).exploreSearch();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
 			pf.getDashboardPage(ob).selectTechPatentTAB();

@@ -825,8 +825,8 @@ public enum OnePObjectMap {
 	NEON_IPA_SAVE_SEARCH_LINK_CSS("span[data-ui-sref='savedWork']"),
 
 	NEON_IPA_EXPLORE_LABEL_CSS(".ipa-home-search--header"),
-	NEON_IPA_TECHNOLOGY_LINK_CSS("li[href*='technology']"),
-	NEON_IPA_COMPANY_LINK_CSS("li[href*='company']"),
+	NEON_IPA_TECHNOLOGY_LINK_CSS("[href*='technology']"),
+	NEON_IPA_COMPANY_LINK_CSS("[href*='company']"),
 	NEON_IPA_SEARCH_TEXTBOX_CSS("input[ng-model='vm.searchParam']"),
 	NEON_IPA_EXPLORE_BUTTON_CSS("button[title='Search']"),
 

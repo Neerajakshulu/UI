@@ -416,6 +416,7 @@ import com.relevantcodes.extentreports.LogStatus;
 	public void validateCompanyKeyInformationPanel(ExtentTest test) throws Exception {
 		test.log(LogStatus.INFO, "Key Information Validation for Company Search");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
 		boolean flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS)
 				.isDisplayed();
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
@@ -524,6 +525,7 @@ import com.relevantcodes.extentreports.LogStatus;
 		int count = 0;
 		test.log(LogStatus.INFO, "Key Information Validation for Technology Search");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
 		boolean flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS)
 				.isDisplayed();
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
