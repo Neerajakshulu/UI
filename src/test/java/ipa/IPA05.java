@@ -79,7 +79,7 @@ public class IPA05 extends TestBase {
 					throw new Exception("Login not sucess");				
 			test.log(LogStatus.PASS, "Login successfully");
 			pf.getDashboardPage(ob).SearchTermEnter("company", "Apple");
-			pf.getDashboardPage(ob).addCompanyTerms("2:1");
+			pf.getDashboardPage(ob).addCompanyTerms("1");
 			pf.getDashboardPage(ob).exploreSearch();
 			pf.getDashboardPage(ob).validateCompanyKeyInformationPanel(test);
 			
