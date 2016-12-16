@@ -56,7 +56,7 @@ public class IPA06 extends TestBase {
 	@Parameters({"username","password"})
 	public void testLoginIPA(String username,String password) throws Exception {
 
-		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
+		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode()); 
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
