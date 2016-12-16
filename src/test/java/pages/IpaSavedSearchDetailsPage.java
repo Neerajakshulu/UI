@@ -116,7 +116,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		throw new Exception("Cancel button is not displayed in Saved tile page");
 	}
 
-	public void updateTitle(String val) throws Exception {
+	/*public WebElement updateTitle(String val) throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS.toString()), 30);
 		waitForAllElementsToBePresent(ob,
@@ -126,15 +126,12 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 				.toString()));
 		for (WebElement we : list) {
 			if (we.getText().equalsIgnoreCase(val)) {
-				we.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS.toString()))
-						.click();
+				return we;
 			}
-
-			else
-				throw new Exception("Saved Data  edit button in the title is not able to select");
 		}
+		throw new Exception("Record not found in the saved list page");
 	}
-
+*/
 	public boolean verifySortOptions() throws Exception {
 		String opt1 = "Date saved", opt2 = "Date viewed";
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);

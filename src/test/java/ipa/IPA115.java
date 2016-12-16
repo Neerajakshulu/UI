@@ -60,17 +60,17 @@ public class IPA115 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
-			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
-			pf.getSearchPageInstance(ob).exploreSearch();
+			/*pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
+			pf.getSearchPageInstance(ob).exploreSearch();*/
 			waitForAjax(ob);
 			pf.getIpaPage(ob).clickOnSaveButton();
 			pf.getIpaPage(ob).enterSavedatatitle(dtitle);
 			test.log(LogStatus.PASS, "Title  has been entered for save data");
 			pf.getIpaPage(ob).clickOnSaveData();
 			test.log(LogStatus.PASS, "Searched data has been saved with title and without Descripton");
-			pf.getIpaSavedSearchpage(ob).updateTitle(dtitle);
+			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
+			pf.getIpaSavedSearchpage(ob).clickOnEditButton(dtitle);
 			pf.getIpaPage(ob).SaveDataInfo(newtitle,ddesc);
-			BrowserWaits.waitTime(4);
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
 			test.log(LogStatus.PASS, "Title is updated with new title and desc");
 			BrowserWaits.waitTime(3);
