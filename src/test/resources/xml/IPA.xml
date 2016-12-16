@@ -78,7 +78,7 @@
 	</test>
 	<test name="IPA0053">
 		<classes>
-			<class name="ipa.IPA0053"></class>
+			<class name="ipa.IPA0053"></class> 
 		</classes>
 	</test>
 	<test name="IPA0054">
