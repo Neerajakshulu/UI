@@ -167,17 +167,17 @@
 	</test>
 
 
-	<test name="IPA113">
+	<test name="sorting-save-data">
 		<classes>
 			<class name="ipa.IPA113"></class>
 		</classes>
 	</test>
-	<test name="IPA114">
+	<test name="validate-record-view-page">
 		<classes>
 			<class name="ipa.IPA114"></class>
 		</classes>
 	</test>
-	<test name="IPA115">
+	<test name="updating-save-data-info">
 		<classes>
 			<class name="ipa.IPA115"></class>
 		</classes>

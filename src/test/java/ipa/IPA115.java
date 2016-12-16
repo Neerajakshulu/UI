@@ -1,7 +1,5 @@
 package ipa;
 
-import java.util.Random;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -32,7 +30,7 @@ public class IPA115 extends TestBase {
 	}
 
 	@Test
-	public void validateTitleInfo() throws Exception {
+	public void validateSavedDataTitlesInfo() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -52,16 +50,16 @@ public class IPA115 extends TestBase {
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(170);
 			String newtitle = this.getClass().getSimpleName() + "_Updated_Save_Title" + "_"
-					+ RandomStringUtils.randomAlphanumeric(60) + "-" + getCurrentTimeStamp();
+					+ RandomStringUtils.randomAlphanumeric(10) + "-" + getCurrentTimeStamp();
 			String searchtype = "technology";
 			String searchTerm = "android";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
-			/*pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
-			pf.getSearchPageInstance(ob).exploreSearch();*/
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER115"),LOGIN.getProperty("IPATESTUSER115pwd"));
+			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
+			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
 			pf.getIpaPage(ob).clickOnSaveButton();
 			pf.getIpaPage(ob).enterSavedatatitle(dtitle);
@@ -70,10 +68,12 @@ public class IPA115 extends TestBase {
 			test.log(LogStatus.PASS, "Searched data has been saved with title and without Descripton");
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			pf.getIpaSavedSearchpage(ob).clickOnEditButton(dtitle);
-			pf.getIpaPage(ob).SaveDataInfo(newtitle,ddesc);
+			pf.getIpaPage(ob).SaveDataInfo(newtitle, ddesc);
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
 			test.log(LogStatus.PASS, "Title is updated with new title and desc");
 			BrowserWaits.waitTime(3);
+			pf.getIpaSavedSearchpage(ob).clickOnDeleteButton(newtitle);
+			test.log(LogStatus.PASS, "Selected Title is deleted in saved data list");
 			closeBrowser();
 
 		} catch (Exception e) {
