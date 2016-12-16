@@ -61,27 +61,27 @@
 			<class name="ipa.IPA054"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0050">
 		<classes>
 			<class name="ipa.IPA0050"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0051">
 		<classes>
 			<class name="ipa.IPA0051"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0052">
 		<classes>
 			<class name="ipa.IPA0052"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0053">
 		<classes>
 			<class name="ipa.IPA0053"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0054">
 		<classes>
 			<class name="ipa.IPA0054"></class>
 		</classes>
