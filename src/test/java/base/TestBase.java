@@ -285,7 +285,7 @@ public class TestBase {
 		}else if (suiteName.equals("IPA")) {
 			loadModuleData(ipaxls.path);
 		}else if (suiteName.equals("Sanity suite")) {
-			loadModuleData(iamxls.path);
+			loadModuleData(iamxls.path); 
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
 			loadModuleData(profilexls.path);
@@ -304,6 +304,8 @@ public class TestBase {
 			loadModuleData(searchxls.path);
 			loadModuleData(rccxls.path);
 			loadModuleData(authoringxls.path);
+			loadModuleData(draxls.path);
+			loadModuleData(ipaxls.path);
 		}
 		
 		logger.info(suiteName + "---" + testcase.size());
