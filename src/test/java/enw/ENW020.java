@@ -49,6 +49,7 @@ public class ENW020 extends TestBase {
 			clearCookies();
 			ob.navigate().to("http://ua-qa.newisiknowledge.com/");
 			loginToWOS("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+			BrowserWaits.waitTime(6);
 			NavigateToENW();
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));

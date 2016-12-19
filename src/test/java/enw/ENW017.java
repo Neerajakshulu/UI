@@ -46,7 +46,7 @@ public class ENW017 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			String header_Expected = "Thomson Reuters Project Neon";
-			String expected_URL = "Thank You";
+			//String expected_URL = "Thank You";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);

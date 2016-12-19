@@ -33,7 +33,7 @@ public enum OnePObjectMap {
 	ENW_SEND_FEEDBACK_LINK_XPATH("//a[@class='feedback-link__anchor']"),
 	ENW_OPTIONS_TAB_LINK("Options"),
 	ENW_PROFILE_TAB_LINK("Profile Information"),
-	ENW_OPTIONS_TAB_XPATH("//a[contains(text(),'Options')]"),
+	ENW_OPTIONS_TAB_XPATH(".//*[@id='lgLink6']"),
 	ENW_PROFILE_TAB_XPATH("//a[contains(text(),'Profile Information')]"),
 	FEEDBACK_THANKU_PAGE("//h3[contains(text(),'Thank You')]"),
 	ENW_PROFILE_FIRST_NAME_XPATH("//input[@id='firstname']"),
