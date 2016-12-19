@@ -95,7 +95,7 @@ import util.TestUtil;
 							"Failed_Screenshot1");
 				}
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Network");
 				List<String> companyList=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
 				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(companyList.get(0)));
 				pf.getSearchPageInstance(ob).exploreSearch();

@@ -825,8 +825,8 @@ public enum OnePObjectMap {
 	NEON_IPA_SAVE_SEARCH_LINK_CSS("span[data-ui-sref='savedWork']"),
 
 	NEON_IPA_EXPLORE_LABEL_CSS(".ipa-home-search--header"),
-	NEON_IPA_TECHNOLOGY_LINK_CSS("[href*='technology']"),
-	NEON_IPA_COMPANY_LINK_CSS("[href*='company']"),
+	NEON_IPA_TECHNOLOGY_LINK_CSS("div[href*='technology']"),
+	NEON_IPA_COMPANY_LINK_CSS("div[href*='company']"),
 	NEON_IPA_SEARCH_TEXTBOX_CSS("input[ng-model='vm.searchParam']"),
 	NEON_IPA_EXPLORE_BUTTON_CSS("button[title='Search']"),
 
@@ -933,7 +933,7 @@ public enum OnePObjectMap {
 	NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_CSS("li input[type='checkbox'][checked='checked']"),
 	NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS("button[id='split-button'] div[class='caret search-term__caret']"),
 	NEON_IPA_SEARCH_TERM_SYNMS_LIST_CSS("li[class^='search-term__item'] li input[type='checkbox']"),
-	NEON_IPA_TECH_SHOW_ALL_LINK_CSS("a[class*='typeahead-results__showall']"),
+	NEON_IPA_TECH_SHOW_ALL_LINK_CSS("button[class*='typeahead-results__showall']"),
 	IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS("button[id='sort-sse-items']"),
 	IPA_SAVED_DATA_PAGE_SORT_MENU_CSS("ul[class='dropdown-menu sse-dropdown__menu'] li"),
 	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class='wui-content-title ng-binding']"),

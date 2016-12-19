@@ -137,7 +137,7 @@ import util.TestUtil;
 			}*/
 				//NEON-575
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Nokia");
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Network");
 				List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
 				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0)));

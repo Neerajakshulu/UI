@@ -96,7 +96,7 @@ import util.TestUtil;
 				}
 				//OPQA-4310
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
-				pf.getSearchPageInstance(ob).SearchTermEnter("company", "nokia");
+				pf.getSearchPageInstance(ob).SearchTermEnter("company", "network");
 				List<String> selectedTerm=pf.getSearchPageInstance(ob).addCompanyTerms("2");
 				try{
 				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(selectedTerm.get(0)));
@@ -104,7 +104,7 @@ import util.TestUtil;
 						"user is able to add company type-ahead suggestions to the searched query at parent level ");
 				}catch(Throwable e){
 					logFailureDetails(test,
-							"user is able to add company type-ahead suggestions to the searched query at parent level ",
+							"user is not able to add company type-ahead suggestions to the searched query at parent level ",
 							"Failed_Screenshot2");
 				}
 				//OPQA-4311
@@ -117,7 +117,7 @@ import util.TestUtil;
 						"user is able to add company type-ahead suggestions to the searched query at child level ");
 				}catch(Throwable e){
 					logFailureDetails(test,
-							"user is able to add company type-ahead suggestions to the searched query at child level ",
+							"user is not able to add company type-ahead suggestions to the searched query at child level ",
 							"Failed_Screenshot3");
 				}
 				//OPQA-4313

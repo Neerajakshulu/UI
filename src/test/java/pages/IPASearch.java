@@ -266,8 +266,8 @@ public class IPASearch extends TestBase {
 			}
 			pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.cssSelector(Xpath)));
 			String termAdded = ob.findElement(By.cssSelector(Xpath1)).getText();
-			termsAdded.add(termAdded.substring(0, termAdded.indexOf("(") - 1));
-
+			termsAdded.add(termAdded.replaceAll("\\([,\\d]+\\)", "").trim());
+			
 		}
 		return termsAdded;
 	}
@@ -350,9 +350,6 @@ public class IPASearch extends TestBase {
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()), 60);
 		List<WebElement> labelsList = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_CSS.toString()
 				+ " " + OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()));
-		if (text.contains("("))
-			text = text.substring(0, text.indexOf("(")).trim();
-		System.out.println(text);
 		for (WebElement we : labelsList) {
 
 			if (we.getText().trim().equalsIgnoreCase(text)) {
@@ -372,7 +369,7 @@ public class IPASearch extends TestBase {
 		ob.findElement(By.cssSelector(
 				OnePObjectMap.NEON_IPA_TECH_SUG_ADD_VAR_CSS.toString().replace("$index", String.valueOf(index))))
 				.click();
-		return term;
+		return term.replaceAll("\\([\\s,\\d]+\\)", "").trim();
 	}
 
 	public void clickOnNewSearchLinkInHeader() throws Exception {
