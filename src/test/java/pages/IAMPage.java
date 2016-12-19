@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import base.TestBase;
@@ -312,5 +313,144 @@ public class IAMPage extends TestBase {
 		Assert.assertEquals(appName, emailAppName);
 
 	}
+	
+	public void openCCURL(String url){
+		ob.get(url);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("User ID");
+	}
+	
+	public void loginCustomerCare(String userName,
+			String password) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_NAME_ID);
+		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_USER_NAME_ID.toString())).sendKeys(userName);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_PASSWORD_ID);
+		ob.findElement(By.id(OnePObjectMap.CUSTOMER_CARE_PASSWORD_ID.toString())).sendKeys(password);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_ID);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_CLICK_LOGIN_BUTTON_ID);
+	}
+
+	public void openMenuPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_MENU_PANEL_NAME);
+		WebElement ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_MENU_PANEL_NAME);
+		ob.switchTo().frame(ele);
+	}
+
+	public void closeMenuPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_MENU_PANEL_NAME);
+		ob.switchTo().defaultContent();
+	}
+
+	public void openMainPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_MAIN_PANEL_NAME);
+		WebElement ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_MAIN_PANEL_NAME);
+		ob.switchTo().frame(ele);
+	}
+
+	public void closeMainPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_MAIN_PANEL_NAME);
+		ob.switchTo().defaultContent();
+	}
+
+	public void clickUserManagement() throws InterruptedException {
+		ob.findElement(By.linkText("User Management")).click();
+	}
+
+	public void clickCreateUser() throws InterruptedException {
+		ob.findElement(By.linkText("Create User")).click();
+		BrowserWaits.waitTime(3);
+	}
+
+	public void registerNewUser(String email) throws Exception {
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_FIRSTNAME_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_FIRSTNAME_NAME,
+				"duster");
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_LASTNAME_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_LASTNAME_NAME, "man");
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_APPLICATIONID_ID);
+		WebElement selectApp = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_APPLICATIONID_ID);
+
+		Select dropdown = new Select(selectApp);
+		dropdown.selectByVisibleText("Neon");
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_SET_PASSWORD_ID);
+		WebElement selectPass = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_SET_PASSWORD_ID);
+
+		Select dropdown1 = new Select(selectPass);
+		dropdown1.selectByVisibleText("Set Password");
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_PASSWORD_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_PASSWORD_NAME,
+				"Neon@123");
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_CONFORM_PASSWORD_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_CONFORM_PASSWORD_NAME,
+				"Neon@123");
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_MAIL_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_MAIL_NAME, email);
+
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_REGISTER_BUTTON_NAME);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_CREATE_USER_REGISTER_BUTTON_NAME);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("The user was successfully registered. User Id is");
+	}
+
+	public void clickAssociateAndDisassociate() {
+		ob.findElement(By.linkText("Associate/Disassociate")).click();
+	}
+
+	public void clickUserToClimeTicket() throws InterruptedException {
+		ob.findElement(By.linkText("User to ClaimTicket")).click();
+		BrowserWaits.waitTime(4);
+	}
+
+	public void enterEmailField(String email,
+			String climeTicket) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_FIND_USER_NAME);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_FIND_USER_NAME, email);
+		ob.findElements(By.name(OnePObjectMap.CUSTOMER_FIND_USER_NAME.toString())).get(0).click();
+		BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_ENTER_CLIME_TICKET_NAME, climeTicket);
+		ob.findElements(By.name(OnePObjectMap.CUSTOMER_FIND_USER_NAME.toString())).get(1).click();
+		BrowserWaits.waitTime(4);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("successfully associated with the claimTicket");
+	}
+
+	public void openHeaderPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_HEADER_PANEL_NAME);
+		WebElement ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_HEADER_PANEL_NAME);
+		ob.switchTo().frame(ele);
+	}
+
+	public void closeHeaderPanel() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_HEADER_PANEL_NAME);
+		ob.switchTo().defaultContent();
+	}
+
+	public String getEmail() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_MAIL_TEXT_ID);
+		String emailText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.GURILLA_MAIL_TEXT_ID).getText();
+		return emailText;
+	}
+
+	public void logoutCustomerCare() {
+		ob.findElement(By.linkText("Log Out")).click();
+	}
+
+	public void checkCCLoginPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LOGIN_PAGE_NAME);
+	}
+	
 
 }
