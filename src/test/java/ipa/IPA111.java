@@ -57,7 +57,7 @@ public class IPA111 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER111"),LOGIN.getProperty("IPATESTUSER111pwd"));
 			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
 			List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
 			pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0));

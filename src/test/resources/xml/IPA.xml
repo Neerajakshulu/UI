@@ -61,27 +61,27 @@
 			<class name="ipa.IPA054"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0050">
 		<classes>
 			<class name="ipa.IPA0050"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0051">
 		<classes>
 			<class name="ipa.IPA0051"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0052">
 		<classes>
 			<class name="ipa.IPA0052"></class>
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0053">
 		<classes>
-			<class name="ipa.IPA0053"></class>
+			<class name="ipa.IPA0053"></class> 
 		</classes>
 	</test>
-	<test name="IPA Sign in">
+	<test name="IPA0054">
 		<classes>
 			<class name="ipa.IPA0054"></class>
 		</classes>
@@ -167,17 +167,17 @@
 	</test>
 
 
-	<test name="IPA113">
+	<test name="sorting-save-data">
 		<classes>
 			<class name="ipa.IPA113"></class>
 		</classes>
 	</test>
-	<test name="IPA114">
+	<test name="validate-record-view-page">
 		<classes>
 			<class name="ipa.IPA114"></class>
 		</classes>
 	</test>
-	<test name="IPA115">
+	<test name="updating-save-data-info">
 		<classes>
 			<class name="ipa.IPA115"></class>
 		</classes>

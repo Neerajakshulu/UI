@@ -1,7 +1,5 @@
 package ipa;
 
-import java.util.Random;
-
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -52,12 +50,12 @@ public class IPA112 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA("ipauser1@tr.com", "Neon@123");
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			test.log(LogStatus.PASS, "navigated to saved data page");
 			waitForAjax(ob);
-			Random rand = new Random();
-			int value = rand.nextInt(5);
+			//Random rand = new Random();
+			//int value = rand.nextInt(5);
 			//pf.getIpaSavedSearchpage(ob).updateTitle(value);
 			pf.getIpaPage(ob).enterSavedatatitle(newtitle);
 			BrowserWaits.waitTime(4);
