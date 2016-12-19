@@ -17,14 +17,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
 import base.TestBase;
 
+import com.google.common.base.Predicate;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.thoughtworks.selenium.Wait;
 
 	public class DashboardPage extends TestBase {
 
@@ -739,14 +742,21 @@ return hexString.toString();}
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS).sendKeys(string);
 		int i=0;
 		do{
-			Thread.sleep(10000);
 			String after =getMD5();
 			if(!before.equals(after))
 				break;
 			
 			i++;
 		}while(i<20);
+		WebDriverWait wait=new WebDriverWait(ob, 120);
+		wait.until( new Predicate<WebDriver>() {
+            public boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor)ob).executeScript("return document.readyState").equals("complete");
+            }
+        }
+    );
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_RESULTLIST_PDF_LINKS_CSS.toString()), 30);
+		Thread.sleep(10000);
 		
 	}
 }
