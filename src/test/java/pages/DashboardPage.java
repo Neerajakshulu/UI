@@ -17,6 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import util.BrowserAction;
@@ -724,9 +725,6 @@ import com.thoughtworks.selenium.Wait;
         for (int i = 0; i < byteData.length; i++) {
          sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
-
-        System.out.println("Digest(in hex format):: " + sb.toString());
-
         //convert the byte to hex format method 2
         StringBuffer hexString = new StringBuffer();
     	for (int i=0;i<byteData.length;i++) {
@@ -739,22 +737,24 @@ return hexString.toString();}
 
 	public void sortByText(String string) throws Exception {
 		String before =getMD5();
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS).sendKeys(string);
+		new Select(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS)).selectByVisibleText(string);
 		int i=0;
-		do{
+		do{Thread.sleep(5000);
 			String after =getMD5();
 			if(!before.equals(after))
 				break;
-			
 			i++;
 		}while(i<20);
-		WebDriverWait wait=new WebDriverWait(ob, 120);
-		wait.until( new Predicate<WebDriver>() {
-            public boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor)ob).executeScript("return document.readyState").equals("complete");
-            }
-        }
-    );
+		
+		before=getMD5();
+		i=0;
+		do{
+			Thread.sleep(5000);
+			String after =getMD5();
+			if(before.equals(after))
+				break;
+			i++;
+		}while(i<20);
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_RESULTLIST_PDF_LINKS_CSS.toString()), 30);
 		Thread.sleep(10000);
 		
