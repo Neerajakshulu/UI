@@ -1,12 +1,14 @@
 package ipa;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.ExtentManager;
 import base.TestBase;
 
@@ -48,11 +50,11 @@ public class IPA115 extends TestBase {
 		try {
 
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
-			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(170);
+			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(200);
 			String newtitle = this.getClass().getSimpleName() + "_Updated_Save_Title" + "_"
-					+ RandomStringUtils.randomAlphanumeric(10) + "-" + getCurrentTimeStamp();
+					+ RandomStringUtils.randomAlphanumeric(20) + "-" + getCurrentTimeStamp();
 			String searchtype = "technology";
-			String searchTerm = "android";
+			String searchTerm = "laser";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -66,17 +68,29 @@ public class IPA115 extends TestBase {
 			test.log(LogStatus.PASS, "Title  has been entered for save data");
 			pf.getIpaPage(ob).clickOnSaveData();
 			test.log(LogStatus.PASS, "Searched data has been saved with title and without Descripton");
+			BrowserWaits.waitTime(3);
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			pf.getIpaSavedSearchpage(ob).clickOnEditButton(dtitle);
-			pf.getIpaPage(ob).SaveDataInfo(newtitle, ddesc);
+			pf.getIpaPage(ob).SaveDataInfo(newtitle,ddesc);
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
 			test.log(LogStatus.PASS, "Title is updated with new title and desc");
 			BrowserWaits.waitTime(3);
+			try{
+				Assert.assertTrue(pf.getIpaSavedSearchpage(ob).lenghtOfIileInfo(newtitle));	
+				test.log(LogStatus.PASS,"Title and Desc length of tile are  matching ");
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+				test.log(LogStatus.FAIL,"Title and Desc length of tile is not matching ");
+				ErrorUtil.addVerificationFailure(ex);
+			}
+			
 			pf.getIpaSavedSearchpage(ob).clickOnDeleteButton(newtitle);
 			test.log(LogStatus.PASS, "Selected Title is deleted in saved data list");
 			closeBrowser();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			logFailureDetails(test, "User is not able to update title", "Screenshot for login");
 			closeBrowser();
 		}

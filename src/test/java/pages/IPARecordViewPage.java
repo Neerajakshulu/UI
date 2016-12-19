@@ -61,8 +61,9 @@ public class IPARecordViewPage extends TestBase {
 		ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS.toString()));
 		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
 				OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS);
+		    val=val-1;
 		if (val <= list.size()) {
-			String title = list.get(val+1).getText();
+			String title = list.get(val).getText();
 			list.get(val).click();
 			return title;
 		} else

@@ -59,9 +59,9 @@ public class IPApage extends TestBase {
 	}
 
 	public void clickOnSaveData() throws Exception {
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS);
+	
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS);
+		//jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS.toString())));
 	}
 
 	public void clickOnCancelData() throws Exception {

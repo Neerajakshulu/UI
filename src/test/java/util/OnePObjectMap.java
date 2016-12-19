@@ -1001,6 +1001,8 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_TECH_COM_Y_MAX_CSS("g[class$='nv-axisMax-y']>text"),
 	NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series']:nth-of-type($index)>text"),
 	NEON_IPA_DASH_KEYINFORMATION_LINK_CSS("[popover-template]"),
+	NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS("div[class='sse-item-description ng-binding']"),
+	NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding'"),
 	
 	
 	// #################### CUSTOMER CARE ##########################

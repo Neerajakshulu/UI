@@ -52,7 +52,7 @@ public class IPA111 extends TestBase {
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(170);
 			String searchtype = "company";
-			String searchTerm = "nokia";
+			String searchTerm = "network";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
