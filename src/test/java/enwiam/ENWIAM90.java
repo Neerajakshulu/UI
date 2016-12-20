@@ -79,7 +79,7 @@ public class ENWIAM90 extends TestBase {
 			clearCookies();
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("FACEBOOKACCOUNT"),
-					(LOGIN.getProperty("FACEBOOKACCOUNTPWD1")));
+					(LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED")));
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
@@ -99,10 +99,10 @@ public class ENWIAM90 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FACEBOOKACCOUNT"),
-						LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
+						LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWD1"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();
