@@ -18,7 +18,8 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class ENWIAM90 extends TestBase {
+//
+public class ENWIAM091 extends TestBase {
 	static int count = -1;
 
 	static boolean fail = false;
@@ -49,7 +50,7 @@ public class ENWIAM90 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseENWIAM90() throws Exception {
+	public void testcaseENWIAM091() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -61,7 +62,7 @@ public class ENWIAM90 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("FACEBOOKACCOUNT"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("NeonMergeAccount"));
 			logger.info("statuCode -->"+statuCode);
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				throw new Exception("Delete API Call failed");
@@ -70,56 +71,49 @@ public class ENWIAM90 extends TestBase {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
-			String accountType = "";
+			String accountType = "Neon";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("FACEBOOKACCOUNT"),
-					(LOGIN.getProperty("FACEBOOKACCOUNTPWD1")));
-			BrowserWaits.waitTime(3);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
-			ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString())).click();
+			ob.get(host);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("NeonMergeAccount"),
+					LOGIN.getProperty("NeonMergeAccountPWD"));
+			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
-			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
-			//pf.getHFPageInstance(ob).clickProfileImage();
-			pf.getHFPageInstance(ob).clickOnAccountLink();
-			accountType = "Neon";
+			test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileName);
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getHFPageInstance(ob).clickOnAccountLink();		
 			validateAccounts(1, accountType);
 			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 			BrowserWaits.waitTime(10);
-			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		//	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FACEBOOKACCOUNT"),
-						LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("NeonMergeAccount"),
+						LOGIN.getProperty("NeonMergeAccountPWD"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWD1"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			pf.getENWReferencePageInstance(ob).clickAccount();
-			pf.getENWReferencePageInstance(ob).closeOnBoardingModal();
+			BrowserWaits.waitTime(10);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
-			accountType = "Facebook";
+			String accountType1 = "Facebook";
 			try {
-				validateLinkedAccounts(2, accountType);
+				validateLinkedAccounts(2, accountType1);
 				String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-				test.log(LogStatus.INFO, "After merging Steam account profile name: " + secondAccountProfileName);
+				test.log(LogStatus.INFO, "After merging Steam account profile name: " + secondAccountProfileName);				
 				Assert.assertEquals(firstAccountProfileName, secondAccountProfileName);
-				test.log(LogStatus.PASS, "Forward Merge is happened");
+				test.log(LogStatus.PASS, "Merge is happened");
 
 			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Forward Merge is not happened");// extent
+				test.log(LogStatus.FAIL, "Merge is not happened");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
@@ -149,9 +143,9 @@ public class ENWIAM90 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("FACEBOOKACCOUNT")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("NeonMergeAccount")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("FACEBOOKACCOUNT")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("NeonMergeAccount")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
@@ -169,7 +163,7 @@ public class ENWIAM90 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("FACEBOOKACCOUNT")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("NeonMergeAccount")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Any account");
 
