@@ -52,7 +52,7 @@ public class IPA111 extends TestBase {
 			String dtitle = this.getClass().getSimpleName() + "_Save_Title" + "_" + getCurrentTimeStamp();
 			String ddesc = this.getClass().getSimpleName() + "_Save_Desc_" + RandomStringUtils.randomAlphanumeric(170);
 			String searchtype = "company";
-			String searchTerm = "network";
+			String searchTerm = "samsung";
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -60,7 +60,7 @@ public class IPA111 extends TestBase {
 			//pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER111"),LOGIN.getProperty("IPATESTUSER111pwd"));
 			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"),LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
-			List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
+			List<String> list=pf.getSearchPageInstance(ob).addCompanyTerms("1");
 			pf.getSearchPageInstance(ob).checkForTextInSearchTermList(list.get(0));
 			test.log(LogStatus.PASS, "Search term is matching");
 			pf.getSearchPageInstance(ob).exploreSearch();
