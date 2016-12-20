@@ -773,6 +773,12 @@ public enum OnePObjectMap {
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	DRA_CHANGEPW_ERROR_MSG_CSS("p[class='wui-input-with-label__error ng-binding ng-scope']"),
 	DRA_INVALIDCREDENTIALS_ERRORMSG_CSS("label[class='wui-input-with-label__error above-form-error-message ng-scope']"),
+	DRA_STEPUPAUTHMODAL_TITLE_CSS("h2[class='wui-large-text ng-binding']"),
+	DRA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-binding ng-scope']"),
+	DRA_STEPUPAUTHMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[1]"),
+	DRA_STEPUPAUTHMODAL_TEXT3_XPATH("//p[contains(.,'Cortellis')]"),
+	DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS("a[class='forgot-password__link']"),
+	DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS("div[class='forgot-password-header']"),
 
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
