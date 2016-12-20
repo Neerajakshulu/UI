@@ -15,7 +15,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.TestUtil;
 
 	/**
 	 * Class for follow/unfollow profile from search page itself
@@ -188,9 +187,8 @@ import util.TestUtil;
 		public void reportTestResult() {
 
 			extent.endTest(test);
-
 			
-			if (status == 1)
+			/*if (status == 1)
 				TestUtil.reportDataSetResult(ipaxls, "Test Cases",
 						TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "PASS");
 			else if (status == 2)
@@ -198,7 +196,7 @@ import util.TestUtil;
 						TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "FAIL");
 			else
 				TestUtil.reportDataSetResult(ipaxls, "Test Cases",
-						TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "SKIP");
+						TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "SKIP");*/
 			 
 		}
 }

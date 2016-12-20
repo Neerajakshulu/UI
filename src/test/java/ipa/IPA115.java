@@ -7,12 +7,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import base.TestBase;
-
-import com.relevantcodes.extentreports.LogStatus;
 
 public class IPA115 extends TestBase {
 

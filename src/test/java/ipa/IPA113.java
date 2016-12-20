@@ -6,10 +6,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import util.ExtentManager;
-import base.TestBase;
-
 import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
+import util.ExtentManager;
 
 public class IPA113 extends TestBase {
 
