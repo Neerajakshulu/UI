@@ -1,6 +1,11 @@
 package pages;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 
@@ -375,6 +380,25 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
 	}
 	
+	public void clickDRALinkInSteam() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+	}
+	
+	public void validateNavigationDRAApp(ExtentTest test) throws Exception{
+		WebElement element=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		if(element.isDisplayed())
+		{
+			test.log(LogStatus.PASS, "user is navigated seemlessly to DRA when logged in with steam credentials");
+		}
+		else{
+			test.log(LogStatus.FAIL, "user is not navigated seemlessly to DRA");
+		}
+		
+	}
+	
 	public void clickOnForgotPwLinkOnStepUpAuthModal() throws Exception{
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
@@ -467,6 +491,41 @@ public class DRAPage extends TestBase {
 
 		}
 
+	}
+	
+	public void clickOnLearnMoreLink() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
+		
+	}
+	
+	public void validateProductOverviewPage(ExtentTest test){
+		try {
+			clickOnLearnMoreLink();
+			BrowserWaits.waitTime(4);
+			
+			Set<String> myset=ob.getWindowHandles();
+			Iterator<String> myIT=myset.iterator();
+			ArrayList<String> al=new ArrayList<String>();
+			for(int i=0; i< myset.size() ; i++){
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
+			String actual_URL = ob.getCurrentUrl();
+			String expected_URL = "http://ip-science.interest.thomsonreuters.com/TargetDruggabilityEAP";
+			Assert.assertTrue(actual_URL.contains(expected_URL));
+			test.log(LogStatus.PASS," user is taken to the target application product overview page in the seperate browser when User clicks on Learn more");
+			BrowserWaits.waitTime(2);
+			ob.close();
+			ob.switchTo().window(al.get(0));
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL," user is not taken to the target application product overview page");
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+		}
+		
 	}
 
 }

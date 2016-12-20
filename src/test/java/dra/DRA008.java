@@ -15,8 +15,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class DRA007 extends TestBase {
-
+public class DRA008 extends TestBase {
 	static int count = -1;
 
 	static boolean fail = false;
@@ -59,6 +58,18 @@ public class DRA007 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser7"));
+
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
@@ -70,29 +81,16 @@ public class DRA007 extends TestBase {
 
 			ob.navigate().to(host);
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser7"),
-					LOGIN.getProperty("DRAfbpw7"));
-			test.log(LogStatus.PASS, "user has logged in with social account");
-			pf.getDraPageInstance(ob).clickDRALink();
-			test.log(LogStatus.PASS, "user is navigate to Step up Auth modal");
-			pf.getDraPageInstance(ob).validateStepUPModalTitle(test);
-			pf.getDraPageInstance(ob).validateFirstTextOnStepUp(test);
-			test.log(LogStatus.INFO, "Verified whether user is able to see First text on step up modal");
-			pf.getDraPageInstance(ob).validateSecondTextOnStepUP(test);
-			test.log(LogStatus.INFO, "Verified whether user is able to see second text on step up modal");
-			pf.getDraPageInstance(ob).validateThirdTextOnStepUp(test);
-			test.log(LogStatus.INFO, "Verified whether user is able to see Third text on step up modal");
-			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
-			BrowserWaits.waitTime(2);
-			try{
-				pf.getDraPageInstance(ob).validateForgotPwOnStepup(test);
-				test.log(LogStatus.INFO, "forgot password link is present on Stepup");
-			}catch(Throwable t){
-				test.log(LogStatus.FAIL, "forgot password link is not present on Stepup");
-			}	
+			// login using TR credentials
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser8"),
+					LOGIN.getProperty("DRAsteampw8"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			test.log(LogStatus.PASS, "user has logged in with steam account in Neon");
+			pf.getDraPageInstance(ob).clickDRALinkInSteam();
+			test.log(LogStatus.INFO, "verifying user is navigated seemlessly to DRA");
+			pf.getDraPageInstance(ob).validateNavigationDRAApp(test);
 			BrowserWaits.waitTime(2);
 			closeBrowser();
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports

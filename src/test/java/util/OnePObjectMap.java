@@ -779,7 +779,8 @@ public enum OnePObjectMap {
 	DRA_STEPUPAUTHMODAL_TEXT3_XPATH("//p[contains(.,'Cortellis')]"),
 	DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS("div[class='forgot-password-header']"),
-
+	DRA_STEPUPAUTHMODAL_LEARNMORE_CSS("a[event-action='learn-more-dra']"),
+	
 	// DRA_PROFILE_FLYOUT_NAME_CSS("div[class='wui-profile-flyout__info'] div[class*='wui-subtitle
 	// wui-profile-flyout__name ng-binding']"),
 	DRA_PROFILE_FLYOUT_NAME_CSS("div[class='dropdown-menu wui-flyout__menu wui-flyout--profile__menu'] div[class='wui-profile-flyout__info'] div"),
