@@ -71,6 +71,8 @@
 			<class name="ipaiam.IPA0053"></class> 
 		</classes>
 	</test>
+	
+	
 	<test name="IPA0054">
 		<classes>
 			<class name="ipaiam.IPA0054"></class>
