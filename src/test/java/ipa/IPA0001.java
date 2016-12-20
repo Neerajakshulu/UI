@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0001 extends TestBase {
+public class IPA0001 extends TestBase { 
 
 	static int count = -1;
 
