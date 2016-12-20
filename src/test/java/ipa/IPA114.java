@@ -50,11 +50,12 @@ public class IPA114 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"),LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getSearchPageInstance(ob).SearchTermEnter("technology", "android");
 			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
 			pf.getDashboardPage(ob).clickOnPatentFoundIcon();
+			waitForAjax(ob);
 			Random rand = new Random();
 			int value = rand.nextInt(6);
 			pf.getIpaRecordViewPage(ob).clickOnPatentTitle(value);

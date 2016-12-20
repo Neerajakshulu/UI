@@ -59,7 +59,8 @@ public class IPA115 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER115"),LOGIN.getProperty("IPATESTUSER115pwd"));
+			//pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER115"),LOGIN.getProperty("IPATESTUSER115pwd"));
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"),LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
 			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
@@ -87,6 +88,7 @@ public class IPA115 extends TestBase {
 			
 			pf.getIpaSavedSearchpage(ob).clickOnDeleteButton(newtitle);
 			test.log(LogStatus.PASS, "Selected Title is deleted in saved data list");
+			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 
 		} catch (Exception e) {

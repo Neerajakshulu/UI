@@ -50,7 +50,8 @@ public class IPA112 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
+			//pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"),LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			test.log(LogStatus.PASS, "navigated to saved data page");
 			waitForAjax(ob);
@@ -62,6 +63,7 @@ public class IPA112 extends TestBase {
 			pf.getIpaSavedSearchpage(ob).clickOnSaveButtonInTile();
 			test.log(LogStatus.PASS, "Title is updated with new title");
 			BrowserWaits.waitTime(3);
+			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 
 		} catch (Exception e) {

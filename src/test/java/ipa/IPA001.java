@@ -55,7 +55,8 @@ public class IPA001 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
+			//pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPATESTUSER001"),LOGIN.getProperty("IPATESTUSER001pwd"));
+			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"),LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getSearchPageInstance(ob).SearchTermEnter(searchtype, searchTerm);
 			pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(2);
 			pf.getSearchPageInstance(ob).exploreSearch();
@@ -77,6 +78,7 @@ public class IPA001 extends TestBase {
 			waitForAjax(ob);
 			pf.getSearchPageInstance(ob).checkForTextInSearchTermList(searchTerm);
 			test.log(LogStatus.PASS, "Search term is matching after exploring the saved search");
+			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 
 		} catch (Exception e) {
