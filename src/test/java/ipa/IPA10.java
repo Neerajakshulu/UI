@@ -75,7 +75,7 @@ import util.TestUtil;
 				maximizeWindow();
 				test.log(LogStatus.INFO, "Login to IPA application");
 				ob.navigate().to(host+CONFIG.getProperty("appendIPAAppUrl"));
-				if(!pf.getLoginTRInstance(ob).loginToIPA("kavya.revanna@thomsonreuters.com", "Neon@123"))
+				if(!pf.getLoginTRInstance(ob).loginToIPA(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1")))
 						throw new Exception("Login not sucess");				
 				//NEON-485
 				//OPQA-4315
