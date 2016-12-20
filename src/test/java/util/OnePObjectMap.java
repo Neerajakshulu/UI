@@ -803,7 +803,7 @@ public enum OnePObjectMap {
 	DRA_OK_BUTTON_XPATH("//button[contains(text(),'OK')]"),
 	DRA_EVICT_MSG_XPATH("//h2[contains(text(),'Your account has been evicted.')]"),
 	DRA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--dra']"),
-	
+
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 	ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
@@ -911,7 +911,7 @@ public enum OnePObjectMap {
 	DR_SEARCH_CLICK_CSS("button[class='wui-search-bar__search-button']"),
 	DR_SEARCH_RESULT_CSS("p[class='wui-title']"),
 	DRA_ACCOUNT_CROSS_CSS("i[class='fa fa-close']"),
-	
+
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
@@ -931,6 +931,8 @@ public enum OnePObjectMap {
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
+	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),
+	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style='color:#621F95;']"),
 
 	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
 	NEON_IPA_SEARCH_TERMS_REMOVE_CSS("div[ng-click^='vm.removeItem']"),
@@ -947,7 +949,7 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS("div[class='typeahead-results-list__item']"),
 	NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS("i[class*='fa fa-certificate']"),
 	NEON_IPA_TECH_SUG_LIST_CSS("li[index='$index']"),
-	NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS("a[data-event-category='searchresult-ck-patents']"), 
+	NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS("a[data-event-category='searchresult-ck-patents']"),
 	NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS("span[class^='patents-found__value']"),
 	IPA_RECORD_VIE_PAGE_PATENTS_INFO_CSS("div [class='ipa-patent--list-items'] li"),
 	IPA_RECORD_VIEW_PAGE_PANTENTS_RHS_TILE_CSS("h6[class='ipa-patent--legal-status']"),
@@ -1010,8 +1012,7 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_KEYINFORMATION_LINK_CSS("[popover-template]"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS("div[class='sse-item-description ng-binding']"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding'"),
-	
-	
+
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
 	CUSTOMER_CARE_PASSWORD_ID("userPassword"),
@@ -1032,7 +1033,7 @@ public enum OnePObjectMap {
 	CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME("associate"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"),
-	
+
 	;
 
 	private String locator;

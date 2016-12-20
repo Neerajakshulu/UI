@@ -114,7 +114,7 @@
 			<class name="enw.ENW017"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW019A">
 		<classes>
 			<class name="enw.ENW019A"></class>
@@ -145,23 +145,23 @@
 			<class name="enw.ENW023"></class>
 		</classes>
 	</test>
-     <test name="ENW034">
+	<test name="ENW034">
 		<classes>
 			<class name="enw.ENW034"></class>
 		</classes>
-		
+
 	</test>
 	<test name="ENW041">
 		<classes>
 			<class name="enw.ENW041"></class>
 		</classes>
-		
+
 	</test>
-	 <test name="ENW043">
+	<test name="ENW043">
 		<classes>
 			<class name="enw.ENW043"></class>
 		</classes>
-		
+
 	</test>
 	<test name="ENWIAM00016">
 		<classes>
@@ -514,22 +514,22 @@
 			<class name="Profile.Profile70"></class>
 		</classes>
 	</test>
-	
-	
+
+
 	<!-- search test case -->
 	<test name="Test B1">
 		<classes>
-				<class name="search.Search127"></class>
-				</classes>
+			<class name="search.Search127"></class>
+		</classes>
 	</test>
-	
+
 	<!-- RCC Testcases -->
 	<test name="Validate_adding_GD_doc_action_for_post_patent_and_to_the_group">
-	<classes>
-		<class name="rcc.RCC021"></class>
-		<class name="rcc.RCC023"></class>
-	</classes>
-</test>
+		<classes>
+			<class name="rcc.RCC021"></class>
+			<class name="rcc.RCC023"></class>
+		</classes>
+	</test>
 
 	<test name="Validate_adding_GD_doc_action_for_article_and_to_the_group">
 		<classes>
@@ -556,7 +556,7 @@
 			<class name="rcc.RCC092"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Share_On_Google_Plus">
 		<parameter name="gusername" value="romanreings2016csk" />
 		<parameter name="gpassword" value="India@2020" />
@@ -566,37 +566,37 @@
 			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
-	
-	 <test name="IPA0002">
+
+	<test name="IPA0002">
 		<classes>
 			<class name="ipa.IPA0002"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IPA0003">
 		<classes>
 			<class name="ipa.IPA0003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA002">
 		<classes>
 			<class name="dra.DRA002"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA003">
 		<classes>
 			<class name="dra.DRA003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA004">
 		<classes>
 			<class name="dra.DRA004"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA0014">
 		<classes>
 			<class name="dra.DRA0014"></class>
@@ -607,19 +607,26 @@
 			<class name="dra.DRA0015"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA052">
 		<classes>
 			<class name="dra.DRA052"></class>
 		</classes>
 	</test>
-	
+
 	<test name="DRA053">
 		<classes>
 			<class name="dra.DRA053"></class>
 		</classes>
 	</test>
-<test name="IPA0055">
+
+	<test name="DRA_Forgot_Password">
+		<classes>
+			<class name="dra.DRA100"></class>
+		</classes>
+	</test>
+
+	<test name="IPA0055">
 		<classes>
 			<class name="ipa.IPA0055"></class>
 		</classes>
@@ -627,6 +634,11 @@
 	<test name="IPA0056">
 		<classes>
 			<class name="ipa.IPA0056"></class>
+		</classes>
+	</test>
+	<test name="IPA_Forgot_Password">
+		<classes>
+			<class name="ipa.IPA100"></class>
 		</classes>
 	</test>
 </suite>

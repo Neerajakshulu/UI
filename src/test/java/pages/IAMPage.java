@@ -83,8 +83,8 @@ public class IAMPage extends TestBase {
 
 	public void checkLoginPage() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-		String loginPageAppName = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
-				.getText();
+//		String loginPageAppName = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
+//				.getText();
 		// Assert.assertTrue(loginPageAppName.contains("Project Neon"));
 
 	}
@@ -124,10 +124,10 @@ public class IAMPage extends TestBase {
 				.findElements(By.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_VALIDATIONS_CSS.toString()))
 				.get(i);
 		element.findElement(By.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_CSS.toString()));
-		String message = element
-				.findElement(By
-						.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_MESSAGE_CSS.toString()))
-				.getText();
+//		String message = element
+//				.findElement(By
+//						.cssSelector(OnePObjectMap.RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_MESSAGE_CSS.toString()))
+//				.getText();
 	}
 
 	public void clickForgotPasswordLink() throws Exception {
@@ -455,6 +455,26 @@ public class IAMPage extends TestBase {
 
 	public void checkCCLoginPage() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LOGIN_PAGE_NAME);
+	}
+	
+	
+	public void checkDRAApplicationName(String appName) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS);
+		String emailAppName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS).getText();
+		logger.info("EmailAppName--->" + emailAppName);
+		Assert.assertEquals(appName, emailAppName);
+	}
+	
+	public void checkIPAApplicationName(String appName) throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS);
+		String emailAppName = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS).getText();
+		logger.info("EmailAppName--->" + emailAppName);
+		Assert.assertEquals(appName, emailAppName);
+
 	}
 
 }
