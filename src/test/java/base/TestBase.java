@@ -93,6 +93,7 @@ public class TestBase {
 	public static Xls_Reader rccxls = null;
 	public static Xls_Reader draxls = null;
 	public static Xls_Reader ipaxls = null;
+	public static Xls_Reader ipaiamxls = null;
 	public static boolean isInitalized = false;
 
 	public WebDriver ob = null;
@@ -258,6 +259,7 @@ public class TestBase {
 			rccxls = new Xls_Reader("src/test/resources/xls/RCC.xlsx");
 			draxls = new Xls_Reader("src/test/resources/xls/DRA.xlsx");
 			ipaxls = new Xls_Reader("src/test/resources/xls/IPA.xlsx");
+			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -284,6 +286,8 @@ public class TestBase {
 			loadModuleData(draxls.path);
 		}else if (suiteName.equals("IPA")) {
 			loadModuleData(ipaxls.path);
+		}else if (suiteName.equals("IPAIAM")) {
+			loadModuleData(ipaiamxls.path);
 		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);  
 			loadModuleData(searchxls.path);
@@ -296,6 +300,7 @@ public class TestBase {
 			loadModuleData(rccxls.path);
 			loadModuleData(draxls.path);
 			loadModuleData(ipaxls.path);
+			loadModuleData(ipaiamxls.path);
 		} else if(suiteName.equals("LocalRun")){
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
@@ -306,6 +311,7 @@ public class TestBase {
 			loadModuleData(authoringxls.path);
 			loadModuleData(draxls.path);
 			loadModuleData(ipaxls.path);
+			loadModuleData(ipaiamxls.path);
 		}
 		
 		logger.info(suiteName + "---" + testcase.size());

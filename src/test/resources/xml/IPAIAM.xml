@@ -1,0 +1,84 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IPAIAM" parallel="tests" thread-count="10">
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+
+	<test name="IPA0001">
+		<classes>
+			<class name="ipaiam.IPA0001"></class>
+		</classes>
+	</test>
+
+	<!-- <test name="IPA0002"> <classes> <class name="ipaiam.IPA0002"></class> 
+		</classes> </test> <test name="IPA0003"> <classes> <class name="ipaiam.IPA0003"></class> 
+		</classes> </test> -->
+
+	 <test name="IPA0004">
+		<classes>
+			<class name="ipaiam.IPA0004"></class>
+		</classes>
+	</test>
+
+	<test name="IPA0005">
+		<classes>
+			<class name="ipaiam.IPA0005"></class>
+		</classes>
+	</test>
+
+
+	<test name="IPA051">
+		<classes>
+			<class name="ipaiam.IPA051"></class>
+		</classes>
+	</test>
+
+	<test name="ipa.IPA052">
+		<classes>
+			<class name="ipaiam.IPA052"></class>
+		</classes>
+	</test>
+
+	<test name="ipa.IPA053">
+		<classes>
+			<class name="ipaiam.IPA053"></class>
+		</classes>
+	</test>
+	<test name="ipa.IPA054">
+		<classes>
+			<class name="ipaiam.IPA054"></class>
+		</classes>
+	</test>
+	<test name="IPA0050">
+		<classes>
+			<class name="ipaiam.IPA0050"></class>
+		</classes>
+	</test>
+	<test name="IPA0051">
+		<classes>
+			<class name="ipaiam.IPA0051"></class>
+		</classes>
+	</test>
+	<test name="IPA0052">
+		<classes>
+			<class name="ipaiam.IPA0052"></class>
+		</classes>
+	</test>
+	<test name="IPA0053">
+		<classes>
+			<class name="ipaiam.IPA0053"></class> 
+		</classes>
+	</test>
+	<test name="IPA0054">
+		<classes>
+			<class name="ipaiam.IPA0054"></class>
+		</classes>
+	</test> 
+	<!-- <test name="IPA Merging"> <classes> <class name="ipaiam.IPA0055"></class> 
+		</classes> </test> <test name="IPA Merging"> <classes> <class name="ipaiam.IPA0056"></class> 
+		</classes> </test> -->
+	
+</suite>
+	

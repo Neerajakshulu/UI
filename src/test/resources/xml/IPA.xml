@@ -11,84 +11,13 @@
 		</classes>
 	</test>
 
-	<test name="IPA0001">
-		<classes>
-			<class name="ipa.IPA0001"></class>
-		</classes>
-	</test>
-
-	<!-- <test name="IPA0002"> <classes> <class name="ipa.IPA0002"></class> 
-		</classes> </test> <test name="IPA0003"> <classes> <class name="ipa.IPA0003"></class> 
-		</classes> </test> -->
-
-	<test name="IPA0004">
-		<classes>
-			<class name="ipa.IPA0004"></class>
-		</classes>
-	</test>
-
-	<test name="IPA0005">
-		<classes>
-			<class name="ipa.IPA0005"></class>
-		</classes>
-	</test>
-
 	<test name="company_Saved_search">
 		<classes>
 			<class name="ipa.IPA111"></class>
 		</classes>
 	</test>
 
-	<test name="ipa.IPA051">
-		<classes>
-			<class name="ipa.IPA051"></class>
-		</classes>
-	</test>
-
-	<test name="ipa.IPA052">
-		<classes>
-			<class name="ipa.IPA052"></class>
-		</classes>
-	</test>
-
-	<test name="ipa.IPA053">
-		<classes>
-			<class name="ipa.IPA053"></class>
-		</classes>
-	</test>
-	<test name="ipa.IPA054">
-		<classes>
-			<class name="ipa.IPA054"></class>
-		</classes>
-	</test>
-	<test name="IPA0050">
-		<classes>
-			<class name="ipa.IPA0050"></class>
-		</classes>
-	</test>
-	<test name="IPA0051">
-		<classes>
-			<class name="ipa.IPA0051"></class>
-		</classes>
-	</test>
-	<test name="IPA0052">
-		<classes>
-			<class name="ipa.IPA0052"></class>
-		</classes>
-	</test>
-	<test name="IPA0053">
-		<classes>
-			<class name="ipa.IPA0053"></class> 
-		</classes>
-	</test>
-	<test name="IPA0054">
-		<classes>
-			<class name="ipa.IPA0054"></class>
-		</classes>
-	</test>
-	<!-- <test name="IPA Merging"> <classes> <class name="ipa.IPA0055"></class> 
-		</classes> </test> <test name="IPA Merging"> <classes> <class name="ipa.IPA0056"></class> 
-		</classes> </test> -->
+	
 	<test name="IPA_login">
 		<parameter name="username" value="srinivasa.narayanappa@thomsonreuters.com" />
 		<parameter name="password" value="Neon@123" />
