@@ -367,5 +367,106 @@ public class DRAPage extends TestBase {
 			closeBrowser();
 		}
 	}
+	
+	public void clickDRALink() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+	}
+	
+	public void clickOnForgotPwLinkOnStepUpAuthModal() throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
+	}
+	
+	public void validateForgotPwOnStepup(ExtentTest test) throws Exception{
+		clickOnForgotPwLinkOnStepUpAuthModal();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
+		WebElement forgotpage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
+		if(forgotpage.isDisplayed())
+		{
+			test.log(LogStatus.PASS,
+					"step up authentication modal includes a link to initiate the EndNote supported forgot password flow.");
+		} else {
+			test.log(LogStatus.FAIL,
+					"step up authentication modal doesn't include a link to initiate the EndNote supported forgot password flow.");
+		}
+		
+	}
+	
+	public void validateThirdTextOnStepUp(ExtentTest test) throws Exception{
+		try{
+		String stepup_expectedtext3 = "Target Druggability shares sign in credentials with other products you may use:";
+		String stepup_expectedtext4 = "Please sign in using the email address and password you use to access any of the above mentioned products.";
+		String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
+		if (stepup_actualtext3.contains(stepup_expectedtext3)
+				&& stepup_actualtext3.contains("Key Pathway Advisor") && stepup_actualtext3.contains("EndNote")
+				&& stepup_actualtext3.contains("InCites") && stepup_actualtext3.contains("Thomson Innovation")
+				&& stepup_actualtext3.contains("Web of Science")
+				&& stepup_actualtext3.contains(stepup_expectedtext4)) {
+			test.log(LogStatus.PASS,
+					"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
+		} else {
+			test.log(LogStatus.FAIL,
+					"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+		}
+	} catch (Throwable t) {
+		test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
+	}
+	}
+	
+	public void validateSecondTextOnStepUP(ExtentTest test) throws Exception{
+
+		try {
+			String stepup_expectedtext2 = "To provide the highest level of security, we require you to sign in with your Target Druggability credentials.";
+			String stepup_actualtext2 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT2_XPATH).getText();
+			System.out.println(stepup_actualtext2);
+			Assert.assertEquals(stepup_actualtext2, stepup_expectedtext2);
+			test.log(LogStatus.PASS,
+					"user is able to see correct Step up Auth modal text2 : To provide the highest level.....");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"user is not able to see correct Step up Auth modal text2 : To provide the highest level.....");
+		}
+	}
+	
+	public void validateFirstTextOnStepUp(ExtentTest test) throws Exception {
+		try {
+			String stepup_expectedtext1 = "Thank you for your interest. Target Druggability is a subscription product. Don't yet have a subscription?";
+			String stepup_actualtext1 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT1_CSS).getText();
+			if (stepup_actualtext1.contains(stepup_expectedtext1) && stepup_actualtext1.contains("Learn more")) {
+				test.log(LogStatus.PASS,
+						"user is able to see correct Step up Auth modal text1 : Thank you for your interest.....");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is able to see incorrect Step up Auth modal text1 : Thank you for your interest.....");
+			}
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"user is not able to see Step up Auth modal text1 : Thank you for your interest.....");
+		}
+	}
+	
+	public void validateStepUPModalTitle(ExtentTest test){
+
+		try {
+			String stepup_expectedtitle = "Sign in to Target Druggability";
+			String stepup_actualtitle = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TITLE_CSS).getText();
+			Assert.assertEquals(stepup_actualtitle, stepup_expectedtitle);
+			test.log(LogStatus.PASS, "user is able to see correct Step up Auth modal title");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "user is not able to see correct Step up Auth modal title");
+
+		}
+
+	}
 
 }

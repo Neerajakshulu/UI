@@ -20,6 +20,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 	}
 
 	public void clickOnSavedWork() throws Exception {
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS);
@@ -165,5 +166,19 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		}
 		throw new Exception("Sortion option is not found");
 	}
+	
+	public boolean lenghtOfIileInfo(String title) throws Exception{
+		WebElement record = getSavedRecord(title);
+		String sdec = record.findElement(
+				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS.toString())).getText();
+		String stitle = record.findElement(
+				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS.toString())).getText();
+		if (stitle.length()<=50 && sdec.length()<=200)
+			return true;
+		else
+			throw new Exception("length are not matching");
+		
+	}
+	
 
 }
