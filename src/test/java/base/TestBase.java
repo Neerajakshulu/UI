@@ -285,6 +285,7 @@ public class TestBase {
 		}else if (suiteName.equals("DRA")) {
 			loadModuleData(draxls.path);
 		}else if (suiteName.equals("IPA")) {
+
 			loadModuleData(ipaxls.path);
 		}else if (suiteName.equals("IPAIAM")) {
 			loadModuleData(ipaiamxls.path);

@@ -40,6 +40,7 @@ public class IPA051 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
 	}
 
+	
 	/**
 	 * Method for login into IPA application using TR ID
 	 * 

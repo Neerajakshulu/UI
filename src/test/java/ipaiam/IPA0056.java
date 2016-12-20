@@ -42,6 +42,7 @@ public class IPA0056 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
 	}
 
+	
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 

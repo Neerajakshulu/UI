@@ -38,6 +38,7 @@ public class IPA0052 extends TestBase {
 		boolean master_condition = suiteRunmode && testRunmode;
 		// static boolean fail = false;
 
+		
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP,
