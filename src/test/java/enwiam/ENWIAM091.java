@@ -97,7 +97,7 @@ public class ENWIAM091 extends TestBase {
 						LOGIN.getProperty("NeonMergeAccountPWD"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("NeonMergeAccountPWD"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();

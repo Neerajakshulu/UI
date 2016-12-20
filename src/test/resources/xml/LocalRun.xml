@@ -175,7 +175,7 @@
 	</test>
 	<test name="ENWIAM091">
 		<classes>
-			<class name="enwiam.ENWIAM091"></class>
+			<class name="enwiam.ENWIAM091"> </class>
 		</classes>
 	</test>
 	
