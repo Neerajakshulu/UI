@@ -3,7 +3,6 @@ package ipa;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserAction;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;

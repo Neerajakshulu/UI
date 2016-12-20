@@ -25,21 +25,6 @@ public class IPASearch extends TestBase {
 		pf = new PageFactory();
 	}
 
-	public boolean loginToIPA(String username, String password) throws Exception {
-		WebElement Element = null;
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-		try {
-			Element = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_IPA_LINK_CSS.toString()));
-		} catch (Exception ex) {
-		}
-		return Element != null;
-
-	}
-
 	/**
 	 * Following block verifying the Following items - User must have a text
 	 * search box unique to Technology - User must be able to search for one or
@@ -300,7 +285,7 @@ public class IPASearch extends TestBase {
 
 	public void addTechnologyTerms(String Term, int count, Boolean freetext, Boolean shollall) throws Exception {
 		String suggestiontext = OnePObjectMap.NEON_IPA_TECH_SUG_TEXT_VAR_CSS.toString();
-		String hits = OnePObjectMap.NEON_IPA_TECH_SUG_HITS_VAR_CSS.toString();
+		//String hits = OnePObjectMap.NEON_IPA_TECH_SUG_HITS_VAR_CSS.toString();
 		String add = OnePObjectMap.NEON_IPA_TECH_SUG_ADD_VAR_CSS.toString();
 		int added = 0;
 
@@ -324,7 +309,7 @@ public class IPASearch extends TestBase {
 
 			}
 		} else if (freetext) {
-			String row = suggestiontext.replace("$index", String.valueOf(0));
+			//String row = suggestiontext.replace("$index", String.valueOf(0));
 			String button = add.replace("$index", String.valueOf(0));
 			ob.findElement(By.cssSelector(button)).click();
 		}
