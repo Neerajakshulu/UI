@@ -1,4 +1,4 @@
-package ipa;
+package ipaiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0055 extends TestBase {
+public class IPAIAM0055 extends TestBase {
 
 	static int count = -1;
 
@@ -39,10 +39,11 @@ public class IPA0055 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 	}
 
 	/**
+	 * 
 	 * Method for login into Neon application using TR ID
 	 * 
 	 * @throws Exception

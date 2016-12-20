@@ -1,4 +1,4 @@
-package ipa;
+package ipaiam;
 
 
 
@@ -18,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0052 extends TestBase {
+public class IPAIAM0052 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -27,7 +27,7 @@ public class IPA0052 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 
 	}
 
@@ -38,6 +38,7 @@ public class IPA0052 extends TestBase {
 		boolean master_condition = suiteRunmode && testRunmode;
 		// static boolean fail = false;
 
+		
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP,

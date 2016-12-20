@@ -8,79 +8,97 @@
 
 	<test name="IPA0001">
 		<classes>
-			<class name="ipaiam.IPA0001"></class>
+			<class name="ipaiam.IPAIAM0001"></class>
 		</classes>
 	</test>
 
-	<!-- <test name="IPA0002"> <classes> <class name="ipaiam.IPA0002"></class> 
-		</classes> </test> <test name="IPA0003"> <classes> <class name="ipaiam.IPA0003"></class> 
-		</classes> </test> -->
-
-	 <test name="IPA0004">
+	<!-- <test name="IPA0002">
+	<classes>
+		<class name="ipaiam.IPAIAM0002"></class>
+	</classes>
+   </test>
+   
+	<test name="IPA0003">
 		<classes>
-			<class name="ipaiam.IPA0004"></class>
+			<class name="ipaiam.IPAIAM0003"></class>
+		</classes>
+	</test> -->
+ 
+	<test name="IPA0004">
+		<classes>
+			<class name="ipaiam.IPAIAM0004"></class>
 		</classes>
 	</test>
 
 	<test name="IPA0005">
 		<classes>
-			<class name="ipaiam.IPA0005"></class>
+			<class name="ipaiam.IPAIAM0005"></class>
 		</classes>
 	</test>
-
 
 	<test name="IPA051">
 		<classes>
-			<class name="ipaiam.IPA051"></class>
+			<class name="ipaiam.IPAIAM051"></class>
 		</classes>
 	</test>
 
-	<test name="ipa.IPA052">
+	<test name="IPA052">
 		<classes>
-			<class name="ipaiam.IPA052"></class>
+			<class name="ipaiam.IPAIAM052"></class>
 		</classes>
 	</test>
 
-	<test name="ipa.IPA053">
+	<test name="IPA053">
 		<classes>
-			<class name="ipaiam.IPA053"></class>
+			<class name="ipaiam.IPAIAM053"></class>
 		</classes>
 	</test>
-	<test name="ipa.IPA054">
+	<test name="IPA054">
 		<classes>
-			<class name="ipaiam.IPA054"></class>
+			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
 	</test>
 	<test name="IPA0050">
 		<classes>
-			<class name="ipaiam.IPA0050"></class>
+			<class name="ipaiam.IPAIAM0050"></class>
 		</classes>
 	</test>
 	<test name="IPA0051">
 		<classes>
-			<class name="ipaiam.IPA0051"></class>
+			<class name="ipaiam.IPAIAM0051"></class>
 		</classes>
 	</test>
+	
 	<test name="IPA0052">
 		<classes>
-			<class name="ipaiam.IPA0052"></class>
+			<class name="ipaiam.IPAIAM0052"></class>
 		</classes>
 	</test>
+	
 	<test name="IPA0053">
 		<classes>
-			<class name="ipaiam.IPA0053"></class> 
+			<class name="ipaiam.IPAIAM0053"></class>
 		</classes>
 	</test>
-	
-	
+
+
 	<test name="IPA0054">
 		<classes>
-			<class name="ipaiam.IPA0054"></class>
+			<class name="ipaiam.IPAIAM0054"></class>
 		</classes>
-	</test> 
-	<!-- <test name="IPA Merging"> <classes> <class name="ipaiam.IPA0055"></class> 
-		</classes> </test> <test name="IPA Merging"> <classes> <class name="ipaiam.IPA0056"></class> 
-		</classes> </test> -->
-	
+	</test>
+
+	<!-- <test name="IPA Merging">
+		<classes>
+			<class name="ipaiam.IPAIAM0055"></class>
+		</classes>
+	</test>
+
+	<test name="IPA Merging2">
+		<classes>
+			<class name="ipaiam.IPAIAM0056"></class>
+		</classes>
+	</test> --> 
+
 </suite>
 	

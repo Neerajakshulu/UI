@@ -1,4 +1,4 @@
-package ipa;
+package ipaiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,7 +15,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class IPA0005 extends TestBase{
+public class IPAIAM0005 extends TestBase{
 
 	static int count = -1;
 
@@ -37,7 +37,7 @@ public class IPA0005 extends TestBase{
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 	}
 
 	/**
@@ -45,6 +45,7 @@ public class IPA0005 extends TestBase{
 	 * 
 	 * @throws Exception
 	 *             , When TR Login is not done
+	 *             
 	 */
 	@Test
 	public void testcaseIPA5() throws Exception {

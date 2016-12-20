@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -19,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0002 extends TestBase {
+public class IPAIAM0002 extends TestBase {
 
 	static int count = -1;
 
@@ -42,7 +41,7 @@ public class IPA0002 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 	}
 
 	/**

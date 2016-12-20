@@ -1,5 +1,7 @@
 package ipaiam;
 
+
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -14,77 +16,70 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
-public class IPA0004 extends TestBase{
+public class IPAIAM0054 extends TestBase {
 
-	static int count = -1;
-
-	static boolean fail = false;
-	static boolean skip = false;
 	static int status = 1;
-	static String followBefore = null;
-	static String followAfter = null;
-
-	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
-	 * 
-	 * @throws Exception
-	 *             , When Something unexpected
-	 */
+	static boolean fail = false;
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
+
 	}
 
-	/**
-	 * Method for login into Neon application using TR ID
-	 * 
-	 * 
-	 * @throws Exception
-	 *             , When TR Login is not done
-	 */
 	@Test
-	public void testcaseIPA4() throws Exception {
+	public void testcaseIPA0054() throws Exception {
+
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
+		// static boolean fail = false;
 
+		
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
+
 			openBrowser();
-			maximizeWindow();
 			clearCookies();
+			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getIpaPage(ob).loginToIPA(LOGIN.getProperty("IPASteamuser3"),
-					LOGIN.getProperty("IPAsteampw3"));
-			test.log(LogStatus.INFO, "User is able to login to IPA");
-			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
-			pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAcurrentsteampw4"), LOGIN.getProperty("IPAnewsteampw4"));
-			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
-			test.log(LogStatus.INFO, "User is able to see the correct message");
+
 			
-			for (int i = 0; i < 9; i++) {
-				pf.getIpaPage(ob).changepwdIPA(LOGIN.getProperty("IPAcurrentsteampw4"), LOGIN.getProperty("IPAnewsteampw4"));
-				BrowserWaits.waitTime(2);
-				test.log(LogStatus.INFO, "User entered incorrect password 10 times");
-			}
-			
-			BrowserWaits.waitTime(2);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("IPAUSER0054"),
+					LOGIN.getProperty("IPAPWD0054"));
+			pf.getIpaPage(ob).clickLoginIPA();
+			test.log(LogStatus.PASS,
+					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
+			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+
+			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			BrowserWaits.waitTime(5);
+			ob.navigate().to(host);
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
+					LOGIN.getProperty("DRAUSERsteamPWD16"));
+			pf.getLoginTRInstance(ob).clickLogin();
+
+			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
+			BrowserWaits.waitTime(3);
+			pf.getDraPageInstance(ob).validateSearchResultMsg(test, DRAProfileName);
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
@@ -95,8 +90,11 @@ public class IPA0004 extends TestBase{
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+
 			closeBrowser();
 		}
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 

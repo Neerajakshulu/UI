@@ -1,4 +1,4 @@
-package ipa;
+package ipaiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0001 extends TestBase { 
+public class IPAIAM0001 extends TestBase {
 
 	static int count = -1;
 
@@ -41,7 +41,7 @@ public class IPA0001 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 	}
 
 	/**
@@ -63,6 +63,7 @@ public class IPA0001 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {

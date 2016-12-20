@@ -1,12 +1,10 @@
-package ipa;
-
-
+package ipaiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.SkipException;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -18,7 +16,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPA0054 extends TestBase {
+public class IPAIAM0051 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -27,19 +25,19 @@ public class IPA0054 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 
 	}
 
 	@Test
-	public void testcaseIPA0054() throws Exception {
+	public void testcaseIPA0051() throws Exception {
+		
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		// static boolean fail = false;
 
 		if (!master_condition) {
-			status = 3;
+
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -49,40 +47,46 @@ public class IPA0054 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-
+			String str = "Your account has been locked.";
+			String evictMsg = "Your account has been evicted.";
+			String locked = "";
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
+            pf.getIpaPage(ob).steamLockedIPA();
+			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
+					30);
+			locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()))
+					.getText();
+			BrowserWaits.waitTime(2);
+			if (locked.equalsIgnoreCase(str)) {
+				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
+			}
 
-			
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("IPAUSER0054"),
-					LOGIN.getProperty("IPAPWD0054"));
-			pf.getIpaPage(ob).clickLoginIPA();
-			test.log(LogStatus.PASS,
-					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
-			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+			else {
+				test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on ENW");
+			}
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 
-			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
 			BrowserWaits.waitTime(5);
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
-					LOGIN.getProperty("DRAUSERsteamPWD16"));
-			pf.getLoginTRInstance(ob).clickLogin();
+			pf.getDraPageInstance(ob).loginTofbSuspended();
+			String evict = ob.findElement(By.xpath(OnePObjectMap.DRA_EVICT_MSG_XPATH.toString())).getText();
+			if (evict.equalsIgnoreCase(evictMsg)) {
+				test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
 
-			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
+			} else {
+				test.log(LogStatus.FAIL, "The evicted string is not displayed");
+
+			}
 			BrowserWaits.waitTime(3);
-			pf.getDraPageInstance(ob).validateSearchResultMsg(test, DRAProfileName);
-			pf.getLoginTRInstance(ob).logOutApp();
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-			// reports
-			// next 3 lines to print whole testng error in report
+
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -97,9 +101,5 @@ public class IPA0054 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-	}
+	
 }
