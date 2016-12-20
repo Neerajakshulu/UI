@@ -367,5 +367,12 @@ public class DRAPage extends TestBase {
 			closeBrowser();
 		}
 	}
+	
+	public void clickDRALink() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+	}
 
 }

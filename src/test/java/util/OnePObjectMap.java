@@ -796,7 +796,8 @@ public enum OnePObjectMap {
 	DRA_FORGOT_PASSWORD_TEXT_XPATH("//h3[contains(text(),'Email Sent')]"),
 	DRA_OK_BUTTON_XPATH("//button[contains(text(),'OK')]"),
 	DRA_EVICT_MSG_XPATH("//h2[contains(text(),'Your account has been evicted.')]"),
-
+	DRA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--dra']"),
+	
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 	ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
