@@ -2019,7 +2019,7 @@ public class ProfilePage extends TestBase {
 					test.log(LogStatus.INFO, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+"Link validation");
 					String helpLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HELP_LINK).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HELP_LINK);
-					BrowserWaits.waitTime(6);
+					BrowserWaits.waitTime(10);//to load pdf
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Help page url-->"+currentPageUrl);
 					logger.info("Help link address-->"+helpLinkAddressURL);
@@ -2032,7 +2032,6 @@ public class ProfilePage extends TestBase {
 					PDFParser testPDF = new PDFParser(TestFile);
 					testPDF.parse();
 					String pdfText = new org.apache.pdfbox.util.PDFTextStripper().getText(testPDF.getPDDocument());
-					
 					if(StringUtils.isEmpty(pdfText)) {
 						logFailureDetails(test, flyoutLinks[i]+"Page PDF not opened", "Help PDF Fail");
 					}
@@ -2045,7 +2044,7 @@ public class ProfilePage extends TestBase {
 					String feedbankLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_FEEDBACK_XPATH).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_FEEDBACK_XPATH);
 					BrowserWaits.waitTime(4);
-					pf.getBrowserWaitsInstance(ob).waitUntilText("To provide feedback","Next");
+					//pf.getBrowserWaitsInstance(ob).waitUntilText("To provide feedback","Next");
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Feedback page url-->"+currentPageUrl);
 					logger.info("Feedback link address-->"+feedbankLinkAddressURL);
