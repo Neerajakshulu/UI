@@ -15,5 +15,6 @@
 		<suite-file path="./RCC.xml" />
 		<suite-file path="./DRA.xml" />
 		<suite-file path="./IPA.xml" />
+		<suite-file path="./IPAIAM.xml" />
 	</suite-files>
 </suite>
