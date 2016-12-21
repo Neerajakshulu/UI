@@ -498,6 +498,35 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 		
 	}
+	public void clickDRAStepUpAuthLoginNotEntitledUser(ExtentTest test, String DRAUserName) throws Exception {
+		try {
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString())).sendKeys(DRAUserName);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			ErrorUtil.addVerificationFailure(t);// testng
+			closeBrowser();
+		}
+	}
+
+	public void clickDRAStepUpAuthLoginSteam(ExtentTest test, String DRAUserName, String DRApwd) throws Exception {
+		try {
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
+
+			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString())).sendKeys(DRAUserName);
+			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString())).sendKeys(DRApwd);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			ErrorUtil.addVerificationFailure(t);// testng
+			closeBrowser();
+		}
+	}
+
+
 	
 	public void validateProductOverviewPage(ExtentTest test){
 		try {
@@ -527,5 +556,6 @@ public class DRAPage extends TestBase {
 		}
 		
 	}
+	
 
 }
