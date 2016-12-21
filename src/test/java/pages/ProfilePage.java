@@ -2022,7 +2022,7 @@ public class ProfilePage extends TestBase {
 					BrowserWaits.waitTime(10);//to load pdf
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Help page url-->"+currentPageUrl);
-					logger.info("Help link address-->"+helpLinkAddressURL);
+					logger.info("Help link address-->"+helpLinkAddressURL); 
 					if(!StringUtils.equalsIgnoreCase(currentPageUrl, helpLinkAddressURL)) {
 						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA-Help Fail");
 					}
