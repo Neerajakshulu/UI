@@ -579,17 +579,6 @@
 		</classes>
 	</test>
 
-	<test name="IPA0002">
-		<classes>
-			<class name="ipa.IPA0002"></class>
-		</classes>
-	</test>
-
-	<test name="IPA0003">
-		<classes>
-			<class name="ipa.IPA0003"></class>
-		</classes>
-	</test>
 
 	<test name="DRA002">
 		<classes>
@@ -637,15 +626,16 @@
 			<class name="dra.DRA100"></class>
 		</classes>
 	</test>
-
+	
+	<!-- IPA IAM Test cases -->
 	<test name="IPA0055">
 		<classes>
-			<class name="ipa.IPA0055"></class>
+			<class name="ipaiam.IPAIAM0055"></class>
 		</classes>
 	</test>
 	<test name="IPA0056">
 		<classes>
-			<class name="ipa.IPA0056"></class>
+			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
 	<test name="IPA_Forgot_Password">
@@ -653,5 +643,18 @@
 			<class name="ipa.IPA100"></class>
 		</classes>
 	</test>
+	
+	<test name="IPA0002">
+		<classes>
+			<class name="ipaiam.IPAIAM0002"></class>
+		</classes>
+	</test>
+
+	<test name="IPA0003">
+		<classes>
+			<class name="ipaiam.IPAIAM0003"></class>
+		</classes>
+	</test>
+	
 </suite>
 
