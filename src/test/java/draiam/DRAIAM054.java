@@ -78,8 +78,11 @@ public class DRAIAM054 extends TestBase {
 						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
 			}
 			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
+			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "@Salma123");
 			
 			BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+			test.log(LogStatus.PASS, "DRA Home page displayed after entering steam account details");
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
