@@ -152,10 +152,7 @@ public class TestBase {
 			}else if (className.contains("DRAIAM")) {
 				suiteName = "DRAIAM";
 			}
-			else if (className.contains("IPA")) {
-				suiteName = "IPA";
-			}
-			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")) {
+			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")||className.contains("IPA")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
 				if (className.contains("ENW")) {
@@ -164,7 +161,13 @@ public class TestBase {
 					} else {
 						suiteName = "ENW";
 					}
-				} else {
+				} else if (className.contains("IPA")) {
+					if (className.contains("IAM")) {
+						suiteName = "IPAIAM";
+					} else {
+						suiteName = "IPA";
+					}
+				} else if (className.contains("IAM")) {
 					suiteName = "IAM";
 				}
 			}
