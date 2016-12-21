@@ -141,7 +141,7 @@ public class TestBase {
 				suiteName = "Notifications";
 			} else if (className.contains("Profile")) {
 				suiteName = "Profile";
-			} else if (className.contains("Authoring")) {
+			} else if (className.contains("Authoring")) { 
 				suiteName = "Authoring";
 			} else if (className.contains("Search")) {
 				suiteName = "Search";
