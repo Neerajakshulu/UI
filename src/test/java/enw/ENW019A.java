@@ -54,7 +54,7 @@ public class ENW019A extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);			
-			loginAs("NONMARKETUSEREMAIL", "MARKETUSERPASSWORD");
+			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			BrowserWaits.waitTime(2);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
