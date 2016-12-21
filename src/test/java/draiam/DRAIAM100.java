@@ -1,4 +1,4 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA100 extends TestBase {
+public class DRAIAM100 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -32,7 +32,7 @@ public class DRA100 extends TestBase {
 		String dec = rowData.getTestcaseDescription();
 		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
-		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("DRA");
+		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("DRAIAM");
 		test.log(LogStatus.INFO, tests[0]);
 		
 		

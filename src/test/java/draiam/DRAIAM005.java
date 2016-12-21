@@ -1,4 +1,4 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -11,11 +11,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 
-public class DRA051 extends TestBase {
+public class DRAIAM005 extends TestBase {
 
 	static int count = -1;
 
@@ -37,17 +37,17 @@ public class DRA051 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 	}
 
 	/**
-	 * Method for login into DRA application using TR ID
+	 * Method for login into Neon application using TR ID
 	 * 
 	 * @throws Exception
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh1() throws Exception {
+	public void testcaseDRA5() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -62,34 +62,27 @@ public class DRA051 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-     
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA051"),
-					LOGIN.getProperty("USERPWDDRA051"));
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		test.log(LogStatus.PASS,
-					"user is able to login to DRA when first name of user is missing.");
-		   
-           String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
-           
-           pf.getDraPageInstance(ob).clickProfileLink();
-           String firstnameerrormessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
-           if(Profilename.equals("")&& firstnameerrormessage.equals("Please enter your first name.") )
-			{test.log(LogStatus.PASS,
-					"user is able to see first name as NULL when first name of user is missing.");
+			pf.getDraPageInstance(ob).loginToDRAApplication(LOGIN.getProperty("DRASteamuser3"),
+					LOGIN.getProperty("DRAsteampw3"));
+			test.log(LogStatus.INFO, "User is able to login to DRA");
+			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
+			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
+			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message");
+			
+			for (int i = 0; i < 9; i++) {
+				pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
+				BrowserWaits.waitTime(2);
 			}
-			else
-			{test.log(LogStatus.FAIL,
-					"user is not  able to see first name as NULL when first name of user is missing.");
-			}
-			pf.getDraPageInstance(ob).logoutDRA();
-			ob.close();
-		}
-		catch (Throwable t) {
+			
+			closeBrowser();
+			
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
 			// next 3 lines to print whole testng error in report
@@ -101,9 +94,7 @@ public class DRA051 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-
 	}
 
 	@AfterTest
@@ -111,5 +102,4 @@ public class DRA051 extends TestBase {
 		extent.endTest(test);
 
 	}
-
 }

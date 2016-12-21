@@ -91,7 +91,7 @@ public class TestBase {
 	public static Xls_Reader enwxls = null;
 	public static Xls_Reader enwiamxls = null;
 	public static Xls_Reader rccxls = null;
-	public static Xls_Reader draxls = null;
+	public static Xls_Reader draiamxls = null;
 	public static Xls_Reader ipaxls = null;
 	public static Xls_Reader ipaiamxls = null;
 	public static boolean isInitalized = false;
@@ -149,8 +149,8 @@ public class TestBase {
 				suiteName = "Watchlist";
 			} else if (className.contains("RCC")) {
 				suiteName = "RCC";
-			}else if (className.contains("DRA")) {
-				suiteName = "DRA";
+			}else if (className.contains("DRAIAM")) {
+				suiteName = "DRAIAM";
 			}
 			else if (className.contains("IPA")) {
 				suiteName = "IPA";
@@ -257,7 +257,7 @@ public class TestBase {
 			enwxls = new Xls_Reader("src/test/resources/xls/ENW.xlsx");
 			enwiamxls = new Xls_Reader("src/test/resources/xls/ENWIAM.xlsx");
 			rccxls = new Xls_Reader("src/test/resources/xls/RCC.xlsx");
-			draxls = new Xls_Reader("src/test/resources/xls/DRA.xlsx");
+			draiamxls = new Xls_Reader("src/test/resources/xls/DRAIAM.xlsx");
 			ipaxls = new Xls_Reader("src/test/resources/xls/IPA.xlsx");
 			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
@@ -282,8 +282,8 @@ public class TestBase {
 			loadModuleData(enwiamxls.path);
 		}else if (suiteName.equals("RCC")) {
 			loadModuleData(rccxls.path);
-		}else if (suiteName.equals("DRA")) {
-			loadModuleData(draxls.path);
+		}else if (suiteName.equals("DRAIAM")) {
+			loadModuleData(draiamxls.path);
 		}else if (suiteName.equals("IPA")) {
 
 			loadModuleData(ipaxls.path);
@@ -299,7 +299,7 @@ public class TestBase {
 			loadModuleData(enwxls.path);
 			loadModuleData(enwiamxls.path);
 			loadModuleData(rccxls.path);
-			loadModuleData(draxls.path);
+			loadModuleData(draiamxls.path);
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
 		} else if(suiteName.equals("LocalRun")){
@@ -310,7 +310,7 @@ public class TestBase {
 			loadModuleData(searchxls.path);
 			loadModuleData(rccxls.path);
 			loadModuleData(authoringxls.path);
-			loadModuleData(draxls.path);
+			loadModuleData(draiamxls.path);
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
 		}

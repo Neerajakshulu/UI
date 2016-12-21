@@ -1,4 +1,4 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA0017 extends TestBase {
+public class DRAIAM054 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -28,7 +28,7 @@ public class DRA0017 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 
 	}
 
@@ -55,28 +55,30 @@ public class DRA0017 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAFBUSER0017"),
-					LOGIN.getProperty("DRAFBUSERPWD17"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA054"),
+					LOGIN.getProperty("USERPWDDRA054"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			BrowserWaits.waitTime(2);
 
-			validateAccountsFB(1, accountType);
+			validateAccountsFB(2, accountType);
 			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickDRALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
 			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-			if (Emailaddress.getAttribute("value").equals("")) {
+			if (Emailaddress.getAttribute("value").equals("shakeal68@x5a9m8ugq.com")) {
 				test.log(LogStatus.PASS,
-						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
+						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
 			} else {
 				test.log(LogStatus.FAIL,
-						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
+						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
 			}
+			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
+			
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {
@@ -99,9 +101,9 @@ public class DRA0017 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAFBUSER0017")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA054")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
+			test.log(LogStatus.PASS, "Social account is linked with steam account");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,

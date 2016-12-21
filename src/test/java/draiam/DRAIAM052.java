@@ -1,9 +1,11 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
-import org.apache.poi.util.SystemOutLogger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -18,7 +20,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA002 extends TestBase {
+public class DRAIAM052 extends TestBase {
 
 	static int count = -1;
 
@@ -40,7 +42,7 @@ public class DRA002 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class DRA002 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseDRA2() throws Exception {
+	public void testcaseDRA4() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -61,17 +63,15 @@ public class DRA002 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
+		
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser1"));
-			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("DRASteamuser1"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERDRA052"));
+			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
 
-			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
-				throw new Exception("Delete API Call failed");
-			}
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -81,24 +81,15 @@ public class DRA002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);
-
-			// Activating the facebook account
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser1"),
-					LOGIN.getProperty("DRAfbpw1"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA052"),
+					LOGIN.getProperty("USERPWDDRA052"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
-			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
-			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
-			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
-			String accountType = "Facebook";
-
-			validateAccounts(1, accountType);
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);
 
@@ -106,36 +97,31 @@ public class DRA002 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser1"),
-						LOGIN.getProperty("DRAsteampw1"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA052"),
+						LOGIN.getProperty("USERPWDDRA052"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "User is able to click the link button");
-				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
-				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				BrowserWaits.waitTime(2);
-				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
+				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+				test.log(LogStatus.PASS, "User is able to click on not now on the modal");	
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				BrowserWaits.waitTime(2);
-				validateLinkedAccounts(2, accountType);
-				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
-				test.log(LogStatus.PASS, "Forward Merge is happened");
-				if (secondAccountProfileName.contains(firstAccountProfileName)) {
-					test.log(LogStatus.PASS, "Winning account is Facebook");
-				}
+				validateAccounts(1,"Neon");
+				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "User is not able to click the link button");
+				test.log(LogStatus.FAIL, "User is not able to click on notnow on the modal");
 				test.log(LogStatus.INFO, "Error--->" + t);
 				ErrorUtil.addVerificationFailure(t);
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
-
 			}
+			
 
+			BrowserWaits.waitTime(2);
+			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
@@ -150,46 +136,54 @@ public class DRA002 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-
 	}
 
+	
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
-
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAfbuser1")));
-			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
+			Assert.assertTrue(verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA052")));
+			Assert.assertTrue(validateAccountsCount(accountCount));
+			//test.log(LogStatus.PASS,  " account is available and is not linked");
+			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
-
-	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
-		try {
-
-			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRASteamuser1")));
-			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAfbuser1")));
-			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS,
-					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Linked accounts are not available in accounts page : Neon and " + linkName + " accounts");
-			ErrorUtil.addVerificationFailure(t);// testng
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Linking_failed")));// screenshot
-		}
+	
+	public boolean validateAccountsCount(int accountCount) {
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
+		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
+		
+		return accountCount==list.size();
 	}
+	
+	public boolean verifyLinkedAccount(String accountType, String emailId) {
+		boolean result = false;
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
+		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
 
+		for (WebElement element : list) {
+			String type = element.getText();
+			if ((accountType.equalsIgnoreCase("Neon") && type.equalsIgnoreCase("Thomson Reuters | Project Neon"))
+					|| accountType.equalsIgnoreCase(type.trim())) {
+			
+				//String emailid = null;
+				String emailid = ob.findElement(By.cssSelector("div[class='account-option-item__app-details'] span[class='ng-binding']")).getText();
+				//String emailid="cattle6@b9x45v1m.com";
+				if (emailid.equalsIgnoreCase(emailId))
+					result = true;
+				
+				break;
+			}
+
+		}
+		return result;
+		
+	}
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

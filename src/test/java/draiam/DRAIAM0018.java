@@ -1,11 +1,8 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +16,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA054 extends TestBase {
+public class DRAIAM0018 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -28,12 +25,12 @@ public class DRA054 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 
 	}
 
 	@Test
-	public void testcaseDRA0010() throws Exception {
+	public void testcaseDRA0018() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -50,34 +47,29 @@ public class DRA054 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
-			String accountType = "Facebook";
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA054"),
-					LOGIN.getProperty("USERPWDDRA054"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAFBUSER0018"),
+					LOGIN.getProperty("DRAFBUSERPWD18"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-
-			pf.getHFPageInstance(ob).clickOnAccountLink();
 			BrowserWaits.waitTime(2);
-
-			validateAccountsFB(2, accountType);
-			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickDRALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
+			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-			if (Emailaddress.getAttribute("value").equals("shakeal68@x5a9m8ugq.com")) {
-				test.log(LogStatus.PASS,
-						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
-			} else {
-				test.log(LogStatus.FAIL,
-						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
-			}
+			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "abcd");
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS);
+			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
 			BrowserWaits.waitTime(2);
+			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, LOGIN.getProperty("DRAFBUSERPWD18"));
+			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);
+			BrowserWaits.waitTime(3);
+			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -93,23 +85,6 @@ public class DRA054 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-	}
-
-	private void validateAccountsFB(int accountCount, String linkName) throws Exception {
-		try {
-
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA054")));
-			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			test.log(LogStatus.PASS, "Social account is linked with steam account");
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL,
-					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
-			ErrorUtil.addVerificationFailure(t);// testng
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
-		}
 	}
 
 	@AfterTest

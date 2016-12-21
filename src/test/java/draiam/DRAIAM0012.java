@@ -1,11 +1,10 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
 import org.testng.SkipException;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,7 +16,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRA0019 extends TestBase {
+public class DRAIAM0012 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
@@ -26,16 +25,15 @@ public class DRA0019 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 
 	}
 
 	@Test
-	public void testcaseDRA0010() throws Exception {
+	public void testcaseDRA0012() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		// static boolean fail = false;
 
 		if (!master_condition) {
 
@@ -51,19 +49,10 @@ public class DRA0019 extends TestBase {
 			String str = "Your account has been locked.";
 			String evictMsg = "Your account has been evicted.";
 			String locked = "";
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAFBUSER0017"),
-					LOGIN.getProperty("DRAFBUSERPWD17"));
-			test.log(LogStatus.PASS, "user has logged in with social account");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getDraPageInstance(ob).clickDRALink();
-			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
+			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			pf.getDraPageInstance(ob).steamLockedDRA();
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
@@ -72,22 +61,15 @@ public class DRA0019 extends TestBase {
 					.getText();
 			BrowserWaits.waitTime(2);
 			if (locked.equalsIgnoreCase(str)) {
-				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on DRA");
+				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
 			}
 
 			else {
-				test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on DRA");
+				test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on ENW");
 			}
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 
 			BrowserWaits.waitTime(5);
-			ob.navigate().to(host);
-			pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getDraPageInstance(ob).clickDRALink();
-			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
 			pf.getDraPageInstance(ob).loginTofbSuspended();
 			String evict = ob.findElement(By.xpath(OnePObjectMap.DRA_EVICT_MSG_XPATH.toString())).getText();
 			if (evict.equalsIgnoreCase(evictMsg)) {
@@ -100,6 +82,7 @@ public class DRA0019 extends TestBase {
 			BrowserWaits.waitTime(3);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 			closeBrowser();
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 
@@ -109,6 +92,7 @@ public class DRA0019 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
 
 			closeBrowser();
 		}
@@ -116,9 +100,5 @@ public class DRA0019 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	@AfterTest
-	public void reportTestResult() {
-		extent.endTest(test);
-
-	}
+	
 }

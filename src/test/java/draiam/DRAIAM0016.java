@@ -1,4 +1,4 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -14,83 +14,69 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
-public class DRA008 extends TestBase {
-	static int count = -1;
+public class DRAIAM0016 extends TestBase {
 
-	static boolean fail = false;
-	static boolean skip = false;
 	static int status = 1;
-	static String followBefore = null;
-	static String followAfter = null;
-
-	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
-	 * Reports
-	 * 
-	 * @throws Exception
-	 *             , When Something unexpected
-	 */
+	static boolean fail = false;
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
+
 	}
 
-	/**
-	 * Method for login into Neon application using TR ID
-	 * 
-	 * @throws Exception
-	 *             , When TR Login is not done
-	 */
 	@Test
-	public void testcaseh2() throws Exception {
+	public void testcaseDRA0016() throws Exception {
+
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
+		// static boolean fail = false;
 
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
+
 		}
 
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAfbuser7"));
-
-			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
-				throw new Exception("Delete API Call failed");
-			}
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
-		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
 
 			openBrowser();
-			maximizeWindow();
 			clearCookies();
+			maximizeWindow();
+			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0016"),
+					LOGIN.getProperty("DRAUSERPWD16"));
+			pf.getDraPageInstance(ob).clickLoginDRA();
+			test.log(LogStatus.PASS,
+					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");
+			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+
+			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			BrowserWaits.waitTime(5);
 			ob.navigate().to(host);
-
-			// login using TR credentials
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser8"),
-					LOGIN.getProperty("DRAsteampw8"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
+					LOGIN.getProperty("DRAUSERsteamPWD16"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			test.log(LogStatus.PASS, "user has logged in with steam account in Neon");
-			pf.getDraPageInstance(ob).clickDRALinkInSteam();
-			test.log(LogStatus.INFO, "verifying user is navigated seemlessly to DRA");
-			pf.getDraPageInstance(ob).validateNavigationDRAApp(test);
-			BrowserWaits.waitTime(2);
+
+			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
+			BrowserWaits.waitTime(3);
+			pf.getDraPageInstance(ob).validateSearchResultMsg(test, DRAProfileName);
+			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
+			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
@@ -101,11 +87,12 @@ public class DRA008 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+
 			closeBrowser();
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-
 	}
 
 	@AfterTest
@@ -113,5 +100,4 @@ public class DRA008 extends TestBase {
 		extent.endTest(test);
 
 	}
-
 }

@@ -1,4 +1,4 @@
-package dra;
+package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,7 +15,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class DRA005 extends TestBase {
+public class DRAIAM006 extends TestBase {
 
 	static int count = -1;
 
@@ -37,7 +37,7 @@ public class DRA005 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class DRA005 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseDRA5() throws Exception {
+	public void testcaseDRA6() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -66,20 +66,20 @@ public class DRA005 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			pf.getDraPageInstance(ob).loginToDRAApplication(LOGIN.getProperty("DRASteamuser3"),
-					LOGIN.getProperty("DRAsteampw3"));
+			pf.getDraPageInstance(ob).loginToDRAApplication(LOGIN.getProperty("DRASteamuser5"),
+					LOGIN.getProperty("DRAsteampw5"));
 			test.log(LogStatus.INFO, "User is able to login to DRA");
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			pf.getDraPageInstance(ob).clickOnChangePwLinkDRA();
-			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
-			pf.getDraPageInstance(ob).validateIncorrectPwdErrorMsg(test);
-			test.log(LogStatus.INFO, "User is able to see the correct message");
-			
-			for (int i = 0; i < 9; i++) {
-				pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAcurrentsteampw4"), LOGIN.getProperty("DRAnewsteampw4"));
-				BrowserWaits.waitTime(2);
-			}
-			
+			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRAsteampw5"));
+			test.log(LogStatus.PASS, "User is able to click on change password link and enter the current & new password");
+			pf.getDraPageInstance(ob).validateCurrentPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters current password in new password field");
+			BrowserWaits.waitTime(2);
+			pf.getDraPageInstance(ob).changepwd(LOGIN.getProperty("DRAsteampw5"), LOGIN.getProperty("DRASteam5pw1"));
+			pf.getDraPageInstance(ob).validateNewPwdErrorMsg(test);
+			test.log(LogStatus.INFO, "User is able to see the correct message when user enters password in new password field which is matching with the previous 4 passwords.");
+			pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 			
 		} catch (Throwable t) {

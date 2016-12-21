@@ -580,50 +580,50 @@
 	</test>
 
 
-	<test name="DRA002">
+	<test name="DRAIAM002">
 		<classes>
-			<class name="dra.DRA002"></class>
+			<class name="draiam.DRA002"></class>
 		</classes>
 	</test>
 
-	<test name="DRA003">
+	<test name="DRAIAM003">
 		<classes>
-			<class name="dra.DRA003"></class>
+			<class name="draiam.DRA003"></class>
 		</classes>
 	</test>
 
-	<test name="DRA004">
+	<test name="DRAIAM004">
 		<classes>
-			<class name="dra.DRA004"></class>
+			<class name="draiam.DRA004"></class>
 		</classes>
 	</test>
 
-	<test name="DRA0014">
+	<test name="DRAIAM0014">
 		<classes>
-			<class name="dra.DRA0014"></class>
+			<class name="draiam.DRA0014"></class>
 		</classes>
 	</test>
-	<test name="DRA0015">
+	<test name="DRAIAM0015">
 		<classes>
-			<class name="dra.DRA0015"></class>
-		</classes>
-	</test>
-
-	<test name="DRA052">
-		<classes>
-			<class name="dra.DRA052"></class>
+			<class name="draiam.DRA0015"></class>
 		</classes>
 	</test>
 
-	<test name="DRA053">
+	<test name="DRAIAM052">
 		<classes>
-			<class name="dra.DRA053"></class>
+			<class name="draiam.DRA052"></class>
+		</classes>
+	</test>
+
+	<test name="DRAIAM053">
+		<classes>
+			<class name="draiam.DRA053"></class>
 		</classes>
 	</test>
 
 	<test name="DRA_Forgot_Password">
 		<classes>
-			<class name="dra.DRA100"></class>
+			<class name="draiam.DRA100"></class>
 		</classes>
 	</test>
 	
