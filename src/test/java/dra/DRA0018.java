@@ -59,13 +59,17 @@ public class DRA0018 extends TestBase {
 			BrowserWaits.waitTime(2);
 			pf.getDraPageInstance(ob).clickDRALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
+			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
+
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "abcd");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS);
+			pf.getBrowserWaitsInstance(ob)
+					.waitUntilElementIsClickable(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS);
 			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
 			BrowserWaits.waitTime(2);
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, LOGIN.getProperty("DRAFBUSERPWD18"));
 			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(3);
+			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
