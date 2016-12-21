@@ -1,5 +1,11 @@
 package pages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,7 +26,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 	}
 
 	public void clickOnSavedWork() throws Exception {
-		
+
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(
 				OnePObjectMap.NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_HOMOE_PAGE_SAVED_WORK_BUTTON_CSS);
@@ -117,22 +123,17 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		throw new Exception("Cancel button is not displayed in Saved tile page");
 	}
 
-	/*public WebElement updateTitle(String val) throws Exception {
+	public void randomTile(int val) throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS.toString()), 30);
-		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_EDIT_BUTTON_CSS.toString()), 30);
-
 		List<WebElement> list = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS
 				.toString()));
-		for (WebElement we : list) {
-			if (we.getText().equalsIgnoreCase(val)) {
-				return we;
-			}
-		}
-		throw new Exception("Record not found in the saved list page");
+		if (val < list.size()) {
+			list.get(val).click();
+		} else
+			throw new Exception("Record not found in the saved list page");
 	}
-*/
+
 	public boolean verifySortOptions() throws Exception {
 		String opt1 = "Date saved", opt2 = "Date viewed";
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
@@ -144,7 +145,9 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		String val2 = ob.findElements(By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()))
 				.get(1).getText();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS);
+
 		if (val1.equalsIgnoreCase(opt1) && val2.equalsIgnoreCase(opt2))
+
 			return true;
 		else
 			return false;
@@ -159,26 +162,126 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		List<WebElement> li = ob
 				.findElements(By.cssSelector(OnePObjectMap.IPA_SAVED_DATA_PAGE_SORT_MENU_CSS.toString()));
 		for (WebElement we : li) {
-			if (we.getText().equalsIgnoreCase(optionvalue)) {
+			if (we.getText().contains(optionvalue)) {
 				we.click();
 				return;
 			}
 		}
 		throw new Exception("Sortion option is not found");
 	}
-	
-	public boolean lenghtOfIileInfo(String title) throws Exception{
+
+	public boolean lenghtOfIileInfo(String title) throws Exception {
 		WebElement record = getSavedRecord(title);
 		String sdec = record.findElement(
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS.toString())).getText();
 		String stitle = record.findElement(
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS.toString())).getText();
-		if (stitle.length()<=50 && sdec.length()<=200)
+		if (stitle.length() <= 50 && sdec.length() <= 200)
 			return true;
 		else
 			throw new Exception("length are not matching");
-		
+
 	}
-	
+
+	public void sortByDateviewedValue() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS);
+		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS
+				.toString()));
+		DateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
+		Date date = new Date();
+		List<String> beforesort = new ArrayList<String>();
+		for (int i = 0; i < li.size(); i++) {
+			if (li.get(i).getText().contains("TODAY")) {
+				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+				beforesort.add(str);
+			} else {
+
+				beforesort.add(li.get(i).getText());
+			}
+		}
+
+		Collections.sort(beforesort, new Comparator<String>() {
+
+			public int compare(String o1,
+					String o2) {
+				try {
+					return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+				} catch (Exception e) {
+					throw new IllegalArgumentException(e);
+				}
+			}
+		});
+
+		System.out.println(beforesort);
+		selectSortoptions("Date viewed");
+		List<String> aftersort = new ArrayList<String>();
+		for (int i = 0; i < li.size(); i++) {
+			if (li.get(i).getText().contains("TODAY")) {
+				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+				aftersort.add(str);
+			} else {
+
+				aftersort.add(li.get(i).getText());
+			}
+		}
+		System.out.println(aftersort);
+		for (int i = 0; beforesort.size() == aftersort.size() && i < beforesort.size(); i++) {
+			if (!beforesort.get(i).equals(aftersort.get(i)))
+				throw new Exception("values are not sorted by Date viewed");
+		}
+	}
+
+	public void sortByDataSavedValue() throws Exception {
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS);
+		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS
+				.toString()));
+		DateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
+		Date date = new Date();
+		List<String> beforesort = new ArrayList<String>();
+		for (int i = 0; i < li.size(); i++) {
+			if (li.get(i).getText().contains("TODAY")) {
+				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+				beforesort.add(str);
+			} else {
+
+				beforesort.add(li.get(i).getText());
+			}
+		}
+
+		Collections.sort(beforesort, new Comparator<String>() {
+
+			public int compare(String o1,
+					String o2) {
+				try {
+					return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+				} catch (Exception e) {
+					throw new IllegalArgumentException(e);
+				}
+			}
+		});
+
+		System.out.println("BFFFF" + beforesort);
+		selectSortoptions("Date saved");
+		waitForAllElementsToBePresent(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS.toString()), 40);
+		List<String> aftersort = new ArrayList<String>();
+		for (int i = 0; i < li.size(); i++) {
+			if (li.get(i).getText().contains("TODAY")) {
+				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+				aftersort.add(str);
+			} else {
+
+				aftersort.add(li.get(i).getText());
+			}
+		}
+		System.out.println("AFFF" + aftersort);
+		for (int i = 0; beforesort.size() == aftersort.size() && i < beforesort.size(); i++) {
+			if (!beforesort.get(i).equals(aftersort.get(i)))
+				throw new Exception("values are not sorted by Date viewed");
+		}
+	}
 
 }

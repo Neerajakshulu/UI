@@ -1013,7 +1013,10 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_KEYINFORMATION_LINK_CSS("[popover-template]"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS("div[class='sse-item-description ng-binding']"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding'"),
-
+	NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS("span[class='wui-label wui-label--sse-item-last-viewed-date ng-scope'] wui-timestamp"),
+	NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS("span[class='wui-label ng-scope'] wui-timestamp"),
+	
+	
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
 	CUSTOMER_CARE_PASSWORD_ID("userPassword"),
