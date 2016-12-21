@@ -60,16 +60,16 @@ public class ENWIAM90 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		try {
+		/*try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("FACEBOOKACCOUNT"));
-			logger.info("statuCode -->"+statuCode);
+			logger.info("statuCode -->" + statuCode);
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				throw new Exception("Delete API Call failed");
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}
+		}*/
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
@@ -88,7 +88,7 @@ public class ENWIAM90 extends TestBase {
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 			test.log(LogStatus.INFO, "Social account profile name: " + firstAccountProfileName);
-			//pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			accountType = "Neon";
 			validateAccounts(1, accountType);
@@ -99,7 +99,7 @@ public class ENWIAM90 extends TestBase {
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
 				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FACEBOOKACCOUNT"),
-						LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED"));
+						LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
 				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED"));
