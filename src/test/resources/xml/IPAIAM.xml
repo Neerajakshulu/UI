@@ -58,6 +58,13 @@
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
 	</test>
+	
+	<test name="IPA055">
+		<classes>
+			<class name="ipaiam.IPAIAM055"></class>
+		</classes>
+	</test>
+	
 	<test name="IPA0050">
 		<classes>
 			<class name="ipaiam.IPAIAM0050"></class>
