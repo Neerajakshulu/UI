@@ -97,6 +97,16 @@
 			<class name="ipaiam.IPAIAM0058"></class>
 		</classes>
 	</test>
+		 <test name="IPA0059">
+		<classes>
+			<class name="ipaiam.IPAIAM0059"></class>
+		</classes>
+	</test>
+		 <test name="IPA0060">
+		<classes>
+			<class name="ipaiam.IPAIAM0060"></class>
+		</classes>
+	</test>
 	<!-- <test name="IPA Merging">
 		<classes>
 			<class name="ipaiam.IPAIAM0055"></class>
