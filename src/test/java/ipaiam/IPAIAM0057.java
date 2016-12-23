@@ -65,7 +65,7 @@ public class IPAIAM0057 extends TestBase {
 
 			validateAccountsFB(1, accountType);
 			BrowserWaits.waitTime(5);
-			pf.getDraPageInstance(ob).clickDRALink();
+			pf.getIpaPage(ob).clickIPALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);

@@ -155,6 +155,11 @@ public class IPApage extends TestBase {
 		}
 	}
 
-
+	public void clickIPALink() throws Exception {
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_APP_SWITCHER_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
+	}
 
 }

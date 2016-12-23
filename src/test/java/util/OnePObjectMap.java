@@ -902,6 +902,7 @@ public enum OnePObjectMap {
 	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[event-action='change-password-submitted']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
+	IPA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--ipa']"),
 
 	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
