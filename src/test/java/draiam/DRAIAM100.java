@@ -60,7 +60,7 @@ public class DRAIAM100 extends TestBase {
 			logger.info(rowData.getTestcaseId());
 			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
-				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("DRA");
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("DRAIAM");
 				test.log(LogStatus.SKIP,
 						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 				extent.endTest(test);
@@ -112,7 +112,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-1934",
 								"Verify that Forgot your password? Link is clickable on NEON Landing page and End note landing page")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).clickForgotPasswordLink();
@@ -137,7 +137,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-1935&OPQA-3687",
 								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link&Verify that,the system should support a ENW password reset workflow with the following configurations")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).validateTextInForgotPasswordPage();
@@ -165,7 +165,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4230",
 								"Verify that system should not inform user that entered email is not found.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).sendEamilToTextBox("absssaa112222cddffdd@tr.com");
@@ -194,7 +194,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4229",
 								"Verify that user should be able to enter email address in Forgot password page.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).validateTextInForgotPasswordPage();
@@ -219,7 +219,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4231",
 								"Verify that  forget password service should send a forgot password email when the email entered is registered in the system")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickSendEmailButton();
 				pf.getIamPage(ob).checkEmailSentText(email);
@@ -246,7 +246,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4232",
 								"Verify that the platform password reset service should send a platform forget password email with branding that corresponds with the originating application as per wireframe")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
 				pf.getIamPage(ob).clickReceivedMail("Drug Research Advisor");
@@ -273,7 +273,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4636",
 								"Verify that When the password reset token in the email is valid, upon clicking the password reset link in the the platform forget password email, the user shall be taken to the External Password Reset Page")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
@@ -297,7 +297,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4261",
 								"Verify that External Password Reset Page should have a new password field where the user enters their new password.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox(newPassword);
 				pf.getIamPage(ob).clickResetButton();
@@ -321,7 +321,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4244",
 								"Verify that when reset Password Token already used user should be taken to sign in screen")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkLoginPage();
 				pf.getIamPage(ob).login(email, newPassword);
@@ -346,7 +346,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4264",
 								"Verify that upon successful submission of a password change, The user should receive a password change confirmation email to the user's primary email address with branding that corresponds with the application that the user completed the password change")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
 				pf.getIamPage(ob).checkChangedPasswordMailSubject("Drug Research Advisor");
@@ -372,7 +372,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4265",
 								"Verify that the password change confirmation email should reference the fact that credentials are shared across all products.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.navigate().to(System.getProperty("host") + CONFIG.getProperty("appendENWAppUrl"));
 				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
@@ -397,7 +397,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4237",
 								"Verify that when the password reset token in the email is expired or already used, upon clicking the password reset link in the the platform forget password email, the user should be taken to the External Invalid Password Reset Token Page.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).openGurillaMail();
@@ -424,7 +424,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4239",
 								"Verify that the email address on the External Invalid Password Reset Token Page should be pre-populated with the email address that matches the email that the forgot password email was sent.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
@@ -448,7 +448,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4240",
 								"Verify that user who clicks the submit button on the the External Invalid Password Reset Token page, should be taken to the target application sign in page.")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkPrepopulatedText(email);
@@ -473,7 +473,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4246",
 								"Verify that when Email address is known from password reset token,error message 'The email address is prepopulated.' should be displayed and email address field should be editable")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 				pf.getIamPage(ob).sendEamilToTextBox("5j6b6y+dzzvwq8idhgf4@sharklasers.com");
@@ -501,7 +501,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4248",
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
@@ -528,7 +528,7 @@ public class DRAIAM100 extends TestBase {
 				test = extent
 						.startTest("OPQA-4252",
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
-						.assignCategory("DRA");
+						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
