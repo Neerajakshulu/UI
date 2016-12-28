@@ -400,6 +400,12 @@
 			</class>
 		</classes>
 	</test>
+	<test name="ENWIAM081">
+		<classes>
+			<class name="enwiam.ENWIAM081">
+			</class>
+		</classes>
+	</test>
 	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
