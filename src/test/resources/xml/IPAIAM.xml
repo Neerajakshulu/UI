@@ -114,6 +114,14 @@
 			<class name="ipaiam.IPAIAM0060"></class>
 		</classes>
 	</test>
+	
+	</test>
+		 <test name="IPAIAM100">
+		<classes>
+			<class name="ipaiam.IPAIAM100"></class>
+		</classes>
+	</test>
+	
 	<!-- <test name="IPA Merging">
 		<classes>
 			<class name="ipaiam.IPAIAM0055"></class>

@@ -644,11 +644,6 @@
 			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
-	<test name="IPA_Forgot_Password">
-		<classes>
-			<class name="ipa.IPA100"></class>
-		</classes>
-	</test>
 	
 	<test name="IPA0002">
 		<classes>
