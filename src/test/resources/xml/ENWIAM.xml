@@ -110,13 +110,20 @@
 		<classes>
 			<class name="enwiam.ENWIAM012"></class>
 		</classes>
-	</test> -->
+	</test> 
+	
+	<test name="ENWIAM61">
+		<classes>
+			<class name="enwiam.ENWIAM61"></class>
+		</classes>
+	</test>-->
 
 	<test name="Validate_password_max_length_in_enw_registration_page">
 		<classes>
 			<class name="enwiam.ENWIAM016"></class>
 		</classes>
 	</test>
+	
 
 	<!-- <test name="Receive_email_notifications_for_likes_checkbox_in_account_page">
 		<classes>

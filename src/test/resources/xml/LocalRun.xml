@@ -277,6 +277,12 @@
 			<class name="enwiam.ENWIAM001"></class>
 		</classes>
 	</test>
+	
+	<test name="ENWIAM61">
+		<classes>
+			<class name="enwiam.ENWIAM61"></class>
+		</classes>
+	</test>
 
 	<test name="ENW_registraiton_and_reset_password8" preserve-order="true">
 		<classes>
