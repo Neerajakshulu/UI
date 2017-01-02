@@ -84,7 +84,7 @@ public class ENW044 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				sortReferences();
-				BrowserWaits.waitTime(4);
+				BrowserWaits.waitTime(5);
 				List<WebElement> list = ob.findElements(By.xpath(".//*[@title='Go to reference']"));
 				 for(int i=0;i<list.size();){
 					 if(list.get(i).getText().equals(neonValues.get("expectedName")))
