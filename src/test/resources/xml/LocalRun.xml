@@ -645,7 +645,7 @@
 		</classes>
 	</test>
 	
-	<!-- IPA IAM Test cases -->
+	<!-- IPAIAM Test cases START-->
 	<test name="IPA0055">
 		<classes>
 			<class name="ipaiam.IPAIAM0055"></class>
@@ -675,5 +675,22 @@
 		</classes>
 	</test>
 	
+	<test name="IPA052">
+		<classes>
+			<class name="ipaiam.IPAIAM052"></class>
+		</classes>
+	</test>
+
+	<test name="IPA053">
+		<classes>
+			<class name="ipaiam.IPAIAM053"></class>
+		</classes>
+	</test>
+	<test name="IPA054">
+		<classes>
+			<class name="ipaiam.IPAIAM054"></class>
+		</classes>
+	</test>
+	<!-- IPAIAM Test cases END-->
 </suite>
 
