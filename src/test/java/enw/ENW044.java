@@ -3,9 +3,12 @@ package enw;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -52,12 +55,8 @@ public class ENW044 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
 					LOGIN.getProperty("USERPASSWORD037"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle("test neon post");
+			pf.getAuthoringInstance(ob).searchArticle(" Neon Testing3");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-//			BrowserWaits.waitTime(8);
-//		    pf.getAuthoringInstance(ob).chooseArticle();
-//			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
-//			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
@@ -78,28 +77,29 @@ public class ENW044 extends TestBase {
 				if (text.equalsIgnoreCase("Continue")) {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
 				}
-
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				
+				sortReferences();
+				BrowserWaits.waitTime(4);
+				List<WebElement> list = ob.findElements(By.xpath(".//*[@title='Go to reference']"));
+				 for(int i=0;i<list.size();){
+					 if(list.get(i).getText().equals(neonValues.get("expectedName")))
+						 System.out.println("List items in ENW:"+list.get(i).getText());
+					 	System.out.println("List items from Neon:"+neonValues.get("expectedName"));
+						 list.get(i).click();
+					 break;
+				 }
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 			BrowserWaits.waitTime(4);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-//			try {
-//			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHOWALLFILEDS_LINK_XPATH);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+	//		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 						endNoteDetails.put("TitleofEntry",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_ENTRY_XPATH.toString())).getText());
@@ -136,7 +136,16 @@ public class ENW044 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	 public void deleteRecord() {
+	 private void sortReferences() throws InterruptedException {
+			 if (ob.findElements(By.xpath("//div[@class='sortBy']")).size() > 0) {
+				Select SortItems = new Select(ob.findElement(By.xpath("//*[@id='sort_By']")));
+				SortItems.selectByVisibleText("Year -- newest to oldest");
+				} else {
+				test.log(LogStatus.FAIL, "Sorting not done .");
+			}
+		
+	}
+	public void deleteRecord() {
 		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
 	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
 	 ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();
