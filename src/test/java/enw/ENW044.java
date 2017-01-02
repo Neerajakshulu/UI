@@ -60,8 +60,7 @@ public class ENW044 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
-			//Thread.sleep(5000);
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(3);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 			HashMap<String, String> neonValues = new HashMap<String, String>();
 			neonValues.put("expectedName",

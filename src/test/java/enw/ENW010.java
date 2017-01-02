@@ -64,7 +64,7 @@ public class ENW010 extends TestBase {
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"),
 					LOGIN.getProperty("NONMARKETUSERPASSWORD"));
 			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
-			BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(9);
 			ValidateAlternativeHeadr();
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 
