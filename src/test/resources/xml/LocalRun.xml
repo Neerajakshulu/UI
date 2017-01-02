@@ -663,5 +663,11 @@
 		</classes>
 	</test>
 	
+	<test name="IPAIAM100">
+		<classes>
+			<class name="ipaiam.IPAIAM100"></class>
+		</classes>
+	</test>
+	
 </suite>
 
