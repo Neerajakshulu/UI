@@ -116,7 +116,13 @@
 		<classes>
 			<class name="enwiam.ENWIAM61"></class>
 		</classes>
-	</test>-->
+	</test>
+	
+	<test name="ENWIAM62">
+		<classes>
+			<class name="enwiam.ENWIAM62"></class>
+		</classes>
+	</test>	-->
 
 	<test name="Validate_password_max_length_in_enw_registration_page">
 		<classes>
