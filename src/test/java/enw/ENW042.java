@@ -18,8 +18,11 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
+//Verify that the user signed in to community enabled version of Endnote and having valid Neon 
+//session will be taken to Profile page seamlessly by clicking on the profilename in profile flyout
+// Verify that the user signed in to community enabled version of Endnote and having valid Neon session 
+//will be taken to Account page seamlessly by clicking on the Account in profile flyout
 public class ENW042 extends TestBase {
-
 	static int status = 1;
 	String expectedUrl = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
 
@@ -50,7 +53,7 @@ public class ENW042 extends TestBase {
 			clearCookies();
 			String header_Expected = "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),
 					(LOGIN.getProperty("MARKETUSERPASSWORD")));
 			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");

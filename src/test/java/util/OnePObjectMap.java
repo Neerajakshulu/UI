@@ -85,8 +85,9 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][2]"),
 	NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][3]"),
 	NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS("span[ng-bind-html='::assign']"),
-
+	NEON_RECORDVIEW_POST_NAME_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
 	NEON_RECORDVIEW_PATENT_ABSTRACT_CSS("p[class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
+	NEON_RECORDVIEW_POST_ABSTRACT_XPATH("//div[@class='col-xs-12']/div[@class='ne-publication__body ne-publication__body--post wui-large-text wui-large-text--serif ng-binding'] /p"),
 
 	ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
 	// ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell
@@ -125,7 +126,7 @@ public enum OnePObjectMap {
 	ENW_RECORD_LASTUPDATEDNO_XPATH("//tr[@id='date_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_VALUE_CSS("div [id='publisher']"),
 	ENW_RECORD_ABSTRACT_VALUE_CSS("div[id='abstract']"),
-
+	ENW_RECORD_TITLE_ENTRY_XPATH(".//*[@id='title']"),
 	// PATENTS RECORDS
 	ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_XPATH("//tr[@id='publisher_tr']/td[1]/span"),
