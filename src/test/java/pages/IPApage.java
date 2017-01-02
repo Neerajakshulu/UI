@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -160,6 +161,81 @@ public class IPApage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.IPA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
+	}
+	
+
+	public void validateIPAStepUPModalTitle(ExtentTest test){
+
+		try {
+			String stepup_expectedtitle = "Sign in to IP Analytics";
+			String stepup_actualtitle = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TITLE_CSS).getText();
+			Assert.assertEquals(stepup_actualtitle, stepup_expectedtitle);
+			test.log(LogStatus.PASS, "user is able to see correct Step up Auth modal title");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "user is not able to see correct Step up Auth modal title");
+
+		}
+
+	}
+
+	
+	public void validateFirstTextOnIPAStepUp(ExtentTest test) throws Exception {
+		try {
+			String stepup_expectedtext1 = "IP Analytics is currently available to customer in our early access program. Contact";
+			String stepup_actualtext1 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.IPA_STEPUPAUTHMODAL_TEXT1_CSS).getText();
+			if (stepup_actualtext1.contains(stepup_expectedtext1)&& stepup_actualtext1.contains("IPA.support@thomsonreuters.com") && stepup_actualtext1.contains("to learn more.")) {
+				test.log(LogStatus.PASS,
+						"user is able to see correct Step up Auth modal text1 : Thank you for your interest.....");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is able to see incorrect Step up Auth modal text1 : Thank you for your interest.....");
+			}
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"user is not able to see Step up Auth modal text1 : Thank you for your interest.....");
+		}
+	}
+	
+	public void validateSecondTextOnIPAStepUP(ExtentTest test) throws Exception{
+
+		try {
+			String stepup_expectedtext2 = "To provide the highest level of security, we require you to sign in with your IP Analytics credentials.";
+			String stepup_actualtext2 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT2_XPATH).getText();
+			Assert.assertEquals(stepup_actualtext2, stepup_expectedtext2);
+			test.log(LogStatus.PASS,
+					"user is able to see correct Step up Auth modal text2 : To provide the highest level.....");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL,
+					"user is not able to see correct Step up Auth modal text2 : To provide the highest level.....");
+		}
+	}
+	
+	public void validateThirdTextOnIPAStepUp(ExtentTest test) throws Exception{
+		try{
+		String stepup_expectedtext3 = "IP Analytics shares sign in credentials with other products you may use:";
+		String stepup_expectedtext4 = " Please sign in using the email address and password you use to access any of the above mentioned products.";
+		String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
+		if (stepup_actualtext3.contains(stepup_expectedtext3)
+				&& stepup_actualtext3.contains("Key Pathway Advisor") && stepup_actualtext3.contains("EndNote")
+				&& stepup_actualtext3.contains("InCites") && stepup_actualtext3.contains("Thomson Innovation")
+				&& stepup_actualtext3.contains("Web of Science")
+				&& stepup_actualtext3.contains(stepup_expectedtext4)) {
+			test.log(LogStatus.PASS,
+					"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
+		} else {
+			test.log(LogStatus.FAIL,
+					"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+		}
+	} catch (Throwable t) {
+		test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
+	}
 	}
 
 }
