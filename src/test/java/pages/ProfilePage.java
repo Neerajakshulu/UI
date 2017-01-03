@@ -154,7 +154,14 @@ public class ProfilePage extends TestBase {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			BrowserWaits.waitTime(4);
 			PARENT_WINDOW_HANDLE = ob.getWindowHandle();
-			ob.findElement(By.partialLinkText(totalAppLinks[i])).click();
+			List<WebElement> apps=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_APP_SWITCHER_LINKS_CSS);
+			for(WebElement app:apps){
+				logger.info("apps name-->"+app.getText());
+				if(app.getText().contains(totalAppLinks[i])){
+					app.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_APP_SWITCHER_BAU_LINK_GO_CSS.toString())).click();
+					break;
+				}
+			}
 			ob.manage().window().maximize();
 			waitForNumberOfWindowsToEqual(ob, 2); 
 			Set<String> child_window_handles = ob.getWindowHandles();
