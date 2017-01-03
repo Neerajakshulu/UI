@@ -137,6 +137,8 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_PATENTS_NOTES2_XPATH("//span[text()='Cited Articles']//preceding::span[1]"),
 	// Profile page locators
 	HOME_ONEP_APPS_CSS("i[class='wui-icon wui-icon--app']"),
+	HOME_PROJECT_NEON_APP_SWITCHER_LINKS_CSS("li[class='ne-app-switcher-flyout__list-item'] a"),
+	HOME_PROJECT_NEON_APP_SWITCHER_BAU_LINK_GO_CSS("span[class*='secondary']"),
 	HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK("Privacy"),
 	HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK("Terms of Use"),
 	HOME_PROJECT_NEON_APP_RECORD_VIEW_DETALIS_XPATH("//a[contains(text(),'View in Web of Science')]"),
