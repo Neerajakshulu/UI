@@ -778,8 +778,12 @@ public class ProfilePage extends TestBase {
 		}
 		String topicLists[] = topics.split("\\|");
 		for (String topicList : topicLists) {
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS,
-					topicList);
+			for (int i = 0; i < topicList.length(); i++) {
+				char topic = topicList.charAt(i);
+				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS,
+						String.valueOf(topic));
+				BrowserWaits.waitTime(2);
+			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 			List<WebElement> topicTypeahead = pf.getBrowserActionInstance(ob).getElements(
@@ -1219,20 +1223,21 @@ public class ProfilePage extends TestBase {
 	public void topicTypeaheadOptionsMinChars(String oneChar,
 			String twoChar) throws Exception {
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, oneChar);
-		// System.out.println("topic typeahed options-->"+topicTypeahead.size());
 		topicTypeahead = pf.getBrowserActionInstance(ob).getElements(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
+		logger.info("topic typeahed options before 2 characters-->"+topicTypeahead.size());
 		if (topicTypeahead.size() > 0) {
 			throw new Exception("topic typeahead options should display only while enter min 2 characters");
 		}
 
-		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
+		//pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, twoChar);
+		BrowserWaits.waitTime(4);
 		topicTypeahead = pf.getBrowserActionInstance(ob).getElements(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_TYPEAHEAD_CSS);
-		// System.out.println("topic typeahed options-->"+topicTypeahead.size());
+		logger.info("topic typeahed options after 2 characters-->"+topicTypeahead.size());
 		if (!(topicTypeahead.size() > 0)) {
 			throw new Exception("topic typeahead options should display while enter min 2 characters");
 		}
