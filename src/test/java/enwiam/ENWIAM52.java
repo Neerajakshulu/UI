@@ -96,7 +96,7 @@ public class ENWIAM52 extends TestBase {
 
 			validateNeonAccount(1, accountType);
 
-			for (int j = 1; j <= 10; j++) {
+			for (int j = 1; j <= 1; j++) {
 				logger.info("Creating " + j + " Watchlist");
 				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 			}
@@ -121,7 +121,7 @@ public class ENWIAM52 extends TestBase {
 
 				validateAccounts(1, accountType);
 
-				for (int j = 1; j <= 10; j++) {
+				for (int j = 1; j <= 1; j++) {
 					logger.info("Creating " + j + " Watchlist");
 					pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 				}
