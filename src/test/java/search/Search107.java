@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -29,8 +30,8 @@ public class Search107 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -42,8 +43,8 @@ public class Search107 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -65,34 +66,35 @@ public class Search107 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-			Thread.sleep(3000);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
-			Thread.sleep(5000);
-
+			BrowserWaits.waitTime(3);
 			ob.navigate().back();
 			Thread.sleep(5000);
-			String text = ob
-					.findElement(By
-							.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"))
+			String text = ob.findElement(
+					By.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"))
 					.getText();
 			System.out.println(text);
 
 			try {
 
-				Assert.assertTrue(text.contains("Patents"));
-				test.log(LogStatus.PASS,
+				Assert.assertTrue(text.contains("All"));
+				test.log(
+						LogStatus.PASS,
 						"Content type in the left navigation pane getting retained correctly when user navigates back to search results page from record view page");// extent
 			} catch (Throwable t) {
 
-				test.log(LogStatus.FAIL,
+				test.log(
+						LogStatus.FAIL,
 						"Content type in the left navigation pane not getting retained when user navigates back to search results page from record view page");// extent
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_content_type_in_left_navigation_pane_not_getting_retained")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_content_type_in_left_navigation_pane_not_getting_retained")));// screenshot
 
 			}
 
@@ -109,8 +111,11 @@ public class Search107 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
