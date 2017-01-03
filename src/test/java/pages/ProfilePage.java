@@ -1228,7 +1228,7 @@ public class ProfilePage extends TestBase {
 		logger.info("topic typeahed options before 2 characters-->"+topicTypeahead.size());
 		if (topicTypeahead.size() > 0) {
 			throw new Exception("topic typeahead options should display only while enter min 2 characters");
-		}
+		} 
 
 		//pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS, twoChar);
