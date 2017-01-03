@@ -121,7 +121,7 @@ public class ENWIAM080 extends TestBase {
 				validateAccounts(1, accountType1);
 				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString()), 30);
 				ob.findElement(By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString())).click();
-				for (int j = 1; j <= 10; j++) {
+				for (int j = 1; j <= 1; j++) {
 					logger.info("Creating " + j + " Watchlist");
 					pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
 				}
