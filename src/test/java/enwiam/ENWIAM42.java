@@ -71,8 +71,8 @@ public class ENWIAM42 extends TestBase {
 
 			ob.navigate().to(host);
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername02"),
-					LOGIN.getProperty("sru_fbpwd02"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername002"),
+					LOGIN.getProperty("sru_fbpwd002"));
 			test.log(LogStatus.PASS, "user has logged in with social account which has Matching Steam");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 
