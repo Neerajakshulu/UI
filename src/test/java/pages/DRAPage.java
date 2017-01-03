@@ -360,7 +360,7 @@ public class DRAPage extends TestBase {
 	public void validateSearchResultMsg(ExtentTest test, String DRAProfileName) throws Exception {
 		try {
 			String Result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DR_SEARCH_RESULT_CSS).getText();
-			String ResultExpected = "Your search for sonui das found no matches.";
+			String ResultExpected = "Your search for kavita manaz found no matches.";
 					if (ResultExpected.contains(Result))  {
 				test.log(LogStatus.PASS, " User's account is non onboarded and non discoverable ");
 			} else {
