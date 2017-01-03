@@ -85,8 +85,9 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][2]"),
 	NEON_RECORDVIEW_PATENT_AUTHOR3_XPATH("//div[@class='wui-descriptor']/span[@class='ng-binding ng-scope'][3]"),
 	NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS("span[ng-bind-html='::assign']"),
-
+	NEON_RECORDVIEW_POST_NAME_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
 	NEON_RECORDVIEW_PATENT_ABSTRACT_CSS("p[class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
+	NEON_RECORDVIEW_POST_ABSTRACT_XPATH("//div[@class='col-xs-12']/div[@class='ne-publication__body ne-publication__body--post wui-large-text wui-large-text--serif ng-binding'] /p"),
 
 	ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
 	// ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell
@@ -125,7 +126,7 @@ public enum OnePObjectMap {
 	ENW_RECORD_LASTUPDATEDNO_XPATH("//tr[@id='date_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_VALUE_CSS("div [id='publisher']"),
 	ENW_RECORD_ABSTRACT_VALUE_CSS("div[id='abstract']"),
-
+	ENW_RECORD_TITLE_ENTRY_XPATH(".//*[@id='title']"),
 	// PATENTS RECORDS
 	ENW_RECORD_INVENTOR_XPATH("//tr[@id='author_tr']/td[1]/span"),
 	ENW_RECORD_ASSIGNEE_XPATH("//tr[@id='publisher_tr']/td[1]/span"),
@@ -893,16 +894,17 @@ public enum OnePObjectMap {
 	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
 	IPA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos text-center ng-scope']"),
 	IPA_LANDINGPAGE_SUPPORT_MAILID_CSS("p[class='tos text-center ng-scope'] >a[event-action='login-customer-care-ipa']"),
-	IPA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon-first']"),
+	IPA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	IPA_LANDINGPAGE_ANALYZE_ICON_CSS("i[class='fa fa-bar-chart login-splash-icon']"),
 	IPA_LANDINGPAGE_VISUALIZE_ICON_CSS("i[class='fa fa-pie-chart login-splash-icon']"),
-	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon-first']"),
+	IPA_LANDINGPAGE_REPORT_ICON_CSS("i[class='fa fa-signal login-splash-icon']"),
 	IPA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	IPA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
 	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[event-action='change-password-submitted']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	IPA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--ipa']"),
+	IPA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-scope']"),
 
 	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),

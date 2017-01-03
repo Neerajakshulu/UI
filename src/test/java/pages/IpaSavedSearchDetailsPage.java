@@ -201,31 +201,34 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 			}
 		}
 
-		Collections.sort(beforesort, new Comparator<String>() {
+			Collections.sort(beforesort, new Comparator<String>() {
 
 			public int compare(String o1,
 					String o2) {
 				try {
-					return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+					return -o1.compareTo(o2);
+					//return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
 				} catch (Exception e) {
 					throw new IllegalArgumentException(e);
 				}
 			}
 		});
 
-		System.out.println(beforesort);
+		System.out.println("af"+beforesort);
 		selectSortoptions("Date viewed");
+		List<WebElement> li2 = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS
+				.toString()));
 		List<String> aftersort = new ArrayList<String>();
-		for (int i = 0; i < li.size(); i++) {
-			if (li.get(i).getText().contains("TODAY")) {
-				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+		for (int i = 0; i < li2.size(); i++) {
+			if (li2.get(i).getText().contains("TODAY")) {
+				String str = li2.get(i).getText().replace("TODAY", dateFormat.format(date));
 				aftersort.add(str);
 			} else {
 
-				aftersort.add(li.get(i).getText());
+				aftersort.add(li2.get(i).getText());
 			}
 		}
-		System.out.println(aftersort);
+		System.out.println("frm ui"+aftersort);
 		for (int i = 0; beforesort.size() == aftersort.size() && i < beforesort.size(); i++) {
 			if (!beforesort.get(i).equals(aftersort.get(i)))
 				throw new Exception("values are not sorted by Date viewed");

@@ -42,7 +42,7 @@
 		</classes>
 	</test>
 
-	<test name="IPA052">
+	<!-- <test name="IPA052">
 		<classes>
 			<class name="ipaiam.IPAIAM052"></class>
 		</classes>
@@ -57,7 +57,7 @@
 		<classes>
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<test name="IPA055">
 		<classes>
@@ -115,11 +115,11 @@
 		</classes>
 	</test>
 	
-		 <test name="IPAIAM100">
+		<!--  <test name="IPAIAM100">
 		<classes>
 			<class name="ipaiam.IPAIAM100"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	<!-- <test name="IPA Merging">
 		<classes>

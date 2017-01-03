@@ -116,7 +116,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed"); 
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user");
@@ -157,7 +157,7 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CLOSE_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 		} catch (Exception e) {
 			throw new Exception("welcome onboarding modal not closed");
 		}
@@ -191,7 +191,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user");
 		}
@@ -227,7 +227,7 @@ public class OnboardingModalsPage extends TestBase {
 			builder.click().build().perform();
 			BrowserWaits.waitTime(4);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Onboarding Profile modal outside click not happend");
@@ -263,7 +263,7 @@ public class OnboardingModalsPage extends TestBase {
 			BrowserWaits.waitTime(4);
 			
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Onboarding Welcome modal outside click not happend");
@@ -361,7 +361,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 		} catch (Exception e) {
 			throw new Exception("Profile Onboarding Modals are not displayed for First time user");
 		}
@@ -417,7 +417,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			
@@ -550,7 +550,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Profile Onboarding Modals are not displayed for First time user");
@@ -654,7 +654,7 @@ public class OnboardingModalsPage extends TestBase {
 				throw new Exception("Onboarding Modals are not closed");
 			}
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","New post","Recommended");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon", "Posts","Articles","Topics","Recommended");
 			
 		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user");

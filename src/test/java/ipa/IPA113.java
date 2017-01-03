@@ -74,14 +74,14 @@ public class IPA113 extends TestBase {
 			pf.getIpaSavedSearchpage(ob).randomTile(value);
 			waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_LABEL_CSS.toString()),
 					60);
-			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS);
 			pf.getIpaSavedSearchpage(ob).clickOnSavedWork();
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Your saved work");
-			pf.getIpaSavedSearchpage(ob).sortByDateviewedValue();
-			test.log(LogStatus.PASS, "values are sorted by Date viewed ");
 			pf.getIpaSavedSearchpage(ob).sortByDataSavedValue();
 			test.log(LogStatus.PASS, "Values are sorted by Date Saved");
-			pf.getDraPageInstance(ob).logoutDRA();
+			pf.getIpaSavedSearchpage(ob).sortByDateviewedValue();
+			test.log(LogStatus.PASS, "values are sorted by Date viewed ");
+					pf.getDraPageInstance(ob).logoutDRA();
 			closeBrowser();
 		} catch (Exception e) {
 			logFailureDetails(test, "User is not able apply sort in Saved data page", "Screenshot for login");

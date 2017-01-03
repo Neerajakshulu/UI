@@ -18,7 +18,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class ENWIAM90 extends TestBase {
+public class ENWIAM91 extends TestBase {
 	static int count = -1;
 
 	static boolean fail = false;
@@ -49,7 +49,7 @@ public class ENWIAM90 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseENWIAM90() throws Exception {
+	public void testcaseENWIAM91() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -78,8 +78,8 @@ public class ENWIAM90 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("FACEBOOKACCOUNT"),
-					(LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED")));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NeonMergeAccount"),
+					(LOGIN.getProperty("NeonMergeAccountPWD")));
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_LINK_XPATH.toString()), 30);
@@ -96,13 +96,15 @@ public class ENWIAM90 extends TestBase {
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 			BrowserWaits.waitTime(10);
+			//NeonAccountActive();
+			BrowserWaits.waitTime(8);
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FACEBOOKACCOUNT"),
-						LOGIN.getProperty("FACEBOOKACCOUNTPWD"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("NeonMergeAccount"),
+						LOGIN.getProperty("NeonMergeAccountPWD"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FACEBOOKACCOUNTPWDMODIFYED"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("NeonMergeAccountPWD"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -143,6 +145,39 @@ public class ENWIAM90 extends TestBase {
 		pf.getHFPageInstance(ob).clickProfileImage();
 		jsClick(ob, ob.findElement(By.xpath(OR.getProperty("signOut_link"))));
 		closeBrowser();
+	}
+
+	private void NeonAccountActive() throws Exception {
+		int watchlistCount = 1;
+		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("NeonMergeAccount"),
+				LOGIN.getProperty("NeonMergeAccountPWD"));
+		test.log(LogStatus.PASS, "user has logged in with social account");
+		pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
+		test.log(LogStatus.PASS, "Avoiding the Linking is happened");
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+		pf.getLoginTRInstance(ob).closeOnBoardingModal();
+		String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
+		test.log(LogStatus.INFO, "Social account profile name: " + secondAccountProfileName);
+		pf.getHFPageInstance(ob).clickProfileImage();
+		pf.getHFPageInstance(ob).clickOnAccountLink();
+		BrowserWaits.waitTime(2);
+		String accountType = "Facebook";
+		validateAccounts(1, accountType);
+		try {
+			for (int j = 1; j <= watchlistCount; j++) {
+				logger.info("Creating " + j + " Watchlist");
+				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();
+			}
+			test.log(LogStatus.PASS, "Social account is made Neon Active");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Unable to create 10 watchlists");// extent
+			ErrorUtil.addVerificationFailure(t);
+
+		}
+		pf.getLoginTRInstance(ob).logOutApp();
+		BrowserWaits.waitTime(5);
+		
 	}
 
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
