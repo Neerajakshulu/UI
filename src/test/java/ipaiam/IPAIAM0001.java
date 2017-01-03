@@ -63,7 +63,6 @@ public class IPAIAM0001 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -196,7 +195,6 @@ public class IPAIAM0001 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {
