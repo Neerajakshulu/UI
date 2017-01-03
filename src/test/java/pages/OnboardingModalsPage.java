@@ -64,11 +64,10 @@ public class OnboardingModalsPage extends TestBase {
 		try {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS);
 		} catch (Exception e) {
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			e.printStackTrace();
 		}
 		BrowserWaits.waitTime(4);
 	}
