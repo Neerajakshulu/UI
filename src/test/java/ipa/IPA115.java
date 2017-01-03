@@ -78,11 +78,11 @@ public class IPA115 extends TestBase {
 			BrowserWaits.waitTime(3);
 			try{
 				Assert.assertTrue(pf.getIpaSavedSearchpage(ob).lenghtOfIileInfo(newtitle));	
-				test.log(LogStatus.PASS,"Title and Desc length of tile are  matching ");
+				test.log(LogStatus.PASS,"Length of title and desc are matching ");
 			}
 			catch(Exception ex){
 				ex.printStackTrace();
-				test.log(LogStatus.FAIL,"Title and Desc length of tile is not matching ");
+				test.log(LogStatus.FAIL,"Length of title is not matching: Expected value is 50 char but Actual value is 100 char ");
 				ErrorUtil.addVerificationFailure(ex);
 			}
 			
