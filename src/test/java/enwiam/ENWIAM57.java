@@ -119,7 +119,7 @@ public class ENWIAM57 extends TestBase {
 
 				validateNeonAccount(1, accountType);
 
-				int watchlistCount = 10;
+				int watchlistCount = 1;
 				try {
 
 					for (int j = 1; j <= watchlistCount; j++) {
