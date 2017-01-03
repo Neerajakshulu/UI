@@ -78,7 +78,7 @@ public class ENWIAM42 extends TestBase {
 
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS);
 
-			String expected_text_onmodal = "Did you know?";
+			String expected_text_onmodal = "Did you know?"; 
 
 			// verifying that did you know modal is displaying or not.
 
