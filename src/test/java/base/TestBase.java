@@ -1562,7 +1562,7 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 		BrowserWaits.waitTime(10);
@@ -1570,7 +1570,7 @@ public class TestBase {
 		BrowserWaits.waitTime(10);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
 		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
@@ -1579,12 +1579,12 @@ public class TestBase {
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))));
 		}
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
+		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
 	}
 
 	/**

@@ -71,24 +71,24 @@ public class Watchlist023 extends TestBase {
 			fn2 = LOGIN.getProperty("FN2");
 			ln2 = LOGIN.getProperty("LN2");
 			// Navigate to the watch list landing page
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 			waitForPageLoad(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
 			// Creating two public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			for (int i = 1; i <= 2; i++) {
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 50);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 50);
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
 						.sendKeys(newWatchlistName + "_" + i);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 50);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea")))
 						.sendKeys("This is my newly created watch list.");
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 50);
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox")), 60);
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 50);
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
 				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
 						30);
@@ -109,7 +109,7 @@ public class Watchlist023 extends TestBase {
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			// selectSearchTypeFromDropDown("People");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 60);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);
