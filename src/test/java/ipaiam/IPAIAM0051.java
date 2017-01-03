@@ -31,7 +31,6 @@ public class IPAIAM0051 extends TestBase {
 
 	@Test
 	public void testcaseIPA0051() throws Exception {
-		
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -54,13 +53,13 @@ public class IPAIAM0051 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-            pf.getIpaPage(ob).steamLockedIPA();
-			BrowserWaits.waitTime(2);
+			pf.getIpaPage(ob).steamLockedIPA();
+
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);
 			locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()))
 					.getText();
-			BrowserWaits.waitTime(2);
+
 			if (locked.equalsIgnoreCase(str)) {
 				test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
 			}
@@ -70,7 +69,6 @@ public class IPAIAM0051 extends TestBase {
 			}
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 
-			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).loginTofbSuspended();
 			String evict = ob.findElement(By.xpath(OnePObjectMap.DRA_EVICT_MSG_XPATH.toString())).getText();
 			if (evict.equalsIgnoreCase(evictMsg)) {
@@ -80,7 +78,7 @@ public class IPAIAM0051 extends TestBase {
 				test.log(LogStatus.FAIL, "The evicted string is not displayed");
 
 			}
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(2);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_OK_BUTTON_XPATH);
 			closeBrowser();
 
@@ -101,5 +99,4 @@ public class IPAIAM0051 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	
 }
