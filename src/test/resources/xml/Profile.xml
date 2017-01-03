@@ -55,7 +55,7 @@
 
 
 	<test name="Validate_Application_Links">
-		<parameter name="appLinks" value="Web of Science|InCites|ResearcherID" />
+		<parameter name="appLinks" value="Web of Science|InCites|Thomson Innovation|Cortellis" />
 		<classes>
 			<class name="Profile.Profile7"></class>
 		</classes>
@@ -221,8 +221,8 @@
 	</test>
 
 	<test name="Topic_Typeahead_Options_Validation">
-		<parameter name="oneChar" value="T" />
-		<parameter name="twoChar" value="te" />
+		<parameter name="oneChar" value="a" />
+		<parameter name="twoChar" value="u" />
 		<classes>
 			<class name="Profile.Profile29"></class>
 		</classes>

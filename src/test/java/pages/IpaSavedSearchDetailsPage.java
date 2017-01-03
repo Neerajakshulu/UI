@@ -188,33 +188,33 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 				OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS);
 		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS
 				.toString()));
-		DateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+		DateFormat ff=new SimpleDateFormat("dd MMMM yyyy |hh:mm a");
 		Date date = new Date();
 		List<String> beforesort = new ArrayList<String>();
 		for (int i = 0; i < li.size(); i++) {
 			if (li.get(i).getText().contains("TODAY")) {
-				String str = li.get(i).getText().replace("TODAY", dateFormat.format(date));
+				String str = li.get(i).getText().replace("TODAY",dateFormat.format(date));
 				beforesort.add(str);
 			} else {
 
 				beforesort.add(li.get(i).getText());
 			}
 		}
-
+		System.out.println("bf"+beforesort);
 			Collections.sort(beforesort, new Comparator<String>() {
 
 			public int compare(String o1,
 					String o2) {
 				try {
-					return -o1.compareTo(o2);
-					//return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+					//return -o1.compareTo(o2);
+					return ff.parse(o2).compareTo(ff.parse(o1));
 				} catch (Exception e) {
 					throw new IllegalArgumentException(e);
 				}
 			}
 		});
 
-		System.out.println("af"+beforesort);
 		selectSortoptions("Date viewed");
 		List<WebElement> li2 = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS
 				.toString()));
@@ -228,7 +228,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 				aftersort.add(li2.get(i).getText());
 			}
 		}
-		System.out.println("frm ui"+aftersort);
+		System.out.println("ui"+aftersort);
 		for (int i = 0; beforesort.size() == aftersort.size() && i < beforesort.size(); i++) {
 			if (!beforesort.get(i).equals(aftersort.get(i)))
 				throw new Exception("values are not sorted by Date viewed");
@@ -242,6 +242,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 		List<WebElement> li = ob.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS
 				.toString()));
 		DateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy");
+		DateFormat ff=new SimpleDateFormat("dd MMMM yyyy |hh:mm a");
 		Date date = new Date();
 		List<String> beforesort = new ArrayList<String>();
 		for (int i = 0; i < li.size(); i++) {
@@ -259,7 +260,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 			public int compare(String o1,
 					String o2) {
 				try {
-					return -dateFormat.parse(o1).compareTo(dateFormat.parse(o2));
+					return -ff.parse(o1).compareTo(ff.parse(o2));
 				} catch (Exception e) {
 					throw new IllegalArgumentException(e);
 				}

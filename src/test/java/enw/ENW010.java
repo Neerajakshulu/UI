@@ -63,6 +63,18 @@ public class ENW010 extends TestBase {
 
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("NONMARKETUSEREMAIL"),
 					LOGIN.getProperty("NONMARKETUSERPASSWORD"));
+			
+			try {
+				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
+						.getText();
+				if (text.equalsIgnoreCase("Continue")) {
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
 			BrowserWaits.waitTime(10);
 			ValidateAlternativeHeadr();
