@@ -91,7 +91,7 @@ public class Profile66 extends TestBase {
 			pf.getOnboardingModalsPageInstance(ob).validateENWProfileFlyout(enwProfileFlyout);
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "ENW to Neon navigation using Project Neon link not done");
+			test.log(LogStatus.FAIL, "ENW Profile flyout not displayed");
 			status = 2;// excel
 			// print full stack trace
 			StringWriter errors = new StringWriter();
