@@ -23,8 +23,9 @@ import util.ErrorUtil;
 import util.ExtentManager;
 
 /**
- * Verify that user is able to watch a post(user generated content) to a particular watchlist from notification in home
- * page||Verify that user is able to unwatch a post from watchlist from notification in home page
+ * Verify that user is able to watch a post(user generated content) to a
+ * particular watchlist from notification in home page||Verify that user is able
+ * to unwatch a post from watchlist from notification in home page
  * 
  * @author Prasenjit Patra
  *
@@ -70,7 +71,7 @@ public class Watchlist029 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			
+
 			// 2)Login with user2 and and try to watch the post from
 			// notification panel
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINSTEAMUSERNAME4"), LOGIN.getProperty("LOGINSTEAMPASSWORD4"));
@@ -82,25 +83,24 @@ public class Watchlist029 extends TestBase {
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
 
-			//Add post to watchlist fron Newsfeed page
-			String docTitle=pf.getNewsfeedPageInstance(ob).getPostTitle();
+			// Add post to watchlist fron Newsfeed page
+			String docTitle = pf.getNewsfeedPageInstance(ob).getPostTitle();
 			pf.getNewsfeedPageInstance(ob).addFirstPostToWatclist(newWatchlistName);
-			
+
 			logger.info("post title in watchlist page-->" + docTitle);
 			BrowserWaits.waitTime(5);
-			
+
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
-			logger.info("text-->"+watchedItems.get(i).getText());
+				logger.info("text-->" + watchedItems.get(i).getText());
 				if (watchedItems.get(i).getText().equals(docTitle)
 						|| (StringUtils.contains(watchedItems.get(i).getText(), "Post removed by member"))) {
 					count++;
-				 }
+				}
 			}
 			if (compareNumbers(1, count)) {
 				test.log(LogStatus.PASS, "User is able to add a post into watchlist from home page");
@@ -113,12 +113,13 @@ public class Watchlist029 extends TestBase {
 						this.getClass().getSimpleName() + "_user_unable_to_add_post_into_watchlist_from_home_page")));// screenshot
 				return;
 			}
-
+			BrowserWaits.waitTime(2);
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
 			// Unwatching the post to a particular watch list
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(10);
 			pf.getNewsfeedPageInstance(ob).addFirstPostToWatclist(newWatchlistName);
-
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
@@ -176,11 +177,14 @@ public class Watchlist029 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
-		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

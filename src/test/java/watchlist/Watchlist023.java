@@ -78,7 +78,7 @@ public class Watchlist023 extends TestBase {
 			// Creating two public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			for (int i = 1; i <= 2; i++) {
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
@@ -90,8 +90,8 @@ public class Watchlist023 extends TestBase {
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))));
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-				waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
-						30);
+				waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + newWatchlistName + "_" + i + "')]"),
+						60);
 			}
 			// Deleting the first watch list
 			deleteParticularWatchlist(newWatchlistName + "_1");
@@ -109,10 +109,10 @@ public class Watchlist023 extends TestBase {
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_type_dropdown")), 30);
 			// Searching for article
 			// selectSearchTypeFromDropDown("People");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 60);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchBox_textBox")), 60);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 30);
+			waitForElementTobeClickable(ob, By.linkText(fn2 + " " + ln2), 60);
 			pf.getProfilePageInstance(ob).clickPeople();
 			// Navigating to the first user profile page
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();

@@ -249,6 +249,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_VIEW_POST_SHARE_TWITTER_CSS("a[event-category='share-twitter-posts']"),
 	HOME_PROJECT_NEON_HEADER_WATCHLIST_CSS("a[href='#/watchlist']"),
 	HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS("a[href='#/home']"),
+	HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH("//span[contains(@class,'ng-binding') and contains(.,'Newsfeed')]"),
 	HOME_PROJECT_NEON_HEADER_PUBLISH_A_POST_CSS("a[redirect-state='profile.post']"),
 
 	HOME_PROJECT_NEON_PROFILE_REMOVE_TOPIC_CSS("a[ng-click='$removeTag()']"),
