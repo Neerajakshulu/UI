@@ -227,10 +227,14 @@ public class GroupsListPage extends TestBase {
 
 	public boolean checkForGroup(String groupTitle) throws Exception {
 		waitForAjax(ob);
+		try{
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS.toString()), 60);
+		}catch(Exception e){
+			return false;
+		}
 		List<WebElement> groupsList = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_GROUP_CARD_CSS);
-
+		if(groupsList.size()==0)return false;
 		String actTitle;
 		for (WebElement we : groupsList) {
 			actTitle = we.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS.toString()))

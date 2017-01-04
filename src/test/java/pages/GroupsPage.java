@@ -114,7 +114,7 @@ public class GroupsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS);
 		ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString())).get(1)
-				.click();
+		 		.click();
 	}
 
 	public void listOfPendingInvitaions() throws Exception {
