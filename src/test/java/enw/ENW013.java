@@ -52,6 +52,7 @@ public class ENW013 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty( "NONMARKETUSERPASSWORD")));
