@@ -83,7 +83,7 @@ public class Watchlist028 extends TestBase {
 			// 1)Login as user1 and comment on some patent
 			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("patent");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("sample");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
@@ -95,13 +95,12 @@ public class Watchlist028 extends TestBase {
 
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_comment_textbox")), 90);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
-					.sendKeys("Automation Script Comment: Watchlist028");
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()), 30);
-			jsClick(ob, ob.findElement(
-					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString())));
-
+					.sendKeys("Automation Script Comment: Watchlist028 test");
 			BrowserWaits.waitTime(2);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS);
+			BrowserWaits.waitTime(4);
 			logout();
 
 			// 2)Login with user2 and and try to watch the patent from
