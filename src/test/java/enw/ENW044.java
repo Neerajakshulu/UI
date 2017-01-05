@@ -52,8 +52,8 @@ public class ENW044 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.get(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
-					LOGIN.getProperty("USERPASSWORD037"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
+					LOGIN.getProperty("USERPASSWORD044"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle(" Neon Testing3");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();

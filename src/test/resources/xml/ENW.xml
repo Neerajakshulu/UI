@@ -204,13 +204,6 @@
 			<class name="enw.ENW030"></class>
 		</classes>
 	</test>
-	 
-	 <test name="ENW042">
-		<classes>
-			<class name="enw.ENW042"></class>
-		</classes>
-		
-	</test>
 	
 	 <test name="ENW044">
 		<classes>
