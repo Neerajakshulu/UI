@@ -83,9 +83,9 @@ public class Watchlist009 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("test");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			Thread.sleep(5000);
@@ -95,7 +95,7 @@ public class Watchlist009 extends TestBase {
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
 
 			// Selecting the post name
-			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 60);
+			waitForElementTobeClickable(ob, By.cssSelector("h2[class^='wui-content-title']"), 60);
 
 			String documentName = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
 			// Navigate to a particular watch list page

@@ -1466,9 +1466,9 @@ public class TestBase {
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
 
 		// Navigate to the watch list landing page
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 30);
+		waitForElementTobeClickable(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
 
 		// Getting all the watch lists
 		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));
@@ -1595,7 +1595,7 @@ public class TestBase {
 	 */
 	public void deleteParticularWatchlist(String watchListName) throws Exception {
 		// Deleting the first watch list
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);

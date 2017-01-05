@@ -122,9 +122,7 @@ public class Watchlist029 extends TestBase {
 			pf.getNewsfeedPageInstance(ob).addFirstPostToWatclist(newWatchlistName);
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
-
 			try {
-
 				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
 
 				if (defaultMessage.isDisplayed()) {
