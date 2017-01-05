@@ -71,6 +71,15 @@ public class ENW044 extends TestBase {
 			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			} catch (Exception e) {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+			}
+			/*try {
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 						.getText();
 				if (text.equalsIgnoreCase("Continue")) {
@@ -79,7 +88,7 @@ public class ENW044 extends TestBase {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
@@ -98,7 +107,7 @@ public class ENW044 extends TestBase {
 				e.printStackTrace();
 			}
 			BrowserWaits.waitTime(4);
-	//		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
+	 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 						endNoteDetails.put("TitleofEntry",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_ENTRY_XPATH.toString())).getText());
