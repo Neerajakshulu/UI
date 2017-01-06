@@ -24,11 +24,8 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 public class ENW044 extends TestBase {
 	static int status = 1;
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	// Verify that the the body of the Post should be displayed under the Abstract field On 
+	//Reference page Optional Fields in EndNote, after post record exported
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -55,7 +52,7 @@ public class ENW044 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
 					LOGIN.getProperty("USERPASSWORD044"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(" Neon Testing3");
+			pf.getAuthoringInstance(ob).searchArticle("Neon Testing2");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
@@ -68,33 +65,21 @@ public class ENW044 extends TestBase {
 			neonValues.put("expectedAbstract",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_ABSTRACT_XPATH.toString())).getText());
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			BrowserWaits.waitTime(2);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			} catch (Exception e) {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-			}
-			/*try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
+			BrowserWaits.waitTime(5);
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				sortReferences();
+				//sortReferences();
 				BrowserWaits.waitTime(5);
-				List<WebElement> list = ob.findElements(By.xpath(".//*[@title='Go to reference']"));
+				List<WebElement> list = ob.findElements(By.xpath("//*[@title='Go to reference']"));
 				 for(int i=0;i<list.size();){
 					 if(list.get(i).getText().equals(neonValues.get("expectedName")))
 						 System.out.println("List items in ENW:"+list.get(i).getText());
@@ -107,7 +92,7 @@ public class ENW044 extends TestBase {
 				e.printStackTrace();
 			}
 			BrowserWaits.waitTime(4);
-	 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
+	 		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 						endNoteDetails.put("TitleofEntry",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_ENTRY_XPATH.toString())).getText());
@@ -117,7 +102,9 @@ public class ENW044 extends TestBase {
 			if (!(endNoteDetails.get("TitleofEntry").equals(neonValues.get("expectedName")))) {
 				test.log(LogStatus.FAIL, "Abstract content is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
-			}else{
+			}
+			else
+			{
 			test.log(LogStatus.PASS, "Post Name is matching and both are same after exporting the post data");
 			}
 			if (!(endNoteDetails.get("Abstract").equals(neonValues.get("expectedAbstract")))) {

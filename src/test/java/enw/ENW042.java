@@ -51,17 +51,16 @@ public class ENW042 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			String header_Expected = "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),
-					(LOGIN.getProperty("MARKETUSERPASSWORD")));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MarketUser42"),
+					(LOGIN.getProperty("MarketUser42PWD")));
 			BrowserWaits.waitTime(3);
-			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
-
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HEADER_XPATH);
 			String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
 			logger.info("Header Text displayed as:" + actual_result);
 			logger.info("Actual result displayed as :" + actual_result
 					+ " text without the hot link and not allow user to Navigate to Neon");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
@@ -71,40 +70,15 @@ public class ENW042 extends TestBase {
 					test.log(LogStatus.FAIL, "Expected page is not displayed");
 					Assert.assertEquals(true, false);
 				} else {
-					test.log(LogStatus.PASS, "Expected page is displayed and  Navigating to the proper Page.");
+					test.log(LogStatus.PASS, "Neon Home page is displayed and  Navigating to the proper Page.");
 				}
 			} else {
-				test.log(LogStatus.FAIL, "Expected page is not displayed");
-				Assert.assertEquals(true, false);
+				test.log(LogStatus.FAIL, "Neon Home page is not displayed");
 			}
-
-			jsClick(ob, ob.findElement(By.cssSelector("span[class='ng-binding']")));
-			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ENW_PROFILE_USER_ACCOUNT_LINK_CSS.toString())));
-			BrowserWaits.waitTime(8);
-			String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
-					.getText();
-			System.out.println(actualEmail);
-			try {
-				Assert.assertEquals(LOGIN.getProperty("MARKETUSEREMAIL"), actualEmail);
-				Assert.assertEquals(ob.getCurrentUrl(), header_Expected);
-				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
-			}
-
-			catch (Throwable t) {
-
-				test.log(LogStatus.FAIL, "Email id getting displayed in Account Setting page is incorrect");// extent
-				// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-			}
-
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(2);
+			NavigateToENW();
+			logout();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
@@ -119,6 +93,42 @@ public class ENW042 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
+	}	
+	private void NavigateToENW() throws Exception {
+		String expected_uRL= "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
+		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
+		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge']")));
+		BrowserWaits.waitTime(10);
+		try {
+			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+		BrowserWaits.waitTime(3);
+		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ENW_PROFILE_USER_ACCOUNT_LINK_CSS.toString())));
+		BrowserWaits.waitTime(8);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);
+		String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString())).getText();
+		System.out.println(actualEmail);
+		try {
+			Assert.assertEquals(ob.getCurrentUrl(), expected_uRL);
+			Assert.assertEquals(LOGIN.getProperty("MarketUser42"), actualEmail);
+			test.log(LogStatus.PASS, " Email id getting displayed in Neon Account Setting page is correct");
+		}
+		catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Email id getting displayed in Neon Account Setting page is incorrect");// extent
+			// reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+					.getSimpleName()
+					+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+			ErrorUtil.addVerificationFailure(t);
+		}
+		
 	}
 
 	@AfterTest
