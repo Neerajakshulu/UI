@@ -768,16 +768,13 @@ public class TestBase {
 	}
 
 	// logging out
-	public void logout() throws Exception {
-		
-		
+	public void logout() throws Exception {		
 		BrowserWaits.waitTime(4);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 		BrowserWaits.waitTime(3);
 	}
-
 	// logging out enw
 	public void logoutEnw() throws InterruptedException {
 		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
@@ -1422,7 +1419,7 @@ public class TestBase {
 		// By.xpath(OR.getProperty("TR_login_button")), 180);
 		// jsClick(ob,
 		// ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
-		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		waitForElementTobeClickable(ob, By.name("loginEmail"), 180);
 		ob.findElement(By.name("loginEmail")).clear();
 		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
@@ -1432,7 +1429,7 @@ public class TestBase {
 
 	public void loginToWOS(String usernameKey,
 			String pwdKey) throws Exception {
-		waitForElementTobeVisible(ob, By.name("username"), 180);
+		waitForElementTobeClickable(ob, By.name("username"), 180);
 		ob.findElement(By.name("username")).clear();
 		ob.findElement(By.name("username")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty(pwdKey));
