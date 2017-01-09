@@ -55,7 +55,8 @@ public class ENWIAM00018 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-
+		
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
@@ -83,7 +84,7 @@ public class ENWIAM00018 extends TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("ENWIAM00018UserPWD"));
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
-
+		pf.getLoginTRInstance(ob).closeOnBoardingModal();
 		//pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 		logout();
 		BrowserWaits.waitTime(2);
