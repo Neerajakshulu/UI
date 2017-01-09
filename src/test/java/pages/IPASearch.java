@@ -34,11 +34,20 @@ public class IPASearch extends TestBase {
 	 *
 	 */
 	public void validateTechnologySearch(ExtentTest test) throws Exception {
-		ob.navigate().refresh();
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS);
-		WebElement searchTextbox = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS.toString()));
+		//ob.navigate().refresh();
+		try{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+		}catch(Exception e){
+		test.log(LogStatus.FAIL, "Explore Page Not Loaded once logged in successfully");
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_TECHNOLOGY_LINK_CSS);	
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+		}
+		
+		WebElement searchTextbox = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS.toString()));
 		String searchWatermark = searchTextbox.getAttribute("placeholder");
-
+System.out.println();
 		if (searchTextbox.isDisplayed() && searchTextbox.isEnabled()) {
 			test.log(LogStatus.PASS, "Search text box found in technology page");
 		} else {
@@ -55,7 +64,8 @@ public class IPASearch extends TestBase {
 			throw new Exception("Search text box not found in technology page");
 		}
 
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS, "carbon");
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS, "carbon");
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH);
 		List<WebElement> searchTerms = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH);
@@ -85,10 +95,10 @@ public class IPASearch extends TestBase {
 		//ob.navigate().refresh();
 		IPALandingPage();
 
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS.toString()), 30);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS.toString()), 30);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_COMPANYSEARCH_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS);
-		WebElement searchTextbox = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS.toString()));
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
+		WebElement searchTextbox = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS.toString()));
 		String searchWatermark = searchTextbox.getAttribute("placeholder");
 
 		if (searchTextbox.isDisplayed() && searchTextbox.isEnabled()) {
@@ -110,7 +120,7 @@ public class IPASearch extends TestBase {
 
 		List<String> termsAdded = new ArrayList<String>();
 
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS, "carbon");
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS, "carbon");
 		termsAdded = addCompanyTerms("1&&2:3");
 
 		List<WebElement> clipboardTerms = ob
@@ -204,7 +214,7 @@ public class IPASearch extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_TECHNOLOGY_LINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_TECHNOLOGY_LINK_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS, "carbon");
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_EXPLOREBUTTON_XPATH);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_EXPLOREBUTTON_XPATH);
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS.toString()));

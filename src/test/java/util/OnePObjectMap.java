@@ -876,7 +876,7 @@ public enum OnePObjectMap {
 	NEON_IPA_ACCOUNT_CSS("a[class='wui-profile-flyout__link wui-profile-flyout__link--icon']"),
 	NEON_IPA_ACCOUNTNAME_CSS("span[class='ng-binding']"),
 	NEON_IPA_TECH_SEARCHBOX_CSS("div[class='ipa-search-input-control__input-group'] input"),
-	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("\\button[starts-with(@ng-click,'vm.select')]"),
+	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("//button[starts-with(@ng-click,'vm.select')]"),
 	NEON_IPA_TECH_CLIPBOARD_CSS("ipa-search-term[class='ng-isolate-scope'] li[ng-repeat='item in vm.items track by $index']"),
 	NEON_IPA_TECH_NEWSEARCH_XPATH("//*[contains(text(),'Search')]"),
 	NEON_IPA_TECHHIGHLIGHT_XPATH("//*[contains(text(),'Technology areas')]/hr[@class='ipa-tabs--underline ipa-tabs--underline__active']"),
