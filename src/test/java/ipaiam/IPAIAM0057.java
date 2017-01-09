@@ -33,7 +33,7 @@ public class IPAIAM0057 extends TestBase {
 	}
 
 	@Test
-	public void testcaseIPAIAM0057 () throws Exception {
+	public void testcaseIPAIAM0057() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -55,12 +55,13 @@ public class IPAIAM0057 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("IPAIAMUSER0057"),
-					LOGIN.getProperty("IPAPWD0057"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAFBUSER0017"),
+					LOGIN.getProperty("DRAFBUSERPWD17"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
 			pf.getHFPageInstance(ob).clickOnAccountLink();
+
 			BrowserWaits.waitTime(2);
 
 			validateAccountsFB(1, accountType);
@@ -99,7 +100,7 @@ public class IPAIAM0057 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("IPAIAMUSER0057")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAFBUSER0017")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 

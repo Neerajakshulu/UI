@@ -65,7 +65,7 @@ public class IPAIAM0059 extends TestBase {
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-			pf.getDraPageInstance(ob).steamLockedDRA();
+			pf.getIpaPage(ob).steamLockedIPA();
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);

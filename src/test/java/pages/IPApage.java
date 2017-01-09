@@ -115,7 +115,7 @@ public class IPApage extends TestBase {
 
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(LOGIN.getProperty("IPAUSER0051Locked"));
+				.sendKeys(LOGIN.getProperty("IPAUSER0059"));
 
 		for (int i = 0; i <= 9; i++) {
 			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");

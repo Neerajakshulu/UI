@@ -62,8 +62,8 @@ public class IPAIAM0060 extends TestBase {
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginSteam(test, LOGIN.getProperty("FBuserENWIAM0009"),
-					LOGIN.getProperty("FBpwdENWIAM0009"));
+			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginSteam(test, LOGIN.getProperty("DRAUSER0020"),
+					LOGIN.getProperty("DRAUSERPWD0020"));
 			// pf.getDraPageInstance(ob).ValidateUnverifiedAcount();
 			// pf.getDraPageInstance(ob).ValidateUnverifiedBUttons();
 			String expectedmessage = "Please activate your account";
