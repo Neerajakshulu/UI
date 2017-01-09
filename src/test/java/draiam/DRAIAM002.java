@@ -3,7 +3,6 @@ package draiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
