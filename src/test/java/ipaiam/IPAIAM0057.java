@@ -33,7 +33,7 @@ public class IPAIAM0057 extends TestBase {
 	}
 
 	@Test
-	public void testcaseIPAIAM0057 () throws Exception {
+	public void testcaseIPAIAM0057() throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -61,6 +61,7 @@ public class IPAIAM0057 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
 			pf.getHFPageInstance(ob).clickOnAccountLink();
+
 			BrowserWaits.waitTime(2);
 
 			validateAccountsFB(1, accountType);
