@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class NewsfeedPage extends TestBase{
@@ -26,6 +27,7 @@ public class NewsfeedPage extends TestBase{
 	public void addFirstPostToWatclist(String watchListName) throws Exception {
 		WebElement watchbutton=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
 		.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+		//scrollElementIntoView(ob, watchbutton);
 		watchOrUnwatchItemToAParticularWatchlist(watchListName, watchbutton);
 	}
 	
@@ -71,8 +73,10 @@ public class NewsfeedPage extends TestBase{
 	}
 	
 	public void clickNewsfeedLink() throws Exception {
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon","Posts");
+		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH);
+		//pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon","Posts");
+		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS);
 	}
 	

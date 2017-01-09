@@ -55,6 +55,7 @@ public class GroupInvitationPage extends TestBase {
 		WebElement groupCard = getRecordCard(groupTitle);
 		groupCard.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_ACCEPT_INVITAION_BUTTON_CSS.toString()))
 				.click();
+		BrowserWaits.waitTime(8);
 
 	}
 

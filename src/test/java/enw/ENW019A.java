@@ -23,27 +23,22 @@ public class ENW019A extends TestBase {
 
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	// Verify that Non Market test group user who signed into the community
+	// application should be able to navigate to the
+	// alternate version of EndNote through "EndNote Online" link on App
+	// switcher, When STeAM account is linked.
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW019A() throws Exception {
-
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		String expected_URL = "Thank You";
-
+		String expected_Str = "Thank You";
 		if (!master_condition) {
-
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
@@ -53,10 +48,10 @@ public class ENW019A extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host);			
+			ob.navigate().to(host);
 			loginAs("NONMARKETUSEREMAIL", "NONMARKETUSERPASSWORD");
 			pf.getHFPageInstance(ob).clickProfileImage();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_SEND_FEEDBACK_TO_NEONTEAM_XPATH.toString())));
 			BrowserWaits.waitTime(3);
@@ -67,21 +62,20 @@ public class ENW019A extends TestBase {
 			BrowserWaits.waitTime(10);
 			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 			try {
-				Assert.assertEquals(expected_URL, str);
-				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
-				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
-				Thread.sleep(2000);
+				Assert.assertEquals(expected_Str, str);
+				test.log(LogStatus.PASS, " Non Market user Feedback has been sent successfully .");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Feedback not sent successfully..");// extent
+				test.log(LogStatus.FAIL, "Non Market user Feedback has been sent");// extent
 				ErrorUtil.addVerificationFailure(t); // reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-			BrowserWaits.waitTime(7);
-			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
+			BrowserWaits.waitTime(10);
+			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
+			BrowserWaits.waitTime(5);
 			if (ob.findElements(By.xpath(OnePObjectMap.SEND_FEEDBACK_COUNTRY_SELECTION_XPATH.toString())).size() > 0) {
 				Select Country = new Select(ob.findElement(By.xpath(OnePObjectMap.COUNTRY_SELECT_IN_NEON.toString())));
 				Country.selectByVisibleText("India");
@@ -90,17 +84,20 @@ public class ENW019A extends TestBase {
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
 				BrowserWaits.waitTime(3);
 				str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
-				Assert.assertEquals(expected_URL, str);
-				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
+				Assert.assertEquals(expected_Str, str);
+				test.log(LogStatus.PASS, " Non market user support request has  been sent successfully.");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 				Thread.sleep(2000);
 			} else {
-				test.log(LogStatus.FAIL, "Feedback has not sent .");
+				test.log(LogStatus.FAIL, "Non market user support request has not been sent");
 			}
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(2);
 			NavigateToENW();
+			logoutEnw();
 			closeBrowser();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
-			} catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
@@ -113,26 +110,27 @@ public class ENW019A extends TestBase {
 			closeBrowser();
 		}
 	}
+
 	private void NavigateToENW() throws Exception {
 		String header_Expected = "Thomson Reuters";
-		jsClick(ob,ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
-		jsClick(ob,ob.findElement(By.cssSelector("a[href='/#/bridge']")));
+		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
+		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge']")));
 		BrowserWaits.waitTime(10);
 		try {
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters",
+		// "EndNote", "Downloads", "Options");
+		BrowserWaits.waitTime(5);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HEADER_XPATH);
 		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
 		logger.info("Header Text displayed as:" + actual_result);
 		String profileLink = ob.findElement(By.cssSelector("li[class='dropdown-header'] a")).getAttribute("class");
 		logger.info("is profile image linked -->" + profileLink);
-
 		logger.info("Actual result displayed as :" + actual_result
 				+ " text without the hot link and not allow user to Navigate to Neon");
 		try {
@@ -143,7 +141,8 @@ public class ENW019A extends TestBase {
 			test.log(LogStatus.FAIL, " Header Logo text is not displayed properly for Non-Market users");// extent
 			ErrorUtil.addVerificationFailure(t);// testng reports
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
+					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 		}
 	}
 

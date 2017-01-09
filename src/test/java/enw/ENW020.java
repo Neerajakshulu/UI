@@ -24,8 +24,9 @@ public class ENW020 extends TestBase {
 
 	static int status = 1;
 	String url = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
-	String url_wos="http://ua-qa.newisiknowledge.com/UA_GeneralSearch_input.do?product=UA&search_mode=GeneralSearch&SID=P2t5lfC6Tvo6wTneQf5&preferencesSaved=";
-    String url_wos1="http://error-qa.newisiknowledge.com/error/Error?PathInfo=%2F&Alias=WOK5&Domain=.newisiknowledge.com&Src=IP&RouterURL=http%3A%2F%2Fcaesarrouter-qa.newisiknowledge.com%2F&Error=IPError";
+	String url_wos = "http://ua-qa.newisiknowledge.com/UA_GeneralSearch_input.do?product=UA&search_mode=GeneralSearch&SID=P2t5lfC6Tvo6wTneQf5&preferencesSaved=";
+	String url_wos1 = "http://error-qa.newisiknowledge.com/error/Error?PathInfo=%2F&Alias=WOK5&Domain=.newisiknowledge.com&Src=IP&RouterURL=http%3A%2F%2Fcaesarrouter-qa.newisiknowledge.com%2F&Error=IPError";
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -49,20 +50,23 @@ public class ENW020 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to("http://ua-qa.newisiknowledge.com/");
-			String uRL_webofScience=ob.getCurrentUrl();
-			if(!uRL_webofScience.contains("error-qa.newisiknowledge.com")){
+			String uRL_webofScience = ob.getCurrentUrl();
+			if (!uRL_webofScience.contains("error-qa.newisiknowledge.com")) {
+				BrowserWaits.waitTime(6);
 				NavigateToENW();
-			}else{
+			} else {
 				loginToWOS("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 				BrowserWaits.waitTime(6);
 				NavigateToENW();
-			}			
-		//	pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
-			BrowserWaits.waitTime(5);
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+			}
+			// // pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson
+			// Reuters",
+			// // "EndNote", "Downloads", "Options");
+			// BrowserWaits.waitTime(5);
+			// jsClick(ob,
+			// ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(10);
 			if (ob.getCurrentUrl().contains(url)) {
 				System.out.println("URL:" + ob.getCurrentUrl());
 				if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
@@ -76,6 +80,8 @@ public class ENW020 extends TestBase {
 				Assert.assertEquals(true, false);
 				closeBrowser();
 			}
+			logout();
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -91,29 +97,33 @@ public class ENW020 extends TestBase {
 	}
 
 	private void NavigateToENW() throws InterruptedException {
-		// jsClick(ob,
-		// ob.findElement(By.xpath(OnePObjectMap.WOS_HOMEPAGE_ENDNOTE_LINK.toString())));
-		//waitForElementTobeVisible(ob, By.xpath(".//*[@id='HS_EndNoteLink']"), 180);
-		BrowserWaits.waitTime(4);
-		 ob.findElement(By.xpath("//div[@class='navBar clearfix']/ul[@class='globalLinks nav-list']/li[@class='nav-item']/a[@id='HS_EndNoteLink_signedin']")).click();
+		ob.findElement(By
+				.xpath("//div[@class='navBar clearfix']//ul[@class='globalLinks nav-list']/li[@class='nav-item']//a[@id='HS_EndNoteLink_signedin']"))
+				.click();
 		try {
 			EndNoteSeesion(ob);
-			BrowserWaits.waitTime(8);
-			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
-				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+			try {
+				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+				}
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+				BrowserWaits.waitTime(5);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+				BrowserWaits.waitTime(5);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	private void EndNoteSeesion(WebDriver ob) {
 		String newWindow = switchToNewWindow(ob);
-		System.out.println("Before Success1");
 		if (newWindow != null) {
-			System.out.println("Before Success2");
 			if (ob.getCurrentUrl().contains("app.qc.endnote.com") && ob.getTitle().contains("EndNote")) {
-				System.out.println("Success with the url");
 				logger.info("Neon Landing page is opened in the new window ");
 			}
 		} else {

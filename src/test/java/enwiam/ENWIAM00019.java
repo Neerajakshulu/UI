@@ -74,10 +74,9 @@ public class ENWIAM00019 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00019User"),
 					LOGIN.getProperty("ENWIAM00019UserPWD"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-
 			test.log(LogStatus.PASS, "user has logged in with steam account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-
+			BrowserWaits.waitTime(3);
 			try {
 
 				try {

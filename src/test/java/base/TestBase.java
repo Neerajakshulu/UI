@@ -768,19 +768,16 @@ public class TestBase {
 	}
 
 	// logging out
-	public void logout() throws Exception {
-		
-		
+	public void logout() throws Exception {		
 		BrowserWaits.waitTime(4);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 		BrowserWaits.waitTime(3);
 	}
-
 	// logging out enw
 	public void logoutEnw() throws InterruptedException {
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
+		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString())));
 		Thread.sleep(5000);
 		// waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH.toString()), 30);
@@ -1422,7 +1419,7 @@ public class TestBase {
 		// By.xpath(OR.getProperty("TR_login_button")), 180);
 		// jsClick(ob,
 		// ob.findElement(By.xpath(OR.getProperty("TR_login_button"))));
-		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		waitForElementTobeClickable(ob, By.name("loginEmail"), 180);
 		ob.findElement(By.name("loginEmail")).clear();
 		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
@@ -1432,7 +1429,7 @@ public class TestBase {
 
 	public void loginToWOS(String usernameKey,
 			String pwdKey) throws Exception {
-		waitForElementTobeVisible(ob, By.name("username"), 180);
+		waitForElementTobeClickable(ob, By.name("username"), 180);
 		ob.findElement(By.name("username")).clear();
 		ob.findElement(By.name("username")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty(pwdKey));
@@ -1466,9 +1463,9 @@ public class TestBase {
 	public void navigateToParticularWatchlistPage(String selectedWatchlistName) throws InterruptedException {
 
 		// Navigate to the watch list landing page
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 30);
+		waitForElementTobeClickable(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
 
 		// Getting all the watch lists
 		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));
@@ -1573,10 +1570,10 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
 		BrowserWaits.waitTime(4);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
 		BrowserWaits.waitTime(5);
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
@@ -1595,7 +1592,7 @@ public class TestBase {
 	 */
 	public void deleteParticularWatchlist(String watchListName) throws Exception {
 		// Deleting the first watch list
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 		BrowserWaits.waitTime(4);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);

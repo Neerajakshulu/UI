@@ -22,18 +22,14 @@ import util.OnePObjectMap;
 public class ENW019 extends TestBase {
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+// For Market User - After submitting request on Neon feedback page by clicking "Report a problem or submit a support request" hyperlink.
+	//"Your support request has been submitted." Message should be displayed.
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW019() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
@@ -68,9 +64,9 @@ public class ENW019 extends TestBase {
 				BrowserWaits.waitTime(3);
 				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 				Assert.assertEquals(expected_URL, str);
-				test.log(LogStatus.PASS, " Feedback has  been sent successfully.");
+				test.log(LogStatus.PASS, " Market user Feedback has  been sent successfully.");
 			} else {
-				test.log(LogStatus.FAIL, "Feedback has not sent .");
+				test.log(LogStatus.FAIL, " Market user Feedback has not been sent .");
 				Assert.assertEquals(true, false);
 			}
 
