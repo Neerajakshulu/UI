@@ -104,7 +104,7 @@ public class Authoring88 extends TestBase {
 
 			}
 
-			
+			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString())));
 			BrowserWaits.waitTime(5);
