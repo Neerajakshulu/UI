@@ -174,7 +174,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS("input#Passwd"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS("input#signIn"),
 
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Share') and @role='button']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Post') and @role='button']"),
 
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS("i[class='fa fa-facebook share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
