@@ -1128,7 +1128,7 @@ public class TestBase {
 			WebElement element) throws Exception {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 
 	/**
