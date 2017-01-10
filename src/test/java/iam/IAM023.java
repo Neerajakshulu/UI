@@ -83,6 +83,10 @@ public class IAM023 extends TestBase {
 
 			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
+			if (CONFIG.getProperty("browserType").equals("IE")) {
+				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+				BrowserWaits.waitTime(4);
+			}
 			BrowserWaits.waitTime(12);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);

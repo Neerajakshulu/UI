@@ -63,6 +63,10 @@ public class IAM028 extends TestBase {
 			if (registationStatus) {
 				BrowserWaits.waitTime(2);
 				ob.get("https://www.guerrillamail.com");
+				if (CONFIG.getProperty("browserType").equals("IE")) {
+					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
+					BrowserWaits.waitTime(4);
+				}
 				BrowserWaits.waitTime(12);
 				ob.navigate().to(host);
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));

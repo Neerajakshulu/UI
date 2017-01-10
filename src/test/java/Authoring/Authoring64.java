@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -85,6 +86,7 @@ public class Authoring64 extends TestBase {
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountAfter);
 
 			try {
+				BrowserWaits.waitTime(5);
 				Assert.assertEquals(postCountBefore - 1, postCountAfter);
 				test.log(LogStatus.PASS, "Post count is decremented after the post deletion");
 			} catch (Throwable t) {
