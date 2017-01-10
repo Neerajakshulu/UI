@@ -1465,7 +1465,7 @@ public class TestBase {
 		// Navigate to the watch list landing page
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
+		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
 
 		// Getting all the watch lists
 		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));
@@ -1606,7 +1606,7 @@ public class TestBase {
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup1"))).click();
 				BrowserWaits.waitTime(6);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
+				//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
 				break;
 			}
 			// Scrolling down to make the watch list visible
