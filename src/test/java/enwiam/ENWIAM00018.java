@@ -56,6 +56,17 @@ public class ENWIAM00018 extends TestBase {
 
 		}
 		
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("ENWIAM00018User"));
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
