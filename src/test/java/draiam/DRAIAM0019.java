@@ -64,7 +64,7 @@ public class DRAIAM0019 extends TestBase {
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_USERNAME_CSS);
 			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-			pf.getDraPageInstance(ob).steamLockedDRA();
+			pf.getDraPageInstance(ob).steamLockedDRA();  
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);

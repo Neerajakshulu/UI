@@ -77,7 +77,7 @@ public class DRAIAM054 extends TestBase {
 						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
 			}
 			
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(5);  
 			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "@Salma123");
 			

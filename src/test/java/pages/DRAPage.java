@@ -295,7 +295,7 @@ public class DRAPage extends TestBase {
 				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
 
 		for (int i = 0; i <= 9; i++) {
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(5);  
 			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
