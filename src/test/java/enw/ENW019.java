@@ -61,7 +61,8 @@ public class ENW019 extends TestBase {
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
 				BrowserWaits.waitTime(2);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-				BrowserWaits.waitTime(3);
+				//BrowserWaits.waitTime(3);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE);
 				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Market user Feedback has  been sent successfully.");
