@@ -67,8 +67,7 @@ public class DRAIAM054 extends TestBase {
 			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickDRALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
-
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_USERNAME_CSS);		
 			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
 			if (Emailaddress.getAttribute("value").equals("shakeal68@x5a9m8ugq.com")) {
 				test.log(LogStatus.PASS,
@@ -77,6 +76,8 @@ public class DRAIAM054 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
 			}
+			
+			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "@Salma123");
 			

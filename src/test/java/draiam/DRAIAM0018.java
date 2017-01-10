@@ -68,7 +68,7 @@ public class DRAIAM0018 extends TestBase {
 			BrowserWaits.waitTime(2);
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, LOGIN.getProperty("DRAFBUSERPWD18"));
 			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			closeBrowser();
 		} catch (Throwable t) {

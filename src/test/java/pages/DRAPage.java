@@ -290,16 +290,18 @@ public class DRAPage extends TestBase {
 	}
 	public void steamLockedDRA() throws Exception {
 
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
+		
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
 				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
 
 		for (int i = 0; i <= 9; i++) {
-			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+			BrowserWaits.waitTime(5);
+			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(2000);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			
 		}
 
 	}
@@ -531,7 +533,7 @@ public class DRAPage extends TestBase {
 	public void validateProductOverviewPage(ExtentTest test){
 		try {
 			clickOnLearnMoreLink();
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(5);
 			
 			Set<String> myset=ob.getWindowHandles();
 			Iterator<String> myIT=myset.iterator();
