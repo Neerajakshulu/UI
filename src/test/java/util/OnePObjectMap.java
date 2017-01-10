@@ -35,7 +35,7 @@ public enum OnePObjectMap {
 	ENW_PROFILE_TAB_LINK("Profile Information"),
 	ENW_OPTIONS_TAB_XPATH("//*[@id='enwHeader']//div[2]//ul[@class='nav navbar-nav navbar-middle']//a[@id='lgLink6' and contains(text(),'Options')]"),
 	ENW_PROFILE_TAB_XPATH("//a[contains(text(),'Profile Information')]"),
-	FEEDBACK_THANKU_PAGE("//h3[contains(text(),'Thank You')]"),
+	FEEDBACK_THANKU_PAGE_XPATH("//h3[contains(text(),'Thank You')]"),
 	ENW_PROFILE_FIRST_NAME_XPATH("//input[@id='firstname']"),
 	ENW_PROFILE_LAST_NAME_XPATH("//input[@id='lastname']"),
 	ENW_SIGNIN_BTN_CSS("button[class*='login-button']"),

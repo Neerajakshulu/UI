@@ -147,7 +147,7 @@ public class ENWIAM91 extends TestBase {
 		closeBrowser();
 	}
 
-	private void NeonAccountActive() throws Exception {
+	/*private void NeonAccountActive() throws Exception {
 		int watchlistCount = 1;
 		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("NeonMergeAccount"),
 				LOGIN.getProperty("NeonMergeAccountPWD"));
@@ -178,7 +178,7 @@ public class ENWIAM91 extends TestBase {
 		pf.getLoginTRInstance(ob).logOutApp();
 		BrowserWaits.waitTime(5);
 		
-	}
+	}*/
 
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
