@@ -288,14 +288,14 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
-	public void steamLockedDRA() throws Exception {
+	public void steamLockedDRA(String steamAccount) throws Exception {
 
 		
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
+				.sendKeys(steamAccount);
 
 		for (int i = 0; i <= 9; i++) {
-			BrowserWaits.waitTime(5);  
+			BrowserWaits.waitTime(3);  
 			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");

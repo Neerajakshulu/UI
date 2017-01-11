@@ -53,7 +53,7 @@ public class DRAIAM0012 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			pf.getDraPageInstance(ob).steamLockedDRA();
+			pf.getDraPageInstance(ob).steamLockedDRA(LOGIN.getProperty("DRAUSER0012Locked"));
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);
