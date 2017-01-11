@@ -224,11 +224,13 @@
 			<class name="enwiam.ENWIAM0009"></class>
 		</classes>
 	</test>
-	 <test name="ENWIAM00018">
+	 
+	 <!-- <test name="ENWIAM00018">
 		<classes>
 			<class name="enwiam.ENWIAM00018"></class>
 		</classes>
-	</test>
+	</test> -->
+	 
 	 <test name="ENWIAM00019">
 		<classes>
 			<class name="enwiam.ENWIAM00019"></class>

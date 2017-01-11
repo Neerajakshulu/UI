@@ -200,6 +200,13 @@
 			<class name="enwiam.ENWIAM00016"></class>
 		</classes>
 	</test>
+	
+	<test name="ENWIAM00018">
+		<classes>
+			<class name="enwiam.ENWIAM00018"></class>
+		</classes>
+	</test>
+	
 	<test name="ENWIAM90">
 		<classes>
 			<class name="enwiam.ENWIAM90"></class>
