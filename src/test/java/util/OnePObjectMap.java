@@ -430,7 +430,7 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
 	LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS("div[class='login-splash__container']"),
-	CLARIVATE_ANALYTICS_PAGE_CSS("span[id='tagline']"),
+	CLARIVATE_ANALYTICS_PAGE_CSS("div[id='site-header'] a"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
