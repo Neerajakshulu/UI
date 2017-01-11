@@ -61,7 +61,7 @@ public class ENW019 extends TestBase {
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
 				BrowserWaits.waitTime(2);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-				//BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(7);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH);
 				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 				Assert.assertEquals(expected_URL, str);
