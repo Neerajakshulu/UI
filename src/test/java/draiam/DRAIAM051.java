@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -74,11 +75,13 @@ public class DRAIAM051 extends TestBase {
 		test.log(LogStatus.PASS,
 					"user is able to login to DRA when first name of user is missing.");
 		   
-           String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
-           
+           //String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
+          
            pf.getDraPageInstance(ob).clickProfileLink();
+           
+           pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS);
            String firstnameerrormessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
-           if(Profilename.equals("")&& firstnameerrormessage.equals("Please enter your first name.") )
+           if(firstnameerrormessage.equals("Please enter your first name."))
 			{test.log(LogStatus.PASS,
 					"user is able to see first name as NULL when first name of user is missing.");
 			}
@@ -86,6 +89,7 @@ public class DRAIAM051 extends TestBase {
 			{test.log(LogStatus.FAIL,
 					"user is not  able to see first name as NULL when first name of user is missing.");
 			}
+           BrowserWaits.waitTime(3);
 			pf.getDraPageInstance(ob).logoutDRA();
 			ob.close();
 		}
