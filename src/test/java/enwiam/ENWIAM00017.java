@@ -85,14 +85,14 @@ public class ENWIAM00017 extends TestBase {
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
 				.sendKeys(LOGIN.getProperty("ENWIAM00015steamUser"));
 
-		for (int i = 0; i <= 9; i++) {
+		for (int i = 0; i <1; i++) {
 			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			Thread.sleep(2000);
 		}
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()), 30);
 		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();	
 		BrowserWaits.waitTime(2);
