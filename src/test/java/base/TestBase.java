@@ -1559,15 +1559,15 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 120);
 
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 		BrowserWaits.waitTime(10);
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
-		BrowserWaits.waitTime(10);
+//		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+//		BrowserWaits.waitTime(10);
 		ob.navigate().refresh();
 		BrowserWaits.waitTime(10);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 120);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
 		BrowserWaits.waitTime(4);
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 120);

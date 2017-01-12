@@ -71,7 +71,7 @@ public class Watchlist028 extends TestBase {
 
 			// login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			
+			BrowserWaits.waitTime(5);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getSearchProfilePageInstance(ob).selectProfile(LOGIN.getProperty("PROFILE8"));
