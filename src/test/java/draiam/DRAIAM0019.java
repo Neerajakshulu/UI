@@ -62,11 +62,11 @@ public class DRAIAM0019 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			pf.getDraPageInstance(ob).clickDRALink();
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_USERNAME_CSS);
 			//waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
 			pf.getDraPageInstance(ob).steamLockedDRA(LOGIN.getProperty("DRAUSER0019Locked"));  
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()),
 					30);
 			locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()))
