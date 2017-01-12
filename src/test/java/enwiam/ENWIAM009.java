@@ -245,7 +245,7 @@ public class ENWIAM009 extends TestBase {
 								"Verify that after updating the preferences ,the system should update the URL that supports the 'View additional email preferences' link .")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				ob.findElement(By.xpath("//font[contains(text(),'ENGLISH')]")).click();
+				ob.findElement(By.xpath("//span[contains(text(),'ENGLISH')]")).click();
 				BrowserWaits.waitTime(2);
 
 				Set<String> myset = ob.getWindowHandles();
