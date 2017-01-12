@@ -73,6 +73,7 @@ public class Search112 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			//waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
@@ -97,6 +98,7 @@ public class Search112 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.xpath("//h3[contains(text(),'Interests')]"), 15);
 			test.log(LogStatus.PASS, "Record view page is opened");
+			BrowserWaits.waitTime(4);
 			ob.navigate().back();
 			BrowserWaits.waitTime(4);
 			// checking for Sort option
