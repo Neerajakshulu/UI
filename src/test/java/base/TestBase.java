@@ -1570,7 +1570,7 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
 		BrowserWaits.waitTime(4);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 120);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
 		BrowserWaits.waitTime(5);
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
@@ -1581,7 +1581,8 @@ public class TestBase {
 		}
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
+		BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 120);
 	}
 
 	/**
