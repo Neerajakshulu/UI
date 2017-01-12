@@ -486,6 +486,7 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickPostsTab() throws Exception {
 		BrowserWaits.waitTime(10);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
