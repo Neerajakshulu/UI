@@ -1581,7 +1581,8 @@ public class TestBase {
 		}
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
+		BrowserWaits.waitTime(5);
+		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 120);
 	}
 
 	/**
