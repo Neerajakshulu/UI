@@ -961,7 +961,6 @@ public class ProfilePage extends TestBase {
 			}
 
 		}
-
 	}
 
 	public void addPostToWatchlist() throws Exception {
