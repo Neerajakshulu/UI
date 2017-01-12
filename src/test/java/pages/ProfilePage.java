@@ -476,7 +476,7 @@ public class ProfilePage extends TestBase {
 		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
-		waitForAjax(ob);
+		waitForAjax(ob); 
 	}
 
 	/**
