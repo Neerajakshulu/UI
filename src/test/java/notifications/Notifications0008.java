@@ -265,6 +265,7 @@ public class Notifications0008 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(user2, CONFIG.getProperty("defaultPassword"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			pf.getHFPageInstance(ob).clickOnHomeLink();
 		/*	waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
 					"Home page is not loaded successfully");*/
 			test.log(LogStatus.INFO, "User logged in successfully for verifying comment on post");
@@ -282,9 +283,12 @@ public class Notifications0008 extends TestBase {
 				ob.findElement(
 						By.cssSelector("div[class='ng-pristine ng-untouched ng-valid ta-bind placeholder-text']"))
 						.sendKeys(OR.getProperty("COMMENT_TEXT1"));
-				ob.findElement(
-						By.cssSelector("button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']"))
-						.click();
+				BrowserWaits.waitTime(3);
+//				ob.findElement(
+//						By.cssSelector("div[class='ne-comment-box__controls'] button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']"))
+//						.click();
+				jsClick(ob, ob.findElement(
+						By.cssSelector("div[class='ne-comment-box__controls'] button[class='wui-mini-btn wui-mini-btn--primary wui-mini-btn--comment-box']")));
 				BrowserWaits.waitTime(2);
 				pf.getHFPageInstance(ob).clickOnHomeLink();
 				BrowserWaits.waitTime(4);
