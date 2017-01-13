@@ -73,10 +73,10 @@ public class Watchlist019 extends TestBase {
 			// loginAsSpecifiedUser(user2, CONFIG.getProperty("defaultPassword"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
 			// Navigate to the watch list landing page
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 40);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 40);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
 			// Creating 2 public watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_";
 			String watchListDescription = "This is newly created watchlist.";
