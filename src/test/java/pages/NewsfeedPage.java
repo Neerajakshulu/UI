@@ -76,7 +76,6 @@ public class NewsfeedPage extends TestBase{
 		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH);
 		//pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon","Posts");
-		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS);
 	}
 	

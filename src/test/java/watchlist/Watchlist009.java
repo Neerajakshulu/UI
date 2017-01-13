@@ -80,12 +80,12 @@ public class Watchlist009 extends TestBase {
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			// Searching for post
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("test");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Demonetization");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString()), 60);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
+			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())));
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 80);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			Thread.sleep(5000);
