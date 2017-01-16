@@ -5,7 +5,9 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -51,9 +53,8 @@ public class Watchlist008 extends TestBase {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-
+		WebElement watchButton;
 		if (!master_condition) {
-
 			status = 3;// excel
 			test.log(LogStatus.SKIP,
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
@@ -90,6 +91,8 @@ public class Watchlist008 extends TestBase {
 			// Searching for Post
 
 			//ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("Post for Testing RecordView0adpdH");
+			ob.navigate().refresh();
+			waitForAjax(ob);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postName2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
@@ -100,14 +103,17 @@ public class Watchlist008 extends TestBase {
 			// Watching 2 articles to a particular watch list
 			for (int i = 0; i < 1; i++) {
 
-				WebElement watchButton = watchButtonList.get(i);
+				 watchButton = watchButtonList.get(i);
 				watchButton.click();
 				Thread.sleep(5000);
 				ob.findElement(By.linkText(newWatchlistName)).click();
 				Thread.sleep(3000);
 				ob.findElement(By.xpath("//input[@type='text']")).click();
 			}
-
+//			watchButton = watchButtonList.get(0);
+//			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+//			((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", watchButton);
+//			BrowserWaits.waitTime(5);
 			// Selecting the document name
 			String firstdocumentName = ob
 					.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"))
@@ -139,6 +145,43 @@ public class Watchlist008 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
 
+			}
+			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			logger.info("First Document Name : " + firstdocumentName);
+			// Unwatching the first document from results
+			watchButton = ob.findElement(By.xpath("//button[contains(.,'Watching')]"));
+			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
+			BrowserWaits.waitTime(5);
+			ob.navigate().refresh();
+			List<WebElement> watchlistPatents=ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			if(watchlistPatents.size()>0) {
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			}else {
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Add articles, patents and posts to your watchlist for easy reference");
+			}
+			
+			count = 0;
+			if(watchlistPatents.size()>0) { 
+				// Checking if first document still exists in the watch list
+				List<WebElement> documentList = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+				String documentTitle;
+				for (WebElement document : documentList) {
+					documentTitle = document.getText();
+					if (documentTitle.equals(firstdocumentName))
+						count++;
+				 }
+			}
+
+			try {
+				Assert.assertEquals(0, count);
+				test.log(LogStatus.PASS, "User is able to unwatch a Post from watchlist page");
+			} catch (Throwable e) {
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_user_unable_to_remove_Post_from_watchlist_in_Patent_content_searchResults_page")));// screenshot
+				ErrorUtil.addVerificationFailure(e);// testng
+				test.log(LogStatus.FAIL, "User is unable to unwatch a Post from watchlist page");
 			}
 			deleteParticularWatchlist(newWatchlistName);
 			closeBrowser();

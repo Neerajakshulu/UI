@@ -99,6 +99,7 @@ public class Watchlist018 extends TestBase {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchBox_textBox")), 60);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2 + " " + ln2);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(5);
 			ob.findElement(By.xpath(OR.getProperty("searchPepole"))).click();
 			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
 

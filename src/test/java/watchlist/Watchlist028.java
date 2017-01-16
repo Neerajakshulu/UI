@@ -71,7 +71,7 @@ public class Watchlist028 extends TestBase {
 
 			// login with user 2 and follow user1 to get the notifications
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			
+			BrowserWaits.waitTime(5);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getSearchProfilePageInstance(ob).selectProfile(LOGIN.getProperty("PROFILE8"));
@@ -114,11 +114,10 @@ public class Watchlist028 extends TestBase {
 			// Navigating to the home page
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			//Add patent to watchlist
+			ob.navigate().refresh();
 			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			logger.info("document title in watchlist page-->" + document_title);
-			BrowserWaits.waitTime(8);
-
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -153,7 +152,7 @@ public class Watchlist028 extends TestBase {
 
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist1")));
 
 				if (defaultMessage.isDisplayed()) {
 
@@ -180,6 +179,7 @@ public class Watchlist028 extends TestBase {
 			}
 
 			// Deleting the watch list
+			BrowserWaits.waitTime(5);
 			deleteParticularWatchlist(newWatchlistName);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

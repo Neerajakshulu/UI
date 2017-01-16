@@ -104,7 +104,7 @@ public class IPAIAM054 extends TestBase {
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERIPA054"),
-						LOGIN.getProperty("USERPWDIPA054"));
+						LOGIN.getProperty("USERPWDIPANEW054"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);

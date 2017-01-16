@@ -64,7 +64,7 @@ public class ENWIAM00017 extends TestBase {
 			clearCookies();
 			steamLocked();
 			loginTofb();
-			
+
 			closeBrowser();
 			pf.clearAllPageObjects();
 
@@ -92,9 +92,9 @@ public class ENWIAM00017 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			Thread.sleep(2000);
 		}
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(3);
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString()), 30);
-		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();	
+		locked = ob.findElement(By.cssSelector(OnePObjectMap.ENW_UNVERIFIED_MESSAGE_BUTTON_CSS.toString())).getText();
 		BrowserWaits.waitTime(2);
 		if (locked.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The locked string is displayed, the account got locked on ENW");
@@ -104,8 +104,8 @@ public class ENWIAM00017 extends TestBase {
 			test.log(LogStatus.FAIL, "The locked string is not displayed, the account is not locked on ENW");
 		}
 
-
 	}
+
 	private void loginTofb() throws Exception {
 
 		// Navigate to TR login page and login with valid TR credentials
@@ -128,8 +128,6 @@ public class ENWIAM00017 extends TestBase {
 		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.LOCKED_OK_BUTTON_XPATH.toString()), 30);
 		ob.findElement(By.xpath(OnePObjectMap.LOCKED_OK_BUTTON_XPATH.toString())).click();
 	}
-
-	
 
 	@AfterTest
 	public void reportTestResult() {

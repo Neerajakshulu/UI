@@ -100,10 +100,8 @@ public class Watchlist025 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(patentName);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			// click on Patent tab
+			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 
 			// Watching an patent to a multiple watch list

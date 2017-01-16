@@ -476,7 +476,7 @@ public class ProfilePage extends TestBase {
 		BrowserWaits.waitTime(10);
 		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
-		waitForAjax(ob);
+		waitForAjax(ob); 
 	}
 
 	/**
@@ -486,7 +486,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickPostsTab() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -960,7 +961,6 @@ public class ProfilePage extends TestBase {
 			}
 
 		}
-
 	}
 
 	public void addPostToWatchlist() throws Exception {
@@ -972,9 +972,9 @@ public class ProfilePage extends TestBase {
 		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		BrowserWaits.waitTime(4);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
 		BrowserWaits.waitTime(2);
 	}
 

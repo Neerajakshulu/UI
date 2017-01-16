@@ -76,7 +76,6 @@ public class NewsfeedPage extends TestBase{
 		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_XPATH);
 		//pf.getBrowserWaitsInstance(ob).waitUntilText("Trending on Neon","Posts");
-		BrowserWaits.waitTime(10);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS);
 	}
 	
@@ -107,6 +106,7 @@ public class NewsfeedPage extends TestBase{
 				String cardTitle=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
 				if(cardTitle.equalsIgnoreCase(patentTitle)) {
 					WebElement addToWatchlist=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+					BrowserWaits.waitTime(4);
 					watchOrUnwatchItemToAParticularWatchlist(watchlist, addToWatchlist);
 					break;
 				}
