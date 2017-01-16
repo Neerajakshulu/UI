@@ -67,7 +67,7 @@ public class Authoring47 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			List<String> list = new ArrayList<String>();
-
+			waitForAjax(ob);
 			if (!pf.getpostRVPageInstance(ob).isCommentCountDisplayed())
 				list.add("Comment count");
 			if (!pf.getpostRVPageInstance(ob).isLikeButtonDisplayed())
