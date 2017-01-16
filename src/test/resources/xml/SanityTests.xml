@@ -528,11 +528,11 @@
 		</classes>
 	</test>
 	
-	<test name="Share_On_Google_Plus">
+	<!-- <test name="Share_On_Google_Plus">
 		<parameter name="gusername" value="romanreings2016csk" />
 		<parameter name="gpassword" value="India@2020" />
 		<classes>
                 <class name="Authoring.Authoring82"></class> 
 		</classes>
-	</test>
+	</test> -->
 </suite>
