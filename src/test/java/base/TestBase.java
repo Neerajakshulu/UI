@@ -1499,9 +1499,9 @@ public class TestBase {
 		//watchbutton.click();
 		jsClick(ob, watchbutton);
 		
-		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 80);
 		Thread.sleep(2000);
-		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 80);
 		Thread.sleep(3000);
 		List<WebElement> list = ob.findElements(By.linkText(watchListName));
 		for (WebElement element : list) {

@@ -106,6 +106,7 @@ public class NewsfeedPage extends TestBase{
 				String cardTitle=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString())).getText();
 				if(cardTitle.equalsIgnoreCase(patentTitle)) {
 					WebElement addToWatchlist=cardSection.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS.toString()));
+					BrowserWaits.waitTime(4);
 					watchOrUnwatchItemToAParticularWatchlist(watchlist, addToWatchlist);
 					break;
 				}
