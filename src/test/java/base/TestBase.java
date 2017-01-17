@@ -1559,7 +1559,7 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 80);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 90);
 
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
 //		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
