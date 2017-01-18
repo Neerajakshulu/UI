@@ -579,7 +579,7 @@ public enum OnePObjectMap {
 	NEON_OK_BUTTON_XPATH("//a[@class='ng-binding ng-scope']"),
 
 	// #######RCC#############
-	RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
+	RCC_GROUP_GROUPTAB_HEADER_XPATH("//a[contains(.,'Groups')]"),
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS("button[class*='wui-icon-btn--add-group']"),
 	RCC_GROUP_GROUPS_COUNT_CSS("a[href*='groups'] span[class*='wui-side-menu__badge']"),
 	RCC_GROUP_INVITATIONS_COUNT_CSS("a[href*='invites'] span[class*='wui-side-menu__badge']"),
@@ -748,6 +748,14 @@ public enum OnePObjectMap {
 	RCC_SEARCH_LIST_VERIFY_GROUPNAME("a[class='ne-action-dropdown__item-content']"),
 	RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
+
+	RCC_GMAIL_LOGIN_USERNAME_XPATH("Email"),
+    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH(".//*[@id='next']"),
+    RCC_GMAIL_LOGIN_SUBMIT_XPATH(".//*[@id='signIn']"),
+    RCC_GMAIL_LOGIN_PASSWORD_XPATH(".//*[@id='Passwd']"),
+    RCC_GMAIL_CLICK_EMAIL_XPATH(".//*[@class='xY a4W']"),
+    RCC_VERIFY_TABLE_CONTENT_XPATH(".//*[@id=':8s']//table[@class='m_3415277218226827690container']"),
+    RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
 
 	// #################### DRA ##########################
 
