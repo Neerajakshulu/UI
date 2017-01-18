@@ -922,7 +922,7 @@ public enum OnePObjectMap {
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn login-button button-color-primary wui-btn--primary']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--login wui-btn--primary']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS("button[class='pull-right wui-btn login-button button-color-primary'] span"),
 	GURILLA_RECEIVED_MAIL_SUBJECT_CSS("h3[class='email_subject']"),
 	GURILLA_MAIL_BODY_PASSWORD_RESET_LINK_XPATH("//*[@class='email_body']//a"),

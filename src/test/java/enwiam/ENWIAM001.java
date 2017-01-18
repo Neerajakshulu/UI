@@ -137,7 +137,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				String signupStatus = ob
 						.findElement(By.cssSelector(
-								"button[class='wui-btn wui-btn--primary login-button button-color-primary pull-right']"))
+								"button[class='pull-right wui-btn wui-btn--primary wui-btn--login ']"))
 						.getAttribute("ng-disabled");
 				logger.info("SingUp Status : " + signupStatus);
 				Assert.assertTrue(signupStatus.contains("userRegister.$invalid"));
@@ -165,7 +165,7 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				// ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 				ob.findElement(
-						By.cssSelector("button[class='wui-btn wui-btn--primary login-button button-color-primary pull-right']"))
+						By.cssSelector("button[class='pull-right wui-btn wui-btn--primary wui-btn--login ']"))
 						.click();
 				BrowserWaits.waitTime(4);
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
