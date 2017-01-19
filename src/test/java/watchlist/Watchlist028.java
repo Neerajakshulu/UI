@@ -70,7 +70,7 @@ public class Watchlist028 extends TestBase {
 			ob.navigate().to(host);
 
 			// login with user 2 and follow user1 to get the notifications
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 			BrowserWaits.waitTime(5);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
 			pf.getSearchProfilePageInstance(ob).clickPeople();
@@ -105,7 +105,7 @@ public class Watchlist028 extends TestBase {
 
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();

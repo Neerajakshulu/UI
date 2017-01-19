@@ -138,12 +138,12 @@ public class Watchlist008 extends TestBase {
 			if (!compareNumbers(1, count)) {
 
 				test.log(LogStatus.FAIL,
-						"User not able to add a patent into watchlist from Patent content search results page");// extent
+						"User not able to add a Post into watchlist from Post content search results page");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO,
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_user_unable_to_add_patent_into_watchlist_from_Patent_content_searchResults_page")));// screenshot
+								+ "_user_unable_to_add_Post_into_watchlist_from_Post_content_searchResults_page")));// screenshot
 
 			}
 			firstdocumentName = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
