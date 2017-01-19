@@ -89,10 +89,12 @@ public class ENWIAM00019 extends TestBase {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				}
+				try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
 				test.log(LogStatus.PASS, "user is able navigate to EndNote");
 				logoutEnw();
+
 				BrowserWaits.waitTime(5);
 				String url = "https://dev-stable.1p.thomsonreuters.com";
 				String actualurl = ob.getCurrentUrl();
@@ -115,6 +117,17 @@ public class ENWIAM00019 extends TestBase {
 							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 					ErrorUtil.addVerificationFailure(t);
+
+				}
+				}
+				catch (Throwable t) {
+					t.printStackTrace();
+					test.log(LogStatus.FAIL, "User is not able to navigate from Neon to EndNote");
+					test.log(LogStatus.INFO, "Error--->" + t);
+					ErrorUtil.addVerificationFailure(t);
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_Not_navigated_to_Enw")));
 
 				}
 				test.log(LogStatus.PASS, "ENW session Closed");
