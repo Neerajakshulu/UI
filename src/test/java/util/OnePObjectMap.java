@@ -579,7 +579,7 @@ public enum OnePObjectMap {
 	NEON_OK_BUTTON_XPATH("//a[@class='ng-binding ng-scope']"),
 
 	// #######RCC#############
-	RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
+	RCC_GROUP_GROUPTAB_HEADER_XPATH("//a[contains(.,'Groups')]"),
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS("button[class*='wui-icon-btn--add-group']"),
 	RCC_GROUP_GROUPS_COUNT_CSS("a[href*='groups'] span[class*='wui-side-menu__badge']"),
 	RCC_GROUP_INVITATIONS_COUNT_CSS("a[href*='invites'] span[class*='wui-side-menu__badge']"),
