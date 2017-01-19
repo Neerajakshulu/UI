@@ -77,6 +77,7 @@ public class ENWIAM00019 extends TestBase {
 			test.log(LogStatus.PASS, "user has logged in with steam account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "user has logged in with steam account");
+			BrowserWaits.waitTime(3);
 			try {
 
 				try {
