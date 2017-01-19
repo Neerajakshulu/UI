@@ -92,8 +92,11 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString()),
+						30);
+				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString())));
+//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
+//				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 				waitForElementTobeVisible(ob,
 						By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString()), 30);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString()))
