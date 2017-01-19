@@ -47,8 +47,9 @@ public class DRAPage extends TestBase {
 	}
 
 	public void clickLoginDRA() throws Exception {
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
 
