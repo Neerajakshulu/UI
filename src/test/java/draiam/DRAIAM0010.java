@@ -60,6 +60,7 @@ public class DRAIAM0010 extends TestBase {
 
 			pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);
 			BrowserWaits.waitTime(2);
+			ob.navigate().refresh();
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0010"),
 					LOGIN.getProperty("DRAUSERPWD10"));
 			pf.getDraPageInstance(ob).clickLoginDRA();
