@@ -292,17 +292,17 @@ public class DRAPage extends TestBase {
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
 		
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(steamAccount);
+		
 
 		for (int i = 0; i <= 9; i++) {
-			BrowserWaits.waitTime(3);  
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
+			.sendKeys(steamAccount); 
 			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			
+			ob.navigate().refresh();
 		}
 
 	}
