@@ -87,12 +87,6 @@ public class IPAIAM0050 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_LINK_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_LINK_CSS.toString()))
-					.sendKeys(LOGIN.getProperty("DRASteamuser14"));
-			ob.findElement(By.cssSelector(OnePObjectMap.DRA_FORGOT_PASSWORD_VERIFICATION_BUTTON_CSS.toString()))
-					.click();
-			test.log(LogStatus.PASS, "'Send verification button' is clicked");
 			BrowserWaits.waitTime(3);
 			ob.close();
 

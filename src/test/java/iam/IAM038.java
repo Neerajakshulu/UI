@@ -92,8 +92,11 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[0], tests_dec[0]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
-				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString()),
+						30);
+				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_CHANGE_PASSWORD_LINK_CSS.toString())));
+//				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
+//				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 				waitForElementTobeVisible(ob,
 						By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString()), 30);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_CANCEL_BUTTON_XPATH.toString()))
@@ -130,7 +133,7 @@ public class IAM038 extends TestBase {
 				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
-								"(//div[@class='row password-validator__item ng-scope'])[11]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				test.log(LogStatus.PASS,
 						"Password field allow one special character from !@#$%^*()~`{}[]| in account page");
@@ -160,7 +163,7 @@ public class IAM038 extends TestBase {
 				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
-								"(//div[@class='row password-validator__item ng-scope'])[9]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				test.log(LogStatus.PASS, "Password field not allowed one number");
 
@@ -187,7 +190,7 @@ public class IAM038 extends TestBase {
 				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
-								"(//div[@class='row password-validator__item ng-scope'])[8]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				test.log(LogStatus.PASS, "Password field allowed one alphabet character");
 
@@ -422,7 +425,7 @@ public class IAM038 extends TestBase {
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("1");
 				BrowserWaits.waitTime(2);
-				waitForElementTobeVisible(ob, By.xpath("(//div[@class='popover-content'])[2]"), 30);
+				waitForElementTobeVisible(ob, By.xpath("(//div[@class='popover-content'])"), 30);
 				test.log(LogStatus.PASS,
 						"Password rules are displaying when New STeAM password does not meet password requirements in account setting page");
 
@@ -458,7 +461,7 @@ public class IAM038 extends TestBase {
 				BrowserWaits.waitTime(2);
 				waitForElementTobeVisible(ob,
 						By.xpath(
-								"(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
+								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
 						30);
 				test.log(LogStatus.PASS, "Password field allowed only 95 characters");
 
@@ -479,12 +482,16 @@ public class IAM038 extends TestBase {
 			try {
 				test = extent.startTest(tests[11], tests_dec[11]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				ob.findElement(By
+						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString())).clear();
+				BrowserWaits.waitTime(3);
 				ob.findElement(By.cssSelector("div[class='account-option-item__forgot-password'] a")).click();
 				BrowserWaits.waitTime(6);
 				String resertPassPage = ob
-						.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString()))
+						.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).get(1)
 						.getText();
-				Assert.assertEquals(resertPassPage, "Reset your password");
+				Assert.assertEquals(resertPassPage, "Email Sent");
+				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())));
 				test.log(LogStatus.PASS,
 						"System is navigating to Forgot Password page, after clicking on Forgot password? Link");
 
