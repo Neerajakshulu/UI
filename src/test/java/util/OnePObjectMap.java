@@ -389,6 +389,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
+	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
+    SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
