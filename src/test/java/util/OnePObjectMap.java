@@ -564,7 +564,7 @@ public enum OnePObjectMap {
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 	TEXT_ACCOUNTPAGE1_XPATH("//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]"),
-	ACCOUNT_CHANGE_PASSWORD_LINK_CSS("h6[class='account-option-item__text--sub ng-scope'] a"),
+	ACCOUNT_CHANGE_PASSWORD_LINK_CSS("h6[class='account-option-item__text-sub ng-scope'] a"),
 	EMAIL_BODY_PASSWORD_RESET_LINK_CSS("[class='email_body'] a"),
 	NEON_LANDING_PAGE_LOGGIN_BANNER_CSS("div[class='login-body']"),
 	ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS("a[class='wui-btn wui-btn--secondary']"),
