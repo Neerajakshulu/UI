@@ -749,7 +749,7 @@ public enum OnePObjectMap {
 	RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
 
-	RCC_GMAIL_LOGIN_USERNAME_XPATH("Email"),
+	RCC_GMAIL_LOGIN_USERNAME_ID("Email"),
     RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH(".//*[@id='next']"),
     RCC_GMAIL_LOGIN_SUBMIT_XPATH(".//*[@id='signIn']"),
     RCC_GMAIL_LOGIN_PASSWORD_XPATH(".//*[@id='Passwd']"),
