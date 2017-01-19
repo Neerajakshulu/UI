@@ -109,7 +109,7 @@ public class Watchlist019 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchPepole")), 40);
 			ob.findElement(By.xpath(OR.getProperty("searchPepole"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
+			waitForElementTobeClickable(ob, By.linkText(fn2 + " " + ln2), 60);
 			// Navigating to the first user profile page
 			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
 			waitForPageLoad(ob);

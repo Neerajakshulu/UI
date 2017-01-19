@@ -101,10 +101,10 @@ public class Watchlist018 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(5);
 			ob.findElement(By.xpath(OR.getProperty("searchPepole"))).click();
-			waitForElementTobeVisible(ob, By.linkText(fn2 + " " + ln2), 60);
+			waitForElementTobeClickable(ob, By.linkText(fn2 + " " + ln2), 60);
 
 			// Navigating to the first user profile page
-			ob.findElement(By.linkText(fn2 + " " + ln2)).click();
+			jsClick(ob,ob.findElement(By.linkText(fn2 + " " + ln2)));
 			waitForPageLoad(ob);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1")), 60);
 			waitForAjax(ob);
