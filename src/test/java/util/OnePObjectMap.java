@@ -750,11 +750,10 @@ public enum OnePObjectMap {
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
 
 	RCC_GMAIL_LOGIN_USERNAME_ID("Email"),
-    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH(".//*[@id='next']"),
-    RCC_GMAIL_LOGIN_SUBMIT_XPATH(".//*[@id='signIn']"),
-    RCC_GMAIL_LOGIN_PASSWORD_XPATH(".//*[@id='Passwd']"),
-    RCC_GMAIL_CLICK_EMAIL_XPATH(".//*[@class='xY a4W']"),
-    RCC_VERIFY_TABLE_CONTENT_XPATH(".//*[@id=':8s']//table[@class='m_3415277218226827690container']"),
+    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH("//input[@id='next']"),
+    RCC_GMAIL_LOGIN_SUBMIT_XPATH("//input[@id='signIn']"),
+    RCC_GMAIL_LOGIN_PASSWORD_XPATH("//input[@id='Passwd']"),
+    RCC_GMAIL_CLICK_EMAIL_XPATH("//span[@class='y2']"),
     RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
     
 
