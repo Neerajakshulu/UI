@@ -72,9 +72,9 @@ public class Search27 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("i");
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("o");
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(4);
 
-			WebElement myE = ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
+					WebElement myE = ob.findElement(By.xpath(OR.getProperty("categoriesTile")));
 			String text = myE.getText();
 
 			String[] arr = text.split("\n");
