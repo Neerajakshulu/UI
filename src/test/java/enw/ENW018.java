@@ -53,7 +53,7 @@ public class ENW018 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);			
-			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+			loginAs("MarketUser42", "MarketUser42PWD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			BrowserWaits.waitTime(2);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
@@ -78,7 +78,9 @@ public class ENW018 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-			closeBrowser();
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
+			BrowserWaits.waitTime(4);
+			logout();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent

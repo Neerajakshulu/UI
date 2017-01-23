@@ -95,7 +95,7 @@ public class HeaderFooterLinksPage extends TestBase {
 	 * @throws Exception, When Profile image not available
 	 */
 	public void clickProfileImage() throws Exception {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);
+		waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString()), 180);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile", "Account", "Help", "Sign out");
 	}
