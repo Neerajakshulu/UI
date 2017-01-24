@@ -37,7 +37,7 @@ public class IPASearch extends TestBase {
 		//ob.navigate().refresh();
 		try{
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
-		}catch(Exception e){
+		}catch(Exception e ){
 		test.log(LogStatus.FAIL, "Explore Page Not Loaded once logged in successfully");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);

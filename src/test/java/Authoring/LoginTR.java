@@ -331,7 +331,7 @@ public class LoginTR extends TestBase {
 	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
 	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
 	       pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-	     
+	     pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 	       try{
 	    	   pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);   
 	    	   Element=      ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()));
