@@ -167,6 +167,12 @@
 		</classes>
 	</test>
 	
+	<test name="Validate_change_password_account_page">
+		<classes>
+			<class name="iam.IAM038"></class>
+		</classes>
+	</test>
+	
 	<test name="Login_page_Clarivate_Analytics_link_clicking">
 		<classes>
 			<class name="iam.IAM039"></class>
