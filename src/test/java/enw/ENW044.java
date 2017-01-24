@@ -54,7 +54,7 @@ public class ENW044 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle("Neon Testing2");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
+			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
 			BrowserWaits.waitTime(3);
@@ -64,8 +64,10 @@ public class ENW044 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_NAME_XPATH.toString())).getText());
 			neonValues.put("expectedAbstract",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_ABSTRACT_XPATH.toString())).getText());
+			BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 			test.log(LogStatus.PASS, "User navigate to End note");
+			BrowserWaits.waitTime(5);
 			try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();

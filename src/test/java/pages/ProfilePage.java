@@ -68,7 +68,7 @@ public class ProfilePage extends TestBase {
 				}
 			}
 		} else
-			System.out.println("Profile Search Results are not available with \t" + lastName + "\t last Name");
+			logger.info("Profile Search Results are not available with \t" + lastName + "\t last Name");
 
 	}
 
@@ -84,15 +84,15 @@ public class ProfilePage extends TestBase {
 		if (profilesLastname.size() > 0) {
 			List<WebElement> profilesMetaData = pf.getBrowserActionInstance(ob).getElements(
 					OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG);
-			System.out.println("Profile metadata--->" + profilesMetaData.size());
+			logger.info("Profile metadata--->" + profilesMetaData.size());
 			for (WebElement profileMetaData : profilesMetaData) {
-				System.out.println("Meta Data-->" + profileMetaData.getText());
+				logger.info("Meta Data-->" + profileMetaData.getText());
 				if (!StringUtils.containsIgnoreCase(profileMetaData.getText(), metaData)) {
 					throw new Exception("Profile search not verifying with Role/Primary Institution/Country	");
 				}
 			}
 		} else
-			System.out.println("No Profile Search Results are not available with \t" + metaData
+			logger.info("No Profile Search Results are not available with \t" + metaData
 					+ "\t role/Primary Institution/Country");
 	}
 
@@ -131,13 +131,13 @@ public class ProfilePage extends TestBase {
 				interests.add(intSkill.getText());
 			}
 
-			System.out.println("interests and skills-->" + interests);
+			logger.info("interests and skills-->" + interests);
 
 			if (!interests.contains(interestAndSkill)) {
 				throw new Exception("Profile Search not happening with Interests and Skill " + interestAndSkill);
 			}
 		} else
-			System.out.println("Profile Search Results are not available with \t" + interestAndSkill
+			logger.info("Profile Search Results are not available with \t" + interestAndSkill
 					+ "\t Interests and Skills");
 
 	}
@@ -264,7 +264,7 @@ public class ProfilePage extends TestBase {
 	public void validateOtherProfileEdit() throws Exception {
 		boolean otherProfileEdit = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_CSS).isDisplayed();
-		System.out.println("profile edit-->" + otherProfileEdit);
+		logger.info("profile edit-->" + otherProfileEdit);
 		if (otherProfileEdit) {
 			throw new Exception("Edit option should not available for others profile");
 		}
@@ -282,13 +282,13 @@ public class ProfilePage extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
-		System.out.println("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
+		logger.info("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
 		//followUnFollowCheck.click();
 		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
-		System.out.println("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
+		logger.info("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
 			throw new Exception("unable to follow other profile from search screen");
@@ -449,7 +449,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickCommentsTab() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENTS_CSS);
 		waitForAjax(ob);
 	}
 
@@ -460,9 +461,9 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickFollowingTab() throws Exception {
 		BrowserWaits.waitTime(15);
-		waitForElementTobeClickable(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS.toString()), 120);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS);
 		waitForAjax(ob);
 	}
 
@@ -473,8 +474,9 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickFollowersTab() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
-		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWERS_CSS);
+		waitForAjax(ob); 
 	}
 
 	/**
@@ -484,7 +486,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickPostsTab() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_POSTS_CSS);
 		waitForAjax(ob);
 	}
 	
@@ -512,16 +515,16 @@ public class ProfilePage extends TestBase {
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countBeforeAppreciate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
-		// System.out.println("Appreciate tooltip-->"+tooltipBeforeAppreciate);
-		// System.out.println("Appreciate count-->"+countBeforeAppreciate);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
+		logger.info("Appreciate tooltip-->"+tooltipBeforeAppreciate);
+		logger.info("Appreciate count-->"+countBeforeAppreciate);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
 		BrowserWaits.waitTime(4);
 		String tooltipAfterAppreciate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
 		String countAfterAppreciate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
-		// System.out.println("Appreciate tooltip after-->"+tooltipAfterAppreciate);
-		// System.out.println("Appreciate count after-->"+countAfterAppreciate);
+		 logger.info("Appreciate tooltip after-->"+tooltipAfterAppreciate);
+		 logger.info("Appreciate count after-->"+countAfterAppreciate);
 		if (tooltipBeforeAppreciate.equalsIgnoreCase(tooltipAfterAppreciate)
 				&& countBeforeAppreciate.equalsIgnoreCase(countAfterAppreciate)) {
 			throw new Exception("comment appreciation not happend");
@@ -932,7 +935,9 @@ public class ProfilePage extends TestBase {
 		waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).click();
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
+		//pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS).click();
 		BrowserWaits.waitTime(8); // Added wait due to toast notifications occured in sauce labs
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
 	}
@@ -956,21 +961,20 @@ public class ProfilePage extends TestBase {
 			}
 
 		}
-
 	}
 
 	public void addPostToWatchlist() throws Exception {
 		watchTextBefore = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS)
 				.findElement(By.tagName("span")).getText();
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS);
 		waitForAjax(ob);
 		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(2);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_POST_WATCH_CLOSE_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS);
 		BrowserWaits.waitTime(4);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ADD_TOPIC_CSS);
 		BrowserWaits.waitTime(2);
 	}
 
@@ -1404,7 +1408,7 @@ public class ProfilePage extends TestBase {
 			throw new Exception("None of the comments are having time stamp");
 		}
 		String timeStamp = commentTs.get(0).getText();
-		// System.out.println("timestamp-->"+timeStamp);
+		// logger.info("timestamp-->"+timeStamp);
 		if (!(timeStamp.contains("TODAY") || timeStamp.contains("2016") || timeStamp.contains("AM") || timeStamp
 				.contains("PM"))) {
 			throw new Exception("Comments timestamp not displaying");
@@ -1421,7 +1425,7 @@ public class ProfilePage extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 		String watchlistTabText = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS).getText();
-		// System.out.println("watchlist tab text-->"+watchlistTabText);
+		// logger.info("watchlist tab text-->"+watchlistTabText);
 		if (!(watchlistTabText.contains("Watchlists"))) {
 			throw new Exception("Other Profiles watchlist tab should be visible");
 		}

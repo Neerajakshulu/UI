@@ -55,7 +55,19 @@ public class ENWIAM00018 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
+		
+		try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("ENWIAM00018User"));
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
 
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
+		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
@@ -83,7 +95,7 @@ public class ENWIAM00018 extends TestBase {
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("ENWIAM00018UserPWD"));
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
-
+		pf.getLoginTRInstance(ob).closeOnBoardingModal();
 		//pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 		logout();
 		BrowserWaits.waitTime(2);

@@ -151,8 +151,9 @@ public class Authoring27 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	private void selectAnArticle() throws InterruptedException {
+	private void selectAnArticle() throws Exception {
 		pf.getHFPageInstance(ob).searchForText("Biology");
+		pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 80);
 		List<WebElement> itemList;
 		itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));

@@ -47,8 +47,9 @@ public class DRAPage extends TestBase {
 	}
 
 	public void clickLoginDRA() throws Exception {
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 	}
 
@@ -288,18 +289,20 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
-	public void steamLockedDRA() throws Exception {
+	public void steamLockedDRA(String steamAccount) throws Exception {
 
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(LOGIN.getProperty("DRAUSER0012Locked"));
+		
+		
 
 		for (int i = 0; i <= 9; i++) {
-			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
+			.sendKeys(steamAccount); 
+			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(2000);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			ob.navigate().refresh();
 		}
 
 	}
@@ -531,7 +534,7 @@ public class DRAPage extends TestBase {
 	public void validateProductOverviewPage(ExtentTest test){
 		try {
 			clickOnLearnMoreLink();
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(5);
 			
 			Set<String> myset=ob.getWindowHandles();
 			Iterator<String> myIT=myset.iterator();

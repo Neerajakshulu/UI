@@ -45,16 +45,11 @@ public class LoginTR extends TestBase {
 
 	/**
 	 * Method for wait TR Home Screen
-	 * 
-	 * @throws InterruptedException
+	 * @throws Exception 
 	 */
-	public void waitForTRHomePage() throws InterruptedException {
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
-		waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css")), 90);
-		browserWait.waitUntilText("Thomson Reuters", "Project Neon");
-		// PageFactory.getBrowserWaitsInstance(ob).waitUntilText("Sign in with
-		// Project Neon");
-
+	public void waitForTRHomePage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "Project Neon");
 	}
 
 	/**

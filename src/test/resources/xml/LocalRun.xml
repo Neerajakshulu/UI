@@ -189,11 +189,24 @@
 		</classes>
 
 	</test>
+	<test name="ENW044">
+		<classes>
+			<class name="enw.ENW044"></class>
+		</classes>
+		
+	</test>
 	<test name="ENWIAM00016">
 		<classes>
 			<class name="enwiam.ENWIAM00016"></class>
 		</classes>
 	</test>
+	
+	<test name="ENWIAM00018">
+		<classes>
+			<class name="enwiam.ENWIAM00018"></class>
+		</classes>
+	</test>
+	
 	<test name="ENWIAM90">
 		<classes>
 			<class name="enwiam.ENWIAM90"></class>
@@ -610,16 +623,6 @@
 	<test name="option_to_add_image_ from_group_details_page">
 		<classes>
 			<class name="rcc.RCC092"></class>
-		</classes>
-	</test>
-
-	<test name="Share_On_Google_Plus">
-		<parameter name="gusername" value="romanreings2016csk" />
-		<parameter name="gpassword" value="India@2020" />
-		<classes>
-			<class name="Authoring.Authoring80"></class>
-			<class name="Authoring.Authoring81"></class>
-			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
 

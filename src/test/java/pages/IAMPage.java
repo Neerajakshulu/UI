@@ -40,7 +40,7 @@ public class IAMPage extends TestBase {
 	}
 
 	public void clickSendEmailButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob)
+ 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Email Sent");
@@ -49,10 +49,10 @@ public class IAMPage extends TestBase {
 	}
 
 	public void checkEmailSentText(String email) throws Exception {
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS);
+//		pf.getBrowserWaitsInstance(ob)
+//				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS);
 		String emailSentText = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS).getText();
+				.getElements(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS).get(1).getText();
 		logger.info("EMAILSENTTEXT-->" + emailSentText);
 		/*
 		 * String emailSentText = element.findElement(By.tagName("h3")).getText(); logger.info("Title : " +
@@ -77,7 +77,7 @@ public class IAMPage extends TestBase {
 		// BrowserWaits.waitTime(3);
 		// pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon");
+	//	pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon");
 
 	}
 
@@ -267,8 +267,8 @@ public class IAMPage extends TestBase {
 
 	public void clickResendEmailButton() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS);
+				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_RESEND_EMAIL_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_RESEND_EMAIL_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 
 	}

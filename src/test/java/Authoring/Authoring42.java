@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -70,6 +71,7 @@ public class Authoring42 extends TestBase {
 			test.log(LogStatus.INFO, "Searched for post:" + postTilte);
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTitle(postTilte);
+			BrowserWaits.waitTime(10);
 			try {
 				pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTilte, profileDeatils);
 				test.log(LogStatus.PASS, "User is able to search and view his own post");

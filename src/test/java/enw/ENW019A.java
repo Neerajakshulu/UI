@@ -60,7 +60,7 @@ public class ENW019A extends TestBase {
 			BrowserWaits.waitTime(5);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
 			BrowserWaits.waitTime(10);
-			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
+			String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 			try {
 				Assert.assertEquals(expected_Str, str);
 				test.log(LogStatus.PASS, " Non Market user Feedback has been sent successfully .");
@@ -83,7 +83,7 @@ public class ENW019A extends TestBase {
 				BrowserWaits.waitTime(2);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
 				BrowserWaits.waitTime(3);
-				str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
+				str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 				Assert.assertEquals(expected_Str, str);
 				test.log(LogStatus.PASS, " Non market user support request has  been sent successfully.");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();

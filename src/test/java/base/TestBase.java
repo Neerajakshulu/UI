@@ -1128,7 +1128,7 @@ public class TestBase {
 			WebElement element) throws Exception {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("arguments[0].scrollIntoView(true);", element);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 
 	/**
@@ -1423,7 +1423,8 @@ public class TestBase {
 		ob.findElement(By.name("loginEmail")).clear();
 		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
-		jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
+		//jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 	}
 
@@ -1465,7 +1466,7 @@ public class TestBase {
 		// Navigate to the watch list landing page
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 		ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
+		waitForElementTobeVisible(ob, By.xpath("//aside[@class='watchlist-side-menu__refine-list wui-side-menu']"), 60);
 
 		// Getting all the watch lists
 		List<WebElement> watchLists = ob.findElements(By.xpath(OR.getProperty("watchlist_name1")));
@@ -1499,9 +1500,9 @@ public class TestBase {
 		//watchbutton.click();
 		jsClick(ob, watchbutton);
 		
-		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 60);
+		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 80);
 		Thread.sleep(2000);
-		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 60);
+		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 80);
 		Thread.sleep(3000);
 		List<WebElement> list = ob.findElements(By.linkText(watchListName));
 		for (WebElement element : list) {
@@ -1559,29 +1560,25 @@ public class TestBase {
 	public void createWatchList(String typeOfWatchList,
 			String watchListName,
 			String watchListDescription) throws Exception {
-		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
+		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 90);
 
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
-		BrowserWaits.waitTime(10);
-		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
-		BrowserWaits.waitTime(10);
-		ob.navigate().refresh();
-		BrowserWaits.waitTime(10);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 60);
+//		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+//		BrowserWaits.waitTime(10);
+		//ob.navigate().refresh();
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 80);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
-		BrowserWaits.waitTime(4);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 80);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox"))).sendKeys(watchListName);
-		BrowserWaits.waitTime(5);
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 80);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListDescriptionTextArea"))).sendKeys(watchListDescription);
 		if (typeOfWatchList.equals("public")) {
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 80);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))));
 		}
-		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 60);
+		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 80);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 60);
+		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 80);
 	}
 
 	/**
@@ -1606,7 +1603,7 @@ public class TestBase {
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup1"))).click();
 				BrowserWaits.waitTime(6);
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
+				//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
 				break;
 			}
 			// Scrolling down to make the watch list visible
@@ -1763,7 +1760,7 @@ public class TestBase {
 				// login with user1
 				pf.getLoginTRInstance(ob).enterTRCredentials(user1, CONFIG.getProperty("defaultPassword"));
 				pf.getLoginTRInstance(ob).clickLogin();
-				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 60);
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
 				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
 				// + " " + ln2);

@@ -47,7 +47,8 @@ public class IPApage extends TestBase {
 	}
 
 	public void enterSavedatadesc(String datadesc) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS,
 				datadesc);
@@ -60,9 +61,10 @@ public class IPApage extends TestBase {
 	}
 
 	public void clickOnSaveData() throws Exception {
-	
+
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS);
-		//jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS.toString())));
+		// jsClick(ob,
+		// ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_BOARD_SAVE_MODAL_SAVE_BUTTON_CSS.toString())));
 	}
 
 	public void clickOnCancelData() throws Exception {
@@ -96,8 +98,7 @@ public class IPApage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS);
 
 	}
-	
-	
+
 	/**
 	 * Method for to check IPA landing screen displayed or not
 	 * 
@@ -105,33 +106,34 @@ public class IPApage extends TestBase {
 	 *             IPA landing screen not displayed
 	 */
 	public void landingScreenIPA() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "IP Analytics","Sign in");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "IP Analytics", "Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 	}
-	
-	public void steamLockedIPA() throws Exception {
 
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-				.sendKeys(LOGIN.getProperty("IPAUSER0051Locked"));
+	public void steamLockedIPA(String steamAccount) throws Exception {
+
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(steamAccount);
 
 		for (int i = 0; i <= 9; i++) {
-			ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+			BrowserWaits.waitTime(3);
+			// ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			Thread.sleep(2000);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+
 		}
 
 	}
+
 	public void clickLoginIPA() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
 
 	}
-	
+
 	public void validateIPAInactiveErrorMsg(ExtentTest test) throws Exception {
 		try {
 			String errormsg_title = pf.getBrowserActionInstance(ob)
@@ -162,9 +164,8 @@ public class IPApage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
 	}
-	
 
-	public void validateIPAStepUPModalTitle(ExtentTest test){
+	public void validateIPAStepUPModalTitle(ExtentTest test) {
 
 		try {
 			String stepup_expectedtitle = "Sign in to IP Analytics";
@@ -180,13 +181,14 @@ public class IPApage extends TestBase {
 
 	}
 
-	
 	public void validateFirstTextOnIPAStepUp(ExtentTest test) throws Exception {
 		try {
 			String stepup_expectedtext1 = "IP Analytics is currently available to customer in our early access program. Contact";
 			String stepup_actualtext1 = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.IPA_STEPUPAUTHMODAL_TEXT1_CSS).getText();
-			if (stepup_actualtext1.contains(stepup_expectedtext1)&& stepup_actualtext1.contains("IPA.support@thomsonreuters.com") && stepup_actualtext1.contains("to learn more.")) {
+			if (stepup_actualtext1.contains(stepup_expectedtext1)
+					&& stepup_actualtext1.contains("IPA.support@thomsonreuters.com")
+					&& stepup_actualtext1.contains("to learn more.")) {
 				test.log(LogStatus.PASS,
 						"user is able to see correct Step up Auth modal text1 : Thank you for your interest.....");
 			} else {
@@ -199,8 +201,8 @@ public class IPApage extends TestBase {
 					"user is not able to see Step up Auth modal text1 : Thank you for your interest.....");
 		}
 	}
-	
-	public void validateSecondTextOnIPAStepUP(ExtentTest test) throws Exception{
+
+	public void validateSecondTextOnIPAStepUP(ExtentTest test) throws Exception {
 
 		try {
 			String stepup_expectedtext2 = "To provide the highest level of security, we require you to sign in with your IP Analytics credentials.";
@@ -215,27 +217,27 @@ public class IPApage extends TestBase {
 					"user is not able to see correct Step up Auth modal text2 : To provide the highest level.....");
 		}
 	}
-	
-	public void validateThirdTextOnIPAStepUp(ExtentTest test) throws Exception{
-		try{
-		String stepup_expectedtext3 = "IP Analytics shares sign in credentials with other products you may use:";
-		String stepup_expectedtext4 = " Please sign in using the email address and password you use to access any of the above mentioned products.";
-		String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
-		if (stepup_actualtext3.contains(stepup_expectedtext3)
-				&& stepup_actualtext3.contains("Key Pathway Advisor") && stepup_actualtext3.contains("EndNote")
-				&& stepup_actualtext3.contains("InCites") && stepup_actualtext3.contains("Thomson Innovation")
-				&& stepup_actualtext3.contains("Web of Science")
-				&& stepup_actualtext3.contains(stepup_expectedtext4)) {
-			test.log(LogStatus.PASS,
-					"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
-		} else {
-			test.log(LogStatus.FAIL,
-					"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+
+	public void validateThirdTextOnIPAStepUp(ExtentTest test) throws Exception {
+		try {
+			String stepup_expectedtext3 = "IP Analytics shares sign in credentials with other products you may use:";
+			String stepup_expectedtext4 = " Please sign in using the email address and password you use to access any of the above mentioned products.";
+			String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
+			if (stepup_actualtext3.contains(stepup_expectedtext3) && stepup_actualtext3.contains("Key Pathway Advisor")
+					&& stepup_actualtext3.contains("EndNote") && stepup_actualtext3.contains("InCites")
+					&& stepup_actualtext3.contains("Thomson Innovation")
+					&& stepup_actualtext3.contains("Web of Science")
+					&& stepup_actualtext3.contains(stepup_expectedtext4)) {
+				test.log(LogStatus.PASS,
+						"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
 		}
-	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
-	}
 	}
 
 }

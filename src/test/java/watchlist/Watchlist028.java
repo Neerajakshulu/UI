@@ -70,8 +70,8 @@ public class Watchlist028 extends TestBase {
 			ob.navigate().to(host);
 
 			// login with user 2 and follow user1 to get the notifications
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
-			
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
+			BrowserWaits.waitTime(5);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			pf.getSearchProfilePageInstance(ob).selectProfile(LOGIN.getProperty("PROFILE8"));
@@ -83,7 +83,7 @@ public class Watchlist028 extends TestBase {
 			// 1)Login as user1 and comment on some patent
 			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("sample");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("computer architecture");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
@@ -105,7 +105,7 @@ public class Watchlist028 extends TestBase {
 
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
@@ -114,11 +114,10 @@ public class Watchlist028 extends TestBase {
 			// Navigating to the home page
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			//Add patent to watchlist
+			ob.navigate().refresh();
 			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			logger.info("document title in watchlist page-->" + document_title);
-			BrowserWaits.waitTime(4);
-
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -153,7 +152,7 @@ public class Watchlist028 extends TestBase {
 
 			try {
 
-				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist")));
+				WebElement defaultMessage = ob.findElement(By.xpath(OR.getProperty("default_message_watchlist1")));
 
 				if (defaultMessage.isDisplayed()) {
 
@@ -180,6 +179,7 @@ public class Watchlist028 extends TestBase {
 			}
 
 			// Deleting the watch list
+			BrowserWaits.waitTime(5);
 			deleteParticularWatchlist(newWatchlistName);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

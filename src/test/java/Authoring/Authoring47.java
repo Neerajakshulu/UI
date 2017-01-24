@@ -56,7 +56,6 @@ public class Authoring47 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
@@ -67,7 +66,7 @@ public class Authoring47 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			List<String> list = new ArrayList<String>();
-
+			waitForAjax(ob);
 			if (!pf.getpostRVPageInstance(ob).isCommentCountDisplayed())
 				list.add("Comment count");
 			if (!pf.getpostRVPageInstance(ob).isLikeButtonDisplayed())

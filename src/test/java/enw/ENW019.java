@@ -49,29 +49,29 @@ public class ENW019 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
+			loginAs("MarketUser42", "MarketUser42PWD");
 			pf.getHFPageInstance(ob).clickProfileImage();
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.NEON_HELP_FEEDBACK_XPATH.toString())));
 			BrowserWaits.waitTime(2);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_SEND_FEEDBACK_LINK_XPATH.toString())));
 			BrowserWaits.waitTime(3);
+			try {
 			if (ob.findElements(By.xpath(OnePObjectMap.SEND_FEEDBACK_COUNTRY_SELECTION_XPATH.toString())).size() > 0) {
 				Select Country = new Select(ob.findElement(By.xpath(OnePObjectMap.COUNTRY_SELECT_IN_NEON.toString())));
 				Country.selectByVisibleText("India");
 				ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_COMMENTS_XPATH.toString())).sendKeys("testing");
 				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_SUBMIT_BTN_XPATH.toString())));
-				BrowserWaits.waitTime(3);
-				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE.toString())).getText();
+				BrowserWaits.waitTime(7);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH);
+				String str = ob.findElement(By.xpath(OnePObjectMap.FEEDBACK_THANKU_PAGE_XPATH.toString())).getText();
 				Assert.assertEquals(expected_URL, str);
 				test.log(LogStatus.PASS, " Market user Feedback has  been sent successfully.");
 			} else {
 				test.log(LogStatus.FAIL, " Market user Feedback has not been sent .");
 				Assert.assertEquals(true, false);
-			}
-
-			try {
-				test.log(LogStatus.PASS, "Feedback has  been sent successfully");
+			}				
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Feedback has not sent.");// extent
 				ErrorUtil.addVerificationFailure(t); // reports
@@ -80,6 +80,10 @@ public class ENW019 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
+			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
+			BrowserWaits.waitTime(4);
+			logout();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports

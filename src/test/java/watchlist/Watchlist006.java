@@ -80,6 +80,7 @@ public class Watchlist006 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 
 			pf.getHFPageInstance(ob).searchForText(patentName);
+			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			// Getting watch button list for patents
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);

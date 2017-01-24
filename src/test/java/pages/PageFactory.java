@@ -38,6 +38,7 @@ public class PageFactory {
 	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
 	private DashboardPage dashboardPage=null;
 	private IPARecordViewPage rvpage=null;
+	private GmailLoginPage gmpage=null;
 	
 	public IAMPage getIamPage(WebDriver ob) {
 
@@ -288,6 +289,13 @@ public class PageFactory {
 		return rvpage;
 	}
 	
+	public GmailLoginPage getGmailLoginPage(WebDriver ob){
+		if(gmpage==null){
+			gmpage=new GmailLoginPage(ob);
+		}
+		return gmpage;
+	}
+	
 	public void clearAllPageObjects() {
 		searchResultsPage=null;
 		accountPage = null;
@@ -314,5 +322,6 @@ public class PageFactory {
 		ipasavedsearchpage=null;
 		dashboardPage=null;
 		rvpage=null;
+		gmpage=null;
 	}
 }

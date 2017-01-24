@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -61,6 +63,27 @@ public class Authoring59 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("USERNAME15", "PASSWORD15");
+			
+			BrowserWaits.waitTime(10);
+			try {
+				for (int i = 0; i < 60; i++) {
+
+					JavascriptExecutor js = (JavascriptExecutor) ob;
+					// check for the pending request count and break if count is
+					// zero.
+					if ((Long) js.executeScript(
+							"return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 1) {
+						System.out.println((Object) js.executeScript(
+								"return angular.element(document.body).injector().get(\'$http\').pendingRequests.response"));
+						break;
+					}
+					Thread.sleep(1000);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			test.log(LogStatus.INFO, "Logged in to NEON");
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			test.log(LogStatus.INFO, "Navigated to Profile Page");

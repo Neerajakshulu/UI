@@ -73,9 +73,10 @@ public class ENWIAM00019 extends TestBase {
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00019User"),
 					LOGIN.getProperty("ENWIAM00019UserPWD"));
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.PASS, "user has logged in with steam account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			test.log(LogStatus.PASS, "user has logged in with steam account");
 			BrowserWaits.waitTime(3);
 			try {
 
@@ -88,20 +89,22 @@ public class ENWIAM00019 extends TestBase {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				}
+				try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
 				test.log(LogStatus.PASS, "user is able navigate to EndNote");
 				logoutEnw();
+
 				BrowserWaits.waitTime(5);
-				String url="https://dev-stable.1p.thomsonreuters.com";
+				String url = "https://dev-stable.1p.thomsonreuters.com";
 				String actualurl = ob.getCurrentUrl();
 				try {
-					if(actualurl.contains(url))
-					test.log(LogStatus.PASS, " when  user signs out of ENW, system has referrer URL = endnote");
-					else
-					{
-						test.log(LogStatus.FAIL, "when  user signs out of ENW, system does not has referrer URL = endnote");// extent
-						
+					if (actualurl.contains(url))
+						test.log(LogStatus.PASS, " when  user signs out of ENW, system has referrer URL = endnote");
+					else {
+						test.log(LogStatus.FAIL,
+								"when  user signs out of ENW, system does not has referrer URL = endnote");// extent
+
 					}
 				}
 
@@ -110,10 +113,21 @@ public class ENWIAM00019 extends TestBase {
 					test.log(LogStatus.FAIL, "when  user signs out of ENW, system does not has referrer URL = endnote");// extent
 					// reports
 					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-							.getSimpleName()
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+							.getClass().getSimpleName()
 							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
 					ErrorUtil.addVerificationFailure(t);
+
+				}
+				}
+				catch (Throwable t) {
+					t.printStackTrace();
+					test.log(LogStatus.FAIL, "User is not able to navigate from Neon to EndNote");
+					test.log(LogStatus.INFO, "Error--->" + t);
+					ErrorUtil.addVerificationFailure(t);
+					status = 2;// excel
+					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+							captureScreenshot(this.getClass().getSimpleName() + "_Not_navigated_to_Enw")));
 
 				}
 				test.log(LogStatus.PASS, "ENW session Closed");
@@ -134,7 +148,7 @@ public class ENWIAM00019 extends TestBase {
 				test.log(LogStatus.PASS, "Neon session Closed");
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				test.log(LogStatus.PASS, "ENW session Closed");
-				
+
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL, "user is not able to link and navigate to EndNote");
@@ -146,7 +160,6 @@ public class ENWIAM00019 extends TestBase {
 
 			}
 
-			
 			closeBrowser();
 
 		} catch (Throwable t) {

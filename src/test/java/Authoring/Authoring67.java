@@ -85,6 +85,7 @@ public class Authoring67 extends TestBase {
 			BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			waitForPageLoad(ob);
+			BrowserWaits.waitTime(10);
 			int postCountAfter = 0;
 			if (postCountBefore == 1) {
 

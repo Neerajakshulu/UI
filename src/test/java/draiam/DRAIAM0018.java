@@ -51,7 +51,7 @@ public class DRAIAM0018 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			ob.navigate().to(host);
+			ob.navigate().to(host);  
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAFBUSER0018"),
 					LOGIN.getProperty("DRAFBUSERPWD18"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
@@ -68,7 +68,7 @@ public class DRAIAM0018 extends TestBase {
 			BrowserWaits.waitTime(2);
 			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, LOGIN.getProperty("DRAFBUSERPWD18"));
 			pf.getDraPageInstance(ob).validateDRAInactiveErrorMsg(test);
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			closeBrowser();
 		} catch (Throwable t) {

@@ -69,7 +69,7 @@ public class IAM039 extends TestBase {
 			ob.switchTo().window(al.get(1));
 			String str1 = ob.findElement(By.cssSelector(OnePObjectMap.CLARIVATE_ANALYTICS_PAGE_CSS.toString())).getText();
 			logger.info("Text : " + str1);
-			Assert.assertEquals(str, str1);
+			Assert.assertEquals(str1, "Clarivate Analytics");
 			test.log(LogStatus.PASS, "Link is open another window succssfully");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Link is not open another window succssfully");// extent reports

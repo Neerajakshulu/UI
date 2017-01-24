@@ -78,13 +78,14 @@ public class Watchlist027 extends TestBase {
 
 			// Navigating to the home page
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
-
+			BrowserWaits.waitTime(8);
 			//Add article to watchlist from Newsfeed page
+			ob.navigate().refresh();
 			String docTitle=pf.getNewsfeedPageInstance(ob).getArticleTitle();
 			pf.getNewsfeedPageInstance(ob).addFirstArticleToWatclist(newWatchlistName);
 
 			logger.info("document title in watchlist page-->" + docTitle);
-			BrowserWaits.waitTime(4);
+			
 			
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);

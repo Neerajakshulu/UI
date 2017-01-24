@@ -123,6 +123,7 @@ public class PostRecordViewPage extends TestBase {
 		WebElement appreciationButton;
 		int countBefore, countAfter;
 		waitForAjax(ob);
+		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_APPRECIATION_COUNT_CSS.toString()), 180);
 		countBefore = Integer

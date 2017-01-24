@@ -59,13 +59,6 @@ public class ENW020 extends TestBase {
 				BrowserWaits.waitTime(6);
 				NavigateToENW();
 			}
-			// // pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson
-			// Reuters",
-			// // "EndNote", "Downloads", "Options");
-			// BrowserWaits.waitTime(5);
-			// jsClick(ob,
-			// ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			loginAs("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			BrowserWaits.waitTime(10);
 			if (ob.getCurrentUrl().contains(url)) {
 				System.out.println("URL:" + ob.getCurrentUrl());

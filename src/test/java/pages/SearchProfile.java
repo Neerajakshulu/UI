@@ -31,10 +31,10 @@ public class SearchProfile extends TestBase {
 		
 		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS, searchKey);
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(4);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS); 
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()),60);
+		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()),80);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class SearchProfile extends TestBase {
 		BrowserWaits.waitTime(5);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS).get(3).click();
 		waitForAjax(ob);
-		waitForElementTobeClickable(ob,
+		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS.toString()), 90);
 	}
 

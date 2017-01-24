@@ -35,7 +35,7 @@ public enum OnePObjectMap {
 	ENW_PROFILE_TAB_LINK("Profile Information"),
 	ENW_OPTIONS_TAB_XPATH("//*[@id='enwHeader']//div[2]//ul[@class='nav navbar-nav navbar-middle']//a[@id='lgLink6' and contains(text(),'Options')]"),
 	ENW_PROFILE_TAB_XPATH("//a[contains(text(),'Profile Information')]"),
-	FEEDBACK_THANKU_PAGE("//h3[contains(text(),'Thank You')]"),
+	FEEDBACK_THANKU_PAGE_XPATH("//h3[contains(text(),'Thank You')]"),
 	ENW_PROFILE_FIRST_NAME_XPATH("//input[@id='firstname']"),
 	ENW_PROFILE_LAST_NAME_XPATH("//input[@id='lastname']"),
 	ENW_SIGNIN_BTN_CSS("button[class*='login-button']"),
@@ -174,7 +174,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS("input#Passwd"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS("input#signIn"),
 
-	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Share') and @role='button']"),
+	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_SHARE_XPATH("//div[contains(.,'Post') and @role='button']"),
 
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_FB_CSS("i[class='fa fa-facebook share-menu-icon']"),
 	HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_FB_USERNAME_CSS("input#email"),
@@ -389,6 +389,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
+	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
+    SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
@@ -428,9 +430,9 @@ public enum OnePObjectMap {
 
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
-	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='login-button']"),
+	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='wui-btn--login']"),
 	LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS("div[class='login-splash__container']"),
-	CLARIVATE_ANALYTICS_PAGE_CSS("span[id='tagline']"),
+	CLARIVATE_ANALYTICS_PAGE_CSS("div[id='site-header'] a"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_CSS("a[event-category='searchresult-ck-profile'][class='ng-binding ng-scope']"),
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
@@ -509,7 +511,7 @@ public enum OnePObjectMap {
 	ENDNOTE_ACCESS_CENTER_EMAIL_FIELD_CSS("input[class='elqField']"),
 	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
-	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[id='pageTitle'] h3"),
+	ENDNOTE_RESET_PASSWORD_PAGE_CSS("div[class='forgot-password-header'] h3"),
 	SINGIN_USING_LINKEDIN_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer button-color-secondary ng-binding']"),
 	ACCOUNT_PAGE_LINKEDIN_MAIL_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[1]"),
 	LINKED_STEAM_ACCOUNT_XPATH("(//div[@class='account-option-item ng-scope']/div[@class='account-option-item__text-container']/span)[2]"),
@@ -564,7 +566,7 @@ public enum OnePObjectMap {
 	ACCOUNT_STEAM_ICON_XPATH("//i[@class='fa fa-envelope-o account-option-item__icon--steam']"),
 	TEXT_ACCOUNTPAGE_XPATH("//div[@ng-hide='Account.isSteamProvider()']/p"),
 	TEXT_ACCOUNTPAGE1_XPATH("//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]"),
-	ACCOUNT_CHANGE_PASSWORD_LINK_CSS("h6[class='account-option-item__text--sub ng-scope'] a"),
+	ACCOUNT_CHANGE_PASSWORD_LINK_CSS("h6[class='account-option-item__text-sub ng-scope'] a"),
 	EMAIL_BODY_PASSWORD_RESET_LINK_CSS("[class='email_body'] a"),
 	NEON_LANDING_PAGE_LOGGIN_BANNER_CSS("div[class='login-body']"),
 	ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS("a[class='wui-btn wui-btn--secondary']"),
@@ -579,7 +581,7 @@ public enum OnePObjectMap {
 	NEON_OK_BUTTON_XPATH("//a[@class='ng-binding ng-scope']"),
 
 	// #######RCC#############
-	RCC_GROUP_GROUPTAB_HEADER_CSS("a[class*='ne-nav-list__link--groups']"),
+	RCC_GROUP_GROUPTAB_HEADER_XPATH("//a[contains(.,'Groups')]"),
 	RCC_GROUP_CREATE_NEW_GROUP_BUTTON_CSS("button[class*='wui-icon-btn--add-group']"),
 	RCC_GROUP_GROUPS_COUNT_CSS("a[href*='groups'] span[class*='wui-side-menu__badge']"),
 	RCC_GROUP_INVITATIONS_COUNT_CSS("a[href*='invites'] span[class*='wui-side-menu__badge']"),
@@ -748,6 +750,15 @@ public enum OnePObjectMap {
 	RCC_SEARCH_LIST_VERIFY_GROUPNAME("a[class='ne-action-dropdown__item-content']"),
 	RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
+
+	RCC_GMAIL_LOGIN_USERNAME_ID("Email"),
+    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH(".//*[@id='next']"),
+    RCC_GMAIL_LOGIN_SUBMIT_XPATH(".//*[@id='signIn']"),
+    RCC_GMAIL_LOGIN_PASSWORD_XPATH(".//*[@id='Passwd']"),
+    RCC_GMAIL_CLICK_EMAIL_XPATH(".//*[@class='xY a4W']"),
+    RCC_VERIFY_TABLE_CONTENT_XPATH(".//*[@id=':8s']//table[@class='m_3415277218226827690container']"),
+    RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
+    
 
 	// #################### DRA ##########################
 
@@ -922,8 +933,9 @@ public enum OnePObjectMap {
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn login-button button-color-primary wui-btn--primary']"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS("button[class='pull-right wui-btn login-button button-color-primary'] span"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--login wui-btn--primary']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS("button[class='pull-right wui-btn wui-btn--primary wui-btn--login'] span"),
+	NEON_RESEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--primary wui-btn--login'] "),
 	GURILLA_RECEIVED_MAIL_SUBJECT_CSS("h3[class='email_subject']"),
 	GURILLA_MAIL_BODY_PASSWORD_RESET_LINK_XPATH("//*[@class='email_body']//a"),
 	RESET_PASSWORD_PAGE_CHECK_VALIDATIONS_CSS("div[class='row password-validator__item ng-scope']"),
