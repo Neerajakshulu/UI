@@ -97,7 +97,8 @@ public class ENW042 extends TestBase {
 	private void NavigateToENW() throws Exception {
 		String expected_uRL= "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
-		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge']")));
+		BrowserWaits.waitTime(2);
+		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
 		BrowserWaits.waitTime(10);
 		try {
 			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {

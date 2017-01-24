@@ -50,15 +50,16 @@ public class ENW020 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to("http://ua-qa.newisiknowledge.com/");
-			String uRL_webofScience = ob.getCurrentUrl();
-			if (!uRL_webofScience.contains("error-qa.newisiknowledge.com")) {
+//			String uRL_webofScience = ob.getCurrentUrl();
+//			if (!uRL_webofScience.contains("error-qa.newisiknowledge.com")) {
+//				BrowserWaits.waitTime(6);
+//				NavigateToENW();
+//			} else {
 				BrowserWaits.waitTime(6);
-				NavigateToENW();
-			} else {
 				loginToWOS("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 				BrowserWaits.waitTime(6);
 				NavigateToENW();
-			}
+//			}
 			BrowserWaits.waitTime(10);
 			if (ob.getCurrentUrl().contains(url)) {
 				System.out.println("URL:" + ob.getCurrentUrl());

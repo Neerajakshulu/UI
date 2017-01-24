@@ -114,7 +114,8 @@ public class ENW019A extends TestBase {
 	private void NavigateToENW() throws Exception {
 		String header_Expected = "Thomson Reuters";
 		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
-		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge']")));
+		BrowserWaits.waitTime(2);
+		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
 		BrowserWaits.waitTime(10);
 		try {
 			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
