@@ -948,7 +948,7 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_CSS("div[class='row ng-scope'] div"),
 	RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS("div[class='wui-input-with-label'] input"),
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left cancel-forgot-password__container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
 	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),
