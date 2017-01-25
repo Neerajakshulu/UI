@@ -535,45 +535,48 @@ public class TestBase {
 				caps.setCapability("platform", "Windows 8.1");
 				caps.setCapability("version", "11.0");
 				caps.setCapability("name", this.getClass().getSimpleName());
-
 			}
 
 		}
 
-		if (os.equals("Mac")) {
+		if (os.equalsIgnoreCase("Mac")) {
 
-			if (browser.equals("Chrome")) {
+			if (browser.equalsIgnoreCase("Chrome")) {
 
 				caps = DesiredCapabilities.chrome();
 				caps.setCapability("platform", "OS X 10.11");
 				caps.setCapability("version", "48.0");
+				caps.setCapability("name", this.getClass().getSimpleName());
 			}
 
-			if (browser.equals("FF")) {
+			if (browser.equalsIgnoreCase("FF")) {
 
 				caps = DesiredCapabilities.firefox();
 				caps.setCapability("platform", "OS X 10.11");
 				caps.setCapability("version", "44.0");
+				caps.setCapability("name", this.getClass().getSimpleName());
 			}
 
-			if (browser.equals("Safari")) {
+			if (browser.equalsIgnoreCase("Safari")) {
 
 				caps = DesiredCapabilities.safari();
 				caps.setCapability("platform", "OS X 10.11");
 				caps.setCapability("version", "9.0");
+				caps.setCapability("name", this.getClass().getSimpleName());
 			}
 		}
 
-		if (os.equals("iOS")) {
+		if (os.equalsIgnoreCase("iOS")) {
 
 			caps = DesiredCapabilities.iphone();
 			caps.setCapability("platform", "OS X 10.10");
 			caps.setCapability("version", "9.2");
 			caps.setCapability("deviceName", "iPhone 6");
 			caps.setCapability("deviceOrientation", "portrait");
+			caps.setCapability("name", this.getClass().getSimpleName());
 		}
 
-		if (os.equals("Android")) {
+		if (os.equalsIgnoreCase("Android")) {
 
 			caps = DesiredCapabilities.android();
 			caps.setCapability("platform", "Linux");
@@ -581,6 +584,7 @@ public class TestBase {
 			caps.setCapability("deviceName", "Android Emulator");
 			caps.setCapability("deviceType", "phone");
 			caps.setCapability("deviceOrientation", "portrait");
+			caps.setCapability("name", this.getClass().getSimpleName());
 		}
 
 		ob = new RemoteWebDriver(new URL(url), caps);
