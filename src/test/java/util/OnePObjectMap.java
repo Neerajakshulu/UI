@@ -389,6 +389,8 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
 	SEARCH_RESULT_PAGE_FILTER_LIST_CSS("div[class='panel-heading']"),
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
+	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
+    SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
 
 	// record view page
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
@@ -749,6 +751,15 @@ public enum OnePObjectMap {
 	RCC_SEARCH_LIST_ADD_ARTICLE_ADD_GROUP_ICON("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	RCC_SRARCHLIST_ARTICLE_CREATE_GROUP_SPINNER_CSS("div[class^='wui-spinner'] div[class='wui-spinner__circle wui-spinner__circle--delayed']"),
 
+	RCC_GMAIL_LOGIN_USERNAME_ID("Email"),
+    RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH(".//*[@id='next']"),
+    RCC_GMAIL_LOGIN_SUBMIT_XPATH(".//*[@id='signIn']"),
+    RCC_GMAIL_LOGIN_PASSWORD_XPATH(".//*[@id='Passwd']"),
+    RCC_GMAIL_CLICK_EMAIL_XPATH(".//*[@class='xY a4W']"),
+    RCC_VERIFY_TABLE_CONTENT_XPATH(".//*[@id=':8s']//table[@class='m_3415277218226827690container']"),
+    RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
+    
+
 	// #################### DRA ##########################
 
 	DRA_LOGO_CSS("h3[class$='company-name--dra']"),
@@ -877,7 +888,8 @@ public enum OnePObjectMap {
 	NEON_IPA_ACCOUNT_CSS("a[class='wui-profile-flyout__link wui-profile-flyout__link--icon']"),
 	NEON_IPA_ACCOUNTNAME_CSS("span[class='ng-binding']"),
 	NEON_IPA_TECH_SEARCHBOX_CSS("div[class='ipa-search-input-control__input-group'] input"),
-	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("\\button[starts-with(@ng-click,'vm.select')]"),
+	
+	NEON_IPA_TECH_SEARCHSUGGESTIONS_XPATH("//button[starts-with(@ng-click,'vm.select')]"),
 	NEON_IPA_TECH_CLIPBOARD_CSS("ipa-search-term[class='ng-isolate-scope'] li[ng-repeat='item in vm.items track by $index']"),
 	NEON_IPA_TECH_NEWSEARCH_XPATH("//*[contains(text(),'Search')]"),
 	NEON_IPA_TECHHIGHLIGHT_XPATH("//*[contains(text(),'Technology areas')]/hr[@class='ipa-tabs--underline ipa-tabs--underline__active']"),
@@ -936,7 +948,7 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_CSS("div[class='row ng-scope'] div"),
 	RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS("div[class='wui-input-with-label'] input"),
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left forgot-password__container'] a"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left cancel-forgot-password__container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
 	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),

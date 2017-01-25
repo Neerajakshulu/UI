@@ -99,9 +99,9 @@ public class IPA012 extends TestBase {
 			pf.getSearchPageInstance(ob).validateIPAnalyticsLandingPage(test);
 			pf.getSearchPageInstance(ob).validateCompanySearch(test);
 			
-			//closeBrowser();
+			closeBrowser();
 			
-		} catch (Throwable t) {
+		} catch (Throwable t ) {
 			test.log(LogStatus.FAIL, "Search page validation is failed");
 			// print full stack trace
 			StringWriter errors = new StringWriter();

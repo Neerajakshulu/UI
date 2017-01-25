@@ -769,9 +769,24 @@ public class ENWIAM013 extends TestBase {
 		}
 
 		catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			extent = ExtentManager.getReporter(filePath);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
+			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+			logger.info("length : " + tests.length);
+			logger.info("doc length : " + tests_dec.length);
+			logger.info(rowData.getTestcaseId());
+			for (int i = 0; i < tests.length; i++) {
+				logger.info(tests_dec[i]);
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
+				test.log(LogStatus.SKIP,
+						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+				extent.endTest(test);
+			}
+			
+			// extent
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));

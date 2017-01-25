@@ -21,8 +21,9 @@ import util.ErrorUtil;
 import util.ExtentManager;
 
 /**
- * Verify that user is able to watch an article to a particular watchlist from notification in home page||Verify that
- * user is able to unwatch an article from watchlist from notification in home page
+ * Verify that user is able to watch an article to a particular watchlist from
+ * notification in home page||Verify that user is able to unwatch an article
+ * from watchlist from notification in home page
  * 
  * @author chinna putha
  *
@@ -64,7 +65,7 @@ public class Watchlist027 extends TestBase {
 		try {
 			// Open browser
 			openBrowser();
-			//runOnSauceLabsFromLocal("Windows", "Chrome");
+			// runOnSauceLabsFromLocal("Windows", "Chrome");
 			maximizeWindow();
 
 			clearCookies();
@@ -78,15 +79,14 @@ public class Watchlist027 extends TestBase {
 
 			// Navigating to the home page
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("home_link"))));
-			BrowserWaits.waitTime(8);
-			//Add article to watchlist from Newsfeed page
 			ob.navigate().refresh();
-			String docTitle=pf.getNewsfeedPageInstance(ob).getArticleTitle();
+			BrowserWaits.waitTime(8);
+			// Add article to watchlist from Newsfeed page
+			String docTitle = pf.getNewsfeedPageInstance(ob).getArticleTitle();
 			pf.getNewsfeedPageInstance(ob).addFirstArticleToWatclist(newWatchlistName);
 
 			logger.info("document title in watchlist page-->" + docTitle);
-			
-			
+
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 
@@ -173,11 +173,14 @@ public class Watchlist027 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases" , TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2) TestUtil.reportDataSetResult(suiteExls,
-		 * "Test Cases", TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases", TestUtil.getRowNum(suiteExls,
-		 * this.getClass().getSimpleName()), "SKIP");
+		 * if (status == 1) TestUtil.reportDataSetResult(suiteExls, "Test Cases"
+		 * , TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(suiteExls, "Test Cases",
+		 * TestUtil.getRowNum(suiteExls, this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 

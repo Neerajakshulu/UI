@@ -70,7 +70,7 @@ public class Watchlist028 extends TestBase {
 			ob.navigate().to(host);
 
 			// login with user 2 and follow user1 to get the notifications
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 			BrowserWaits.waitTime(5);
 			pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(LOGIN.getProperty("PROFILE8"));
 			pf.getSearchProfilePageInstance(ob).clickPeople();
@@ -81,7 +81,7 @@ public class Watchlist028 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 
 			// 1)Login as user1 and comment on some patent
-			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("computer architecture");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
@@ -105,7 +105,7 @@ public class Watchlist028 extends TestBase {
 
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME2"), LOGIN.getProperty("LOGINPASSWORD2"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
@@ -114,7 +114,8 @@ public class Watchlist028 extends TestBase {
 			// Navigating to the home page
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			//Add patent to watchlist
-			ob.navigate().refresh();
+			//ob.navigate().refresh();
+			//BrowserWaits.waitTime(8);
 			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			logger.info("document title in watchlist page-->" + document_title);

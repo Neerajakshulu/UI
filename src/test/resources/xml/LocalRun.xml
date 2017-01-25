@@ -264,11 +264,11 @@
 		</classes>
 	</test>
 
-	<test name="Validate_change_password_account_page">
+	<!-- <test name="Validate_change_password_account_page">
 		<classes>
 			<class name="iam.IAM038"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- ENW IAM -->
 
