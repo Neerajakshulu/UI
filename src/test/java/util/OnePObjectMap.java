@@ -88,11 +88,12 @@ public enum OnePObjectMap {
 	NEON_RECORDVIEW_POST_NAME_XPATH("//h2[@class='wui-content-title wui-content-title--ne-publication ng-binding']"),
 	NEON_RECORDVIEW_PATENT_ABSTRACT_CSS("p[class='ne-publication__body wui-large-text wui-large-text--serif ng-binding']"),
 	NEON_RECORDVIEW_POST_ABSTRACT_XPATH("//div[@class='col-xs-12']/div[@class='ne-publication__body ne-publication__body--post wui-large-text wui-large-text--serif ng-binding'] /p"),
-
+  
 	ENW_UNFILEDFOLDER_LINK_XPATH("//div[@id='idFolderLink_1']/a"),
 	// ENW_RECORD_LINK_XPATH("//a[@title='Go to reference' and contains(text(),'Fostering synergy between cell
 	// biology')]"),
 	ENW_RECORD_LINK_XPATH(".//*[@id='ref_main']/tr[6]/td[4]/a"),
+	ENW_SORTBY_OPTIONS_ID("sort_By"),
 
 	ENW_RECORD_REFERENCETYPE_XPATH("//tr[@id='showRefName']/td[1]"),
 	ENW_RECORD_REFERENCETYPE_VALUE_XPATH("//tr[@id='showRefName']/td[2]"),
