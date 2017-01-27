@@ -111,7 +111,7 @@ public class ENWIAM40 extends TestBase {
 						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
 
 				String actual_Neon_Title = ob.getTitle();
-				String expected_Neon_Title = "Thomson Reuters - Project Neon";
+				String expected_Neon_Title = "Clarivate Analytics - Project Neon";
 
 				try {
 					Assert.assertEquals(actual_Neon_Title, expected_Neon_Title);
