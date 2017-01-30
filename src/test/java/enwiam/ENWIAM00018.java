@@ -56,8 +56,8 @@ public class ENWIAM00018 extends TestBase {
 
 		}
 		
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("ENWIAM00018User"));
+		/*try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -66,7 +66,7 @@ public class ENWIAM00018 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}
+		}*/
 		
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
@@ -90,9 +90,9 @@ public class ENWIAM00018 extends TestBase {
 	private void steamLogin() throws Exception {
 
 		ob.navigate().to(host);
-		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty("ENWIAM00018User"));
+		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty("UserFBENWIAM80"));
 
-		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("ENWIAM00018UserPWD"));
+		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("PWDUserFBENWIAM80"));
 		
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 		pf.getLoginTRInstance(ob).closeOnBoardingModal();
@@ -104,11 +104,11 @@ public class ENWIAM00018 extends TestBase {
 
 	private void loginTofb() throws Exception {
 
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00018User"),
-				LOGIN.getProperty("ENWIAM00018UserPWD"));
+		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+				LOGIN.getProperty("PWDUserFBENWIAM80"));
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_DIFFSTEAMLINKING_LINKINGMODALTEXT_CSS);
-		String ModalText = "Your email address " + LOGIN.getProperty("ENWIAM00018User")
+		String ModalText = "Your email address " + LOGIN.getProperty("UserFBENWIAM80")
 				+ " is already registered with Project Neon.";
 				
 		String LInkText = ob

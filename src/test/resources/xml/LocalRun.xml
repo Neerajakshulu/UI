@@ -201,11 +201,7 @@
 		</classes>
 	</test>
 	
-	<test name="ENWIAM00018">
-		<classes>
-			<class name="enwiam.ENWIAM00018"></class>
-		</classes>
-	</test>
+	
 	
 	<test name="ENWIAM90">
 		<classes>
@@ -388,14 +384,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ContactCustomerSupportScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM52">
-			</class>
-		</classes>
-	</test> -->
 
-	<test name="ForwardMergeScenario001">
+   <test name="ForwardMergeScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM53">
 			</class>
@@ -423,12 +413,6 @@
 		</classes>
 	</test>
 
-	<!-- <test name="AutomatedMergeScenario002">
-		<classes>
-			<class name="enwiam.ENWIAM57">
-			</class>
-		</classes>
-	</test> -->
 
 	<test name="ContactCustomerSupportScenarioENW001">
 		<classes>
@@ -446,6 +430,7 @@
 
 	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
+		    <class name="enwiam.ENWIAM00018"></class>
 			<class name="enwiam.ENWIAM080"></class>
 			<class name="enwiam.ENWIAM081"></class>
 			<class name="enwiam.ENWIAM0001"></class>
@@ -453,12 +438,7 @@
 			<class name="enwiam.ENWIAM57"></class>
 		</classes>
 	</test>
-	<!-- <test name="ENWIAM081">
-		<classes>
-			<class name="enwiam.ENWIAM081">
-			</class>
-		</classes>
-	</test> -->
+	
 	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
