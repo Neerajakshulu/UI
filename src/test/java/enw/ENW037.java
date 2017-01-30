@@ -92,13 +92,13 @@ public class ENW037 extends TestBase {
 				test.log(LogStatus.FAIL, "Record is not exported and the Abstract content is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
 			}else{
-				test.log(LogStatus.FAIL, "Record is exported and the Abstract content is matching between Neon and endnote");
+				test.log(LogStatus.PASS, "Record is exported and the Abstract content is matching between Neon and endnote");
 			}
 			if (!(endNoteDetails.get("AssigneeValue").equals(neonValues.get("expectedAssignee")))) {
 						test.log(LogStatus.FAIL, "Record is not exported , The Assignee value is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
 					}else{
-						test.log(LogStatus.FAIL, "After exporting the record, The Assignee value is matching between Neon and endnote");
+						test.log(LogStatus.PASS, "After exporting the record, The Assignee value is matching between Neon and endnote");
 					}
 		closeBrowser();
 	} catch (Throwable t) {
