@@ -61,7 +61,7 @@ public class ENWIAM091 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		/*try {
+		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			logger.info("statuCode -->"+statuCode);
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
@@ -70,7 +70,7 @@ public class ENWIAM091 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}*/
+		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
 			String accountType = "Neon";
@@ -102,7 +102,8 @@ public class ENWIAM091 extends TestBase {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(10);
+			
+			BrowserWaits.waitTime(5);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			String accountType1 = "Facebook";
 			try {
