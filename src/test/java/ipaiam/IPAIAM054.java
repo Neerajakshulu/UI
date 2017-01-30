@@ -35,7 +35,6 @@ public class IPAIAM054 extends TestBase {
 	 *             , When Something unexpected
 	 */
 
-
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -64,11 +63,10 @@ public class IPAIAM054 extends TestBase {
 
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERIPA054"));
-			
+
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				throw new Exception("Delete API Call failed");
 			}
-
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
@@ -109,13 +107,14 @@ public class IPAIAM054 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click the link button");
+
+				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+
+				validateLinkedAccounts(2, accountType);
 				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				BrowserWaits.waitTime(2);
 				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
-				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				BrowserWaits.waitTime(2);
-				validateLinkedAccounts(2, accountType);
 				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 				test.log(LogStatus.PASS, "Forward Merge is happened");
 				if (secondAccountProfileName.contains(firstAccountProfileName)) {
@@ -133,6 +132,8 @@ public class IPAIAM054 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 
 			}
+			BrowserWaits.waitTime(2);
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
