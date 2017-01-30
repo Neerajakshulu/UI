@@ -74,18 +74,20 @@ public class ENWIAM00019 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00019User"),
 					LOGIN.getProperty("ENWIAM00019UserPWD"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			test.log(LogStatus.PASS, "user has logged in with steam account");
+			test.log(LogStatus.PASS, "user has logged in to Neon with steam account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			test.log(LogStatus.PASS, "user has logged in with steam account");
+			test.log(LogStatus.PASS, "user has logged in to ENDNote with steam account");
 			BrowserWaits.waitTime(3);
 			try {
 
 				try {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+					BrowserWaits.waitTime(3);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				} catch (Exception e) {
+					BrowserWaits.waitTime(3);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				}
