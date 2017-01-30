@@ -87,12 +87,9 @@ public class OnboardingModalsPage extends TestBase {
 		try {
 			if(ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size()!=0){
 				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
-			}else{
-				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		BrowserWaits.waitTime(4);
 	}

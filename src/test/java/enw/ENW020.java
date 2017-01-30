@@ -24,8 +24,8 @@ public class ENW020 extends TestBase {
 
 	static int status = 1;
 	//String url = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
-	String ENWURL = "https://dev-stable.1p.thomsonreuters.com/#/login?referrer=%252F%23%252Fprofile%3Fapp%3Dendnote&app=endnote&pageview=";
-	String NeonUrlProfile = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
+	String ENWURL="https://dev-stable.1p.thomsonreuters.com/#/login?referrer=%252F%23%252Fprofile%3Fapp%3Dendnote&app=endnote&pageview=";
+	String NeonUrlProfile="https://dev-stable.1p.thomsonreuters.com/#/profile/";
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -70,12 +70,9 @@ public class ENW020 extends TestBase {
 				BrowserWaits.waitTime(3);
 				String ExpectedNeonUrl=ob.getCurrentUrl();
 				Assert.assertEquals(ExpectedNeonUrl,NeonUrlProfile );
-//				if (!ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).isDisplayed()) {
-//					test.log(LogStatus.FAIL, "Expected page is Not displayed ");
-//					Assert.assertEquals(true, false);
-//				} else {
+
 					test.log(LogStatus.PASS, "Neon Profile page is displayed and Navigating to the proper page.");
-//				}
+
 			} else {
 				test.log(LogStatus.FAIL, "Neon Profile page is not displayed");
 				Assert.assertEquals(true, false);
