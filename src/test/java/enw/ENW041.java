@@ -47,7 +47,7 @@ public class ENW041 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to("http://tsenwqa01.int.westgroup.com:4444/enwservices/supportutility/");
-			loginToSupport_utility("SUPPORTUTILITYACCOUNT", "SUPPORTUTILITY_PWD");
+			loginToSupport_utility("SUPPORTUTILITYACCOUNT", "SUPPORTUTILITYACCOUNT_PWD");
 			String expected = "Login successful";
 			String actualText = ob.findElement(By.cssSelector("h3")).getText();
 			try {
