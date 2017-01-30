@@ -114,8 +114,8 @@ public class Watchlist028 extends TestBase {
 			// Navigating to the home page
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			//Add patent to watchlist
-			//ob.navigate().refresh();
-			//BrowserWaits.waitTime(8);
+			ob.navigate().refresh();
+			BrowserWaits.waitTime(10);
 			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			logger.info("document title in watchlist page-->" + document_title);
