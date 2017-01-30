@@ -305,7 +305,6 @@
 
 	<test name="ENW Linking from ENW" preserve-order="true">
 		<classes>
-			<class name="enwiam.ENWIAM0001"></class>
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enwiam.ENWIAM0006"></class>
 		</classes>
@@ -445,10 +444,10 @@
 		</classes>
 	</test>
 
-	<test name="ENWAutomatedMerge1">
+	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
-			<class name="enwiam.ENWIAM080">
-			</class>
+			<class name="enwiam.ENWIAM080"></class>
+			<class name="enwiam.ENWIAM0001"></class>
 		</classes>
 	</test>
 	<test name="ENWIAM081">
