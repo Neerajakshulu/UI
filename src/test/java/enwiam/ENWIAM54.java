@@ -61,7 +61,7 @@ public class ENWIAM54 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		/*try {
+		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername08"));
 			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("sru_steam08"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
@@ -77,7 +77,7 @@ public class ENWIAM54 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}*/
+		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
