@@ -7,9 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -71,23 +70,14 @@ public class ENW008 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-
+			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			BrowserWaits.waitTime(8);
 			pf.getAuthoringInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 
-		
-		    List<WebElement> IPCcodelist = ob.findElements(By.xpath("//span[@ng-repeat='ipc in vm.record.ipccodes track by $index']"));
-		    String completeIPCCode="";
-		    for(int i=0;i<IPCcodelist.size();i++)
-		    {
-		    String IPCCode=IPCcodelist.get(i).getText();
-		    completeIPCCode=completeIPCCode+IPCCode;
-		    }
 		    
-
 			String expectedNotes1 = ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENTS_NOTES1_XPATH.toString()))
 				.getText();
 			String expectedNotes2 = ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENTS_NOTES2_XPATH.toString()))
@@ -100,7 +90,6 @@ public class ENW008 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_TITLE_XPATH.toString())).getText());
 		   neonValues.put("expectedNotes", "Cited Patents:" + expectedNotes1 + " Cited Articles:" + expectedNotes2);
 		  
-			//neonValues.put("expectedIPCcodes", "completeIPCCode");
 		   String expectedAuthor1=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText();
 		   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
 			
@@ -132,7 +121,9 @@ public class ENW008 extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			Select se=new Select(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_SORTBY_OPTIONS_ID));
+			se.selectByVisibleText("Added to Library -- newest to oldest");		
+					
 			BrowserWaits.waitTime(4);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 		
@@ -165,12 +156,10 @@ public class ENW008 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
 			endNoteDetails.put("TitleValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_VALUE_XPATH.toString())).getText());
-		
 			endNoteDetails.put("Abstract",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ABSTRACT_XPATH.toString())).getText());
 			endNoteDetails.put("PatentNumber",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_PATENTNO_XPATH.toString())).getText());
-			
 			endNoteDetails.put("Accessionnumber",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ACCESSIONNUMBER_XPATH.toString())).getText());
 			endNoteDetails.put("Keywords",
@@ -189,12 +178,7 @@ public class ENW008 extends TestBase {
 				}
 			}
 			
-		  /* String Author1=expectedAuthor1.substring(1, expectedAuthor1.length()-1);
-		   String Author2=expectedAuthor2.substring(1, expectedAuthor2.length()-1);
-			System.out.println("Verifying Values  ");
-			System.out.println(neonValues.get("Author1"));
-			System.out.println(neonValues.get("expectedAuthor1"));
-			System.out.println(endNoteDetails.get("InventorValue1"));*/
+		 
 			if (!(endNoteDetails.get("ReferenceTypeValue").contains(neonValues.get("expectedReferenceType")))) {
 				test.log(LogStatus.FAIL, "ReferenceTypeValue is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
@@ -220,11 +204,8 @@ public class ENW008 extends TestBase {
 				Assert.assertEquals(true, false);
 			}
 
-			//deleteRecord();
 			closeBrowser();
 			
-			 
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -241,21 +222,6 @@ public class ENW008 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 	
-
-	  public void deleteRecord() {
-		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
-	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
-	 ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();
-	 ob.findElement(By.xpath("//*[contains(text(),'OK')]")).click();
-	 
-	 Alert alert = ob.switchTo().alert();
-	 System.out.println("Alert Message "+alert.getText());
-	 alert.accept();
-//	 ob.switchTo().alert().accept();
-//	 System.out.println(ob.switchTo().alert().getText());
-	// ob.findElement(By.xpath("//*[contains(text(),'OK')]")).click();
-	 
-	  }
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

@@ -53,9 +53,10 @@ public class ENW043 extends TestBase {
 			clearCookies();
 			ob.navigate().to("http://ua-qa.newisiknowledge.com/");
 			loginToWOS("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(8);
 			InvalidNeonSession();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+			BrowserWaits.waitTime(8);
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PRIVACY_LINK_XPATH.toString())));
 			BrowserWaits.waitTime(3);
@@ -77,7 +78,7 @@ public class ENW043 extends TestBase {
 	}
 
 	private void InvalidNeonSession() throws Exception {
-		waitForElementTobeVisible(ob, By.cssSelector("a[id='HS_EndNoteLink_signedin']"), 180);
+		waitForElementTobeClickable(ob, By.cssSelector("a[id='HS_EndNoteLink_signedin']"), 180);
 		jsClick(ob, ob.findElement(By.cssSelector("a[id='HS_EndNoteLink_signedin']")));
 		try {
 		EndNoteSeesion(ob);

@@ -92,7 +92,7 @@ public class Watchlist007 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(8);
 			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
