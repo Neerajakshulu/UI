@@ -61,8 +61,8 @@ public class ENWIAM091 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("NeonMergeAccount"));
+		/*try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			logger.info("statuCode -->"+statuCode);
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				throw new Exception("Delete API Call failed");
@@ -70,7 +70,7 @@ public class ENWIAM091 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}
+		}*/
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 		try {
 			String accountType = "Neon";
@@ -78,8 +78,8 @@ public class ENWIAM091 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.get(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("NeonMergeAccount"),
-					LOGIN.getProperty("NeonMergeAccountPWD"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			BrowserWaits.waitTime(4);
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
@@ -93,11 +93,11 @@ public class ENWIAM091 extends TestBase {
 			BrowserWaits.waitTime(10);
 		//	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			try {
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("NeonMergeAccount"),
-						LOGIN.getProperty("NeonMergeAccountPWD"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				BrowserWaits.waitTime(5);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("NeonMergeAccountPWD"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user is able to link");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -143,9 +143,9 @@ public class ENWIAM091 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("NeonMergeAccount")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("NeonMergeAccount")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
@@ -163,7 +163,7 @@ public class ENWIAM091 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("NeonMergeAccount")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Any account");
 

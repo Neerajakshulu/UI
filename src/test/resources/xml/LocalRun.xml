@@ -208,12 +208,6 @@
 			<class name="enwiam.ENWIAM90"></class>
 		</classes>
 	</test>
-	<test name="ENWIAM091">
-		<classes>
-			<class name="enwiam.ENWIAM091"> </class>
-		</classes>
-	</test>
-	
 	
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
@@ -436,6 +430,7 @@
 			<class name="enwiam.ENWIAM0001"></class>
 			<class name="enwiam.ENWIAM52"></class>
 			<class name="enwiam.ENWIAM57"></class>
+			<class name="enwiam.ENWIAM091"></class>
 		</classes>
 	</test>
 	
