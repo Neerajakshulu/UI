@@ -87,6 +87,7 @@ public class ENWIAM00019 extends TestBase {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 				try {
 					BrowserWaits.waitTime(3);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
