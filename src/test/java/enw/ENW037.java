@@ -52,6 +52,7 @@ public class ENW037 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			NavigatingToENW();
+			BrowserWaits.waitTime(3);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
 					LOGIN.getProperty("USERPASSWORD037"));
@@ -100,6 +101,10 @@ public class ENW037 extends TestBase {
 					}else{
 						test.log(LogStatus.PASS, "After exporting the record, The Assignee value is matching between Neon and endnote");
 					}
+			BrowserWaits.waitTime(3);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		closeBrowser();
 	} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -116,7 +121,6 @@ public class ENW037 extends TestBase {
 	
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
 	 private void NavigatingToENW() {
 		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {

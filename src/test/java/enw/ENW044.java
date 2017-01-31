@@ -8,7 +8,6 @@ import java.util.List;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -48,6 +47,8 @@ public class ENW044 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			NavigatingToENW();
+			BrowserWaits.waitTime(3);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
 					LOGIN.getProperty("USERPASSWORD044"));
@@ -133,15 +134,40 @@ public class ENW044 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	 private void sortReferences() throws InterruptedException {
-			 if (ob.findElements(By.xpath("//div[@class='sortBy']")).size() > 0) {
-				Select SortItems = new Select(ob.findElement(By.xpath("//*[@id='sort_By']")));
-				SortItems.selectByVisibleText("Year -- newest to oldest");
-				} else {
-				test.log(LogStatus.FAIL, "Sorting not done .");
-			}
+	 private void NavigatingToENW() {
+		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		 try {
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
+			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+			BrowserWaits.waitTime(5);
+			if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
+			{
+				ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
+			}			
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
+			HandleAlert();
+			BrowserWaits.waitTime(4);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
+	private void HandleAlert() {
+		Alert alert=ob.switchTo().alert();		
+		String alertMessage=ob.switchTo().alert().getText();		
+        System.out.println(alertMessage);			
+        alert.accept();	
+		
+	}
+	
 	public void deleteRecord() {
 		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
 	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
