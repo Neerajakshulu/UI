@@ -77,9 +77,9 @@ public class ENWIAM00015 extends TestBase {
 	private void steamEnw() throws Exception {
 		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 		String str = "Your account has been evicted.";
-		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty("ENWIAM00015UserSuspended"));
+		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty("sru_steam11"));
 
-		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
+		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty("sru_steampw11"));
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 
 		BrowserWaits.waitTime(2);
@@ -102,9 +102,9 @@ public class ENWIAM00015 extends TestBase {
 		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 
 		String str = "Your account has been evicted.";
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00015UserSuspended"),
-				LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("ENWIAM00015SuspendedPWD"));
+		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername11"),
+				LOGIN.getProperty("sru_fbpwd11"));
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw11"));
 		BrowserWaits.waitTime(2);
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 		if (evict.equalsIgnoreCase(str)) {
