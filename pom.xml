@@ -135,7 +135,6 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/xml/${suiteXML}</suiteXmlFile>
-						<suiteXmlFile>src/test/resources/ProdSuite/${suiteXMLFile}</suiteXmlFile>
 					</suiteXmlFiles>
 
 					<systemProperties>
