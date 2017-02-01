@@ -83,7 +83,7 @@ public class ENWIAM00015 extends TestBase {
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 
 		BrowserWaits.waitTime(2);
-
+		
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 		if (evict.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
