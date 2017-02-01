@@ -1,0 +1,538 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sanity suite" parallel="tests" thread-count="10">
+
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+	<parameter name="username" value="user1testautomation@gmail.com" />
+	<parameter name="password" value="Neon@123" />
+	<parameter name="articleName" value="biology" />
+	<parameter name="patentName" value="Percutaneous placement valve stent" />
+	<parameter name="postName" value="Unique Post for Automation" />
+	<parameter name="completeArticle" value="Schizophrenia and drug delivery systems"></parameter>
+	<parameter name="addComments" value="Testing Comments"></parameter>
+	<parameter name="article" value="Biology"></parameter>
+	
+	<test name="Search2">
+		<classes>
+			<class name="search.Search2"></class>
+		</classes>
+	</test>
+
+	<test name="Search3">
+		<classes>
+			<class name="search.Search3"></class>
+		</classes>
+	</test>
+
+	<test name="Search58">
+		<classes>
+			<class name="search.Search58"></class>
+		</classes>
+	</test>
+
+	<test name="Search49">
+		<classes>
+			<class name="search.Search49"></class>
+		</classes>
+	</test>
+
+	<test name="Search32">
+		<classes>
+			<class name="search.Search32"></class>
+		</classes>
+	</test>
+
+	<test name="Search81">
+		<classes>
+			<class name="search.Search81"></class>
+		</classes>
+	</test>
+
+	<test name="Search97">
+		<classes>
+			<class name="search.Search97"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search54">
+		<classes>
+			<class name="search.Search54"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search39">
+		<classes>
+			<class name="search.Search39"></class>
+		</classes>
+	</test>
+
+	<test name="Search40">
+		<classes>
+			<class name="search.Search40"></class>
+		</classes>
+	</test>
+
+	<test name="Search70">
+		<classes>
+			<class name="search.Search70"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search55">
+		<classes>
+			<class name="search.Search55"></class>
+		</classes>
+	</test>
+
+
+	 <test name="Search36">
+		<classes>
+			<class name="search.Search36"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search91">
+		<classes>
+			<class name="search.Search91"></class>
+		</classes>
+	</test>
+
+	<test name="Search109">
+		<classes>
+			<class name="search.Search109"></class>
+		</classes>
+	</test>
+
+	<test name="Search71">
+		<classes>
+			<class name="search.Search71"></class>
+		</classes>
+	</test>
+
+	<test name="Search89">
+		<classes>
+			<class name="search.Search89"></class>
+		</classes>
+	</test>
+
+	<test name="Search56">
+		<classes>
+			<class name="search.Search56"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search106">
+		<classes>
+			<class name="search.Search106"></class>
+		</classes>
+	</test>
+
+	<test name="Search44">
+		<classes>
+			<class name="search.Search44"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search57">
+		<classes>
+			<class name="search.Search57"></class>
+		</classes>
+	</test>
+
+	<test name="Search99">
+		<classes>
+			<class name="search.Search99"></class>
+		</classes>
+	</test>
+
+
+	<test name="Search123">
+		<classes>
+			<class name="search.Search123"></class>
+		</classes>
+	</test>
+
+	<test name="Search73">
+		<classes>
+			<class name="search.Search73"></class>
+		</classes>
+	</test>
+
+	<test name="Search66">
+		<classes>
+			<class name="search.Search66"></class>
+		</classes>
+	</test>
+
+<!-- Duplicated
+    <test name="Search77">
+      	<classes>
+			<class name="search.Search77"></class>
+		</classes>
+	</test>
+ -->
+	<test name="Search87">
+		<classes>
+			<class name="search.Search87"></class>
+		</classes>
+	</test>
+
+	<test name="Search88">
+		<classes>
+			<class name="search.Search88"></class>
+		</classes>
+	</test>
+
+	<test name="Search79">
+		<classes>
+			<class name="search.Search79"></class>
+		</classes>
+	</test>
+
+	<test name="Search93">
+		<classes>
+			<class name="search.Search93"></class>
+		</classes>
+	</test>
+
+	<test name="Search94">
+		<classes>
+			<class name="search.Search94"></class>
+		</classes>
+	</test>
+
+	<!-- Profile Sanity Testcases -->
+	<test name="Validate_View_Profile">
+		<classes>
+			<class name="Profile.Profile5"></class>
+		</classes>
+	</test>
+
+	<test name="edit_User_Own_Profile">
+		<parameter name="profileInfo" value="user|automation|Testing|Thomson reuters|india" />
+		<classes>
+			<class name="Profile.Profile6"></class>
+		</classes>
+	</test>
+
+	<test name="Profile_Country_Typeahead">
+		<parameter name="countryTypeahead" value="In" />
+		<parameter name="fullCountry" value="India" />
+		<classes>
+			<class name="Profile.Profile27"></class>
+		</classes>
+	</test>
+
+	<test name="Validate_Add_Topics">
+		<parameter name="topics" value="tes|aut|dru" />
+		<classes>
+			<class name="Profile.Profile11"></class>
+		</classes>
+	</test>
+
+	<test name="Others_Profile_View">
+		<classes>
+			<class name="Profile.Profile3"></class>
+		</classes>
+	</test>
+
+	<test name="Follow_UnFollow_Other_Profile_from_SearchResults">
+		<parameter name="profileName" value="chinna" />
+		<classes>
+			<class name="Profile.Profile1"></class>
+		</classes>
+	</test>
+
+	<test name="Follow_UnFollow_Other_Profile_from_ProfilePage">
+		<parameter name="searchPeople" value="test"/>
+		<classes>
+			<class name="Profile.Profile2"></class>
+		</classes>
+	</test>
+<!--  Removing from sanity due to saucelabs doesnot have permission to image from Git -->
+	<!-- <test name="Validate_Profile_image_upload">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<classes>
+			<class name="Profile.Profile69"></class>
+		</classes>
+	</test> -->
+
+	 <!-- IAM test cases -->
+	 <test name="IAM002">
+		<classes>
+			<class name="iam.IAM002"></class>
+		</classes>
+	</test>
+
+	<!-- <test name="IAM003"> <classes> <class name="iam.IAM003"></class> </classes> 
+		</test> -->
+
+	<test name="IAM004">
+		<classes>
+			<class name="iam.IAM004"></class>
+		</classes>
+	</test>
+
+	<test name="IAM021">
+		<classes>
+			<class name="iam.IAM021"></class>
+		</classes>
+	</test>
+
+	<!-- Watchlist test cases -->
+
+	<test name="Watchlist004">
+		<classes>
+			<class name="watchlist.Watchlist004"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist005">
+		<classes>
+			<class name="watchlist.Watchlist005"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist006">
+		<classes>
+			<class name="watchlist.Watchlist006"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist007">
+		<classes>
+			<class name="watchlist.Watchlist007"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist014">
+		<classes>
+			<class name="watchlist.Watchlist014"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist015">
+		<classes>
+			<class name="watchlist.Watchlist015"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist018">
+		<classes>
+			<class name="watchlist.Watchlist018"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist019">
+		<classes>
+			<class name="watchlist.Watchlist019"></class>
+		</classes>
+	</test>
+
+	<test name="Watchlist022">
+		<classes>
+			<class name="watchlist.Watchlist022"></class>
+		</classes>
+	</test>
+
+
+<!-- Notifications Test Cases -->
+
+	<test name="Test F11">
+		<classes>
+			<class name="notifications.Notifications0011"></class>
+		</classes>
+	</test>
+
+
+	<test name="Test F2">
+		<classes>
+			<class name="notifications.Notifications0002"></class>
+		</classes>
+	</test>
+
+	<test name="Test F9">
+		<classes>
+			<class name="notifications.Notifications0009"></class>
+		</classes>
+	</test>
+
+	<test name="Test F10">
+		<classes>
+			<class name="notifications.Notifications0010"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F12">
+		<classes>
+			<class name="notifications.Notifications0012"></class>
+		</classes>
+	</test>
+	
+	<test name="Test F13">
+		<classes>
+			<class name="notifications.Notifications0013"></class>
+		</classes>
+	</test>
+	
+	<!-- Authoring Test cases -->
+	<test name="Authoring43">
+		<classes>
+			<class name="Authoring.Authoring43"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring41">
+		<classes>
+			<class name="Authoring.Authoring41"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring47">
+		<classes>
+			<class name="Authoring.Authoring47"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring44">
+		<classes>
+			<class name="Authoring.Authoring44"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring8">
+		<classes>
+			<class name="Authoring.Authoring8"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring9">
+		<classes>
+			<class name="Authoring.Authoring9"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring10">
+		<parameter name="username" value="LOGINUSERNAME1" />
+		<parameter name="password" value="LOGINPASSWORD1" />
+		<classes>
+			<class name="Authoring.Authoring10"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring11">
+		<parameter name="tusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="tpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring11"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring12">
+		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="lipassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring12"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring13">
+		<parameter name="fbusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="fbpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring13"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring52">
+		<parameter name="fbusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="fbpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring52"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring53">
+		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="lipassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring53"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring54">
+		<parameter name="tusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="tpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring54"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring49">
+		<classes>
+			<class name="Authoring.Authoring49"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring21">
+		<classes>
+			<class name="Authoring.Authoring21"></class>
+		</classes>	
+	</test>
+	
+	<test name="Authoring71">
+		<classes>
+			<class name="Authoring.Authoring71"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring72">
+		<classes>
+			<class name="Authoring.Authoring72"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring73">
+		<classes>
+			<class name="Authoring.Authoring73"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring74">
+		<classes>
+			<class name="Authoring.Authoring74"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="Authoring75">
+		<classes>
+			<class name="Authoring.Authoring75"></class>
+		</classes>
+	</test>
+	
+	<test name="Authoring76">
+		<classes>
+			<class name="Authoring.Authoring76"></class>
+		</classes>
+	</test>
+	
+	<!-- <test name="Share_On_Google_Plus">
+		<parameter name="gusername" value="romanreings2016csk" />
+		<parameter name="gpassword" value="India@2020" />
+		<classes>
+                <class name="Authoring.Authoring82"></class> 
+		</classes>
+	</test> -->
+</suite>
