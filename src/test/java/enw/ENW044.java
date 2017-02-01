@@ -48,7 +48,7 @@ public class ENW044 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			NavigatingToENW();
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(8);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
 					LOGIN.getProperty("USERPASSWORD044"));
@@ -137,7 +137,7 @@ public class ENW044 extends TestBase {
 	 private void NavigatingToENW() {
 		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
 			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);

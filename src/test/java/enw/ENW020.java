@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -23,9 +24,9 @@ import util.OnePObjectMap;
 public class ENW020 extends TestBase {
 
 	static int status = 1;
-	//String url = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
-	String ENWURL="https://dev-stable.1p.thomsonreuters.com/#/login?referrer=%252F%23%252Fprofile%3Fapp%3Dendnote&app=endnote&pageview=";
-	String NeonUrlProfile="https://dev-stable.1p.thomsonreuters.com/#/profile/";
+	// String url = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
+	String ENWURL = "https://dev-stable.1p.thomsonreuters.com/#/login?referrer=%252F%23%252Fprofile%3Fapp%3Dendnote&app=endnote&pageview=";
+	String NeonUrlProfile = "https://dev-stable.1p.thomsonreuters.com/#/profile/";
 
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -55,24 +56,23 @@ public class ENW020 extends TestBase {
 			// BrowserWaits.waitTime(6);
 			// NavigateToENW();
 			// } else {
-
 			BrowserWaits.waitTime(5);
 			loginToWOS("MARKETUSEREMAIL", "MARKETUSERPASSWORD");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WOS_HEADER_XPATH);
 			BrowserWaits.waitTime(6);
 			NavigateToENW();
-			BrowserWaits.waitTime(10);
-			String neon_Profile_URL = ob.getCurrentUrl();
-			if (neon_Profile_URL.contains(ENWURL)) {
-				logger.info("URL:" + ob.getCurrentUrl());
+			BrowserWaits.waitTime(5);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Sign in");
+			// String neon_Profile_URL = ob.getCurrentUrl();
+			WebElement web = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()));
+			String str = web.getText().toString();
+			if (str.equals("Sign in")) {
 				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
 						(LOGIN.getProperty("MARKETUSERPASSWORD")));
 				BrowserWaits.waitTime(3);
-				String ExpectedNeonUrl=ob.getCurrentUrl();
-				Assert.assertEquals(ExpectedNeonUrl,NeonUrlProfile );
-
-					test.log(LogStatus.PASS, "Neon Profile page is displayed and Navigating to the proper page.");
-
+				String ExpectedNeonUrl = ob.getCurrentUrl();
+				Assert.assertEquals(ExpectedNeonUrl, NeonUrlProfile);
+				test.log(LogStatus.PASS, "Neon Profile page is displayed and Navigating to the proper page.");
 			} else {
 				test.log(LogStatus.FAIL, "Neon Profile page is not displayed");
 				Assert.assertEquals(true, false);
@@ -103,6 +103,8 @@ public class ENW020 extends TestBase {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 				}
+				Assert.assertEquals(ob.getTitle(), "EndNote");
+				test.log(LogStatus.PASS, "ENW application home page is opened with single Sign On(SSO) Login.");
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 				BrowserWaits.waitTime(5);
 				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
