@@ -16,7 +16,7 @@
 			<class name="iam.IAM017"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Neon_registraiton_and_reset_password4" preserve-order="true">
 		<classes>
 			<class name="iam.IAM023"></class>
@@ -28,7 +28,7 @@
 			<class name="iam.IAM024"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Neon_registraiton_and_reset_password6" preserve-order="true">
 		<classes>
 			<class name="iam.IAM028"></class>
@@ -71,19 +71,22 @@
 		</classes>
 	</test>
 
-	<test name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_facebook_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM007"></class>
 		</classes>
 	</test>
 
-	<test name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_linkedin_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM008"></class>
 		</classes>
 	</test>
 
-	<test name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
+	<test
+		name="Not_able_to_login_using_steam_account_differnt_combination_of_username_and_password">
 		<classes>
 			<class name="iam.IAM009"></class>
 		</classes>
@@ -116,6 +119,12 @@
 	<test name="Neon_not_allow_existing_account_to_create_account">
 		<classes>
 			<class name="iam.IAM015"></class>
+		</classes>
+	</test>
+
+	<test name="IAM016">
+		<classes>
+			<class name="iam.IAM016"></class>
 		</classes>
 	</test>
 
@@ -166,13 +175,13 @@
 			<class name="iam.IAM029"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Validate_change_password_account_page">
 		<classes>
 			<class name="iam.IAM038"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Login_page_Clarivate_Analytics_link_clicking">
 		<classes>
 			<class name="iam.IAM039"></class>
