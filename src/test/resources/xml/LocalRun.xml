@@ -224,11 +224,11 @@
 		</classes>
 	</test>
 
-	<test name="IAM016">
+	<!-- <test name="IAM016">
 		<classes>
 			<class name="iam.IAM016"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>

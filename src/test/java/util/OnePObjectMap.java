@@ -936,7 +936,7 @@ public enum OnePObjectMap {
 	// #################### IAM ##########################
 	// NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_CSS("input[name='loginEmail']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS("div[class='forgot-password-header']"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--login wui-btn--primary']"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_SEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--send-email wui-btn--primary']"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS("button[class='pull-right wui-btn wui-btn--primary wui-btn--login'] span"),
 	NEON_RESEND_EMAIL_BUTTON_CSS("button[class='pull-right wui-btn wui-btn--primary wui-btn--login'] "),
 	GURILLA_RECEIVED_MAIL_SUBJECT_CSS("h3[class='email_subject']"),
@@ -950,7 +950,7 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_CSS("div[class='row ng-scope'] div"),
 	RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS("div[class='wui-input-with-label'] input"),
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
-	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='pull-left cancel-forgot-password__container'] a"),
+	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='login-button-container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
 	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),
