@@ -1062,6 +1062,7 @@ public enum OnePObjectMap {
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 
+	
 	;
 
 	private String locator;
