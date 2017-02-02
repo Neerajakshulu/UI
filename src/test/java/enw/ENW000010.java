@@ -124,7 +124,7 @@ public class ENW000010 extends TestBase {
 					.getText();
 			System.out.println(passwordText);
 			try {
-				Assert.assertEquals(passwordText, "Password is associated with your Facebook account.");
+				Assert.assertEquals(passwordText, "Password is associated with your Facebook");
 				test.log(LogStatus.PASS,
 						"Message 'Password is associated with your Facebook account.' is dispalyed correctly in account setting page");
 			}
@@ -132,7 +132,7 @@ public class ENW000010 extends TestBase {
 			catch (Throwable t) {
 
 				test.log(LogStatus.FAIL,
-						"Message 'Password is associated with your Facebook account.' is not displayed correctly in account setting page");// extent
+						"Message 'Password is associated with your Facebook' is not displayed correctly in account setting page");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
