@@ -400,14 +400,8 @@
 		</classes>
 	</test>
 
-	<test name="AutomatedMergeScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM56">
-			</class>
-		</classes>
-	</test>
-
-    <test name="RandomMergeScenarioENW001">
+	
+   <test name="RandomMergeScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM59">
 			</class>
@@ -424,6 +418,7 @@
 			<class name="enwiam.ENWIAM57"></class>
 			<class name="enwiam.ENWIAM091"></class>
 			<class name="enwiam.ENWIAM58"></class>
+			<class name="enwiam.ENWIAM56"></class>
 	   </classes>
 	</test>
 	
