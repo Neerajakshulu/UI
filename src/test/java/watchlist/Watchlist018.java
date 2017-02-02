@@ -81,8 +81,8 @@ public class Watchlist018 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
 			BrowserWaits.waitTime(8);
 			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(8);
+			logout();
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
 			openBrowser();
@@ -132,7 +132,7 @@ public class Watchlist018 extends TestBase {
 				ErrorUtil.addVerificationFailure(e);
 				test.log(LogStatus.FAIL, "Others unable to see the public watchlists of a user on user's profile page");
 			}
-
+			logout();
 			closeBrowser();
 
 		} catch (Throwable t) {
