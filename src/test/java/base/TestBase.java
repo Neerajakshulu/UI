@@ -1582,7 +1582,7 @@ public class TestBase {
 		}
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListCreateButton")), 80);
 		ob.findElement(By.xpath(OR.getProperty("newWatchListCreateButton"))).click();
-		waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 80);
+		waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'" + watchListName + "')]"), 80);
 	}
 
 	/**
