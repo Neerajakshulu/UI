@@ -75,20 +75,23 @@ public class Watchlist018 extends TestBase {
 			createWatchList("private", newWatchlistName, newWatchListDescription);
 			// Making the watch list from private to public
 			// ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox"))).click();
-
+			BrowserWaits.waitTime(6);
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
+			BrowserWaits.waitTime(6);
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
-			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-
 			BrowserWaits.waitTime(2);
-			closeBrowser();
-			// 2)Login as User1 and navigate to the user2 profile page
-			openBrowser();
-			maximizeWindow();
-			clearCookies();
-			// ob.get(host);
+			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
+			BrowserWaits.waitTime(6);
+			logout();
+//			closeBrowser();
+//			// 2)Login as User1 and navigate to the user2 profile page
+//			openBrowser();
+//			maximizeWindow();
+//			clearCookies();
+//			// ob.get(host);
 			ob.navigate().to(host);
+			BrowserWaits.waitTime(6);
 			// loginAsSpecifiedUser(user1, CONFIG.getProperty("defaultPassword"));
 			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			fn2 = LOGIN.getProperty("FN2");
@@ -109,9 +112,10 @@ public class Watchlist018 extends TestBase {
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1")), 60);
 			waitForAjax(ob);
 			// Navigating to the watch list tab
+			BrowserWaits.waitTime(8);
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tr_watchlists_tab_in_profile_page1"))));
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 60);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")), 60);
 			List<WebElement> watchlists = ob
 					.findElements(By.xpath(OR.getProperty("tr_watchlist_results_in_profile_page")));
 			int count = 0;
@@ -131,7 +135,7 @@ public class Watchlist018 extends TestBase {
 				ErrorUtil.addVerificationFailure(e);
 				test.log(LogStatus.FAIL, "Others unable to see the public watchlists of a user on user's profile page");
 			}
-
+			logout();
 			closeBrowser();
 
 		} catch (Throwable t) {
