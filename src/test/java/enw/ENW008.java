@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -133,6 +134,7 @@ public class ENW008 extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("ReferenceType",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH.toString())).getText());
@@ -203,7 +205,8 @@ public class ENW008 extends TestBase {
 				test.log(LogStatus.FAIL, "Author2Value is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
 			}
-
+			BrowserWaits.waitTime(3);
+			deleteRecord();
 			closeBrowser();
 			
 		} catch (Throwable t) {
@@ -221,6 +224,17 @@ public class ENW008 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
+	
+	public void deleteRecord() {
+		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
+	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
+	 ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();
+	// ob.findElement(By.xpath("//*[contains(text(),'OK')]")).click();
+	 
+	 Alert alert = ob.switchTo().alert();
+	 System.out.println("Alert Message "+alert.getText());
+	 alert.accept();
+}
 	
 	@AfterTest
 	public void reportTestResult() {
