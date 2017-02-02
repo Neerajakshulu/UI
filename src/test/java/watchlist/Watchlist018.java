@@ -79,9 +79,9 @@ public class Watchlist018 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
-			BrowserWaits.waitTime(8);
+			BrowserWaits.waitTime(9);
 			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
-			BrowserWaits.waitTime(8);
+			BrowserWaits.waitTime(9);
 			logout();
 			closeBrowser();
 			// 2)Login as User1 and navigate to the user2 profile page
