@@ -47,10 +47,10 @@
 		</classes>
 	</test>
 	
-	<test name="Test F13">
+	<!-- <test name="Test F13">
 		<classes>
 			<class name="notifications.Notifications0013"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 </suite>
