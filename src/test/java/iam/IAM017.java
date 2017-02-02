@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -79,16 +80,18 @@ public class IAM017 extends TestBase {
 			String actual_name = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString() + " img"))
 					.getAttribute("title");
-			String expected_name = "firstfirstfirstfirstfiirstfiirstfirstfirst lastlas ...";
-
-			if (expected_name.contains(actual_name)) {
+			logger.info("Actual Value : "+actual_name);
+			String expected_name = "firstfirstfirstfirstfiirstfiirstfirstfirst lastlas...";
+			Assert.assertEquals(expected_name, actual_name);
+			test.log(LogStatus.PASS, "Long name is getting ellipsed correctly");
+			/*if (expected_name.contains(actual_name)) {
 				test.log(LogStatus.PASS, "Long name is getting ellipsed correctly");
 			} else {
 				test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");// extent
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 						this.getClass().getSimpleName() + "_long_name_not_getting_ellipsed_correctly")));
-			}
+			}*/
 
 			logout();
 			closeBrowser();
@@ -96,7 +99,7 @@ public class IAM017 extends TestBase {
 
 		catch (Throwable t) {
 
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+			test.log(LogStatus.FAIL, "Long name is not getting ellipsed correctly");// extent
 																		// reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
