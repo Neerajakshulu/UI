@@ -997,9 +997,11 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_BUTTON_CSS);
 		BrowserWaits.waitTime(5);
-		Alert alert = ob.switchTo().alert();
-		alert.sendKeys(url);
-		alert.accept();
+		pf.getBrowserActionInstance(ob).getElement(
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_TEXT_BOX_CSS).sendKeys(url);
+		
+				pf.getBrowserActionInstance(ob).getElement(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_INSERT_CSS).click();;
 		BrowserWaits.waitTime(5);
 	}
 

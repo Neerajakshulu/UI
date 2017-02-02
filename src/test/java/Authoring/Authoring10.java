@@ -3,6 +3,7 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -127,17 +128,19 @@ public class Authoring10 extends TestBase {
 
 			pf.getAuthoringInstance(ob).enterArticleComments(htmlTags);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
-
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 60);
 			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Profanity Word Error
 			// Message--->"+profanityErrorMessage);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(unSupporteTagErrorMessage);
-
+			
 			// Assert.assertEquals(unSupporteTagErrorMessage, errorMessage);
 			if (!unSupporteTagErrorMessage.equalsIgnoreCase(errorMessage)) {
 				throw new Exception("UnSupported_HTML_tags_doesnot_allow_comments_validation");
 			}
+			
+			pf.getAuthoringInstance(ob).cancelComment();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

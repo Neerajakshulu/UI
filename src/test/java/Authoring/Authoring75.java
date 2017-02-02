@@ -108,7 +108,7 @@ public class Authoring75 extends TestBase {
 					.getText();
 			System.out.println(postTitleBeforeEditing);
 			ob.findElement(
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString()))
+					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_EDIT_CSS.toString()))
 					.click();
 
 			pf.getProfilePageInstance(ob).enterPostTitle(postString);
@@ -118,7 +118,7 @@ public class Authoring75 extends TestBase {
 
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
-			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			 pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			waitForAjax(ob);
 			String postTitleAfterEditing = ob
 					.findElement(By

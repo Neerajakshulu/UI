@@ -3,6 +3,7 @@ package Authoring;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -125,6 +126,7 @@ public class Authoring9 extends TestBase {
 			pf.getAuthoringInstance(ob).enterArticleComments(profanityWord);
 			pf.getAuthoringInstance(ob).clickAddCommentButton();
 
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 60);
 			String profanityErrorMessage = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Profanity Word Error
@@ -136,7 +138,8 @@ public class Authoring9 extends TestBase {
 			if (!profanityErrorMessage.equalsIgnoreCase(errorMessage)) {
 				throw new Exception("Profanity_Words_doesnot_allow_comments_validation");
 			}
-
+			pf.getAuthoringInstance(ob).cancelComment();
+			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			status = 2;

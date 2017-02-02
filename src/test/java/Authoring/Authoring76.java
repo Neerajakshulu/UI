@@ -102,7 +102,7 @@ public class Authoring76 extends TestBase {
 
 			}
 
-			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			/*pf.getProfilePageInstance(ob).clickOnPublishPostButton();
 			test.log(LogStatus.INFO, "Open Post Modal by clicking on Publish a post ");
 			waitForElementTobeVisible(ob,
 					By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_DRAFTS_LINK_XPATH.toString()),
@@ -151,7 +151,7 @@ public class Authoring76 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
-			}
+			}*/
 			postCountBefore = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Draft Post count:" + postCountBefore);
 
