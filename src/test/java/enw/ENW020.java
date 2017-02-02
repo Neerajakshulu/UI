@@ -67,9 +67,9 @@ public class ENW020 extends TestBase {
 			WebElement web = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()));
 			String str = web.getText().toString();
 			if (str.equals("Sign in")) {
-				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("MARKETUSEREMAIL"),
+				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),
 						(LOGIN.getProperty("MARKETUSERPASSWORD")));
-				BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(8);
 				String ExpectedNeonUrl = ob.getCurrentUrl();
 				Assert.assertEquals(ExpectedNeonUrl, NeonUrlProfile);
 				test.log(LogStatus.PASS, "Neon Profile page is displayed and Navigating to the proper page.");
