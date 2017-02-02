@@ -79,6 +79,7 @@ public class Watchlist018 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListPublicCheckBox1")), 60);
 			ob.findElement(By.xpath(OR.getProperty("newWatchListPublicCheckBox1"))).click();
+			BrowserWaits.waitTime(8);
 			ob.findElement(By.xpath(OR.getProperty("watchListUpdateButton"))).click();
 
 			BrowserWaits.waitTime(2);

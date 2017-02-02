@@ -98,6 +98,7 @@ public class ENW019 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		closeBrowser();
 	}
 
 	@AfterTest
