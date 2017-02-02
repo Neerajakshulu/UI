@@ -103,12 +103,12 @@ public class DRAIAM001 extends TestBase {
 			// Verifying that DRA Landing page, displays privacy statement and
 			// terms of use links
 			try {
-
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_PRIVACY_LINK_CSS);
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
-
+				
+				//pf.getBrowserWaitsInstance(ob)
+				//		.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_PRIVACY_LINK_CSS);
+				//BrowserWaits.waitTime(3);
+				//pf.getBrowserWaitsInstance(ob)
+				//		.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
 				WebElement tl_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
 				WebElement pl_element = pf.getBrowserActionInstance(ob)
@@ -127,8 +127,8 @@ public class DRAIAM001 extends TestBase {
 			// verifying that DRA Landing page, displays the message and email
 			// id
 			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_SUPPORT_MAILID_CSS);
+				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
+				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_SUPPORT_MAILID_CSS);
 				WebElement helpmsg = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
 				WebElement supportmailid = pf.getBrowserActionInstance(ob)
