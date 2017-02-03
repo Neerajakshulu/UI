@@ -93,8 +93,8 @@ public class Watchlist028 extends TestBase {
 
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("document_comment_textbox")), 90);
-			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox")))
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox_patent")), 90);
+			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox_patent")))
 					.sendKeys("Automation Script Comment: Watchlist028 test");
 			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS);

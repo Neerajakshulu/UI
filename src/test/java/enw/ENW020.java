@@ -34,7 +34,6 @@ public class ENW020 extends TestBase {
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW020() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
@@ -103,6 +102,21 @@ public class ENW020 extends TestBase {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 				}
+				String str = ob.getTitle().toString();
+				if(str.equals("EndNote")){
+					test.log(LogStatus.PASS, "ENW application home page is opened with single Sign On(SSO) Login.");
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+					BrowserWaits.waitTime(5);
+					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+					BrowserWaits.waitTime(5);
+					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+					BrowserWaits.waitTime(1);
+				}else{
+					
+					MarketUer(); 
+					
+				}
+				
 				Assert.assertEquals(ob.getTitle(), "EndNote");
 				test.log(LogStatus.PASS, "ENW application home page is opened with single Sign On(SSO) Login.");
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
@@ -120,6 +134,32 @@ public class ENW020 extends TestBase {
 
 	}
 
+	private void MarketUer() throws Exception {
+		
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MARKETUSEREMAIL"),
+					(LOGIN.getProperty("MARKETUSERPASSWORD")));
+			try {
+				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+					ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+				}
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
+				BrowserWaits.waitTime(5);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+				BrowserWaits.waitTime(5);
+				jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.IMAGE_USER_XPATH.toString())));
+				BrowserWaits.waitTime(5);
+				String ExpectedNeonUrl = ob.getCurrentUrl();
+				Assert.assertEquals(ExpectedNeonUrl, NeonUrlProfile);
+				test.log(LogStatus.PASS, "Neon Profile page is displayed and Navigating to the proper page.");
+				logout();
+				closeBrowser();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BrowserWaits.waitTime(10);
+		
+	}
 	private void EndNoteSeesion(WebDriver ob) {
 		String newWindow = switchToNewWindow(ob);
 		if (newWindow != null) {
