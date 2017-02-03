@@ -649,12 +649,11 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnPostPublishButton() throws Exception {
-		// BrowserWaits.getBrowserWaitsInstance(ob).waitTime(5);
+		BrowserWaits.waitTime(5);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString()))
-				.click();
-
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
+		BrowserWaits.waitTime(5);
 	}
 
 	/**
@@ -675,8 +674,9 @@ public class ProfilePage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public int getPostsCount() throws Exception {
-		BrowserWaits.waitTime(20);
+		BrowserWaits.waitTime(10);
 		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
 		int count = Integer.parseInt(ob.findElement(
@@ -732,9 +732,10 @@ public class ProfilePage extends TestBase {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public String getFirstPostTitle() throws InterruptedException {
+	public String getFirstPostTitle() throws Exception {
 		BrowserWaits.waitTime(8);
 		waitForAjax(ob);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS.toString()), 20);
 				
 		String postTitle = ob
@@ -837,10 +838,11 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickPublishAPost() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAGLIST_PUBLISH_A_POST_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Post");
+				.click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Publish a Post");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("We only support video links from YouTube and Vimeo at this time.");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 	}
 
@@ -854,8 +856,8 @@ public class ProfilePage extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS);
 		pf.getBrowserActionInstance(ob).click((OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PUBLISH_A_POST_DISCARD_CSS));
-		pf.getBrowserWaitsInstance(ob).waitUntilNotText("Publish A Post",
-				"Give an update, pose a question, share an interesting find.");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Interests and Skills", "Posts", "Comments", "Followers",
+				"Following");
 	}
 
 	/**
