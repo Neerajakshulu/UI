@@ -62,18 +62,18 @@ public class DRAIAM0014 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		/*
-		 * try { String statuCode =
-		 * deleteUserAccounts(LOGIN.getProperty("DRASteamuser14")); if
-		 * (!(statuCode.equalsIgnoreCase("200") ||
-		 * statuCode.equalsIgnoreCase("400"))) { // test.log(LogStatus.FAIL,
-		 * "Delete accounts api call failed"); throw new Exception(
-		 * "Delete API Call failed"); }
-		 * 
-		 * } catch (Throwable t) { test.log(LogStatus.FAIL,
-		 * "Delete accounts api call failed");// extent
-		 * ErrorUtil.addVerificationFailure(t); }
-		 */
+		/*try {
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUSER0015"));
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}*/
+		
+		 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -84,8 +84,8 @@ public class DRAIAM0014 extends TestBase {
 
 			// Activating the Steam account
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser14"),
-					LOGIN.getProperty("DRAsteampw14"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0015"),
+					LOGIN.getProperty("DRAUSERPWD15"));
 			pf.getDraPageInstance(ob).clickLoginDRA();
 
 			String firstAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
@@ -104,8 +104,8 @@ public class DRAIAM0014 extends TestBase {
 			ob.navigate().to(host);
 			try {
 
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser14"),
-						LOGIN.getProperty("DRAfbpw14"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUSER0015"),
+						LOGIN.getProperty("DRAUSERPWD15"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
@@ -141,8 +141,8 @@ public class DRAIAM0014 extends TestBase {
 
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRASteamuser14"),
-						LOGIN.getProperty("DRAsteampw14"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0015"),
+						LOGIN.getProperty("DRAUSERPWD15"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
@@ -235,9 +235,9 @@ public class DRAIAM0014 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRASteamuser14")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAfbuser14")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
@@ -255,7 +255,7 @@ public class DRAIAM0014 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAfbuser14")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 

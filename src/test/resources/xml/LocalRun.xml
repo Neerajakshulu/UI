@@ -609,18 +609,13 @@
 			<class name="draiam.DRAIAM004"></class>
 		</classes>
 	</test>
-
-	<test name="DRAIAM0014">
+   <test name="DRAIAMAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
-			<class name="draiam.DRAIAM0014"></class>
-		</classes>
-	</test>
-	<test name="DRAIAM0015">
-		<classes>
+		    <class name="draiam.DRAIAM0014"></class>
 			<class name="draiam.DRAIAM0015"></class>
-		</classes>
+	   </classes>
 	</test>
-
+	
 	<test name="DRAIAM052">
 		<classes>
 			<class name="draiam.DRAIAM052"></class>
