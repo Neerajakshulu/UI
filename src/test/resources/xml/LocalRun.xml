@@ -168,21 +168,21 @@
 			<class name="enw.ENW037"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENW041">
 		<classes>
 			<class name="enw.ENW041"></class>
 		</classes>
 
 	</test>
-	
-	 <test name="ENW042">
+
+	<test name="ENW042">
 		<classes>
 			<class name="enw.ENW042"></class>
 		</classes>
-		
+
 	</test>
-	
+
 	<test name="ENW043">
 		<classes>
 			<class name="enw.ENW043"></class>
@@ -193,22 +193,22 @@
 		<classes>
 			<class name="enw.ENW044"></class>
 		</classes>
-		
+
 	</test>
 	<test name="ENWIAM00016">
 		<classes>
 			<class name="enwiam.ENWIAM00016"></class>
 		</classes>
 	</test>
-	
-	
-	
+
+
+
 	<test name="ENWIAM90">
 		<classes>
 			<class name="enwiam.ENWIAM90"></class>
 		</classes>
 	</test>
-	
+
 	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
@@ -224,11 +224,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="IAM016">
-		<classes>
-			<class name="iam.IAM016"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="IAM016"> <classes> <class name="iam.IAM016"></class> </classes> 
+		</test> -->
 
 	<test name="Deep_linking_account_page_Using_LI_and_facebook">
 		<classes>
@@ -254,11 +251,8 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Validate_change_password_account_page">
-		<classes>
-			<class name="iam.IAM038"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="Validate_change_password_account_page"> <classes> <class 
+		name="iam.IAM038"></class> </classes> </test> -->
 
 	<!-- ENW IAM -->
 
@@ -305,13 +299,13 @@
 			<class name="enwiam.ENWIAM001"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM61">
 		<classes>
 			<class name="enwiam.ENWIAM61"></class>
 		</classes>
 	</test>
-	
+
 	<test name="ENWIAM62">
 		<classes>
 			<class name="enwiam.ENWIAM62"></class>
@@ -379,7 +373,7 @@
 	</test>
 
 
-   <test name="ForwardMergeScenario001">
+	<test name="ForwardMergeScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM53">
 			</class>
@@ -400,8 +394,8 @@
 		</classes>
 	</test>
 
-	
-   <test name="RandomMergeScenarioENW001">
+
+	<test name="RandomMergeScenarioENW001">
 		<classes>
 			<class name="enwiam.ENWIAM59">
 			</class>
@@ -410,7 +404,7 @@
 
 	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
-		    <class name="enwiam.ENWIAM00018"></class>
+			<class name="enwiam.ENWIAM00018"></class>
 			<class name="enwiam.ENWIAM080"></class>
 			<class name="enwiam.ENWIAM081"></class>
 			<class name="enwiam.ENWIAM0001"></class>
@@ -419,9 +413,9 @@
 			<class name="enwiam.ENWIAM091"></class>
 			<class name="enwiam.ENWIAM58"></class>
 			<class name="enwiam.ENWIAM56"></class>
-	   </classes>
+		</classes>
 	</test>
-	
+
 	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
@@ -609,13 +603,13 @@
 			<class name="draiam.DRAIAM004"></class>
 		</classes>
 	</test>
-   <test name="DRAIAMAutomatedMerge1" preserve-order="true" parallel="false">
+	<test name="DRAIAMAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
-		    <class name="draiam.DRAIAM0014"></class>
+			<class name="draiam.DRAIAM0014"></class>
 			<class name="draiam.DRAIAM0015"></class>
-	   </classes>
+		</classes>
 	</test>
-	
+
 	<test name="DRAIAM052">
 		<classes>
 			<class name="draiam.DRAIAM052"></class>
@@ -633,8 +627,8 @@
 			<class name="draiam.DRAIAM100"></class>
 		</classes>
 	</test>
-	
-	<!-- IPAIAM Test cases START-->
+
+	<!-- IPAIAM Test cases START -->
 	<test name="IPA0055">
 		<classes>
 			<class name="ipaiam.IPAIAM0055"></class>
@@ -645,10 +639,11 @@
 			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
-	
-	<test name="IPA0002">
+
+	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM0002"></class>
+
 		</classes>
 	</test>
 
@@ -657,13 +652,13 @@
 			<class name="ipaiam.IPAIAM0003"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IPAIAM100">
 		<classes>
 			<class name="ipaiam.IPAIAM100"></class>
 		</classes>
 	</test>
-	
+
 	<test name="IPA052">
 		<classes>
 			<class name="ipaiam.IPAIAM052"></class>
@@ -680,6 +675,6 @@
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
 	</test>
-	<!-- IPAIAM Test cases END-->
+	<!-- IPAIAM Test cases END -->
 </suite>
 
