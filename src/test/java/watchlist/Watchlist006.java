@@ -74,7 +74,7 @@ public class Watchlist006 extends TestBase {
 			
 			ob.navigate().to(host);
 
-			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist006UN"), LOGIN.getProperty("Watchlist006PWD"));
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
