@@ -62,7 +62,7 @@ public class DRAIAM0014 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		/*try {
+		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUSER0015"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -71,7 +71,7 @@ public class DRAIAM0014 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
-		}*/
+		}
 		
 		 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
