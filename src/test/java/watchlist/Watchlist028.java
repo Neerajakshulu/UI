@@ -83,7 +83,7 @@ public class Watchlist028 extends TestBase {
 			// 1)Login as user1 and comment on some patent
 			loginAsSpecifiedUser(LOGIN.getProperty("USERNAME8"), LOGIN.getProperty("PASSWORD8"));
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 90);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("patent");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("OPTIMIZED AD HOC NETWORKING");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
@@ -114,8 +114,8 @@ public class Watchlist028 extends TestBase {
 			// Navigating to the home page
 			pf.getNewsfeedPageInstance(ob).clickNewsfeedLink();
 			//Add patent to watchlist
-			ob.navigate().refresh();
-			BrowserWaits.waitTime(10);
+			//ob.navigate().refresh();
+			BrowserWaits.waitTime(8);
 			pf.getNewsfeedPageInstance(ob).addPatentToWatchlist(newWatchlistName, document_title);
 
 			logger.info("document title in watchlist page-->" + document_title);
