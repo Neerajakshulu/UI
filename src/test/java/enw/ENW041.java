@@ -47,7 +47,7 @@ public class ENW041 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to("http://tsenwqa01.int.westgroup.com:4444/enwservices/supportutility/");
-			loginToSupport_utility("SUPPORTUTILITYACCOUNT", "SUPPORTUTILITYPWD");
+			loginToSupport_utility("SUPPORTUTILITYACCOUNT", "SUPPORTUTILITYACCOUNT_PASSWD");
 			String expected = "Login successful";
 			String actualText = ob.findElement(By.cssSelector("h3")).getText();
 			try {
@@ -86,54 +86,34 @@ public class ENW041 extends TestBase {
 	}
 
 	private void LoginToENW() throws Exception {
-		openBrowser();
-		maximizeWindow();
-		clearCookies();
 		String header_Expected = "Thomson Reuters Project Neon";
 		ob.get("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
-		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("SUTILITYCUSTOMER"),(LOGIN.getProperty("MARKETUSERPASSWORD")));
+		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("SUTILITYCUSTOMER"),
+				(LOGIN.getProperty("MARKETUSERPASSWORD")));
 		BrowserWaits.waitTime(8);
-		//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Downloads", "Options");
+		// pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters",
+		// "EndNote", "Downloads", "Options");
 		String actual_result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HEADER_XPATH).getText();
 		logger.info("Header Text displayed as:" + actual_result);
-			logger.info("Actual result displayed as :" + actual_result
+		logger.info("Actual result displayed as :" + actual_result
 				+ " text without the hot link and not allow user to Navigate to Neon");
 		try {
 			Assert.assertEquals(header_Expected, actual_result);
-			test.log(LogStatus.PASS, "community enabled version of ENDNOTE logo has been displayed for Market users");
+			test.log(LogStatus.PASS,
+					"community enabled version of ENDNOTE logo has been displayed for the Market users");
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "community enabled version of ENDNOTE logo is not displayed for Market users");// extent
+			test.log(LogStatus.FAIL, "community enabled version of ENDNOTE logo is not displayed for the Market users");// extent
 			ErrorUtil.addVerificationFailure(t);// testng reports
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
 					this.getClass().getSimpleName() + "Header Text is displayed wrongly and its Hyperlinked")));// screenshot
 		}
-		
+		BrowserWaits.waitTime(3);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		closeBrowser();
 	}
-
-	private void ENWSTeamLogin1(String userName, String password) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
-		
-		pf.getBrowserActionInstance(ob).clear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS,userName);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS,password);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		try {
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-					.getText();
-			if (text.equalsIgnoreCase("Continue")) {
-				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		BrowserWaits.waitTime(2);
-	}
-		
-
 
 	private void Test1(String CnameForSearch) throws Exception {
 		String str = ob.findElement(By.xpath("//form[@name='removeForm']//h2")).getText();
@@ -143,8 +123,8 @@ public class ENW041 extends TestBase {
 				logger.info("Support Utility Home page as displayed as:" + str);
 				System.out.println("Support Utility" + str);
 				test.log(LogStatus.PASS, CnameForSearch + "  is a member of the Market user Customer groups:");
-				jsClick(ob, ob.findElement(By.xpath("//a[contains(text(),'Logout mohana.yalamarthi@thomsonreuters.com')]")));
-				closeBrowser();
+				jsClick(ob, ob
+						.findElement(By.xpath("//a[contains(text(),'Logout mohana.yalamarthi@thomsonreuters.com')]")));
 			} else {
 				test.log(LogStatus.FAIL, CnameForSearch + "  is Not a member of the Market user Customer groups:");
 			}

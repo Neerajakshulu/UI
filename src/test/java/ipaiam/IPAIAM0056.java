@@ -42,7 +42,6 @@ public class IPAIAM0056 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
 	}
 
-	
 	/**
 	 * Method for login into Neon application using TR ID
 	 * 
@@ -150,10 +149,7 @@ public class IPAIAM0056 extends TestBase {
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-					ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString()))
-							.sendKeys(LOGIN.getProperty("IPAPWD0056"));
-					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+
 					pf.getBrowserWaitsInstance(ob)
 							.waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
 					pf.getDraPageInstance(ob).clickOnAccountLinkDRA();

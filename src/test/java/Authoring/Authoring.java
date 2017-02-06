@@ -96,14 +96,28 @@ public class Authoring extends TestBase {
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
 		BrowserWaits.waitTime(5);
+		ob
+		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
 		WebElement commentArea = ob
 				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
 		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		commentArea.click();
 		commentArea.clear();
-		commentArea.sendKeys(addComments);
+		
+		for(int i=0;i<addComments.length();i++){
+			commentArea.sendKeys(addComments.charAt(i)+"");
+			Thread.sleep(500);
+			}
+		
+		
 		Thread.sleep(2000);// after entering the comments wait for submit button
 							// to get enabled or disabled
+	}
+	
+	public void cancelComment(){
+		waitForElementTobeClickable(ob,
+				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString()), 60);
+		ob
+		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString())).click();	
 	}
 
 	public void clickAddCommentButton() throws InterruptedException {

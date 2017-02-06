@@ -165,17 +165,7 @@ public class ENWIAM62 extends TestBase {
 							LOGIN.getProperty("sru_steampw15"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 					pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
-					try {
-						pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
-						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
-						pf.getBrowserWaitsInstance(ob)
-								.waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-					} catch (Exception e) {
-						pf.getBrowserWaitsInstance(ob)
-								.waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-						pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-					}
+
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 					pf.getENWReferencePageInstance(ob).clickAccount();
 					pf.getBrowserWaitsInstance(ob)
@@ -311,8 +301,8 @@ public class ENWIAM62 extends TestBase {
 	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("sru_fbusername15")));
+			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
+					LOGIN.getProperty("sru_fbusername15")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam15")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));

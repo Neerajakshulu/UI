@@ -36,7 +36,7 @@ public class ENW037 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
 	@Test
-	public void testcaseENW008() throws Exception {
+	public void testcaseENW037() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -51,6 +51,8 @@ public class ENW037 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			NavigatingToENW();
+			BrowserWaits.waitTime(3);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
 					LOGIN.getProperty("USERPASSWORD037"));
@@ -67,51 +69,43 @@ public class ENW037 extends TestBase {
 			neonValues.put("expectedAssignee",
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS.toString())).getText());
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(8);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-				}
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+						ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+					}
+						pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				
+				BrowserWaits.waitTime(4);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
+				BrowserWaits.waitTime(4);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(4);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-//			try {
-//			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHOWALLFILEDS_LINK_XPATH);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("AbstractValue",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_ABSTRACT_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("AssigneeValue",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_ASSIGNEE_VALUE_CSS.toString())).getText());
 			if (!(endNoteDetails.get("AbstractValue").equals(neonValues.get("expectedAbstract")))) {
-				test.log(LogStatus.FAIL, "Abstract content is not matching between Neon and endnote");
+				test.log(LogStatus.FAIL, "Record is not exported and the Abstract content is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
+			}else{
+				test.log(LogStatus.PASS, "Record is exported and the Abstract content is matching between Neon and endnote");
 			}
 			if (!(endNoteDetails.get("AssigneeValue").equals(neonValues.get("expectedAssignee")))) {
-						test.log(LogStatus.FAIL, "Assignee value is not matching between Neon and endnote");
+						test.log(LogStatus.FAIL, "Record is not exported , The Assignee value is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
+					}else{
+						test.log(LogStatus.PASS, "After exporting the record, The Assignee value is matching between Neon and endnote");
 					}
-		 //deleteRecord();
-			closeBrowser();
+			BrowserWaits.waitTime(3);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+		closeBrowser();
 	} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 																		// reports
@@ -124,10 +118,42 @@ public class ENW037 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-
+	
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	 public void deleteRecord() {
+	 private void NavigatingToENW() {
+		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		 try {
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
+			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+			BrowserWaits.waitTime(5);
+			if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
+			{
+				ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
+			}			
+			BrowserWaits.waitTime(2);
+			ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
+			HandleAlert();
+			BrowserWaits.waitTime(4);
+			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+	private void HandleAlert() {
+		Alert alert=ob.switchTo().alert();		
+		String alertMessage=ob.switchTo().alert().getText();		
+        System.out.println(alertMessage);			
+        alert.accept();	
+	}
+	public void deleteRecord() {
 		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
 	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
 	 ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();

@@ -75,8 +75,8 @@ public class IPAIAM0001 extends TestBase {
 			// logo
 			try {
 
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_BRANDING_NAME_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
+				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_BRANDING_NAME_CSS);
+				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
 				WebElement brand_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_BRANDING_NAME_CSS);
 				WebElement ipa_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_LOGO_CSS);
@@ -100,11 +100,11 @@ public class IPAIAM0001 extends TestBase {
 			// terms of use links
 			try {
 
-				pf.getBrowserWaitsInstance(ob)
+				/*pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.IPA_LANDINGPAGE_TERMS_LINK_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.IPA_LANDINGPAGE_PRIVACY_LINK_CSS);
-
+*/
 				WebElement tl_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_LANDINGPAGE_TERMS_LINK_CSS);
 				WebElement pl_element = pf.getBrowserActionInstance(ob)
@@ -123,10 +123,10 @@ public class IPAIAM0001 extends TestBase {
 			// verifying that IPA Landing page, displays the message and email
 			// id
 			try {
-				pf.getBrowserWaitsInstance(ob)
+				/*pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.IPA_LANDINGPAGE_HELP_MESSAGE_CSS);
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.IPA_LANDINGPAGE_SUPPORT_MAILID_CSS);
+						.waitUntilElementIsDisplayed(OnePObjectMap.IPA_LANDINGPAGE_SUPPORT_MAILID_CSS);*/
 				WebElement helpmsg = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_LANDINGPAGE_HELP_MESSAGE_CSS);
 				WebElement supportmailid = pf.getBrowserActionInstance(ob)

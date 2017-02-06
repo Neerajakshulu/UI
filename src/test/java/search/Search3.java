@@ -20,6 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search3 extends TestBase {
 
@@ -63,25 +64,22 @@ public class Search3 extends TestBase {
 			maximizeWindow();
 
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			//
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()),30);
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()), 30);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS.toString()), 30);
 			Thread.sleep(2000);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS.toString()));
 			logger.info("Links Size : " + searchResults.size());
 			ArrayList<String> urls = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -97,7 +95,7 @@ public class Search3 extends TestBase {
 
 				ob.navigate().to(urls.get(i));
 				Thread.sleep(5000);
-				WebElement myE = ob.findElement(By.xpath(OR.getProperty("details_link")));
+				WebElement myE = ob.findElement((By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS.toString())));
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 

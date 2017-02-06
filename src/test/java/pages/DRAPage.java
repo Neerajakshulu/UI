@@ -174,7 +174,8 @@ public class DRAPage extends TestBase {
 	 */
 	public void validateInvalidCredentialsErrorMsg(ExtentTest test) throws Exception {
 		try {
-			if (!((pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS).isDisplayed()))) {
+			if (!((pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS)
+					.isDisplayed()))) {
 				test.log(LogStatus.FAIL, "Unexpected login happened");// extent
 																		// //
 																		// report
@@ -284,30 +285,28 @@ public class DRAPage extends TestBase {
 				.getText();
 		return ProfileName;
 	}
-	
-	public void clickOnProfileImageDRA() throws Exception{
+
+	public void clickOnProfileImageDRA() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
+
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
-		
-		
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(steamAccount);
 
 		for (int i = 0; i <= 9; i++) {
-			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString()))
-			.sendKeys(steamAccount); 
-			//ob.findElement(By.name("loginPassword")).sendKeys("asdfgh");
+
+			BrowserWaits.waitTime(3);
 			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 					.sendKeys("asdfgh");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			ob.navigate().refresh();
+			
 		}
 
 	}
 
-	
 	public void loginTofbSuspended() throws Exception {
 
 		pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00015UserSuspended"),
@@ -322,20 +321,19 @@ public class DRAPage extends TestBase {
 		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item ng-scope']"));
 
 		for (WebElement element : list) {
-						
+
 			String type1 = null;
 			List<WebElement> elementList1 = element
-					.findElements(By.cssSelector("span[class='wui-subtitle ng-binding']"));	
+					.findElements(By.cssSelector("span[class='wui-subtitle ng-binding']"));
 			for (WebElement we1 : elementList1) {
-			
+
 				if (we1.isDisplayed()) {
 					type1 = we1.getText();
 					break;
 				}
-			
+
 			}
-			
-			
+
 			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Thomson Reuters | Project Neon"))
 					|| accountType.equalsIgnoreCase(type1.trim())) {
 				String emailid = null;
@@ -348,7 +346,7 @@ public class DRAPage extends TestBase {
 		}
 		return result;
 	}
-	
+
 	public void SearchDRAprofileName(String title) throws Exception {
 
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 30);
@@ -364,7 +362,7 @@ public class DRAPage extends TestBase {
 		try {
 			String Result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DR_SEARCH_RESULT_CSS).getText();
 			String ResultExpected = "Your search for kavita manaz found no matches.";
-					if (ResultExpected.contains(Result))  {
+			if (ResultExpected.contains(Result)) {
 				test.log(LogStatus.PASS, " User's account is non onboarded and non discoverable ");
 			} else {
 				test.log(LogStatus.FAIL, " User's account  non discoverable ");
@@ -375,76 +373,74 @@ public class DRAPage extends TestBase {
 			closeBrowser();
 		}
 	}
-	
+
 	public void clickDRALink() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
 	}
-	
+
 	public void clickDRALinkInSteam() throws Exception {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_ONEP_APPS_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_APP_SWITCHER_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 	}
-	
-	public void validateNavigationDRAApp(ExtentTest test) throws Exception{
-		WebElement element=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-		if(element.isDisplayed())
-		{
+
+	public void validateNavigationDRAApp(ExtentTest test) throws Exception {
+		WebElement element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_SEARCH_BOX_CSS);
+		if (element.isDisplayed()) {
 			test.log(LogStatus.PASS, "user is navigated seemlessly to DRA when logged in with steam credentials");
-		}
-		else{
+		} else {
 			test.log(LogStatus.FAIL, "user is not navigated seemlessly to DRA");
 		}
-		
+
 	}
-	
-	public void clickOnForgotPwLinkOnStepUpAuthModal() throws Exception{
+
+	public void clickOnForgotPwLinkOnStepUpAuthModal() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_LINK_CSS);
 	}
-	
-	public void validateForgotPwOnStepup(ExtentTest test) throws Exception{
+
+	public void validateForgotPwOnStepup(ExtentTest test) throws Exception {
 		clickOnForgotPwLinkOnStepUpAuthModal();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
-		WebElement forgotpage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
-		if(forgotpage.isDisplayed())
-		{
+		WebElement forgotpage = pf.getBrowserActionInstance(ob)
+				.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS);
+		if (forgotpage.isDisplayed()) {
 			test.log(LogStatus.PASS,
 					"step up authentication modal includes a link to initiate the EndNote supported forgot password flow.");
 		} else {
 			test.log(LogStatus.FAIL,
 					"step up authentication modal doesn't include a link to initiate the EndNote supported forgot password flow.");
 		}
-		
+
 	}
-	
-	public void validateThirdTextOnStepUp(ExtentTest test) throws Exception{
-		try{
-		String stepup_expectedtext3 = "Target Druggability shares sign in credentials with other products you may use:";
-		String stepup_expectedtext4 = "Please sign in using the email address and password you use to access any of the above mentioned products.";
-		String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
-		if (stepup_actualtext3.contains(stepup_expectedtext3)
-				&& stepup_actualtext3.contains("Key Pathway Advisor") && stepup_actualtext3.contains("EndNote")
-				&& stepup_actualtext3.contains("InCites") && stepup_actualtext3.contains("Thomson Innovation")
-				&& stepup_actualtext3.contains("Web of Science")
-				&& stepup_actualtext3.contains(stepup_expectedtext4)) {
-			test.log(LogStatus.PASS,
-					"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
-		} else {
-			test.log(LogStatus.FAIL,
-					"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+
+	public void validateThirdTextOnStepUp(ExtentTest test) throws Exception {
+		try {
+			String stepup_expectedtext3 = "Target Druggability shares sign in credentials with other products you may use:";
+			String stepup_expectedtext4 = "Please sign in using the email address and password you use to access any of the above mentioned products.";
+			String stepup_actualtext3 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_STEPUPAUTHMODAL_TEXT3_XPATH).getText();
+			if (stepup_actualtext3.contains(stepup_expectedtext3) && stepup_actualtext3.contains("Key Pathway Advisor")
+					&& stepup_actualtext3.contains("EndNote") && stepup_actualtext3.contains("InCites")
+					&& stepup_actualtext3.contains("Thomson Innovation")
+					&& stepup_actualtext3.contains("Web of Science")
+					&& stepup_actualtext3.contains(stepup_expectedtext4)) {
+				test.log(LogStatus.PASS,
+						"user is able to see correct Step up Auth modal text3 : Target Druggability shares sign in .....");
+			} else {
+				test.log(LogStatus.FAIL,
+						"user is able to see incorrect Step up Auth modal text3 : Target Druggability shares sign in .....");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
 		}
-	} catch (Throwable t) {
-		test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
 	}
-	}
-	
-	public void validateSecondTextOnStepUP(ExtentTest test) throws Exception{
+
+	public void validateSecondTextOnStepUP(ExtentTest test) throws Exception {
 
 		try {
 			String stepup_expectedtext2 = "To provide the highest level of security, we require you to sign in with your Target Druggability credentials.";
@@ -460,7 +456,7 @@ public class DRAPage extends TestBase {
 					"user is not able to see correct Step up Auth modal text2 : To provide the highest level.....");
 		}
 	}
-	
+
 	public void validateFirstTextOnStepUp(ExtentTest test) throws Exception {
 		try {
 			String stepup_expectedtext1 = "Thank you for your interest. Target Druggability is a subscription product. Don't yet have a subscription?";
@@ -479,8 +475,8 @@ public class DRAPage extends TestBase {
 					"user is not able to see Step up Auth modal text1 : Thank you for your interest.....");
 		}
 	}
-	
-	public void validateStepUPModalTitle(ExtentTest test){
+
+	public void validateStepUPModalTitle(ExtentTest test) {
 
 		try {
 			String stepup_expectedtitle = "Sign in to Target Druggability";
@@ -495,12 +491,13 @@ public class DRAPage extends TestBase {
 		}
 
 	}
-	
-	public void clickOnLearnMoreLink() throws Exception{
+
+	public void clickOnLearnMoreLink() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
-		
+
 	}
+
 	public void clickDRAStepUpAuthLoginNotEntitledUser(ExtentTest test, String DRAUserName) throws Exception {
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
@@ -529,36 +526,34 @@ public class DRAPage extends TestBase {
 		}
 	}
 
-
-	
-	public void validateProductOverviewPage(ExtentTest test){
+	public void validateProductOverviewPage(ExtentTest test) {
 		try {
 			clickOnLearnMoreLink();
 			BrowserWaits.waitTime(5);
-			
-			Set<String> myset=ob.getWindowHandles();
-			Iterator<String> myIT=myset.iterator();
-			ArrayList<String> al=new ArrayList<String>();
-			for(int i=0; i< myset.size() ; i++){
+
+			Set<String> myset = ob.getWindowHandles();
+			Iterator<String> myIT = myset.iterator();
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < myset.size(); i++) {
 				al.add(myIT.next());
 			}
 			ob.switchTo().window(al.get(1));
 			String actual_URL = ob.getCurrentUrl();
 			String expected_URL = "http://ip-science.interest.thomsonreuters.com/TargetDruggabilityEAP";
 			Assert.assertTrue(actual_URL.contains(expected_URL));
-			test.log(LogStatus.PASS," user is taken to the target application product overview page in the seperate browser when User clicks on Learn more");
+			test.log(LogStatus.PASS,
+					" user is taken to the target application product overview page in the seperate browser when User clicks on Learn more");
 			BrowserWaits.waitTime(2);
 			ob.close();
 			ob.switchTo().window(al.get(0));
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL," user is not taken to the target application product overview page");
+			test.log(LogStatus.FAIL, " user is not taken to the target application product overview page");
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 		}
-		
+
 	}
-	
 
 }

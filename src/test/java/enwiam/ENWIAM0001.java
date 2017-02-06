@@ -56,7 +56,7 @@ public class ENWIAM0001 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName22"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"));
 
 		} catch (Throwable t) {
@@ -96,8 +96,8 @@ public class ENWIAM0001 extends TestBase {
 		ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 		String accountType = "Facebook";
 
-		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("fbUserName22"), LOGIN.getProperty("fbPassword22"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("SteamPassword22"));
+		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserFBENWIAM80"), LOGIN.getProperty("PWDUserFBENWIAM80"));
+		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 
 		try {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
@@ -147,9 +147,9 @@ public class ENWIAM0001 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("SteamUserName22")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbUserName22")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);

@@ -61,7 +61,7 @@ public class ENWIAM58 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername12"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -85,8 +85,8 @@ public class ENWIAM58 extends TestBase {
 			// Making the social account Neon Active
 
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername12"),
-					LOGIN.getProperty("sru_fbpwd12"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
@@ -111,8 +111,8 @@ public class ENWIAM58 extends TestBase {
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				ob.navigate().refresh();
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam12"),
-						LOGIN.getProperty("sru_steampw12"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.ALREADY_HAVE_AN_ACCOUNT_NOTNOW_CSS);
@@ -163,7 +163,7 @@ public class ENWIAM58 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 				ob.navigate().refresh();
 				pf.getLinkingModalsInstance(ob).clickOnSignInWithFB();
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw12"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.INFO, "Trying to link two Neon active accounts ");
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.CONTACT_CUSTOMER_SUPPORT_TITLE_CSS);
@@ -209,7 +209,7 @@ public class ENWIAM58 extends TestBase {
 	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam12")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
@@ -224,7 +224,7 @@ public class ENWIAM58 extends TestBase {
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername12")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
 

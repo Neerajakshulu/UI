@@ -77,7 +77,7 @@ public class Watchlist007 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINUSERNAME1"), LOGIN.getProperty("LOGINPASSWORD1"));
+			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist007_User"), LOGIN.getProperty("Watchlist007_PWD"));
 
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
@@ -92,14 +92,14 @@ public class Watchlist007 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(8);
 			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
+		//	waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image1")), 30);
 			BrowserWaits.waitTime(3);
 			// Watching the patent to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image1")));
@@ -142,10 +142,10 @@ public class Watchlist007 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + patentName + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(10);
 			ob.findElement(By.xpath(OR.getProperty("searchPatents"))).click();
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
+			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links1")), 30);
 
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links1"))).click();

@@ -811,17 +811,20 @@ public class PostRecordViewPage extends TestBase {
 	 */
 	public void addExternalLinkComments(String url) throws Exception {
 		BrowserWaits.waitTime(15);
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()),
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString()),
 				40);
-		WebElement commentArea = ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
-		commentArea.click();
+		ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
+		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())));
-		waitForAlertToBePresent(ob, 40);
-		Alert alert = ob.switchTo().alert();
-		alert.sendKeys(url);
-		alert.accept();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_COMMENTS_INSERT_LINK_CSS.toString())).click();
+		scrollingToElementofAPage();
+		pf.getBrowserActionInstance(ob).getElement(
+				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_TEXT_BOX_CSS).sendKeys(url);
+		
+		
+				pf.getBrowserActionInstance(ob).getElement(
+						OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_INSERT_LINK_URL_INSERT_CSS).click();
 		BrowserWaits.waitTime(5);
 	}
 

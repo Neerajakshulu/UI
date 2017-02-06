@@ -580,6 +580,19 @@ public class IAM016 extends TestBase {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
+			extent = ExtentManager.getReporter(filePath);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
+			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+			logger.info(rowData.getTestcaseId());
+			for (int i = 0; i < tests.length; i++) {
+				logger.info(tests_dec[i]);
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
+				test.log(LogStatus.SKIP,
+						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+				extent.endTest(test);
+			}
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports

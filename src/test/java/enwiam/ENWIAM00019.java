@@ -74,53 +74,59 @@ public class ENWIAM00019 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00019User"),
 					LOGIN.getProperty("ENWIAM00019UserPWD"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			test.log(LogStatus.PASS, "user has logged in with steam account");
+			test.log(LogStatus.PASS, "user has logged in to Neon with steam account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			test.log(LogStatus.PASS, "user has logged in with steam account");
+			test.log(LogStatus.PASS, "user has logged in to ENDNote with steam account");
 			BrowserWaits.waitTime(3);
 			try {
 
 				try {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				try {
+					BrowserWaits.waitTime(3);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				} catch (Exception e) {
-					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
-					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					e.printStackTrace();
 				}
 				try {
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
-				Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
-				test.log(LogStatus.PASS, "user is able navigate to EndNote");
-				logoutEnw();
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
+					Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);
+					test.log(LogStatus.PASS, "user is able navigate to EndNote");
+					logoutEnw();
 
-				BrowserWaits.waitTime(5);
-				String url = "https://dev-stable.1p.thomsonreuters.com";
-				String actualurl = ob.getCurrentUrl();
-				try {
-					if (actualurl.contains(url))
-						test.log(LogStatus.PASS, " when  user signs out of ENW, system has referrer URL = endnote");
-					else {
+					BrowserWaits.waitTime(5);
+					String url = "https://dev-stable.1p.thomsonreuters.com";
+					String actualurl = ob.getCurrentUrl();
+					try {
+						if (actualurl.contains(url))
+							test.log(LogStatus.PASS, " when  user signs out of ENW, system has referrer URL = endnote");
+						else {
+							test.log(LogStatus.FAIL,
+									"when  user signs out of ENW, system does not has referrer URL = endnote");// extent
+
+						}
+					}
+
+					catch (Throwable t) {
+
 						test.log(LogStatus.FAIL,
 								"when  user signs out of ENW, system does not has referrer URL = endnote");// extent
+						// reports
+						status = 2;// excel
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
+								.getClass().getSimpleName()
+								+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+						ErrorUtil.addVerificationFailure(t);
 
 					}
-				}
-
-				catch (Throwable t) {
-
-					test.log(LogStatus.FAIL, "when  user signs out of ENW, system does not has referrer URL = endnote");// extent
-					// reports
-					status = 2;// excel
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this
-							.getClass().getSimpleName()
-							+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-					ErrorUtil.addVerificationFailure(t);
-
-				}
-				}
-				catch (Throwable t) {
+				} catch (Throwable t) {
 					t.printStackTrace();
 					test.log(LogStatus.FAIL, "User is not able to navigate from Neon to EndNote");
 					test.log(LogStatus.INFO, "Error--->" + t);

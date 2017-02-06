@@ -77,7 +77,7 @@ public class ENWIAM080 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
-			int watchlistCount = 10;
+			int watchlistCount = 1;
 			openBrowser();
 			maximizeWindow();
 			clearCookies();

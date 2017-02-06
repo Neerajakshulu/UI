@@ -102,6 +102,8 @@ public class Profile35 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post and Validate Published Post count");
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
 			pf.getProfilePageInstance(ob).validatePostTitle(postTitle);
 		} catch (Exception e) {
 			e.printStackTrace();

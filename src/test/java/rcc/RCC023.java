@@ -83,6 +83,7 @@ public class RCC023 extends TestBase {
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			pf.getHFPageInstance(ob).searchForText("test");
+			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			String recordTitle = pf.getSearchResultsPageInstance(ob).getPatentsTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(title);

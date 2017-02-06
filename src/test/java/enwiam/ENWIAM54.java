@@ -101,7 +101,7 @@ public class ENWIAM54 extends TestBase {
 			String accountType = "Neon";
 
 			validateAccounts(1, accountType);
-			int watchlistCount = 10;
+			int watchlistCount = 1;
 			for (int j = 1; j <= watchlistCount; j++) {
 				logger.info("Creating " + j + " Watchlist");
 				pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();

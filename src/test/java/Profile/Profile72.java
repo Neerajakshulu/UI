@@ -1,4 +1,4 @@
-package ipa;
+package Profile;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,20 +15,13 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-/**
- * Class for follow/unfollow profile from search page itself
- * 
- * @author UC202376
- *
- */
-public class IPA012 extends TestBase {
+public class Profile72 extends TestBase {
 
-	static int count = -1;
+	
 
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-	
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent Reports
@@ -39,21 +32,21 @@ public class IPA012 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPA");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Profile");
 	}
 
 	/**
-	 * Method for login into Neon application using TR ID
+	 * Method for wait TR Login Screen
 	 * 
-	 * @throws Exception, When TR Login is not done
+	 * @throws Exception, When TR Login screen not displayed
 	 */
 	@Test
-	@Parameters({"username","password"})
-	public void testLoginIPA(String username,String password) throws Exception {
+	@Parameters({"username", "password"})
+	public void testLoginTRAccount(String username,
+			String password) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
 
 		if (!master_condition) {
 			status = 3;
@@ -68,41 +61,14 @@ public class IPA012 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			test.log(LogStatus.INFO, "Login to IPA application");
-			ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-			pf.getLoginTRInstance(ob).loginToIPA(username,password);
-			test.log(LogStatus.PASS, "Login successfully");
-			
+
+			ob.navigate().to(host);
+
+			pf.getLoginTRInstance(ob).waitForTRHomePage();
+			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
+			pf.getLoginTRInstance(ob).clickLogin();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Error: Login not happended");
-			// print full stack trace
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());
-			ErrorUtil.addVerificationFailure(t);
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: "
-					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
-			
-			closeBrowser();
-		}
-
-	}
-
-	
-	@Test(dependsOnMethods = "testLoginIPA")
-	public void technologySearch() throws Exception {
-		try {
-			test.log(LogStatus.INFO, "Verifying the search textbox for the Technology");
-			pf.getSearchPageInstance(ob).validateTechnologySearch(test);
-			pf.getSearchPageInstance(ob).validateNewSearchLandingPage(test);
-			pf.getSearchPageInstance(ob).validateIPAnalyticsLandingPage(test);
-			pf.getSearchPageInstance(ob).validateCompanySearch(test);
-			
-			closeBrowser();
-			
-		} catch (Throwable t ) {
-			test.log(LogStatus.FAIL, "Search page validation is failed");
+			test.log(LogStatus.FAIL, "Login_not_happend");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
@@ -110,31 +76,49 @@ public class IPA012 extends TestBase {
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;// excel
 			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_add_topic_not_done")));
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_TR_Login_Not_happended")));
 			closeBrowser();
 		}
 	}
 
-	
+	@Test(dependsOnMethods = "testLoginTRAccount")
+	public void watchlistTabScrollValidation() throws Exception {
+		try {
+			test.log(LogStatus.INFO, "go to user profile page");
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
+			test.log(LogStatus.INFO, "Watchlist tab records/record count should increase while do scrolldown");
+			pf.getProfilePageInstance(ob).watchlistTabScroll();
+			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Watchlist tab scroll fail");
+			// print full stack trace
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());
+			ErrorUtil.addVerificationFailure(t);
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test
+					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_watchlist_tab_scroll")));
+			closeBrowser();
+		}
+	}
+
 	/**
 	 * updating Extent Report with test case status whether it is PASS or FAIL or SKIP
 	 */
 	@AfterTest
 	public void reportTestResult() {
-
 		extent.endTest(test);
-
-		
-		/*if (status == 1)
-			TestUtil.reportDataSetResult(ipaxls, "Test Cases",
-					TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "PASS");
-		else if (status == 2)
-			TestUtil.reportDataSetResult(ipaxls, "Test Cases",
-					TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "FAIL");
-		else
-			TestUtil.reportDataSetResult(ipaxls, "Test Cases",
-					TestUtil.getRowNum(ipaxls, this.getClass().getSimpleName()), "SKIP");*/
-		 
+		/*
+		 * if(status==1) TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "FAIL"); else
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls,this.getClass().getSimpleName()), "SKIP");
+		 */
 	}
-
 }

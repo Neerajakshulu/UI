@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -95,6 +96,7 @@ public class Profile20 extends TestBase {
 
 			test.log(LogStatus.INFO, " Click Publish A Post and Post your article");
 			pf.getProfilePageInstance(ob).clickPublishAPost();
+			BrowserWaits.waitTime(6);
 			String postTitle = myPost + RandomStringUtils.randomAlphanumeric(6);
 			pf.getProfilePageInstance(ob).enterPostTitle(postTitle);
 			test.log(LogStatus.INFO, "Entered Post Title");
@@ -102,6 +104,10 @@ public class Profile20 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post and Validate Published Post");
+			
+			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getProfilePageInstance(ob).clickProfileLink();
+			
 			pf.getProfilePageInstance(ob).validatePostTitle(postTitle);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
