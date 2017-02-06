@@ -13,7 +13,6 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.pdfparser.PDFParser;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -498,7 +497,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public void clickWatchlistTab() throws Exception {
 		BrowserWaits.waitTime(10);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_WATCHLIST_CSS);
 		waitForAjax(ob);
 	}
 
@@ -1302,6 +1302,15 @@ public class ProfilePage extends TestBase {
 			profileTabInfiniteScroll("Following");
 		}
 	}
+	
+	public void watchlistTabScroll() throws Exception {
+		clickWatchlistTab();
+		int totalWatchlists = getWatchlistsCount();
+		logger.info("watchlist tabs-->"+totalWatchlists);
+		if (totalWatchlists > 10) {
+			profileTabInfiniteScroll("Watchlist");
+		}
+	}
 
 	/**
 	 * Method for validate profile tab focus, tab focus should be POST tab only
@@ -1309,31 +1318,29 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception, When tab focus on other than POST tab
 	 */
 	public void profileTabInfiniteScroll(String tabName) throws Exception {
-		if (tabName.contains("Followers") || tabName.contains("Following")) {
-			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
-		} else {
-			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
-		}
+		profileTabsRecords = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
+
 		int beforeScroll = profileTabsRecords.size();
 		((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
 		waitForAjax(ob);
 		BrowserWaits.waitTime(4);
 
-		if (tabName.contains("Followers") || tabName.contains("Following")) {
-			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
-		} else {
-			profileTabsRecords = pf.getBrowserActionInstance(ob).getElements(
-					OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
-		}
+		profileTabsRecords = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TABS_RECORDS_CSS);
 
-		logger.info("before scroll-->"+beforeScroll);
+		logger.info("before "+tabName +" scroll-->" + beforeScroll);
 		int firstScroll = profileTabsRecords.size();
-		logger.info(" first scroll-->"+firstScroll);
-		if (!(firstScroll > beforeScroll)) {
-			throw new Exception("Records/Records Count should be increase while do page scrolldown");
+		logger.info(" first "+tabName+" scroll-->" + firstScroll);
+		
+		if(tabName.equalsIgnoreCase("Watchlist")) {
+			if (!((firstScroll > beforeScroll) || (firstScroll > 10))) {
+				throw new Exception(tabName + " Records/Records Count should be increase while do page scrolldown 1234");
+			}
+		} else {
+			if (!(firstScroll > beforeScroll)) {
+				throw new Exception(tabName + " Records/Records Count should be increase while do page scrolldown");
+			}
 		}
 	}
 

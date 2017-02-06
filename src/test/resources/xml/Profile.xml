@@ -514,5 +514,11 @@
 		</classes>
 	</test> 
 	
+	<test name="Watchlist_tab_infinite_Scroll">
+		<classes>
+			<class name="Profile.Profile72"></class>
+		</classes>
+	</test> 
+	
 </suite>
 
