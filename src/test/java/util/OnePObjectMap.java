@@ -906,7 +906,7 @@ public enum OnePObjectMap {
 	NEON_IPA_EXPLOREBUTTON_XPATH("//button[contains(text(),'Explore')]"),
 	NEON_IPA_TECHNOLOGYSEARCH_CSS("[ui-sref='home.search({type: \\'technology\\'})']"),
 	NEON_IPA_COMPANYSEARCH_CSS("[ui-sref='home.search({type: \\'company\\'})"),
-	NEON_IPA_HEADER_CSS("span[class='ne-nav-header__text--ne']"),
+	NEON_IPA_HEADER_CSS("span[ng-click*='header.newSearch()']"),
 	NEON_IPA_TECHPORTFOLIO_CSS("li[class='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
 	NEON_IPA_CHART_CSS("svg[class='nvd3-svg']"),
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),

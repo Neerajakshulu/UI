@@ -198,8 +198,8 @@ System.out.println();
 		IPALandingPage();
 		// BrowserWaits.waitTime(4);
 
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_IPA_COMPANYHIGHLIGHT_XPATH.toString()), 30);
-		selection = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_COMPANYHIGHLIGHT_XPATH);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_IPA_TECHHIGHLIGHT_XPATH.toString()), 30);
+		selection = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_TECHHIGHLIGHT_XPATH);
 
 		if (!(selection == null)) {
 			test.log(LogStatus.PASS, "NEON-438 - Technology Search is highlighted");
@@ -213,8 +213,8 @@ System.out.println();
 
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_TECHNOLOGY_LINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_TECHNOLOGY_LINK_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS, "carbon");
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_EXPLOREBUTTON_XPATH);
+		pf.getDashboardPage(ob).SearchTermEnter("technology", "Java");
+		pf.getDashboardPage(ob).exploreSearch();
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS.toString()));
@@ -226,8 +226,8 @@ System.out.println();
 	public void performCompanySearch() throws Exception {
 
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_COMPANY_LINK_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_COMPANY_LINK_CSS);
-		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_TECH_SEARCHBOX_CSS, "Thomson");
+		pf.getDashboardPage(ob).SearchTermEnter("company", "Thomson");
+		pf.getDashboardPage(ob).addCompanyTerms("1");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_EXPLORE_BUTTON_CSS);
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
