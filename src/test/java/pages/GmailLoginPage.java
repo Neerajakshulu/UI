@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -7,6 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.OnePObjectMap;
 
 public class GmailLoginPage extends TestBase {
@@ -22,15 +25,17 @@ public class GmailLoginPage extends TestBase {
 	public void gmailLogin(String username, String password) throws Exception {
 
 		ob.get("https://accounts.google.com/ServiceLogin#identifier");
-		// ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_LOGIN_USERNAME.toString())).clear();
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RCC_GMAIL_LOGIN_USERNAME_ID, username);
-		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH.toString())).click();
-		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_LOGIN_PASSWORD_XPATH.toString())).sendKeys(password);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_LOGIN_NEXT_BUTTON_XPATH);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RCC_GMAIL_LOGIN_PASSWORD_XPATH, password);
 		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_LOGIN_SUBMIT_XPATH.toString())).sendKeys(Keys.ENTER);
 	}
 
 	public void clickonMail() {
 		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_CLICK_EMAIL_XPATH.toString())).click();
+	}
+
+	public void clickViewInvitationLink() {
 		ob.findElement(By.linkText("View invitation")).click();
 	}
 
@@ -46,7 +51,63 @@ public class GmailLoginPage extends TestBase {
 	}
 
 	public void mailProtectclick() {
-		ob.findElement(By.xpath(OnePObjectMap.RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH.toString())).click();
+
+		try {
+			ob.findElement(By.xpath(OnePObjectMap.RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH.toString())).click();
+		} catch (Throwable t) {
+
+		}
+	}
+
+	public boolean verifyEmailSubject() throws Exception {
+		String OriginalSubject = "Project Neon Group invitation";
+		BrowserWaits.waitTime(5);
+
+		String MailSubject = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GMAIL_SUBJECT_CONTENT_XPATH)
+				.getText();
+
+		if (OriginalSubject.equals(MailSubject))
+			return true;
+		else
+			return false;
+
+	}
+	
+	public void LogoutGmail() throws Exception
+	{
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_PROFILE_CLICK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_LOGOUT_BUTTON_CSS);
+	}
+	
+
+	public boolean verifyEmailContent(String ReceiverUname,String Title,String SenderUserName) throws Exception {
+		boolean result = false;
+		String[] emailcontent = {"Project Neon",
+				                 "Project Neon Group Invitation",
+				                 "Thomson Reuters Project Neon",
+				                 ReceiverUname,
+				                 "you've been invited to join a project", 
+				                 SenderUserName,
+				                 Title,
+				                 "I've created a group for our team to share research findings.",
+				                 "View invitation",
+				                 "The Project Neon team" };
+		
+		
+
+		List<String> list = Arrays.asList(emailcontent);
+
+		String content = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.RCC_GMAIL_WHOLE_CONTENT_CSS)
+				.getText();
+
+		for (String nw : list) {
+
+			if (!content.contains(nw))
+				return false;
+
+			result = true;
+		}
+		return result;
 	}
 
 }

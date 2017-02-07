@@ -17,7 +17,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class RCC119 extends TestBase {
+public class RCC120 extends TestBase {
 
 	static int status = 1;
 
@@ -64,7 +64,8 @@ public class RCC119 extends TestBase {
 			String password = "India@2020";
 			String title = RandomStringUtils.randomAlphanumeric(4);
 			//String groupTitle = this.getClass().getSimpleName() + "_Group_" + "_" + getCurrentTimeStamp();
-			String desc = "This group is to check the Gmail Invitation";
+			String Custommessage="Hey,I am sending a email Invitation Please follow up my updates";
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -72,7 +73,7 @@ public class RCC119 extends TestBase {
 			loginAs("RCCTESTUSER008", "RCCTESTUSERPWD008");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
-			pf.getGroupsListPage(ob).createGroup(title, desc);
+			pf.getGroupsListPage(ob).createGroup(title);
 			try {
 				Assert.assertEquals(title, pf.getGroupDetailsPage(ob).getGroupTitle());
 				test.log(LogStatus.PASS, "user is able to create a new group");
@@ -86,6 +87,7 @@ public class RCC119 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
 			test.log(LogStatus.INFO, "Group Created and Invitation has been to sent to the User");
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCGMAILPROFILE93"));
+			pf.getGroupDetailsPage(ob).typeCustomMessage(Custommessage);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -98,8 +100,10 @@ public class RCC119 extends TestBase {
 			test.log(LogStatus.INFO, "Logging in with Gmail and Verifying View Invitation Link");
 			pf.getGmailLoginPage(ob).gmailLogin(Uname, password);
 			pf.getGmailLoginPage(ob).mailProtectclick();
+			// Verifying the 'View Invitation' Link.
 			pf.getGmailLoginPage(ob).clickonMail();
 			BrowserWaits.waitTime(5);
+
 			try {
 				Assert.assertTrue(pf.getGmailLoginPage(ob).verifyEmailSubject());
 				test.log(LogStatus.PASS, "Email Subject Verification Success");
@@ -107,33 +111,28 @@ public class RCC119 extends TestBase {
 				logFailureDetails(test, t, "failed to verify the Email Subject Verification",
 						"Subject Verification Failed");
 			}
-			try {
-				pf.getGmailLoginPage(ob).clickViewInvitationLink();
-				test.log(LogStatus.PASS, "Clicked on View Invitation Link");
-			} catch (Throwable t) {
-				logFailureDetails(test, t, "failed to Click on the Link", "Failed to Click on the Link");
-			}
-			pf.getGmailLoginPage(ob).MailWindowHandle();
-			// Login with main user and accept the invitation.
-			test.log(LogStatus.INFO, "logging in with user and verifying the Invitation");
-			loginAs("RCCGMAILUSER", "RCCGMAILPASSWORD");
-			BrowserWaits.waitTime(5);
-			pf.getGroupInvitationPage(ob).verifyingInvitations(title);
-			BrowserWaits.waitTime(10);
-			test.log(LogStatus.INFO, "Invitation Accepted");
-			pf.getGroupInvitationPage(ob).acceptInvitation(title);
-			test.log(LogStatus.INFO, "verify the group desc");
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyGroupDescription(desc));
-				test.log(LogStatus.PASS, "Group desc verified");
+				Assert.assertTrue(pf.getGmailLoginPage(ob).verifyEmailContent(LOGIN.getProperty("RCCPROFILE8"),title,
+						LOGIN.getProperty("RCCGMAILPROFILE93").substring(0,
+								LOGIN.getProperty("RCCGMAILPROFILE93").indexOf(" "))));
+				test.log(LogStatus.PASS, "Email Content verification Success");
 
+				
 			} catch (Throwable t) {
-				logFailureDetails(test, t, "Group description not verified", "Group_Desc_verified");
+				logFailureDetails(test, t, "failed to verify the Email Content",
+						"Content Verification Failed");
 			}
-			logout();
-			closeBrowser();
-
+			
+		    try {
+			pf.getGmailLoginPage(ob).LogoutGmail();
+			test.log(LogStatus.PASS, "Logout Done");
+		    } catch(Throwable t) {
+		    	logFailureDetails(test, t, "failed to Logout",
+						"Logout Failed");
+		    }
+		    
+		    
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
