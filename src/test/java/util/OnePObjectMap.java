@@ -762,7 +762,11 @@ public enum OnePObjectMap {
     RCC_GMAIL_LOGIN_PASSWORD_XPATH("//input[@id='Passwd']"),
     RCC_GMAIL_CLICK_EMAIL_XPATH("//span[@class='y2']"),
     RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
-    
+    RCC_GMAIL_SUBJECT_CONTENT_XPATH("//h2[@class='hP']"),
+    RCC_GMAIL_WHOLE_CONTENT_CSS("table[class*='container']"),
+    RCC_GMAIL_WHOLE_CONTENT2_CSS("div[class='nH aHU']"),
+    RCC_GMAIL_PROFILE_CLICK_CSS("span[class='gb_9a gbii']"),
+    RCC_GMAIL_LOGOUT_BUTTON_CSS("a[id='gb_71']"),
 
 	// #################### DRA ##########################
 
@@ -1023,9 +1027,9 @@ public enum OnePObjectMap {
 	NEON_IPA_RECORDVIEW_STRENGTH_CSS("[ng-hide*='patent.patentStrength']>span:nth-of-type(2)"),
 	NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS("[class*='ng-binding font-bold']"),
 	NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS("li[ng-hide*='patent.expirationDate'] span:nth-of-type(2)"),
-	NEON_IPA_DASH_TECH_COM_TAB_CSS("li[href*='competitors']"),
-	NEON_IPA_DASH_TECH_TEC_TAB_CSS("li[href*='trending']"),
-	NEON_IPA_DASH_TECH_PAN_TAB_CSS("li[href*='patents']"),
+	NEON_IPA_DASH_TECH_COM_TAB_CSS("div[event-category*='competitors']"),
+	NEON_IPA_DASH_TECH_TEC_TAB_CSS("div[event-category*='trending']"),
+	NEON_IPA_DASH_TECH_PAN_TAB_CSS("div[event-category*='patents']"),
 	NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS("div.popover-content"),
 	NEON_IPA_DASH_TITLE_CSS("div[class*='dashboard--heading-primary']"),
 	NEON_IPA_DASH_TECH_COM_X_MIN_CSS("g[class$='nv-axisMin-x']>text"),

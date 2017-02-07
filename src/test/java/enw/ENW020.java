@@ -60,8 +60,8 @@ public class ENW020 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WOS_HEADER_XPATH);
 			BrowserWaits.waitTime(6);
 			NavigateToENW();
-			BrowserWaits.waitTime(5);
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Sign in");
+			BrowserWaits.waitTime(6);
+			//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "EndNote", "Sign in");
 			// String neon_Profile_URL = ob.getCurrentUrl();
 			WebElement web = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()));
 			String str = web.getText().toString();
