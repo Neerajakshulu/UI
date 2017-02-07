@@ -1025,7 +1025,7 @@ public enum OnePObjectMap {
 	NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS("[class*='ng-binding font-bold']"),
 	NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS("li[ng-hide*='patent.expirationDate'] span:nth-of-type(2)"),
 	NEON_IPA_DASH_TECH_COM_TAB_CSS("div[event-category*='competitors']"),
-	NEON_IPA_DASH_TECH_TEC_TAB_CSS("div[event-category*='trending']"),
+	NEON_IPA_DASH_TECH_TEC_TAB_CSS("div[event-category*='trend']"),
 	NEON_IPA_DASH_TECH_PAN_TAB_CSS("div[event-category*='patents']"),
 	NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS("div.popover-content"),
 	NEON_IPA_DASH_TITLE_CSS("div[class*='dashboard--heading-primary']"),
