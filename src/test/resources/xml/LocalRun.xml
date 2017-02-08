@@ -127,11 +127,11 @@
 		</classes>
 	</test>
 
-	<test name="ENW020">
+	<!--  <test name="ENW020">
 		<classes>
 			<class name="enw.ENW020"></class>
 		</classes>
-	</test>
+	</test>-->
 
 
 	<test name="ENW021">
