@@ -150,7 +150,8 @@ public class Search121 extends TestBase {
 					30);
 			String abst = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ABSTRACTS_CSS.toString()))
 					.getText();
-			if (abst.length() <= 302)
+			System.out.println("lenght "+ abst.length());
+			if (abst.length()<= 303)
 				test.log(LogStatus.PASS, "Snippet of abstract is displaying for article search result page");// extent
 			else
 				test.log(LogStatus.FAIL,
