@@ -218,7 +218,7 @@ public class DRAIAM0014 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRASteamuser14")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUSER0015")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single account is available .");
 
