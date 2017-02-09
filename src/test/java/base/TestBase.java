@@ -43,6 +43,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -127,6 +128,7 @@ public class TestBase {
 	protected static final String EUREKA_HOST_PORT = "port";
 	protected static final String EUREKA_VIP_ADDRESS = "vipAddress";
 	protected static final String EUREKA_DC_NAME = "Amazon";
+	protected static final String USER_AGENT = "UI Automation Job";
 	protected Map<String, String> appHosts = new HashMap<String, String>();
 
 	public static String mainWindow = "";
@@ -321,21 +323,6 @@ public class TestBase {
 		logger.info(suiteName + "---" + testcase.size());
 	}
 
-	// public static ExtentReports getInstance() {
-	// if (extent == null) {
-	// extent = new ExtentReports("testReports/test_report.html", true);
-	//
-	// // optional
-	// extent.config().documentTitle("Automation
-	// Report").reportName("Regression").reportHeadline("1-P PLATFORM");
-	//
-	// // optional
-	// extent.addSystemInfo("Selenium Version",
-	// "2.43").addSystemInfo("Environment", "stage");
-	// }
-	// return extent;
-	// }
-
 	protected void loadModuleData(String module) throws IOException {
 		XSSFWorkbook workBook = null;
 		FileInputStream inputStream = null;
@@ -437,6 +424,14 @@ public class TestBase {
 			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
 			desiredCapabilities.setCapability("name", this.getClass().getSimpleName());
+			
+			if (StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
+				if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("Chrome")) {
+					ChromeOptions co = new ChromeOptions();
+					co.addArguments("--user-agent="+USER_AGENT);
+					desiredCapabilities.setCapability(ChromeOptions.CAPABILITY , co);
+				}
+			}
 			ob = new RemoteWebDriver(
 					new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
 					desiredCapabilities);
@@ -459,9 +454,12 @@ public class TestBase {
 				System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
 				ob = new InternetExplorerDriver(capabilities);
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Chrome")) {
+				System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 				DesiredCapabilities capability = DesiredCapabilities.chrome();
 				capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-				System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+				ChromeOptions co = new ChromeOptions();
+				co.addArguments("--user-agent="+USER_AGENT);
+				capability.setCapability(ChromeOptions.CAPABILITY , co);
 				ob = new ChromeDriver(capability);
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) {
 				DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
