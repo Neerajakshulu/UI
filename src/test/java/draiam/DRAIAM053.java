@@ -60,21 +60,17 @@ public class DRAIAM053 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERDRA053"));
-			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
-
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
@@ -97,7 +93,7 @@ public class DRAIAM053 extends TestBase {
 			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 			String accountType = "Facebook";
 			pf.getDraPageInstance(ob).logoutDRA();
-			
+
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA053"),
 					LOGIN.getProperty("USERPWDDRA053"));
@@ -117,11 +113,12 @@ public class DRAIAM053 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
 				BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "User is able to link steam account with facebook account");	
-				
-				
+				test.log(LogStatus.PASS, "User is able to link steam account with facebook account");
+
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				validateAccounts(2,accountType);
+				validateAccounts(2, accountType);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
+				BrowserWaits.waitTime(2);
 				String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 				test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
@@ -131,10 +128,10 @@ public class DRAIAM053 extends TestBase {
 				test.log(LogStatus.PASS, "Random Merge is happened");
 
 				if (winingAccountProfileName.contains(firstAccountProfileName)) {
-				test.log(LogStatus.PASS, "Winning account is steam account");
+					test.log(LogStatus.PASS, "Winning account is steam account");
 				} else
-				throw new Exception("Winning account is cannot be determined");
-				pf.getDraPageInstance(ob).logoutDRA();
+					throw new Exception("Winning account is cannot be determined");
+
 			} catch (Throwable t) {
 				closeBrowser();
 				t.printStackTrace();
@@ -145,7 +142,6 @@ public class DRAIAM053 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 			}
-			
 
 			BrowserWaits.waitTime(2);
 			closeBrowser();
@@ -165,13 +161,15 @@ public class DRAIAM053 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
-			Assert.assertTrue(pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("USERDRA053")));
+			Assert.assertTrue(
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("USERDRA053")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
-			//test.log(LogStatus.PASS,  " account is available and is not linked");
-			test.log(LogStatus.PASS, "Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
+			// test.log(LogStatus.PASS, " account is available and is not
+			// linked");
+			test.log(LogStatus.PASS,
+					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
@@ -180,7 +178,6 @@ public class DRAIAM053 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
 		}
 	}
-	
 
 	@AfterTest
 	public void reportTestResult() {
