@@ -68,7 +68,11 @@ public class ENW037 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_ABSTRACT_CSS.toString())).getText());
 			neonValues.put("expectedAssignee",
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS.toString())).getText());
+			neonValues.put("IPC",
+					ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_IPC_CURRENT_CSS.toString())).getText());
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			System.out.println("Asssigniee:"+ neonValues.get("expectedAbstract")+"\n"+"IPC Codes in Neon:"+neonValues.get("IPC"));
+			
 			BrowserWaits.waitTime(8);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			try {
@@ -81,7 +85,7 @@ public class ENW037 extends TestBase {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 				BrowserWaits.waitTime(4);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
@@ -89,6 +93,9 @@ public class ENW037 extends TestBase {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_ABSTRACT_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("AssigneeValue",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_ASSIGNEE_VALUE_CSS.toString())).getText());
+			endNoteDetails.put("Keywords",
+										ob.findElement(By.xpath(OnePObjectMap.ENW_KEYWORDS_XPATH.toString())).getText());
+		
 			if (!(endNoteDetails.get("AbstractValue").equals(neonValues.get("expectedAbstract")))) {
 				test.log(LogStatus.FAIL, "Record is not exported and the Abstract content is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
@@ -101,6 +108,15 @@ public class ENW037 extends TestBase {
 					}else{
 						test.log(LogStatus.PASS, "After exporting the record, The Assignee value is matching between Neon and endnote");
 					}
+			String str= neonValues.get("IPC").replace(" ", "-");
+		System.out.println("Asssigniee Name:"+ endNoteDetails.get("AssigneeValue")+"\n"+"IPC or Keywords in ENW:"+endNoteDetails.get("Keywords"));
+		System.out.println("IPC value after replace - symbol:"+str);
+			if(!(endNoteDetails.get("Keywords").equalsIgnoreCase(str))){
+				test.log(LogStatus.FAIL, "Record is not exported , The IPC value is not matching between Neon and endnote");
+				Assert.assertEquals(true, false);
+			}else{
+				test.log(LogStatus.PASS, "After exporting the record, The IPC value is displayed as Keywords in neon");			
+			}
 			BrowserWaits.waitTime(3);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 			BrowserWaits.waitTime(3);
@@ -124,7 +140,7 @@ public class ENW037 extends TestBase {
 	 private void NavigatingToENW() {
 		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
 			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
@@ -142,7 +158,6 @@ public class ENW037 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
