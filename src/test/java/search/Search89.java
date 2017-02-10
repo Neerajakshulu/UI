@@ -69,11 +69,7 @@ public class Search89 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("synthetic biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(4);
-//			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-//			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-//			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-//			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 
@@ -132,6 +128,7 @@ public class Search89 extends TestBase {
 				// Switching tab
 				List<String> tabs = new ArrayList<String>(ob.getWindowHandles());
 				ob.switchTo().window(tabs.get(1));
+		     waitForElementTobePresent(ob, By.xpath("//div[@id='PAT.TIOR0']"),60);
 				boolean titlePresent = ob.findElements(By.xpath("//div[@id='PAT.TIOR0']")).size() == 1;
 				if (titlePresent) {
 
