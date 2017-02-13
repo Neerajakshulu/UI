@@ -119,7 +119,7 @@
 		</classes>
 	</test> -->
 	
-	<test name="DRAIAM054">
+	<test name="DRAIAM054" preserve-order="true" parallel="false">
 		<classes>
 			<class name="draiam.DRAIAM054"></class>
 		</classes>
