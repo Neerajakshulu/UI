@@ -226,6 +226,7 @@ public class RCC019 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
+			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
