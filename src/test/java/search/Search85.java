@@ -144,7 +144,7 @@ public class Search85 extends TestBase {
 					30);
 			String abst = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).getText();
 			System.out.println("lenght" + abst.length());
-			if (abst.length() <= 302)
+			if (abst.length() <= 303)
 				test.log(LogStatus.PASS, "Snippet of abstract is dispalying for patents search result page");// extent
 			else
 				test.log(LogStatus.FAIL,

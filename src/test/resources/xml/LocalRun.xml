@@ -127,11 +127,8 @@
 		</classes>
 	</test>
 
-	<test name="ENW020">
-		<classes>
-			<class name="enw.ENW020"></class>
-		</classes>
-	</test>
+	<!-- <test name="ENW020"> <classes> <class name="enw.ENW020"></class> </classes> 
+		</test> -->
 
 
 	<test name="ENW021">
@@ -629,16 +626,17 @@
 	</test>
 
 	<!-- IPAIAM Test cases START -->
-	<test name="IPA0055">
+
+	<test name="DRAIAMAutomatedMerge14" preserve-order="true"
+		parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM0055"></class>
-		</classes>
-	</test>
-	<test name="IPA0056">
-		<classes>
 			<class name="ipaiam.IPAIAM0056"></class>
+
 		</classes>
 	</test>
+
+
 
 	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
 		<classes>

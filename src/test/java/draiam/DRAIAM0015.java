@@ -60,7 +60,6 @@ public class DRAIAM0015 extends TestBase {
 					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
 		try {
 			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUSER0015"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
@@ -123,10 +122,7 @@ public class DRAIAM0015 extends TestBase {
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-					ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString()))
-							.sendKeys(LOGIN.getProperty("DRAUSERPWD15"));
-					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 
 					pf.getDraPageInstance(ob).clickOnAccountLinkDRA();

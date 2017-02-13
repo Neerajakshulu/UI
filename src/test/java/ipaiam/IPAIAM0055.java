@@ -127,10 +127,7 @@ public class IPAIAM0055 extends TestBase {
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
-					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
-					ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_PASSWORD_CSS.toString()))
-							.sendKeys(LOGIN.getProperty("IPAPWD0055"));
-					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+					
 					waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()),
 							30);
 
