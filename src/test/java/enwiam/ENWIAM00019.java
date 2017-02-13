@@ -83,18 +83,13 @@ public class ENWIAM00019 extends TestBase {
 				try {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				try {
-					BrowserWaits.waitTime(3);
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				} catch (Exception e) {
-					e.printStackTrace();
+					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
+					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				}
+				BrowserWaits.waitTime(3);
 				try {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENDNOTE_LOGO_CSS);
 					Assert.assertEquals(pf.getEnwReferenceInstance(ob).validateNavigationToEnw(), true);

@@ -55,8 +55,8 @@ public class DRAIAM054 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA054"),
-					LOGIN.getProperty("USERPWDDRA054"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
+					LOGIN.getProperty("PWDUserFBENW00029"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
@@ -69,7 +69,7 @@ public class DRAIAM054 extends TestBase {
 			test.log(LogStatus.PASS, "STeAM Step Up Auth Modal is displayed");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_USERNAME_CSS);		
 			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-			if (Emailaddress.getAttribute("value").equals("shakeal68@x5a9m8ugq.com")) {
+			if (Emailaddress.getAttribute("value").equals("lyla6@xxqx3802.com")) {
 				test.log(LogStatus.PASS,
 						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
 			} else {
@@ -105,7 +105,7 @@ public class DRAIAM054 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA054")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Social account is linked with steam account");
 

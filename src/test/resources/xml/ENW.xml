@@ -194,7 +194,7 @@
 		</classes>
 		
 	</test> -->
-	<test name="ENW00029">
+	<test name="ENW00029" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enw.ENW00029"></class>
 		</classes>

@@ -58,8 +58,7 @@
 			<class name="ipaiam.IPAIAM054"></class>
 		</classes>
 	</test> -->
-	
-	<test name="IPA055">
+	<test name="IPA055" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM055"></class>
 		</classes>
