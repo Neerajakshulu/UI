@@ -117,7 +117,7 @@ public class ENW000012 extends TestBase {
 					.getText();
 			System.out.println(passwordText);
 			try {
-				Assert.assertEquals(passwordText, "Password is associated with your LinkedIn account.");
+				Assert.assertEquals(passwordText, "Password is associated with your LinkedIn");
 				test.log(LogStatus.PASS,
 						"Message 'Password is associated with your LinkedIn account.' is dispalyed correctly in account setting page");
 			}

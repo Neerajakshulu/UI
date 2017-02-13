@@ -55,8 +55,8 @@ public class IPAIAM055 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA054"),
-					LOGIN.getProperty("USERPWDDRA054"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
+					LOGIN.getProperty("PWDUserFBENW00029"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
@@ -70,7 +70,7 @@ public class IPAIAM055 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
 			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-			if (Emailaddress.getAttribute("value").equals("shakeal68@x5a9m8ugq.com")) {
+			if (Emailaddress.getAttribute("value").equals("lyla6@xxqx3802.com")) {
 				test.log(LogStatus.PASS,
 						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
 			} else {
@@ -82,7 +82,7 @@ public class IPAIAM055 extends TestBase {
 			
 			BrowserWaits.waitTime(2);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
-			test.log(LogStatus.PASS, "DRA Home page displayed after entering steam account details");
+			test.log(LogStatus.PASS, "IPA Home page displayed after entering steam account details");
 			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -104,7 +104,7 @@ public class IPAIAM055 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA054")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Social account is linked with steam account");
 
