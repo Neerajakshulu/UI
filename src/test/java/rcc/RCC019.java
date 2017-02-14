@@ -66,6 +66,7 @@ public class RCC019 extends TestBase {
 			String modalInfoText = "Are you sure you wish to remove this item from the group?";
 			openBrowser();
 			clearCookies();
+			
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
