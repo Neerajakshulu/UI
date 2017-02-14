@@ -249,6 +249,12 @@
 		</classes>
 	</test>
 
+	<test name="Forgot_password_in_neon_landing_page">
+		<classes>
+			<class name="iam.IAM016"></class>
+		</classes>
+	</test>
+
 	<!-- <test name="Validate_change_password_account_page"> <classes> <class 
 		name="iam.IAM038"></class> </classes> </test> -->
 
@@ -589,7 +595,7 @@
 		</classes>
 	</test>
 
-	
+
 
 	<test name="DRAIAM004">
 		<classes>
@@ -632,7 +638,7 @@
 		</classes>
 	</test>
 
-    <test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
+	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM0002"></class>
 			<class name="draiam.DRAIAM003"></class>
