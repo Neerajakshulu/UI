@@ -83,7 +83,7 @@ public class RCC014 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE12"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE25"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -92,7 +92,7 @@ public class RCC014 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER012", "RCCTESTUSERPWD012");
+			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -219,12 +219,16 @@ public class RCC014 extends TestBase {
 				logFailureDetails(test, t, "Items count in Group list page not displayed correctly",
 						"_Group_Item_count_mismatch");
 			}
+			
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
 
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER012", "RCCTESTUSERPWD012");
+			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
