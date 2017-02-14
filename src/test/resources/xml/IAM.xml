@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="IAM" parallel="tests" thread-count="10">
+<suite name="IAM" parallel="tests" thread-count="5">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -122,11 +122,11 @@
 		</classes>
 	</test>
 
-	<test name="IAM016">
+	<!-- <test name="IAM016">
 		<classes>
 			<class name="iam.IAM016"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="Linkedin_cancle_button">
 		<classes>
