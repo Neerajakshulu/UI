@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -220,6 +221,12 @@ public class RCC018 extends TestBase {
 						"_Group_Item_count_mismatch");
 			}
 
+			BrowserWaits.waitTime(5);
+			waitForAjax(ob);
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -262,8 +269,8 @@ public class RCC018 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		}finally{
-		closeBrowser();
+		} finally {
+			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 	}
