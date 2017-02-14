@@ -220,6 +220,11 @@ public class RCC019 extends TestBase {
 				logFailureDetails(test, t, "Items count in Group list page not displayed correctly",
 						"_Group_Item_count_mismatch");
 			}
+			
+			pf.getLoginTRInstance(ob).logOutApp();
+			closeBrowser();
+			pf.clearAllPageObjects();
+			
 
 			openBrowser();
 			clearCookies();
