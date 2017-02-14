@@ -221,8 +221,6 @@ public class RCC018 extends TestBase {
 						"_Group_Item_count_mismatch");
 			}
 
-			BrowserWaits.waitTime(5);
-			waitForAjax(ob);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
