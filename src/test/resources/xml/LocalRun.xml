@@ -19,9 +19,10 @@
 		</classes>
 	</test>
 
-	<test name="ENW004">
+	<test name="Linkedin Testcases" preserve-order="true">
 		<classes>
 			<class name="enw.ENW004"></class>
+			<class name="enwiam.ENWIAM0006"></class>
 		</classes>
 	</test>
 
@@ -284,10 +285,9 @@
 		</classes>
 	</test>
 
-	<test name="ENW Linking from ENW" preserve-order="true">
+	<test name="ENW Linking from ENW">
 		<classes>
 			<class name="enwiam.ENWIAM0005"></class>
-			<class name="enwiam.ENWIAM0006"></class>
 		</classes>
 	</test>
 
