@@ -80,7 +80,7 @@ public class Watchlist023 extends TestBase {
 			for (int i = 1; i <= 2; i++) {
 				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton")), 60);
 				ob.findElement(By.xpath(OR.getProperty("createWatchListButton"))).click();
-				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 60);
+				waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 80);
 				ob.findElement(By.xpath(OR.getProperty("newWatchListNameTextBox")))
 						.sendKeys(newWatchlistName + "_" + i);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("newWatchListDescriptionTextArea")), 60);
