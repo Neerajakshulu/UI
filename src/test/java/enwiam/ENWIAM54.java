@@ -62,8 +62,8 @@ public class ENWIAM54 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername08"));
-			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("sru_steam08"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
+			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -90,8 +90,8 @@ public class ENWIAM54 extends TestBase {
 			ob.navigate().to(host);
 
 			// Making the Steam account Neon Active
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_steam08"),
-					LOGIN.getProperty("sru_steampw08"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
 			String firstAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
@@ -113,10 +113,10 @@ public class ENWIAM54 extends TestBase {
 
 			// Login to New social account and merge
 			try {
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername08"),
-						LOGIN.getProperty("sru_fbpwd08"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw08"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user is able to link");
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_HEADER_NEWSFEED_CSS);
@@ -200,9 +200,9 @@ public class ENWIAM54 extends TestBase {
 		try {
 
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("sru_fbusername08")));
+					LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_steam08")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");
@@ -220,7 +220,7 @@ public class ENWIAM54 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("sru_steam08")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 

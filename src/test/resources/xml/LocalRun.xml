@@ -383,13 +383,6 @@
 		</classes>
 	</test>
 
-	<test name="ForwardMergeScenario002">
-		<classes>
-			<class name="enwiam.ENWIAM54">
-			</class>
-		</classes>
-	</test>
-
 	<test name="RandomMergeScenario001">
 		<classes>
 			<class name="enwiam.ENWIAM55">
@@ -397,15 +390,7 @@
 		</classes>
 	</test>
 
-
-	<test name="RandomMergeScenarioENW001">
-		<classes>
-			<class name="enwiam.ENWIAM59">
-			</class>
-		</classes>
-	</test>
-
-	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
+   <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enwiam.ENWIAM00018"></class>
 			<class name="enwiam.ENWIAM080"></class>
@@ -416,6 +401,8 @@
 			<class name="enwiam.ENWIAM091"></class>
 			<class name="enwiam.ENWIAM58"></class>
 			<class name="enwiam.ENWIAM56"></class>
+			<class name="enwiam.ENWIAM59"></class>
+			<class name="enwiam.ENWIAM54"></class>
 		</classes>
 	</test>
 
