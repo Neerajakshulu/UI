@@ -45,10 +45,11 @@ public class Authoring extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public int getCommentCount() throws InterruptedException {
-		BrowserWaits.waitTime(15);
+		BrowserWaits.waitTime(2);
+		//Commented by KR
 		waitForPageLoad(ob);
-		waitForAjax(ob);
-		scrollingToElementofAPage();
+		//waitForAjax(ob);
+		//scrollingToElementofAPage();
 		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()),
 				180);
 		String commentSizeBeforeAdd = ob
@@ -66,28 +67,32 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		BrowserWaits.waitTime(15);
+		//BrowserWaits.waitTime(15);
 
-		WebElement commentArea = ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
-		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		// jsClick(ob,commentArea);
-
-		// Used points class to get x and y coordinates of element.
-		Point point = commentArea.getLocation();
-		// int xcord = point.getX();
-		int ycord = point.getY();
-		ycord = ycord + 200;
-		JavascriptExecutor jse = (JavascriptExecutor) ob;
-		jse.executeScript("scroll(0," + ycord + ");");
-		BrowserWaits.waitTime(2);
-		jsClick(ob, commentArea);
-		commentArea.clear();
+//		WebElement commentArea = ob
+//				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+//		System.out.println("Attribute-->" + commentArea.getAttribute("fr-placeholder"));
+//		// jsClick(ob,commentArea);
+//
+//		// Used points class to get x and y coordinates of element.
+//		Point point = commentArea.getLocation();
+//		// int xcord = point.getX();
+//		int ycord = point.getY();
+//		ycord = ycord + 200;
+//		JavascriptExecutor jse = (JavascriptExecutor) ob;
+//		jse.executeScript("scroll(0," + ycord + ");");
+//		BrowserWaits.waitTime(2);
+//		jsClick(ob, commentArea);
+//		commentArea.clear();
+		
+		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
+		commentArea.click();
+		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 		String comment = addComments + RandomStringUtils.randomNumeric(3);
-		commentArea.sendKeys(comment);
+		innerTextBox.sendKeys(comment);
 		// new
 		// Actions(ob).moveToElement(commentArea).sendKeys(addComments).build().perform();
-		Thread.sleep(3000);// after entering the comments wait for submit button
+		Thread.sleep(1000);// after entering the comments wait for submit button
 							// to get enabled or disabled
 	}
 
@@ -95,21 +100,26 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
-		BrowserWaits.waitTime(5);
-		ob
-		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
-		WebElement commentArea = ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
-		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
-		commentArea.clear();
+		BrowserWaits.waitTime(1);
+		//commented by KR
+//		ob
+//		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
+//		WebElement commentArea = ob
+//				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
+//		System.out.println("Attribute-->" + commentArea.getAttribute("placeholder"));
+//		commentArea.clear();
 		
+		// Added by KR
+		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
+		commentArea.click();
+		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
+		innerTextBox.clear();
 		for(int i=0;i<addComments.length();i++){
-			commentArea.sendKeys(addComments.charAt(i)+"");
-			Thread.sleep(500);
+			innerTextBox.sendKeys(addComments.charAt(i)+"");
+			Thread.sleep(100);
 			}
 		
-		
-		Thread.sleep(2000);// after entering the comments wait for submit button
+		Thread.sleep(100);// after entering the comments wait for submit button
 							// to get enabled or disabled
 	}
 	
@@ -134,7 +144,9 @@ public class Authoring extends TestBase {
 	public void validateCommentAdd(ExtentTest test, int expCommentCount) throws Exception {
 		int commentCount = getCommentCount();
 
-		System.out.println("After-->" + commentSizeAfterAdd);
+		//Commented by KR
+		//System.out.println("After-->" + commentSizeAfterAdd);
+		System.out.println("After-->" + commentCount);
 		test.log(LogStatus.INFO, "before-->" + expCommentCount);
 		test.log(LogStatus.INFO, "After-->" + commentCount);
 		if (!(commentCount > expCommentCount)) {
@@ -145,7 +157,8 @@ public class Authoring extends TestBase {
 	}
 
 	public void updateComment(ExtentTest test, String steComment) throws Exception {
-		BrowserWaits.waitTime(10);
+		//commented by KR
+		BrowserWaits.waitTime(3);
 		scrollingToElementofAPage();
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()), 40);
@@ -159,7 +172,9 @@ public class Authoring extends TestBase {
 		System.out.println("no of comment areas enabled-->" + commentArea.size());
 		commentArea.get(1).clear();
 		commentArea.get(1).sendKeys(steComment);
-		BrowserWaits.waitTime(5);
+		
+		//commented by KR
+		BrowserWaits.waitTime(2);
 		List<WebElement> subButtons = ob.findElements(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_SUBMIT_BUTTON_CSS.toString()));
 		System.out.println("Buttons available---2--->" + subButtons);
@@ -167,11 +182,15 @@ public class Authoring extends TestBase {
 			System.out.println("Button Text-->" + subButton.getText());
 			if (subButton.getText().trim().equalsIgnoreCase("Submit")) {
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
+				//Added by KR
+				//scrollElementIntoView(ob,subButton);
+				
 				executor.executeScript("arguments[0].click();", subButton);
 				waitForPageLoad(ob);
 				break;
 			}
 		}
+		BrowserWaits.waitTime(3);
 		test.log(LogStatus.INFO, "Comment is updated");
 	}
 
