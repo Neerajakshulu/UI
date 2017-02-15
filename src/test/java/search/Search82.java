@@ -66,13 +66,13 @@ public class Search82 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("searchBox_textBox")), 120);
 
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-
+			waitForElementTobeVisible(ob,By.id("single-button"),30);
 			ob.findElement(By.id("single-button")).click();
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 120);
 

@@ -68,6 +68,7 @@ public class Search111 extends TestBase {
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			BrowserWaits.waitTime(3);
 			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 
 			// checking for Default sort option
@@ -85,7 +86,7 @@ public class Search111 extends TestBase {
 			System.out.println(afterScrollSize.size());
 
 			try {
-				Assert.assertTrue(afterScrollSize.size() > beforeScrollSize.size());
+				Assert.assertTrue(afterScrollSize.size()>beforeScrollSize.size());
 				test.log(LogStatus.PASS, "More people search results are displayed when user scroll's down");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Scroll down is not displaying more results / Results are less");// extent

@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -56,7 +57,6 @@ public class Search114 extends TestBase {
 		try {
 
 			String search_query = "cat dog";
-
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -72,13 +72,14 @@ public class Search114 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForAllElementsToBePresent(ob,By
-					.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()) ,30);
+			BrowserWaits.waitTime(3);
+			waitForAllElementsToBePresent(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()), 30);
+
 			List<WebElement> content_type_tiles = ob.findElements(By
 					.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
-			content_type_tiles.get(2).click();
-			waitForAjax(ob);
+
+			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 			jsClick(ob, searchResults.get(8));
 			Thread.sleep(6000);
@@ -96,7 +97,6 @@ public class Search114 extends TestBase {
 			try {
 				content_type_tiles = ob.findElements(By
 						.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
-
 				Assert.assertTrue(content_type_tiles.get(2).findElement(By.xpath("parent::li")).getAttribute("class")
 						.contains("active"));
 				test.log(LogStatus.PASS,

@@ -64,16 +64,13 @@ public class Search112 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			Thread.sleep(3000);
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 50);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 50);
 			// Searching for people
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("John");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//waitForAjax(ob);
+			BrowserWaits.waitTime(4);
 			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);

@@ -69,11 +69,10 @@ public class Search43 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+			//jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())));
+             waitForAjax(ob);
 			// Check the filter is collapsed by default
 			collapseFilter();
 			BrowserWaits.waitTime(5);
@@ -133,6 +132,7 @@ public class Search43 extends TestBase {
 
 	private void collapseFilter() {
 		// Finding out the types filer in refine panel
+		waitForElementTobeVisible(ob,By.cssSelector("div[class=panel-heading]"),40);
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(2);
 		WebElement downArrow = documentTypePanelHeading
