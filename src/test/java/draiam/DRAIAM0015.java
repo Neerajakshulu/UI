@@ -61,7 +61,7 @@ public class DRAIAM0015 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUSER0015"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername15"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -81,8 +81,8 @@ public class DRAIAM0015 extends TestBase {
 			ob.navigate().to(host);
 			try {
 
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUSER0015"),
-						LOGIN.getProperty("DRAUSERPWD15"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername15"),
+						LOGIN.getProperty("sru_fbpwd15"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 
 				pf.getBrowserWaitsInstance(ob)
@@ -117,8 +117,8 @@ public class DRAIAM0015 extends TestBase {
 				try {
 
 					ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0015"),
-							LOGIN.getProperty("DRAUSERPWD15"));
+					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("sru_fbusername15"),
+							LOGIN.getProperty("sru_fbpwd15"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
@@ -206,7 +206,7 @@ public class DRAIAM0015 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAUSER0015")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("sru_fbusername15")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
@@ -223,9 +223,9 @@ public class DRAIAM0015 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRAUSER0015")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("sru_fbusername15")));
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUSER0015")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("sru_fbusername15")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");

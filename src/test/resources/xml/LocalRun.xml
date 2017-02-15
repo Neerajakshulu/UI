@@ -309,7 +309,7 @@
 		</classes>
 	</test>
 
-	<test name="ENWIAM62">
+	<test name="ENWIAM62" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enwiam.ENWIAM62"></class>
 		</classes>
