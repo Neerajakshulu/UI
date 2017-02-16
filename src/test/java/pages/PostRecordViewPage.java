@@ -762,7 +762,7 @@ public class PostRecordViewPage extends TestBase {
 
 		} else {
 			flagOrUnflagAPost();
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(3);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
 			Assert.assertTrue(attribute.contains("fa-flag-o"));
@@ -774,13 +774,18 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on FLAG or UNFLAG on the comment
+	 * @throws InterruptedException 
 	 */
-	private void flagOrUnflagAPost() {
+	private void flagOrUnflagAPost() throws InterruptedException {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
-				40);
-		jsClick(ob, ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		BrowserWaits.waitTime(4);
+		//Commented by KR
+//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+//				40);
+		ob.findElement(By.xpath("//span[ng-transclude[span[text()='Offensive']]]/preceding-sibling::span")).click();
+//		jsClick(ob, ob
+//				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		BrowserWaits.waitTime(2);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}

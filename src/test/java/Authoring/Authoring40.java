@@ -73,7 +73,9 @@ public class Authoring40 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			//ob.navigate().back();
+			//ob.navigate().back();
+			//pf.getProfilePageInstance(ob).clickOnFirstPost();
 
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).verifyPostCreationDate());

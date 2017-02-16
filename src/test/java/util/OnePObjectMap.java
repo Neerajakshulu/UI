@@ -267,7 +267,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS("h2[class^='wui-content-title']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS("div[class='ne-publication__header'] div[class='wui-subtitle ne-user-profile-object-name ng-scope'] a"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS("div[class='ne-publication__header'] div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
-	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='body ne-publication__body--post']"),
+	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='ne-publication__body--post wui-large-text wui-large-text--serif fr-view']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='ne-publication__header'] span[class^='ne-publication__metadata']"),
 	HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS("div[data-ng-show='vm.isCurrentUsersProfile']"),
 	// HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),

@@ -76,7 +76,7 @@ public class Authoring45 extends TestBase {
 			pf.getProfilePageInstance(ob).addExternalLinkToPostContent(URL);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
-			pf.getProfilePageInstance(ob).clickFirstPostTitle();
+			//pf.getProfilePageInstance(ob).clickFirstPostTitle();
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(URL));
 				test.log(LogStatus.PASS, "Post is published with external link");
