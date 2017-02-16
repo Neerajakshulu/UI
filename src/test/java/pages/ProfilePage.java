@@ -597,8 +597,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public boolean validatePostErrorMessage(String expErrorMsg) throws Exception {
 		boolean result = false;
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
 		String actErrorMessage = ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString())).getText();
 		if (expErrorMsg.equalsIgnoreCase(actErrorMessage)) {

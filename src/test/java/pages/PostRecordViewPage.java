@@ -96,9 +96,9 @@ public class PostRecordViewPage extends TestBase {
 	 * Method to click on EDIT post icon in post record view
 	 */
 	public void clickOnEditButton() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString()),
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
 				180);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString())));
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString())));
 	}
 
 	/**

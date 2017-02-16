@@ -67,7 +67,7 @@ public class Authoring extends TestBase {
 	public void enterArticleComment(String addComments) throws InterruptedException {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
-		//BrowserWaits.waitTime(15);
+		BrowserWaits.waitTime(8);
 
 //		WebElement commentArea = ob
 //				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()));
@@ -87,6 +87,7 @@ public class Authoring extends TestBase {
 		
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
+		BrowserWaits.waitTime(2);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 		String comment = addComments + RandomStringUtils.randomNumeric(3);
 		innerTextBox.sendKeys(comment);
@@ -112,11 +113,12 @@ public class Authoring extends TestBase {
 		// Added by KR
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
+		BrowserWaits.waitTime(1);
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
 		innerTextBox.clear();
 		for(int i=0;i<addComments.length();i++){
 			innerTextBox.sendKeys(addComments.charAt(i)+"");
-			Thread.sleep(100);
+			Thread.sleep(300);
 			}
 		
 		Thread.sleep(100);// after entering the comments wait for submit button
