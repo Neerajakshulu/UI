@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -206,9 +207,16 @@ public class RCC021 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+			pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			
 			try {
-				pf.getGroupDetailsPage(ob).validateGDUrl();
+				
+				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
 			} catch (Throwable t) {
@@ -356,10 +364,15 @@ public class RCC021 extends TestBase {
 
 			}
 
-			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
+		pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+		pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
+		pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+		pf.getGmailLoginPage(ob).clickonGoogleContinue();
 			try {
-				pf.getGroupDetailsPage(ob).validateGDUrl();
+				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
 			} catch (Throwable t) {

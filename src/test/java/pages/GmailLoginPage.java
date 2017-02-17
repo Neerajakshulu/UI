@@ -59,6 +59,21 @@ public class GmailLoginPage extends TestBase {
 		}
 	}
 
+	public void clickonSwitchtoaccountinGooglepage() throws Exception {
+
+		String PARENT_WINDOW = ob.getWindowHandle();
+		waitForNumberOfWindowsToEqual(ob, 2);
+		Set<String> child_window_handles = ob.getWindowHandles();
+		for (String child_window_handle : child_window_handles) {
+			if (!child_window_handle.equals(PARENT_WINDOW)) {
+				ob.switchTo().window(child_window_handle);
+				
+         pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_SWITCH_TO_ACCOUNT_GOOGLE_XPATH);
+         
+         //ob.switchTo().window(PARENT_WINDOW);
+	}
+		}
+	}
 	public boolean verifyEmailSubject() throws Exception {
 		String OriginalSubject = "Project Neon Group invitation";
 		BrowserWaits.waitTime(5);
@@ -72,28 +87,18 @@ public class GmailLoginPage extends TestBase {
 			return false;
 
 	}
-	
-	public void LogoutGmail() throws Exception
-	{
+
+	public void LogoutGmail() throws Exception {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_PROFILE_CLICK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_LOGOUT_BUTTON_CSS);
 	}
-	
 
-	public boolean verifyEmailContent(String ReceiverUname,String Title,String SenderUserName) throws Exception {
+	public boolean verifyEmailContent(String ReceiverUname, String Title, String SenderUserName) throws Exception {
 		boolean result = false;
-		String[] emailcontent = {"Project Neon",
-				                 "Project Neon Group Invitation",
-				                 "Thomson Reuters Project Neon",
-				                 ReceiverUname,
-				                 "you've been invited to join a project", 
-				                 SenderUserName,
-				                 Title,
-				                 "I've created a group for our team to share research findings.",
-				                 "View invitation",
-				                 "The Project Neon team" };
-		
-		
+		String[] emailcontent = { "Project Neon", "Project Neon Group Invitation", "Thomson Reuters Project Neon",
+				ReceiverUname, "you've been invited to join a project", SenderUserName, Title,
+				"I've created a group for our team to share research findings.", "View invitation",
+				"The Project Neon team" };
 
 		List<String> list = Arrays.asList(emailcontent);
 
@@ -109,5 +114,45 @@ public class GmailLoginPage extends TestBase {
 		}
 		return result;
 	}
+	
+	public void clickonGoogleContinue() throws Exception
+	{
+		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_CLICK_CONTINUE_XPATH.toString())).click();
+		BrowserWaits.waitTime(5);
+	}
+	public void signinGoogleWithoutSwitchingWindow(String username,String pwd) throws Exception
+	{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+				OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(
+				OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_USERNAME_CSS, username);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_NEXT_CSS);
+		pf.getBrowserActionInstance(ob)
+				.enterFieldValue(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_PASSWORD_CSS, pwd);
+		pf.getBrowserActionInstance(ob)
+				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS);
+	}
 
+	public boolean validateGDUrlWithoutSwitchingWindow() {
+		boolean result=false;
+		
+					if(ob.getCurrentUrl().contains("drive.google.com"))
+					{
+				
+				result= true;	
+		}
+	
+		return result;
+	}
+	
+	public String switchToMainWindow(WebDriver driver) {
+		System.out.println("Closing the current browser");
+		driver.getWindowHandles().remove(driver.getWindowHandle());
+		ob.close();
+		driver.switchTo().window(mainWindow);
+		return mainWindow;
+	}
+	
+	
 }
