@@ -372,7 +372,7 @@ public class RCC021 extends TestBase {
 			try {
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
-				switchToMainWindow(ob);
+				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
 			} catch (Throwable t) {
