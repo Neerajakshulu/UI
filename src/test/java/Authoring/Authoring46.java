@@ -143,7 +143,7 @@ public class Authoring46 extends TestBase {
 			
 			//Added by KR
 			WebElement editCommentElement = ob
-					.findElement(By.xpath("//button[@class='wui-mini-btn wui-mini-btn--secondary'][1]"));
+					.findElement(By.xpath("//button[@class='wui-mini-btn wui-mini-btn--secondary']"));
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
 
