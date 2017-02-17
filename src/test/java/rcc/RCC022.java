@@ -204,17 +204,25 @@ public class RCC022 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+			pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			
 			try {
-				pf.getGroupDetailsPage(ob).validateGDUrl();
+				
+				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for article");
+						"GD doc is opened correctly for post");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for article",
+						"GD doc is not opened correctly for post",
 						"_GD_title_dec_not_updated");
 
 			}
+			
 			
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
 			try {
@@ -355,17 +363,25 @@ public class RCC022 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
+			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+			pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			
 			try {
-				pf.getGroupDetailsPage(ob).validateGDUrl();
+				
+				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for article");
+						"GD doc is opened correctly for post");
 			} catch (Throwable t) {
 				logFailureDetails(test, t,
-						"GD doc is not opened correctly for article",
+						"GD doc is not opened correctly for post",
 						"_GD_title_dec_not_updated");
 
 			}
+			
 			
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
