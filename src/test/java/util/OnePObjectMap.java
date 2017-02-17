@@ -423,7 +423,10 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_LI_SHARE_MODAL_CANCEL_BUTTON_CSS("div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.cancel()']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_CANCEL_BUTTON_CSS("button[ng-click^='cancelEdit']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS("div[class=ne-comment-list__comment-content] div[class='wui-textarea__error']"),
-	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
+	//Commented by KR
+	//RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
+	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_XPATH("div[@class='fr-box fr-basic fr-bottom']/descendant::div[@class='fr-element fr-view']"),
+	
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS("div[class='ne-publication__header'] div[class='wui-descriptor']"),

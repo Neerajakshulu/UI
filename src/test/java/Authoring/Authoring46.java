@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -53,7 +54,6 @@ public class Authoring46 extends TestBase {
 
 	@Test
 	public void testOpenApplication() throws Exception {
-
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		try {
@@ -133,21 +133,35 @@ public class Authoring46 extends TestBase {
 			test.log(LogStatus.INFO, "Min and Max Length Comment Validation");
 			// System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
 			BrowserWaits.waitTime(10);
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()), 180);
+			//Commented by KR
+//			waitForElementTobeVisible(ob,
+//					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()), 180);
+//			WebElement editCommentElement = ob
+//					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
+//			JavascriptExecutor exe = (JavascriptExecutor) ob;
+//			exe.executeScript("arguments[0].click();", editCommentElement);
+			
+			//Added by KR
 			WebElement editCommentElement = ob
-					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_BUTTON_CSS.toString()));
+					.findElement(By.xpath("//button[@class='wui-mini-btn wui-mini-btn--secondary'][1]"));
 			JavascriptExecutor exe = (JavascriptExecutor) ob;
 			exe.executeScript("arguments[0].click();", editCommentElement);
+
 			test.log(LogStatus.INFO, "minCharCount:" + minCharCount);
+			//Added by KR
+			scrollingToElementofAPage();
+			
 			WebElement commentArea = ob
-					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS.toString()));
+					.findElement(By.xpath("//div[@class='fr-box fr-basic fr-bottom']/descendant::div[@class='fr-element fr-view']"));
 			commentArea.clear();
 			commentArea.sendKeys(RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
-			Thread.sleep(2000);// after entering the comments wait for submit
-								// button to get enabled or disabled
-
+			//Added by KR to fix issue - Error was not displaying, so adding 1 number and deleting it.
+			commentArea.sendKeys(Keys.NUMPAD6, Keys.BACK_SPACE);
+			
 			BrowserWaits.waitTime(5);
+			//Added by KR
+			scrollingToElementofAPage();
+			
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
@@ -157,13 +171,16 @@ public class Authoring46 extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 			System.out.println("MaxCharCount-->" + (maxCharCount.substring(0, 4)));
-			commentArea = ob
-					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS.toString()));
+//			commentArea = ob
+//					.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_XPATH.toString()));
 			commentArea.clear();
 			commentArea.sendKeys(RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
 			Thread.sleep(2000);// after entering the comments wait for submit
 								// button to get enabled or disabled
 			BrowserWaits.waitTime(5);
+			//Added by KR
+			scrollingToElementofAPage();
+			
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 30);
 			String maxValidErrMsg = pf.getBrowserActionInstance(ob)

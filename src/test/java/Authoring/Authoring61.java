@@ -98,7 +98,7 @@ public class Authoring61 extends TestBase {
 
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
-			// pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
+			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			waitForAjax(ob);
 			String postTitleAfterEditing = ob
 					.findElement(By

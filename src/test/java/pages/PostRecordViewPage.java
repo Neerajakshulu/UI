@@ -94,10 +94,13 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on EDIT post icon in post record view
+	 * @throws InterruptedException 
 	 */
-	public void clickOnEditButton() {
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
-				180);
+	public void clickOnEditButton() throws InterruptedException {
+		// Commented by KR
+//		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
+//				180);
+		BrowserWaits.waitTime(5);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString())));
 	}
 
@@ -757,7 +760,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(!attribute.contains("fa-flag-o"));
+			Assert.assertTrue(!attribute.contains("fa fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to flag the post");
 
 		} else {
@@ -765,7 +768,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(3);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("fa-flag-o"));
+			Assert.assertTrue(attribute.contains("fa fa-flag"));
 			test.log(LogStatus.PASS, "User is able to Unflag the post");
 
 		}
@@ -777,15 +780,18 @@ public class PostRecordViewPage extends TestBase {
 	 * @throws InterruptedException 
 	 */
 	private void flagOrUnflagAPost() throws InterruptedException {
+		BrowserWaits.waitTime(2);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
-		BrowserWaits.waitTime(4);
+		BrowserWaits.waitTime(3);
 		//Commented by KR
 //		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
 //				40);
-		ob.findElement(By.xpath("//span[ng-transclude[span[text()='Offensive']]]/preceding-sibling::span")).click();
+		
+		ob.findElement(By.xpath("//span[ng-transclude[span[text()='Other']]]/preceding-sibling::span")).click();
+
 //		jsClick(ob, ob
 //				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(3);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}
