@@ -88,7 +88,7 @@ public class ENW041 extends TestBase {
 	private void LoginToENW() throws Exception {
 		String header_Expected = "Thomson Reuters Project Neon";
 		ob.get("https://dev-stable.1p.thomsonreuters.com/#/login?app=endnote");
-		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin1(LOGIN.getProperty("SUTILITYCUSTOMER"),
+		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("SUTILITYCUSTOMER"),
 				(LOGIN.getProperty("MARKETUSERPASSWORD")));
 		BrowserWaits.waitTime(8);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters",
