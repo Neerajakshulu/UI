@@ -391,8 +391,7 @@ public class RCC021 extends TestBase {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
-	
-			
+	  		
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();

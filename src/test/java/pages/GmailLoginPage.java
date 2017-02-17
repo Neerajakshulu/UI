@@ -120,6 +120,7 @@ public class GmailLoginPage extends TestBase {
 		ob.findElement(By.xpath(OnePObjectMap.RCC_GMAIL_CLICK_CONTINUE_XPATH.toString())).click();
 		BrowserWaits.waitTime(5);
 	}
+	
 	public void signinGoogleWithoutSwitchingWindow(String username,String pwd) throws Exception
 	{
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
