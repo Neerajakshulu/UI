@@ -79,12 +79,12 @@ public class Watchlist017 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_watchlist_image"))).click();
 
 			// Wait until select a watch list model loads
-			waitForElementTobeVisible(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
+			waitForElementTobeVisible(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 10);
 			// waitForElementTobeVisible(ob, By.xpath("//div[@class='dropdown-menu ne-action-dropdown']"), 5);
 			// Select the first watch list from the model
 			// waitForElementTobeClickable(ob,
 			// By.xpath("//a[@class='ne-action-dropdown__item-content']"), 5);
-			waitForElementTobeClickable(ob, By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"), 5);
+			waitForElementTobeClickable(ob, By.xpath("//span[@class='ne-action-dropdown__item-text ng-binding']"), 10);
 
 			try {
 				// Finding the no of watch lists
@@ -103,7 +103,7 @@ public class Watchlist017 extends TestBase {
 			}
 
 			// Step2: Verify that every user watch list is private by default
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("watchlist_link")), 60);
 			BrowserWaits.waitTime(2);
 			ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))).click();
 			BrowserWaits.waitTime(4);

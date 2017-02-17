@@ -83,7 +83,7 @@ public class Watchlist006 extends TestBase {
 			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			// Getting watch button list for patents
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_watchlist_image")), 60);
 			List<WebElement> watchButtonList = ob.findElements(By.xpath(OR.getProperty("search_watchlist_image")));
 			WebElement watchButton;
 			

@@ -68,7 +68,8 @@ public class Authoring18 extends TestBase {
 			pf.getHFPageInstance(ob).searchForText("Biology");
 			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
-			BrowserWaits.waitTime(10);
+			//Commented by KR
+			//BrowserWaits.waitTime(10);
 			waitForAllElementsToBePresent(ob,
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
 			List<WebElement> commentsList = ob

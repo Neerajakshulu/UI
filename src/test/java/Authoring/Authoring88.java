@@ -109,7 +109,12 @@ public class Authoring88 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS.toString())));
 			BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+			//Added by KR
+			ob.navigate().back();
+			ob.navigate().back();
+			
 			pf.getProfilePageInstance(ob).clickPostsTab();
+
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			try {
 				

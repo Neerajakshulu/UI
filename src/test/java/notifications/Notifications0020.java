@@ -491,9 +491,11 @@ public class Notifications0020 extends TestBase {
 				logger.info("Document Title in record view page :" + doc_title);
 				if (document_title.contains(doc_title)) {
 					BrowserWaits.waitTime(4);
-					waitForElementTobeVisible(ob,
-							By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
-					pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS);
+//					waitForElementTobeVisible(ob,
+//							By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
+					pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
+					pf.getAuthoringInstance(ob).clickAddCommentButton();
+					//pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS);
 					// jsClick(ob,
 					// ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
 					/*
@@ -501,13 +503,13 @@ public class Notifications0020 extends TestBase {
 					 * RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
 					 * .sendKeys(OR.getProperty("COMMENT_TEXT"));
 					 */
-					pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS,
-							OR.getProperty("COMMENT_TEXT"));
-
-					BrowserWaits.waitTime(5);
-					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString()), 30);
-					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString())));
-					BrowserWaits.waitTime(6);
+//					pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS,
+//							OR.getProperty("COMMENT_TEXT"));
+//
+//					BrowserWaits.waitTime(5);
+//					waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString()), 30);
+//					jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ADD_COMMENT_BUTTON_XPATH.toString())));
+//					BrowserWaits.waitTime(6);
 				} else {
 					logger.info("Document title is not match with record with page doucument title");
 					closeBrowser();

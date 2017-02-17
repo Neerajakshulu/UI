@@ -5,6 +5,9 @@ import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -129,8 +132,15 @@ public class Authoring8 extends TestBase {
 			// System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
+//			waitForElementTobeVisible(ob,
+//					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
+			//Added by KR
+			//WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
+			//innerTextBox.sendKeys(Keys.SPACE);
+			//innerTextBox.sendKeys(Keys.BACK_SPACE);
+			 //((JavascriptExecutor)ob).executeScript("document.getElementByXpath('//div[@class='fr-element fr-view']').value='Q '");
+
+			
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Min Validation Error

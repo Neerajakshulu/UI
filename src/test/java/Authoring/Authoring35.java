@@ -89,6 +89,7 @@ public class Authoring35 extends TestBase {
 				pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			}
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickOnEditButton();
 			test.log(LogStatus.INFO, "Initiated post edit action");
 		} catch (Throwable t) {

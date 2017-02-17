@@ -499,16 +499,24 @@ public class Notifications0008 extends TestBase {
 	private boolean publishPost() throws Exception {
 		boolean status = false;
 		try {
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("home_page_publish_post_link")), 3000);
-			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
-			pf.getProfilePageInstance(ob).enterPostTitle(postString);
-			logger.info("Entered Post Title");
+//			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("home_page_publish_post_link")), 3000);
+//			ob.findElement(By.xpath(OR.getProperty("home_page_publish_post_link"))).click();
+//			pf.getProfilePageInstance(ob).enterPostTitle(postString);
+//			logger.info("Entered Post Title");
+//			String content = RandomStringUtils.randomAlphanumeric(510);
+//			pf.getProfilePageInstance(ob).enterPostContent(content);
+//			logger.info("Entered Post Content");
+//			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+//			logger.info("Published the post");
+//			BrowserWaits.waitTime(3);
 			String content = RandomStringUtils.randomAlphanumeric(510);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			pf.getProfilePageInstance(ob).enterPostTitle(postString);
+			//test.log(LogStatus.INFO, "Entered Post Title");
 			pf.getProfilePageInstance(ob).enterPostContent(content);
-			logger.info("Entered Post Content");
+			//test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-			logger.info("Published the post");
-			BrowserWaits.waitTime(3);
+			//test.log(LogStatus.INFO, "Published the post");
 			status = true;
 		} catch (Exception e) {
 			logger.error("Post creation problem" + e.getMessage());

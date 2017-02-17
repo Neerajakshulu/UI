@@ -106,7 +106,7 @@ public class Authoring4 extends TestBase {
 		try {
 			// Get Total No.of comments
 			totalProfileCommentsBeforeAdd = getProfleComments();
-			System.out.println("comments Before-->" + totalProfileCommentsBeforeAdd);
+			System.out.println("comment count Before adding new comment-->" + totalProfileCommentsBeforeAdd);
 			System.out.println();
 			pf.getAuthoringInstance(ob).searchArticle(article);
 			pf.getAuthoringInstance(ob).chooseArticle();
@@ -117,7 +117,7 @@ public class Authoring4 extends TestBase {
 			pf.getAuthoringInstance(ob).validateCommentAdd(test, expCount);
 			pf.getAuthoringInstance(ob).validateViewComment(test, addComments);
 			totalProfileCommentsAfterAdd = getProfleComments();
-			System.out.println("comments After-->" + totalProfileCommentsAfterAdd);
+			System.out.println("comment count After adding new comment-->" + totalProfileCommentsAfterAdd);
 			// Validate Comments count increased or not
 			if (!(totalProfileCommentsAfterAdd > totalProfileCommentsBeforeAdd)) {
 				status = 2;

@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -75,6 +76,11 @@ public class Authoring87 extends TestBase {
 			pf.getProfilePageInstance(ob).addExternalLinkToPostContent(host + URL);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
+			//Added by KR
+			BrowserWaits.waitTime(2);
+			ob.navigate().back();
+			ob.navigate().back();
+			
 			pf.getProfilePageInstance(ob).clickFirstPostTitle();
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validatePostContentForExternalLink(host + URL));

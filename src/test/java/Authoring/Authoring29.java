@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -74,6 +75,10 @@ public class Authoring29 extends TestBase {
 			test.log(LogStatus.INFO, "Entered Post Content");
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			test.log(LogStatus.INFO, "Published the post");
+			ob.navigate().back();
+			BrowserWaits.waitTime(2);
+			ob.navigate().back();
+			BrowserWaits.waitTime(2);
 			int postCountAfter = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
 

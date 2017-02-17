@@ -597,8 +597,8 @@ public class ProfilePage extends TestBase {
 	 */
 	public boolean validatePostErrorMessage(String expErrorMsg) throws Exception {
 		boolean result = false;
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS);
 		String actErrorMessage = ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS.toString())).getText();
 		if (expErrorMsg.equalsIgnoreCase(actErrorMessage)) {
@@ -658,11 +658,13 @@ public class ProfilePage extends TestBase {
 
 	/**
 	 * Method to click on cancel button in post creation modal
+	 * @throws InterruptedException 
 	 */
-	public void clickOnPostCancelButton() {
-
-		waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()), 120);
+	public void clickOnPostCancelButton() throws InterruptedException {
+		BrowserWaits.waitTime(6);
+		//Commented by KR
+//		waitForElementTobeVisible(ob,
+//				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()), 120);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS.toString()))
 				.click();
 	}
@@ -674,14 +676,25 @@ public class ProfilePage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public int getPostsCount() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(5);
 		waitForAjax(ob);
-		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
-		int count = Integer.parseInt(ob.findElement(
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString())).getText());
-		return count;
+		//commented by KR
+//		pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+//		BrowserWaits.waitTime(5);
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS);
+		
+//		int count = Integer.parseInt(ob.findElement(
+//				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString())).getText());
+		
+		String commentsCount = ob.findElement(
+				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS.toString())).getText();
+		if (commentsCount.contains(",")) {
+			count = Integer.parseInt(commentsCount.replace(",", ""));
+		} else {
+			count = Integer.parseInt(commentsCount);
+		}
+		return count; 
 	}
 
 	public int getDraftPostsCount() throws Exception {
@@ -1043,11 +1056,11 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH);
 		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_KEEP_DRAFT_XPATH.toString())));
-				
+		BrowserWaits.waitTime(5);	
 	}
 
 	public void clickOnDraftPostsTab() throws InterruptedException {
-		BrowserWaits.waitTime(20);
+		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
@@ -1757,8 +1770,10 @@ public class ProfilePage extends TestBase {
 		
 	
 	public void clickOnPostModalCloseButton() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS);
+		//Commented by KR
+//		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
+//				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS);
+		BrowserWaits.waitTime(5);
 		ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_MODAL_CLOSE_BUTTON_CSS.toString()))
 				.click();

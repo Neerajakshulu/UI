@@ -94,11 +94,14 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on EDIT post icon in post record view
+	 * @throws InterruptedException 
 	 */
-	public void clickOnEditButton() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString()),
-				180);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_CSS.toString())));
+	public void clickOnEditButton() throws InterruptedException {
+		// Commented by KR
+//		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString()),
+//				180);
+		BrowserWaits.waitTime(5);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH.toString())));
 	}
 
 	/**
@@ -757,15 +760,15 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(6);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(!attribute.contains("fa-flag-o"));
+			Assert.assertTrue(!attribute.contains("fa fa-flag-o"));
 			test.log(LogStatus.PASS, "User is able to flag the post");
 
 		} else {
 			flagOrUnflagAPost();
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(3);
 			attribute = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString()))
 					.getAttribute("class");
-			Assert.assertTrue(attribute.contains("fa-flag-o"));
+			Assert.assertTrue(attribute.contains("fa fa-flag"));
 			test.log(LogStatus.PASS, "User is able to Unflag the post");
 
 		}
@@ -774,13 +777,21 @@ public class PostRecordViewPage extends TestBase {
 
 	/**
 	 * Method to click on FLAG or UNFLAG on the comment
+	 * @throws InterruptedException 
 	 */
-	private void flagOrUnflagAPost() {
+	private void flagOrUnflagAPost() throws InterruptedException {
+		BrowserWaits.waitTime(2);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_VIEW_POST_FLAG_BUTTON_CSS.toString())).click();
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
-				40);
-		jsClick(ob, ob
-				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		BrowserWaits.waitTime(3);
+		//Commented by KR
+//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+//				40);
+		
+		ob.findElement(By.xpath("//span[ng-transclude[span[text()='Other']]]/preceding-sibling::span")).click();
+
+//		jsClick(ob, ob
+//				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));
+		BrowserWaits.waitTime(3);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}
@@ -1012,14 +1023,27 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS.toString())));
 	}
 
-	public void createComment(String comment) {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()),
-				40);
-		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
-		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
-				.sendKeys(comment);
-		jsClick(ob, ob.findElement(
-				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
+	public void createComment(String comment) throws InterruptedException {
+		//Commented by KR
+//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()),
+//				40);
+//		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));
+//		ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()))
+//				.sendKeys(comment);
+//		jsClick(ob, ob.findElement(
+//				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
+		
+		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
+		commentArea.click();
+		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
+		innerTextBox.clear();
+		for(int i=0;i<comment.length();i++){
+			innerTextBox.sendKeys(comment.charAt(i)+"");
+			Thread.sleep(100);
+			}
+		pf.getAuthoringInstance(ob).clickAddCommentButton();
+		Thread.sleep(100);// after entering the comments wait for submit button
+							// to get enabled or disabled
 	}
 
 	public String getRecordType() {
