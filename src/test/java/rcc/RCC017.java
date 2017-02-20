@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -71,6 +72,7 @@ public class RCC017 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Group is created successfully: " + title);
+			BrowserWaits.waitTime(8);
 			pf.getGroupDetailsPage(ob).clickPatentstab();
 					
 			try {
