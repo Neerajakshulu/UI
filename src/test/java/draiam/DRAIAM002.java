@@ -118,6 +118,10 @@ public class DRAIAM002 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 				BrowserWaits.waitTime(2);
 				validateLinkedAccounts(2, accountType);
+				
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
+				BrowserWaits.waitTime(2);
+								
 				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 				test.log(LogStatus.PASS, "Forward Merge is happened");
 				if (secondAccountProfileName.contains(firstAccountProfileName)) {
@@ -134,6 +138,9 @@ public class DRAIAM002 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_link")));
 
 			}
+			
+			BrowserWaits.waitTime(2);
+			closeBrowser();
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
