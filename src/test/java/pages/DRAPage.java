@@ -334,7 +334,7 @@ public class DRAPage extends TestBase {
 
 			}
 
-			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Thomson Reuters | Project Neon"))
+			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Clarivate Analytics"))
 					|| accountType.equalsIgnoreCase(type1.trim())) {
 				String emailid = null;
 				emailid = element.findElement(By.cssSelector("span[class='ng-binding']")).getText();
