@@ -7,6 +7,7 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import base.TestBase;
 import util.BrowserWaits;
@@ -67,6 +68,8 @@ public class GmailLoginPage extends TestBase {
 		for (String child_window_handle : child_window_handles) {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
+				
+				
 				
          pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GMAIL_SWITCH_TO_ACCOUNT_GOOGLE_XPATH);
          
@@ -135,7 +138,8 @@ public class GmailLoginPage extends TestBase {
 				.click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_GOOGLE_LOGIN_CSS);
 	}
 
-	public boolean validateGDUrlWithoutSwitchingWindow() {
+	public boolean validateGDUrlWithoutSwitchingWindow() throws InterruptedException {
+		BrowserWaits.waitTime(5);
 		boolean result=false;
 		
 					if(ob.getCurrentUrl().contains("drive.google.com"))
@@ -147,13 +151,12 @@ public class GmailLoginPage extends TestBase {
 		return result;
 	}
 	
-	public String switchToMainWindow(WebDriver driver) {
+	public String switchToMainWindow(WebDriver driver)  {
 		System.out.println("Closing the current browser");
 		driver.getWindowHandles().remove(driver.getWindowHandle());
 		ob.close();
 		driver.switchTo().window(mainWindow);
 		return mainWindow;
 	}
-	
 	
 }

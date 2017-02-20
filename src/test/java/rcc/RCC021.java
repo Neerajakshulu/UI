@@ -207,6 +207,7 @@ public class RCC021 extends TestBase {
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+			BrowserWaits.waitTime(5);
 			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
 			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
 			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
@@ -215,6 +216,7 @@ public class RCC021 extends TestBase {
 			try {
 				
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				waitForAjax(ob);
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
@@ -371,7 +373,9 @@ public class RCC021 extends TestBase {
 		pf.getGmailLoginPage(ob).clickonGoogleContinue();
 			try {
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				BrowserWaits.waitTime(5);
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				BrowserWaits.waitTime(5);
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
