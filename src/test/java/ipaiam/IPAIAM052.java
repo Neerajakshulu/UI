@@ -184,6 +184,7 @@ public class IPAIAM052 extends TestBase {
 		}
 		return result;
 		
+		
 	}
 	@AfterTest
 	public void reportTestResult() {
