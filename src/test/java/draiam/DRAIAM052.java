@@ -106,7 +106,7 @@ public class DRAIAM052 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click on not now on the modal");	
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				validateAccounts(1,"Neon");
+				validateAccounts(1,"Clarivate Analytics");
 				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();
