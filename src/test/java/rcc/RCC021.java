@@ -213,11 +213,13 @@ public class RCC021 extends TestBase {
 			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
 			pf.getGmailLoginPage(ob).clickonGoogleContinue();
 			
-			try {
+			try {   
 				
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
 				waitForAjax(ob);
-				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				BrowserWaits.waitTime(8);
+				 pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
+				 BrowserWaits.waitTime(6);
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
