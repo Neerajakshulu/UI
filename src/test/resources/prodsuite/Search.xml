@@ -15,13 +15,13 @@
 	<parameter name="addComments" value="Testing Comments"></parameter>
 	<parameter name="article" value="Biology"></parameter>
 	
-	<test name="Search2">
+	<test name="Search89">
 		<classes>
 			<class name="search.Search2"></class>
 		</classes>
 	</test>
 
-	<test name="Search3">
+	<!-- <test name="Search3">
 		<classes>
 			<class name="search.Search3"></class>
 		</classes>
@@ -202,5 +202,5 @@
 			<class name="search.Search94"></class>
 		</classes>
 	</test>
-
+ -->
 </suite>
