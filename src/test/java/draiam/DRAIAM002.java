@@ -87,7 +87,7 @@ public class DRAIAM002 extends TestBase {
 
 			ob.navigate().to(host);
 
-			// Activating the facebook account
+			// Activating the facebook account  
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAfbuser1"),
 					LOGIN.getProperty("DRAfbpw1"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
