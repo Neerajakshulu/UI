@@ -106,10 +106,9 @@ public class Search89 extends TestBase {
 						.findElements(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']"));
 				// Clicking on the details link
 				
-				BrowserWaits.waitTime(4);
-				if (detailsLink.size() != 0) {
-					jsClick(ob,
-							ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")));
+						if (detailsLink.size() != 0) {
+					BrowserWaits.waitTime(3);
+						ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).click();
 					test.log(LogStatus.PASS, "View in Thomson Innovation link is present in the record view page");
 				} else {
 					test.log(LogStatus.FAIL,
@@ -128,6 +127,7 @@ public class Search89 extends TestBase {
 				// Switching tab
 				List<String> tabs = new ArrayList<String>(ob.getWindowHandles());
 				ob.switchTo().window(tabs.get(1));
+				
 		     waitForElementTobePresent(ob, By.xpath("//div[@id='PAT.TIOR0']"),60);
 				boolean titlePresent = ob.findElements(By.xpath("//div[@id='PAT.TIOR0']")).size() == 1;
 				if (titlePresent) {

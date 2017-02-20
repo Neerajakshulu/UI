@@ -1,22 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Search"  parallel="tests" thread-count="10">
+<suite name="Search" parallel="tests" thread-count="10">
 
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Test B1" preserve-order="true">
-		<classes>
-				<class name="search.Search127"></class>
-			   <class name="search.Search130"></class>
-		</classes>
-	</test>
-	
 	<test name="Test C1">
 		<classes>
-				<class name="search.Search1"></class>
-				
+			<class name="search.Search1"></class>
+
 		</classes>
 	</test>
 
@@ -50,7 +43,7 @@
 		</classes>
 	</test>
 
-	
+
 	<test name="Test B8">
 		<classes>
 			<class name="search.Search8"></class>
@@ -259,7 +252,7 @@
 			<class name="search.Search49"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test B54">
 		<classes>
 			<class name="search.Search54"></class>
@@ -310,7 +303,7 @@
 		</classes>
 	</test>
 
-<test name="Test B67">
+	<test name="Test B67">
 		<classes>
 			<class name="search.Search67"></class>
 		</classes>
@@ -356,7 +349,7 @@
 		</classes>
 	</test>
 
-	
+
 	<test name="Test B78">
 		<classes>
 			<class name="search.Search78"></class>
@@ -483,7 +476,7 @@
 			<class name="search.Search97"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Test B99">
 		<classes>
 			<class name="search.Search99"></class>
@@ -572,7 +565,7 @@
 			<class name="search.Search114"></class>
 		</classes>
 	</test>
-	
+
 	<test name="TestCase_B116">
 		<classes>
 			<class name="search.Search116"></class>
@@ -615,7 +608,7 @@
 		<classes>
 			<class name="search.Search122"></class>
 		</classes>
-	</test> 
+	</test>
 
 	<test name="TestCase_B123">
 		<classes>
@@ -640,30 +633,20 @@
 			<class name="search.Search126"></class>
 		</classes>
 	</test>
-	
-	<!--<test name="TestCase_B127">
-		<classes>
-			<class name="search.Search127"></class>
-		</classes>
-	</test>
-	<test name="TestCase_B129">
-		<classes>
-			<class name="search.Search129"></class>
-		</classes>
-	</test>
-	<test name="TestCase_B130">
-		<classes>
-			<class name="search.Search130"></class>
-		</classes>
-	</test>
-	-->
-	
+
+
 	<test name="TestCase_B128">
 		<classes>
 			<class name="search.Search128"></class>
 		</classes>
 	</test>
 
+	<test name="Test B1" preserve-order="true">
+		<classes>
+			<class name="search.Search127"></class>
+			<class name="search.Search130"></class>
+		</classes>
+	</test>
 
 </suite>
 

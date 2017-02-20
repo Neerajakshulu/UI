@@ -66,7 +66,7 @@ public class IPAIAM052 extends TestBase {
 		}
 		
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERIPA052"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERDRA052"));
 			
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -87,8 +87,8 @@ public class IPAIAM052 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERIPA052"),
-					LOGIN.getProperty("USERPWDIPA052"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA052"),
+					LOGIN.getProperty("USERPWDDRA052"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -98,8 +98,8 @@ public class IPAIAM052 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERIPA052"),
-						LOGIN.getProperty("USERPWDIPA052"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA052"),
+						LOGIN.getProperty("USERPWDDRA052"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
@@ -142,7 +142,7 @@ public class IPAIAM052 extends TestBase {
 	
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
-			Assert.assertTrue(verifyLinkedAccount(linkName, LOGIN.getProperty("USERIPA052")));
+			Assert.assertTrue(verifyLinkedAccount(linkName, LOGIN.getProperty("USERDRA052")));
 			Assert.assertTrue(validateAccountsCount(accountCount));
 			//test.log(LogStatus.PASS,  " account is available and is not linked");
 			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
@@ -183,6 +183,7 @@ public class IPAIAM052 extends TestBase {
 
 		}
 		return result;
+		
 		
 	}
 	@AfterTest

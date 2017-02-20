@@ -596,11 +596,12 @@
 		</classes>
 	</test>
 
-	<test name="DRAIAM052">
+	<test name="DRAIAM052" preserve-order="true" parallel="false"> 
 		<classes>
 			<class name="draiam.DRAIAM052"></class>
 		</classes>
 	</test>
+
 
 	<test name="DRAIAM053">
 		<classes>
@@ -645,7 +646,7 @@
 		</classes>
 	</test>
 
-	<test name="IPA052">
+	<test name="IPA052" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM052"></class>
 		</classes>
