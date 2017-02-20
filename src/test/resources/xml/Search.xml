@@ -6,12 +6,7 @@
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
-	<test name="Test B1" preserve-order="true">
-		<classes>
-				<class name="search.Search127"></class>
-			   <class name="search.Search130"></class>
-		</classes>
-	</test>
+	
 	
 	<test name="Test C1">
 		<classes>
@@ -20,7 +15,7 @@
 		</classes>
 	</test>
 
-	<test name="Test B2">
+	<!-- <test name="Test B2">
 		<classes>
 			<class name="search.Search2"></class>
 		</classes>
@@ -641,22 +636,6 @@
 		</classes>
 	</test>
 	
-	<!--<test name="TestCase_B127">
-		<classes>
-			<class name="search.Search127"></class>
-		</classes>
-	</test>
-	<test name="TestCase_B129">
-		<classes>
-			<class name="search.Search129"></class>
-		</classes>
-	</test>
-	<test name="TestCase_B130">
-		<classes>
-			<class name="search.Search130"></class>
-		</classes>
-	</test>
-	-->
 	
 	<test name="TestCase_B128">
 		<classes>
@@ -664,6 +643,13 @@
 		</classes>
 	</test>
 
-
+<test name="Test B1" preserve-order="true">
+		<classes>
+				<class name="search.Search127"></class>
+			   <class name="search.Search130"></class>
+		</classes>
+	</test>
+ -->
+ 
 </suite>
 
