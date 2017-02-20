@@ -10,7 +10,7 @@
 	
 	<test name="Test C1">
 		<classes>
-				<class name="search.Search1"></class>
+				<class name="search.Search89"></class>
 				
 		</classes>
 	</test>
