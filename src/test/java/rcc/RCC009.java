@@ -67,6 +67,8 @@ public class RCC009 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
+			test.log(LogStatus.PASS, "Group is created by the owner ");
+			BrowserWaits.waitTime(5);
 
 			// Inviting user2
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
