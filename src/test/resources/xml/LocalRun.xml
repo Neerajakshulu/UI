@@ -536,28 +536,19 @@
 
 
 
-	<test name="DRAIAM004">
+	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>
 			<class name="draiam.DRAIAM004"></class>
-		</classes>
-	</test>
-	<test name="DRAIAMAutomatedMerge1" preserve-order="true" parallel="false">
-		<classes>
+			<class name="draiam.DRAIAM003"></class>
 			<class name="draiam.DRAIAM0014"></class>
 			<class name="draiam.DRAIAM0015"></class>
+			<class name="draiam.DRAIAM053"></class>
 		</classes>
 	</test>
-
+	
 	<test name="DRAIAM052" preserve-order="true" parallel="false"> 
 		<classes>
 			<class name="draiam.DRAIAM052"></class>
-		</classes>
-	</test>
-
-
-	<test name="DRAIAM053">
-		<classes>
-			<class name="draiam.DRAIAM053"></class>
 		</classes>
 	</test>
 
@@ -581,8 +572,6 @@
 	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM0002"></class>
-			<class name="draiam.DRAIAM003"></class>
-
 		</classes>
 	</test>
 

@@ -62,7 +62,7 @@ public class DRAIAM053 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERDRA053"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUserNameValid"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -80,8 +80,8 @@ public class DRAIAM053 extends TestBase {
 
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA053"),
-					LOGIN.getProperty("USERPWDDRA053"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
+					LOGIN.getProperty("DRAPasswordValid"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
@@ -95,8 +95,8 @@ public class DRAIAM053 extends TestBase {
 			pf.getDraPageInstance(ob).logoutDRA();
 
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERDRA053"),
-					LOGIN.getProperty("USERPWDDRA053"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUserNameValid"),
+					LOGIN.getProperty("DRAPasswordValid"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon to make it Activated");
 			pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -106,8 +106,8 @@ public class DRAIAM053 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA053"),
-						LOGIN.getProperty("USERPWDDRA053"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
+						LOGIN.getProperty("DRAPasswordValid"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
 				pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
@@ -164,7 +164,7 @@ public class DRAIAM053 extends TestBase {
 	private void validateAccounts(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("USERDRA053")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUserNameValid")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			// test.log(LogStatus.PASS, " account is available and is not
 			// linked");
