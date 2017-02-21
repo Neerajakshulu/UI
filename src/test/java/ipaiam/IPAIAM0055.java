@@ -62,7 +62,7 @@ public class IPAIAM0055 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("IPAUSER0055"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUserNameValid"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -85,8 +85,8 @@ public class IPAIAM0055 extends TestBase {
 			ob.navigate().to(host);
 			try {
 
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("IPAUSER0055"),
-						LOGIN.getProperty("IPAPWD0055"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUserNameValid"),
+						LOGIN.getProperty("DRAPasswordValid"));
 				test.log(LogStatus.PASS, "user has logged in with social account");
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
@@ -122,8 +122,8 @@ public class IPAIAM0055 extends TestBase {
 				try {
 
 					ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
-					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("IPAUSER0055"),
-							LOGIN.getProperty("IPAPWD0055"));
+					pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
+							LOGIN.getProperty("DRAPasswordValid"));
 					pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 					pf.getDraPageInstance(ob).clickOnSignInWithFBOnDRAModal();
@@ -213,7 +213,7 @@ public class IPAIAM0055 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("IPAUSER0055")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("DRAUserNameValid")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Social account is available and is not linked to Steam account");
 
@@ -230,9 +230,9 @@ public class IPAIAM0055 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("IPAUSER0055")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA("Steam", LOGIN.getProperty("DRAUserNameValid")));
 			Assert.assertTrue(
-					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("IPAUSER0055")));
+					pf.getDraPageInstance(ob).verifyLinkedAccountInDRA(linkName, LOGIN.getProperty("DRAUserNameValid")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");

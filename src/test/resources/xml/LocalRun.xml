@@ -543,6 +543,7 @@
 			<class name="draiam.DRAIAM0014"></class>
 			<class name="draiam.DRAIAM0015"></class>
 			<class name="draiam.DRAIAM053"></class>
+			<class name="draiam.DRAIAM053"></class>
 		</classes>
 	</test>
 	
@@ -560,24 +561,14 @@
 
 	<!-- IPAIAM Test cases START -->
 
-	<test name="DRAIAMAutomatedMerge14" preserve-order="true"
-		parallel="false">
-		<classes>
-			<class name="ipaiam.IPAIAM0055"></class>
-			<class name="ipaiam.IPAIAM0056"></class>
-
-		</classes>
-	</test>
+	
 
 	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM0002"></class>
-		</classes>
-	</test>
-
-	<test name="IPA0003">
-		<classes>
 			<class name="ipaiam.IPAIAM0003"></class>
+			<class name="ipaiam.IPAIAM0055"></class>
+			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
 

@@ -64,7 +64,7 @@ public class IPAIAM0002 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName18"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("DRAUserNameValid"));
 
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -85,8 +85,8 @@ public class IPAIAM0002 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("fbUserName18"),
-					LOGIN.getProperty("fbPassword18"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUserNameValid"),
+					LOGIN.getProperty("DRAPasswordValid"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
@@ -96,8 +96,8 @@ public class IPAIAM0002 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 				ob.navigate().refresh();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbUserName18"),
-						LOGIN.getProperty("fbPassword18"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUserNameValid"),
+						LOGIN.getProperty("DRAPasswordValid"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS);
@@ -105,7 +105,7 @@ public class IPAIAM0002 extends TestBase {
 				String expected_title_onmodal = "Already have an account?";
 				String expected_text1 = "You have previously signed in with ";
 				String expected_text2 = "To protect your security, please sign into Facebook so that we can link your account.";
-				String expected_email = LOGIN.getProperty("fbUserName18");
+				String expected_email = LOGIN.getProperty("DRAUserNameValid");
 				// verifying that did you know modal is displaying or not.
 				String actualtext1 = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_LINKINGMODAL_TEXT1_XPATH).getText();
