@@ -47,10 +47,10 @@ public class RCC022 extends TestBase {
 	 */
 	@Test
 	public void testGroupCreation() throws Exception {
-		String gUsername1=LOGIN.getProperty("GMAILUSERNAME2");
-		String gPassword1=LOGIN.getProperty("GMAILPASSWORD2");
-		String gUsername2=LOGIN.getProperty("GMAILUSERNAME4");
-		String gPassword2=LOGIN.getProperty("GMAILPASSWORD4");
+		String gUsername1 = LOGIN.getProperty("GMAILUSERNAME2");
+		String gPassword1 = LOGIN.getProperty("GMAILPASSWORD2");
+		String gUsername2 = LOGIN.getProperty("GMAILUSERNAME4");
+		String gPassword2 = LOGIN.getProperty("GMAILPASSWORD4");
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -62,8 +62,8 @@ public class RCC022 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
-		String gdDocDesc=RandomStringUtils.randomAlphanumeric(250);
-		String gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
+		String gdDocDesc = RandomStringUtils.randomAlphanumeric(250);
+		String gdDoctitle = RandomStringUtils.randomAlphanumeric(30);
 		String title = null;
 		try {
 			String modalLabel = "Remove attached file";
@@ -89,63 +89,67 @@ public class RCC022 extends TestBase {
 			test.log(LogStatus.INFO, "Added article to the Group");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
-			
+
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
 
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
 			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
-			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1,0);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1, 0);
 			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2,1);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2, 1);
 			BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Attached GC docs the article");
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc1));
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc2));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc1));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User1_doc2));
 				test.log(LogStatus.PASS, "Owner is able to attach multiple GD doocs to the artile");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Owner is able not to attach multiple GD doocs to the artile",
 						"Group_gd_attachment_failed");
 			}
-			String timeBefore=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, User1_doc1);
+			String timeBefore = pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType,
+					User1_doc1);
 			BrowserWaits.waitTime(90);
-			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User1_doc1, gdDoctitle, gdDocDesc);
-			String timeAfter=pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle);
-			
+			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User1_doc1, gdDoctitle,
+					gdDocDesc);
+			String timeAfter = pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType,
+					gdDoctitle);
+
 			try {
-			//	Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
-				
-			//	test.log(LogStatus.PASS,
-					//	"GD doc desc and title updated date is displayed correctly for article");
+				// Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
+
+				// test.log(LogStatus.PASS,
+				// "GD doc desc and title updated date is displayed correctly
+				// for article");
 				test.log(LogStatus.INFO, "OPQA-3896 : is logged for Modified date issue");
-				
+
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title updated date is displayed correctly for article",
+				logFailureDetails(test, t, "GD doc desc and title updated date is displayed correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for article");
+				Assert.assertEquals(
+						pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),
+						gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for article",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for article");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob)
+						.getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for article",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -153,15 +157,11 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for article");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for article",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for article", "_GD_title_dec_not_updated");
 
 			}
-			
 
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE6"));
@@ -182,48 +182,44 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
 
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for article");
+				Assert.assertEquals(
+						pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),
+						gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for article",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for article");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob)
+						.getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for article",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
 			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
-			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+			// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+			// gPassword2);
+			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
 			pf.getGmailLoginPage(ob).clickonGoogleContinue();
-			
+
 			try {
-				
-				//pf.getGroupDetailsPage(ob).validateGDUrl();
+
+				// pf.getGroupDetailsPage(ob).validateGDUrl();
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for post");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for post", "_GD_title_dec_not_updated");
 
 			}
-			
-			
+
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(modalLabel, modalInfoText,
@@ -237,7 +233,8 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnCancelButtonINConfirmationModal();
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is not removed when user cancels remove GD doc action");
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "GD doc is removed when user cancels remove GD doc action",
@@ -247,59 +244,63 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is not removed when user cancels remove GD doc action");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is removed when user cancels remove GD doc action",
 						"Group_remove_close_failed");
 			}
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
+				Assert.assertFalse(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is removed when user submits remove GD doc action");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
-			String gdOld=gdDoctitle;
-			gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
+			String gdOld = gdDoctitle;
+			gdDoctitle = RandomStringUtils.randomAlphanumeric(30);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
-			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1,0);
+			// pf.getGroupDetailsPage(ob).signInToGoogle("", "");
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1, 0);
 			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileForRecord(recordTitle, recordType);
-			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2,1);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2, 1);
 			BrowserWaits.waitTime(10);
 			test.log(LogStatus.INFO, "Attached GC docs the article");
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc1));
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc2));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc1));
+				Assert.assertTrue(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, User2_doc2));
 				test.log(LogStatus.PASS, "Member is able to attach multiple GD doocs to the artile");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Member is able not to attach multiple GD doocs to the artile",
 						"Group_Member_gd_attachment_failed");
 			}
-			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User2_doc1, gdDoctitle, gdDocDesc);
+			pf.getGroupDetailsPage(ob).updateItemLevelGoogleDoc(recordTitle, recordType, User2_doc1, gdDoctitle,
+					gdDocDesc);
 			test.log(LogStatus.INFO, "Updated the GD doc description");
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for article");
+				Assert.assertEquals(
+						pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),
+						gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for article",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for article");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob)
+						.getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for article",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -307,16 +308,12 @@ public class RCC022 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for article");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for article",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for article", "_GD_title_dec_not_updated");
 
 			}
-			
-		
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -332,72 +329,73 @@ public class RCC022 extends TestBase {
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			test.log(LogStatus.INFO, "Access the group");
 			pf.getGroupDetailsPage(ob).clickArticlesTab();
-			
+
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdOld));
+				Assert.assertFalse(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdOld));
 				test.log(LogStatus.PASS, "Removed Gd doc is not available in the list for articles");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Removed Gd doc is available in the list for articles",
 						"Group_remove_submit_failed");
 			}
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for article");
+				Assert.assertEquals(
+						pf.getGroupDetailsPage(ob).getItemLevelGoogleDocDesc(recordTitle, recordType, gdDoctitle),
+						gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for article");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for article",
-						"_GD_title_dec_not_updated");
-
-			}
-			
-			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for article");
-			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for article",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for article",
 						"_GD_title_dec_not_updated");
 
 			}
 
-			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
-			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
-			pf.getGmailLoginPage(ob).clickonGoogleContinue();
-			
 			try {
-				
-				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob)
+						.getItemLevelGoogleDocTimestamp(recordTitle, recordType, gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for article");
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for article",
+						"_GD_title_dec_not_updated");
+
+			}
+			try {
+				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+				pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+				// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+				// gPassword2);
+				pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
+				pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "Successfully Logged in clearing all the privacy things in google.",
+						"Not logged in "); 
+			}
+
+			try {
+
+				// pf.getGroupDetailsPage(ob).validateGDUrl();
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for post");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for post", "_GD_title_dec_not_updated");
 
 			}
-			
-			
+
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
+				Assert.assertFalse(
+						pf.getGroupDetailsPage(ob).isItemLevelGDRecordPresent(recordTitle, recordType, gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is removed when user submits remove GD doc action");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
-	
-			
+
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -409,8 +407,7 @@ public class RCC022 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		} 
-		finally{
+		} finally {
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");

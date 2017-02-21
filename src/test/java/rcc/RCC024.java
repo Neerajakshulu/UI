@@ -25,7 +25,6 @@ public class RCC024 extends TestBase {
 	private static final String User2_doc2 = "cuty.jpg";
 	static int status = 1;
 
-	
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
@@ -48,11 +47,11 @@ public class RCC024 extends TestBase {
 	 */
 	@Test
 	public void testGroupCreation() throws Exception {
-		String gUsername1=LOGIN.getProperty("GMAILUSERNAME2");
-		String gPassword1=LOGIN.getProperty("GMAILPASSWORD2");
-		String gUsername2=LOGIN.getProperty("GMAILUSERNAME4");
-		String gPassword2=LOGIN.getProperty("GMAILPASSWORD4");
-		String infoText="Add files to this group by selecting the \"Attach files\" button.";
+		String gUsername1 = LOGIN.getProperty("GMAILUSERNAME2");
+		String gPassword1 = LOGIN.getProperty("GMAILPASSWORD2");
+		String gUsername2 = LOGIN.getProperty("GMAILUSERNAME4");
+		String gPassword2 = LOGIN.getProperty("GMAILPASSWORD4");
+		String infoText = "Add files to this group by selecting the \"Attach files\" button.";
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -64,8 +63,8 @@ public class RCC024 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
-		String gdDocDesc=RandomStringUtils.randomAlphanumeric(250);
-		String gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
+		String gdDocDesc = RandomStringUtils.randomAlphanumeric(250);
+		String gdDoctitle = RandomStringUtils.randomAlphanumeric(30);
 		String title = null;
 		try {
 			String modalLabel = "Remove attached file";
@@ -83,73 +82,72 @@ public class RCC024 extends TestBase {
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Created the group: " + title);
 			pf.getGroupDetailsPage(ob).clickAttachedFilesTab();
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==0);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 0);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly after removing the GD doc");
-				
+
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getNoRecordsInfoText(), infoText);
 				test.log(LogStatus.PASS,
 						"Informational text is displayed correcty in Attached file tab when there are no files");
-				
-			}catch (Throwable t) {
-				logFailureDetails(test, t, "No records informational text is displayed correcty in Attached file tab when there are no files",
+
+			} catch (Throwable t) {
+				logFailureDetails(test, t,
+						"No records informational text is displayed correcty in Attached file tab when there are no files",
 						"Group_No_record_validation_failed");
 			}
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
 			pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
-			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1,0);
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc1, 0);
 			BrowserWaits.waitTime(10);
-				pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
-			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2,1);
+			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
+			pf.getGroupDetailsPage(ob).selectGDdoc(User1_doc2, 1);
 			test.log(LogStatus.INFO, "Attached GC docs the group");
 			BrowserWaits.waitTime(10);
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly in owner view after adding the gd docs");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent( User1_doc1));
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent( User1_doc2));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 2);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly in owner view after adding the gd docs");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(User1_doc1));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(User1_doc2));
 				test.log(LogStatus.PASS, "Owner is able to attach multiple GD doocs to the group");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Owner is able not to attach multiple GD doocs to the group",
 						"Group_gd_attachment_failed");
 			}
-			String timeBefore=pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(User1_doc1);
+			String timeBefore = pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(User1_doc1);
 			BrowserWaits.waitTime(90);
-			pf.getGroupDetailsPage(ob).updateGroupLevelGoogleDoc(User1_doc1, gdDoctitle,gdDocDesc);
-			String timeAfter=pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle);
-			
+			pf.getGroupDetailsPage(ob).updateGroupLevelGoogleDoc(User1_doc1, gdDoctitle, gdDocDesc);
+			String timeAfter = pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle);
+
 			try {
-				//Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
-				
-				//test.log(LogStatus.PASS,
-					//	"GD doc desc and title updated date is displayed correctly for group");
+				// Assert.assertFalse(timeBefore.equalsIgnoreCase(timeAfter));
+
+				// test.log(LogStatus.PASS,
+				// "GD doc desc and title updated date is displayed correctly
+				// for group");
 				test.log(LogStatus.INFO, "OPQA-3896 : is logged for Modified date issue");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title updated date is not displayed correctly for group",
+				logFailureDetails(test, t, "GD doc desc and title updated date is not displayed correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for group");
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle), gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for group",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for group");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob)
+						.validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for group",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -157,15 +155,11 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for group");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for group",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for group", "_GD_title_dec_not_updated");
 
 			}
-			
 
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE6"));
@@ -186,51 +180,49 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickAttachedFilesTab();
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 2);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly in members view");
-				
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for group");
-			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for group",
-						"_GD_title_dec_not_updated");
 
-			}
-			
-			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp( gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for group");
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle), gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for group",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
 
-			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
-			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
-			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
-			pf.getGmailLoginPage(ob).clickonGoogleContinue();
-			
 			try {
-				
-				//pf.getGroupDetailsPage(ob).validateGDUrl();
+				Assert.assertTrue(pf.getGroupDetailsPage(ob)
+						.validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for group");
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for group",
+						"_GD_title_dec_not_updated");
+
+			}
+			try {
+				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
+				pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+				// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+				// gPassword2);
+				pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
+				pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "Successfully Logged in clearing all the privacy things in google.",
+						"Not logged in ");  
+			}
+
+			try {
+
+				// pf.getGroupDetailsPage(ob).validateGDUrl();
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for post");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for post", "_GD_title_dec_not_updated");
 
 			}
-			
-			
+
 			pf.getGroupDetailsPage(ob).clickOnGroupLevelRemoveGoogleDoc(gdDoctitle);
 			try {
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyConfirmationModalContents(modalLabel, modalInfoText,
@@ -244,8 +236,9 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnCancelButtonINConfirmationModal();
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly when user cancels remove GD doc action");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 2);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly when user cancels remove GD doc action");
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is not removed when user cancels remove GD doc action");
 			} catch (Throwable t) {
@@ -256,66 +249,66 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnCloseButtonINConfirmationModal();
 
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly when user cancels remove GD doc action");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 2);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly when user cancels remove GD doc action");
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is not removed when user cancels remove GD doc action");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is removed when user cancels remove GD doc action",
 						"Group_remove_close_failed");
 			}
-			pf.getGroupDetailsPage(ob).clickOnGroupLevelRemoveGoogleDoc( gdDoctitle);
+			pf.getGroupDetailsPage(ob).clickOnGroupLevelRemoveGoogleDoc(gdDoctitle);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==1);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly when user submits remove GD doc action");
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent( gdDoctitle));
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 1);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly when user submits remove GD doc action");
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is removed when user submits remove GD doc action");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
-			String gdOld=gdDoctitle;
-			gdDoctitle=RandomStringUtils.randomAlphanumeric(30);
+			String gdOld = gdDoctitle;
+			gdDoctitle = RandomStringUtils.randomAlphanumeric(30);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
-			//pf.getGroupDetailsPage(ob).signInToGoogle("", "");
-			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1,0);
+			// pf.getGroupDetailsPage(ob).signInToGoogle("", "");
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc1, 0);
 			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnAttachFileButton();
-			
-			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2,1);
+
+			pf.getGroupDetailsPage(ob).selectGDdoc(User2_doc2, 1);
 			test.log(LogStatus.INFO, "Attached GC docs the group");
 			BrowserWaits.waitTime(10);
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==3);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly after adding the GD doc in member view");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 3);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly after adding the GD doc in member view");
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(User2_doc1));
 				Assert.assertTrue(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(User2_doc2));
 				test.log(LogStatus.PASS, "Member is able to attach multiple GD doocs to the group");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Member is able not to attach multiple GD doocs to the group",
 						"Group_Member_gd_attachment_failed");
 			}
-			pf.getGroupDetailsPage(ob).updateGroupLevelGoogleDoc( User2_doc1, gdDoctitle, gdDocDesc);
+			pf.getGroupDetailsPage(ob).updateGroupLevelGoogleDoc(User2_doc1, gdDoctitle, gdDocDesc);
 			test.log(LogStatus.INFO, "Updated the GD doc description");
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for group");
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle), gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for group",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp( gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for group");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob)
+						.validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for group",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
@@ -323,28 +316,26 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
 			try {
 				pf.getGroupDetailsPage(ob).validateGDUrl();
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for group");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for group",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for group", "_GD_title_dec_not_updated");
 
 			}
-			
+
 			pf.getGroupsPage(ob).clickOnGroupsLink();
-			
+
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(3, title);
-				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly after adding attached files");
+				test.log(LogStatus.PASS,
+						"Items count in Group list page displayed correctly after adding attached files");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Items count in Group list page not displayed correctly after adding attached files");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -359,78 +350,74 @@ public class RCC024 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(3, title);
-				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly after adding attached files in members view");
+				test.log(LogStatus.PASS,
+						"Items count in Group list page displayed correctly after adding attached files in members view");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Items count in Group list page not displayed correctly after adding attached files");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			test.log(LogStatus.INFO, "Access the group");
 			pf.getGroupDetailsPage(ob).clickAttachedFilesTab();
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==3);
-				test.log(LogStatus.PASS, "Attached tab count is displayed correctly in owner view when member adds the GD doc to the group");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 3);
+				test.log(LogStatus.PASS,
+						"Attached tab count is displayed correctly in owner view when member adds the GD doc to the group");
 				Assert.assertFalse(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(gdOld));
 				test.log(LogStatus.PASS, "Removed Gd doc is not available in the list for groups");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Removed Gd doc is available in the list for groups",
 						"Group_remove_submit_failed");
 			}
 			try {
-				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle),gdDocDesc);
-				test.log(LogStatus.PASS,
-						"GD doc desc and title updated correctly for group");
+				Assert.assertEquals(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocDesc(gdDoctitle), gdDocDesc);
+				test.log(LogStatus.PASS, "GD doc desc and title updated correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc desc and title is not updated correctly for group",
+				logFailureDetails(test, t, "GD doc desc and title is not updated correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
-				test.log(LogStatus.PASS,
-						"GD doc timestamp is displayed correctly for group");
+				Assert.assertTrue(pf.getGroupDetailsPage(ob)
+						.validateTimeStamp(pf.getGroupDetailsPage(ob).getGroupLevelGoogleDocTimestamp(gdDoctitle)));
+				test.log(LogStatus.PASS, "GD doc timestamp is displayed correctly for group");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc timestamp is not displayed correctly for group",
+				logFailureDetails(test, t, "GD doc timestamp is not displayed correctly for group",
 						"_GD_title_dec_not_updated");
 
 			}
 
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
 			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
-			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+			// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+			// gPassword2);
+			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
 			pf.getGmailLoginPage(ob).clickonGoogleContinue();
-			
+
 			try {
-				
-				//pf.getGroupDetailsPage(ob).validateGDUrl();
+
+				// pf.getGroupDetailsPage(ob).validateGDUrl();
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
-				test.log(LogStatus.PASS,
-						"GD doc is opened correctly for post");
+				test.log(LogStatus.PASS, "GD doc is opened correctly for post");
 			} catch (Throwable t) {
-				logFailureDetails(test, t,
-						"GD doc is not opened correctly for post",
-						"_GD_title_dec_not_updated");
+				logFailureDetails(test, t, "GD doc is not opened correctly for post", "_GD_title_dec_not_updated");
 
 			}
-			
-			
+
 			pf.getGroupDetailsPage(ob).clickOnGroupLevelRemoveGoogleDoc(gdDoctitle);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			try {
 				Assert.assertFalse(pf.getGroupDetailsPage(ob).isGroupLevelGDRecordPresent(gdDoctitle));
 				test.log(LogStatus.PASS, "Gd doc is removed when user submits remove GD doc action");
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==2);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 2);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly after removing the GD doc");
-			}catch (Throwable t) {
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
@@ -438,35 +425,36 @@ public class RCC024 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
 			pf.getGroupDetailsPage(ob).clickOnGroupLevelRemoveGoogleDoc(User2_doc2);
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
-			
+
 			try {
-				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts()==0);
+				Assert.assertTrue(pf.getGroupDetailsPage(ob).getAttachedFilesCounts() == 0);
 				test.log(LogStatus.PASS, "Attached tab count is displayed correctly after removing the GD doc");
-				
+
 				Assert.assertEquals(pf.getGroupDetailsPage(ob).getNoRecordsInfoText(), infoText);
 				test.log(LogStatus.PASS,
 						"Informational text is displayed correcty in Attached files tab when there are no groups");
-				
-			}catch (Throwable t) {
+
+			} catch (Throwable t) {
 				logFailureDetails(test, t, "Gd doc is not removed when user submits remove Gd doc action",
 						"Group_remove_submit_failed");
 			}
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 			try {
 				pf.getGroupsListPage(ob).verifyItemsCount(0, title);
-				test.log(LogStatus.PASS, "Items count in Group list page displayed correctly after removing attached files");
+				test.log(LogStatus.PASS,
+						"Items count in Group list page displayed correctly after removing attached files");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Items count in Group list page not displayed correctly after adding attached files");
-				test.log(LogStatus.FAIL, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
+				test.log(LogStatus.FAIL, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_Group_Item_count_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
+
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -478,7 +466,7 @@ public class RCC024 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		} finally{
+		} finally {
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
