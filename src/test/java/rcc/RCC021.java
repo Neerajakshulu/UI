@@ -217,7 +217,7 @@ public class RCC021 extends TestBase {
 			} catch (Throwable t) {
 			logFailureDetails(test, t,
 					"Successfully Logged in clearing all the privacy things in google.",
-					"Not logged in ");
+					"Not logged in ");  
 			}
 			
 			try {   
