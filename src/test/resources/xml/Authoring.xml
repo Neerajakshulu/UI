@@ -517,7 +517,11 @@
 			<class name="Authoring.Authoring88"></class>
 		</classes>
 	</test>
-	
+	<test name="Authoring89">
+		<classes>
+			<class name="Authoring.Authoring89"></class>
+		</classes>
+	</test>
 	
 </suite>
 

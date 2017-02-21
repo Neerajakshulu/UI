@@ -586,6 +586,23 @@ public class ProfilePage extends TestBase {
 		
 		}
 
+	/**
+	 * Method to click on add video to a post in profile page
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void AddVideoAndPublishAPost() throws InterruptedException {
+		waitForPageLoad(ob);
+		BrowserWaits.waitTime(2);
+		ob.findElement(By.xpath("//div[@class='main ng-scope']")).click();
+		ob.findElement(By.xpath("//div[@id='post-buttons']/descendant::span[text()='Upload Video']")).click();
+		//jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH.toString())));
+		BrowserWaits.waitTime(2);
+		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString())));
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString())).sendKeys("https://www.youtube.com/watch?v=kP88lNAmHXA");
+		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString())));
+		waitForPageLoad(ob);
+		}
 	
 
 	/**
