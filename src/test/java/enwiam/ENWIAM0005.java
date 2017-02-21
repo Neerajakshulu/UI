@@ -57,7 +57,7 @@ public class ENWIAM0005 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName18"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
@@ -87,8 +87,8 @@ public class ENWIAM0005 extends TestBase {
 		// Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 		// pf.getEnwReferenceInstance(ob).loginWithFBCredentialsENW(ob,"arvindkandaswamy@gmail.com","darshiniyogi@123");
-		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("fbUserName18"),
-				LOGIN.getProperty("fbPassword18"));
+		pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+				LOGIN.getProperty("PWDUserFBENWIAM80"));
 		test.log(LogStatus.PASS, "User is able to login with social ");
 		pf.getLinkingModalsInstance(ob).clickOutsideTheModal();
 

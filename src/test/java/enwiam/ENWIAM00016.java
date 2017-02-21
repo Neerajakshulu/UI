@@ -65,7 +65,7 @@ public class ENWIAM00016 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("ENWIAM00016User"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -85,8 +85,8 @@ public class ENWIAM00016 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00016User"),
-					LOGIN.getProperty("ENWIAM00016UserPWD"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 
 			pf.getHFPageInstance(ob).clickOnAccountLink();
@@ -99,8 +99,8 @@ public class ENWIAM00016 extends TestBase {
 
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00016User"),
-						LOGIN.getProperty("ENWIAM00016UserPWD"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ENW_NOTNOW_XPATH.toString()), 30);
 
@@ -133,8 +133,8 @@ public class ENWIAM00016 extends TestBase {
 				BrowserWaits.waitTime(5);
 
 				ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM00016User"),
-						LOGIN.getProperty("ENWIAM00016UserPWD"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				BrowserWaits.waitTime(2);
 
@@ -185,7 +185,7 @@ public class ENWIAM00016 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("ENWIAM00016User")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single  account is available ");
 
