@@ -235,7 +235,7 @@ public class RCC021 extends TestBase {
 						"_GD_title_dec_not_updated");
 
 			}
-			pf.getGmailLoginPage(ob).switchToMainWindow(ob);
+			pf.getGmailLoginPage(ob).switchToMainWindow(ob);   
 			BrowserWaits.waitTime(5);
 			
 			pf.getGroupDetailsPage(ob).clickOnItemLevelRemoveGoogleDoc(recordTitle, recordType, gdDoctitle);
