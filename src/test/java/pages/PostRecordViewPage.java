@@ -298,6 +298,21 @@ public class PostRecordViewPage extends TestBase {
 		return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS)
 				.getText();
 	}
+	
+	/**
+	 * This method captures and returns the post video attachment url from Post record view
+	 * page
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String getPostVideoUrl() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH);
+		String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
+		return VideoUrl.substring(2, VideoUrl.indexOf("?"));
+
+	}
 
 	/**
 	 * This method takes the link as as argument and validates that the post

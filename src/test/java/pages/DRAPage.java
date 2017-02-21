@@ -302,7 +302,7 @@ public class DRAPage extends TestBase {
 					.sendKeys("asdfgh");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			
+
 		}
 
 	}
@@ -334,7 +334,8 @@ public class DRAPage extends TestBase {
 
 			}
 
-			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Clarivate Analytics"))
+			if ((accountType.equalsIgnoreCase("Steam") && type1.contains("Clarivate Analytics")
+					|| type1.contains("Thomson Reuters | Project Neon"))
 					|| accountType.equalsIgnoreCase(type1.trim())) {
 				String emailid = null;
 				emailid = element.findElement(By.cssSelector("span[class='ng-binding']")).getText();
