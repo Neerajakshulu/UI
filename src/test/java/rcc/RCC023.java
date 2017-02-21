@@ -210,7 +210,7 @@ public class RCC023 extends TestBase {
 				pf.getGmailLoginPage(ob).clickonGoogleContinue();
 			} catch (Throwable t) {
 				logFailureDetails(test, t, "Successfully Logged in clearing all the privacy things in google.",
-						"Not logged in ");
+						"Not logged in "); 
 			}
 
 			try {
