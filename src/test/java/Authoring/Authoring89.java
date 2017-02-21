@@ -72,6 +72,7 @@ public class Authoring89 extends TestBase {
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			BrowserWaits.waitTime(3);
 			String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
 			String TrimmedVideoUrl = VideoUrl.substring(2, VideoUrl.indexOf("?"));
 			try {

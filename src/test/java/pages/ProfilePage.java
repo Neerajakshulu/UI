@@ -13,10 +13,12 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.xerces.impl.xpath.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -592,15 +594,11 @@ public class ProfilePage extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void AddVideoAndPublishAPost() throws InterruptedException {
-		waitForPageLoad(ob);
-		BrowserWaits.waitTime(2);
-		ob.findElement(By.xpath("//div[@class='main ng-scope']")).click();
-		ob.findElement(By.xpath("//div[@id='post-buttons']/descendant::span[text()='Upload Video']")).click();
-		//jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH.toString())));
-		BrowserWaits.waitTime(2);
-		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString())));
-		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString())).sendKeys("https://www.youtube.com/watch?v=kP88lNAmHXA");
-		jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString())));
+		Actions act = new Actions(ob);
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH.toString()))).click().perform();
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).click().perform();
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).sendKeys("https://www.youtube.com/watch?v=kP88lNAmHXA");
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString()))).click().perform();
 		waitForPageLoad(ob);
 		}
 	

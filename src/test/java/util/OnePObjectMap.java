@@ -310,10 +310,10 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_WATCHLIST_CSS("button[class*='wui-icon-only-btn ne-action-dropdown__add-button']"),
 
 	//KR
-	HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH("//div[@id='post-buttons']/descendant::span[text()='Upload Video']"),
+	HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH("//i[@class='fa fa-video-camera']"),
 	HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH("//input[contains(@id,'fr-video-by-url-layer-text-')]"),
 	HOME_PROJECT_NEON_INSERT_URL_XPATH("//button[@class='fr-command fr-submit' and @data-cmd='videoInsertByURL']"),
-	HOME_PROJECT_NEON_VIDEO_BOX_XPATH("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']"),
+	HOME_PROJECT_NEON_VIDEO_BOX_XPATH("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']/iframe"),
 	
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
