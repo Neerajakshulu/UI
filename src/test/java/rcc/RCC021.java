@@ -223,10 +223,7 @@ public class RCC021 extends TestBase {
 			try {   
 				
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
-				waitForAjax(ob);
-				BrowserWaits.waitTime(8);
 				 pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
-				 BrowserWaits.waitTime(6);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");
 			} catch (Throwable t) {
@@ -383,9 +380,9 @@ public class RCC021 extends TestBase {
 		pf.getGmailLoginPage(ob).clickonGoogleContinue();
 			try {
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				pf.getGmailLoginPage(ob).validateGDUrlWithoutSwitchingWindow();
-				BrowserWaits.waitTime(5);
+				//BrowserWaits.waitTime(5);
 				pf.getGmailLoginPage(ob).switchToMainWindow(ob);
 				test.log(LogStatus.PASS,
 						"GD doc is opened correctly for post");

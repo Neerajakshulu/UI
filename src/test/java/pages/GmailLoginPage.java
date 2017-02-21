@@ -1,6 +1,8 @@
 package pages;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -152,11 +154,20 @@ public class GmailLoginPage extends TestBase {
 	}
 	
 	public String switchToMainWindow(WebDriver driver)  {
-		System.out.println("Closing the current browser");
-		driver.getWindowHandles().remove(driver.getWindowHandle());
-		ob.close();
-		driver.switchTo().window(mainWindow);
-		return mainWindow;
+//		System.out.println("Closing the current browser");
+//		driver.getWindowHandles().remove(driver.getWindowHandle());
+		Set<String> myset = driver.getWindowHandles();
+		Iterator<String> myIT = myset.iterator();
+		ArrayList<String> al = new ArrayList<String>();
+		for (int i = 0; i < myset.size(); i++) {
+
+			al.add(myIT.next());
+		}
+
+		driver.switchTo().window(al.get(1));
+		driver.close();
+		driver.switchTo().window(al.get(0));
+		return al.get(0);
 	}
 	
 }
