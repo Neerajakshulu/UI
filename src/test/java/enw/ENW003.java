@@ -110,7 +110,7 @@ public class ENW003 extends TestBase {
 						"Error message displayed is incorrect after enting wrong password while linking");
 				ErrorUtil.addVerificationFailure(t);
 			}
-			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
+			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage(LOGIN.getProperty("STEAMUSERPASSWORD"));
 
 			try {
 				Assert.assertEquals(expectedSuccessMessage,

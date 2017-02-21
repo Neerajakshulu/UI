@@ -49,7 +49,7 @@ public class ENW004 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername004"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("sfbLIusername004"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
@@ -68,8 +68,8 @@ public class ENW004 extends TestBase {
 			String expectedSuccessMessage = "Sent To EndNote";
 			
 
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("sfbLIusername004"),
-					CONFIG.getProperty("sfbpwrd004"));
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("sfbLIusername004"),
+					LOGIN.getProperty("sfbpwrd004"));
 
 			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 
@@ -77,7 +77,7 @@ public class ENW004 extends TestBase {
 
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 
-			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage();
+			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage(LOGIN.getProperty("sfbpwrd004"));
 
 			BrowserWaits.waitTime(4);
 			pf.getLoginTRInstance(ob).logOutApp();
