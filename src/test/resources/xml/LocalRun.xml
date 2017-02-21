@@ -13,9 +13,10 @@
 
 	<!-- ENW -->
 
-	<test name="ENW003">
+	<test name="ENW003" preserve-order="true">
 		<classes>
 			<class name="enw.ENW003"></class>
+			<class name="enw.ENW023"></class>
 		</classes>
 	</test>
 
@@ -138,11 +139,6 @@
 		</classes>
 	</test>
 
-	<test name="ENW023">
-		<classes>
-			<class name="enw.ENW023"></class>
-		</classes>
-	</test>
 	<test name="ENW034">
 		<classes>
 			<class name="enw.ENW034"></class>
