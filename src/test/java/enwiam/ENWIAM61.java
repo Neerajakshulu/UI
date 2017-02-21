@@ -61,7 +61,7 @@ public class ENWIAM61 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("ENWIAM61User"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
@@ -83,7 +83,7 @@ public class ENWIAM61 extends TestBase {
 			ob.navigate().to(host);
 
 			// making facebook account
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM61User"),LOGIN.getProperty("ENWIAM61UserPWD"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),LOGIN.getProperty("PWDUserFBENWIAM80"));
 			
 			test.log(LogStatus.PASS, "user is able to login using facebook");
 
@@ -111,7 +111,7 @@ public class ENWIAM61 extends TestBase {
 
 			try {
 				ob.navigate().to(host);
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM61User"),LOGIN.getProperty("ENWIAM61UserPWD"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
@@ -146,7 +146,7 @@ public class ENWIAM61 extends TestBase {
 	private void validateNeonAccount(int accountCount, String linkName) throws Exception {
 		try {
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("ENWIAM61User")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Single Steam account is available and is not linked to Social account");
 
@@ -163,9 +163,9 @@ public class ENWIAM61 extends TestBase {
 		try {
 
 			Assert.assertTrue(pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook",
-					LOGIN.getProperty("ENWIAM61User")));
+					LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("ENWIAM61User")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Facebook and " + linkName + " accounts");

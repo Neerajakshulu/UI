@@ -28,7 +28,6 @@ import util.OnePObjectMap;
 //OPQA-2373 || OPQA-2375 || OPQA-2377 || OPQA-2379 || OPQA-2381 || OPQA-2383 || OPQA-2385 || OPQA-2404 || OPQA-2405
 //Sign-in with social with-out a linked steam account and link with non-matching email.
 
-
 public class ENWIAM0002 extends TestBase {
 
 	// Following is the list of status:
@@ -65,49 +64,28 @@ public class ENWIAM0002 extends TestBase {
 
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		// Deleting the links for aravind.attur@thomsonreuters.com
-
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName21"));
-			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
+			logger.info("statuCode -->" + statuCode);
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
-				throw new Exception("Delete API Call failed");
-			}
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
-		}
-
-		// Deleting the links for enwyogi3@yahoo.com
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbUserName21"));
-			String statuCode2 = deleteUserAccounts(LOGIN.getProperty("UserName21"));
-			//Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
-				throw new Exception("Delete API Call failed");
-			}
-			
-			if (!(statuCode2.equalsIgnoreCase("200") || statuCode2.equalsIgnoreCase("400"))) {
-				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
 				throw new Exception("Delete API Call failed");
 			}
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
+
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
 
 		try {
 
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			
-			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("fbUserName21"), LOGIN.getProperty("fbPassword21"));
+
+			ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
+			pf.getENWReferencePageInstance(ob).loginWithENWFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NO_LETS_CONTINUE_BUTTON_XPATH);
 
 			Dimension dimesions = pf.getBrowserActionInstance(ob)
@@ -123,14 +101,10 @@ public class ENWIAM0002 extends TestBase {
 					.build().perform();
 			builder.click().build().perform();
 			test.log(LogStatus.PASS, "Linking modal has been disappered");
-			/*new Actions(ob).moveByOffset(200, 200).click().build().perform();
-			ob.findElement(By.cssSelector("i[class='fa fa-close']")).click();
-			Thread.sleep(3000);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();*/
 
-			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserName21"), LOGIN.getProperty("Password21"));
-			
+			pf.getENWReferencePageInstance(ob).yesAccount(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
+
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_AGREE_CSS);
@@ -140,36 +114,19 @@ public class ENWIAM0002 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.ENW_HOME_CONTINUE_XPATH);
 			}
-			/*try {
-				ob.findElement(By.className("button-form btn-common")).click();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
-			try {
-				ob.findElement(By.className("btn-common")).click();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 			pf.getENWReferencePageInstance(ob).clickAccount();
 
 			validateLinkedAccounts(2, "Facebook");
 
 			pf.getENWReferencePageInstance(ob).logout();
 
-
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Unexpected error");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
 
-
 		try {
-			/*
-			 * openBrowser(); maximizeWindow(); clearCookies();
-			 */
-			//loginToLn();
+
 			closeBrowser();
 			pf.clearAllPageObjects();
 		} catch (Throwable t) {
@@ -179,15 +136,13 @@ public class ENWIAM0002 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-
-	private void validateLinkedAccounts(int accountCount,
-			String linkName) throws Exception {
+	private void validateLinkedAccounts(int accountCount, String linkName) throws Exception {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName21")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENWIAM80")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbUserName21")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENWIAM80")));
 			test.log(LogStatus.PASS, "The account are matching");
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			System.out.println(accountCount);
@@ -210,10 +165,10 @@ public class ENWIAM0002 extends TestBase {
 
 		/*
 		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS");
+		 * else if(status==2) TestUtil.reportDataSetResult(iamxls, "Test Cases",
+		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL");
+		 * else TestUtil.reportDataSetResult(iamxls, "Test Cases",
 		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
 		 */
 	}

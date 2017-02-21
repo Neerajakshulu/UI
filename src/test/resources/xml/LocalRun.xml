@@ -193,21 +193,8 @@
 		</classes>
 
 	</test>
-	<test name="ENWIAM00016">
-		<classes>
-			<class name="enwiam.ENWIAM00016"></class>
-		</classes>
-	</test>
-
-
-
-	<test name="ENWIAM90">
-		<classes>
-			<class name="enwiam.ENWIAM90"></class>
-		</classes>
-	</test>
-
-	<!-- IAM -->
+	
+    <!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
@@ -279,39 +266,10 @@
 			<class name="enwiam.ENWIAM40"></class>
 		</classes>
 	</test>
-	<test name="Navigation2">
-		<classes>
-			<class name="enwiam.ENWIAM41"></class>
-		</classes>
-	</test>
-
-	<test name="ENWIAM0002">
-		<classes>
-			<class name="enwiam.ENWIAM0002"></class>
-		</classes>
-	</test>
-
-	<test name="ENW Linking from ENW">
-		<classes>
-			<class name="enwiam.ENWIAM0005"></class>
-		</classes>
-	</test>
-
-	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
+	
+    <test name="ENW_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM001"></class>
-		</classes>
-	</test>
-
-	<test name="ENWIAM61">
-		<classes>
-			<class name="enwiam.ENWIAM61"></class>
-		</classes>
-	</test>
-
-	<test name="ENWIAM62" preserve-order="true" parallel="false">
-		<classes>
-			<class name="enwiam.ENWIAM62"></class>
 		</classes>
 	</test>
 
@@ -375,21 +333,6 @@
 		</classes>
 	</test>
 
-
-	<test name="ForwardMergeScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM53">
-			</class>
-		</classes>
-	</test>
-
-	<test name="RandomMergeScenario001">
-		<classes>
-			<class name="enwiam.ENWIAM55">
-			</class>
-		</classes>
-	</test>
-
    <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enwiam.ENWIAM00018"></class>
@@ -403,6 +346,15 @@
 			<class name="enwiam.ENWIAM56"></class>
 			<class name="enwiam.ENWIAM59"></class>
 			<class name="enwiam.ENWIAM54"></class>
+			<class name="enwiam.ENWIAM53"></class>
+			<class name="enwiam.ENWIAM55"></class>
+			<class name="enwiam.ENWIAM61"></class>
+			<class name="enwiam.ENWIAM62"></class>
+			<class name="enwiam.ENWIAM00016"></class>
+			<class name="enwiam.ENWIAM90"></class>
+			<class name="enwiam.ENWIAM41"></class>
+			<class name="enwiam.ENWIAM0002"></class>
+			<class name="enwiam.ENWIAM0005"></class>
 		</classes>
 	</test>
 

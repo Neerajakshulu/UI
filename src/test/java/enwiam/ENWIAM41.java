@@ -61,7 +61,7 @@ public class ENWIAM41 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("sru_fbusername01"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -83,14 +83,14 @@ public class ENWIAM41 extends TestBase {
 
 			ob.navigate().to(host);
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername01"),
-					LOGIN.getProperty("sru_fbpwd01"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getHFPageInstance(ob).clickOnEndNoteLink();
 
 			try {
 
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw01"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("PWDUserFBENWIAM80"));
 				test.log(LogStatus.PASS, "user is able to link");
 				try {
 					pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_HOME_AGREE_CSS);
