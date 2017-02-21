@@ -104,15 +104,6 @@ public class ENW023 extends TestBase {
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	private void loginToFacebook() throws Exception {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString()), 30);
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
-		ob.findElement(By.xpath("//a[contains(text(),'Not now')]")).click();
-		Thread.sleep(3000);
-		pf.getLoginTRInstance(ob).checkLinking();
-		pf.getLoginTRInstance(ob).logOutApp();
-		}
-
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

@@ -51,7 +51,7 @@ public class ENW003 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("sfbLIusername003"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("STEAMUSEREMAIL"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
@@ -68,8 +68,8 @@ public class ENW003 extends TestBase {
 
 			String expectedSuccessMessage = "Sent To EndNote";
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("sfbLIusername003"),
-					CONFIG.getProperty("sfbpwrd003"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
+					LOGIN.getProperty("STEAMUSERPASSWORD"));
 
 			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 			BrowserWaits.waitTime(5);
@@ -118,7 +118,6 @@ public class ENW003 extends TestBase {
 				test.log(LogStatus.PASS,
 						" Record sent successfully from Search Results Page after linking with steam account");
 			}
-
 			catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL,

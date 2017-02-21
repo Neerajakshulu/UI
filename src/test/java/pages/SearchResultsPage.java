@@ -336,7 +336,7 @@ public class SearchResultsPage extends TestBase {
 
 	public void linkSteamAcctWhileSendToEndnoteSearchPage() throws InterruptedException {
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString())).clear();
-		 ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys(CONFIG.getProperty("sfbpwrd003"));
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString())).sendKeys(LOGIN.getProperty("STEAMUSERPASSWORD"));
 		   
 		 ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString())).click();
 		   
