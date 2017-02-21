@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -61,9 +62,12 @@ public class RCC025 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
+			test.log(LogStatus.PASS, "Group is created by the USER1 ");
 
 			// Inviting user2
+			BrowserWaits.waitTime(5);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
+			BrowserWaits.waitTime(5);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");

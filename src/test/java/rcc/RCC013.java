@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import base.TestBase;
@@ -67,6 +68,7 @@ public class RCC013 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
+			BrowserWaits.waitTime(5);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the USER2");
