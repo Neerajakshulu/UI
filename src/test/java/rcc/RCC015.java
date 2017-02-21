@@ -120,8 +120,10 @@ public class RCC015 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
+				BrowserWaits.waitTime(10);
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
+				BrowserWaits.waitTime(10);
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
@@ -179,8 +181,10 @@ public class RCC015 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
 
 			try {
+				BrowserWaits.waitTime(5);
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
+				BrowserWaits.waitTime(5);
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
@@ -207,6 +211,7 @@ public class RCC015 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Group_post_author_details_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
+			BrowserWaits.waitTime(5);
 			pf.getGroupsPage(ob).clickOnGroupsLink();
 
 			try {
