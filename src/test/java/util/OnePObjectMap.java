@@ -779,7 +779,6 @@ public enum OnePObjectMap {
     RCC_GMAIL_LOGOUT_BUTTON_CSS("a[id='gb_71']"),
     RCC_GMAIL_SWITCH_TO_ACCOUNT_GOOGLE_XPATH("//button[@class='jfk-button jfk-button-standard']"),
     RCC_GMAIL_CLICK_CONTINUE_XPATH("//input[@type='submit']"),   
-   
 
 	// #################### DRA ##########################
 
