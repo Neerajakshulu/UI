@@ -206,12 +206,19 @@ public class RCC021 extends TestBase {
 
 			}
 
+			try {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
 			BrowserWaits.waitTime(5);
 			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
 			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
 			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
 			pf.getGmailLoginPage(ob).clickonGoogleContinue();
+            test.log(LogStatus.PASS, "Successfully Logged in clearing all the privacy things in google.");
+			} catch (Throwable t) {
+			logFailureDetails(test, t,
+					"Successfully Logged in clearing all the privacy things in google.",
+					"Not logged in ");
+			}
 			
 			try {   
 				
