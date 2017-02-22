@@ -27,7 +27,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Authoring89 extends TestBase {
+public class Authoring90 extends TestBase {
 	
 	static int status = 1;
 	static int time = 90;
@@ -42,9 +42,15 @@ public class Authoring89 extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for deleting a post with video content and checking the count in post.
+	 * 
+	 * @throws Exception, When Something unexpected
+	 */
+	//@Test(dependsOnMethods="testAddVideosToPost")
 	@Test
-	public void testAddVideosToPost() throws Exception {
-		
+	public void testDeleteVideoPost() throws Exception
+	{
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -56,9 +62,6 @@ public class Authoring89 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
-		
-		
-		// selenium code
 		try {
 			openBrowser();
 			clearCookies();
@@ -67,41 +70,43 @@ public class Authoring89 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
+			BrowserWaits.waitTime(2);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
 			
-			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
-			String title = RandomStringUtils.randomAlphabetic(20);
-			pf.getProfilePageInstance(ob).enterPostTitle(title);
-			String content = RandomStringUtils.randomAlphabetic(20);
-			pf.getProfilePageInstance(ob).enterPostContent(content);
-			pf.getProfilePageInstance(ob).AddVideoAndPublishAPost();
-			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
+			int postCountBeforeDeleting = pf.getProfilePageInstance(ob).getPostsCount();
+			test.log(LogStatus.INFO, "Post count before deleting a video post:" + postCountBeforeDeleting);
+
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			BrowserWaits.waitTime(5);
+			WebElement deleteCommentButton = ob
+					.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_XPATH.toString()));
+			JavascriptExecutor executor = (JavascriptExecutor) ob;
+			executor.executeScript("arguments[0].click();", deleteCommentButton);
+
+			jsClick(ob, ob.findElement(By
+					.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_XPATH.toString())));
 			waitForAjax(ob);
+			String Delete_Text = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH.toString())).getText();
+			Assert.assertEquals(Delete_Text, "This post has been removed by the member.");
+			
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(3);
-			String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
-			String TrimmedVideoUrl = VideoUrl.substring(2, VideoUrl.indexOf("?"));
-			try {
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostVideoUrl(), TrimmedVideoUrl);
-				test.log(LogStatus.PASS, "User is able to publish the post with a video");
-				closeBrowser();
+			test.log(LogStatus.INFO, "Navigated to Profile Page");
+			
+			int postCountAfterDeleting = pf.getProfilePageInstance(ob).getPostsCount();
+			test.log(LogStatus.INFO, "Post count after deleting a video post:" + postCountAfterDeleting);
 
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "User is not able to publish the post with a video");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
+			if (!(postCountBeforeDeleting > postCountAfterDeleting)) {
+				test.log(LogStatus.FAIL, "Error: Video comment not deleted successfully");// extent
+																			// reports
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "Post_title_with_video_validation_failed")));// screenshot
+						captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
 			}
-			
-		} catch (Exception e) {
+			closeBrowser();
+			}catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
@@ -112,14 +117,12 @@ public class Authoring89 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
-			
-		}
-	}
+		}	
 		
+	}
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 	}
 
 }
-
