@@ -413,6 +413,8 @@ public enum OnePObjectMap {
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH("//button[@class='wui-btn wui-btn--primary' and text()='Delete']"),
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
+	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
 	RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS("button[ng-click='reportThis()']"),
