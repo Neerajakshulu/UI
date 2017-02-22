@@ -20,13 +20,13 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Authoring91 extends TestBase {
+public class Authoring92 extends TestBase {
 	
 	static int status = 1;
 	static int time = 90;
 	static int totalCommentsBeforeDeletion = 0;
 	static int totalCommentsAfterDeletion = 0;
-	static String url = "http://www.metacafe.com/watch/1837388/thomson_reuters_improves_searchability_for_blogs_publishers_wit/";
+	static String url = "https://www.youtube.com/watch?v=kP88lNAmHXA";
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -64,22 +64,16 @@ public class Authoring91 extends TestBase {
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			
 			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
-			String title = RandomStringUtils.randomAlphabetic(20);
-			pf.getProfilePageInstance(ob).enterPostTitle(title);
-			String content = RandomStringUtils.randomAlphabetic(20);
-			pf.getProfilePageInstance(ob).enterPostContent(content);
 			pf.getProfilePageInstance(ob).AddVideoAndPublishAPost(url);
-			
+			//Publish button is an angularJS type
 			try {
-				ob.findElement(By.xpath("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']/iframe")).isDisplayed();
+				ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS.toString())).isEnabled();
 					
 			}catch(NoSuchElementException e){
-				test.log(LogStatus.PASS, "User is not able to add video apart from Youtube and Vimeo");
+				test.log(LogStatus.PASS, "User is not able to publish a post without a title and content");
 				closeBrowser();
-			}				
-			
+			}	
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
@@ -101,3 +95,4 @@ public class Authoring91 extends TestBase {
 	}
 
 }
+			
