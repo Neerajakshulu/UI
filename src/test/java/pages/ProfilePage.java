@@ -593,11 +593,11 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public void AddVideoAndPublishAPost() throws InterruptedException {
+	public void AddVideoAndPublishAPost(String url) throws InterruptedException {
 		Actions act = new Actions(ob);
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH.toString()))).click().perform();
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).click().perform();
-		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).sendKeys("https://www.youtube.com/watch?v=kP88lNAmHXA");
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).sendKeys(url);
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString()))).click().perform();
 		waitForPageLoad(ob);
 		}

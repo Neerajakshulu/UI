@@ -2,18 +2,11 @@ package Authoring;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -27,13 +20,13 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Authoring89 extends TestBase {
+public class Authoring91 extends TestBase {
 	
 	static int status = 1;
 	static int time = 90;
 	static int totalCommentsBeforeDeletion = 0;
 	static int totalCommentsAfterDeletion = 0;
-	static String url = "https://www.youtube.com/watch?v=kP88lNAmHXA";
+	static String url = "http://www.metacafe.com/watch/1837388/thomson_reuters_improves_searchability_for_blogs_publishers_wit/";
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -44,7 +37,7 @@ public class Authoring89 extends TestBase {
 	}
 	
 	@Test
-	public void testAddVideosToPost() throws Exception {
+	public void testAddNotSupportedVideosToPost() throws Exception {
 		
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -78,30 +71,14 @@ public class Authoring89 extends TestBase {
 			String content = RandomStringUtils.randomAlphabetic(20);
 			pf.getProfilePageInstance(ob).enterPostContent(content);
 			pf.getProfilePageInstance(ob).AddVideoAndPublishAPost(url);
-			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
-			waitForAjax(ob);
-			pf.getHFPageInstance(ob).clickOnProfileLink();
-			BrowserWaits.waitTime(5);
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(3);
-			String VideoUrl = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_VIDEO_BOX_XPATH.toString())).getAttribute("src");
-			String TrimmedVideoUrl = VideoUrl.substring(2, VideoUrl.indexOf("?"));
 			
 			try {
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);
-				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostVideoUrl(), TrimmedVideoUrl);
-				test.log(LogStatus.PASS, "User is able to publish the post with a video");
+				if(ob.findElement(By.xpath("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']/iframe")).isDisplayed());
+					
+			}catch(NoSuchElementException e){
+				test.log(LogStatus.PASS, "User is not able to add video apart from Youtube and Vimeo");
 				closeBrowser();
-
-			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "User is not able to publish the post with a video");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "Post_title_with_video_validation_failed")));// screenshot
-			}
+			}				
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -124,4 +101,3 @@ public class Authoring89 extends TestBase {
 	}
 
 }
-
