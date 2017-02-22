@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,12 +28,13 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Authoring90 extends TestBase {
+public class Authoring94 extends TestBase {
 	
 	static int status = 1;
 	static int time = 90;
 	static int totalCommentsBeforeDeletion = 0;
 	static int totalCommentsAfterDeletion = 0;
+	static String url = "https://www.youtube.com/watch?v=kP88lNAmHXA";
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -42,15 +44,9 @@ public class Authoring90 extends TestBase {
 		
 	}
 	
-	/**
-	 * Method for deleting a post with video content and checking the count in post.
-	 * 
-	 * @throws Exception, When Something unexpected
-	 */
-	//@Test(dependsOnMethods="testAddVideosToPost")
 	@Test
-	public void testDeleteVideoPost() throws Exception
-	{
+	public void testAddVideosToPost() throws Exception {
+		
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -62,6 +58,9 @@ public class Authoring90 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts for data set #" + count + "--->");
+		
+		
+		// selenium code
 		try {
 			openBrowser();
 			clearCookies();
@@ -70,43 +69,69 @@ public class Authoring90 extends TestBase {
 			ob.navigate().to(host);
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			BrowserWaits.waitTime(2);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			
-			int postCountBeforeDeleting = pf.getProfilePageInstance(ob).getPostsCount();
-			test.log(LogStatus.INFO, "Post count before deleting a video post:" + postCountBeforeDeleting);
-
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(5);
-			WebElement deleteCommentButton = ob
-					.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH.toString()));
-			JavascriptExecutor executor = (JavascriptExecutor) ob;
-			executor.executeScript("arguments[0].click();", deleteCommentButton);
-
-			jsClick(ob, ob.findElement(By
-					.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH.toString())));
+			int postCountBefore = pf.getProfilePageInstance(ob).getPostsCount();
+			test.log(LogStatus.INFO, "Post count:" + postCountBefore);
+			pf.getProfilePageInstance(ob).clickOnPublishPostButton();
+			String title = RandomStringUtils.randomAlphabetic(20);
+			pf.getProfilePageInstance(ob).enterPostTitle(title);
+			String content = RandomStringUtils.randomAlphabetic(20);
+			pf.getProfilePageInstance(ob).enterPostContent(content);
+			while(true)
+			{
+				if (ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH.toString())).isDisplayed())
+					{
+						pf.getProfilePageInstance(ob).AddImageToPost();
+						break;
+					}
+				else
+				{
+					ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+					.sendKeys(Keys.ENTER);
+				}				
+			}
+			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
-			String Delete_Text = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH.toString())).getText();
-			Assert.assertEquals(Delete_Text, "This post has been removed by the member.");
-			
+			BrowserWaits.waitTime(3);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
-			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			
-			int postCountAfterDeleting = pf.getProfilePageInstance(ob).getPostsCount();
-			test.log(LogStatus.INFO, "Post count after deleting a video post:" + postCountAfterDeleting);
+			int postCountAfter = pf.getProfilePageInstance(ob).getPostsCount();
+			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
 
-			if (!(postCountBeforeDeleting > postCountAfterDeleting)) {
-				test.log(LogStatus.FAIL, "Error: Video comment not deleted successfully");// extent
-																			// reports
+			try {
+				Assert.assertEquals(postCountBefore + 1, postCountAfter);
+				test.log(LogStatus.PASS, "Post count is incremented after the new post creation");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Post count is not incremented after the new post creation");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
+						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
+
 			}
-			closeBrowser();
-			}catch (Exception e) {
+			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			BrowserWaits.waitTime(3);
+			try {
+				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
+				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);
+				if(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH.toString())).isDisplayed())
+					test.log(LogStatus.PASS, "Published post has image");
+				closeBrowser();
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "User is not able to publish the post with a Image");
+				test.log(LogStatus.INFO, "Error--->" + t);
+				ErrorUtil.addVerificationFailure(t);
+				status = 2;
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "Post_title_with_Image_validation_failed")));// screenshot
+			}
+			
+			
+		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
@@ -117,9 +142,10 @@ public class Authoring90 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
-		}	
-		
+			
+		}
 	}
+		
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);

@@ -12,9 +12,9 @@
 	<parameter name="addComments" value="Testing Comments"></parameter>
 
 	
-	<test name="Authoring93">
+	<test name="Authoring90">
 		<classes>
-			<class name="Authoring.Authoring93"></class>
+			<class name="Authoring.Authoring90"></class>
 		</classes>
 	</test>
 </suite>

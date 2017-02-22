@@ -1,6 +1,7 @@
 package pages;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.xerces.impl.xpath.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -602,6 +604,22 @@ public class ProfilePage extends TestBase {
 		waitForPageLoad(ob);
 		}
 	
+	/**
+	 * Method to click on add Image button and add an image to a post
+	 * 
+	 * @throws InterruptedException
+	 * @throws IOException 
+	 */
+	public void AddImageToPost() throws InterruptedException, IOException {
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH.toString())).click();
+		BrowserWaits.waitTime(1);
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH.toString())).click();
+		//String imgPath = System.getProperty("user.dir") + "\\images\\" + "myimage" + ".jpg";
+		String imgPath = "C:\\IMG.jpg";
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imgPath);
+		BrowserWaits.waitTime(10);
+		
+		}
 
 	/**
 	 * Method to validate various error messages while creating the post
@@ -655,6 +673,8 @@ public class ProfilePage extends TestBase {
 				.clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 				.sendKeys(content);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+		.sendKeys(Keys.ENTER);
 
 	}
 

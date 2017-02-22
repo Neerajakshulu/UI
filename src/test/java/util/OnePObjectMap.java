@@ -314,6 +314,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH("//input[contains(@id,'fr-video-by-url-layer-text-')]"),
 	HOME_PROJECT_NEON_INSERT_URL_XPATH("//button[@class='fr-command fr-submit' and @data-cmd='videoInsertByURL']"),
 	HOME_PROJECT_NEON_VIDEO_BOX_XPATH("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']/iframe"),
+	HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH("//a[@class='fr-floating-btn']"),
+	HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH("//i[@class='fa fa-image']"),
+	HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH("//img[contains(@class,'fr-fic fr-dii')]"),
+	HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH("//span[text()='This post has been removed by the member.']"),
+	
 	
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
@@ -404,10 +409,10 @@ public enum OnePObjectMap {
     SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
 
 	// record view page
-	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+    RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
-	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
-	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH("//button[@class='wui-btn wui-btn--primary' and text()='Delete']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_FLAG_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
 	RECORD_VIEW_PAGE_COMMENTS_FLAG_BUTTON_CSS("button[ng-click='reportThis()']"),
