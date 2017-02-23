@@ -19,7 +19,6 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
 import util.TestUtil;
 
 public class IAM010 extends TestBase {
