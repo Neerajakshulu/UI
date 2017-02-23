@@ -931,7 +931,7 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 
 	IPA_BRANDING_NAME_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
-	IPA_LOGO_CSS("h2[class='login-header__app-name']"),
+	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
 	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
 	IPA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos']"),
