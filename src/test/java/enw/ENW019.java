@@ -97,7 +97,6 @@ public class ENW019 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 		closeBrowser();
 	}

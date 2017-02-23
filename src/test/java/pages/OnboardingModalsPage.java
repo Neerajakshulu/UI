@@ -52,7 +52,7 @@ public class OnboardingModalsPage extends TestBase {
 	 * @throws Exception, 
 	 */
 	public void ENWSTeamLogin(String userName,String password) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
+		//pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
 		
