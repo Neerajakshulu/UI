@@ -165,6 +165,20 @@ public class IPApage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
 	}
 
+	public String getProfileNameIPA() throws Exception {
+		clickOnProfileImageIPA();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		String ProfileName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS)
+				.getText();
+		return ProfileName;
+	}
+
+	public void clickOnProfileImageIPA() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.IPA_PROFILE_FLYOUT_IMAGE_CSS);
+
+	}
+
 	public void validateIPAStepUPModalTitle(ExtentTest test) {
 
 		try {
@@ -238,6 +252,7 @@ public class IPApage extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "user is not able to see Step up Auth modal thrid text");
 		}
+
 	}
 
 }
