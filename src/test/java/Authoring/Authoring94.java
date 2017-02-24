@@ -92,6 +92,7 @@ public class Authoring94 extends TestBase {
 					.sendKeys(Keys.ENTER);
 				}				
 			}
+			BrowserWaits.waitTime(5);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
 			BrowserWaits.waitTime(3);
@@ -113,11 +114,11 @@ public class Authoring94 extends TestBase {
 
 			}
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(10);
 			try {
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);
-				if(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH.toString())).isDisplayed())
+				if(ob.findElement(By.xpath("//div[p[text()=content]]/descendant::img]")).isDisplayed())
 					test.log(LogStatus.PASS, "Published post has image");
 				closeBrowser();
 

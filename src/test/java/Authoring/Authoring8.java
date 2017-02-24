@@ -135,19 +135,19 @@ public class Authoring8 extends TestBase {
 //			waitForElementTobeVisible(ob,
 //					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
 			//Added by KR
-			//WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
-			//innerTextBox.sendKeys(Keys.SPACE);
-			//innerTextBox.sendKeys(Keys.BACK_SPACE);
+			WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
+			innerTextBox.sendKeys("x");
+			innerTextBox.sendKeys(Keys.BACK_SPACE);
 			 //((JavascriptExecutor)ob).executeScript("document.getElementByXpath('//div[@class='fr-element fr-view']').value='Q '");
 
-			
+			pf.getBrowserActionInstance(ob).scrollingPageDown();
 			String minValidErrMsg = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
 			// System.out.println("Min Validation Error
 			// Message--->"+minValidErrMsg);
 			pf.getBrowserWaitsInstance(ob).waitUntilText(minValidErrMsg);
 			Assert.assertEquals(minValidErrMsg, expMinComment);
-
+			ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString())).click();
 			System.out.println("MaxCharCount-->" + (maxCharCount.substring(0, 4)));
 			pf.getAuthoringInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));

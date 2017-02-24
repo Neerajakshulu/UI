@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -17,6 +18,7 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 import util.TestUtil;
 
 public class Authoring31 extends TestBase {
@@ -124,7 +126,7 @@ public class Authoring31 extends TestBase {
 		test.log(LogStatus.INFO, "Entered Post Title of length:" + maxCharCount);
 		try {
 			Assert.assertFalse(pf.getProfilePageInstance(ob).validatePublishButton());;
-			test.log(LogStatus.PASS, "Publish button is disabled for the post content less than min character count");
+			test.log(LogStatus.PASS, "Publish button is disabled for the post content more than max character count");
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
 					"Publish button is not disabled for the post content less than min character count");
@@ -135,8 +137,6 @@ public class Authoring31 extends TestBase {
 					captureScreenshot(this.getClass().getSimpleName() + "Post_title_validation_failed")));// screenshot
 
 		}
-		pf.getProfilePageInstance(ob).clickOnPostCancelButton();
-		pf.getProfilePageInstance(ob).clickOnPostCancelDiscardButton();
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 	}

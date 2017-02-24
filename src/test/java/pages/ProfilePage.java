@@ -665,14 +665,18 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void enterPostContent(String content) throws Exception {
+		WebElement wb = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()));
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
 //		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 //				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.sendKeys(content);
+		wb.clear();
+		for(int i=0;i<content.length();i++){
+			wb.sendKeys(content.charAt(i)+"");
+			//Thread.sleep(1);
+			}
+//		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+//				.sendKeys(content);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
 		.sendKeys(Keys.ENTER);
 
@@ -1104,7 +1108,7 @@ public class ProfilePage extends TestBase {
 	}
 
 	public boolean validatePublishButton() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(5);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 
