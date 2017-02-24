@@ -81,14 +81,10 @@ public class ENWIAM51 extends TestBase {
 			try {
 
 				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				WebElement m_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_MARKETING_COPY_CSS);
-
 				String branding_name = b_element.getText();
-				String marketing_Copy = m_element.getText();
 
-				if (b_element.isDisplayed() && m_element.isDisplayed()) {
-					Assert.assertEquals(branding_name, "Thomson Reuters");
-					Assert.assertEquals(marketing_Copy, "EndNote");
+				if (b_element.isDisplayed()) {
+					Assert.assertEquals(branding_name, "EndNote");
 					test.log(LogStatus.PASS, "EndNote Landing page displays EndNote branding and marketing copy");
 				}
 
@@ -102,7 +98,6 @@ public class ENWIAM51 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
 
 			}
-
 
 			// Verifying that on ENW landing page, link to login with Shibboleth
 			// is displayed.
@@ -170,29 +165,6 @@ public class ENWIAM51 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			// Verify EndNote landing page displays Integration with EndNote
-			try {
-				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-				WebElement integrationmsg = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-				String actual_text = integrationmsg.getText();
-				//String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
-
-				if (actual_text.contains("You can use your Web of Science") && actual_text.contains("EndNote") && actual_text.contains("or ResearcherID credentials to sign in"))
-					// Assert.assertEquals(actual_text, expected_text);
-					test.log(LogStatus.PASS, "EndNote Landing page displays integration with Neon");
-				
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "EndNote Landing page doesn't display integration with Neon");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
-			}
-
 			// Verifying links to EndNote marketing pages are displayed.
 			try {
 				boolean find_icon = checkElementIsDisplayed(ob,
@@ -241,16 +213,16 @@ public class ENWIAM51 extends TestBase {
 				test.log(LogStatus.FAIL, "Connect icon is not displayed on EndNote landing page");
 				ErrorUtil.addVerificationFailure(t);
 			}
-			
-          try {
-				
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHIBB_LINK_CSS); 
-				String expectedShibbLink="http://error-qa.newisiknowledge.com";
+
+			try {
+
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_SHIBB_LINK_CSS);
+				String expectedShibbLink = "http://error-qa.newisiknowledge.com";
 				BrowserWaits.waitTime(4);
 				String actualShibbLinkurl = ob.getCurrentUrl();
-				//Assert.assertEquals(actualShibbLinkurl, expectedShibbLink);
-				if(actualShibbLinkurl.contains(expectedShibbLink))
-				test.log(LogStatus.PASS, "Shibboleth link is taking to proper url");
+				// Assert.assertEquals(actualShibbLinkurl, expectedShibbLink);
+				if (actualShibbLinkurl.contains(expectedShibbLink))
+					test.log(LogStatus.PASS, "Shibboleth link is taking to proper url");
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL, "Shibboleth link is not taking to proper url");
