@@ -74,18 +74,15 @@ public class Watchlist029 extends TestBase {
 
 			// 2)Login with user2 and and try to watch the post from
 			// notification panel
-			loginAsSpecifiedUser(LOGIN.getProperty("LOGINSTEAMUSERNAME4"), LOGIN.getProperty("LOGINSTEAMPASSWORD4"));
-
+			loginAsSpecifiedUser(LOGIN.getProperty("LOGINSTEAMUSERNAME29"), LOGIN.getProperty("LOGINSTEAMUSERNAME29PWD"));
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
-
 			// Navigating to the home page
 			ob.findElement(By.xpath(OR.getProperty("home_link"))).click();
-
 			// Add post to watchlist fron Newsfeed page
-			ob.navigate().refresh();
 			BrowserWaits.waitTime(5);
+			ob.navigate().refresh();
 			String docTitle = pf.getNewsfeedPageInstance(ob).getPostTitle();
 			pf.getNewsfeedPageInstance(ob).addFirstPostToWatclist(newWatchlistName);
 
