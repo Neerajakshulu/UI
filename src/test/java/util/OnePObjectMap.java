@@ -949,7 +949,7 @@ public enum OnePObjectMap {
 	IPA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-scope']"),
 	IPA_PROFILE_FLYOUT_IMAGE_CSS("a[class='wui-profile-flyout--trigger wui-circle']"),
 
-	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
+	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[class='wui-modal__close-btn']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
 	IPA_CANCEL_BUTTON_IN_SAVED_DATA_TILE_CSS("button[ng-click='vm.cancelItemEditMode(item)']"),
 	IPA_DELETE_SAVED_ITEM_BUTTON_POPUP_TEXT_CSS("div[class='modal-body wui-modal__body'] p"),
