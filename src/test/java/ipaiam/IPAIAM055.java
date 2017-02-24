@@ -55,8 +55,8 @@ public class IPAIAM055 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
-					LOGIN.getProperty("PWDUserFBENW00029"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("FBuserENWIAM0009"),
+					LOGIN.getProperty("FBpwdENWIAM0009"));
 			test.log(LogStatus.PASS, "user has logged in with social account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 
@@ -70,7 +70,7 @@ public class IPAIAM055 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
 			WebElement Emailaddress = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-			if (Emailaddress.getAttribute("value").equals("lyla6@xxqx3802.com")) {
+			if (Emailaddress.getAttribute("value").equals("jihipe@30wave.com")) {
 				test.log(LogStatus.PASS,
 						"The STeAM Step Up Auth Modal is presented to the user with a pre-populated email address when user does not have a linked STeAM account.");
 			} else {
@@ -78,7 +78,7 @@ public class IPAIAM055 extends TestBase {
 						"The STeAM Step Up Auth Modal is presented to the user without a pre-populated email address when user does not have a linked STeAM account.");
 			}
 			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
-			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "@Salma123");
+			pf.getDraPageInstance(ob).clickDRAStepUpAuthLoginNotEntitledUser(test, "sruthi@1");
 			
 			BrowserWaits.waitTime(2);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
@@ -104,7 +104,7 @@ public class IPAIAM055 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("FBuserENWIAM0009")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Social account is linked with steam account");
 

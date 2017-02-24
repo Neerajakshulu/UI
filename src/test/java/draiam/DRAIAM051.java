@@ -3,6 +3,7 @@ package draiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -68,32 +69,32 @@ public class DRAIAM051 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-     
+
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA051"),
 					LOGIN.getProperty("USERPWDDRA051"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		test.log(LogStatus.PASS,
-					"user is able to login to DRA when first name of user is missing.");
-		   
-           //String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
-          
-           pf.getDraPageInstance(ob).clickProfileLink();
-           
-           pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS);
-           String firstnameerrormessage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
-           if(firstnameerrormessage.equals("Please enter your first name."))
-			{test.log(LogStatus.PASS,
-					"user is able to see first name as NULL when first name of user is missing.");
+			test.log(LogStatus.PASS, "user is able to login to DRA when first name of user is missing.");
+
+			// String Profilename=pf.getDraPageInstance(ob).getProfileNameDRA();
+
+			pf.getDraPageInstance(ob).clickProfileLink();
+
+			try {
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS);
+				String firstnameerrormessage = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS).getText();
+				Assert.assertEquals(firstnameerrormessage, "Please enter your first name.");
+				test.log(LogStatus.PASS, "user is able to see first name as NULL when first name of user is missing.");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"user is not  able to see first name as NULL when first name of user is missing.");
 			}
-			else
-			{test.log(LogStatus.FAIL,
-					"user is not  able to see first name as NULL when first name of user is missing.");
-			}
-           BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(3);
 			pf.getDraPageInstance(ob).logoutDRA();
 			ob.close();
-		}
-		catch (Throwable t) {
+		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
 			// next 3 lines to print whole testng error in report
