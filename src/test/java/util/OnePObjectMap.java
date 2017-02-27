@@ -741,7 +741,7 @@ public enum OnePObjectMap {
 	RCC_PENDING_INVITATIONS_MESSAGE_CSS("div[class='ng-binding ng-scope']"),
 	RCC_INVITATIONS_STATUS_CSS("div[class='pull-right ng-binding ng-scope']"),
 	RCC_INVITATION_DESCRIPTION_CSS("textarea[placeholder='Add a description']"),
-	RCC_GROUP_CREATION_SUCCESS_MESSAGE_POP_UP_XPATH("//div[@class='ui-notification wui-toast wui-toast--success ng-scope clickable']"),
+	RCC_GROUP_CREATION_SUCCESS_MESSAGE_POP_UP_XPATH("//div[@class='ui-notification wui-toast wui-toast--success ng-scope clickable']"), 
 
 	RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
 	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
