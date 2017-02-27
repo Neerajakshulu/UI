@@ -72,7 +72,7 @@ public class RCC011 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the owner ");
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(30);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user");
