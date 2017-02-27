@@ -65,9 +65,9 @@ public class RCC025 extends TestBase {
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
 
 			// Inviting user2
-			BrowserWaits.waitTime(30);
+			BrowserWaits.waitTime(25);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21")); 
-			BrowserWaits.waitTime(30);
+			BrowserWaits.waitTime(25);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");
