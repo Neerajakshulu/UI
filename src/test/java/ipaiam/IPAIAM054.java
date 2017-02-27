@@ -111,10 +111,10 @@ public class IPAIAM054 extends TestBase {
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 
 				validateLinkedAccounts(2, accountType);
-				String secondAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+				String secondAccountProfileName =pf.getIpaPage(ob).getProfileNameIPA();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				BrowserWaits.waitTime(2);
-				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+				pf.getIpaPage(ob).clickOnProfileImageIPA();
 				Assert.assertEquals(secondAccountProfileName, firstAccountProfileName);
 				test.log(LogStatus.PASS, "Forward Merge is happened");
 				if (secondAccountProfileName.contains(firstAccountProfileName)) {

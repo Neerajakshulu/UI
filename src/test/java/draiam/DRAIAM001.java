@@ -83,14 +83,11 @@ public class DRAIAM001 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
 				WebElement brand_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_BRANDING_NAME_CSS);
-				WebElement dra_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_LOGO_CSS);
 
-				String branding_name = brand_element.getText();
-				String dra_logo = dra_element.getText();
+				String dra_logo = brand_element.getText();
 
-				if (brand_element.isDisplayed() && dra_element.isDisplayed()) {
-					Assert.assertEquals(dra_logo, "Drug Research Advisor");
-					Assert.assertEquals(branding_name, "TARGET DRUGGABILITY");
+				if (brand_element.isDisplayed()) {
+					Assert.assertEquals(dra_logo, "Drug Research Advisor: Target Druggability");
 					test.log(LogStatus.PASS, "DRA Landing page displays branding and marketing copy");
 				}
 

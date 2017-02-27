@@ -128,7 +128,7 @@ public class IPAIAM053 extends TestBase {
 
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
 				validateAccounts(2, accountType);
-				String winingAccountProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
+				String winingAccountProfileName = pf.getIpaPage(ob).getProfileNameIPA();
 				test.log(LogStatus.INFO, "After merging account profile name: " + winingAccountProfileName);
 
 				// Verifying that Profile name is same as winning

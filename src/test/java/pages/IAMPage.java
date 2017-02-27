@@ -31,7 +31,7 @@ public class IAMPage extends TestBase {
 				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS);
 		WebElement element = ob
 				.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_TEXT_CSS.toString()));
-		String forgotPassText = element.findElement(By.tagName("h4")).getText();
+		String forgotPassText = element.findElement(By.tagName("h3")).getText();
 		logger.info("Title : " + forgotPassText);
 		String text = element.findElement(By.tagName("p")).getText();
 		logger.info("Text : " + text);
@@ -61,6 +61,7 @@ public class IAMPage extends TestBase {
 		 */
 		String messageContent = "An email with password reset instructions has been sent to " + email + ".";
 		logger.info("Text123 : " + messageContent);
+		
 		/*
 		 * String checkFolder = list.get(1).getText(); logger.info("Email verification folder : " + checkFolder);
 		 */

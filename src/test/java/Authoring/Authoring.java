@@ -101,7 +101,7 @@ public class Authoring extends TestBase {
 		commentSizeBeforeAdd = getCommentCount();
 		System.out.println("Before-->" + commentSizeBeforeAdd);
 		scrollingToElementofAPage();
-		BrowserWaits.waitTime(1);
+		BrowserWaits.waitTime(5);
 		//commented by KR
 //		ob
 //		.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTAREA_CSS.toString())).click();
@@ -118,7 +118,7 @@ public class Authoring extends TestBase {
 		innerTextBox.clear();
 		for(int i=0;i<addComments.length();i++){
 			innerTextBox.sendKeys(addComments.charAt(i)+"");
-			Thread.sleep(300);
+			Thread.sleep(10);
 			}
 		
 		Thread.sleep(100);// after entering the comments wait for submit button

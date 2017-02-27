@@ -488,7 +488,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By.cssSelector("div[class='account-option-item__forgot-password'] a")).click();
 				BrowserWaits.waitTime(6);
 				String resertPassPage = ob
-						.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).getText();
+						.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).get(1).getText();
 				Assert.assertEquals(resertPassPage, "Email Sent");
 				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())));
 				test.log(LogStatus.PASS,

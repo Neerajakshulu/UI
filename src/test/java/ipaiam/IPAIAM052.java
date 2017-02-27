@@ -107,7 +107,7 @@ public class IPAIAM052 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS);
 				test.log(LogStatus.PASS, "User is able to click on not now on the modal");	
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				validateAccounts(1,"Neon");
+				validateAccounts(1,"Clarivate Analytics");
 				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();

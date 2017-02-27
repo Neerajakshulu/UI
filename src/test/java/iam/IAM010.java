@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
@@ -101,7 +102,12 @@ public class IAM010 extends TestBase {
 				BrowserWaits.waitTime(3);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 
-				String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
+				JavascriptExecutor js = (JavascriptExecutor) ob;
+				String text = (String) (js.executeScript("return arguments[0].value",
+						ob.findElement(By.name(OR.getProperty("signup_email_texbox")))));
+				
+				
+				//String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
 				logger.info("Text : " + text);
 
 				if (validity.equalsIgnoreCase("YES")) {
@@ -124,7 +130,7 @@ public class IAM010 extends TestBase {
 				}
 
 				else {
-					String title = ob.findElement(By.xpath("//h2[@class='login-title']")).getText();
+					String title = ob.findElement(By.xpath("//h3[@class='wui-subtitle']")).getText();
 					try {
 						Assert.assertTrue(title.contains("Sign up"));
 						test.log(LogStatus.PASS, "Sign up Page is opened successfully");

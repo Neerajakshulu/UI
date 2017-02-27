@@ -1,6 +1,7 @@
 package pages;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.xerces.impl.xpath.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -593,15 +595,31 @@ public class ProfilePage extends TestBase {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public void AddVideoAndPublishAPost() throws InterruptedException {
+	public void AddVideoAndPublishAPost(String url) throws InterruptedException {
 		Actions act = new Actions(ob);
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_VIDEO_BUTTON_XPATH.toString()))).click().perform();
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).click().perform();
-		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).sendKeys("https://www.youtube.com/watch?v=kP88lNAmHXA");
+		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH.toString()))).sendKeys(url);
 		act.moveToElement(ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_INSERT_URL_XPATH.toString()))).click().perform();
 		waitForPageLoad(ob);
 		}
 	
+	/**
+	 * Method to click on add Image button and add an image to a post
+	 * 
+	 * @throws InterruptedException
+	 * @throws IOException 
+	 */
+	public void AddImageToPost() throws InterruptedException, IOException {
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH.toString())).click();
+		BrowserWaits.waitTime(1);
+		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH.toString())).click();
+		//String imgPath = System.getProperty("user.dir") + "\\images\\" + "myimage" + ".jpg";
+		String imgPath = "C:\\IMG.jpg";
+		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imgPath);
+		BrowserWaits.waitTime(10);
+		
+		}
 
 	/**
 	 * Method to validate various error messages while creating the post
@@ -647,14 +665,20 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void enterPostContent(String content) throws Exception {
+		WebElement wb = ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()));
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()), 90);
 //		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 //				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS);
+		wb.clear();
+		for(int i=0;i<content.length();i++){
+			wb.sendKeys(content.charAt(i)+"");
+			//Thread.sleep(1);
+			}
+//		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
+//				.sendKeys(content);
 		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.clear();
-		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_CONTENT_CSS.toString()))
-				.sendKeys(content);
+		.sendKeys(Keys.ENTER);
 
 	}
 
@@ -1084,7 +1108,7 @@ public class ProfilePage extends TestBase {
 	}
 
 	public boolean validatePublishButton() throws Exception {
-		BrowserWaits.waitTime(10);
+		BrowserWaits.waitTime(5);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS);
 

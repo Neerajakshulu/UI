@@ -314,6 +314,11 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ADD_URL_BUTTON_XPATH("//input[contains(@id,'fr-video-by-url-layer-text-')]"),
 	HOME_PROJECT_NEON_INSERT_URL_XPATH("//button[@class='fr-command fr-submit' and @data-cmd='videoInsertByURL']"),
 	HOME_PROJECT_NEON_VIDEO_BOX_XPATH("//span[@class='fr-video fr-fvc fr-dvb fr-draggable']/iframe"),
+	HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH("//a[@class='fr-floating-btn']"),
+	HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH("//i[@class='fa fa-image']"),
+	HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH("//img[contains(@class,'fr-fic fr-dii')]"),
+	HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH("//span[text()='This post has been removed by the member.']"),
+	
 	
 	HOME_PROJECT_SECTION_HEADING_LABEL("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"),
 	HOME_PROJECT_SELECT_PEOPLE_FOR_SEARCH_IN_DROPDOWN_XPATH("//div[@class='input-group-btn open']//ul[@class='dropdown-menu']//li[4]//a"),
@@ -404,8 +409,10 @@ public enum OnePObjectMap {
     SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
 
 	// record view page
-	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+    RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.close()']"),
+	RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH("//button[@class='wui-btn wui-btn--primary' and text()='Delete']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS("div[class='modal-dialog']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS("span[class='wui-checkbox__visible']"),
 	RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CANCEL_BUTTON_CSS("div[class^='modal-footer'] button[ng-click='vm.cancel()']"),
@@ -537,7 +544,7 @@ public enum OnePObjectMap {
 
 	// Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
-	NEON_ENW_COMPANY_CSS("h5[class='login-header__company-name']"),
+	NEON_ENW_COMPANY_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	NEON_MARKETING_COPY_CSS("h2[class$='app-name ng-binding']"),
 	NEON_CONNECT_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
 	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
@@ -784,7 +791,7 @@ public enum OnePObjectMap {
 	// #################### DRA ##########################
 
 	DRA_LOGO_CSS("h4[class$='wui-title login-header__app-name ng-binding']"),
-	DRA_BRANDING_NAME_CSS("h2[class^='login-header__app-name']"),
+	DRA_BRANDING_NAME_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
 	DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
@@ -924,8 +931,8 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 
-	IPA_BRANDING_NAME_CSS("h5[class='login-header__company-name']"),
-	IPA_LOGO_CSS("h2[class='login-header__app-name']"),
+	IPA_BRANDING_NAME_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
+	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
 	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
 	IPA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos']"),
@@ -941,8 +948,9 @@ public enum OnePObjectMap {
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	IPA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--ipa']"),
 	IPA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-scope']"),
+	IPA_PROFILE_FLYOUT_IMAGE_CSS("a[class='wui-profile-flyout--trigger wui-circle']"),
 
-	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[title='Close']"),
+	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[class='wui-modal__close-btn']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),
 	IPA_CANCEL_BUTTON_IN_SAVED_DATA_TILE_CSS("button[ng-click='vm.cancelItemEditMode(item)']"),
 	IPA_DELETE_SAVED_ITEM_BUTTON_POPUP_TEXT_CSS("div[class='modal-body wui-modal__body'] p"),

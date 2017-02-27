@@ -76,17 +76,14 @@ public class ENWIAM50 extends TestBase {
 			try {
 
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_CSS);
+
 				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				WebElement m_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.NEON_MARKETING_COPY_CSS);
 
 				String branding_name = b_element.getText();
-				String marketing_Copy = m_element.getText();
 
-				if (b_element.isDisplayed() && m_element.isDisplayed()) {
-					Assert.assertEquals(branding_name, "Thomson Reuters");
-					Assert.assertEquals(marketing_Copy, "Project Neon");
+				if (b_element.isDisplayed()) {
+					Assert.assertEquals(branding_name, "Project Neon");
+
 					test.log(LogStatus.PASS, "Neon Landing page displays Neon branding and marketing copy");
 				}
 
@@ -95,31 +92,6 @@ public class ENWIAM50 extends TestBase {
 				test.log(LogStatus.FAIL, "Neon Landing page doesn't displays Neon branding and marketing copy");
 				ErrorUtil.addVerificationFailure(t);
 
-			}
-
-			// Verify Neon landing page displays Integration with EndNote
-			
-			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-
-			WebElement integrationmsg = pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.NEON_ENW_INTEGRATION_TEXT_CSS);
-			String actual_text = integrationmsg.getText();
-			//String expected_text = "You can use your Web of Science™, EndNote™, or ResearcherID credentials to sign in.";
-
-			try {
-				if (actual_text.contains("You can use your Web of Science") && actual_text.contains("EndNote") && actual_text.contains("or ResearcherID credentials to sign in"))
-					// Assert.assertEquals(actual_text, expected_text);
-					test.log(LogStatus.PASS, "Neon Landing page displays integration with Endnote");
-				
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Neon Landing page doesn't display integration with Endnote");
-				test.log(LogStatus.INFO, "Error--->" + t);
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_Not_able_to_close_modal")));
 			}
 
 			// verify Neon Icon is displayed on Neon sign in page
