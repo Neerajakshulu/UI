@@ -66,7 +66,7 @@ public class RCC025 extends TestBase {
 
 			// Inviting user2
 			BrowserWaits.waitTime(5);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21")); 
 			BrowserWaits.waitTime(5);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
