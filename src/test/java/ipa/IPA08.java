@@ -87,7 +87,7 @@ public class IPA08 extends TestBase {
 			pf.getDashboardPage(ob).SearchTermEnter("company", "Apple");
 			pf.getDashboardPage(ob).addCompanyTerms("1");
 			pf.getDashboardPage(ob).exploreSearch();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_COM_CSS.toString()), 30);
 			pf.getDashboardPage(ob).selectTechPatentTAB();
 			int pub = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_PUBLICATION_NUMS_CSS,
 					test);
