@@ -115,6 +115,7 @@ public class RCC011 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
+			BrowserWaits.waitTime(30);
 			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(title);
 				test.log(LogStatus.PASS, "User2 has accepted the invitation");
