@@ -137,7 +137,7 @@ public class RCC010 extends TestBase {
 			// Verify thet submitt button is working for Cancel Invitation Modal
 			pf.getGroupDetailsPage(ob).cancelPendingInvitations(LOGIN.getProperty("RCCPROFILE18"));
 			pf.getGroupDetailsPage(ob).clickOnSubmitButtonINConfirmationModal();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(20);
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).verifyUserInPendingInvitationList(LOGIN.getProperty("RCCPROFILE18")),
 					"Invitation is canceled by the owner of the group");
 
