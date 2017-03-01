@@ -49,7 +49,7 @@ public class LoginTR extends TestBase {
 	 */
 	public void waitForTRHomePage() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters", "Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon");
 	}
 
 	/**
@@ -58,11 +58,6 @@ public class LoginTR extends TestBase {
 	 * @throws InterruptedException
 	 */
 	public void enterTRCredentials(String userName, String password) throws InterruptedException {
-		// ob.findElement(By.cssSelector(OR.getProperty("tr_home_signInwith_projectNeon_css"))).click();
-		// waitUntilTextPresent(OR.getProperty("tr_signIn_header_css"), "Thomson
-		// Reuters ID");
-		// waitUntilTextPresent(OR.getProperty("tr_signIn_login_css"),"Sign
-		// in");
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(userName);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString())).sendKeys(password);
