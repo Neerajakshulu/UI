@@ -35,8 +35,8 @@ public class IAMPage extends TestBase {
 		logger.info("Title : " + forgotPassText);
 		String text = element.findElement(By.tagName("p")).getText();
 		logger.info("Text : " + text);
-		Assert.assertTrue(forgotPassText.contains("Forgot Password") && text.contains(
-				"Please enter your email address. We'll send you an email that will allow you to reset your password."));
+		Assert.assertTrue(forgotPassText.contains("Forgot password"));
+		Assert.assertTrue(text.contains("Please enter your email address. We'll send you an email that will allow you to reset your password."));
 	}
 
 	public void clickSendEmailButton() throws Exception {
@@ -163,17 +163,19 @@ public class IAMPage extends TestBase {
 			String newPass) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS);
 		WebElement element = ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_CSS.toString()));
-
+		
 		List<WebElement> listOfElements = element.findElements(By.tagName("p"));
-		String resetPassText = listOfElements.get(0).getText();
+		String resetPassText = element.findElement(By.tagName("h3")).getText();
+		//String resetPassText = listOfElements.get(0).getText();
 		logger.info("Title : " + resetPassText);
-		String newPassText = listOfElements.get(1).getText();
+		String newPassText = listOfElements.get(0).getText();
 		logger.info("wxpireTimeText : " + newPassText);
 		// String resetPassText = element.findElement(By.tagName("h2")).getText();
 		// logger.info("Title : " + resetPassText);
 		// String newPassText = element.findElement(By.tagName("p")).getText();
 		// logger.info("Title : " + newPassText);
-		Assert.assertTrue(resetPassText.contains(resetPass) && newPassText.contains(newPass));
+		Assert.assertTrue(resetPassText.contains(resetPass));
+		Assert.assertTrue(newPassText.contains(newPass));
 	}
 
 	public void checkTextBox(String newPassword) throws Exception {
@@ -234,11 +236,12 @@ public class IAMPage extends TestBase {
 		// String resetPassText = element.findElement(By.tagName("h2")).getText();
 		// logger.info("Title : " + resetPassText);
 		List<WebElement> ListOfElements = element.findElements(By.tagName("p"));
-		String resetPassText = ListOfElements.get(0).getText();
+		String resetPassText = element.findElement(By.tagName("h3")).getText();
+		//String resetPassText = ListOfElements.get(0).getText();
 		logger.info("Title : " + resetPassText);
-		String expireTimeText = ListOfElements.get(1).getText();
+		String expireTimeText = ListOfElements.get(0).getText();
 		logger.info("wxpireTimeText : " + expireTimeText);
-		String resentMailText = ListOfElements.get(2).getText();
+		String resentMailText = ListOfElements.get(1).getText();
 		logger.info("ResentMailText : " + resentMailText);
 		String invalidPassPageTitle = "Password reset link has expired";
 		String expireTime = "To protect your security, the link to reset your password expired after 24 hours.";
