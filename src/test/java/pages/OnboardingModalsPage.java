@@ -824,7 +824,7 @@ public class OnboardingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 		validateENWProfileFlyout(enwProfileFlyout);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_SIGNOUT_LINK);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("EndNote","Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 	}
 	
@@ -846,7 +846,7 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_PLINK);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
 			//pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","Select an image","(no more than 1024 px or 256 KB in size).");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","Select an image","(at least 120 px by 120 px and less than 8 MB).");
 			//validate update button status
 			validateProfilePicUpdateButtonStatus();
 			//upload new profile image

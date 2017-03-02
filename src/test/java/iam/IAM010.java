@@ -130,7 +130,7 @@ public class IAM010 extends TestBase {
 				}
 
 				else {
-					String title = ob.findElement(By.xpath("//h3[@class='wui-subtitle']")).getText();
+					String title = ob.findElement(By.xpath("//h3[@class='wui-subtitle wui-subtitle--app-signin']")).getText();
 					try {
 						Assert.assertTrue(title.contains("Sign up"));
 						test.log(LogStatus.PASS, "Sign up Page is opened successfully");

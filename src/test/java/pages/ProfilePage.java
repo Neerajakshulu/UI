@@ -1724,7 +1724,7 @@ public class ProfilePage extends TestBase {
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
 		//pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","Select an image","(no more than 1024 px or 256 KB in size).");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","Select an image","(at least 120 px by 120 px and less than 8 MB).");
 	}
 	
 	/**

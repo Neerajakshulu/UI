@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -78,6 +79,7 @@ public class Watchlist015 extends TestBase {
 			// Editing the first watch list
 			String watchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp() + "_Updated";
 			String watchlistDescription = "This is my watchlist";
+			BrowserWaits.waitTime(9);
 			ob.findElement(By.xpath(OR.getProperty("edit_watch_list_button1"))).click();
 			// waitForElementTobeVisible(ob, By.xpath("//div[@data-submit-callback='Workspace.submitWatchlistForm']"),
 			// 30);
@@ -91,6 +93,7 @@ public class Watchlist015 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("//a[@class='ng-binding']"), 60);
 			String updatedWatchlistName = ob.findElement(By.xpath("//a[@class='ng-binding']")).getText();
 			// waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item-description ng-binding']"), 60);
+			
 			waitForElementTobeVisible(ob, By.xpath("//p[@class='watchlist-item__description ng-binding ng-scope']"),
 					60);
 			String updatedWatchlistDescription = ob
@@ -104,6 +107,10 @@ public class Watchlist015 extends TestBase {
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is not able to update watch list name");
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				closeBrowser();
 			}
 
 			// Compare watch list description
@@ -113,6 +120,10 @@ public class Watchlist015 extends TestBase {
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is not able to update watch list description");
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				closeBrowser();
 			}
 
 			// Deleting the watch list

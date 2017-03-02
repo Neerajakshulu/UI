@@ -80,7 +80,7 @@ public class ENW019 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "Feedback New window is not displayed and content is not matching")));// screenshot
 			}
-			BrowserWaits.waitTime(8);
+			BrowserWaits.waitTime(15);
 			ob.findElement(By.xpath(OnePObjectMap.COMMON_FEEDBACK_CLOSE_XPATH.toString())).click();
 			BrowserWaits.waitTime(4);
 			logout();
