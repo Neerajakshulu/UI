@@ -107,6 +107,10 @@ public class Watchlist015 extends TestBase {
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is not able to update watch list name");
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				closeBrowser();
 			}
 
 			// Compare watch list description
@@ -116,6 +120,10 @@ public class Watchlist015 extends TestBase {
 			} catch (Error e) {
 				status = 2;
 				test.log(LogStatus.FAIL, "User is not able to update watch list description");
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				closeBrowser();
 			}
 
 			// Deleting the watch list
