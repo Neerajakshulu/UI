@@ -788,9 +788,8 @@ public enum OnePObjectMap {
     RCC_GMAIL_CLICK_CONTINUE_XPATH("//input[@type='submit']"),   
 
 	// #################### DRA ##########################
-
-	DRA_LOGO_CSS("h4[class$='wui-title login-header__app-name ng-binding']"),
-	DRA_BRANDING_NAME_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
+    DRA_LOGO_CSS("h3[class='wui-title wui-title--app-signin-secondaryname']"),
+	DRA_BRANDING_NAME_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
 	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
 	DRA_LANDINGPAGE_VALIDATE_ICON_CSS("i[class='fa fa-check-circle-o login-splash-icon']"),
@@ -931,7 +930,7 @@ public enum OnePObjectMap {
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. thomson reuters)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
 
-	IPA_BRANDING_NAME_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
+	IPA_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
 	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
