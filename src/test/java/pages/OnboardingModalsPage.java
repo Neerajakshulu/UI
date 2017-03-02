@@ -824,7 +824,7 @@ public class OnboardingModalsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 		validateENWProfileFlyout(enwProfileFlyout);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_SIGNOUT_LINK);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Thomson Reuters","EndNote","Sign in");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("EndNote","Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 	}
 	
