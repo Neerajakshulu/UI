@@ -56,6 +56,7 @@ public class ENW037 extends TestBase {
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
 					LOGIN.getProperty("USERPASSWORD037"));
+			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).clickLogin();
 			pf.getAuthoringInstance(ob).searchArticle("Portable calendaring device having perceptual agent managing calendar entries");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
@@ -99,12 +100,21 @@ public class ENW037 extends TestBase {
 			if (!(endNoteDetails.get("AbstractValue").equals(neonValues.get("expectedAbstract")))) {
 				test.log(LogStatus.FAIL, "Record is not exported and the Abstract content is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				
 			}else{
 				test.log(LogStatus.PASS, "Record is exported and the Abstract content is matching between Neon and endnote");
 			}
 			if (!(endNoteDetails.get("AssigneeValue").equals(neonValues.get("expectedAssignee")))) {
-						test.log(LogStatus.FAIL, "Record is not exported , The Assignee value is not matching between Neon and endnote");
-						Assert.assertEquals(true, false);
+				test.log(LogStatus.FAIL, "Record is not exported , The Assignee value is not matching between Neon and endnote");
+				Assert.assertEquals(true, false);
+						status = 2;// excel
+						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+								captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+						closeBrowser();
+						
 					}else{
 						test.log(LogStatus.PASS, "After exporting the record, The Assignee value is matching between Neon and endnote");
 					}
@@ -114,6 +124,10 @@ public class ENW037 extends TestBase {
 			if(!(endNoteDetails.get("Keywords").equalsIgnoreCase(str))){
 				test.log(LogStatus.FAIL, "Record is not exported , The IPC value is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+				
 			}else{
 				test.log(LogStatus.PASS, "After exporting the record, The IPC value is displayed as Keywords in neon");			
 			}
