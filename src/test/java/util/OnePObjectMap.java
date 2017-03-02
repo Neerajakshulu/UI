@@ -943,7 +943,7 @@ public enum OnePObjectMap {
 	IPA_LINKINGMODAL_TEXT1_XPATH("(//p[@class='ng-binding'])[1]"),
 	IPA_LINKINGMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[2]"),
 	IPA_LINKINGMODAL_EMAIL_CSS("span[class='wui-modal__email ng-binding']"),
-	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[event-action='change-password-submitted']"),
+	IPA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[data-event-action='change-password-submitted']"),
 	IPA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	IPA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--ipa']"),
 	IPA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-scope']"),
