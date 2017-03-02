@@ -206,7 +206,7 @@ public class RCC021 extends TestBase {
 
 			}
 
-			try {
+			/*try {
 			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
 			BrowserWaits.waitTime(5);
 			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
@@ -218,7 +218,20 @@ public class RCC021 extends TestBase {
 			logFailureDetails(test, t,
 					"Successfully Logged in clearing all the privacy things in google.",
 					"Not logged in ");  
-			}
+			}*/
+			
+			
+			try {
+				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+				BrowserWaits.waitTime(5);
+				pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+				test.log(LogStatus.PASS, "Successfully Logged in without accessing Google privacy things");
+				}catch(Throwable t) {
+				logFailureDetails(test, t,
+				"Issus in google login",
+				"_Login_Issue");
+				}
+			
 			
 			try {   
 				
@@ -373,11 +386,23 @@ public class RCC021 extends TestBase {
 
 			}
 
-		pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
-		pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
-		pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
-		pf.getGmailLoginPage(ob).clickonGoogleContinue();
+//		pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+//		pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+//			//pf.getGroupDetailsPage(ob).signInToGoogle(gUsername1, gPassword1);
+//		pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,gPassword2);
+//		pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			
+			try {
+				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkItemLevel(recordTitle, recordType, gdDoctitle);
+				BrowserWaits.waitTime(5);
+				pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
+				test.log(LogStatus.PASS, "Successfully Logged in without accessing Google privacy things");
+				}catch(Throwable t) {
+				logFailureDetails(test, t,
+				"Issus in google login",
+				"_Login_Issue");
+				}
+			
 			try {
 				//pf.getGroupDetailsPage(ob).validateGDUrl();
 				//BrowserWaits.waitTime(5);
