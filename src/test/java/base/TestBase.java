@@ -118,6 +118,7 @@ public class TestBase {
 	protected String module = null;
 
 	public PageFactory pf = new PageFactory();
+
 	public String suiteName;
 
 	protected static final String COLON = ":";

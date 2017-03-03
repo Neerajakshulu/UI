@@ -10,19 +10,20 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
-
 import base.TestBase;
-import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
+
 public class Authoring1 extends TestBase {
-
+	
+	//Global Variables
 	static int status = 1;
-
 	static int time = 15;
-	PageFactory pf = new PageFactory();
+
+	//To be deleted
+	//PageFactory pf = new PageFactory();
 
 	// Checking whether this test case should be skipped or not
 	@BeforeTest
@@ -32,6 +33,11 @@ public class Authoring1 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
 	}
 
+	/**
+	 * Method for validating TR Login Screen
+	 * 
+	 * @throws Exception, When TR Login Home screen not displaying
+	 */
 	@Test
 	public void testLoginTRAccount() throws Exception {
 
@@ -93,8 +99,9 @@ public class Authoring1 extends TestBase {
 		// closeBrowser();
 	}
 
+	
 	public void validateUpdatedComment(String updatedComments) throws Exception {
-		scrollingToElementofAPage();
+		//scrollingToElementofAPage();
 		String commentText = ob
 				.findElements(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_COMMENT_CSS.toString())).get(0)
 				.getText();
