@@ -463,42 +463,6 @@
 			<class name="Authoring.Authoring70"></class>
 		</classes>
 	</test>
-
-	<test name="Authoring71">
-		<classes>
-			<class name="Authoring.Authoring71"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring72">
-		<classes>
-			<class name="Authoring.Authoring72"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring73">
-		<classes>
-			<class name="Authoring.Authoring73"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring74">
-		<classes>
-			<class name="Authoring.Authoring74"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring75">
-		<classes>
-			<class name="Authoring.Authoring75"></class>
-		</classes>
-	</test>
-
-	<test name="Authoring76">
-		<classes>
-			<class name="Authoring.Authoring76"></class>
-		</classes>
-	</test>
 	
 	<test name="Authoring77">
 		<classes>
@@ -518,11 +482,29 @@
 		</classes>
 	</test> 
 	
-<!-- 	<test name="Authoring83"> -->
-<!-- 		<classes> -->
-<!-- 			<class name="Authoring.Authoring83"></class> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
+	<test name="Authoring80">
+		<classes>
+			<class name="Authoring.Authoring80"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring81">
+		<classes>
+			<class name="Authoring.Authoring81"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring82">
+		<classes>
+			<class name="Authoring.Authoring82"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring83">
+		<classes>
+			<class name="Authoring.Authoring83"></class>
+		</classes>
+	</test>
 	
 	<test name="Authoring84">
 		<classes>
@@ -593,5 +575,3 @@
 		</classes>
 	</test>
 </suite>
-
-
