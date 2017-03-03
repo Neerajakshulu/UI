@@ -464,6 +464,36 @@
 		</classes>
 	</test>
 	
+	<test name="Authoring71">
+		<classes>
+			<class name="Authoring.Authoring71"></class>
+		</classes>
+	</test>
+	<test name="Authoring72">
+		<classes>
+			<class name="Authoring.Authoring72"></class>
+		</classes>
+	</test>
+	<test name="Authoring73">
+		<classes>
+			<class name="Authoring.Authoring73"></class>
+		</classes>
+	</test>
+	<test name="Authoring74">
+		<classes>
+			<class name="Authoring.Authoring74"></class>
+		</classes>
+	</test>
+	<test name="Authoring75">
+		<classes>
+			<class name="Authoring.Authoring75"></class>
+		</classes>
+	</test>
+	<test name="Authoring76">
+		<classes>
+			<class name="Authoring.Authoring76"></class>
+		</classes>
+	</test>
 	<test name="Authoring77">
 		<classes>
 			<class name="Authoring.Authoring77"></class>
@@ -484,17 +514,23 @@
 	
 	<test name="Authoring80">
 		<classes>
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
 			<class name="Authoring.Authoring80"></class>
 		</classes>
 	</test>
 
 	<test name="Authoring81">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
 		<classes>
 			<class name="Authoring.Authoring81"></class>
 		</classes>
 	</test>
 
 	<test name="Authoring82">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
 		<classes>
 			<class name="Authoring.Authoring82"></class>
 		</classes>
