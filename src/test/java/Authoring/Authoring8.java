@@ -51,7 +51,7 @@ public class Authoring8 extends TestBase {
 		runmodes = TestUtil.getDataSetRunmodes(authoringxls, this.getClass().getSimpleName());
 	}
 
-	@Test
+	@Test(priority=1)
 	public void testOpenApplication() throws Exception {
 		try {
 
