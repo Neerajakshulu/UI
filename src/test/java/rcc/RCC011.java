@@ -150,7 +150,7 @@ public class RCC011 extends TestBase {
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE18")));
 			Assert.assertTrue(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE16")));
 			test.log(LogStatus.PASS, "Same  members are present in the group owner page");
-			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE19"));
+			pf.getGroupDetailsPage(ob).removeMembers(LOGIN.getProperty("RCCPROFILE16"));
 			BrowserWaits.waitTime(3);
 			test.log(LogStatus.PASS, "Remove button is clicked for a memeber");
 
@@ -191,7 +191,7 @@ public class RCC011 extends TestBase {
 			else
 				test.log(LogStatus.PASS,
 						"Members count in not displaying correctly after removing the member from group ");
-			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE19")));
+			Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE16")));
 			test.log(LogStatus.PASS, "Member is removed from the group in owner group details page");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
