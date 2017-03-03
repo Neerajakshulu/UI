@@ -346,6 +346,7 @@ public class DashboardPage extends TestBase {
 
 			String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
 			try {
+				
 				for (int i = 1; i < 11; i++) {
 					String row = css.replace("$index", String.valueOf(i));
 					WebElement webelement = ob.findElement(By.cssSelector(row));
