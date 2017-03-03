@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -18,31 +19,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import base.TestBase;
 import util.BrowserAction;
 import util.BrowserWaits;
 import util.OnePObjectMap;
-import base.TestBase;
 
-import com.google.common.base.Predicate;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-import com.thoughtworks.selenium.Wait;
+public class DashboardPage extends TestBase {
 
-	public class DashboardPage extends TestBase {
+	PageFactory pf;
+	BrowserWaits browserWait;
+	BrowserAction browserAction;
 
-	                PageFactory pf;
-	                BrowserWaits browserWait;
-	                BrowserAction browserAction;
+	public DashboardPage(WebDriver ob) {
+		this.ob = ob;
+		pf = new PageFactory();
+		browserWait = new BrowserWaits(ob);
+		browserAction = new BrowserAction(ob);
 
-	                public DashboardPage(WebDriver ob) {
-	                                this.ob = ob;
-	                                pf = new PageFactory();
-	                                browserWait = new BrowserWaits(ob);
-	                                browserAction = new BrowserAction(ob);
-
-	                }
+	}
 
 	public void clickOnPatentFoundIcon() throws Exception {
 
@@ -51,7 +49,7 @@ import com.thoughtworks.selenium.Wait;
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS);
 
 	}
-	
+
 	public List<String> getAllPatentRecords() throws Exception {
 		List<String> recordList = new ArrayList<>();
 		loadAllPatentRecords();
@@ -65,33 +63,33 @@ import com.thoughtworks.selenium.Wait;
 
 		return recordList;
 	}
-	
+
 	public String clickOnNthPatentRecords(int index) throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS.toString()), 60);
 		List<WebElement> patentList = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS);
 		String title = patentList.get(index - 1).getText();
-		patentList.get(index-1).click();
+		patentList.get(index - 1).click();
 		return title;
 	}
-	
-	public void loadAllPatentRecords() throws InterruptedException{
+
+	public void loadAllPatentRecords() throws InterruptedException {
 		scrollAndWait();
-		while(isSpinnerDisplayed()){
-			
+		while (isSpinnerDisplayed()) {
+
 			scrollAndWait();
 		}
-		
+
 	}
-	
-	private void scrollAndWait() throws InterruptedException{
+
+	private void scrollAndWait() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, 250);");
 		Thread.sleep(1000);
-		
+
 	}
-	
+
 	private boolean isSpinnerDisplayed() {
 		try {
 			return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS)
@@ -100,8 +98,7 @@ import com.thoughtworks.selenium.Wait;
 			return false;
 		}
 	}
-	
-	
+
 	public int getPatentCount() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_DASH_BOARD_PATENT_FOUND_COUNT_CSS);
@@ -111,6 +108,7 @@ import com.thoughtworks.selenium.Wait;
 		return Integer.parseInt(count);
 
 	}
+
 	public void SearchTermEnter(String searchType, String searchTerm) throws Exception {
 		boolean switched = false;
 		if (searchType.equalsIgnoreCase("company")) {
@@ -159,6 +157,18 @@ import com.thoughtworks.selenium.Wait;
 
 	}
 
+	public String getSelectedViewByOption() throws Exception {
+
+		List<WebElement> opt = ob.findElements(By.cssSelector("button[class*='btn btn-default active']"));
+		WebElement ele = null;
+		if (opt.size() == 2)
+			ele = opt.get(1);
+		else
+			ele = opt.get(0);
+		return ele.getText();
+
+	}
+
 	public void addTechnologyTerms(String Term, int count, Boolean freetext, Boolean shollall) throws Exception {
 		String suggestiontext = OnePObjectMap.NEON_IPA_TECH_SUG_TEXT_VAR_CSS.toString();
 		String hits = OnePObjectMap.NEON_IPA_TECH_SUG_HITS_VAR_CSS.toString();
@@ -197,6 +207,7 @@ import com.thoughtworks.selenium.Wait;
 
 	public void exploreSearch() throws Exception {
 		browserAction.jsClick(OnePObjectMap.NEON_IPA_EXPLORE_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
@@ -211,31 +222,30 @@ import com.thoughtworks.selenium.Wait;
 		Set<String> Companylist = new HashSet<String>();
 		String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
 		if (!Temp.trim().equalsIgnoreCase("Breadth"))
-			test.log(LogStatus.FAIL, "X axis is Label is not as expected Actual:" + Temp.trim()
-					+ "But Expected:Breadth");
+			test.log(LogStatus.FAIL,
+					"X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth");
 		else
-			test.log(LogStatus.PASS,
-					"X axis is Label as expected \"Breadth\"");
+			test.log(LogStatus.PASS, "X axis is Label as expected \"Breadth\"");
 		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
 		if (!Temp.trim().equalsIgnoreCase("Strength"))
-			test.log(LogStatus.FAIL, "Y axis is Label is not as expected Actual:" + Temp.trim()
-					+ "But Expected:Strength");
+			test.log(LogStatus.FAIL,
+					"Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Strength");
 		else
 			test.log(LogStatus.PASS, "Y axis is Label as expected \"Strength\"");
 
-		//List<WebElement> TopIPC = browserAction.getElements(OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS);
+		// List<WebElement> TopIPC =
+		// browserAction.getElements(OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS);
 		Map<String, String> TOP10IPC = new HashMap<String, String>();
-		String css=OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
-		
-		for(int i=1;i<11;i++){
+		String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
+
+		for (int i = 1; i < 11; i++) {
 			String row = css.replace("$index", String.valueOf(i));
-			WebElement webelement=		ob.findElement(By.cssSelector(row));
+			WebElement webelement = ob.findElement(By.cssSelector(row));
 			TOP10IPC.put(webelement.getText(), ob.findElement(By.cssSelector(
 					"svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series']:nth-of-type(" + i + ") circle"))
 					.getCssValue("stroke"));
-			
+
 		}
-		
 
 		try {
 
@@ -245,7 +255,8 @@ import com.thoughtworks.selenium.Wait;
 				Actions actionBuilder = new Actions(ob);
 				actionBuilder.moveToElement(webElement).click().build().perform();
 				Thread.sleep(3000);
-				companies.add(new company(ob.findElement(By.cssSelector("div[class='customToolTip'] b")).getText(),"","","",""));
+				companies.add(new company(ob.findElement(By.cssSelector("div[class='customToolTip'] b")).getText(), "",
+						"", "", ""));
 
 			}
 		} catch (Exception e) {
@@ -261,15 +272,18 @@ import com.thoughtworks.selenium.Wait;
 			String color = TOP10IPC.get(companyName);
 			Companylist.add(companyName);
 			/*
-			String ActualColor = color.substring(4, color.length() - 1);
-			String ExpectedColor = company.Color.substring(5, company.Color.lastIndexOf(","));
-			if (ActualColor.trim().equalsIgnoreCase(ExpectedColor.trim()))
-				test.log(LogStatus.PASS, "Expected and Actual color displayed for IPC:" + company.getCompany()
-						+ " Count: " + company.PublicationCount + " size: " + company.Size + " are same");
-			else
-				test.log(LogStatus.FAIL, "ExpectedColor:" + ExpectedColor + "but ActualColor" + ActualColor
-						+ " for IPC:" + company.getCompany() + " are not same");
-						*/
+			 * String ActualColor = color.substring(4, color.length() - 1);
+			 * String ExpectedColor = company.Color.substring(5,
+			 * company.Color.lastIndexOf(",")); if
+			 * (ActualColor.trim().equalsIgnoreCase(ExpectedColor.trim()))
+			 * test.log(LogStatus.PASS,
+			 * "Expected and Actual color displayed for IPC:" +
+			 * company.getCompany() + " Count: " + company.PublicationCount +
+			 * " size: " + company.Size + " are same"); else
+			 * test.log(LogStatus.FAIL, "ExpectedColor:" + ExpectedColor +
+			 * "but ActualColor" + ActualColor + " for IPC:" +
+			 * company.getCompany() + " are not same");
+			 */
 		}
 		if (companies.size() == TOP10IPC.size())
 			test.log(LogStatus.PASS, "All IPCs are displayed Properly");
@@ -277,10 +291,12 @@ import com.thoughtworks.selenium.Wait;
 			test.log(LogStatus.FAIL, "All IPCs are not displayed Properly");
 
 	}
+
 	public void validateTechTrending(ExtentTest test) throws Exception {
-		validateTechTrending(test,false);
+		validateTechTrending(test, false);
 	}
-	public void validateTechTrending(ExtentTest test,boolean yearvalidate) throws Exception {
+
+	public void validateTechTrending(ExtentTest test, boolean yearvalidate) throws Exception {
 		Set<String> TOPLine = new HashSet<String>();
 		Set<String> Line = new HashSet<String>();
 		String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
@@ -296,19 +312,19 @@ import com.thoughtworks.selenium.Wait;
 			test.log(LogStatus.PASS, "X axis Values started from Min value and ended Max Value");
 		else
 			test.log(LogStatus.FAIL, "X axis Values not  started from Min value and ended Max Value");
-		if(yearvalidate){
-			Calendar now = Calendar.getInstance();   // Gets the current date and time
+		if (yearvalidate) {
+			Calendar now = Calendar.getInstance(); // Gets the current date and
+													// time
 			int year = now.get(Calendar.YEAR);
-			if(max==year)
+			if (max == year)
 				test.log(LogStatus.PASS, "X axis graph plotted to the current year");
 			else
 				test.log(LogStatus.FAIL, "X axis graph not plotted to the current year");
-			if(min==(year-10))
+			if (min == (year - 10))
 				test.log(LogStatus.PASS, "X axis graph started from the current year-10");
 			else
 				test.log(LogStatus.FAIL, "X axis graph not started from the current year-10");
-				
-					
+
 		}
 		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
 		if (!Temp.trim().equalsIgnoreCase("Volume"))
@@ -325,28 +341,29 @@ import com.thoughtworks.selenium.Wait;
 		else
 			test.log(LogStatus.FAIL, "Y axis Values not  started from Min value and ended Max Value");
 
-		String css=OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
-		
-		for(int i=1;i<11;i++){
+		String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
+
+		for (int i = 1; i < 11; i++) {
 			String row = css.replace("$index", String.valueOf(i));
-			WebElement webelement=		ob.findElement(By.cssSelector(row));
+			WebElement webelement = ob.findElement(By.cssSelector(row));
 			TOPLine.add(webelement.getText());
 		}
 
 		try {
 			String Text = "";
 			int i = 1;
-			for(int z=1;z<11;z++){
-				try{
-				WebElement ele=ob.findElement(By.cssSelector("g[clip-path*='url'] >g[class='nv-groups']>g:nth-of-type("+z+")>path"));
-				Actions actionBuilder = new Actions(ob);
-				actionBuilder.click(ele).build().perform();
-				}catch (Exception e) {
+			for (int z = 1; z < 11; z++) {
+				try {
+					WebElement ele = ob.findElement(
+							By.cssSelector("g[clip-path*='url'] >g[class='nv-groups']>g:nth-of-type(" + z + ")>path"));
+					Actions actionBuilder = new Actions(ob);
+					actionBuilder.click(ele).build().perform();
+				} catch (Exception e) {
 					System.out.println("I tried");
 				}
 			}
 			List<WebElement> elements = ob.findElements(By.cssSelector("g[class='nv-point-paths']>path"));
-			for (int itr=0;itr<elements.size();itr++) {
+			for (int itr = 0; itr < elements.size(); itr++) {
 				WebElement ele = ob
 						.findElement(By.cssSelector("g[class='nv-point-paths']>path:nth-of-type(" + i + ")"));
 				Actions actionBuilder = new Actions(ob);
@@ -407,6 +424,7 @@ import com.thoughtworks.selenium.Wait;
 
 	public void selectTechPatentTAB() throws Exception {
 		browserAction.jsClick(OnePObjectMap.NEON_IPA_DASH_TECH_PAN_TAB_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS.toString()), 30);
@@ -418,9 +436,12 @@ import com.thoughtworks.selenium.Wait;
 	}
 
 	public void validateCompanyKeyInformationPanel(ExtentTest test) throws Exception {
-		test.log(LogStatus.INFO, "Key Information Validation for Company Search");
+		try{
+	
+			test.log(LogStatus.INFO, "Key Information Validation for Company Search");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
 		boolean flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS)
 				.isDisplayed();
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
@@ -511,8 +532,8 @@ import com.thoughtworks.selenium.Wait;
 				"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
 
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+				//.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
 		WebElement ele = null;
 		try {
 			ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
@@ -522,14 +543,17 @@ import com.thoughtworks.selenium.Wait;
 		}
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL, "Key Information Panel " + (flag ? "not " : "")
 				+ "Displayed after clicking on KeyInformation Click When Panel is Dispalyed");
-
+		}catch(Exception ex){
+			
+		}
 	}
 
 	public void validateTechnologyKeyInofrmation(ExtentTest test) throws Exception {
 		int count = 0;
 		test.log(LogStatus.INFO, "Key Information Validation for Technology Search");
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
 		boolean flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS)
 				.isDisplayed();
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
@@ -670,17 +694,20 @@ import com.thoughtworks.selenium.Wait;
 		try {
 
 			for (int x = 0; x < i; x++) {
-				WebElement elements = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_STRENGTH_CSS);
+				WebElement elements = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_STRENGTH_CSS);
 				str.add(Double.valueOf(elements.getText()));
-				String before=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
+				String before = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_RECORDVIEW_NEXT_CSS);
-				for(int z=0;z<10;z++){
-					String after=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
-					if(!before.equals(after))
+				for (int z = 0; z < 10; z++) {
+					String after = pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
+					if (!before.equals(after))
 						break;
 					Thread.sleep(1000);
 				}
-				
+
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -692,127 +719,184 @@ import com.thoughtworks.selenium.Wait;
 		List<Date> str = new ArrayList<Date>();
 		try {
 
+			List<WebElement> elements = ob.findElements(By.cssSelector("span[ng-hide*='expiration']"));
 			for (int x = 0; x < i; x++) {
-				WebElement elements = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-				Date startDate = df.parse(elements.getText());
+				Date startDate = df.parse(elements.get(x).getText().split(":")[1]);
 				str.add(startDate);
-				String before=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
+				/*String before = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_RECORDVIEW_NEXT_CSS);
-				for(int z=0;z<10;z++){
-					String after=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
-					if(!before.equals(after))
+				
+				for (int z = 0; z < 10; z++) {
+					String after = pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
+					if (!before.equals(after))
 						break;
 					Thread.sleep(1000);
 				}
-				
+				*/
+
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return str;	}
+		return str;
+	}
 
 	public String getMD5() throws Exception {
 		String pagesource = ob.getPageSource();
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(pagesource.getBytes());
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(pagesource.getBytes());
 
-        byte byteData[] = md.digest();
+		byte byteData[] = md.digest();
 
-        //convert the byte to hex format method 1
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < byteData.length; i++) {
-         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        //convert the byte to hex format method 2
-        StringBuffer hexString = new StringBuffer();
-    	for (int i=0;i<byteData.length;i++) {
-    		String hex=Integer.toHexString(0xff & byteData[i]);
-   	     	if(hex.length()==1) hexString.append('0');
-   	     	hexString.append(hex);
-    	}
-    	System.out.println("Digest(in hex format):: " + hexString.toString());
-return hexString.toString();}
+		// convert the byte to hex format method 1
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < byteData.length; i++) {
+			sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		// convert the byte to hex format method 2
+		StringBuffer hexString = new StringBuffer();
+		for (int i = 0; i < byteData.length; i++) {
+			String hex = Integer.toHexString(0xff & byteData[i]);
+			if (hex.length() == 1)
+				hexString.append('0');
+			hexString.append(hex);
+		}
+		System.out.println("Digest(in hex format):: " + hexString.toString());
+		return hexString.toString();
+	}
 
 	public void sortByText(String string) throws Exception {
-		String before =getMD5();
-		new Select(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS)).selectByVisibleText(string);
-		int i=0;
-		do{Thread.sleep(5000);
-			String after =getMD5();
-			if(!before.equals(after))
-				break;
-			i++;
-		}while(i<20);
-		
-		before=getMD5();
-		i=0;
-		do{
+		String before = getMD5();
+		new Select(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS))
+				.selectByVisibleText(string);
+		int i = 0;
+		do {
 			Thread.sleep(5000);
-			String after =getMD5();
-			if(before.equals(after))
+			String after = getMD5();
+			if (!before.equals(after))
 				break;
 			i++;
-		}while(i<20);
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_RESULTLIST_PDF_LINKS_CSS.toString()), 30);
+		} while (i < 20);
+
+		before = getMD5();
+		i = 0;
+		do {
+			Thread.sleep(5000);
+			String after = getMD5();
+			if (before.equals(after))
+				break;
+			i++;
+		} while (i < 20);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
+				By.cssSelector(OnePObjectMap.NEON_IPA_RESULTLIST_PDF_LINKS_CSS.toString()), 30);
 		Thread.sleep(10000);
+
+	}
+
+	public void selectTab(String string) throws Exception {
+		String css = "div[event-category*='" + string + "']";
+		pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.cssSelector(css)));
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+		try{
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeInvisible(ob, By.cssSelector("div[class*='wui-spinner__circle wui-spinner__circle--delayed']"), 120);
+		}catch(Exception ex){
+			System.out.println("visualization not loaded in 2 mins");
+		}
+	}
+
+	public void selectViewBy(String string) throws Exception {
+		if (!string.equals("Basic")) {
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_VIEWBY_Publication_CSS);
+			pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+		}
+		String css = "button[ng-class*='" + string + "']";
+		pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.cssSelector(css)));
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+
+	}
+
+	public String deleteAnySearchTerm() throws Exception {
+		String css=OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS.toString();
+		String text=css+">div:nth-of-type(1)";
+		String Delete=css+">div:nth-of-type(2)";
+		String SelectedText="";
+		List<WebElement> ele=ob.findElements(By.cssSelector(Delete));
+		List<WebElement> ele1=ob.findElements(By.cssSelector(text));
+		int ran=new Random().nextInt(ele.size());
+		SelectedText=ele1.get(ran).getText();
+		pf.getBrowserActionInstance(ob).jsClick(ele.get(ran));
+		return SelectedText;
+	}
+	public int getSearchCount() throws Exception{
+	return	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS).size();
+	}
+	
+	public void addSearchTerm(String Term) throws Exception{
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_SEARCH_TAB_TEXT_CSS, Term);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+		String xpath=OnePObjectMap.NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH.toString().replace("$value", Term);
+		pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.xpath(xpath)));
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 		
 	}
 }
-	class company {
-		String Company;
-		String Value;
-		String PublicationCount;
-		String Color;
-		String Size;
 
-		public String getCompany() {
-			return Company;
-		}
+class company {
+	String Company;
+	String Value;
+	String PublicationCount;
+	String Color;
+	String Size;
 
-		public company(String company, String value, String publicationCount, String color, String size) {
-			Company = company;
-			Value = value;
-			PublicationCount = publicationCount;
-			Color = color;
-			Size = size;
-		}
-
-		public void setCompany(String company) {
-			Company = company;
-		}
-
-		public String getSize() {
-			return Size;
-		}
-
-		public void setSize(String size) {
-			Size = size;
-		}
-
-		public String getColor() {
-			return Color;
-		}
-
-		public void setColor(String color) {
-			Color = color;
-		}
-
-		public String getValue() {
-			return Value;
-		}
-
-		public void setValue(String value) {
-			Value = value;
-		}
-
-		public String getPublicationCount() {
-			return PublicationCount;
-		}
-
-		public void setPublicationCount(String publicationCount) {
-			PublicationCount = publicationCount;
-		}
+	public String getCompany() {
+		return Company;
 	}
 
+	public company(String company, String value, String publicationCount, String color, String size) {
+		Company = company;
+		Value = value;
+		PublicationCount = publicationCount;
+		Color = color;
+		Size = size;
+	}
+
+	public void setCompany(String company) {
+		Company = company;
+	}
+
+	public String getSize() {
+		return Size;
+	}
+
+	public void setSize(String size) {
+		Size = size;
+	}
+
+	public String getColor() {
+		return Color;
+	}
+
+	public void setColor(String color) {
+		Color = color;
+	}
+
+	public String getValue() {
+		return Value;
+	}
+
+	public void setValue(String value) {
+		Value = value;
+	}
+
+	public String getPublicationCount() {
+		return PublicationCount;
+	}
+
+	public void setPublicationCount(String publicationCount) {
+		PublicationCount = publicationCount;
+	}
+}

@@ -87,7 +87,7 @@ public class IPA08 extends TestBase {
 			pf.getDashboardPage(ob).SearchTermEnter("company", "Apple");
 			pf.getDashboardPage(ob).addCompanyTerms("1");
 			pf.getDashboardPage(ob).exploreSearch();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_COM_CSS.toString()), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
 			pf.getDashboardPage(ob).selectTechPatentTAB();
 			int pub = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_PUBLICATION_NUMS_CSS,
 					test);
@@ -99,8 +99,8 @@ public class IPA08 extends TestBase {
 					.getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_ULIMATE_PATENTS_CSS, test);
 			int title = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_DWPI_TITLES_CSS,
 					test);
-			int relavences = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_RELAVENCES_CSS,
-					test);
+			/*int relavences = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_RELAVENCES_CSS,
+					test);*/
 			int status = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_LIVE_STATUS_CSS,
 					test);
 			int expiredates = pf.getDashboardPage(ob)
@@ -108,7 +108,8 @@ public class IPA08 extends TestBase {
 			int dwpiimg = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_DWPI_IMAGES_CSS,
 					test);
 			int pdfs = pf.getDashboardPage(ob).getDisplayedCount(OnePObjectMap.NEON_IPA_RESULTLIST_PDF_LINKS_CSS, test);
-			if (pub == pubdate && pub == Assignee && pub == parent && pub == title && pub == relavences && pub == status
+			//&& pub == relavences 
+			if (pub == pubdate && pub == Assignee && pub == parent && pub == title && pub == status
 					&& pub == expiredates && pub == dwpiimg && pub == pdfs)
 				test.log(LogStatus.PASS, "All Mandatory Fields are displayed successfully");
 			else
@@ -178,6 +179,15 @@ public class IPA08 extends TestBase {
 			else
 				test.log(LogStatus.FAIL, "Sort By Date added  is not working as Expected when selecting after some other sorts.Expected:"+sorted+" Actual:"+ele+".");
 			
+			pf.getDashboardPage(ob).sortByText("Expiration Date");
+			dates= pf.getDashboardPage(ob).getExpiryDates(10);
+			datessorted =new ArrayList<>(dates);
+			Collections.sort(datessorted,Collections.reverseOrder());
+			if(dates.equals(datessorted))
+				test.log(LogStatus.PASS, "Sort By Expiration Date is working as Expected");
+			else
+				test.log(LogStatus.FAIL, "Sort By Expiration Date is not working as Expected.Expected:"+datessorted+" Actual:"+dates+".");
+			
 			
 			pf.getDashboardPage(ob).sortByText("Strength");
 			
@@ -189,22 +199,6 @@ public class IPA08 extends TestBase {
 				test.log(LogStatus.PASS, "Sort By Strength is working as Expected");
 			else
 				test.log(LogStatus.FAIL, "Sort By Strength is not working as Expected.Expected:"+sorted+" Actual:"+ele+".");
-			
-			ob.navigate().back();
-			
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_PAT_SEL_DD_CSS.toString()), 30);
-			
-			pf.getDashboardPage(ob).sortByText("Expiration Date");
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_RESULTLIST_DWPI_TITLES_CSS).click();
-			
-			dates= pf.getDashboardPage(ob).getExpiryDates(10);
-			datessorted =new ArrayList<>(dates);
-			Collections.sort(datessorted,Collections.reverseOrder());
-			if(dates.equals(datessorted))
-				test.log(LogStatus.PASS, "Sort By Expiration Date is working as Expected");
-			else
-				test.log(LogStatus.FAIL, "Sort By Expiration Date is not working as Expected.Expected:"+datessorted+" Actual:"+dates+".");
-			
 			
 			
 			closeBrowser();

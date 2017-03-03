@@ -54,7 +54,7 @@ public class IPA114 extends TestBase {
 			pf.getSearchPageInstance(ob).SearchTermEnter("technology", "android");
 			pf.getSearchPageInstance(ob).exploreSearch();
 			waitForAjax(ob);
-			pf.getDashboardPage(ob).clickOnPatentFoundIcon();
+			pf.getDashboardPage(ob).selectTechPatentTAB();
 			waitForAjax(ob);
 			Random rand = new Random();
 			int value = rand.nextInt(6);
@@ -64,9 +64,11 @@ public class IPA114 extends TestBase {
 			 * Assert.assertTrue(pf.getIpaRecordViewPage(ob).checkInfo());
 			 * test.log(LogStatus.PASS,"Headings like Abstract,claims,Description are present in record view page");
 			 */
+			
 			pf.getIpaRecordViewPage(ob).clickOnOriginalPatent();
 			test.log(LogStatus.PASS, "Pdf file for patent is clicked");
 			closeBrowser();
+			
 
 		} catch (Exception e) {
 			logFailureDetails(test, "Fields are not matching in record view page", "Screenshot for login");

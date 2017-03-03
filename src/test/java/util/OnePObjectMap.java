@@ -778,6 +778,7 @@ public enum OnePObjectMap {
     RCC_GMAIL_LOGIN_SUBMIT_XPATH("//input[@id='signIn']"),
     RCC_GMAIL_LOGIN_PASSWORD_XPATH("//input[@id='Passwd']"),
     RCC_GMAIL_CLICK_EMAIL_XPATH("//span[@class='y2']"),
+
     RCC_CLICK_ON_GMAIL_SECURITY_LINK_XPATH("//a[@class='WaidBe']"),
     RCC_GMAIL_SUBJECT_CONTENT_XPATH("//h2[@class='hP']"),
     RCC_GMAIL_WHOLE_CONTENT_CSS("table[class*='container']"),
@@ -890,7 +891,7 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_TAB_SEL_CSS("li[class*='ipa-content-tabs--list-item ng-scope ipa-content-tabs--list-item__active']"),
 	NEON_IPA_DASH_KEYWORDS_LINK_CSS("[popover-template]"),
 
-	NEON_IPA_DASH_TECH_COM_CSS("svg[class='nvd3-svg']"),
+	NEON_IPA_DASH_TECH_COM_CSS("svg[class]"),
 	NEON_IPA_DASH_COM_CSS("div[class='wui-chart']"),
 	NEON_IPA_DASH_TECH_COM_X_CSS("svg.nvd3-svg  g[class='nv-x nv-axis nvd3-svg'] text[class='nv-axislabel']"),
 	NEON_IPA_DASH_TECH_COM_Y_CSS("svg.nvd3-svg  g[class='nv-y nv-axis nvd3-svg'] text[class='nv-axislabel']"),
@@ -898,8 +899,8 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_TECH_COM_COMPANYNAME_CSS("[class='key']"),
 	NEON_IPA_DASH_TECH_COM_COMPANYVALUE_CSS("[class='value']"),
 	NEON_IPA_DASH_TECH_COM_PATENTCOUNT_CSS("[class='x-value']"),
-	NEON_IPA_DASH_BOARD_SAVE_BUTTON_CSS("div[class='pull-right save-export hidden-xs']>button:nth-of-type(2)>i"),
-	NEON_IPA_DASH_BOARD_SAVE_MODAL_CSS("div[class='modal-header wui-modal__header']>h3"),
+	NEON_IPA_DASH_BOARD_SAVE_BUTTON_CSS("div[class*='ipa-dashboard--heading'] button[ng-click*='saveSearch']"),
+	NEON_IPA_DASH_BOARD_SAVE_MODAL_CSS("[name='itemName']"),
 	NEON_IPA_DASH_BOARD_SAVE_MODAL_TEXT_CSS("h3[class='wui-modal__title']"),
 	NEON_IPA_DASH_BOARD_SAVE_MODAL_TITLE_CSS("div[class='wui-input'] input"),
 	NEON_IPA_DASH_BOARD_SAVE_MODAL_DESC_CSS("div[class='wui-textarea'] textarea"),
@@ -1046,8 +1047,8 @@ public enum OnePObjectMap {
 
 	NEON_IPA_RECORDVIEW_NEXT_CSS("[ng-click*='vm.nextPage()']"),
 	NEON_IPA_RECORDVIEW_STRENGTH_CSS("[ng-hide*='patent.patentStrength']>span:nth-of-type(2)"),
-	NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS("[class*='ng-binding font-bold']"),
-	NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS("li[ng-hide*='patent.expirationDate'] span:nth-of-type(2)"),
+	NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS("[class*='ng-binding current-page']"),
+	NEON_IPA_RECORDVIEW_EXPIRYDATE_CSS("li[ng-hide*='patent.expiration'] span:nth-of-type(2)"),
 	NEON_IPA_DASH_TECH_COM_TAB_CSS("div[event-category*='competitors']") ,
 	NEON_IPA_DASH_TECH_TEC_TAB_CSS("div[event-category*='trend']"),
 	NEON_IPA_DASH_TECH_PAN_TAB_CSS("div[event-category*='patents']"),
@@ -1058,12 +1059,23 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_TECH_COM_Y_MIN_CSS("g[class$='nv-axisMin-y']>text"),
 	NEON_IPA_DASH_TECH_COM_Y_MAX_CSS("g[class$='nv-axisMax-y']>text"),
 	NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS("svg.nvd3-svg g[class*='nvd3 nv-legend'] g[class='nv-series']:nth-of-type($index)>text"),
-	NEON_IPA_DASH_KEYINFORMATION_LINK_CSS("[popover-template]"),
+	NEON_IPA_DASH_KEYINFORMATION_LINK_CSS("div[class*='dashboard__header']:nth-of-type(3) a[class='popover-target']"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_DESC_CSS("div[class='sse-item-description ng-binding']"),
 	NEON_IPA_SAVED_SEARCH_PAGE_TILE_TITLE_CSS("div[class='wui-content-title wui-content-title--medium ng-binding'"),
 	NEON_IPA_SAVED_SEARCH_PAGE_LAST_VIEWED_CSS("span[class='wui-label wui-label--sse-item-last-viewed-date ng-scope'] wui-timestamp"),
 	NEON_IPA_SAVED_SEARCH_PAGE_SAVED_VALUE_CSS("span[class='wui-label ng-scope'] wui-timestamp"),
 	
+	NEON_IPA_VIEWBY_ALL_CSS("button[ng-class*='undefined']"),
+	NEON_IPA_VIEWBY_UTILITY_CSS("button[ng-class*='U']"),
+	NEON_IPA_VIEWBY_GRANT_CSS("button[ng-class*='G']"),
+	NEON_IPA_VIEWBY_APPLICATION_CSS("button[ng-class*='A']"),
+	NEON_IPA_VIEWBY_Familiy_CSS("button[ng-class*='Basic']"),
+	NEON_IPA_VIEWBY_Publication_CSS("button[ng-class*='grantStatus']"),
+	
+	NEON_IPA_DASH_LINK_SEARCHTERM_CSS("a[ng-click*='search']"),
+	NEON_IPA_DASH_SEARCHTERMS_CSS("[type='Dashboard.queryType'] button[id='split-button']"),
+	NEON_IPA_SEARCH_TAB_TEXT_CSS("input[ng-model='vm.searchParam']"),
+	NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH("//text()[   contains(     translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$value') ]/../../../button"),
 	
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
