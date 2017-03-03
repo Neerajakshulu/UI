@@ -513,10 +513,10 @@
 	</test> 
 	
 	<test name="Authoring80">
-		<classes>
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
-			<class name="Authoring.Authoring80"></class>
+		<classes>
+					<class name="Authoring.Authoring80"></class>
 		</classes>
 	</test>
 
