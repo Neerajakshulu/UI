@@ -297,111 +297,119 @@ public class DashboardPage extends TestBase {
 	}
 
 	public void validateTechTrending(ExtentTest test, boolean yearvalidate) throws Exception {
-		Set<String> TOPLine = new HashSet<String>();
-		Set<String> Line = new HashSet<String>();
-		String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
-		if (!Temp.trim().equalsIgnoreCase("Year"))
-			test.log(LogStatus.FAIL, "X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Year");
-		else
-			test.log(LogStatus.PASS, "X axis is Label as expected \"Year\"");
-		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
-		int min = Integer.valueOf(Temp);
-		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MAX_CSS).getText();
-		int max = Integer.valueOf(Temp);
-		if (max > min)
-			test.log(LogStatus.PASS, "X axis Values started from Min value and ended Max Value");
-		else
-			test.log(LogStatus.FAIL, "X axis Values not  started from Min value and ended Max Value");
-		if (yearvalidate) {
-			Calendar now = Calendar.getInstance(); // Gets the current date and
-													// time
-			int year = now.get(Calendar.YEAR);
-			if (max == year)
-				test.log(LogStatus.PASS, "X axis graph plotted to the current year");
-			else
-				test.log(LogStatus.FAIL, "X axis graph not plotted to the current year");
-			if (min == (year - 10))
-				test.log(LogStatus.PASS, "X axis graph started from the current year-10");
-			else
-				test.log(LogStatus.FAIL, "X axis graph not started from the current year-10");
-
-		}
-		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
-		if (!Temp.trim().equalsIgnoreCase("Volume"))
-			test.log(LogStatus.FAIL,
-					"Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Volume");
-		else
-			test.log(LogStatus.PASS, "Y axis is Label as expected \"Volume\"");
-		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
-		min = Integer.valueOf(Temp);
-		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MAX_CSS).getText();
-		max = Integer.valueOf(Temp);
-		if (max > min)
-			test.log(LogStatus.PASS, "Y axis Values started from Min value and ended Max Value");
-		else
-			test.log(LogStatus.FAIL, "Y axis Values not  started from Min value and ended Max Value");
-
-		String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
-
-		for (int i = 1; i < 11; i++) {
-			String row = css.replace("$index", String.valueOf(i));
-			WebElement webelement = ob.findElement(By.cssSelector(row));
-			TOPLine.add(webelement.getText());
-		}
-
 		try {
-			String Text = "";
-			int i = 1;
-			for (int z = 1; z < 11; z++) {
-				try {
-					WebElement ele = ob.findElement(
-							By.cssSelector("g[clip-path*='url'] >g[class='nv-groups']>g:nth-of-type(" + z + ")>path"));
+			Set<String> TOPLine = new HashSet<String>();
+			Set<String> Line = new HashSet<String>();
+			String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
+			if (!Temp.trim().equalsIgnoreCase("Year"))
+				test.log(LogStatus.FAIL,
+						"X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Year");
+			else
+				test.log(LogStatus.PASS, "X axis is Label as expected \"Year\"");
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
+			int min = Integer.valueOf(Temp);
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MAX_CSS).getText();
+			int max = Integer.valueOf(Temp);
+			if (max > min)
+				test.log(LogStatus.PASS, "X axis Values started from Min value and ended Max Value");
+			else
+				test.log(LogStatus.FAIL, "X axis Values not  started from Min value and ended Max Value");
+			if (yearvalidate) {
+				Calendar now = Calendar.getInstance(); // Gets the current date
+														// and
+														// time
+				int year = now.get(Calendar.YEAR);
+				if (max == year)
+					test.log(LogStatus.PASS, "X axis graph plotted to the current year");
+				else
+					test.log(LogStatus.FAIL, "X axis graph not plotted to the current year");
+				if (min == (year - 10))
+					test.log(LogStatus.PASS, "X axis graph started from the current year-10");
+				else
+					test.log(LogStatus.FAIL, "X axis graph not started from the current year-10");
+
+			}
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
+			if (!Temp.trim().equalsIgnoreCase("Volume"))
+				test.log(LogStatus.FAIL,
+						"Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Volume");
+			else
+				test.log(LogStatus.PASS, "Y axis is Label as expected \"Volume\"");
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
+			min = Integer.valueOf(Temp);
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MAX_CSS).getText();
+			max = Integer.valueOf(Temp);
+			if (max > min)
+				test.log(LogStatus.PASS, "Y axis Values started from Min value and ended Max Value");
+			else
+				test.log(LogStatus.FAIL, "Y axis Values not  started from Min value and ended Max Value");
+
+			String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
+			try {
+				for (int i = 1; i < 11; i++) {
+					String row = css.replace("$index", String.valueOf(i));
+					WebElement webelement = ob.findElement(By.cssSelector(row));
+					TOPLine.add(webelement.getText());
+				}
+			} catch (Exception ex) {
+				test.log(LogStatus.FAIL, "IPC Info not displayed in the visualization");
+			}
+			try {
+				String Text = "";
+				int i = 1;
+				for (int z = 1; z < 11; z++) {
+					try {
+						WebElement ele = ob.findElement(By.cssSelector(
+								"g[clip-path*='url'] >g[class='nv-groups']>g:nth-of-type(" + z + ")>path"));
+						Actions actionBuilder = new Actions(ob);
+						actionBuilder.click(ele).build().perform();
+					} catch (Exception e) {
+						System.out.println("I tried");
+					}
+				}
+				List<WebElement> elements = ob.findElements(By.cssSelector("g[class='nv-point-paths']>path"));
+				for (int itr = 0; itr < elements.size(); itr++) {
+					WebElement ele = ob
+							.findElement(By.cssSelector("g[class='nv-point-paths']>path:nth-of-type(" + i + ")"));
 					Actions actionBuilder = new Actions(ob);
-					actionBuilder.click(ele).build().perform();
-				} catch (Exception e) {
-					System.out.println("I tried");
+					actionBuilder.moveToElement(ele).build().perform();
+					try {
+						Text = "";
+						Text = ob.findElement(By.cssSelector("div[class*='ipa-charts__tooltip--header']")).getText();
+						if (!Text.isEmpty())
+							Line.add(Text);
+					} catch (Exception ex) {
+					}
+					i++;
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+
+			}
+			int count = 0;
+			for (String data : Line) {
+				for (String Expected : TOPLine) {
+					if (data.trim().contains(Expected.replaceAll(".", ""))) {
+						count++;
+						break;
+					}
 				}
 			}
-			List<WebElement> elements = ob.findElements(By.cssSelector("g[class='nv-point-paths']>path"));
-			for (int itr = 0; itr < elements.size(); itr++) {
-				WebElement ele = ob
-						.findElement(By.cssSelector("g[class='nv-point-paths']>path:nth-of-type(" + i + ")"));
-				Actions actionBuilder = new Actions(ob);
-				actionBuilder.moveToElement(ele).build().perform();
-				try {
-					Text = "";
-					Text = ob.findElement(By.cssSelector("div[class*='ipa-charts__tooltip--header']")).getText();
-					if (!Text.isEmpty())
-						Line.add(Text);
-				} catch (Exception ex) {
-				}
-				i++;
-			}
-
-		} catch (Exception e) {
-			System.out.println(e);
-
+			if (count == 10)
+				test.log(LogStatus.PASS, "Tech Trending Graph Plotted Sucessfully");
+			else
+				test.log(LogStatus.FAIL, "Tech Trending Graph Not Plotted Sucessfully");
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-		int count = 0;
-		for (String data : Line) {
-			for (String Expected : TOPLine) {
-				if (data.trim().contains(Expected.replaceAll(".", ""))) {
-					count++;
-					break;
-				}
-			}
-		}
-		if (count == 10)
-			test.log(LogStatus.PASS, "Tech Trending Graph Plotted Sucessfully");
-		else
-			test.log(LogStatus.FAIL, "Tech Trending Graph Not Plotted Sucessfully");
-
 	}
 
 	public void selectTechTrendingTAB() throws Exception {
 		browserAction.jsClick(OnePObjectMap.NEON_IPA_DASH_TECH_TEC_TAB_CSS);
 
 		try {
+			pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_DASH_TECH_COM_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_DASH_PATENTS_FOUND_CNT_CSS.toString()));
 		} catch (Exception e) {
@@ -436,115 +444,116 @@ public class DashboardPage extends TestBase {
 	}
 
 	public void validateCompanyKeyInformationPanel(ExtentTest test) throws Exception {
-		try{
-	
-			test.log(LogStatus.INFO, "Key Information Validation for Company Search");
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
-				By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
-		boolean flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Key Information Panel " + (flag ? "" : "not ") + "Displayed after clicking on KeyInformation Click");
-		if (!flag)
-			throw new Exception("Key Information Panel not dispalyed after clicking on Key Information Link");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PUB_XPATH).isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Publication Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PUB_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Publication Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_LIVE_PATENT_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"LIVE PATENT Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_LIVE_PATENT_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"LIVE PATENT Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_FAMILIES_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"FAMILIES Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_FAMILIES_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"FAMILIES Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_STRENGTH_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"AVG.STRENGTH Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_STRENGTH_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"AVG.STRENGTH Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_CUR_OWNER_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"CUR OWNER Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_CUR_OWNER_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"CUR OWNER Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PARENT_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"PARENT Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PARENT_VAL_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"PARENT Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_TEC_TERMS_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Top Technology Terms Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		List<WebElement> Terms = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_TEC_TERMS_VALS_XPATH);
-		int count = 0;
-		for (WebElement webElement : Terms) {
-			if (webElement.isDisplayed())
-				count++;
-		}
-		flag = count == 5;
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_COUNTRIES_XPATH)
-				.isDisplayed();
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Top Technology Terms Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-		Terms = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_COUNTRIES_VALS_XPATH);
-		count = 0;
-		for (WebElement webElement : Terms) {
-			if (webElement.isDisplayed())
-				count++;
-		}
-		flag = count == 5;
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
-				"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
-
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
-		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-				//.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
-		WebElement ele = null;
 		try {
-			ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
-			flag = (!ele.isDisplayed());
-		} catch (Exception e) {
-			flag = true;
-		}
-		test.log(flag ? LogStatus.PASS : LogStatus.FAIL, "Key Information Panel " + (flag ? "not " : "")
-				+ "Displayed after clicking on KeyInformation Click When Panel is Dispalyed");
-		}catch(Exception ex){
-			
+
+			test.log(LogStatus.INFO, "Key Information Validation for Company Search");
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
+			pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS.toString()), 30);
+			boolean flag = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS).isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL, "Key Information Panel " + (flag ? "" : "not ")
+					+ "Displayed after clicking on KeyInformation Click");
+			if (!flag)
+				throw new Exception("Key Information Panel not dispalyed after clicking on Key Information Link");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PUB_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Publication Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PUB_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Publication Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_LIVE_PATENT_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"LIVE PATENT Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_LIVE_PATENT_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"LIVE PATENT Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_FAMILIES_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"FAMILIES Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_FAMILIES_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"FAMILIES Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_STRENGTH_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"AVG.STRENGTH Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_STRENGTH_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"AVG.STRENGTH Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_CUR_OWNER_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"CUR OWNER Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_CUR_OWNER_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"CUR OWNER Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PARENT_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"PARENT Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_PARENT_VAL_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"PARENT Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_TEC_TERMS_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Top Technology Terms Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			List<WebElement> Terms = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_TEC_TERMS_VALS_XPATH);
+			int count = 0;
+			for (WebElement webElement : Terms) {
+				if (webElement.isDisplayed())
+					count++;
+			}
+			flag = count == 5;
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			flag = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_COUNTRIES_XPATH)
+					.isDisplayed();
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Top Technology Terms Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+			Terms = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_COUNTRIES_VALS_XPATH);
+			count = 0;
+			for (WebElement webElement : Terms) {
+				if (webElement.isDisplayed())
+					count++;
+			}
+			flag = count == 5;
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
+					"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
+
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
+			pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+			// .waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
+			WebElement ele = null;
+			try {
+				ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
+				flag = (!ele.isDisplayed());
+			} catch (Exception e) {
+				flag = true;
+			}
+			test.log(flag ? LogStatus.PASS : LogStatus.FAIL, "Key Information Panel " + (flag ? "not " : "")
+					+ "Displayed after clicking on KeyInformation Click When Panel is Dispalyed");
+		} catch (Exception ex) {
+
 		}
 	}
 
@@ -724,18 +733,19 @@ public class DashboardPage extends TestBase {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				Date startDate = df.parse(elements.get(x).getText().split(":")[1]);
 				str.add(startDate);
-				/*String before = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_RECORDVIEW_NEXT_CSS);
-				
-				for (int z = 0; z < 10; z++) {
-					String after = pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS).getText();
-					if (!before.equals(after))
-						break;
-					Thread.sleep(1000);
-				}
-				*/
+				/*
+				 * String before = pf.getBrowserActionInstance(ob)
+				 * .getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS
+				 * ).getText();
+				 * pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.
+				 * NEON_IPA_RECORDVIEW_NEXT_CSS);
+				 * 
+				 * for (int z = 0; z < 10; z++) { String after =
+				 * pf.getBrowserActionInstance(ob)
+				 * .getElement(OnePObjectMap.NEON_IPA_RECORDVIEW_CURRENTPAGE_CSS
+				 * ).getText(); if (!before.equals(after)) break;
+				 * Thread.sleep(1000); }
+				 */
 
 			}
 		} catch (Exception e) {
@@ -801,9 +811,10 @@ public class DashboardPage extends TestBase {
 		String css = "div[event-category*='" + string + "']";
 		pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.cssSelector(css)));
 		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-		try{
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeInvisible(ob, By.cssSelector("div[class*='wui-spinner__circle wui-spinner__circle--delayed']"), 120);
-		}catch(Exception ex){
+		try {
+			pf.getBrowserWaitsInstance(ob).waitForElementTobeInvisible(ob,
+					By.cssSelector("div[class*='wui-spinner__circle wui-spinner__circle--delayed']"), 120);
+		} catch (Exception ex) {
 			System.out.println("visualization not loaded in 2 mins");
 		}
 	}
@@ -820,28 +831,29 @@ public class DashboardPage extends TestBase {
 	}
 
 	public String deleteAnySearchTerm() throws Exception {
-		String css=OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS.toString();
-		String text=css+">div:nth-of-type(1)";
-		String Delete=css+">div:nth-of-type(2)";
-		String SelectedText="";
-		List<WebElement> ele=ob.findElements(By.cssSelector(Delete));
-		List<WebElement> ele1=ob.findElements(By.cssSelector(text));
-		int ran=new Random().nextInt(ele.size());
-		SelectedText=ele1.get(ran).getText();
+		String css = OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS.toString();
+		String text = css + ">div:nth-of-type(1)";
+		String Delete = css + ">div:nth-of-type(2)";
+		String SelectedText = "";
+		List<WebElement> ele = ob.findElements(By.cssSelector(Delete));
+		List<WebElement> ele1 = ob.findElements(By.cssSelector(text));
+		int ran = new Random().nextInt(ele.size());
+		SelectedText = ele1.get(ran).getText();
 		pf.getBrowserActionInstance(ob).jsClick(ele.get(ran));
 		return SelectedText;
 	}
-	public int getSearchCount() throws Exception{
-	return	pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS).size();
+
+	public int getSearchCount() throws Exception {
+		return pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NEON_IPA_DASH_SEARCHTERMS_CSS).size();
 	}
-	
-	public void addSearchTerm(String Term) throws Exception{
+
+	public void addSearchTerm(String Term) throws Exception {
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_SEARCH_TAB_TEXT_CSS, Term);
 		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-		String xpath=OnePObjectMap.NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH.toString().replace("$value", Term);
+		String xpath = OnePObjectMap.NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH.toString().replace("$value", Term);
 		pf.getBrowserActionInstance(ob).jsClick(ob.findElement(By.xpath(xpath)));
 		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-		
+
 	}
 }
 
