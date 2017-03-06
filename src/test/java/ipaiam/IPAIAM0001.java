@@ -76,7 +76,6 @@ public class IPAIAM0001 extends TestBase {
 			try {
 
 				// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_BRANDING_NAME_CSS);
-				// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
 				WebElement brand_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_BRANDING_NAME_CSS);
 
@@ -92,7 +91,20 @@ public class IPAIAM0001 extends TestBase {
 				test.log(LogStatus.FAIL, "IPA Landing page doesn't displays branding and marketing copy");
 				ErrorUtil.addVerificationFailure(t);
 			}
+			try {
 
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_NEW_LOGO_CSS);
+				WebElement brand_logo = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_NEW_LOGO_CSS);
+
+				if (brand_logo.isDisplayed()) {
+					test.log(LogStatus.PASS, "IPA Landing page displays Clarivate Analytics logo");
+				}
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL, "IPA Landing page doesn't display Clarivate Analytics logo");
+				ErrorUtil.addVerificationFailure(t);
+			}
 			// Verifying that IPA Landing page, displays privacy statement and
 			// terms of use links
 			try {

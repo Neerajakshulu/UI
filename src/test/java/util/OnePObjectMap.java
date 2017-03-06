@@ -933,6 +933,7 @@ public enum OnePObjectMap {
 
 	IPA_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
+	IPA_NEW_LOGO_CSS("img[class='login-logo']"),
 	IPA_LANDINGPAGE_TERMS_LINK_CSS("a[event-action='login-terms-of-use']"),
 	IPA_LANDINGPAGE_PRIVACY_LINK_CSS("a[event-action='login-privacy-statement']"),
 	IPA_LANDINGPAGE_HELP_MESSAGE_CSS("p[class='tos']"),
