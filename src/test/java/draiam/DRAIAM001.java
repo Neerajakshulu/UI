@@ -78,7 +78,8 @@ public class DRAIAM001 extends TestBase {
 			// Verify that DRA Landing page, displays application branding and
 			// logo
 			try {
-
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.BRANDING_NAME_CSS);
+				WebElement b_element = ob.findElement(By.cssSelector(OnePObjectMap.BRANDING_NAME_CSS.toString()));
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_BRANDING_NAME_CSS);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
 				WebElement brand_element = pf.getBrowserActionInstance(ob)
@@ -87,7 +88,7 @@ public class DRAIAM001 extends TestBase {
 						.getElement(OnePObjectMap.DRA_LOGO_CSS);
 				String dra_logo = brand_element.getText();
 				String dra_brand = dra_logo_element.getText();
-				if (brand_element.isDisplayed() && dra_logo_element.isDisplayed()) {
+				if (brand_element.isDisplayed() && dra_logo_element.isDisplayed() && b_element.isDisplayed()) {
 					Assert.assertEquals(dra_logo, "Drug Research Advisor");
 					Assert.assertEquals(dra_brand,"Target Druggability");
 					test.log(LogStatus.PASS, "DRA Landing page displays branding and marketing copy");

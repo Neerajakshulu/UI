@@ -3,6 +3,7 @@ package enwiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -75,15 +76,15 @@ public class ENWIAM50 extends TestBase {
 			// Verify Neon landing page displays Branding and Marketing copy
 			try {
 
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_ENW_COMPANY_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.BRANDING_NAME_CSS);
+				WebElement b_element = ob.findElement(By.cssSelector(OnePObjectMap.BRANDING_NAME_CSS.toString()));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_CSS);
+				WebElement m_element = ob.findElement(By.cssSelector(OnePObjectMap.NEON_MARKETING_COPY_CSS.toString()));
 
-				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
+				String marketing_Copy = m_element.getText();
 
-				String branding_name = b_element.getText();
-
-				if (b_element.isDisplayed()) {
-					Assert.assertEquals(branding_name, "Project Neon");
-
+				if (b_element.isDisplayed() && m_element.isDisplayed()) {
+					Assert.assertEquals(marketing_Copy, "Project Neon");
 					test.log(LogStatus.PASS, "Neon Landing page displays Neon branding and marketing copy");
 				}
 

@@ -80,14 +80,20 @@ public class ENWIAM51 extends TestBase {
 
 			try {
 
-				WebElement b_element = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_ENW_COMPANY_CSS);
-				String branding_name = b_element.getText();
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.BRANDING_NAME_CSS);
+				WebElement b_element = ob.findElement(By.cssSelector(OnePObjectMap.BRANDING_NAME_CSS.toString()));
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_MARKETING_COPY_CSS);
+				WebElement m_element = ob.findElement(By.cssSelector(OnePObjectMap.NEON_MARKETING_COPY_CSS
+								.toString()));
 
-				if (b_element.isDisplayed()) {
-					Assert.assertEquals(branding_name, "EndNote");
-					test.log(LogStatus.PASS, "EndNote Landing page displays EndNote branding and marketing copy");
+				String marketing_Copy = m_element.getText();
+
+				if (b_element.isDisplayed() && m_element.isDisplayed()) {
+				
+					Assert.assertEquals(marketing_Copy, "EndNote");
+					test.log(LogStatus.PASS,
+							"EndNote Landing page displays EndNote branding and marketing copy");
 				}
-
 			} catch (Throwable t) {
 				t.printStackTrace();
 				test.log(LogStatus.FAIL, "EndNote Landing page doesn't displays EndNote branding and marketing copy");

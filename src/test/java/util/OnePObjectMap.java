@@ -545,7 +545,8 @@ public enum OnePObjectMap {
 	// Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
 	NEON_ENW_COMPANY_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
-	NEON_MARKETING_COPY_CSS("h2[class$='app-name ng-binding']"),
+	BRANDING_NAME_CSS("img[alt='Clarivate Logo']"),
+	NEON_MARKETING_COPY_CSS("h3[class$='app-name ng-binding']"),
 	NEON_CONNECT_ICON_CSS("i[class='fa fa-users login-splash-icon']"),
 	ENW_SHIBB_LINK_CSS("a[class='shibboleth-link']"),
 	ENW_DESKTOP_TEXT_CSS("h5[class='endnote-advertisement__header']"),
