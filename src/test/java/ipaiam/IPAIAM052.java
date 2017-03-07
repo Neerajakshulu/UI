@@ -97,7 +97,7 @@ public class IPAIAM052 extends TestBase {
 			try {
 				ob.navigate().to(host + CONFIG.getProperty("appendIPAAppUrl"));
 				ob.navigate().refresh();
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_LOGO_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_BRANDING_NAME_CSS);
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA052"),
 						LOGIN.getProperty("USERPWDDRA052"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
