@@ -453,6 +453,7 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='wui-btn--login']"),
+	LOGIN_PAGE_LOGO_IMG_XPATH("//img[@class='login-logo']"),
 	LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS("div[class='login-splash__container']"),
 	CLARIVATE_ANALYTICS_PAGE_CSS("div[id='site-header'] a"),
 	SEARCH_RESULTS_PAGE_PEOPLE_TITLE_CSS("div[class='wui-card__content'] a[class='ng-binding ng-scope']"),
@@ -1099,6 +1100,11 @@ public enum OnePObjectMap {
 	CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME("associate"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
+	
+	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h2"),
+	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
+	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-content ng-binding'])[1]"),
+	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]")
 
 	
 	;
