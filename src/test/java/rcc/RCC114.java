@@ -95,20 +95,24 @@ public class RCC114 extends TestBase {
 	@Test(dependsOnMethods="testLoginTRAccount")
 	public void createTwoNewGroups() throws Exception {
 
-		test.log(LogStatus.INFO, "Create Group ");
+		test.log(LogStatus.INFO, "Create Group initiaziated ");
 		try {
 			groupTitle = this.getClass().getSimpleName() + "_Group_1" + "_" + getCurrentTimeStamp();
 			String desc = this.getClass().getSimpleName() + "_Group_" + RandomStringUtils.randomAlphanumeric(100);
 			groupTitle2 = this.getClass().getSimpleName() + "_Group_2" + "_" + getCurrentTimeStamp();
 			
+			BrowserWaits.waitTime(20);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
+			BrowserWaits.waitTime(20);
+			test.log(LogStatus.INFO, "Group one Created");
 			
 			
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle2, desc);
+			test.log(LogStatus.INFO, "Group two Created");
 			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Not able to Creat Group");
