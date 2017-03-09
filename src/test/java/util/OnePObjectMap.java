@@ -1104,8 +1104,15 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h2"),
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
 	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-content ng-binding'])[1]"),
-	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]")
-
+	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]"),
+	CUSTOMER_CARE_USER_FULLNAME_NAME("fullName"),
+	CUSTOMER_CARE_USER_ORGANIZATION_NAME("organization"),
+	CUSTOMER_CARE_USER_EMAILID_NAME("email"),
+	CUSTOMER_CARE_USER_PHONE_NAME("phone"),
+	CUSTOMER_CARE_USER_COUNTRY_NAME("country"),
+	CUSTOMER_CARE_USER_CATEGORY_NAME("category"),
+	CUSTOMER_CARE_USER_REQUEST_NAME("request"),
+	
 	
 	;
 
