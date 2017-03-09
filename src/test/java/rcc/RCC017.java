@@ -135,7 +135,7 @@ public class RCC017 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			
-			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).clickOnGroupsTab(); 
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
