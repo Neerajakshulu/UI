@@ -108,7 +108,7 @@ public class RCC001 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			pf.getGroupsPage(ob).clickOnGroupsTab();
+			pf.getGroupsPage(ob).clickOnGroupsTab(); 
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
