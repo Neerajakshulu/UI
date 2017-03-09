@@ -28,7 +28,7 @@ public class Authoring83 extends TestBase {
 	static boolean skip = false;
 	static int status = 1;
 
-	static int time = 90;
+	static int time = 10;
 	PageFactory pf = new PageFactory();
 
 	// Following is the list of status:
@@ -79,7 +79,10 @@ public class Authoring83 extends TestBase {
 			BrowserWaits.waitTime(time);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
+			ob.navigate().back();
+			ob.navigate().back();
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
+			waitForAjax(ob);
 			try {
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);

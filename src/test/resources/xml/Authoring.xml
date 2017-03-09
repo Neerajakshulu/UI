@@ -516,7 +516,7 @@
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
 		<classes>
-					<class name="Authoring.Authoring80"></class>
+			<class name="Authoring.Authoring80"></class>
 		</classes>
 	</test>
 
