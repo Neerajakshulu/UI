@@ -4,8 +4,6 @@ package ipaiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-
-
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -78,6 +76,7 @@ public class IPAIAMCC001 extends TestBase {
 			String Name = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_NAME_CSS).getText();
 			String Organization = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_ORG_NAME_CSS)
 					.getText();
+
 			try {
 				if (Organization.equals("")) {
 					Assert.assertTrue(pf.getIpaPage(ob).validateCustomerCareNameErrorMessage());

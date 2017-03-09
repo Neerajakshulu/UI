@@ -89,7 +89,8 @@ public class IPAIAMCC003 extends TestBase {
 
 				}
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "user is not able to select the issue type/category of the issue as an option");
+				test.log(LogStatus.FAIL,
+						"user is not able to select the issue type/category of the issue as an option");
 				closeBrowser();
 			}
 			closeBrowser();

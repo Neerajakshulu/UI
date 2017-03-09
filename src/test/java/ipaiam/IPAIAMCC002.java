@@ -69,8 +69,7 @@ public class IPAIAMCC002 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendPACCAppUrl"));
-			String Email = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_EMAIL_CSS)
-					.getText();
+			String Email = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_EMAIL_CSS).getText();
 			try {
 				if (Email.equals("")) {
 					Assert.assertTrue(pf.getIpaPage(ob).validateCustomerCareEmailErrorMessage());
@@ -80,7 +79,7 @@ public class IPAIAMCC002 extends TestBase {
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"Error message 'Incorrect email address format. Please try again' is not displayed when user enters incorrect email address.");
-				
+
 			}
 			try {
 				if (Email.equals("")) {
@@ -92,6 +91,7 @@ public class IPAIAMCC002 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"Error message 'Invalid format. Only numbers (minimum 7 digits), spaces, and special characters '+ ( ) -' allowed' is not displayed when user enters incorrect phone number");
 				closeBrowser();
+
 			}
 			closeBrowser();
 		} catch (Throwable t) {

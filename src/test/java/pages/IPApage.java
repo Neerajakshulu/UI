@@ -320,6 +320,7 @@ public class IPApage extends TestBase {
 		}
 		return false;
 	}
+
 	public boolean validateCustomerCareNumberErrorMessage() throws Exception {
 		String ErrorMsg = "Invalid format. Only numbers (minimum 7 digits), spaces, and special characters + ( ) - allowed";
 		waitForAjax(ob);

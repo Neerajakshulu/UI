@@ -1087,6 +1087,7 @@ public enum OnePObjectMap {
 	IPA_CC_COUNTRY_NAME("category"),
 	
 	
+	
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
 	CUSTOMER_CARE_PASSWORD_ID("userPassword"),
