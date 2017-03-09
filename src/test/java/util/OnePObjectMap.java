@@ -1085,7 +1085,7 @@ public enum OnePObjectMap {
 	IPA_CC_EMAIL_CSS("input[type='email']"),
 	IPA_CC_PHONE_CSS("input[type='tel']"),
 	IPA_CC_COUNTRY_NAME("category"),
-	
+	IPA_CC_HEADER_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--ipa']"),
 	
 	
 	// #################### CUSTOMER CARE ##########################
@@ -1109,7 +1109,8 @@ public enum OnePObjectMap {
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 	
-	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h2"),
+	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
+	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
 	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-content ng-binding'])[1]"),
 	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]"),
