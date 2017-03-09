@@ -86,8 +86,8 @@ public class IAM035 extends TestBase {
 
 	private void continueToLandingNeonPage() throws Exception {
 		BrowserWaits.waitTime(10);
-
-		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
 		if (!checkElementPresence("ul_name")) {
 
 			test.log(LogStatus.FAIL, "New user credentials are not working fine");// extent reports
@@ -96,7 +96,7 @@ public class IAM035 extends TestBase {
 					this.getClass().getSimpleName() + "_existing_FB_User_credentials_not_working_fine")));// screenshot
 			closeBrowser();
 
-		}
+		}*/
 		logout();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 		closeBrowser();
