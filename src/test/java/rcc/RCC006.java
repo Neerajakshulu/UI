@@ -196,7 +196,7 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Owner name not same");
 			}*/
 
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
 			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 
