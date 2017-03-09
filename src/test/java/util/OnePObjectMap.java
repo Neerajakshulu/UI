@@ -1079,6 +1079,13 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_SEARCHTERMS_CSS("[type='Dashboard.queryType'] button[id='split-button']"),
 	NEON_IPA_SEARCH_TAB_TEXT_CSS("input[ng-model='vm.searchParam']"),
 	NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH("//text()[   contains(     translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$value') ]/../../../button"),
+
+	IPA_CC_NAME_CSS("input[ng-model='vm.fullName']"),
+	IPA_CC_ORG_NAME_CSS("input[ng-model='vm.organization']"),
+	IPA_CC_EMAIL_CSS("input[type='email']"),
+	IPA_CC_PHONE_CSS("input[type='tel']"),
+	IPA_CC_COUNTRY_NAME("category"),
+	
 	
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
