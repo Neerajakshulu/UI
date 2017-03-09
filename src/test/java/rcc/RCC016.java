@@ -136,7 +136,7 @@ public class RCC016 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE10"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE15"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -145,7 +145,7 @@ public class RCC016 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER010", "RCCTESTUSERPWD010");
+			loginAs("RCCTESTUSER015", "RCCTESTUSERPWD015");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
