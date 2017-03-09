@@ -34,8 +34,8 @@ public class Search54 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 
 	}
 
@@ -48,8 +48,8 @@ public class Search54 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,8 +63,8 @@ public class Search54 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			
-			// login using TR credentials  autocompleteTile
+
+			// login using TR credentials autocompleteTile
 			login();
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
@@ -78,9 +78,11 @@ public class Search54 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS);
+			// ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()), 30);
+			waitForElementTobeVisible(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()), 30);
 			Thread.sleep(2000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
@@ -91,8 +93,8 @@ public class Search54 extends TestBase {
 
 			}
 
-			List<WebElement> tileTags = ob
-					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()));
+			List<WebElement> tileTags = ob.findElements(By
+					.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()));
 			int count = 0;
 			for (int i = 0; i < tileTags.size(); i++) {
 				if (tileTags.get(i).getText().equals("ARTICLE"))
@@ -101,13 +103,16 @@ public class Search54 extends TestBase {
 
 			if (!compareNumbers(tileTags.size(), count)) {
 
-				test.log(LogStatus.FAIL,
+				test.log(
+						LogStatus.FAIL,
 						"Items other than articles also getting displayed in the summary page when user searches using ARTICLES content type in search drop down");// extent
 																																									// report
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_items_other_than_articles_also_getting_displayed_in_the_summary_page_when_user_searches_using_ARTICLES_content_type_in_search_drop_down")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_items_other_than_articles_also_getting_displayed_in_the_summary_page_when_user_searches_using_ARTICLES_content_type_in_search_drop_down")));// screenshot
 
 			}
 
@@ -124,8 +129,11 @@ public class Search54 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
