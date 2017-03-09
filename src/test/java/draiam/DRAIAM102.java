@@ -3,7 +3,6 @@ package draiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -21,10 +20,10 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRAIAM101 extends TestBase {
+public class DRAIAM102 extends TestBase {
 
-	 //Verify that Thomson Reuters logo should be replaced with Clarivate Analytics logo
-	//|| Verify that Clarivate Analytics logo should be Placed below the marketing area (centered).
+	//"Verify that 'EndNote' should be moved within the white area and should be above 'Forgot Password' text and center aligned 
+	//Verify that Clarivate Analytics logo should be Placed below the marketing area (centered).".
 	static int status = 1;
 	static boolean fail = false;
    
@@ -33,7 +32,6 @@ public class DRAIAM101 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
-
 	}
 	@Test
 	public void testcaseDRAIAM101() throws Exception {
@@ -54,10 +52,9 @@ public class DRAIAM101 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
-			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
-			//pf.getDraPageInstance(ob).validateInvalidCredentialsErrorMsg(test);	
-		//	ClarivateAnalyticslogo();
+			ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
+			test.log(LogStatus.PASS, "ENW Landing page is displayed. ");
+			VerifyEndnoteTxt();
 			BrowserWaits.waitTime(6);
 			JavascriptExecutor jse = (JavascriptExecutor)ob;
 			jse.executeScript("window.scrollBy(0,250)", "");
@@ -71,11 +68,11 @@ public class DRAIAM101 extends TestBase {
 				if (!ImagePresent)
 		        {
 		        	
-		        	test.log(LogStatus.FAIL, "DRA Landing page the Clarivate Logo is not diplayed");
+		        	test.log(LogStatus.FAIL, "Clarivate Logo is not diplayed in EndNote Landing page");
 		        }
 		        else
 		        {
-		        	test.log(LogStatus.PASS, "DRA Landing page displays the Clarivate Logo");
+		        	test.log(LogStatus.PASS, "Clarivate Logo is diplayed in EndNote Landing page");
 		        }
 
 				test.log(LogStatus.PASS, " Image is present and User name is not hyper linked");
@@ -102,6 +99,21 @@ public class DRAIAM101 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	}
+	private void VerifyEndnoteTxt() throws Exception {
+	String str = ob.findElement(By.xpath("//h3[@class='wui-title login-header__app-name ng-binding']")).getText();
+	try {
+		Assert.assertEquals("EndNote", str);
+		test.log(LogStatus.PASS, " ENDNOTE Header is displayed within the white area .");
+	} catch (Throwable t) {
+		test.log(LogStatus.FAIL, "ENDNOTE Header is not  displayed within the white area");// extent
+		ErrorUtil.addVerificationFailure(t); // reports
+		status = 2;// excel
+		test.log(LogStatus.INFO,
+				"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+						+ "Feedback New window is not displayed and content is not matching")));// screenshot
+	}
+		
 	}
 	@AfterTest
 	public void reportTestResult() {
