@@ -84,8 +84,6 @@ public class Authoring83 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			waitForAjax(ob);
 			try {
-				System.out.println("*************************************"+  pf.getpostRVPageInstance(ob).getPostTitle());
-				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+ title);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostContent(), content);
 				test.log(LogStatus.PASS, "User is able to publish the post max characters for title and content");
