@@ -1,7 +1,10 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -255,4 +258,86 @@ public class IPApage extends TestBase {
 
 	}
 
+	public boolean validateCustomerCareNameErrorMessage() throws Exception {
+		String ErrorMsg = "Please enter at least 2 characters for name";
+		waitForAjax(ob);
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.IPA_CC_NAME_CSS.toString()), 60);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_ORG_NAME_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_NAME_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_NAME_CSS.toString())).sendKeys("");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_ORG_NAME_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_NAME_CSS);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.IPA_CC_NAME_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean validateCustomerCareOrgNameErrorMessage() throws Exception {
+		String ErrorMsg = "Please enter at least 2 characters for organization name";
+
+		waitForAjax(ob);
+
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.IPA_CC_ORG_NAME_CSS.toString()), 60);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_ORG_NAME_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_ORG_NAME_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_ORG_NAME_CSS.toString())).sendKeys("a");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_ORG_NAME_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_NAME_CSS);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.IPA_CC_ORG_NAME_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean validateCustomerCareEmailErrorMessage() throws Exception {
+		String ErrorMsg = "Incorrect email address format. Please try again";
+		waitForAjax(ob);
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_EMAIL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_PHONE_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_EMAIL_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_EMAIL_CSS.toString())).sendKeys("a.com");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_PHONE_CSS);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.IPA_CC_EMAIL_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean validateCustomerCareNumberErrorMessage() throws Exception {
+		String ErrorMsg = "Invalid format. Only numbers (minimum 7 digits), spaces, and special characters + ( ) - allowed";
+		waitForAjax(ob);
+
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_EMAIL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.IPA_CC_PHONE_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_PHONE_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_CC_PHONE_CSS.toString())).sendKeys("a.com");
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_CC_PHONE_CSS);
+
+		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.IPA_CC_PHONE_CSS);
+		for (WebElement we : list) {
+			if (we.isDisplayed()) {
+				we.getText().trim().equalsIgnoreCase(ErrorMsg);
+				return true;
+			}
+		}
+		return false;
+	}
 }

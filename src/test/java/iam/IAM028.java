@@ -93,7 +93,7 @@ public class IAM028 extends TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 			}
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 
 			// Verify that profile image using below xpath is present or not
 			String profile_name_xpath = "//img[@title='" + first_name + " " + last_name + "']";

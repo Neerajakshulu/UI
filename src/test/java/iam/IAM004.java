@@ -77,7 +77,7 @@ public class IAM004 extends TestBase {
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);

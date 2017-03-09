@@ -1079,6 +1079,14 @@ public enum OnePObjectMap {
 	NEON_IPA_DASH_SEARCHTERMS_CSS("[type='Dashboard.queryType'] button[id='split-button']"),
 	NEON_IPA_SEARCH_TAB_TEXT_CSS("input[ng-model='vm.searchParam']"),
 	NEON_IPA_SEARCH_TAB_ADD_TERM_XPATH("//text()[   contains(     translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'$value') ]/../../../button"),
+
+	IPA_CC_NAME_CSS("input[ng-model='vm.fullName']"),
+	IPA_CC_ORG_NAME_CSS("input[ng-model='vm.organization']"),
+	IPA_CC_EMAIL_CSS("input[type='email']"),
+	IPA_CC_PHONE_CSS("input[type='tel']"),
+	IPA_CC_COUNTRY_NAME("category"),
+	IPA_CC_HEADER_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--ipa']"),
+	
 	
 	// #################### CUSTOMER CARE ##########################
 	CUSTOMER_CARE_USER_NAME_ID("login"),
@@ -1101,11 +1109,19 @@ public enum OnePObjectMap {
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 	
-	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h2"),
+	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
+	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
 	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-content ng-binding'])[1]"),
-	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]")
-
+	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]"),
+	CUSTOMER_CARE_USER_FULLNAME_NAME("fullName"),
+	CUSTOMER_CARE_USER_ORGANIZATION_NAME("organization"),
+	CUSTOMER_CARE_USER_EMAILID_NAME("email"),
+	CUSTOMER_CARE_USER_PHONE_NAME("phone"),
+	CUSTOMER_CARE_USER_COUNTRY_NAME("country"),
+	CUSTOMER_CARE_USER_CATEGORY_NAME("category"),
+	CUSTOMER_CARE_USER_REQUEST_NAME("request"),
+	
 	
 	;
 
