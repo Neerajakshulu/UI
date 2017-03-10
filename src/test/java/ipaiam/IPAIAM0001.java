@@ -143,7 +143,7 @@ public class IPAIAM0001 extends TestBase {
 				 * .waitUntilElementIsDisplayed(OnePObjectMap.
 				 * IPA_LANDINGPAGE_SUPPORT_MAILID_CSS);
 				 */
-				WebElement helpmsg = pf.getBrowserActionInstance(ob)
+				/*WebElement helpmsg = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_LANDINGPAGE_HELP_MESSAGE_CSS);
 				WebElement supportmailid = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.IPA_LANDINGPAGE_SUPPORT_MAILID_CSS);
@@ -153,7 +153,7 @@ public class IPAIAM0001 extends TestBase {
 				if (actual_help_text.contains("Need help signing in? Please contact")
 						&& actual_mail_id.contains("IPA_support@thomsonreuters.com")) {
 					test.log(LogStatus.PASS, "IPA Landing page  displays the message and email");
-				}
+				}*/
 
 			} catch (Throwable t) {
 				t.printStackTrace();
