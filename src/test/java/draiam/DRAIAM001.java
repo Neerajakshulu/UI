@@ -126,7 +126,7 @@ public class DRAIAM001 extends TestBase {
 
 			// verifying that DRA Landing page, displays the message and email
 			// id
-			try {
+			/*try {
 				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
 				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_SUPPORT_MAILID_CSS);
 				WebElement helpmsg = pf.getBrowserActionInstance(ob)
@@ -146,7 +146,7 @@ public class DRAIAM001 extends TestBase {
 				test.log(LogStatus.FAIL, "DRA Landing page displays the incorrect message and email");
 				ErrorUtil.addVerificationFailure(t);
 			}
-		
+		*/
 
 			// Verifying DRA marketing copy are displayed.
 			try {
