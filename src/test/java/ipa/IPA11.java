@@ -93,11 +93,11 @@ import util.ExtentManager;
 				}
 				pf.getSearchPageInstance(ob).exploreSearch();
 				
-				pf.getSearchPageInstance(ob).clickOnSearchTermDropDown(searchTerm);
+				pf.getSearchPageInstance(ob).clickOnSearchTermDropDownDashboard(searchTerm);
 				
 				
 			try {
-				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCount(searchTerm) > 0);
+				Assert.assertTrue(pf.getSearchPageInstance(ob).getselectedSynonymsCountDashboard(searchTerm) > 0);
 				test.log(LogStatus.PASS,
 						"clicking the term drop down is displayed with the list of Synonyms when the user submits Technology Search");
 			} catch (Throwable e) {
@@ -140,7 +140,7 @@ import util.ExtentManager;
 				pf.getSearchPageInstance(ob).SearchTermEnter("technology", freeformText);
 				pf.getSearchPageInstance(ob).selectSearchTermFromSuggestion(0);
 				try{
-				Assert.assertFalse(pf.getSearchPageInstance(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
+				Assert.assertTrue(pf.getSearchPageInstance(ob).checkIfSearchTermDropDownIsDispalyed(freeformText));
 				test.log(LogStatus.PASS,
 						"Search term dropdown is not displayed when there are no synonyms");
 				}catch (Throwable e) {

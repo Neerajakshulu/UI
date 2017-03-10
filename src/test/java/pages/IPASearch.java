@@ -401,12 +401,40 @@ System.out.println();
 		}
 		throw new Exception("Search term not found in list");
 	}
+	
+	public WebElement getSearchItemElementDashboard(String serachTerm) throws Exception {
+		if (serachTerm.contains("("))
+			serachTerm = serachTerm.substring(0, serachTerm.indexOf("(")).trim();
+		
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_DASHBOARD_LABEL_CSS.toString()), 60);
+		List<WebElement> labelsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.NEON_IPA_SEARCH_TERMS_DASHBOARD_LABEL_CSS);
+		
+		String text = "";
+		for (WebElement we : labelsList) {
+			text = we.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERMS_DASHBOARD_CSS.toString())).getText();
+
+			if (text.trim().equalsIgnoreCase(serachTerm)) {
+				return we;
+			}
+		}
+		throw new Exception("Search term not found in list");
+	}
 
 	public int getselectedSynonymsCount(String searchTerm) throws Exception {
 		WebElement term = getSearchItemElement(searchTerm);
 
 		List<WebElement> synms = term
 				.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_CSS.toString()));
+
+		return synms.size();
+	}
+	
+	public int getselectedSynonymsCountDashboard(String searchTerm) throws Exception {
+		WebElement term = getSearchItemElementDashboard(searchTerm);
+		
+		List<WebElement> synms = ob
+				.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERM_PRESELECTED_SYNMS_DB_CSS.toString()));
 
 		return synms.size();
 	}
@@ -455,6 +483,12 @@ System.out.println();
 		WebElement term=getSearchItemElement(searchTerm);
 		term.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS.toString())).click();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TERM_SYNMS_LIST_CSS);
+	}
+	
+	public void clickOnSearchTermDropDownDashboard(String searchTerm) throws Exception{
+		WebElement term=getSearchItemElementDashboard(searchTerm);
+		term.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_SEARCH_TERM_DROP_DOWN_ICON_CSS.toString())).click();
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_SEARCH_TERM_SYNMS_LIST_DB_CSS);
 	}
 	
 	public boolean checkIfSearchTermDropDownIsDispalyed(String searchTerm) throws Exception{
