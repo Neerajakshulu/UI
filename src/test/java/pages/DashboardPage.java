@@ -221,17 +221,17 @@ public class DashboardPage extends TestBase {
 		List<company> companies = new ArrayList<company>();
 		Set<String> Companylist = new HashSet<String>();
 		String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
-		if (!Temp.trim().equalsIgnoreCase("Breadth"))
-			test.log(LogStatus.FAIL,
-					"X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth");
-		else
-			test.log(LogStatus.PASS, "X axis is Label as expected \"Breadth\"");
+		if (!Temp.trim().equalsIgnoreCase("Technology diversity")){
+				logFailureDetails(test, "X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth", "fail");
+		}else{
+			test.log(LogStatus.PASS, "X axis is Label as expected \"Technology diversity\"");
+		}
+			
 		Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
-		if (!Temp.trim().equalsIgnoreCase("Strength"))
-			test.log(LogStatus.FAIL,
-					"Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Strength");
-		else
-			test.log(LogStatus.PASS, "Y axis is Label as expected \"Strength\"");
+		if (!Temp.trim().equalsIgnoreCase("Average patent strength")){
+			logFailureDetails(test, "Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth", "fail");
+		}else
+			test.log(LogStatus.PASS, "Y axis is Label as expected \"Average patent strength\"");
 
 		// List<WebElement> TopIPC =
 		// browserAction.getElements(OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS);
@@ -253,9 +253,10 @@ public class DashboardPage extends TestBase {
 				WebElement webElement = ob.findElement(
 						By.cssSelector("g[class*='nv-point-clips']>clipPath:nth-of-type(" + i + ") circle"));
 				Actions actionBuilder = new Actions(ob);
-				actionBuilder.moveToElement(webElement).click().build().perform();
+				actionBuilder.moveToElement(ob.findElement(
+						By.cssSelector("g[class*='nv-point-clips']>clipPath:nth-of-type(" + i + ") circle"))).click().build().perform();
 				Thread.sleep(3000);
-				companies.add(new company(ob.findElement(By.cssSelector("div[class='customToolTip'] b")).getText(), "",
+				companies.add(new company(ob.findElement(By.cssSelector("div[class='wui-charts-company-name']")).getText(), "",
 						"", "", ""));
 
 			}
@@ -287,8 +288,10 @@ public class DashboardPage extends TestBase {
 		}
 		if (companies.size() == TOP10IPC.size())
 			test.log(LogStatus.PASS, "All IPCs are displayed Properly");
-		else
-			test.log(LogStatus.FAIL, "All IPCs are not displayed Properly");
+		else{
+			logFailureDetails(test, "All IPCs are not displayed Properly", "fail");
+		}
+			
 
 	}
 
@@ -301,10 +304,9 @@ public class DashboardPage extends TestBase {
 			Set<String> TOPLine = new HashSet<String>();
 			Set<String> Line = new HashSet<String>();
 			String Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_CSS).getText();
-			if (!Temp.trim().equalsIgnoreCase("Year"))
-				test.log(LogStatus.FAIL,
-						"X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Year");
-			else
+			if (!Temp.trim().equalsIgnoreCase("Year")){
+				logFailureDetails(test, "X axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth", "fail");
+			}else
 				test.log(LogStatus.PASS, "X axis is Label as expected \"Year\"");
 			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
 			int min = Integer.valueOf(Temp);
@@ -330,9 +332,11 @@ public class DashboardPage extends TestBase {
 
 			}
 			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
-			if (!Temp.trim().equalsIgnoreCase("Volume"))
-				test.log(LogStatus.FAIL,
-						"Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Volume");
+			if (!Temp.trim().equalsIgnoreCase("Volume")){
+				logFailureDetails(test, "Y axis is Label is not as expected Actual:" + Temp.trim() + "But Expected:Breadth", "fail");
+				
+			}
+				
 			else
 				test.log(LogStatus.PASS, "Y axis is Label as expected \"Volume\"");
 			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
