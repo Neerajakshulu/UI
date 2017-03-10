@@ -158,4 +158,28 @@
 		</classes>
 	</test>
 	
+	
+		<test name="Authoring80">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring80"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring81">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring81"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring82">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring82"></class>
+		</classes>
+	</test>
 </suite>
