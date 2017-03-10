@@ -40,7 +40,7 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Authoring8">
+	<test name="Authoring8">
 		<classes>
 			<class name="Authoring.Authoring8"></class>
 		</classes>
@@ -58,7 +58,7 @@
 		<classes>
 			<class name="Authoring.Authoring10"></class>
 		</classes>
-	</test> -->
+	</test>
 	
 	<test name="Authoring11">
 		<parameter name="tusername" value="testing.prasadreddy@gmail.com" />
