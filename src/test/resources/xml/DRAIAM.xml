@@ -116,6 +116,11 @@
 			<class name="draiam.DRAIAM102"></class>
 		</classes>
 	</test>
+	<test name="DRAIAM103">
+		<classes>
+			<class name="draiam.DRAIAM103"></class>
+		</classes>
+	</test>
 	
 	<!-- <test name="DRAIAM052">
 		<classes>
