@@ -15,7 +15,7 @@ import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class IPA5 extends TestBase {
+public class IPA21 extends TestBase {
 
 	static int count = -1;
 
@@ -39,7 +39,7 @@ public class IPA5 extends TestBase {
 	}
 
 	/**
-	 * Method for login into IPA application using TR ID
+	 * Method for login into Neon application using TR ID
 	 * 
 	 * @throws Exception
 	 *             , When TR Login is not done
@@ -86,25 +86,37 @@ public class IPA5 extends TestBase {
 	 */
 	@Test(dependsOnMethods = "testLoginIPAApp")
 	@Parameters("proflieFlyoutLinks")
-	public void validateAppHeaderFooterLinks(String proflieFlyoutLinks) throws Exception {
+	public void validateIPAProfileFlyout(String proflieFlyoutLinks) throws Exception {
 		try {
+			test.log(LogStatus.INFO, "IPA Profile Flyout Info - Header and Footer validation");
+			pf.getProfilePageInstance(ob).validateDRAProfileFlyout(proflieFlyoutLinks,test);
+			test.log(LogStatus.PASS, "IPA Profile Flyout Info - Header and Footer validation Successful");
 			
-			pf.getProfilePageInstance(ob).validateProflileFlyoutLinks(test,proflieFlyoutLinks);
+			test.log(LogStatus.INFO, "Validate IPA Profile page from Profile flyout");
+			pf.getProfilePageInstance(ob).clickProfileTitleLink();
+			pf.getProfilePageInstance(ob).validateDRAProfilePageAndClose(test);
 			
-			test.log(LogStatus.INFO, "IPA Profile Flyout - Signout link validaton");
+			test.log(LogStatus.PASS, "IPA Profile page landing succefully from Profile flyout");
+			
+
+			test.log(LogStatus.INFO, "Validate IPA Account link from Profile flyout");
+			pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+			pf.getProfilePageInstance(ob).validateAccountLinkModalAndClose();
+			test.log(LogStatus.PASS, "Validate IPA Account link from Profile flyout is Successful");
+			
 			pf.getDraPageInstance(ob).logoutDRA();
 			pf.getIpaPage(ob).landingScreenIPA();
-			test.log(LogStatus.PASS, "IPA Profile Flyout - Signout link validaton Successful");
+			test.log(LogStatus.PASS, "Logout from IPA Successfully");
 			closeBrowser();
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Profile flyout links are not working");
+			test.log(LogStatus.FAIL, "Profile flyout Info Validation Fail");
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());
 			ErrorUtil.addVerificationFailure(t);
 			status = 2;
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "flyout_links_are_not_working")));
+					captureScreenshot(this.getClass().getSimpleName() + "flyout_validation_fail")));
 			closeBrowser();
 		}
 	}
@@ -112,7 +124,6 @@ public class IPA5 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
 	}
 
 }

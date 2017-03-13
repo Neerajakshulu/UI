@@ -14,7 +14,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class IPA115 extends TestBase {
+public class IPA15 extends TestBase {
 
 	static int status = 1;
 

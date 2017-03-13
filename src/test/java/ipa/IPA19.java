@@ -12,7 +12,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ExtentManager;
 
-public class IPA114 extends TestBase {
+public class IPA19 extends TestBase {
 
 	static int status = 1;
 
@@ -71,6 +71,7 @@ public class IPA114 extends TestBase {
 			
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			logFailureDetails(test, "Fields are not matching in record view page", "Screenshot for login");
 			closeBrowser();
 		}

@@ -63,7 +63,9 @@ public class IPARecordViewPage extends TestBase {
 				OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS);
 		    val=val-1;
 		if (val <= list.size()) {
-			String title = list.get(val).getText();
+			System.out.println("Reached 1");			
+			String title = "title"; //list.get(val).getText();
+			System.out.println("Reached 2");
 			list.get(val).click();
 			return title;
 		} else

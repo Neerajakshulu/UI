@@ -21,7 +21,7 @@ import util.ExtentManager;
  * @author UC202376
  *
  */
-public class IPA012 extends TestBase {
+public class IPA09 extends TestBase {
 
 	static int count = -1;
 

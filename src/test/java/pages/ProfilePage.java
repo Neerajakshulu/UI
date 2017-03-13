@@ -2138,7 +2138,8 @@ public class ProfilePage extends TestBase {
 			} 
 			
 		} catch (Exception e) {
-			ob.navigate().back();
+			e.printStackTrace();
+			ob.navigate().back();			
 			logFailureDetails(test, "Flyouts links not responded", "Profile flyouts Fail");
 		}
 	}

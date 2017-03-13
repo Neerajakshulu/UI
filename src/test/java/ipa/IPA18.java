@@ -15,7 +15,7 @@ import base.TestBase;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-public class IPA113 extends TestBase {
+public class IPA18 extends TestBase {
 
 	static int status = 1;
 
