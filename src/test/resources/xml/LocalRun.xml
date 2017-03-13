@@ -249,19 +249,19 @@
 		</classes>
 	</test>
 
-	<test name="ENW_Linking_from_NEON" preserve-order="true">
+	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM100"></class>
 			<class name="enwiam.ENWIAM101"></class>
-			<!-- <class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class> -->
+			<class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Navigation1">
+	<!-- <test name="Navigation1">
 		<classes>
 			<class name="enwiam.ENWIAM40"></class>
 		</classes>
-	</test>
+	</test> -->
 	
     <test name="ENW_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
@@ -338,7 +338,7 @@
 			<class name="enwiam.ENWIAM52"></class>
 			<class name="enwiam.ENWIAM57"></class>
 			<class name="enwiam.ENWIAM091"></class>
-			<class name="enwiam.ENWIAM58"></class>
+		<!-- 	<class name="enwiam.ENWIAM58"></class> -->
 			<class name="enwiam.ENWIAM56"></class>
 			<class name="enwiam.ENWIAM59"></class>
 			<class name="enwiam.ENWIAM54"></class>
@@ -348,7 +348,7 @@
 			<class name="enwiam.ENWIAM62"></class>
 			<class name="enwiam.ENWIAM00016"></class>
 			<class name="enwiam.ENWIAM90"></class>
-			<class name="enwiam.ENWIAM41"></class>
+			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0002"></class>
 			<class name="enwiam.ENWIAM0005"></class>
 		</classes>
