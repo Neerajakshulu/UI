@@ -81,26 +81,26 @@
 		</classes>
 	</test>
 	
-    <test name="DRAIAM0017">
+    <!-- <test name="DRAIAM0017">
 		<classes>
 			<class name="draiam.DRAIAM0017"></class>
 		</classes>
-	</test>
-	 <test name="DRAIAM0018">
+	</test> -->
+	<!--  <test name="DRAIAM0018">
 		<classes>
 			<class name="draiam.DRAIAM0018"></class>
 		</classes>
-	</test>
-	  <test name="DRAIAM0019">
+	</test> -->
+	 <!--  <test name="DRAIAM0019">
 		<classes>
 			<class name="draiam.DRAIAM0019"></class>
 		</classes>
-	</test>
-	  <test name="DRAIAM0020">
+	</test> -->
+	<!--   <test name="DRAIAM0020">
 		<classes>
 			<class name="draiam.DRAIAM0020"></class>
 		</classes>
-	</test>
+	</test> -->
 	<test name="DRAIAM051">
 		<classes>
 			<class name="draiam.DRAIAM051"></class>
@@ -134,11 +134,11 @@
 		</classes>
 	</test> -->
 	
-	<test name="DRAIAM054" preserve-order="true" parallel="false">
+<!-- 	<test name="DRAIAM054" preserve-order="true" parallel="false">
 		<classes>
 			<class name="draiam.DRAIAM054"></class>
 		</classes>
-	</test>
+	</test> -->
 	 <test name="DRAIAMCC001">
 		<classes>
 			<class name="draiam.IPAIAMCC001"></class>

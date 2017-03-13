@@ -57,11 +57,11 @@
 		</classes> </test> <test name="IPA053"> <classes> <class name="ipaiam.IPAIAM053"></class> 
 		</classes> </test> <test name="IPA054"> <classes> <class name="ipaiam.IPAIAM054"></class> 
 		</classes> </test> -->
-	<test name="IPA055" preserve-order="true" parallel="false">
+	<!-- <test name="IPA055" preserve-order="true" parallel="false">
 		<classes>
 			<class name="ipaiam.IPAIAM055"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="IPA0050">
 		<classes>
@@ -92,12 +92,12 @@
 			<class name="ipaiam.IPAIAM0054"></class>
 		</classes>
 	</test>
-	<test name="IPA0057">
+	<!-- <test name="IPA0057">
 		<classes>
 			<class name="ipaiam.IPAIAM0057"></class>
 		</classes>
-	</test>
-	<test name="IPA0058">
+	</test> -->
+	<!-- <test name="IPA0058">
 		<classes>
 			<class name="ipaiam.IPAIAM0058"></class>
 		</classes>
@@ -111,7 +111,7 @@
 		<classes>
 			<class name="ipaiam.IPAIAM0060"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- <test name="IPAIAM100"> <classes> <class name="ipaiam.IPAIAM100"></class> 
 		</classes> </test> -->
