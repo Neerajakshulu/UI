@@ -327,8 +327,11 @@ public class DashboardPage extends TestBase {
 					test.log(LogStatus.FAIL, "X axis graph not plotted to the current year");
 				if (min == (year - 10))
 					test.log(LogStatus.PASS, "X axis graph started from the current year-10");
-				else
-					test.log(LogStatus.FAIL, "X axis graph not started from the current year-10");
+				else{
+					
+					logFailureDetails(test, "X axis graph not started from the current year-10", "fail");
+				}
+					
 
 			}
 			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_CSS).getText();
@@ -339,14 +342,15 @@ public class DashboardPage extends TestBase {
 				
 			else
 				test.log(LogStatus.PASS, "Y axis is Label as expected \"Volume\"");
-			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MIN_CSS).getText();
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_MIN_CSS).getText();
 			min = Integer.valueOf(Temp);
-			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_X_MAX_CSS).getText();
+			Temp = browserAction.getElement(OnePObjectMap.NEON_IPA_DASH_TECH_COM_Y_MAX_CSS).getText();
 			max = Integer.valueOf(Temp);
 			if (max > min)
 				test.log(LogStatus.PASS, "Y axis Values started from Min value and ended Max Value");
 			else
-				test.log(LogStatus.FAIL, "Y axis Values not  started from Min value and ended Max Value");
+				logFailureDetails(test, "Y axis Values not started from Min value and ended Max Value", "fail");
+				
 
 			String css = OnePObjectMap.NEON_IPA_DASH_TECH_COM_TOP_IPC_CSS.toString();
 			try {
@@ -356,7 +360,7 @@ public class DashboardPage extends TestBase {
 					TOPLine.add(webelement.getText());
 				}
 			} catch (Exception ex) {
-				test.log(LogStatus.FAIL, "IPC Info not displayed in the visualization");
+				logFailureDetails(test, "IPC Info not displayed in the visualization", "fail");
 			}
 			try {
 				String Text = "";

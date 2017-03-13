@@ -136,8 +136,11 @@ public class IPA07 extends TestBase {
 			Collections.sort(sorted1);
 			if(ele1.equals(sorted1))
 				test.log(LogStatus.PASS, "Sort By Assignee is working as Expected");
-			else
-				test.log(LogStatus.FAIL, "Sort By Assignee is not working as Expected.Expected:"+sorted1+" Actual:"+ele1+".");
+			else{
+				logFailureDetails(test, "Sort By Assignee is not working as Expected.Expected:"+sorted1+" Actual:"+ele1+".", "fail");
+			}
+			
+				
 			/*
 			pf.getDashboardPage(ob).sortByText("Publication Number");
 			
@@ -153,8 +156,11 @@ public class IPA07 extends TestBase {
 			Collections.sort(sorted1);
 			if(ele1.equals(sorted1))
 				test.log(LogStatus.PASS, "Sort By Ultimate Parent is working as Expected");
-			else
-				test.log(LogStatus.FAIL, "Sort By Ultimate Parent is not working as Expected.Expected:"+sorted1+" Actual:"+ele1+".");
+			else{
+				
+				logFailureDetails(test, "Sort By Ultimate Parent is not working as Expected.Expected:"+sorted1+" Actual:"+ele1+".", "fail");
+			}
+				
 		
 			pf.getDashboardPage(ob).sortByText("Date added");
 			
