@@ -63,8 +63,7 @@ public class ENWIAM00017 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			steamLocked();
-			loginTofb();
-
+			
 			closeBrowser();
 			pf.clearAllPageObjects();
 
@@ -106,28 +105,7 @@ public class ENWIAM00017 extends TestBase {
 
 	}
 
-	private void loginTofb() throws Exception {
-
-		// Navigate to TR login page and login with valid TR credentials
-		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-
-		String str = "Your account has been locked.";
-		String locked = "";
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("ENWIAM00015steamUser"),
-				LOGIN.getProperty("ENWIAM00015steamUserPWD"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("ENWIAM00015steamUserPWD"));
-		BrowserWaits.waitTime(2);
-		locked = ob.findElement(By.xpath(OnePObjectMap.LOCKED_MSG_XPATH.toString())).getText();
-
-		if (locked.equalsIgnoreCase(str)) {
-			test.log(LogStatus.PASS, "STeAM account is in a locked status and can not be linked");
-
-		} else {
-			test.log(LogStatus.FAIL, "STeAM account is not in a locked status");
-		}
-		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.LOCKED_OK_BUTTON_XPATH.toString()), 30);
-		ob.findElement(By.xpath(OnePObjectMap.LOCKED_OK_BUTTON_XPATH.toString())).click();
-	}
+	
 
 	@AfterTest
 	public void reportTestResult() {

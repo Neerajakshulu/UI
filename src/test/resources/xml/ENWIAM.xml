@@ -160,17 +160,17 @@
 			<class name="enwiam.ENWIAM41"></class>
 		</classes>
 	</test> -->
-	<test name="Navigation3" preserve-order="true">
+	<!-- <test name="Navigation3" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM42"></class>
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Navigation4" preserve-order="true">
+	<!-- <test name="Navigation4" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM43"></class>
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="NeonLandingpage" preserve-order="true">
 		<classes>
@@ -231,11 +231,11 @@
 		</classes>
 	</test> -->
 	 
-	 <test name="ENWIAM00019">
+	<!--  <test name="ENWIAM00019">
 		<classes>
 			<class name="enwiam.ENWIAM00019"></class>
 		</classes>
-	</test>
+	</test> -->
 	<!--  <test name="ENWIAM00020">
 		<classes>
 			<class name="enwiam.ENWIAM00020"></class>

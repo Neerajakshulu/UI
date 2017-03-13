@@ -58,10 +58,9 @@ public class ENWIAM00015 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			//steamLocked();
-			//loginTofb();
+
 			steamEnw();
-			loginTofbSuspended();
+
 			closeBrowser();
 			pf.clearAllPageObjects();
 
@@ -72,7 +71,6 @@ public class ENWIAM00015 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
-	
 	// LOGIN TO ENW AND CHECKING THE EVICTED ACCONT
 	private void steamEnw() throws Exception {
 		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
@@ -83,7 +81,7 @@ public class ENWIAM00015 extends TestBase {
 		ob.findElement(By.xpath("//span[contains(text(),'Sign in')]")).click();
 
 		BrowserWaits.waitTime(2);
-		
+
 		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
 		if (evict.equalsIgnoreCase(str)) {
 			test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
@@ -96,29 +94,6 @@ public class ENWIAM00015 extends TestBase {
 		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
 
 	}
-
-	private void loginTofbSuspended() throws Exception {
-
-		ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
-
-		String str = "Your account has been evicted.";
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("sru_fbusername11"),
-				LOGIN.getProperty("sru_fbpwd11"));
-		pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("sru_steampw11"));
-		BrowserWaits.waitTime(2);
-		String evict = ob.findElement(By.xpath("//h2[contains(text(),'Your account has been evicted.')]")).getText();
-		if (evict.equalsIgnoreCase(str)) {
-			test.log(LogStatus.PASS, "The evicted string is displayed, the account got evicted");
-
-		} else {
-			test.log(LogStatus.FAIL, "The evicted string is not displayed");
-
-		}
-		BrowserWaits.waitTime(3);
-		ob.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-	}
-
-	
 
 	@AfterTest
 	public void reportTestResult() {
