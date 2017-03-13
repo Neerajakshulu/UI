@@ -58,10 +58,8 @@ public class ENWIAM00015 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
-			steamEnw();
-
-			closeBrowser();
+            steamEnw();
+            closeBrowser();
 			pf.clearAllPageObjects();
 
 		} catch (Throwable t) {

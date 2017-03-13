@@ -63,7 +63,7 @@ public class ENWIAM00017 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			steamLocked();
-			
+
 			closeBrowser();
 			pf.clearAllPageObjects();
 
@@ -104,8 +104,6 @@ public class ENWIAM00017 extends TestBase {
 		}
 
 	}
-
-	
 
 	@AfterTest
 	public void reportTestResult() {
