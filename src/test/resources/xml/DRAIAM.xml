@@ -141,7 +141,7 @@
 	</test> -->
 	 <test name="DRAIAMCC001">
 		<classes>
-			<class name="draiam.IPAIAMCC001"></class>
+			<class name="draiam.DRAIAMCC001"></class>
 		</classes>
 	</test>
 	<test name="DRAIAMCC002">
