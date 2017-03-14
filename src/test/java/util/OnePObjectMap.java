@@ -982,9 +982,9 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='login-button-container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
-	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
-	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),
-	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style='color:#621F95;']"),
+	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style*='color:#FF9100;']"),
+	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style*='color:#B1CD43;']"),
+	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style*='color:#621F95;']"),
 
 	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
 	NEON_IPA_SEARCH_TERMS_LABEL_NEW_CSS("span[ng-repeat='item in vm.clipboard.getDisplayDb(vm.type) | limitTo: 4 track by $index']>div>button>div"),
