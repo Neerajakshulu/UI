@@ -2071,6 +2071,12 @@ public class ProfilePage extends TestBase {
 				if (flyoutLinks[i].equalsIgnoreCase("Privacy")) {
 					test.log(LogStatus.INFO, "DRA Proflie flyout  "+flyoutLinks[i]+"Links validation");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
+					String main = ob.getWindowHandle();
+					Set<String> windows = ob.getWindowHandles();
+					
+					for(String winHan : windows){
+						ob.switchTo().window(winHan);
+					}
 					pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "July 2016 (version 1.1)");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String psText = ob.findElement(By.tagName("h2")).getText();
@@ -2078,13 +2084,21 @@ public class ProfilePage extends TestBase {
 					if(!StringUtils.containsIgnoreCase(psText, flyoutLinks[i])) {
 						logFailureDetails(test, psText+"Page not opened", "DRA/IPA-Privacy Fail");
 					}
-					ob.navigate().back();
+					ob.close();
+					ob.switchTo().window(main);
 					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 
 				else if (flyoutLinks[i].equalsIgnoreCase("Terms of Use")){ 
 					test.log(LogStatus.INFO, "DRA Proflie flyout  "+flyoutLinks[i]+"Links validation");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
+					System.out.println(ob.getWindowHandles().size());
+					String main = ob.getWindowHandle();
+					Set<String> windows = ob.getWindowHandles();
+					
+					for(String winHan : windows){
+						ob.switchTo().window(winHan);
+					}
 					pf.getBrowserWaitsInstance(ob).waitUntilText(
 							"These Terms of Use shall govern your use of the online service known as","July 2016 (version 1.1)");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
@@ -2093,13 +2107,20 @@ public class ProfilePage extends TestBase {
 					if(!StringUtils.equalsIgnoreCase(tcText, flyoutLinks[i])) {
 						logFailureDetails(test, tcText+"Page not opened", "DRA-Terms of Use Fail");
 					}
-					ob.navigate().back();
+					ob.close();
+					ob.switchTo().window(main);
 					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 				else if (flyoutLinks[i].equalsIgnoreCase("Help")){ 
 					test.log(LogStatus.INFO, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+"Link validation");
 					String helpLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HELP_LINK).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HELP_LINK);
+					String main = ob.getWindowHandle();
+					Set<String> windows = ob.getWindowHandles();
+					
+					for(String winHan : windows){
+						ob.switchTo().window(winHan);
+					}
 					BrowserWaits.waitTime(10);//to load pdf
 					String currentPageUrl=ob.getCurrentUrl();
 					logger.info("Help page url-->"+currentPageUrl);
@@ -2117,13 +2138,20 @@ public class ProfilePage extends TestBase {
 						logFailureDetails(test, flyoutLinks[i]+"Page PDF not opened", "Help PDF Fail");
 					}
 					
-					ob.navigate().back();
+					ob.close();
+					ob.switchTo().window(main);
 					test.log(LogStatus.PASS, "Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 				else if (flyoutLinks[i].equalsIgnoreCase("Feedback")){ 
 					test.log(LogStatus.INFO, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+"Links validation");
 					String feedbankLinkAddressURL=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_FEEDBACK_XPATH).getAttribute("href");
 					pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_FEEDBACK_XPATH);
+					String main = ob.getWindowHandle();
+					Set<String> windows = ob.getWindowHandles();
+					
+					for(String winHan : windows){
+						ob.switchTo().window(winHan);
+					}
 					BrowserWaits.waitTime(4);
 					//pf.getBrowserWaitsInstance(ob).waitUntilText("To provide feedback","Next");
 					String currentPageUrl=ob.getCurrentUrl();
@@ -2132,7 +2160,8 @@ public class ProfilePage extends TestBase {
 					if(!StringUtils.containsIgnoreCase(currentPageUrl, feedbankLinkAddressURL)) {
 						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA/IPA -Feedback Fail");
 					}
-					ob.navigate().back();
+					ob.close();
+					ob.switchTo().window(main);
 					test.log(LogStatus.PASS, "DRA/IPA Proflie flyout  "+flyoutLinks[i]+" Link validation is Successful");
 				}
 			} 
@@ -2154,6 +2183,7 @@ public class ProfilePage extends TestBase {
 		List<String> profileFlyout= new ArrayList<String>();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS);
+		Thread.sleep(3000);
 		String profileTitle=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).getText();
 		String profileMetadata=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.DRA_PROFILE_FLYOUT_INFO_CSS).get(1).getText();
 		
@@ -2234,7 +2264,7 @@ public class ProfilePage extends TestBase {
 	 * @throws Exception
 	 */
 	public void validateAccountLinkModalAndClose() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Connected Accounts","Thomson Reuters | Project Neon");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Account","Connected Accounts");
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Last sign in:","Change password");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS);
 		String accountText=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.MATCHING_STEAM_MODALTITLE_CSS).getText();

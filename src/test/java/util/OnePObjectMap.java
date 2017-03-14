@@ -207,7 +207,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_EDIT_CSS("button[ng-show='vm.shouldShowEditButton()']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_FIRST_NAME_CSS("input[name='firstName']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_LAST_NAME_CSS("input[name='lastName']"),
-	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[ng-model*='role']"),
+	HOME_PROJECT_NEON_PROFILE_EDIT_ROLE_CSS("input[aria-label*='Role']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PI_CSS("input[ng-model*='vm.field']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_PRIINS_CSS("input[placeholder='+ Institution']"),
 	HOME_PROJECT_NEON_PROFILE_EDIT_COUNTRY_CSS("input[placeholder='+ Country']"),
@@ -841,8 +841,8 @@ public enum OnePObjectMap {
 	DRA_PROFILE_FLYOUT_HEADER_IMAGE_CSS("img[class='wui-profile-flyout__image wui-circle']"),
 	DRA_PROFILE_UPDATE_CSS("button[class='wui-btn wui-btn--primary wui-btn--modal-footer']"),
 	DRA_PROFILE_CANCEL_CSS("button[class='wui-btn wui-btn--secondary wui-btn--modal-footer']"),
-	DRA_PROFILE_IMAGE_EDIT_CSS("button[ng-click='ProfileModal.openImageModal()']"),
-	DRA_PROFILE_IMAGE_DELETE_CSS("button[ng-click='ProfileModal.deleteImage()']"),
+	DRA_PROFILE_IMAGE_EDIT_CSS("button[aria-label*='Change']"),
+	DRA_PROFILE_IMAGE_DELETE_CSS("button[aria-label*='Delete']"),
 	DRA_FORGOT_PASSWORD_VERIFICATION_BUTTON_CSS("button[class='pull-right wui-btn login-button button-color-primary wui-btn--primary']"),
 	DRA_FORGOT_PASSWORD_TEXT_XPATH("//h3[contains(text(),'Email Sent')]"),
 	DRA_OK_BUTTON_XPATH("//button[contains(text(),'OK')]"),
@@ -1116,6 +1116,13 @@ public enum OnePObjectMap {
 	CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME("associate"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
+	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[class='form-control cc-call-us-select ng-pristine ng-untouched ng-valid']"),
+	CUSTOMER_CARE_CALLUS_CTRY1_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[1]"),
+	CUSTOMER_CARE_CALLUS_CTRY2_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[2]"),
+	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
+	
+	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
+	
 	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
 	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),
