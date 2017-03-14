@@ -94,13 +94,12 @@ public class ENW008 extends TestBase {
 		   String expectedAuthor1=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText();
 		   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
 			
-			
+			logout();
 		   
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			BrowserWaits.waitTime(2);
-			test.log(LogStatus.PASS, "User navigate to End note");
-			
-			switchToNewWindow(ob);
+		   ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL008"),
+					LOGIN.getProperty("USERPASSWORD008"));
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 			try {
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
@@ -178,6 +177,10 @@ public class ENW008 extends TestBase {
 					test.log(LogStatus.FAIL, "label present is incorrect " + listItem);
 					Assert.assertEquals(true, false);
 				}
+				else
+				{
+					test.log(LogStatus.PASS, "label present is correct " + listItem);
+				}
 			}
 			
 		 
@@ -185,25 +188,49 @@ public class ENW008 extends TestBase {
 				test.log(LogStatus.FAIL, "ReferenceTypeValue is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
 			}
+			else
+			{
+				test.log(LogStatus.PASS, "ReferenceTypeValue is matching between Neon and endnote");
+			}
 			if (!(endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL")))) {
 						test.log(LogStatus.FAIL, "URLValue is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
 					}
+			else
+			{
+				test.log(LogStatus.PASS, "URLValue is matching between Neon and endnote");
+			}
 			if (!(neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue")))) {
 						test.log(LogStatus.FAIL, "expectedTitleValue is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
 					}
+			else
+			{
+				test.log(LogStatus.PASS, "expectedTitleValue is matching between Neon and endnote");
+			}
 			if (!(neonValues.get("expectedNotes").equals(endNoteDetails.get("NotesValue")))) {
 						test.log(LogStatus.FAIL, "NotesValue is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
 					}
+			else
+			{
+				test.log(LogStatus.PASS, "NotesValue is matching between Neon and endnote");
+			}
 			if (!(expectedAuthor1.contains(endNoteDetails.get("InventorValue1")))) {
 						test.log(LogStatus.FAIL, "Author1Value is not matching between Neon and endnote");
 						Assert.assertEquals(true, false);
 					}
+			else
+			{
+				test.log(LogStatus.PASS, "Author1Value is matching between Neon and endnote");
+			}
 			if (!(expectedAuthor2.contains(endNoteDetails.get("InventorValue2")))) {
 				test.log(LogStatus.FAIL, "Author2Value is not matching between Neon and endnote");
 				Assert.assertEquals(true, false);
+			}
+			else
+			{
+				test.log(LogStatus.PASS, "Author2Value is matching between Neon and endnote");
 			}
 			BrowserWaits.waitTime(3);
 			deleteRecord();
