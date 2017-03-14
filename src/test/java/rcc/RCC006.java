@@ -198,7 +198,7 @@ public class RCC006 extends TestBase{
 
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017"); 
 
 			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();
