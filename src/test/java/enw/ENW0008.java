@@ -91,11 +91,12 @@ public class ENW0008 extends TestBase {
 			
 			
 
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			BrowserWaits.waitTime(2);
-			test.log(LogStatus.PASS, "User navigate to End note");
-			
-			switchToNewWindow(ob);
+			logout();
+			   
+			   ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL0008"),
+						LOGIN.getProperty("USERPASSWORD0008"));
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 			try {
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
@@ -162,6 +163,10 @@ public class ENW0008 extends TestBase {
 					test.log(LogStatus.FAIL, "label present is incorrect " + listItem);
 					Assert.assertEquals(true, false);
 				}
+				else
+				{
+					test.log(LogStatus.PASS, "label present is correct " + listItem);
+				}
 			}
 			
 
@@ -174,7 +179,10 @@ public class ENW0008 extends TestBase {
 				Assert.assertEquals(true, false);
 			}
 			
-			
+			else
+			{
+				test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+			}
 		
 			
 
