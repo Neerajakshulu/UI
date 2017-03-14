@@ -1116,6 +1116,13 @@ public enum OnePObjectMap {
 	CUSTOMER_CLICK_ASSOCIATE_BUTTON_NAME("associate"),
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
+	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[class='form-control cc-call-us-select ng-pristine ng-untouched ng-valid']"),
+	CUSTOMER_CARE_CALLUS_CTRY1_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[1]"),
+	CUSTOMER_CARE_CALLUS_CTRY2_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[2]"),
+	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
+	
+	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
+	
 	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
 	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),

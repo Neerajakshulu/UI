@@ -291,6 +291,10 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
 	}
 
+	public void clickOnFeedbackDRA() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
+	}
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(steamAccount);
@@ -498,6 +502,12 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 
 	}
+	
+	public void clickOnSupportLinkFeedback() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
+
+	}
 
 	public void clickDRAStepUpAuthLoginNotEntitledUser(ExtentTest test, String DRAUserName) throws Exception {
 		try {
@@ -556,5 +566,34 @@ public class DRAPage extends TestBase {
 		}
 
 	}
+	
+	public void validateFeedbackPageDRA(ExtentTest test) {
+		try {
+			
+			Set<String> myset = ob.getWindowHandles();
+			Iterator<String> myIT = myset.iterator();
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < myset.size(); i++) {
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(2));
+			String actual_URL = ob.getCurrentUrl();
+			String expected_URL = "https://dev-snapshot.1p.thomsonreuters.com/#/customer-care?app=dra";
+			Assert.assertTrue(actual_URL.contains(expected_URL));
+			test.log(LogStatus.PASS,
+					" user is taken to the customer care page in the seperate browser when User clicks on support link");
+			BrowserWaits.waitTime(2);
+			ob.close();
+			ob.switchTo().window(al.get(0));
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, " user is not taken to the customer care page ");
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+		}
+
+	}
+	
 
 }
