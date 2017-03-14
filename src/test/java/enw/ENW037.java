@@ -51,7 +51,7 @@ public class ENW037 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			NavigatingToENW();
+			//NavigatingToENW();
 			BrowserWaits.waitTime(3);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL037"),
@@ -71,16 +71,19 @@ public class ENW037 extends TestBase {
 			ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_ASSIGNEE_CSS.toString())).getText());
 			neonValues.put("IPC",
 					ob.findElement(By.cssSelector(OnePObjectMap.NEON_RECORDVIEW_PATENT_IPC_CURRENT_CSS.toString())).getText());
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
-			System.out.println("Asssigniee:"+ neonValues.get("expectedAbstract")+"\n"+"IPC Codes in Neon:"+neonValues.get("IPC"));
-			
+			//pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			logout();
+			BrowserWaits.waitTime(3);
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			ob.navigate().refresh();
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
 			BrowserWaits.waitTime(8);
-			test.log(LogStatus.PASS, "User navigate to End note");
-			try {
+				try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 						ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
 					}
-						pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				test.log(LogStatus.PASS, "User navigate to End note");
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
@@ -131,10 +134,12 @@ public class ENW037 extends TestBase {
 			}else{
 				test.log(LogStatus.PASS, "After exporting the record, The IPC value is displayed as Keywords in neon");			
 			}
+			
 			BrowserWaits.waitTime(3);
-			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+			NavigatingToENW();
+//			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+//			BrowserWaits.waitTime(3);
+//			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
 		closeBrowser();
 	} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -152,9 +157,9 @@ public class ENW037 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 	 private void NavigatingToENW() {
-		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		// ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
+			//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
 			BrowserWaits.waitTime(3);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);

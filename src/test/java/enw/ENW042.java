@@ -96,17 +96,21 @@ public class ENW042 extends TestBase {
 	}	
 	private void NavigateToENW() throws Exception {
 		String expected_uRL= "https://dev-stable.1p.thomsonreuters.com/#/account?app=endnote";
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
-		BrowserWaits.waitTime(2);
-		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
+		BrowserWaits.waitTime(5);
+		jsClick(ob, ob.findElement(By.xpath("//span[@class='ng-binding']")));
+//		BrowserWaits.waitTime(2);
+//		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
+//		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+//		ob.navigate().refresh();
+//		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("MarketUser42"),(LOGIN.getProperty("MarketUser42PWD")));
 		BrowserWaits.waitTime(10);
-		try {
-			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
-				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
+//				ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH);
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
 		BrowserWaits.waitTime(3);
