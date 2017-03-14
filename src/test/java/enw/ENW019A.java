@@ -23,10 +23,7 @@ public class ENW019A extends TestBase {
 
 	static int status = 1;
 
-	// Verify that Non Market test group user who signed into the community
-	// application should be able to navigate to the
-	// alternate version of EndNote through "EndNote Online" link on App
-	// switcher, When STeAM account is linked.
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -91,6 +88,7 @@ public class ENW019A extends TestBase {
 			} else {
 				test.log(LogStatus.FAIL, "Non market user support request has not been sent");
 			}
+			logout();
 		//	ob.navigate().refresh();
 			BrowserWaits.waitTime(2);
 			NavigateToENW();
@@ -113,9 +111,12 @@ public class ENW019A extends TestBase {
 
 	private void NavigateToENW() throws Exception {
 		String header_Expected = "Thomson Reuters";
-		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
-		BrowserWaits.waitTime(2);
-		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
+//		jsClick(ob, ob.findElement(By.cssSelector("i[class='wui-icon wui-icon--app']")));
+//		BrowserWaits.waitTime(2);
+//		jsClick(ob, ob.findElement(By.cssSelector("a[href='/#/bridge?app=endnote']")));
+		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		ob.navigate().refresh();
+		pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("NONMARKETUSEREMAIL"),(LOGIN.getProperty("NONMARKETUSERPASSWORD")));
 		BrowserWaits.waitTime(10);
 		try {
 			if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {

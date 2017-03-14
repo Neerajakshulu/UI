@@ -139,12 +139,12 @@
 		</classes>
 	</test>
 
-	<test name="ENW034">
+	<!--  <test name="ENW034">
 		<classes>
 			<class name="enw.ENW034"></class>
 		</classes>
 
-	</test>
+	</test>-->
 	<test name="ENW035">
 		<classes>
 			<class name="enw.ENW035"></class>
