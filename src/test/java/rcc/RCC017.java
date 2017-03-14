@@ -115,7 +115,7 @@ public class RCC017 extends TestBase {
 			}
 
 		pf.getGroupDetailsPage(ob).clickPatentstab();
-		
+		BrowserWaits.waitTime(10);
 		String recordDetals=pf.getGroupDetailsPage(ob).getRecordContent(recordTitle, recordType);
 		List<String> metrics=pf.getGroupDetailsPage(ob).getRecordMetrics(recordTitle, recordType);
 		pf.getGroupDetailsPage(ob).clickOnRecordTitle(recordTitle, recordType);
