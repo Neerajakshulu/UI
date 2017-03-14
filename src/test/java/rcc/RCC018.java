@@ -229,7 +229,7 @@ public class RCC018 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER026", "RCCTESTUSERPWD026"); 
+			loginAs("RCCTESTUSER026", "RCCTESTUSERPWD026");  
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
