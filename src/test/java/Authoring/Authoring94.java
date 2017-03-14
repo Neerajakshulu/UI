@@ -96,6 +96,7 @@ public class Authoring94 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
 			BrowserWaits.waitTime(3);
+			//ob.navigate().refresh();
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			int postCountAfter = pf.getProfilePageInstance(ob).getPostsCount();
