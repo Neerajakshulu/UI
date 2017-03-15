@@ -1047,7 +1047,7 @@ public class PostRecordViewPage extends TestBase {
 //				.sendKeys(comment);
 //		jsClick(ob, ob.findElement(
 //				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
-		
+
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
@@ -1056,6 +1056,7 @@ public class PostRecordViewPage extends TestBase {
 			innerTextBox.sendKeys(comment.charAt(i)+"");
 			Thread.sleep(100);
 			}
+		BrowserWaits.waitTime(5);
 		pf.getAuthoringInstance(ob).clickAddCommentButton();
 		Thread.sleep(100);// after entering the comments wait for submit button
 							// to get enabled or disabled
