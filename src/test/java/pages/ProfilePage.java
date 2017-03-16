@@ -14,7 +14,6 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.pdfparser.PDFParser;
-import org.apache.xerces.impl.xpath.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -614,8 +613,7 @@ public class ProfilePage extends TestBase {
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH.toString())).click();
 		BrowserWaits.waitTime(1);
 		ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH.toString())).click();
-		//String imgPath = System.getProperty("user.dir") + "\\images\\" + "myimage" + ".jpg";
-		String imgPath = "C:\\IMG.jpg";
+		String imgPath = System.getProperty("user.dir") + "\\images\\" + "myimage2" + ".jpg";
 		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imgPath);
 		BrowserWaits.waitTime(10);
 		
