@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Notifications" parallel="tests" thread-count="10">
+<!-- As per framework adjustments giving the suite name -->
+<suite name="Sanity suite" parallel="tests" thread-count="10">
 
 
 	<listeners>
