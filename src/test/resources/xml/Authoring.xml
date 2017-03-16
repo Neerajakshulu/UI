@@ -511,13 +511,14 @@
 			<class name="Authoring.Authoring79"></class>
 		</classes>
 	</test> 
-
+	
+<!--
 	<test name="Authoring83">
 		<classes>
 			<class name="Authoring.Authoring83"></class>
 		</classes>
 	</test>
-	
+-->
 	<test name="Authoring84">
 		<classes>
 			<class name="Authoring.Authoring84"></class>

@@ -329,6 +329,12 @@
 		</classes>
 	</test>
 
+	<test name="Authoring83">
+		<classes>
+			<class name="Authoring.Authoring83"></class>
+		</classes>
+	</test>
+	
    <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enwiam.ENWIAM00018"></class>
