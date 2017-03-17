@@ -51,12 +51,6 @@
 		</classes>
 	</test>
 
-	<test name="ENW000010">
-		<classes>
-			<class name="enw.ENW000010"></class>
-		</classes>
-	</test>
-
 	<test name="ENW000012">
 		<classes>
 			<class name="enw.ENW000012"></class>
@@ -357,6 +351,7 @@
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0002"></class>
 			<class name="enwiam.ENWIAM0005"></class>
+			<class name="enw.ENW000010"></class>
 		</classes>
 	</test>
 

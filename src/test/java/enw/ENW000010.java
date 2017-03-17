@@ -49,7 +49,7 @@ public class ENW000010 extends TestBase {
 
 		try {
 			try {
-				String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000010"));
+				String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
 				String statuCode2 = deleteUserAccounts(LOGIN.getProperty("UserENWsteam000010"));
 				if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 					// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -68,29 +68,17 @@ public class ENW000010 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-
-			try {
-				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-				ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
-						.sendKeys(LOGIN.getProperty("UserENWsteam000010"));
-				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-						.sendKeys(LOGIN.getProperty("PWDuserENW000010"));
-				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				
-				pf.getLoginTRInstance(ob).closeOnBoardingModal();
-
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.INFO, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
-				closeBrowser();
-			}
+            
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserENWsteam000010"),LOGIN.getProperty("PWDuserENW000010"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			
+			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+		
 
 			logout();
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserENW000010"),
-					LOGIN.getProperty("PWDuserENW000010"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserName18"),
+					LOGIN.getProperty("Password18"));
 
 
 			pf.getBrowserWaitsInstance(ob)
@@ -103,7 +91,7 @@ public class ENW000010 extends TestBase {
 			System.out.println(actualEmail);
 
 			try {
-				Assert.assertEquals(LOGIN.getProperty("UserENW000010"), actualEmail);
+				Assert.assertEquals(LOGIN.getProperty("UserName18"), actualEmail);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 			}
 
