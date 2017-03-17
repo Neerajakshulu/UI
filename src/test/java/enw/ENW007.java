@@ -133,7 +133,7 @@ public class ENW007 extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(6);
+			BrowserWaits.waitTime(8);
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 			//pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.ENW_RECORD_LINK_XPATH.toString()),30);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);

@@ -121,6 +121,7 @@ public class ENW008 extends TestBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			BrowserWaits.waitTime(4);
 			Select se=new Select(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_SORTBY_OPTIONS_ID));
 			se.selectByVisibleText("Added to Library -- newest to oldest");		
 					
