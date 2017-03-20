@@ -80,7 +80,7 @@ public class RCC009 extends TestBase {
 				throw new Exception("Sending Invitation is failed due to user1 does not exist");
 			}
 			// Inviting user3
-			boolean result1 = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE19"));
+			boolean result1 = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 
 			if (result1)
@@ -117,7 +117,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
 			test.log(LogStatus.INFO, "Invitation has been send to the Neon user3 and accepted");
@@ -196,7 +196,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER019", "RCCTESTUSERPWD019");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			
@@ -229,7 +229,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017"); 
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			

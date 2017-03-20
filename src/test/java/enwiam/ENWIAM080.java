@@ -114,13 +114,13 @@ public class ENWIAM080 extends TestBase {
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				String firstAccountProfileNameSteam1 = pf.getLinkingModalsInstance(ob).getProfileName();
 				test.log(LogStatus.INFO, "Steam account profile name: " + firstAccountProfileNameSteam1);
-				pf.getHFPageInstance(ob).clickProfileImage();
+/*				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
 				String accountType1 = "Neon";
 
-				validateAccounts(1, accountType1);
-				waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString()), 30);
-				ob.findElement(By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString())).click();
+				validateAccounts(1, accountType1);*/
+			//	waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString()), 30);
+			//	ob.findElement(By.xpath(OnePObjectMap.NEON_PROFILE_HEADER_XPATH.toString())).click();
 				for (int j = 1; j <= 1; j++) {
 					logger.info("Creating " + j + " Watchlist");
 					pf.getLinkingModalsInstance(ob).toMakeAccountNeonActive();

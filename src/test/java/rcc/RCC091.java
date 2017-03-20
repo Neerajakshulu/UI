@@ -87,6 +87,7 @@ public class RCC091 extends TestBase {
 				test.log(LogStatus.FAIL, "user is not able to update cover photo");
 				e.printStackTrace();
 			}
+			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			pf.getLoginTRInstance(ob).logOutApp();

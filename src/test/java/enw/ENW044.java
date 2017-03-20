@@ -47,7 +47,7 @@ public class ENW044 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			NavigatingToENW();
+			//NavigatingToENW();
 			BrowserWaits.waitTime(8);
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
@@ -65,8 +65,12 @@ public class ENW044 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_NAME_XPATH.toString())).getText());
 			neonValues.put("expectedAbstract",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_POST_ABSTRACT_XPATH.toString())).getText());
-			BrowserWaits.waitTime(5);
-			pf.getHFPageInstance(ob).clickOnEndNoteLink();
+			logout();
+			BrowserWaits.waitTime(3);
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			ob.navigate().refresh();
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
+			BrowserWaits.waitTime(8);
 			test.log(LogStatus.PASS, "User navigate to End note");
 			BrowserWaits.waitTime(5);
 			try {
@@ -124,6 +128,7 @@ public class ENW044 extends TestBase {
 			test.log(LogStatus.PASS, "Abstract content is matching between Neon and endnote and both are same after exporting the data");
 					}
 		 //deleteRecord();
+			NavigatingToENW();
 			closeBrowser();
 	} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -141,29 +146,27 @@ public class ENW044 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 	 private void NavigatingToENW() {
-		 ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		 try {
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL044"),(LOGIN.getProperty("USERPASSWORD044")));
-			BrowserWaits.waitTime(3);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-			BrowserWaits.waitTime(5);
-			if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
-			{
-				ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
-			}			
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
-			HandleAlert();
-			BrowserWaits.waitTime(4);
-			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
+				BrowserWaits.waitTime(3);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				BrowserWaits.waitTime(5);
+				if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
+				{
+					ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
+				}			
+				BrowserWaits.waitTime(2);
+				ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
+				HandleAlert();
+				BrowserWaits.waitTime(4);
+				jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
+				BrowserWaits.waitTime(3);
+				ob.findElement(By.xpath(OnePObjectMap.ENW_FB_PROFILE_FLYOUT_SIGNOUT_XPATH.toString())).click();
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 	}
 	private void HandleAlert() {

@@ -199,14 +199,14 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
 		logger.info("post -->" + post + "post title-->" + postTitle);
 		Assert.assertEquals(post, postTitle);
-		String postRVProfileTitle = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
+		BrowserWaits.waitTime(5);
+		String postRVProfileTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
 		logger.info("Post RV title-->" + postRVProfileTitle);
 		logger.info("Profile info-->" + profileInfo);
 
 		String profileData = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
-
+		
 		logger.info("Profile metadata-->" + profileData);
 		if (!(/* profileInfo.contains(profileData) && */ profileInfo.contains(postRVProfileTitle))) {
 			throw new Exception("Profile info mismatching in Record view page of a Post");
@@ -1047,7 +1047,7 @@ public class PostRecordViewPage extends TestBase {
 //				.sendKeys(comment);
 //		jsClick(ob, ob.findElement(
 //				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_ADD_COMMENT_BUTTON_CSS.toString())));
-		
+
 		WebElement commentArea = ob.findElement(By.xpath("//textarea[@placeholder='Join the discussion']"));
 		commentArea.click();
 		WebElement innerTextBox = ob.findElement(By.xpath("//div[@class='fr-element fr-view']"));
@@ -1056,6 +1056,7 @@ public class PostRecordViewPage extends TestBase {
 			innerTextBox.sendKeys(comment.charAt(i)+"");
 			Thread.sleep(100);
 			}
+		BrowserWaits.waitTime(5);
 		pf.getAuthoringInstance(ob).clickAddCommentButton();
 		Thread.sleep(100);// after entering the comments wait for submit button
 							// to get enabled or disabled

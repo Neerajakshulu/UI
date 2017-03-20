@@ -198,6 +198,7 @@ public class DRAIAM001 extends TestBase {
 			}
 			
 			// Verifying the Learn more link is displaying
+			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_LEARNMORE_LINK_CSS);
 				WebElement lm_element = pf.getBrowserActionInstance(ob)
@@ -217,7 +218,7 @@ public class DRAIAM001 extends TestBase {
 					
 					ob.switchTo().window(al.get(1));
 					String actual_URL = ob.getCurrentUrl();
-					String expected_URL = "http://ip-science.interest.thomsonreuters.com/TargetDruggabilityEAP";
+					String expected_URL = "http://clarivate.com/life-sciences/discovery-and-preclinical-research/drug-research-advisor/";
 					Assert.assertTrue(actual_URL.contains(expected_URL));
 					test.log(LogStatus.PASS,
 							"user is taken to the TargetDruggability page");

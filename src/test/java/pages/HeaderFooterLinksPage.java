@@ -38,7 +38,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			if (headerFooterLinks[i].equalsIgnoreCase("Privacy")) {
 				
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PRIVACY_STATEMENT_LINK);
-				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "July 2016 (version 1.1)");
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "Last updated");
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String psText = ob.findElement(By.tagName("h2")).getText();
 				logger.info("ps text-->"+psText);
@@ -50,7 +50,7 @@ public class HeaderFooterLinksPage extends TestBase {
 			else if (headerFooterLinks[i].equalsIgnoreCase("Terms of Use")){ 
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TERMS_OF_USE_LINK);
 				pf.getBrowserWaitsInstance(ob).waitUntilText(
-						"These Terms of Use shall govern your use of the online service known as","July 2016 (version 1.1)");
+						"These Terms of Use shall govern your use of the online service known as","Last updated");
 				
 				pf.getBrowserWaitsInstance(ob).waitUntilText(headerFooterLinks[i]);
 				String tcText = ob.findElement(By.tagName("h2")).getText();

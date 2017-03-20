@@ -165,7 +165,7 @@ public class RCC006 extends TestBase{
 				test.log(LogStatus.FAIL, "Shared Group is displayed");
 			}*/
 
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE25"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE17"));
 			if (result) {
 				test.log(LogStatus.PASS, "User Invited sucessfully");
 			} else {
@@ -198,7 +198,7 @@ public class RCC006 extends TestBase{
 
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
+			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017"); 
 
 			BrowserWaits.waitTime(2);
 			pf.getGroupsPage(ob).clickOnGroupsTab();

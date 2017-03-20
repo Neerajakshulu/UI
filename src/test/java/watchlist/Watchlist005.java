@@ -79,14 +79,14 @@ public class Watchlist005 extends TestBase {
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
 			BrowserWaits.waitTime(4);
 		//	pf.getHFPageInstance(ob).searchForText("hello");
-			pf.getHFPageInstance(ob).searchForText("Technology");
-			BrowserWaits.waitTime(2);
+			pf.getHFPageInstance(ob).searchForText("Green Chemistry");
+			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 60);
 			// Navigating to record view page
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 
-			BrowserWaits.waitTime(5);
+			BrowserWaits.waitTime(6);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_watchlist_button")), 30);
 			// Watching the article to a particular watch list
 			WebElement watchButton = ob.findElement(By.xpath(OR.getProperty("document_watchlist_button")));

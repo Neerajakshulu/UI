@@ -51,12 +51,6 @@
 		</classes>
 	</test>
 
-	<test name="ENW000010">
-		<classes>
-			<class name="enw.ENW000010"></class>
-		</classes>
-	</test>
-
 	<test name="ENW000012">
 		<classes>
 			<class name="enw.ENW000012"></class>
@@ -139,12 +133,12 @@
 		</classes>
 	</test>
 
-	<test name="ENW034">
+	<!--  <test name="ENW034">
 		<classes>
 			<class name="enw.ENW034"></class>
 		</classes>
 
-	</test>
+	</test>-->
 	<test name="ENW035">
 		<classes>
 			<class name="enw.ENW035"></class>
@@ -329,6 +323,12 @@
 		</classes>
 	</test>
 
+	<test name="Authoring83">
+		<classes>
+			<class name="Authoring.Authoring83"></class>
+		</classes>
+	</test>
+	
    <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
 			<class name="enwiam.ENWIAM00018"></class>
@@ -351,6 +351,7 @@
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0002"></class>
 			<class name="enwiam.ENWIAM0005"></class>
+			<class name="enw.ENW000010"></class>
 		</classes>
 	</test>
 
@@ -530,7 +531,29 @@
 		</classes>
 	</test>
 
+	<test name="Authoring80">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring80"></class>
+		</classes>
+	</test>
 
+	<test name="Authoring81">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring81"></class>
+		</classes>
+	</test>
+
+	<test name="Authoring82">
+		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
+		<parameter name="gpassword" value="likhithreddy@123" />
+		<classes>
+			<class name="Authoring.Authoring82"></class>
+		</classes>
+	</test>
 
 	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>

@@ -135,7 +135,7 @@ public class IAM013 extends TestBase {
 			}
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			BrowserWaits.waitTime(2);
-			WebElement myE = ob.findElement(By.linkText(OR.getProperty("reg_PricayStatement_link")));
+			WebElement myE = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
 			myE.click();
 
 			BrowserWaits.waitTime(3);

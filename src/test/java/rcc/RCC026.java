@@ -62,7 +62,7 @@ public class RCC026 extends TestBase {
 			pf.getGroupsListPage(ob).createGroup(groupTitle);		
 			pf.getHFPageInstance(ob).clickOnHomeLink();
 			waitForPageLoad(ob);
-			pf.getHFPageInstance(ob).searchForText("network biology");
+			pf.getHFPageInstance(ob).searchForText("network traffic");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			String articleTitle=pf.getSearchResultsPageInstance(ob).getArticleTitle();
 			pf.getSearchResultsPageInstance(ob).addDocumentToGroup(groupTitle);
