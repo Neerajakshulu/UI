@@ -440,7 +440,7 @@ public enum OnePObjectMap {
 	//RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_CSS("div[class='ne-comment-list__comment-content'] div[id^='taTextElement']"),
 	RECORD_VIEW_PAGE_COMMENTS_EDIT_TEXTBOX_XPATH("div[@class='fr-box fr-basic fr-bottom']/descendant::div[@class='fr-element fr-view']"),
 	
-	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("button[class='wui-icon-btn ng-isolate-scope']"),
+	RECORD_VIEW_PAGE_SENDTOENDNOTE_BUTTON_CSS("div[class='ne-publication-sidebar__actions'] div button[class='wui-icon-btn ng-isolate-scope']"),
 	RECORD_VIEW_PAGE_SENDTOENDNOTE_TOASTNOTIFICATION_XPATH("//div[@class='message ng-binding']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_PUBLICATION_CSS("div[class='ne-publication__header'] div[class='wui-descriptor']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_SOURCE_CSS("div[class='ne-publication__header'] div[class*='wui-descriptor--uppercase']"),
@@ -932,6 +932,7 @@ public enum OnePObjectMap {
 	NEON_IPA_CHART_CSS("svg[class='nvd3-svg']"),
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. Ford Motor Co)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
+	NEON_IPA_NONSELECTED_TABS_CSS("li[class='ipa-content-tabs__list-item ng-scope']"),
 
 	IPA_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
@@ -982,9 +983,9 @@ public enum OnePObjectMap {
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='login-button-container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
-	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style='color:#FF9100;']"),
-	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style='color:#B1CD43;']"),
-	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style='color:#621F95;']"),
+	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style*='color:#FF9100;']"),
+	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style*='color:#B1CD43;']"),
+	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style*='color:#621F95;']"),
 
 	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
 	NEON_IPA_SEARCH_TERMS_LABEL_NEW_CSS("span[ng-repeat='item in vm.clipboard.getDisplayDb(vm.type) | limitTo: 4 track by $index']>div>button>div"),
@@ -1002,7 +1003,7 @@ public enum OnePObjectMap {
 	NEON_IPA_TECH_SHOW_ALL_LINK_CSS("button[class*='typeahead-results__showall']"),
 	IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS("button[id='sort-sse-items']"),
 	IPA_SAVED_DATA_PAGE_SORT_MENU_CSS("ul[class='dropdown-menu sse-dropdown__menu'] li"),
-	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class='wui-content-title ng-binding']"),
+	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class^='wui-content-title']"),
 	NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS("div[class='typeahead-results-list__item']"),
 	NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS("ul[class='ipa-content-tabs']>li:nth-of-type(4)"),
 	NEON_IPA_TECH_SUG_LIST_CSS("li[index='$index']"),
