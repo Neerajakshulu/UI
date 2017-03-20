@@ -2075,7 +2075,7 @@ public class ProfilePage extends TestBase {
 					for(String winHan : windows){
 						ob.switchTo().window(winHan);
 					}
-					pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies", "July 2016 (version 1.1)");
+					pf.getBrowserWaitsInstance(ob).waitUntilText("Scope", "Highlights", "Full Privacy Statement","Cookies","Last updated:");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String psText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("ps text-->"+psText);
@@ -2098,7 +2098,7 @@ public class ProfilePage extends TestBase {
 						ob.switchTo().window(winHan);
 					}
 					pf.getBrowserWaitsInstance(ob).waitUntilText(
-							"These Terms of Use shall govern your use of the online service known as","July 2016 (version 1.1)");
+							"These Terms of Use shall govern your use of the online service known as","Last updated:");
 					pf.getBrowserWaitsInstance(ob).waitUntilText(flyoutLinks[i]);
 					String tcText = ob.findElement(By.tagName("h2")).getText();
 					logger.info("Terms of Use text-->"+tcText);
