@@ -82,6 +82,7 @@ public class IPA01 extends TestBase {
 			closeBrowser();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			logFailureDetails(test, "User is not able to save data", "Screenshot for login");
 			closeBrowser();
 		}

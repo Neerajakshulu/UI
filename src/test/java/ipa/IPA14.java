@@ -89,6 +89,7 @@ import util.ExtentManager;
 				test.log(LogStatus.PASS,
 						"full content of record is displayed in same window  when user selects a record from ResultList from Technology");
 				} catch (Exception e) {
+					e.printStackTrace();
 					logFailureDetails(test,
 							"full content of record is not displayed in same window  when user selects a record from ResultList from Technology",
 							"Failed_Screenshot1");

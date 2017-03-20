@@ -74,7 +74,7 @@ public class IpaSavedSearchDetailsPage extends TestBase {
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TITLE_CSS.toString())).getText();
 		String stype = record.findElement(
 				By.cssSelector(OnePObjectMap.NEON_IPA_SAVED_DATA_PAGE_SEARCH_TERM_TYPE_CSS.toString())).getText();
-		if (title.equalsIgnoreCase(stitle) && stype.equalsIgnoreCase(type))
+		if (title.equalsIgnoreCase(stitle) && stype.equalsIgnoreCase("TECHNOLOGY SEARCH"))
 			return true;
 		else
 			return false;
