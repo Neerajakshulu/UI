@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -68,7 +69,7 @@ public class Authoring18 extends TestBase {
 			pf.getAuthoringInstance(ob).chooseArticle();
 			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
 			//Commented by KR
-			//BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(10);
 			waitForAllElementsToBePresent(ob,
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
 			List<WebElement> commentsList = ob

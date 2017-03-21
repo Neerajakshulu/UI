@@ -932,6 +932,7 @@ public enum OnePObjectMap {
 	NEON_IPA_CHART_CSS("svg[class='nvd3-svg']"),
 	NEON_IPA_COMPANYWATERMARK_CSS("Enter a company you're interested in (eg. Ford Motor Co)"),
 	NEON_IPA_COMPANYCLIPBOARD_CSS("li[ng-repeat='item in vm.items track by \\$index'][class='search-term__item ng-scope']"),
+	NEON_IPA_NONSELECTED_TABS_CSS("li[class='ipa-content-tabs__list-item ng-scope']"),
 
 	IPA_BRANDING_NAME_CSS("h3[class='wui-title login-header__app-name ng-binding']"),
 	IPA_LOGO_CSS("h4[class='wui-title login-header__app-name ng-binding']"),
@@ -1002,7 +1003,7 @@ public enum OnePObjectMap {
 	NEON_IPA_TECH_SHOW_ALL_LINK_CSS("button[class*='typeahead-results__showall']"),
 	IPA_SAVED_DATA_PAGE_SORT_BUTTON_CSS("button[id='sort-sse-items']"),
 	IPA_SAVED_DATA_PAGE_SORT_MENU_CSS("ul[class='dropdown-menu sse-dropdown__menu'] li"),
-	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class='wui-content-title ng-binding']"),
+	IPA_RECORD_VIEW_PAGE_PATENT_TITLE_CSS("h2[class^='wui-content-title']"),
 	NEON_IPA_COMPANY_TYPE_AHAED_LABEL_CSS("div[class='typeahead-results-list__item']"),
 	NEON_IPA_DASH_BOARD_PATENT_FOUND_ICON_CSS("ul[class='ipa-content-tabs']>li:nth-of-type(4)"),
 	NEON_IPA_TECH_SUG_LIST_CSS("li[index='$index']"),
