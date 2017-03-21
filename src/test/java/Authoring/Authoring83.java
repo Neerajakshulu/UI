@@ -79,8 +79,8 @@ public class Authoring83 extends TestBase {
 			BrowserWaits.waitTime(time);
 			pf.getProfilePageInstance(ob).clickOnPostPublishButton();
 			waitForAjax(ob);
-			ob.navigate().back();
-			ob.navigate().back();
+			//ob.navigate().back();
+			//ob.navigate().back();
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			waitForAjax(ob);
 			try {
