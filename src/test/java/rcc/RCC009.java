@@ -71,7 +71,7 @@ public class RCC009 extends TestBase {
 			BrowserWaits.waitTime(30);
 
 			// Inviting user2
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE20"));
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the Neon user1");
@@ -97,7 +97,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			try {
 				pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
@@ -144,7 +144,7 @@ public class RCC009 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER018", "RCCTESTUSERPWD018");
+			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
@@ -257,7 +257,7 @@ public class RCC009 extends TestBase {
 			
 			
 			try {
-				Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE18")));
+				Assert.assertFalse(pf.getGroupDetailsPage(ob).checkMemberInList(LOGIN.getProperty("RCCPROFILE20")));
 				test.log(LogStatus.PASS,
 						"Member is not available in the members tab after leaving the group");
 			} catch (Throwable t) {
