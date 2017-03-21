@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserAction;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
@@ -82,10 +83,13 @@ public class Authoring88 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnPostCancelButton();
 			pf.getProfilePageInstance(ob).clickOnPostCancelKeepDraftButton();
 			test.log(LogStatus.INFO, "Saved the Post as a draft");
-			ob.navigate().refresh();
+			BrowserWaits.waitTime(3);
+			//ob.navigate().refresh();
 			waitForPageLoad(ob);
+			
 			int postCountAfter = pf.getProfilePageInstance(ob).getDraftPostsCount();
 			test.log(LogStatus.INFO, "Post count:" + postCountAfter);
+			scrollingToElementofAPage();
 			pf.getProfilePageInstance(ob).clickOnDraftPostsTab();
 			String postTitle = ob
 					.findElement(By
