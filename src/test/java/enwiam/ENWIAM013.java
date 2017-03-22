@@ -782,7 +782,7 @@ public class ENWIAM013 extends TestBase {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
 				test.log(LogStatus.SKIP,
-						"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+						"Skipping test case " + this.getClass().getSimpleName() + " User Not created, hence skiping this test case");
 				extent.endTest(test);
 			}
 			
