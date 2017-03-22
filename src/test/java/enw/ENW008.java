@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -69,7 +70,7 @@ public class ENW008 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD008"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getAuthoringInstance(ob).searchArticle("Baseball technologies");
 			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			BrowserWaits.waitTime(8);
@@ -91,7 +92,7 @@ public class ENW008 extends TestBase {
 		   neonValues.put("expectedNotes", "Cited Patents:" + expectedNotes1 + " Cited Articles:" + expectedNotes2);
 		  
 		   String expectedAuthor1=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText();
-		   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
+		//   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
 			
 			logout();
 			BrowserWaits.waitTime(4);
@@ -109,12 +110,14 @@ public class ENW008 extends TestBase {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-				BrowserWaits.waitTime(4);
+				
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
-			BrowserWaits.waitTime(5);
+//			JavascriptExecutor jse = (JavascriptExecutor)ob;
+//			jse.executeScript("window.scrollBy(0,250)", "");
+			BrowserWaits.waitTime(10);
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("ReferenceType",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH.toString())).getText());
@@ -130,8 +133,8 @@ public class ENW008 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_INVENTOR_XPATH.toString())).getText());
 			endNoteDetails.put("InventorValue1",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS.toString())).getText());
-			endNoteDetails.put("InventorValue2",
-					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
+//			endNoteDetails.put("InventorValue2",
+//					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("Assignee",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ASSIGNEE_XPATH.toString())).getText());
 			endNoteDetails.put("Title",
@@ -205,14 +208,14 @@ public class ENW008 extends TestBase {
 			{
 				test.log(LogStatus.PASS, "Author1Value is matching between Neon and endnote");
 			}
-			if (!(expectedAuthor2.contains(endNoteDetails.get("InventorValue2")))) {
-				test.log(LogStatus.FAIL, "Author2Value is not matching between Neon and endnote");
-				Assert.assertEquals(true, false);
-			}
-			else
-			{
-				test.log(LogStatus.PASS, "Author2Value is matching between Neon and endnote");
-			}
+//			if (!(expectedAuthor2.contains(endNoteDetails.get("InventorValue2")))) {
+//				test.log(LogStatus.FAIL, "Author2Value is not matching between Neon and endnote");
+//				Assert.assertEquals(true, false);
+//			}
+//			else
+//			{
+//				test.log(LogStatus.PASS, "Author2Value is matching between Neon and endnote");
+//			}
 			BrowserWaits.waitTime(3);
 			NavigatingToENW();
 			closeBrowser();

@@ -12,6 +12,27 @@
 		</classes>
 	</test>
 	
+	<test name="DRAIAM070">
+		<classes>
+			<class name="draiam.DRAIAM070"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM071">
+		<classes>
+			<class name="draiam.DRAIAM071"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM072">
+		<classes>
+			<class name="draiam.DRAIAM072"></class>
+		</classes>
+	</test>
+	<test name="DRAIAM073">
+		<classes>
+			<class name="draiam.DRAIAM073"></class>
+		</classes>
+	</test>
+	
 	<!-- <test name="DRAIAM002">
 		<classes>
 			<class name="draiam.DRAIAM002"></class>
