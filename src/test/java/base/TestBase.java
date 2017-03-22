@@ -95,6 +95,7 @@ public class TestBase {
 	public static Xls_Reader draiamxls = null;
 	public static Xls_Reader ipaxls = null;
 	public static Xls_Reader ipaiamxls = null;
+	public static Xls_Reader customercarexls = null;
 	public static boolean isInitalized = false;
 
 	public WebDriver ob = null;
@@ -172,6 +173,9 @@ public class TestBase {
 					}
 				} else if (className.contains("IAM")) {
 					suiteName = "IAM";
+				}
+				else if (className.contains("CC")) {
+					suiteName = "customercare";
 				}
 			}
 		}
@@ -266,6 +270,7 @@ public class TestBase {
 			draiamxls = new Xls_Reader("src/test/resources/xls/DRAIAM.xlsx");
 			ipaxls = new Xls_Reader("src/test/resources/xls/IPA.xlsx");
 			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
+			customercarexls = new Xls_Reader("src/test/resources/xls/customercare.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -295,6 +300,8 @@ public class TestBase {
 			loadModuleData(ipaxls.path);
 		}else if (suiteName.equals("IPAIAM")) {
 			loadModuleData(ipaiamxls.path);
+		}else if (suiteName.equals("customercare")) {
+			loadModuleData(customercarexls.path);
 		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);  
 			loadModuleData(searchxls.path);
@@ -308,6 +315,7 @@ public class TestBase {
 			loadModuleData(draiamxls.path);
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
+			loadModuleData(customercarexls.path);
 		} else if(suiteName.equals("LocalRun")){
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
@@ -319,6 +327,7 @@ public class TestBase {
 			loadModuleData(draiamxls.path);
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
+			loadModuleData(customercarexls.path);
 		}
 		
 		logger.info(suiteName + "---" + testcase.size());

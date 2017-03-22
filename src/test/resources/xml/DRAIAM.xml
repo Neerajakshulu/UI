@@ -12,26 +12,6 @@
 		</classes>
 	</test>
 	
-	<test name="DRAIAM070">
-		<classes>
-			<class name="draiam.DRAIAM070"></class>
-		</classes>
-	</test>
-	<test name="DRAIAM071">
-		<classes>
-			<class name="draiam.DRAIAM071"></class>
-		</classes>
-	</test>
-	<test name="DRAIAM072">
-		<classes>
-			<class name="draiam.DRAIAM072"></class>
-		</classes>
-	</test>
-	<test name="DRAIAM073">
-		<classes>
-			<class name="draiam.DRAIAM073"></class>
-		</classes>
-	</test>
 	
 	<!-- <test name="DRAIAM002">
 		<classes>
@@ -160,28 +140,7 @@
 			<class name="draiam.DRAIAM054"></class>
 		</classes>
 	</test> -->
-	 <test name="DRAIAMCC001">
-		<classes>
-			<class name="draiam.DRAIAMCC001"></class>
-		</classes>
-	</test>
-	<test name="DRAIAMCC002">
-		<classes>
-			<class name="draiam.DRAIAMCC002"></class>
-		</classes>
-	</test>
 	
-	<test name="DRAIAMCC003" preserve-order="true" parallel="false">
-		<classes>
-			<class name="draiam.DRAIAMCC003"></class>
-		</classes>
-	</test>
-	
-	<test name="DRAIAMCC004">
-		<classes>
-			<class name="draiam.DRAIAMCC004"></class>
-		</classes>
-	</test>
 	
 	<test name="DRA_Profile_Flyout_links_Validation">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />

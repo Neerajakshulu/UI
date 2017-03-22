@@ -33,26 +33,7 @@
 			<class name="ipaiam.IPAIAM051"></class>
 		</classes>
 	</test>
-	<test name="IPAIAMCC001">
-		<classes>
-			<class name="ipaiam.IPAIAMCC001"></class>
-		</classes>
-	</test>
-	<test name="IPAIAMCC002">
-		<classes>
-			<class name="ipaiam.IPAIAMCC002"></class>
-		</classes>
-	</test>
-	<test name="IPAIAMCC003">
-		<classes>
-			<class name="ipaiam.IPAIAMCC003"></class>
-		</classes>
-	</test>
-   <test name="IPAIAMCC004">
-		<classes>
-			<class name="ipaiam.IPAIAMCC004"></class>
-		</classes>
-	</test>
+	
     <!-- <test name="IPA052"> <classes> <class name="ipaiam.IPAIAM052"></class> 
 		</classes> </test> <test name="IPA053"> <classes> <class name="ipaiam.IPAIAM053"></class> 
 		</classes> </test> <test name="IPA054"> <classes> <class name="ipaiam.IPAIAM054"></class> 

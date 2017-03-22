@@ -16,5 +16,6 @@
 		<suite-file path="./DRAIAM.xml" />
 		<suite-file path="./IPA.xml" />
 		<suite-file path="./IPAIAM.xml" />
+		<suite-file path="./customercare.xml" />
 	</suite-files>
 </suite>

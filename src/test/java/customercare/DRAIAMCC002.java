@@ -1,9 +1,9 @@
-package draiam;
+
+package customercare;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -13,12 +13,11 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRAIAM070 extends TestBase {
+public class DRAIAMCC002 extends TestBase {
 
 	static int count = -1;
 
@@ -50,7 +49,7 @@ public class DRAIAM070 extends TestBase {
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseDRA70() throws Exception {
+	public void testcaseIPA1() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -63,46 +62,38 @@ public class DRAIAM070 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
+
 		try {
 
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRACCUrl"));
-
+			String Email = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_EMAIL_CSS).getText();
 			try {
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
-				WebElement callus_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
-				WebElement region_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
-				WebElement hrs_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
-				WebElement language_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
-
-				String hours_of_operation = hrs_element.getText();
-				String lang = language_element.getText();
-
-				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
-						&& language_element.isDisplayed())
-					Assert.assertEquals(lang, "English");
-				Assert.assertTrue(hours_of_operation.contains("GMT-5"));
-
-				test.log(LogStatus.PASS,
-						"DRA Customer care page displays Call us section and customer care contact details");
-
+				if (Email.equals("")) {
+					Assert.assertTrue(pf.getIpaPage(ob).validateCustomerCareEmailErrorMessage());
+					test.log(LogStatus.PASS,
+							"Error message 'Incorrect email address format. Please try again' is displayed when user enters incorrect email address.");
+				}
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"DRA Customer care page doesn't display Call us section and customer care contact details");
-			}
-			BrowserWaits.waitTime(2);
-			closeBrowser();
+						"Error message 'Incorrect email address format. Please try again' is not displayed when user enters incorrect email address.");
 
+			}
+			try {
+				if (Email.equals("")) {
+					Assert.assertTrue(pf.getIpaPage(ob).validateCustomerCareNumberErrorMessage());
+					test.log(LogStatus.PASS,
+							"Error message 'Invalid format. Only numbers (minimum 7 digits), spaces, and special characters '+ ( ) -' allowed' is displayed when user enters incorrect phone number");
+				}
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"Error message 'Invalid format. Only numbers (minimum 7 digits), spaces, and special characters '+ ( ) -' allowed' is not displayed when user enters incorrect phone number");
+				closeBrowser();
+
+			}
+			closeBrowser();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
 			// reports
@@ -125,5 +116,4 @@ public class DRAIAM070 extends TestBase {
 		extent.endTest(test);
 
 	}
-
 }
