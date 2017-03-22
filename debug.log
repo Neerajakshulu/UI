@@ -183,3 +183,8 @@
 [1020/193143:ERROR:crash_report_database_win.cc(460)] failed to truncate: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
 [1206/132017:ERROR:file_io_win.cc(227)] SetEndOfFile: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
 [1206/132023:ERROR:file_io_win.cc(227)] SetEndOfFile: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
+[0322/153521.985:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0322/170504.008:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0322/173123.153:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0322/173331.558:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0322/174559.232:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)

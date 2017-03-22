@@ -29,6 +29,7 @@ public class ENW037 extends TestBase {
 	// 2--->FAIL
 	// 3--->SKIP
 	// Checking whether this test case should be skipped or not
+	//Verify that field "Patent Assignee" in Neon should be displayed as "Assignee" label in Endnote after exporting the patent from Neon to ENW.
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -58,7 +59,7 @@ public class ENW037 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD037"));
 			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle("Portable calendaring device having perceptual agent managing calendar entries");
+			pf.getAuthoringInstance(ob).searchArticle("Baseball technologies");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			BrowserWaits.waitTime(8);
 			pf.getAuthoringInstance(ob).chooseArticle();
