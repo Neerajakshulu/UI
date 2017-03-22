@@ -147,6 +147,7 @@ public class RCC009 extends TestBase {
 			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
+			BrowserWaits.waitTime(10);
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 			pf.getGroupDetailsPage(ob).clickonLeaveGroupButton();
 			test.log(LogStatus.INFO, "Clicked on leave group button Pop Up opened");
@@ -201,7 +202,7 @@ public class RCC009 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			
 			try {
-				Assert.assertTrue(pf.getGroupsListPage(ob).verifyMembersCount(1,groupTitle));
+				Assert.assertTrue(pf.getGroupsListPage(ob).verifyMembersCount(1,groupTitle)); 
 				test.log(LogStatus.PASS,
 						"Members count is updated correctly in group list page in member view");
 			} catch (Throwable t) {
