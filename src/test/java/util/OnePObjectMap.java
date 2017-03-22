@@ -953,6 +953,9 @@ public enum OnePObjectMap {
 	IPA_APP_SWITCHER_LINK_CSS("a[class='ne-app-switcher-flyout__link ne-app-switcher-flyout__link--ipa']"),
 	IPA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-scope']"),
 	IPA_PROFILE_FLYOUT_IMAGE_CSS("a[class='wui-profile-flyout--trigger wui-circle']"),
+	NEON_IPA_VISUALIZATION_PIN_CSS("i[class='fa pin__icon fa-thumb-tack']"),
+	NEON_IPA_SELECTED_TABS_CSS("li[class='ipa-content-tabs__list-item ng-scope ipa-content-tabs__list-item--active']"),
+	NEON_IPA_DISPLAYED_GRAPHS_CSS("div[ng-repeat='pin in Dashboard.pins.getPins()']"),
 
 	IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS("button[class='wui-modal__close-btn']"),
 	NEON_PROJECTNEON_APP_SWITCHER_CSS("a[class='wui-app-switcher__link wui-app-switcher__link--neon']"),

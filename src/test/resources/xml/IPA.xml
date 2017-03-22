@@ -157,4 +157,16 @@
 		</classes>
 	</test>
 	
+	<test name="IPA22">
+		<classes>
+			<class name="ipa.IPA22"></class>
+		</classes>
+	</test>	
+	
+	<test name="IPA23">
+		<classes>
+			<class name="ipa.IPA23"></class>
+		</classes>
+	</test>	
+	
 </suite>	
