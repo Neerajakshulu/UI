@@ -300,7 +300,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_COUNT_XPATH("//div[contains(@class,'post-stat')]/descendant::div[contains(@class,'doc-info')][2]/span[contains(@class,'stat-count')][1]"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_LIKE_XPATH("//div[@class='ne-publication-sidebar__metrics']/button/i"),
 	HOME_PROJECT_NEON_PROFILE_POST_LIKE_CSS("span[class='wui-icon-metric__value ng-binding']"),
-	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[@date='post.keydate']/span"),
+	HOME_PROJECT_NEON_PROFILE_POST_TIMESTAMP_XPATH("//wui-timestamp[contains(@date,'post.keydate')]/span"),
 	HOME_PROJECT_NEON_PROFILE_SUMMARY_CSS("div[ng-hide='vm.shouldShowSummaryInput()'] p"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_TITLE_CSS("a[ng-click^='vm.titleClicked']"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_FIRST_EDIT_CSS("div[class*='wui-card__footer-content'] a"),
@@ -319,6 +319,8 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH("//a[@class='fr-floating-btn']"),
 	HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH("//i[@class='fa fa-image']"),
 	HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH("//img[contains(@class,'fr-fic fr-dii')]"),
+	
+	//wui-timestamp[contains(@date,'post.keydate'])/span
 	HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH("//span[text()='This post has been removed by the member.']"),
 	
 	
