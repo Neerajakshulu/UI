@@ -48,7 +48,7 @@ public class ENW000012 extends TestBase {
 
 		try {
 
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserENW000012"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENW000012"));
 			logger.info("User Status : " + statuCode);
 			if (statuCode.equalsIgnoreCase("200")) {
 				logger.info("User Deleted Successfully");
@@ -85,8 +85,8 @@ public class ENW000012 extends TestBase {
 
 			logout();
 
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("UserENW000012"),
-					LOGIN.getProperty("PWDuserENW000012"));
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("UserFBENW000012"),
+					LOGIN.getProperty("PWDUserFBENW00029"));
 
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
@@ -97,7 +97,7 @@ public class ENW000012 extends TestBase {
 			System.out.println(actualEmail);
 
 			try {
-				Assert.assertEquals(LOGIN.getProperty("UserENW000012"), actualEmail);
+				Assert.assertEquals(LOGIN.getProperty("UserFBENW000012"), actualEmail);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");
 			}
 

@@ -68,7 +68,7 @@ public class ENW007 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD007"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle("Ligand restricted conformational shuttle: A King-Altman kinetics model for nitric oxide synthase reductase catalysis and control");
+			pf.getAuthoringInstance(ob).searchArticle("Vitrification of organics-containing wastes");
 
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getAuthoringInstance(ob).chooseArticle();
@@ -101,7 +101,6 @@ public class ENW007 extends TestBase {
 			neonValues.put("expectedAuthor2",
 					ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText());
 			logout();
-
 			BrowserWaits.waitTime(4);
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
@@ -126,23 +125,20 @@ public class ENW007 extends TestBase {
 			endNoteDetails.put("ReferenceType",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH.toString())).getText());
 			endNoteDetails.put("ReferenceTypeValue",
-					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_VALUE_XPATH.toString())).getText());
-			endNoteDetails.put("URL",
-					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_XPATH.toString())).getText());
-			endNoteDetails.put("URLValue",
-					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_VALUE_XPATH.toString())).getText());
+				ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_XPATH.toString())).getText());
 			endNoteDetails.put("Author",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
 			endNoteDetails.put("AuthorValue1",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR1_VALUE_CSS.toString())).getText());
-			endNoteDetails.put("AuthorValue2",
-					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
+//			endNoteDetails.put("AuthorValue2",
+//					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR2_VALUE_CSS.toString())).getText());
 			//endNoteDetails.put("AuthorValue3",
 				//	ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_PATENT_AUTHOR3_VALUE_CSS.toString())).getText());
 			endNoteDetails.put("Title",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
 			endNoteDetails.put("TitleValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_VALUE_XPATH.toString())).getText());
+			
 			endNoteDetails.put("Journal",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_JOURNAL_XPATH.toString())).getText());
 			endNoteDetails.put("JournalValue",
@@ -155,15 +151,16 @@ public class ENW007 extends TestBase {
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ISSUE_XPATH.toString())).getText());
 			endNoteDetails.put("IssueValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ISSUE_VALUE_XPATH.toString())).getText());
-			endNoteDetails.put("Abstract",
-					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ABSTRACT_XPATH.toString())).getText());
+//			endNoteDetails.put("Abstract",
+//					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ABSTRACT_XPATH.toString())).getText());
 			endNoteDetails.put("Accessionnumber",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ACCESSIONNUMBER_XPATH.toString())).getText());
 			endNoteDetails.put("Notes",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_NOTES_XPATH.toString())).getText());
 			endNoteDetails.put("NotesValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_NOTES_VALUE_XPATH.toString())).getText());
-
+			endNoteDetails.put("URLValue",
+					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_VALUE_XPATH.toString())).getText());
 			System.out.println("Verifying label ");
 			Collection<String> values = endNoteDetails.values();
 			for (String listItem : list) {

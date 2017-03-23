@@ -71,8 +71,8 @@ public class ENW023 extends TestBase {
 			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials1(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-				BrowserWaits.waitTime(3);
-				ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
+				BrowserWaits.waitTime(5);
+				//ob.findElement(By.xpath("//div[@class='modal-content ng-scope']")).isDisplayed();
 				uRl=ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).getText();
 				Assert.assertEquals(uRl, "Did you know?");
 				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).click(); 
