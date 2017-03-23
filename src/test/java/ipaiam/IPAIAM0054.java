@@ -76,7 +76,7 @@ public class IPAIAM0054 extends TestBase {
 
 			pf.getDraPageInstance(ob).SearchDRAprofileName(DRAProfileName);
 			BrowserWaits.waitTime(3);
-			pf.getDraPageInstance(ob).validateSearchResultMsg(test, DRAProfileName);
+			pf.getIpaPage(ob).validateSearchResultMsg(test, DRAProfileName);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 

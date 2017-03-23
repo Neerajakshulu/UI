@@ -295,6 +295,7 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 	}
+
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(steamAccount);
@@ -366,7 +367,7 @@ public class DRAPage extends TestBase {
 	public void validateSearchResultMsg(ExtentTest test, String DRAProfileName) throws Exception {
 		try {
 			String Result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DR_SEARCH_RESULT_CSS).getText();
-			String ResultExpected = "Your search for Imara  das found no matches.";
+			String ResultExpected = "Your search for imara das found no matches.";
 			if (ResultExpected.contains(Result)) {
 				test.log(LogStatus.PASS, " User's account is non onboarded and non discoverable ");
 			} else {
@@ -377,6 +378,7 @@ public class DRAPage extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			closeBrowser();
 		}
+
 	}
 
 	public void clickDRALink() throws Exception {
@@ -502,9 +504,10 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 
 	}
-	
+
 	public void clickOnSupportLinkFeedback() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
 
 	}
@@ -566,10 +569,10 @@ public class DRAPage extends TestBase {
 		}
 
 	}
-	
+
 	public void validateFeedbackPageDRA(ExtentTest test) {
 		try {
-			
+
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
 			ArrayList<String> al = new ArrayList<String>();
@@ -594,6 +597,5 @@ public class DRAPage extends TestBase {
 		}
 
 	}
-	
 
 }

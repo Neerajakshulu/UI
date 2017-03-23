@@ -320,7 +320,22 @@ public class IPApage extends TestBase {
 		}
 		return false;
 	}
+	public void validateSearchResultMsg(ExtentTest test, String DRAProfileName) throws Exception {
+		try {
+			String Result = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DR_SEARCH_RESULT_CSS).getText();
+			String ResultExpected = "Your search for kavita manaz found no matches.";
+			if (ResultExpected.contains(Result)) {
+				test.log(LogStatus.PASS, " User's account is non onboarded and non discoverable ");
+			} else {
+				test.log(LogStatus.FAIL, " User's account  non discoverable ");
+			}
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			ErrorUtil.addVerificationFailure(t);// testng
+			closeBrowser();
+		}
 
+	}
 	public boolean validateCustomerCareNumberErrorMessage() throws Exception {
 		String ErrorMsg = "Invalid format. Only numbers (minimum 7 digits), spaces, and special characters + ( ) - allowed";
 		waitForAjax(ob);
