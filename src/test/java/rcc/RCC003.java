@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -70,6 +71,7 @@ public class RCC003 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(groupTitle, desc);
 			pf.getGroupDetailsPage(ob).typeCustomMessage(msg);
+			BrowserWaits.waitTime(10);
 			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE18"));
 			
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
