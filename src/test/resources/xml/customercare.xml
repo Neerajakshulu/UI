@@ -8,66 +8,66 @@
 	
 	<test name="DRAIAMCC070">
 		<classes>
-			<class name="customercare.DRAIAMCC070"></class>
+			<class name="customercare.Customercare001"></class>
 		</classes>
 	</test>
 	<test name="DRAIAMCC071">
 		<classes>
-			<class name="customercare.DRAIAMCC071"></class>
+			<class name="customercare.Customercare002"></class>
 		</classes>
 	</test>
 	<test name="DRAIAMCC072">
 		<classes>
-			<class name="customercare.DRAIAMCC072"></class>
+			<class name="customercare.Customercare003"></class>
 		</classes>
 	</test>
 	<test name="DRAIAMCC073">
 		<classes>
-			<class name="customercare.DRAIAMCC073"></class>
+			<class name="customercare.Customercare004"></class>
 		</classes>
 	</test>
 	
 	 <test name="DRAIAMCC001">
 		<classes>
-			<class name="customercare.DRAIAMCC001"></class>
+			<class name="customercare.Customercare005"></class>
 		</classes>
 	</test>
 	<test name="DRAIAMCC002">
 		<classes>
-			<class name="customercare.DRAIAMCC002"></class>
+			<class name="customercare.Customercare006"></class>
 		</classes>
 	</test>
 	
-	<test name="DRAIAMCC003" preserve-order="true" parallel="false">
+	<test name="DRAIAMCC003">
 		<classes>
-			<class name="customercare.DRAIAMCC003"></class>
+			<class name="customercare.Customercare007"></class>
 		</classes>
 	</test>
 	
 	<test name="DRAIAMCC004">
 		<classes>
-			<class name="customercare.DRAIAMCC004"></class>
+			<class name="customercare.Customercare008"></class>
 		</classes>
 	</test>
 	
 	<test name="IPAIAMCC001">
 		<classes>
-			<class name="customercare.IPAIAMCC001"></class>
+			<class name="customercare.Customercare009"></class>
 		</classes>
 	</test>
 	<test name="IPAIAMCC002">
 		<classes>
-			<class name="customercare.IPAIAMCC002"></class>
+			<class name="customercare.Customercare010"></class>
 		</classes>
 	</test>
 	<test name="IPAIAMCC003">
 		<classes>
-			<class name="customercare.IPAIAMCC003"></class>
+			<class name="customercare.Customercare011"></class>
 		</classes>
 	</test>
    <test name="IPAIAMCC004">
 		<classes>
-			<class name="customercare.IPAIAMCC004"></class>
+			<class name="customercare.Customercare012"></class>
 		</classes>
 	</test>
 	

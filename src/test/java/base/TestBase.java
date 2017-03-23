@@ -156,6 +156,9 @@ public class TestBase {
 			}else if (className.contains("DRAIAM")) {
 				suiteName = "DRAIAM";
 			}
+			else if (className.contains("Customercare")) {
+				suiteName = "customercare";
+			}
 			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")||className.contains("IPA")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
@@ -173,9 +176,6 @@ public class TestBase {
 					}
 				} else if (className.contains("IAM")) {
 					suiteName = "IAM";
-				}
-				else if (className.contains("CC")) {
-					suiteName = "customercare";
 				}
 			}
 		}
@@ -296,7 +296,6 @@ public class TestBase {
 		}else if (suiteName.equals("DRAIAM")) {
 			loadModuleData(draiamxls.path);
 		}else if (suiteName.equals("IPA")) {
-
 			loadModuleData(ipaxls.path);
 		}else if (suiteName.equals("IPAIAM")) {
 			loadModuleData(ipaiamxls.path);
