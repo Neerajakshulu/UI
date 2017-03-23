@@ -2,76 +2,76 @@
 <suite name="customercare" parallel="tests" thread-count="10">
 
 	<listeners>
-		<listener class-name="listener.TestsListenerAdapter" /> 
+		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
-	
-	
-	<test name="DRAIAMCC070">
+
+
+	<test name="Customercare001">
 		<classes>
 			<class name="customercare.Customercare001"></class>
 		</classes>
 	</test>
-	<test name="DRAIAMCC071">
+	<test name="Customercare002">
 		<classes>
 			<class name="customercare.Customercare002"></class>
 		</classes>
 	</test>
-	<test name="DRAIAMCC072">
+	<test name="Customercare003">
 		<classes>
 			<class name="customercare.Customercare003"></class>
 		</classes>
 	</test>
-	<test name="DRAIAMCC073">
+	<test name="Customercare004">
 		<classes>
 			<class name="customercare.Customercare004"></class>
 		</classes>
 	</test>
-	
-	 <test name="DRAIAMCC001">
+
+	<test name="Customercare005">
 		<classes>
 			<class name="customercare.Customercare005"></class>
 		</classes>
 	</test>
-	<test name="DRAIAMCC002">
+	<test name="Customercare006">
 		<classes>
 			<class name="customercare.Customercare006"></class>
 		</classes>
 	</test>
-	
-	<test name="DRAIAMCC003">
+
+	<test name="Customercare007">
 		<classes>
 			<class name="customercare.Customercare007"></class>
 		</classes>
 	</test>
-	
-	<test name="DRAIAMCC004">
+
+	<test name="Customercare008">
 		<classes>
 			<class name="customercare.Customercare008"></class>
 		</classes>
 	</test>
-	
-	<test name="IPAIAMCC001">
+
+	<test name="Customercare009">
 		<classes>
 			<class name="customercare.Customercare009"></class>
 		</classes>
 	</test>
-	<test name="IPAIAMCC002">
+	<test name="Customercare010">
 		<classes>
 			<class name="customercare.Customercare010"></class>
 		</classes>
 	</test>
-	<test name="IPAIAMCC003">
+	<test name="Customercare011">
 		<classes>
 			<class name="customercare.Customercare011"></class>
 		</classes>
 	</test>
-   <test name="IPAIAMCC004">
+	<test name="Customercare012">
 		<classes>
 			<class name="customercare.Customercare012"></class>
 		</classes>
 	</test>
-	
-	
+
+
 </suite>
 
 
