@@ -378,6 +378,7 @@ public class DRAPage extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			closeBrowser();
 		}
+
 	}
 
 	public void clickDRALink() throws Exception {
