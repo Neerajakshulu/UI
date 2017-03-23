@@ -22,7 +22,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRAIAMCC072 extends TestBase{
+public class Customercare003 extends TestBase{
 	
 	String runmodes[] = null;
 	static int count = -1;

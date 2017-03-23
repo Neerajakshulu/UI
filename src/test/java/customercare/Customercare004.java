@@ -19,7 +19,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class DRAIAMCC073 extends TestBase{
+public class Customercare004 extends TestBase{
 	
 	static int count = -1;
 
