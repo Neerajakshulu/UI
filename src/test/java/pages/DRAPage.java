@@ -295,6 +295,7 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 	}
+
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(steamAccount);
@@ -502,9 +503,10 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 
 	}
-	
+
 	public void clickOnSupportLinkFeedback() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS);
 
 	}
@@ -566,10 +568,10 @@ public class DRAPage extends TestBase {
 		}
 
 	}
-	
+
 	public void validateFeedbackPageDRA(ExtentTest test) {
 		try {
-			
+
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
 			ArrayList<String> al = new ArrayList<String>();
@@ -594,6 +596,5 @@ public class DRAPage extends TestBase {
 		}
 
 	}
-	
 
 }
