@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,8 +18,8 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IPAIAMCC071 extends TestBase{
-	
+public class Customercare013 extends TestBase {
+
 	static int count = -1;
 
 	static boolean fail = false;
@@ -39,7 +40,7 @@ public class IPAIAMCC071 extends TestBase{
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IPAIAM");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRAIAM");
 	}
 
 	/**
@@ -67,44 +68,37 @@ public class IPAIAMCC071 extends TestBase{
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host + CONFIG.getProperty("appendDRACCUrl"));
+			ob.navigate().to(host + CONFIG.getProperty("appendPACCAppUrl"));
 
 			try {
 				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
-				WebElement name_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_FULLNAME_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_ORGANIZATION_NAME);
-				WebElement organz_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_ORGANIZATION_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_EMAILID_NAME);
-				WebElement email_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_EMAILID_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_PHONE_NAME);
-				WebElement phone_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_PHONE_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME);
-				WebElement country_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_CATEGORY_NAME);
-				WebElement category_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_CATEGORY_NAME);
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_NAME);
-				WebElement description_element = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_NAME);
-			
+						.waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
+				WebElement callus_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
+				WebElement region_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.CUSTOMER_CARE_REGION_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
+				WebElement hrs_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
+				WebElement language_element = pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
 
-				if (name_element.isDisplayed() && organz_element.isDisplayed() && email_element.isDisplayed()
-						&& phone_element.isDisplayed() && country_element.isDisplayed() &&  category_element.isDisplayed() && description_element.isDisplayed()){
-					
-					test.log(LogStatus.PASS,
-							"DRA Customer care page displays required fields : Name,Organization,Contact details (email, telephone),Issue Category,Country,Description of issue");
-				}
-					
+				String hours_of_operation = hrs_element.getText();
+				String lang = language_element.getText();
+
+				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
+						&& language_element.isDisplayed())
+					Assert.assertEquals(lang, "English");
+				Assert.assertTrue(hours_of_operation.contains("GMT-5"));
+
+				test.log(LogStatus.PASS,
+						"IPA Customer care page displays Call us section and customer care contact details");
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
-						"DRA Customer care page is not displaying required fields ");
+						"IPA Customer care page doesn't display Call us section and customer care contact details");
 			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();
