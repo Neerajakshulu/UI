@@ -3,7 +3,6 @@ package customercare;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
