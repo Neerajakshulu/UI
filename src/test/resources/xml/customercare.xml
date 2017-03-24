@@ -86,6 +86,11 @@
 			<class name="customercare.Customercare020"></class>
 		</classes>
 	</test>
+	<test name="Customercare021">
+		<classes>
+			<class name="customercare.Customercare021"></class>
+		</classes>
+	</test>
 </suite>
 
 

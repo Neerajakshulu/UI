@@ -1163,6 +1163,9 @@ DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	CUSTOMER_CARE_USER_REQUEST_MSG2_CSS("div[class='modal-body wui-modal__body ng-scope'] p:nth-child(2)"),
 	CUSTOMER_CARE_USER_OK_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
 	DRA_CUSTOMER_CARE_LINK_CSS("a[data-event-category='dra-customer-care']"),
+	CUSTOMER_CARE_PHONE_NAME_ERROR_MESSAGE_XPATH("//span[@class='wui-input__error wui-input__error--cc-contact-form']"),
+	CUSTOMER_CARE_CLEARBTN_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
+	
 	;
 
 	private String locator;

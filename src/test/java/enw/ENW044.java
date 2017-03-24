@@ -117,16 +117,16 @@ public class ENW044 extends TestBase {
 			{
 			test.log(LogStatus.PASS, "Post Name is matching and both are same after exporting the post data");
 			}
-			if (!(endNoteDetails.get("Abstract").equals(neonValues.get("expectedAbstract")))) {
-				Assert.assertEquals(true, false);
-						test.log(LogStatus.FAIL, "Assignee value is not matching between Neon and endnote");
-						status = 2;// excel
-						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-								captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));					
-					}
-			else{
-			test.log(LogStatus.PASS, "Abstract content is matching between Neon and endnote and both are same after exporting the data");
-					}
+//			if (!(endNoteDetails.get("Abstract").equals(neonValues.get("expectedAbstract")))) {
+//				Assert.assertEquals(true, false);
+//						test.log(LogStatus.FAIL, "Assignee value is not matching between Neon and endnote");
+//						status = 2;// excel
+//						test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//								captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));					
+//					}
+//			else{
+//			test.log(LogStatus.PASS, "Abstract content is matching between Neon and endnote and both are same after exporting the data");
+//					}
 		 //deleteRecord();
 			NavigatingToENW();
 			closeBrowser();

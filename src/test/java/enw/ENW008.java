@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
