@@ -1129,8 +1129,20 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_CALLUS_CTRY1_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[1]"),
 	CUSTOMER_CARE_CALLUS_CTRY2_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[2]"),
 	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
+DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	
 	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
+	
+	CUSTOMER_CARE_SUPPORTLINK_HELP_CSS("a[href='/#/customer-care?app=dra']"),
+	CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS("input[placeholder^='Name']"),
+	CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS("input[placeholder^='Organization']"),
+	CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS("input[placeholder^='Email address']"),
+    DRA_PROFILEDATA_CSS("div[class='wui-subtitle wui-profile-flyout__name ng-binding']"),
+	DRA_PROFILE_FNAME_CSS("input[placeholder='+ First Name']"),
+	DRA_PROFILE_LNAME_CSS("input[placeholder='+ Last Name']"),
+	DRA_PROFILE_ORG_CSS("input[placeholder='+ Institution']"),
+	DRA_PROFILE_COUNTRY_CSS("input[placeholder='+ Country']"),
+
 	
 	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),

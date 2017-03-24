@@ -295,6 +295,11 @@ public class DRAPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_FEEDBACKLINK_CSS);
 	}
+	
+	public void clickOnHelpDRA() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_HELPLINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_HELPLINK_CSS);
+	}
 
 	public void steamLockedDRA(String steamAccount) throws Exception {
 
@@ -512,6 +517,12 @@ public class DRAPage extends TestBase {
 
 	}
 
+	public void clickOnSupportLinkHelp() throws Exception {
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_HELP_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_SUPPORTLINK_HELP_CSS);
+
+	}
 	public void clickDRAStepUpAuthLoginNotEntitledUser(ExtentTest test, String DRAUserName) throws Exception {
 		try {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.NEON_IPA_USERNAME_CSS.toString()), 30);
@@ -581,13 +592,14 @@ public class DRAPage extends TestBase {
 			}
 			ob.switchTo().window(al.get(2));
 			String actual_URL = ob.getCurrentUrl();
-			String expected_URL = "https://dev-snapshot.1p.thomsonreuters.com/#/customer-care?app=dra";
+			
+			String expected_URL = "http://dev-stable.1p.thomsonreuters.com/#/customer-care?app=dra";
 			Assert.assertTrue(actual_URL.contains(expected_URL));
 			test.log(LogStatus.PASS,
 					" user is taken to the customer care page in the seperate browser when User clicks on support link");
 			BrowserWaits.waitTime(2);
-			ob.close();
-			ob.switchTo().window(al.get(0));
+			//ob.close();
+			//ob.switchTo().window(al.get(0));
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, " user is not taken to the customer care page ");
 			StringWriter errors = new StringWriter();
@@ -598,4 +610,6 @@ public class DRAPage extends TestBase {
 
 	}
 
+	
+	
 }
