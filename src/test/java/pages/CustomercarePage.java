@@ -1,11 +1,19 @@
 
 package pages;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.OnePObjectMap;
 import base.TestBase;
@@ -59,5 +67,50 @@ public class CustomercarePage extends TestBase {
 			ErrorUtil.addVerificationFailure(t);// testng
 			closeBrowser();
 		}
+	}
+
+	public void clickOnDRACustomerCareLink() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.DRA_CUSTOMER_CARE_LINK_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_CUSTOMER_CARE_LINK_CSS);
+		
+	}
+
+	public void validateDRACustomerCareLink(ExtentTest test) {
+		try {
+			clickOnDRACustomerCareLink();
+			test.log(LogStatus.PASS,"Drug Research Advisor Customer Care is hyperlinked and it islinked to customer care / support page.");
+			BrowserWaits.waitTime(5);
+
+			Set<String> myset = ob.getWindowHandles();
+			Iterator<String> myIT = myset.iterator();
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < myset.size(); i++) {
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
+			String actual_URL = ob.getCurrentUrl();
+			String expected_URL = "https://dev-stable.1p.thomsonreuters.com/#/customer-care?app=dra";
+			Assert.assertTrue(actual_URL.contains(expected_URL));
+			test.log(LogStatus.PASS,
+					"DRA customer care page URL is opened in a second window/tab (based on user/browser preference)");
+			BrowserWaits.waitTime(2);
+			if (actual_URL.contains("dra")) {
+				test.log(LogStatus.PASS, "Customer care page URL content is specific to DRA(Target Druggability).");
+
+			} else {
+				test.log(LogStatus.FAIL, "Customer care page URL content is not specific to DRA(Target Druggability).");
+
+			}
+
+			ob.close();
+			ob.switchTo().window(al.get(0));
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, " user is not taken to DRA customer care page ");
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+		}
+
 	}
 }

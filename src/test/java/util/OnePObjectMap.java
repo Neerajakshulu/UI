@@ -1151,7 +1151,7 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_USER_REQUEST_MSG1_CSS("div[class='modal-body wui-modal__body ng-scope'] p:nth-child(1)"),
 	CUSTOMER_CARE_USER_REQUEST_MSG2_CSS("div[class='modal-body wui-modal__body ng-scope'] p:nth-child(2)"),
 	CUSTOMER_CARE_USER_OK_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
-	
+	DRA_CUSTOMER_CARE_LINK_CSS("a[data-event-category='dra-customer-care']"),
 	;
 
 	private String locator;

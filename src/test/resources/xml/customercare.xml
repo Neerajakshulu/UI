@@ -72,10 +72,14 @@
 	</test>
    <test name="Customercare015">
 		<classes>
-			<class name="customercare.Customercare012"></class>
+			<class name="customercare.Customercare015"></class>
 		</classes>
 	</test>
-
+ <test name="Customercare016">
+		<classes>
+			<class name="customercare.Customercare016"></class>
+		</classes>
+	</test>
 </suite>
 
 
