@@ -70,7 +70,11 @@
 			<class name="customercare.Customercare012"></class>
 		</classes>
 	</test>
-
+   <test name="Customercare015">
+		<classes>
+			<class name="customercare.Customercare012"></class>
+		</classes>
+	</test>
 
 </suite>
 

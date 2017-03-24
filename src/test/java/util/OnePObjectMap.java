@@ -1146,7 +1146,11 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_USER_COUNTRY_NAME("country"),
 	CUSTOMER_CARE_USER_CATEGORY_NAME("category"),
 	CUSTOMER_CARE_USER_REQUEST_NAME("request"),
-	
+	CUSTOMER_CARE_SUBMIT_BUTTON_CSS("button[ng-click='vm.submitRequest()']"),
+	CUSTOMER_CARE_USER_REQUEST_MSG_CSS("h3[class='wui-subtitle']"),
+	CUSTOMER_CARE_USER_REQUEST_MSG1_CSS("div[class='modal-body wui-modal__body ng-scope'] p:nth-child(1)"),
+	CUSTOMER_CARE_USER_REQUEST_MSG2_CSS("div[class='modal-body wui-modal__body ng-scope'] p:nth-child(2)"),
+	CUSTOMER_CARE_USER_OK_BUTTON_CSS("button[class='wui-btn wui-btn--primary']"),
 	
 	;
 

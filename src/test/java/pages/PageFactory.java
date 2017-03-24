@@ -35,6 +35,7 @@ public class PageFactory {
 	private IPASearch searchPage = null;
 	private IPApage ipapage=null;
 	private IAMPage iamPage=null;
+	private CustomercarePage customercarePage=null;
 	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
 	private DashboardPage dashboardPage=null;
 	private IPARecordViewPage rvpage=null;
@@ -265,6 +266,15 @@ public class PageFactory {
 		}
 
 		return ipapage;
+
+	}
+	
+	public CustomercarePage getCustomercarePage(WebDriver ob) {
+		if (customercarePage == null) {
+			customercarePage = new CustomercarePage(ob);
+		}
+
+		return customercarePage;
 
 	}
 	
