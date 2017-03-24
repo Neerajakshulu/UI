@@ -1,8 +1,6 @@
 package pages;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.pdfbox.pdfparser.PDFParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -2125,15 +2122,6 @@ public class ProfilePage extends TestBase {
 					logger.info("Help link address-->"+helpLinkAddressURL); 
 					if(!StringUtils.equalsIgnoreCase(currentPageUrl, helpLinkAddressURL)) {
 						logFailureDetails(test, flyoutLinks[i]+"Page not opened", "DRA-Help Fail");
-					}
-					
-					URL TestURL = new URL(helpLinkAddressURL);
-					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-					PDFParser testPDF = new PDFParser(TestFile);
-					testPDF.parse();
-					String pdfText = new org.apache.pdfbox.util.PDFTextStripper().getText(testPDF.getPDDocument());
-					if(StringUtils.isEmpty(pdfText)) {
-						logFailureDetails(test, flyoutLinks[i]+"Page PDF not opened", "Help PDF Fail");
 					}
 					
 					ob.close();
