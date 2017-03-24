@@ -106,7 +106,8 @@ public class Watchlist028 extends TestBase {
 			// 2)Login with user2 and and try to watch the patent from
 			// notification panel
 			loginAsSpecifiedUser(LOGIN.getProperty("Watchlist028_User"), LOGIN.getProperty("Watchlist028_PWD"));
-
+			
+			ob.navigate().refresh(); //adding refresh code to load page properly
 			// Create watch list
 			String newWatchlistName = this.getClass().getSimpleName() + "_" + getCurrentTimeStamp();
 			createWatchList("private", newWatchlistName, "This is my test watchlist.");
