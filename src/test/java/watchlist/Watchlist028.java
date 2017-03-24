@@ -91,7 +91,7 @@ public class Watchlist028 extends TestBase {
 			String document_title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
 			logger.info("patent doc title" + document_title);
 
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click(); 
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("document_comment_textbox_patent")), 90);
 			ob.findElement(By.xpath(OR.getProperty("document_comment_textbox_patent")))
