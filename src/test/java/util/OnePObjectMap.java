@@ -1132,7 +1132,6 @@ public enum OnePObjectMap {
 DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	
 	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
-	
 	CUSTOMER_CARE_SUPPORTLINK_HELP_CSS("a[href='/#/customer-care?app=dra']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS("input[placeholder^='Name']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS("input[placeholder^='Organization']"),

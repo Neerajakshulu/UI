@@ -584,6 +584,7 @@ public class DRAPage extends TestBase {
 	public void validateFeedbackPageDRA(ExtentTest test) {
 		try {
 
+		
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
 			ArrayList<String> al = new ArrayList<String>();

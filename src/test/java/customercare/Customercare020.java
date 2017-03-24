@@ -90,6 +90,7 @@ public class Customercare020 extends TestBase{
 				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 				pf.getDraPageInstance(ob).clickOnHelpDRA();	
 				
+				
 				Set<String> myset = ob.getWindowHandles();
 				Iterator<String> myIT = myset.iterator();
 				ArrayList<String> al = new ArrayList<String>();
