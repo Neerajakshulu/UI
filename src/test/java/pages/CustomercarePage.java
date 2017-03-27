@@ -39,7 +39,7 @@ public class CustomercarePage extends TestBase {
 		// pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_CATEGORY_NAME,
 		// Category);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_NAME, Request);
-
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.CUSTOMER_CARE_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.CUSTOMER_CARE_SUBMIT_BUTTON_CSS);
 		test.log(LogStatus.PASS,
 				" All characters including special characters are  allowed in extension field in customer care page.");
@@ -65,7 +65,7 @@ public class CustomercarePage extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");
 			ErrorUtil.addVerificationFailure(t);// testng
-			closeBrowser();
+			//closeBrowser();
 		}
 	}
 

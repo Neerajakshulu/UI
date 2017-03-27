@@ -84,20 +84,21 @@ public class Customercare015 extends TestBase {
 					test.log(LogStatus.PASS,
 							"extension field should be placed next to phone number field in customer care page.");
 				}
-				String Name = "Yalamarthi Mohana";
+				String Name = "Naznina";
 				String Orgname = "Clarivate Analytics";
-				String Email = "yalamarthi.mohana@clarivate.com";
-				String Phone = "748730234";
-				String Extension = "+91@*%";
+				String Email = "naznina.b@clarivate.com";
+				String Phone = "74873023486";
+				String Extension = "+91@*%*#";
 				Select dropdown = new Select(ob.findElement(By.name("country")));
-				dropdown.selectByIndex(7);
-				String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_COUNTRY_NAME)
-						.getText();
-				String Request = "Please test the above scenario.";
+				dropdown.selectByIndex(10);
+				String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getAttribute("value");
+						
+				String Request = "Please test the above scenario --ts0001";
 				pf.getCustomercarePage(ob).EnterCustomercareDetails(test, Name, Orgname, Email, Phone, Extension,
 						Country, Request);
 
 				test.log(LogStatus.PASS, "user is able to submit the form in DRA Customer care page . ");
+				BrowserWaits.waitTime(3);
 				pf.getCustomercarePage(ob).ValidateSuccessMessage(test);
 				test.log(LogStatus.PASS,
 						"Success message is displayed that confirms submission and allows user to raise a new ticket.");

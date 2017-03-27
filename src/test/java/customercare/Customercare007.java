@@ -40,7 +40,8 @@ public class Customercare007 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("customercare");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("customercare");
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class Customercare007 extends TestBase {
 				Select dropdown = new Select(ob.findElement(By.name("category")));
 				dropdown.selectByIndex(7);
 				String DropText = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.IPA_CC_COUNTRY_NAME)
-						.getText();
+						.getAttribute("value");
 
 				if (DropText.contains("Data Changes")) {
 					test.log(LogStatus.PASS,
