@@ -100,13 +100,14 @@ public class ENW001 extends TestBase {
 			if (recordType.equalsIgnoreCase("Articles"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-				pf.getAuthoringInstance(ob).chooseArticle();
+				pf.getAuthoringInstance(ob).chooseArticle1();
 				BrowserWaits.waitTime(4);
 				
-			}else if(recordType.equalsIgnoreCase("Patents"))
+			}
+			else if(recordType.equalsIgnoreCase("Patents"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-				pf.getAuthoringInstance(ob).chooseArticle();
+				pf.getAuthoringInstance(ob).chooseArticle1();
 				BrowserWaits.waitTime(4);
 			}else
 			{

@@ -23,7 +23,6 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 public class ENW007 extends TestBase {
-
 	static int status = 1;
 
 	// Following is the list of status:
@@ -68,20 +67,16 @@ public class ENW007 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD007"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle("Vitrification of organics-containing wastes");
+			pf.getAuthoringInstance(ob).searchArticle("Fieldbus technology in industrial automation");
 
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			pf.getAuthoringInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(6);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
-
-			
-
 			String expectedNotes1 = ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_NOTES1_XPATH.toString()))
 					.getText();
 			String expectedNotes2 = ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_NOTES2_XPATH.toString()))
 					.getText();
-		
 			HashMap<String, String> neonValues = new HashMap<String, String>();
 			neonValues.put("expectedReferenceType", "Journal Article");
 			neonValues.put("expectedURL", "https://dev-stable.1p.thomsonreuters.com");

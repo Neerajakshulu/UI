@@ -20,8 +20,8 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Customercare020 extends TestBase{
-	
+public class Customercare020 extends TestBase {
+
 	static int count = -1;
 
 	static boolean fail = false;
@@ -42,7 +42,8 @@ public class Customercare020 extends TestBase{
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("customercare");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("customercare");
 	}
 
 	/**
@@ -72,51 +73,55 @@ public class Customercare020 extends TestBase{
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
-			
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL007"),
-						LOGIN.getProperty("USERPASSWORD007"));
-				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-				
-				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
-				
-				String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS).getAttribute("value")+" "+
-						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_LNAME_CSS).getAttribute("value");
-				String expectedOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_ORG_CSS).getAttribute("value");
-				//String expectedcountry = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_COUNTRY_CSS).getAttribute("value");
-				String expectedemail = LOGIN.getProperty("USEREMAIL007");
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
-				BrowserWaits.waitTime(2);
-				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
-				pf.getDraPageInstance(ob).clickOnHelpDRA();	
-				
-				
-				Set<String> myset = ob.getWindowHandles();
-				Iterator<String> myIT = myset.iterator();
-				ArrayList<String> al = new ArrayList<String>();
-				for (int i = 0; i < myset.size(); i++) {
-					al.add(myIT.next());
-				}
-				ob.switchTo().window(al.get(1));
-				pf.getDraPageInstance(ob).clickOnSupportLinkHelp();	
-				pf.getDraPageInstance(ob).validateFeedbackPageDRA(test);
-				
-				BrowserWaits.waitTime(2);
-				String actualName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS).getAttribute("value");
-				String actualOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS).getAttribute("value");
-				String actualemail = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS).getAttribute("value");
-				/*Select se=new Select();
-				se.getFirstSelectedOption().getText();*/
-				try {
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL007"),
+					LOGIN.getProperty("USERPASSWORD007"));
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+
+			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
+
+			String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS)
+					.getAttribute("value") + " "
+					+ pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_LNAME_CSS)
+							.getAttribute("value");
+			String expectedOrg = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_ORG_CSS)
+					.getAttribute("value");
+			// String expectedcountry =
+			// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_COUNTRY_CSS).getAttribute("value");
+			String expectedemail = LOGIN.getProperty("USEREMAIL007");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
+			BrowserWaits.waitTime(2);
+			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+			pf.getDraPageInstance(ob).clickOnHelpDRA();
+
+			Set<String> myset = ob.getWindowHandles();
+			Iterator<String> myIT = myset.iterator();
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < myset.size(); i++) {
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
+			pf.getDraPageInstance(ob).clickOnSupportLinkHelp();
+			BrowserWaits.waitTime(5);
+			// pf.getDraPageInstance(ob).validateFeedbackPageDRA(test);
+			validateFeedbackDRA();
+			String actualName = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS).getAttribute("value");
+			String actualOrg = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS).getAttribute("value");
+			String actualemail = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS).getAttribute("value");
+			/*
+			 * Select se=new Select(); se.getFirstSelectedOption().getText();
+			 */
+			try {
 				Assert.assertEquals(expectedName, actualName);
 				Assert.assertEquals(expectedOrg, actualOrg);
 				Assert.assertEquals(expectedemail, actualemail);
-				test.log(LogStatus.PASS,
-						" Support Request form is prepopulating with Name,Org,Email and country");
-				
+				test.log(LogStatus.PASS, " Support Request form is prepopulating with Name,Org,Email and country");
+
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Support Request form is prepopulating with Name,Org,Email and country");
+				test.log(LogStatus.FAIL, "Support Request form is prepopulating with Name,Org,Email and country");
 			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();
@@ -136,6 +141,23 @@ public class Customercare020 extends TestBase{
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 
+	}
+
+	private void validateFeedbackDRA() throws InterruptedException {
+		String expected_URL = "http://dev-stable.1p.thomsonreuters.com/#/customer-care?app=dra";
+		String newWindow = switchToNewWindow(ob);
+		if (newWindow != null) {
+			if (ob.getCurrentUrl().contains(expected_URL)) {
+				Assert.assertTrue(ob.getCurrentUrl().contains(expected_URL));
+				logger.info("Privacy-statement is opened in the new browser and Content Available");
+				test.log(LogStatus.PASS,
+						" user is taken to the customer care page in the seperate browser when User clicks on support link");
+			}
+		} else {
+			test.log(LogStatus.FAIL, "New browser is not displayed and content is not matching");
+			Assert.assertEquals(true, false);
+		}
+		BrowserWaits.waitTime(5);
 	}
 
 	@AfterTest

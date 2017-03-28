@@ -59,7 +59,10 @@ public class ENW00029 extends TestBase {
 
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-				pf.getHFPageInstance(ob).clickOnAccountLink();
+			//	pf.getHFPageInstance(ob).clickOnAccountLink();
+				pf.getHFPageInstance(ob).clickProfileImage();
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS.toString()), 180);
+				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS.toString())).click();
 
 				String actualEmail = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL_XPATH.toString()))
 						.getText();

@@ -54,7 +54,7 @@ public class ENW030 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host);			
 			loginAs("STEAMUSERFIRSTNAME", "PASSWORD10");
-			pf.getHFPageInstance(ob).clickProfileImage();
+			pf.getHFPageInstance(ob).clickProfileImage(); 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString()), 180);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_CSS.toString())));
 			waitForPageLoad(ob);
