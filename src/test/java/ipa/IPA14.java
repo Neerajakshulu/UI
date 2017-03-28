@@ -96,7 +96,7 @@ import util.ExtentManager;
 				}
 				pf.getSearchPageInstance(ob).clickOnNewSearchLinkInHeader();
 				pf.getSearchPageInstance(ob).SearchTermEnter("company", "Network");
-				List<String> companyList=pf.getSearchPageInstance(ob).addCompanyTerms("2:1");
+				List<String> companyList=pf.getSearchPageInstance(ob).addCompanyTerms("3:1");
 				Assert.assertTrue(pf.getSearchPageInstance(ob).checkForTextInSearchTermList(companyList.get(0)));
 				pf.getSearchPageInstance(ob).exploreSearch();
 				pf.getDashboardPage(ob).clickOnPatentFoundIcon();
