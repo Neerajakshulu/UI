@@ -88,7 +88,7 @@ public class RCC019 extends TestBase {
 			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE17"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			pf.clearAllPageObjects();
+			pf.clearAllPageObjects(); 
 
 			openBrowser();
 			clearCookies(); 
