@@ -242,7 +242,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_ERROR_CSS("div[class^='wui-textarea__error ne-publication-posting__info ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_CSS("button[data-event-action='cancel'][title='Close']"),
 	HOME_PROJECT_NEON_PROFILE_CREATE_POST_PUBLISH_CSS("button[data-event-action='publish']"),
-	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("div[class^='wui-content-title']"),
+	HOME_PROJECT_NEON_PROFILE_POST_TITLE_CSS("h3[class='wui-content-title wui-content-title--medium ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(1) span[class='wui-side-menu__badge ng-binding']"),
 	HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS("ul[class='wui-side-menu__list'] li[class^='wui-side-menu__list-item']:nth-child(2) span[class='wui-side-menu__badge ng-binding']"),
 	HOME_PROJECT_NEON_VIEW_POST_EDIT_XPATH("//button[text()='Edit']"),
