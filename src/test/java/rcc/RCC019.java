@@ -91,7 +91,7 @@ public class RCC019 extends TestBase {
 			pf.clearAllPageObjects();
 
 			openBrowser();
-			clearCookies();
+			clearCookies(); 
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER017", "RCCTESTUSERPWD017");
