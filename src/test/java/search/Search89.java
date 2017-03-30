@@ -68,7 +68,7 @@ public class Search89 extends TestBase {
 			// Searching for patents
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("synthetic biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			//waitForAjax(ob);
+			waitForAjax(ob);
 			BrowserWaits.waitTime(5);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);

@@ -75,17 +75,17 @@ public class Search99 extends TestBase {
 			// checking for Default sort option
 			// String defaultSort = ob.findElement(By.xpath(OR.getProperty("tr_search_people_sortBy_dropdown_xpath")))
 			// .getText();
-			String defaultSort = ob.findElement(By.xpath("//button[@id='single-button']")).getText();
-
+			String defaultSort = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
+            System.out.println("dddd"+defaultSort);
 			// checking for different options available in sort
-			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 35);
-			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 35);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			Thread.sleep(3000);
 			String text = ob
-					.findElement(By.xpath("//ul[@class='dropdown-menu search-sort-dropdown__menu' and @role='menu']"))
+					.findElement(By.xpath("//ul[@class='wui-dropdown__menu dropdown-menu' and @role='menu']"))
 					.getText();
 
-			if (defaultSort.equals("Sort by: Relevance")) {
+			if (defaultSort.equals("Sort by Relevance")) {
 				test.log(LogStatus.PASS, "Relevance is the default sort in people results page");
 
 			} else {
