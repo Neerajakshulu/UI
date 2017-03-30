@@ -1130,8 +1130,8 @@ public enum OnePObjectMap {
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[ng-model='vm.region']"),
-	CUSTOMER_CARE_CALLUS_CTRY1_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[1]"),
-	CUSTOMER_CARE_CALLUS_CTRY2_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[2]"),
+	CUSTOMER_CARE_CALLUS_CTRY1_CSS("div[class='ng-scope cc-call-us__info'] p"),
+	CUSTOMER_CARE_CALLUS_CTRY2_CSS("div[class='ng-scope cc-call-us__info-secondary'] p"),
 	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
     DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	
@@ -1154,7 +1154,6 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
 	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-no-margin ng-binding'])[3]"),
 	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-no-margin ng-binding'])[4]"),
-	
 	CUSTOMER_CARE_USER_FULLNAME_NAME("fullName"),
 	CUSTOMER_CARE_USER_ORGANIZATION_NAME("organization"),
 	CUSTOMER_CARE_USER_EMAILID_NAME("email"),

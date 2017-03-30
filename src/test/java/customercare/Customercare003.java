@@ -3,7 +3,6 @@ package customercare;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -119,14 +118,14 @@ public class Customercare003 extends TestBase{
 		Select se=new Select(ele);
 		se.selectByVisibleText(Countries);
 		
-		String actualCtry1=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_CTRY1_XPATH).getText();
-		String actualCtry2=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_CTRY2_XPATH).getText();
+		String actualCtry1=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_CTRY1_CSS).getText();
+		String actualCtry2=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_CTRY2_CSS).getText();
 			
 		String actualWeektime=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_HRS_XPATH).getText();
 		String actualLanguage=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH).getText();
 			
 		
-		System.out.println(ob.findElement(By.cssSelector("p[class='cc-content ng-binding ng-scope']")).getText());
+		//System.out.println(ob.findElement(By.cssSelector("p[class='cc-content ng-binding ng-scope']")).getText());
 		try{
 		Assert.assertEquals(actualCtry1, Ctry1);
 		test.log(LogStatus.PASS,
@@ -195,25 +194,25 @@ public class Customercare003 extends TestBase{
 		Object[][] data = new Object[3][5];
 
 		// 1st row
-		data[0][0] ="North America: +1-800-336-4474";
-		data[0][1] = "Central and South America: +1-888-216-4101";
-		data[0][2] = "Monday -- Friday 9 AM - 8 PM GMT-5";
+		data[0][0] ="+18003364474 [Toll free US & Canada]";
+		data[0][1] = "Latin America: +18882164101";
+		data[0][2] = "Monday -- Friday 9.00am - 8.00pm UTC-5";
 		data[0][3] = "English";
 		data[0][4] = "Americas Offices";
 
 		// 2nd row
-		data[1][0] ="Australia: 1-800-007214";
-		data[1][1] = "New Zealand: 0800443162";
-		data[1][2] = "Monday -- Friday 7 AM - 7 PM GMT+10";
+		data[1][0] ="Australia: 1-800007214 [Toll free]";
+		data[1][1] = "New Zealand: 0800443162 [Toll free]";
+		data[1][2] = "Monday -- Friday 7.00am - 7.00pm UTC+10";
 		data[1][3] = "English";
 		data[1][4] = "Australia and New Zealand";
 		
 		// 3nd row
-		data[2][0] ="Within the UK: 0800 328 8044, +44 20 3564 2068";
-		data[2][1] = "Outside of the UK: +44 800 328 8044, +44 20 3564 2068";
-		data[2][2] = "Monday -- Friday 9 AM - 5 PM GMT";
-		data[2][3] = "English";
-		data[2][4] = "Europe, Middle East, Africa";
+		data[2][0] ="Hong Kong: 800905720 [Toll free]";
+		data[2][1] = "Taiwan: 00806651914 [Toll free]";
+		data[2][2] = "Monday -- Friday 9.00am - 6.00pm UTC+8";
+		data[2][3] = "Mandarin, English";
+		data[2][4] = "Hong Kong and Taiwan";
 				
 		
 		
