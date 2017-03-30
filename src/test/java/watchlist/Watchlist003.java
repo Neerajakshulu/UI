@@ -17,16 +17,17 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * Verify that user is able to add a Post from ALL content search results page to a particular watchlist||Verify that
  * user is able to unwatch a Post from ALL content search results page
  * 
- * @author Prasenjit Patra
- *
  */
+
 public class Watchlist003 extends TestBase {
 
 	static int status = 1;
@@ -65,14 +66,7 @@ public class Watchlist003 extends TestBase {
 
 			// Opening browser
 			openBrowser();
-			// runOnSauceLabsFromLocal("Windows","Chrome");
-
-			try {
-				maximizeWindow();
-			} catch (Throwable t) {
-
-				System.out.println("maximize() command not supported in Selendroid");
-			}
+			maximizeWindow();
 			clearCookies();
 
 			ob.navigate().to(host);
@@ -124,10 +118,9 @@ public class Watchlist003 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + postName + 2 + "\"");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-
-			waitForElementTobeVisible(ob,
-					By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"), 60);
-			Thread.sleep(3000);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS);
+			BrowserWaits.waitTime(3);
+			
 			// Watching a post to a particular watch list
 			watchButton = ob.findElement(By.xpath(OR.getProperty("search_watchlist_image")));
 			watchOrUnwatchItemToAParticularWatchlist(newWatchlistName, watchButton);
