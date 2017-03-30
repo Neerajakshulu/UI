@@ -399,7 +399,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='ne-action-dropdown dropdown-menu']"),
-	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] ul li"),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='ne-action-dropdown dropdown-menu'] ul li"),
 	SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS("div[class='wui-card__header--before-text wui-card__header']"),
 	SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS("button[ng-click='vm.openProjectSelector()']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
