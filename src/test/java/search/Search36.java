@@ -17,6 +17,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search36 extends TestBase {
 
@@ -74,13 +75,13 @@ public class Search36 extends TestBase {
 			// Clicking on Articles content result set
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[id='single-button']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			Thread.sleep(2000);
 
 			// Finding out the types by which we can sort the Article content
 			// results
 			List<WebElement> content_types = ob
-					.findElements(By.cssSelector("li[class='search-sort-dropdown__menu-item ng-scope']"));
+					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()));
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();

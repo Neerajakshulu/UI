@@ -345,9 +345,9 @@ public enum OnePObjectMap {
 	NEWSFEED_SHAREANIDEA_LINK_XPATH("(//button[@id='posting'])[2]"),
 	NEWSFEED_MOST_VIEWED_ARTICLES_XPATH("//ne-most-viewed-documents"),
 	NEWSFEED_FEATURED_POST_XPATH("//div[@class='wui-card--featured-post wui-card']"),
-	NEWSFEED_TRENDINDING_MENU_XPATH("//ul[@class='nav nav-tabs']//tab-heading[contains(.,'FILTER_TYPE')]"),
-	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li"),
-	NEWSFEED_TRENDINDING_TOPICS_LINKS_XPATH("//ne-trending-categories[@class='ng-isolate-scope']//li[2]//a"),
+	NEWSFEED_TRENDINDING_MENU_XPATH("//ul[@class='nav nav-tabs']//h3[contains(.,'FILTER_TYPE')]"),
+	NEWSFEED_TRENDINDING_CATEGORIES_LINKS_XPATH("//ne-trending-categories[@class='ng-scope ng-isolate-scope']//li"),
+	NEWSFEED_TRENDINDING_TOPICS_LINKS_XPATH("//ne-trending-categories[@class='ng-scope ng-isolate-scope']//li[2]//a"),
 	NEWSFEED_RECOMMEND_PEOPLE_XPATH("//ne-recommend-people[@class='ng-scope']"),
 	NEWSFEED_RECOMMEND_PEOPLE_LABEL_XPATH("//ne-recommend-people[@class='ng-scope']//div"),
 	NEWSFEED_RECOMMEND_PEOPLE_IMAGE_XPATH("//ne-recommend-people[@class='ng-scope ng-isolate-scope']/div//div[@class='horizontal-profiles__image-row']/div"),
@@ -356,7 +356,7 @@ public enum OnePObjectMap {
 	NEWSFEED_RECOMMEND_ARTICLE_A_XPATH("//ne-recommend-articles[@class='ng-scope ng-isolate-scope']//a"),
 	NEWSFEED_ALL_NOTIFICATIONS_XPATH("//div[contains(@class,'notification-component')][2]"),
 	NEWSFEED_NEW_POST_NOTIFICATIONS_XPATH("//ne-notification-post-creation"),
-	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//ul[@class='list-unstyled ne-trending__list']/li/div/div"),
+	NEWSFEED_TRENDINDING_DOCUMENT_TITLES_XPATH("//div[@class='tab-content']//li/div/h4"),
 	NEWSFEED_NEW_FOLLOWER_NOTITIFICATION_CSS("ne-notification-new-follower[class='ng-scope ng-isolate-scope'] div"),
 	NEWSFEED_NEW_FREND_FOLLOW_NOTITIFICATION_CSS("ne-notify-friend-follows[class='ng-scope'] div"),
 	NEWSFEED_TOP_COMMENTERS_XPATH("//div[contains(@ng-if,'TopUserCommenters')]"),
@@ -399,7 +399,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_ARCTICLE_OR_PATENT_RESULTS_CSS("div[class='wui-card__content'] a"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_CSS("div[class*='add-to-group-toggle'] button[ng-click='vm.openProjectSelector()']"),
 	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='ne-action-dropdown dropdown-menu']"),
-	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='dropdown-menu ne-action-dropdown'] ul li"),
+	SEARCH_RESULTS_PAGE_ITEM_ADD_TO_GROUP_DROPDOWN_LIST_CSS("div[class='add-to-group-toggle ng-isolate-scope dropdown open'] div[class='ne-action-dropdown dropdown-menu'] ul li"),
 	SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS("div[class='wui-card__header--before-text wui-card__header']"),
 	SEARCH_RESULTS_PAGE_DOCUMENT_ADD_TO_GROUP_CSS("button[ng-click='vm.openProjectSelector()']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
@@ -414,6 +414,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULT_PAGE_FILTER_VALUES_CSS("span[class='wui-checkbox__visible']"),
 	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
     SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
+    SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS("a[data-event-category='searchresult-ck-sort']"),
 
 	// record view page
     RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
@@ -638,7 +639,7 @@ public enum OnePObjectMap {
 	RCC_GROUPDETAILS_PATENTS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.patents']"),
 	RCC_GROUPDETAILS_ARTICLES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.articles']"),
 	RCC_GROUPDETAILS_GROUP_TITLE_CSS("div[class='research-group-card__text'] div[class*='wui-content-title']"),
-	RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS("a[class='research-group-card__text'] div[class*='wui-content-title']"),
+	RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS("a[class='research-group-card__text'] h3[class*='wui-content-title']"),
 	RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS("div[class='wui-card__content'] input"),
 	RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS("ul[class='suggestion-list'] li span[class='ng-binding ng-scope']"),
 	RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS("button[event-action='save']"),
@@ -859,7 +860,7 @@ public enum OnePObjectMap {
 
 	SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]/h6"),
 	SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH("(//div[@class='row password-validator__item ng-scope'])[12]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
-	ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal--italic account-option-item__last-sign-in ng-binding']"),
+	ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS("div[class='source-sans--normal-italic account-option-item__last-sign-in ng-binding']"),
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS("input[name='oldPassword']"),
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS("input[name='newPassword']"),
 	ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH("//span[contains(text(),'Submit')]"),
@@ -1168,7 +1169,8 @@ public enum OnePObjectMap {
 	DRA_CUSTOMER_CARE_LINK_CSS("a[data-event-category='dra-customer-care']"),
 	CUSTOMER_CARE_PHONE_NAME_ERROR_MESSAGE_XPATH("//span[@class='wui-input__error wui-input__error--cc-contact-form']"),
 	CUSTOMER_CARE_CLEARBTN_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
-	
+	CUSTOMER_CARELINK_IN_ERRORPAGE_CSS("a[href='#/customer-care?app=dra'] div[class^='cc-product-tile']"),
+	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	;
 
 	private String locator;

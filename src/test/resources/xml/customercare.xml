@@ -95,6 +95,12 @@
 			<class name="customercare.Customercare021"></class>
 		</classes>
 	</test>
+	
+	<test name="Customercare022">
+		<classes>
+			<class name="customercare.Customercare022"></class>
+		</classes>
+	</test>
 </suite>
 
 

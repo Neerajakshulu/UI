@@ -76,13 +76,13 @@ public class Search39 extends TestBase {
 			// Clicking on Articles content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
 			waitForElementTobeVisible(ob,
-					By.cssSelector("button[class='wui-btn--block search-sort-dropdown__button dropdown-toggle']"), 30);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			BrowserWaits.waitTime(2);
 			// Finding out the default sort by value for Article content set
 			String defaultSortBy = ob
 					.findElement(By
-							.cssSelector("button[class='wui-btn--block search-sort-dropdown__button dropdown-toggle']"))
-					.getText().substring(9);
+							.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()))
+					.getText().substring(8);
 			System.out.println("the value " + defaultSortBy);
 
 			// Comparing the the label of default sort by value
