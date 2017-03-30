@@ -117,17 +117,17 @@ public class Watchlist008 extends TestBase {
 //			BrowserWaits.waitTime(5);
 			// Selecting the document name
 			String firstdocumentName = ob
-					.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"))
+					.findElement(By.xpath("//h3[@class='wui-content-title wui-content-title--medium ng-binding']"))
 					.getText();
+			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS);
 			logger.info("First Document Name : " + firstdocumentName);
 
 			// Navigate to a particular watch list page
 			navigateToParticularWatchlistPage(newWatchlistName);
 			waitForPageLoad(ob);
 
-			List<WebElement> watchedItems = ob
-					.findElements(By.xpath("//div[@class='wui-content-title wui-content-title--medium ng-binding']"));
-
+			List<WebElement> watchedItems = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			
 			int count = 0;
 			for (int i = 0; i < watchedItems.size(); i++) {
 
@@ -135,6 +135,7 @@ public class Watchlist008 extends TestBase {
 					count++;
 
 			}
+			
 
 			if (!compareNumbers(1, count)) {
 
