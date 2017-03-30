@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search91 extends TestBase {
 
@@ -70,10 +71,10 @@ public class Search91 extends TestBase {
 			Thread.sleep(7000);
 			ob.findElement(By.partialLinkText("Patents")).click();
 
-			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 4);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
 			Thread.sleep(8000);
-			String defaultSortByValue = ob.findElement(By.xpath("//button[@id='single-button']")).getText();
-			if (defaultSortByValue.equalsIgnoreCase("Sort by: Relevance")) {
+			String defaultSortByValue = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
+			if (defaultSortByValue.equalsIgnoreCase("Sort by Relevance")) {
 				test.log(LogStatus.PASS, "Patents results are sorted by RELEVANCE by default");
 			} else {
 				status = 2;

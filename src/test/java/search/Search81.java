@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search81 extends TestBase {
 
@@ -67,7 +68,7 @@ public class Search81 extends TestBase {
 			waitForAjax(ob);
 			Thread.sleep(2000);
 
-			String text = ob.findElement(By.id("single-button")).getText();
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
 			System.out.println(text);
 
 			try {
