@@ -80,7 +80,11 @@
 			<class name="customercare.Customercare016"></class>
 		</classes>
 	</test>
-	
+	<test name="Customercare017">
+		<classes>
+			<class name="customercare.Customercare017"></class>
+		</classes>
+	</test>
 	<test name="Customercare020">
 		<classes>
 			<class name="customercare.Customercare020"></class>

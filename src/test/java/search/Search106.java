@@ -19,6 +19,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search106 extends TestBase {
 
@@ -33,8 +34,8 @@ public class Search106 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -46,8 +47,8 @@ public class Search106 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -72,17 +73,15 @@ public class Search106 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
-			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
-			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			waitForElementTobeClickable(ob,
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(5);
 			waitForElementTobeVisible(ob,
-					By.xpath(
-							"//div[@class='search-sort-dropdown dropdown open']/ul[@class='dropdown-menu search-sort-dropdown__menu']"),
-					4);
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()), 4);
 			Thread.sleep(2000);
-			List<WebElement> postDropdownmenus = ob
-					.findElement(By.cssSelector("div[class='search-sort-dropdown dropdown open']"))
-					.findElements(By.tagName("li"));
+			List<WebElement> postDropdownmenus = ob.findElements(
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()));
 			String postExpectedDropdown = "Create Date (Newest)|Create Date (Oldest)|Relevance";
 			List<String> postDropdowndata = new ArrayList<String>();
 			for (WebElement postDropdownmenu : postDropdownmenus) {
@@ -114,8 +113,11 @@ public class Search106 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_patent_recordview_failed")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_patent_recordview_failed")));// screenshot
 			closeBrowser();
 		}
 

@@ -73,18 +73,18 @@ public class Search32 extends TestBase {
 
 			// Clicking on All content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath("//button[@id='single-button']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			Thread.sleep(2000);
 
 			// Clicking on the sort by drop down
 			// ob.findElement(By.cssSelector("button[class='btn search-sort-btn dropdown-toggle']")).click();
-			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			Thread.sleep(3000);
 
 			// Finding out the types by which we can sort the All content
 			// results
 			List<WebElement> content_types = ob
-					.findElements(By.cssSelector("a[event-category='searchresult-ck-sort']"));
+					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()));
 			String text1 = content_types.get(0).getText();
 			String text2 = content_types.get(1).getText();
 			String text3 = content_types.get(2).getText();
