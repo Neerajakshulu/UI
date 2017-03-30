@@ -638,7 +638,7 @@ public enum OnePObjectMap {
 	RCC_GROUPDETAILS_PATENTS_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.patents']"),
 	RCC_GROUPDETAILS_ARTICLES_TAB_CSS("a[class='wui-side-menu__link'][ui-sref='groups.details.articles']"),
 	RCC_GROUPDETAILS_GROUP_TITLE_CSS("div[class='research-group-card__text'] div[class*='wui-content-title']"),
-	RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS("a[class='research-group-card__text'] div[class*='wui-content-title']"),
+	RCC_GROUPSLIST_GROUP_TITLE_LINK_CSS("a[class='research-group-card__text'] h3[class*='wui-content-title']"),
 	RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS("div[class='wui-card__content'] input"),
 	RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS("ul[class='suggestion-list'] li span[class='ng-binding ng-scope']"),
 	RCC_GROUPDETAILS_INVITE_MEMBERS_SEND_BUTTON_CSS("button[event-action='save']"),
