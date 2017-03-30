@@ -498,7 +498,7 @@ public class PostRecordViewPage extends TestBase {
 		waitForAjax(ob);
 		String attribute = ob
 				.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-				.getAttribute("data-tooltip");
+				.getAttribute("data-uib-tooltip");
 
 		if (attribute.equalsIgnoreCase("Follow this person")) {
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
@@ -507,7 +507,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-					.getAttribute("data-tooltip");
+					.getAttribute("data-uib-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Unfollow this person"));
 			test.log(LogStatus.PASS, "Follow functionality is working fine in view post record page");
@@ -518,7 +518,7 @@ public class PostRecordViewPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_VIEW_POST_FOLLOW_BUTTON_CSS.toString()))
-					.getAttribute("data-tooltip");
+					.getAttribute("data-uib-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Follow this person"));
 			test.log(LogStatus.PASS, "UnFollow functionality is working fine in view post record page");
@@ -661,8 +661,9 @@ public class PostRecordViewPage extends TestBase {
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString()), 40);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
-				60);
+//		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+//				60);
+		BrowserWaits.waitTime(5);
 		jsClick(ob, ob.findElement(
 				By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_LI_SHARE_MODAL_SHARE_BUTTON_CSS.toString())));
 
