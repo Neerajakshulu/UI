@@ -1169,7 +1169,8 @@ DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	DRA_CUSTOMER_CARE_LINK_CSS("a[data-event-category='dra-customer-care']"),
 	CUSTOMER_CARE_PHONE_NAME_ERROR_MESSAGE_XPATH("//span[@class='wui-input__error wui-input__error--cc-contact-form']"),
 	CUSTOMER_CARE_CLEARBTN_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
-	
+	CUSTOMER_CARELINK_IN_ERRORPAGE_CSS("a[href='#/customer-care?app=dra'] div[class^='cc-product-tile']"),
+	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	;
 
 	private String locator;
