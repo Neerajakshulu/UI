@@ -87,6 +87,7 @@ public class Customercare001 extends TestBase {
 						.getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
 
 				String hours_of_operation = hrs_element.getText();
+
 				String lang = language_element.getText();
 
 				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
