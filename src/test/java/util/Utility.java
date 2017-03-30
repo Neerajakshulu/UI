@@ -13,10 +13,18 @@ public class Utility extends TestBase{
 	
 	public void deleteGroup(String groupTitle) throws Exception{
 		
+		try {
+			BrowserWaits.waitTime(5); 
 		pf.getGroupsPage(ob).clickOnGroupsTab();
 		pf.getGroupsPage(ob).switchToGroupTab();
 		pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
 		pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 		pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
+		}
+		
+		catch (Throwable t) {
+			
+			System.out.println("Error in Deleting the Group");
+		}
 	}
 }
