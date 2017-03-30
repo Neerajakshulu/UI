@@ -88,7 +88,7 @@ public class Notifications0011 extends TestBase {
 			test.log(LogStatus.INFO, "Featured post is at the top of the home page");
 			WebElement element=listOfNotifications.get(0);
 			//String postTitle=element.findElement(By.xpath("")).getText();
-			String postTitle=element.findElement(By.xpath("//div[@class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']")).getText();
+			String postTitle=element.findElement(By.xpath("//h3[@class='wui-content-title wui-content-title--medium wui-content-title--card-heading ng-binding']")).getText();
 			logger.info("Post Title : "+postTitle);
 			logger.info("Post Title length : "+postTitle.length());
 			// li[@class='ne-trending__list-item ng-scope']/a
