@@ -655,7 +655,7 @@ public enum OnePObjectMap {
 	RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Items']"),
 	RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Members']"),
 	RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("a[class='research-group-card__text'] p"),
-	RCC_GROUP_GROUPS_LINK__CSS("span[class='wui-title'] a"),
+	RCC_GROUP_GROUPS_LINK__CSS("h2[class='wui-title wui-title--groups'] a"),
 	RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 	RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
 	RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS("div[class='modal-dialog ng-scope'] button[event-action='delete']"),
