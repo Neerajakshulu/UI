@@ -91,7 +91,7 @@ public class Customercare001 extends TestBase {
 				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
 						&& language_element.isDisplayed())
 					Assert.assertEquals(lang, "English");
-				Assert.assertTrue(hours_of_operation.contains("GMT-5"));
+				Assert.assertTrue(hours_of_operation.contains("UTC-5"));
 
 				test.log(LogStatus.PASS,
 						"DRA Customer care page displays Call us section and customer care contact details");
