@@ -754,7 +754,7 @@ public enum OnePObjectMap {
 	RCC_INVITATION_DESCRIPTION_CSS("textarea[placeholder='Add a description']"),
 
 	RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
-	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
+	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[class='wui-dropdown__toggle dropdown-toggle']"),
 	RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
 	RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS("span[class='ng-binding ng-scope']"),
 
