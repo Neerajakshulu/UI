@@ -35,6 +35,7 @@ public class SearchProfile extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS); 
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
 		waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()),80);
+		BrowserWaits.waitTime(4);
 	}
 
 	/**
@@ -88,13 +89,13 @@ public class SearchProfile extends TestBase {
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
 				OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		System.out.println("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
 		//followUnFollowCheck.click();
 		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(4);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		System.out.println("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
@@ -112,7 +113,7 @@ public class SearchProfile extends TestBase {
 				OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS);
 		String hcrAttr = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_HCR_BADGE_CSS).get(1).findElement(By.cssSelector("span[class*='wui-icon--hcr']"))
-				.getAttribute("data-tooltip");
+				.getAttribute("data-uib-tooltip");
 		logger.info("hcr profile badge-->"+hcrAttr);
 		if (!hcrAttr.contains("Highly Cited Researcher")) {
 			throw new Exception("HCR Profile should display with Badge");

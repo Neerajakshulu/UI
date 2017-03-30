@@ -387,12 +387,7 @@ public class Authoring extends TestBase {
 		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
 		waitForPageLoad(ob);
 	}
-	public void chooseArticle1() throws InterruptedException {
-		BrowserWaits.waitForAllElementsToBePresent(ob,
-				By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH1.toString()), 180);
-		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH1.toString())));
-		waitForPageLoad(ob);
-	}
+	
 	public void waitUntilTextPresent(String locator, String text) {
 		try {
 			WebDriverWait wait = new WebDriverWait(ob, time);

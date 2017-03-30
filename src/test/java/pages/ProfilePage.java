@@ -280,13 +280,13 @@ public class ProfilePage extends TestBase {
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
 				OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		logger.info("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
 		//followUnFollowCheck.click();
 		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		logger.info("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
@@ -304,13 +304,13 @@ public class ProfilePage extends TestBase {
 		WebElement followUnFollowCheck = pf.getBrowserActionInstance(ob).getElement(
 				OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		followUnfollowLableBefore = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		logger.info("Follow/Unfollow Label Before-->" + followUnfollowLableBefore);
 		if(followUnfollowLableBefore.contains("Follow")) {
 		pf.getBrowserActionInstance(ob).jsClick(followUnFollowCheck);
 		BrowserWaits.waitTime(2);
 		followUnfollowLableAfter = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-tooltip");
+				.getElements(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_PROFILE_TOOLTIP_CSS).get(1).getAttribute("data-uib-tooltip");
 		logger.info("Follow/Unfollow Label After-->" + followUnfollowLableAfter);
 
 		if (followUnfollowLableBefore.equalsIgnoreCase(followUnfollowLableAfter)) {
@@ -512,7 +512,7 @@ public class ProfilePage extends TestBase {
 		waitForElementTobeClickable(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS.toString()), 120);
 		String tooltipBeforeAppreciate = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("data-uib-tooltip");
 		String countBeforeAppreciate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		logger.info("Appreciate tooltip-->"+tooltipBeforeAppreciate);
@@ -520,7 +520,7 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS);
 		BrowserWaits.waitTime(4);
 		String tooltipAfterAppreciate = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("tooltip");
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getAttribute("data-uib-tooltip");
 		String countAfterAppreciate = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_COMMENT_APPRECIATE_CSS).getText();
 		 logger.info("Appreciate tooltip after-->"+tooltipAfterAppreciate);
@@ -1550,7 +1550,7 @@ public class ProfilePage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS);
 		BrowserWaits.waitTime(6);
 		String followInfo = pf.getBrowserActionInstance(ob)
-				.getElement(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS).getAttribute("data-tooltip");
+				.getElement(OnePObjectMap.HOME_PROJECT_NEON_OTHER_PROFILE_TICKMARK_CSS).getAttribute("data-uib-tooltip");
 		logger.info("Follow/Unfollow Label Before-->" + followInfo);
 		
 		if(!followInfo.equals("Unfollow this person")) {
@@ -1570,7 +1570,7 @@ public class ProfilePage extends TestBase {
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).getText();
 		logger.info("profile name-->"+profileName);
 		String hcrProfileTooltip = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS).findElement(By.cssSelector("span[class*='wui-icon--hcr']"))
-									.getAttribute("data-tooltip");
+									.getAttribute("data-uib-tooltip");
 		logger.info("HCR profile-->"+hcrProfileTooltip);
 		
 		if(!(profileName.equalsIgnoreCase(hcrProfile) && hcrProfileTooltip.equalsIgnoreCase("Highly Cited Researcher"))){
