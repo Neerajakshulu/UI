@@ -1147,9 +1147,10 @@ public enum OnePObjectMap {
 	DRA_PROFILE_COUNTRY_CSS("input[placeholder='+ Country']"),
 
 	
-	
-	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
+	CUSTOMER_CARE_CALLUS_SECTION_PHONEICON_CSS("i[class^='fa fa-phone']"),
+	CUSTOMER_CARE_CALLUS_SECTION_CLOCKICON_CSS("i[class^='fa fa-clock-o']"),
+	CUSTOMER_CARE_CALLUS_SECTION_LANGICON_CSS("i[class^='fa fa-language']"),
 	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
 	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-no-margin ng-binding'])[3]"),
