@@ -72,7 +72,20 @@ public class IPARecordViewPage extends TestBase {
 			throw new Exception("Patent Titles are not found");
 	}
 
-	public void clickOnOriginalPatent() throws Exception {
+	public void clickOnOriginalPatent(ExtentTest test) throws Exception {
+		String pubNum = ob.findElement(By.xpath("//span[@class='ng-binding'][1]")).getText();
+		String[] tmp = pubNum.split(": ");
+		pubNum = tmp[1];
+		int i;
+		
+		for(i=pubNum.length()-1; i>=0; i--){
+			if(Character.isAlphabetic(pubNum.charAt(i))){
+				break;
+			}
+		}
+				
+		String Num = pubNum.substring(0, i);
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilText("ORIGINAL");
 		String winHandleBefore = ob.getWindowHandle();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_RECORD_VIEW_PAGE_PATENT_PDF_LINK_CSS);
@@ -80,6 +93,12 @@ public class IPARecordViewPage extends TestBase {
 			ob.switchTo().window(winHandle);
 		}
 		BrowserWaits.waitTime(6);
+		String url = ob.findElement(By.cssSelector("embed[id='plugin']")).getAttribute("src");
+		
+		if(url.contains(Num))
+			test.log(LogStatus.INFO, "PDF is opened successfully ");
+		else
+			test.log(LogStatus.FAIL, "PDF is not opened successfully ");
 		ob.close();
 		ob.switchTo().window(winHandleBefore);
 

@@ -65,7 +65,7 @@ public class IPA19 extends TestBase {
 			 * test.log(LogStatus.PASS,"Headings like Abstract,claims,Description are present in record view page");
 			 */
 			
-			pf.getIpaRecordViewPage(ob).clickOnOriginalPatent();
+			pf.getIpaRecordViewPage(ob).clickOnOriginalPatent(test);
 			test.log(LogStatus.PASS, "Pdf file for patent is clicked");
 			closeBrowser();
 			
