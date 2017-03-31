@@ -188,16 +188,20 @@ public class PostRecordViewPage extends TestBase {
 	 *             When Validation not done
 	 */
 	public void validatePostTitleAndProfileMetadata(String post, List<String> profileInfo) throws Exception {
+
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS);
+		BrowserWaits.waitTime(1);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS);
+
 		String postTitle = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_TITLE_CSS).getText();
 		waitForPageLoad(ob);
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS.toString()), 180);
 		logger.info("post -->" + post + "post title-->" + postTitle);
+
 		Assert.assertEquals(post, postTitle);
 		BrowserWaits.waitTime(5);
 		String postRVProfileTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_TILE_CSS).getText();
@@ -206,7 +210,7 @@ public class PostRecordViewPage extends TestBase {
 
 		String profileData = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_RECORD_VIEW_POST_PROFILE_METADATA_CSS).getText();
-		
+
 		logger.info("Profile metadata-->" + profileData);
 		if (!(/* profileInfo.contains(profileData) && */ profileInfo.contains(postRVProfileTitle))) {
 			throw new Exception("Profile info mismatching in Record view page of a Post");

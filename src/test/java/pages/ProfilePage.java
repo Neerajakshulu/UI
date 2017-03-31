@@ -1096,8 +1096,9 @@ public class ProfilePage extends TestBase {
 	public void clickOnDraftPostsTab() throws InterruptedException {
 		BrowserWaits.waitTime(10);
 		waitForPageLoad(ob);
-		waitForElementTobeClickable(ob,
-				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
+		BrowserWaits.waitTime(5);
+//		waitForElementTobeClickable(ob,
+//				By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString()), 40);
 		jsClick(ob,ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_DRAFT_POST_COUNT_CSS.toString())));
 		waitForAjax(ob);
 	}
