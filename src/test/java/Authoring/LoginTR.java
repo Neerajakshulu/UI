@@ -254,7 +254,7 @@ public class LoginTR extends TestBase {
 	}
 
 	public String clickOnLinkButtonInLoginPage() {
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 60);
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()), 60);
 		//waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 60);
 		//WebElement linkButton = ob.findElement(By.cssSelector("button[ng-click='vm.callSocialLogin()']"));
 		WebElement linkButton=ob.findElement(By.cssSelector(OnePObjectMap.SIGNIN_USING_FB_BUTTON_CSS.toString()));

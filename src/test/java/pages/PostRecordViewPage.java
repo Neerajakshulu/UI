@@ -1017,7 +1017,7 @@ public class PostRecordViewPage extends TestBase {
 
 	public void selectReasonInFlagModal() {
 
-		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()),
+		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()),
 				180);
 		jsClick(ob, ob
 				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString())));

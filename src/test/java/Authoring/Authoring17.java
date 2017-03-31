@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -71,8 +72,9 @@ public class Authoring17 extends TestBase {
 			pf.getpostRVPageInstance(ob).loadComments();
 			pf.getpostRVPageInstance(ob).clickOnFlagOfOtherUserComments(PROFILE_NAME);
 
-			waitForElementTobeVisible(ob,
-					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CSS.toString()), 180);
+//			waitForElementTobeVisible(ob,
+//					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()), 180);
+			BrowserWaits.waitTime(3);
 
 			try {
 				WebElement flagButton = ob.findElement(
