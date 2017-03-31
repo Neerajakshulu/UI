@@ -655,7 +655,7 @@ public enum OnePObjectMap {
 	RCC_GROUPSLIST_GROUP_ITEMS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Items']"),
 	RCC_GROUPSLIST_GROUP_MEMBERS_COUNT_CSS("div[class='ng-isolate-scope wui-metric'][labels*='Members']"),
 	RCC_GROUPSLIST_GROUP_DESCRIPTION_CSS("a[class='research-group-card__text'] p"),
-	RCC_GROUP_GROUPS_LINK__CSS("span[class='wui-title'] a"),
+	RCC_GROUP_GROUPS_LINK__CSS("h2[class='wui-title wui-title--groups'] a"),
 	RCC_GROUPSLIST_GROUP_OWNER_NAME_CSS("div[class='research-group-card__content'] div[class='ne-user-profile-object-info'] a[event-category*='ck-profile']"),
 	RCC_GROUPSLIST_GROUP_OWNER_ROLE_CSS("div[class='ne-user-profile-object-info'] div[class*='wui-descriptor__profile']"),
 	RCC_GROUPDETAILS_DELETE_CONFIMATION_DELETE_BUTTON_CSS("div[class='modal-dialog ng-scope'] button[event-action='delete']"),
@@ -753,9 +753,9 @@ public enum OnePObjectMap {
 	RCC_INVITATIONS_STATUS_CSS("div[class='pull-right ng-binding ng-scope']"),
 	RCC_INVITATION_DESCRIPTION_CSS("textarea[placeholder='Add a description']"),
 
-	RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("ul[class='dropdown-menu search-sort-dropdown__menu'] li"),
-	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[id='rcc-sort-groups']"),
-	RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] div"),
+	RCC_GROUP_LIST_PAGE_GROUP_SORT_BY_MENU_CSS("a[class='wui-dropdown__link ng-binding ng-scope']"),
+	RCC_GROUP_LIST_PAGE_SORT_BUTTON_CSS("button[class='wui-dropdown__toggle dropdown-toggle']"),
+	RCC_GROUP_LIST_PAGE_TITLE_CSS("a[class='research-group-card__text'] h3"),
 	RCC_GROUP_LIST_PAGE_GROUPS_TILE_DATE_CSS("span[class='ng-binding ng-scope']"),
 
 	RCC_GROUP_LIST_PAGE_GROUP_CARD_CSS("div[ui-view='createGroup']"),
@@ -1130,10 +1130,10 @@ public enum OnePObjectMap {
 	GURILLA_MAIL_TEXT_ID("email-widget"),
 	CUSTOMER_CARE_LOGIN_PAGE_NAME("loginform"), 
 	CUSTOMER_CARE_CALLUS_DROPDOWN_CSS("select[ng-model='vm.region']"),
-	CUSTOMER_CARE_CALLUS_CTRY1_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[1]"),
-	CUSTOMER_CARE_CALLUS_CTRY2_XPATH("(//p[@class='cc-content ng-binding ng-scope'])[2]"),
+	CUSTOMER_CARE_CALLUS_CTRY1_CSS("div[class='ng-scope cc-call-us__info'] p"),
+	CUSTOMER_CARE_CALLUS_CTRY2_CSS("div[class='ng-scope cc-call-us__info-secondary'] p"),
 	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
-DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
+    DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	
 	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
 	CUSTOMER_CARE_SUPPORTLINK_HELP_CSS("a[href='/#/customer-care?app=dra']"),
@@ -1147,12 +1147,14 @@ DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	DRA_PROFILE_COUNTRY_CSS("input[placeholder='+ Country']"),
 
 	
-	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
+	CUSTOMER_CARE_CALLUS_SECTION_PHONEICON_CSS("i[class^='fa fa-phone']"),
+	CUSTOMER_CARE_CALLUS_SECTION_CLOCKICON_CSS("i[class^='fa fa-clock-o']"),
+	CUSTOMER_CARE_CALLUS_SECTION_LANGICON_CSS("i[class^='fa fa-language']"),
 	CUSTOMER_CARE_REQUEST_SECTION_CSS("div[class='cc-contact-form'] h4"),
 	CUSTOMER_CARE_REGION_CSS("strong[class='wui-emphasis ng-binding']"),
-	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-content ng-binding'])[1]"),
-	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-content ng-binding'])[2]"),
+	CUSTOMER_CARE_HRS_XPATH("(//p[@class='cc-no-margin ng-binding'])[3]"),
+	CUSTOMER_CARE_LANGUAGE_XPATH("(//p[@class='cc-no-margin ng-binding'])[4]"),
 	CUSTOMER_CARE_USER_FULLNAME_NAME("fullName"),
 	CUSTOMER_CARE_USER_ORGANIZATION_NAME("organization"),
 	CUSTOMER_CARE_USER_EMAILID_NAME("email"),
@@ -1169,7 +1171,8 @@ DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
 	DRA_CUSTOMER_CARE_LINK_CSS("a[data-event-category='dra-customer-care']"),
 	CUSTOMER_CARE_PHONE_NAME_ERROR_MESSAGE_XPATH("//span[@class='wui-input__error wui-input__error--cc-contact-form']"),
 	CUSTOMER_CARE_CLEARBTN_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
-	
+	CUSTOMER_CARELINK_IN_ERRORPAGE_CSS("a[href='#/customer-care?app=dra'] div[class^='cc-product-tile']"),
+	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	;
 
 	private String locator;

@@ -40,7 +40,8 @@ public class Customercare001 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("customercare");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
+				.assignCategory("customercare");
 	}
 
 	/**
@@ -84,21 +85,37 @@ public class Customercare001 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
 				WebElement language_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_LANGUAGE_XPATH);
-
+               
+				
 				String hours_of_operation = hrs_element.getText();
+
 				String lang = language_element.getText();
 
 				if (callus_element.isDisplayed() && region_element.isDisplayed() && hrs_element.isDisplayed()
 						&& language_element.isDisplayed())
 					Assert.assertEquals(lang, "English");
-				Assert.assertTrue(hours_of_operation.contains("GMT-5"));
+				Assert.assertTrue(hours_of_operation.contains("UTC-5"));
 
 				test.log(LogStatus.PASS,
 						"DRA Customer care page displays Call us section and customer care contact details");
-
+						
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"DRA Customer care page doesn't display Call us section and customer care contact details");
+			}
+			WebElement phone_icon = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_PHONEICON_CSS);
+			WebElement clock_icon = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_CLOCKICON_CSS);
+			WebElement language_icon = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_CALLUS_SECTION_LANGICON_CSS);
+			if (phone_icon.isDisplayed() && clock_icon.isDisplayed() && language_icon.isDisplayed())
+				test.log(LogStatus.PASS,
+						"Phone icon,Clock icon and Language icon are displaying correctly");
+			else
+			{
+				test.log(LogStatus.FAIL,
+						"Phone icon,Clock icon and Language icon are not displaying correctly");
 			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();

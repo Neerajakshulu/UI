@@ -90,7 +90,7 @@ public class RCC091 extends TestBase {
 			BrowserWaits.waitTime(10);
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
-			pf.getLoginTRInstance(ob).logOutApp();
+			//pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 
 		} catch (Throwable t) {

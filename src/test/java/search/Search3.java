@@ -74,12 +74,12 @@ public class Search3 extends TestBase {
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS.toString()), 30);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 			Thread.sleep(2000);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
-			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS.toString()));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			logger.info("Links Size : " + searchResults.size());
 			ArrayList<String> urls = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {

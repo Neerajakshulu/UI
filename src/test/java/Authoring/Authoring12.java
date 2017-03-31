@@ -118,7 +118,7 @@ public class Authoring12 extends TestBase {
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_CSS.toString())));
 
 			// pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ARTICLE_RECORD_VIEW_SHARE_ON_LI_LINK);
-			waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
+			//waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 40);
 			jsClick(ob, ob.findElement(By.cssSelector(
 					"div[class='modal-footer wui-modal__footer ng-scope'] button[data-ng-click='shareModal.close()']")));
 
