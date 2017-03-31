@@ -73,9 +73,9 @@ public class Search42 extends TestBase {
 			BrowserWaits.waitTime(7);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
-			//ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())));
-			BrowserWaits.waitTime(4);
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+			waitForAjax(ob);
+
 			// Check the filter is collapsed by default
 			collapseFilter();
 			BrowserWaits.waitTime(2);
@@ -120,7 +120,7 @@ public class Search42 extends TestBase {
 			test.log(LogStatus.PASS, "Down arrow is visible for Authors filter");
 		}
 
-		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
+		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-body'] ul"));
 
 		documentTypePanelBody = filterPanelBodyList.get(0);
 		if (!documentTypePanelBody.isDisplayed()) {

@@ -72,10 +72,10 @@ public class Search80 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
 			BrowserWaits.waitTime(4);
-			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeClickable(ob, By.xpath("//a[contains(@ng-click,'vm.sortElements')]"), 120);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
+			waitForElementTobeClickable(ob, By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"), 120);
 
-			List<WebElement> mylist = ob.findElements(By.xpath("//a[contains(@ng-click,'vm.sortElements')]"));
+			List<WebElement> mylist = ob.findElements(By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"));
 			// System.out.println(mylist.size());
 			//
 			// for(int i=0;i<mylist.size();i++){

@@ -77,13 +77,13 @@ public class Search34 extends TestBase {
 
 			// Clicking on All content result set
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
-			waitForElementTobeVisible(ob, By.cssSelector("button[id='single-button']"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 
 			// Clicking on the sort by drop down
-			ob.findElement(By.cssSelector("button[id='single-button']")).click();
-			waitForElementTobeVisible(ob, By.cssSelector("a[event-action='citingsrcslocalcount:desc']"), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]"), 30);
 
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
+			ob.findElement(By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]")).click();
 			Thread.sleep(4000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0, 250);");

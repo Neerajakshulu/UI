@@ -20,6 +20,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search110 extends TestBase {
 
@@ -74,16 +75,14 @@ public class Search110 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			waitForElementTobeVisible(ob, By.id("single-button"), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 
-			ob.findElement(By.id("single-button")).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob,
-					By.xpath(
-							"//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"),
+					By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"),
 					30);
-			ob.findElement(By
-					.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"))
+			ob.findElement(By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"))
 					.click();
 			waitForElementTobeVisible(ob, By.xpath("//div[@tooltip='Times Cited']"), 30);
 			Thread.sleep(6000);

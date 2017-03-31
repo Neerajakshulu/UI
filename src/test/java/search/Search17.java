@@ -20,6 +20,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search17 extends TestBase {
 
@@ -76,13 +77,13 @@ public class Search17 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			waitForElementTobeVisible(ob, By.id("single-button"), 30);
-			ob.findElement(By.id("single-button")).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob,
-					By.xpath("//a[@event-action='citingsrcslocalcount:desc' and contains(text(),'Times Cited')]"), 30);
+					By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text(),'Times Cited')]"), 30);
 			ob.findElement(
-					By.xpath("//a[@event-action='citingsrcslocalcount:desc' and contains(text(),'Times Cited')]"))
+					By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text(),'Times Cited')]"))
 					.click();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob,

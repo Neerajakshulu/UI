@@ -19,6 +19,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search101 extends TestBase {
 
@@ -72,9 +73,9 @@ public class Search101 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 
-			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			Thread.sleep(1000);
 			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
 			waitForAjax(ob);
@@ -123,7 +124,7 @@ public class Search101 extends TestBase {
 
 			}
 
-			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText();
+			String option = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
 			option = option.substring(option.indexOf(":") + 1).trim();
 			if (!compareStrings("Times Cited", option)) {
 

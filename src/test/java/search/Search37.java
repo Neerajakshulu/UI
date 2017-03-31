@@ -84,9 +84,9 @@ public class Search37 extends TestBase {
 
 			// Clicking on the sort by drop down
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			waitForElementTobeVisible(ob, By.cssSelector("a[event-action='citingsrcslocalcount:desc']"), 30);
+			waitForElementTobeVisible(ob, By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]"), 30);
 
-			ob.findElement(By.cssSelector("a[event-action='citingsrcslocalcount:desc']")).click();
+			ob.findElement(By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]")).click();
 			Thread.sleep(4000);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0, 250);");

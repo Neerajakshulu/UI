@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search90 extends TestBase {
 
@@ -72,18 +73,17 @@ public class Search90 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			waitForElementTobeClickable(ob, By.xpath("//button[@id='single-button']"), 4);
-			ob.findElement(By.xpath("//button[@id='single-button']")).click();
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 4);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 
 			// waitForElementTobeClickable(ob, By.xpath("//a[@class='wui-side-menu__link']").partialLinkText("Article"),
 			// 4);
 			waitForElementTobeVisible(ob,
-					By.xpath(
-							"//div[@class='search-sort-dropdown dropdown open']/ul[@class='dropdown-menu search-sort-dropdown__menu']"),
+					By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"),
 					4);
 			Thread.sleep(2000);
 			List<WebElement> sortByValuesList = ob
-					.findElements(By.xpath("//div[@class='search-sort-dropdown dropdown open']/ul/li"));
+					.findElements(By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"));
 			List<String> expectedDropDownValues = Arrays.asList(new String[] {"Relevance", "Times Cited",
 					"Publication Date (Newest)", "Publication Date (Oldest)"});
 			List<String> actualDropDownValues = new ArrayList<String>();

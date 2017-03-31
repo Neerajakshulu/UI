@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search108 extends TestBase {
 
@@ -70,14 +71,14 @@ public class Search108 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.id("single-button"), 30);
-			ob.findElement(By.id("single-button")).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			waitForElementTobeVisible(ob,
 					By.xpath(
-							"//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"),
+							"//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"),
 					30);
 			ob.findElement(By
-					.xpath("//a[@class='wui-emphasis search-sort-dropdown__menu-link ng-binding' and contains(text(),'Times Cited')]"))
+					.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"))
 					.click();
 			Thread.sleep(5000);
 
@@ -122,7 +123,7 @@ public class Search108 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_sorting_not_retained")));// screenshot
 			}
 
-			String text = ob.findElement(By.id("single-button")).getText().substring(9);
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(9);
 			// System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {

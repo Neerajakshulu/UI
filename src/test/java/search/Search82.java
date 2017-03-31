@@ -20,6 +20,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search82 extends TestBase {
 
@@ -72,8 +73,8 @@ public class Search82 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob,By.id("single-button"),30);
-			ob.findElement(By.id("single-button")).click();
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()),30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			waitForElementTobeClickable(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 120);
 
 			ob.findElement(By.xpath("//a[contains(text(),'Times Cited')]")).click();

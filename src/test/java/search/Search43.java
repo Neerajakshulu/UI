@@ -118,7 +118,7 @@ public class Search43 extends TestBase {
 			test.log(LogStatus.PASS, "Down arrow is visible for Categories filter");
 		}
 
-		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
+		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-body'] ul"));
 		documentTypePanelBody = filterPanelBodyList.get(0);
 
 		if (!documentTypePanelBody.isDisplayed()) {

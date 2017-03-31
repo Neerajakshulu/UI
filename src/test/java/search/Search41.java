@@ -73,7 +73,8 @@ public class Search41 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
-			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
+			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
+			waitForAjax(ob);
 
 			// Check the filter is collapsed by default
 			collapseFilter();
@@ -120,7 +121,7 @@ public class Search41 extends TestBase {
 			test.log(LogStatus.PASS, "Down arrow is visible for Document Type filter");
 		}
 
-		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-collapse in']"));
+		filterPanelBodyList = ob.findElements(By.cssSelector("div[class='panel-body'] ul"));
 		documentTypePanelBody = filterPanelBodyList.get(0);
 
 		if (!documentTypePanelBody.isDisplayed()) {
