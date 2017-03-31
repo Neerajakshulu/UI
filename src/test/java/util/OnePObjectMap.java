@@ -187,11 +187,9 @@ public enum OnePObjectMap {
 
 	HOME_PROJECT_NEON_ARTICLE_PROFILE_METADATA_TAG("h6"),
 	HOME_PROJECT_NEON_PROFILE_INTEREST_AND_SKILLS_CSS("li[class='interest-or-skill ng-binding ng-scope']"),
-	//HOME_PROJECT_NEON_SEARCH_BOX_CSS("div[class='ne-main-nav'] input[class^='wui-search-bar__input']"),
 	HOME_PROJECT_NEON_SEARCH_BOX_CSS("input[placeholder='Search Articles, Patents, People and Posts']"),
 	HOME_PROJECT_NEON_SEARCH_CLICK_CSS("div[class='ne-main-nav'] button[title='Search'] i[class='fa fa-search']"),
 	HOME_PROJECT_NEON_SEARCH_PEOPLE_CSS("li[class^='wui-side-menu__list-item']"),
-	//HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("div[class^='dropdown ne-profile-flyout'] a[data-toggle='dropdown']"),
 	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("div[class^='ne-profile-flyout'] a[class='dropdown-toggle']"),
 	HOME_PROJECT_NEON_PROFILE_CSS("div[class*='ne-profile-flyout__menu'] a[href^='#/profile']"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
@@ -273,7 +271,6 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_CONTENT_CSS("div[class*='ne-publication__body--post wui-large-text wui-large-text--serif fr-view']"),
 	HOME_PROJECT_NEON_RECORD_VIEW_POST_TIMESTAMP_CSS("div[class='ne-publication__header'] span[class^='ne-publication__metadata']"),
 	HOME_PROJECT_NEON_PROFILE_TABS_DEFAULT_MESSAGE_CSS("div[data-ng-show='vm.isCurrentUsersProfile']"),
-	// HOME_PROJECT_NEON_PROFILE_POST_DETAILS_TIMESTAMP_CSS("div[data-ng-show='vm.hasPosts'] p"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_LIKE_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[1]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_COMMENTS_XPATH("//div[@data-ng-show='vm.hasPosts']/div[2]/div[2]"),
 	HOME_PROJECT_NEON_PROFILE_POST_DETAILS_WATCH_CSS("div[data-ng-show='vm.hasPosts'] button[data-event-category='watchlist-watch-item']"),
@@ -322,8 +319,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_ADD_IMAGE_BTN_XPATH("//a[@class='fr-floating-btn']"),
 	HOME_PROJECT_NEON_IMAGE_SELECTOR_BTN_XPATH("//i[@class='fa fa-image']"),
 	HOME_PROJECT_NEON_IMAGE_IN_POST_XPATH("//img[contains(@class,'fr-fic fr-dii')]"),
-	
-	//wui-timestamp[contains(@date,'post.keydate'])/span
+
 	HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH("//span[text()='This post has been removed by the member.']"),
 	
 	
@@ -375,7 +371,7 @@ public enum OnePObjectMap {
 
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
 	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
-	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][data-uib-tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
+	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH("//h3[@class='wui-content-title wui-content-title--medium']/a"),
@@ -469,7 +465,7 @@ public enum OnePObjectMap {
 	SEARCH_RESULTS_PAGE_POST_AUTHOR_DETAILS_CSS("div[class='ne-user-profile-object-info'] div[class^='wui-descriptor']"),
 	WTCHLISH_LINK_XPATH("//span[contains(text(),'Watchlist')]"),
 	NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_CSS("div[class='wui-card__line-item']"),
-	NEWSFEED_RECOMMENDED_ARTICLE_TITLE_CSS("h3[class='wui-content-title wui-content-title--card-heading ng-binding wui-content-title--small']"),
+	NEWSFEED_RECOMMENDED_ARTICLE_TITLE_CSS("div[class='wui-content-title ng-binding wui-content-title--small']"),
 	ARTICLE_TITLE_IN_RECORD_VIEW_PAGE_CSS("div[class='ne-publication__header'] h2"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_FOLLOW_USER_CSS("div[class='wui-card ng-scope'] span[class='fa fa-check unfollow']"),
 	NEWSFEED_RECOMMENDED_PEOPLE_SECTION_NUMBER_OF_USER_CSS("div[class='clearfix horizontal-wrapper'] div[class='ne-user-profile-image-wrapper']"),
@@ -495,7 +491,7 @@ public enum OnePObjectMap {
 	LOGIN_PAGE_FB_PASSWORD_TEXT_BOX_ID("pass"),
 	LOGIN_PAGE_FB_LOGIN_BUTTON_ID("loginbutton"),
 	FUTUREPOST_AUTHOR_NAME_CSS("div[class='wui-subtitle ne-user-profile-object-title-wrapper'] a"),
-	FUTUREPOST_POST_NAME_CSS("h3[class='wui-content-title wui-content-title--medium wui-content-title--card-heading ng-binding']"),
+	FUTUREPOST_POST_NAME_CSS("div[class='wui-content-title wui-content-title--medium wui-content-title--medium-card-title ng-binding']"),
 	FUTUREPOST_WATCHLIST_STATUS_CSS("div[class='wui-card--featured-post wui-card'] button[class='wui-icon-btn wui-icon-btn--horizontal-spacing dropdown-toggle']"),
 	FUTUREPOST_WATCHLIST_WATCHING_CSS("button[class='wui-icon-only-btn ne-action-dropdown__add-button--active']"),
 	//HOME_PROJECT_NEON_PROFILE_CREATE_POST_CANCEL_PUBLISH_XPATH("//div[@class='modal-dialog']/descendant::button[@event-action='publish']"),
