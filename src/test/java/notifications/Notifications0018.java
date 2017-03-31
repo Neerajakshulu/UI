@@ -87,8 +87,9 @@ public class Notifications0018 extends TestBase {
 			String watchstatus = null;
 			for (WebElement elem : element) {
 				if (elem.getAttribute("ng-repeat").contains("article in vm.articles track by")) {
-					List<WebElement> elment = elem
-							.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_NAME_XPATH.toString()));
+//					List<WebElement> elment = elem
+//							.findElements(By.xpath(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLES_SECTION_ARTICLE_NAME_XPATH.toString()));
+					List<WebElement> elment = elem.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_RECOMMENDED_ARTICLE_TITLE_CSS.toString()));
 					actual = elment.get(0).getText();
 					logger.info("Actual--> " + actual);
 					BrowserWaits.waitTime(3);
