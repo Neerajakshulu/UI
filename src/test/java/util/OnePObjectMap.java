@@ -371,7 +371,7 @@ public enum OnePObjectMap {
 
 	SEARCH_PAGE_ARTICLES_CSS("a[class='wui-side-menu__link'][ng-click*='ARTICLES']"),
 	SEARCH_RESULTS_PAGE_ITEM_CSS("div[class='wui-card__content']"),
-	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
+	SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS("div[class*='wui-icon-metric'][data-uib-tooltip='Comments'] span[class='wui-icon-metric__value ng-binding']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS("a[class='ng-binding']"),
 	SEARCH_RESULTS_PAGE_POST_TITLE_CSS("a[href^='#/posts']"),
 	SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH("//h3[@class='wui-content-title wui-content-title--medium']/a"),
