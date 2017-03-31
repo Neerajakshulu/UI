@@ -120,7 +120,7 @@ public enum OnePObjectMap {
 
 	ENW_RECORD_ISSUE_XPATH("//tr[@id='number_tr']/td[1]/span"),
 	ENW_RECORD_ISSUE_VALUE_XPATH("//tr[@id='number_tr']/td[2]/div"),
-
+	ENW_RECORD_PAGES_VALUE_XPATH("//*[@id='pages']"),
 	ENW_RECORD_ABSTRACT_XPATH("//tr[@id='abstract_tr']/td[1]/span"),
 	ENW_RECORD_ACCESSIONNUMBER_XPATH("//tr[@id='accession_number_tr']/td[1]/span"),
 
