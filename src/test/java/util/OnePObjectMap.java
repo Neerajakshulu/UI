@@ -402,7 +402,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_SEARCH_RESULT_SOURCE_CSS("ne-search-result-type div[class*='wui-descriptor--authors']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_PUBLICATION_CSS("ne-search-result-type div[class*='wui-descriptor--uppercase']"),
 	HOME_PROJECT_NEON_SEARCH_RESULT_PATENT_SOURCE_CSS("ne-search-result-type div[class='wui-descriptor']"),
-	SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS("div[class^='add-to-group-toggle'][class$='dropdown open'] div[class='dropdown-menu ne-action-dropdown']"),
+	SEARCH_RESULT_PAGE_ADDTOGROUP_DROPDOWN_CSS("div[class^='add-to-group-toggle'][class$='dropdown open'] div[class='ne-action-dropdown dropdown-menu']"),
 	// Added by bhavya
 	SEARCH_RESULT_PAGE_SORT_DROPDOWN_ITEMS_CSS("ul[class='wui-dropdown__menu dropdown-menu']"),
 	SEARCH_RESULT_PAGE_RESULTS_LINK_CSS("div[class='wui-card__body-content'] a"),
