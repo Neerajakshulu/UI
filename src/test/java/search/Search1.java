@@ -38,7 +38,7 @@ public class Search1 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
 				"Search suite");
 
-		
+	
 	}
 
 	/**
