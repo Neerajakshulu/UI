@@ -594,7 +594,7 @@ public class DRAPage extends TestBase {
 			ob.switchTo().window(al.get(2));
 			String actual_URL = ob.getCurrentUrl();
 			
-			String expected_URL = "http://dev-stable.1p.thomsonreuters.com/#/customer-care?app=dra";
+			String expected_URL = "https://projectne.thomsonreuters.com/#/customer-care?app=dra";
 			Assert.assertTrue(actual_URL.contains(expected_URL));
 			test.log(LogStatus.PASS,
 					" user is taken to the customer care page in the seperate browser when User clicks on support link");

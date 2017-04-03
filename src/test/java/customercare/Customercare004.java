@@ -51,7 +51,7 @@ public class Customercare004 extends TestBase{
 	 *             , When TR Login is not done
 	 */
 	@Test
-	public void testcaseDRA73() throws Exception {
+	public void testcaseCustomercare004() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
@@ -72,8 +72,8 @@ public class Customercare004 extends TestBase{
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
 			try {
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USERDRA054"),
-						LOGIN.getProperty("USERPWDDRA054"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAfbuser14"),
+						LOGIN.getProperty("DRAfbpw14"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				
 				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
