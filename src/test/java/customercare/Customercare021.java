@@ -3,6 +3,8 @@ package customercare;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -28,6 +30,8 @@ public class Customercare021 extends TestBase{
 	static String followAfter = null;
 	String alertMessage = "Invalid format. Only numbers (minimum 7 digits), spaces, and special characters + ( ) - allowed";
 	String err = "";
+	String[] invalidChars = {"#", "!", "$", "@", "%", "^", "&"};
+    String[] validchar={"+", "(",")","-" };
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -55,7 +59,7 @@ public class Customercare021 extends TestBase{
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);
-		
+		String number = " 8054 893 459";
 		if (!master_condition) {
 			status = 3;
 			test.log(LogStatus.SKIP,
@@ -78,9 +82,8 @@ public class Customercare021 extends TestBase{
 			Validate();
 			ob.navigate().refresh();
 			Validate1();
-	        String[] invalidChars = {"#", "!", "$", "@", "%", "^", "&"};
 	        
-	        String number = " 8054 893 459";
+	      //  String number = " 8054 893 459";
 	         for (String invalid : invalidChars) {
 	        	 pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.CUSTOMER_CARE_USER_PHONE_NAME).clear();
@@ -103,8 +106,9 @@ public class Customercare021 extends TestBase{
 	            	test.log(LogStatus.FAIL,
 							"Phone number format accepting special characters on Support Request form");
 	            }
-
-			BrowserWaits.waitTime(2);
+	         validate3();
+	         BrowserWaits.waitTime(5);
+	         
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -125,6 +129,29 @@ public class Customercare021 extends TestBase{
 		
 	}
 
+	private void validate3() throws Exception {
+		String Name = "Srinivas";
+		String Orgname = "Clarivate Analytics";
+		String Email = "srinivas.bms@clarivate.com";
+		String Phone = "+ 3 (123) 456-789";
+		String Extension = "+91@*%*#";
+		Select dropdown = new Select(ob.findElement(By.name("country")));
+		dropdown.selectByIndex(10);
+		String Country = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getAttribute("value");
+				
+		String Request = "Please test the above scenario --ts0001";
+		pf.getCustomercarePage(ob).EnterCustomercareDetails(test, Name, Orgname, Email, Phone, Extension,
+				Country, Request);
+
+		test.log(LogStatus.PASS, "user is able to submit the form in DRA Customer care page and Phone number field allowed only  "
+				+ "special characters + ( ) - ");
+		BrowserWaits.waitTime(3);
+		pf.getCustomercarePage(ob).ValidateSuccessMessage(test);
+		test.log(LogStatus.PASS,
+				"Success message is displayed that confirms submission and allows user to raise a new ticket.");
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.CUSTOMER_CARE_USER_OK_BUTTON_CSS);
+		
+	}
 	private void Validate() throws Exception {
 		String charact="56789101112131415161718192021222324252627";
 		 pf.getBrowserActionInstance(ob)
