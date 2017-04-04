@@ -19,6 +19,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search8 extends TestBase {
 
@@ -71,29 +72,29 @@ public class Search8 extends TestBase {
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 
 			// Find out that how many search results are visible right now
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			// System.out.println("No of search results visible="+searchResults.size());
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
+			System.out.println("No of search results visible="+searchResults.size());
 			int count1 = searchResults.size();
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 			BrowserWaits.waitTime(6);
 			searchResults.clear();
-			searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			// System.out.println("No of search results visible="+searchResults.size());
+			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
+			System.out.println("No of search results visible="+searchResults.size());
 			int count2 = searchResults.size();
 
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 			BrowserWaits.waitTime(6);
 			searchResults.clear();
 			searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
-			// System.out.println("No of search results visible="+searchResults.size());
+			System.out.println("No of search results visible="+searchResults.size());
 			int count3 = searchResults.size();
 
 			boolean condition1 = count2 > count1;

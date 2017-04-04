@@ -144,7 +144,8 @@ public class Search4 extends TestBase {
 			}
 
 			closeBrowser();
-		} catch (Throwable t) {
+		} 
+		catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();

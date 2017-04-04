@@ -68,18 +68,18 @@ public class Search22 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS);
 			waitForAjax(ob);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			ArrayList<String> urls = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
 
@@ -95,7 +95,7 @@ public class Search22 extends TestBase {
 				Thread.sleep(5000);
 				// String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
 				// ob.get(link55);
-				WebElement myE = ob.findElement(By.xpath(OR.getProperty("details_link")));
+				WebElement myE = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS.toString()));
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
 
