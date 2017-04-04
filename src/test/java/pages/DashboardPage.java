@@ -529,7 +529,7 @@ public class DashboardPage extends TestBase {
 				if (webElement.isDisplayed())
 					count++;
 			}
-			flag = count == 5;
+			flag = count == 10;
 			test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
 					"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
 
@@ -550,11 +550,12 @@ public class DashboardPage extends TestBase {
 
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
 			pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+			Thread.sleep(100);
 			// .waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
 			WebElement ele = null;
 			try {
 				ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
-				flag = (!ele.isDisplayed());
+				flag = (!ele.isDisplayed());				
 			} catch (Exception e) {
 				flag = true;
 			}
