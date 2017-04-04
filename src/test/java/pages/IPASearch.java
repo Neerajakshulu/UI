@@ -121,7 +121,7 @@ System.out.println();
 		List<String> termsAdded = new ArrayList<String>();
 
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_SEARCH_TEXTBOX_CSS, "carbon");
-		termsAdded = addCompanyTerms("1&&2:3");
+		termsAdded = addCompanyTerms("1&&2:2");
 
 		List<WebElement> clipboardTerms = ob
 				.findElements(By.cssSelector(OnePObjectMap.NEON_IPA_COMPANYCLIPBOARD_CSS.toString()));
