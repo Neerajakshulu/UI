@@ -180,7 +180,7 @@ public class ENW007 extends TestBase {
 				}
 					
 			}
-			System.out.println("Verifying Values  ");
+		//	System.out.println("Verifying Values  ");
 		//	test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
 //			System.out.println("Values from Neon: 1." + neonValues.get("expectedReferenceType") + " 2."+
 //					neonValues.get("expectedURL") + " 3. "+ neonValues.get("expectedJournal") + " 4."+ neonValues.get("expectedTitle")
