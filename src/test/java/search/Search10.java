@@ -107,7 +107,7 @@ public class Search10 extends TestBase {
 			JavascriptExecutor js = (JavascriptExecutor) ob;
 			js.executeScript("window.history.back();");
 			waitForAjax(ob);
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults2 = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			BrowserWaits.waitTime(8);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
@@ -137,8 +137,8 @@ public class Search10 extends TestBase {
 				// screenshot
 
 			}
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("filter_checkbox")), 40);
-			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS.toString()) ,40);
+			filterValues = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS.toString()));
 			BrowserWaits.waitTime(4);
 			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")
 					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");

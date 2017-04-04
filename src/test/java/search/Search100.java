@@ -18,6 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search100 extends TestBase {
 
@@ -65,7 +66,7 @@ public class Search100 extends TestBase {
 			// waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS.toString())).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
