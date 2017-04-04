@@ -51,7 +51,7 @@ public class NewsfeedPage extends TestBase {
 
 	public String getPostTitle() throws Exception {
 		String postCategeory = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
-				.findElements(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString())).get(1)
+				.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString()))
 				.getText();
 		logger.info("Post Categeory-->" + postCategeory);
 		String postTitle = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_CSS)
