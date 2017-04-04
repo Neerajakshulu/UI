@@ -585,13 +585,13 @@ public class DRAPage extends TestBase {
 		try {
 
 		
-			Set<String> myset = ob.getWindowHandles();
+			/*Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
 			ArrayList<String> al = new ArrayList<String>();
 			for (int i = 0; i < myset.size(); i++) {
 				al.add(myIT.next());
 			}
-			ob.switchTo().window(al.get(2));
+			ob.switchTo().window(al.get(2));*/
 			String actual_URL = ob.getCurrentUrl();
 			
 			String expected_URL = "https://projectne.thomsonreuters.com/#/customer-care?app=dra";

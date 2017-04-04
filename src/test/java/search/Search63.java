@@ -66,15 +66,15 @@ public class Search63 extends TestBase {
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			waitForAjax(ob);
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println(searchResults.size());
 
 			if (!compareNumbers(0, searchResults.size())) {
@@ -95,7 +95,7 @@ public class Search63 extends TestBase {
 					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS.toString()));
 
 			mylist.get(0).click();
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.xpath("//*[@ng-show='noResults']"), 30);
 
 			String actual_text1 = ob.findElement(By.xpath("//*[@ng-show='noResults']")).getText();

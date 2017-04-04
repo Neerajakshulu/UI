@@ -62,7 +62,7 @@ public class ENW030 extends TestBase {
 			String firstName= ob.findElement(By.cssSelector("[name='firstName']")).getAttribute("placeholder");
 			try {
 				Assert.assertEquals(expected_URL, firstName);	
-				test.log(LogStatus.PASS, " Header Logo text is displayed properly for Non-Market users");
+				test.log(LogStatus.PASS, "User is able to sign in with STeAM account which is missing  first name,last name or both.");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, " Header Logo text is not displayed properly for Non-Market users");// extent
 				ErrorUtil.addVerificationFailure(t);// testng reports
