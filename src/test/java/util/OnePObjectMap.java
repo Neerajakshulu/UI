@@ -990,7 +990,7 @@ public enum OnePObjectMap {
 	RESET_PASSWORD_PAGE_CHECK_SUCCESS_TICK_MARK_MESSAGE_CSS("H6[class='col-xs-11 password-validator__text ng-binding']"),
 	LOGIN_PAGE_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
 	GURILLA_LIST_EMAIL_IDS_XPATH("//tr[starts-with(@id,'mr_')]/td[2]"),
-	GURILLA_LIST_EMAIL_PROJECT_TITLE_CSS("span[style='color:#45B7E7;']"),
+	GURILLA_LIST_EMAIL_PROJECT_TITLE_CSS("span[style*='color:#45B7E7;']"),
 	RESET_YOUR_PASSWORD_PAGE_CSS("div[class='row ng-scope'] div"),
 	RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS("div[class='wui-input-with-label'] input"),
 	RESET_YOUR_PASSWORD_PAGE_RESET_BUTTON_CSS("div[class='login-button-container'] button"),
