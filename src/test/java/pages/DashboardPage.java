@@ -602,7 +602,7 @@ public class DashboardPage extends TestBase {
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
 				"Top Fillers Label " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
 		List<WebElement> Terms = pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.NEON_IPA_DASH_COM_KEY_TOP_TEC_TERMS_VALS_XPATH);
+				.getElements(OnePObjectMap.NEON_IPA_DASH_TECH_KEY_TOPFILERS_VALS_XPATH);
 		count = 0;
 		for (WebElement webElement : Terms) {
 			if (webElement.isDisplayed())
@@ -623,13 +623,14 @@ public class DashboardPage extends TestBase {
 			if (webElement.isDisplayed())
 				count++;
 		}
-		flag = count == 5;
+		flag = count == 10;
 		test.log(flag ? LogStatus.PASS : LogStatus.FAIL,
 				"Top Technology Terms Values " + (flag ? "" : "not ") + "displayed in KeyInformation Panel");
 
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_LINK_CSS);
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 		WebElement ele = null;
 		try {
 			ele = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_IPA_DASH_KEYINFORMATION_PANEL_CSS);
