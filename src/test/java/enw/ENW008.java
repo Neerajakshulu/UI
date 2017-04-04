@@ -27,11 +27,7 @@ public class ENW008 extends TestBase {
 
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	// Verify that the Reference type","Title",URL in ENDnote from Neon for Posts
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
