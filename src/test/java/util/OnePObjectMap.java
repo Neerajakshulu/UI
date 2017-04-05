@@ -553,6 +553,7 @@ public enum OnePObjectMap {
 	LOCKED_MSG_XPATH("//h2[contains(text(),'Your account has been locked.')]"),
 	LOCKED_OK_BUTTON_XPATH("//button[@class='wui-btn wui-btn--secondary button-color-secondary']"),
 
+	
 	// Navigation and Landing page
 	NEON_ENW_INTEGRATION_TEXT_CSS("p[class='sign-in-options-text text-center']"),
 	NEON_ENW_COMPANY_CSS("h4[class='wui-title login-header__app-name ng-binding']"),

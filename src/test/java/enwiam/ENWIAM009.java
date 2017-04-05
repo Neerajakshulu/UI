@@ -161,6 +161,7 @@ public class ENWIAM009 extends TestBase {
 
 				ob.switchTo().window(al.get(1));
 				BrowserWaits.waitTime(4);
+				
 				String str1 = ob
 						.findElement(By.xpath(OnePObjectMap.ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH.toString()))
 						.getText();
