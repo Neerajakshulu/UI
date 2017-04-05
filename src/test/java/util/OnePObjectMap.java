@@ -1178,6 +1178,8 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_CLEARBTN_XPATH("//button[@class='wui-btn wui-btn--secondary']"),
 	CUSTOMER_CARELINK_IN_ERRORPAGE_CSS("a[href='#/customer-care?app=dra'] div[class^='cc-product-tile']"),
 	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
+	HOME_PROJECT_NEON_RVIEW_ARTICLE_COMMENTCOUNT_CSS("div[class='ne-publication-sidebar__metrics'] span[class='wui-icon-metric__value ng-binding']"),
+	
 	;
 
 	private String locator;
