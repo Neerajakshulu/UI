@@ -209,6 +209,12 @@
 			<class name="watchlist.Watchlist033"></class>
 		</classes>
 	</test>
+	<test name="Watchlist034">
+		<classes>
+			<class name="watchlist.Watchlist034"></class>
+		</classes>
+	</test>
+	
 
 </suite>
 
