@@ -66,7 +66,7 @@ public class RCC025 extends TestBase {
 
 			// Inviting user2
 			BrowserWaits.waitTime(25);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21")); 
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23")); 
 			BrowserWaits.waitTime(25);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
@@ -84,7 +84,7 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow(); 
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			int beforeusergroupcount = -1;
 			try {
 				pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -168,7 +168,7 @@ public class RCC025 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
+			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
