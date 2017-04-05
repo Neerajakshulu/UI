@@ -540,7 +540,7 @@ public enum OnePObjectMap {
 	ENDNOTE_LOGOUT_HEADER_LABLE_XPATH("(//a[@class='dropdown-toggle'])[2]"),
 	ENDNOTE_LOGOUT_SIGNOUT_LINK_XPATH("(//a[contains(text(),'Sign out')]"),
 	ENDNOTE_ACCOUNT_LINK_XPATH("//span[@class='fa fa-cog profile_account_link']"),
-	ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH("//div[@class='elqHeading']"),
+	ENDNOTE_ACCOUNT_PAGE_PREFERENCE_LINK_XPATH("//div[@class='black_background']//h1"),
 	ENDNOTE_ACCESS_CENTER_EMAIL_FIELD_CSS("input[class='elqField']"),
 	ENDNOTE_ACCESS_CENTER_SUBMIT_BUTTON_CSS("input[id='submit']"),
 	ENDNOTE_ACCESS_CENTER_VERIFICATION_MAIL_CSS("div[class='elqHeading']"),
