@@ -138,7 +138,7 @@ static int status = 1;
 				}
 				 
 				 test.log(LogStatus.INFO, "Inviting list of users at a time from type ahead search");
-				 List<String> membersList= Arrays.asList(LOGIN.getProperty("RCCPROFILE13"), LOGIN.getProperty("RCCPROFILE14"), LOGIN.getProperty("RCCPROFILE10"));
+				 List<String> membersList= Arrays.asList(LOGIN.getProperty("RCCPROFILE13"), LOGIN.getProperty("RCCPROFILE14"), LOGIN.getProperty("RCCPROFILE12"));
 				 
 				 pf.getGroupDetailsPage(ob).inviteMembers(membersList);
 				 
