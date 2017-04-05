@@ -62,10 +62,8 @@ public class IPARecordViewPage extends TestBase {
 		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(
 				OnePObjectMap.NEON_IPA_RECORD_LIST_PAGE_PATENT_TITLE_CSS);
 		    val=val-1;
-		if (val <= list.size()) {
-			System.out.println("Reached 1");			
+		if (val >= 0 && val <= list.size()) {
 			String title = "title"; //list.get(val).getText();
-			System.out.println("Reached 2");
 			list.get(val).click();
 			return title;
 		} else
@@ -89,9 +87,11 @@ public class IPARecordViewPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob).waitUntilText("ORIGINAL");
 		String winHandleBefore = ob.getWindowHandle();
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_RECORD_VIEW_PAGE_PATENT_PDF_LINK_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
 		for (String winHandle : ob.getWindowHandles()) {
 			ob.switchTo().window(winHandle);
 		}
+
 		BrowserWaits.waitTime(6);
 		String url = ob.findElement(By.cssSelector("embed[id='plugin']")).getAttribute("src");
 		
