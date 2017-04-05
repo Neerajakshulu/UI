@@ -97,6 +97,7 @@ public class RCC018 extends TestBase {
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
+			test.log(LogStatus.INFO, "Invitation Accepted");
 			pf.getGroupDetailsPage(ob).clickPostsTab();
 			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 
