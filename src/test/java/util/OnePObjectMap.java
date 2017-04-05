@@ -415,7 +415,9 @@ public enum OnePObjectMap {
   //Added by Ashwini
   	SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS("span[class='wui-checkbox__visible']"),
   	SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS("input[type='text']"),
-
+  	SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH("//a[contains(text(),'Times Cited')]"),
+  	
+  	
 	// record view page
     RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
@@ -459,7 +461,7 @@ public enum OnePObjectMap {
 	TRENDING_SECTION_POST_FROM_NEWSFEED_CSS("a[data-ui-sref='postsView({id:post.id})']"),
 	// login page elements
 
-	SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH("//a[contains(text(),'Times Cited')]"),
+	
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='wui-btn--login']"),
