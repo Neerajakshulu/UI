@@ -73,28 +73,26 @@ public class Search110 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(3);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			BrowserWaits.waitTime(2);
-			waitForElementTobeVisible(ob,
-					By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"),
-					30);
-			ob.findElement(By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text() , 'Times Cited')]"))
-					.click();
-			waitForElementTobeVisible(ob, By.xpath("//div[@tooltip='Times Cited']"), 30);
-			Thread.sleep(6000);
-			List<WebElement> times_cited_labels = ob.findElements(By.xpath("//div[@tooltip='Times Cited']"));
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString()),30);
+			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString())).click();
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector("div[data-uib-tooltip='Times Cited']"), 30);
+			
+			List<WebElement> times_cited_labels = ob.findElements(By.cssSelector("div[data-uib-tooltip='Times Cited']"));
+			
 			ArrayList<Integer> counts = new ArrayList<Integer>();
 			String temp;
 			for (int i = 0; i < times_cited_labels.size(); i++) {
 
-				temp = times_cited_labels.get(i).getText()
-						.substring(0, times_cited_labels.get(0).getText().indexOf(" ")).trim();
+				temp = times_cited_labels.get(i).getText().substring(0, times_cited_labels.get(0).getText().indexOf(" ")).trim();
 				counts.add(Integer.parseInt(temp));
-				// System.out.println(counts.get(i));
+			 System.out.println(counts.get(i));
 			}
 
 			ArrayList<Integer> mylist = new ArrayList<Integer>();
@@ -107,6 +105,7 @@ public class Search110 extends TestBase {
 			try {
 
 				Assert.assertTrue(counts.equals(mylist));
+				test.log(LogStatus.PASS,"Records are sorted based on time cited option");
 			}
 
 			catch (Throwable t) {

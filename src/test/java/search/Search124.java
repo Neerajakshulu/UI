@@ -65,13 +65,15 @@ public class Search124 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			String title1 = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			System.out.println("..................");
+			System.out.println(title1);
 			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
 			Thread.sleep(5000);
 			waitForPageLoad(ob);
 			waitForElementTobeVisible(ob, By.cssSelector("h2[class^='wui-content-title']"), 40);
 
 			String title2 = ob.findElement(By.cssSelector("h2[class^='wui-content-title']")).getText();
-
+			System.out.println(title2);
 			if (!compareStrings(title1, title2)) {
 
 				test.log(LogStatus.FAIL, "Clicking on article title is not redirected to correct record page");// extent

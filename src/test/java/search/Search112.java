@@ -104,7 +104,7 @@ public class Search112 extends TestBase {
 			BrowserWaits.waitTime(4);
 			String sortOptionSelected = ob
 					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()))
-					.getText().substring(9);
+					.getText().substring(8);
 			System.out.println(sortOptionSelected);
 			BrowserWaits.waitTime(3);
 			List<WebElement> webElementOrderAfterNavigation = ob.findElements(By

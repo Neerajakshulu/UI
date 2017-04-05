@@ -123,7 +123,7 @@ public class Search108 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_sorting_not_retained")));// screenshot
 			}
 
-			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(9);
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(8);
 			// System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {

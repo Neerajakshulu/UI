@@ -123,10 +123,10 @@ public class Search101 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_incorrect_documents_getting_displayed")));// screenshot
 
 			}
-
-			String option = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
-			option = option.substring(option.indexOf(":") + 1).trim();
-			if (!compareStrings("Times Cited", option)) {
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(8);
+			//String option = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText();
+			//option = option.substring(option.indexOf(":") + 1).trim();
+			if (!compareStrings("Times Cited", text)) {
 
 				test.log(LogStatus.FAIL, "Incorrect sorting option getting displayed");// extent reports
 				status = 2;// excel
