@@ -72,10 +72,10 @@ public class Search119 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.id("single-button"), 30);
-			ob.findElement(By.id("single-button")).click();
-			waitForElementTobeVisible(ob, By.xpath("//a[contains(text(),'Times Cited')]"), 30);
-			ob.findElement(By.xpath("//a[contains(text(),'Times Cited')]")).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString())).click();
 
 			Thread.sleep(5000);
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
@@ -119,8 +119,8 @@ public class Search119 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_sorting_not_retained")));// screenshot
 			}
 
-			String text = ob.findElement(By.id("single-button")).getText().substring(9);
-			// System.out.println(text);
+			String text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(8);
+			 System.out.println(text);
 
 			if (!compareStrings("Times Cited", text)) {
 

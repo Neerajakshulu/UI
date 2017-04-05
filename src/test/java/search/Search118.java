@@ -68,19 +68,20 @@ public class Search118 extends TestBase {
 			// login using TR credentials
 			login();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()),30);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			waitForElementTobeVisible(ob, By.id(OR.getProperty("sortDropdown_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 
-			ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).click();
-			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link")), 40);
-			ob.findElement(By.linkText(OR.getProperty("sortDropdown_timesCitedOption_link"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
+			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString()), 30);
+			ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH.toString())).click();
+
 			waitForAjax(ob);
 
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
@@ -99,7 +100,7 @@ public class Search118 extends TestBase {
 			filterValues.get(1).click();
 			waitForAjax(ob);
 
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			// System.out.println("search results-->"+searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -117,7 +118,7 @@ public class Search118 extends TestBase {
 			waitForPageLoad(ob);
 			waitForAjax(ob);
 			Thread.sleep(6000);
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults2 = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			// System.out.println("search results2-->"+searchResults2.size());
 			ArrayList<String> al2 = new ArrayList<String>();
 			for (int i = 0; i < searchResults2.size(); i++) {
@@ -140,7 +141,7 @@ public class Search118 extends TestBase {
 
 			}
 
-			String option = ob.findElement(By.id(OR.getProperty("sortDropdown_button"))).getText().substring(9);
+			String option = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).getText().substring(8);
 			System.out.println(option);
 			if (!compareStrings("Times Cited", option)) {
 

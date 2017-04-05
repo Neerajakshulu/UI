@@ -61,14 +61,14 @@ public class Search121 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 			String search_term = "Systems Biology of Cell Behavior";
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("\"" + search_term + "\"");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement((By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()))).sendKeys("\"" + search_term + "\"");
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 			Thread.sleep(15000);
-			String title = ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).getText();
+			String title = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString())).getText();
 			// System.out.println(search_term);
 			// System.out.println(title);
 
@@ -121,7 +121,7 @@ public class Search121 extends TestBase {
 						this.getClass().getSimpleName() + "_publication_date_not_getting_displayed_correctly")));// screenshot
 			}
 
-			String times_cited = ob.findElement(By.xpath("//div[@tooltip='Times Cited']")).getText();
+			String times_cited = ob.findElement(By.xpath("//span[@class='wui-icon-metric__label' and contains(text() ,'Times Cited')]")).getText();
 			// System.out.println(times_cited);
 			// String expected_times_cited="2 Times Cited";
 
