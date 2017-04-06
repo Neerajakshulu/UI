@@ -85,19 +85,19 @@ public class Search105 extends TestBase {
 
 			boolean googleShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(0)
-					.getAttribute("tooltip").contains("Share on Google");
+					.getAttribute("data-uib-tooltip").contains("Share on Google");
 
 			boolean twitterShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button")).get(2)
-					.getAttribute("tooltip").contains("Share on Twitter");
+					.getAttribute("data-uib-tooltip").contains("Share on Twitter");
 
 			boolean fbShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(0)
-					.getAttribute("tooltip").contains("Share on Facebook");
+					.getAttribute("data-uib-tooltip").contains("Share on Facebook");
 
 			boolean liShare = ob
 					.findElements(By.cssSelector("div[class='ne-publication-sidebar__social-share'] button a")).get(1)
-					.getAttribute("tooltip").contains("Share on LinkedIn");
+					.getAttribute("data-uib-tooltip").contains("Share on LinkedIn");
 
 			List<WebElement> postCreationAndEdit = ob
 					.findElements(By.xpath("//span[contains(@class,'ne-publication__metadata--post')]"));
