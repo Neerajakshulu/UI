@@ -678,6 +678,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnRemoveRecord(String recordTitle, String recordType) throws Exception {
 		
 		WebElement record = getRecordCard(recordTitle, recordType);
+		BrowserWaits.waitTime(5);
 		scrollElementIntoView(ob, record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
 		jsClick(ob,record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
 				

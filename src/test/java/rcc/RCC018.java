@@ -99,6 +99,7 @@ public class RCC018 extends TestBase {
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 			test.log(LogStatus.INFO, "Invitation Accepted");
 			pf.getGroupDetailsPage(ob).clickPostsTab();
+			BrowserWaits.waitTime(5);
 			pf.getGroupDetailsPage(ob).clickOnRemoveRecord(recordTitle, recordType);
 
 			try {
