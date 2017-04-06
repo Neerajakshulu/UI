@@ -68,7 +68,7 @@ public class Authoring21 extends TestBase {
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
 			pf.getHFPageInstance(ob).searchForText("The language instinct of Steven Pinker");
 			pf.getSearchResultsPageInstance(ob).searchForArticleWithComments();
-			pf.getpostRVPageInstance(ob).loadComments();
+			//pf.getpostRVPageInstance(ob).loadComments();
 
 			waitForAllElementsToBePresent(ob,
 					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_DYNAMIC_XPATH.toString()), 80);
