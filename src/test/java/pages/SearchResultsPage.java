@@ -60,6 +60,7 @@ public class SearchResultsPage extends TestBase {
 	 */
 	public void clickOnPatentsTab() throws Exception {
 		waitForAjax(ob);
+		BrowserWaits.waitTime(2);
 		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(2).click();
 		waitForAjax(ob);
 	}
