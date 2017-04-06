@@ -52,7 +52,7 @@
 	<test name="document_Add_to_Group_from_Record_view_page">
 		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 		<parameter name="password" value="Thomson@123" />
-		<parameter name="documentTitle" value="cancer"/>
+		<parameter name="documentTitle" value="network biology"/>
 		<classes>
 			<class name="rcc.RCC112"></class>
 		</classes> 
