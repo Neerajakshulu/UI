@@ -154,20 +154,19 @@ public class ENW000012 extends TestBase {
 
 			}
 
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString()), 30);
+			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
 
 			waitForElementTobeVisible(ob, By.name(OnePObjectMap.LINK_LOGIN_NAME.toString()), 30);
-			Thread.sleep(4);
+			BrowserWaits.waitTime(5);
 			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UsersteamENW000011"));
+			BrowserWaits.waitTime(5);
 			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000011"));
-			waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString()), 30);
+			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString()), 30);
 			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
 
 			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
 					.getText();
-
-			System.out.println(actualEmail1);
 			try {
 				Assert.assertEquals(LOGIN.getProperty("UsersteamENW000011"), actualEmail1);
 				test.log(LogStatus.PASS, " Email id getting displayed in Account Setting page is correct");

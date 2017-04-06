@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -165,22 +166,22 @@ public class ENW0008 extends TestBase {
 			}
 			
 
-//			System.out.println("Verifying Values  ");
-//			if (!(endNoteDetails.get("ReferenceTypeValue").contains(neonValues.get("expectedReferenceType"))
-//					&& endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL"))
-//					&& neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue"))
-//					&& neonValues.get("expectedAuthor").equals(endNoteDetails.get("AuthorValue")))) {
-//				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
-//				Assert.assertEquals(true, false);
-//			}
-//			
-//			else
-//			{
-//				test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
-//			}
-//		
-//			
-
+			System.out.println("Verifying Values  ");
+			Assert.assertEquals(endNoteDetails.get("ReferenceTypeValue"),neonValues.get("expectedReferenceType"));
+			Assert.assertEquals(endNoteDetails.get("TitleValue"), neonValues.get("expectedTitle"));
+		    JavascriptExecutor jse = (JavascriptExecutor) ob;
+		    jse.executeScript("window.scrollBy(0,250)", "");
+		 	if ((endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL")))) 
+			{
+				test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+			}
+			
+			else
+			{
+				
+				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+				
+			}
 			NavigatingToENW();
 			closeBrowser();
 			

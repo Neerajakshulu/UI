@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -180,39 +182,22 @@ public class ENW007 extends TestBase {
 				}
 					
 			}
-		//	System.out.println("Verifying Values  ");
-		//	test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
-//			System.out.println("Values from Neon: 1." + neonValues.get("expectedReferenceType") + " 2."+
-//					neonValues.get("expectedURL") + " 3. "+ neonValues.get("expectedJournal") + " 4."+ neonValues.get("expectedTitle")
-//					+" 5." + neonValues.get("expectedAuthor1") + " 6."+ neonValues.get("expectedAuthor2")
-//					+ "7." + neonValues.get("expectedVolume") + "8."+ neonValues.get("expectedIssue") 
-//					+""+ neonValues.get("expectedPages"));
-//			
-//			System.out.println("Values from ENDNOTE: EN Refe Value:" + endNoteDetails.get("ReferenceTypeValue") 
-//			+ "EN URL" + endNoteDetails.get("URLValue") 
-//			+ "EN JValue"+ endNoteDetails.get("JournalValue") + " EN Title" +endNoteDetails.get("TitleValue") + " EN Author1"+
-//			endNoteDetails.get("AuthorValue1") + " EN Author2 " + endNoteDetails.get("AuthorValue2")
-//			+ " EN Valume " + endNoteDetails.get("VolumeValue") + " EN Issue " + endNoteDetails.get("IssueValue")
-//			+ " EN Paages " + endNoteDetails.get("pagesValue"));
+			System.out.println("Verifying Values  ");
+			Assert.assertEquals(endNoteDetails.get("ReferenceTypeValue"),neonValues.get("expectedReferenceType"));
+			Assert.assertEquals(endNoteDetails.get("TitleValue"), neonValues.get("expectedTitle"));
+		    JavascriptExecutor jse = (JavascriptExecutor) ob;
+		    jse.executeScript("window.scrollBy(0,250)", "");
+		 	if ((endNoteDetails.get("URLValue").contains(neonValues.get("expectedURL")))) 
+			{
+				test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+			}
 			
-			
-//			if (!(neonValues.get("expectedReferenceType").equals((endNoteDetails.get("ReferenceTypeValue")))
-//					&& neonValues.get("expectedTitle").equals(endNoteDetails.get("TitleValue"))
-//					&& (neonValues.get("expectedURL").equals((endNoteDetails.get("URLValue"))))
-//					&& neonValues.get("expectedJournal").equals(endNoteDetails.get("JournalValue"))
-//					&& neonValues.get("expectedVolume").equals(endNoteDetails.get("VolumeValue"))
-//					&& neonValues.get("expectedIssue").equals(endNoteDetails.get("IssueValue"))
-//					&& neonValues.get("expectedPages").equals(endNoteDetails.get("pagesValue"))
-//					&& neonValues.get("expectedAuthor1").contains(endNoteDetails.get("AuthorValue1"))
-//					&& neonValues.get("expectedAuthor2").contains(endNoteDetails.get("AuthorValue2")))) {
-//				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
-//				//Assert.assertEquals(true, false);
-//			}
-//			else
-//			{
-//				test.log(LogStatus.PASS, "Values are matching \n"+neonValues+" Endnote Values "+endNoteDetails);
-//			}
-
+			else
+			{
+				
+				test.log(LogStatus.FAIL, "Values are not matching \n"+neonValues+" Endnote Values "+endNoteDetails);
+				
+			}
 			NavigatingToENW();
 			closeBrowser();
 		} catch (Throwable t) {
