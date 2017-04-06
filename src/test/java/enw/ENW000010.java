@@ -148,15 +148,13 @@ public class ENW000010 extends TestBase {
 
 			}
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_LINK_BUTTON_XPATH.toString())).click();
-
-			waitForElementTobeClickable(ob, By.name(OnePObjectMap.LINK_LOGIN_NAME.toString()), 30);
-			
+			BrowserWaits.waitTime(5);
 			ob.findElement(By.name("email")).sendKeys(LOGIN.getProperty("UserENWsteam000010"));
 			BrowserWaits.waitTime(5);
 			ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty("PWDuserENW000010"));
-
+			BrowserWaits.waitTime(5);
 			ob.findElement(By.xpath(OnePObjectMap.DONE_BUTTON_CLICK_XPATH.toString())).click();
-
+			
 			String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
 					.getText();
 

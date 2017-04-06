@@ -24,18 +24,15 @@ public class ENW018 extends TestBase {
 	static int status = 1;
 	String expected_URL = "Thank You";
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	// Verify that the Neon specific Feedback page is displayed, When a user is navigating from Neon 
+	//|| Verify that,the user's message should be sent to a configurable email box specific for Neon when user submitting the 
+	//feedback from Neon version of the new "Feedback" page.
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
 	}
-
 	@Test
 	public void testcaseENW018() throws Exception {
 
