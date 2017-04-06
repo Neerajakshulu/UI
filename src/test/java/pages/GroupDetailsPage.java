@@ -713,7 +713,7 @@ public class GroupDetailsPage extends TestBase {
 		WebElement record = getRecordCard(recordTitle, recordType);
 		String attribute = record
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
-				.getAttribute("data-tooltip");
+				.getAttribute("data-uib-tooltip");
 
 		if (attribute.equalsIgnoreCase("Follow this person")) {
 			record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString())).click();
@@ -721,7 +721,7 @@ public class GroupDetailsPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = record
 					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
-					.getAttribute("data-tooltip");
+					.getAttribute("data-uib-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Unfollow this person"));
 			test.log(LogStatus.PASS, "Follow functionality is working fine in view post record page");
@@ -731,7 +731,7 @@ public class GroupDetailsPage extends TestBase {
 			BrowserWaits.waitTime(10);
 			attribute = record
 					.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_FOLLOW_OWNER_CSS.toString()))
-					.getAttribute("data-tooltip");
+					.getAttribute("data-uib-tooltip");
 
 			Assert.assertTrue(attribute.equalsIgnoreCase("Follow this person"));
 			test.log(LogStatus.PASS, "UnFollow functionality is working fine in view post record page");
