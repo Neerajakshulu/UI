@@ -143,6 +143,12 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
+		try{
+			ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();	
+			ob.findElement(By.xpath("//a[text()='Not now']")).click();
+		}catch (Exception e) {
+			System.out.println("Loging in to Neon without linking popup");	
+		}
 	}
 	
 	/**
