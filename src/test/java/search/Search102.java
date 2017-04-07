@@ -62,7 +62,7 @@ public class Search102 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 
 			// login using TR credentials
-			login();
+			login(); 
 			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
