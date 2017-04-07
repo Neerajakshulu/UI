@@ -63,6 +63,7 @@ public class Search102 extends TestBase {
 
 			// login using TR credentials
 			login();
+			
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			ob.findElement(By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"))
