@@ -20,6 +20,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search103 extends TestBase {
 
@@ -65,30 +66,31 @@ public class Search103 extends TestBase {
 			// login using TR credentials
 			login();
 			//
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
+			
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			List<WebElement> filterPanelHeadingList;
 			WebElement documentTypePanelHeading;
 			// Capturing panel heading for filters
-			filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
+			filterPanelHeadingList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_PANELHEADING_CSS.toString()));
 			documentTypePanelHeading = filterPanelHeadingList.get(0);
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
 			BrowserWaits.waitTime(5);
-			List<WebElement> filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			List<WebElement> filterValues = ob.findElements(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH.toString()));
 			filterValues.get(0).click();
 			BrowserWaits.waitTime(8);
 			// Re-capturing filter values
-			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			filterValues = ob.findElements(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH.toString()));
 			filterValues.get(1).click();
 			waitForAjax(ob);
 
-			List<WebElement> searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			BrowserWaits.waitTime(4);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
@@ -104,7 +106,7 @@ public class Search103 extends TestBase {
 			js.executeScript("window.history.back();");
 			waitForPageLoad(ob);
 			waitForAjax(ob);
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults2 = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			BrowserWaits.waitTime(4);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al2 = new ArrayList<String>();
@@ -134,7 +136,7 @@ public class Search103 extends TestBase {
 
 			}
 
-			filterValues = ob.findElements(By.xpath(OR.getProperty("filter_checkbox")));
+			filterValues = ob.findElements(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH.toString()));
 
 			boolean filtering_condition = filterValues.get(0).getCssValue("color").contains("rgba(42, 45, 53, 1)")
 					&& filterValues.get(1).getCssValue("color").contains("rgba(42, 45, 53, 1)");

@@ -64,13 +64,13 @@ public class Search100 extends TestBase {
 			// login using TR credentials
 			login();
 			// waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 			// Type into the search box and get search results
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS.toString())).sendKeys("bio");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
-			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 120);
+			List<WebElement> searchResults1 = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
@@ -81,7 +81,7 @@ public class Search100 extends TestBase {
 
 			}
 
-			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			List<WebElement> searchResults2 = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 
 			// System.out.println(searchResults1.size());
 			// System.out.println(searchResults2.size());

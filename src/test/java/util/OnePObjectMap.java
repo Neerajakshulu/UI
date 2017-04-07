@@ -416,7 +416,8 @@ public enum OnePObjectMap {
   	SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS("span[class='wui-checkbox__visible']"),
   	SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS("input[type='text']"),
   	SEARCH_RESULT_PAGE_SORTDROPDOWN_TIMECITED_XPATH("//a[contains(text(),'Times Cited')]"),
-  	
+  	SEARCH_RESULT_PAGE_FILTER_PANELHEADING_CSS("div[class=panel-heading]"),
+  	SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH("//span[@class='wui-checkbox__visible']"),
   	
 	// record view page
     RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
