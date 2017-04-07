@@ -209,12 +209,12 @@ public class ENW0008 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(5);
-				if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
+				if ( !ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_CHECKBOX_XPATH.toString())).isSelected() )
 				{
-					ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
+					ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_CHECKBOX_XPATH.toString())).click();
 				}			
 				BrowserWaits.waitTime(2);
-				ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
+				ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_DELETE_XPATH.toString())).click();
 				HandleAlert();
 				BrowserWaits.waitTime(4);
 				jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
