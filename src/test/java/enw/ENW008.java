@@ -230,17 +230,6 @@ public class ENW008 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-	
-	public void deleteRecord() {
-		  ob.findElement(By.xpath("//input[@title='Return to list']")).click();
-	  ob.findElement(By.xpath("//input[@id='idCheckAllRef']")).click();
-	 ob.findElement(By.xpath("//input[@id='idDeleteTrash']")).click();
-	// ob.findElement(By.xpath("//*[contains(text(),'OK')]")).click();
-	 
-	 Alert alert = ob.switchTo().alert();
-	 System.out.println("Alert Message "+alert.getText());
-	 alert.accept();
-}
 	private void NavigatingToENW() {
 		 try {
 				//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL037"),(LOGIN.getProperty("USERPASSWORD037")));
@@ -248,12 +237,12 @@ public class ENW008 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(5);
-				if ( !ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).isSelected() )
+				if ( !ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_CHECKBOX_XPATH.toString())).isSelected() )
 				{
-					ob.findElement(By.xpath(".//*[@id='idCheckAllRef']")).click();
+					ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_CHECKBOX_XPATH.toString())).click();
 				}			
 				BrowserWaits.waitTime(2);
-				ob.findElement(By.xpath(".//*[@id='idDeleteTrash']")).click();
+				ob.findElement(By.xpath(OnePObjectMap.ENW_ALLRECORDS_DELETE_XPATH.toString())).click();
 				HandleAlert();
 				BrowserWaits.waitTime(4);
 				jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_USER_ICON_XPATH.toString())));
