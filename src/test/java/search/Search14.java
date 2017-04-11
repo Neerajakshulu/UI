@@ -62,7 +62,7 @@ public class Search14 extends TestBase {
 
 			openBrowser();
 			clearCookies();
-			maximizeWindow();
+			maximizeWindow(); 
 			ob.navigate().to(host);
 
 			// login using TR credentials
