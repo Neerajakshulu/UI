@@ -546,7 +546,7 @@ public class OnboardingModalsPage extends TestBase {
 			
 			
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(4);
 			
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
@@ -577,7 +577,7 @@ public class OnboardingModalsPage extends TestBase {
 			
 			if(isProfileEditable) {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_EDIT_UPDATE_CSS);
-				BrowserWaits.waitTime(3);
+				BrowserWaits.waitTime(6);
 			}
 			
 			List<String> profileData = pf.getProfilePageInstance(ob).getProfileTitleAndMetadata();

@@ -10,7 +10,8 @@
 	<parameter name="articleName" value="biology" />
 	<parameter name="patentName" value="CULTIVATION CONTROLLER" />
 	<parameter name="postName" value="Unique Post for Automation" />
-    <parameter name="postName2" value="test neon post" />
+	<parameter name="postName2" value="test neon post" />
+
 
 	<test name="Watchlist001">
 		<classes>
@@ -185,25 +186,25 @@
 			<class name="watchlist.Watchlist029"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Watchlist030">
 		<classes>
 			<class name="watchlist.Watchlist030"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Watchlist031">
 		<classes>
 			<class name="watchlist.Watchlist031"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Watchlist032">
 		<classes>
 			<class name="watchlist.Watchlist032"></class>
 		</classes>
 	</test>
-	
+
 	<test name="Watchlist033">
 		<classes>
 			<class name="watchlist.Watchlist033"></class>
@@ -214,7 +215,12 @@
 			<class name="watchlist.Watchlist034"></class>
 		</classes>
 	</test>
-	
+	<test name="Watchlist035">
+		<parameter name="user" value="nali tk" />
+		<classes>
+			<class name="watchlist.Watchlist035"></class>
+		</classes>
+	</test>
 
 </suite>
 
