@@ -93,7 +93,7 @@ public class Search8 extends TestBase {
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 			BrowserWaits.waitTime(6);
 			searchResults.clear();
-			searchResults = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
+			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println("No of search results visible="+searchResults.size());
 			int count3 = searchResults.size();
 
