@@ -422,6 +422,7 @@ public enum OnePObjectMap {
   	SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH("//span[@class='wui-checkbox__visible']"),
   	SEARCH_RESULT_PAGE_DETAIL_LINK_XPATH("//div[@class='col-xs-12']/a"),
   	
+  	
 	// record view page
     RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),
 	RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH("//button[@id='deleting']"),
