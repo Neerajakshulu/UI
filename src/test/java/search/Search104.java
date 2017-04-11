@@ -16,6 +16,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search104 extends TestBase {
 
@@ -60,13 +61,13 @@ public class Search104 extends TestBase {
 			ob.navigate().to(host);
 			// login using TR credentials
 			login();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()), 120);
 
 			String post = "Post for Testing bJ38z9";
 			// String post="Fairy circles";
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(post);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(post);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
 			waitForAjax(ob);
 
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css"))).click();
