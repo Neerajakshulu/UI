@@ -69,7 +69,7 @@ public class RCC013 extends TestBase {
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.PASS, "Group is created by the USER1 ");
 			BrowserWaits.waitTime(30);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE21"));
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE9"));
 			if (result)
 				test.log(LogStatus.PASS, "Invitation has been send to the USER2");
 			else
@@ -82,7 +82,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
+			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			waitForAjax(ob);
 			// pf.getGroupsPage(ob).switchToInvitationTab();
@@ -137,7 +137,7 @@ public class RCC013 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER021", "RCCTESTUSERPWD021");
+			loginAs("RCCTESTUSER009", "RCCTESTUSERPWD009");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			waitForAjax(ob);
