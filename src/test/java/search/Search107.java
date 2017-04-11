@@ -16,6 +16,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class Search107 extends TestBase {
 
@@ -62,18 +63,18 @@ public class Search107 extends TestBase {
 
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString()), 30);
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("argentina");
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchResults_links"))).click();
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys("argentina");
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
+			//waitForAjax(ob);
+			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
+			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString())).click();
 			BrowserWaits.waitTime(3);
 			ob.navigate().back();
 			Thread.sleep(5000);
-			String text = ob.findElement(
-					By.xpath("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"))
+			String text = ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_LINK_XPATH.toString()))
 					.getText();
 			System.out.println(text);
 

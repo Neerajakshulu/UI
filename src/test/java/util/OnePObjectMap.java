@@ -421,7 +421,7 @@ public enum OnePObjectMap {
   	SEARCH_RESULT_PAGE_FILTER_PANELHEADING_CSS("div[class=panel-heading]"),
   	SEARCH_RESULT_PAGE_FILTERPANEL_CHECKBOXES_XPATH("//span[@class='wui-checkbox__visible']"),
   	SEARCH_RESULT_PAGE_DETAIL_LINK_XPATH("//div[@class='col-xs-12']/a"),
-  	
+  	SEARCH_RESULT_PAGE_ALL_LINK_XPATH("//li[@class='wui-side-menu__list-item ng-scope wui-side-menu__list-item--active']"),
   	
 	// record view page
     RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS("button[class='wui-mini-btn wui-mini-btn--secondary'][ng-click='deleteThis(comment.id)']"),

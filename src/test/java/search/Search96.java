@@ -63,15 +63,16 @@ public class Search96 extends TestBase {
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			// login using TR credentials
 			login();
-			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 180);
+			waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString()), 180);
 
 			String postToSearch = "Post for Testing P9mW5A";
 
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(postToSearch);
-			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForAjax(ob);
+			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(postToSearch);
+			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
+			//waitForAjax(ob);
+			BrowserWaits.waitTime(5);
 
-			String postTitle = ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_post_title_css")))
+			String postTitle = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_POST_TITLE_CSS.toString()))
 					.getText();
 			BrowserWaits.waitTime(3);
 			String postAuthor = ob
