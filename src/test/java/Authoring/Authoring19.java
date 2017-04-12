@@ -111,8 +111,8 @@ public class Authoring19 extends TestBase {
 				}
 
 			}
-//			scrollingToElementofAPage();
-//			scrollingToElementofAPage();
+			scrollingToElementofAPage();
+			scrollingToElementofAPage();
 			WebElement ele = ob.findElement(By.xpath("//div[@class='modal-body wui-modal__body clearfix ng-scope']/div[1]/descendant::label/span[1]"));
 			scrollElementIntoView(ob, ele);
 			pf.getpostRVPageInstance(ob).selectReasonInFlagModal();
