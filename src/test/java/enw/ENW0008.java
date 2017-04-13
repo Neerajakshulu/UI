@@ -105,7 +105,7 @@ public class ENW0008 extends TestBase {
 				test.log(LogStatus.PASS, "User navigate to End note");
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				BrowserWaits.waitTime(6);
+				BrowserWaits.waitTime(7);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
 				BrowserWaits.waitTime(4);
 
