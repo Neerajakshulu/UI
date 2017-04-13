@@ -121,7 +121,7 @@ public class NewsfeedPage extends TestBase {
 					.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString()))
 					.getText();
 			logger.info("categeory type-->" + cardCategeory);
-			if (cardCategeory.contains("New Comment") || cardCategeory.contains("New Comments")) {
+			if (cardCategeory.contains("New comment") || cardCategeory.contains("New comments")) {
 				String cardTitle = cardSection
 						.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString()))
 						.getText();

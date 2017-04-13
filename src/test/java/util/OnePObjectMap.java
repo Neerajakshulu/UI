@@ -365,7 +365,7 @@ public enum OnePObjectMap {
 	NEWSFEED_NOTIFICATION_COMMENT_ON_OWN_POST_XPATH("//ne-notification-document-comment-event[@class='ng-scope']"),
 
 	NEWSFEED_POST_CARD_SECTION_CSS("div[class*='post wui-card']"),
-	NEWSFEED_POST_CARD_SECTION_TITLE_CSS("div[class*='wui-card__'] h2[class*='wui-card__heading ng-scope']"),
+	NEWSFEED_POST_CARD_SECTION_TITLE_CSS("div[class*='wui-card__'] h2[class*='wui-card__heading ng-binding ng-scope']"),
 	NEWSFEED_POST_CARD_POST_TITLE_CSS("h3[class*='wui-content-title']"),
 	NEWSFEED_POST_CARD_POST_TITLE_ADD_TO_WATCHLIST_CSS("button[ng-click='WatchButton.openWatchlistSelector()']"),
 	NEWSFEED_ARTICLE_CARD_SECTION_CSS("div[class*='articles wui-card']"),
@@ -1006,7 +1006,7 @@ public enum OnePObjectMap {
 	NEON_LOGIN_PAGE_FORGOT_PASSWORD_PAGE_CALCEL_BUTTON_CSS("div[class='login-button-container'] a"),
 	FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS("label[class='wui-input-with-label__error ng-scope']"),
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style*='color:#FF9100;']"),
-	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style*='color:#B1CD43;']"),
+	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style*='color:#008080;']"),
 	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style*='color:#621F95;']"),
 
 	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
