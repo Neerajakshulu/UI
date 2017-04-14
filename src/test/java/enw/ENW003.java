@@ -63,15 +63,9 @@ public class ENW003 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
 			ob.get(host);
-
-			String expectedSuccessMessage = "Sent To EndNote";
-
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
-
-			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
@@ -82,21 +76,17 @@ public class ENW003 extends TestBase {
 					.click();
 			BrowserWaits.waitTime(5);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-
-			// pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
-			// new Actions(ob).moveByOffset(200, 200).click().build().perform();
 			BrowserWaits.waitTime(8);
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 
 			ob.findElement(
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_STEAMLINKING_WHILE_SENDTOENW_BUTTON_CSS.toString()))
 					.sendKeys("asdfg");
+			BrowserWaits.waitTime(3);
 			ob.findElement(By
 					.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SOCIAL_LINKING_ONBOARDING_MODAL_BUTTON_CSS.toString()))
 					.click();
-
 			try {
-
 				String expectedErrorMsg = "The email and password do not match. Please try again.";
 
 				String actualErrorMsg = pf.getBrowserActionInstance(ob)
@@ -111,24 +101,6 @@ public class ENW003 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			pf.getSearchResultsPageInstance(ob).linkSteamAcctWhileSendToEndnoteSearchPage(LOGIN.getProperty("STEAMUSERPASSWORD"));
-
-			try {
-				Assert.assertEquals(expectedSuccessMessage,
-						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
-				test.log(LogStatus.PASS,
-						" Record sent successfully from Search Results Page after linking with steam account");
-			}
-			catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL,
-						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
-																													// reports
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-			}
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 

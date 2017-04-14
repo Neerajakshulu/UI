@@ -56,7 +56,7 @@ public class IAM033 extends TestBase {
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
 
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername"));
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
@@ -68,14 +68,14 @@ public class IAM033 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername"),
-					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername1"),
+					CONFIG.getProperty("fbpwrdPwd"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			pf.getLoginTRInstance(ob).logOutApp();
 
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),
-					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
+					CONFIG.getProperty("fbpwrd1"));
 						pf.getLoginTRInstance(ob).socialLinking();
 			test.log(LogStatus.PASS, "User has logged in with facebook credentials");
 			test.log(LogStatus.PASS, "Facebook account is linked with steam account");
@@ -92,8 +92,8 @@ public class IAM033 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),
-					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
+					CONFIG.getProperty("fbpwrd1"));
 			pf.getLoginTRInstance(ob).socialLinking();
 			test.log(LogStatus.PASS, "User has logged in with Linkedin credentials");
 			pf.getLoginTRInstance(ob).checkLinking();
@@ -111,11 +111,11 @@ public class IAM033 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername"),
-					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
+					CONFIG.getProperty("fbpwrd1"));
 			pf.getLoginTRInstance(ob).checkLinking();
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", CONFIG.getProperty("fbusername")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", CONFIG.getProperty("fbusername1")));
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
@@ -129,11 +129,11 @@ public class IAM033 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername"),
-					CONFIG.getProperty("fbpwrd"));
+			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
+					CONFIG.getProperty("fbpwrd1"));
 			pf.getLoginTRInstance(ob).checkLinking();
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", CONFIG.getProperty("fbusername")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", CONFIG.getProperty("fbusername1")));
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
