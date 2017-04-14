@@ -23,11 +23,7 @@ public class ENW011 extends TestBase {
 
 	static int status = 1;
 
-	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	// 
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -63,7 +59,7 @@ public class ENW011 extends TestBase {
 			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("ENW011USERNAME"),(LOGIN.getProperty("ENW011PASSWORD")));
 			BrowserWaits.waitTime(3);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_OPTIONS_TAB_XPATH.toString())));
-			BrowserWaits.waitTime(3);
+			BrowserWaits.waitTime(4);
 			jsClick(ob,ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_TAB_XPATH.toString())));
 			BrowserWaits.waitTime(1);
 			user_First_Name = ob.findElement(By.xpath(OnePObjectMap.ENW_PROFILE_FIRST_NAME_XPATH.toString()))
