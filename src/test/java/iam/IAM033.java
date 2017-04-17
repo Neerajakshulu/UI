@@ -1,8 +1,5 @@
 package iam;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -13,7 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import pages.PageFactory;
-import util.ErrorUtil;
+import util.BrowserWaits;
 import util.ExtentManager;
 
 public class IAM033 extends TestBase {
@@ -55,14 +52,14 @@ public class IAM033 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
 
-		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
-		}
+//		try {
+//			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
+//			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+//
+//		} catch (Throwable t) {
+//			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+//			ErrorUtil.addVerificationFailure(t);
+//		}
 
 		try {
 			openBrowser();
@@ -73,7 +70,7 @@ public class IAM033 extends TestBase {
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			pf.getLoginTRInstance(ob).logOutApp();
-
+			BrowserWaits.waitTime(6);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
 					CONFIG.getProperty("fbpwrd1"));
 						pf.getLoginTRInstance(ob).socialLinking();
@@ -88,25 +85,25 @@ public class IAM033 extends TestBase {
 			closeBrowser();
 			pf.clearAllPageObjects();
 		}
-		try {
-			openBrowser();
-			maximizeWindow();
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
-					CONFIG.getProperty("fbpwrd1"));
-			pf.getLoginTRInstance(ob).socialLinking();
-			test.log(LogStatus.PASS, "User has logged in with Linkedin credentials");
-			pf.getLoginTRInstance(ob).checkLinking();
-			test.log(LogStatus.PASS, "Linkedin account is linked with steam account");
-			pf.getLoginTRInstance(ob).logOutApp();
-
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Linking with face book  is not performed properly");// extent
-			closeBrowser();
-		} finally {
-			closeBrowser();
-			pf.clearAllPageObjects();
-		}
+//		try {
+//			openBrowser();
+//			maximizeWindow();
+//			ob.navigate().to(host);
+//			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
+//					CONFIG.getProperty("fbpwrd1"));
+//			pf.getLoginTRInstance(ob).socialLinking();
+//			test.log(LogStatus.PASS, "User has logged in with Linkedin credentials");
+//			pf.getLoginTRInstance(ob).checkLinking();
+//			test.log(LogStatus.PASS, "Linkedin account is linked with steam account");
+//			pf.getLoginTRInstance(ob).logOutApp();
+//
+//		} catch (Throwable t) {
+//			test.log(LogStatus.FAIL, "Linking with face book  is not performed properly");// extent
+//			closeBrowser();
+//		} finally {
+//			closeBrowser();
+//			pf.clearAllPageObjects();
+//		}
 		try {
 			openBrowser();
 			maximizeWindow();
@@ -125,31 +122,31 @@ public class IAM033 extends TestBase {
 			closeBrowser();
 			pf.clearAllPageObjects();
 		}
-		try {
-			openBrowser();
-			maximizeWindow();
-			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
-					CONFIG.getProperty("fbpwrd1"));
-			pf.getLoginTRInstance(ob).checkLinking();
-			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", CONFIG.getProperty("fbusername1")));
-			test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
-			pf.getLoginTRInstance(ob).logOutApp();
-			closeBrowser();
-		} catch (Throwable t) {
-
-			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
-																		// reports
-			StringWriter errors = new StringWriter();
-			t.printStackTrace(new PrintWriter(errors));
-			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);// testng
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-			closeBrowser();
-		}
+//		try {
+//			openBrowser();
+//			maximizeWindow();
+//			ob.navigate().to(host);
+//			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("fbusername1"),
+//					CONFIG.getProperty("fbpwrd1"));
+//			pf.getLoginTRInstance(ob).checkLinking();
+//			Assert.assertTrue(
+//					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", CONFIG.getProperty("fbusername1")));
+//			test.log(LogStatus.PASS, "Linked accounts are available in accounts page ");
+//			pf.getLoginTRInstance(ob).logOutApp();
+//			closeBrowser();
+//		} catch (Throwable t) {
+//
+//			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
+//																		// reports
+//			StringWriter errors = new StringWriter();
+//			t.printStackTrace(new PrintWriter(errors));
+//			test.log(LogStatus.INFO, errors.toString());// extent reports
+//			ErrorUtil.addVerificationFailure(t);// testng
+//			status = 2;// excel
+//			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+//					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+//			closeBrowser();
+//		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 

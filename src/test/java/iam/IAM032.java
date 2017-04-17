@@ -21,22 +21,16 @@ public class IAM032 extends TestBase {
 	static boolean fail = false;
 	static boolean skip = false;
 	static int status = 1;
-
 	static int time = 30;
 	PageFactory pf = new PageFactory();
-
 	// Following is the list of status:
-	// 1--->PASS
-	// 2--->FAIL
-	// 3--->SKIP
-	// Checking whether this test case should be skipped or not
+	
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
 	}
-
 	@Test
 	public void testInitiatePostCreation() throws Exception {
 
@@ -52,7 +46,7 @@ public class IAM032 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERNAME17"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			loginTofb();
 			linkAccounts("Facebook");
@@ -62,7 +56,7 @@ public class IAM032 extends TestBase {
 		}
 
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("USERNAME17"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			loginToLinkedIn();
 			linkAccounts("LinkedIn");
@@ -80,23 +74,21 @@ public class IAM032 extends TestBase {
 
 		// Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-		pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("USERNAME17"),
-				LOGIN.getProperty("PASSWORD17"));
+		pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("fbusername1"),
+				LOGIN.getProperty("fbpwrd1"));
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		pf.clearAllPageObjects();
 
 	}
-
 	private void loginTofb() throws Exception {
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
-
 		// Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("USERNAME17"),
-				LOGIN.getProperty("PASSWORD17"));
+		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("fbusername1"),
+				LOGIN.getProperty("fbpwrd1"));
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		pf.clearAllPageObjects();
@@ -114,7 +106,7 @@ public class IAM032 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("USERNAME17", "PASSWORD17");
+			loginAs("fbusername1", "fbpwrdPwd");
 			
 
 			String linkName = pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
@@ -128,12 +120,12 @@ public class IAM032 extends TestBase {
 
 			}
 			if (accountType.equalsIgnoreCase("Facebook")) {
-				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("USERNAME17"),
-						LOGIN.getProperty("PASSWORD17"));
+				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("fbusername1"),
+						LOGIN.getProperty("fbpwrd1"));
 				test.log(LogStatus.PASS, "User is able to link " + accountType + " account to Neon account");
 			} else if (accountType.equalsIgnoreCase("LinkedIn")) {
-				pf.getLoginTRInstance(ob).signInToLinkedIn(LOGIN.getProperty("USERNAME17"),
-						LOGIN.getProperty("PASSWORD17"));
+				pf.getLoginTRInstance(ob).signInToLinkedIn(LOGIN.getProperty("fbusername1"),
+						LOGIN.getProperty("fbpwrd1"));
 				test.log(LogStatus.PASS, "User is able to link " + accountType + " account to Neon account");
 			}
 
@@ -142,7 +134,7 @@ public class IAM032 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 			try {
 
-				loginAs("USERNAME17", "PASSWORD17");
+				loginAs("fbusername1", "fbpwrdPwd");
 				test.log(LogStatus.PASS,
 						"User is not asked to link the account again when user has already linked them");
 			} catch (Exception e) {
@@ -181,9 +173,9 @@ public class IAM032 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("USERNAME17")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("fbusername1")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("USERNAME17")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbusername1")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
