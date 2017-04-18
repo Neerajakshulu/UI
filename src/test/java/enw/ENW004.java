@@ -65,7 +65,7 @@ public class ENW004 extends TestBase {
 
 			ob.get(host);
 
-			//String expectedSuccessMessage = "Sent To EndNote";
+			String expectedSuccessMessage = "Sent To EndNote";
 			
 
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("sfbLIusername004"),
@@ -81,25 +81,25 @@ public class ENW004 extends TestBase {
 			BrowserWaits.waitTime(4);
 			pf.getLoginTRInstance(ob).logOutApp();
 
-//			try {
-//				Assert.assertEquals(expectedSuccessMessage,
-//						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
-//				test.log(LogStatus.PASS,
-//						" Record sent successfully from Search Results Page after linking with steam account");
-//			}
-//
-//			catch (Throwable t) {
-//
-//				test.log(LogStatus.FAIL,
-//						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
-//																													// reports
-//				status = 2;// excel
-//				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-//						.getSimpleName()
-//						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
-//				ErrorUtil.addVerificationFailure(t);
-//			}
-//
+			try {
+				Assert.assertEquals(expectedSuccessMessage,
+						pf.getSearchResultsPageInstance(ob).ValidateSendToEndnoteSearchPage());
+				test.log(LogStatus.PASS,
+						" Record sent successfully from Search Results Page after linking with steam account");
+			}
+
+			catch (Throwable t) {
+
+				test.log(LogStatus.FAIL,
+						" Record is not sent to Endnote from Search Results Page after linking with steam account");// extent
+																													// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
+						.getSimpleName()
+						+ "_more_search_results_do_not_get_displayed_when_user_scrolls_down_in_ALL_search_results_page")));// screenshot
+				ErrorUtil.addVerificationFailure(t);
+			}
+
 		closeBrowser();
 
 		} catch (Throwable t) {

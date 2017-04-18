@@ -63,6 +63,7 @@ public class ENW003 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+			
 			ob.get(host);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("STEAMUSEREMAIL"),
 					LOGIN.getProperty("STEAMUSERPASSWORD"));

@@ -11,6 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import pages.PageFactory;
 import util.BrowserWaits;
+import util.ErrorUtil;
 import util.ExtentManager;
 
 public class IAM033 extends TestBase {
@@ -52,14 +53,14 @@ public class IAM033 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
 
-//		try {
-//			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
-//			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-//
-//		} catch (Throwable t) {
-//			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-//			ErrorUtil.addVerificationFailure(t);
-//		}
+		try {
+			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
+			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+			ErrorUtil.addVerificationFailure(t);
+		}
 
 		try {
 			openBrowser();
