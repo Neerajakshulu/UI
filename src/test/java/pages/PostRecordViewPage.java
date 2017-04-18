@@ -1062,7 +1062,7 @@ public class PostRecordViewPage extends TestBase {
 			Thread.sleep(100);
 			}
 		BrowserWaits.waitTime(5);
-		pf.getAuthoringInstance(ob).clickAddCommentButton();
+		pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 		Thread.sleep(100);// after entering the comments wait for submit button
 							// to get enabled or disabled
 	}

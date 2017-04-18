@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import Authoring.Authoring;
+//import Authoring.Authoring;
 import Authoring.LoginTR;
 import util.BrowserAction;
 import util.BrowserWaits;
@@ -19,7 +19,7 @@ public class PageFactory {
 	private BrowserAction browserAction = null;
 	private BrowserWaits browserWaits = null;
 	private LoginTR loginTR = null;
-	private Authoring authoring = null;
+	//private Authoring authoring = null;
 	private OnboardingModalsPage onboarding = null;
 	private AccountPage accountPage = null;
 	private ENWReferencePage enwReferencePage = null;
@@ -40,6 +40,7 @@ public class PageFactory {
 	private DashboardPage dashboardPage=null;
 	private IPARecordViewPage rvpage=null;
 	private GmailLoginPage gmpage=null;
+	private CreatePostAndCommentPage postncommentpage = null;
 	
 	public IAMPage getIamPage(WebDriver ob) {
 
@@ -57,6 +58,13 @@ public class PageFactory {
 
 	}
 	
+	public CreatePostAndCommentPage getPostCommentPageInstance(WebDriver ob) {
+
+		if (postncommentpage == null) {
+			postncommentpage = new CreatePostAndCommentPage(ob);
+		}
+		return postncommentpage;
+	}
 	
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
@@ -133,15 +141,15 @@ public class PageFactory {
 		return browserWaits;
 
 	}
-
-	public Authoring getAuthoringInstance(WebDriver ob) {
-		if (authoring == null) {
-			authoring = new Authoring(ob);
-		}
-
-		return authoring;
-
-	}
+//
+//	public Authoring getAuthoringInstance(WebDriver ob) {
+//		if (authoring == null) {
+//			authoring = new Authoring(ob);
+//		}
+//
+//		return authoring;
+//
+//	}
 
 	public LoginTR getLoginTRInstance(WebDriver ob) {
 		if (loginTR == null) {
@@ -311,7 +319,7 @@ public class PageFactory {
 		accountPage = null;
 		loginTR = null;
 		onboarding = null;
-		authoring = null;
+		//authoring = null;
 		browserWaits = null;
 		browserAction = null;
 		hfPage = null;
@@ -333,5 +341,6 @@ public class PageFactory {
 		dashboardPage=null;
 		rvpage=null;
 		gmpage=null;
+		postncommentpage = null;
 	}
 }

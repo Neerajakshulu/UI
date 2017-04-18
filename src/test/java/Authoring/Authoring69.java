@@ -68,7 +68,7 @@ public class Authoring69 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			pf.getpostRVPageInstance(ob).addExternalLinkComments(URL);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			test.log(LogStatus.INFO, "Added external link to the comment");
 			try {
 				Assert.assertTrue(pf.getpostRVPageInstance(ob).validateCommentForExternalLink(URL));

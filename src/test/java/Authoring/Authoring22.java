@@ -95,14 +95,14 @@ public class Authoring22 extends TestBase {
 
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
-			pf.getAuthoringInstance(ob).enterArticleComment("Test Appreciation");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("Test Appreciation");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			Thread.sleep(6000);// wait for new comment to get added and
 								// displayed.
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			closeBrowser();
 		} catch (Throwable t) {

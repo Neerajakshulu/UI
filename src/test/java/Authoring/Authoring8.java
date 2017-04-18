@@ -104,8 +104,8 @@ public class Authoring8 extends TestBase {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -129,7 +129,7 @@ public class Authoring8 extends TestBase {
 		try {
 			test.log(LogStatus.INFO, "Min and Max Length Comment Validation");
 			// System.out.println("MinCharCount-->"+(minCharCount.substring(0,1)));
-			pf.getAuthoringInstance(ob).enterArticleComments(
+			pf.getPostCommentPageInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(minCharCount.substring(0, 1))));
 //			waitForElementTobeVisible(ob,
 //					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);
@@ -148,7 +148,7 @@ public class Authoring8 extends TestBase {
 			Assert.assertEquals(minValidErrMsg, expMinComment);
 			ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_CANCEL_COMMENT_BUTTON_CSS.toString())).click();
 			System.out.println("MaxCharCount-->" + (maxCharCount.substring(0, 4)));
-			pf.getAuthoringInstance(ob).enterArticleComments(
+			pf.getPostCommentPageInstance(ob).enterArticleComments(
 					RandomStringUtils.randomAlphabetic(Integer.parseInt(maxCharCount.substring(0, 4))));
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 180);

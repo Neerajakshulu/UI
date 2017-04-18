@@ -72,7 +72,7 @@ public class ENW005 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(CONFIG.getProperty("LIonlyusernameenw005"),
 					CONFIG.getProperty("LIonlypwrdenw005"));
 
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 

@@ -243,8 +243,8 @@ public class Notifications0008 extends TestBase {
 			/*waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.NEWSFEED_FEATURED_POST_XPATH.toString()), 60,
 					"Home page is not loaded successfully");*/
 			ob.navigate().to(document_url);
-			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			status = true;
 		} catch (Exception e) {
 			logger.error("Probem happens while adding comment on post" + e.getMessage());

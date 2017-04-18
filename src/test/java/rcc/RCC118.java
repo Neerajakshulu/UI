@@ -125,8 +125,8 @@ public class RCC118 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnArticleOrPatentTitle(patentTitle);
 			pf.getpostRVPageInstance(ob).validateDocumentInRecordViewPage(patentTitle);
 			
-			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on patent");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("test comments added on patent");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			
 			test.log(LogStatus.INFO, "Logout from the application and login with tested user");
 			pf.getLoginTRInstance(ob).logOutApp();

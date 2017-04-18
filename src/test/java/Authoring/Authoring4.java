@@ -108,14 +108,14 @@ public class Authoring4 extends TestBase {
 			totalProfileCommentsBeforeAdd = getProfleComments();
 			System.out.println("comment count Before adding new comment-->" + totalProfileCommentsBeforeAdd);
 			System.out.println();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			// Enter Article Comments
-			int expCount = pf.getAuthoringInstance(ob).getCommentCount();
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validateCommentAdd(test, expCount);
-			pf.getAuthoringInstance(ob).validateViewComment(test, addComments);
+			int expCount = pf.getProfilePageInstance(ob).getCommentCount();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(addComments);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).validateCommentAdd(test, expCount);
+			pf.getPostCommentPageInstance(ob).validateViewComment(test, addComments);
 			totalProfileCommentsAfterAdd = getProfleComments();
 			System.out.println("comment count After adding new comment-->" + totalProfileCommentsAfterAdd);
 			// Validate Comments count increased or not

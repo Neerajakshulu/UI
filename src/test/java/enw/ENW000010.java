@@ -72,7 +72,7 @@ public class ENW000010 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserENWsteam000010"),LOGIN.getProperty("PWDuserENW000010"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 		
 
 			logout();

@@ -66,8 +66,8 @@ public class Authoring51 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).viewOtherUsersPost(profileName);
 			int countBefore = pf.getpostRVPageInstance(ob).getCommentCount();
 
-			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("test comments added on post");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 			int countAfter = pf.getpostRVPageInstance(ob).getCommentCount();
 
@@ -88,8 +88,8 @@ public class Authoring51 extends TestBase {
 			}
 
 			try {
-				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
-				pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+				pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
+				pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
 				test.log(LogStatus.PASS, "Comment appreciation on posts working as expected");
 
 			} catch (Throwable t) {

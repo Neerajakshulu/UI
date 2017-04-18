@@ -493,8 +493,8 @@ public class Notifications0020 extends TestBase {
 					BrowserWaits.waitTime(4);
 //					waitForElementTobeVisible(ob,
 //							By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString()), 30);
-					pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
-					pf.getAuthoringInstance(ob).clickAddCommentButton();
+					pf.getPostCommentPageInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
+					pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 					//pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS);
 					// jsClick(ob,
 					// ob.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_TEXTBOX_CSS.toString())));

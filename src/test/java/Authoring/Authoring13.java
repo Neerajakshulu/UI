@@ -88,8 +88,8 @@ public class Authoring13 extends TestBase {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

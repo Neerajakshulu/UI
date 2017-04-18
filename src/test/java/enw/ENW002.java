@@ -60,7 +60,7 @@ public class ENW002 extends TestBase {
 					LOGIN.getProperty("MARKETUSERPWDENW001"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 			
 			waitForAjax(ob);
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();

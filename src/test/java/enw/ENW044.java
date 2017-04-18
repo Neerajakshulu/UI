@@ -53,7 +53,7 @@ public class ENW044 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL044"),
 					LOGIN.getProperty("USERPASSWORD044"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle("Neon Testing2");
+			pf.getSearchResultsPageInstance(ob).searchArticle("Neon Testing2");
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_results_post_title_css")), 60);
 			// Navigating to record view page

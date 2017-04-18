@@ -98,8 +98,8 @@ public class Authoring9 extends TestBase {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -123,8 +123,8 @@ public class Authoring9 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  Profanity Words execution starts for data set #" + (count + 1) + "--->");
 
-			pf.getAuthoringInstance(ob).enterArticleComments(profanityWord);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComments(profanityWord);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 60);
 			String profanityErrorMessage = pf.getBrowserActionInstance(ob)
@@ -138,7 +138,7 @@ public class Authoring9 extends TestBase {
 			if (!profanityErrorMessage.equalsIgnoreCase(errorMessage)) {
 				throw new Exception("Profanity_Words_doesnot_allow_comments_validation");
 			}
-			pf.getAuthoringInstance(ob).cancelComment();
+			pf.getPostCommentPageInstance(ob).cancelComment();
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

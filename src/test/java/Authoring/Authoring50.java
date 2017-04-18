@@ -74,8 +74,8 @@ public class Authoring50 extends TestBase {
 			pf.getProfilePageInstance(ob).clickOnFirstPost();
 			int countBefore = pf.getpostRVPageInstance(ob).getCommentCount();
 
-			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("test comments added on post");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 			int countAfter = pf.getpostRVPageInstance(ob).getCommentCount();
 
@@ -94,8 +94,8 @@ public class Authoring50 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "Post_count_validation_failed")));// screenshot
 
 			}
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 		} catch (Throwable t) {

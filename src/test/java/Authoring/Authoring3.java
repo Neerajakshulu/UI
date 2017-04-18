@@ -108,10 +108,10 @@ public class Authoring3 extends TestBase {
 
 			// pf.getAuthoringInstance(ob).waitForTRHomePage();
 			loginAs("USERNAME6", "PASSWORD6");
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).selectArtcleWithComments();
-			pf.getAuthoringInstance(ob).enterArticleComment("Test comments");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).selectArtcleWithComments();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("Test comments");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			deleteComments();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -150,7 +150,7 @@ public class Authoring3 extends TestBase {
 	public void deleteComments() throws Exception {
 		try {
 			scrollingToElementofAPage();
-			totalCommentsBeforeDeletion = pf.getAuthoringInstance(ob).getCommentCount();
+			totalCommentsBeforeDeletion = pf.getProfilePageInstance(ob).getCommentCount();
 			System.out.println("Before Deletion count --->" + totalCommentsBeforeDeletion);
 			WebElement deleteCommentButton = ob
 					.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON_CSS.toString()));
@@ -166,7 +166,7 @@ public class Authoring3 extends TestBase {
 			jsClick(ob, ob.findElement(By
 					.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON_CSS.toString())));
 			waitForAjax(ob);
-			totalCommentsAfterDeletion = pf.getAuthoringInstance(ob).getCommentCount();
+			totalCommentsAfterDeletion = pf.getProfilePageInstance(ob).getCommentCount();
 			System.out.println("TOTAL COMMENTS AFTER DELETION --->" + totalCommentsAfterDeletion);
 
 			if (!(totalCommentsBeforeDeletion > totalCommentsAfterDeletion)) {

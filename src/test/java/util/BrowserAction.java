@@ -212,6 +212,15 @@ public class BrowserAction extends TestBase {
 		return ele;
 
 	}
+	
+	public void scrollingToElementofAPage() throws InterruptedException {
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
+		jse.executeScript("scroll(0, 250);");
+	}
+
+	public void scrollingToElement(WebElement element) throws InterruptedException {
+		((JavascriptExecutor) ob).executeScript("arguments[0].scrollIntoView(true);", element);
+	}
 
 	public void scrollToElement(Object elementName) throws Exception {
 		if ((elementName instanceof Enum)) {

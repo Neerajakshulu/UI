@@ -132,8 +132,8 @@ public class Profile39 extends TestBase {
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).validatePostTitleAndProfileMetadata(postTitle, profileDetails);
 
-			pf.getAuthoringInstance(ob).enterArticleComment("test comments added on post");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment("test comments added on post");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 			pf.getHFPageInstance(ob).clickProfileImage();
 			pf.getProfilePageInstance(ob).clickProfileLink();

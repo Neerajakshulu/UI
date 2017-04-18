@@ -66,10 +66,10 @@ public class ENW007 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD007"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle("AN OVERVIEW OF IRRIGATION MOSAICS");
+			pf.getSearchResultsPageInstance(ob).searchArticle("AN OVERVIEW OF IRRIGATION MOSAICS");
 
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(6);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 			String expectedNotes1 = ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_NOTES1_XPATH.toString()))

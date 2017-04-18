@@ -65,11 +65,11 @@ public class ENW008 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD008"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle("Baseball technologies");
+			pf.getSearchResultsPageInstance(ob).searchArticle("Baseball technologies");
 			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			BrowserWaits.waitTime(8);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 

@@ -73,7 +73,7 @@ public class ENW006 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
 					CONFIG.getProperty("fbpwrd1"));
 
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 

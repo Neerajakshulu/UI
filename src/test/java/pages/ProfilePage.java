@@ -2264,4 +2264,25 @@ public class ProfilePage extends TestBase {
 	}
 	
 	//#################DRA-Profile flyout#################
+	
+	//************************Authoring Related *********************************
+	/**
+	 * Method to return comment count from article record view
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public int getCommentCount() throws InterruptedException {
+		BrowserWaits.waitTime(2);
+		//Commented by KR
+		waitForPageLoad(ob);
+		//waitForAjax(ob);
+		//scrollingToElementofAPage();
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString()),
+				180);
+		String commentSizeBeforeAdd = ob
+				.findElement(By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_COUNT_CSS.toString())).getText()
+				.replaceAll(",", "").trim();
+		return Integer.parseInt(commentSizeBeforeAdd);
+	}
 }

@@ -73,7 +73,7 @@ public class ENW004 extends TestBase {
 
 			// pf.getLoginTRInstance(ob).clickNotnowButtonLinkingModal();
 
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 

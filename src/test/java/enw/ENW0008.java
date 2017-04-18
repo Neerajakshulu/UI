@@ -65,7 +65,7 @@ public class ENW0008 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD0008"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getAuthoringInstance(ob).searchArticle("Creating Post For API Notification Testing 13Apr2017_170336");
+			pf.getSearchResultsPageInstance(ob).searchArticle("Creating Post For API Notification Testing 13Apr2017_170336");
 
 			// pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();

@@ -60,14 +60,14 @@ public class Authoring1 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(System.getProperty("host"));
 			loginAs("USERNAME15", "PASSWORD15");
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			pf.getAuthoringInstance(ob).chooseArticle();
-			int count = pf.getAuthoringInstance(ob).getCommentCount();
-			pf.getAuthoringInstance(ob).enterArticleComment(CONFIG.getProperty("commentText"));
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validateCommentAdd(test, count);
-			pf.getAuthoringInstance(ob).validateViewComment(test, CONFIG.getProperty("commentText"));
-			pf.getAuthoringInstance(ob).updateComment(test, "comment updated");
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
+			int count = pf.getProfilePageInstance(ob).getCommentCount();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(CONFIG.getProperty("commentText"));
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).validateCommentAdd(test, count);
+			pf.getPostCommentPageInstance(ob).validateViewComment(test, CONFIG.getProperty("commentText"));
+			pf.getPostCommentPageInstance(ob).updateComment(test, "comment updated");
 			validateUpdatedComment("comment updated");
 			closeBrowser();
 		} catch (Throwable e) {

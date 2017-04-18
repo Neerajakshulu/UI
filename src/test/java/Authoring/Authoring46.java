@@ -104,11 +104,11 @@ public class Authoring46 extends TestBase {
 		try {
 
 			loginAs("USERNAME4", "PASSWORD4");
-			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getAuthoringInstance(ob).chooseArticle();
-			pf.getAuthoringInstance(ob).enterArticleComments("test");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
+			pf.getPostCommentPageInstance(ob).enterArticleComments("test");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

@@ -97,15 +97,15 @@ public class Authoring7 extends TestBase {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
 			//Edited by KR
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getPostCommentPageInstance(ob).enterArticleComment(addComments);
 			
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
-			pf.getAuthoringInstance(ob).searchArticle("micro biology");
+			pf.getSearchResultsPageInstance(ob).searchArticle("micro biology");
 			waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()),
 					40);
 			waitForAjax(ob);
@@ -114,10 +114,10 @@ public class Authoring7 extends TestBase {
 
 			// ob.navigate().refresh();
 			//Edited by KR
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
+			pf.getPostCommentPageInstance(ob).enterArticleComment(addComments);
 			
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validatePreventBotComment();
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).validatePreventBotComment();
 
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();

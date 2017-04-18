@@ -63,8 +63,8 @@ public class Authoring82 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 			loginAs("LOGINUSERNAME1", "LOGINPASSWORD1");
 			test.log(LogStatus.INFO, "Logged in to NEON");
-			pf.getAuthoringInstance(ob).searchArticle("Biology");
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle("Biology");
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			pf.getpostRVPageInstance(ob).shareRecordOnGoogle(gusername, gpassword);
 
 			pf.getLoginTRInstance(ob).logOutApp();

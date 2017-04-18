@@ -94,8 +94,8 @@ public class Authoring5 extends TestBase {
 		try {
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			recordViewDetailsLinkValidation();
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			pf.getLoginTRInstance(ob).logOutApp();

@@ -56,10 +56,10 @@ public class Authoring2 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("LOGINUSERNAME1"),
 					LOGIN.getProperty("LOGINPASSWORD1"));
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
-			pf.getAuthoringInstance(ob).selectArtcleWithComments();
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
-			pf.getAuthoringInstance(ob).validateAppreciationComment(test);
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).selectArtcleWithComments();
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
+			pf.getPostCommentPageInstance(ob).validateAppreciationComment(test);
 			test.log(LogStatus.INFO, this.getClass().getSimpleName() + " Test execution ends ");
 			closeBrowser();
 

@@ -91,7 +91,7 @@ public class ENW001 extends TestBase {
 		pf.getLoginTRInstance(ob).enterTRCredentials(username,password);
 		pf.getLoginTRInstance(ob).clickLogin();
 		
-		pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+		pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 		
 		for(int i=0; i<list.size();i++)
 		{
@@ -100,14 +100,14 @@ public class ENW001 extends TestBase {
 			if (recordType.equalsIgnoreCase("Articles"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-				pf.getAuthoringInstance(ob).chooseArticle();
+				pf.getSearchResultsPageInstance(ob).chooseArticle();
 				BrowserWaits.waitTime(4);
 				
 			}
 			else if(recordType.equalsIgnoreCase("Patents"))
 			{
 				pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
-				pf.getAuthoringInstance(ob).chooseArticle();
+				pf.getSearchResultsPageInstance(ob).chooseArticle();
 				BrowserWaits.waitTime(4);
 			}else
 			{

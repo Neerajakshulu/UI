@@ -76,8 +76,8 @@ public class Authoring19 extends TestBase {
 					.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())).getText();
 			ob.findElement((By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()))).click();
 			String comment = "testFlag";
-			pf.getAuthoringInstance(ob).enterArticleComment(comment);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(comment);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			pf.getLoginTRInstance(ob).logOutApp();
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));

@@ -64,9 +64,9 @@ public class ENW036 extends TestBase {
 					LOGIN.getProperty("grpAuthPwdenw036"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			
-			pf.getAuthoringInstance(ob).searchArticle("Dissipation and emission of p-mode in the quiet sun from acoustic imaging with TON data");
+			pf.getSearchResultsPageInstance(ob).searchArticle("Dissipation and emission of p-mode in the quiet sun from acoustic imaging with TON data");
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(4);
 			
 			waitForAjax(ob);

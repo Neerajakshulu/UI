@@ -694,5 +694,58 @@ public void verifylinkDiffSteamAcctText(ExtentTest test) throws Exception {
 		}
 
 	}
+	
+	//************************** Authoring Methods *************************************
+	
+	public void selectArtcleWithComments() {
+		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 180);
+		List<WebElement> itemList;
+
+		while (true) {
+			itemList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()));
+			int commentsCount, itr = 1;
+			String strCmntCt;
+			boolean isFound = false;
+			for (int i = (itr - 1) * 10; i < itemList.size(); i++) {
+				strCmntCt = itemList.get(i)
+						.findElement(
+								By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_COMMENTS_COUNT_CSS.toString()))
+						.getText().replaceAll(",", "").trim();
+				commentsCount = Integer.parseInt(strCmntCt);
+				if (commentsCount != 0) {
+					jsClick(ob, itemList.get(i)
+							.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_CSS.toString())));
+					isFound = true;
+					break;
+				}
+
+			}
+
+			if (isFound)
+				break;
+			itr++;
+			((JavascriptExecutor) ob).executeScript("javascript:window.scrollBy(0,document.body.scrollHeight-150)");
+			waitForAjax(ob);
+		}
+	}
+
+
+	public void searchArticle(String article) throws InterruptedException {
+
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString()), 90);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).sendKeys(article);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
+		waitForPageLoad(ob);
+		ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS.toString())).clear();
+		BrowserWaits.waitTime(3);
+	}
+
+	public void chooseArticle() throws InterruptedException {
+		BrowserWaits.waitForAllElementsToBePresent(ob,
+				By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString()), 180);
+		jsClick(ob, ob.findElement(By.xpath(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_TITLE_XPATH.toString())));
+		waitForPageLoad(ob);
+	}
 
 }

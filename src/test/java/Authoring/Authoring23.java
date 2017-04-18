@@ -93,11 +93,11 @@ public class Authoring23 extends TestBase {
 		try {
 			// waitForTRHomePage();
 			loginAs("USERNAME11", "PASSWORD11");
-			pf.getAuthoringInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
-			pf.getAuthoringInstance(ob).chooseArticle();
-			pf.getAuthoringInstance(ob).enterArticleComments("test");
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
+			pf.getPostCommentPageInstance(ob).enterArticleComments("test");
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -122,7 +122,7 @@ public class Authoring23 extends TestBase {
 					+ "  Profanity Words execution starts for data set #" + (count + 1) + "--->");
 			BrowserWaits.waitTime(5);
 			waitForAjax(ob);
-			pf.getAuthoringInstance(ob).updateComment(test, profanityWord);
+			pf.getPostCommentPageInstance(ob).updateComment(test, profanityWord);
 			waitForElementTobeVisible(ob,
 					By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_COMMENTS_EDIT_ERROR_MESSAGE_CSS.toString()), 40);
 			String profanityErrorMessage = pf.getBrowserActionInstance(ob)

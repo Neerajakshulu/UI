@@ -7,6 +7,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.TestBase;
@@ -267,5 +268,18 @@ public class BrowserWaits extends TestBase {
 			}
 			return ele;
 
+	}
+	
+	public void waitForTRHomePage() throws InterruptedException {
+		waitForPageLoad(ob);
+	}
+
+	public void waitUntilTextPresent(String locator, String text) {
+		try {
+			WebDriverWait wait = new WebDriverWait(ob, time);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(locator), text));
+		} catch (TimeoutException e) {
+			throw new TimeoutException("Failed to find element Locator , after waiting for " + time + "ms");
+		}
 	}
 }

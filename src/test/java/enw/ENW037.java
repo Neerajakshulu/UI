@@ -59,10 +59,10 @@ public class ENW037 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD037"));
 			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle("Baseball technologies");
+			pf.getSearchResultsPageInstance(ob).searchArticle("Baseball technologies");
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
 			BrowserWaits.waitTime(8);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			BrowserWaits.waitTime(4);
 			pf.getpostRVPageInstance(ob).clickSendToEndnoteRecordViewPage();
 			HashMap<String, String> neonValues = new HashMap<String, String>();

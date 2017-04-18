@@ -68,7 +68,7 @@ public class ENW003 extends TestBase {
 					LOGIN.getProperty("STEAMUSERPASSWORD"));
 			BrowserWaits.waitTime(5);
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			pf.getAuthoringInstance(ob).searchArticle(CONFIG.getProperty("article"));
+			pf.getSearchResultsPageInstance(ob).searchArticle(CONFIG.getProperty("article"));
 
 			pf.getSearchResultsPageInstance(ob).clickSendToEndnoteSearchPage();
 

@@ -66,7 +66,7 @@ public class Authoring18 extends TestBase {
 			loginAs("USERNAME16", "PASSWORD16");
 			String PROFILE_NAME = LOGIN.getProperty("PROFILE16");
 			pf.getHFPageInstance(ob).searchForText("Biology");
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 			pf.getpostRVPageInstance(ob).createComment("test flag in own comment");
 			//Commented by KR
 			BrowserWaits.waitTime(10);

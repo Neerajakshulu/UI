@@ -356,8 +356,8 @@ public class Notifications0021 extends TestBase {
 			 * "Home page is not loaded successfully");
 			 */
 			ob.navigate().to(document_url);
-			pf.getAuthoringInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(OR.getProperty("COMMENT_TEXT"));
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			status = true;
 		} catch (Exception e) {
 			// TODO: handle exception

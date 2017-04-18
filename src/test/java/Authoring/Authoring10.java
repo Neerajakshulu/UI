@@ -101,8 +101,8 @@ public class Authoring10 extends TestBase {
 		try {
 			// waitForTRHomePage();
 			loginAs(username, password);
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
@@ -126,8 +126,8 @@ public class Authoring10 extends TestBase {
 			test.log(LogStatus.INFO, this.getClass().getSimpleName()
 					+ "  UnSupported HTML Tags execution starts for data set #" + (count + 1) + "--->");
 
-			pf.getAuthoringInstance(ob).enterArticleComments(htmlTags);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComments(htmlTags);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS.toString()), 60);
 			String unSupporteTagErrorMessage = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.HOME_PROJECT_NEON_AUTHORING_PREVENT_BOT_COMMENT_CSS).getText();
@@ -140,7 +140,7 @@ public class Authoring10 extends TestBase {
 				throw new Exception("UnSupported_HTML_tags_doesnot_allow_comments_validation");
 			}
 			
-			pf.getAuthoringInstance(ob).cancelComment();
+			pf.getPostCommentPageInstance(ob).cancelComment();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");

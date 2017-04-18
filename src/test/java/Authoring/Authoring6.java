@@ -96,16 +96,16 @@ public class Authoring6 extends TestBase {
 			// waitForTRHomePage();
 			pf.getLoginTRInstance(ob).enterTRCredentials(username, password);
 			pf.getLoginTRInstance(ob).clickLogin();
-			pf.getAuthoringInstance(ob).searchArticle(article);
-			pf.getAuthoringInstance(ob).chooseArticle();
+			pf.getSearchResultsPageInstance(ob).searchArticle(article);
+			pf.getSearchResultsPageInstance(ob).chooseArticle();
 
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(addComments);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
 			ob.navigate().refresh();
 			waitForAjax(ob);
-			pf.getAuthoringInstance(ob).enterArticleComment(addComments);
-			pf.getAuthoringInstance(ob).clickAddCommentButton();
-			pf.getAuthoringInstance(ob).validatePreventBotComment();
+			pf.getPostCommentPageInstance(ob).enterArticleComment(addComments);
+			pf.getPostCommentPageInstance(ob).clickAddCommentButton();
+			pf.getPostCommentPageInstance(ob).validatePreventBotComment();
 
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
