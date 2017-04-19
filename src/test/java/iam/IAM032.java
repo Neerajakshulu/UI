@@ -15,6 +15,7 @@ import base.TestBase;
 import pages.PageFactory;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class IAM032 extends TestBase {
 
@@ -23,7 +24,11 @@ public class IAM032 extends TestBase {
 	static int status = 1;
 	static int time = 30;
 	PageFactory pf = new PageFactory();
-	// Following is the list of status:
+	// 1) Sign-in with Steam and link existing social account with matching email. 
+	//2) Sign-in with Steam account which already has linked social account. Verify that user should never be prompted 
+	//to link accounts, when sign in first time on Neon landing screen using social.
+	//3)Verify that user should be prompted to link accounts, when sign in first time on Neon landing screen using STeAM. 
+	//(Note:User should already been sign into social)
 	
 	@BeforeTest
 	public void beforeTest() throws Exception {
@@ -46,25 +51,29 @@ public class IAM032 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbusername1"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			loginTofb();
-			linkAccounts("Facebook");
+			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
+				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
+				throw new Exception("Delete API Call failed");
+			}
+			
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
 			ErrorUtil.addVerificationFailure(t);
 		}
-
-		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
-			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-			loginToLinkedIn();
-			linkAccounts("LinkedIn");
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-			ErrorUtil.addVerificationFailure(t);
-		}
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+		loginTofb();
+		linkAccounts("Facebook");
+//		try {
+//			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbusername1"));
+//			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
+//			loginToLinkedIn();
+//			linkAccounts("LinkedIn");
+//		} catch (Throwable t) {
+//			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
+//			ErrorUtil.addVerificationFailure(t);
+//		}
+//		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	private void loginToLinkedIn() throws Exception {
@@ -101,14 +110,22 @@ public class IAM032 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-
-			// Navigate to TR login page and login with valid TR credentials
+		// Navigate to TR login page and login with valid TR credentials
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
-			loginAs("fbusername1", "fbpwrdPwd");
+			//loginAs("fbusername1", "fbpwrdPwd");
+//			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername1"),
+//					CONFIG.getProperty("fbpwrdPwd"));
+//			pf.getLoginTRInstance(ob).clickLogin();
+//			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			
-
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
+						LOGIN.getProperty("fbpwrdPwd"));
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+				test.log(LogStatus.PASS, "User is able to log in with steam credentials");
+				pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
+			
 			String linkName = pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
 
 			if (linkName == null) {

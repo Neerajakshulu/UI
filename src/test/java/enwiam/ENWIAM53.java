@@ -46,7 +46,7 @@ public class ENWIAM53 extends TestBase {
 	 * @throws Exception , When TR Login is not done
 	 */
 	@Test
-	public void testcaseh13() throws Exception {
+	public void testcasehENWIAM53() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 		logger.info("checking master condition status-->" + this.getClass().getSimpleName() + "-->" + master_condition);

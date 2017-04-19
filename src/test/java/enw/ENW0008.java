@@ -65,9 +65,11 @@ public class ENW0008 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD0008"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
-			pf.getSearchResultsPageInstance(ob).searchArticle("Creating Post For API Notification Testing 13Apr2017_170336");
+			pf.getSearchResultsPageInstance(ob)
+					.searchArticle("Post for Testing RecordView8E4LBO");
 
 			// pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			BrowserWaits.waitTime(4);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();
 			BrowserWaits.waitTime(4);
@@ -111,23 +113,23 @@ public class ENW0008 extends TestBase {
 			}
 			HashMap<String, String> endNotelabel = new HashMap<String, String>();
 			HashMap<String, String> endNotevalues = new HashMap<String, String>();
-			endNotelabel.put("ReferenceType",
+			endNotelabel.put("ReferenceType:",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH.toString())).getText());
 			endNotevalues.put("ReferenceTypeValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_VALUE_XPATH.toString())).getText());
 
-			endNotelabel.put("Author",
+			endNotelabel.put("Author:",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_AUTHOR_XPATH.toString())).getText());
 			endNotevalues.put("AuthorValue",
 					ob.findElement(By.cssSelector(OnePObjectMap.ENW_RECORD_AUTHOR_VALUE_CSS.toString())).getText());
 
-			endNotelabel.put("Title",
+			endNotelabel.put("Title of Entry:",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_XPATH.toString())).getText());
 			endNotevalues.put("TitleValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_TITLE_VALUE_XPATH.toString())).getText());
-			endNotelabel.put("Accessionnumber",
+			endNotelabel.put("Accessionnumber:",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_ACCESSIONNUMBER_XPATH.toString())).getText());
-			endNotelabel.put("URL", ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_XPATH.toString())).getText());
+			endNotelabel.put("URL:", ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_XPATH.toString())).getText());
 			endNotevalues.put("URLValue",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_URL_VALUE_XPATH.toString())).getText());
 			System.out.println("Verifying label ");
@@ -145,22 +147,17 @@ public class ENW0008 extends TestBase {
 			for (String val : values) {
 				System.out.println("Values from EndNote are:" + val);
 			}
-			System.out.println("Verifying Values  ");
+		//	System.out.println("Verifying Values ");
 			Assert.assertEquals(endNotevalues.get("ReferenceTypeValue"), neonValues.get("expectedReferenceType"));
 			Assert.assertEquals(endNotevalues.get("AuthorValue"), neonValues.get("expectedAuthor"));
 			Assert.assertEquals(endNotevalues.get("TitleValue"), neonValues.get("expectedTitle"));
-
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("window.scrollBy(0,250)", "");
 			if ((endNotevalues.get("URLValue").contains(neonValues.get("expectedURL")))) {
 				test.log(LogStatus.PASS, "Values are matching \n" + neonValues + " Endnote Values " + endNotevalues);
-			}
-
-			else {
-
+			} else {
 				test.log(LogStatus.FAIL,
 						"Values are not matching \n" + neonValues + " Endnote Values " + endNotevalues);
-
 			}
 			NavigatingToENW();
 			closeBrowser();

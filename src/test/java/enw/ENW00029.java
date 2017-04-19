@@ -89,7 +89,7 @@ public class ENW00029 extends TestBase {
 						.getText();
 				System.out.println(actualEmail);
 				try {
-					Assert.assertEquals(actualEmail1,"kaena10@jetableemails.com");
+					Assert.assertEquals(actualEmail1,LOGIN.getProperty("UserFBENW00029"));
 					test.log(LogStatus.PASS, "alternate Email id is displayed in Account Setting page.");
 				}
 
@@ -159,7 +159,7 @@ public class ENW00029 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", "kaena10@jetableemails.com"));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENW00029")));
 			Assert.assertTrue(
 					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
 //			Assert.assertTrue(
