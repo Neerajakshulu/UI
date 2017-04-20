@@ -26,7 +26,7 @@ public class Customercare017 extends TestBase {
 	static String followBefore = null;
 	static String followAfter = null;
 
-	/**
+	/** Verify that Countries list should be updated to match with SFDC list in customer care page as per document OPWLRA-630.xlsx.
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 

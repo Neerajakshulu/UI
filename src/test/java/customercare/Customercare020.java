@@ -30,7 +30,9 @@ public class Customercare020 extends TestBase {
 	static String followBefore = null;
 	static String followAfter = null;
 
-	/**
+	/** 
+	 * Verify that If the user is logged-in into the application, The system should prefill the webform with the name,
+	 *  contact information, organization, and country information obtained from the user's STeAM account
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
@@ -73,11 +75,12 @@ public class Customercare020 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL007"),
-					LOGIN.getProperty("USERPASSWORD007"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
+					LOGIN.getProperty("fbpwrdPwd"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+			BrowserWaits.waitTime(5);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
 
 			String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS)
@@ -88,10 +91,11 @@ public class Customercare020 extends TestBase {
 					.getAttribute("value");
 			// String expectedcountry =
 			// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_COUNTRY_CSS).getAttribute("value");
-			String expectedemail = LOGIN.getProperty("USEREMAIL007");
+			String expectedemail = LOGIN.getProperty("fbusername1");
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
-			BrowserWaits.waitTime(2);
+			BrowserWaits.waitTime(4);
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).clickOnHelpDRA();
 
 			Set<String> myset = ob.getWindowHandles();
@@ -121,7 +125,7 @@ public class Customercare020 extends TestBase {
 				test.log(LogStatus.PASS, " Support Request form is prepopulating with Name,Org,Email and country");
 
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Support Request form is prepopulating with Name,Org,Email and country");
+				test.log(LogStatus.FAIL, "Support Request form is Not prepopulating with Name,Org,Email and country");
 			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();
