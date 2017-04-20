@@ -57,7 +57,7 @@ public class RCC006 extends TestBase{
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
@@ -333,7 +333,7 @@ public class RCC006 extends TestBase{
 
 			BrowserWaits.waitTime(2);
 			pf.getLoginTRInstance(ob).logOutApp();
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER025", "RCCTESTUSERPWD025");
 			pf.getUtility(ob).deleteGroup(title);
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
