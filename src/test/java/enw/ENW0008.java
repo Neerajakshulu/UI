@@ -53,9 +53,6 @@ public class ENW0008 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-
-			List<String> list = Arrays.asList(
-					new String[] { "Reference Type:", "Author:", "Title of Entry:", "Accession Number:", "URL:" });
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -66,8 +63,9 @@ public class ENW0008 extends TestBase {
 
 			pf.getSearchResultsPageInstance(ob)
 					.searchArticle("Post for Testing RecordView8E4LBO");
-
-			// pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			List<String> list = Arrays.asList(
+					new String[] {"Author:", "Title of Entry:",  "Reference Type:", "URL:","Accession Number:"});
+			//Author:, Title of Entry:, Reference Type:, URL:, Accession Number:
 			BrowserWaits.waitTime(4);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
 			pf.getSearchResultsPageInstance(ob).clickOnFirstPostTitle();

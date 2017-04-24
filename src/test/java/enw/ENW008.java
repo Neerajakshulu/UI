@@ -33,7 +33,6 @@ public class ENW008 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENW");
-
 	}
 
 	@Test
@@ -51,10 +50,7 @@ public class ENW008 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		try {
-			
-			List<String> list = Arrays.asList(new String[] { "Reference Type:", "Inventor:", "Title:", "Assignee:",
-					"Abstract:", "Patent Number:","Accession Number:", "Keywords:","Notes:", "URL:" });
+		try {			
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
@@ -65,6 +61,9 @@ public class ENW008 extends TestBase {
 					LOGIN.getProperty("USERPASSWORD008"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
+			List<String> list = Arrays.asList(new String[] { "Reference Type:", "Inventor:", "Title:", "Assignee:",
+					"Abstract:", "Patent Number:","Accession Number:", "Keywords:","Notes:", "URL:" });
+			
 			pf.getSearchResultsPageInstance(ob).searchArticle("Baseball technologies");
 			BrowserWaits.waitTime(2);
 			pf.getSearchResultsPageInstance(ob).clickOnPatentsTab();
@@ -88,7 +87,6 @@ public class ENW008 extends TestBase {
 		  
 		   String expectedAuthor1=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR1_XPATH.toString())).getText();
 		//   String expectedAuthor2=ob.findElement(By.xpath(OnePObjectMap.NEON_RECORDVIEW_PATENT_AUTHOR2_XPATH.toString())).getText();
-			
 			logout();
 			BrowserWaits.waitTime(4);
 		   	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
