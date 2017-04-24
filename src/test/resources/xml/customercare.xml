@@ -27,11 +27,6 @@
 		</classes>
 	</test>
 
-	<test name="Customercare005">
-		<classes>
-			<class name="customercare.Customercare005"></class>
-		</classes>
-	</test>
 	<test name="Customercare006">
 		<classes>
 			<class name="customercare.Customercare006"></class>
@@ -50,11 +45,6 @@
 		</classes>
 	</test>
 
-	<test name="Customercare009">
-		<classes>
-			<class name="customercare.Customercare009"></class>
-		</classes>
-	</test>
 	<test name="Customercare010">
 		<classes>
 			<class name="customercare.Customercare010"></class>
