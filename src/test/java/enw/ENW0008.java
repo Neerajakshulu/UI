@@ -50,12 +50,13 @@ public class ENW0008 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
-
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		
 		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
+
 			ob.get(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL0008"),
 					LOGIN.getProperty("USERPASSWORD0008"));
@@ -82,15 +83,17 @@ public class ENW0008 extends TestBase {
 			logout();
 			ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
+			BrowserWaits.waitTime(7);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL0008"),
 					LOGIN.getProperty("USERPASSWORD0008"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-
+			BrowserWaits.waitTime(4);
 			try {
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 						.getText();
 				if (text.equalsIgnoreCase("Continue")) {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+					BrowserWaits.waitTime(8);
 				}
 
 			} catch (Exception e) {

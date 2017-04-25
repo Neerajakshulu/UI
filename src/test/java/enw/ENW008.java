@@ -57,8 +57,8 @@ public class ENW008 extends TestBase {
 
 			ob.get(host);
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL008"),
-					LOGIN.getProperty("USERPASSWORD008"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("LOGINUSERNAME2"),
+					LOGIN.getProperty("LOGINPASSWORD2"));
 			pf.getLoginTRInstance(ob).clickLogin();
 
 			List<String> list = Arrays.asList(new String[] { "Reference Type:", "Inventor:", "Title:", "Assignee:",
@@ -91,26 +91,28 @@ public class ENW008 extends TestBase {
 			BrowserWaits.waitTime(4);
 		   	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
-			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL008"),(LOGIN.getProperty("USERPASSWORD008")));
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("LOGINUSERNAME2"),(LOGIN.getProperty("LOGINPASSWORD2")));
 			BrowserWaits.waitTime(8);
 
 			try {
 				if (ob.findElements(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).size() != 0) {
 						ob.findElement(By.xpath(OnePObjectMap.ENW_HOME_CONTINUE_XPATH.toString())).click();
+						BrowserWaits.waitTime(10);
 					}
-				test.log(LogStatus.PASS, "User navigate to End note");
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
-				BrowserWaits.waitTime(4);
-				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-				
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
-//			JavascriptExecutor jse = (JavascriptExecutor)ob;
-//			jse.executeScript("window.scrollBy(0,250)", "");
-			BrowserWaits.waitTime(10);
+			try {
+				test.log(LogStatus.PASS, "User navigate to End note");
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
+				BrowserWaits.waitTime(6);
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
+				BrowserWaits.waitTime(8);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			HashMap<String, String> endNoteDetails = new HashMap<String, String>();
 			endNoteDetails.put("ReferenceType",
 					ob.findElement(By.xpath(OnePObjectMap.ENW_RECORD_REFERENCETYPE_XPATH.toString())).getText());
