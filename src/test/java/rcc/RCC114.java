@@ -202,7 +202,7 @@ public class RCC114 extends TestBase {
 			
 			
 			
-			pf.getLoginTRInstance(ob).logOutApp();
+			//pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			
 		} catch (Throwable t) {

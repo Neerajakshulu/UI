@@ -168,7 +168,7 @@ public class RCC113 extends TestBase {
 			pf.getGroupDetailsPage(ob).clickOnDeleteButton();
 			pf.getGroupDetailsPage(ob).clickOnDeleteButtonInConfirmationMoadl();
 			
-			pf.getLoginTRInstance(ob).logOutApp();
+			//pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			
 		} catch (Throwable t) {
