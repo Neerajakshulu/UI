@@ -835,7 +835,7 @@ public enum OnePObjectMap {
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_SUBMIT_CSS("button[type='submit']"),
 	DRA_ACCOUNTSETTINGS_CHANGEPWD_CANCEL_CSS("button[event-action='change-password-cancelled']"),
 	DRA_CHANGEPW_ERROR_MSG_CSS("p[class='wui-input-with-label__error ng-binding ng-scope']"),
-	DRA_INVALIDCREDENTIALS_ERRORMSG_CSS("label[class='wui-input-with-label__error above-form-error-message ng-scope']"),
+	DRA_INVALIDCREDENTIALS_ERRORMSG_CSS("label[class='form-level-error__message-text ng-scope']"),
 	DRA_STEPUPAUTHMODAL_TITLE_CSS("h2[class='wui-large-text ng-binding']"),
 	DRA_STEPUPAUTHMODAL_TEXT1_CSS("p[class='ng-binding ng-scope']"),
 	DRA_STEPUPAUTHMODAL_TEXT2_XPATH("(//p[@class='ng-binding'])[1]"),
