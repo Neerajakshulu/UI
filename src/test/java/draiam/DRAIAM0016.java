@@ -53,8 +53,8 @@ public class DRAIAM0016 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSER0016"),
-					LOGIN.getProperty("DRAUSERPWD16"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAfbuser14"),
+					LOGIN.getProperty("DRAfbpw14"));
 			pf.getDraPageInstance(ob).clickLoginDRA();
 			test.log(LogStatus.PASS,
 					"user successfully authenticated to the platform by by supplying correct STeAM credentials (email address + password), on the DRA sign in screen.");

@@ -58,17 +58,18 @@ public class DRAIAM0013 extends TestBase {
 
 			String cssValue = ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS.toString()))
 					.getCssValue("background-color");
-			if (cssValue.contains("rgba(99, 116, 31, 1)")) {
-				test.log(LogStatus.INFO, "Sign in button is  displayed in  application specific green colour");
+			System.out.println(cssValue);
+			if (cssValue.contains("rgba(0, 128, 128, 1)")) {
+				test.log(LogStatus.PASS, "Sign in button is  displayed in  application specific green colour");
 			} else {
-				test.log(LogStatus.INFO, "Sign in button is not  displayed in  application specific green colour");
+				test.log(LogStatus.FAIL, "Sign in button is not  displayed in  application specific green colour");
 				status = 2;
 			}
 			String cssValue1 = ob.findElement(By.cssSelector("html[class='unauth-page--dra']"))
 					.getCssValue("background");
-			logger.info("Values : " + cssValue);
+			logger.info("Values : " + cssValue1);
 
-			if (cssValue1.contains("rgb(99, 116, 31)") && cssValue1.contains("rgb(177, 205, 67)")) {
+			if (cssValue1.contains("rgb(139, 197, 197)") && cssValue1.contains("rgba(0, 0, 0, 0)")) {
 				test.log(LogStatus.PASS, " DRA Landing page displayed  in  application specific green colour");
 			} else {
 				test.log(LogStatus.FAIL, " DRA Landing page is not displayed  in  application specific green colour");
