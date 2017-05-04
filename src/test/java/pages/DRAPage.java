@@ -121,7 +121,7 @@ public class DRAPage extends TestBase {
 	 */
 	public void landingScreenDRA() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Target Druggability", "Drug Research Advisor");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Drug Research Advisor");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
@@ -137,7 +137,7 @@ public class DRAPage extends TestBase {
 	 */
 	public void loginToDRAApplication(String userName, String password) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Target Druggability", "Drug Research Advisor");
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Drug Research Advisor");
 
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, userName);

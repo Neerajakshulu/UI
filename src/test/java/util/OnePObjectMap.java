@@ -810,7 +810,7 @@ public enum OnePObjectMap {
     RCC_GMAIL_CLICK_CONTINUE_XPATH("//input[@type='submit']"),   
 
 	// #################### DRA ##########################
-    DRA_LOGO_CSS("h3[class='wui-title wui-title--app-signin-secondaryname']"),
+    DRA_LOGO_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
 	DRA_BRANDING_NAME_CSS("h2[class='wui-title wui-title--app-signin-primaryname']"),
 	DRA_LANDINGPAGE_EXPLORE_ICON_CSS("i[class='fa fa-compass login-splash-icon']"),
 	DRA_LANDINGPAGE_IDENTIFY_ICON_CSS("i[class^='wui-icon wui-icon--target-point']"),
