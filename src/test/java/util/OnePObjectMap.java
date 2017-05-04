@@ -1008,7 +1008,7 @@ public enum OnePObjectMap {
 	GURILLA_LIST_EMAIL_ENW_PROJECT_TITLE_CSS("span[style*='color:#FF9100;']"),
 	GURILLA_LIST_EMAIL_DRA_PROJECT_TITLE_CSS("span[style*='color:#008080;']"),
 	GURILLA_LIST_EMAIL_IPA_PROJECT_TITLE_CSS("span[style*='color:#621F95;']"),
-
+	LOGING_PAGE_ERROR_MESSAGE_CSS("span[class='ng-scope']"),
 	NEON_IPA_SEARCH_TERMS_LABEL_CSS("div[class^='search-term__label']"),
 	NEON_IPA_SEARCH_TERMS_LABEL_NEW_CSS("span[ng-repeat='item in vm.clipboard.getDisplayDb(vm.type) | limitTo: 4 track by $index']>div>button>div"),
 	NEON_IPA_SEARCH_TERMS_REMOVE_CSS("div[ng-click^='vm.removeItem']"),

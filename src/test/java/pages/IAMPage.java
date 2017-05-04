@@ -24,6 +24,8 @@ public class IAMPage extends TestBase {
 	public void sendEamilToTextBox(String email) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(email);
+		ob.findElement(By.cssSelector(OnePObjectMap.IPA_BRANDING_NAME_CSS.toString())).click();
+		
 	}
 
 	public void validateTextInForgotPasswordPage() throws Exception {
@@ -179,8 +181,8 @@ public class IAMPage extends TestBase {
 	}
 
 	public void checkTextBox(String newPassword) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS);
-		ob.findElement(By.cssSelector(OnePObjectMap.RESET_YOUR_PASSWORD_PAGE_TEXT_BOX_CSS.toString()))
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 				.sendKeys(newPassword);
 	}
 
@@ -287,9 +289,9 @@ public class IAMPage extends TestBase {
 
 	public void checkErrorMessage(String errorMessage) throws Exception {
 		pf.getBrowserWaitsInstance(ob)
-				.waitUntilElementIsDisplayed(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS);
+				.waitUntilElementIsDisplayed(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS);
 		String errorMessaes = ob
-				.findElement(By.cssSelector(OnePObjectMap.FORGOT_PASSWORD_PAGE_ERROR_MESSAGE_CSS.toString())).getText();
+				.findElement(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).getText();
 		Assert.assertTrue(errorMessage.contains(errorMessaes));
 	}
 
