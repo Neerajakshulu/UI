@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,6 +17,7 @@ import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 public class ENWIAM013 extends TestBase {
 
@@ -277,10 +280,134 @@ public class ENWIAM013 extends TestBase {
 			}
 
 			try {
+				test = extent
+						.startTest("OPQA-1950",
+								"Verify Password must have at least one special character from !@#$%^*()~`{}[]| in reset password page")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				pf.getIamPage(ob).checkTextBox("!");
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob,
+						By.xpath(
+								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+						30);
+				pf.getIamPage(ob).checkTextBox("!@#$%^*()~`{}[]|");
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob,
+						By.xpath(
+								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+						30);
+				test.log(LogStatus.PASS,
+						"Password field allow one special character from !@#$%^*()~`{}[]| in account page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL,
+						"Password field not allow one special character from !@#$%^*()~`{}[]| in account page");
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				test = extent
+						.startTest("OPQA-1951",
+								"Verify  Password must contain at least one number is ALWAYS enforced in password reset page")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkTextBox("1");
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob,
+						By.xpath(
+								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+						30);
+				test.log(LogStatus.PASS, "Password field allowed one number");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Password field not allowed one number");
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				test = extent
+						.startTest("OPQA-1953",
+								"Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced in reset password page.")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				pf.getIamPage(ob).checkTextBox("a");
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob,
+						By.xpath(
+								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
+						30);
+				test.log(LogStatus.PASS, "Password field allowed one alphabet character");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Password field not allowed one alphabet character");
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				test = extent
+						.startTest("OPQA-1949",
+								"Verify Password Maximum Length of 95 characters is ALWAYS enforced in reset password page.")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				String name = "N@1";
+				String maxPassword = name + generateRandomName(93);
+				logger.info("Last Name : " + maxPassword);
+				pf.getIamPage(ob).checkTextBox(maxPassword);
+				BrowserWaits.waitTime(2);
+				waitForElementTobeVisible(ob,
+						By.xpath(
+								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
+						30);
+				test.log(LogStatus.PASS, "Password field allowed only 95 characters");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Password field allowed more than 95 characters");
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-4261",
-								"Verify that External Password Reset Page should have a new password field where the user enters their new password.")
+						.startTest("OPQA-4261&&OPQA-1948",
+								"Verify that External Password Reset Page should have a new password field where the user enters their new password.&&Verify that the Password minimum length of 8 characters is ALWAYS enforced in reset password page.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox(newPassword);
@@ -308,7 +435,7 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkLoginPage();
-				//pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
+				// pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
 				pf.getIamPage(ob).login(email, newPassword);
 				pf.getIamPage(ob).checkAgreeAndContinueButton();
 				logoutEnw();
@@ -361,13 +488,13 @@ public class ENWIAM013 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.navigate().to(System.getProperty("host"));
-//				pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
-//				logoutEnw();
+				// pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(email, newPassword);
+				// logoutEnw();
 				pf.getLoginTRInstance(ob).waitForTRHomePage();
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, newPassword);
 				pf.getLoginTRInstance(ob).clickLogin();
-				//pf.getIamPage(ob).login(email, newPassword);
-				//pf.getIamPage(ob).checkAgreeAndContinueButton();
+				// pf.getIamPage(ob).login(email, newPassword);
+				// pf.getIamPage(ob).checkAgreeAndContinueButton();
 				logout();
 				pf.getIamPage(ob).checkLoginPage();
 				test.log(LogStatus.PASS, "User login and logout successfylly other applications");
@@ -543,6 +670,73 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5399",
+								"Verify that error message New password should not match current password. when enter Old and New password are same in reset password page.")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				pf.getIamPage(ob).openGurillaMail();
+				pf.getIamPage(ob).clickReceivedMail("EndNote");
+				pf.getIamPage(ob).checkENWApplicationName("EndNote");
+				pf.getIamPage(ob).clickResetYourPasswordLink();
+				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
+				pf.getIamPage(ob).checkTextBox(newPassword);
+				pf.getIamPage(ob).clickResetButton();
+				BrowserWaits.waitTime(3);
+				String str = ob
+						.findElement(
+								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
+						.getText();
+
+				Assert.assertEquals(str, "New password should not match current password");
+				test.log(LogStatus.PASS, "Valid error massage displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "New password should match current password" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5400",
+								"Verify that error message New password should not match previous 4 passwords. when enter new password match with previous four passwords in reset password page.")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				pf.getIamPage(ob).checkTextBox("Neon@123");
+				pf.getIamPage(ob).clickResetButton();
+				BrowserWaits.waitTime(3);
+				String str = ob
+						.findElement(
+								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
+						.getText();
+				Assert.assertEquals(str, "New password should not match previous 4 passwords");
+				test.log(LogStatus.PASS, "Valid error massage displayed");
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "New password should match current password" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
 			ob.quit();
 			/*
 			 * try { extent = ExtentManager.getReporter(filePath); test = extent .startTest("OPQA-1934",
@@ -764,8 +958,8 @@ public class ENWIAM013 extends TestBase {
 			 * test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end"); extent.endTest(test); }
 			 */
 
-			//logoutEnw();
-			
+			// logoutEnw();
+
 		}
 
 		catch (Throwable t) {
@@ -781,11 +975,11 @@ public class ENWIAM013 extends TestBase {
 			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
-				test.log(LogStatus.SKIP,
-						"Skipping test case " + this.getClass().getSimpleName() + " User Not created, hence skiping this test case");
+				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+						+ " User Not created, hence skiping this test case");
 				extent.endTest(test);
 			}
-			
+
 			// extent
 			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
