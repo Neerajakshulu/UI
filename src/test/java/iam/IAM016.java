@@ -269,16 +269,12 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
-			
-			
-			
-			
-			
+
 			try {
-				test = extent.startTest("OPQA-1950", "Verify Password must have at least one special character from !@#$%^*()~`{}[]| in reset password page").assignCategory("IAM");
+				test = extent
+						.startTest("OPQA-1950",
+								"Verify Password must have at least one special character from !@#$%^*()~`{}[]| in reset password page")
+						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("!");
 				BrowserWaits.waitTime(2);
@@ -311,7 +307,10 @@ public class IAM016 extends TestBase {
 			}
 
 			try {
-				test = extent.startTest("OPQA-1951", "Verify  Password must contain at least one number is ALWAYS enforced in password reset page").assignCategory("IAM");
+				test = extent
+						.startTest("OPQA-1951",
+								"Verify  Password must contain at least one number is ALWAYS enforced in password reset page")
+						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkTextBox("1");
@@ -337,7 +336,10 @@ public class IAM016 extends TestBase {
 			}
 
 			try {
-				test = extent.startTest("OPQA-1953", "Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced in reset password page.").assignCategory("IAM");
+				test = extent
+						.startTest("OPQA-1953",
+								"Verify Password must have at least one alphabet character either upper or lower case is ALWAYS enforced in reset password page.")
+						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("a");
 				BrowserWaits.waitTime(2);
@@ -360,9 +362,12 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
+
 			try {
-				test = extent.startTest("OPQA-1949", "Verify Password Maximum Length of 95 characters is ALWAYS enforced in reset password page.").assignCategory("IAM");
+				test = extent
+						.startTest("OPQA-1949",
+								"Verify Password Maximum Length of 95 characters is ALWAYS enforced in reset password page.")
+						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				String name = "N@1";
 				String maxPassword = name + generateRandomName(93);
@@ -388,13 +393,6 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
-			
-			
-			
-			
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -654,8 +652,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -675,7 +672,7 @@ public class IAM016 extends TestBase {
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
 						.getText();
-				
+
 				Assert.assertEquals(str, "New password should not match current password");
 				test.log(LogStatus.PASS, "Valid error massage displayed");
 			} catch (Throwable t) {
@@ -691,9 +688,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -723,8 +718,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
+
 			ob.quit();
 			// String email = createNewUser("duster", "man");
 
@@ -789,8 +783,8 @@ public class IAM016 extends TestBase {
 			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
-				test.log(LogStatus.SKIP,
-						"Skipping test case " + this.getClass().getSimpleName() + " User Not created, hence skiping this test case");
+				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+						+ " User Not created, hence skiping this test case");
 				extent.endTest(test);
 			}
 			StringWriter errors = new StringWriter();
