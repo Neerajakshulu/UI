@@ -181,8 +181,10 @@ public class IAMPage extends TestBase {
 	}
 
 	public void checkTextBox(String newPassword) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS);
-		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_TEXT_BOX_CSS);
+		ob.findElement(By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
+		.clear();
+		ob.findElement(By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_TEXT_BOX_CSS.toString()))
 				.sendKeys(newPassword);
 	}
 

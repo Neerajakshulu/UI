@@ -469,6 +469,8 @@ public enum OnePObjectMap {
 	
 	LOGIN_PAGE_EMAIL_TEXT_BOX_CSS("input[name='loginEmail']"),
 	LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='loginPassword']"),
+	PASSWORD_RESET_PAGE_PASSWORD_TEXT_BOX_CSS("input[name='password']"),
+	PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS("p[class='wui-input-with-label__error above-form-error-message ng-binding']"),
 	LOGIN_PAGE_SIGN_IN_BUTTON_CSS("button[class*='wui-btn--login']"),
 	LOGIN_PAGE_LOGO_IMG_XPATH("//img[@class='login-logo']"),
 	LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS("div[class='login-splash__container']"),
