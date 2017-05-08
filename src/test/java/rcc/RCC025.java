@@ -66,7 +66,7 @@ public class RCC025 extends TestBase {
 
 			// Inviting user2
 			BrowserWaits.waitTime(25);
-			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23")); 
+			boolean result = pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
 			BrowserWaits.waitTime(25);
 			pf.getGroupDetailsPage(ob).clickOnSendInvitation();
 			if (result)
@@ -82,19 +82,19 @@ public class RCC025 extends TestBase {
 			// logging in with user2 to accept invitation
 			openBrowser();
 			clearCookies();
-			maximizeWindow(); 
+			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
 			int beforeusergroupcount = -1;
 			try {
 				pf.getGroupsPage(ob).clickOnGroupsTab();
 				pf.getGroupInvitationPage(ob).acceptInvitation(groupTitle);
-				
-                 test.log(LogStatus.INFO, "Invitation has been send to the Neon user2 and accepted");
-				
-                ob.navigate().refresh();
- 				pf.getGroupsPage(ob).clickOnGroupsTab();
- 				pf.getGroupsPage(ob).switchToGroupTab();
+
+				test.log(LogStatus.INFO, "Invitation has been send to the Neon user2 and accepted");
+
+				ob.navigate().refresh();
+				pf.getGroupsPage(ob).clickOnGroupsTab();
+				pf.getGroupsPage(ob).switchToGroupTab();
 				beforeusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 
 				Assert.assertTrue(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
@@ -109,7 +109,7 @@ public class RCC025 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 			}
 			// Logging in with user1 and verifying the delete group pop up
-			int beforegroupcount=-1;
+			int beforegroupcount = -1;
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
@@ -117,7 +117,6 @@ public class RCC025 extends TestBase {
 			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
-			
 
 			beforegroupcount = pf.getGroupsPage(ob).getGroupsCount();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(groupTitle);
@@ -149,7 +148,7 @@ public class RCC025 extends TestBase {
 
 				int aftergroupcount = pf.getGroupsPage(ob).getGroupsCount();
 
-				Assert.assertEquals(beforegroupcount, aftergroupcount+1, "Verifird the group count with user1 ");
+				Assert.assertEquals(beforegroupcount, aftergroupcount + 1, "Verifird the group count with user1 ");
 				test.log(LogStatus.PASS, "verified the groups count after deleting");
 
 				logout();
@@ -172,15 +171,13 @@ public class RCC025 extends TestBase {
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			int afterusergroupcount = pf.getGroupsPage(ob).getGroupsCount();
-			
-			Assert.assertEquals(beforeusergroupcount, afterusergroupcount+1 , "Verifird the group count wit user2 ");
+			BrowserWaits.waitTime(4);
+			Assert.assertEquals(beforeusergroupcount, afterusergroupcount + 1, "Verifird the group count wit user2 ");
 			test.log(LogStatus.PASS, "verified the groups count with user after deleting");
 
 			logout();
 			closeBrowser();
 			pf.clearAllPageObjects();
-			
-			
 
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
