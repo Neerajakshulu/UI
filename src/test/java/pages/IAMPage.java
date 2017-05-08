@@ -24,7 +24,7 @@ public class IAMPage extends TestBase {
 	public void sendEamilToTextBox(String email) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
 		ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys(email);
-		ob.findElement(By.cssSelector(OnePObjectMap.IPA_BRANDING_NAME_CSS.toString())).click();
+		//ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
 		
 	}
 

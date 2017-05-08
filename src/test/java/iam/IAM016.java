@@ -635,6 +635,7 @@ public class IAM016 extends TestBase {
 				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
+				ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
 				pf.getIamPage(ob).checkErrorMessage("Please enter a valid email address.");
 				pf.getIamPage(ob).clickCancelButton();
 				pf.getIamPage(ob).checkLoginPage();
