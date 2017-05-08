@@ -922,7 +922,7 @@ public class TestBase {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 				BrowserWaits.waitTime(4);
 			}
-			BrowserWaits.waitTime(14);
+			BrowserWaits.waitTime(22);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);

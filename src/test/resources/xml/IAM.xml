@@ -188,6 +188,12 @@
 		</classes>
 	</test>
 	
+	<test name="Signup_Page_Text_Fields_Validation">
+		<classes>
+			<class name="iam.IAM041"></class>
+		</classes>
+	</test>
+	
 	
 
 	<!-- <test name="Login_page_Clarivate_Analytics_link_clicking">
