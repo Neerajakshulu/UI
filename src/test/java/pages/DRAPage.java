@@ -136,7 +136,7 @@ public class DRAPage extends TestBase {
 	 *             When login not happend
 	 */
 	public void loginToDRAApplication(String userName, String password) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LOGO_CSS);
+		
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Drug Research Advisor");
 
 		pf.getBrowserActionInstance(ob).clickAndClear(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS);
@@ -155,7 +155,7 @@ public class DRAPage extends TestBase {
 
 			if (!(element.isDisplayed())) {
 				test.log(LogStatus.FAIL,
-						"user is not allowed to access DRA as the STeAM account is not tied to an active subscription");
+						"user is allowed to access DRA as the STeAM account is not tied to an active subscription");
 			}
 			test.log(LogStatus.PASS,
 					"user is not allowed to access DRA as the STeAM account is not tied to an active subscription with the 'DRA_TARGET_DRUG' entitlement (SKU).");
@@ -204,7 +204,7 @@ public class DRAPage extends TestBase {
 
 			if (errormsg_title.contains("Thank you for your interest")
 					&& msg1.contains("Target Druggability is a subscription product.")
-					&& msg2.contains("Questions? Learn more or contact DRA.support@thomsonreuters.com.")) {
+					&& msg2.contains("Questions? Learn more or contact Drug Research Advisor Customer Care.")) {
 				test.log(LogStatus.PASS, " correct msg displayed ");
 			} else {
 				test.log(LogStatus.FAIL, " incorrect msg displayed ");
