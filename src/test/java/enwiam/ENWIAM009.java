@@ -206,7 +206,7 @@ public class ENWIAM009 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(14);
+				BrowserWaits.waitTime(22);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
