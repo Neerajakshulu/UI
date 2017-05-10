@@ -123,7 +123,7 @@ public class IAM040 extends TestBase {
 		Assert.assertTrue(passwordErrorMessage1.contains("Please enter a password."));
 		BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("neon.user2@tr.com");
+		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("neon.user12@tr.com");
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("abcd1233");
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
