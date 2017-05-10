@@ -58,42 +58,12 @@ public class IAM041 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
-			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			BrowserWaits.waitTime(2);
-
-			String emailErrorMessage = ob
-					.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
-					.getText();
-			Assert.assertTrue(emailErrorMessage.contains("Please enter an email address."));
-
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
-			BrowserWaits.waitTime(2);
-			String passwordErrorMessage = ob
-					.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(1)
-					.getText();
-			Assert.assertTrue(passwordErrorMessage.contains("Please enter a password."));
-
-			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
-			BrowserWaits.waitTime(2);
-			String firstNameErrorMessage = ob
-					.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(2)
-					.getText();
-			Assert.assertTrue(firstNameErrorMessage.contains("Please enter your first name."));
-
-			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
-			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-			BrowserWaits.waitTime(2);
-			String lastNameErrorMessage = ob
-					.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(4)
-					.getText();
-			Assert.assertTrue(lastNameErrorMessage.contains("Please enter your last name."));
-
+			checkForSignUpPageValidations();
+			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+			BrowserWaits.waitTime(3);
+			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
+			ob.navigate().refresh();
+			checkForSignUpPageValidations();
 			closeBrowser();
 		} catch (Throwable t) {
 			status = 2;// excel-main testcase
@@ -109,6 +79,46 @@ public class IAM041 extends TestBase {
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+	}
+
+	private void checkForSignUpPageValidations() throws InterruptedException {
+
+		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
+		ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
+		waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
+		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+		BrowserWaits.waitTime(2);
+
+		String emailErrorMessage = ob
+				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
+				.getText();
+		Assert.assertTrue(emailErrorMessage.contains("Please enter an email address."));
+
+		ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+		ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).click();
+		BrowserWaits.waitTime(2);
+		String passwordErrorMessage = ob
+				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(1)
+				.getText();
+		Assert.assertTrue(passwordErrorMessage.contains("Please enter a password."));
+
+		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
+		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
+		BrowserWaits.waitTime(2);
+		String firstNameErrorMessage = ob
+				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(2)
+				.getText();
+		Assert.assertTrue(firstNameErrorMessage.contains("Please enter your first name."));
+
+		ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
+		ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
+		BrowserWaits.waitTime(2);
+		String lastNameErrorMessage = ob
+				.findElements(By.cssSelector(OnePObjectMap.NEON_SIGN_UP_PAGE_ERROR_MESSAGE_CSS.toString())).get(4)
+				.getText();
+		Assert.assertTrue(lastNameErrorMessage.contains("Please enter your last name."));
+		
 	}
 
 	@AfterTest
