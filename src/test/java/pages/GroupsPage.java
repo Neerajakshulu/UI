@@ -35,9 +35,8 @@ public class GroupsPage extends TestBase {
 	}
 	public void clickOnGroupsTab() throws Exception {
 		//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_XPATH);
-		BrowserWaits.waitTime(5);
-		//Thread.sleep(1000);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_XPATH);
+		BrowserWaits.waitTime(6);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUP_GROUPTAB_HEADER_XPATH);
 		waitForAjax(ob);
 		/*
 		 * pf.getBrowserWaitsInstance(ob)
