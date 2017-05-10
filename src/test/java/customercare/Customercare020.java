@@ -78,7 +78,7 @@ public class Customercare020 extends TestBase {
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
 					LOGIN.getProperty("fbpwrdPwd"));
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-
+			pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 			BrowserWaits.waitTime(5);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);

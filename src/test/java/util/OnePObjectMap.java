@@ -1118,7 +1118,7 @@ public enum OnePObjectMap {
 	IPA_CC_COUNTRY_NAME("category"),
 	IPA_CC_HEADER_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--ipa']"),
 	
-	DRA_CC_HEADER_CSS("h3[class='cc-sub-nav__subtitle cc-sub-nav__subtitle--dra']"),
+	DRA_CC_HEADER_CSS("h2[class='cc-sub-nav__subtitle cc-sub-nav__subtitle--dra']"),
 	DRA_CC_HEADER_TD_CSS("h2[class='cc-sub-nav__title cc-sub-nav__title--dra']"),
 	
 	

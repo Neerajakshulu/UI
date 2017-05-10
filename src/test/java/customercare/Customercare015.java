@@ -75,7 +75,7 @@ public class Customercare015 extends TestBase {
 
 			try {
 
-				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CC_HEADER_TD_CSS);
+				
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_EXTN_NAME);
 				WebElement extn_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_EXTN_NAME);
