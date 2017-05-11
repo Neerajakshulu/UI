@@ -57,7 +57,7 @@
 			<class name="rcc.RCC112"></class>
 		</classes> 
 	</test>
-	<test name="document_Add_to_Single_And_Multiple_Groups_from_Watchlist_page">
+	<test name="document_Add_to_Single_And_Multiple_Groups_from_Watchlist_page" parallel="false">
 		<parameter name="username" value="RccTestUser1@tr.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="watchlistTitle" value="New Watchlist for RCC testing"/>
@@ -67,7 +67,7 @@
 		</classes>
 	</test> 
 	
-	<test name="document_Add_to_multiple_Groups_Search_Results_page_And_RecordViewPage">
+	<test name="document_Add_to_multiple_Groups_Search_Results_page_And_RecordViewPage" parallel="false">
 		<parameter name="username" value="RccTestUser2@tr.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="documentTitle" value="sample"/>
