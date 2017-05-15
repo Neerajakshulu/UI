@@ -82,13 +82,13 @@ public class Customercare008 extends TestBase {
 				test.log(LogStatus.FAIL, "DRA Customer care page displays Support Request sections.");
 				closeBrowser();
 			}
-			WebElement DRA_Header_TD = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CC_HEADER_TD_CSS);
+			
 			WebElement DRA_Header_DRA = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_CC_HEADER_CSS);
-			String HeaderTD = DRA_Header_TD.getText();
+			
 			String HeaderDRA = DRA_Header_DRA.getText();
 			try {
-				if (DRA_Header_TD.isDisplayed() && DRA_Header_DRA.isDisplayed())
-					Assert.assertEquals(HeaderTD, "TARGET DRUGGABILITY");
+				if ( DRA_Header_DRA.isDisplayed())
+				
 				Assert.assertEquals(HeaderDRA, "Drug Research Advisor");
 				test.log(LogStatus.PASS, "DRA Customer care page displays DRA header");
 			} catch (Throwable t) {
