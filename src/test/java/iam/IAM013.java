@@ -57,6 +57,21 @@ public class IAM013 extends TestBase {
 		ob.navigate().to(host);
 		BrowserWaits.waitTime(6);
 		termofUserAndPrivacyStatement();
+		WebElement myE = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]")).get(1);
+		myE.click();
+		BrowserWaits.waitTime(3);
+		if (!checkElementPresence("reg_PageHeading_label")) {
+
+			test.log(LogStatus.FAIL,
+					"Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");// extent
+																													// reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
+
+		}
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
@@ -65,6 +80,21 @@ public class IAM013 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			BrowserWaits.waitTime(4);
 			termofUserAndPrivacyStatement();
+			WebElement myE1 = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
+			myE1.click();
+			BrowserWaits.waitTime(3);
+			if (!checkElementPresence("reg_PageHeading_label")) {
+
+				test.log(LogStatus.FAIL,
+						"Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");// extent
+																														// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
+
+			}
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 
 		} catch (Throwable t) {
 
@@ -80,9 +110,24 @@ public class IAM013 extends TestBase {
 		}
 
 		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+		ob.navigate().refresh();
 		BrowserWaits.waitTime(6);
 		termofUserAndPrivacyStatement();
+		WebElement myE2 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]")).get(1);
+		myE2.click();
+		BrowserWaits.waitTime(3);
+		if (!checkElementPresence("reg_PageHeading_label")) {
 
+			test.log(LogStatus.FAIL,
+					"Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");// extent
+																													// reports
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
+
+		}
+		BrowserWaits.waitTime(3);
+		ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
 			BrowserWaits.waitTime(2);
@@ -90,6 +135,21 @@ public class IAM013 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			BrowserWaits.waitTime(4);
 			termofUserAndPrivacyStatement();
+			WebElement myE3 = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
+			myE3.click();
+			BrowserWaits.waitTime(3);
+			if (!checkElementPresence("reg_PageHeading_label")) {
+
+				test.log(LogStatus.FAIL,
+						"Either PRICAY STATEMENT link is not working or the page is not getting displayed correctly");// extent
+																														// reports
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
+
+			}
+			BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 
 		} catch (Throwable t) {
 
@@ -133,9 +193,9 @@ public class IAM013 extends TestBase {
 						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_termsOfUse_link")));// screenshot
 
 			}
-			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
+			/*ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			BrowserWaits.waitTime(2);
-			WebElement myE = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
+			WebElement myE = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]")).get(1);
 			myE.click();
 
 			BrowserWaits.waitTime(3);
@@ -151,7 +211,7 @@ public class IAM013 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_issue_with_privacyStatement_link")));// screenshot
 
-			}
+			}*/
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
 			// closeBrowser();
