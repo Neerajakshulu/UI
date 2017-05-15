@@ -459,6 +459,8 @@ public class DRAIAM100 extends TestBase {
 						.assignCategory("DRAIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkLoginPage();
+				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
+				ob.navigate().refresh();
 				pf.getIamPage(ob).login(email, newPassword);
 				pf.getDraPageInstance(ob).logoutDRA();
 				test.log(LogStatus.PASS, "New password text box is available in External Password reset Page");
