@@ -415,7 +415,8 @@ public enum OnePObjectMap {
 	SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS("div[class='col-xs-12'] a"),
     SEARCH_RESULT_PAGE_LINKS_CSS("div[class='wui-content-title wui-content-title--medium'] a"),
     SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS("a[data-event-category='searchresult-ck-sort']"),
-    
+    PEOPLE_SEARCH_RESULT_PAGE_COMMENTS_LABEL_CSS("div[class='wui-icon-metric ng-scope']"),
+    PEOPLE_SEARCH_RESULT_PAGE_POST_LABEL_CSS("div[class='wui-metric ng-scope']"),
   //Added by Ashwini
   	SEARCH_RESULT_PAGE_FILTER_CHECKBOXES_CSS("span[class='wui-checkbox__visible']"),
   	SEARCH_RESULT_PAGE_SEARCH_TEXTBOX_CSS("input[type='text']"),

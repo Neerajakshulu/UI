@@ -2,8 +2,10 @@ package search;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -70,6 +72,14 @@ public class Search93 extends TestBase {
 			waitForAjax(ob);
 			pf.getSearchProfilePageInstance(ob).clickPeople();
 			waitForAjax(ob);
+		List<WebElement> commentcount=ob.findElements(By.cssSelector(OnePObjectMap.PEOPLE_SEARCH_RESULT_PAGE_COMMENTS_LABEL_CSS.toString()));
+		List<WebElement> postcount=ob.findElements(By.cssSelector(OnePObjectMap.PEOPLE_SEARCH_RESULT_PAGE_POST_LABEL_CSS.toString()));
+		if(commentcount.size()>0&&postcount.size()>0)
+	
+			test.log(LogStatus.PASS,"comment count and post count is displaying in people tab");
+			
+		else
+			test.log(LogStatus.FAIL,"comment count and post count is not displaying in people tab");
 			pf.getProfilePageInstance(ob).clickProfile();
 			boolean isPresent = ob
 					.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TITLE_CSS.toString()))
