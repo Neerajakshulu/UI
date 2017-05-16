@@ -330,7 +330,7 @@ public class IAM038 extends TestBase {
 				test = extent.startTest(tests[8], tests_dec[8]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(12);
+				BrowserWaits.waitTime(22);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
