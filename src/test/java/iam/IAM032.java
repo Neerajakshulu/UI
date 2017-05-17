@@ -64,16 +64,7 @@ public class IAM032 extends TestBase {
 		}
 		loginTofb();
 		linkAccounts("Facebook");
-//		try {
-//			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbusername1"));
-//			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
-//			loginToLinkedIn();
-//			linkAccounts("LinkedIn");
-//		} catch (Throwable t) {
-//			test.log(LogStatus.FAIL, "Delete accounts api call failed");// extent
-//			ErrorUtil.addVerificationFailure(t);
-//		}
-//		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
+//			
 	}
 
 	private void loginToLinkedIn() throws Exception {
@@ -114,11 +105,6 @@ public class IAM032 extends TestBase {
 			ob.navigate().to(host);
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
-			//loginAs("fbusername1", "fbpwrdPwd");
-//			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername1"),
-//					CONFIG.getProperty("fbpwrdPwd"));
-//			pf.getLoginTRInstance(ob).clickLogin();
-//			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
 						LOGIN.getProperty("fbpwrdPwd"));
@@ -126,16 +112,7 @@ public class IAM032 extends TestBase {
 				test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 				pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
 			
-			String linkName = pf.getLoginTRInstance(ob).clickOnLinkButtonInLoginPage();
-
-			if (linkName == null) {
-				test.log(LogStatus.FAIL, "Issue with link modal: Neither Facebook nor LinkedIn button is dispalyed");
-				ErrorUtil.addVerificationFailure(new Exception("Link Modal is not dispalyed properly"));// testng
-			} else if (!linkName.equalsIgnoreCase(accountType)) {
-				test.log(LogStatus.FAIL, "User is asked to link the account again when user has already linked them");
-				ErrorUtil.addVerificationFailure(new Exception("Wrong Link button is dispalyed"));// testng
-
-			}
+			
 			if (accountType.equalsIgnoreCase("Facebook")) {
 				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("fbusername1"),
 						LOGIN.getProperty("fbpwrd1"));
