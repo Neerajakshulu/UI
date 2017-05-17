@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Search" parallel="tests" thread-count="10">
+<suite name="Search" parallel="tests" thread-count="5">
 
 
 	<listeners>
@@ -638,6 +638,19 @@
 	<test name="TestCase_B128">
 		<classes>
 			<class name="search.Search128"></class>
+		</classes>
+	</test>
+	
+	<test name="TestCase_B131">
+		<classes>
+			<class name="search.Search131"></class>
+		</classes>
+	</test>
+	
+	
+	<test name="TestCase_B132">
+		<classes>
+			<class name="search.Search132"></class>
 		</classes>
 	</test>
 

@@ -69,10 +69,13 @@ public class SearchResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void clickOnPeopleTab() throws Exception {
-		waitForAjax(ob);
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS);
-		pf.getBrowserActionInstance(ob).click(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS);
+		/*pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS);
 		//pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS).click();
+		waitForAjax(ob);*/
+		waitForAjax(ob);
+		BrowserWaits.waitTime(2);
+		pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_LEFT_NAV_PANE_CSS).get(3).click();
 		waitForAjax(ob);
 	}
 	

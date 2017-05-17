@@ -20,7 +20,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class Search131 extends TestBase {
+public class Search132 extends TestBase {
 
 	static int status = 1;
 
@@ -69,21 +69,35 @@ public class Search131 extends TestBase {
 			ob.navigate().to(host);
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("test");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(3);
-			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
+			pf.getSearchResultsPageInstance(ob).clickOnPeopleTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchResults_links")), 30);
 			Thread.sleep(2000);
 			waitForAllElementsToBePresent(ob, By.cssSelector("div[class='panel-heading']"), 30);
-			String fname = ob.findElement(By.cssSelector(" h4[class='panel-title'] div[class='ng-scope'] span"))
-					.getText();
-			if (compareStrings("Institutions", fname))
-				test.log(LogStatus.PASS, "Institution filter is present in Posts search result page ");// extent
+			List<WebElement> filterhead = ob.findElements(By.cssSelector(" h4[class='panel-title'] div[class='ng-scope'] span"));
+			//String fname=filterhead.get(0).getText();
+			if (compareStrings("Institutions",filterhead.get(1).getText()))
+				test.log(LogStatus.PASS, "Institution filter is present in people search result page ");// extent
 			// reports
 
 			else {
-				test.log(LogStatus.FAIL, "Institution filter is not present in post search result page");// extent
+				test.log(LogStatus.FAIL, "Institution filter is not present in people search result page");// extent
+				// reports
+				status = 2;// excel
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "Filters_not_present")));// screenshot
+
+			}
+			if (compareStrings("Country",filterhead.get(0).getText()))
+				test.log(LogStatus.PASS, "country filter is present in people search result page ");// extent
+			// reports
+
+			else {
+				test.log(LogStatus.FAIL, "Country filter is not present in people search result page");// extent
 				// reports
 				status = 2;// excel
 				test.log(
@@ -95,53 +109,56 @@ public class Search131 extends TestBase {
 			}
 
 			List<WebElement> filter_list = ob.findElements(By.cssSelector("div[class='panel-heading']"));
-			filter_list.get(0).click();
-			BrowserWaits.waitTime(4);
-			waitForElementTobeVisible(ob,
-					By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);
-			jsClick(ob, ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
-			BrowserWaits.waitTime(2);
 
-			// System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
+			for (int i = 0; i < filter_list.size(); i++) {
+				filter_list.get(i).click();
+				waitForElementTobeVisible(ob,
+						By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);
+				jsClick(ob,
+						ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
+				BrowserWaits.waitTime(2);
 
-			String temp1 = ob.findElement(
-					By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
-			if (!compareStrings("Less", temp1)) {
+				// System.out.println(ob.findElement(By.xpath("//button[@class='load-more-button ng-scope']")).getText());
 
-				test.log(LogStatus.FAIL, "Less link not working");// extent
-				// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_more_link_not_working")));// screenshot
+				String temp1 = ob.findElement(
+						By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
+				if (!compareStrings("Less", temp1)) {
 
+					test.log(LogStatus.FAIL, "Less link not working");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_more_link_not_working")));// screenshot
+
+				}
+
+				jsClick(ob,
+						ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
+				BrowserWaits.waitTime(2);
+				String temp2 = ob.findElement(
+						By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
+
+				if (!compareStrings("More", temp2)) {
+
+					test.log(LogStatus.FAIL, "More link not working");// extent
+					// reports
+					status = 2;// excel
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_less_link_not_working")));// screenshot
+
+				}
 			}
-		
-			jsClick(ob, ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
-			BrowserWaits.waitTime(2);
-			String temp2 = ob.findElement(
-					By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
-
-			if (!compareStrings("More", temp2)) {
-
-				test.log(LogStatus.FAIL, "More link not working");// extent
-				// reports
-				status = 2;// excel
-				test.log(
-						LogStatus.INFO,
-						"Snapshot below: "
-								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-										+ "_less_link_not_working")));// screenshot
-
-			}
-			
 			int checkboxesSelected = 0;
 			List<WebElement> checkboxList;
 			for (int i = 0; i < 2; i++) {
-				checkboxList = ob
-						.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()));
+				checkboxList = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS
+						.toString()));
 				BrowserWaits.waitTime(1);
 				if (checkboxList.get(i).isDisplayed() && !checkboxList.get(i).isSelected())
 					jsClick(ob, checkboxList.get(i));
