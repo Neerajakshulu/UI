@@ -509,6 +509,16 @@ public class DRAPage extends TestBase {
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_STEPUPAUTHMODAL_LEARNMORE_CSS);
 
 	}
+	
+	public void clickOnNotNowButton() throws Exception {
+
+		List<WebElement> ele=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NOT_NOW_BUTTON_CSS) ;
+		if(ele.size() == 1) {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+		}
+		
+	}
 
 	public void clickOnSupportLinkFeedback() throws Exception {
 		pf.getBrowserWaitsInstance(ob)
