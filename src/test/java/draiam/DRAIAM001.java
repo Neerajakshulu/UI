@@ -124,18 +124,16 @@ public class DRAIAM001 extends TestBase {
 			}
 
 			// verifying that DRA Landing page, displays the message and email
-			// id
-			/*try {
-				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
-				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_SUPPORT_MAILID_CSS);
+			// id OPQA-5194||OPQA-5190
+			try {
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
+				
 				WebElement helpmsg = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_LANDINGPAGE_HELP_MESSAGE_CSS);
-				WebElement supportmailid = pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.DRA_LANDINGPAGE_SUPPORT_MAILID_CSS);
-				String actual_help_text = helpmsg.getText();
-				String actual_mail_id=supportmailid.getText();
 				
-				if (actual_help_text.contains("Need help signing in? Please contact") && actual_mail_id.contains("DRA_support@thomsonreuters.com")){
+				String actual_help_text = helpmsg.getText();
+		
+				if (actual_help_text.contains("Need help signing in? Please contact Drug Research Advisor Customer Care.") ){
 					test.log(LogStatus.PASS, "DRA Landing page  displays the message and email");
 				}
 				
@@ -145,7 +143,7 @@ public class DRAIAM001 extends TestBase {
 				test.log(LogStatus.FAIL, "DRA Landing page displays the incorrect message and email");
 				ErrorUtil.addVerificationFailure(t);
 			}
-		*/
+		
 
 			// Verifying DRA marketing copy are displayed.
 			try {
