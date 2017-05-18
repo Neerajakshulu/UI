@@ -69,19 +69,18 @@ public class Search83 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-
-			waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")), 120);
+           	waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")),120);
 			List<WebElement> searchResults1 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 1; i <=10; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
 				waitForAjax(ob);
 
 			}
-
+         
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			// System.out.println(searchResults1.size());

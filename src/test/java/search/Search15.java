@@ -140,7 +140,7 @@ public class Search15 extends TestBase {
 										+ "Viewsfor search results validation failed")));// screenshot
 
 			}
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_comments_search_results_xpath")), 40);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("tr_comments_search_results_xpath")),60);
 			commentsList = ob.findElements(By.xpath(OR.getProperty("tr_comments_search_results_xpath")));
 			if (commentsList.size() != 0) {
 				for (WebElement comments : commentsList) {
