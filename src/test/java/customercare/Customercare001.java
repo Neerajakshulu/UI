@@ -128,6 +128,16 @@ public class Customercare001 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"Phone icon,Clock icon and Language icon are not displaying correctly");
 			}
+			WebElement DRA_brand = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.DRA_CC_HEADER_CSS);
+			if (DRA_brand.isDisplayed())
+				test.log(LogStatus.PASS,
+						"App name for DRA will appear same in the Customer Care pages as it does in the DRA app");
+			else
+			{
+				test.log(LogStatus.FAIL,
+						"App name for DRA is not appearing same in the Customer Care pages as it does in the DRA app");
+			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 
