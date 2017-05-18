@@ -1149,7 +1149,7 @@ public enum OnePObjectMap {
 	CUSTOMER_CARE_CALLUS_CTRY2_CSS("div[class='ng-scope cc-call-us__info-secondary'] p"),
 	DRA_FEEDBACKLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(4)"),
     DRA_HELPLINK_CSS("ul[class='wui-profile-flyout__list'] li:nth-child(3)"),
-	
+    CUSTOMER_CARE_LINK_LANDINGPAGE_CSS("a[href='/#/customer-care?app=dra']"),
 	CUSTOMER_CARE_SUPPORTLINK_FEEDBACK_CSS("a[href*='thomsonreuters.com']"),
 	CUSTOMER_CARE_SUPPORTLINK_HELP_CSS("a[href='/#/customer-care?app=dra']"),
 	CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS("input[placeholder^='Name']"),

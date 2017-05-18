@@ -2,6 +2,9 @@ package customercare;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -69,7 +72,15 @@ public class Customercare001 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host + CONFIG.getProperty("appendDRACCUrl"));
+			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_LINK_LANDINGPAGE_CSS);
+			Set<String> myset = ob.getWindowHandles();
+			Iterator<String> myIT = myset.iterator();
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < myset.size(); i++) {
+				al.add(myIT.next());
+			}
+			ob.switchTo().window(al.get(1));
 
 			try {
 				pf.getBrowserWaitsInstance(ob)
