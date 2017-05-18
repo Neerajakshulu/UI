@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -115,9 +116,7 @@ public class Customercare020 extends TestBase {
 					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS).getAttribute("value");
 			String actualemail = pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS).getAttribute("value");
-			/*
-			 * Select se=new Select(); se.getFirstSelectedOption().getText();
-			 */
+			
 			try {
 				Assert.assertEquals(expectedName, actualName);
 				Assert.assertEquals(expectedOrg, actualOrg);
@@ -126,6 +125,38 @@ public class Customercare020 extends TestBase {
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Support Request form is Not prepopulating with Name,Org,Email and country");
+			}
+			
+			new Actions(ob).moveToElement(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CLEAR_CSS)).build().perform();
+			
+			String bckcolor1=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CUSTOMER_CARE_CLEAR_CSS).getCssValue("background-color");
+			System.out.println(bckcolor1);
+            try {
+				
+				Assert.assertTrue(bckcolor1.contains("rgba(139, 197, 197"));
+				
+				test.log(LogStatus.PASS, "Color of clear button is changed to blue when mouse over");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Color of clear button is not changed to blue when mouse over");
+			}
+          pf.getBrowserActionInstance(ob).click(OnePObjectMap.CUSTOMER_CARE_CLEAR_CSS);
+			String actualName1 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_NAME_CSS).getAttribute("value");
+			String actualOrg1 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_ORG_CSS).getAttribute("value");
+			String actualemail1 = pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.CUSTOMER_CARE_SUPPORTREQUEST_EMAIL_CSS).getAttribute("value");
+			
+			try {
+				
+				Assert.assertTrue(actualName1.isEmpty());
+				Assert.assertTrue(actualOrg1.isEmpty());
+				Assert.assertTrue(actualemail1.isEmpty());
+				test.log(LogStatus.PASS, "Name,Org,Email and country fields are cleared");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Name,Org,Email and country fields are not cleared");
 			}
 			BrowserWaits.waitTime(2);
 			closeBrowser();

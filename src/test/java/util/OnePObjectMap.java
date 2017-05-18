@@ -1160,6 +1160,7 @@ public enum OnePObjectMap {
 	DRA_PROFILE_LNAME_CSS("input[placeholder='+ Last Name']"),
 	DRA_PROFILE_ORG_CSS("input[placeholder='+ Institution']"),
 	DRA_PROFILE_COUNTRY_CSS("input[placeholder='+ Country']"),
+	CUSTOMER_CARE_CLEAR_CSS("button[type='reset']"),
 
 	
 	CUSTOMER_CARE_CALLUS_SECTION_CSS("div[class='cc-call-us'] h4"),
