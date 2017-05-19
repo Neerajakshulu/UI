@@ -113,6 +113,56 @@ public class IAM016 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
+						.startTest("OPQA-5207&&OPQA-5138",
+								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all neon pages related forgot password&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
+						.assignCategory("IAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5208",
+								"Verify that the Project Neon should be displayed on the forgot password page")
+						.assignCategory("IAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkAppName("Project Neon");
+				test.log(LogStatus.PASS, "Application name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Application name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
 						.startTest("OPQA-1935&OPQA-3687",
 								"Verify that the system is navigating to Forgot Password page or not, after clicking on Forgot your password? Link&Verify that,the system should support a ENW password reset workflow with the following configurations")
 						.assignCategory("IAM");
@@ -258,6 +308,32 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.PASS, "Reset your password page is opened successfylly");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Reset your password page is not opened successfylly" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5133",
+								"Verify that 'Project Neon' should be moved within the white area and should be above 'Reset your Password' text and center aligned")
+						.assignCategory("IAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				pf.getIamPage(ob).checkAppName("Project Neon");
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
