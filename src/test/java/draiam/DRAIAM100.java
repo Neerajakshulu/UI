@@ -25,7 +25,7 @@ public class DRAIAM100 extends TestBase {
 	static boolean fail = false;
 	String[] tests;
 	String[] tests_dec;
-	
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
@@ -36,11 +36,10 @@ public class DRAIAM100 extends TestBase {
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("DRAIAM");
 		test.log(LogStatus.INFO, tests[0]);
-		
-		
-//		extent = ExtentManager.getReporter(filePath);
-//		rowData = testcase.get(this.getClass().getSimpleName());
-//		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
+
+		// extent = ExtentManager.getReporter(filePath);
+		// rowData = testcase.get(this.getClass().getSimpleName());
+		// test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("DRA");
 
 	}
 
@@ -49,8 +48,7 @@ public class DRAIAM100 extends TestBase {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
-		
-		
+
 		logger.info("Test --" + suiteRunmode + "--" + testRunmode);
 		if (!master_condition) {
 			status = 3;// excel
@@ -69,7 +67,7 @@ public class DRAIAM100 extends TestBase {
 			}
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 
 		try {
@@ -77,9 +75,9 @@ public class DRAIAM100 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			
+
 			pf.getIamPage(ob).openGurillaMail();
-			String email=pf.getIamPage(ob).getEmail();
+			String email = pf.getIamPage(ob).getEmail();
 			pf.getIamPage(ob).openCCURL("http://10.205.140.206:7270/steam-admin-app/actions/LogoutAction.do");
 			pf.getIamPage(ob).loginCustomerCare("ramesh.lalam@thomsonreuters.com", "Ramesh_lalam21");
 			pf.getIamPage(ob).openMenuPanel();
@@ -94,21 +92,21 @@ public class DRAIAM100 extends TestBase {
 			pf.getIamPage(ob).clickUserToClimeTicket();
 			pf.getIamPage(ob).closeMenuPanel();
 			pf.getIamPage(ob).openMainPanel();
-			pf.getIamPage(ob).enterEmailField(email,"21770187XY");
+			pf.getIamPage(ob).enterEmailField(email, "21770187XY");
 			pf.getIamPage(ob).closeMainPanel();
 			pf.getIamPage(ob).openHeaderPanel();
 			pf.getIamPage(ob).logoutCustomerCare();
 			pf.getIamPage(ob).closeHeaderPanel();
 			pf.getIamPage(ob).checkCCLoginPage();
-			
+
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 			test.log(LogStatus.PASS, "User is succeccfully sent to the DRA landing page. ");
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(email,"Neon@123");
+			pf.getLoginTRInstance(ob).enterTRCredentials(email, "Neon@123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			BrowserWaits.waitTime(5);
 			pf.getDraPageInstance(ob).logoutDRA();
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -122,6 +120,56 @@ public class DRAIAM100 extends TestBase {
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Forgot password? Link is not clickable on EndNote landing page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5162",
+								"Verify that Thomson Reuters logo should be replaced with Clarivate Analytics logo as per updated UX guidelines(https://thomsonreuters.invisionapp.com/share/XAACS4Z53#/screens/217761229)")
+						.assignCategory("DRAIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5163",
+								"Verify that 'Drug Research Advisor: Target Druggability' should be moved within the white area (above and centered over the 'Forgot Password' text).")
+						.assignCategory("DRAIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkDRAAppname("Drug Research Advisor");
+				test.log(LogStatus.PASS, "Application name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Application name not displayed in forgot password page" + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -294,9 +342,32 @@ public class DRAIAM100 extends TestBase {
 				extent.endTest(test);
 			}
 
-			
-			
-			
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5121",
+								"Verify that 'Drug Research Advisor : Target Druggability' should be moved within the white area")
+						.assignCategory("DRAIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				pf.getIamPage(ob).checkDRAAppname("Drug Research Advisor");
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
 			try {
 				test = extent
 						.startTest("OPQA-1950",
@@ -420,13 +491,7 @@ public class DRAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
-			
-			
-			
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -688,8 +753,7 @@ public class DRAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
+
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -755,9 +819,7 @@ public class DRAIAM100 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			
-			
-			
+
 			ob.quit();
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent
@@ -770,8 +832,8 @@ public class DRAIAM100 extends TestBase {
 			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("DRAIAM");
-				test.log(LogStatus.SKIP,
-						"Skipping test case " + this.getClass().getSimpleName() + " User Not created, hence skiping this test case");
+				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+						+ " User Not created, hence skiping this test case");
 				extent.endTest(test);
 			}
 			StringWriter errors = new StringWriter();
@@ -787,7 +849,6 @@ public class DRAIAM100 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
-
 
 	@AfterTest
 	public void reportTestResult() {

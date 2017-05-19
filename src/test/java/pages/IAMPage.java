@@ -497,6 +497,13 @@ public class IAMPage extends TestBase {
 		Assert.assertEquals(appName, expectedAppName);		
 	}
 
+	public void checkDRAAppname(String expectedAppName) throws Exception{
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_BRANDING_NAME_CSS);
+		String appName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_BRANDING_NAME_CSS).getText();
+		Assert.assertEquals(appName, expectedAppName);
+	}
+	
+	
 	
 	
 }
