@@ -118,6 +118,64 @@ public class ENWIAM013 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
+			
+			
+			
+			
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5209",
+								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all endnote pages related  forgot password")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5210",
+								"Verify that the Endnote should be displayed on the forgot password page")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkAppName("EndNote");
+				test.log(LogStatus.PASS, "Application name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Application name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+			
+			
+			
+			
+			
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -279,6 +337,32 @@ public class ENWIAM013 extends TestBase {
 				extent.endTest(test);
 			}
 
+			try {
+				extent = ExtentManager.getReporter(filePath);
+				test = extent
+						.startTest("OPQA-5136&&OPQA-5135",
+								"Verify that 'EndNote' should be moved within the white area and should be above 'Forgot Password' text and center aligned&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
+						.assignCategory("ENWIAM");
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+
+				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
+				pf.getIamPage(ob).checkAppName("EndNote");
+				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
+
+			} catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Company name not displayed in forgot password page" + t);// extent
+				StringWriter errors = new StringWriter();
+				t.printStackTrace(new PrintWriter(errors));
+				test.log(LogStatus.INFO, errors.toString());// extent reports
+				ErrorUtil.addVerificationFailure(t);// testng
+				status = 2;// excel
+				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));
+			} finally {
+				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
+				extent.endTest(test);
+			}
+			
 			try {
 				test = extent
 						.startTest("OPQA-1950",
