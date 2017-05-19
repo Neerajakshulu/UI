@@ -61,9 +61,22 @@ public class DRAIAM0016 extends TestBase {
 			String DRAProfileName = pf.getDraPageInstance(ob).getProfileNameDRA();
 
 			test.log(LogStatus.INFO, "DRA account profile name: " + DRAProfileName);
+			try {
 			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+	        pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK);
+	        pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_PROFILEFLYOUT_ACCOUNTLINK_CSS);
+	       pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);
+	       test.log(LogStatus.PASS, " Accounts setting modal has not initiated on-boarding. ");
+			}
+			catch (Throwable t) {
+				test.log(LogStatus.FAIL, "Accounts setting modal has  initiated on-boarding.");
+				ErrorUtil.addVerificationFailure(t);// testng
+				
+			}
+	       // pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+			//pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK);
+	        pf.getDraPageInstance(ob).logoutDRA();
 			BrowserWaits.waitTime(5);
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("DRAUSERsteam0016"),
