@@ -2,6 +2,9 @@ package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -110,7 +113,45 @@ public class ENWIAM50 extends TestBase {
 				ErrorUtil.addVerificationFailure(t);
 
 			}
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("ENWIAM50"),
+					LOGIN.getProperty("ENWIAM50pwd"));
+			pf.getLoginTRInstance(ob).clickLogin();
+			test.log(LogStatus.PASS, "user has logged in with steam account");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CLARIVATELOGO_HOMEPAGE_CSS);
+			String backcolor=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.CLARIVATELOGO_HOMEPAGE_CSS).getCssValue("background-color");
+			try {
+				Assert.assertEquals(backcolor, "rgba(0, 0, 0, 0)");
+				test.log(LogStatus.PASS, "Platform header background color is white");
 
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL, "Platform header background color is white");
+				ErrorUtil.addVerificationFailure(t);
+
+			}
+			System.out.println(backcolor);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.CLARIVATELOGO_HOMEPAGE_CSS);
+			Set<String> myset=ob.getWindowHandles();
+			Iterator<String> it=myset.iterator();
+			ArrayList<String> arr=new ArrayList<String>();
+			for(int i=0;i<myset.size();i++)
+			{
+				arr.add(it.next());
+			}
+			ob.switchTo().window(arr.get(1));
+			String ActualURL=ob.getCurrentUrl();
+			try {
+				Assert.assertEquals(ActualURL, "http://clarivate.com/");
+				test.log(LogStatus.PASS, "Clarivate marking site is opened in new tab");
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+				test.log(LogStatus.FAIL, "Clarivate marking site is not opened in new tab");
+				ErrorUtil.addVerificationFailure(t);
+
+			}
+
+			
 			BrowserWaits.waitTime(2);
 			closeBrowser();
 		} catch (Throwable t) {

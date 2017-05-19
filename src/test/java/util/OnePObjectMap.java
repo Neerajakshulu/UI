@@ -594,6 +594,7 @@ public enum OnePObjectMap {
 	PROFILE_PAGE_WATCHLIST_COUNT_XPATH("//a[@data-event-category='profilewatchlists']/span[@class='wui-side-menu__badge ng-binding']"),
 	ALREADY_HAVE_AN_ACCOUNT_NOTNOW_CSS("div[class='modal-content ng-scope']"),
 	HOME_PROJECT_NEON_HEADER_CSS("a[class='ne-logo__link']"),
+	CLARIVATELOGO_HOMEPAGE_CSS("svg[class='ne-header__logo-mark']"),
 
 	// AccountSettingPage
 	ACCOUNT_RADIOBUTTON1_XPATH("(//label[contains(text(),'Make primary')])[1]"),
