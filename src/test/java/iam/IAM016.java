@@ -138,8 +138,8 @@ public class IAM016 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-5208",
-								"Verify that the Project Neon should be displayed on the forgot password page")
+						.startTest("OPQA-5208&&OPQA-5139",
+								"Verify that the Project Neon should be displayed on the forgot password page&&Verify that 'Project Neon' should be moved within the white area and should be above 'Forgot Password' text and center aligned")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 

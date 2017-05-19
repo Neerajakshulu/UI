@@ -125,8 +125,8 @@ public class ENWIAM013 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-5209",
-								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all endnote pages related  forgot password")
+						.startTest("OPQA-5209&&OPQA-5135",
+								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all endnote pages related  forgot password&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo. and placed below the white area")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
@@ -150,8 +150,8 @@ public class ENWIAM013 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-5210",
-								"Verify that the Endnote should be displayed on the forgot password page")
+						.startTest("OPQA-5210&&OPQA-5136",
+								"Verify that the Endnote should be displayed on the forgot password page&&Verify that 'EndNote' should be moved within the white area and should be above 'Forgot Password' text and center aligned")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
@@ -340,8 +340,8 @@ public class ENWIAM013 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-5136&&OPQA-5135",
-								"Verify that 'EndNote' should be moved within the white area and should be above 'Forgot Password' text and center aligned&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
+						.startTest("OPQA-5130&&OPQA-5129",
+								"Verify that 'EndNote' should be moved within the white area and should be above 'Reset your Password' text and center aligned&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
