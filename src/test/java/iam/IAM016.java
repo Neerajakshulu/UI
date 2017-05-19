@@ -113,7 +113,7 @@ public class IAM016 extends TestBase {
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
-						.startTest("OPQA-5207&&OPQA-5138",
+						.startTest("OPQA-5207&&OPQA-OPQA-5138",
 								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all neon pages related forgot password&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
