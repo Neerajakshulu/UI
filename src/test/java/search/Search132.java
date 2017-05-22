@@ -135,14 +135,13 @@ public class Search132 extends TestBase {
 
 				}
 
+				BrowserWaits.waitTime(2);
 				jsClick(ob,
 						ob.findElement(By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")));
 				BrowserWaits.waitTime(2);
 				String temp2 = ob.findElement(
 						By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']")).getText();
-
 				if (!compareStrings("More", temp2)) {
-
 					test.log(LogStatus.FAIL, "More link not working");// extent
 					// reports
 					status = 2;// excel
