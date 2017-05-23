@@ -1,4 +1,4 @@
-package iam;
+package enwiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,7 +17,7 @@ import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
-public class IAM032 extends TestBase {
+public class ENWIAM63 extends TestBase {
 
 	static boolean fail = false;
 	static boolean skip = false;

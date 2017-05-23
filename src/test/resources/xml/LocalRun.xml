@@ -20,13 +20,6 @@
 		</classes>
 	</test>
 
-	<test name="Linkedin Testcases" preserve-order="true">
-		<classes>
-			<class name="enw.ENW004"></class>
-			<class name="enwiam.ENWIAM0006"></class>
-		</classes>
-	</test>
-
 	<test name="ENW005">
 		<classes>
 			<class name="enw.ENW005"></class>
@@ -123,22 +116,12 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ENW020"> <classes> <class name="enw.ENW020"></class> </classes> 
-		</test> -->
-
-
 	<test name="ENW021">
 		<classes>
 			<class name="enw.ENW021"></class>
 		</classes>
 	</test>
 
-	<!--  <test name="ENW034">
-		<classes>
-			<class name="enw.ENW034"></class>
-		</classes>
-
-	</test>-->
 	<test name="ENW035">
 		<classes>
 			<class name="enw.ENW035"></class>
@@ -211,18 +194,6 @@
 	<test name="Deep_linking_help_page_Using_LI_and_facebook">
 		<classes>
 			<class name="iam.IAM031"></class>
-		</classes>
-	</test>
-
-	<test name="Linking_Steam_to_Social">
-		<classes>
-			<class name="iam.IAM032"></class>
-		</classes>
-	</test>
-
-	<test name="Liking_Social_to_Steam">
-		<classes>
-			<class name="iam.IAM033"></class>
 		</classes>
 	</test>
 
@@ -331,6 +302,7 @@
 	
    <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
+		<class name="enw.ENW004"></class>
 			<class name="enwiam.ENWIAM00018"></class>
 			<class name="enwiam.ENWIAM080"></class>
 			<class name="enwiam.ENWIAM081"></class>
@@ -563,6 +535,10 @@
 			<class name="draiam.DRAIAM0015"></class>
 			<class name="draiam.DRAIAM053"></class>
 			<class name="draiam.DRAIAM053"></class>
+			<class name="ipaiam.IPAIAM0002"></class>
+			<class name="ipaiam.IPAIAM0003"></class>
+			<class name="ipaiam.IPAIAM0055"></class>
+			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
 	
@@ -580,16 +556,6 @@
 
 	<!-- IPAIAM Test cases START -->
 
-	
-
-	<test name="IPAIAMAutomatedscript" preserve-order="true" parallel="false">
-		<classes>
-			<class name="ipaiam.IPAIAM0002"></class>
-			<class name="ipaiam.IPAIAM0003"></class>
-			<class name="ipaiam.IPAIAM0055"></class>
-			<class name="ipaiam.IPAIAM0056"></class>
-		</classes>
-	</test>
 
 	<test name="IPAIAM100">
 		<classes>

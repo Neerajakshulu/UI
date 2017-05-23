@@ -1,4 +1,4 @@
-package iam;
+package enwiam;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -14,7 +14,7 @@ import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
-public class IAM033 extends TestBase {
+public class ENWIAM64 extends TestBase {
 
 	static int status = 1;
 	static boolean fail = false;
