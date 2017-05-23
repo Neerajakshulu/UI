@@ -15,20 +15,9 @@
 
 	<test name="ENW003" preserve-order="true">
 		<classes>
+		
 			<class name="enw.ENW003"></class>
 			<class name="enw.ENW023"></class>
-		</classes>
-	</test>
-
-	<test name="ENW005">
-		<classes>
-			<class name="enw.ENW005"></class>
-		</classes>
-	</test>
-
-	<test name="ENW006">
-		<classes>
-			<class name="enw.ENW006"></class>
 		</classes>
 	</test>
 
@@ -321,12 +310,18 @@
 			<class name="enwiam.ENWIAM00016"></class>
 			<class name="enwiam.ENWIAM90"></class>
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
-			<class name="enwiam.ENWIAM0002"></class>
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enw.ENW000010"></class>
 		</classes>
 	</test>
 
+
+<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
+		<classes>
+		<class name="enwiam.ENWIAM63"></class>
+		<class name="enwiam.ENWIAM64"></class>
+		</classes>
+	</test>
 	<!-- Profile -->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
@@ -580,5 +575,6 @@
 		</classes>
 	</test>
 	<!-- IPAIAM Test cases END -->
+	
 </suite>
 
