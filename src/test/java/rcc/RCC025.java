@@ -141,6 +141,7 @@ public class RCC025 extends TestBase {
 			try {
 				ob.navigate().refresh();
 				pf.getGroupDetailsPage(ob).clickOnDeleteButton();
+				BrowserWaits.waitTime(2);
 				pf.getGroupDetailsPage(ob).clickOnDeleteGroupButtoninPopUp();
 
 				Assert.assertFalse(pf.getGroupsListPage(ob).checkForGroup(groupTitle));
@@ -191,6 +192,7 @@ public class RCC025 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 			closeBrowser();
+
 		}
 	}
 
