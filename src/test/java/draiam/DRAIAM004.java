@@ -86,6 +86,7 @@ public class DRAIAM004 extends TestBase {
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUserNameValid"),
 					LOGIN.getProperty("DRAPasswordValid"));
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
+			BrowserWaits.waitTime(4);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(5);

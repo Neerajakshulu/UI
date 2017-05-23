@@ -111,7 +111,7 @@ public class DRAIAM002 extends TestBase {
 				BrowserWaits.waitTime(2);
 				pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
-				BrowserWaits.waitTime(2);
+				BrowserWaits.waitTime(4);
 				validateLinkedAccounts(2, accountType);
 
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.DRA_ACCOUNT_CROSS_CSS);

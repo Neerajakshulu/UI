@@ -92,7 +92,7 @@ public class DRAIAM0015 extends TestBase {
 				test.log(LogStatus.INFO, "Social account profile name: " + FirstAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
 				pf.getHFPageInstance(ob).clickOnAccountLink();
-				BrowserWaits.waitTime(2);
+				BrowserWaits.waitTime(4);
 				String accountType = "Facebook";
 
 				validateAccounts(1, accountType);
