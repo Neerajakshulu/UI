@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 
@@ -66,7 +67,7 @@ public class Search83 extends TestBase {
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
 
 			// Type into the search box and get search results
-			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bio");
+			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("biology");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
            	waitForElementTobeClickable(ob, By.xpath(OR.getProperty("searchResults_links")),120);
@@ -80,7 +81,7 @@ public class Search83 extends TestBase {
 				waitForAjax(ob);
 
 			}
-         
+         BrowserWaits.waitTime(2);
 			List<WebElement> searchResults2 = ob.findElements(By.xpath(OR.getProperty("searchResults_links")));
 
 			// System.out.println(searchResults1.size());

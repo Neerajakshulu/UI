@@ -107,10 +107,11 @@ public class Search132 extends TestBase {
 										+ "Filters_not_present")));// screenshot
 
 			}
-
+          BrowserWaits.waitTime(2);
 			List<WebElement> filter_list = ob.findElements(By.cssSelector("div[class='panel-heading']"));
 
 			for (int i = 0; i < filter_list.size(); i++) {
+				
 				filter_list.get(i).click();
 				waitForElementTobeVisible(ob,
 						By.xpath("//button[@class='search-result-refine-menu__load-button ng-scope']"), 30);
