@@ -491,13 +491,6 @@
 		</classes>
 	</test>
 
-
-	<test name="DRAIAM002">
-		<classes>
-			<class name="draiam.DRAIAM002"></class>
-		</classes>
-	</test>
-
 	<test name="Authoring80">
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
@@ -524,6 +517,7 @@
 
 	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>
+		<class name="draiam.DRAIAM002"></class>
 			<class name="draiam.DRAIAM004"></class>
 			<class name="draiam.DRAIAM003"></class>
 			<class name="draiam.DRAIAM0014"></class>
