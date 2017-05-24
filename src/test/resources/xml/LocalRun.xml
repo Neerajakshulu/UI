@@ -312,6 +312,7 @@
 			<!-- <class name="enwiam.ENWIAM41"></class> -->
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enw.ENW000010"></class>
+			<class name="enwiam.ENWIAM64"></class>
 		</classes>
 	</test>
 
@@ -319,7 +320,7 @@
 <test name="ENWAutomatedMerge" preserve-order="true" parallel="false">
 		<classes>
 		<class name="enwiam.ENWIAM63"></class>
-		<class name="enwiam.ENWIAM64"></class>
+		
 		</classes>
 	</test>
 	<!-- Profile -->

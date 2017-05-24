@@ -32,7 +32,7 @@ public class ENWIAM64 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("IAM");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("ENWIAM");
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class ENWIAM64 extends TestBase {
 		// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn In Page
 
 		try {
-			String statuCode = deleteUserAccounts(CONFIG.getProperty("fbusername1"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserFBENWIAM80"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 
 		} catch (Throwable t) {
@@ -66,14 +66,14 @@ public class ENWIAM64 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).enterTRCredentials(CONFIG.getProperty("fbusername1"),
-					CONFIG.getProperty("fbpwrdPwd"));
+			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getLoginTRInstance(ob).clickLogin();
 			test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 			pf.getLoginTRInstance(ob).logOutApp();
 			BrowserWaits.waitTime(6);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
-					CONFIG.getProperty("fbpwrd1"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 						pf.getLoginTRInstance(ob).socialLinking();
 			test.log(LogStatus.PASS, "User has logged in with facebook credentials");
 			test.log(LogStatus.PASS, "Facebook account is linked with steam account");
@@ -109,11 +109,11 @@ public class ENWIAM64 extends TestBase {
 			openBrowser();
 			maximizeWindow();
 			ob.navigate().to(host);
-			pf.getLoginTRInstance(ob).loginWithFBCredentials(CONFIG.getProperty("fbusername1"),
-					CONFIG.getProperty("fbpwrd1"));
+			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENWIAM80"),
+					LOGIN.getProperty("PWDUserFBENWIAM80"));
 			pf.getLoginTRInstance(ob).checkLinking();
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", CONFIG.getProperty("fbusername1")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Facebook", LOGIN.getProperty("UserFBENWIAM80")));
 			test.log(LogStatus.PASS, "Linked accounts are available in accounts page");
 			pf.getLoginTRInstance(ob).logOutApp();
 		} catch (Throwable t) {
