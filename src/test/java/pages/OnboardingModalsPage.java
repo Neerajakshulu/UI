@@ -723,7 +723,7 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Follow and discuss research", "Connect with researchers",
 					"Discover articles, patents, and community contributions");
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow");
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Recommended people to follow"); 
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
