@@ -81,6 +81,8 @@ public class RCC024 extends TestBase {
 			pf.getGroupsPage(ob).clickOnCreateNewGroupButton();
 			pf.getGroupsListPage(ob).createGroup(title, desc);
 			test.log(LogStatus.INFO, "Created the group: " + title);
+			BrowserWaits.waitTime(4);
+			scrollingToElementofAPage();
 			pf.getGroupDetailsPage(ob).clickAttachedFilesTab();
 
 			try {
@@ -200,28 +202,28 @@ public class RCC024 extends TestBase {
 						"_GD_title_dec_not_updated");
 
 			}
-//			try {
-//				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
-//				pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-//				// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
-//				// gPassword2);
-//				pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
-//				pf.getGmailLoginPage(ob).clickonGoogleContinue();
-//			} catch (Throwable t) {
-//				logFailureDetails(test, t, "Successfully Logged in clearing all the privacy things in google.",
-//						"Not logged in ");  
-//			}
-			
+			// try {
+			// pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
+			// pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			// // pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+			// // gPassword2);
+			// pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,
+			// gPassword2);
+			// pf.getGmailLoginPage(ob).clickonGoogleContinue();
+			// } catch (Throwable t) {
+			// logFailureDetails(test, t, "Successfully Logged in clearing all
+			// the privacy things in google.",
+			// "Not logged in ");
+			// }
+
 			try {
 				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
 				BrowserWaits.waitTime(5);
 				pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
 				test.log(LogStatus.PASS, "Successfully Logged in without accessing Google privacy things");
-				}catch(Throwable t) {
-				logFailureDetails(test, t,
-				"Issus in google login",
-				"_Login_Issue");
-				}
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "Issus in google login", "_Login_Issue");
+			}
 
 			try {
 
@@ -403,24 +405,22 @@ public class RCC024 extends TestBase {
 
 			}
 
-//			pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
-//			pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
-//			// pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
-//			// gPassword2);
-//			pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2, gPassword2);
-//			pf.getGmailLoginPage(ob).clickonGoogleContinue();
-			
+			// pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
+			// pf.getGmailLoginPage(ob).clickonSwitchtoaccountinGooglepage();
+			// // pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2,
+			// // gPassword2);
+			// pf.getGmailLoginPage(ob).signinGoogleWithoutSwitchingWindow(gUsername2,
+			// gPassword2);
+			// pf.getGmailLoginPage(ob).clickonGoogleContinue();
+
 			try {
 				pf.getGroupDetailsPage(ob).clickOnOpenInGoogleDriveLinkGroupLevel(gdDoctitle);
 				BrowserWaits.waitTime(5);
 				pf.getGroupDetailsPage(ob).signInToGoogle(gUsername2, gPassword2);
 				test.log(LogStatus.PASS, "Successfully Logged in without accessing Google privacy things");
-				}catch(Throwable t) {
-				logFailureDetails(test, t,
-				"Issus in google login",
-				"_Login_Issue");
-				}
-			
+			} catch (Throwable t) {
+				logFailureDetails(test, t, "Issus in google login", "_Login_Issue");
+			}
 
 			try {
 
