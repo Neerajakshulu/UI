@@ -76,8 +76,8 @@ public class Customercare020 extends TestBase {
 			clearCookies();
 			ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
-					LOGIN.getProperty("fbpwrdPwd"));
+			pf.getLoginTRInstance(ob).enterTRCredentials("7ttabm+arteo85hji878@sharklasers.com",
+					"@Salma123");
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			pf.getDraPageInstance(ob).clickOnNotNowButton();
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
@@ -92,7 +92,7 @@ public class Customercare020 extends TestBase {
 					.getAttribute("value");
 			// String expectedcountry =
 			// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_COUNTRY_CSS).getAttribute("value");
-			String expectedemail = LOGIN.getProperty("fbusername1");
+			String expectedemail = "7ttabm+arteo85hji878@sharklasers.com";
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
 			BrowserWaits.waitTime(4);
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
