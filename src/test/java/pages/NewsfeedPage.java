@@ -2,6 +2,8 @@ package pages;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -121,7 +123,8 @@ public class NewsfeedPage extends TestBase {
 					.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_SECTION_TITLE_CSS.toString()))
 					.getText();
 			logger.info("categeory type-->" + cardCategeory);
-			if (cardCategeory.contains("New comment") || cardCategeory.contains("New comments")) {
+			
+			if (StringUtils.containsIgnoreCase(cardCategeory, "New comment")|| StringUtils.containsIgnoreCase(cardCategeory, "New comments")) {
 				String cardTitle = cardSection
 						.findElement(By.cssSelector(OnePObjectMap.NEWSFEED_POST_CARD_POST_TITLE_CSS.toString()))
 						.getText();
