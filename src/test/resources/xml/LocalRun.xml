@@ -453,7 +453,7 @@
 	<!-- search test case -->
 	<test name="Test B1">
 		<classes>
-			<class name="search.Search127"></class>
+			<class name="search.Search129"></class>
 		</classes>
 	</test>
 
