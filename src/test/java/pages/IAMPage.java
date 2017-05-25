@@ -502,6 +502,16 @@ public class IAMPage extends TestBase {
 		String appName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_BRANDING_NAME_CSS).getText();
 		Assert.assertEquals(appName, expectedAppName);
 	}
+
+	public void checkOnBoarding() throws Exception {
+		
+		List<WebElement> element=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.DRA_ONBOARDING_CSS);
+		if(element.size()!=0){
+			element.get(1).click();
+			BrowserWaits.waitTime(5);
+		}
+		
+	}
 	
 	
 	

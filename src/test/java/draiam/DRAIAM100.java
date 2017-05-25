@@ -2,9 +2,11 @@ package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -527,6 +529,7 @@ public class DRAIAM100 extends TestBase {
 				ob.navigate().to(host + CONFIG.getProperty("appendDRAAppUrl"));
 				ob.navigate().refresh();
 				pf.getIamPage(ob).login(email, newPassword);
+				pf.getIamPage(ob).checkOnBoarding();
 				pf.getDraPageInstance(ob).logoutDRA();
 				test.log(LogStatus.PASS, "New password text box is available in External Password reset Page");
 			} catch (Throwable t) {
