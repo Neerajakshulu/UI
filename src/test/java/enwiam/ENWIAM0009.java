@@ -75,7 +75,7 @@ public class ENWIAM0009 extends TestBase {
 				
 				
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_LINKIINGMODAl_CSS.toString()), 300);
-				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("SteampwdENWIAM0009"));
+				pf.getENWReferencePageInstance(ob).didYouKnow(LOGIN.getProperty("FBpwdENWIAM0009"));
 				BrowserWaits.waitTime(5);
 				//ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS.toString())).click();
 				waitForElementTobeVisible(ob, By.cssSelector("h2[class='login-title']"), 300);

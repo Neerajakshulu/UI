@@ -119,7 +119,7 @@ public class ENW00029 extends TestBase {
 				Assert.assertEquals(accountpageText,
 						"Project Neon has linked your accounts. You can sign in with any of the accounts you already use.");
 				test.log(LogStatus.PASS,
-						"Message 'Project Neon supports linking your accounts - ' is dispalyed correctly in account setting page");
+						"Message 'Project Neon has linked your accounts. You can sign ' is dispalyed correctly in account setting page");
 			}
 
 			catch (Throwable t) {
