@@ -80,8 +80,8 @@ public class IPAIAM100 extends TestBase {
 			
 			pf.getIamPage(ob).openGurillaMail();
 			String email=pf.getIamPage(ob).getEmail();
-			pf.getIamPage(ob).openCCURL("http://10.205.140.206:7270/steam-admin-app/actions/LogoutAction.do");
-			pf.getIamPage(ob).loginCustomerCare("ramesh.lalam@thomsonreuters.com", "Ramesh_lalam21");
+			pf.getIamPage(ob).openCCURL("http://10.205.147.235:7270/steam-admin-app/");
+			pf.getIamPage(ob).loginCustomerCare("mahesh.morsu@thomsonreuters.com", "Neon@123");
 			pf.getIamPage(ob).openMenuPanel();
 			pf.getIamPage(ob).clickUserManagement();
 			pf.getIamPage(ob).clickCreateUser();
