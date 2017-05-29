@@ -92,9 +92,6 @@ public class Notifications0025 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"Record view page is not open while clicking article in trending section from Newsfeed page");
 				// reports
-				ErrorUtil.addVerificationFailure(t);
-				status = 2;// excel
-				logger.error(this.getClass().getSimpleName() + "--->" + t);
 				throw new Exception("Maximum count on the trending list is not 5 per page");
 			}
 		} catch (Throwable t) {
