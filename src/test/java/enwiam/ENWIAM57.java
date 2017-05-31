@@ -106,11 +106,16 @@ public class ENWIAM57 extends TestBase {
 				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserFBENWIAM80"),
 						LOGIN.getProperty("PWDUserFBENWIAM80"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+				BrowserWaits.waitTime(8);
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
+				BrowserWaits.waitTime(8);
 				pf.getLoginTRInstance(ob).closeOnBoardingModal();
+				
+				
+				//pf.getBrowserWaitsInstance(ob)
+					//	.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
+				test.log(LogStatus.PASS, "Avoiding the Linking is happened");
+			//	pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				String secondAccountProfileName = pf.getLinkingModalsInstance(ob).getProfileName();
 				test.log(LogStatus.INFO, "Steam account profile name: " + secondAccountProfileName);
 				pf.getHFPageInstance(ob).clickProfileImage();
