@@ -17,7 +17,7 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
+	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
 		<parameter name="searchPeople" value="Badiola" />
 		<classes>
 			<class name="Profile.Profile2"></class>
@@ -386,7 +386,7 @@
 		</classes>
 	</test>   
 
-	<test name="onboarding_modals" preserve-order="true" parallel="false">
+	<!-- <test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
 		<parameter name="password" value="Neon@123" />
 		<parameter name="truid" value="e95006e0-70e0-11e6-be2c-7129e85cb017" />
@@ -502,7 +502,7 @@
 		<classes>
 			<class name="Profile.Profile70"></class>
 		</classes>
-	</test>
+	</test> -->
 	
 	 <test name="profile_tabs_default_messages">
 		<parameter name="username" value="FirstTime.User@ca.com" />
@@ -519,6 +519,6 @@
 			<class name="Profile.Profile72"></class>
 		</classes>
 	</test> 
-	 -->
+	
 </suite>
 
