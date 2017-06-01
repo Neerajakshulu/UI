@@ -255,6 +255,7 @@ public class TestBase {
 
 			// Getting url
 			host = System.getProperty("host");
+			logger.info("host name-->"+host);
 
 			// logger.info(host);
 			// xls file
