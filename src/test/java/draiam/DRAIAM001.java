@@ -102,12 +102,6 @@ public class DRAIAM001 extends TestBase {
 			// Verifying that DRA Landing page, displays privacy statement and
 			// terms of use links
 			try {
-				
-				//pf.getBrowserWaitsInstance(ob)
-				//		.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_PRIVACY_LINK_CSS);
-				//BrowserWaits.waitTime(3);
-				//pf.getBrowserWaitsInstance(ob)
-				//		.waitUntilElementIsDisplayed(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
 				WebElement tl_element = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.DRA_LANDINGPAGE_TERMS_LINK_CSS);
 				WebElement pl_element = pf.getBrowserActionInstance(ob)
@@ -148,13 +142,13 @@ public class DRAIAM001 extends TestBase {
 			// Verifying DRA marketing copy are displayed.
 			try {
 				boolean explore_icon = checkElementIsDisplayed(ob,
-						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_EXPLORE_ICON_CSS.toString()));
+						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_DESIGN_ICON_CSS.toString()));
 				Assert.assertEquals(explore_icon, true);
-				test.log(LogStatus.PASS, "Explore icon is displayed on DRA landing page");
+				test.log(LogStatus.PASS, "Design icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Explore icon is not displayed on DRA landing page");
+				test.log(LogStatus.FAIL, "Design icon is not displayed on DRA landing page");
 				ErrorUtil.addVerificationFailure(t);
 			}
 
@@ -172,27 +166,16 @@ public class DRAIAM001 extends TestBase {
 
 			try {
 				boolean validate_icon = checkElementIsDisplayed(ob,
-						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_VALIDATE_ICON_CSS.toString()));
+						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_OPTIMIZE_ICON_CSS.toString()));
 				Assert.assertEquals(validate_icon, true);
-				test.log(LogStatus.PASS, "Validate icon is displayed on DRA landing page");
+				test.log(LogStatus.PASS, "Optimize icon is displayed on DRA landing page");
 
 			} catch (Throwable t) {
 				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Validate icon is not displayed on DRA landing page");
+				test.log(LogStatus.FAIL, "Optimize icon is not displayed on DRA landing page");
 				ErrorUtil.addVerificationFailure(t);
 			}
 
-			try {
-				boolean rank_icon = checkElementIsDisplayed(ob,
-						By.cssSelector(OnePObjectMap.DRA_LANDINGPAGE_RANK_ICON_CSS.toString()));
-				Assert.assertEquals(rank_icon, true);
-				test.log(LogStatus.PASS, "Rank icon is displayed on DRA landing page");
-
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.FAIL, "Rank icon is not displayed on DRA landing page");
-				ErrorUtil.addVerificationFailure(t);
-			}
 			
 			// Verifying the Learn more link is displaying
 			//pf.getDraPageInstance(ob).validateProductOverviewPage(test);
