@@ -712,12 +712,12 @@ public class OnboardingModalsPage extends TestBase {
 	public void validateENWToNeonOnboardingModalsUsingProfileLink() throws Exception {
 
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_HEADER_CSS).findElement(By.tagName("img")).click();
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(8);
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
 
-		/*try {*/
+		try {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilText("We’re expanding EndNote -- making it easier for you to:");
@@ -729,7 +729,7 @@ public class OnboardingModalsPage extends TestBase {
 					.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-			BrowserWaits.waitTime(10);
+			BrowserWaits.waitTime(8);
 			List<WebElement> onboarding_modals=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 			logger.info("onboarding_modals size-->"+onboarding_modals.size());
 			if(!(onboarding_modals.size()==0)) {
@@ -741,9 +741,9 @@ public class OnboardingModalsPage extends TestBase {
 					"Followers", "Following", "Watchlists", "Add a Topic");
 			logger.info("Navigate to ENW-->"+pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
 			Assert.assertEquals("< Back to EndNote", pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_LINK).getText());
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			throw new Exception("Onboarding Modals are not displayed for First time user using Account link for Market Test group");
-		}*/
+		}
 
 	}
 	
@@ -755,7 +755,7 @@ public class OnboardingModalsPage extends TestBase {
 	public void validateENWToNeonOnboardingModalsUsingAccountLink() throws Exception {
 
 		pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_HOME_PROFILE_FLYOUT_ACCOUNT_LINK);
-		BrowserWaits.waitTime(2);
+		BrowserWaits.waitTime(8);
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
@@ -838,7 +838,7 @@ public class OnboardingModalsPage extends TestBase {
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
 
-		/*try {*/
+		try {
 			profileOnboardingModal();
 			//Profile image modal
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS);
@@ -857,9 +857,9 @@ public class OnboardingModalsPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Add a Topic","You can always complete your profile later from  your Profile page.");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Note:", "Your name and any additional information you add will", "be visible to others.");
 			
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			throw new Exception("Profile Image upload not done in Profile modal");
-		}*/
+		}
 
 	}
 	
@@ -909,6 +909,7 @@ public class OnboardingModalsPage extends TestBase {
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_PLINK);
 		BrowserWaits.waitTime(4);
 		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imagePath);
+		BrowserWaits.waitTime(4);
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_UPDATE_CSS);
 		//giving more wait to update the profile image
