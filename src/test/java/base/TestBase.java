@@ -145,7 +145,7 @@ public class TestBase {
 				suiteName = "Notifications";
 			} else if (className.contains("Profile")) {
 				suiteName = "Profile";
-			} else if (className.contains("Authoring")) { 
+			} else if (className.contains("Authoring")) {
 				suiteName = "Authoring";
 			} else if (className.contains("Search")) {
 				suiteName = "Search";
@@ -153,13 +153,12 @@ public class TestBase {
 				suiteName = "Watchlist";
 			} else if (className.contains("RCC")) {
 				suiteName = "RCC";
-			}else if (className.contains("DRAIAM")) {
+			} else if (className.contains("DRAIAM")) {
 				suiteName = "DRAIAM";
-			}
-			else if (className.contains("Customercare")) {
+			} else if (className.contains("Customercare")) {
 				suiteName = "customercare";
-			}
-			else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")||className.contains("IPA")) {
+			} else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")
+					|| className.contains("IPA")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
 				if (className.contains("ENW")) {
@@ -255,7 +254,7 @@ public class TestBase {
 
 			// Getting url
 			host = System.getProperty("host");
-			logger.info("host name-->"+host);
+			logger.info("host name-->" + host);
 
 			// logger.info(host);
 			// xls file
@@ -292,18 +291,18 @@ public class TestBase {
 			loadModuleData(enwxls.path);
 		} else if (suiteName.equals("ENWIAM")) {
 			loadModuleData(enwiamxls.path);
-		}else if (suiteName.equals("RCC")) {
+		} else if (suiteName.equals("RCC")) {
 			loadModuleData(rccxls.path);
-		}else if (suiteName.equals("DRAIAM")) {
+		} else if (suiteName.equals("DRAIAM")) {
 			loadModuleData(draiamxls.path);
-		}else if (suiteName.equals("IPA")) {
+		} else if (suiteName.equals("IPA")) {
 			loadModuleData(ipaxls.path);
-		}else if (suiteName.equals("IPAIAM")) {
+		} else if (suiteName.equals("IPAIAM")) {
 			loadModuleData(ipaiamxls.path);
-		}else if (suiteName.equals("customercare")) {
+		} else if (suiteName.equals("customercare")) {
 			loadModuleData(customercarexls.path);
-		}else if (suiteName.equals("Sanity suite")) {
-			loadModuleData(iamxls.path);  
+		} else if (suiteName.equals("Sanity suite")) {
+			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
 			loadModuleData(profilexls.path);
@@ -316,7 +315,7 @@ public class TestBase {
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
-		} else if(suiteName.equals("LocalRun")){
+		} else if (suiteName.equals("LocalRun")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
 			loadModuleData(enwxls.path);
@@ -329,7 +328,7 @@ public class TestBase {
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
 		}
-		
+
 		logger.info(suiteName + "---" + testcase.size());
 	}
 
@@ -434,12 +433,12 @@ public class TestBase {
 			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
 			desiredCapabilities.setCapability("name", this.getClass().getSimpleName());
-			
+
 			if (StringUtils.containsIgnoreCase(host, "https://projectne.thomsonreuters.com")) {
-				if(System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("Chrome")) {
+				if (System.getenv("SELENIUM_BROWSER").equalsIgnoreCase("Chrome")) {
 					ChromeOptions co = new ChromeOptions();
-					co.addArguments("--user-agent="+USER_AGENT);
-					desiredCapabilities.setCapability(ChromeOptions.CAPABILITY , co);
+					co.addArguments("--user-agent=" + USER_AGENT);
+					desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, co);
 				}
 			}
 			ob = new RemoteWebDriver(
@@ -468,8 +467,8 @@ public class TestBase {
 				DesiredCapabilities capability = DesiredCapabilities.chrome();
 				capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 				ChromeOptions co = new ChromeOptions();
-				co.addArguments("--user-agent="+USER_AGENT);
-				capability.setCapability(ChromeOptions.CAPABILITY , co);
+				co.addArguments("--user-agent=" + USER_AGENT);
+				capability.setCapability(ChromeOptions.CAPABILITY, co);
 				ob = new ChromeDriver(capability);
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("Safari")) {
 				DesiredCapabilities desiredCapabilities = DesiredCapabilities.safari();
@@ -780,13 +779,15 @@ public class TestBase {
 	}
 
 	// logging out
-	public void logout() throws Exception {		
+	public void logout() throws Exception {
 		BrowserWaits.waitTime(4);
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob, By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
+		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
+				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 		BrowserWaits.waitTime(3);
 	}
+
 	// logging out enw
 	public void logoutEnw() throws InterruptedException {
 		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.ENDNOTE_LOGOUT_HEADER_LABLE_XPATH.toString()), 30);
@@ -800,12 +801,12 @@ public class TestBase {
 	// capturing screenshot
 	public String captureScreenshot(String filename) throws Exception {
 		// screenshot in base64 format
-		//String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
+		// String myP = ((TakesScreenshot) ob).getScreenshotAs(OutputType.BASE64);
 		// screenshot in File format
 		File myImg = ((TakesScreenshot) ob).getScreenshotAs(OutputType.FILE);
 		String myP1 = System.getProperty("user.dir") + "/screenshots/" + filename + ".jpg";
 		FileUtils.copyFile(myImg, new File(myP1));
-		//return "data:image/jpeg;base64," + myP;
+		// return "data:image/jpeg;base64," + myP;
 		return myP1;
 
 	}
@@ -880,28 +881,19 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
-			
-			Assert.assertTrue(text.contains(email));
-			//test.log(LogStatus.PASS, "Account activation email sent");
-			/*if(text.contains(email)){
-				test.log(LogStatus.INFO, "Account activation email sent");
-			}else{
-				if (test != null) {
-					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
-																					// reports
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
-				}
-			}
 
-			if (!StringContains(text, email)) {
-				if (test != null) {
-					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
-																					// reports
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
-				}
-			}*/
+			Assert.assertTrue(text.contains(email));
+			// test.log(LogStatus.PASS, "Account activation email sent");
+			/*
+			 * if(text.contains(email)){ test.log(LogStatus.INFO, "Account activation email sent"); }else{ if (test !=
+			 * null) { test.log(LogStatus.FAIL, "Account activation email not sent");// extent // reports
+			 * test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+			 * captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+			 * } } if (!StringContains(text, email)) { if (test != null) { test.log(LogStatus.FAIL,
+			 * "Account activation email not sent");// extent // reports test.log(LogStatus.INFO, "Snapshot below: " +
+			 * test.addScreenCapture( captureScreenshot(this.getClass().getSimpleName() +
+			 * "_account_activation_email_not_sent")));// screenshot } }
+			 */
 
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {
@@ -956,8 +948,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			//BrowserWaits.waitTime(6);
-			//ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			// BrowserWaits.waitTime(6);
+			// ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
 			BrowserWaits.waitTime(3);
@@ -1096,12 +1088,11 @@ public class TestBase {
 	public boolean waitForElementTobeInvisible(WebDriver driver,
 			By locator,
 			int time) {
-	Wait<WebDriver> wait = new FluentWait<>(driver)
-		    .withTimeout(time, TimeUnit.SECONDS)
-		    .pollingEvery(1, TimeUnit.SECONDS)
-		    .ignoring(NoSuchElementException.class);
-	return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(time, TimeUnit.SECONDS)
+				.pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 	}
+
 	/**
 	 * Method to wait till the element is present on the web page
 	 * 
@@ -1134,7 +1125,7 @@ public class TestBase {
 	 * 
 	 * @param driver
 	 * @param element
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void scrollElementIntoView(WebDriver driver,
 			WebElement element) throws Exception {
@@ -1271,25 +1262,25 @@ public class TestBase {
 	 * @param driver
 	 * @return
 	 */
-//	public String switchToNewWindow(WebDriver driver) {
-//		mainWindow = driver.getWindowHandle();
-//		String newWindow = "";
-//		Set<String> windows = driver.getWindowHandles();
-//		// windows.remove(mainWindow);
-//		if (!windows.iterator().next().contains(mainWindow))
-//			newWindow = windows.iterator().next();
-//		driver.switchTo().window(newWindow);
-//		return newWindow;
-//
-//	}
+	// public String switchToNewWindow(WebDriver driver) {
+	// mainWindow = driver.getWindowHandle();
+	// String newWindow = "";
+	// Set<String> windows = driver.getWindowHandles();
+	// // windows.remove(mainWindow);
+	// if (!windows.iterator().next().contains(mainWindow))
+	// newWindow = windows.iterator().next();
+	// driver.switchTo().window(newWindow);
+	// return newWindow;
+	//
+	// }
 	public String switchToNewWindow(WebDriver driver) {
 		mainWindow = driver.getWindowHandle();
 		String newWindow = "";
-		for(String windowhandle : driver.getWindowHandles()){
-			newWindow=windowhandle;
-		    driver.switchTo().window(windowhandle);
+		for (String windowhandle : driver.getWindowHandles()) {
+			newWindow = windowhandle;
+			driver.switchTo().window(windowhandle);
 		}
-		return newWindow;		
+		return newWindow;
 	}
 
 	public String switchToMainWindow(WebDriver driver) {
@@ -1435,14 +1426,14 @@ public class TestBase {
 		ob.findElement(By.name("loginEmail")).clear();
 		ob.findElement(By.name("loginEmail")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.name("loginPassword")).sendKeys(LOGIN.getProperty(pwdKey));
-		//jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
+		// jsClick(ob, ob.findElement(By.cssSelector("button[class*='login-button']")));
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			try{
-				ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();	
-				ob.findElement(By.xpath("//a[text()='Not now']")).click();
-			}catch (Exception e) {
-				System.out.println("Loging in to Neon without linking popup");	
-			}
+		try {
+			ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();
+			ob.findElement(By.xpath("//a[text()='Not now']")).click();
+		} catch (Exception e) {
+			System.out.println("Loging in to Neon without linking popup");
+		}
 	}
 
 	public void loginToWOS(String usernameKey,
@@ -1453,23 +1444,23 @@ public class TestBase {
 		ob.findElement(By.name("password")).sendKeys(LOGIN.getProperty(pwdKey));
 		jsClick(ob, ob.findElement(By.xpath(".//*[@name='image']")));
 		try {
-			if(ob.findElements(By.xpath(".//h1[contains(text(),'Thank you for using Web of Science')]")).size()>0){
+			if (ob.findElements(By.xpath(".//h1[contains(text(),'Thank you for using Web of Science')]")).size() > 0) {
 				jsClick(ob, ob.findElement(By.xpath(".//a[contains(text(),'continue and establish a new session')]")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void loginToRID(String usernameKey,
 			String pwdKey) throws Exception {
-		jsClick(ob,ob.findElement(By.xpath("//a[@id='header_link_login']")));
+		jsClick(ob, ob.findElement(By.xpath("//a[@id='header_link_login']")));
 		waitForElementTobeVisible(ob, By.xpath("//input[@id='email']"), 180);
 		ob.findElement(By.xpath("//input[@id='email']")).clear();
 		ob.findElement(By.xpath("//input[@id='email']")).sendKeys(LOGIN.getProperty(usernameKey));
 		ob.findElement(By.xpath("//input[@id='password']")).sendKeys(LOGIN.getProperty(pwdKey));
 		jsClick(ob, ob.findElement(By.xpath("//*[@id='submitImage']/img")));
-		
+
 	}
 
 	/**
@@ -1514,9 +1505,9 @@ public class TestBase {
 	public void watchOrUnwatchItemToAParticularWatchlist(String watchListName,
 			WebElement watchbutton) throws InterruptedException {
 
-		//watchbutton.click();
+		// watchbutton.click();
 		jsClick(ob, watchbutton);
-		
+
 		waitForAllElementsToBePresent(ob, By.xpath("//a[@class='ne-action-dropdown__item-content']"), 80);
 		Thread.sleep(2000);
 		waitForAllElementsToBePresent(ob, By.linkText(watchListName), 80);
@@ -1525,7 +1516,7 @@ public class TestBase {
 		for (WebElement element : list) {
 
 			if (element.isDisplayed()) {
-				//element.click();
+				// element.click();
 				jsClick(ob, element);
 				break;
 			}
@@ -1580,9 +1571,9 @@ public class TestBase {
 		waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("watchlist_link")), 90);
 
 		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
-//		jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
-//		BrowserWaits.waitTime(10);
-		//ob.navigate().refresh();
+		// jsClick(ob, ob.findElement(By.cssSelector(OR.getProperty("watchlist_link"))));
+		// BrowserWaits.waitTime(10);
+		// ob.navigate().refresh();
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("createWatchListButton1")), 80);
 		ob.findElement(By.xpath(OR.getProperty("createWatchListButton1"))).click();
 		waitForElementTobeClickable(ob, By.xpath(OR.getProperty("newWatchListNameTextBox")), 80);
@@ -1620,7 +1611,7 @@ public class TestBase {
 				BrowserWaits.waitTime(4);
 				ob.findElement(By.xpath(OR.getProperty("delete_button_in_popup1"))).click();
 				BrowserWaits.waitTime(6);
-				//waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
+				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("watchlist_name1")), 60);
 				break;
 			}
 			// Scrolling down to make the watch list visible
@@ -1781,10 +1772,10 @@ public class TestBase {
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn2 + " " + ln2);
 				// ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(fn2
 				// + " " + ln2);
-				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
-					pf.getSearchProfilePageInstance(ob).clickPeople();
-					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				//}
+				// if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				pf.getSearchProfilePageInstance(ob).clickPeople();
+				pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				// }
 				pf.getLoginTRInstance(ob).logOutApp();
 				// closeBrowser();
 			} else {
@@ -1805,10 +1796,10 @@ public class TestBase {
 				pf.getLoginTRInstance(ob).clickLogin();
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 				pf.getSearchProfilePageInstance(ob).enterSearchKeyAndClick(fn3 + " " + ln3);
-				//if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
-					pf.getSearchProfilePageInstance(ob).clickPeople();
-					pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
-				//}
+				// if (pf.getSearchProfilePageInstance(ob).getPeopleCount() > 0) {
+				pf.getSearchProfilePageInstance(ob).clickPeople();
+				pf.getSearchProfilePageInstance(ob).followProfileFromSeach();
+				// }
 				pf.getLoginTRInstance(ob).logOutApp();
 				closeBrowser();
 			} else {
@@ -1891,7 +1882,13 @@ public class TestBase {
 		} else {
 			local = "Y";
 		}
-		getAllAppHostsForGivenEnv("http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.stable.dev", local);
+		if (host.contains("stable")) {
+			getAllAppHostsForGivenEnv("http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.stable.dev",
+					local);
+		} else {
+			getAllAppHostsForGivenEnv("http://eureka.us-west-2.dev.oneplatform.build:8080/v2/apps", "1p.snapshot.dev",
+					local);
+		}
 
 		RequestSpecification reqSpec = given();
 		Response resp;
@@ -2090,7 +2087,7 @@ public class TestBase {
 		}
 		return true;
 	}
-	
+
 	protected String getJiraId(String currentCellData) {
 		String jiraid = "";
 		if (StringUtils.isNotBlank(currentCellData)) {
@@ -2105,35 +2102,41 @@ public class TestBase {
 		}
 		return jiraid;
 	}
-	
+
 	/**
-	 * Method for set  status as FAIL and appending screenshot in ExtentReport
+	 * Method for set status as FAIL and appending screenshot in ExtentReport
+	 * 
 	 * @param test
 	 * @param t
 	 * @param message
 	 * @param screenShotName
-	 * @throws Exception, When Report details not captured 
+	 * @throws Exception, When Report details not captured
 	 */
-	public void logFailureDetails(ExtentTest test,Throwable t,String message,String screenShotName) throws Exception{
+	public void logFailureDetails(ExtentTest test,
+			Throwable t,
+			String message,
+			String screenShotName) throws Exception {
 		test.log(LogStatus.FAIL, message);
-		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+screenShotName)));// screenshot
+		test.log(LogStatus.FAIL, "Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(t);
 	}
-	
+
 	/**
-	 * Method for set  status as FAIL and appending screenshot in ExtentReport
+	 * Method for set status as FAIL and appending screenshot in ExtentReport
+	 * 
 	 * @param test
 	 * @param t
 	 * @param message
 	 * @param screenShotName
 	 * @throws Exception,When Report details not captured
 	 */
-	public void logFailureDetails(ExtentTest test,String message,String screenShotName) throws Exception{
+	public void logFailureDetails(ExtentTest test,
+			String message,
+			String screenShotName) throws Exception {
 		test.log(LogStatus.FAIL, message);
-		test.log(LogStatus.FAIL, "Snapshot below: " + test
-				.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()+screenShotName)));// screenshot
+		test.log(LogStatus.FAIL, "Snapshot below: "
+				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(new Exception("Test case Failed"));
 	}
 }
-
