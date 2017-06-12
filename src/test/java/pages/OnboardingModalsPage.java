@@ -843,9 +843,8 @@ public class OnboardingModalsPage extends TestBase {
 			//Profile image modal
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_IMAGE_EDIT_CSS);
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
-			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_PLINK);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_LINK);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_CLOSE_CSS);
-			//pf.getBrowserWaitsInstance(ob).waitUntilText("Profile Picture","Select Image File: ","(Images must be no more than 1024px or 256KB in size)");
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Profile image","Select an image","(at least 120 px by 120 px and less than 8 MB).");
 			//validate update button status
 			validateProfilePicUpdateButtonStatus();
@@ -905,8 +904,7 @@ public class OnboardingModalsPage extends TestBase {
 				.getAttribute("src");
 		logger.info("image timestamp before upload-->"+profileImageTimeStamp);
 		
-		//pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_MODAL_WINDOW_BROWSE_CSS);
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_PLINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_LINK);
 		BrowserWaits.waitTime(4);
 		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imagePath);
 		BrowserWaits.waitTime(4);
