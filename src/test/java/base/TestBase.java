@@ -424,7 +424,7 @@ public class TestBase {
 		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
 			logger.info("Running Environment is Saucelabs");
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER")); 
+			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
 			logger.info("Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
 			desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
 			logger.info("Browser Version-->" + System.getenv("SELENIUM_VERSION"));
@@ -442,7 +442,7 @@ public class TestBase {
 				}
 			}
 			ob = new RemoteWebDriver(
-					new URL("http://chinna_putha:e58d38dc-3d93-43e8-af25-5e3a1df25e8b@ondemand.saucelabs.com:80/wd/hub"),
+					new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
 					desiredCapabilities);
 			String waitTime = CONFIG.getProperty("defaultImplicitWait");
 			String pageWait = CONFIG.getProperty("defaultPageWait");
