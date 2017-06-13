@@ -15,7 +15,7 @@
 
 	<test name="ENW003" preserve-order="true">
 		<classes>
-		
+
 			<class name="enw.ENW003"></class>
 			<class name="enw.ENW023"></class>
 		</classes>
@@ -155,8 +155,8 @@
 		</classes>
 
 	</test>
-	
-    <!-- IAM -->
+
+	<!-- IAM -->
 	<test name="Neon_registraiton_and_reset_password9" preserve-order="true">
 		<classes>
 			<class name="iam.IAM036"></class>
@@ -203,21 +203,15 @@
 		</classes>
 	</test>
 
-	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true">
-		<classes>
-			<class name="enwiam.ENWIAM100"></class>
-			<class name="enwiam.ENWIAM101"></class>
-			<class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class>
-		</classes>
-	</test> -->
+	<!-- <test name="ENW_Linking_from_NEON" preserve-order="true"> <classes> 
+		<class name="enwiam.ENWIAM100"></class> <class name="enwiam.ENWIAM101"></class> 
+		<class name="enwiam.ENWIAM102"></class> <class name="enwiam.ENWIAM103"></class> 
+		</classes> </test> -->
 
-	<!-- <test name="Navigation1">
-		<classes>
-			<class name="enwiam.ENWIAM40"></class>
-		</classes>
-	</test> -->
-	
-    <test name="ENW_registraiton_and_reset_password7" preserve-order="true">
+	<!-- <test name="Navigation1"> <classes> <class name="enwiam.ENWIAM40"></class> 
+		</classes> </test> -->
+
+	<test name="ENW_registraiton_and_reset_password7" preserve-order="true">
 		<classes>
 			<class name="enwiam.ENWIAM001"></class>
 		</classes>
@@ -283,15 +277,9 @@
 		</classes>
 	</test>
 
-	<test name="Authoring83">
+	<test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
 		<classes>
-			<class name="Authoring.Authoring83"></class>
-		</classes>
-	</test>
-	
-   <test name="ENWAutomatedMerge1" preserve-order="true" parallel="false">
-		<classes>
-		<class name="enw.ENW004"></class>
+			<class name="enw.ENW004"></class>
 			<class name="enwiam.ENWIAM00018"></class>
 			<class name="enwiam.ENWIAM080"></class>
 			<class name="enwiam.ENWIAM081"></class>
@@ -299,7 +287,7 @@
 			<class name="enwiam.ENWIAM52"></class>
 			<class name="enwiam.ENWIAM57"></class>
 			<class name="enwiam.ENWIAM091"></class>
-		<!-- 	<class name="enwiam.ENWIAM58"></class> -->
+			<!-- <class name="enwiam.ENWIAM58"></class> -->
 			<class name="enwiam.ENWIAM56"></class>
 			<class name="enwiam.ENWIAM59"></class>
 			<class name="enwiam.ENWIAM54"></class>
@@ -317,13 +305,13 @@
 	</test>
 
 
-<test name="ENWAutomatedMerge" preserve-order="true" parallel="false">
+	<test name="ENWAutomatedMerge" preserve-order="true" parallel="false">
 		<classes>
-		<class name="enwiam.ENWIAM63"></class>
-		
+			<class name="enwiam.ENWIAM63"></class>
 		</classes>
 	</test>
-	<!-- Profile -->
+	
+	<!-- Profile START-->
 
 	<test name="onboarding_modals" preserve-order="true" parallel="false">
 		<parameter name="username" value="49eq13+1gxhb27mqmgkk@sharklasers.com" />
@@ -354,20 +342,6 @@
 			<class name="Profile.Profile58"></class>
 			<class name="Profile.Profile59"></class>
 			<class name="Profile.Profile60"></class>
-		</classes>
-	</test>
-
-	<test name="ENW_to_Neon_Onboarding_with_market_test_groups"
-		preserve-order="true" parallel="false">
-		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
-		<parameter name="password" value="Thomson@123" />
-		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
-		<parameter name="enwProfileFlyout"
-			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
-		<classes>
-			<class name="Profile.Profile61"></class>
-			<class name="Profile.Profile62"></class>
-			<class name="Profile.Profile63"></class>
 		</classes>
 	</test>
 
@@ -414,10 +388,10 @@
 
 	<test name="Deep_linking_own_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<!-- <parameter name="username" value="testing.prasadreddy@gmail.com" />
-		<parameter name="password" value="likhithreddy@123" /> -->
-		<parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
+		<parameter name="password" value="Apple@123" />
+		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
+		<parameter name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl" value="/#/profile/" />
 		<classes>
 			<class name="Profile.Profile52"></class>
@@ -426,10 +400,10 @@
 
 	<test name="Deep_linking_Other_profile_Using_Facebook and LI">
 		<parameter name="socialLogin" value="FB|LI" />
-		<!-- <parameter name="username" value="testing.prasadreddy@gmail.com" />
-		<parameter name="password" value="likhithreddy@123" /> -->
-		<parameter name="username" value="linkedinloginid@gmail.com" />
-		<parameter name="password" value="Neon@1234" />
+		<parameter name="username" value="testing.prasadreddy@gmail.com" /> 
+		<parameter name="password" value="Apple@123" />
+		<!-- <parameter name="username" value="linkedinloginid@gmail.com" />
+		<parameter name="password" value="Neon@1234" /> -->
 		<parameter name="deepLinkUrl"
 			value="/#/profile/cbd0c52f-2ed7-401a-80b5-18a08623d90e" />
 		<classes>
@@ -454,6 +428,21 @@
 		</classes>
 	</test>
 
+	<test name="ENW_to_Neon_Onboarding_with_market_test_groups"
+		preserve-order="true" parallel="false">
+		<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+		<parameter name="password" value="Thomson@123" />
+		<parameter name="truid" value="f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9" />
+		<parameter name="enwProfileFlyout"
+			value="Account|Sign out|Privacy|Terms of use|Help|Feedback" />
+		<classes>
+			<class name="Profile.Profile61"></class>
+			<class name="Profile.Profile62"></class>
+			<class name="Profile.Profile63"></class>
+		</classes>
+	</test>
+
+  <!-- Profile END-->
 
 	<!-- search test case -->
 	<test name="Test B1">
@@ -495,7 +484,9 @@
 			<class name="rcc.RCC092"></class>
 		</classes>
 	</test>
-
+	
+	<!-- Authoring START -->
+	
 	<test name="Authoring80">
 		<parameter name="gusername" value="testing.prasadreddy@gmail.com" />
 		<parameter name="gpassword" value="likhithreddy@123" />
@@ -519,10 +510,18 @@
 			<class name="Authoring.Authoring82"></class>
 		</classes>
 	</test>
-
+	
+	<test name="Authoring83">
+		<classes>
+			<class name="Authoring.Authoring83"></class>
+		</classes>
+	</test>
+	
+	<!-- Authoring END -->
+	
 	<test name="DRAIAMscripts" preserve-order="true" parallel="false">
 		<classes>
-		<class name="draiam.DRAIAM002"></class>
+			<class name="draiam.DRAIAM002"></class>
 			<class name="draiam.DRAIAM004"></class>
 			<class name="draiam.DRAIAM003"></class>
 			<class name="draiam.DRAIAM0014"></class>
@@ -535,8 +534,8 @@
 			<class name="ipaiam.IPAIAM0056"></class>
 		</classes>
 	</test>
-	
-	<test name="DRAIAM052" preserve-order="true" parallel="false"> 
+
+	<test name="DRAIAM052" preserve-order="true" parallel="false">
 		<classes>
 			<class name="draiam.DRAIAM052"></class>
 		</classes>
@@ -574,6 +573,6 @@
 		</classes>
 	</test>
 	<!-- IPAIAM Test cases END -->
-	
+
 </suite>
 
