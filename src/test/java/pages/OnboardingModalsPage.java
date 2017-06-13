@@ -904,7 +904,7 @@ public class OnboardingModalsPage extends TestBase {
 				.getAttribute("src");
 		logger.info("image timestamp before upload-->"+profileImageTimeStamp);
 		
-		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_LINK);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_PICTURE_SELECT_IMAGE_LINK);
 		BrowserWaits.waitTime(4);
 		Runtime.getRuntime().exec("autoit_scripts/imageUpload2.exe"+" "+imagePath);
 		BrowserWaits.waitTime(4);
