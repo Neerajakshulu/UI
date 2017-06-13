@@ -424,7 +424,7 @@ public class TestBase {
 		if (StringUtils.isNotBlank(System.getenv("SELENIUM_BROWSER"))) {
 			logger.info("Running Environment is Saucelabs");
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
+			desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER")); 
 			logger.info("Browser Name-->" + System.getenv("SELENIUM_BROWSER"));
 			desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
 			logger.info("Browser Version-->" + System.getenv("SELENIUM_VERSION"));
