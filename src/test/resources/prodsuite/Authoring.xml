@@ -70,7 +70,7 @@
 	
 	<test name="Authoring12">
 		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
-		<parameter name="lipassword" value="likhithreddy@123" />
+		<parameter name="lipassword" value="Apple@123" />
 		<classes>
 			<class name="Authoring.Authoring12"></class>
 		</classes>
@@ -94,7 +94,7 @@
 	
 	<test name="Authoring53">
 		<parameter name="liusername" value="testing.prasadreddy@gmail.com" />
-		<parameter name="lipassword" value="likhithreddy@123" />
+		<parameter name="lipassword" value="Apple@123" />
 		<classes>
 			<class name="Authoring.Authoring53"></class>
 		</classes>
