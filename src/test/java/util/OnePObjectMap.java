@@ -857,7 +857,7 @@ public enum OnePObjectMap {
 	DRA_PROFILE_FIRSTNAME_ERRORMSG_CSS("label[class='wui-input__error ng-scope']"),
 
 	DRA_PROFILE_CSS("div[class='header-profile-picture']"),
-	DRA_SEARCH_BOX_CSS("div[class='home-input-group']"),
+	DRA_SEARCH_BOX_CSS("input[id='qs']"),
 	DRA_SIGNOUT_BUTTON_CSS("button[ng-click='vm.logout()']"),
 	DRA_FORGOT_PASSWORD_LINK_CSS("a[class='forgot-password__link']"),
 	DRA_BGCOLOR_CLASS_CSS("div[class='flex-center-horizontally']"),
