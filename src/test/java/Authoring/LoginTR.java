@@ -215,7 +215,7 @@ public class LoginTR extends TestBase {
 			desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true); //
 			desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
 			driver = new RemoteWebDriver(
-					new URL("http://amneetsingh:f48a9e78-a431-4779-9592-1b49b6d406a4@ondemand.saucelabs.com:80/wd/hub"),
+					new URL("http://mohana-yalamarthi:4cc2c2ac-35f6-4cc3-a751-9c6758fffe96@ondemand.saucelabs.com:80/wd/hub"),
 					desiredCapabilities);
 			String waitTime = CONFIG.getProperty("defaultImplicitWait");
 			String pageWait = CONFIG.getProperty("defaultPageWait");
