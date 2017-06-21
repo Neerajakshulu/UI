@@ -203,7 +203,7 @@ public class DRAPage extends TestBase {
 					.getText();
 
 			if (errormsg_title.contains("Thank you for your interest")
-					&& msg1.contains("Target Druggability is a subscription product.")
+					&& msg1.contains("Drug Research Advisor is a subscription product.")
 					&& msg2.contains("Questions? Learn more or contact Drug Research Advisor Customer Care.")) {
 				test.log(LogStatus.PASS, " correct msg displayed ");
 			} else {
