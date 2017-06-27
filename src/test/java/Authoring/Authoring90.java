@@ -21,29 +21,30 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 public class Authoring90 extends TestBase {
-	
+
 	static int status = 1;
 	static int time = 90;
 	static int totalCommentsBeforeDeletion = 0;
 	static int totalCommentsAfterDeletion = 0;
-	
+
 	@BeforeTest
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory("Authoring");
-		
+
 	}
-	
+
 	/**
-	 * Method for deleting a post with video content and checking the count in post.
+	 * Method for deleting a post with video content and checking the count in
+	 * post.
 	 * 
-	 * @throws Exception, When Something unexpected
+	 * @throws Exception,
+	 *             When Something unexpected
 	 */
-	//@Test(dependsOnMethods="testAddVideosToPost")
+	// @Test(dependsOnMethods="testAddVideosToPost")
 	@Test
-	public void testDeleteVideoPost() throws Exception
-	{
+	public void testDeleteVideoPost() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -67,7 +68,7 @@ public class Authoring90 extends TestBase {
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			
+
 			int postCountBeforeDeleting = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count before deleting a video post:" + postCountBeforeDeleting);
 
@@ -77,29 +78,31 @@ public class Authoring90 extends TestBase {
 					.findElement(By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_BUTTON1_XPATH.toString()));
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", deleteCommentButton);
-
-			jsClick(ob, ob.findElement(By
-					.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH.toString())));
+			BrowserWaits.waitTime(5);
+			jsClick(ob, ob.findElement(
+					By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_COMMENT_DELETE_CONFIMATION_OK_BUTTON1_XPATH.toString())));
 			waitForAjax(ob);
-			String Delete_Text = ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH.toString())).getText();
+			String Delete_Text = ob
+					.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_NEON_DELETE_POST_CONFIRMATION_XPATH.toString()))
+					.getText();
 			Assert.assertEquals(Delete_Text, "This post has been removed by the member.");
-			
+			BrowserWaits.waitTime(3);
 			pf.getHFPageInstance(ob).clickOnProfileLink();
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Navigated to Profile Page");
-			
+
 			int postCountAfterDeleting = pf.getProfilePageInstance(ob).getPostsCount();
 			test.log(LogStatus.INFO, "Post count after deleting a video post:" + postCountAfterDeleting);
 
 			if (!(postCountBeforeDeleting > postCountAfterDeleting)) {
 				test.log(LogStatus.FAIL, "Error: Video comment not deleted successfully");// extent
-																			// reports
+				// reports
 				status = 2;
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_DeletComments_not_done")));// screenshot
 			}
 			closeBrowser();
-			}catch (Exception e) {
+		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "UnExpected Error");
 			// print full stack trace
 			StringWriter errors = new StringWriter();
@@ -110,9 +113,10 @@ public class Authoring90 extends TestBase {
 			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 					captureScreenshot(this.getClass().getSimpleName() + "_Unable_to_share_the_Article")));
 			closeBrowser();
-		}	
-		
+		}
+
 	}
+
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
