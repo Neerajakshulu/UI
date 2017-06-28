@@ -1,19 +1,30 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="DeleteGroupsWatchlists" parallel="tests" thread-count="10">
+<suite name="DeleteGroupsWatchlists" parallel="tests">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
 	</listeners>
 
 
-	<test name="delete_all_watchlist_and_groups">
-	<parameter name="truid" value="59ddd666-fc1c-4e22-a26b-952bfe11bb96|be9a57e8-45e4-4c2d-9f2b-c96304ccb9e7"/>
-	<parameter name="containerType" value="watchlist"/>
-	<!-- <parameter name="containerType" value="project"/> -->
+	<test name="delete_all_watchlist">
+		<parameter name="truid"
+			value="59ddd666-fc1c-4e22-a26b-952bfe11bb96|be9a57e8-45e4-4c2d-9f2b-c96304ccb9e7|5a6a60d0-ec62-11e6-ad6d-c740a04d36bd" />
+		<parameter name="containerType" value="watchlist" />
+		<!-- <parameter name="containerType" value="project"/> -->
 		<classes>
 			<class name="util.DeleteAllWatchlistGroupsTest"></class>
 		</classes>
 	</test>
-	
+
+
+	<test name="delete_all_groups">
+		<parameter name="truid"
+			value="3f1c70e0-f3de-4970-beb5-d20b77ca1dec|6bc88b60-95d0-11e6-a23a-3bd68f5ddc81|8205af30-9a84-11e6-be14-913e0ffdc2fd|9dc30a50-a584-11e6-accc-c1c844890647|d78f07c0-a584-11e6-accc-c1c844890647|23a9d700-a587-11e6-accc-c1c844890647|bfd0a9b0-a587-11e6-accc-c1c844890647|d909bff0-42dc-4552-9bab-2e759d32c37e|5e532050-95c9-11e6-a23a-3bd68f5ddc81|909fdc8c-e045-4f9f-b23d-492ecf06828d|a674fc40-370a-4e96-a68d-617857e44616|67c3b87c-26bb-4a21-ae0b-8e190fa55315|f0a2fd70-9b3e-11e6-b9de-9375b4a0197c|7887eebe-b521-4e4d-ab89-46f916889c6c|7761fc30-a198-11e6-b195-75d3508a108a|101dde80-a199-11e6-b195-75d3508a108a|2c68f080-a0ad-11e6-b9de-9375b4a0197c|83537a90-a248-11e6-accc-c1c844890647|9a167b10-a59a-11e6-accc-c1c844890647|f99c8570-a59a-11e6-accc-c1c844890647|2c6ae46e-4734-440e-9578-7447325893a0|b7ddcd25-a02c-4c2c-97fc-460b4f3331ea|e4d4bc26-7166-454a-9821-24c0ee4d7db3|35577674-dda2-4a13-aad0-4336e2d58b50|2034bb89-2a4f-40f6-b6c2-779c33a9bd02|c3d8c788-baae-4c96-89a8-821b718490a4|a1e541a6-5308-410f-8d6a-908f0919ecfa|e55fc3bf-c458-4d9d-ae39-571f1c5713d2|f5e86f1f-b0b9-4bb2-ab2b-6b14145344a9|01e7fd56-e849-464d-b8e4-ee28661f5b7c|f38ee79a-5157-41b4-95c6-99b62a738472|d1a1cc0d-3bb0-4e3a-9638-0c462cbfa25f" />
+		<parameter name="containerType" value="project" />
+		<classes>
+			<class name="util.DeleteAllWatchlistGroupsTest"></class>
+		</classes>
+	</test>
+
 </suite>
 
