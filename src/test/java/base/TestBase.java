@@ -456,6 +456,7 @@ public class TestBase {
 		} else {
 			logger.info("Running Environment is Local Machine");
 			if (CONFIG.getProperty("browserType").equalsIgnoreCase("FF")) {
+				System.setProperty("webdriver.gecko.driver","drivers/geckodriver.exe");
 				ob = new FirefoxDriver();
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("IE")) {
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
