@@ -33,14 +33,15 @@ public class ENWIAM010 extends TestBase {
 	@BeforeTest
 	public void beforeTest() throws Exception {
 
-		extent = ExtentManager.getReporter(filePath);
+		rowData = testcase.get(this.getClass().getSimpleName());
+		/*extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
 		String var = rowData.getTestcaseId();
 		String dec = rowData.getTestcaseDescription();
 		tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 		tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 		test = extent.startTest(tests[0], tests_dec[0]).assignCategory("ENWIAM");
-		test.log(LogStatus.INFO, tests[0]);
+		test.log(LogStatus.INFO, tests[0]);*/
 		
 		
 //		extent = ExtentManager.getReporter(filePath);
@@ -95,9 +96,9 @@ public class ENWIAM010 extends TestBase {
 								"Verify that STeAM user is able to submit an email address and password on the ENW Landing screen.")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				String email = createENWNewUser(first_name, last_name);
+				//String email = createENWNewUser(first_name, last_name);
 				logger.info("Email Address : " + email);
-
+				Assert.assertTrue(!email.contains(null));
 				test.log(LogStatus.PASS,
 						"STeAM user successfully submit an email address and password on the ENW Landing screen.");
 

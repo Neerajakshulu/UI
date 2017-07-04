@@ -93,7 +93,7 @@ public class ENWIAM009 extends TestBase {
 			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
-		//	ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
