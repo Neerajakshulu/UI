@@ -73,8 +73,7 @@ public class ENWIAM010 extends TestBase {
 			}
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
-
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
+		
 		try {
 			openBrowser();
 			try {
@@ -206,9 +205,6 @@ public class ENWIAM010 extends TestBase {
 			// 30);
 			// ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
 
-			logoutEnw();
-			BrowserWaits.waitTime(3);
-
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -216,7 +212,8 @@ public class ENWIAM010 extends TestBase {
 								"Verify that A user should not be allowed to sign-in to ENW if an incorrect email address and password combination is provided on the ENW landing screen")
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
+				logoutEnw();
+				BrowserWaits.waitTime(6);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("userendnote@gmail.com");
@@ -261,7 +258,6 @@ public class ENWIAM010 extends TestBase {
 			closeBrowser();
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
 	@AfterTest
