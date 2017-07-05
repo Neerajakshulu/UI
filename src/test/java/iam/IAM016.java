@@ -857,7 +857,7 @@ public class IAM016 extends TestBase {
 			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 			logger.info(rowData.getTestcaseId());
-			for (int i = 1; i < tests.length; i++) {
+			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
 				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
