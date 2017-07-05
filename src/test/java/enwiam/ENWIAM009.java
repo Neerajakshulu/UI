@@ -320,7 +320,7 @@ public class ENWIAM009 extends TestBase {
 			logger.info("length : " + tests.length);
 			logger.info("doc length : " + tests_dec.length);
 			logger.info(rowData.getTestcaseId());
-			for (int i = 1; i < tests.length; i++) {
+			for (int i = 0; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
 				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
 				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
