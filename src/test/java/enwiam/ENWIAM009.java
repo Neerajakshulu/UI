@@ -311,17 +311,34 @@ public class ENWIAM009 extends TestBase {
 			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Preference page not opened");// extent
-																	// reports
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "unable_to_open_preference_page")));// screenshot
+			test.log(LogStatus.FAIL, "User not created");
+			extent = ExtentManager.getReporter(filePath);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
+			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+			logger.info("length : " + tests.length);
+			logger.info("doc length : " + tests_dec.length);
+			logger.info(rowData.getTestcaseId());
+			for (int i = 0; i < tests.length; i++) {
+				logger.info(tests_dec[i]);
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
+				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+						+ " User Not created, hence skiping this test case");
+				extent.endTest(test);
+			}
+
+			// extent
+			// next 3 lines to print whole testng error in report
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
-			ErrorUtil.addVerificationFailure(t);
+			ErrorUtil.addVerificationFailure(t);// testng
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			closeBrowser();
 		}
-		closeBrowser();
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 

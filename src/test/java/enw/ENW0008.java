@@ -83,22 +83,9 @@ public class ENW0008 extends TestBase {
 			logout();
 			ob.navigate().to(host + CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
-			BrowserWaits.waitTime(7);
-			pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("USEREMAIL0008"),
-					LOGIN.getProperty("USERPASSWORD0008"));
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			BrowserWaits.waitTime(4);
-			try {
-				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
-						.getText();
-				if (text.equalsIgnoreCase("Continue")) {
-					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-					BrowserWaits.waitTime(8);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			pf.getOnboardingModalsPageInstance(ob).ENWSTeamLogin(LOGIN.getProperty("USEREMAIL0008"),
+					LOGIN.getProperty("USERPASSWORD0008"));
 
 			try {
 				test.log(LogStatus.PASS, "User navigate to End note");
@@ -106,7 +93,7 @@ public class ENW0008 extends TestBase {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_UNFILEDFOLDER_LINK_XPATH);
 				BrowserWaits.waitTime(6);
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.ENW_RECORD_LINK_XPATH);
-				BrowserWaits.waitTime(4);
+				BrowserWaits.waitTime(6);
 
 			} catch (Exception e) {
 				e.printStackTrace();

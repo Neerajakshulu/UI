@@ -324,11 +324,13 @@ public class IAM038 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution end");
 				extent.endTest(test);
 			}
-			logout();
+			
 
 			try {
 				test = extent.startTest(tests[8], tests_dec[8]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				logout();
+				BrowserWaits.waitTime(3);
 				ob.get("https://www.guerrillamail.com");
 				BrowserWaits.waitTime(22);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
@@ -363,22 +365,26 @@ public class IAM038 extends TestBase {
 				extent.endTest(test);
 			}
 
-			ob.navigate().to(host);
-			waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-			BrowserWaits.waitTime(2);
-			ob.findElement(By.name("loginEmail")).sendKeys(email);
-			ob.findElement(By.name("loginPassword")).sendKeys(password);
-			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-			pf.getBrowserWaitsInstance(ob)
-					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
-			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
-			BrowserWaits.waitTime(2);
 
 			try {
 				test = extent.startTest(tests[7], tests_dec[7]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
+				
+				
+				ob.navigate().to(host);
+				waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+				BrowserWaits.waitTime(2);
+				ob.findElement(By.name("loginEmail")).sendKeys(email);
+				ob.findElement(By.name("loginPassword")).sendKeys(password);
+				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+				pf.getBrowserWaitsInstance(ob)
+						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
+				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
+				ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
+				BrowserWaits.waitTime(2);
+				
+				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
 				ob.findElement(By
@@ -491,6 +497,9 @@ public class IAM038 extends TestBase {
 						.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).get(1).getText();
 				Assert.assertEquals(resertPassPage, "Email Sent");
 				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())));
+				ob.navigate().back();
+				BrowserWaits.waitTime(3);
+				logout();
 				test.log(LogStatus.PASS,
 						"System is navigating to Forgot Password page, after clicking on Forgot password? Link");
 
@@ -510,31 +519,34 @@ public class IAM038 extends TestBase {
 				extent.endTest(test);
 			}
 
-			ob.navigate().back();
-			BrowserWaits.waitTime(3);
-			logout();
+			
 		} catch (Throwable t) {
-			if (test == null) {
-				extent = ExtentManager.getReporter(filePath);
-				String var = rowData.getTestcaseId();
-				String dec = rowData.getTestcaseDescription();
-				String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
-				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
-				for (int i = 0; i < tests.length; i++) {
-					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
-					test.log(LogStatus.FAIL, "FAIL - " + t.getMessage());
-					extent.endTest(test);
-				}
-			} else {
-				test.log(LogStatus.FAIL, "Something unexpected happened" + t);// extent
-				StringWriter errors = new StringWriter();
-				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// extent reports
-				ErrorUtil.addVerificationFailure(t);// testng
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(LogStatus.FAIL, "Something unexpected happened");
+			extent = ExtentManager.getReporter(filePath);
+			String var = rowData.getTestcaseId();
+			String dec = rowData.getTestcaseDescription();
+			String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
+			String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
+			logger.info("length : " + tests.length);
+			logger.info("doc length : " + tests_dec.length);
+			logger.info(rowData.getTestcaseId());
+			for (int i = 1; i < tests.length; i++) {
+				logger.info(tests_dec[i]);
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
+				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+						+ " User Not created, hence skiping this test case");
+				extent.endTest(test);
 			}
+
+			// extent
+			// next 3 lines to print whole testng error in report
+			StringWriter errors = new StringWriter();
+			t.printStackTrace(new PrintWriter(errors));
+			test.log(LogStatus.INFO, errors.toString());// extent reports
+			ErrorUtil.addVerificationFailure(t);// testng
+			status = 2;// excel
+			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
+					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
 		} finally {
 			closeBrowser();
 		}
