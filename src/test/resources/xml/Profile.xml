@@ -76,7 +76,7 @@
 	</test>
 
 	<test name="Validate_Other_User_Profile_Comments_Like">
-		<parameter name="otherProfileName" value="reddy" />
+		<parameter name="otherProfileName" value="janardhana" />
 		<classes>
 			<class name="Profile.Profile10"></class>
 		</classes>
@@ -125,7 +125,7 @@
 	</test>
 
 	<test name="Profile_Search_with_PrimaryInstitution">
-		<parameter name="primaryInstitution" value="thomson reuters"></parameter>
+		<parameter name="primaryInstitution" value="clarivate"></parameter>
 		<classes>
 			<class name="Profile.Profile17"></class>
 		</classes>
