@@ -124,7 +124,8 @@ public class RCC015 extends TestBase {
 				Assert.assertEquals(recordTitle, pf.getpostRVPageInstance(ob).getPostTitle().trim());
 				test.log(LogStatus.PASS, "Post title in groups deails page is matching with record view page");
 				BrowserWaits.waitTime(10);
-				Assert.assertTrue(pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals));
+				Assert.assertTrue(
+						pf.getpostRVPageInstance(ob).getPostContent().contains(recordDetals.substring(0, 30)));
 				test.log(LogStatus.PASS, "Post content in groups deails page is matching with record view page");
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Post details are not displayed correctly in group details page");
@@ -237,7 +238,7 @@ public class RCC015 extends TestBase {
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-			
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -249,7 +250,7 @@ public class RCC015 extends TestBase {
 			test.log(LogStatus.FAIL, "Snapshot below: "
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
-		} finally{
+		} finally {
 			closeBrowser();
 		}
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");

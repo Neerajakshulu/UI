@@ -197,6 +197,7 @@ public enum OnePObjectMap {
 	HOME_PROJECT_NEON_PROFILE_IMAGE_CSS("div[class^='ne-profile-flyout'] a[class='dropdown-toggle']"),
 	HOME_PROJECT_NEON_PROFILE_CSS("div[class*='ne-profile-flyout__menu'] a[href^='#/profile']"),
 	HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK("Sign out"),
+	HOME_PROJECT_NEON_PROFILE_SIGNOUT_XPATH("//a[contains(text(), 'Sign out')]"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK("Account"),
 	HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS("a[href='#/account']"),
 	HOME_PROJECT_NEON_PROFILE_HELP_LINK("Help & Feedback"),
