@@ -109,7 +109,8 @@ public class Search89 extends TestBase {
 				
 						if (detailsLink.size() != 0) {
 					BrowserWaits.waitTime(3);
-						//ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).click();
+					String name=ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary wui-btn--view-in-ti']")).getText();
+					if(name.contains("Derwent Innovation"))
 					test.log(LogStatus.PASS, "View in Derwent Innovation link is present in the record view page");
 				} else {
 					test.log(LogStatus.FAIL,
