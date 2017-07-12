@@ -117,7 +117,7 @@ public class Search86 extends TestBase {
 
 			if (!checkElementPresence("recordView_VITI")) {
 
-				test.log(LogStatus.FAIL, "VIEW IN THOMSON INNOVATION button not getting displayed");// extent
+				test.log(LogStatus.FAIL, "VIEW IN  DERWENT INNOVATION button not getting displayed");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
@@ -127,7 +127,7 @@ public class Search86 extends TestBase {
 
 			if (!checkElementPresence("recordView_VITI")) {
 
-				test.log(LogStatus.FAIL, "VIEW IN THOMSON INNOVATION button not getting displayed");// extent
+				test.log(LogStatus.FAIL, "VIEW IN DERWENT INNOVATION button not getting displayed");// extent
 				// reports
 				status = 2;// excel
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
