@@ -198,7 +198,7 @@ public class DRAIAM001 extends TestBase {
 					
 					ob.switchTo().window(al.get(1));
 					String actual_URL = ob.getCurrentUrl();
-					String expected_URL = "http://clarivate.com/life-sciences/discovery-and-preclinical-research/drug-research-advisor/";
+					String expected_URL = "https://clarivate.com/products/drug-research-advisor/";
 					Assert.assertTrue(actual_URL.contains(expected_URL));
 					test.log(LogStatus.PASS,
 							"user is taken to the TargetDruggability page");
