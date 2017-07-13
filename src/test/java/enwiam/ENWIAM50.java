@@ -141,7 +141,7 @@ public class ENWIAM50 extends TestBase {
 			ob.switchTo().window(arr.get(1));
 			String ActualURL=ob.getCurrentUrl();
 			try {
-				Assert.assertEquals(ActualURL, "http://clarivate.com/");
+				Assert.assertEquals(ActualURL, "https://www.clarivate.com/");
 				test.log(LogStatus.PASS, "Clarivate marking site is opened in new tab");
 
 			} catch (Throwable t) {
