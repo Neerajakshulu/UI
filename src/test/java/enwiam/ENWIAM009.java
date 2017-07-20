@@ -293,7 +293,7 @@ public class ENWIAM009 extends TestBase {
 				Assert.assertNotEquals(currentUrl, currentUrl1);
 				test.log(LogStatus.PASS,
 						"After updating the preferences ,the system update the URL that supports the 'View additional email preferences' link .");
-
+				closeBrowser();
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL,
 						"After updating the preferences ,the system not update the URL that supports the 'View additional email preferences' link ."
