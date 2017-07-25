@@ -2,6 +2,7 @@ package iam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -80,8 +81,9 @@ public class IAM013 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			BrowserWaits.waitTime(4);
 			termofUserAndPrivacyStatement();
-			WebElement myE1 = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
-			myE1.click();
+			List<WebElement> myE1 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]"));
+			logger.info(""+myE1.size());
+			myE1.get(1).click();
 			BrowserWaits.waitTime(3);
 			if (!checkElementPresence("reg_PageHeading_label")) {
 
@@ -135,8 +137,8 @@ public class IAM013 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			BrowserWaits.waitTime(4);
 			termofUserAndPrivacyStatement();
-			WebElement myE3 = ob.findElement(By.xpath("//a[contains(text(),'Privacy Statement')]"));
-			myE3.click();
+			List<WebElement> myE3 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]"));
+			myE3.get(1).click();
 			BrowserWaits.waitTime(3);
 			if (!checkElementPresence("reg_PageHeading_label")) {
 
