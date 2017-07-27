@@ -301,15 +301,11 @@
 			<class name="enwiam.ENWIAM0005"></class>
 			<class name="enw.ENW000010"></class>
 			<class name="enwiam.ENWIAM64"></class>
-		</classes>
-	</test>
-
-
-	<test name="ENWAutomatedMerge" preserve-order="true" parallel="false">
-		<classes>
 			<class name="enwiam.ENWIAM63"></class>
 		</classes>
 	</test>
+
+
 	<test name="ENWIAM0009">
 		<classes>
 			<class name="enwiam.ENWIAM0009"></class>

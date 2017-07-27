@@ -51,7 +51,7 @@ public class ENWIAM63 extends TestBase {
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
 		try {
-			String statuCode = deleteUserAccounts(LOGIN.getProperty("fbusername1"));
+			String statuCode = deleteUserAccounts(LOGIN.getProperty("UserName18"));
 			Assert.assertTrue(statuCode.equalsIgnoreCase("200"));
 			if (!(statuCode.equalsIgnoreCase("200") || statuCode.equalsIgnoreCase("400"))) {
 				// test.log(LogStatus.FAIL, "Delete accounts api call failed");
@@ -64,6 +64,8 @@ public class ENWIAM63 extends TestBase {
 		}
 		loginTofb();
 		linkAccounts("Facebook");
+		
+		closeBrowser();
 //			
 	}
 
@@ -74,8 +76,8 @@ public class ENWIAM63 extends TestBase {
 
 		// Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-		pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("fbusername1"),
-				LOGIN.getProperty("fbpwrd1"));
+		pf.getLoginTRInstance(ob).loginWithLinkedInCredentials(LOGIN.getProperty("UserName18"),
+				LOGIN.getProperty("Password18"));
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		pf.clearAllPageObjects();
@@ -87,8 +89,8 @@ public class ENWIAM63 extends TestBase {
 		clearCookies();
 		// Navigate to TR login page and login with valid TR credentials
 		ob.navigate().to(host);
-		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("fbusername1"),
-				LOGIN.getProperty("fbpwrd1"));
+		pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserName18"),
+				LOGIN.getProperty("Password18"));
 		pf.getLoginTRInstance(ob).logOutApp();
 		closeBrowser();
 		pf.clearAllPageObjects();
@@ -106,20 +108,20 @@ public class ENWIAM63 extends TestBase {
 			// ob.get(CONFIG.getProperty("testSiteName"));
 
 			
-				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("fbusername1"),
-						LOGIN.getProperty("fbpwrdPwd"));
+				pf.getLoginTRInstance(ob).enterTRCredentials(LOGIN.getProperty("UserName18"),
+						LOGIN.getProperty("Password18"));
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 				test.log(LogStatus.PASS, "User is able to log in with steam credentials");
 				pf.getLinkingModalsInstance(ob).clickOnSignInUsingFB();
 			
 			
 			if (accountType.equalsIgnoreCase("Facebook")) {
-				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("fbusername1"),
-						LOGIN.getProperty("fbpwrd1"));
+				pf.getLoginTRInstance(ob).signInToFacebook(LOGIN.getProperty("UserName18"),
+						LOGIN.getProperty("Password18"));
 				test.log(LogStatus.PASS, "User is able to link " + accountType + " account to Neon account");
 			} else if (accountType.equalsIgnoreCase("LinkedIn")) {
-				pf.getLoginTRInstance(ob).signInToLinkedIn(LOGIN.getProperty("fbusername1"),
-						LOGIN.getProperty("fbpwrd1"));
+				pf.getLoginTRInstance(ob).signInToLinkedIn(LOGIN.getProperty("UserName18"),
+						LOGIN.getProperty("Password18"));
 				test.log(LogStatus.PASS, "User is able to link " + accountType + " account to Neon account");
 			}
 
@@ -128,7 +130,7 @@ public class ENWIAM63 extends TestBase {
 			pf.getLoginTRInstance(ob).logOutApp();
 			try {
 
-				loginAs("fbusername1", "fbpwrdPwd");
+				loginAs("UserName18", "Password18");
 				test.log(LogStatus.PASS,
 						"User is not asked to link the account again when user has already linked them");
 			} catch (Exception e) {
@@ -167,9 +169,9 @@ public class ENWIAM63 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("fbusername1")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("fbusername1")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS,
 					"Linked accounts are available in accounts page : Neon and " + linkName + " accounts");
