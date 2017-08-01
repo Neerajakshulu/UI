@@ -302,6 +302,7 @@
 			<class name="enw.ENW000010"></class>
 			<class name="enwiam.ENWIAM64"></class>
 			<class name="enwiam.ENWIAM63"></class>
+			<class name="enw.ENW00029"></class>
 		</classes>
 	</test>
 

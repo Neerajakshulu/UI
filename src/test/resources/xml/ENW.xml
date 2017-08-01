@@ -17,137 +17,7 @@
 		</classes>
 	</test>
 		
-	<!-- <test name="ENW003">
-		<classes>
-			<class name="enw.ENW003"></class>
-		</classes>
-	</test>
-	<test name="ENW004">
-		<classes>
-			<class name="enw.ENW004"></class>
-		</classes>
-	</test>
-	<test name="ENW005">
-		<classes>
-			<class name="enw.ENW005"></class>
-		</classes>
-	</test> -->
-	<!-- <test name="ENW007">
-		<classes>
-			<class name="enw.ENW007"></class>
-		</classes>
-	</test> -->
-	<!-- <test name="ENW006">
-		<classes>
-			<class name="enw.ENW006"></class>
-		</classes>
-	</test> -->
-
-	<!-- <test name="ENW009">
-		<classes>
-			<class name="enw.ENW009"></class>
-		</classes>
-	</test> -->
-	<!-- <test name="ENW010">
-		<classes>
-			<class name="enw.ENW010"></class>
-		</classes>
-	</test> -->
-	<!-- <test name="ENW011">
-		<classes>
-			<class name="enw.ENW011"></class>
-		</classes>
-	</test>
-	<test name="ENW012">
-		<classes>
-			<class name="enw.ENW012"></class>
-		</classes>
-	</test>
-	<test name="ENW013">
-		<classes>
-			<class name="enw.ENW013"></class>
-		</classes>
-	</test>
-	<test name="ENW014">
-		<classes>
-			<class name="enw.ENW014"></class>
-		</classes>
-	</test>
-	<test name="ENW015">
-		<classes>
-			<class name="enw.ENW015"></class>
-		</classes>
-	</test>
-	<test name="ENW016">
-		<classes>
-			<class name="enw.ENW016"></class>
-		</classes>
-	</test>
-	<test name="ENW017">
-		<classes>
-			<class name="enw.ENW017"></class>
-		</classes>
-	</test> -->
-	<!-- <test name="ENW022">
-		<classes>
-			<class name="enw.ENW022"></class>
-		</classes>
-	</test>
 	
-	<test name="ENW023">
-		<classes>
-			<class name="enw.ENW023"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW024">
-		<classes>
-			<class name="enw.ENW024"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW031">
-		<classes>
-			<class name="enw.ENW031"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW032">
-		<classes>
-			<class name="enw.ENW032"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW033">
-		<classes>
-			<class name="enw.ENW033"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW035">
-		<classes>
-			<class name="enw.ENW035"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW036">
-		<classes>
-			<class name="enw.ENW036"></class>
-		</classes>
-	</test>
-	
-	<test name="ENW037">
-		<classes>
-			<class name="enw.ENW037"></class>
-		</classes>
-	</test>
-	 <test name="ENW043">
-		<classes>
-			<class name="enw.ENW043"></class>
-		</classes>
-		
-	</test>
-	 -->
 	<test name="ENW018">
 		<classes>
 			<class name="enw.ENW018"></class>
@@ -159,73 +29,14 @@
 		</classes>
 	</test>
 	
-	<!-- <test name="ENW020">
-		<classes>
-			<class name="enw.ENW020"></class>
-		</classes>
-	</test>
 	
-	<test name="ENW019A">
-		<classes>
-			<class name="enw.ENW019A"></class>
-		</classes>
-	</test>
 	
-	<test name="ENW021">
-		<classes>
-			<class name="enw.ENW021"></class>
-		</classes>
-	</test> -->
-	
-	<!-- <test name="ENW000010">
-		<classes>
-			<class name="enw.ENW000010"></class>
-		</classes>
-	</test> -->
-	
-	<!-- <test name="ENW000012">
-		<classes>
-			<class name="enw.ENW000012"></class>
-		</classes>
-	</test> 
-	<test name="ENW041">
-		<classes>
-			<class name="enw.ENW041"></class>
-		</classes>
-		
-	</test> -->
-	<test name="ENW00029" preserve-order="true" parallel="false">
-		<classes>
-			<class name="enw.ENW00029"></class>
-		</classes>
-	</test>
 	<test name="ENW030">
 		<classes>
 			<class name="enw.ENW030"></class>
 		</classes>
 	</test>
 	
-	<!-- <test name="ENW044">
-		<classes>
-			<class name="enw.ENW044"></class>
-		</classes>
-		
-	</test>
-	<test name="ENW034">
-		<classes>
-			<class name="enw.ENW034"></class>
-		</classes>
-	</test>
-	 <test name="ENW008">
-		<classes>
-			<class name="enw.ENW008"></class>
-		</classes>
-	</test> -->
 	
-	<!-- <test name="ENW0008">
-		<classes>
-			<class name="enw.ENW0008"></class>
-		</classes>
-	</test> -->
 </suite>
 

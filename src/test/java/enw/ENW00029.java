@@ -52,14 +52,12 @@ public class ENW00029 extends TestBase {
 			maximizeWindow();
 			ob.navigate().to(host);
 
-			try {
-
-				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserFBENW00029"),
-						LOGIN.getProperty("PWDUserFBENW00029"));
+				pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("UserName18"),
+						LOGIN.getProperty("Password18"));
 
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
-			//	pf.getHFPageInstance(ob).clickOnAccountLink();
+	
 				pf.getHFPageInstance(ob).clickProfileImage();
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS.toString()), 180);
 				ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_ACCOUNT_LINK_CSS.toString())).click();
@@ -68,7 +66,7 @@ public class ENW00029 extends TestBase {
 						.getText();
 				System.out.println(actualEmail);
 				try {
-					Assert.assertEquals(LOGIN.getProperty("UserFBENW00029"), actualEmail);
+					Assert.assertEquals(LOGIN.getProperty("UserName18"), actualEmail);
 					test.log(LogStatus.PASS, "First  Email id getting displayed in Account Setting page ");
 				}
 
@@ -85,11 +83,9 @@ public class ENW00029 extends TestBase {
 
 				String accountType = "Facebook";
 				validateSocialAccounts(2, accountType);
-				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString()))
-						.getText();
-				System.out.println(actualEmail);
+				String actualEmail1 = ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_ACTUAL_EMAIL1_XPATH.toString())).getText();
 				try {
-					Assert.assertEquals(actualEmail1,LOGIN.getProperty("UserFBENW00029"));
+					Assert.assertEquals(actualEmail1,LOGIN.getProperty("UserName18"));
 					test.log(LogStatus.PASS, "alternate Email id is displayed in Account Setting page.");
 				}
 
@@ -104,17 +100,8 @@ public class ENW00029 extends TestBase {
 					ErrorUtil.addVerificationFailure(t);
 				}
 
-			} catch (Throwable t) {
-				t.printStackTrace();
-				test.log(LogStatus.INFO, "Snapshot below: " + test
-						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
-				ErrorUtil.addVerificationFailure(t);
-				closeBrowser();
-			}
-		//	String accountpageText=ob.findElement(By.xpath("//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]"));
-			//p[contains(text(),'Project Neon has linked your accounts. You can sign in with any of the accounts you already use.')]
 			String accountpageText = ob.findElement(By.xpath(OnePObjectMap.TEXT_ACCOUNTPAGE1_XPATH.toString())).getText();
-			System.out.println(accountpageText);
+			
 			try {
 				Assert.assertEquals(accountpageText,
 						"Project Neon has linked your accounts. You can sign in with any of the accounts you already use.");
@@ -159,11 +146,9 @@ public class ENW00029 extends TestBase {
 		try {
 
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserFBENW00029")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount("Neon", LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(
-					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserFBENW00029")));
-//			Assert.assertTrue(
-//					pf.getAccountPageInstance(ob).verifyLinkedAccount("LinkedIn", LOGIN.getProperty("UserFBENW00029")));
+					pf.getAccountPageInstance(ob).verifyLinkedAccount(linkName, LOGIN.getProperty("UserName18")));
 			Assert.assertTrue(pf.getAccountPageInstance(ob).validateAccountsCount(accountCount));
 			test.log(LogStatus.PASS, "Multiple accounts are present in account setting page");
 
