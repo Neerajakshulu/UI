@@ -97,6 +97,7 @@ public class TestBase {
 	public static Xls_Reader ipaiamxls = null;
 	public static Xls_Reader customercarexls = null;
 	public static Xls_Reader watxls = null;
+	public static Xls_Reader watiamxls = null;
 	public static boolean isInitalized = false;
 
 	public WebDriver ob = null;
@@ -158,10 +159,8 @@ public class TestBase {
 				suiteName = "DRAIAM";
 			} else if (className.contains("Customercare")) {
 				suiteName = "customercare";
-			}else if (className.contains("WAT")) {
-				suiteName = "WAT";
 			} else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")
-					|| className.contains("IPA")) {
+					|| className.contains("IPA")||className.contains("WAT")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
 				if (className.contains("ENW")) {
@@ -175,6 +174,12 @@ public class TestBase {
 						suiteName = "IPAIAM";
 					} else {
 						suiteName = "IPA";
+					}
+				} else if (className.contains("WAT")) {
+					if (className.contains("IAM")) {
+						suiteName = "WATIAM";
+					} else {
+						suiteName = "WAT";
 					}
 				} else if (className.contains("IAM")) {
 					suiteName = "IAM";
@@ -275,6 +280,7 @@ public class TestBase {
 			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
 			customercarexls = new Xls_Reader("src/test/resources/xls/customercare.xlsx");
 			watxls = new Xls_Reader("src/test/resources/xls/WAT.xlsx");
+			watiamxls=new Xls_Reader("src/test/resources/xls/WATIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -307,6 +313,8 @@ public class TestBase {
 			loadModuleData(customercarexls.path);
 		}else if (suiteName.equals("WAT")) {
 			loadModuleData(watxls.path);
+		}else if (suiteName.equals("WATIAM")) {
+			loadModuleData(watiamxls.path);
 		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
@@ -322,6 +330,7 @@ public class TestBase {
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
 			loadModuleData(watxls.path);
+			loadModuleData(watiamxls.path);
 		} else if (suiteName.equals("LocalRun")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
@@ -335,6 +344,7 @@ public class TestBase {
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
 			loadModuleData(watxls.path);
+			loadModuleData(watiamxls.path);
 		}
 
 		logger.info(suiteName + "---" + testcase.size());
