@@ -40,9 +40,6 @@ public class WATIAM001 extends TestBase {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
-		ArrayList<String> cases = new ArrayList<String>();
-		cases.add("smallCase");
-		cases.add("upperCase");
 		if (!master_condition) {
 
 			status = 3;// excel
@@ -53,61 +50,16 @@ public class WATIAM001 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-//		Iterator<String> iterator = cases.iterator();
 		String username="chinna.putha@thomsonreuters.com";
 		String password="Thomson@123";
 		openBrowser();
 		maximizeWindow();
 		clearCookies();
-		//ob.navigate().to(host);
-		
 		ob.navigate().to(host+CONFIG.getProperty("appendWATAppUrl"));
-		pf.getLoginTRInstance(ob).loginToWAT(username,password,test);
+		pf.getWatPageInstance(ob).loginToWAT(username,password,test);
+		pf.getWatPageInstance(ob).logoutWAT();
 		pf.getBrowserActionInstance(ob).closeBrowser();
 		
-/*		while (iterator.hasNext()) {
-			try {
-
-				// if :checking if user can login with uppercase email address
-				if (iterator.next().equals("upperCase")) {
-					waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
-					ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-					ob.findElement(By.name(OR.getProperty("TR_email_textBox")))
-							.sendKeys(CONFIG.getProperty("defaultUsername").toUpperCase());
-					ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-							.sendKeys(CONFIG.getProperty("defaultPassword"));
-					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-					BrowserWaits.waitTime(4);
-				} else {
-					// else: checking if user can login successfully using smallcase email address
-
-					login();
-				}
-				BrowserWaits.waitTime(2);
-				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
-
-				logout();
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
-
-			} catch (Throwable t) {
-
-				test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
-				// next 3 lines to print whole testng error in report
-				StringWriter errors = new StringWriter();
-				t.printStackTrace(new PrintWriter(errors));
-				test.log(LogStatus.INFO, errors.toString());// extent reports
-				ErrorUtil.addVerificationFailure(t);// testng
-				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
-				closeBrowser();
-			}
-		}
-		closeBrowser();
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");*/
 	}
 
 	@AfterTest

@@ -1194,6 +1194,10 @@ public enum OnePObjectMap {
 	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	HOME_PROJECT_NEON_RVIEW_ARTICLE_COMMENTCOUNT_CSS("div[class='ne-publication-sidebar__metrics'] span[class='wui-icon-metric__value ng-binding']"),
 	
+	
+	WAT_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[class*='wui-circle dropdown-toggle']"),
+	
+	
 	;
 
 	private String locator;
