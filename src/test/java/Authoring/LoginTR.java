@@ -20,6 +20,9 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 import base.TestBase;
 import util.BrowserAction;
 import util.BrowserWaits;
@@ -339,6 +342,24 @@ public class LoginTR extends TestBase {
 	       }catch(Exception ex){
 	       }
 	       return Element!=null;
+	       
+	}
+	
+	/**
+	 * Method for Login to WAT application
+	 * @param username
+	 * @param password
+	 * @throws Exception, When user is not able to login Successfully
+	 */
+	public void loginToWAT(String username,String password,ExtentTest test) throws Exception{
+		   pf.getBrowserWaitsInstance(ob).waitUntilText("SaR Labs","Sign in","Forgot password?");
+	       pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
+	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
+	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
+	       pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+	       pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+	       pf.getBrowserWaitsInstance(ob).waitUntilText("Search","Web of Science: Author search");
+	       test.log(LogStatus.INFO, "Login to WAT Applicaton Successfully");
 	       
 	}
 

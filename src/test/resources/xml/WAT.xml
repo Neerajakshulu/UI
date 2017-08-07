@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite name="WAT" >
+
+	<listeners>
+		<listener class-name="listener.TestsListenerAdapter" />
+	</listeners>
+
+	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
+	<parameter name="password" value="Thomson@123" />
+
+ 	 <test name="WAT_Login" preserve-order="true">
+		<classes>
+			<class name="wat.WAT01"></class>
+		</classes>
+	</test>
+	
+</suite>
+

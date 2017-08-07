@@ -124,6 +124,31 @@ public class BrowserWaits extends TestBase {
 						+ "}], after waiting for " + time + "ms");
 			}
 	}
+	
+	/**
+	 * wait until desired element is Clickable with Time
+	 * 
+	 * @param locator
+	 * @throws Exception 
+	 */
+	public void waitUntilElementIsClickable(Object elementName, int time) throws Exception {
+		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
+			try {
+				(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+
+					public Boolean apply(WebDriver d) {
+						try {
+							return Boolean.valueOf(element != null && element.isEnabled());
+						} catch (Exception e) {
+							return Boolean.valueOf(false);
+						}
+					}
+				});
+			} catch (TimeoutException te) {
+				throw new TimeoutException("Failed to find element [Locator = {" + locatorText
+						+ "}], after waiting for " + time + "ms");
+			}
+	}
 
 	/**
 	 * wait until desired element is not displayed

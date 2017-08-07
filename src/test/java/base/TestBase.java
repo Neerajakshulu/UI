@@ -96,6 +96,7 @@ public class TestBase {
 	public static Xls_Reader ipaxls = null;
 	public static Xls_Reader ipaiamxls = null;
 	public static Xls_Reader customercarexls = null;
+	public static Xls_Reader watxls = null;
 	public static boolean isInitalized = false;
 
 	public WebDriver ob = null;
@@ -157,6 +158,8 @@ public class TestBase {
 				suiteName = "DRAIAM";
 			} else if (className.contains("Customercare")) {
 				suiteName = "customercare";
+			}else if (className.contains("WAT")) {
+				suiteName = "WAT";
 			} else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")
 					|| className.contains("IPA")) {
 				logger.info("Test - " + className.startsWith("ENW"));
@@ -271,6 +274,7 @@ public class TestBase {
 			ipaxls = new Xls_Reader("src/test/resources/xls/IPA.xlsx");
 			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
 			customercarexls = new Xls_Reader("src/test/resources/xls/customercare.xlsx");
+			watxls = new Xls_Reader("src/test/resources/xls/WAT.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -301,7 +305,9 @@ public class TestBase {
 			loadModuleData(ipaiamxls.path);
 		} else if (suiteName.equals("customercare")) {
 			loadModuleData(customercarexls.path);
-		} else if (suiteName.equals("Sanity suite")) {
+		}else if (suiteName.equals("WAT")) {
+			loadModuleData(watxls.path);
+		}else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
@@ -315,6 +321,7 @@ public class TestBase {
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
+			loadModuleData(watxls.path);
 		} else if (suiteName.equals("LocalRun")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(profilexls.path);
@@ -327,6 +334,7 @@ public class TestBase {
 			loadModuleData(ipaxls.path);
 			loadModuleData(ipaiamxls.path);
 			loadModuleData(customercarexls.path);
+			loadModuleData(watxls.path);
 		}
 
 		logger.info(suiteName + "---" + testcase.size());
@@ -601,7 +609,6 @@ public class TestBase {
 
 	// Closing the browser
 	public void closeBrowser() {
-
 		ob.quit();
 	}
 
