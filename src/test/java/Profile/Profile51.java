@@ -62,7 +62,7 @@ public class Profile51 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-			String deepLink = System.getProperty("host") + deepLinkUrl;
+			String deepLink = "https://apps.dev-stable.clarivate.com/cmty"+ deepLinkUrl;
 			logger.info("Profile deep link URL-->" + deepLink);
 			ob.navigate().to(deepLink);
 			pf.getLoginTRInstance(ob).waitForTRHomePage();

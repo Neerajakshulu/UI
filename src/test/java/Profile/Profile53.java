@@ -66,7 +66,7 @@ public class Profile53 extends TestBase {
 			maximizeWindow();
 			String fbLILogins[] = socialLogin.split("\\|");
 			for (String fbLILogin : fbLILogins) {
-				String deepLink = System.getProperty("host") + deepLinkUrl;
+				String deepLink = "https://apps.dev-stable.clarivate.com/cmty"+ deepLinkUrl;
 				logger.info("Profile deep link URL-->" + deepLink);
 				ob.navigate().to(deepLink);
 
