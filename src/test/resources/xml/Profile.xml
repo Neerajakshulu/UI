@@ -14,7 +14,7 @@
 		<parameter name="profileName" value="reddy" />
 		<classes>
 			<class name="Profile.Profile1"></class>
-		</classes>
+		</classes> 
 	</test>
 
 	<test name="Find_Other_Profile_and_Follow_Others" preserve-order="true">
