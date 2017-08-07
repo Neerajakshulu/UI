@@ -41,6 +41,7 @@ public class PageFactory {
 	private IPARecordViewPage rvpage=null;
 	private GmailLoginPage gmpage=null;
 	private CreatePostAndCommentPage postncommentpage = null;
+	private WATLogInPage watLogInPage=null;
 	
 	public IAMPage getIamPage(WebDriver ob) {
 
@@ -275,6 +276,14 @@ public class PageFactory {
 
 		return ipapage;
 
+	}
+	
+	public WATLogInPage getWatPageInstance(WebDriver ob) {
+
+		if (watLogInPage == null) {
+			watLogInPage = new WATLogInPage(ob);
+		}
+		return watLogInPage;
 	}
 	
 	public CustomercarePage getCustomercarePage(WebDriver ob) {
