@@ -3,6 +3,8 @@ package watiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,10 +13,12 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
-public class WATIAM001 extends TestBase {
+public class WATIAM007 extends TestBase {
 
 	static int status = 1;
 
@@ -31,7 +35,7 @@ public class WATIAM001 extends TestBase {
 	}
 
 	@Test
-	public void testcaseA1() throws Exception {
+	public void testcaseA3() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -45,19 +49,27 @@ public class WATIAM001 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		String username="chinna.putha@thomsonreuters.com";
-		String password="Thomson@123";
-		try{
+		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host+CONFIG.getProperty("appendWATAppUrl"));
-			pf.getWatPageInstance(ob).loginToWAT(username,password,test);
-			pf.getWatPageInstance(ob).logoutWAT();
-			test.log(LogStatus.PASS, "WAT user logged and logout successfylly using STeAM user");
+			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.IPA_BRANDING_NAME_CSS.toString()),
+					30);
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).clear();
+			ob.findElement(By.cssSelector(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS.toString())).sendKeys("abcd.com");
+			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
+			BrowserWaits.waitTime(2);
+			String emailInvalidErrorMessage = ob
+					.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
+					.getText();
+			Assert.assertTrue(emailInvalidErrorMessage.contains("Please enter a valid email address."));
+			BrowserWaits.waitTime(2);
+			
+			test.log(LogStatus.PASS, "Correct Error message displayed when user enter wrong format email id");
 			pf.getBrowserActionInstance(ob).closeBrowser();
-		}catch (Throwable t) {
-			test.log(LogStatus.FAIL, "WAT user not logged in and logout successfylly using STeAM user");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Correct Error message not displayed when user enter wrong format email id");
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -74,15 +86,6 @@ public class WATIAM001 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		/*
-		 * if(status==1) TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(iamxls, "Test Cases",
-		 * TestUtil.getRowNum(iamxls,this.getClass().getSimpleName()), "SKIP");
-		 */
 	}
 
 }

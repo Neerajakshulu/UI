@@ -27,7 +27,7 @@ public enum OnePObjectMap {
 	COUNTRY_SELECT_IN_NEON(".//*[@id='countrySelect']"),
 
 	ENW_PRIVACY_LINK_XPATH("//a[contains(text(),'Privacy')]"),
-	ENW_TERMS_OF_USE_XPATH("//a[contains(text(),'Terms of use')]"),
+	ENW_TERMS_OF_USE_XPATH("//a[contains(text(),'Terms of Use')]"),
 	ENW_HELP_LINK("Help"),
 	ENW_HELP_XPATH("//a[contains(text(),'Help')]"),
 	ENW_FEEDBACK_XPATH("//a[contains(text(),'Feedback')]"),
@@ -1196,7 +1196,7 @@ public enum OnePObjectMap {
 	
 	
 	WAT_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[class*='wui-circle dropdown-toggle']"),
-	
+	WAT_LOGIN_PAGE_CONTACT_EMAIL_ID_CSS("p[class*='ng-binding']"),
 	
 	;
 

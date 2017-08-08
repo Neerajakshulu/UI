@@ -3,6 +3,7 @@ package watiam;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.openqa.selenium.By;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,8 +14,9 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.TestBase;
 import util.ErrorUtil;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
-public class WATIAM001 extends TestBase {
+public class WATIAM004 extends TestBase {
 
 	static int status = 1;
 
@@ -31,7 +33,7 @@ public class WATIAM001 extends TestBase {
 	}
 
 	@Test
-	public void testcaseA1() throws Exception {
+	public void testcaseA4() throws Exception {
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
 
@@ -45,19 +47,18 @@ public class WATIAM001 extends TestBase {
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts--->");
-		String username="chinna.putha@thomsonreuters.com";
-		String password="Thomson@123";
-		try{
+		try {
 			openBrowser();
 			maximizeWindow();
 			clearCookies();
-			ob.navigate().to(host+CONFIG.getProperty("appendWATAppUrl"));
-			pf.getWatPageInstance(ob).loginToWAT(username,password,test);
-			pf.getWatPageInstance(ob).logoutWAT();
-			test.log(LogStatus.PASS, "WAT user logged and logout successfylly using STeAM user");
+			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.WAT_LOGIN_PAGE_CONTACT_EMAIL_ID_CSS.toString()),
+					30);
+			pf.getBrowserWaitsInstance(ob).waitUntilNotText("Identify",3);
+			test.log(LogStatus.PASS, "Market Modules are not displayed WAT application landig page");
 			pf.getBrowserActionInstance(ob).closeBrowser();
-		}catch (Throwable t) {
-			test.log(LogStatus.FAIL, "WAT user not logged in and logout successfylly using STeAM user");
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Market Modules are displayed WAT application landig page");
 			StringWriter errors = new StringWriter();
 			t.printStackTrace(new PrintWriter(errors));
 			test.log(LogStatus.INFO, errors.toString());// extent reports
