@@ -90,16 +90,23 @@ public class WAT02 extends TestBase {
 	public void testSearchAuthorCluster(String LastName, String FirstName, String CountryName, String OrgName)
 			throws Exception {
 
-		// Verify whether control is in Author Search page
-		Assert.assertEquals(
-				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(),
-				wos_title, "Control is not in WOS Author Search page");
-		test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+		try {
+			// Verify whether control is in Author Search page
+			Assert.assertEquals(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
+					"Control is not in WOS Author Search page");
+			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
 
-		// Search for an author cluster
-		test.log(LogStatus.INFO, "Entering author name... ");
-		pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
-		test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
+			// Search for an author cluster
+			test.log(LogStatus.INFO, "Entering author name... ");
+			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
+			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		} catch (Throwable t) {
+			logFailureDetails(test, t, "Login Fail", "login_fail");
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		}
+
 	}
 
 	/**
