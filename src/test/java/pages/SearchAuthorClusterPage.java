@@ -81,17 +81,6 @@ public class SearchAuthorClusterPage extends TestBase {
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			test.log(LogStatus.INFO, "Clicking find button... ");
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-			// if
-			// (ob.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH.toString())).isDisplayed())
-			// {
-			// selectCountryofAuthor(test);
-			// BrowserWaits.waitTime(2);
-			// selectOrgofAuthor(test);
-			// } else {
-			// test.log(LogStatus.INFO,
-			// "Country name selection is not required as the searched user
-			// resulted in less than 50 clusters... ");
-			// }
 			try {
 				ob.findElement(By.xpath(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH.toString()));
 				selectCountryofAuthor(test);
