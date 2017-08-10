@@ -1193,11 +1193,27 @@ public enum OnePObjectMap {
 	CUSTOMER_CARELINK_IN_ERRORPAGE_CSS("a[href='#/customer-care?app=dra'] div[class^='cc-product-tile']"),
 	OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS("a[href*='ip-science.thomsonreuters.com'] div[class^='cc-product-tile']"),
 	HOME_PROJECT_NEON_RVIEW_ARTICLE_COMMENTCOUNT_CSS("div[class='ne-publication-sidebar__metrics'] span[class='wui-icon-metric__value ng-binding']"),
-	
+
+	//******************************************** WAT Locators ********************************************************
 	
 	WAT_PROFILE_FLYOUT_IMAGE_CSS("div[class*='wui-profile-flyout'] a[class*='wui-circle dropdown-toggle']"),
 	WAT_LOGIN_PAGE_CONTACT_EMAIL_ID_CSS("p[class*='ng-binding']"),
-	
+		
+	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
+	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
+	WAT_AUTHOR_FIRSTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--first-and-middle']/descendant::input"),
+	WAT_AUTHOR_COUNTRY_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button[text()[normalize-space() = 'USA']]"),
+	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div"),
+	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div"),
+	WAT_AUTHOR_ORG_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div/button[text()[normalize-space() = 'IBM CORP']]"),
+	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
+	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
+	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
+	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='SMITH']"),
+	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
+	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
+	WAT_SEARCH_RESULTS_TEXT_XPATH("//span[text()='Search Results']")
+
 	;
 
 	private String locator;

@@ -19,7 +19,7 @@ public class PageFactory {
 	private BrowserAction browserAction = null;
 	private BrowserWaits browserWaits = null;
 	private LoginTR loginTR = null;
-	//private Authoring authoring = null;
+	// private Authoring authoring = null;
 	private OnboardingModalsPage onboarding = null;
 	private AccountPage accountPage = null;
 	private ENWReferencePage enwReferencePage = null;
@@ -29,20 +29,38 @@ public class PageFactory {
 	private GroupsListPage groupsListPage = null;
 	private GroupInvitationPage groupInvitationPage = null;
 	private GroupsPage groupsPage = null;
-	private Utility utility=null;
-	private NewsfeedPage newsfeedPage=null;
-	private DRAPage draPage=null;
+	private Utility utility = null;
+	private NewsfeedPage newsfeedPage = null;
+	private DRAPage draPage = null;
 	private IPASearch searchPage = null;
-	private IPApage ipapage=null;
-	private IAMPage iamPage=null;
-	private CustomercarePage customercarePage=null;
-	private IpaSavedSearchDetailsPage ipasavedsearchpage=null;
-	private DashboardPage dashboardPage=null;
-	private IPARecordViewPage rvpage=null;
-	private GmailLoginPage gmpage=null;
+	private IPApage ipapage = null;
+	private IAMPage iamPage = null;
+	private CustomercarePage customercarePage = null;
+	private IpaSavedSearchDetailsPage ipasavedsearchpage = null;
+	private DashboardPage dashboardPage = null;
+	private IPARecordViewPage rvpage = null;
+	private GmailLoginPage gmpage = null;
 	private CreatePostAndCommentPage postncommentpage = null;
-	private WATLogInPage watLogInPage=null;
-	
+	private WATLogInPage watLogInPage = null;
+
+	private SearchAuthorClusterPage SearchAuthClusterPage = null;
+
+	/**
+	 * This Method provides Search author cluster page object to access the
+	 * common methods related to search author cluster page.
+	 * 
+	 * 
+	 * @throws
+	 * 
+	 */
+	public SearchAuthorClusterPage getSearchAuthClusterPage(WebDriver ob) {
+
+		if (SearchAuthClusterPage == null) {
+			SearchAuthClusterPage = new SearchAuthorClusterPage(ob);
+		}
+		return SearchAuthClusterPage;
+	}
+
 	public IAMPage getIamPage(WebDriver ob) {
 
 		if (iamPage == null) {
@@ -58,7 +76,7 @@ public class PageFactory {
 		return searchPage;
 
 	}
-	
+
 	public CreatePostAndCommentPage getPostCommentPageInstance(WebDriver ob) {
 
 		if (postncommentpage == null) {
@@ -66,7 +84,7 @@ public class PageFactory {
 		}
 		return postncommentpage;
 	}
-	
+
 	public SearchProfile getSearchProfilePageInstance(WebDriver ob) {
 		if (searchProfilePage == null) {
 			searchProfilePage = new SearchProfile(ob);
@@ -142,15 +160,15 @@ public class PageFactory {
 		return browserWaits;
 
 	}
-//
-//	public Authoring getAuthoringInstance(WebDriver ob) {
-//		if (authoring == null) {
-//			authoring = new Authoring(ob);
-//		}
-//
-//		return authoring;
-//
-//	}
+	//
+	// public Authoring getAuthoringInstance(WebDriver ob) {
+	// if (authoring == null) {
+	// authoring = new Authoring(ob);
+	// }
+	//
+	// return authoring;
+	//
+	// }
 
 	public LoginTR getLoginTRInstance(WebDriver ob) {
 		if (loginTR == null) {
@@ -244,8 +262,7 @@ public class PageFactory {
 		}
 		return groupsPage;
 	}
-	
-	
+
 	public Utility getUtility(WebDriver ob) {
 
 		if (utility == null) {
@@ -253,14 +270,14 @@ public class PageFactory {
 		}
 		return utility;
 	}
-	
+
 	public NewsfeedPage getNewsfeedPageInstance(WebDriver ob) {
 		if (newsfeedPage == null) {
 			newsfeedPage = new NewsfeedPage(ob);
 		}
 		return newsfeedPage;
 	}
-	
+
 	public DRAPage getDraPageInstance(WebDriver ob) {
 
 		if (draPage == null) {
@@ -268,7 +285,7 @@ public class PageFactory {
 		}
 		return draPage;
 	}
-	
+
 	public IPApage getIpaPage(WebDriver ob) {
 		if (ipapage == null) {
 			ipapage = new IPApage(ob);
@@ -277,7 +294,7 @@ public class PageFactory {
 		return ipapage;
 
 	}
-	
+
 	public WATLogInPage getWatPageInstance(WebDriver ob) {
 
 		if (watLogInPage == null) {
@@ -285,7 +302,7 @@ public class PageFactory {
 		}
 		return watLogInPage;
 	}
-	
+
 	public CustomercarePage getCustomercarePage(WebDriver ob) {
 		if (customercarePage == null) {
 			customercarePage = new CustomercarePage(ob);
@@ -294,10 +311,10 @@ public class PageFactory {
 		return customercarePage;
 
 	}
-	
-	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob){
-		if(ipasavedsearchpage==null){
-			ipasavedsearchpage=new IpaSavedSearchDetailsPage(ob);
+
+	public IpaSavedSearchDetailsPage getIpaSavedSearchpage(WebDriver ob) {
+		if (ipasavedsearchpage == null) {
+			ipasavedsearchpage = new IpaSavedSearchDetailsPage(ob);
 		}
 		return ipasavedsearchpage;
 	}
@@ -309,26 +326,27 @@ public class PageFactory {
 
 		return dashboardPage;
 	}
-	public IPARecordViewPage getIpaRecordViewPage(WebDriver ob){
-		if(rvpage==null){
-			rvpage=new IPARecordViewPage(ob);
+
+	public IPARecordViewPage getIpaRecordViewPage(WebDriver ob) {
+		if (rvpage == null) {
+			rvpage = new IPARecordViewPage(ob);
 		}
 		return rvpage;
 	}
-	
-	public GmailLoginPage getGmailLoginPage(WebDriver ob){
-		if(gmpage==null){
-			gmpage=new GmailLoginPage(ob);
+
+	public GmailLoginPage getGmailLoginPage(WebDriver ob) {
+		if (gmpage == null) {
+			gmpage = new GmailLoginPage(ob);
 		}
 		return gmpage;
 	}
-	
+
 	public void clearAllPageObjects() {
-		searchResultsPage=null;
+		searchResultsPage = null;
 		accountPage = null;
 		loginTR = null;
 		onboarding = null;
-		//authoring = null;
+		// authoring = null;
 		browserWaits = null;
 		browserAction = null;
 		hfPage = null;
@@ -343,13 +361,13 @@ public class PageFactory {
 		groupsPage = null;
 		groupInvitationPage = null;
 		groupsListPage = null;
-		utility=null;
-		draPage=null;
-		ipapage=null;
-		ipasavedsearchpage=null;
-		dashboardPage=null;
-		rvpage=null;
-		gmpage=null;
+		utility = null;
+		draPage = null;
+		ipapage = null;
+		ipasavedsearchpage = null;
+		dashboardPage = null;
+		rvpage = null;
+		gmpage = null;
 		postncommentpage = null;
 	}
 }

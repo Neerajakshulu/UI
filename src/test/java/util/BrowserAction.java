@@ -58,6 +58,21 @@ public class BrowserAction extends TestBase {
 	}
 
 	/**
+	 * double click on desired element
+	 * 
+	 * @param locator
+	 */
+	public void moveToElement(Object elementName) throws Exception {
+
+		Actions act = new Actions(ob);
+		if ((elementName instanceof Enum)) {
+			act.moveToElement(getLocator(((Enum<?>) elementName).name(), elementName.toString()));
+		} else {
+			throw new Exception("All Locators Should be Declared as a Constants in Enum");
+		}
+	}
+
+	/**
 	 * Method for Clear field
 	 * 
 	 * @param locator
@@ -89,8 +104,7 @@ public class BrowserAction extends TestBase {
 	 * 
 	 * @param locator
 	 */
-	public void enterFieldValue(Object elementName,
-			String enterText) throws Exception {
+	public void enterFieldValue(Object elementName, String enterText) throws Exception {
 		if ((elementName instanceof Enum)) {
 			getLocator(((Enum<?>) elementName).name(), elementName.toString()).sendKeys(enterText);
 		} else {
@@ -103,8 +117,7 @@ public class BrowserAction extends TestBase {
 	 * 
 	 * @param locator
 	 */
-	public void selectDropdownByText(Object elementName,
-			String dropDownText) throws Exception {
+	public void selectDropdownByText(Object elementName, String dropDownText) throws Exception {
 		if ((elementName instanceof Enum)) {
 			getLocator(((Enum<?>) elementName).name(), elementName.toString()).click();
 			WebElement ele = getLocator(((Enum<?>) elementName).name(), elementName.toString());
@@ -120,8 +133,7 @@ public class BrowserAction extends TestBase {
 	 * 
 	 * @param locator
 	 */
-	public void selectDropdownByOption(Object elementName,
-			String optionValue) throws Exception {
+	public void selectDropdownByOption(Object elementName, String optionValue) throws Exception {
 		if ((elementName instanceof Enum)) {
 			getLocator(((Enum<?>) elementName).name(), elementName.toString()).click();
 			WebElement ele = getLocator(((Enum<?>) elementName).name(), elementName.toString());
@@ -137,8 +149,7 @@ public class BrowserAction extends TestBase {
 	 * 
 	 * @param locator
 	 */
-	public void selectDropdownByIndex(Object elementName,
-			int index) throws Exception {
+	public void selectDropdownByIndex(Object elementName, int index) throws Exception {
 		if ((elementName instanceof Enum)) {
 			WebElement ele = getLocator(((Enum<?>) elementName).name(), elementName.toString());
 			Select selectRole = new Select(ele);
@@ -148,8 +159,7 @@ public class BrowserAction extends TestBase {
 		}
 	}
 
-	public WebElement getLocator(String locatorType,
-			String locatorText) throws Exception {
+	public WebElement getLocator(String locatorType, String locatorText) throws Exception {
 		WebElement ele = null;
 
 		try {
@@ -169,19 +179,18 @@ public class BrowserAction extends TestBase {
 				ele = ob.findElement(By.tagName(locatorText));
 			} else if (locatorType.endsWith("_NAME")) {
 				ele = ob.findElement(By.name(locatorText));
-			}else{
+			} else {
 				throw new Exception("Unable to handle the locator type: " + locatorType
-                        + ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
-			} 
-			}catch (NoSuchElementException nse) {
-					throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
+						+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+			}
+		} catch (NoSuchElementException nse) {
+			throw new NoSuchElementException("Unable to locate the element" + locatorType + "=" + locatorText);
 		}
 		return ele;
 
 	}
 
-	public List<WebElement> getLocators(String locatorType,
-			String locatorText) {
+	public List<WebElement> getLocators(String locatorType, String locatorText) {
 		List<WebElement> ele = null;
 
 		try {
@@ -199,7 +208,7 @@ public class BrowserAction extends TestBase {
 				ele = ob.findElements(By.className(locatorText));
 			} else if (locatorType.endsWith("_TAG")) {
 				ele = ob.findElements(By.tagName(locatorText));
-			} else if(locatorType.endsWith("_NAME")) {
+			} else if (locatorType.endsWith("_NAME")) {
 				ele = ob.findElements(By.name(locatorText));
 			} else {
 				throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
@@ -207,12 +216,12 @@ public class BrowserAction extends TestBase {
 			}
 
 		} catch (NoSuchElementException nse) {
-			throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
+			throw new NoSuchElementException("Unable to locate the element" + locatorType + "=" + locatorText);
 		}
 		return ele;
 
 	}
-	
+
 	public void scrollingToElementofAPage() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, 250);");
@@ -240,9 +249,10 @@ public class BrowserAction extends TestBase {
 		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, -250);");
 	}
-	
+
 	/**
 	 * Scroll to Element using WebElement
+	 * 
 	 * @param element
 	 */
 	public void scrollToElement(WebElement element) {

@@ -48,7 +48,8 @@ public class LoginTR extends TestBase {
 
 	/**
 	 * Method for wait TR Home Screen
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public void waitForTRHomePage() throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
@@ -74,7 +75,7 @@ public class LoginTR extends TestBase {
 	}
 
 	public void closeOnBoardingModal() throws Exception, InterruptedException {
-		
+
 		List<WebElement> onboardingStatus = pf.getBrowserActionInstance(ob)
 				.getElements(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_MODAL_CSS);
 		logger.info("onboarding status-->" + onboardingStatus.size());
@@ -89,7 +90,8 @@ public class LoginTR extends TestBase {
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_WELCOME_MODAL_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsClickable(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
-				pf.getBrowserActionInstance(ob).scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
+				pf.getBrowserActionInstance(ob)
+						.scrollToElement(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.HOME_PROJECT_NEON_ONBOARDING_PROFILE_MODAL_CSS);
 				BrowserWaits.waitTime(4);
 				pf.getBrowserWaitsInstance(ob)
@@ -146,20 +148,22 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_PASSWORD_TEXT_BOX_ID.toString())).sendKeys(pwd);
 		// BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OnePObjectMap.LOGIN_PAGE_LI_ALLOW_ACCESS_BUTTON_ID.toString())).click();
-		try{
-			ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();	
+		try {
+			ob.findElement(By.xpath("//h3[@class='wui-modal__title']")).isDisplayed();
 			ob.findElement(By.xpath("//a[text()='Not now']")).click();
-		}catch (Exception e) {
-			System.out.println("Loging in to Neon without linking popup");	
+		} catch (Exception e) {
+			System.out.println("Loging in to Neon without linking popup");
 		}
 	}
-	
+
 	/**
 	 * Method for Login Neon application using FB valid login credentials
+	 * 
 	 * @param username
 	 * @param pwd
 	 * @throws InterruptedException
-	 * @throws Exception, When user is not able to login using FB
+	 * @throws Exception,
+	 *             When user is not able to login using FB
 	 */
 	public void loginWithFBCredentials(String username, String pwd) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_SIGN_IN_BUTTON_CSS);
@@ -175,11 +179,14 @@ public class LoginTR extends TestBase {
 		signInToFacebook(username, pwd);
 		closeOnBoardingModal();
 	}
+
 	/**
 	 * Method for Login with FB login credentials
+	 * 
 	 * @param username
 	 * @param pwd
-	 * @throws Exception, not able to login FB account
+	 * @throws Exception,
+	 *             not able to login FB account
 	 */
 	public void signInToFacebook(String username, String pwd) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.LOGIN_PAGE_FB_EMAIL_TEXT_BOX_ID);
@@ -264,9 +271,11 @@ public class LoginTR extends TestBase {
 
 	public String clickOnLinkButtonInLoginPage() {
 		waitForElementTobeVisible(ob, By.xpath(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_XPATH.toString()), 60);
-		//waitForElementTobeVisible(ob, By.cssSelector("div[class='modal-dialog']"), 60);
-		//WebElement linkButton = ob.findElement(By.cssSelector("button[ng-click='vm.callSocialLogin()']"));
-		WebElement linkButton=ob.findElement(By.cssSelector(OnePObjectMap.SIGNIN_USING_FB_BUTTON_CSS.toString()));
+		// waitForElementTobeVisible(ob,
+		// By.cssSelector("div[class='modal-dialog']"), 60);
+		// WebElement linkButton =
+		// ob.findElement(By.cssSelector("button[ng-click='vm.callSocialLogin()']"));
+		WebElement linkButton = ob.findElement(By.cssSelector(OnePObjectMap.SIGNIN_USING_FB_BUTTON_CSS.toString()));
 		String linkName = linkButton.getText();
 		linkButton.click();
 
@@ -315,53 +324,57 @@ public class LoginTR extends TestBase {
 		ob.findElement(By.cssSelector("a[ng-click='vm.callSkipLinking()']")).click();
 
 	}
-	
+
 	/**
 	 * Method for click Not now link if its present
-	 * @throws Exception, When not ablet to click link
+	 * 
+	 * @throws Exception,
+	 *             When not ablet to click link
 	 */
 	public void clickNotnowLink() throws Exception {
-		List<WebElement> alreadyHaveAccount=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.NOT_NOW_BUTTON_CSS);
-		if(alreadyHaveAccount.size() == 1) {
+		List<WebElement> alreadyHaveAccount = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.NOT_NOW_BUTTON_CSS);
+		if (alreadyHaveAccount.size() == 1) {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NOT_NOW_BUTTON_CSS);
 		}
-		
-	}
-	
-	public boolean loginToIPA(String username,String password) throws Exception{
-	       WebElement Element=null;
-	       pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
-	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
-	       pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-	     pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-	       try{
-	    	   pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);   
-	    	   Element=      ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()));
-	       }catch(Exception ex){
-	       }
-	       return Element!=null;
-	       
-	}
-	
-	/**
-	 * Method for Login to WAT application
-	 * @param username
-	 * @param password
-	 * @throws Exception, When user is not able to login Successfully
-	 */
-	public void loginToWAT(String username,String password,ExtentTest test) throws Exception{
-		   pf.getBrowserWaitsInstance(ob).waitUntilText("SaR Labs","Sign in","Forgot password?");
-	       pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
-	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
-	       pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
-	       pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
-	       pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
-	       pf.getBrowserWaitsInstance(ob).waitUntilText("Search","Web of Science: Author search");
-	       test.log(LogStatus.INFO, "Login to WAT Applicaton Successfully");
-	       
+
 	}
 
+	public boolean loginToIPA(String username, String password) throws Exception {
+		WebElement Element = null;
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+		try {
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS);
+			Element = ob.findElement(By.cssSelector(OnePObjectMap.NEON_IPA_NEW_SEARCH_LINK_CSS.toString()));
+		} catch (Exception ex) {
+		}
+		return Element != null;
+
+	}
+
+	/**
+	 * Method for Login to WAT application
+	 * 
+	 * @param username
+	 * @param password
+	 * @throws Exception,
+	 *             When user is not able to login Successfully
+	 */
+	public void loginToWAT(String username, String password, ExtentTest test) throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("SaR Labs", "Sign in", "Forgot password?");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.NEON_IPA_USERNAME_CSS);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_USERNAME_CSS, username);
+		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.NEON_IPA_PASSWORD_CSS, password);
+		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_IPA_SIGNIN_CSS);
+		pf.getBrowserWaitsInstance(ob).waitForAjax(ob);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Search", "Web of Science: Author search");
+		test.log(LogStatus.INFO, "Logged into WAT Applicaton Successfully");
+
+	}
 
 }

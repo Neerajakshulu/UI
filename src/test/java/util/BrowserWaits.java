@@ -77,10 +77,10 @@ public class BrowserWaits extends TestBase {
 	 * wait until desired element is displayed
 	 * 
 	 * @param locator
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void waitUntilElementIsDisplayed(Object elementName) throws Exception {
-		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
+		WebElement element = getLocator(((Enum<?>) elementName).name(), elementName.toString());
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
@@ -93,75 +93,74 @@ public class BrowserWaits extends TestBase {
 				}
 			});
 		} catch (TimeoutException te) {
-			throw new TimeoutException("Failed to find element [Locator = {" + locatorText
-					+ "}], after waiting for " + time + "ms");
+			throw new TimeoutException(
+					"Failed to find element [Locator = {" + locatorText + "}], after waiting for " + time + "ms");
 		}
 
 	}
-	
-	
+
 	/**
 	 * wait until desired element is Clickable
 	 * 
 	 * @param locator
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void waitUntilElementIsClickable(Object elementName) throws Exception {
-		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
-			try {
-				(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+		WebElement element = getLocator(((Enum<?>) elementName).name(), elementName.toString());
+		try {
+			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
-					public Boolean apply(WebDriver d) {
-						try {
-							return Boolean.valueOf(element != null && element.isEnabled());
-						} catch (Exception e) {
-							return Boolean.valueOf(false);
-						}
+				public Boolean apply(WebDriver d) {
+					try {
+						return Boolean.valueOf(element != null && element.isEnabled());
+					} catch (Exception e) {
+						return Boolean.valueOf(false);
 					}
-				});
-			} catch (TimeoutException te) {
-				throw new TimeoutException("Failed to find element [Locator = {" + locatorText
-						+ "}], after waiting for " + time + "ms");
-			}
+				}
+			});
+		} catch (TimeoutException te) {
+			throw new TimeoutException(
+					"Failed to find element [Locator = {" + locatorText + "}], after waiting for " + time + "ms");
+		}
 	}
-	
+
 	/**
 	 * wait until desired element is Clickable with Time
 	 * 
 	 * @param locator
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void waitUntilElementIsClickable(Object elementName, int time) throws Exception {
-		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
-			try {
-				(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+		WebElement element = getLocator(((Enum<?>) elementName).name(), elementName.toString());
+		try {
+			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
-					public Boolean apply(WebDriver d) {
-						try {
-							return Boolean.valueOf(element != null && element.isEnabled());
-						} catch (Exception e) {
-							return Boolean.valueOf(false);
-						}
+				public Boolean apply(WebDriver d) {
+					try {
+						return Boolean.valueOf(element != null && element.isEnabled());
+					} catch (Exception e) {
+						return Boolean.valueOf(false);
 					}
-				});
-			} catch (TimeoutException te) {
-				throw new TimeoutException("Failed to find element [Locator = {" + locatorText
-						+ "}], after waiting for " + time + "ms");
-			}
+				}
+			});
+		} catch (TimeoutException te) {
+			throw new TimeoutException(
+					"Failed to find element [Locator = {" + locatorText + "}], after waiting for " + time + "ms");
+		}
 	}
 
 	/**
 	 * wait until desired element is not displayed
 	 * 
 	 * @param locator
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void waitUntilElementIsNotDisplayed(Object elementName) throws Exception {
-		WebElement element=getLocator(((Enum<?>) elementName).name(), elementName.toString());
+		WebElement element = getLocator(((Enum<?>) elementName).name(), elementName.toString());
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
-				public Boolean apply(WebDriver d) { 
+				public Boolean apply(WebDriver d) {
 					try {
 						return Boolean.valueOf(element == null || !element.isDisplayed());
 					} catch (Exception e) {
@@ -170,8 +169,8 @@ public class BrowserWaits extends TestBase {
 				}
 			});
 		} catch (TimeoutException te) {
-			throw new TimeoutException("Failed to find element [Locator = {" + locatorText
-					+ "}], after waiting for " + time + "ms");
+			throw new TimeoutException(
+					"Failed to find element [Locator = {" + locatorText + "}], after waiting for " + time + "ms");
 		}
 
 	}
@@ -227,7 +226,9 @@ public class BrowserWaits extends TestBase {
 		}
 	}
 
-	/*********************** Wait until specified text is not present **********************/
+	/***********************
+	 * Wait until specified text is not present
+	 **********************/
 
 	public void waitUntilNotText(final String... text) throws Exception {
 		for (String each : text) {
@@ -235,8 +236,7 @@ public class BrowserWaits extends TestBase {
 		}
 	}
 
-	public void waitUntilNotText(final String text,
-			final int time) {
+	public void waitUntilNotText(final String text, final int time) {
 		try {
 			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
 
@@ -249,8 +249,8 @@ public class BrowserWaits extends TestBase {
 				}
 			});
 		} catch (TimeoutException te) {
-			throw new TimeoutException("Text: " + text + " is present which is not expected, after waiting for " + time
-					+ "ms");
+			throw new TimeoutException(
+					"Text: " + text + " is present which is not expected, after waiting for " + time + "ms");
 		}
 	}
 
@@ -262,39 +262,48 @@ public class BrowserWaits extends TestBase {
 	public static void waitTime(final int secs) throws InterruptedException {
 		Thread.sleep(secs * 1000);
 	}
-	
-	public WebElement getLocator(String locatorType,
-			String locatorText) throws Exception {
+
+	/**
+	 * wait for provided time
+	 * 
+	 * @author UC225218
+	 * @param secs
+	 */
+	public static void waitTime(final double secs) throws InterruptedException {
+		Thread.sleep((long) (secs * 1000));
+	}
+
+	public WebElement getLocator(String locatorType, String locatorText) throws Exception {
 		WebElement ele = null;
-		
-			try {
-				if (locatorType.endsWith("_CSS")) {
-					ele = ob.findElement(By.cssSelector(locatorText));
-				} else if (locatorType.endsWith("_XPATH")) {
-					ele = ob.findElement(By.xpath(locatorText));
-				} else if (locatorType.endsWith("_LINK")) {
-					ele = ob.findElement(By.linkText(locatorText));
-				} else if (locatorType.endsWith("_PLINK")) {
-					ele = ob.findElement(By.partialLinkText(locatorText));
-				} else if (locatorType.endsWith("_ID")) {
-					ele = ob.findElement(By.id(locatorText));
-				} else if (locatorType.endsWith("_CLASS")) {
-					ele = ob.findElement(By.className(locatorText));
-				} else if (locatorType.endsWith("_TAG")) {
-					ele = ob.findElement(By.tagName(locatorText));
-				} else if (locatorType.endsWith("_NAME")) {
-					ele = ob.findElement(By.name(locatorText));
-				}else{
-					throw new Exception("Unable to handle the locator type: " + locatorType
-	                        + ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
-				} 
-				}catch (NoSuchElementException nse) {
-						throw new NoSuchElementException("Unable to locate the element" + locatorType+"="+locatorText);
+
+		try {
+			if (locatorType.endsWith("_CSS")) {
+				ele = ob.findElement(By.cssSelector(locatorText));
+			} else if (locatorType.endsWith("_XPATH")) {
+				ele = ob.findElement(By.xpath(locatorText));
+			} else if (locatorType.endsWith("_LINK")) {
+				ele = ob.findElement(By.linkText(locatorText));
+			} else if (locatorType.endsWith("_PLINK")) {
+				ele = ob.findElement(By.partialLinkText(locatorText));
+			} else if (locatorType.endsWith("_ID")) {
+				ele = ob.findElement(By.id(locatorText));
+			} else if (locatorType.endsWith("_CLASS")) {
+				ele = ob.findElement(By.className(locatorText));
+			} else if (locatorType.endsWith("_TAG")) {
+				ele = ob.findElement(By.tagName(locatorText));
+			} else if (locatorType.endsWith("_NAME")) {
+				ele = ob.findElement(By.name(locatorText));
+			} else {
+				throw new Exception("Unable to handle the locator type: " + locatorType
+						+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
 			}
-			return ele;
+		} catch (NoSuchElementException nse) {
+			throw new NoSuchElementException("Unable to locate the element" + locatorType + "=" + locatorText);
+		}
+		return ele;
 
 	}
-	
+
 	public void waitForTRHomePage() throws InterruptedException {
 		waitForPageLoad(ob);
 	}
