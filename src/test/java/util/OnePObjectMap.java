@@ -27,7 +27,7 @@ public enum OnePObjectMap {
 	COUNTRY_SELECT_IN_NEON(".//*[@id='countrySelect']"),
 
 	ENW_PRIVACY_LINK_XPATH("//a[contains(text(),'Privacy')]"),
-	ENW_TERMS_OF_USE_XPATH("//a[contains(text(),'Terms of Use')]"),
+	ENW_TERMS_OF_USE_XPATH("//ul[contains(@class,'row2 list-inline')]//li[3]/a"),
 	ENW_HELP_LINK("Help"),
 	ENW_HELP_XPATH("//a[contains(text(),'Help')]"),
 	ENW_FEEDBACK_XPATH("//a[contains(text(),'Feedback')]"),
