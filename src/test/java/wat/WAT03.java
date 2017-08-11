@@ -98,159 +98,170 @@ public class WAT03 extends TestBase {
 
 		// NOTE - Assertion ERRORs are caught in EXCEPTION block just for
 		// Reporting purpose
-
 		try {
-			// Verify WOS title text
-			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).isDisplayed(),
-					"WOS title is not displayed");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"WOS title text not matching");
-			test.log(LogStatus.PASS, "WOS title text is matching in WOS Author Search page");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL, "WOS title text is not present or not matching in WOS Author Search page");
-		}
+			try {
+				// Verify WOS title text
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).isDisplayed(),
+						"WOS title is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
+						"WOS title text not matching");
+				test.log(LogStatus.PASS, "WOS title text is matching in WOS Author Search page");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "WOS title text is not present or not matching in WOS Author Search page");
+			}
 
-		try {
-			// Verify SaR Labs Text
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SAR_LABS_TEXT_XPATH).isDisplayed(),
-					"SaR Labs Text is not present");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SAR_LABS_TEXT_XPATH).getText(),
-					sar_labs_text, "SaR Labs text not matching");
-			test.log(LogStatus.PASS, "SaR Labs text matching in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL, "SaR Labs text not matching in Author search page.");
-		}
+			try {
+				// Verify SaR Labs Text
+				Assert.assertTrue(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SAR_LABS_TEXT_XPATH).isDisplayed(),
+						"SaR Labs Text is not present");
+				Assert.assertEquals(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SAR_LABS_TEXT_XPATH).getText(),
+						sar_labs_text, "SaR Labs text not matching");
+				test.log(LogStatus.PASS, "SaR Labs text matching in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL, "SaR Labs text not matching in Author search page.");
+			}
 
-		try {
-			// Verify Search Link
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).isDisplayed(),
-					"Search link not present");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).getText(),
-					search_link_text, "Search link text not matching");
-			test.log(LogStatus.PASS, "Search link is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Search link is not present or is not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify Search Link
+				Assert.assertTrue(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).isDisplayed(),
+						"Search link not present");
+				Assert.assertEquals(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_LINK_XPATH).getText(),
+						search_link_text, "Search link text not matching");
+				test.log(LogStatus.PASS, "Search link is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Search link is not present or is not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify Name search button is present
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH)
-					.isDisplayed(), "Name Search button is not displayed");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH).getText(),
-					name_search_button_text, "Name search button text not matching");
-			test.log(LogStatus.PASS, "Name search button is present in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Name search button is not present or button text not matching in Author search page.");
-		}
+			try {
+				// Verify Name search button is present
+				Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH)
+						.isDisplayed(), "Name Search button is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_NAME_SEARCH_BUTTON_XPATH).getText(), name_search_button_text,
+						"Name search button text not matching");
+				test.log(LogStatus.PASS, "Name search button is present in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Name search button is not present or button text not matching in Author search page.");
+			}
 
-		try {
-			// Verify ORCid search button is present
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCiD_SEARCH_BUTTON_XPATH)
-					.isDisplayed(), "ORCiD Search button is not displayed");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ORCiD_SEARCH_BUTTON_XPATH).getText(),
-					orcid_search_button_text, "Name search button text not matching");
-			test.log(LogStatus.PASS, "ORCiD search button is present in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"ORCiD search button is not present or button text not matching in Author search page.");
-		}
+			try {
+				// Verify ORCid search button is present
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_ORCiD_SEARCH_BUTTON_XPATH).isDisplayed(),
+						"ORCiD Search button is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_ORCiD_SEARCH_BUTTON_XPATH).getText(), orcid_search_button_text,
+						"Name search button text not matching");
+				test.log(LogStatus.PASS, "ORCiD search button is present in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"ORCiD search button is not present or button text not matching in Author search page.");
+			}
 
-		try {
-			// Verify Welcome Text
-			Assert.assertTrue(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WELCOME_TEXT_XPATH).isDisplayed(),
-					"Welcome text is not displayed");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WELCOME_TEXT_XPATH).getText(),
-					welcome_text, "Welcome text not matching");
-			test.log(LogStatus.PASS, "Welcome text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			e.printStackTrace();
-			test.log(LogStatus.FAIL,
-					"Welcome text is not present or its not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify Welcome Text
+				Assert.assertTrue(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WELCOME_TEXT_XPATH).isDisplayed(),
+						"Welcome text is not displayed");
+				Assert.assertEquals(
+						pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_WELCOME_TEXT_XPATH).getText(),
+						welcome_text, "Welcome text not matching");
+				test.log(LogStatus.PASS, "Welcome text is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				e.printStackTrace();
+				test.log(LogStatus.FAIL,
+						"Welcome text is not present or its not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify search suggestion text
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_SUGGESTION_TEXT_XPATH)
-					.isDisplayed(), "Search suggestion text is not displayed");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_SEARCH_SUGGESTION_TEXT_XPATH).getText(), search_suggestion_text,
-					"Search suggestion text not matching");
-			test.log(LogStatus.PASS,
-					"Search suggestion text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Search suggestion text is not present or is not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify search suggestion text
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_SEARCH_SUGGESTION_TEXT_XPATH).isDisplayed(),
+						"Search suggestion text is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_SEARCH_SUGGESTION_TEXT_XPATH).getText(), search_suggestion_text,
+						"Search suggestion text not matching");
+				test.log(LogStatus.PASS,
+						"Search suggestion text is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Search suggestion text is not present or is not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify Lastname textbox inner text
-			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).isDisplayed(),
-					"Lastname textbox is not displayed");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).getText(), last_name_inner_text,
-					"Lastname textbox inner text not matching");
-			test.log(LogStatus.PASS,
-					"Lastname textbox inner text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Lastname textbox inner text is not present or is not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify Lastname textbox inner text
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).isDisplayed(),
+						"Lastname textbox is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH).getText(), last_name_inner_text,
+						"Lastname textbox inner text not matching");
+				test.log(LogStatus.PASS,
+						"Lastname textbox inner text is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Lastname textbox inner text is not present or is not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify Firstname textbox inner text
-			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH).isDisplayed(),
-					"Firstname textbox is not displayed");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH).getText(), first_name_inner_text,
-					"Firstname textbox inner text not matching");
-			test.log(LogStatus.PASS,
-					"Firstname textbox inner text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Firstname textbox inner text is not present or is not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify Firstname textbox inner text
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH).isDisplayed(),
+						"Firstname textbox is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH).getText(),
+						first_name_inner_text, "Firstname textbox inner text not matching");
+				test.log(LogStatus.PASS,
+						"Firstname textbox inner text is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Firstname textbox inner text is not present or is not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify Add alternate name inner text
-			Assert.assertTrue(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH)
-					.isDisplayed(), "Add alternate name button is not displayed");
-			Assert.assertEquals(
-					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH).getText(),
-					add_alt_name_text, "Add alternate name inner text not matching");
-			test.log(LogStatus.PASS,
-					"Add alternate name inner text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Add alternate name inner text is not present or is not displayed as expected in Author search page.");
-		}
+			try {
+				// Verify Add alternate name inner text
+				Assert.assertTrue(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH).isDisplayed(),
+						"Add alternate name button is not displayed");
+				Assert.assertEquals(pf.getBrowserActionInstance(ob)
+						.getElement(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH).getText(), add_alt_name_text,
+						"Add alternate name inner text not matching");
+				test.log(LogStatus.PASS,
+						"Add alternate name inner text is present and is displayed as expected in Author search page.");
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Add alternate name inner text is not present or is not displayed as expected in Author search page.");
+			}
 
-		try {
-			// Verify Find button
-			Assert.assertTrue(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed(),
-					"Find button is not displayed");
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).getText(), find_btn_text,
-					"Find button text not matching");
-			test.log(LogStatus.PASS,
-					"Find button text is present and is displayed as expected in Author search page.");
-		} catch (AssertionError e) {
-			test.log(LogStatus.FAIL,
-					"Find button text is not present or is not displayed as expected in Author search page.");
+			try {
+				// Verify Find button
+				Assert.assertTrue(
+						pf.getBrowserActionInstance(ob)
+								.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed(),
+						"Find button is not displayed");
+				Assert.assertEquals(
+						pf.getBrowserActionInstance(ob)
+								.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).getText(),
+						find_btn_text, "Find button text not matching");
+				test.log(LogStatus.PASS,
+						"Find button text is present and is displayed as expected in Author search page.");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			} catch (AssertionError e) {
+				test.log(LogStatus.FAIL,
+						"Find button text is not present or is not displayed as expected in Author search page.");
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to verify all static texts in Author search page.");
+			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
+
 }

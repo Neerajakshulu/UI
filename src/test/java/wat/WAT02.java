@@ -19,7 +19,6 @@ import util.OnePObjectMap;
  * @author UC225218
  *
  */
-
 public class WAT02 extends TestBase {
 
 	static int status = 1;
@@ -60,7 +59,7 @@ public class WAT02 extends TestBase {
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 		}
 
-		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts ");
+		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution starts.... ");
 
 		try {
 			openBrowser();
@@ -102,8 +101,9 @@ public class WAT02 extends TestBase {
 			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
 			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
+
 		} catch (Throwable t) {
-			logFailureDetails(test, t, "Login Fail", "login_fail");
+			test.log(LogStatus.FAIL, "Failed to searched for an author and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
