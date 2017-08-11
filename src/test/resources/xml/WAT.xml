@@ -14,15 +14,21 @@
 	<parameter name="CountryName" value="USA" />
 	<parameter name="OrgName" value="IBM CORP" />
 
-  	 <test name="WAT_Login" preserve-order="true">
+<!--    	 <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test> 
+	</test>  
 	
 	<test name="WAT_Author_Search" preserve-order="true">
 		<classes>
 			<class name="wat.WAT02"></class>
+		</classes>
+	</test> -->
+	
+	<test name="WAT_Author_Search_Page_static_text_Verify" preserve-order="true">
+		<classes>
+			<class name="wat.WAT03"></class>
 		</classes>
 	</test>
 	

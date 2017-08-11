@@ -1201,7 +1201,9 @@ public enum OnePObjectMap {
 		
 	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
 	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
+	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
 	WAT_AUTHOR_FIRSTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--first-and-middle']/descendant::input"),
+	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
 	WAT_AUTHOR_COUNTRY_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button[text()[normalize-space() = 'USA']]"),
 	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div"),
 	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div"),
@@ -1212,8 +1214,13 @@ public enum OnePObjectMap {
 	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='SMITH']"),
 	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
 	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
-	WAT_SEARCH_RESULTS_TEXT_XPATH("//span[text()='Search Results']")
-
+	WAT_SEARCH_RESULTS_TEXT_XPATH("//span[text()='Search Results']"),
+	WAT_SAR_LABS_TEXT_XPATH("//a[text()[normalize-space() = 'SaR Labs']]"),
+	WAT_WELCOME_TEXT_XPATH("//div[@class='wat-search__welcome']/p"),
+	WAT_SEARCH_SUGGESTION_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
+	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
+	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
+	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]")
 	;
 
 	private String locator;
