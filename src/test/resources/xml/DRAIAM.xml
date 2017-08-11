@@ -123,11 +123,7 @@
 		</classes>
 	</test>
 	
-	<!-- <test name="DRAIAM052">
-		<classes>
-			<class name="draiam.DRAIAM052"></class>
-		</classes>
-	</test>
+	<!--
 	
 	<test name="DRAIAM053">
 		<classes>

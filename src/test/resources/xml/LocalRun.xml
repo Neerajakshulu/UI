@@ -536,12 +536,6 @@
 		</classes>
 	</test>
 
-	<test name="DRAIAM052" preserve-order="true" parallel="false">
-		<classes>
-			<class name="draiam.DRAIAM052"></class>
-		</classes>
-	</test>
-
 	<test name="DRA_Forgot_Password">
 		<classes>
 			<class name="draiam.DRAIAM100"></class>

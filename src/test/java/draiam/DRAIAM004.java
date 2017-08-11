@@ -2,8 +2,11 @@ package draiam;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -85,6 +88,7 @@ public class DRAIAM004 extends TestBase {
 			ob.navigate().to(host);
 			pf.getLoginTRInstance(ob).loginWithFBCredentials(LOGIN.getProperty("DRAUserNameValid"),
 					LOGIN.getProperty("DRAPasswordValid"));
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_BOX_CSS);
 			test.log(LogStatus.PASS, "user has logged in with social account in Neon");
 			BrowserWaits.waitTime(4);
 			pf.getHFPageInstance(ob).clickOnAccountLink();
@@ -102,7 +106,9 @@ public class DRAIAM004 extends TestBase {
 				pf.getLinkingModalsInstance(ob).clickOnNotNowButton();
 				BrowserWaits.waitTime(2);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_SEARCH_BOX_CSS);
-				test.log(LogStatus.PASS, "User is able to click on not now on the modal");		
+				test.log(LogStatus.PASS, "User is able to click on not now on the modal");
+				pf.getDraPageInstance(ob).clickOnAccountLinkDRA();
+				validateAccounts(1,"Clarivate Analytics");
 				pf.getDraPageInstance(ob).logoutDRA();
 			} catch (Throwable t) {
 				closeBrowser();
@@ -158,10 +164,57 @@ public class DRAIAM004 extends TestBase {
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends--->");
 	}
 
+	
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
 
+	}
+	
+	private void validateAccounts(int accountCount, String linkName) throws Exception {
+		try {
+			Assert.assertTrue(verifyLinkedAccount(linkName, LOGIN.getProperty("DRAUserNameValid")));
+			Assert.assertTrue(validateAccountsCount(accountCount));
+			//test.log(LogStatus.PASS,  " account is available and is not linked");
+			test.log(LogStatus.PASS, "Single " + linkName + " account is available and is not linked");
+
+		} catch (Throwable t) {
+			test.log(LogStatus.FAIL, "Linked accounts are available in accounts page");
+			ErrorUtil.addVerificationFailure(t);// testng
+			test.log(LogStatus.INFO, "Snapshot below: "
+					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_failed")));// screenshot
+		}
+	}
+	
+	public boolean validateAccountsCount(int accountCount) {
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
+		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
+		
+		return accountCount==list.size();
+	}
+	
+	public boolean verifyLinkedAccount(String accountType, String emailId) {
+		boolean result = false;
+		waitForAllElementsToBePresent(ob, By.cssSelector("div[class='account-option-item__info-header'] span"), 60);
+		List<WebElement> list = ob.findElements(By.cssSelector("div[class='account-option-item__info-header'] span"));
+
+		for (WebElement element : list) {
+			String type = element.getText();
+			if ((accountType.equalsIgnoreCase("Neon") && type.equalsIgnoreCase("Thomson Reuters | Project Neon"))
+					|| accountType.equalsIgnoreCase(type.trim())) {
+			
+				//String emailid = null;
+				String emailid = ob.findElement(By.cssSelector("div[class='account-option-item__app-details'] span[class='ng-binding']")).getText();
+				//String emailid="cattle6@b9x45v1m.com";
+				if (emailid.equalsIgnoreCase(emailId))
+					result = true;
+				
+				break;
+			}
+
+		}
+		return result;
+		
 	}
 
 }
