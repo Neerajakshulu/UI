@@ -139,8 +139,11 @@ public class ENWIAM50 extends TestBase {
 				arr.add(it.next());
 			}
 			ob.switchTo().window(arr.get(1));
+			BrowserWaits.waitTime(6);
 			String ActualURL=ob.getCurrentUrl();
+			
 			try {
+				
 				Assert.assertEquals(ActualURL, "https://clarivate.com/");
 				test.log(LogStatus.PASS, "Clarivate marking site is opened in new tab");
 
