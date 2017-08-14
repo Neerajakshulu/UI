@@ -81,7 +81,7 @@ public class Authoring83 extends TestBase {
 			waitForAjax(ob);
 			//ob.navigate().back();
 			//ob.navigate().back();
-			pf.getProfilePageInstance(ob).clickOnFirstPost();
+		//	pf.getProfilePageInstance(ob).clickOnFirstPost();
 			waitForAjax(ob);
 			try {
 				Assert.assertEquals(pf.getpostRVPageInstance(ob).getPostTitle(), title);
