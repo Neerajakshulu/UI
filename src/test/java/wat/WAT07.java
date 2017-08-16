@@ -2,7 +2,6 @@ package wat;
 
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,12 +13,12 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality
+ * Class for testing Author cluster search functionality with only Last Name
  * 
  * @author UC225218
  *
  */
-public class WAT02 extends TestBase {
+public class WAT07 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -85,9 +84,8 @@ public class WAT02 extends TestBase {
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	@Parameters({ "LastName" })
+	public void testSearchAuthorClusterFirstNameTypeahead(String LastName) throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -95,39 +93,22 @@ public class WAT02 extends TestBase {
 					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster
+			// Search for an author cluster with only Last name
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
 
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "J");
+			if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH))
+					.isDisplayed()) {
+				test.log(LogStatus.PASS, "First name Typeahead displayed for minimum 1 Letter");
+				pf.getBrowserActionInstance(ob).closeBrowser();
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "First name Typeahead not displayed for minimum 1 Letter");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
-
-	}
-
-	/**
-	 * updating Extent Report with test case status whether it is PASS or FAIL
-	 * or SKIP
-	 */
-	@AfterTest
-	public void reportTestResult() {
-
-		extent.endTest(test);
-
-		/*
-		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
-		 * "Test Cases", TestUtil.getRowNum(profilexls,
-		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
-		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
-		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
-		 * "SKIP");
-		 */
-
 	}
 }

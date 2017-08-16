@@ -10,16 +10,17 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality
+ * Class for testing Author cluster search functionality with only Last Name
  * 
  * @author UC225218
  *
  */
-public class WAT02 extends TestBase {
+public class WAT05 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -85,9 +86,8 @@ public class WAT02 extends TestBase {
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	@Parameters({ "FirstName" })
+	public void testSearchAuthorClusterWithOnlyFirstName(String FirstName) throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -96,10 +96,23 @@ public class WAT02 extends TestBase {
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
 
-			// Search for an author cluster
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
+			// Search for an author cluster with only FIRST name
+			test.log(LogStatus.INFO, "Entering author First name... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+			for (int i = 0; i < FirstName.length(); i++) {
+				char c = FirstName.charAt(i);
+				String s = new StringBuilder().append(c).toString();
+				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
+				BrowserWaits.waitTime(0.5);
+			}
+			test.log(LogStatus.INFO, "Trying to click find button... ");
+
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+					.isEnabled()) {
+				test.log(LogStatus.FAIL, "Able to search for author cluster with only First name");
+			}
+			test.log(LogStatus.PASS, "User cant search for Author cluster with only first name");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 
 		} catch (Throwable t) {
@@ -130,4 +143,5 @@ public class WAT02 extends TestBase {
 		 */
 
 	}
+
 }

@@ -14,12 +14,12 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality
+ * Class for testing Author cluster search functionality with only Last Name
  * 
  * @author UC225218
  *
  */
-public class WAT02 extends TestBase {
+public class WAT04 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -85,9 +85,8 @@ public class WAT02 extends TestBase {
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	@Parameters({ "LastName" })
+	public void testSearchAuthorClusterOnlyLastName(String LastName) throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -96,14 +95,16 @@ public class WAT02 extends TestBase {
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
 
-			// Search for an author cluster
+			// Search for an author cluster with only Last name
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
+			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, test);
+			test.log(LogStatus.PASS,
+					"Successfully searched for an author using only Last name and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
+			test.log(LogStatus.FAIL,
+					"Failed to searched for an author using only Last name and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

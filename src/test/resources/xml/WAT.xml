@@ -11,17 +11,17 @@
 	<parameter name="password" value="Thomson@123" />
 	<parameter name="LastName" value="SMITH" />
 	<parameter name="FirstName" value="JOHN" />
-	<parameter name="CountryName" value="USA" />
-	<parameter name="OrgName" value="IBM CORP" />
+	<parameter name="CountryName" value="CANADA" />
+	<parameter name="OrgName" value="BEDFORD INST OCEANOG" />
 
 
-   	<test name="WAT_Login" preserve-order="true">
+    	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
 	</test>  
 	
-	<test name="WAT_Author_Search" preserve-order="true">
+	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT02"></class>
 		</classes>
@@ -31,7 +31,30 @@
 		<classes>
 			<class name="wat.WAT03"></class>
 		</classes>
+	</test>  
+	
+	<test name="WAT_Author_Search_Only_Lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT04"></class>
+		</classes>
 	</test> 
 	
+	<test name="WAT_Author_Search_Only_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT05"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_Author_Search_Typeahead_Lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT06"></class>
+		</classes>
+	</test>
+	
+		<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT07"></class>
+		</classes>
+	</test>
 </suite>
 

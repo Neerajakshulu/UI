@@ -13,7 +13,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing
+ * Class for testing all static contents in Author cluster search page
  * 
  * @author UC225218
  *

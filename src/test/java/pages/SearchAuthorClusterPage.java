@@ -38,6 +38,23 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			test.log(LogStatus.INFO, "Clicking find button... ");
+			int i = 1;
+			while (i < 5) {
+				try {
+					if (pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+						pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+						break;
+					}
+				} catch (Exception e) {
+					test.log(LogStatus.INFO, "Find button not enabled... Count is " + i);
+					BrowserWaits.waitTime(1);
+					// pf.getBrowserActionInstance(ob).clear(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+					// BrowserWaits.waitTime(1);
+					enterAuthorLastName(LastName, test);
+					i++;
+				}
+			}
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
 					.isDisplayed()) {
@@ -52,9 +69,9 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH);
 			Assert.assertEquals(
 					(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_SEARCH_RESULTS_TEXT_XPATH).getText()),
-					"Search Results", "Unable to search for an author and landed in Author search result page.");
+					"Search Results", "Unable to search for an author and land in Author search result page.");
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to search for an author and landed in Author search result page.");
+			test.log(LogStatus.FAIL, "Unable to search for an author and land in Author search result page.");
 		}
 	}
 
@@ -65,8 +82,9 @@ public class SearchAuthorClusterPage extends TestBase {
 	 *             UC225218
 	 * @param LastName
 	 *            FirstName
+	 * @throws Exception
 	 */
-	public void SearchAuthorCluster(String LastName, String FirstName, ExtentTest test) {
+	public void SearchAuthorCluster(String LastName, String FirstName, ExtentTest test) throws Exception {
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			enterAuthorLastName(LastName, test);
@@ -75,7 +93,24 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			test.log(LogStatus.INFO, "Clicking find button... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			int i = 1;
+			while (i < 5) {
+				try {
+					if (pf.getBrowserActionInstance(ob)
+							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+						pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+						break;
+					}
+				} catch (Exception e) {
+					test.log(LogStatus.INFO, "Find button not enabled... Count is " + i);
+					BrowserWaits.waitTime(1);
+					enterAuthorLastName(LastName, test);
+					pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+					enterAuthorFirstName(FirstName, test);
+					i++;
+				}
+
+			}
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
 					.isDisplayed()) {
 				selectCountryofAuthor(test);
@@ -92,6 +127,7 @@ public class SearchAuthorClusterPage extends TestBase {
 					"Search Results", "Unable to search for an author and landed in Author search result page.");
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to search for an author and landed in Author search result page.");
+			throw new Exception(e);
 		}
 	}
 
@@ -147,7 +183,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void enterAuthorLastName(String LastName, ExtentTest test) throws Exception {
-
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
 		for (int i = 0; i < LastName.length(); i++) {
 			char c = LastName.charAt(i);
 			String s = new StringBuilder().append(c).toString();
@@ -167,7 +203,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void enterAuthorFirstName(String FirstName, ExtentTest test) throws Exception {
-
+		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
 		for (int i = 0; i < FirstName.length(); i++) {
 			char c = FirstName.charAt(i);
 			String s = new StringBuilder().append(c).toString();

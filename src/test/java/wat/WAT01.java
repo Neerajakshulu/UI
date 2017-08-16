@@ -1,5 +1,6 @@
 package wat;
 
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -10,6 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
 import util.ExtentManager;
+import util.OnePObjectMap;
 
 /**
  * Class for login WoS Author Transformation Application
@@ -65,6 +67,18 @@ public class WAT01 extends TestBase {
 			test.log(LogStatus.INFO, "Logging into WAT Applicaton using valid WAT Entitled user ");
 			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
 			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
+
+			Assert.assertTrue(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).isDisplayed(),
+					"Lastname text box not visible");
+			test.log(LogStatus.INFO, "User is able to see last name textbox and can be used for author cluster search");
+
+			Assert.assertTrue(
+					pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).isDisplayed(),
+					"Firstname text box not visible");
+			test.log(LogStatus.INFO,
+					"User is able to see First name textbox and can be used for author cluster search");
+
 			pf.getBrowserActionInstance(ob).closeBrowser();
 
 		} catch (Throwable t) {
