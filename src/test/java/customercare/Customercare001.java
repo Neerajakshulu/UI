@@ -129,7 +129,7 @@ public class Customercare001 extends TestBase {
 						"Phone icon,Clock icon and Language icon are not displaying correctly");
 			}
 			
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

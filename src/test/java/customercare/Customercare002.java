@@ -106,7 +106,7 @@ public class Customercare002 extends TestBase{
 				test.log(LogStatus.FAIL,
 						"DRA Customer care page is not displaying required fields ");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

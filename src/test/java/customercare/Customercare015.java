@@ -98,7 +98,8 @@ public class Customercare015 extends TestBase {
 						Country, Request);
 
 				test.log(LogStatus.PASS, "user is able to submit the form in DRA Customer care page . ");
-				BrowserWaits.waitTime(3);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_REQUEST_MSG_CSS);
+				//BrowserWaits.waitTime(3);
 				pf.getCustomercarePage(ob).ValidateSuccessMessage(test);
 				test.log(LogStatus.PASS,
 						"Success message is displayed that confirms submission and allows user to raise a new ticket.");

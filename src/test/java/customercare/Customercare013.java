@@ -100,7 +100,7 @@ public class Customercare013 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"IPA Customer care page doesn't display Call us section and customer care contact details");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {
