@@ -70,13 +70,13 @@ public class IAM002 extends TestBase {
 					ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 							.sendKeys(CONFIG.getProperty("defaultPassword"));
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-					BrowserWaits.waitTime(4);
+					pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 				} else {
 					// else: checking if user can login successfully using smallcase email address
 
 					login();
 				}
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);

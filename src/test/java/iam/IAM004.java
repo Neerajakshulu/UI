@@ -63,28 +63,29 @@ public class IAM004 extends TestBase {
 
 			// Navigate to FB login page
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			//
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Log in to Facebook");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 
 			// Verify that existing FB credentials are working fine
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
-			BrowserWaits.waitTime(4);
+//			BrowserWaits.waitTime(4);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
-
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Link accounts");
 
 			try {
 				List<WebElement> list = ob.findElements(By.xpath(

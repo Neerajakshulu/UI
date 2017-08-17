@@ -787,12 +787,13 @@ public class TestBase {
 	// logging in
 	public void login() throws Exception {
 
-		waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-		Thread.sleep(3000);
+		/*waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
+		Thread.sleep(3000);*/
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 		ob.findElement(By.name("loginEmail")).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.name("loginPassword")).sendKeys(CONFIG.getProperty("defaultPassword"));
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		Thread.sleep(5000);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 
 	}
 
