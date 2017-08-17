@@ -105,7 +105,7 @@ public class IAM012 extends TestBase {
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 					ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("behl");
 					ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-					BrowserWaits.waitTime(4);
+					BrowserWaits.waitTime(2);
 				}
 			}
 			closeBrowser();

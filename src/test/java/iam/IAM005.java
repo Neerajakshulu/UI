@@ -89,10 +89,10 @@ public class IAM005 extends TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_firstName_textbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
 
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
 			logger.info("Errors Count : " + errorList.size());
 

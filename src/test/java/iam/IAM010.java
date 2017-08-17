@@ -90,16 +90,16 @@ public class IAM010 extends TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
+			/*ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("duster");
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-			BrowserWaits.waitTime(4);
+			BrowserWaits.waitTime(4);*/
 
 			if (email.contains(".com")) {
-				BrowserWaits.waitTime(3);
+//				BrowserWaits.waitTime(3);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 
 				JavascriptExecutor js = (JavascriptExecutor) ob;

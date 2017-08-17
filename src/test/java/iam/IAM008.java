@@ -73,14 +73,14 @@ public class IAM008 extends TestBase {
 			ob.navigate().to(host);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("LI_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("LI_login_button"))).click();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("LI_email_textBox")), 30);
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			Thread.sleep(5000);
+//			pf.getBrowserWaitsInstance(ob).waitUntilText("Clarivate Analytics");
 			if (!checkElementPresence_name("LI_allowAccess_button")) {
 
 				fail = true;// excel

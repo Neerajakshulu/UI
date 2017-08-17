@@ -73,13 +73,12 @@ public class IAM009 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(4);
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
 			if (!checkElementPresence_id("login_error")) {
 
 				fail = true;

@@ -72,7 +72,7 @@ public class IAM007 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
