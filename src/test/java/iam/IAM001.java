@@ -75,7 +75,7 @@ public class IAM001 extends TestBase {
 
 			}
 			logout();
-			BrowserWaits.waitTime(3);
+//			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
@@ -92,14 +92,14 @@ public class IAM001 extends TestBase {
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 			ob.get(links.get(1).getAttribute("href"));
-			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			BrowserWaits.waitTime(6);
-
+			//BrowserWaits.waitTime(6);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 			logout();
 			closeBrowser();
 

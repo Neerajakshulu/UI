@@ -803,7 +803,7 @@ public class TestBase {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
-		BrowserWaits.waitTime(3);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 	}
 
 	// logging out enw
@@ -857,7 +857,7 @@ public class TestBase {
 			String last_name) throws Exception {
 
 		status = registrationForm(first_name, last_name);
-		BrowserWaits.waitTime(2);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 		if (status) {
 			activationStatus = userActivation();
 
@@ -874,7 +874,7 @@ public class TestBase {
 			String last_name) throws Exception {
 		try {
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 				BrowserWaits.waitTime(4);
@@ -895,7 +895,7 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Thank you");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
@@ -927,7 +927,7 @@ public class TestBase {
 
 	public boolean userActivation() throws Exception {
 		try {
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
@@ -939,15 +939,15 @@ public class TestBase {
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", myE);
-			BrowserWaits.waitTime(3);
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 			ob.get(links.get(0).getAttribute("href"));
-			BrowserWaits.waitTime(3);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Success!");
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			BrowserWaits.waitTime(4);
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.INFO, "Snapshot below: " + test
@@ -966,13 +966,16 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			// BrowserWaits.waitTime(6);
+			pf.getLoginTRInstance(ob).closeOnBoardingModal();
+			/*// BrowserWaits.waitTime(6);
 			// ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_done_button")), 30);
+			//BrowserWaits.waitTime(3);
 			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-			BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
-			BrowserWaits.waitTime(3);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_join_button")), 30);
+			//BrowserWaits.waitTime(3);
+			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();*/
+			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.INFO, "Snapshot below: " + test
