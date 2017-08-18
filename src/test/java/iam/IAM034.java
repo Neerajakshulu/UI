@@ -84,10 +84,6 @@ public class IAM034 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
 				waitUntilText("Guerrilla Mail");
-				if (CONFIG.getProperty("browserType").equals("IE")) {
-					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-					BrowserWaits.waitTime(4);
-				}
 				email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 				ob.navigate().to(host);
 				waitUntilText("Sign in");
@@ -194,10 +190,6 @@ public class IAM034 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
-				if (CONFIG.getProperty("browserType").equals("IE")) {
-					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-					BrowserWaits.waitTime(4);
-				}
 				BrowserWaits.waitTime(14);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);

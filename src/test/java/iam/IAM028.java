@@ -62,10 +62,6 @@ public class IAM028 extends TestBase {
 			if (registationStatus) {
 				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
-				if (CONFIG.getProperty("browserType").equals("IE")) {
-					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-					BrowserWaits.waitTime(4);
-				}
 //				BrowserWaits.waitTime(12);
 				ob.navigate().to(host);
 				waitUntilText("Sign in");

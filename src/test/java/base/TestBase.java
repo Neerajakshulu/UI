@@ -878,10 +878,6 @@ public class TestBase {
 			String last_name) throws Exception {
 		try {
 			ob.get("https://www.guerrillamail.com");
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 			email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			ob.navigate().to(host);
