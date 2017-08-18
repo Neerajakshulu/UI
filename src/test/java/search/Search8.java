@@ -74,8 +74,8 @@ public class Search8 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OnePObjectMap.HOME_PROJECT_SEARCH_TEXTBOX_XPATH.toString())).sendKeys(search_query);
 			ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_SEARCH_CLICK_CSS.toString())).click();
-			//waitForAjax(ob);
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
+			//BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()), 30);
 
 			// Find out that how many search results are visible right now
@@ -85,14 +85,16 @@ public class Search8 extends TestBase {
 
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
+			waitForAjax(ob);
 			searchResults.clear();
 			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println("No of search results visible="+searchResults.size());
 			int count2 = searchResults.size();
 
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-			BrowserWaits.waitTime(6);
+			//BrowserWaits.waitTime(6);
+			waitForAjax(ob);
 			searchResults.clear();
 			searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
 			System.out.println("No of search results visible="+searchResults.size());

@@ -5,14 +5,22 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.google.common.base.Function;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
@@ -81,7 +89,38 @@ public class Customercare020 extends TestBase {
 			pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
 			pf.getDraPageInstance(ob).clickOnNotNowButton();
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
-			BrowserWaits.waitTime(5);
+			
+			/*new FluentWait<WebElement>(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILEDATA_CSS)).
+            withTimeout(10, TimeUnit.SECONDS).
+            pollingEvery(100,TimeUnit.MILLISECONDS).
+            until(new Function<WebElement  , Boolean>() {
+                @Override
+                public Boolean apply(WebElement element) {
+                    return element.getText().endsWith("04");
+                }
+            }
+            */
+			FluentWait<WebDriver> wait = new FluentWait<WebDriver>(ob);
+
+            wait.withTimeout(30, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+
+            	 
+
+            	    wait.until(new Function<WebDriver, WebElement>() {
+
+            	     public WebElement apply(WebDriver ob) {
+
+            	       try {
+						return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILEDATA_CSS);
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+						return null;
+					}
+
+            	     }
+            	   });
+			//BrowserWaits.waitTime(5);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
 
 			String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS)

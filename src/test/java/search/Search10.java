@@ -82,7 +82,8 @@ public class Search10 extends TestBase {
 
 			// Expand the document type filter by clicking it again
 			documentTypePanelHeading.click();
-			BrowserWaits.waitTime(5);
+		//	BrowserWaits.waitTime(5);
+			waitForAjax(ob);
 			waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()), 60);
 			List<WebElement> filterValues = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()));
 			filterValues.get(0).click();
@@ -92,7 +93,7 @@ public class Search10 extends TestBase {
 			filterValues.get(1).click();
 			waitForAjax(ob);
 			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()));
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			System.out.println("Search Results-->" + searchResults.size());
 			ArrayList<String> al1 = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
