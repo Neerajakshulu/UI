@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.openqa.selenium.WebElement;
-
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,7 +12,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -88,7 +86,7 @@ public class Customercare016 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"DRA Customer care page doesn't display Call us section and customer care contact details");
 			}
-			//BrowserWaits.waitTime(2);
+			
 			closeBrowser();
 
 		} catch (Throwable t) {

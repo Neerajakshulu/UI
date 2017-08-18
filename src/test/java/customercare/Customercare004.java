@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -95,7 +94,6 @@ public class Customercare004 extends TestBase{
 				test.log(LogStatus.FAIL,
 						"DRA Customer care page is not displaying required fields ");
 			}
-			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

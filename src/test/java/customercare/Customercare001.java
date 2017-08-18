@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -129,7 +128,6 @@ public class Customercare001 extends TestBase {
 						"Phone icon,Clock icon and Language icon are not displaying correctly");
 			}
 			
-			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

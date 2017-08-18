@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -70,13 +69,13 @@ public class Customercare022 extends TestBase{
 
 			
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Clarivate Analytics Customer Care");
-				//BrowserWaits.waitTime(2);
+				
 				pf.getBrowserWaitsInstance(ob).IsElementPresent(OnePObjectMap.CUSTOMER_CARELINK_IN_ERRORPAGE_CSS);
-				//throw new Exception("Customer care link is not present");
+				
 				pf.getBrowserWaitsInstance(ob).IsElementPresent(OnePObjectMap.OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS);
-				//throw new Exception("Other products link is not present");
+			
 				test.log(LogStatus.PASS,"Customer care link and other product link are present");
-		//	BrowserWaits.waitTime(2);
+		
 			closeBrowser();
 
 		} catch (Throwable t) {

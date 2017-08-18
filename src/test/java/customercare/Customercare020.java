@@ -7,13 +7,11 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -90,37 +88,8 @@ public class Customercare020 extends TestBase {
 			pf.getDraPageInstance(ob).clickOnNotNowButton();
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
 			
-			/*new FluentWait<WebElement>(pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILEDATA_CSS)).
-            withTimeout(10, TimeUnit.SECONDS).
-            pollingEvery(100,TimeUnit.MILLISECONDS).
-            until(new Function<WebElement  , Boolean>() {
-                @Override
-                public Boolean apply(WebElement element) {
-                    return element.getText().endsWith("04");
-                }
-            }
-            */
-			FluentWait<WebDriver> wait = new FluentWait<WebDriver>(ob);
-
-            wait.withTimeout(30, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-
-            	 
-
-            	    wait.until(new Function<WebDriver, WebElement>() {
-
-            	     public WebElement apply(WebDriver ob) {
-
-            	       try {
-						return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILEDATA_CSS);
-					} catch (Exception e) {
-						
-						e.printStackTrace();
-						return null;
-					}
-
-            	     }
-            	   });
-			//BrowserWaits.waitTime(5);
+			FluentwaitforElement(30,OnePObjectMap.DRA_PROFILEDATA_CSS);
+			
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.DRA_PROFILEDATA_CSS);
 
 			String expectedName = pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FNAME_CSS)
@@ -133,9 +102,43 @@ public class Customercare020 extends TestBase {
 			// pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_COUNTRY_CSS).getAttribute("value");
 			String expectedemail = "7ttabm+arteo85hji878@sharklasers.com";
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.IPA_ACCOUNTSETTINGS_CLOSEBUTTON_CSS);
-			BrowserWaits.waitTime(4);
+			FluentwaitforElement(50,OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+			/*wait.until(new Function<WebDriver, WebElement>() {
+
+       	     public WebElement apply(WebDriver ob) {
+
+       	       try {
+					return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_PROFILE_FLYOUT_IMAGE_CSS);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					return null;
+				}
+
+       	     }
+       	   });*/
+			test.log(LogStatus.PASS, " 2nd fluentwait");
+			BrowserWaits.waitTime(6);
+			
+			
 			pf.getDraPageInstance(ob).clickOnProfileImageDRA();
+		FluentwaitforElement(80,OnePObjectMap.DRA_HELPLINK_CSS);
+			/*wait.until(new Function<WebDriver, WebElement>() {
+
+	       	     public WebElement apply(WebDriver ob) {
+
+	       	       try {
+						return pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.DRA_HELPLINK_CSS);
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+						return null;
+					}
+
+	       	     }
+	       	   });*/
 			BrowserWaits.waitTime(5);
+			test.log(LogStatus.PASS, " 3nd fluentwait");
 			pf.getDraPageInstance(ob).clickOnHelpDRA();
 
 			Set<String> myset = ob.getWindowHandles();
@@ -197,7 +200,7 @@ public class Customercare020 extends TestBase {
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Name,Org,Email and country fields are not cleared");
 			}
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {
@@ -223,7 +226,7 @@ public class Customercare020 extends TestBase {
 		if (newWindow != null) {
 			if (ob.getCurrentUrl().contains(expected_URL)) {
 				Assert.assertTrue(ob.getCurrentUrl().contains(expected_URL));
-				logger.info("Privacy-statement is opened in the new browser and Content Available");
+				//logger.info("Privacy-statement is opened in the new browser and Content Available");
 				test.log(LogStatus.PASS,
 						" user is taken to the customer care page in the seperate browser when User clicks on support link");
 			}
@@ -239,5 +242,28 @@ public class Customercare020 extends TestBase {
 		extent.endTest(test);
 
 	}
+	
+	public void FluentwaitforElement(int time,Object element) {
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(ob);
+
+        wait.withTimeout(time, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+
+        	 
+
+        	    wait.until(new Function<WebDriver, WebElement>() {
+
+        	     public WebElement apply(WebDriver ob) {
+
+        	       try {
+					return pf.getBrowserActionInstance(ob).getElement(element);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					return null;
+				}
+
+        	     }
+        	   });
+        }
 
 }

@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -100,7 +99,6 @@ public class Customercare013 extends TestBase {
 				test.log(LogStatus.FAIL,
 						"IPA Customer care page doesn't display Call us section and customer care contact details");
 			}
-			//BrowserWaits.waitTime(2);
 			closeBrowser();
 
 		} catch (Throwable t) {

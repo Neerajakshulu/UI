@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -73,7 +72,7 @@ public class Customercare017 extends TestBase {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CC_HEADER_CSS);
 				String DropText = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getText();
-				//BrowserWaits.waitTime(2);   
+			   
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME);
 				if (DropText.contains("Åland Islands") && DropText.contains("Côte d'Ivoire")
 						&& DropText.contains("Holy See (Vatican City State)")
@@ -86,7 +85,7 @@ public class Customercare017 extends TestBase {
 						&& DropText.contains("Tanzania, United Republic of")
 						&& DropText.contains("United States & Outlying Islands") && DropText.contains("United States")
 						&& DropText.contains("Virgin Islands, British") && DropText.contains("Virgin Islands, U.S.")) {
-					//BrowserWaits.waitTime(2);
+					
 					test.log(LogStatus.PASS,
 							"Countries list is updated to match with SFDC list in customer care page as per document OPWLRA-630.xlsx");
 
@@ -99,7 +98,7 @@ public class Customercare017 extends TestBase {
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Countries list is not updated to match with SFDC list in customer care page");
 			}
-		//	BrowserWaits.waitTime(2);
+	
 			closeBrowser();
 
 		} catch (Throwable t) {
