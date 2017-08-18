@@ -40,6 +40,7 @@ import org.openqa.selenium.NoSuchElementException;
 // import util.ExtentManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -78,6 +79,7 @@ import util.Xls_Reader;
 
 public class TestBase {
 
+	static int time = 90;
 	protected static Logger logger = LogManager.getLogger();
 	public static Properties CONFIG = null;
 	public static Properties OR = null;
@@ -160,7 +162,7 @@ public class TestBase {
 			} else if (className.contains("Customercare")) {
 				suiteName = "customercare";
 			} else if (className.contains("ENW") || className.contains("ENWIAM") || className.contains("IAM")
-					|| className.contains("IPA")||className.contains("WAT")) {
+					|| className.contains("IPA") || className.contains("WAT")) {
 				logger.info("Test - " + className.startsWith("ENW"));
 
 				if (className.contains("ENW")) {
@@ -280,7 +282,7 @@ public class TestBase {
 			ipaiamxls = new Xls_Reader("src/test/resources/xls/IPAIAM.xlsx");
 			customercarexls = new Xls_Reader("src/test/resources/xls/customercare.xlsx");
 			watxls = new Xls_Reader("src/test/resources/xls/WAT.xlsx");
-			watiamxls=new Xls_Reader("src/test/resources/xls/WATIAM.xlsx");
+			watiamxls = new Xls_Reader("src/test/resources/xls/WATIAM.xlsx");
 			suiteXls = new Xls_Reader("src/test/resources/xls/Suite.xlsx");
 			isInitalized = true;
 		}
@@ -311,11 +313,11 @@ public class TestBase {
 			loadModuleData(ipaiamxls.path);
 		} else if (suiteName.equals("customercare")) {
 			loadModuleData(customercarexls.path);
-		}else if (suiteName.equals("WAT")) {
+		} else if (suiteName.equals("WAT")) {
 			loadModuleData(watxls.path);
-		}else if (suiteName.equals("WATIAM")) {
+		} else if (suiteName.equals("WATIAM")) {
 			loadModuleData(watiamxls.path);
-		}else if (suiteName.equals("Sanity suite")) {
+		} else if (suiteName.equals("Sanity suite")) {
 			loadModuleData(iamxls.path);
 			loadModuleData(searchxls.path);
 			loadModuleData(authoringxls.path);
@@ -474,7 +476,7 @@ public class TestBase {
 		} else {
 			logger.info("Running Environment is Local Machine");
 			if (CONFIG.getProperty("browserType").equalsIgnoreCase("FF")) {
-				System.setProperty("webdriver.gecko.driver","drivers/geckodriver.exe");
+				System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
 				ob = new FirefoxDriver();
 			} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("IE")) {
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -787,13 +789,14 @@ public class TestBase {
 	// logging in
 	public void login() throws Exception {
 
-		/*waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-		Thread.sleep(3000);*/
+		/*
+		 * waitForElementTobeVisible(ob, By.name("loginEmail"), 180); Thread.sleep(3000);
+		 */
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 		ob.findElement(By.name("loginEmail")).sendKeys(CONFIG.getProperty("defaultUsername"));
 		ob.findElement(By.name("loginPassword")).sendKeys(CONFIG.getProperty("defaultPassword"));
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
+		waitUntilText("Newsfeed", "Watchlists", "Groups");
 
 	}
 
@@ -804,7 +807,7 @@ public class TestBase {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
 		jsClick(ob, ob.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 	}
 
 	// logging out enw
@@ -858,7 +861,7 @@ public class TestBase {
 			String last_name) throws Exception {
 
 		status = registrationForm(first_name, last_name);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		if (status) {
 			activationStatus = userActivation();
 
@@ -875,7 +878,6 @@ public class TestBase {
 			String last_name) throws Exception {
 		try {
 			ob.get("https://www.guerrillamail.com");
-			//BrowserWaits.waitTime(2);
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 				BrowserWaits.waitTime(4);
@@ -896,7 +898,7 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Thank you");
+			waitUntilText("Thank you");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
 			String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
@@ -928,7 +930,7 @@ public class TestBase {
 
 	public boolean userActivation() throws Exception {
 		try {
-			//BrowserWaits.waitTime(3);
+			// BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
@@ -940,7 +942,7 @@ public class TestBase {
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", myE);
-			//BrowserWaits.waitTime(3);
+			// BrowserWaits.waitTime(3);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_body")), 30);
 			WebElement email_body = ob.findElement(By.xpath(OR.getProperty("email_body")));
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
@@ -948,7 +950,7 @@ public class TestBase {
 			ob.get(links.get(0).getAttribute("href"));
 			pf.getBrowserWaitsInstance(ob).waitUntilText("Success!");
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.INFO, "Snapshot below: " + test
@@ -968,15 +970,15 @@ public class TestBase {
 					.sendKeys(CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			/*// BrowserWaits.waitTime(6);
-			// ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_done_button")), 30);
-			//BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_join_button")), 30);
-			//BrowserWaits.waitTime(3);
-			ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();*/
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
+			/*
+			 * // BrowserWaits.waitTime(6); //
+			 * ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_done_button")), 30);
+			 * //BrowserWaits.waitTime(3); ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
+			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_join_button")), 30);
+			 * //BrowserWaits.waitTime(3); ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
+			 */
+			waitUntilText("Newsfeed", "Watchlists", "Groups");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.INFO, "Snapshot below: " + test
@@ -2161,4 +2163,28 @@ public class TestBase {
 				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(new Exception("Test case Failed"));
 	}
+
+	public void waitUntilText(final String text) {
+		try {
+			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+
+				public Boolean apply(WebDriver d) {
+					try {
+						return Boolean.valueOf(d.getPageSource().contains(text));
+					} catch (Exception e) {
+						return Boolean.valueOf(false);
+					}
+				}
+			});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find text: " + text + ", after waiting for " + time + "ms");
+		}
+	}
+
+	public void waitUntilText(final String... text) {
+		for (String each : text) {
+			waitUntilText(each);
+		}
+	}
+
 }

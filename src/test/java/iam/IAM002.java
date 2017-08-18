@@ -70,7 +70,7 @@ public class IAM002 extends TestBase {
 					ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 							.sendKeys(CONFIG.getProperty("defaultPassword"));
 					ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-					pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
+					waitUntilText("Newsfeed","Watchlists","Groups");
 				} else {
 					// else: checking if user can login successfully using smallcase email address
 

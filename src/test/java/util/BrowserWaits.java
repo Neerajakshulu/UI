@@ -26,7 +26,7 @@ public class BrowserWaits extends TestBase {
 	 * @param ElementPath
 	 * @return boolean
 	 */
-	static int time = 280;
+	static int time = 90;
 	static String locatorType;
 	static String locatorText;
 

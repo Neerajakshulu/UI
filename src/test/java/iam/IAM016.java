@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -81,7 +80,7 @@ public class IAM016 extends TestBase {
 			String email = createNewUser("duster", "man");
 
 			logout();
-			BrowserWaits.waitTime(4);
+			//BrowserWaits.waitTime(4);
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -353,13 +352,13 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("!");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
 						30);
 				pf.getIamPage(ob).checkTextBox("!@#$%^*()~`{}[]|");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -390,7 +389,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkTextBox("1");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -418,7 +417,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("a");
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -449,7 +448,7 @@ public class IAM016 extends TestBase {
 				String maxPassword = name + generateRandomName(93);
 				logger.info("Last Name : " + maxPassword);
 				pf.getIamPage(ob).checkTextBox(maxPassword);
-				BrowserWaits.waitTime(2);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -606,9 +605,9 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
-				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
+				test.log(LogStatus.PASS, "Invalid password reset page is opend successfylly");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Invalid password reset pagee is opend successfylly" + t);// extent
+				test.log(LogStatus.FAIL, "Invalid password reset page is opend successfylly" + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -631,9 +630,9 @@ public class IAM016 extends TestBase {
 
 				pf.getIamPage(ob).checkPrepopulatedText(email);
 				pf.getIamPage(ob).clickResendEmailButton();
-				test.log(LogStatus.PASS, "Invalid password reset pagee is opend successfylly");
+				test.log(LogStatus.PASS, "User Navigate to login page");
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL, "Invalid password reset pagee is opend successfylly" + t);// extent
+				test.log(LogStatus.FAIL, "User Navigate to login page" + t);// extent
 				StringWriter errors = new StringWriter();
 				t.printStackTrace(new PrintWriter(errors));
 				test.log(LogStatus.INFO, errors.toString());// extent reports
@@ -681,7 +680,6 @@ public class IAM016 extends TestBase {
 								"Verify that when Email address is not known from password reset token,email address field should be blank and user should be able to enter any email address")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).checkPrepopulatedText("");
 				pf.getIamPage(ob).clickCancelButton();
@@ -708,7 +706,6 @@ public class IAM016 extends TestBase {
 								"Verify that error message Please enter a valid email address.should be displayed in red color when user enters email address in wrong format")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-				BrowserWaits.waitTime(3);
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				pf.getIamPage(ob).sendEamilToTextBox("abcd.com");
 				ob.findElement(By.cssSelector(OnePObjectMap.DRA_STEPUPAUTHMODAL_FORGOTPW_PAGE_CSS.toString())).click();
@@ -744,7 +741,7 @@ public class IAM016 extends TestBase {
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				pf.getIamPage(ob).checkTextBox(newPassword);
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match current password");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))
@@ -775,7 +772,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkTextBox("Neon@123");
 				pf.getIamPage(ob).clickResetButton();
-				BrowserWaits.waitTime(3);
+				waitUntilText("New password should not match previous 4 passwords");
 				String str = ob
 						.findElement(
 								By.cssSelector(OnePObjectMap.PASSWORD_RESET_PAGE_PASSWORD_ERROR_MESSAGE_CSS.toString()))

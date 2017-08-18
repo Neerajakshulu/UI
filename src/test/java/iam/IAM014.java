@@ -60,7 +60,7 @@ public class IAM014 extends TestBase {
 
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(4);
+			waitUntilText("Sign up");
 			String buttonName = ob.findElement(By.cssSelector(OR.getProperty("sinup_button_disable"))).getText();
 			logger.info("Button Name : " + buttonName);
 			try {

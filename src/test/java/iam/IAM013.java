@@ -56,12 +56,12 @@ public class IAM013 extends TestBase {
 		maximizeWindow();
 
 		ob.navigate().to(host);
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		termofUserAndPrivacyStatement();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		WebElement myE = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]")).get(1);
 		myE.click();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement");
+		waitUntilText("Privacy Statement");
 		/*BrowserWaits.waitTime(3);
 		if (!checkElementPresence("reg_PageHeading_label")) {
 
@@ -75,19 +75,19 @@ public class IAM013 extends TestBase {
 		}
 		BrowserWaits.waitTime(3);*/
 		ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
 			//BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 			termofUserAndPrivacyStatement();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 			List<WebElement> myE1 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]"));
 			logger.info(""+myE1.size());
 			myE1.get(1).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement");
+			waitUntilText("Privacy Statement");
 			/*BrowserWaits.waitTime(3);
 			if (!checkElementPresence("reg_PageHeading_label")) {
 
@@ -101,7 +101,7 @@ public class IAM013 extends TestBase {
 			}
 			BrowserWaits.waitTime(3);*/
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 
 		} catch (Throwable t) {
 
@@ -118,12 +118,12 @@ public class IAM013 extends TestBase {
 
 		ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
 		ob.navigate().refresh();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		termofUserAndPrivacyStatement();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		WebElement myE2 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]")).get(1);
 		myE2.click();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement");
+		waitUntilText("Privacy Statement");
 		/*BrowserWaits.waitTime(3);
 		if (!checkElementPresence("reg_PageHeading_label")) {
 
@@ -137,18 +137,18 @@ public class IAM013 extends TestBase {
 		}
 		BrowserWaits.waitTime(3);*/
 		ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
-		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
+		waitUntilText("Sign in");
 		try {
 			// Verify that TERMS OF USE and PRIVACY STATEMENT links are working correctly in Singn Up Page
 			//BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 			termofUserAndPrivacyStatement();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 			List<WebElement> myE3 = ob.findElements(By.xpath("//a[contains(text(),'Privacy Statement')]"));
 			myE3.get(1).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Privacy Statement");
+			waitUntilText("Privacy Statement");
 			/*BrowserWaits.waitTime(3);
 			if (!checkElementPresence("reg_PageHeading_label")) {
 
@@ -162,7 +162,7 @@ public class IAM013 extends TestBase {
 			}
 			BrowserWaits.waitTime(3);*/
 			ob.findElement(By.xpath(OR.getProperty("close_PageHeading_label"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Sign up");
+			waitUntilText("Sign up");
 
 		} catch (Throwable t) {
 
@@ -190,7 +190,7 @@ public class IAM013 extends TestBase {
 			waitForElementTobeVisible(ob, By.linkText(OR.getProperty("reg_TermsOfUse_link")), 30);
 
 			ob.findElement(By.linkText(OR.getProperty("reg_TermsOfUse_link"))).click();
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Terms of Use");
+			waitUntilText("Terms of Use");
 
 			/*String headerModalText = null;
 			headerModalText = ob.findElement(By.xpath(OR.getProperty("reg_PageHeading_label"))).getText();

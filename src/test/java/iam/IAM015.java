@@ -64,20 +64,20 @@ public class IAM015 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			BrowserWaits.waitTime(2);
+			waitUntilText("Already");
 
-			String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
-			if (error_message1.contains("Sign up")) {
+			//String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
+			/*if (error_message1.contains("Sign up")) {
 				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@321");
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Neon12");
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("Neon12");
 				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-				BrowserWaits.waitTime(3);
-			}
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Already");
+			}*/
 
-			if (!checkElementPresence_id("reg_errorMessage")) {
+		/*	if (!checkElementPresence_id("reg_errorMessage")) {
 
 				test.log(LogStatus.FAIL,
 						"User able to create a new TR account with an email id that has already been used");// extent
@@ -87,11 +87,11 @@ public class IAM015 extends TestBase {
 						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
 								+ "_user_able_to_create_TR_account_with_emailid_that_has_already_been_used")));// screenshot
 
-			}
+			}*/
 
 			String error_message = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			logger.info("Error Message : " + error_message);
-			BrowserWaits.waitTime(4);
+		//	BrowserWaits.waitTime(4);
 
 			if (!compareStrings("Already have an account?", error_message)) {
 
@@ -102,7 +102,7 @@ public class IAM015 extends TestBase {
 
 			}
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tryAgain"))));
-			BrowserWaits.waitTime(2);
+			waitUntilText("Sign in");
 			closeBrowser();
 
 		}
