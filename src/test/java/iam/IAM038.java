@@ -130,7 +130,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("!");
-				BrowserWaits.waitTime(2);
+				waitUntilText("Forgot password?");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[5]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -160,7 +160,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("1");
-				BrowserWaits.waitTime(2);
+				waitUntilText("Forgot password?");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[3]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -187,7 +187,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("a");
-				BrowserWaits.waitTime(2);
+				waitUntilText("Forgot password?");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[2]//div[@class='col-xs-1 password-validator__icon fa text-success fa-check']"),
@@ -223,10 +223,9 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys(password);
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH.toString()))
 						.click();
-				BrowserWaits.waitTime(2);
+				waitUntilText("Incorrect password. Please try again.");
 				String str = ob
 						.findElement(
 								By.cssSelector("div[class='account-option-item__change-password-container'] div p"))
@@ -263,10 +262,9 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("Neon@123");
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH.toString()))
 						.click();
-				BrowserWaits.waitTime(2);
+				waitUntilText("New password should not match current password");
 				String str = ob
 						.findElement(
 								By.cssSelector("div[class='account-option-item__change-password-container'] div p"))
@@ -303,10 +301,9 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys(password);
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH.toString()))
 						.click();
-				BrowserWaits.waitTime(2);
+				waitUntilText("Change password");
 				String str = ob.findElement(By.xpath(OR.getProperty("change_password_link"))).getText();
 				Assert.assertEquals(str, "Change password");
 				test.log(LogStatus.PASS, "New Password field allowed min 8 characters and changed password.");
@@ -330,15 +327,13 @@ public class IAM038 extends TestBase {
 				test = extent.startTest(tests[8], tests_dec[8]).assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				logout();
-				BrowserWaits.waitTime(3);
 				ob.get("https://www.guerrillamail.com");
 				BrowserWaits.waitTime(22);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-				Thread.sleep(2000);
-
+				waitUntilText("Project Neon password changed");
 				String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 				logger.info("Email Subject Text : " + email_subject);
 				if (!StringContains(email_subject, "Project Neon password changed")) {
@@ -372,8 +367,8 @@ public class IAM038 extends TestBase {
 				
 				
 				ob.navigate().to(host);
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.name("loginEmail"), 180);
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.name("loginEmail")).sendKeys(email);
 				ob.findElement(By.name("loginPassword")).sendKeys(password);
 				pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
@@ -382,11 +377,12 @@ public class IAM038 extends TestBase {
 				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 				ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
-				BrowserWaits.waitTime(2);
+				waitUntilText("Account");
 				
 				
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("change_password_link")), 30);
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("change_password_link"))));
+				waitUntilText("Forgot password?");
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_OLD_PASSWORD_FIELD_CSS.toString()))
 						.clear();
@@ -399,10 +395,9 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("Neon@123");
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH.toString()))
 						.click();
-				BrowserWaits.waitTime(2);
+				waitUntilText("New password should not match previous 4 passwords");
 				String str = ob
 						.findElement(
 								By.cssSelector("div[class='account-option-item__change-password-container'] div p"))
@@ -430,7 +425,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys("1");
-				BrowserWaits.waitTime(2);
+				waitUntilText("Forgot password?");
 				waitForElementTobeVisible(ob, By.xpath("(//div[@class='popover-content'])"), 30);
 				test.log(LogStatus.PASS,
 						"Password rules are displaying when New STeAM password does not meet password requirements in account setting page");
@@ -464,7 +459,7 @@ public class IAM038 extends TestBase {
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 						.sendKeys(maxPassword);
-				BrowserWaits.waitTime(2);
+				waitUntilText("Password is too long");
 				waitForElementTobeVisible(ob,
 						By.xpath(
 								"(//div[@class='row password-validator__item ng-scope'])[6]//div[@class='col-xs-1 password-validator__icon fa color-c5-red fa-times']"),
@@ -490,15 +485,15 @@ public class IAM038 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By
 						.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString())).clear();
-				BrowserWaits.waitTime(3);
+				waitUntilText("Forgot password?");
 				ob.findElement(By.cssSelector("div[class='account-option-item__forgot-password'] a")).click();
-				BrowserWaits.waitTime(6);
+				waitUntilText("Email Sent");
 				String resertPassPage = ob
 						.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_RESET_PASSWORD_PAGE_CSS.toString())).get(1).getText();
 				Assert.assertEquals(resertPassPage, "Email Sent");
 				jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())));
 				ob.navigate().back();
-				BrowserWaits.waitTime(3);
+				waitUntilText("Newsfeed","Watchlists","Groups");
 				logout();
 				test.log(LogStatus.PASS,
 						"System is navigating to Forgot Password page, after clicking on Forgot password? Link");

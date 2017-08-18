@@ -52,7 +52,6 @@ public class IAM021 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			login();
 			pf.getBrowserWaitsInstance(ob)

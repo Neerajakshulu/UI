@@ -83,13 +83,14 @@ public class IAM034 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(2);
+				waitUntilText("Guerrilla Mail");
 				if (CONFIG.getProperty("browserType").equals("IE")) {
 					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 					BrowserWaits.waitTime(4);
 				}
 				email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 				ob.navigate().to(host);
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 				String signupStatus = ob.findElement(By.xpath(OR.getProperty("signup_button")))
@@ -129,7 +130,6 @@ public class IAM034 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Duster");
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-				BrowserWaits.waitTime(2);
 				test.log(LogStatus.PASS, "Required fields are enter properly");
 
 			} catch (Throwable t) {
@@ -154,7 +154,7 @@ public class IAM034 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-				BrowserWaits.waitTime(4);
+				waitUntilText("Thank you");
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 
 				String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
@@ -192,7 +192,7 @@ public class IAM034 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(3);
+				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
 				if (CONFIG.getProperty("browserType").equals("IE")) {
 					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
@@ -244,7 +244,7 @@ public class IAM034 extends TestBase {
 				List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 				ob.get(links.get(0).getAttribute("href"));
-				BrowserWaits.waitTime(3);
+				waitUntilText("Success!");
 				String confomMessage = ob.findElement(By.cssSelector("h2[class='login-title']")).getText();
 
 				Assert.assertEquals(confomMessage, "Success!");
@@ -273,18 +273,14 @@ public class IAM034 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(4);
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 						.sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				BrowserWaits.waitTime(4);
-				ob.findElement(By.xpath(OR.getProperty("signup_done_button"))).click();
-				BrowserWaits.waitTime(3);
-				ob.findElement(By.xpath(OR.getProperty("signup_join_button"))).click();
-				BrowserWaits.waitTime(3);
+				pf.getLoginTRInstance(ob).closeOnBoardingModal();
 				test.log(LogStatus.PASS,
 						"After completion of verification process,user successfylly login to Neon application");
 			} catch (Throwable t) {

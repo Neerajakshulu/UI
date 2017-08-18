@@ -59,16 +59,19 @@ public class IAM024 extends TestBase {
 			test.log(LogStatus.INFO, " New User created");
 			logout();
 			test.log(LogStatus.INFO, " Attempting Login by providing wrong password");
-			for (int i = 0; i < 10; i++) {
-				BrowserWaits.waitTime(4);
+			for (int i = 0; i < 9; i++) {
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("neon@126");
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				Thread.sleep(5000);
+				waitUntilText("Invalid email/password. Please try again.");
 			}
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
+			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("neon@126");
+			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			test.log(LogStatus.INFO, " 10 unsuccessfull login attempts");
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("lock_title")), 10);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("lock_title")), 30);
 			String message = ob.findElement(By.xpath(OR.getProperty("lock_title"))).getText();
 			String expectedMessage = "Your account has been locked.";
 			System.out.println(message);

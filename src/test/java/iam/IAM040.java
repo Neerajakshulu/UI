@@ -58,10 +58,11 @@ public class IAM040 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
+			waitUntilText("Sign in");
 			checkForLoginPageValidations();
-			BrowserWaits.waitTime(3);
 			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
+			waitUntilText("Sign in");
 			checkForLoginPageValidations();
 			closeBrowser();
 		} catch (Throwable t) {
@@ -84,35 +85,37 @@ public class IAM040 extends TestBase {
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).click();
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).click();
-		BrowserWaits.waitTime(2);
+		waitUntilText("Please enter a valid email address.");
 		String emailErrorMessage = ob
 				.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
 				.getText();
 		Assert.assertTrue(emailErrorMessage.contains("Please enter a valid email address."));
 		ob.navigate().refresh();
+		waitUntilText("Sign in");
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).click();
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).click();
-		BrowserWaits.waitTime(2);
+		waitUntilText("Please enter a password.");
 		String passwordErrorMessage = ob
 				.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(1)
 				.getText();
 		Assert.assertTrue(passwordErrorMessage.contains("Please enter a password."));
 
 		ob.navigate().refresh();
-		BrowserWaits.waitTime(2);
+		waitUntilText("Sign in");
 		waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("abcd.com");
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).click();
-		BrowserWaits.waitTime(2);
+		waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString()), 30);
 		String emailInvalidErrorMessage = ob
 				.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
 				.getText();
+		logger.info("Error message: "+emailInvalidErrorMessage);
 		Assert.assertTrue(emailInvalidErrorMessage.contains("Please enter a valid email address."));
-		BrowserWaits.waitTime(2);
 		ob.navigate().refresh();
+		waitUntilText("Sign in");
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-		BrowserWaits.waitTime(2);
+		waitUntilText("Please enter a valid email address.");
 		String emailErrorMessage1 = ob
 				.findElements(By.cssSelector(OnePObjectMap.LOGING_PAGE_ERROR_MESSAGE_CSS.toString())).get(0)
 				.getText();
@@ -121,13 +124,12 @@ public class IAM040 extends TestBase {
 				.getText();
 		Assert.assertTrue(emailErrorMessage1.contains("Please enter a valid email address."));
 		Assert.assertTrue(passwordErrorMessage1.contains("Please enter a password."));
-		BrowserWaits.waitTime(2);
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys("neon.user12@tr.com");
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).clear();
 		ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("abcd1233");
 		ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-		BrowserWaits.waitTime(2);
+		waitUntilText("Invalid email/password. Please try again.");
 		String errorMessage = ob.findElement(By.cssSelector(OnePObjectMap.DRA_INVALIDCREDENTIALS_ERRORMSG_CSS.toString()))
 				.getText();
 		Assert.assertTrue(errorMessage.contains("Invalid email/password. Please try again."));

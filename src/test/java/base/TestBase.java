@@ -802,7 +802,7 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-		BrowserWaits.waitTime(4);
+		waitUntilText("Newsfeed","Watchlists","Groups");
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
@@ -948,7 +948,7 @@ public class TestBase {
 			List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 			ob.get(links.get(0).getAttribute("href"));
-			pf.getBrowserWaitsInstance(ob).waitUntilText("Success!");
+			waitUntilText("Success!");
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			waitUntilText("Sign in");
 		} catch (Throwable t) {
@@ -2066,7 +2066,6 @@ public class TestBase {
 			String email1) throws Exception {
 
 		status = traillingRegistrationNeonForm(first_name, last_name, email1);
-		BrowserWaits.waitTime(2);
 		if (status) {
 			activationStatus = userActivation();
 
@@ -2085,6 +2084,7 @@ public class TestBase {
 		email = email1;
 		try {
 			ob.get(host);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
@@ -2098,9 +2098,10 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
 			ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
+			waitUntilText("Thank you");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
 			test.log(LogStatus.INFO, "Snapshot below: " + test

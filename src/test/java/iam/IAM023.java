@@ -60,7 +60,7 @@ public class IAM023 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
 
-			BrowserWaits.waitTime(3);
+			waitUntilText("Account");
 			String beforeChangePass = ob
 					.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS.toString())).getText();
 			BrowserWaits.waitTime(20);
@@ -75,13 +75,10 @@ public class IAM023 extends TestBase {
 			ob.findElement(
 					By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_NEW_PASSWORD_FIELD_CSS.toString()))
 					.sendKeys("Neon@1234");
-			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath(OnePObjectMap.ACCOUNT_PAGE_CHANGE_PASSWORD_LINK_SUBMIT_BUTTON_XPATH.toString()))
 					.click();
-			BrowserWaits.waitTime(2);
+			waitUntilText("Change password");
 			logout();
-
-			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			if (CONFIG.getProperty("browserType").equals("IE")) {
 				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
@@ -92,8 +89,7 @@ public class IAM023 extends TestBase {
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
 			executor.executeScript("arguments[0].click();", myE);
-			Thread.sleep(2000);
-
+			waitUntilText("Project Neon password changed");
 			String email_subject = ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText();
 			logger.info("Email Subject Text : " + email_subject);
 			if (!StringContains(email_subject, "Project Neon password changed")) {
@@ -110,7 +106,7 @@ public class IAM023 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			Thread.sleep(10000);
+			waitUntilText("Newsfeed","Watchlists","Groups");
 
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
@@ -118,7 +114,7 @@ public class IAM023 extends TestBase {
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_LINK_CSS.toString())).click();
 
-			BrowserWaits.waitTime(4);
+			waitUntilText("Account");
 			String beforeChangePass1 = ob
 					.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_LAST_LOGIN_TIME_CSS.toString())).getText();
 

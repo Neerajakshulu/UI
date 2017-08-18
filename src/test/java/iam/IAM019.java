@@ -76,7 +76,7 @@ public class IAM019 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(4);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);

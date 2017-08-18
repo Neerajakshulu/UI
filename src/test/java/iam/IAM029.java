@@ -85,7 +85,7 @@ public class IAM029 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
@@ -116,7 +116,7 @@ public class IAM029 extends TestBase {
 				}
 
 				ob.findElement(By.xpath(OnePObjectMap.SIGNUP_PAGE_RED_CROSS_SYSMBOL_XPATH.toString()));
-				BrowserWaits.waitTime(3);
+				waitUntilText("Password is too long");
 
 			}
 

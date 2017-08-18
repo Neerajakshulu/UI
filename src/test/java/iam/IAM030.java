@@ -92,14 +92,13 @@ public class IAM030 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(4);
+			waitUntilText("Account");
 			String str = ob.findElement(By.cssSelector("h2[class='wui-title']")).getText();
 			logger.info("Title : " + str);
 			String emailName = ob.findElement(By.cssSelector("div[class='account-option-item__text-container'] span")).getText();
 			logger.info("Emai Text : " + emailName);
 			String additionalMail = ob.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']")).getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(email)
 						&& additionalMail.contains("View additional email preferences"));
@@ -158,7 +157,6 @@ public class IAM030 extends TestBase {
 			driver.navigate().to(CONFIG.getProperty("accountLink"));
 
 			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, email, password);
-			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
 
 			String str = driver.findElement(By.cssSelector("h2[class='wui-title']")).getText();
@@ -168,7 +166,6 @@ public class IAM030 extends TestBase {
 			String additionalMail = driver.findElement(By.cssSelector("a[class='wui-btn wui-btn--secondary']"))
 					.getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(email)
 						&& additionalMail.contains("View additional email preferences"));
@@ -180,7 +177,6 @@ public class IAM030 extends TestBase {
 				jsClick(driver, driver
 						.findElement(By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString())));
 
-				BrowserWaits.waitTime(3);
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Deep link is not working correctly for account page using FB" + t);// extent

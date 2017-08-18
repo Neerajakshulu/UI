@@ -60,20 +60,20 @@ public class IAM028 extends TestBase {
 
 			boolean registationStatus = registrationForm(first_name, last_name);
 			if (registationStatus) {
-				BrowserWaits.waitTime(2);
+				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
 				if (CONFIG.getProperty("browserType").equals("IE")) {
 					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
 					BrowserWaits.waitTime(4);
 				}
-				BrowserWaits.waitTime(12);
+//				BrowserWaits.waitTime(12);
 				ob.navigate().to(host);
+				waitUntilText("Sign in");
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));
-				BrowserWaits.waitTime(2);
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			}
 
-			BrowserWaits.waitTime(3);
+			waitUntilText("Please activate your account");
 			String textMessage = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			logger.info("Text Message : " + textMessage);
 			if (!textMessage.contains("Please activate your account")) {
@@ -83,9 +83,9 @@ public class IAM028 extends TestBase {
 			}
 
 			ob.findElement(By.cssSelector(OR.getProperty("resend_activation"))).click();
-			BrowserWaits.waitTime(2);
+			waitUntilText("Thank You");
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-
+			waitUntilText("Sign in");
 			boolean userAction = userActivation();
 			if (userAction) {
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));

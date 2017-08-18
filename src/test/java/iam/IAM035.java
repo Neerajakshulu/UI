@@ -54,11 +54,7 @@ public class IAM035 extends TestBase {
 
 		try {
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
+			waitUntilText("Guerrilla Mail");
 			String email1 = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			logger.info("Email Id:" + email1);
 			String traillingSpaceEmail = " " + email1;
@@ -67,7 +63,6 @@ public class IAM035 extends TestBase {
 			String str = createTraillingSpaceNeonUser("duster", "man", traillingSpaceEmail);
 			logger.info("After Trailling user :" + str);
 			continueToLandingNeonPage();
-			BrowserWaits.waitTime(3);
 		} catch (Throwable t) {
 
 			test.log(LogStatus.FAIL, "Something unexpected happened");// extent reports
@@ -85,18 +80,7 @@ public class IAM035 extends TestBase {
 	}
 
 	private void continueToLandingNeonPage() throws Exception {
-		BrowserWaits.waitTime(10);
 		waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
-		/*waitForElementTobeVisible(ob, By.xpath(OR.getProperty("ul_name")), 30);
-		if (!checkElementPresence("ul_name")) {
-
-			test.log(LogStatus.FAIL, "New user credentials are not working fine");// extent reports
-			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(
-					this.getClass().getSimpleName() + "_existing_FB_User_credentials_not_working_fine")));// screenshot
-			closeBrowser();
-
-		}*/
 		logout();
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 		closeBrowser();

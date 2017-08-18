@@ -53,11 +53,10 @@ public class IAM039 extends TestBase {
 			maximizeWindow();
 			clearCookies();
 			ob.navigate().to(host);
-
+			waitUntilText("Sign in");
 			String str = ob.findElements(By.cssSelector(OnePObjectMap.LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS.toString())).get(0).getText();
 			logger.info("Text : " + str);
 			jsClick(ob, ob.findElements(By.cssSelector(OnePObjectMap.LOGIN_PAGE_CLARIVATE_ANALYTICS_LINK_CSS.toString())).get(0));
-			BrowserWaits.waitTime(4);
 			Set<String> myset = ob.getWindowHandles();
 			Iterator<String> myIT = myset.iterator();
 			ArrayList<String> al = new ArrayList<String>();

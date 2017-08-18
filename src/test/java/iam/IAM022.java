@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
 
@@ -77,7 +78,7 @@ public class IAM022 extends TestBase {
 							By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString()))
 					.getCssValue("background");
 
-			Thread.sleep(5000);
+			BrowserWaits.waitTime(3);
 			if (cssValue.contains("rgb(255, 255, 255)")) {
 				test.log(LogStatus.INFO, "unchecking is working fine");
 				// restoring the check status

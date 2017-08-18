@@ -60,6 +60,7 @@ public class IAM026 extends TestBase {
 			// Navigate to deep link account page
 			ob.navigate().to(CONFIG.getProperty("accountLink"));
 			login();
+			waitUntilText("Account");
 			pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS);
 			String str = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_CSS.toString())).getText();
 			logger.info("Title : " + str);
@@ -75,7 +76,6 @@ public class IAM026 extends TestBase {
 					.findElement(By.cssSelector(OnePObjectMap.ACCOUNT_PAGE_EMAIL_PREFERENCE_LINK_CSS.toString()))
 					.getText();
 			logger.info("Additional Email Link Text : " + additionalMail);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Account") && emailName.contains(CONFIG.getProperty("defaultUsername"))
 						&& additionalMail.contains("View additional email preferences"));

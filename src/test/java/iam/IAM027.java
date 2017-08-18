@@ -60,6 +60,7 @@ public class IAM027 extends TestBase {
 			// Navigate to deep link account page
 			ob.navigate().to(CONFIG.getProperty("helpLink"));
 			login();
+			waitUntilText("Feedback or questions about Project Neon?");
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SEND_FEEDBACK_LINK_CSS);
 			String str = ob
@@ -74,7 +75,6 @@ public class IAM027 extends TestBase {
 							.cssSelector(OnePObjectMap.NEON_HELP_AND_FEEDBACK_PAGE_SUBMIT_SUPPORT_LINK_CSS.toString()))
 					.getText();
 			logger.info("Emai Text : " + feedBack);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Send feedback to the Project Neon team")
 						&& feedBack.contains("Report a problem or submit a support request"));
