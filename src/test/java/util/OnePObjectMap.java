@@ -1211,7 +1211,7 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
-	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='SMITH']"),
+	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='U MAYER']"),
 	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
 	WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH("//button[@ng-click='vm.findClusters()' and text()[normalize-space() = 'Find']]"),
 	WAT_SEARCH_RESULTS_TEXT_XPATH("//span[text()='Search Results']"),
@@ -1220,7 +1220,8 @@ public enum OnePObjectMap {
 	WAT_SEARCH_SUGGESTION_TEXT_XPATH("//p[contains(text(),'Enter the author')]"),
 	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
-	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]")
+	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]"),
+	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']")
 	;
 
 	private String locator;
