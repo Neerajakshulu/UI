@@ -14,13 +14,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search17 extends TestBase {
 
@@ -79,7 +79,7 @@ public class Search17 extends TestBase {
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			BrowserWaits.waitTime(4);
+			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_RESULTS_LINK_CSS.toString()),90);
 			waitForElementTobeVisible(ob,
 					By.xpath("//a[@class='wui-dropdown__link ng-binding ng-scope' and contains(text(),'Times Cited')]"), 30);
 			ob.findElement(
@@ -112,6 +112,7 @@ public class Search17 extends TestBase {
 			try {
 
 				Assert.assertTrue(counts.equals(mylist));
+				test.log(LogStatus.PASS,"Articles are sorted correctly as per TIMES CITED field in ARTICLES content type");
 			}
 
 			catch (Throwable t) {
@@ -150,17 +151,6 @@ public class Search17 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
-
 	}
 
 }

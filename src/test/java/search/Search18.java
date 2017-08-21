@@ -80,7 +80,8 @@ public class Search18 extends TestBase {
 			waitForAllElementsToBePresent(ob, By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css")),
 					40);
 			ob.findElement(By.cssSelector(OR.getProperty("tr_search_results_refine_expand_css"))).click();
-			BrowserWaits.waitTime(5);
+			waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()),
+					60);		
 
 			int checkboxesSelected = 0;
 			List<WebElement> checkboxList;
@@ -96,7 +97,8 @@ public class Search18 extends TestBase {
 
 			checkboxList = ob
 					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_FILTER_VALUES_CSS.toString()));
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
+			
 			for (WebElement element : checkboxList) {
 				if (element.getCssValue("color").contains("rgba(42, 45, 53, 1)"))
 					checkboxesSelected++;

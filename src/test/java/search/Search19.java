@@ -121,6 +121,7 @@ public class Search19 extends TestBase {
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_more_link_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey()))));
 				BrowserWaits.waitTime(4);
+				//waitForAllElementsToBePresent(ob,By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")) ,60);
 				ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey())));
 				checkBoxDisplayed = 0;
@@ -148,6 +149,7 @@ public class Search19 extends TestBase {
 				jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tr_search_results_refine_less_link_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey()))));
 				BrowserWaits.waitTime(4);
+				//waitForAllElementsToBePresent(ob,By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")) ,60);
 				ckBoxList = ob.findElements(By.xpath(OR.getProperty("tr_search_results_refine_checkboxes_xpath")
 						.replaceAll("FILTER_TYPE", entry.getKey())));
 				checkBoxDisplayed = 0;

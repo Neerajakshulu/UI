@@ -38,7 +38,6 @@ public class Search1 extends TestBase {
 		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
 				"Search suite");
 
-	
 	}
 
 	/**
@@ -67,7 +66,6 @@ public class Search1 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			ob.navigate().to(host);
 			login();
 			//
@@ -83,7 +81,8 @@ public class Search1 extends TestBase {
 
 			// Put the urls of all the search results documents in a list and test whether documents contain searched
 			// keyword or not
-			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS.toString()));
+			List<WebElement> searchResults = ob.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_LINKS_CSS
+					.toString()));
 			System.out.println("No of elements=" + searchResults.size());
 			ArrayList<String> urls = new ArrayList<String>();
 			for (int i = 0; i < searchResults.size(); i++) {
@@ -97,14 +96,16 @@ public class Search1 extends TestBase {
 			for (int i = 0; i < urls.size(); i++) {
 
 				ob.navigate().to(urls.get(i));
-				Thread.sleep(5000);
-				// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("details_link")), 30);
+				//Thread.sleep(5000);
+				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS
+						.toString()),60);
 				// String link55=ob.findElement(By.xpath(OR.getProperty("details_link"))).getAttribute("href");
 				// ob.get(link55);
-				WebElement myE = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS.toString()));
+				WebElement myE = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RECORD_VIEW_PAGE_DETAILS_LINK_CSS
+						.toString()));
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-				Thread.sleep(5000);
+				//Thread.sleep(5000);
 
 				Set<String> myset = ob.getWindowHandles();
 				Iterator<String> myIT = myset.iterator();
