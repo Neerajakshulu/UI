@@ -63,6 +63,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
+import com.google.common.base.Function;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -928,11 +929,8 @@ public class TestBase {
 		try {
 			// BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
-			BrowserWaits.waitTime(22);
+			waitUntilText("Please activate your Project Neon account");
+//			BrowserWaits.waitTime(22);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
@@ -945,7 +943,7 @@ public class TestBase {
 
 			ob.get(links.get(0).getAttribute("href"));
 			waitUntilText("Success!");
-			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
+			ob.findElement(By.xpath(OR.getProperty("signup_zconformatin_button"))).click();
 			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -1939,12 +1937,8 @@ public class TestBase {
 			String last_name) throws Exception {
 		try {
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(2);
-			if (CONFIG.getProperty("browserType").equals("IE")) {
-				Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-				BrowserWaits.waitTime(4);
-			}
-
+			waitUntilText("Guerrilla Mail");
+			waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 			email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
@@ -2182,6 +2176,20 @@ public class TestBase {
 		for (String each : text) {
 			waitUntilText(each);
 		}
+	}
+	
+	public void fluentwaitforElement(WebDriver ob,By element,int time) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(ob)
+			    .withTimeout(30, TimeUnit.SECONDS)
+			    .pollingEvery(500, TimeUnit.MILLISECONDS)
+			    .ignoring(NoSuchElementException.class);
+			 
+			wait.until(new Function<WebDriver, WebElement>() 
+			{
+			  public WebElement apply(WebDriver driver) {
+			  return driver.findElement(element);
+			}
+			});
 	}
 
 }
