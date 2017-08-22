@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -63,17 +62,15 @@ public class IAM004 extends TestBase {
 
 			// Navigate to FB login page
 			ob.navigate().to(host);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-			waitUntilText("Log in to Facebook");
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_email_textBox")), 60);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_password_textBox")), 60);
-			// Verify that existing FB credentials are working fine
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-
 			waitUntilText("Newsfeed","Watchlists","Groups");
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);

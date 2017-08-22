@@ -72,18 +72,15 @@ public class IAM007 extends TestBase {
 			clearCookies();
 
 			ob.navigate().to(host);
-			//BrowserWaits.waitTime(2);
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 30);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-			waitUntilText("Log in to Facebook");
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_email_textBox")), 60);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_password_textBox")), 60);
-			
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			waitForElementTobeVisible(ob, By.id(OR.getProperty("FB_page_login_button")), 30);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
-			BrowserWaits.waitTime(2);
 			waitForElementTobeVisible(ob, By.id("loginform"), 30);
 			closeBrowser();
 
