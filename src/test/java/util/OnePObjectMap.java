@@ -1204,10 +1204,10 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
 	WAT_AUTHOR_FIRSTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--first-and-middle']/descendant::input"),
 	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
-	WAT_AUTHOR_COUNTRY_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button[text()[normalize-space() = 'CANADA']]"),
+	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button"),
 	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div"),
 	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div"),
-	WAT_AUTHOR_ORG_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div/button[text()[normalize-space() = 'BEDFORD INST OCEANOG']]"),
+	WAT_AUTHOR_ORG_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div/button"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
 	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
@@ -1221,7 +1221,9 @@ public enum OnePObjectMap {
 	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
 	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]"),
-	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']")
+	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']"),
+	WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
+	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li")
 	;
 
 	private String locator;

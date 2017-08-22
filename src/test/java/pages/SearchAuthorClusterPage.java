@@ -27,6 +27,8 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf = new PageFactory();
 	}
 
+	int k = 1;
+
 	/**
 	 * Common method to search for an author cluster with only LastName
 	 * 
@@ -35,34 +37,29 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * @throws Exception
 	 * 
 	 */
-	public void SearchAuthorCluster(String LastName, ExtentTest test) throws Exception {
+	public void SearchAuthorCluster(String LastName, String Country, String org, ExtentTest test) throws Exception {
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			enterAuthorLastName(LastName, test);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			test.log(LogStatus.INFO, "Clicking find button... ");
-			int i = 1;
-			while (i < 5) {
-				try {
-					if (pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
-						pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-						break;
-					}
-				} catch (Exception e) {
-					test.log(LogStatus.INFO, "Find button not enabled... Count is " + i);
-					enterAuthorLastName(LastName, test);
-					i++;
-				}
+			BrowserWaits.waitTime(2);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+					.isEnabled()) {
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			} else {
+				throw new Exception("FIND button not clicked");
 			}
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
-					.isDisplayed()) {
-				selectCountryofAuthor(test);
-				if (ele.size() != 0) {
-					selectOrgofAuthor(test);
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				selectCountryofAuthor(Country, test);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				List<WebElement> orgName = pf.getBrowserActionInstance(ob)
+						.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				if (orgName.size() != 0) {
+					selectOrgofAuthor(org, test);
 				}
 				test.log(LogStatus.INFO, "Org name selection is not required as the searched user has only one org. ");
 			} else {
@@ -88,7 +85,8 @@ public class SearchAuthorClusterPage extends TestBase {
 	 *            FirstName
 	 * @throws Exception
 	 */
-	public void SearchAuthorCluster(String LastName, String FirstName, ExtentTest test) throws Exception {
+	public void SearchAuthorCluster(String LastName, String FirstName, String Country, String org, ExtentTest test)
+			throws Exception {
 		try {
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			enterAuthorLastName(LastName, test);
@@ -97,30 +95,19 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			test.log(LogStatus.INFO, "Clicking find button... ");
-			int i = 1;
-			while (i < 5) {
-				try {
-					if (pf.getBrowserActionInstance(ob)
-							.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
-						pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-						break;
-					}
-				} catch (Exception e) {
-					test.log(LogStatus.INFO, "Find button not enabled... Count is " + i);
-					BrowserWaits.waitTime(1);
-					enterAuthorLastName(LastName, test);
-					pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
-					enterAuthorFirstName(FirstName, test);
-					i++;
-				}
+
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+					.isEnabled()) {
+				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
 			}
 			List<WebElement> ele = pf.getBrowserActionInstance(ob)
-					.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
-					.isDisplayed()) {
-				selectCountryofAuthor(test);
-				if (ele.size() != 0) {
-					selectOrgofAuthor(test);
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+			if (ele.size() != 0) {
+				selectCountryofAuthor(Country, test);
+				List<WebElement> orgName = pf.getBrowserActionInstance(ob)
+						.getElements(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+				if (orgName.size() != 0) {
+					selectOrgofAuthor(org, test);
 				}
 				test.log(LogStatus.INFO, "Org name selection is not required as the searched user has only one org. ");
 			} else {
@@ -138,48 +125,6 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 
 	/**
-	 * Common method to search for an author cluster with LastName, First name
-	 * and Country name
-	 * 
-	 * @param LastName
-	 *            FirstName CountryName
-	 * @author UC225218
-	 * 
-	 */
-	public void SearchAuthorCluster(String LastName, String FirstName, String CountryName, ExtentTest test) {
-		try {
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-			enterAuthorLastName(LastName, test);
-			BrowserWaits.waitTime(2);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
-			enterAuthorFirstName(FirstName, test);
-			BrowserWaits.waitTime(1);
-			selectCountryofAuthor(test);
-			BrowserWaits.waitTime(2);
-			selectOrgofAuthor(test);
-
-			// TODO Yet to be finished
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
-
-	/**
-	 * Common method to search for an author cluster with LastName, First
-	 * name,Country name and Org Name
-	 * 
-	 * @param LastName
-	 *            FirstName CountryName OrgName
-	 * @author UC225218
-	 * 
-	 */
-	public void SearchAuthorCluster(String LastName, String FirstName, String CountryName, String OrgName,
-			ExtentTest test) {
-		// TODO Yet to be coded
-	}
-
-	/**
 	 * Method to enter the author search name (Last name) character by
 	 * character.
 	 * 
@@ -189,16 +134,19 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void enterAuthorLastName(String LastName, ExtentTest test) throws Exception {
-		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
-		for (int i = 0; i < LastName.length(); i++) {
-			char c = LastName.charAt(i);
-			String s = new StringBuilder().append(c).toString();
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, s);
-			BrowserWaits.waitTime(0.5);
+		try {
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+			for (int i = 0; i < LastName.length(); i++) {
+				char c = LastName.charAt(i);
+				String s = new StringBuilder().append(c).toString();
+				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, s);
+				BrowserWaits.waitTime(0.5);
+			}
+			selectLastNameFromTypeahead(LastName, test);
+		} catch (Exception e) {
+			e.getMessage();
+			test.log(LogStatus.FAIL, "Author Last name not entered");
 		}
-		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH);
-		selectLastNameFromTypeahead(LastName, test);
-		test.log(LogStatus.INFO, "Author Last name entered");
 	}
 
 	/**
@@ -210,6 +158,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void enterAuthorFirstName(String FirstName, ExtentTest test) throws Exception {
+
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
 		for (int i = 0; i < FirstName.length(); i++) {
 			char c = FirstName.charAt(i);
@@ -217,7 +166,6 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
 			BrowserWaits.waitTime(0.5);
 		}
-		// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH);
 		selectFirstNameFromTypeahead(FirstName, test);
 		test.log(LogStatus.INFO, "Author First name entered");
 	}
@@ -233,36 +181,40 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void selectLastNameFromTypeahead(String selectionText, ExtentTest test) throws Exception {
-		int i = 1;
-		while (i < 2) {
-			try {
+		while (k < 2) {
+			List<WebElement> web = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+			List<WebElement> lastNameSuggestions = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH);
 
-				List<WebElement> web = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH);
-				List<WebElement> ele = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
-
-				if (web.size() != 0) {
-					pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH);
-					test.log(LogStatus.INFO, "Typeahead is present for last name");
-					break;
-				} else if (ele.size() == 0 && pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) {
-					test.log(LogStatus.INFO,
-							"No Typeahead displayed, Might be due to exact matching of provided last name with name in typeahead suggestion, Hence directly clicking FIND button");
-					break;
-				} else if (pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH).isDisplayed()) {
-					test.log(LogStatus.FAIL, "Entered name is incorrect, Please enter a valid last name ");
-					break;
+			if (web.size() != 0) {
+				for (int j = 0; j < lastNameSuggestions.size(); j++) {
+					if (lastNameSuggestions.get(j).getText().equals(selectionText)) {
+						lastNameSuggestions.get(j).click();
+						test.log(LogStatus.INFO, "Typeahead is present for last name");
+						test.log(LogStatus.INFO, "Author Last name entered");
+						break;
+					}
 				}
-			} catch (Exception e) {
-				test.log(LogStatus.INFO, "Typeahead not displayed... Count is " + i);
-				pf.getBrowserActionInstance(ob).clear(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-				i++;
+				break;
+			} else if (ele.size() == 0 && pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) {
+				test.log(LogStatus.INFO, "Author Last name entered");
+				test.log(LogStatus.INFO,
+						"No Typeahead displayed, Might be due to exact matching of provided last name with name in typeahead suggestion, Hence directly clicking FIND button");
+				break;
+			} else if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH)
+					.isDisplayed()) {
+				test.log(LogStatus.FAIL, "Entered name is incorrect, Please enter a valid last name ");
+				break;
+			} else {
+				if (k == 2)
+					throw new Exception("No Typeahead suggestion displayed even after 2 attempts");
+				k++;
+				enterAuthorLastName(selectionText, test);
 			}
-			enterAuthorLastName(selectionText, test);
-			break;
 		}
 	}
 
@@ -277,35 +229,39 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void selectFirstNameFromTypeahead(String selectionText, ExtentTest test) throws Exception {
-		int i = 1;
-		while (i < 2) {
-			try {
-				List<WebElement> web = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH);
-				List<WebElement> ele = pf.getBrowserActionInstance(ob)
-						.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+		while (k < 2) {
+			List<WebElement> web = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+			List<WebElement> firstNameSuggestions = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH);
 
-				if (web.size() != 0) {
-					pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH);
-					test.log(LogStatus.INFO, "Typeahead is present for First name");
-					break;
-				} else if (ele.size() == 0 && pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) {
-					test.log(LogStatus.INFO,
-							"No Typeahead displayed, Might be due to exact matching of provided first name with name in typeahead suggestion, Hence directly clicking FIND button");
-					break;
-				} else if (pf.getBrowserActionInstance(ob)
-						.getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH).isDisplayed()) {
-					test.log(LogStatus.FAIL, "Entered name is incorrect, Please enter a valid First name ");
-					break;
+			if (web.size() != 0) {
+				for (int j = 0; j < firstNameSuggestions.size(); j++) {
+					if (firstNameSuggestions.get(j).getText().equals(selectionText)) {
+						firstNameSuggestions.get(j).click();
+						test.log(LogStatus.INFO, "Typeahead is present for first name");
+						test.log(LogStatus.INFO, "Author First name entered");
+						break;
+					}
 				}
-
-			} catch (Exception e) {
-				test.log(LogStatus.INFO, "Typeahead not displayed... Count is " + i);
-				pf.getBrowserActionInstance(ob).clear(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
-				enterAuthorFirstName(selectionText, test);
-				test.log(LogStatus.INFO, "Typeahead not displayed... Count is " + i);
-				i++;
+				break;
+			} else if (ele.size() == 0 && pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isDisplayed()) {
+				test.log(LogStatus.INFO, "Author Last name entered");
+				test.log(LogStatus.INFO,
+						"No Typeahead displayed, Might be due to exact matching of provided first name with name in typeahead suggestion, Hence directly clicking FIND button");
+				break;
+			} else if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH)
+					.isDisplayed()) {
+				test.log(LogStatus.FAIL, "Entered name is incorrect, Please enter a valid First name ");
+				break;
+			} else {
+				if (k == 2)
+					throw new Exception("No Typeahead suggestion displayed even after 2 attempts");
+				k++;
+				enterAuthorLastName(selectionText, test);
 			}
 		}
 	}
@@ -318,7 +274,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 * 
 	 */
-	public void selectCountryofAuthor(ExtentTest test) throws Exception {
+	public void selectCountryofAuthor(String CountryName, ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH.toString()), 3,
 				"Country dropdown is not present in Author search page");
@@ -326,7 +282,17 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserActionInstance(ob).moveToElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
 			test.log(LogStatus.INFO,
 					"Country name selected as the searched user resulted in more than 50 clusters... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_COUNTRY_XPATH);
+			List<WebElement> ctry = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_OPTION_XPATH);
+			if (ctry.size() != 0) {
+				for (int j = 0; j < ctry.size(); j++) {
+					if (ctry.get(j).getText().equals(CountryName)) {
+						ctry.get(j).click();
+						test.log(LogStatus.INFO, "Country name clicked");
+						break;
+					}
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -342,14 +308,25 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 * 
 	 */
-	public void selectOrgofAuthor(ExtentTest test) throws Exception {
+	public void selectOrgofAuthor(String orgName, ExtentTest test) throws Exception {
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.xpath(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH.toString()), 5,
-				"Country dropdown is not present in Author search page");
+				"Org dropdown is not present in Author search page");
 		try {
 			test.log(LogStatus.INFO, "Selecting relavent organization... ");
 			pf.getBrowserActionInstance(ob).moveToElement(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_ORG_XPATH);
+			List<WebElement> org = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_ORG_OPTION_XPATH);
+			if (org.size() != 0) {
+				for (int j = 0; j < org.size(); j++) {
+					if (org.get(j).getText().equals(orgName)) {
+						org.get(j).click();
+						test.log(LogStatus.INFO, "Org name clicked");
+						break;
+					}
+				}
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

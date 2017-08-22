@@ -98,7 +98,7 @@ public class WAT02 extends TestBase {
 
 			// Search for an author cluster
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, test);
+			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
 			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 

@@ -9,10 +9,10 @@
 
 	<parameter name="username" value="chinna.putha@thomsonreuters.com" />
 	<parameter name="password" value="Thomson@123" />
-	<parameter name="LastName" value="U MAYER" />
-	<parameter name="FirstName" value="JOHN" />
+	<parameter name="LastName" value="UPADHYAYA" />
+	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName" value="CANADA" />
-	<parameter name="OrgName" value="BEDFORD INST OCEANOG" />
+	<parameter name="OrgName" value="MCMASTER UNIV" />
 
 
      <test name="WAT_Login" preserve-order="true">

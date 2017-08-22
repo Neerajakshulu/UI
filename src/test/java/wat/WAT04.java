@@ -85,8 +85,9 @@ public class WAT04 extends TestBase {
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName" })
-	public void testSearchAuthorClusterOnlyLastName(String LastName) throws Exception {
+	@Parameters({ "LastName", "CountryName", "OrgName" })
+	public void testSearchAuthorClusterOnlyLastName(String LastName, String CountryName, String OrgName)
+			throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -97,7 +98,7 @@ public class WAT04 extends TestBase {
 
 			// Search for an author cluster with only Last name
 			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, test);
+			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, CountryName, OrgName, test);
 			test.log(LogStatus.PASS,
 					"Successfully searched for an author using only Last name and landed in Author search result page.");
 			pf.getBrowserActionInstance(ob).closeBrowser();
