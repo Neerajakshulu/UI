@@ -65,6 +65,7 @@ public class IAM004 extends TestBase {
 			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
+			fluentwaitforElement(ob, By.name(OR.getProperty("FB_email_textBox")),30);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_email_textBox")), 60);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_password_textBox")), 60);
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
