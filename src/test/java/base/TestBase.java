@@ -231,6 +231,7 @@ public class TestBase {
 	public void beforeClass() {
 		logger = LogManager.getLogger(this.getClass().getSimpleName());
 	}
+
 	// @BeforeClass
 	// public void beforeClass() {
 	// extent = ExtentManager.getReporter(filePath);
@@ -462,8 +463,8 @@ public class TestBase {
 					desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, co);
 				}
 			}
-			ob = new RemoteWebDriver(
-					new URL("http://mohana-yalamarthi:4cc2c2ac-35f6-4cc3-a751-9c6758fffe96@ondemand.saucelabs.com:80/wd/hub"),
+			ob = new RemoteWebDriver(new URL(
+					"http://mohana-yalamarthi:4cc2c2ac-35f6-4cc3-a751-9c6758fffe96@ondemand.saucelabs.com:80/wd/hub"),
 					desiredCapabilities);
 			String waitTime = CONFIG.getProperty("defaultImplicitWait");
 			String pageWait = CONFIG.getProperty("defaultPageWait");
@@ -803,7 +804,7 @@ public class TestBase {
 
 	// logging out
 	public void logout() throws Exception {
-		waitUntilText("Newsfeed","Watchlists","Groups");
+		waitUntilText("Newsfeed", "Watchlists", "Groups");
 		jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
 		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
 				By.linkText(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_SIGNOUT_LINK.toString()), 30);
@@ -888,8 +889,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
@@ -916,8 +917,11 @@ public class TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 
@@ -930,7 +934,7 @@ public class TestBase {
 			// BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
 			waitUntilText("Please activate your Project Neon account");
-//			BrowserWaits.waitTime(22);
+			// BrowserWaits.waitTime(22);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
@@ -947,8 +951,11 @@ public class TestBase {
 			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 		}
@@ -960,8 +967,8 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			/*
@@ -975,8 +982,11 @@ public class TestBase {
 			waitUntilText("Newsfeed", "Watchlists", "Groups");
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 		}
 		return email;
@@ -1178,8 +1188,8 @@ public class TestBase {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				// check for the pending request count and break if count is
 				// zero.
-				if ((Long) js.executeScript(
-						"return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
+				if ((Long) js
+						.executeScript("return angular.element(document.body).injector().get(\'$http\').pendingRequests.length") == 0) {
 					break;
 				}
 				Thread.sleep(1000);
@@ -1948,8 +1958,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
@@ -1964,16 +1974,22 @@ public class TestBase {
 				if (test != null) {
 					test.log(LogStatus.FAIL, "Account activation email not sent");// extent
 																					// reports
-					test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-							captureScreenshot(this.getClass().getSimpleName() + "_account_activation_email_not_sent")));// screenshot
+					test.log(
+							LogStatus.INFO,
+							"Snapshot below: "
+									+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+											+ "_account_activation_email_not_sent")));// screenshot
 				}
 			}
 
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 
@@ -1986,14 +2002,17 @@ public class TestBase {
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-			ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
 			BrowserWaits.waitTime(10);
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 		}
 		return email;
@@ -2029,8 +2048,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
@@ -2042,8 +2061,11 @@ public class TestBase {
 			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 
@@ -2081,8 +2103,8 @@ public class TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
-			ob.findElement(By.name(OR.getProperty("signup_password_textbox")))
-					.sendKeys(CONFIG.getProperty("defaultPassword"));
+			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(
+					CONFIG.getProperty("defaultPassword"));
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
@@ -2094,8 +2116,11 @@ public class TestBase {
 			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();
-			test.log(LogStatus.INFO, "Snapshot below: " + test
-					.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_user_not_registered")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_user_not_registered")));// screenshot
 			closeBrowser();
 			return false;
 
@@ -2132,8 +2157,10 @@ public class TestBase {
 			String message,
 			String screenShotName) throws Exception {
 		test.log(LogStatus.FAIL, message);
-		test.log(LogStatus.FAIL, "Snapshot below: "
-				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
+		test.log(
+				LogStatus.FAIL,
+				"Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(t);
 	}
 
@@ -2150,8 +2177,10 @@ public class TestBase {
 			String message,
 			String screenShotName) throws Exception {
 		test.log(LogStatus.FAIL, message);
-		test.log(LogStatus.FAIL, "Snapshot below: "
-				+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
+		test.log(
+				LogStatus.FAIL,
+				"Snapshot below: "
+						+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + screenShotName)));// screenshot
 		ErrorUtil.addVerificationFailure(new Exception("Test case Failed"));
 	}
 
@@ -2177,19 +2206,19 @@ public class TestBase {
 			waitUntilText(each);
 		}
 	}
-	
-	public void fluentwaitforElement(WebDriver ob,By element,int time) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(ob)
-			    .withTimeout(30, TimeUnit.SECONDS)
-			    .pollingEvery(500, TimeUnit.MILLISECONDS)
-			    .ignoring(NoSuchElementException.class);
-			 
-			wait.until(new Function<WebDriver, WebElement>() 
-			{
-			  public WebElement apply(WebDriver driver) {
-			  return driver.findElement(element);
+
+	public void fluentwaitforElement(WebDriver ob,
+			By element,
+			int time) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(ob).withTimeout(time, TimeUnit.SECONDS)
+				.pollingEvery(500, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+
+		wait.until(new Function<WebDriver, WebElement>() {
+
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(element);
 			}
-			});
+		});
 	}
 
 }
