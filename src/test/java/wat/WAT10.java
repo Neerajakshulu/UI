@@ -1,5 +1,8 @@
 package wat;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -14,13 +17,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality using both Last name
- * and First Name
+ * Class for testing Author cluster search functionality with numbers in Last
+ * Name. This is a negative scenario.
  * 
  * @author UC225218
  *
  */
-public class WAT02 extends TestBase {
+public class WAT10 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -42,7 +45,6 @@ public class WAT02 extends TestBase {
 	/**
 	 * Method for login into WAT application using Steam ID
 	 * 
-	 * @param username,password
 	 * @throws Exception,
 	 *             When WAT Login is not done
 	 */
@@ -79,17 +81,15 @@ public class WAT02 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application using both first and last name
+	 * Method for testing Author cluster search functionality with numbers in
+	 * Last Name.
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
+	 * @throws Exception,
+	 *             When Something unexpected
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	public void testSearchAuthorClusterWithOnlyFirstName() throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -98,17 +98,30 @@ public class WAT02 extends TestBase {
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
 
-			// Search for an author cluster
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			test.log(LogStatus.INFO, "Entering author Last name... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, "10");
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+			test.log(LogStatus.INFO, "Trying to click find button... ");
+
+			if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+				test.log(LogStatus.PASS, "Unable to search for author cluster with numbers in Last name");
+			} else {
+				test.log(LogStatus.FAIL,
+						"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
+				throw new Exception(
+						"User is able to search for Author cluster with numbers in Last name OR Find button is enabled for number search");
+			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
-			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
+			test.log(LogStatus.FAIL, "Negative search test failed");
+			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
+
 	}
 
 	/**
@@ -132,4 +145,5 @@ public class WAT02 extends TestBase {
 		 */
 
 	}
+
 }

@@ -82,7 +82,8 @@ public class WAT04 extends TestBase {
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
-	 * 
+	 * @throws Exception,
+	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "CountryName", "OrgName" })
@@ -106,6 +107,7 @@ public class WAT04 extends TestBase {
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL,
 					"Failed to searched for an author using only Last name and landed in Author search result page.");
+			logFailureDetails(test, t, "Authorcluster search with only last name failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 

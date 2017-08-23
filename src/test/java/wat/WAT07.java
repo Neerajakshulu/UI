@@ -2,6 +2,7 @@ package wat;
 
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality with only Last Name
+ * Class for testing typeahead functionality for First name field.
  * 
  * @author UC225218
  *
@@ -76,11 +77,11 @@ public class WAT07 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method to test typeahead for Firstname field.
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
+	 * @param LastName
+	 * @throws Exception,
+	 *             When Something unexpected
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
@@ -93,22 +94,44 @@ public class WAT07 extends TestBase {
 					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-			// Search for an author cluster with only Last name
 			test.log(LogStatus.INFO, "Entering author name... ");
 
-			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
 			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
 			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, "J");
 			if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH))
 					.isDisplayed()) {
-				test.log(LogStatus.PASS, "First name Typeahead displayed for minimum 1 Letter");
+				test.log(LogStatus.PASS, "First name Typeahead displayed for minimum 1 Letter - Firststname");
 				pf.getBrowserActionInstance(ob).closeBrowser();
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "First name Typeahead not displayed for minimum 1 Letter");
+			test.log(LogStatus.FAIL, "First name Typeahead not displayed for minimum 1 Letter - Firststname");
+			logFailureDetails(test, e, "Typeahead not displayed for minimum 1 Letter - Firststname", "Typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
+	}
+
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL
+	 * or SKIP
+	 */
+	@AfterTest
+	public void reportTestResult() {
+
+		extent.endTest(test);
+
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
+
 	}
 }

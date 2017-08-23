@@ -14,13 +14,13 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing Author cluster search functionality using both Last name
- * and First Name
+ * Class for testing Author cluster search functionality with blank First Name.
+ * This is a negative scenario.
  * 
  * @author UC225218
  *
  */
-public class WAT02 extends TestBase {
+public class WAT12 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -42,7 +42,6 @@ public class WAT02 extends TestBase {
 	/**
 	 * Method for login into WAT application using Steam ID
 	 * 
-	 * @param username,password
 	 * @throws Exception,
 	 *             When WAT Login is not done
 	 */
@@ -79,17 +78,17 @@ public class WAT02 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application using both first and last name
+	 * Method for testing Author cluster search functionality with blank First
+	 * Name.
 	 * 
-	 * @param LastName,
-	 *            FirstName, CountryName, OrgName
+	 * @param LastName
+	 * @throws Exception,
+	 *             When Something unexpected
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName", "FirstName", "CountryName", "OrgName" })
-	public void testSearchAuthorClusterLastAndFirstName(String LastName, String FirstName, String CountryName,
-			String OrgName) throws Exception {
+	@Parameters({ "LastName" })
+	public void testSearchAuthorClusterBlankFirstName(String LastName) throws Exception {
 
 		try {
 			// Verify whether control is in Author Search page
@@ -97,18 +96,28 @@ public class WAT02 extends TestBase {
 					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster
-			test.log(LogStatus.INFO, "Entering author name... ");
-			pf.getSearchAuthClusterPage(ob).SearchAuthorCluster(LastName, FirstName, CountryName, OrgName, test);
-			test.log(LogStatus.PASS, "Successfully searched for an author and landed in Author search result page.");
-			pf.getBrowserActionInstance(ob).closeBrowser();
+			test.log(LogStatus.INFO, "Entering author Last name... ");
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, " ");
+			test.log(LogStatus.INFO, "Trying to click find button... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
+					.isEnabled()
+					&& pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH)
+							.isEnabled()) {
+				test.log(LogStatus.PASS, "User is able to search for author cluster with blank First name");
+			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
-			logFailureDetails(test, t, "Author Search Fail", "author_search_fail");
+			test.log(LogStatus.FAIL, "Negative search test failed");
+			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
+
 	}
 
 	/**
@@ -117,6 +126,7 @@ public class WAT02 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
+		pf.getBrowserActionInstance(ob).closeBrowser();
 
 		extent.endTest(test);
 
@@ -132,4 +142,5 @@ public class WAT02 extends TestBase {
 		 */
 
 	}
+
 }

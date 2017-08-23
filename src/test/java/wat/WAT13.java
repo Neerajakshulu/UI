@@ -1,27 +1,31 @@
 package wat;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
-import util.BrowserWaits;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import util.TestUtil;
 
 /**
- * Class for testing Author cluster search functionality with only First Name.
- * This is a negative scenario.
+ * Class for testing Author cluster search functionality with special character
+ * in First Name. This is a negative scenario.
  * 
  * @author UC225218
  *
  */
-public class WAT05 extends TestBase {
+public class WAT13 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -43,12 +47,13 @@ public class WAT05 extends TestBase {
 	/**
 	 * Method for login into WAT application using Steam ID
 	 * 
+	 * @param LastName
 	 * @throws Exception,
 	 *             When WAT Login is not done
 	 */
 	@Test
-	@Parameters({ "username", "password" })
-	public void testLoginWATApp(String username, String password) throws Exception {
+	@Parameters({ "username", "password", "LastName" })
+	public void testLoginWATApp(String username, String password, String LastName) throws Exception {
 
 		boolean testRunmode = getTestRunMode(rowData.getTestcaseRunmode());
 		boolean master_condition = suiteRunmode && testRunmode;
@@ -71,6 +76,18 @@ public class WAT05 extends TestBase {
 			ob.navigate().to(host + CONFIG.getProperty("appendWATAppUrl"));
 			pf.getLoginTRInstance(ob).loginToWAT(username, password, test);
 
+			// Verify whether control is in Author Search page
+			Assert.assertEquals(pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
+					"Control is not in WOS Author Search page");
+			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+
+			// Search for an author cluster with symbols in First name
+			test.log(LogStatus.INFO, "Entering author Last name... ");
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
+
 		} catch (Throwable t) {
 			logFailureDetails(test, t, "Login Fail", "login_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
@@ -79,46 +96,38 @@ public class WAT05 extends TestBase {
 	}
 
 	/**
-	 * Method to search for an author cluster after successful login into WAT
-	 * application
+	 * Method for testing Author cluster search functionality with special
+	 * character in First Name.
 	 * 
-	 * @param FirstName
-	 * @throws Exception,
-	 *             When Something unexpected
+	 * @throws Exception
+	 * 
 	 */
-	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "FirstName" })
-	public void testSearchAuthorClusterWithOnlyFirstName(String FirstName) throws Exception {
+	@Test(dependsOnMethods = { "testLoginWATApp" }, dataProvider = "getTestData")
+	public void testSearchAuthorClusterWithSymbolsLastName(String Symbols, String errorMessage) throws Exception {
 
 		try {
-			// Verify whether control is in Author Search page
-			Assert.assertEquals(pf.getBrowserActionInstance(ob)
-					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
-					"Control is not in WOS Author Search page");
-			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
-
-			// Search for an author cluster with only FIRST name
-			test.log(LogStatus.INFO, "Entering author First name... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
-			for (int i = 0; i < FirstName.length(); i++) {
-				char c = FirstName.charAt(i);
-				String s = new StringBuilder().append(c).toString();
-				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
-				BrowserWaits.waitTime(0.5);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, Symbols);
+			List<WebElement> ele = pf.getBrowserActionInstance(ob)
+					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
+			if (ele.size() != 0 && !pf.getBrowserActionInstance(ob)
+					.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH).isEnabled()) {
+				if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH)
+						.getText().equals(errorMessage)) {
+					test.log(LogStatus.INFO, "Error text matching for symbol -----------    " + Symbols);
+					test.log(LogStatus.PASS,
+							"Unable to search for author cluster with special character in First name");
+				}
+			} else {
+				test.log(LogStatus.FAIL,
+						"User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
+				throw new Exception(
+						"Test User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
 			}
-			test.log(LogStatus.INFO, "Trying to click find button... ");
-
-			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
-					.isEnabled()) {
-				test.log(LogStatus.FAIL, "Able to search for author cluster with only First name");
-			}
-			test.log(LogStatus.PASS, "User cant search for Author cluster with only first name");
-			pf.getBrowserActionInstance(ob).closeBrowser();
-
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
-			logFailureDetails(test, t, "Authorcluster search with only firstname Fail", "search_fail");
+			test.log(LogStatus.FAIL, "Negative search test failed");
+			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
@@ -130,7 +139,7 @@ public class WAT05 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-
+		pf.getBrowserActionInstance(ob).closeBrowser();
 		extent.endTest(test);
 
 		/*
@@ -144,6 +153,11 @@ public class WAT05 extends TestBase {
 		 * "SKIP");
 		 */
 
+	}
+
+	@DataProvider
+	public Object[][] getTestData() {
+		return TestUtil.getData(watxls, this.getClass().getSimpleName());
 	}
 
 }

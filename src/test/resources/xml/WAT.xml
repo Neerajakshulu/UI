@@ -13,9 +13,8 @@
 	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName" value="CANADA" />
 	<parameter name="OrgName" value="MCMASTER UNIV" />
-
-
-     <test name="WAT_Login" preserve-order="true">
+ 
+    <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -51,10 +50,59 @@
 		</classes>
 	</test>
 	
-		<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
+	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT07"></class>
 		</classes>
+	</test>  
+	
+	<test name="WAT_Author_Search_blank_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT08"></class>
+		</classes>
+	</test>
+	
+		<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT09"></class>
+		</classes>
 	</test> 
+	
+		<test name="WAT_Author_Search_number_lastnamee" preserve-order="true">
+		<classes>
+			<class name="wat.WAT10"></class>
+		</classes>
+	</test>
+
+	<test name="WAT_Author_Search_alphanum_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT11"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_Author_Search_blank_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT12"></class>
+		</classes>
+	</test>  
+	
+	<test name="WAT_Author_Search_symbol_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT13"></class>
+		</classes>
+	</test> 
+	
+	<test name="WAT_Author_Search_number_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT14"></class>
+		</classes>
+	</test>  
+	
+	<test name="WAT_Author_Search_alphanum_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT15"></class>
+		</classes>
+	</test> 
+	
 </suite>
 

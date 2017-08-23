@@ -14,7 +14,7 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for login WoS Author Transformation Application
+ * Class to test login into WoS Author Transformation Application
  * 
  * @author UC202376
  *
@@ -24,7 +24,7 @@ public class WAT01 extends TestBase {
 	static int status = 1;
 
 	/**
-	 * Method for displaying JIRA ID's for test case in specified path of Extent
+	 * Method to displaying JIRA ID's for test case in specified path of Extent
 	 * Reports
 	 * 
 	 * @throws Exception,
@@ -38,10 +38,10 @@ public class WAT01 extends TestBase {
 	}
 
 	/**
-	 * Method for login into Neon application using TR ID
+	 * Method for login into WAT application using TR ID
 	 * 
 	 * @throws Exception,
-	 *             When TR Login is not done
+	 *             When WAT Login is not done
 	 */
 	@Test
 	@Parameters({ "username", "password" })

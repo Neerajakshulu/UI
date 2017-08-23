@@ -2,6 +2,7 @@ package wat;
 
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -91,6 +92,8 @@ public class WAT03 extends TestBase {
 	/**
 	 * Method to verify all the static page content in author search page.
 	 * 
+	 * @throws Exception,
+	 *             When Something unexpected
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
@@ -110,6 +113,7 @@ public class WAT03 extends TestBase {
 				test.log(LogStatus.PASS, "WOS title text is matching in WOS Author Search page");
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL, "WOS title text is not present or not matching in WOS Author Search page");
+				logFailureDetails(test, e, "WOS title is not displayed", "wos_title_fail");
 			}
 
 			try {
@@ -123,6 +127,7 @@ public class WAT03 extends TestBase {
 				test.log(LogStatus.PASS, "SaR Labs text matching in Author search page.");
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL, "SaR Labs text not matching in Author search page.");
+				logFailureDetails(test, e, "SaR Labs Text is not present", "sar_label_fail");
 			}
 
 			try {
@@ -137,6 +142,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Search link is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Search link not present", "search_link_fail");
 			}
 
 			try {
@@ -150,6 +156,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Name search button is not present or button text not matching in Author search page.");
+				logFailureDetails(test, e, "Name Search button is not displayed", "name_button_fail");
 			}
 
 			try {
@@ -164,6 +171,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"ORCiD search button is not present or button text not matching in Author search page.");
+				logFailureDetails(test, e, "ORCiD Search button is not displayed", "orcid_button_fail");
 			}
 
 			try {
@@ -179,6 +187,7 @@ public class WAT03 extends TestBase {
 				e.printStackTrace();
 				test.log(LogStatus.FAIL,
 						"Welcome text is not present or its not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Welcome text is not displayed", "welcome_text_fail");
 			}
 
 			try {
@@ -194,6 +203,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Search suggestion text is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Search suggestion text is not displayed", "search_suggestion_text_fail");
 			}
 
 			try {
@@ -209,6 +219,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Lastname textbox inner text is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Lastname textbox is not displayed", "ln_textbox_fail");
 			}
 
 			try {
@@ -224,6 +235,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Firstname textbox inner text is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Firstname textbox is not displayed", "fn_textbox_fail");
 			}
 
 			try {
@@ -239,6 +251,7 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Add alternate name inner text is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Add alternate name button is not displayed", "alt_name_btn_fail");
 			}
 
 			try {
@@ -257,11 +270,34 @@ public class WAT03 extends TestBase {
 			} catch (AssertionError e) {
 				test.log(LogStatus.FAIL,
 						"Find button text is not present or is not displayed as expected in Author search page.");
+				logFailureDetails(test, e, "Find button is not displayed", "find_btn_fail");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to verify all static texts in Author search page.");
+			logFailureDetails(test, e, "Author Search Fail", "author_search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 	}
 
+	/**
+	 * updating Extent Report with test case status whether it is PASS or FAIL
+	 * or SKIP
+	 */
+	@AfterTest
+	public void reportTestResult() {
+
+		extent.endTest(test);
+
+		/*
+		 * if (status == 1) TestUtil.reportDataSetResult(profilexls,
+		 * "Test Cases", TestUtil.getRowNum(profilexls,
+		 * this.getClass().getSimpleName()), "PASS"); else if (status == 2)
+		 * TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(profilexls, "Test Cases",
+		 * TestUtil.getRowNum(profilexls, this.getClass().getSimpleName()),
+		 * "SKIP");
+		 */
+
+	}
 }

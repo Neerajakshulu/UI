@@ -309,9 +309,7 @@ public class SearchAuthorClusterPage extends TestBase {
 	 * 
 	 */
 	public void selectOrgofAuthor(String orgName, ExtentTest test) throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitForElementTobeVisible(ob,
-				By.xpath(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH.toString()), 5,
-				"Org dropdown is not present in Author search page");
+		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH, 5);
 		try {
 			test.log(LogStatus.INFO, "Selecting relavent organization... ");
 			pf.getBrowserActionInstance(ob).moveToElement(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
