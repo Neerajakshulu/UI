@@ -14,12 +14,14 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class for testing - Typeahead works during multiple alternative name search.
+ * Class to Verify that "Add alternative name" button should be (Gryed out) when
+ * content of Last Name field is removed.
+ * 
  * 
  * @author UC225218
  *
  */
-public class WAT16 extends TestBase {
+public class WAT20 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
@@ -77,48 +79,63 @@ public class WAT16 extends TestBase {
 	}
 
 	/**
-	 * Method for testing Typeahead functionality during multiple alternative
-	 * name search.
+	 * Method to Verify that "Add alternative name" button should be (Gryed out)
+	 * when content of Last Name field is removed.
 	 * 
+	 * @throws Exception,
+	 *             When Something unexpected
 	 * @param LastName
-	 * @throws Exception
-	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName" })
-	public void testTypeaheadMultipleAltNameLastName(String LastName) throws Exception {
-		String Lastname2 = "Upadhya";
-		String Lastname3 = "Bhat";
+	public void testSearchAuthorClusterLastNameTypeahead(String LastName) throws Exception {
+
 		try {
 			// Verify whether control is in Author Search page
 			Assert.assertEquals(pf.getBrowserActionInstance(ob)
 					.getElement(OnePObjectMap.WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH).getText(), wos_title,
 					"Control is not in WOS Author Search page");
 			test.log(LogStatus.INFO, "Control is in WOS Author Search page");
+			test.log(LogStatus.INFO, "Entering author name... ");
 
-			test.log(LogStatus.INFO, "Entering author Last name... ");
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH))
+					.isEnabled()) {
+				test.log(LogStatus.INFO,
+						"Add alternate name button not enabled when no data entered into Lastname field");
+			} else {
+				test.log(LogStatus.FAIL,
+						"Add alternate name button is enabled when no data entered into Lastname field");
+				throw new Exception("Add alternate name button is enabled when no data entered into Lastname field");
+			}
+			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
 			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
+			if (pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH))
+					.isEnabled()) {
+				test.log(LogStatus.INFO,
+						"Add alternate name button enabled after entering a value into Lastname field");
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
+				test.log(LogStatus.INFO, "Cleared value from Lastname field");
+			} else {
+				test.log(LogStatus.FAIL,
+						"Add alternate name button is not enabled even after entering value into Lastname field");
+				throw new Exception(
+						"Add alternate name button is not enabled even after entering value into Lastname field");
+			}
 
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME2_XPATH, Lastname2,
-					test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH);
-
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(OnePObjectMap.WAT_AUTHOR_LASTNAME3_XPATH, Lastname3,
-					test);
-			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
-			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
-			test.log(LogStatus.PASS, "Typeahead displayed during multiple Alternate name search");
-		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Lastname Typeahead not displayed during multiple Alternate name search");
-			logFailureDetails(test, t, "Lastname Typeahead not displayed during multiple Alternate name search",
-					"Alt_name_typeahead_fail");
+			if (!pf.getBrowserActionInstance(ob).getElement((OnePObjectMap.WAT_ADD_ALT_NAME_BTN_TEXT_XPATH))
+					.isEnabled()) {
+				test.log(LogStatus.PASS, "Add alternate name button not enabled after clearing Lastname field");
+			} else {
+				test.log(LogStatus.FAIL,
+						"Add alternate name button is enabled evenafter clearing data from Lastname field");
+				throw new Exception("Add alternate name button is enabled evenafter clearing data from Lastname field");
+			}
+			pf.getBrowserActionInstance(ob).closeBrowser();
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Add alternate name button functionality has issue");
+			logFailureDetails(test, e, "Add alternate name button functionality has issue", "Typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
-
 	}
 
 	/**
@@ -127,7 +144,7 @@ public class WAT16 extends TestBase {
 	 */
 	@AfterTest
 	public void reportTestResult() {
-		pf.getBrowserActionInstance(ob).closeBrowser();
+
 		extent.endTest(test);
 
 		/*
@@ -142,5 +159,4 @@ public class WAT16 extends TestBase {
 		 */
 
 	}
-
 }

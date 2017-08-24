@@ -14,7 +14,7 @@
 	<parameter name="CountryName" value="CANADA" />
 	<parameter name="OrgName" value="MCMASTER UNIV" />
  
-     <test name="WAT_Login" preserve-order="true">
+<!--      <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -113,6 +113,24 @@
 	<test name="WAT_Multiple_alt_name_typeahead_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT17"></class>
+		</classes>
+	</test>  -->
+	
+		<test name="WAT_Alt_btn_dsbld_no_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT18"></class>
+		</classes>
+	</test> 
+	
+		<test name="WAT_Alt_btn_dsbld_with_only_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT19"></class>
+		</classes>
+	</test> 
+	
+		<test name="WAT_Alt_btn_dsbld_when_removed_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT20"></class>
 		</classes>
 	</test> 
 	

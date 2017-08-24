@@ -80,13 +80,14 @@ public class WAT17 extends TestBase {
 	 * Method for testing Typeahead functionality during multiple alternative
 	 * name search.
 	 * 
-	 * @param LastName
+	 * @param LastName,
+	 *            First name
 	 * @throws Exception
 	 * 
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
 	@Parameters({ "LastName", "FirstName" })
-	public void testTypeaheadMultipleAltName(String LastName, String FirstName) throws Exception {
+	public void testTypeaheadMultipleAltNameFirstName(String LastName, String FirstName) throws Exception {
 		String Lastname2 = "UPADHYA";
 		String Lastname3 = "BHAT";
 		String Firstname2 = "KAPIL DEV";
