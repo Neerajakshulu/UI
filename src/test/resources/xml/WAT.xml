@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="WAT" >
+<suite name="WAT" parallel="tests" thread-count="10">
 
 	<listeners>
 		<listener class-name="listener.TestsListenerAdapter" />
@@ -14,7 +14,7 @@
 	<parameter name="CountryName" value="CANADA" />
 	<parameter name="OrgName" value="MCMASTER UNIV" />
  
-<!--      <test name="WAT_Login" preserve-order="true">
+    <test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
@@ -114,7 +114,7 @@
 		<classes>
 			<class name="wat.WAT17"></class>
 		</classes>
-	</test>  -->
+	</test>  
 	
 		<test name="WAT_Alt_btn_dsbld_no_lastname" preserve-order="true">
 		<classes>
@@ -128,10 +128,21 @@
 		</classes>
 	</test> 
 	
-		<test name="WAT_Alt_btn_dsbld_when_removed_lastname" preserve-order="true">
+	<test name="WAT_Alt_btn_dsbld_when_removed_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT20"></class>
 		</classes>
 	</test> 
 	
+	<test name="WAT_Error_msg_lastname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT21"></class>
+		</classes>
+	</test> 
+	
+		<test name="WAT_Error_msg_firstname" preserve-order="true">
+		<classes>
+			<class name="wat.WAT22"></class>
+		</classes>
+	</test>
 </suite>
