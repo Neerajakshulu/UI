@@ -1201,8 +1201,12 @@ public enum OnePObjectMap {
 		
 	WAT_WOS_AUTHOR_SEARCH_TITLE_XPATH("//h2[text()='Web of Science: Author search']"),
 	WAT_AUTHOR_LASTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--last']/descendant::input"),
+	WAT_AUTHOR_LASTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[1]"),
+	WAT_AUTHOR_LASTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[1]"),
 	WAT_AUTHOR_LASTNAME_INNERTEXT_XPATH("//label[text()='Last name']"),
 	WAT_AUTHOR_FIRSTNAME_XPATH("//div[@class='wat-search__field wat-search__field-name wat-search__field-name--first-and-middle']/descendant::input"),
+	WAT_AUTHOR_FIRSTNAME2_XPATH("//div[@class='ng-scope'][2]/descendant::input[2]"),
+	WAT_AUTHOR_FIRSTNAME3_XPATH("//div[@class='ng-scope'][3]/descendant::input[2]"),
 	WAT_AUTHOR_FIRSTSTNAME_INNERTEXT_XPATH("//label[text()='First name and middle initial(s)']"),
 	WAT_AUTHOR_COUNTRY_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div/button"),
 	WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-country']/descendant::div"),

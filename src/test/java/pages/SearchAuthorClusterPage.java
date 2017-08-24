@@ -150,6 +150,32 @@ public class SearchAuthorClusterPage extends TestBase {
 	}
 
 	/**
+	 * Method to enter the author search name (Last name) character by
+	 * character. This method is special case for Alternate name typeahead
+	 * search scenario.
+	 * 
+	 * @throws Exception
+	 * @param Name
+	 *            element Typeahead
+	 * 
+	 */
+	public void enterAuthorLastName(OnePObjectMap path, String LastName, ExtentTest test) throws Exception {
+		try {
+			pf.getBrowserActionInstance(ob).getElement(path).clear();
+			for (int i = 0; i < LastName.length(); i++) {
+				char c = LastName.charAt(i);
+				String s = new StringBuilder().append(c).toString();
+				pf.getBrowserActionInstance(ob).enterFieldValue(path, s);
+				BrowserWaits.waitTime(0.5);
+			}
+			selectLastNameFromTypeahead(LastName, test);
+		} catch (Exception e) {
+			e.getMessage();
+			test.log(LogStatus.FAIL, "Author Last name not entered");
+		}
+	}
+
+	/**
 	 * Method to enter the author search name (First name) character by
 	 * character.
 	 * 
@@ -164,6 +190,28 @@ public class SearchAuthorClusterPage extends TestBase {
 			char c = FirstName.charAt(i);
 			String s = new StringBuilder().append(c).toString();
 			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
+			BrowserWaits.waitTime(0.5);
+		}
+		selectFirstNameFromTypeahead(FirstName, test);
+		test.log(LogStatus.INFO, "Author First name entered");
+	}
+
+	/**
+	 * Method to enter the author search name (First name) character by
+	 * character. This method is special case for Alternate name typeahead
+	 * search scenario.
+	 * 
+	 * @throws Exception
+	 * @param Name
+	 * 
+	 */
+	public void enterAuthorFirstName(OnePObjectMap path, String FirstName, ExtentTest test) throws Exception {
+
+		pf.getBrowserActionInstance(ob).getElement(path).clear();
+		for (int i = 0; i < FirstName.length(); i++) {
+			char c = FirstName.charAt(i);
+			String s = new StringBuilder().append(c).toString();
+			pf.getBrowserActionInstance(ob).enterFieldValue(path, s);
 			BrowserWaits.waitTime(0.5);
 		}
 		selectFirstNameFromTypeahead(FirstName, test);
