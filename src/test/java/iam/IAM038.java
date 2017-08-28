@@ -328,7 +328,7 @@ public class IAM038 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				logout();
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(22);
+				waitUntilText("Project Neon password changed");
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -527,7 +527,7 @@ public class IAM038 extends TestBase {
 			logger.info(rowData.getTestcaseId());
 			for (int i = 1; i < tests.length; i++) {
 				logger.info(tests_dec[i]);
-				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
+				test = extent.startTest(tests[i], tests_dec[i]).assignCategory("IAM");
 				test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
 						+ " User Not created, hence skiping this test case");
 				extent.endTest(test);
