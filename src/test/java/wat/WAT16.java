@@ -113,7 +113,6 @@ public class WAT16 extends TestBase {
 			pf.getSearchAuthClusterPage(ob).enterAuthorLastName(LastName, test);
 			test.log(LogStatus.PASS, "Typeahead displayed during multiple Alternate name search");
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Lastname Typeahead not displayed during multiple Alternate name search");
 			logFailureDetails(test, t, "Lastname Typeahead not displayed during multiple Alternate name search",
 					"Alt_name_typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

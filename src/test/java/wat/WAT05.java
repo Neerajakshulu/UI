@@ -117,7 +117,6 @@ public class WAT05 extends TestBase {
 			pf.getBrowserActionInstance(ob).closeBrowser();
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Failed to search for an author and landed in Author search result page.");
 			logFailureDetails(test, t, "Authorcluster search with only firstname Fail", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

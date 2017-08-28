@@ -126,7 +126,6 @@ public class WAT13 extends TestBase {
 						"Test User is able to search for Author cluster with special character in First name OR Find button is enabled for Symbol search");
 			}
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Negative search test failed");
 			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

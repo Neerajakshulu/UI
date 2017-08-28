@@ -102,7 +102,6 @@ public class WAT06 extends TestBase {
 			}
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Typeahead not displayed for minimum 1 Letter - Lastname");
 			logFailureDetails(test, e, "Typeahead not displayed for minimum 1 Letter - Lastname", "Typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

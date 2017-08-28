@@ -132,7 +132,6 @@ public class WAT20 extends TestBase {
 			}
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Add alternate name button functionality has issue");
 			logFailureDetails(test, e, "Add alternate name button functionality has issue", "Typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

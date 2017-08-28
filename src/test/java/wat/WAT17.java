@@ -135,7 +135,6 @@ public class WAT17 extends TestBase {
 			test.log(LogStatus.PASS, "Firstname Typeahead displayed during multiple Alternate name search");
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Firstname Typeahead not displayed during multiple Alternate name search");
 			logFailureDetails(test, t, "Firstname Typeahead not displayed during multiple Alternate name search",
 					"Alt_name_typeahead_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();

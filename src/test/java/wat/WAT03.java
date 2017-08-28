@@ -273,7 +273,6 @@ public class WAT03 extends TestBase {
 				logFailureDetails(test, e, "Find button is not displayed", "find_btn_fail");
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to verify all static texts in Author search page.");
 			logFailureDetails(test, e, "Author Search Fail", "author_search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

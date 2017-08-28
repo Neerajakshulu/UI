@@ -113,7 +113,6 @@ public class WAT12 extends TestBase {
 			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Negative search test failed");
 			logFailureDetails(test, t, "Negative search test failed", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}

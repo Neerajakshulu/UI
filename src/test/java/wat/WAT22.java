@@ -122,7 +122,6 @@ public class WAT22 extends TestBase {
 			}
 
 		} catch (Throwable t) {
-			test.log(LogStatus.FAIL, "Error message functionality not working as expected");
 			logFailureDetails(test, t, "Error message functionality not working as expected", "search_fail");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
