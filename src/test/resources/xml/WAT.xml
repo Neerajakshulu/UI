@@ -13,62 +13,63 @@
 	<parameter name="FirstName" value="KRISHNARAJ" />
 	<parameter name="CountryName" value="CANADA" />
 	<parameter name="OrgName" value="MCMASTER UNIV" />
- 
-    <test name="WAT_Login" preserve-order="true">
+
+	<test name="WAT_Login" preserve-order="true">
 		<classes>
 			<class name="wat.WAT01"></class>
 		</classes>
-	</test>   
-	
- 	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Search_Lastname_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT02"></class>
 		</classes>
-	</test>  
-		
-  	<test name="WAT_Author_Search_Page_static_text_Verify" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Search_Page_static_text_Verify"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT03"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_Author_Search_Only_Lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT04"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Search_Only_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT05"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Search_Typeahead_Lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT06"></class>
 		</classes>
 	</test>
-	
+
 	<test name="WAT_Author_Search_Typeahead_Firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT07"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_Author_Search_blank_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT08"></class>
 		</classes>
 	</test>
-	
-		<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
+
+	<test name="WAT_Author_Search_spcl_char_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT09"></class>
 		</classes>
-	</test> 
-	
-		<test name="WAT_Author_Search_number_lastnamee" preserve-order="true">
+	</test>
+
+	<test name="WAT_Author_Search_number_lastnamee" preserve-order="true">
 		<classes>
 			<class name="wat.WAT10"></class>
 		</classes>
@@ -78,71 +79,83 @@
 		<classes>
 			<class name="wat.WAT11"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Search_blank_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT12"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_Author_Search_symbol_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT13"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Author_Search_number_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT14"></class>
 		</classes>
-	</test>  
-	
+	</test>
+
 	<test name="WAT_Author_Search_alphanum_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT15"></class>
 		</classes>
-	</test>  
-	
-	<test name="WAT_Multiple_alt_name_typeahead_Lastname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Multiple_alt_name_typeahead_Lastname"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT16"></class>
 		</classes>
-	</test> 
-	
-	<test name="WAT_Multiple_alt_name_typeahead_Firstname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Multiple_alt_name_typeahead_Firstname"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT17"></class>
 		</classes>
-	</test>  
-	
-		<test name="WAT_Alt_btn_dsbld_no_lastname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Alt_btn_dsbld_no_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT18"></class>
 		</classes>
-	</test> 
-	
-		<test name="WAT_Alt_btn_dsbld_with_only_firstname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Alt_btn_dsbld_with_only_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT19"></class>
 		</classes>
-	</test> 
-	
-	<test name="WAT_Alt_btn_dsbld_when_removed_lastname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Alt_btn_dsbld_when_removed_lastname"
+		preserve-order="true">
 		<classes>
 			<class name="wat.WAT20"></class>
 		</classes>
-	</test> 
-	
+	</test>
+
 	<test name="WAT_Error_msg_lastname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT21"></class>
 		</classes>
-	</test> 
-	
-		<test name="WAT_Error_msg_firstname" preserve-order="true">
+	</test>
+
+	<test name="WAT_Error_msg_firstname" preserve-order="true">
 		<classes>
 			<class name="wat.WAT22"></class>
+		</classes>
+	</test>
+
+	<test name="author_results_publication" preserve-order="true">
+		<parameter name="lastName" value="smith" />
+		<parameter name="countryName" value="TAIWAN" />
+		<parameter name="orgName" value="ACAD SINICA" />
+		<classes>
+			<class name="wat.WAT23"></class>
 		</classes>
 	</test>
 </suite>
