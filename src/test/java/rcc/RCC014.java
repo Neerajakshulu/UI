@@ -85,7 +85,7 @@ public class RCC014 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -94,7 +94,7 @@ public class RCC014 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -221,7 +221,7 @@ public class RCC014 extends TestBase {
 				logFailureDetails(test, t, "Items count in Group list page not displayed correctly",
 						"_Group_Item_count_mismatch");
 			}
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -230,7 +230,7 @@ public class RCC014 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
@@ -255,7 +255,7 @@ public class RCC014 extends TestBase {
 			pf.getUtility(ob).deleteGroup(title);
 			test.log(LogStatus.INFO, "Deleted the group");
 			pf.getLoginTRInstance(ob).logOutApp();
-		
+
 		} catch (Throwable t) {
 			test.log(LogStatus.FAIL, "Something went wrong");
 			// print full stack trace
@@ -268,11 +268,11 @@ public class RCC014 extends TestBase {
 					+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_login_not_done")));// screenshot
 
 		} finally {
-			
+
 			closeBrowser();
 
 		}
-		
+
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");
 	}
 

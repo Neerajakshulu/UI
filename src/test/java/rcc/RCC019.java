@@ -66,7 +66,7 @@ public class RCC019 extends TestBase {
 			String modalInfoText = "Are you sure you wish to remove this item from the group?";
 			openBrowser();
 			clearCookies();
-			
+
 			maximizeWindow();
 			ob.navigate().to(host);
 			loginAs("RCCTESTUSER011", "RCCTESTUSERPWD011");
@@ -85,16 +85,16 @@ public class RCC019 extends TestBase {
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
-			pf.clearAllPageObjects(); 
+			pf.clearAllPageObjects();
 
 			openBrowser();
-			clearCookies(); 
+			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			test.log(LogStatus.INFO, "Login as Group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
@@ -221,19 +221,16 @@ public class RCC019 extends TestBase {
 				logFailureDetails(test, t, "Items count in Group list page not displayed correctly",
 						"_Group_Item_count_mismatch");
 			}
-			
+
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
-			
 
-			
-			
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			BrowserWaits.waitTime(5);
 			test.log(LogStatus.INFO, "Login as group member");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
@@ -274,7 +271,7 @@ public class RCC019 extends TestBase {
 
 		} finally {
 			closeBrowser();
-			
+
 		}
 
 		test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution ends ");

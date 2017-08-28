@@ -152,7 +152,7 @@ public class RCC015 extends TestBase {
 
 			ob.navigate().back();
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE23"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE24"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -161,7 +161,7 @@ public class RCC015 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER023", "RCCTESTUSERPWD023");
+			loginAs("RCCTESTUSER024", "RCCTESTUSERPWD024");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 

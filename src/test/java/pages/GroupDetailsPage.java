@@ -91,7 +91,7 @@ public class GroupDetailsPage extends TestBase {
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
 				scrollElementIntoView(ob, we);
-				jsClick(ob,we);
+				jsClick(ob, we);
 				return;
 			}
 		}
@@ -107,14 +107,13 @@ public class GroupDetailsPage extends TestBase {
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
 				scrollElementIntoView(ob, we);
-				jsClick(ob,we);
+				jsClick(ob, we);
 				BrowserWaits.waitTime(2);
 				return;
 			}
 		}
 		throw new Exception("Attach File button is not displayed in group details page");
-		
-		
+
 	}
 
 	public void clickOnInviteOthersButton() throws Exception {
@@ -126,7 +125,7 @@ public class GroupDetailsPage extends TestBase {
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
 				scrollElementIntoView(ob, we);
-				jsClick(ob,we);
+				jsClick(ob, we);
 				return;
 			}
 		}
@@ -223,15 +222,15 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public boolean selectUserFromList(String membersName) throws InterruptedException {
-		boolean isFound=false;
+		boolean isFound = false;
 		waitForAjax(ob);
 		BrowserWaits.waitTime(4);
-		for(int i=0;i<membersName.length();i++){
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
-				.sendKeys(membersName.charAt(i)+"");
-		BrowserWaits.waitTime(1);
+		for (int i = 0; i < membersName.length(); i++) {
+			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_CSS.toString()))
+					.sendKeys(membersName.charAt(i) + "");
+			BrowserWaits.waitTime(1);
 		}
-		
+
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBER_TYPE_AHEAD_OPTIONS_CSS.toString()), 30);
 		BrowserWaits.waitTime(2);
@@ -278,10 +277,8 @@ public class GroupDetailsPage extends TestBase {
 		scrollingToElementofAPage();
 		waitForAjax(ob);
 		WebElement groupCard = getPendingRecords(username);
-		jsClick(ob,groupCard
-				.findElement(By.cssSelector(
-						OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString())));
-				
+		jsClick(ob, groupCard.findElement(By
+				.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_PENDING_MEMBERS_CANCEL_INVITATION_BUTTON_CSS.toString())));
 
 	}
 
@@ -328,7 +325,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Article not present in Group details page
 	 */
-	public void validateArtcileInGroupDetailsPage(ExtentTest test,String articleTitle) throws Exception {
+	public void validateArtcileInGroupDetailsPage(ExtentTest test, String articleTitle) throws Exception {
 		clickArticlesTab();
 		boolean isArticleRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -346,8 +343,10 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isArticleRecordPresent) {
-			//throw new Exception("Article Record is not present in Group Details Page");
-			logFailureDetails(test, "Article Record is not present in Group Details Page", "article_not_present_GD_page");
+			// throw new Exception("Article Record is not present in Group
+			// Details Page");
+			logFailureDetails(test, "Article Record is not present in Group Details Page",
+					"article_not_present_GD_page");
 		}
 	}
 
@@ -358,7 +357,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Patent not present in Group details page
 	 */
-	public void validatePatentInGroupDetailsPage(ExtentTest test,String patentTitle) throws Exception {
+	public void validatePatentInGroupDetailsPage(ExtentTest test, String patentTitle) throws Exception {
 		clickPatentstab();
 		boolean isPatentRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -376,7 +375,8 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isPatentRecordPresent) {
-			//throw new Exception("Patent Record is not present in Group Details Page");
+			// throw new Exception("Patent Record is not present in Group
+			// Details Page");
 			logFailureDetails(test, "Patent Record is not present in Group Details Page", "patent_not_present_GD_page");
 		}
 	}
@@ -388,7 +388,7 @@ public class GroupDetailsPage extends TestBase {
 	 * @throws Exception,
 	 *             When Post not present in Group details page
 	 */
-	public void validatePostInGroupDetailsPage(ExtentTest test,String postTitle) throws Exception {
+	public void validatePostInGroupDetailsPage(ExtentTest test, String postTitle) throws Exception {
 		clickPostsTab();
 		boolean isPostRecordPresent = false;
 		pf.getBrowserWaitsInstance(ob)
@@ -407,11 +407,13 @@ public class GroupDetailsPage extends TestBase {
 			}
 		}
 		if (!isPostRecordPresent) {
-			//throw new Exception("Post Record is not present in Group Details Page");
+			// throw new Exception("Post Record is not present in Group Details
+			// Page");
 			logFailureDetails(test, "Post Record is not present in Group Details Page", "post_not_present_GD_page");
-			
+
 		}
 	}
+
 	public String getPendingInvitationMessage() throws Exception {
 		scrollingToElementofAPage();
 		pf.getBrowserWaitsInstance(ob)
@@ -429,7 +431,8 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CANCEL_BUTTON_CSS);
-		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
+		waitForElementTobeInvisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		BrowserWaits.waitTime(3);
 	}
 
@@ -437,7 +440,8 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CLOSE_BUTTON_CSS);
-		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
+		waitForElementTobeInvisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		BrowserWaits.waitTime(3);
 	}
 
@@ -445,7 +449,8 @@ public class GroupDetailsPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_SUBMIT_BUTTON_CSS);
-		waitForElementTobeInvisible(ob, By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
+		waitForElementTobeInvisible(ob,
+				By.cssSelector(OnePObjectMap.RCC_GROUPS_DETAILS_CONFIRMATION_MODAL_CSS.toString()), 5);
 		waitForAjax(ob);
 		BrowserWaits.waitTime(3);
 	}
@@ -505,17 +510,18 @@ public class GroupDetailsPage extends TestBase {
 		return groupDesc.equals(desc);
 
 	}
+
 	public String getGroupDescription() throws Exception {
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS.toString()), 60);
 
-		return pf.getBrowserActionInstance(ob)
-				.getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS).get(1).getText().trim();
-		
+		return pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_GROUPDETAILS_GROUP_DESCRIPTION_CSS).get(1)
+				.getText().trim();
+
 	}
 
 	public void clickOnGroupOwnerName() throws Exception {
-		JavascriptExecutor jse = (JavascriptExecutor)ob;
+		JavascriptExecutor jse = (JavascriptExecutor) ob;
 		jse.executeScript("scroll(0, -250);");
 		waitForAllElementsToBePresent(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_GROUP_OWNER_NAME_CSS.toString()), 60);
@@ -535,7 +541,7 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickonLeaveGroupButton() throws Exception {
-		
+
 		waitForAjax(ob);
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
 				60);
@@ -676,19 +682,23 @@ public class GroupDetailsPage extends TestBase {
 	}
 
 	public void clickOnRemoveRecord(String recordTitle, String recordType) throws Exception {
-		
+
 		WebElement record = getRecordCard(recordTitle, recordType);
 		BrowserWaits.waitTime(5);
-		scrollElementIntoView(ob, record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
-		jsClick(ob,record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
-				
+		scrollElementIntoView(ob, record
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+		jsClick(ob, record
+				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_REMOVE_BUTTON_CSS.toString())));
+
 	}
 
 	public void clickOnAttachFileForRecord(String recordTitle, String recordType) throws Exception {
 		WebElement record = getRecordCard(recordTitle, recordType);
-		scrollElementIntoView(ob, record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
-		jsClick(ob,record.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
-		BrowserWaits.waitTime(2);		
+		scrollElementIntoView(ob, record.findElement(
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
+		jsClick(ob, record.findElement(
+				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_CARD_ATTACHFILE_BUTTON_CSS.toString())));
+		BrowserWaits.waitTime(2);
 	}
 
 	public boolean verifytheDateandTimeofAttachedRecord(String recordTitle, String recordType) throws Exception {
@@ -751,8 +761,10 @@ public class GroupDetailsPage extends TestBase {
 		String role = record
 				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPINVITATIONS_GROUP_OWNER_ROLE_CSS.toString()))
 				.getText();
-		if(role.equals(""))return name.trim();
-		else return name.trim() + ", " + role.trim();
+		if (role.equals(""))
+			return name.trim();
+		else
+			return name.trim() + ", " + role.trim();
 
 	}
 
@@ -978,6 +990,7 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("Group Description is not updtaed in group details page");
 
 	}
+
 	public boolean validateSaveButtonDisabled() throws Exception {
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS.toString()),
 				60);
@@ -985,18 +998,18 @@ public class GroupDetailsPage extends TestBase {
 				.getElements(OnePObjectMap.RCC_GROUPSLIST_SAVE_GROUP_BUTTON_CSS);
 		for (WebElement we : list) {
 			if (we.isDisplayed()) {
-			return we.isEnabled();
-			
+				return we.isEnabled();
+
 			}
 		}
 		throw new Exception("Save button is not displayed while editing the group");
 
 	}
-	
+
 	public boolean validateCreateGroupCardErrorMessage() throws Exception {
 		String ErrorMsg = "Please provide a title for your group. (Minimum 2 characters)";
 		waitForAjax(ob);
-		
+
 		waitForAllElementsToBePresent(ob, By.xpath(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH.toString()), 60);
 
 		List<WebElement> list = pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.RCC_ERROR_MSG_TEXT_XPATH);
@@ -1111,7 +1124,7 @@ public class GroupDetailsPage extends TestBase {
 	public void clickOnItemLevelRemoveGoogleDoc(String recordTitle, String recordType, String docTitle)
 			throws Exception {
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
-		jsClick(ob,gdRecord.findElement(
+		jsClick(ob, gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_REMOVE_BUTTON_CSS.toString())));
 	}
 
@@ -1133,35 +1146,32 @@ public class GroupDetailsPage extends TestBase {
 			throws Exception {
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		return gdRecord
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_ITEM_LEVEL_TIMESTAMP_CSS.toString()))
+				.findElement(By.cssSelector(
+						OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_ITEM_LEVEL_TIMESTAMP_CSS.toString()))
 				.getText();
 	}
 
-	public void enterItemLevelGoogleDocTitle(WebElement gdRecord,String newTilte)
-			throws Exception {
+	public void enterItemLevelGoogleDocTitle(WebElement gdRecord, String newTilte) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.sendKeys(newTilte);
 	}
 
-	public void enterItemLevelGoogleDocDesc(WebElement gdRecord,String desc)
-			throws Exception {
+	public void enterItemLevelGoogleDocDesc(WebElement gdRecord, String desc) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.sendKeys(desc);
 	}
 
-	public void clickOnCanelItemLevelGoogleDocEdit(WebElement gdRecord)
-			throws Exception {
+	public void clickOnCanelItemLevelGoogleDocEdit(WebElement gdRecord) throws Exception {
 		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_CANCEL_BUTTON_CSS.toString())).click();
 	}
 
-	public void clickOnUpdateItemLevelGoogleDocEdit(WebElement gdRecord)
-			throws Exception {
-		
+	public void clickOnUpdateItemLevelGoogleDocEdit(WebElement gdRecord) throws Exception {
+
 		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_UPDATE_BUTTON_CSS.toString())).click();
 	}
@@ -1186,7 +1196,8 @@ public class GroupDetailsPage extends TestBase {
 		clickOnUpdateItemLevelGoogleDocEdit(gdRecord);
 	}
 
-	public void clickOnOpenInGoogleDriveLinkItemLevel(String recordTitle, String recordType, String docTitle) throws Exception {
+	public void clickOnOpenInGoogleDriveLinkItemLevel(String recordTitle, String recordType, String docTitle)
+			throws Exception {
 		scrollingToElementofAPage();
 		WebElement gdRecord = getItemLevelGDRecord(recordTitle, recordType, docTitle);
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_LINK_CSS.toString()))
@@ -1216,17 +1227,18 @@ public class GroupDetailsPage extends TestBase {
 		}
 	}
 
-	public void selectGDdoc(String gddocTitle,int iterationCount) {
+	public void selectGDdoc(String gddocTitle, int iterationCount) {
 		waitForAllElementsToBePresent(ob, By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"), 90);
-		List<WebElement> frames=ob.findElements(By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"));
-			
-		WebDriverWait wait = new WebDriverWait(ob,60);
-		  wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frames.get(iterationCount)));
+		List<WebElement> frames = ob.findElements(By.cssSelector("iframe[class='picker-frame picker-dialog-frame']"));
+
+		WebDriverWait wait = new WebDriverWait(ob, 60);
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frames.get(iterationCount)));
 		waitForElementTobeVisible(ob, By.xpath(
 				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle)), 90);
 		ob.findElement(By.xpath(
-				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle))).click();
-				
+				OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_TITLE_XPATH.toString().replaceAll("TITLE", gddocTitle)))
+				.click();
+
 		waitForElementTobeClickable(ob, By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString()),
 				90);
 		ob.findElement(By.xpath(OnePObjectMap.RCC_GROUPDETAILS_GOOGLE_DOC_SELECT_XPATH.toString())).click();
@@ -1275,63 +1287,63 @@ public class GroupDetailsPage extends TestBase {
 	public String getGroupLevelGoogleDocTimestamp(String docTitle) throws Exception {
 		WebElement gdRecord = getGroupLevelGDRecord(docTitle);
 		return gdRecord
-				.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GROUP_LEVEL_GOOGLE_DOC_TIMESTAMP_CSS.toString()))
+				.findElement(By.cssSelector(
+						OnePObjectMap.RCC_GROUPDETAILS_RECORD_GROUP_LEVEL_GOOGLE_DOC_TIMESTAMP_CSS.toString()))
 				.getText();
 	}
 
-	public void enterGroupLevelGoogleDocTitle(WebElement gdRecord,String docTitle, String newTilte) throws Exception {
+	public void enterGroupLevelGoogleDocTitle(WebElement gdRecord, String docTitle, String newTilte) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_TITLE_CSS.toString()))
 				.sendKeys(newTilte);
 	}
 
-	public void enterGroupLevelGoogleDocDesc(WebElement gdRecord,String docTitle, String desc) throws Exception {
+	public void enterGroupLevelGoogleDocDesc(WebElement gdRecord, String docTitle, String desc) throws Exception {
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.clear();
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_EDIT_DESC_CSS.toString()))
 				.sendKeys(desc);
 	}
 
-	public void clickOnCanelGroupLevelGoogleDocEdit(WebElement gdRecord,String docTitle) throws Exception {
+	public void clickOnCanelGroupLevelGoogleDocEdit(WebElement gdRecord, String docTitle) throws Exception {
 		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_CANCEL_BUTTON_CSS.toString())).click();
 	}
 
-	public void clickOnUpdateGroupLevelGoogleDocEdit(WebElement gdRecord,String docTitle) throws Exception {
-		 gdRecord.findElement(
+	public void clickOnUpdateGroupLevelGoogleDocEdit(WebElement gdRecord, String docTitle) throws Exception {
+		gdRecord.findElement(
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_UPDATE_BUTTON_CSS.toString())).click();
 	}
 
 	public void updateGroupLevelGoogleDoc(String docTitle, String newTilte, String desc) throws Exception {
 		WebElement gdRecord = getGroupLevelGDRecord(docTitle);
 		clickOnGroupLevelEditGoogleDoc(docTitle);
-		enterGroupLevelGoogleDocTitle(gdRecord,docTitle, newTilte);
-		enterGroupLevelGoogleDocDesc(gdRecord,docTitle, desc);
-		clickOnUpdateGroupLevelGoogleDocEdit(gdRecord,docTitle);
+		enterGroupLevelGoogleDocTitle(gdRecord, docTitle, newTilte);
+		enterGroupLevelGoogleDocDesc(gdRecord, docTitle, desc);
+		clickOnUpdateGroupLevelGoogleDocEdit(gdRecord, docTitle);
 	}
 
-	public void clickOnOpenInGoogleDriveLinkGroupLevel(String docTitle)
-			throws Exception {
+	public void clickOnOpenInGoogleDriveLinkGroupLevel(String docTitle) throws Exception {
 		WebElement gdRecord = getGroupLevelGDRecord(docTitle);
 		gdRecord.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_LINK_CSS.toString()))
 				.click();
 	}
 
 	public boolean validateGDUrl() {
-		boolean result=false;
+		boolean result = false;
 		String PARENT_WINDOW = ob.getWindowHandle();
 		waitForNumberOfWindowsToEqual(ob, 2);
 		Set<String> child_window_handles = ob.getWindowHandles();
 		for (String child_window_handle : child_window_handles) {
 			if (!child_window_handle.equals(PARENT_WINDOW)) {
 				ob.switchTo().window(child_window_handle);
-				
-				if(ob.getCurrentUrl().contains("drive.google.com")){
-				ob.close();
-				
-				result= true;
-				
+
+				if (ob.getCurrentUrl().contains("drive.google.com")) {
+					ob.close();
+
+					result = true;
+
 				}
 			}
 		}
@@ -1339,69 +1351,68 @@ public class GroupDetailsPage extends TestBase {
 		return result;
 	}
 
-	
 	public boolean isItemLevelGDRecordPresent(String recordTitle, String recordType, String docTitle) throws Exception {
-		try{
+		try {
 			scrollingToElementofAPage();
 			waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
 
-		List<WebElement> gdList = getRecordCard(recordTitle, recordType)
-				.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
-		String actTitle;
-		if (gdList.size() != 0) {
-			for (WebElement we : gdList) {
-				actTitle = we
-						.findElement(
-								By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
-						.getText();
-				if (actTitle.equalsIgnoreCase(docTitle)) {
-					return true;
+			List<WebElement> gdList = getRecordCard(recordTitle, recordType)
+					.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
+			String actTitle;
+			if (gdList.size() != 0) {
+				for (WebElement we : gdList) {
+					actTitle = we
+							.findElement(By
+									.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
+							.getText();
+					if (actTitle.equalsIgnoreCase(docTitle)) {
+						return true;
+					}
 				}
 			}
-		}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
-		return false;	
+		return false;
 
 	}
-	
-	public String getInvitationStatus(String username) throws Exception
-	{
-	 WebElement groupcard = getPendingRecords(username);
 
-     String Timecard = groupcard
-                .findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
-                .getText();
-     return Timecard;
+	public String getInvitationStatus(String username) throws Exception {
+		WebElement groupcard = getPendingRecords(username);
+
+		String Timecard = groupcard
+				.findElement(By.xpath(OnePObjectMap.RCC_GROUP_INVITATIONS_DETAILS_TIMESTAMP_XPATH.toString()))
+				.getText();
+		return Timecard;
 	}
-	
+
 	public boolean isGroupLevelGDRecordPresent(String docTitle) throws Exception {
-		try{
-		waitForAllElementsToBePresent(ob,
-				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
+		try {
+			waitForAllElementsToBePresent(ob,
+					By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()), 30);
 
-		List<WebElement> gdList = ob.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
-		String actTitle;
-		if (gdList.size() != 0) {
-			for (WebElement we : gdList) {
-				actTitle = we
-						.findElement(
-								By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
-						.getText();
-				if (actTitle.equalsIgnoreCase(docTitle)) {
-					return true;
+			List<WebElement> gdList = ob
+					.findElements(By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_DIV_CSS.toString()));
+			String actTitle;
+			if (gdList.size() != 0) {
+				for (WebElement we : gdList) {
+					actTitle = we
+							.findElement(By
+									.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_RECORD_GOOGLE_DOC_TTILE_CSS.toString()))
+							.getText();
+					if (actTitle.equalsIgnoreCase(docTitle)) {
+						return true;
+					}
 				}
 			}
-		}
-		}catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
-		return false;	
+		return false;
 
 	}
-	
+
 	public void clickOnCancelGroup() {
 		waitForElementTobeVisible(ob,
 				By.cssSelector(OnePObjectMap.RCC_GROUPDETAILS_INVITE_MEMBERS_CANCEL_BUTTON_CSS.toString()), 30);
@@ -1448,6 +1459,7 @@ public class GroupDetailsPage extends TestBase {
 		return false;
 
 	}
+
 	public boolean verifyDeleteGroupPopupMessage() throws Exception {
 		String Originalmessage = "Are you sure you want to delete this group? You will remove all group members and pending invitations.";
 		waitForAjax(ob);
@@ -1457,17 +1469,19 @@ public class GroupDetailsPage extends TestBase {
 				.findElement(
 						By.cssSelector(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_VERIFICATION_TEXT_CSS.toString()))
 				.getText();
-		if(Originaltext.equals(Originalmessage))
+		if (Originaltext.equals(Originalmessage))
 			return true;
 		else
 			return false;
 	}
+
 	public boolean verifyDeletegroupPopupButtons() throws Exception {
 		waitForAjax(ob);
-            try {
+		try {
 			ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
 					.isDisplayed();
-			ob.findElement(By.cssSelector(OnePObjectMap.GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS.toString()))
+			ob.findElement(
+					By.cssSelector(OnePObjectMap.GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS.toString()))
 					.isDisplayed();
 			return true;
 		} catch (NoSuchElementException e) {
@@ -1475,10 +1489,11 @@ public class GroupDetailsPage extends TestBase {
 		}
 
 	}
-	
+
 	public boolean clickonCancelButtononDEleteGroupPopup() throws Exception {
 		waitForAjax(ob);
-		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString())).click();
+		ob.findElement(By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_POP_UP_CANCEL_BUTTON_CSS.toString()))
+				.click();
 
 		waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.RCC_GROUPLIST_LEAVE_GROUP_BUTTON_CSS.toString()),
 				10);
@@ -1492,12 +1507,11 @@ public class GroupDetailsPage extends TestBase {
 		throw new Exception("leave group button is not displayed in group details page");
 
 	}
-	
+
 	public void clickOnDeleteGroupButtoninPopUp() throws Exception {
-		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(
-				OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
-		pf.getBrowserActionInstance(ob)
-				.click(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
+		pf.getBrowserWaitsInstance(ob)
+				.waitUntilElementIsDisplayed(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
+		pf.getBrowserActionInstance(ob).click(OnePObjectMap.RCC_GROUPLIST_DELETE_GROUP_POP_UP_DELETEGROUP_BUTTON_CSS);
 
 	}
 
