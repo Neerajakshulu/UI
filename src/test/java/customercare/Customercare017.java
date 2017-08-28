@@ -70,9 +70,11 @@ public class Customercare017 extends TestBase {
 
 			try {
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CC_HEADER_CSS);
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.DRA_CC_HEADER_CSS);
 				String DropText = pf.getBrowserActionInstance(ob)
 						.getElement(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME).getText();
 			   
+				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME);
 				pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.CUSTOMER_CARE_USER_COUNTRY_NAME);
 				if (DropText.contains("Åland Islands") && DropText.contains("Côte d'Ivoire")
 						&& DropText.contains("Holy See (Vatican City State)")
