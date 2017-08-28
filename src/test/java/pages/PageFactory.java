@@ -41,26 +41,12 @@ public class PageFactory {
 	private IPARecordViewPage rvpage = null;
 	private GmailLoginPage gmpage = null;
 	private CreatePostAndCommentPage postncommentpage = null;
+	
 	private WATLogInPage watLogInPage = null;
-
 	private SearchAuthorClusterPage SearchAuthClusterPage = null;
+	private SearchAuthorClusterResultsPage searchAuthorClusterResultsPage=null;
 
-	/**
-	 * This Method provides Search author cluster page object to access the
-	 * common methods related to search author cluster page.
-	 * 
-	 * 
-	 * @throws
-	 * 
-	 */
-	public SearchAuthorClusterPage getSearchAuthClusterPage(WebDriver ob) {
-
-		if (SearchAuthClusterPage == null) {
-			SearchAuthClusterPage = new SearchAuthorClusterPage(ob);
-		}
-		return SearchAuthClusterPage;
-	}
-
+	
 	public IAMPage getIamPage(WebDriver ob) {
 
 		if (iamPage == null) {
@@ -340,6 +326,31 @@ public class PageFactory {
 		}
 		return gmpage;
 	}
+	
+	
+	/**
+	 * This Method provides Search author cluster page object to access the common methods related to search author
+	 * cluster page.
+	 * 
+	 * @throws
+	 * 
+	 */
+	public SearchAuthorClusterPage getSearchAuthClusterPage(WebDriver ob) {
+
+		if (SearchAuthClusterPage == null) {
+			SearchAuthClusterPage = new SearchAuthorClusterPage(ob);
+		}
+		return SearchAuthClusterPage;
+	}
+	
+	public SearchAuthorClusterResultsPage getSearchAuthClusterResultsPage(WebDriver ob) {
+
+		if (searchAuthorClusterResultsPage == null) {
+			searchAuthorClusterResultsPage = new SearchAuthorClusterResultsPage(ob);
+		}
+		return searchAuthorClusterResultsPage;
+	}
+
 
 	public void clearAllPageObjects() {
 		searchResultsPage = null;
@@ -369,5 +380,6 @@ public class PageFactory {
 		rvpage = null;
 		gmpage = null;
 		postncommentpage = null;
+		searchAuthorClusterResultsPage=null;
 	}
 }

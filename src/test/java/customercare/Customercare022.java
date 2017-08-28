@@ -70,9 +70,9 @@ public class Customercare022 extends TestBase{
 			
 				pf.getBrowserWaitsInstance(ob).waitUntilText("Clarivate Analytics Customer Care");
 				
-				pf.getBrowserWaitsInstance(ob).IsElementPresent(OnePObjectMap.CUSTOMER_CARELINK_IN_ERRORPAGE_CSS);
+				pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(OnePObjectMap.CUSTOMER_CARELINK_IN_ERRORPAGE_CSS);
 				
-				pf.getBrowserWaitsInstance(ob).IsElementPresent(OnePObjectMap.OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS);
+				pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(OnePObjectMap.OTHERPRODUCTSLINK_IN_ERRORPAGE_CSS);
 			
 				test.log(LogStatus.PASS,"Customer care link and other product link are present");
 		

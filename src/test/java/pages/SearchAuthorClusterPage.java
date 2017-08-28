@@ -138,8 +138,7 @@ public class SearchAuthorClusterPage extends TestBase {
 			pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).clear();
 			for (int i = 0; i < LastName.length(); i++) {
 				char c = LastName.charAt(i);
-				String s = new StringBuilder().append(c).toString();
-				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, s);
+				pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH, String.valueOf(c));
 				BrowserWaits.waitTime(0.5);
 			}
 			selectLastNameFromTypeahead(LastName, test);
@@ -188,8 +187,7 @@ public class SearchAuthorClusterPage extends TestBase {
 		pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).clear();
 		for (int i = 0; i < FirstName.length(); i++) {
 			char c = FirstName.charAt(i);
-			String s = new StringBuilder().append(c).toString();
-			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, s);
+			pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH, String.valueOf(c));
 			BrowserWaits.waitTime(0.5);
 		}
 		selectFirstNameFromTypeahead(FirstName, test);
@@ -374,8 +372,26 @@ public class SearchAuthorClusterPage extends TestBase {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param test
+	 * @throws Exception
+	 */
+	public void validateAuthorSearchPage(ExtentTest test) throws Exception {
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH).isDisplayed(),
+				"Lastname text box not visible");
+		test.log(LogStatus.INFO, "User is able to see last name textbox and can be used for author cluster search");
+
+		Assert.assertTrue(
+				pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_FIRSTNAME_XPATH).isDisplayed(),
+				"Firstname text box not visible");
+		test.log(LogStatus.INFO,
+				"User is able to see First name textbox and can be used for author cluster search");
+	}
+
 }

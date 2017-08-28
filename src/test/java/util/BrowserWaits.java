@@ -1,5 +1,6 @@
 package util;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
@@ -34,43 +35,16 @@ public class BrowserWaits extends TestBase {
 	public BrowserWaits(WebDriver ob) {
 		this.ob = ob;
 	}
-
-	public void IsElementPresent(Object elementName) throws Exception {
-		if ((elementName instanceof Enum)) {
-			locatorType = ((Enum<?>) elementName).name();
-			locatorText = elementName.toString();
-		}
-		int count = 0;
-		System.out.println("locator Type -->" + locatorType);
-		System.out.println("locator Text -->" + locatorText);
-
-		try {
-			if (locatorType.endsWith("_CSS")) {
-				count = ob.findElements(By.cssSelector(locatorText)).size();
-				System.out.println("CSS locator and cound is-->" + count);
-			} else if (locatorType.endsWith("_XPATH")) {
-				count = ob.findElements(By.xpath(locatorText)).size();
-			} else if (locatorType.endsWith("_LINK")) {
-				count = ob.findElements(By.linkText(locatorText)).size();
-			} else if (locatorType.endsWith("_PLINK")) {
-				count = ob.findElements(By.partialLinkText(locatorText)).size();
-			} else if (locatorType.endsWith("_ID")) {
-				count = ob.findElements(By.id(locatorText)).size();
-			} else if (locatorType.endsWith("_TAG")) {
-				count = ob.findElements(By.tagName(locatorText)).size();
-			} else if (locatorType.endsWith("_CLASS")) {
-				count = ob.findElements(By.className(locatorText)).size();
-			} else {
-				count = ob.findElements(By.name(locatorText)).size();
-			}
-		} catch (NoSuchElementException ne) {
-			throw new NoSuchElementException("Failed to find element [Locator = {" + locatorText + "}]");
-		}
-
-		if (!(count > 0)) {
+	/**
+	 * An expectation for checking that there is at least one element present on a web page.
+	 * @param elementName
+	 * @throws Exception, Something unexpected 
+	 */
+	public void waitForAllElementsToBePresent(Object elementName) throws Exception {
+		List<WebElement> elements = getLocators(((Enum<?>) elementName).name(), elementName.toString());
+		if (!(elements.size() > 0)) {
 			throw new Exception("Unable to find Element...Element is not present");
 		}
-
 	}
 
 	/**
@@ -252,6 +226,24 @@ public class BrowserWaits extends TestBase {
 			throw new TimeoutException("Failed to find text: " + text + ", after waiting for " + time + "ms");
 		}
 	}
+	
+	
+	public void waitUntilText(final String text,int time) {
+		try {
+			(new WebDriverWait(ob, time)).until(new ExpectedCondition<Boolean>() {
+
+				public Boolean apply(WebDriver d) {
+					try {
+						return Boolean.valueOf(d.getPageSource().contains(text));
+					} catch (Exception e) {
+						return Boolean.valueOf(false);
+					}
+				}
+			});
+		} catch (TimeoutException te) {
+			throw new TimeoutException("Failed to find text: " + text + ", after waiting for " + time + "ms");
+		}
+	}
 
 	/***********************
 	 * Wait until specified text is not present
@@ -329,6 +321,38 @@ public class BrowserWaits extends TestBase {
 		}
 		return ele;
 
+	}
+	
+	
+	public List<WebElement> getLocators(String locatorType, String locatorText) {
+		List<WebElement> ele = null;
+
+		try {
+			if (locatorType.endsWith("_CSS")) {
+				ele = ob.findElements(By.cssSelector(locatorText));
+			} else if (locatorType.endsWith("_XPATH")) {
+				ele = ob.findElements(By.xpath(locatorText));
+			} else if (locatorType.endsWith("_LINK")) {
+				ele = ob.findElements(By.linkText(locatorText));
+			} else if (locatorType.endsWith("_PLINK")) {
+				ele = ob.findElements(By.partialLinkText(locatorText));
+			} else if (locatorType.endsWith("_ID")) {
+				ele = ob.findElements(By.id(locatorText));
+			} else if (locatorType.endsWith("_CLASS")) {
+				ele = ob.findElements(By.className(locatorText));
+			} else if (locatorType.endsWith("_TAG")) {
+				ele = ob.findElements(By.tagName(locatorText));
+			} else if (locatorType.endsWith("_NAME")) {
+				ele = ob.findElements(By.name(locatorText));
+			} else {
+				throw new NoSuchElementException("Unable to handle the locator type: " + locatorType
+						+ ". Locator name should end with _ID/_NAME/" + "_CLASS/_CSS/_LINK/_PLINK/_TAG/_XPATH");
+			}
+
+		} catch (NoSuchElementException nse) {
+			throw new NoSuchElementException("Unable to locate the element" + locatorType + "=" + locatorText);
+		}
+		return ele;
 	}
 
 	public void waitForTRHomePage() throws InterruptedException {

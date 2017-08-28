@@ -1227,7 +1227,15 @@ public enum OnePObjectMap {
 	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]"),
 	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
-	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li")
+	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS("div[class='wat-search-results-meta-names__list']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS("div[class*='wui-emphasis wat-search-results-publications-title']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS("div[class*='wui-descriptor-uppercase wat-search-results-publications-source-group']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS("div[class*='wui-descriptor wat-search-results-publications-authors']"),
+	
+	
 	;
 
 	private String locator;
