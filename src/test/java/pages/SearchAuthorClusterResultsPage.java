@@ -20,6 +20,8 @@ import util.OnePObjectMap;
  *
  */
 public class SearchAuthorClusterResultsPage extends TestBase {
+	
+	List<WebElement> pubDetailsList;
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
 		this.ob = ob;
@@ -33,6 +35,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 * @throws Exception
 	 */
 	public void waitForauthorClusterSearchResults(ExtentTest test) throws Exception{
+		pf.getBrowserActionInstance(ob).waitForAjax(ob);
 		pf.getBrowserWaitsInstance(ob).waitUntilText("Search terms","results"," Sorted by ","Relevance");
 		pf.getBrowserWaitsInstance(ob).waitForAllElementsToBePresent(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 		test.log(LogStatus.INFO, "Author Cluster Search Results page is displayed");
@@ -44,7 +47,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	 */
 	public void validatePublicationCount1Details(String lastName,String countryName,String orgName,ExtentTest test) throws Exception {
 		waitForauthorClusterSearchResults(test);
-		List<WebElement> pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
 		String authorMetadata=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS).get(pubDetailsList.size()-1).getText();
 		
 		pf.getBrowserActionInstance(ob).scrollingToElement(pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS).get(pubDetailsList.size()-1));
@@ -63,6 +66,21 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for match author search results count with publications count
+	 * @param test
+	 * @throws Exception
+	 */
+	public void matchSearchResultsCountWithPublicationsCount(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		String[] results=pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_COUNT_CSS).getText().split(" ");
+		int resultsCount=Integer.parseInt(results[0]);
+		if(!(pubDetailsList.size() == resultsCount)){
+			throw new Exception("Author Search Results count doesn't match Publications Count");
+		}
+		
+	}
 	
 
 }

@@ -21,13 +21,13 @@ import util.OnePObjectMap;
  *
  */
 public class SearchAuthorClusterPage extends TestBase {
+	
+	int k = 1;
 
 	public SearchAuthorClusterPage(WebDriver ob) {
 		this.ob = ob;
 		pf = new PageFactory();
 	}
-
-	int k = 1;
 
 	/**
 	 * Common method to search for an author cluster with only LastName
