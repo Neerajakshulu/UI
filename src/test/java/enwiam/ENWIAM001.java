@@ -90,11 +90,6 @@ public class ENWIAM001 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(2);
-				if (CONFIG.getProperty("browserType").equals("IE")) {
-					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-					BrowserWaits.waitTime(4);
-				}
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 				email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 				ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
@@ -204,10 +199,7 @@ public class ENWIAM001 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				BrowserWaits.waitTime(3);
 				ob.get("https://www.guerrillamail.com");
-				if (CONFIG.getProperty("browserType").equals("IE")) {
-					Runtime.getRuntime().exec("C:/Users/uc204155/Desktop/IEScript.exe");
-					BrowserWaits.waitTime(4);
-				}
+				
 				BrowserWaits.waitTime(14);
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
@@ -332,7 +324,7 @@ public class ENWIAM001 extends TestBase {
 				String[] tests = StringUtils.split(var, TOKENIZER_DOUBLE_PIPE);
 				String[] tests_dec = StringUtils.split(dec, TOKENIZER_DOUBLE_PIPE);
 				for (int i = 0; i < tests.length; i++) {
-					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("Notifications");
+					test = extent.startTest(tests[i], tests_dec[i]).assignCategory("ENWIAM");
 					test.log(LogStatus.FAIL, "FAIL - " + t.getMessage());
 					extent.endTest(test);
 				}
