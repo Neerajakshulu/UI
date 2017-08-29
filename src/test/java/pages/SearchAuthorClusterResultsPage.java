@@ -52,7 +52,6 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		
 		pf.getBrowserActionInstance(ob).scrollingToElement(pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS).get(pubDetailsList.size()-1));
 		
-		
 		pubDetailsList.get(pubDetailsList.size()-1).findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS.toString())).getText();
 		
 		String pubTitle=pubDetailsList.get(pubDetailsList.size()-1).findElement(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS.toString())).getText();;
@@ -82,5 +81,20 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 		
 	}
 	
+	/**
+	 * Method for Default avatar/profile image available for each publication cart
+	 * @param test
+	 * @throws Exception
+	 */
+	public void defaultAvatarEachPublication(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		List<WebElement> defaultAvatars=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_DEFAULT_AVATAR_CSS);
+		for(WebElement defaultAvatar:defaultAvatars){
+			if(!defaultAvatar.isDisplayed()){
+				throw new Exception("Default Avatar not displayed for Each publication");
+			}
+			
+		}
+	}
 
 }

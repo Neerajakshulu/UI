@@ -234,7 +234,7 @@ public class SearchAuthorClusterPage extends TestBase {
 					.getElements(OnePObjectMap.WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH);
 			List<WebElement> lastNameSuggestions = pf.getBrowserActionInstance(ob)
 					.getElements(OnePObjectMap.WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH);
-
+			
 			if (web.size() != 0) {
 				for (int j = 0; j < lastNameSuggestions.size(); j++) {
 					if (lastNameSuggestions.get(j).getText().equals(selectionText)) {
@@ -392,6 +392,24 @@ public class SearchAuthorClusterPage extends TestBase {
 				"Firstname text box not visible");
 		test.log(LogStatus.INFO,
 				"User is able to see First name textbox and can be used for author cluster search");
+	}
+	
+	/**
+	 * Method for Search Author cluster using last name
+	 * @param LastName
+	 * @param test
+	 * @throws Exception, When unable to search for author using last name
+	 */
+	public void SearchAuthorCluster(String LastName, ExtentTest test) throws Exception {
+		try {
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_LASTNAME_XPATH);
+			enterAuthorLastName(LastName, test);
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+			pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to search for an author using lastname");
+			throw new Exception(e);
+		}
 	}
 
 }

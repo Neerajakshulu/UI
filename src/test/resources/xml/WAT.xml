@@ -159,7 +159,7 @@
 		</classes>
 	</test>
 	
-	<test name="author_results_publication" preserve-order="true">
+	<test name="author_results_count_publication_count" preserve-order="true">
 		<parameter name="lastName" value="SMITH" />
 		<parameter name="firstName" value="JOHN" />
 		<parameter name="countryName" value="USA" />
@@ -168,4 +168,12 @@
 			<class name="wat.WAT24"></class>
 		</classes>
 	</test>
+	
+	<test name="author_search_results_publication_default_avatar" preserve-order="true">
+		<parameter name="lastName" value="TRANQUADA" />
+		<classes>
+			<class name="wat.WAT25"></class>
+		</classes>
+	</test>
+	
 </suite>

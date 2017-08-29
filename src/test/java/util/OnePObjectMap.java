@@ -1213,7 +1213,9 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_ORG_DROPDOWN_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div"),
 	WAT_AUTHOR_ORG_OPTION_XPATH("//div[@class='wat-search__field wat-search__field-affiliation']/descendant::div/button"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
+	
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']"),
+	
 	WAT_SEARCH_LINK_XPATH("//span[text()='Search']"),
 	WAT_LASTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='U MAYER']"),
 	WAT_FIRSTNAME_FIRST_TYPEAHEAD_SUGGESTION_XPATH("//a[@title='JOHN']"),
@@ -1225,8 +1227,10 @@ public enum OnePObjectMap {
 	WAT_NAME_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='Name search']"),
 	WAT_ORCiD_SEARCH_BUTTON_XPATH("//span[@class='wui-toggle__label ng-binding' and text()='ORCiD search']"),
 	WAT_ADD_ALT_NAME_BTN_TEXT_XPATH("//button[text()[normalize-space() = 'Add alternative name']]"),
+	
 	WAT_AUTHOR_NAME_NOT_FOUND_ERROR_XPATH("//span[@class='wat-material-input__error']"),
 	WAT_AUTHOR_LASTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
+	
 	WAT_AUTHOR_FIRSTNAME_TYPEAHEAD_OPTION_XPATH("//ul[@class='dropdown-menu ng-isolate-scope']/li"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS("div.wui-card"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS("div.wui-card h3 a"),
@@ -1235,6 +1239,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS("div[class*='wui-descriptor-uppercase wat-search-results-publications-source-group']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_AUTHORS_CSS("div[class*='wui-descriptor wat-search-results-publications-authors']"),
 	WAT_AUTHOR_SEARCH_RESULTS_COUNT_CSS("div[class='wat-search-results-header-count'] h2"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_DEFAULT_AVATAR_CSS("div.wui-card i[class*='wui-icon wui-icon--profile wat-search-results-icon--profile']"),
+	
 	
 	
 	;
