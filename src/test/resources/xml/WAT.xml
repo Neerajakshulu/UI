@@ -176,4 +176,9 @@
 		</classes>
 	</test>
 	
+	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
+		<classes>
+			<class name="wat.WAT40"></class>
+		</classes>
+	</test>
 </suite>
