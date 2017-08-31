@@ -76,7 +76,6 @@ public class IAM002 extends TestBase {
 
 					login();
 				}
-				//BrowserWaits.waitTime(2);
 				//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 				pf.getBrowserWaitsInstance(ob)
 						.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);

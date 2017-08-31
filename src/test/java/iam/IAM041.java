@@ -60,9 +60,10 @@ public class IAM041 extends TestBase {
 			ob.navigate().to(host);
 			checkForSignUpPageValidations();
 			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign in");
 			ob.navigate().to(host+CONFIG.getProperty("appendENWAppUrl"));
 			ob.navigate().refresh();
+			waitUntilText("Sign in");
 			checkForSignUpPageValidations();
 			closeBrowser();
 		} catch (Throwable t) {

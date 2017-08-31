@@ -190,22 +190,11 @@ public class IAM034 extends TestBase {
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
-				BrowserWaits.waitTime(14);
+				waitUntilText("Please activate your Project Neon account");
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-				BrowserWaits.waitTime(3);
-				if (ob.findElement(By.cssSelector("h3[class='email_subject']")).getText()
-						.equalsIgnoreCase("Welcome to Guerrilla Mail")) {
-					ob.get("https://www.guerrillamail.com");
-					BrowserWaits.waitTime(14);
-					List<WebElement> email_list1 = ob.findElements(By.xpath(OR.getProperty("email_list")));
-					WebElement myE1 = email_list1.get(0);
-					JavascriptExecutor executor1 = (JavascriptExecutor) ob;
-					executor1.executeScript("arguments[0].click();", myE1);
-				}
-				BrowserWaits.waitTime(2);
 				String text = ob.findElement(By.cssSelector("h3[class='email_subject']")).getText();
 				Assert.assertEquals(text, "Please activate your Project Neon account");
 				test.log(LogStatus.PASS, "User get an Email verification Link on the registered Email Id");

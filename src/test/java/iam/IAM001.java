@@ -75,9 +75,8 @@ public class IAM001 extends TestBase {
 
 			}
 			logout();
-//			BrowserWaits.waitTime(3);
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(14);
+			waitUntilText("Welcome to Project Neon");
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;
@@ -94,7 +93,6 @@ public class IAM001 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys(password);
 			ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-			//BrowserWaits.waitTime(6);
 			waitUntilText("Newsfeed","Watchlists","Groups");
 			logout();
 			closeBrowser();

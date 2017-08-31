@@ -91,7 +91,6 @@ public class IAM029 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
-			BrowserWaits.waitTime(3);
 
 			List<WebElement> errMsg = null;
 			if (validity.equalsIgnoreCase("YES")) {
@@ -105,6 +104,7 @@ public class IAM029 extends TestBase {
 			}
 
 			else {
+				waitUntilText("Password is too long");
 				errMsg = ob.findElements(By.xpath(OnePObjectMap.SIGNUP_PAGE_PASSWORD_TO_LONG_XPATH.toString()));
 				if (errMsg.size() == 1) {
 

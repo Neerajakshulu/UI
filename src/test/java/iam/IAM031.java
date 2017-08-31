@@ -90,13 +90,11 @@ public class IAM031 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
-			BrowserWaits.waitTime(4);
-
+			waitUntilText("Send feedback to the Project Neon team", "Report a problem or submit a support request");
 			String str = ob.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = ob.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
 			logger.info("Emai Text : " + feedBack);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Send feedback to the Project Neon team")
 						&& feedBack.contains("Report a problem or submit a support request"));
@@ -113,7 +111,7 @@ public class IAM031 extends TestBase {
 						this.getClass().getSimpleName() + "Deep_link_is_not_working_correctly_ for_help_page")));// screenshot
 			}
 
-			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
+			// pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 
@@ -166,14 +164,13 @@ public class IAM031 extends TestBase {
 			driver.navigate().to(CONFIG.getProperty("helpLink"));
 
 			pf.getLoginTRInstance(driver).loginWithFBCredentials(driver, email, password);
-			BrowserWaits.waitTime(10);
+			waitUntilText("Newsfeed","Watchlists","Groups");
+			waitUntilText("Send feedback to the Project Neon team","Report a problem or submit a support request");
 			waitForPageLoad(driver);
-
 			String str = driver.findElement(By.cssSelector("a[class='feedback-link__anchor ng-binding']")).getText();
 			logger.info("Title : " + str);
 			String feedBack = driver.findElement(By.cssSelector("a[class='feedback-link__anchor']")).getText();
 			logger.info("Emai Text : " + feedBack);
-			BrowserWaits.waitTime(2);
 			try {
 				Assert.assertTrue(str.contains("Send feedback to the Project Neon team")
 						&& feedBack.contains("Report a problem or submit a support request"));

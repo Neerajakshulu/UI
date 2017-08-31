@@ -70,7 +70,6 @@ public class IAM003 extends TestBase {
 			// Verify that existing LI user credentials are working fine
 			ob.findElement(By.name(OR.getProperty("LI_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("LI_password_textBox"))).sendKeys(password);
-			// BrowserWaits.waitTime(2);
 			ob.findElement(By.name(OR.getProperty("LI_allowAccess_button"))).click();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.HOME_ONEP_APPS_CSS);

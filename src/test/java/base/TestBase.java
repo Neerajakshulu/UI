@@ -947,7 +947,7 @@ public class TestBase {
 
 			ob.get(links.get(0).getAttribute("href"));
 			waitUntilText("Success!");
-			ob.findElement(By.xpath(OR.getProperty("signup_zconformatin_button"))).click();
+			ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
 			waitUntilText("Sign in");
 		} catch (Throwable t) {
 			t.printStackTrace();

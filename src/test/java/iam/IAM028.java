@@ -62,7 +62,7 @@ public class IAM028 extends TestBase {
 			if (registationStatus) {
 				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
-//				BrowserWaits.waitTime(12);
+				waitUntilText("Please activate your Project Neon account");
 				ob.navigate().to(host);
 				waitUntilText("Sign in");
 				pf.getLoginTRInstance(ob).enterTRCredentials(email, CONFIG.getProperty("defaultPassword"));

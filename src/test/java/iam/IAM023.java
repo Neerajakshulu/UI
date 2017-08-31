@@ -80,7 +80,7 @@ public class IAM023 extends TestBase {
 			waitUntilText("Change password");
 			logout();
 			ob.get("https://www.guerrillamail.com");
-			BrowserWaits.waitTime(12);
+			waitUntilText("Project Neon password changed");
 			List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 			WebElement myE = email_list.get(0);
 			JavascriptExecutor executor = (JavascriptExecutor) ob;

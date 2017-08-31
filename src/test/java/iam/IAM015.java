@@ -91,8 +91,6 @@ public class IAM015 extends TestBase {
 
 			String error_message = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			logger.info("Error Message : " + error_message);
-		//	BrowserWaits.waitTime(4);
-
 			if (!compareStrings("Already have an account?", error_message)) {
 
 				test.log(LogStatus.FAIL, "Error text is incorrect");// extent reports

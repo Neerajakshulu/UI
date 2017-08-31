@@ -78,7 +78,7 @@ public class IAM022 extends TestBase {
 							By.cssSelector(OnePObjectMap.RECORD_VIEW_PAGE_FLAG_REASON_MODAL_CHECKBOX_CSS.toString()))
 					.getCssValue("background");
 
-			BrowserWaits.waitTime(3);
+			waitUntilText("Communications","Receive email notifications for likes, comments and other activity.");
 			if (cssValue.contains("rgb(255, 255, 255)")) {
 				test.log(LogStatus.INFO, "unchecking is working fine");
 				// restoring the check status

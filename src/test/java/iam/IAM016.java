@@ -80,7 +80,6 @@ public class IAM016 extends TestBase {
 			String email = createNewUser("duster", "man");
 
 			logout();
-			//BrowserWaits.waitTime(4);
 
 			try {
 				extent = ExtentManager.getReporter(filePath);
@@ -93,7 +92,6 @@ public class IAM016 extends TestBase {
 				pf.getIamPage(ob).clickForgotPasswordLink();
 				// ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
 				test.log(LogStatus.PASS, "Forgot password? Link is clickable on EndNote landing page");
-				// BrowserWaits.waitTime(4);
 
 			} catch (Throwable t) {
 				test.log(LogStatus.FAIL, "Forgot password? Link is not clickable on EndNote landing page" + t);// extent
@@ -794,54 +792,6 @@ public class IAM016 extends TestBase {
 			}
 
 			ob.quit();
-			// String email = createNewUser("duster", "man");
-
-			/*
-			 * logout(); BrowserWaits.waitTime(4);
-			 * ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click(); BrowserWaits.waitTime(4);
-			 * waitForElementTobeVisible(ob, By.id(OR.getProperty("email_Address")), 30);
-			 * ob.findElement(By.id(OR.getProperty("email_Address"))).sendKeys(email);
-			 * ob.findElement(By.xpath(OR.getProperty("verification_email_button"))).click(); BrowserWaits.waitTime(3);
-			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("confomr_message")), 30); String text =
-			 * ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText(); logger.info("Email Address : " +
-			 * text); String expected_text = "An email with password reset instructions has been sent to " + email;
-			 * logger.info("Expected Email : " + expected_text); String checkEmail1 =
-			 * ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText(); logger.info(
-			 * "Email Address : " + checkEmail1); String checkEmail = "Please check your email"; if
-			 * (text.contains(expected_text) && checkEmail.contains(checkEmail1)) { test.log(LogStatus.PASS,
-			 * "Email for password change sent"); } else { test.log(LogStatus.FAIL, "Email for password change not sent"
-			 * ); } BrowserWaits.waitTime(3); ob.get("https://www.guerrillamail.com"); BrowserWaits.waitTime(12);
-			 * List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list"))); WebElement myE =
-			 * email_list.get(0); JavascriptExecutor executor = (JavascriptExecutor) ob;
-			 * executor.executeScript("arguments[0].click();", myE); Thread.sleep(2000); String email_subject =
-			 * ob.findElement(By.xpath(OR.getProperty("email_subject_label"))).getText(); logger.info(
-			 * "Email Subject Text : " + email_subject); if (email_subject.contains(
-			 * "Project Neon password change request")) { test.log(LogStatus.PASS,
-			 * "Email for changing password received"); } else { test.log(LogStatus.FAIL,
-			 * "Email for changing password not received"); } WebElement reset_link_element = ob
-			 * .findElement(By.cssSelector(OnePObjectMap.EMAIL_BODY_PASSWORD_RESET_LINK_CSS.toString())); String
-			 * reset_link_url = reset_link_element.getAttribute("href"); ob.get(reset_link_url);
-			 * waitForElementTobeVisible(ob, By.id(OR.getProperty("newPassword_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("newPassword_textBox"))).sendKeys("Neon@1234");
-			 * ob.findElement(By.id(OR.getProperty("confirmPassword_textBox"))).sendKeys("Neon@1234");
-			 * ob.findElement(By.id(OR.getProperty("update_password"))).click(); String checkEmail2 =
-			 * ob.findElement(By.xpath(OR.getProperty("check_confrom_message"))).getText(); logger.info(
-			 * "Email Address : " + checkEmail2); waitForElementTobeVisible(ob,
-			 * By.xpath(OR.getProperty("confomr_message")), 30); text =
-			 * ob.findElement(By.xpath(OR.getProperty("confomr_message"))).getText(); logger.info("Expected Text : " +
-			 * text); expected_text = "Your password has been updated"; String expectedText =
-			 * "Your password has been successfully updated. A confirmation has been sent to your email address."; if
-			 * (checkEmail2.contains(expected_text) && text.contains(expectedText)) { test.log(LogStatus.PASS,
-			 * "Password changed successfully"); } else { test.log(LogStatus.FAIL, "Password not changed successfully");
-			 * } BrowserWaits.waitTime(2); // 4)login with changed password
-			 * ob.findElement(By.cssSelector("input[class='button']")).click(); BrowserWaits.waitTime(4);
-			 * ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
-			 * ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
-			 * ob.findElement(By.name(OR.getProperty("TR_password_textBox"))).sendKeys("Neon@1234");
-			 * ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click(); Thread.sleep(10000);
-			 * pf.getBrowserWaitsInstance(ob)
-			 * .waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS); logout(); ob.quit();
-			 */
 		}
 
 		catch (Throwable t) {
