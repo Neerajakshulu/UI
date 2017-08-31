@@ -87,10 +87,10 @@ public class Search37 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]"), 30);
 
 			ob.findElement(By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]")).click();
-			Thread.sleep(4000);
+			waitForAllElementsToBePresent(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),90);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
+			
 
 			// Finding out time cited values for the displayed articles in
 			// article result page

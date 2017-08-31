@@ -70,14 +70,14 @@ public class Search36 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 
 			// Clicking on Articles content result set
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
 			// Clicking on the sort by drop down
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			Thread.sleep(2000);
-
+		    waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_DROP_DOWN_MENU_FIELDS_VALUE_CSS.toString()),60);
+		    
 			// Finding out the types by which we can sort the Article content
 			// results
 			List<WebElement> content_types = ob

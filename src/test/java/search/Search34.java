@@ -81,14 +81,14 @@ public class Search34 extends TestBase {
 
 			// Clicking on the sort by drop down
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
-			waitForElementTobeVisible(ob, By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]"), 30);
-
+			waitForElementTobeVisible(ob, By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]"),60);
 			ob.findElement(By.xpath("(//a[@class='wui-dropdown__link ng-binding ng-scope' ])[2]")).click();
-			Thread.sleep(4000);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
+
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("scroll(0, 250);");
-			Thread.sleep(4000);
-
+			
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()),60);
 			// Finding out the time cited values for the displayed items in all
 			// result page
 			List<WebElement> timeCitedCountList = ob.findElements(By.xpath("//div[@class='h6 doc-info']/span[1]"));
