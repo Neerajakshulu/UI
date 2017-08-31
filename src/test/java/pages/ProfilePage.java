@@ -540,7 +540,7 @@ public class ProfilePage extends TestBase {
 		String followingCountBefore = pf.getBrowserActionInstance(ob)
 				.getElement(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_TAB_FOLLOWING_CSS).getText();
 		String followingCount[] = followingCountBefore.split(" ");
-		followingBefore = Integer.parseInt(followingCount[1]);
+		followingBefore = Integer.parseInt(followingCount[1].contains(",")?followingCount[1].replace(",", ""):followingCount[1]);
 		return followingBefore;
 	}
 	
