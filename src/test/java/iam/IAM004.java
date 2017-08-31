@@ -65,14 +65,15 @@ public class IAM004 extends TestBase {
 			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("FB_login_button")), 60);
 			ob.findElement(By.cssSelector(OR.getProperty("FB_login_button"))).click();
-			fluentwaitforElement(ob, By.name(OR.getProperty("FB_email_textBox")),30);
+			fluentwaitforElement(ob, By.name(OR.getProperty("FB_email_textBox")), 30);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_email_textBox")), 60);
 			waitForElementTobeClickable(ob, By.name(OR.getProperty("FB_password_textBox")), 60);
 			ob.findElement(By.name(OR.getProperty("FB_email_textBox"))).sendKeys(email);
 			ob.findElement(By.name(OR.getProperty("FB_password_textBox"))).sendKeys(password);
 			ob.findElement(By.id(OR.getProperty("FB_page_login_button"))).click();
+			pf.getLoginTRInstance(ob).clickNotnowLink();
 			pf.getLoginTRInstance(ob).closeOnBoardingModal();
-			waitUntilText("Newsfeed","Watchlists","Groups");
+			waitUntilText("Newsfeed", "Watchlists", "Groups");
 			pf.getBrowserWaitsInstance(ob)
 					.waitUntilElementIsDisplayed(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS);
 			jsClick(ob, ob.findElement(By.cssSelector(OnePObjectMap.HOME_PROJECT_NEON_PROFILE_IMAGE_CSS.toString())));
