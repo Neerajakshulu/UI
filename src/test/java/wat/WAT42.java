@@ -1,5 +1,8 @@
 package wat;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterTest;
@@ -15,17 +18,17 @@ import util.ExtentManager;
 import util.OnePObjectMap;
 
 /**
- * Class to Verify that "Select a country/territory where this author has
- * published." text is mentioned on top of country dropdown
+ * Class to Verify that "Select an organization where this author has
+ * published." text is mentioned on top of org dropdown
  * 
  * @author UC225218
  *
  */
-public class WAT41 extends TestBase {
+public class WAT42 extends TestBase {
 
 	static int status = 1;
 	static String wos_title = "Web of Science: Author search";
-	static String Country_drpdwn_text = "Select a country/territory where this author has published.";
+	static String Org_drpdwn_text = "Select an organization where this author has published.";
 
 	/**
 	 * Method for displaying JIRA ID's for test case in specified path of Extent
@@ -80,8 +83,8 @@ public class WAT41 extends TestBase {
 	}
 
 	/**
-	 * Method to Verify that "Select a country/territory where this author has
-	 * published." text is mentioned on top of country dropdown
+	 * Method to Verify that "Select an organization where this author has
+	 * published." text is mentioned on top of org dropdown
 	 * 
 	 * @param LastName,
 	 *            FirstName, CountryName, OrgName
@@ -89,8 +92,8 @@ public class WAT41 extends TestBase {
 	 *             When Something unexpected
 	 */
 	@Test(dependsOnMethods = { "testLoginWATApp" })
-	@Parameters({ "LastName" })
-	public void testCountryDropdownStaticText(String LastName) throws Exception {
+	@Parameters({ "LastName", "CountryName" })
+	public void testCountryDropdownStaticText(String LastName, String CountryName) throws Exception {
 		try {
 			// Verify whether control is in Author Search page
 			Assert.assertEquals(pf.getBrowserActionInstance(ob)
@@ -108,18 +111,28 @@ public class WAT41 extends TestBase {
 			if (pf.getBrowserActionInstance(ob).getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH)
 					.isEnabled()) {
 				pf.getBrowserActionInstance(ob).click(OnePObjectMap.WAT_AUTHOR_SEARCH_BY_NAME_FIND_BTN_XPATH);
-				pf.getBrowserWaitsInstance(ob)
-						.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
-				Assert.assertEquals(
-						pf.getBrowserActionInstance(ob)
-								.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_PAGE_COUNTRY_DROPDOWN_TEXT_XPATH).getText(),
-						Country_drpdwn_text);
+
+				List<WebElement> ele = pf.getBrowserActionInstance(ob)
+						.getElements(OnePObjectMap.WAT_AUTHOR_COUNTRY_DROPDOWN_XPATH);
+				if (ele.size() != 0) {
+					pf.getSearchAuthClusterPage(ob).selectCountryofAuthor(CountryName, test);
+					pf.getBrowserWaitsInstance(ob)
+							.waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_ORG_DROPDOWN_XPATH);
+					Assert.assertEquals(
+							pf.getBrowserActionInstance(ob)
+									.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_PAGE_ORG_DROPDOWN_TEXT_XPATH).getText(),
+							Org_drpdwn_text);
+				} else {
+					test.log(LogStatus.INFO,
+							"Country name selection is not required as the searched user resulted in less than 50 clusters... ");
+				}
+
 			} else {
 				throw new Exception("FIND button not clicked");
 			}
-			test.log(LogStatus.PASS, "Text above country dropdown matches the expectation.");
+			test.log(LogStatus.PASS, "Text above org dropdown matches the expectation.");
 		} catch (AssertionError t) {
-			logFailureDetails(test, t, "Text above country dropdown dosent match the expectation.", "Text_not_match");
+			logFailureDetails(test, t, "Text above country org dosent match the expectation.", "Text_not_match");
 			pf.getBrowserActionInstance(ob).closeBrowser();
 		}
 
