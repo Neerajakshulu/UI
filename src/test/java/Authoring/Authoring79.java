@@ -25,7 +25,8 @@ import util.OnePObjectMap;
 import util.TestUtil;
 
 /**
- * Class for Performing Authoring Comments Validation with Unsupported HTML tags except <br>
+ * Class for Performing Authoring Comments Validation with Unsupported HTML tags
+ * except <br>
  * ,<b>,<i> and
  * <p>
  * 
@@ -92,10 +93,12 @@ public class Authoring79 extends TestBase {
 
 	public void reportDataSetResult() {
 		/*
-		 * if(skip) { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(), count+2, "SKIP"); }
-		 * else if(fail) { status=2; TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
-		 * count+2, "FAIL"); } else { TestUtil.reportDataSetResult(authoringxls, this.getClass().getSimpleName(),
-		 * count+2, "PASS"); }
+		 * if(skip) { TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "SKIP"); } else if(fail) {
+		 * status=2; TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "FAIL"); } else {
+		 * TestUtil.reportDataSetResult(authoringxls,
+		 * this.getClass().getSimpleName(), count+2, "PASS"); }
 		 */
 
 		skip = false;
@@ -109,18 +112,19 @@ public class Authoring79 extends TestBase {
 		extent.endTest(test);
 
 		/*
-		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "PASS"); else if(status==2)
+		 * if(status==1) TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "PASS"); else if(status==2)
 		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases",
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "FAIL"); else
-		 * TestUtil.reportDataSetResult(authoringxls, "Test Cases" ,
-		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()), "SKIP");
+		 * TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "FAIL"); else TestUtil.reportDataSetResult(authoringxls, "Test Cases"
+		 * , TestUtil.getRowNum(authoringxls,this.getClass().getSimpleName()),
+		 * "SKIP");
 		 */
 	}
 
 	@Test(dependsOnMethods = "testOpenApplication", dataProvider = "getTestData")
-	public void test(String url,
-			String recordType) throws Exception {
+	public void test(String url, String recordType) throws Exception {
 		WebDriver driver = null;
 		try {
 
@@ -136,9 +140,10 @@ public class Authoring79 extends TestBase {
 					LOGIN.getProperty("SOCIALLOGINPASSWORD"));
 			BrowserWaits.waitTime(10);
 			waitForPageLoad(driver);
-
+			// Temprorary solution for micro url
+			String hosts = "https://apps.dev-stable.clarivate.com";
 			try {
-				Assert.assertEquals(driver.getCurrentUrl(), host + url);
+				Assert.assertEquals(driver.getCurrentUrl(), hosts + url);
 				test.log(LogStatus.PASS, "Deep linking url is matching after login for " + recordType);
 				Assert.assertEquals(getRecordType(driver), recordType);
 				test.log(LogStatus.PASS, "Deep linking is redirecting to the appropriate page for " + recordType);
