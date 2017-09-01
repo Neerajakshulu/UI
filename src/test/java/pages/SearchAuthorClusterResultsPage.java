@@ -24,6 +24,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	
 	List<WebElement> pubDetailsList;
 	List<WebElement> morePublications;
+	List<WebElement> recentPublications;
 	protected static final String REG_EXP="^[-+]?\\d+(\\ - \\d+)?$";
 	
 
@@ -145,7 +146,45 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			test.log(LogStatus.FAIL, "Publications doesn't have any count value, Years and Top Journals");
 			throw new Exception("More Publications details fail");
 		}
+		
+		recentPublications=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS);
+		pf.getBrowserActionInstance(ob).scrollingToElement(recentPublications.get(0));
+		if(recentPublications.size()>0) {
+			if(!StringUtils.equalsIgnoreCase(recentPublications.get(0).getText().trim(), "Recent publications")){
+				test.log(LogStatus.FAIL, "Recent Publications link not present in Publication cart");
+				throw new Exception("No Recent publicaion link present in cart");
+			}
 
+		}
+	}
+	
+	/**
+	 * Method for Click Recent Publications
+	 * @param test
+	 * @throws Exception
+	 */
+	public void clickRecentPublications(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		recentPublications=pubDetailsList.get(0).findElements(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_RECENT_PUBLICATIONS_CSS.toString()));
+		if(recentPublications.size()>0) {
+			test.log(LogStatus.INFO, "Recent Publications link available in Publication cart");
+			pf.getBrowserActionInstance(ob).scrollingToElement(recentPublications.get(0));
+			recentPublications.get(0).click();
+			test.log(LogStatus.INFO, "Click Recent Publications link and it turns into Hide Publications");
+			pf.getBrowserWaitsInstance(ob).waitUntilElementIsClickable(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_HIDE_PUBLICATIONS_CSS);
+			List<WebElement> topPubs=pubDetailsList.get(0).findElements(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_TOP_PUBLICATIONS_CSS.toString()));
+			
+			logger.info("top publications-->"+topPubs.size());
+			if (topPubs.size() == 3 && StringUtils.isNotEmpty(topPubs.get(0).getText())
+					&& StringUtils.isNotEmpty(topPubs.get(1).getText())
+					&& StringUtils.isNotEmpty(topPubs.get(2).getText())) {
+				test.log(LogStatus.FAIL, "Top 3 Recent Publications displayed");
+				throw new Exception("Top 3 publications are not displayed while click Recent Publications");
+			}
+			
+		}
 	}
 
 }
