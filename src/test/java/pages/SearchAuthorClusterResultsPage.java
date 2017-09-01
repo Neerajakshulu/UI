@@ -11,6 +11,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.ErrorUtil;
 import util.OnePObjectMap;
 
 /**
@@ -22,6 +23,9 @@ import util.OnePObjectMap;
 public class SearchAuthorClusterResultsPage extends TestBase {
 	
 	List<WebElement> pubDetailsList;
+	List<WebElement> morePublications;
+	protected static final String REG_EXP="^[-+]?\\d+(\\ - \\d+)?$";
+	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
 		this.ob = ob;
@@ -95,6 +99,53 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 			}
 			
 		}
+	}
+	
+	/**
+	 * Verify publication details if publication count is morethan 1
+	 * 
+	 * @throws Exception
+	 */
+	public void validateMorePublicationsCount(String lastName,
+			String countryName,
+			String orgName,
+			ExtentTest test) throws Exception {
+		String publications[] = null;
+		String years[] = null;
+		String topJournals = null;
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS);
+		String authorMetadata = pf.getBrowserActionInstance(ob)
+				.getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_CSS)
+				.get(0).getText();
+		
+		String primaryName=pf.getBrowserActionInstance(ob)
+		.getElement(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_NAME_CSS).getText();
+		
+		if (!(StringUtils.containsIgnoreCase(primaryName, lastName)
+				&& StringUtils.containsIgnoreCase(authorMetadata, countryName)
+				&& StringUtils.containsIgnoreCase(authorMetadata, orgName))){
+			test.log(LogStatus.FAIL, "Author Metadata Mismatching with Search input content");
+			ErrorUtil.addVerificationFailure(new Exception("Author Metadata details are mismatching with Search input"));
+		}
+
+		morePublications = pf.getBrowserActionInstance(ob).getElements(
+				OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_MORE_PUBLICATIONS_XPATH);
+		if (morePublications.size() > 0) {
+			publications = morePublications.get(0).getText().split("\n");
+			years = morePublications.get(1).getText().split("\n");
+			topJournals = morePublications.get(2).getText();
+		}
+		
+		if (!(StringUtils.containsIgnoreCase(publications[0].trim(), "Publications")
+				&& (publications[1].trim().matches(REG_EXP)))
+				&& (years[0].trim().equalsIgnoreCase("Years") && (years[1].trim().matches(REG_EXP)))
+				&& (StringUtils.isNotEmpty(topJournals) && topJournals.equalsIgnoreCase("Top Journals"))) {
+			test.log(LogStatus.FAIL, "Publications doesn't have any count value, Years and Top Journals");
+			throw new Exception("More Publications details fail");
+		}
+
 	}
 
 }

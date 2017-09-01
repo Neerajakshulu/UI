@@ -10,13 +10,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search68 extends TestBase {
 
@@ -31,8 +30,8 @@ public class Search68 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -43,8 +42,8 @@ public class Search68 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -57,8 +56,7 @@ public class Search68 extends TestBase {
 			maximizeWindow();
 
 			// Navigating to the NEON login page
-			// ob.navigate().to(host);
-			ob.navigate().to(CONFIG.getProperty("testSiteName"));
+			ob.navigate().to(host);
 
 			// login using TR credentials
 			login();
@@ -67,8 +65,7 @@ public class Search68 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
-			BrowserWaits.waitTime(2);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 90);
 			String all_text = ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()))
 					.getText();
 			String all_temp = all_text.substring(3);
@@ -81,8 +78,8 @@ public class Search68 extends TestBase {
 			int articles_num = convertStringToInt(articles_temp);
 			System.out.println(articles_num);
 
-			String patents_text = ob
-					.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
+			String patents_text = ob.findElement(
+					By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).getText();
 			String patents_temp = patents_text.substring(7);
 			int patents_num = convertStringToInt(patents_temp);
 			System.out.println(patents_num);
@@ -100,33 +97,33 @@ public class Search68 extends TestBase {
 			System.out.println(posts_num);
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			boolean cond1 = getHeadingCount() == articles_num;
 			System.out.println(cond1);
 			Assert.assertTrue(cond1);
 			test.log(LogStatus.PASS, "Count of Articles content type gets displayed at the top");// extent report
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			boolean cond2 = getHeadingCount() == patents_num;
 			System.out.println(cond2);
 			Assert.assertTrue(cond2);
 			test.log(LogStatus.PASS, "Count of patents content type gets displayed at the top");// extent report
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			boolean cond3 = getHeadingCount() == people_num;
 			System.out.println(cond3);
 			Assert.assertTrue(cond3);
 			test.log(LogStatus.PASS, "Count of People content type gets displayed at the top");// extent report
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_POSTS_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			boolean cond4 = getHeadingCount() == posts_num;
 			System.out.println(cond4);
 			Assert.assertTrue(cond4);
 			test.log(LogStatus.PASS, "Count of post content type gets displayed at the top");// extent report
 
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
-			BrowserWaits.waitTime(3);
+			waitForAjax(ob);
 			boolean cond5 = getHeadingCount() == all_num;
 			System.out.println(cond5);
 
@@ -146,9 +143,11 @@ public class Search68 extends TestBase {
 																												// report
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(LogStatus.INFO,
-						"Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-								+ "_count_of_selected_content_type_does_not_get_displayed_at_the_top")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_count_of_selected_content_type_does_not_get_displayed_at_the_top")));// screenshot
 			}
 
 			closeBrowser();
@@ -164,8 +163,11 @@ public class Search68 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

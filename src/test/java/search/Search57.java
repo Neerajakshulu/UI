@@ -12,13 +12,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search57 extends TestBase {
 
@@ -34,8 +33,8 @@ public class Search57 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -47,8 +46,8 @@ public class Search57 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -69,9 +68,8 @@ public class Search57 extends TestBase {
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("bi");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-		    BrowserWaits.waitTime(3);
-			waitForElementTobeVisible(ob,By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 30);
-			Thread.sleep(2000);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PEOPLE_CSS.toString())).click();
 			waitForAjax(ob);
 
@@ -79,20 +77,21 @@ public class Search57 extends TestBase {
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).clear();
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-           waitForAjax(ob);
-			waitForElementTobeVisible(ob, By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())), 30);
-			Thread.sleep(2000);
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob,
+					By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())), 90);
+
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				Thread.sleep(3000);
+				waitForAjax(ob);
 
 			}
 
-			List<WebElement> tileTags = ob
-					.findElements(By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()));
+			List<WebElement> tileTags = ob.findElements(By
+					.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString()));
 			int count = 0;
 			for (int i = 0; i < tileTags.size(); i++) {
 
@@ -102,13 +101,16 @@ public class Search57 extends TestBase {
 
 			if (!compareNumbers(tileTags.size(), count)) {
 
-				test.log(LogStatus.FAIL,
+				test.log(
+						LogStatus.FAIL,
 						"Items other than people also getting displayed in the summary page when user searches using PEOPLE content type in search drop down");// extent
 																																								// report
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_items_other_than_people_also_getting_displayed_in_the_summary_page_when_user_searches_using_PEOPLE_content_type_in_search_drop_down")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_items_other_than_people_also_getting_displayed_in_the_summary_page_when_user_searches_using_PEOPLE_content_type_in_search_drop_down")));// screenshot
 
 			}
 
@@ -125,8 +127,11 @@ public class Search57 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -136,16 +141,6 @@ public class Search57 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

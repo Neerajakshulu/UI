@@ -1241,8 +1241,12 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_COUNT_CSS("div[class='wat-search-results-header-count'] h2"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_DEFAULT_AVATAR_CSS("div.wui-card i[class*='wui-icon wui-icon--profile wat-search-results-icon--profile']"),
 	WAT_AUTHOR_SEARCH_PAGE_COUNTRY_DROPDOWN_TEXT_XPATH("//p[text()='Select a country/territory where this author has published.']"),
-	WAT_AUTHOR_SEARCH_PAGE_ORG_DROPDOWN_TEXT_XPATH("//p[text()='Select an organization where this author has published.']")
-	
+	WAT_AUTHOR_SEARCH_PAGE_ORG_DROPDOWN_TEXT_XPATH("//p[text()='Select an organization where this author has published.']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_MORE_PUBLICATIONS_XPATH("//div[@class='wat-search-results-meta-publications-years-journals']/child::div "),
+	WAT_LOGO_XPATH("//div[@class='wui-platform-header__nav-content']/a"),
+	WAT_WEB_PAGE_LOGO_XPATH("//div[@class='row grid-start']/a/img"),
+	WAT_PROFILE_NAME_XPATH("//div[@class='wui-subtitle wui-profile-flyout__name ng-binding']"),
+	WAT_PROFILE_PAGE_PROFILE_TEXT_XPATH("//h2[text()='Profile']")
 	
 	
 	;

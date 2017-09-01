@@ -12,13 +12,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
 import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search44 extends TestBase {
 
@@ -33,8 +33,8 @@ public class Search44 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class Search44 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -63,11 +63,8 @@ public class Search44 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
 			// login using TR credentials
 			login();
-			Thread.sleep(15000);
 			// Type into the search box and get search results
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 120);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
@@ -79,21 +76,21 @@ public class Search44 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]"),
 					30);
-			BrowserWaits.waitTime(2);
 			ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")).click();
-			BrowserWaits.waitTime(5);
 
 			if (!checkElementPresence("filter_up_icon")) {
 
 				test.log(LogStatus.FAIL, "Filter not getting expended");// extent report
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_filter_not_expanding")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_filter_not_expanding")));// screenshot
 
 			}
 
 			jsClick(ob, ob.findElement(By.xpath("//span[@class='ng-binding' and contains(text(),'Institutions')]")));
-			Thread.sleep(3000);
 
 			List<WebElement> mylist = ob.findElements(By.xpath(OR.getProperty("filter_up_icon")));
 			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
@@ -113,8 +110,11 @@ public class Search44 extends TestBase {
 				test.log(LogStatus.FAIL, "Filter not getting collapsed");// extent report
 				ErrorUtil.addVerificationFailure(t);// testng
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-						captureScreenshot(this.getClass().getSimpleName() + "_filter_not_getting_collapsed")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_filter_not_getting_collapsed")));// screenshot
 
 			}
 			closeBrowser();
@@ -128,8 +128,11 @@ public class Search44 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
@@ -144,8 +147,8 @@ public class Search44 extends TestBase {
 		// Capturing panel heading after expanding document type filter
 		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		documentTypePanelHeading = filterPanelHeadingList.get(3);
-		WebElement upArrow = documentTypePanelHeading
-				.findElement(By.cssSelector("i[class='fa pull-right fa-sort-desc']"));
+		WebElement upArrow = documentTypePanelHeading.findElement(By
+				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
 		if (upArrow != null) {
 			test.log(LogStatus.PASS, "Up arrow is visible for Institutions filter");
@@ -168,8 +171,8 @@ public class Search44 extends TestBase {
 		// Finding out the types filer in refine panel
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(3);
-		WebElement downArrow = documentTypePanelHeading
-				.findElement(By.cssSelector("i[class='fa pull-right fa-sort-asc']"));
+		WebElement downArrow = documentTypePanelHeading.findElement(By
+				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
 		if (downArrow != null) {
 			test.log(LogStatus.PASS, "Down arrow is visible for Institutions filter");

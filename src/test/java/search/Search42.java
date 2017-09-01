@@ -11,13 +11,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search42 extends TestBase {
 
@@ -70,7 +69,7 @@ public class Search42 extends TestBase {
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys(search_query);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			BrowserWaits.waitTime(7);
+			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_PAGE_ARTICLES_CSS.toString()), 30);
 			// Clicking on Articles content result set
 			pf.getSearchResultsPageInstance(ob).clickOnArticleTab();
@@ -78,10 +77,10 @@ public class Search42 extends TestBase {
 
 			// Check the filter is collapsed by default
 			collapseFilter();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			// Check if the filter expanded
 			expandFilter();
-			BrowserWaits.waitTime(2);
+			//BrowserWaits.waitTime(2);
 			// Check if filter is collapsible
 			collapseFilter();
 			test.log(LogStatus.PASS, "Authors filter is collapsible");

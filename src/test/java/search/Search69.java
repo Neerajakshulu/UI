@@ -32,8 +32,8 @@ public class Search69 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 
 	}
 
@@ -46,8 +46,8 @@ public class Search69 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -61,45 +61,21 @@ public class Search69 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// login using TR credentials
 			login();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("john");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
-			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()), 30);
-			Thread.sleep(2000);
-
+			waitForAjax(ob);
+			waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString()),80);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_PATENTS_CSS.toString())).click();
-
-			// waitForElementTobeVisible(ob,
-			// By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']"), 30);
-			//
-			// Thread.sleep(3000);
-
-			// String dd_text = ob.findElement(
-			// By.xpath("//button[@class='btn dropdown-toggle ne-search-dropdown-btn ng-binding']")).getText();
-			// if (!compareStrings("Patents", dd_text)) {
-			//
-			// test.log(LogStatus.FAIL, "Search drop down option not getting changed to the switched content type");//
-			// extent
-			// // reports
-			// status = 2;// excel
-			// test.log(
-			// LogStatus.INFO,
-			// "Snapshot below: "
-			// + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
-			// + "_search_drop_down_option_not_getting_changed_to_the_switched_content_type")));// screenshot
-			//
-			// }
-
+			
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				Thread.sleep(3000);
+				waitForAjax(ob);
 
 			}
 
@@ -117,9 +93,11 @@ public class Search69 extends TestBase {
 						"Items other than switched content type also getting displayed in the summary page");// extent
 																												// report
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_items_other_than_switched_content_type_also_getting_displayed_in_the_summary_page")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_items_other_than_switched_content_type_also_getting_displayed_in_the_summary_page")));// screenshot
 
 			}
 
@@ -136,8 +114,11 @@ public class Search69 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 

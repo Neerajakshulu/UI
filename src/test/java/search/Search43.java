@@ -11,13 +11,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search43 extends TestBase {
 
@@ -75,13 +74,10 @@ public class Search43 extends TestBase {
              waitForAjax(ob);
 			// Check the filter is collapsed by default
 			collapseFilter();
-			BrowserWaits.waitTime(5);
 			// Check if the filter expanded
 			expandFilter();
-			BrowserWaits.waitTime(5);
 			// Check if filter is collapsible
 			collapseFilter();
-			BrowserWaits.waitTime(4);
 			test.log(LogStatus.PASS, "Categories filter is collapsible");
 
 			closeBrowser();
