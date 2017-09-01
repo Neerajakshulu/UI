@@ -82,7 +82,7 @@ public class Search55 extends TestBase {
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 90);
+				waitForAjax(ob);
 
 			}
 

@@ -61,26 +61,22 @@ public class Search56 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-
 			// login using TR credentials
 			login();
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")),60);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("post");
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			pf.getSearchResultsPageInstance(ob).clickOnPostTab();
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
-			waitForElementTobeVisible(ob, By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())), 30);
-			Thread.sleep(2000);
+			waitForElementTobeVisible(ob, By.cssSelector((OnePObjectMap.SEARCH_RESULTS_PAGE_RECORDS_TITLE_CSS.toString())),60);
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 
 			for (int i = 1; i <= 5; i++) {
 
 				jse.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
-				Thread.sleep(2000);
-
+				//waitForAllElementsToBePresent(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULTS_PAGE_ITEM_CSS.toString()), 90);
+               waitForAjax(ob);
 			}
 
 			List<WebElement> tileTags = ob
@@ -128,16 +124,6 @@ public class Search56 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
 
 	}
 

@@ -10,13 +10,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
-import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search66 extends TestBase {
 
@@ -58,15 +56,15 @@ public class Search66 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-						// login using TR credentials
+		 // login using TR credentials
 			login();
 			waitForAjax(ob);
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("searchBox_textBox")), 30);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("drugs");
-			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")) ,30);
+			waitForElementTobeClickable(ob,By.xpath(OR.getProperty("search_button")),60);
 			ob.findElement(By.xpath(OR.getProperty("search_button"))).click();
 			//pf.getBrowserWaitsInstance(ob).waitUntilElementIsNotDisplayed(OnePObjectMap.NEON_TO_ENW_BACKTOENDNOTE_PAGELOAD_CSS);
-			BrowserWaits.waitTime(5);
+			//BrowserWaits.waitTime(5);
 			waitForAjax(ob);
 			String all_text = ob
 					.findElement(By.xpath("//a[contains(@class,'wui-side-menu__link') and contains(text(),'All')]"))
@@ -158,17 +156,6 @@ public class Search66 extends TestBase {
 	@AfterTest
 	public void reportTestResult() {
 		extent.endTest(test);
-
-		// if (status == 1)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "PASS");
-		// else if (status == 2)
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "FAIL");
-		// else
-		// TestUtil.reportDataSetResult(searchxls, "Test Cases",
-		// TestUtil.getRowNum(searchxls, this.getClass().getSimpleName()), "SKIP");
-
 	}
 
 }

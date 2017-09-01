@@ -61,9 +61,6 @@ public class Search70 extends TestBase {
 
 			// Navigating to the NEON login page
 			ob.navigate().to(host);
-			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
-			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-
 			// login using TR credentials
 			login();
 			// waitForElementTobeVisible(ob, By.xpath(OR.getProperty("search_button")), 30);
@@ -86,9 +83,7 @@ public class Search70 extends TestBase {
 			BrowserWaits.waitTime(1);
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("y");
 			BrowserWaits.waitTime(1);
-
-			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")), 30);
-			BrowserWaits.waitTime(1);
+			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("articlesTile")),90);
 			WebElement myE2 = ob.findElement(By.xpath(OR.getProperty("articlesTile")));
 			JavascriptExecutor jse = (JavascriptExecutor) ob;
 			jse.executeScript("arguments[0].scrollIntoView(true);", myE2);
