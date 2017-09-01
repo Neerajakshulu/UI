@@ -93,19 +93,25 @@ public class ENWIAM004 extends TestBase {
 			// Navigate to TR login page
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign up");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_firstName_textbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys(first_name);
-			BrowserWaits.waitTime(3);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).click();
-
-			BrowserWaits.waitTime(2);
-			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
+			if (validity.equalsIgnoreCase("YES")) {
+				closeBrowser();
+			}else{
+			waitUntilText("First name is too long.");
+			closeBrowser();
+			}
+			//BrowserWaits.waitTime(2);
+			/*List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
 			logger.info("Errors Count : " + errorList.size());
 
+			
 			if (validity.equalsIgnoreCase("YES")) {
 
 				for (WebElement text : errorList) {
@@ -141,18 +147,9 @@ public class ENWIAM004 extends TestBase {
 					}
 
 				}
-				/*
-				 * BrowserWaits.waitTime(3); String errorText =
-				 * ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText(); logger.info("Error Text  : "
-				 * +errorText); if (!compareStrings("First name is too long.", errorText)) { fail = true;// excel
-				 * test.log(LogStatus.FAIL, "Error text is incorrect");// extent report test.log( LogStatus.INFO,
-				 * "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() +
-				 * "_incorrect_error_text_" + (count + 1)))); closeBrowser(); return; }
-				 */
-
 			}
 
-			closeBrowser();
+			closeBrowser();*/
 
 		}
 

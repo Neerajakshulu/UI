@@ -90,14 +90,23 @@ public class ENWIAM003 extends TestBase {
 			clearCookies();
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(3);
+//			BrowserWaits.waitTime(3);
+			waitUntilText("Sign up");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys(password);
-			BrowserWaits.waitTime(3);
-			List<WebElement> tm_list = ob
+			//BrowserWaits.waitTime(3);
+			if (validity.equalsIgnoreCase("NO")) {
+				waitUntilText("Passwords should be at least 8 characters");
+				closeBrowser();
+			}else{
+				waitUntilText("Sign up with Facebook","Sign up with LinkedIn");
+				closeBrowser();
+			}
+			
+		/*	List<WebElement> tm_list = ob
 					.findElements(By.xpath(OR.getProperty("reg_passwordStrength_tickMark_labels")));
 			logger.info("TickMark Size : " + tm_list.size());
 			List<WebElement> listOfTags = ob
@@ -117,9 +126,9 @@ public class ENWIAM003 extends TestBase {
 					ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 					BrowserWaits.waitTime(4);
 				}
-			}
+			}*/
 
-			closeBrowser();
+			
 
 		}
 

@@ -89,6 +89,7 @@ public class ENWIAM002 extends TestBase {
 			clearCookies();
 
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
@@ -101,10 +102,10 @@ public class ENWIAM002 extends TestBase {
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
 			// ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
-			BrowserWaits.waitTime(4);
+			// BrowserWaits.waitTime(4);
 
 			if (email.contains(".com")) {
-				BrowserWaits.waitTime(3);
+				fluentwaitforElement(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 
 				String text = ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).getText();
@@ -115,6 +116,7 @@ public class ENWIAM002 extends TestBase {
 					String textSignup = ob.findElement(By.xpath(OR.getProperty("signup_button"))).getText();
 					try {
 						Assert.assertTrue(textSignup.contains("Sign up"));
+						closeBrowser();
 						test.log(LogStatus.PASS, "Sign up button is enabled in Singn up page");
 					} catch (Throwable t) {
 						test.log(LogStatus.FAIL, "Sign up button is not enabled in Singn up page" + t);// extent
@@ -130,10 +132,12 @@ public class ENWIAM002 extends TestBase {
 				}
 
 				else {
-
-					String title = ob.findElement(By.xpath("//h3[@class='wui-subtitle wui-subtitle--app-signin']")).getText();
+					waitUntilText("Email address is too long.");
+					String title = ob.findElement(By.xpath("//h3[@class='wui-subtitle wui-subtitle--app-signin']"))
+							.getText();
 					try {
 						Assert.assertTrue(title.contains("Sign up"));
+						closeBrowser();
 						test.log(LogStatus.PASS, "Sign up Page is opened successfully");
 					} catch (Throwable t) {
 						test.log(LogStatus.FAIL, "Sign up Page is not opened successfully" + t);// extent
@@ -146,8 +150,10 @@ public class ENWIAM002 extends TestBase {
 								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName())));// screenshot
 					}
 				}
+			} else {
+				waitUntilText("Please enter a valid email address.");
+				closeBrowser();
 			}
-			closeBrowser();
 
 		}
 

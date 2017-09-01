@@ -93,6 +93,7 @@ public class ENWIAM001 extends TestBase {
 				waitForElementTobeVisible(ob, By.id(OR.getProperty("email_textBox")), 30);
 				email = ob.findElement(By.id(OR.getProperty("email_textBox"))).getText();
 				ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 				ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
@@ -105,7 +106,7 @@ public class ENWIAM001 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).sendKeys("Duster");
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("man");
-				BrowserWaits.waitTime(2);
+				//BrowserWaits.waitTime(2);
 				test.log(LogStatus.PASS, "Required fields are enter properly");
 
 			} catch (Throwable t) {
@@ -162,7 +163,7 @@ public class ENWIAM001 extends TestBase {
 				ob.findElement(
 						By.cssSelector("button[class='pull-right wui-btn wui-btn--primary wui-btn--login ']"))
 						.click();
-				BrowserWaits.waitTime(4);
+				waitUntilText("Thank you");
 				waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("signup_confom_sent_mail")), 30);
 				String text = ob.findElement(By.cssSelector(OR.getProperty("signup_confom_sent_mail"))).getText();
 
@@ -197,17 +198,16 @@ public class ENWIAM001 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(3);
+				waitUntilText("Sign in");
 				ob.get("https://www.guerrillamail.com");
-				
-				BrowserWaits.waitTime(14);
+				waitUntilText("Please activate your EndNote account ");
 				waitForElementTobeVisible(ob, By.xpath(OR.getProperty("email_list")), 30);
 				List<WebElement> email_list = ob.findElements(By.xpath(OR.getProperty("email_list")));
 				WebElement myE = email_list.get(0);
 				JavascriptExecutor executor = (JavascriptExecutor) ob;
 				executor.executeScript("arguments[0].click();", myE);
-				BrowserWaits.waitTime(3);
-				if (ob.findElement(By.cssSelector("h3[class='email_subject']")).getText()
+				waitUntilText("Click here to activate.");
+				/*if (ob.findElement(By.cssSelector("h3[class='email_subject']")).getText()
 						.equalsIgnoreCase("Welcome to Guerrilla Mail")) {
 					ob.get("https://www.guerrillamail.com");
 					BrowserWaits.waitTime(14);
@@ -216,8 +216,8 @@ public class ENWIAM001 extends TestBase {
 					WebElement myE1 = email_list1.get(0);
 					JavascriptExecutor executor1 = (JavascriptExecutor) ob;
 					executor1.executeScript("arguments[0].click();", myE1);
-				}
-				BrowserWaits.waitTime(2);
+				}*/
+				//BrowserWaits.waitTime(2);
 				String text = ob.findElement(By.cssSelector("h3[class='email_subject']")).getText();
 				Assert.assertEquals(text, "Please activate your EndNote account");
 				test.log(LogStatus.PASS, "User get an Email verification Link on the registered Email Id");
@@ -249,7 +249,7 @@ public class ENWIAM001 extends TestBase {
 				List<WebElement> links = email_body.findElements(By.tagName("a"));
 
 				ob.get(links.get(0).getAttribute("href"));
-				BrowserWaits.waitTime(3);
+				waitUntilText("Success!");
 				String confomMessage = ob.findElement(By.cssSelector("h2[class='login-title']")).getText();
 
 				Assert.assertEquals(confomMessage, "Success!");
@@ -278,25 +278,30 @@ public class ENWIAM001 extends TestBase {
 						.assignCategory("ENWIAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				ob.findElement(By.xpath(OR.getProperty("signup_conformatin_button"))).click();
-				BrowserWaits.waitTime(4);
+				waitUntilText("Sign in");
 				waitForElementTobeVisible(ob, By.name(OR.getProperty("TR_email_textBox")), 30);
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).clear();
 				ob.findElement(By.name(OR.getProperty("TR_email_textBox"))).sendKeys(email);
 				ob.findElement(By.name(OR.getProperty("TR_password_textBox")))
 						.sendKeys(CONFIG.getProperty("defaultPassword"));
 				ob.findElement(By.cssSelector(OR.getProperty("login_button"))).click();
-				BrowserWaits.waitTime(10);
+				waitUntilText("I Agree");
 				waitForElementTobeVisible(ob, By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString()),
 						30);
 				ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_AGREE_BUTTON_CSS.toString())).click();
-
-				waitForElementTobeVisible(ob,
+				List<WebElement> list=ob.findElements(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()));
+				if (list.size()==1) {
+					waitUntilText("Continue");
+					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
+				}
+				/*waitForElementTobeVisible(ob,
 						By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()), 30);
 				String text = ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString()))
 						.getText();
 				if (text.equalsIgnoreCase("Continue")) {
 					ob.findElement(By.cssSelector(OnePObjectMap.ENDNOTE_LOGIN_CONTINUE_BUTTON_CSS.toString())).click();
-				}
+				}*/
+				waitUntilText("Getting Started","Find","Collect");
 				test.log(LogStatus.PASS,
 						"After completion of verification process,user successfylly login to ENW application");
 			} catch (Throwable t) {

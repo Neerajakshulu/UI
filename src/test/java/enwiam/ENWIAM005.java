@@ -89,33 +89,24 @@ public class ENWIAM005 extends TestBase {
 				logger.info("maximize() command not supported in Selendroid");
 			}
 			clearCookies();
-
-			// Navigate to TR login page
-			// ob.get(CONFIG.getProperty("testSiteName"));
-			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
-			//
-			/*
-			 * waitForElementTobeVisible(ob, By.xpath(OR.getProperty("TR_login_button")), 30);
-			 * ob.findElement(By.xpath(OR.getProperty("TR_login_button"))).click (); waitForElementTobeVisible(ob,
-			 * By.linkText(OR.getProperty("TR_register_link")), 30); // Create new TR account
-			 * ob.findElement(By.linkText(OR.getProperty("TR_register_link"))). click(); //
-			 * waitForElementTobeVisible(ob, By.id(OR.getProperty("reg_lastName_textBox")), 30);
-			 * ob.findElement(By.id(OR.getProperty("reg_lastName_textBox"))). sendKeys(last_name);
-			 * ob.findElement(By.id(OR.getProperty("reg_firstName_textBox"))). click();
-			 */
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(3);
+			waitUntilText("Sign up");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_lastName_textbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys(last_name);
-			BrowserWaits.waitTime(3);
 			ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).click();
 
-			BrowserWaits.waitTime(2);
+			if (validity.equalsIgnoreCase("YES")) {
+				closeBrowser();
+			}else{
+			waitUntilText("Last name is too long.");
+			closeBrowser();
+			}
+			
+			/*BrowserWaits.waitTime(2);
 			List<WebElement> errorList = ob.findElements(By.xpath(OR.getProperty("reg_error_label")));
 			logger.info("Error List Size : " + errorList.size());
 			if (validity.equalsIgnoreCase("YES")) {
@@ -153,18 +144,9 @@ public class ENWIAM005 extends TestBase {
 						return;
 					}
 				}
-				/*
-				 * BrowserWaits.waitTime(3); String errorText =
-				 * ob.findElement(By.xpath(OR.getProperty("reg_error_label"))).getText(); logger.info("Error Message : "
-				 * +errorText); if (!compareStrings("Last name is too long.", errorText)) { fail = true;// excel
-				 * test.log(LogStatus.FAIL, "Error text is incorrect");// extent // report test.log(LogStatus.INFO,
-				 * "Snapshot below: " + test.addScreenCapture(captureScreenshot( this.getClass().getSimpleName() +
-				 * "_incorrect_error_text_" + (count + 1)))); closeBrowser(); return; }
-				 */
-
 			}
 
-			closeBrowser();
+			closeBrowser();*/
 
 		}
 
