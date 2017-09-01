@@ -205,10 +205,16 @@
 			<class name="wat.WAT44"></class>
 		</classes>
 	</test>
-		 -->
+
 	<test name="WAT_CA_redirection_link" preserve-order="true">
 		<classes>
 			<class name="wat.WAT45"></class>
+		</classes>
+	</test>
+	 -->
+		<test name="WAT_Profile_detail_view" preserve-order="true">
+		<classes>
+			<class name="wat.WAT46"></class>
 		</classes>
 	</test>
 </suite>
