@@ -1243,6 +1243,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_PAGE_COUNTRY_DROPDOWN_TEXT_XPATH("//p[text()='Select a country/territory where this author has published.']"),
 	WAT_AUTHOR_SEARCH_PAGE_ORG_DROPDOWN_TEXT_XPATH("//p[text()='Select an organization where this author has published.']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_MORE_PUBLICATIONS_XPATH("//div[@class='wat-search-results-meta-publications-years-journals']/child::div "),
+	WAT_LOGO_XPATH("//div[@class='wui-platform-header__nav-content']/a"),
+	WAT_WEB_PAGE_LOGO_XPATH("//div[@class='row grid-start']/a/img")
 	
 	
 	;
