@@ -11,13 +11,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search41 extends TestBase {
 
@@ -33,8 +32,8 @@ public class Search41 extends TestBase {
 		extent = ExtentManager.getReporter(filePath);
 
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -46,8 +45,8 @@ public class Search41 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -78,10 +77,8 @@ public class Search41 extends TestBase {
 
 			// Check the filter is collapsed by default
 			collapseFilter();
-			BrowserWaits.waitTime(2);
 			// Check if the filter expanded
 			expandFilter();
-			BrowserWaits.waitTime(2);
 			// Check if filter is collapsible
 			collapseFilter();
 			test.log(LogStatus.PASS, "Document type filter is collapsible");
@@ -114,8 +111,8 @@ public class Search41 extends TestBase {
 		waitForAjax(ob);
 		filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		documentTypePanelHeading = filterPanelHeadingList.get(0);
-		WebElement upArrow = documentTypePanelHeading
-				.findElement(By.cssSelector("i[class='fa pull-right fa-sort-desc']"));
+		WebElement upArrow = documentTypePanelHeading.findElement(By
+				.cssSelector("i[class='fa pull-right fa-sort-desc']"));
 
 		if (upArrow != null) {
 			test.log(LogStatus.PASS, "Down arrow is visible for Document Type filter");
@@ -138,8 +135,8 @@ public class Search41 extends TestBase {
 		waitForAjax(ob);
 		List<WebElement> filterPanelHeadingList = ob.findElements(By.cssSelector("div[class=panel-heading]"));
 		WebElement documentTypePanelHeading = filterPanelHeadingList.get(0);
-		WebElement downArrow = documentTypePanelHeading
-				.findElement(By.cssSelector("i[class='fa pull-right fa-sort-asc']"));
+		WebElement downArrow = documentTypePanelHeading.findElement(By
+				.cssSelector("i[class='fa pull-right fa-sort-asc']"));
 
 		if (downArrow != null) {
 			test.log(LogStatus.PASS, "UP arrow is visible for Document Type filter");
