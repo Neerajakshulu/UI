@@ -78,7 +78,6 @@ public class IAMPage extends TestBase {
 		pf.getBrowserWaitsInstance(ob)
 				.waitUntilElementIsClickable(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
 		// ob.findElement(By.cssSelector(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS.toString())).click();
-		// BrowserWaits.waitTime(3);
 		// pf.getBrowserActionInstance(ob).click(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.NEON_LOGIN_PAGE_FORGOT_PASSWORD_OK_CSS);
 		// pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon");
@@ -86,6 +85,7 @@ public class IAMPage extends TestBase {
 	}
 
 	public void checkLoginPage() throws Exception {
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Sign in");
 		pf.getBrowserWaitsInstance(ob).waitUntilElementIsDisplayed(OnePObjectMap.NEON_LANDING_PAGE_LOGGIN_BANNER_CSS);
 		// String loginPageAppName = ob.findElement(By.cssSelector(OnePObjectMap.DRA_BGCOLOR_CLASS_CSS.toString()))
 		// .getText();
@@ -95,7 +95,6 @@ public class IAMPage extends TestBase {
 
 	public void openGurillaMail() throws InterruptedException {
 		ob.get("https://www.guerrillamail.com");
-		BrowserWaits.waitTime(22);
 	}
 
 	public void clickReceivedMail(String message) throws InterruptedException {
@@ -103,7 +102,7 @@ public class IAMPage extends TestBase {
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
-		Thread.sleep(4000);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Click here to reset your password");
 		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
 				.getText();
 		String expectedSubjectTitle = message + " password reset";
@@ -201,7 +200,6 @@ public class IAMPage extends TestBase {
 		WebElement myE = email_list.get(0);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
-		Thread.sleep(4000);
 		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
 				.getText();
 		String expectedSubjectTitle = message + " password changed";
@@ -217,7 +215,6 @@ public class IAMPage extends TestBase {
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_EMAIL_TEXT_BOX_CSS, email);
 		pf.getBrowserActionInstance(ob).enterFieldValue(OnePObjectMap.LOGIN_PAGE_PASSWORD_TEXT_BOX_CSS, newPassword);
 		pf.getBrowserActionInstance(ob).jsClick(OnePObjectMap.LOGIN_PAGE_SIGN_IN_BUTTON_CSS);
-		BrowserWaits.waitTime(4);
 	}
 
 	public void checkAlreadyUsedMailSubject(String message) throws InterruptedException {
@@ -226,7 +223,7 @@ public class IAMPage extends TestBase {
 		WebElement myE = email_list.get(1);
 		JavascriptExecutor executor = (JavascriptExecutor) ob;
 		executor.executeScript("arguments[0].click();", myE);
-		Thread.sleep(2000);
+		pf.getBrowserWaitsInstance(ob).waitUntilText("Click here to reset your password");
 		String subjectTitle = ob.findElement(By.cssSelector(OnePObjectMap.GURILLA_RECEIVED_MAIL_SUBJECT_CSS.toString()))
 				.getText();
 		String expectedSubjectTitle = message + " password reset";

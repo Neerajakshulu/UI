@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.TestBase;
+import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
@@ -80,7 +81,6 @@ public class IAM016 extends TestBase {
 			String email = createNewUser("duster", "man");
 
 			logout();
-
 			try {
 				extent = ExtentManager.getReporter(filePath);
 				test = extent
@@ -90,7 +90,6 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 
 				pf.getIamPage(ob).clickForgotPasswordLink();
-				// ob.findElement(By.xpath(OR.getProperty("forgot_password_link"))).click();
 				test.log(LogStatus.PASS, "Forgot password? Link is clickable on EndNote landing page");
 
 			} catch (Throwable t) {
@@ -114,7 +113,7 @@ public class IAM016 extends TestBase {
 								"Verify that Thomson Reuters is replaced with Clarivate Analytics to all neon pages related forgot password&&Verify that Thomson Reuters logo is replaced with Clarivate Analytics logo.")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Forgot password");
 				pf.getIamPage(ob).checkForgotPasswordPageCALogo();
 				test.log(LogStatus.PASS, "Company name displayed successfully in forgot password page");
 
@@ -139,7 +138,6 @@ public class IAM016 extends TestBase {
 								"Verify that the Project Neon should be displayed on the forgot password page&&Verify that 'Project Neon' should be moved within the white area and should be above 'Forgot Password' text and center aligned")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
 				pf.getIamPage(ob).checkAppName("Project Neon");
 				test.log(LogStatus.PASS, "Application name displayed successfully in forgot password page");
 
@@ -274,6 +272,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon password reset");
 				pf.getIamPage(ob).clickReceivedMail("Project Neon");
 				pf.getIamPage(ob).checkApplicationName("Project Neon");
 				test.log(LogStatus.PASS,
@@ -301,6 +300,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Reset your password");
 				pf.getIamPage(ob).checkExternalPasswordPageText("Reset your password", "Enter a new password below");
 				test.log(LogStatus.PASS, "Reset your password page is opened successfylly");
 			} catch (Throwable t) {
@@ -500,6 +500,7 @@ public class IAM016 extends TestBase {
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).checkLoginPage();
 				pf.getIamPage(ob).login(email, newPassword);
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Newsfeed","Watchlists","Groups");
 				logout();
 				test.log(LogStatus.PASS, "New password text box is available in External Password reset Page");
 			} catch (Throwable t) {
@@ -524,6 +525,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				pf.getBrowserWaitsInstance(ob).waitUntilText("Project Neon password changed");
 				pf.getIamPage(ob).checkChangedPasswordMailSubject("Project Neon");
 				pf.getIamPage(ob).checkApplicationName("Project Neon");
 
@@ -601,7 +603,7 @@ public class IAM016 extends TestBase {
 								"Verify that the email address on the External Invalid Password Reset Token Page should be pre-populated with the email address that matches the email that the forgot password email was sent.")
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
-
+				waitUntilText("Password reset link has expired");
 				pf.getIamPage(ob).checkInvalidPasswordResetPage();
 				test.log(LogStatus.PASS, "Invalid password reset page is opend successfylly");
 			} catch (Throwable t) {
@@ -733,6 +735,7 @@ public class IAM016 extends TestBase {
 						.assignCategory("IAM");
 				test.log(LogStatus.INFO, this.getClass().getSimpleName() + " execution start");
 				pf.getIamPage(ob).openGurillaMail();
+				BrowserWaits.waitTime(22);
 				pf.getIamPage(ob).clickReceivedMail("Project Neon");
 				pf.getIamPage(ob).checkApplicationName("Project Neon");
 				pf.getIamPage(ob).clickResetYourPasswordLink();
