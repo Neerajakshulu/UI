@@ -62,18 +62,17 @@ public class ENWIAM006 extends TestBase {
 
 			// ob.navigate().to(CONFIG.getProperty("enwUrl"));
 			ob.get(host + CONFIG.getProperty("appendENWAppUrl"));
-
+			waitUntilText("Sign in");
 			waitForElementTobeVisible(ob, By.xpath(OR.getProperty("signup_link")), 30);
 
 			ob.findElement(By.xpath(OR.getProperty("signup_link"))).click();
-			BrowserWaits.waitTime(2);
+			waitUntilText("Sign up");
 			waitForElementTobeVisible(ob, By.name(OR.getProperty("signup_email_texbox")), 30);
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).clear();
 			ob.findElement(By.name(OR.getProperty("signup_email_texbox"))).sendKeys("trloginid@gmail.com");
 			ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).click();
-			BrowserWaits.waitTime(2);
-
-			String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
+			waitUntilText("Already have an account?");
+			/*String error_message1 = ob.findElement(By.cssSelector(OR.getProperty("reg_errorMessage"))).getText();
 			if (error_message1.contains("Sign up")) {
 				ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("Neon@123");
 				ob.findElement(By.name(OR.getProperty("signup_firstName_textbox"))).clear();
@@ -82,7 +81,7 @@ public class ENWIAM006 extends TestBase {
 				ob.findElement(By.name(OR.getProperty("signup_lastName_textbox"))).sendKeys("Neon12");
 				ob.findElement(By.xpath(OR.getProperty("signup_button"))).click();
 				BrowserWaits.waitTime(3);
-			}
+			}*/
 
 			/*
 			 * //ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).clear();
@@ -91,7 +90,7 @@ public class ENWIAM006 extends TestBase {
 			 * //ob.findElement(By.name(OR.getProperty("signup_password_textbox"))).sendKeys("A");
 			 * BrowserWaits.waitTime(6);
 			 */
-			if (!checkElementPresence_id("reg_errorMessage")) {
+			/*if (!checkElementPresence_id("reg_errorMessage")) {
 
 				test.log(LogStatus.FAIL,
 						"User able to create a new TR account with an email id that has already been used");// extent
@@ -116,9 +115,10 @@ public class ENWIAM006 extends TestBase {
 				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
 						captureScreenshot(this.getClass().getSimpleName() + "_incorrect_error_text")));// screenshot
 
-			}
+			}*/
 			jsClick(ob, ob.findElement(By.xpath(OR.getProperty("tryAgain"))));
-			BrowserWaits.waitTime(2);
+//			BrowserWaits.waitTime(2);
+			waitUntilText("Sign up");
 			closeBrowser();
 
 		}
