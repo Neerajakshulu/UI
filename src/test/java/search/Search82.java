@@ -107,22 +107,6 @@ public class Search82 extends TestBase {
 			Collections.sort(al2);
 			Collections.reverse(al2);
 
-			// for(int i=0;i<al1.size();i++){
-			//
-			// System.out.println(al1.get(i));
-			// }
-			//
-			// System.out.println("#########################################");
-			//
-			// for(int i=0;i<al2.size();i++){
-			//
-			// System.out.println(al2.get(i));
-			// }
-
-			// if(al1.equals(al2))
-			// System.out.println("pass");
-			// else
-			// System.out.println("fail");
 
 			try {
 

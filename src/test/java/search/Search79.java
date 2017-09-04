@@ -59,15 +59,13 @@ public class Search79 extends TestBase {
 			openBrowser();
 			clearCookies();
 			maximizeWindow();
-
 			// ob.navigate().to(CONFIG.getProperty("testSiteName"));
 			ob.navigate().to(host);
-
 			// login using TR credentials
 			login();
-			waitForElementTobeVisible(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
+			fluentwaitforElement(ob, By.cssSelector(OR.getProperty("tr_search_box_css")),120);
 			waitForElementTobeClickable(ob, By.cssSelector(OR.getProperty("tr_search_box_css")), 120);
-			Thread.sleep(2000);
+			fluentwaitforElement(ob, By.cssSelector(OR.getProperty("tr_search_box_css")),120);
 			// Type into the search box and get search results
 			ob.findElement(By.xpath(OR.getProperty("searchBox_textBox"))).sendKeys("s");
 			BrowserWaits.waitTime(3);

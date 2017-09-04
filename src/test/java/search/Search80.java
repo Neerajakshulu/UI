@@ -12,13 +12,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
-
-import base.TestBase;
-import util.BrowserWaits;
 import util.ErrorUtil;
 import util.ExtentManager;
 import util.OnePObjectMap;
+import base.TestBase;
+
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Search80 extends TestBase {
 
@@ -33,8 +32,8 @@ public class Search80 extends TestBase {
 	public void beforeTest() throws Exception {
 		extent = ExtentManager.getReporter(filePath);
 		rowData = testcase.get(this.getClass().getSimpleName());
-		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription())
-				.assignCategory("Search suite");
+		test = extent.startTest(rowData.getTestcaseId(), rowData.getTestcaseDescription()).assignCategory(
+				"Search suite");
 	}
 
 	@Test
@@ -46,8 +45,8 @@ public class Search80 extends TestBase {
 		if (!master_condition) {
 
 			status = 3;// excel
-			test.log(LogStatus.SKIP,
-					"Skipping test case " + this.getClass().getSimpleName() + " as the run mode is set to NO");
+			test.log(LogStatus.SKIP, "Skipping test case " + this.getClass().getSimpleName()
+					+ " as the run mode is set to NO");
 			throw new SkipException("Skipping Test Case" + this.getClass().getSimpleName() + " as runmode set to NO");// reports
 
 		}
@@ -71,11 +70,12 @@ public class Search80 extends TestBase {
 			waitForAjax(ob);
 			waitForElementTobeClickable(ob, By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString()), 30);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_ALL_CSS.toString())).click();
-			BrowserWaits.waitTime(4);
+			waitForAjax(ob);
 			ob.findElement(By.cssSelector(OnePObjectMap.SEARCH_RESULT_PAGE_SORT_DROPDOWN_CSS.toString())).click();
 			waitForElementTobeClickable(ob, By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"), 120);
 
-			List<WebElement> mylist = ob.findElements(By.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"));
+			List<WebElement> mylist = ob.findElements(By
+					.cssSelector("a[class='wui-dropdown__link ng-binding ng-scope']"));
 			// System.out.println(mylist.size());
 			//
 			// for(int i=0;i<mylist.size();i++){
@@ -105,9 +105,11 @@ public class Search80 extends TestBase {
 						"Correct sorting options not present in SORT BY drop down in ALL search results page");// extent
 																												// reports
 				status = 2;// excel
-				test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(captureScreenshot(this.getClass()
-						.getSimpleName()
-						+ "_correct_sorting_options_not_present_in_SORT_BY_drop_down_in_ALL_search_results_page")));// screenshot
+				test.log(
+						LogStatus.INFO,
+						"Snapshot below: "
+								+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+										+ "_correct_sorting_options_not_present_in_SORT_BY_drop_down_in_ALL_search_results_page")));// screenshot
 
 			}
 
@@ -121,8 +123,11 @@ public class Search80 extends TestBase {
 			test.log(LogStatus.INFO, errors.toString());// extent reports
 			ErrorUtil.addVerificationFailure(t);// testng
 			status = 2;// excel
-			test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture(
-					captureScreenshot(this.getClass().getSimpleName() + "_something_unexpected_happened")));// screenshot
+			test.log(
+					LogStatus.INFO,
+					"Snapshot below: "
+							+ test.addScreenCapture(captureScreenshot(this.getClass().getSimpleName()
+									+ "_something_unexpected_happened")));// screenshot
 			closeBrowser();
 		}
 
