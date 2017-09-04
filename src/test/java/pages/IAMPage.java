@@ -95,6 +95,7 @@ public class IAMPage extends TestBase {
 
 	public void openGurillaMail() throws InterruptedException {
 		ob.get("https://www.guerrillamail.com");
+		BrowserWaits.waitTime(22);
 	}
 
 	public void clickReceivedMail(String message) throws InterruptedException {
