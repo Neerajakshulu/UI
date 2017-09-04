@@ -203,6 +203,14 @@
 		</classes>
 	</test>
 	
+	<test name="author_search_results_Top_journals" preserve-order="true">
+		<parameter name="lastName" value="MURTHY" />
+		<parameter name="countryName" value="INDIA" />
+		<parameter name="orgName" value="ANDHRA UNIV" />
+		<classes>
+			<class name="wat.WAT29"></class>
+		</classes>
+	</test>
 	<test name="WAT_Find_btn_enabled_issue" preserve-order="true">
 		<classes>
 			<class name="wat.WAT40"></class>

@@ -29,6 +29,7 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 	String publications[] = null;
 	String years[] = null;
 	String topJournals = null;
+	List<WebElement> journals;
 	
 
 	public SearchAuthorClusterResultsPage(WebDriver ob) {
@@ -243,6 +244,27 @@ public class SearchAuthorClusterResultsPage extends TestBase {
 					
 			 }
 		}
-		
+	}
+	
+	/**
+	 * Method for Author Cluster Search Results Top Journals should contain max 3
+	 * @param test
+	 * @throws Exception
+	 */
+	public void searchResultsTopJournals(ExtentTest test) throws Exception{
+		waitForauthorClusterSearchResults(test);
+		pubDetailsList=pf.getBrowserActionInstance(ob).getElements(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_CSS);
+		logger.info("total pub_years_journals-->"+pubDetailsList.size());
+		if(pubDetailsList.size()>0) {
+			for(WebElement topJournals:pubDetailsList){
+				pf.getBrowserActionInstance(ob).scrollingToElement(topJournals);
+				journals=topJournals.findElements(By.cssSelector(OnePObjectMap.WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_TOP_JOURNALS_CSS.toString()));
+				logger.info("Top journals size-->"+journals.size());
+				if(!(journals.size()<=3 && journals.size()==0)){
+					test.log(LogStatus.FAIL, "Top Journals section should contain max of 3 journal titles");
+					throw new Exception("Top Journals section should contain max of 3 journal titles");
+				}
+			}
+		}
 	}
 }

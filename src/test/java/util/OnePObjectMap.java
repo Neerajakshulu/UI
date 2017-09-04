@@ -1239,6 +1239,8 @@ public enum OnePObjectMap {
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_ALTERNATIVE_NAME_CSS("div[class*='wat-search-results-meta-names']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_AFFILIATION_CSS("div[class*='wat-search-results-meta-affiliation']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_LOCATION_CSS("div[class*='wat-search-results-meta-location']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_PUB_YEARS_JOURNALS_CSS("div[class='wat-search-results-meta-publications-years-journals']"),
+	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_AUTHOR_TOP_JOURNALS_CSS("div[class='wat-search-results-meta-journals__list'] span"),
 
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_TITLE_CSS("div[class*='wui-emphasis wat-search-results-publications-title']"),
 	WAT_AUTHOR_SEARCH_RESULTS_PAGE_PUBLICATIONS_DETAILS_PUBLICATION_SOURCE_CSS("div[class*='wui-descriptor-uppercase wat-search-results-publications-source-group']"),
