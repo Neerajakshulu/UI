@@ -86,10 +86,9 @@ public class RCC001 extends TestBase {
 				test.log(LogStatus.PASS, "Items count in Group list page in Group list page is displayed correctly");
 				Assert.assertTrue(pf.getGroupsListPage(ob).verifytheDateandTimeofIvitation(title));
 				test.log(LogStatus.PASS, "Creation date is displayed for the group in group list page");
-								
+
 			} catch (Throwable t) {
-				test.log(LogStatus.FAIL,
-						"Group details in Group list page is not displayed correctly");
+				test.log(LogStatus.FAIL, "Group details in Group list page is not displayed correctly");
 				test.log(LogStatus.FAIL, "Snapshot below: " + test
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
@@ -108,11 +107,11 @@ public class RCC001 extends TestBase {
 						.addScreenCapture(captureScreenshot(this.getClass().getSimpleName() + "_Group_desc_mismatch")));// screenshot
 				ErrorUtil.addVerificationFailure(t);
 			}
-			pf.getGroupsPage(ob).clickOnGroupsTab(); 
+			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupsPage(ob).switchToGroupTab();
 			pf.getGroupsListPage(ob).clickOnGroupTitle(title);
 			pf.getGroupDetailsPage(ob).clickOnInviteOthersButton();
-			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE20"));
+			pf.getGroupDetailsPage(ob).inviteMembers(LOGIN.getProperty("RCCPROFILE5"));
 			pf.getLoginTRInstance(ob).logOutApp();
 			closeBrowser();
 			pf.clearAllPageObjects();
@@ -121,7 +120,7 @@ public class RCC001 extends TestBase {
 			clearCookies();
 			maximizeWindow();
 			ob.navigate().to(host);
-			loginAs("RCCTESTUSER020", "RCCTESTUSERPWD020");
+			loginAs("RCCTESTUSER005", "RCCTESTUSERPWD005");
 			pf.getGroupsPage(ob).clickOnGroupsTab();
 			pf.getGroupInvitationPage(ob).acceptInvitation(title);
 
